@@ -2,69 +2,50 @@ import React from 'react'
 import { StackNavigator, DrawerNavigator } from 'react-navigation'
 import { Icon } from 'native-base'
 
-import HomeScreen from './../Screen/HomeScreen'
-import AboutScreen from './../Screen/AboutScreen'
+import BusinessListScreen from './../Screen/BusinessListScreen'
+import NewBusinessScreen from './../Screen/NewBusinessScreen'
+import ViewBusinessScreen from './../Screen/ViewBusinessScreen'
 import Sidebar from './Sidebar'
 import styles from './../Style/Layout'
 import { color } from './../Style/Color'
 
-const DrawerStack = DrawerNavigator(
+const BusinessStack = StackNavigator(
     {
-        Home: {
-            screen: StackNavigator(
-                {
-                    Home: {
-                        screen: HomeScreen,
-                        navigationOptions: ({ navigation }) => (
-                            {
-                                title: 'Home',
-                                headerLeft: <Icon
-                                            name={'menu'}
-                                            onPress={() => navigation.navigate('DrawerToggle')}
-                                            style={styles.menuIcon}
-                                        />,
-                                headerTintColor: color.secondary,
-                                headerStyle: {
-                                    backgroundColor: color.primary
-                                }
-                            }
-                        )
-                    }
-                },
-                {
-                    initialRouteName: 'Home'
-                }
-            )
+        BusinessList: {
+            screen: BusinessListScreen
         },
-        About: {
-            screen: StackNavigator(
-                {
-                    About: {
-                        screen: AboutScreen,
-                        navigationOptions: ({ navigation }) => (
-                            {
-                                title: 'About',
-                                headerLeft: <Icon
-                                            name={'menu'}
-                                            onPress={() => navigation.navigate('DrawerToggle')}
-                                            style={styles.menuIcon}
-                                        />,
-                                headerTintColor: color.secondary,
-                                headerStyle: {
-                                    backgroundColor: color.primary
-                                }
-                            }
-                        )
-                    }
-                },
-                {
-                    initialRouteName: 'About'
-                }
-            )
+        NewBusiness: {
+            screen: NewBusinessScreen
+        },
+        ViewBusiness: {
+            screen: ViewBusinessScreen
         }
     },
+    {
+        initialRouteName: 'BusinessList',
+        navigationOptions: ({ navigation }) => (
+            {
+                title: 'BusinessList',
+                headerLeft: <Icon
+                            name={'menu'}
+                            onPress={() => navigation.navigate('DrawerToggle')}
+                            style={styles.menuIcon}
+                        />,
+                headerTintColor: color.secondary,
+                headerStyle: {
+                    backgroundColor: color.primary
+                }
+            }
+        )
+    }
+)
+
+const DrawerStack = DrawerNavigator(
+    {
+        BusinessList: BusinessStack
+    },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'BusinessList',
     // contentComponent: props => <Sidebar {...props}/>,
     contentOptions: {
         activeTintColor: color.secondary,

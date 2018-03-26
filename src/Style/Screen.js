@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { color } from './Color'
 
 export default StyleSheet.create(
     {
@@ -6,10 +7,18 @@ export default StyleSheet.create(
             flex: 1,
             justifyContent: 'center',
             alignItems: 'center',
-            backgroundColor: '#eeeeee'
+            backgroundColor: color.secondary
         },
         paddingHorizontal: {
             paddingHorizontal: 16
+        },
+        searchIcon: {
+            color: color.secondary,
+            padding: 16,
+            fontSize: 28
+        },
+        fab: {
+            backgroundColor: color.primary
         }
     }
 )
