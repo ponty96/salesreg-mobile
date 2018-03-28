@@ -5,6 +5,8 @@ import { Icon } from 'native-base'
 import BusinessListScreen from './../Screen/BusinessListScreen'
 import NewBusinessScreen from './../Screen/NewBusinessScreen'
 import ViewBusinessScreen from './../Screen/ViewBusinessScreen'
+import SettingsScreen from './../Screen/SettingsScreen'
+import DebtScreen from './../Screen/DebtScreen'
 import Sidebar from './Sidebar'
 import styles from './../Style/Layout'
 import { color } from './../Style/Color'
@@ -19,6 +21,12 @@ const BusinessStack = StackNavigator(
         },
         ViewBusiness: {
             screen: ViewBusinessScreen
+        },
+        Settings: {
+            screen: SettingsScreen
+        },
+        Debt: {
+            screen: DebtScreen
         }
     },
     {
@@ -43,16 +51,16 @@ const BusinessStack = StackNavigator(
 const DrawerStack = DrawerNavigator(
     {
         BusinessList: BusinessStack
-    },
-  {
-    initialRouteName: 'BusinessList',
-    // contentComponent: props => <Sidebar {...props}/>,
-    contentOptions: {
-        activeTintColor: color.secondary,
-        activeBackgroundColor : color.primary,
-        inactiveTintColor: color.primary
-      }
-  }
+    },   
+    {
+        initialRouteName: 'BusinessList',
+        contentComponent: props => <Sidebar {...props}/>,
+        contentOptions: {
+            activeTintColor: color.secondary,
+            activeBackgroundColor : color.primary,
+            inactiveTintColor: color.primary
+        }
+    }
 )
 
 export default DrawerStack

@@ -11,7 +11,7 @@ class ViewBusinessScreen extends Component {
           title: params.name,
           headerRight: <Icon
                     name={'ios-search'}
-                    style={styles.searchIcon}
+                    style={styles.headerIcon}
                 />,
         };
     };

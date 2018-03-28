@@ -12,13 +12,29 @@ export default StyleSheet.create(
         paddingHorizontal: {
             paddingHorizontal: 16
         },
-        searchIcon: {
+        headerIcon: {
             color: color.secondary,
             padding: 16,
             fontSize: 28
         },
+        headerIconLogout: {
+            color: color.secondary,
+            padding: 8,
+            fontSize: 28
+        },
+        headerText: {
+            color: color.secondary,
+            fontWeight: 'bold',
+            paddingRight: 16,
+            fontSize: 18
+        },
         fab: {
             backgroundColor: color.primary
-        }
+        },
+        headerItem: {
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center'
+        },
     }
 )
