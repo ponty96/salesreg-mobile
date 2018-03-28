@@ -17,10 +17,10 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: 'white',
     height: 70,
-    width: 200,
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: 'grey'
+    borderColor: 'lightgrey',
+    borderWidth: 0.2
   },
   buttonText: {
     color: 'black',
