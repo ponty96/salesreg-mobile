@@ -27,6 +27,8 @@ class DisplayCustomer extends Component {
             style={{
               flexDirection: "column",
               alignItems: "flex-end",
+              //marginLeft: 90,
+              //marginRight: 20,
               width: "30%"
             }}
           >
