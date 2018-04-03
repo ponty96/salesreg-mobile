@@ -93,6 +93,16 @@ export default class SignupScreen extends React.Component {
             autoCapitalize="none"
             secureTextEntry={true}
           />
+          <TextInput
+            onFocus={this.onFocusChange}
+            style={styles.input}
+            style={(this.state.isFocused) ? styles.input : styles.input} 
+            underlineColorAndroid="#c0c0c0"
+            placeholder="  Pasuma Wonder"
+            placeholderTextColor="#c0c0c0"
+            autoCapitalize="none"
+            secureTextEntry={true}
+          />
         <RedButton text="Sign Up" />
         <RedText text="I have an account already" />
           </View>

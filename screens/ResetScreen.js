@@ -71,7 +71,6 @@ const styles = StyleSheet.create({
   },
   redView: {
     height: "40%",
-    width: 500,
     backgroundColor: "rgba(218,11,11,59)"
   },
   greyView: {
@@ -86,21 +85,22 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     minHeight: 500,
-    width: 435,
+    width: "90%",
     backgroundColor: "#fff",
     zIndex: 1
   },
   input: {
-    margin: 8,
+    margin: 3,
+    marginLeft: 15,
     height: 50,
-    width: "100%",
+    width: "85%",
     fontSize: 18,
     borderColor: "#fff",
     backgroundColor: "white",
-    padding: 5
+    padding: 2
   },
   innerLayer: {
-    width: 400
+    width: 320,
   },
   instruct: {
     fontSize: 17,
