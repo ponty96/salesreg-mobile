@@ -7,32 +7,33 @@ import NewBusinessScreen from './../Screen/NewBusinessScreen'
 import ViewBusinessScreen from './../Screen/ViewBusinessScreen'
 import SettingsScreen from './../Screen/SettingsScreen'
 import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen'
+import HomeScreenTabNavigator from './../Screen/HomeTabNavigator'
 import DebtScreen from './../Screen/DebtScreen'
 import Sidebar from './Sidebar'
 import styles from './../Style/Layout'
 import { color } from './../Style/Color'
 
-const ViewBusinessStack = TabNavigator(
-    {
-        Product: {
-            screen: BusinessListScreen
-        },
-        Order: {
-            screen: NewBusinessScreen
-        },
-        Customer: {
-            screen: ViewBusinessScreen
-        },
-        Debts: {
-            screen: ViewBusinessScreen
-        }
-    }
-)
+// const ViewBusinessStack = TabNavigator(
+//     {
+//         Product: {
+//             screen: BusinessListScreen
+//         },
+//         Order: {
+//             screen: NewBusinessScreen
+//         },
+//         Customer: {
+//             screen: ViewBusinessScreen
+//         },
+//         Debts: {
+//             screen: ViewBusinessScreen
+//         }
+//     }
+// )
 
 const BusinessStack = StackNavigator(
     {
         BusinessList: {
-            screen: BusinessListScreen
+            screen: HomeScreenTabNavigator
         },
         NewBusiness: {
             screen: NewBusinessScreen
