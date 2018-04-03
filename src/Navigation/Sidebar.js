@@ -10,6 +10,26 @@ const SideBar = (props) => (
 		<View style={styles.itemsContainer}>
 			<ScrollView>
 				<TouchableOpacity
+					onPress={() => props.navigation.navigate('Settings',
+									{
+										name: 'Kay5iveAttractions',
+										id: 'ID here for getting data at the new scrren'
+									}
+								)
+							}
+				>
+					<View style={styles.sidebarItem}>
+						<Icon
+							name={'settings'}
+							style={styles.itemIcon}
+							type={'MaterialCommunityIcons'}
+						/>
+						<Text style={ styles.itemText }>
+							Kay5iveAttractions
+						</Text>
+					</View>	
+				</TouchableOpacity>
+				<TouchableOpacity
 					onPress={() => props.navigation.navigate('Settings')}
 				>
 					<View style={styles.sidebarItem}>
