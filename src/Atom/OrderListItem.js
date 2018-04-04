@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity } from "react-native";
+import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 
 class OrderListItem extends React.Component {
   render() {

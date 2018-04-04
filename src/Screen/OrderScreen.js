@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
 import styles from './../Style/Screen'
 import { color } from './../Style/Color'
+import OrderList from './../Components/OrderList'
 
 class OrderScreen extends Component {
 
@@ -38,7 +39,7 @@ class OrderScreen extends Component {
                     type={'MaterialIcons'}                    
                     navigation={this.props.navigation}
                 />
-                <Text>Order Screen</Text>
+                <OrderList />
             </View>
         )
     }

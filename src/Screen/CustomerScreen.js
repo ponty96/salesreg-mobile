@@ -1,9 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { Icon } from 'native-base'
 
 import styles from './../Style/Screen'
 import FabAtom from './../Atom/FabAtom'
+import CustomerList from './../Components/CustomerList'
 import { color } from './../Style/Color'
 
 class CustomerScreen extends Component {
@@ -37,7 +38,7 @@ class CustomerScreen extends Component {
                     name={'md-person-add'}
                     navigation={this.props.navigation}
                 />
-                <Text>Customer Screen</Text>
+                <CustomerList />
             </View>
         )
     }

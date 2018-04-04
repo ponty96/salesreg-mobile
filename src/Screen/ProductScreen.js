@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
 import styles from './../Style/Screen'
 import { color } from './../Style/Color'
+import ProductList from './../Components/ProductList'
 
 class ProductScreen extends Component {
 
@@ -38,7 +39,7 @@ class ProductScreen extends Component {
                     type={'MaterialCommunityIcons'}
                     navigation={this.props.navigation}
                 />
-                <Text>Product Screen</Text>
+                <ProductList />
             </View>
         )
     }
