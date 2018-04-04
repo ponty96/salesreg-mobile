@@ -34,7 +34,7 @@ class OrderScreen extends Component {
         return (
             <View style={ styles.centerContainer }>
                 <FabAtom
-                    routeName={'NewBusiness'}
+                    routeName={'NewOrder'}
                     name={'add-shopping-cart'}
                     type={'MaterialIcons'}                    
                     navigation={this.props.navigation}

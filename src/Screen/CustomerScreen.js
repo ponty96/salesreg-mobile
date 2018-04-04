@@ -34,7 +34,7 @@ class CustomerScreen extends Component {
         return (
             <View style={ styles.centerContainer }>
                 <FabAtom
-                    routeName={'NewBusiness'}
+                    routeName={'NewCustomer'}
                     name={'md-person-add'}
                     navigation={this.props.navigation}
                 />

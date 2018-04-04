@@ -5,6 +5,9 @@ import { Icon } from 'native-base'
 
 import BusinessListScreen from './../Screen/BusinessListScreen'
 import NewBusinessScreen from './../Screen/NewBusinessScreen'
+import NewOrderScreen from './../Screen/NewOrderScreen'
+import NewProductScreen from './../Screen/NewProductScreen'
+import NewCustomerScreen from './../Screen/NewCustomerScreen'
 import SettingsScreen from './../Screen/SettingsScreen'
 import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen'
 import DebtScreen from './../Screen/DebtScreen'
@@ -97,6 +100,15 @@ const BusinessStack = StackNavigator(
         },
         Debt: {
             screen: DebtScreen
+        },
+        NewCustomer: {
+            screen: NewCustomerScreen
+        },
+        NewOrder: {
+            screen: NewOrderScreen
+        },
+        NewProduct: {
+            screen: NewProductScreen
         }
     },
     {

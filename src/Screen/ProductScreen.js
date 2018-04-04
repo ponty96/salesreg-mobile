@@ -34,7 +34,7 @@ class ProductScreen extends Component {
         return (
             <View style={ styles.centerContainer }>
                 <FabAtom
-                    routeName={'NewBusiness'}
+                    routeName={'NewProduct'}
                     name={'basket-fill'}
                     type={'MaterialCommunityIcons'}
                     navigation={this.props.navigation}
