@@ -8,52 +8,8 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Icon } from "native-base";
+import DisplayCustomer from "../Atom/DisplayCustomer";
 
-class DisplayCustomer extends Component {
-  latestAmount = this.props.status == "paid"
-    ? this.props.debt
-    : this.props.status == "balance" ? this.props.balance : this.props.debt;
-  render() {
-    return (
-      <TouchableOpacity onPress={this.onPress}>
-        <View style={styles.row}>
-          <View style={{ height: 68, width: "20%", alignItems: "center" }}>
-            <Image source={{ uri: this.props.images }} style={styles.dp} />
-          </View>
-          <View style={{ flexDirection: "column", width: "50%", }}>
-            <Text style={styles.rowText1}>{this.props.customerName}</Text>
-          </View>
-          <View
-            style={{
-              flexDirection: "column",
-              alignItems: "flex-end",
-              //marginLeft: 90,
-              //marginRight: 20,
-              width: "30%"
-            }}
-          >
-            <Text style={{fontSize: 15, fontWeight: "bold"}}>NGN {this.props.amount}.00</Text>
-            <Text
-              style={[
-                styles.lilFont,
-                {
-                  color:
-                    this.props.status == "paid"
-                      ? "#c0c0c0"
-                      : this.props.status == "balance"
-                        ? "#00FFFF"
-                        : "rgba(218,11,11,59)"
-                }
-              ]}
-            >
-              {this.props.latestAmount}.00
-            </Text>
-          </View>
-        </View>
-      </TouchableOpacity>
-    );
-  }
-}
 
 const users = [
   {
@@ -207,14 +163,6 @@ export default class CustomerList extends Component {
           dataSource={this.state.userDataSource}
           renderRow={this.renderRow.bind(this)}
         />
-        <View style={styles.part}>
-          <TouchableOpacity style={styles.btn} onPress={this.addRow}>
-            <Icon
-              name="md-person-add"
-              style={{ color: "white", paddingRight: 5 }}
-            />
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -250,28 +198,6 @@ const styles = StyleSheet.create({
     color: "#000",
     paddingRight: 18,
     fontSize: 18
-  },
-  part: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  btn: {
-    position: "absolute",
-    width: 60,
-    height: 60,
-    backgroundColor: "rgba(218,11,11,59)",
-    borderRadius: 50,
-    bottom: 40,
-    right: 15,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  plus: {
-    color: "white",
-    fontSize: 15,
-    marginRight: 15,
-    margin: 0
   },
   image: {
     height: 20,

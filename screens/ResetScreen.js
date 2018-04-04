@@ -1,28 +1,27 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import RedButton from "../components/RedButton";
-import RedText from "../components/RedText";
-import NumberInput from "../components/NumberInput";
+import RedButton from "../src/Atom/RedButton";
+import RedText from "../src/Atom/RedText";
+import NumberInput from "../src/Atom/InputForText";
 
 class Form extends React.Component {
+  constructor() {
+    super();
+    this.state = {
+      ButtonStateHolder: true
+    };
+  }
 
-    constructor(){  
-        super();   
-        this.state={  
-          ButtonStateHolder : true,     
-        }
-      }
-
-  handleButton = (text) => {
+  handleButton = text => {
     if (text.length > 5) {
       this.setState({
         ButtonStateHolder: false
       });
     } else {
-        this.setState({
-            ButtonStateHolder: true
-        }); 
+      this.setState({
+        ButtonStateHolder: true
+      });
     }
   };
 
@@ -30,17 +29,32 @@ class Form extends React.Component {
     return (
       <View>
         <Text style={styles.instruct}>
-          A six digit reset code will be sent to xxxxxxxx678
-          . Enter the code to reset your password.
+          A six digit reset code will be sent to xxxxxxxx678 . Enter the code to
+          reset your password.
         </Text>
 
-        <NumberInput placeholder="  Enter reset code" length={6} onChangeText= {this.handleButton.bind(this)}/>
+        <InputForText
+          placeholder="  Enter reset code"
+          length={6}
+          onChangeText={this.handleButton.bind(this)}
+          keyboardType="numeric"
+        />
 
         <RedText text="Send another code" />
         <View style={{ alignItems: "center", justifyContent: "center" }}>
-        <TouchableOpacity style={[styles.redButton , { backgroundColor: this.state.ButtonStateHolder ? '#c0c0c0' : 'rgba(218,11,11,59)' }]} disabled={this.state.ButtonStateHolder}>
-          <Text style={styles.buttonText}>Reset</Text>
-        </TouchableOpacity>
+          <TouchableOpacity
+            style={[
+              styles.redButton,
+              {
+                backgroundColor: this.state.ButtonStateHolder
+                  ? "#c0c0c0"
+                  : "rgba(218,11,11,59)"
+              }
+            ]}
+            disabled={this.state.ButtonStateHolder}
+          >
+            <Text style={styles.buttonText}>Reset</Text>
+          </TouchableOpacity>
         </View>
         <RedText text="I don't have an account" />
       </View>
@@ -100,7 +114,7 @@ const styles = StyleSheet.create({
     padding: 2
   },
   innerLayer: {
-    width: 320,
+    width: 320
   },
   instruct: {
     fontSize: 17,
@@ -120,5 +134,5 @@ const styles = StyleSheet.create({
     paddingRight: 38,
     paddingLeft: 38,
     fontWeight: "bold"
-  },
+  }
 });

@@ -8,28 +8,27 @@ import {
 } from "react-native";
 
 import ModalDropdown from "react-native-modal-dropdown";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
-import RedButton from "../components/RedButton";
-import RedText from "../components/RedText";
-import NumberInput from "../components/NumberInput";
-import AppName from "../components/AppName";
+import RedButton from "../src/Atom/RedButton";
+import RedText from "../src/Atom/RedText";
+import InputForText from "../src/Atom/InputForText";
+
 
 export default class SignupScreen extends React.Component {
-
-  constructor(){
+  constructor() {
     super();
-    this.state={
-       isFocused: false 
+    this.state = {
+      isFocused: false,
+      useThis: true
     };
-
   }
-  
-  onFocusChange = () => {
-   // this.setState(prevState => ({ isFocused: !prevState.isFocused}));
-   this.setState({isFocused: true});
-}
 
+  onFocusChange = () => {
+    this.setState({ isFocused: true });
+  };
+  onFocusBack = () => {
+    this.setState({ isFocused: false });
+  };
 
   render() {
     return (
@@ -38,73 +37,45 @@ export default class SignupScreen extends React.Component {
           <AppName text="NAME OF APP HERE" />
         </View>
         <View style={styles.greyView} />
-        <View style={(!this.state.isFocused) ? styles.signupForm : styles.goUpForm }>
-        <View style={styles.innerLayer}>
-          
-        <TextInput
-          style={styles.firstInput}
-          underlineColorAndroid="#c0c0c0"
-          placeholder="  Full name"
-          placeholderTextColor="#c0c0c0"
-          autoCapitalize="none"
-        />
-        <NumberInput placeholder="  Phone number" length={11} />
+        <View
+          style={!this.state.isFocused ? styles.signupForm : styles.goUpForm}
+        >
+          <View style={styles.innerLayer}>
+            <InputForText
+              onFocus={this.onFocusBack}
+              style={styles.firstInput}
+              placeholder="  Full name"
+              autoCapitalize="none"
+            />
+            <InputForText
+              placeholder="  Phone number"
+              length={11}
+              keyboardType="numeric"
+            />
 
-        <ModalDropdown
-          defaultValue="Gender..."
-          options={["Male", "Female"]}
-          style={{
-            marginLeft: 20,
-            marginTop: 5,
-            borderBottomWidth: 0.5,
-            borderColor: "#c0c0c0",
-            width: 120,
-            paddingLeft: 10,
-            paddingRight: 50,
-            padding: 10
-          }}
-          textStyle={{ fontSize: 18, color: "#000" }}
-          dropdownTextStyle={{
-            fontSize: 18,
-            color: "#000",
-            paddingLeft: 50,
-            paddingRight: 50,
-            paddingTop: 20,
-            paddingBottom: 20
-          }}
-          dropdownTextHighlightStyle={{ color: "red" }}
-        />
-        
-          <TextInput
-            onFocus={this.onFocusChange}
-            style={styles.pinPut}
-            underlineColorAndroid="#c0c0c0"
-            placeholder="  Password"
-            placeholderTextColor="#c0c0c0"
-            autoCapitalize="none"
-            secureTextEntry={true}
-          />
-          <TextInput
-            onFocus={this.onFocusChange}
-            style={styles.input}
-            underlineColorAndroid="#c0c0c0"
-            placeholder="  Reenter-password"
-            placeholderTextColor="#c0c0c0"
-            autoCapitalize="none"
-            secureTextEntry={true}
-          />
-          <TextInput
-            onFocus={this.onFocusChange}
-            style={styles.input}
-            style={(this.state.isFocused) ? styles.input : styles.input} 
-            underlineColorAndroid="#c0c0c0"
-            placeholder="  Pasuma Wonder"
-            placeholderTextColor="#c0c0c0"
-            autoCapitalize="none"
-            secureTextEntry={true}
-          />
-        <RedButton text="Sign Up" />
-        <RedText text="I have an account already" />
+            <ModalDropdown
+              defaultValue="Gender..."
+              options={["Male", "Female"]}
+              style={styles.modalStyle}
+              textStyle={styles.modalTextStyle}
+              dropdownTextStyle={styles.modalDropdownTextStyle}
+              dropdownTextHighlightStyle={{ color: "red" }}
+            />
+
+            <InputForText
+              onFocus={this.onFocusChange}
+              style={styles.pinPut}
+              placeholder="  Password"
+              secureTextEntry={true}
+            />
+            <InputForText
+              onFocus={this.onFocusChange}
+              style={styles.input}
+              placeholder="  Reenter-password"
+              secureTextEntry={true}
+            />
+            <RedButton text="Sign Up" />
+            <RedText text="I have an account already" />
           </View>
         </View>
       </View>
@@ -181,5 +152,27 @@ const styles = StyleSheet.create({
   },
   innerLayer: {
     width: 320
+  },
+  modalStyle: {
+    marginLeft: 20,
+    marginTop: 5,
+    borderBottomWidth: 0.5,
+    borderColor: "#c0c0c0",
+    width: 120,
+    paddingLeft: 10,
+    paddingRight: 50,
+    padding: 10
+  },
+  modalTextStyle: {
+    fontSize: 18,
+    color: "#000"
+  },
+  modalDropdownTextStyle: {
+    fontSize: 18,
+    color: "#000",
+    paddingLeft: 50,
+    paddingRight: 50,
+    paddingTop: 20,
+    paddingBottom: 20
   }
 });

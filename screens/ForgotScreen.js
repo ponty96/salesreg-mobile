@@ -1,9 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View ,TextInput } from 'react-native';
-import AppName from "../components/AppName";
 
-import RedText from "../components/RedText";
-import NumberInput from "../components/NumberInput";
+import RedText from "../src/Atom/RedText";
+import InputForText from "../src/Atom/InputForText";
 
 class RedButton extends React.Component {
   constructor(){  
@@ -31,8 +30,7 @@ class Form extends React.Component {
         <Text style={styles.instruct}>
           To recover password, please input your number below...
         </Text>
-        <NumberInput placeholder="  Phone number" length={11} />
-
+        <InputForText placeholder="  Phone number" length={11} keyboardType="numeric"/>
         <RedButton text="Reset Password" />
         <RedText text="I remember my password now" />
       </View>
@@ -45,7 +43,7 @@ export default class ForgotScreen extends React.Component {
     return (
       <View style={styles.container}>
         <View style={styles.redView}>
-        <AppName text="NAME OF APP HERE" /> 
+        <View><Text>{this.props.appName}</Text></View>
         </View>
         <View style={styles.greyView} />
         <View style={styles.signupForm}>

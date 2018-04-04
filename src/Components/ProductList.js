@@ -7,8 +7,8 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
-import { TabNavigator, TabBarBottom } from "react-navigation";
 import { Icon } from 'native-base';
+import ProductlistItem from "../Atom/ProductListItem";
 
 const users = [
     {
@@ -183,31 +183,21 @@ const users = [
     };
     renderRow(user) {
       return (
-        <TouchableOpacity onPress={this.onPress}>
-          <View style={styles.row}>
-            <Image source={{ uri: user.images }} style={styles.dp} />
-            <Text style={styles.rowText1}>{user.name}</Text>
-            <Text style={styles.rowText3}> {user.number}</Text>
-          </View>
-        </TouchableOpacity>
+        <ProductlistItem
+        onPress={this.onPress}
+        images={user.images}
+        name={user.name}
+        number={user.number}
+        />
       );
     }
     render() {
       return (
         <View style={styles.container}>
           <ListView
-            /*ref={ref => (this.scrollView = ref)}
-            onContentSizeChange={() => {
-              this.scrollView.scrollToEnd({ animated: false });
-            }}*/
             dataSource={this.state.userDataSource}
             renderRow={this.renderRow.bind(this)}
           />
-          <View style={styles.part}>
-            <TouchableOpacity style={styles.btn} onPress={this.addRow}>
-              <Icon name="md-briefcase" style={{color: 'white'}} />
-            </TouchableOpacity>
-          </View>
         </View>
       );
     }
@@ -241,28 +231,6 @@ const users = [
       color: 'red',
       paddingRight: 18,
       fontSize: 18,
-    },
-    part: {
-      flex: 1,
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    btn: {
-      position: "absolute",
-      width: 60,
-      height: 60,
-      backgroundColor: "rgba(218,11,11,59)",
-      borderRadius: 50,
-      bottom: 40,
-      right: 15,
-      alignItems: "center",
-      justifyContent: "center"
-    },
-    plus: {
-      color: "white",
-      fontSize: 15,
-      marginRight: 15,
-      margin: 0,
     },
     image: {
       height: 20,

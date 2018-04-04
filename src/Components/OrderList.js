@@ -8,10 +8,10 @@ import {
   Image,
   TouchableOpacity
 } from "react-native";
-//import { TabNavigator, TabBarBottom } from "react-navigation";
 import { Icon } from "native-base";
-import DateOrder from "./DateOrder";
-import TotalOrder from "./TotalOrder";
+import DateOrder from "../Atom/DateOrder";
+import TotalOrder from "../Atom/TotalOrder";
+import OrderListItem from "../Atom/OrderListItem";
 
 export default class OrderList extends Component {
   constructor() {
@@ -133,8 +133,7 @@ export default class OrderList extends Component {
           status: "paid",
           number: 20,
           images:
-            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280",
-        
+            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280"
         },
         {
           date: "20 March 2018",
@@ -147,7 +146,7 @@ export default class OrderList extends Component {
           status: "paid",
           number: 20,
           images:
-            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280",
+            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280"
         },
         {
           date: "20 March 2018",
@@ -247,11 +246,11 @@ export default class OrderList extends Component {
           name: "John Bellion",
           customerName: "Okonkwo Chioma",
           time: "08:46am",
-          amount: '2000',
+          amount: "2000",
           status: "paid",
           number: 3,
           images:
-            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa",
+            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa"
         },
         {
           date: "20 March 2018",
@@ -264,8 +263,7 @@ export default class OrderList extends Component {
           status: "paid",
           number: 3,
           images:
-            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa",
-        
+            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa"
         },
         {
           date: "21 March 2018",
@@ -278,8 +276,7 @@ export default class OrderList extends Component {
           status: "paid",
           number: 3,
           images:
-            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa",
-        
+            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa"
         },
         {
           date: "21 March 2018",
@@ -292,8 +289,7 @@ export default class OrderList extends Component {
           status: "paid",
           number: 3,
           images:
-            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa",
-        
+            "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa"
         }
       ],
       stickyHeaderIndices: []
@@ -318,32 +314,14 @@ export default class OrderList extends Component {
       return <DateOrder date={item.date} />;
     } else if (item.header == "middle") {
       return (
-        <TouchableOpacity onPress={this.onPress}>
-          <View style={styles.row}>
-            <View style={{ height: 68, width: "20%", alignItems: "center"}}>
-              <Image source={{ uri: item.images }} style={styles.dp} />
-            </View>
-            <View style={{ flexDirection: "column", width:"60%"}}>
-              <Text style={styles.rowText1}>{item.name}</Text>
-
-              <Text style={styles.rowText2}>{item.customerName}</Text>
-            </View>
-            <View
-              style={{
-                flexDirection: "column",
-                alignItems: "flex-end",
-                //marginLeft: 45,
-                //marginRight: 20,
-                width: "20%",
-              }}
-            >
-              <Text style={styles.rowText3}>
-                {item.number}   </Text>
-                <Text style={styles.rowText2}>{item.time} </Text>
-              
-            </View>
-          </View>
-        </TouchableOpacity>
+        <OrderListItem
+          onPress={this.onPress}
+          images={item.images}
+          name={item.name}
+          customerName={item.customerName}
+          number={item.number}
+          time={item.time}
+        />
       );
     } else if (item.header == "end") {
       return <TotalOrder totalAmount={item.amount} />;
@@ -363,11 +341,6 @@ export default class OrderList extends Component {
           keyExtractor={item => item.key}
           stickyHeaderIndices={this.state.stickyHeaderIndices}
         />
-        <View style={styles.part}>
-          <TouchableOpacity style={styles.btn} onPress={this.addRow}>
-            <Icon name="md-cart" style={{ color: "white" }} />
-          </TouchableOpacity>
-        </View>
       </View>
     );
   }
@@ -375,7 +348,7 @@ export default class OrderList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#c0c0c0",
+    backgroundColor: "#c0c0c0"
   },
   row: {
     flex: 1,
@@ -402,42 +375,20 @@ const styles = StyleSheet.create({
     textAlign: "right",
     fontSize: 18
   },
-  part: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "center"
-  },
-  btn: {
-    position: "absolute",
-    width: 60,
-    height: 60,
-    backgroundColor: "rgba(218,11,11,59)",
-    borderRadius: 50,
-    bottom: 45,
-    right: 15,
-    alignItems: "center",
-    justifyContent: "center",
-  },
-  plus: {
-    color: "white",
-    fontSize: 15,
-    marginRight: 15,
-    margin: 0,
-  },
   image: {
     height: 20,
     width: 20,
-    padding: 6,
+    padding: 6
   },
   dp: {
     height: 55,
     width: 55,
     borderRadius: 55 / 2,
-    margin: 8,
+    margin: 8
   },
   icons: {
     backgroundColor: "#fff",
     height: 25,
-    width: 25,
+    width: 25
   }
 });
