@@ -1,13 +1,17 @@
 import React from 'react'
-import { StackNavigator, DrawerNavigator, TabNavigator } from 'react-navigation'
+import { Text, View } from 'react-native'
+import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 import { Icon } from 'native-base'
 
 import BusinessListScreen from './../Screen/BusinessListScreen'
 import NewBusinessScreen from './../Screen/NewBusinessScreen'
-import ViewBusinessScreen from './../Screen/ViewBusinessScreen'
 import SettingsScreen from './../Screen/SettingsScreen'
 import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen'
 import DebtScreen from './../Screen/DebtScreen'
+import ProductScreen from './../Screen/ProductScreen'
+import OrderScreen from './../Screen/OrderScreen'
+import CustomerScreen from './../Screen/CustomerScreen'
+import DebtsScreen from './../Screen/DebtsScreen'
 import Sidebar from './Sidebar'
 import styles from './../Style/Layout'
 import { color } from './../Style/Color'
@@ -15,17 +19,62 @@ import { color } from './../Style/Color'
 const ViewBusinessStack = TabNavigator(
     {
         Product: {
-            screen: BusinessListScreen
+            screen: ProductScreen
         },
         Order: {
-            screen: NewBusinessScreen
+            screen: OrderScreen
         },
-        Customer: {
-            screen: ViewBusinessScreen
+        Customers: {
+            screen: CustomerScreen
         },
         Debts: {
-            screen: ViewBusinessScreen
+            screen: DebtsScreen
         }
+    },
+    {
+        navigationOptions: ({ navigation }) => ({
+            tabBarIcon: ({ focused, tintColor }) => {
+                const { routeName } = navigation.state;
+                let iconName;
+                let tabColor;
+                if (routeName === 'Product') {
+                    iconName = 'basket';
+                    tabColor = focused ? color.primary : color.inactive;
+                } else if (routeName === 'Order') {
+                    iconName = 'cart';
+                    tabColor = focused ? color.primary : color.inactive;
+                } else if (routeName === 'Customers') {
+                    iconName = 'person';
+                    tabColor = focused ? color.primary : color.inactive;
+                } else if (routeName === 'Debts') {
+                    iconName = 'database';
+                    tabColor = focused ? color.primary : color.inactive;
+                }
+                return <View style={{alignItems: 'center'}}>
+                            <Icon
+                                name={iconName}
+                                size={25}
+                                style={{color: tabColor}}
+                                type={routeName === 'Debts' ? 'MaterialCommunityIcons' : 'Ionicons'}
+                            />
+                            <Text style={{color: tabColor}}>{routeName}</Text>
+                        </View>;
+            }
+        }),
+        tabBarOptions: {
+            activeTintColor: color.primary,
+            inactiveTintColor: color.inactive,
+            showLabel: false,
+            style: {
+                backgroundColor: color.secondary,
+                height: 60,
+                paddingVertical: 8
+            }
+        },
+        tabBarComponent: TabBarBottom,
+        tabBarPosition: 'bottom',
+        animationEnabled: false,
+        swipeEnabled: false,
     }
 )
 
@@ -38,7 +87,7 @@ const BusinessStack = StackNavigator(
             screen: NewBusinessScreen
         },
         ViewBusiness: {
-            screen: ViewBusinessScreen
+            screen: ViewBusinessStack
         },
         BusinessDetails: {
             screen: BusinessDetailsScreen

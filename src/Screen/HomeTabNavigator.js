@@ -10,10 +10,10 @@ import {
 import { TabNavigator, TabBarBottom } from "react-navigation";
 import { Icon } from 'native-base';
 
-import ProductList from "./ProductList";
-import OrderList from "./OrderList";
-import CustomerList from "./CustomerList";
-import CreditList from "./CreditList";
+import ProductList from "./../Components/ProductList";
+import OrderList from "./../Components/OrderList";
+import CustomerList from "./../Components/CustomerList";
+import CreditList from "./../Components/CustomerList";
 
 
 const users = [

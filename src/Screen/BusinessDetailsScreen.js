@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import { List, ListItem, Icon, Fab } from 'native-base'
+import { List, ListItem, Icon } from 'native-base'
 
+import FabAtom from './../Atom/FabAtom'
 import styles from './../Style/Screen'
 import { color } from './../Style/Color'
 
@@ -32,16 +33,11 @@ class BusinessDetailsScreen extends Component {
     render() {
         return (
             <View style={ styles.centerContainer }>
-                <Fab
-                    position="bottomRight"
-                    style={styles.fab}
-                    onPress={() => this.props.navigation.navigate('NewBusiness')}
-                >
-                    <Icon
-                        name="md-add"
-                        color={color.secondary}
-                    />
-                </Fab>
+                <FabAtom
+                    routeName={'NewBusiness'}
+                    name={'md-add'}
+                    navigation={this.props.navigation}
+                />
 
                  <List>
                     <ListItem
