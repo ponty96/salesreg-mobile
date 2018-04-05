@@ -45,4 +45,4 @@ class ProductScreen extends Component {
     }
 }
 
-export default ProductScreen
+export default ProductScreen;

@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   totalView: {
     width: '30%',
-    height: 85,
+    height: 75,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   redNumberView: {
     width: '70%',
-    height: 85,
+    height: 75,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFC0CB',

@@ -208,44 +208,5 @@ const users = [
     container: {
       backgroundColor: "#c0c0c0",
     },
-    row: {
-      flexDirection: "row",
-      top: 0,
-      padding: 10,
-      height: 75,
-      alignItems: "center",
-      backgroundColor: "#fff",
-      marginBottom: .5,
-    },
-    rowText1: {
-      flex: 1,
-      fontWeight: "bold",
-      fontSize: 15,
-      paddingLeft: 20,
-      color: 'grey',
-    },
-    rowText2: {
-      flex: 1
-    },
-    rowText3: {
-      color: 'red',
-      paddingRight: 18,
-      fontSize: 18,
-    },
-    image: {
-      height: 20,
-      width: 20,
-      padding: 6
-    },
-    dp: {
-      height: 55,
-      width: 55,
-      borderRadius: 55/2,
-      margin: 8,
-    },
-    icons: {
-      backgroundColor: "#fff",
-      height: 25,
-      width: 25
-    }
+
   });
