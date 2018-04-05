@@ -1,30 +1,24 @@
 import React, { Component } from 'react';
-import { TextInput, View, StyleSheet } from 'react-native';
+import { TextInput, View, StyleSheet, Text } from 'react-native';
 
 export default class InputForText extends Component {
-  constructor() {
-    super();
-    this.state = {
-      useThis: false
-    };
-  }
-
   render() {
     return (
       <View style = {styles.wrapper}>
-        <TextInput 
-          onFocus= {this.props.onFocus}
-          placeholder = { this.props.whatToInput }
-          style = { styles.input || this.props.style}
-          style={!this.state.useThis ? styles.input : this.props.style}
-          placeholderTextColor="#c0c0c0"
-          autoCapitalize="none"
+        <View style = { styles.wrapperForAsterikAndTextInput }>
+          <Text style = {styles.asterik}>
+            {(this.props.required === true) ? '*' : ''}
+          </Text>
+          <TextInput 
+          placeholder = { this.props.placeholder }
+          style = { styles.input }
           keyboardType = { this.props.keyboardType }
-          underlineColorAndroid = "transparent"
-          maxLength={this.props.length}
-          onChangeText={this.props.onChangeText}
-          secureTextEntry={this.props.secureTextEntry}
-        />
+          underlineColorAndroid = 'transparent'
+          />
+        </View>
+        <Text style = {styles.bottomLabel}>
+          { this.props.bottomLabel }
+        </Text>
       </View>
     );
 
@@ -34,11 +28,17 @@ export default class InputForText extends Component {
 
 const styles = StyleSheet.create({
   wrapper: {
-    flexDirection: 'row', 
+    marginHorizontal: 10
+  },
+  wrapperForAsterikAndTextInput: {
+    flexDirection: 'row',
     borderBottomWidth: 1,
     borderBottomColor: 'lightgrey',
-    marginLeft: 10,
-    marginRight: 10
+  },
+  asterik: {
+    color: 'red',
+    marginTop: 13,
+    fontSize: 20
   },
   input: {
     color: 'grey',
@@ -48,6 +48,8 @@ const styles = StyleSheet.create({
     fontSize: 17,
     flex: 1,
     marginLeft: 1,
+  },
+  bottomLabel: {
+    color: 'lightgrey',
   }
-  
 });
