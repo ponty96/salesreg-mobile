@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { TextInput, View, StyleSheet, Text } from 'react-native';
 
-export default class InputForText extends Component {
+export default class InputAtom extends Component {
   render() {
     return (
       <View style = {styles.wrapper}>
@@ -13,6 +13,8 @@ export default class InputForText extends Component {
           placeholder = { this.props.placeholder }
           style = { styles.input }
           keyboardType = { this.props.keyboardType }
+          secureTextEntry = { this.props.secureTextEntry }
+          maxLength = { this.props.maxLength }
           underlineColorAndroid = 'transparent'
           />
         </View>
