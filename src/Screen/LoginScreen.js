@@ -1,10 +1,10 @@
 import React from "react";
 import { Text, View, KeyboardAvoidingView } from "react-native";
 
-import LoginForm from "./../Components/LoginForm";
-import styles from './../Style/Auth'
+import styles from './../Style/Auth';
+import LoginForm from './../Components/LoginForm';
 
-class AuthLayout extends React.Component {
+class LoginScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
@@ -16,7 +16,7 @@ class AuthLayout extends React.Component {
                 <View style={styles.whiteView} />
                 <View style={styles.formContainer}>
                     <KeyboardAvoidingView style={styles.formInnerLayer} behaviour="position">
-                        <LoginForm />
+                        <LoginForm/>
                     </KeyboardAvoidingView>
                 </View>
             </View>
@@ -24,4 +24,4 @@ class AuthLayout extends React.Component {
     }
 }
 
-export default AuthLayout;
+export default LoginScreen;

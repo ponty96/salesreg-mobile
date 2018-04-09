@@ -3,6 +3,7 @@ import { Text, View } from 'react-native'
 import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
 import { Icon } from 'native-base'
 
+import LoginScreen from './../Screen/LoginScreen'
 import BusinessListScreen from './../Screen/BusinessListScreen'
 import NewBusinessScreen from './../Screen/NewBusinessScreen'
 import NewOrderScreen from './../Screen/NewOrderScreen'
@@ -86,6 +87,9 @@ const BusinessStack = StackNavigator(
         BusinessList: {
             screen: BusinessListScreen
         },
+        Login: {
+            screen: LoginScreen
+        },
         NewBusiness: {
             screen: NewBusinessScreen
         },
@@ -112,7 +116,7 @@ const BusinessStack = StackNavigator(
         }
     },
     {
-        initialRouteName: 'BusinessList',
+        initialRouteName: 'Login',
         navigationOptions: ({ navigation }) => (
             {
                 title: 'BusinessList',
