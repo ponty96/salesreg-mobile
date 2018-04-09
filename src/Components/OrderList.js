@@ -363,7 +363,7 @@ const styles = StyleSheet.create({
   },
   rowText1: {
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 12,
     color: "grey"
   },
   rowText2: {
@@ -373,7 +373,7 @@ const styles = StyleSheet.create({
   rowText3: {
     color: "red",
     textAlign: "right",
-    fontSize: 18
+    fontSize: 13
   },
   image: {
     height: 20,
