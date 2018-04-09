@@ -7,9 +7,9 @@ import {
   KeyboardAvoidingView
 } from "react-native";
 
-import RedButton from "../src/Atom/RedButton";
-import RedText from "../src/Atom/RedText";
-import InputForText from "../src/Atom/InputForText";
+import RedButton from "../Atom/RedButton";
+import RedText from "../Atom/RedText";
+import InputForText from "../Atom/InputForText";
 
 class Form extends React.Component {
   render() {

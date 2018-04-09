@@ -1,8 +1,8 @@
 import React from 'react';
 import { StyleSheet, Text, View ,TextInput } from 'react-native';
 
-import RedText from "../src/Atom/RedText";
-import InputForText from "../src/Atom/InputForText";
+import RedText from "../Atom/RedText";
+import InputAtom from "../Atom/InputAtom";
 
 class RedButton extends React.Component {
   constructor(){  
@@ -30,7 +30,7 @@ class Form extends React.Component {
         <Text style={styles.instruct}>
           To recover password, please input your number below...
         </Text>
-        <InputForText placeholder="  Phone number" length={11} keyboardType="numeric"/>
+        <InputAtom placeholder="Phone number" length={11} keyboardType="numeric"/>
         <RedButton text="Reset Password" />
         <RedText text="I remember my password now" />
       </View>

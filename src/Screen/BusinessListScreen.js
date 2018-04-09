@@ -1,10 +1,11 @@
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { List, ListItem, Icon } from 'native-base'
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { List, ListItem, Icon } from 'native-base';
 
-import FabAtom from './../Atom/FabAtom'
-import styles from './../Style/Screen'
-import { color } from './../Style/Color'
+import FabAtom from './../Atom/FabAtom';
+import styles from './../Style/Screen';
+import { color } from './../Style/Color';
+import Login from './../Containers/AuthLayout';
 
 class BusinessListScreen extends Component {
 
@@ -40,27 +41,28 @@ class BusinessListScreen extends Component {
     render() {
         // do change the list to the appropriate molecule
         return (
-            <View style={ styles.centerContainer }>
-                <FabAtom
-                    routeName={'NewBusiness'}
-                    name={'md-add'}
-                    navigation={this.props.navigation}
-                />
+            <Login />
+            // <View style={ styles.centerContainer }>
+            //     <FabAtom
+            //         routeName={'NewBusiness'}
+            //         name={'md-add'}
+            //         navigation={this.props.navigation}
+            //     />
 
-                 <List>
-                    <ListItem
-                        onPress={() => this.props.navigation.navigate('ViewBusiness',
-                                        {
-                                            name: 'Kay5iveAttractions',
-                                            id: 'ID here for getting data at the new scrren'
-                                        }
-                                    )
-                                }
-                    >
-                        <Text>Views</Text>
-                    </ListItem>
-                </List>
-            </View>
+            //      <List>
+            //         <ListItem
+            //             onPress={() => this.props.navigation.navigate('ViewBusiness',
+            //                             {
+            //                                 name: 'Kay5iveAttractions',
+            //                                 id: 'ID here for getting data at the new scrren'
+            //                             }
+            //                         )
+            //                     }
+            //         >
+            //             <Text>Views</Text>
+            //         </ListItem>
+            //     </List>
+            // </View>
         )
     }
 }

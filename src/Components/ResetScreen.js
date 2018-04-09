@@ -1,9 +1,9 @@
 import React from "react";
 import { StyleSheet, Text, View, TouchableOpacity } from "react-native";
 
-import RedButton from "../src/Atom/RedButton";
-import RedText from "../src/Atom/RedText";
-import NumberInput from "../src/Atom/InputForText";
+import RedButton from "../Atom/RedButton";
+import RedText from "../Atom/RedText";
+import NumberInput from "../Atom/InputForText";
 
 class Form extends React.Component {
   constructor() {

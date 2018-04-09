@@ -1,57 +1,42 @@
-import React, { Component } from 'react';
-import { TextInput, View, StyleSheet, Text } from 'react-native';
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import {Item, Input, Label, Text } from 'native-base';
 
-export default class InputAtom extends Component {
-  render() {
-    return (
-      <View style = {styles.wrapper}>
-        <View style = { styles.wrapperForAsterikAndTextInput }>
-          <Text style = {styles.asterik}>
-            {(this.props.required === true) ? '*' : ''}
-          </Text>
-          <TextInput 
-          placeholder = { this.props.placeholder }
-          style = { styles.input }
-          keyboardType = { this.props.keyboardType }
-          secureTextEntry = { this.props.secureTextEntry }
-          maxLength = { this.props.maxLength }
-          underlineColorAndroid = 'transparent'
-          />
-        </View>
-        <Text style = {styles.bottomLabel}>
-          { this.props.bottomLabel }
-        </Text>
-      </View>
-    );
+import styles from './../Style/Form';
 
-    
-  }
+class InputAtom extends Component {
+    static defaultProps = {
+        required: false,
+        floatingLabel: true,
+        secureTextEntry: false,
+        keyboardType: 'default'
+    }
+
+    render() {
+        return (
+            <Item floatingLabel={this.props.floatingLabel}>
+                <Label style={styles.label}>
+                    {this.props.required && <Text style={styles.required}>* </Text>}
+                    {this.props.label}
+                </Label>
+                <Input
+                    defaultValue = {this.props.defaultValue}
+                    secureTextEntry = {this.props.secureTextEntry}
+                    keyboardType = {this.props.keyboardType}
+                    underlineColorAndroid = {'transparent'}
+                />
+            </Item>
+        );
+    }
 }
 
-const styles = StyleSheet.create({
-  wrapper: {
-    marginHorizontal: 10
-  },
-  wrapperForAsterikAndTextInput: {
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
-  },
-  asterik: {
-    color: 'red',
-    marginTop: 13,
-    fontSize: 20
-  },
-  input: {
-    color: 'grey',
-    marginRight: 10,
-    marginBottom: 7,
-    marginTop: 15,
-    fontSize: 17,
-    flex: 1,
-    marginLeft: 1,
-  },
-  bottomLabel: {
-    color: 'lightgrey',
-  }
-});
+InputAtom.propTypes = {
+    required: PropTypes.bool,
+    label: PropTypes.string.isRequired,
+    defaultValue: PropTypes.string,
+    floatingLabel: PropTypes.bool,
+    secureTextEntry: PropTypes.bool,
+    keyboardType: PropTypes.oneOf(['default', 'numeric', 'email-address', 'phone-pad']),
+}
+
+export default InputAtom;
