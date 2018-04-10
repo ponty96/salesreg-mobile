@@ -26,6 +26,12 @@ export default StyleSheet.create(
         },
         required: {
             color: color.primary
+        },
+        buttonDisabled: {
+            backgroundColor: color.disabled,
+            paddingHorizontal: 32,
+            alignSelf: 'center',
+            marginVertical: 8
         }
     }
 )

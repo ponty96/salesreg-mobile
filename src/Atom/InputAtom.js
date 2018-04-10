@@ -20,6 +20,8 @@ class InputAtom extends Component {
                     {this.props.label}
                 </Label>
                 <Input
+                    placeholder = {this.props.placeholder}
+                    onChangeText={text => this.props.getValue(text)}
                     defaultValue = {this.props.defaultValue}
                     secureTextEntry = {this.props.secureTextEntry}
                     keyboardType = {this.props.keyboardType}
@@ -32,10 +34,12 @@ class InputAtom extends Component {
 
 InputAtom.propTypes = {
     required: PropTypes.bool,
-    label: PropTypes.string.isRequired,
+    label: PropTypes.string,
     defaultValue: PropTypes.string,
+    placeholder: PropTypes.string,
     floatingLabel: PropTypes.bool,
     secureTextEntry: PropTypes.bool,
+    getValue: PropTypes.func,
     keyboardType: PropTypes.oneOf(['default', 'numeric', 'email-address', 'phone-pad']),
 }
 

@@ -1,24 +1,26 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom } from 'react-navigation'
+import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom, SwitchNavigator } from 'react-navigation'
 import { Icon } from 'native-base'
 
-import LoginScreen from './../Screen/LoginScreen'
-import BusinessListScreen from './../Screen/BusinessListScreen'
-import NewBusinessScreen from './../Screen/NewBusinessScreen'
-import NewOrderScreen from './../Screen/NewOrderScreen'
-import NewProductScreen from './../Screen/NewProductScreen'
-import NewCustomerScreen from './../Screen/NewCustomerScreen'
-import SettingsScreen from './../Screen/SettingsScreen'
-import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen'
-import DebtScreen from './../Screen/DebtScreen'
-import ProductScreen from './../Screen/ProductScreen'
-import OrderScreen from './../Screen/OrderScreen'
-import CustomerScreen from './../Screen/CustomerScreen'
-import DebtsScreen from './../Screen/DebtsScreen'
-import Sidebar from './Sidebar'
-import styles from './../Style/Layout'
-import { color } from './../Style/Color'
+import SignupScreen from './../Screen/SignupScreen';
+import ResetScreen from './../Screen/ResetScreen';
+import LoginScreen from './../Screen/LoginScreen';
+import BusinessListScreen from './../Screen/BusinessListScreen';
+import NewBusinessScreen from './../Screen/NewBusinessScreen';
+import NewOrderScreen from './../Screen/NewOrderScreen';
+import NewProductScreen from './../Screen/NewProductScreen';
+import NewCustomerScreen from './../Screen/NewCustomerScreen';
+import SettingsScreen from './../Screen/SettingsScreen';
+import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen';
+import DebtScreen from './../Screen/DebtScreen';
+import ProductScreen from './../Screen/ProductScreen';
+import OrderScreen from './../Screen/OrderScreen';
+import CustomerScreen from './../Screen/CustomerScreen';
+import DebtsScreen from './../Screen/DebtsScreen';
+import Sidebar from './Sidebar';
+import styles from './../Style/Layout';
+import { color } from './../Style/Color';
 
 const ViewBusinessStack = TabNavigator(
     {
@@ -87,9 +89,6 @@ const BusinessStack = StackNavigator(
         BusinessList: {
             screen: BusinessListScreen
         },
-        Login: {
-            screen: LoginScreen
-        },
         NewBusiness: {
             screen: NewBusinessScreen
         },
@@ -116,7 +115,7 @@ const BusinessStack = StackNavigator(
         }
     },
     {
-        initialRouteName: 'Login',
+        initialRouteName: 'BusinessList',
         navigationOptions: ({ navigation }) => (
             {
                 title: 'BusinessList',
@@ -132,7 +131,7 @@ const BusinessStack = StackNavigator(
             }
         )
     }
-)
+);
 
 const DrawerStack = DrawerNavigator(
     {
@@ -147,6 +146,27 @@ const DrawerStack = DrawerNavigator(
             inactiveTintColor: color.primary
         }
     }
-)
+);
 
-export default DrawerStack
+const AuthStack = StackNavigator(
+    {
+        Login: LoginScreen,
+        Reset: ResetScreen,
+        Signup: SignupScreen,
+    },
+    {
+        headerMode: 'none'
+    }
+);
+
+const SwitchStack = SwitchNavigator(
+    {
+        Auth: AuthStack,
+        App: DrawerStack
+    },
+    {
+        initialRouteName: 'Auth',
+    }
+);
+
+export default SwitchStack;

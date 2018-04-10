@@ -7,17 +7,17 @@ export default StyleSheet.create(
             flexDirection: "column"
         },
         redView: {
-            height: "40%",
+            height: "50%",
             backgroundColor: "rgba(218,11,11,59)"
         },
         whiteView: {
-            height: "60%",
+            height: "50%",
             flex: 1,
             backgroundColor: "#f0f0f0"
         },
         formContainer: {
             position: "absolute",
-            top: 70,
+            top: 120,
             alignItems: "center",
             alignSelf: "center",
             justifyContent: "center",
@@ -32,7 +32,8 @@ export default StyleSheet.create(
         },
         appName: {
             alignSelf: 'center',
-            marginVertical: 20
+            marginTop: 50,
+            marginBottom: 20
         },
         appText: {
             color: '#fff',
