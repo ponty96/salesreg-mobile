@@ -348,7 +348,8 @@ export default class OrderList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#c0c0c0"
+    backgroundColor: "#c0c0c0",
+      flex: 1
   },
   row: {
     flex: 1,

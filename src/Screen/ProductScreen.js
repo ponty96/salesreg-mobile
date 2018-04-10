@@ -33,13 +33,13 @@ class ProductScreen extends Component {
         // do change the list to the appropriate molecule
         return (
             <View style={ styles.centerContainer }>
+                <ProductList />
                 <FabAtom
                     routeName={'NewProduct'}
                     name={'basket-fill'}
                     type={'MaterialCommunityIcons'}
                     navigation={this.props.navigation}
                 />
-                <ProductList />
             </View>
         )
     }

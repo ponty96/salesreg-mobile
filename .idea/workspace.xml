@@ -2,28 +2,11 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Components/ResetForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Components/SignupForm.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Screen/ResetScreen.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Screen/SignupScreen.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Atom/ButtonAtom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/ButtonAtom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Atom/InputAtom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/InputAtom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Atom/InputForText.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Atom/InputaAtom.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Atom/RedButton.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Atom/RedText.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Atom/TotalOrder.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/TotalOrder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ForgotScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/LoginScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ResetScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/SignupScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation/Routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/LoginScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Style/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style/Auth.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Style/Color.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style/Color.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Style/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style/Form.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CustomerList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CustomerList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/OrderList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/OrderList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProductList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProductList.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/ProductScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/ProductScreen.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -37,13 +20,37 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="Routes.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Navigation/Routes.js">
+      <file leaf-file-name="FabAtom.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Atom/FabAtom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="526">
-              <caret line="139" column="5" lean-forward="true" selection-start-line="139" selection-start-column="5" selection-end-line="139" selection-end-column="5" />
+            <state relative-caret-position="153">
+              <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
               <folding>
                 <element signature="e#0#25#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductScreen.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Screen/ProductScreen.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="368">
+              <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+              <folding>
+                <element signature="e#0#40#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ProductList.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/ProductList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="501">
+              <caret line="209" column="15" selection-start-line="209" selection-start-column="15" selection-end-line="209" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -52,7 +59,8 @@
       <file leaf-file-name="CustomerList.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Components/CustomerList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state>
+            <state relative-caret-position="218">
+              <caret line="156" column="27" selection-start-line="156" selection-start-column="27" selection-end-line="156" selection-end-column="27" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -60,11 +68,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="OrderList.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="OrderList.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Components/OrderList.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1544">
-              <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+            <state relative-caret-position="116">
+              <caret line="332" column="29" selection-start-line="332" selection-start-column="29" selection-end-line="332" selection-end-column="29" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -72,24 +80,13 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="TotalOrder.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Atom/TotalOrder.js">
+      <file leaf-file-name="Screen.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Style/Screen.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="572">
-              <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
+            <state relative-caret-position="323">
+              <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="OrderListItem.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Atom/OrderListItem.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-5">
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -135,6 +132,12 @@
         <option value="$PROJECT_DIR$/src/Components/LoginForm.js" />
         <option value="$PROJECT_DIR$/src/Navigation/Routes.js" />
         <option value="$PROJECT_DIR$/src/Atom/TotalOrder.js" />
+        <option value="$PROJECT_DIR$/src/Atom/DateOrder.js" />
+        <option value="$PROJECT_DIR$/src/Atom/FabAtom.js" />
+        <option value="$PROJECT_DIR$/src/Screen/ProductScreen.js" />
+        <option value="$PROJECT_DIR$/src/Components/ProductList.js" />
+        <option value="$PROJECT_DIR$/src/Components/OrderList.js" />
+        <option value="$PROJECT_DIR$/src/Components/CustomerList.js" />
       </list>
     </option>
   </component>
@@ -191,6 +194,12 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Components" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Screen" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
@@ -241,12 +250,12 @@
       <workItem from="1522605413948" duration="3380000" />
       <workItem from="1523274814708" duration="257000" />
       <workItem from="1523275169062" duration="232000" />
-      <workItem from="1523275599504" duration="28404000" />
+      <workItem from="1523275599504" duration="30219000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="32273000" />
+    <option name="totallyTimeSpent" value="34088000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -255,7 +264,7 @@
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1784534" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3295325" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32905984" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
       <window_info anchor="bottom" id="Version Control" order="9" weight="0.32905984" />
       <window_info id="npm" order="2" side_tool="true" />
@@ -271,6 +280,26 @@
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
     </layout>
+    <layout-to-restore>
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1784534" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="8" weight="0.32905984" />
+      <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.3295325" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32905984" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+    </layout-to-restore>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="1" />
@@ -325,16 +354,6 @@
         <state>
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Style/Screen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="323">
-          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -540,6 +559,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/TotalOrder.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="29" lean-forward="true" selection-start-line="28" selection-start-column="29" selection-end-line="28" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/Navigation/Routes.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="526">
@@ -550,40 +579,81 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/CustomerList.js">
+    <entry file="file://$PROJECT_DIR$/src/Atom/DateOrder.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
+        <state relative-caret-position="340">
+          <caret line="20" column="24" selection-start-line="20" selection-start-column="24" selection-end-line="20" selection-end-column="24" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Atom/OrderListItem.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-5">
+        <state>
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/OrderList.js">
+    <entry file="file://$PROJECT_DIR$/src/Style/Screen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1544">
-          <caret line="27" column="20" lean-forward="true" selection-start-line="27" selection-start-column="20" selection-end-line="27" selection-end-column="20" />
+        <state relative-caret-position="323">
+          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Atom/TotalOrder.js">
+    <entry file="file://$PROJECT_DIR$/src/Atom/FabAtom.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="572">
-          <caret line="43" column="14" selection-start-line="43" selection-start-column="14" selection-end-line="43" selection-end-column="14" />
+        <state relative-caret-position="153">
+          <caret line="9" column="26" lean-forward="true" selection-start-line="9" selection-start-column="26" selection-end-line="9" selection-end-column="26" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#25#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/ProductScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="368">
+          <caret line="35" column="31" selection-start-line="35" selection-start-column="31" selection-end-line="35" selection-end-column="31" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/ProductList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="501">
+          <caret line="209" column="15" selection-start-line="209" selection-start-column="15" selection-end-line="209" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CustomerList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="156" column="27" selection-start-line="156" selection-start-column="27" selection-end-line="156" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/OrderList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="116">
+          <caret line="332" column="29" selection-start-line="332" selection-start-column="29" selection-end-line="332" selection-end-column="29" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

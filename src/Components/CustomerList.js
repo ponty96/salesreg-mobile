@@ -154,7 +154,7 @@ export default class CustomerList extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <ListView
           dataSource={this.state.userDataSource}
           renderRow={this.renderRow.bind(this)}

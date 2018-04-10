@@ -8,6 +8,7 @@ const FabAtom = (props) => (
 	<Fab
         position="bottomRight"
         style={styles.fab}
+        active={true}
         onPress={() => props.navigation.navigate(props.routeName)}
     >
         <Icon

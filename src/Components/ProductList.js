@@ -207,6 +207,7 @@ const users = [
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#c0c0c0",
+        flex: 1
     },
 
   });
