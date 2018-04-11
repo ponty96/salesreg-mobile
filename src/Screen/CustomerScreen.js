@@ -44,4 +44,4 @@ class CustomerScreen extends Component {
     }
 }
 
-export default CustomerScreen
+export default CustomerScreen;

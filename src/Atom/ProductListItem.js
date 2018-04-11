@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   rowText1: {
     flex: 1,
     fontWeight: "bold",
-    fontSize: 15,
+    fontSize: 12,
     paddingLeft: 20,
     color: 'grey',
   },
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   rowText3: {
     color: 'red',
     paddingRight: 18,
-    fontSize: 18,
+    fontSize: 13,
   },
   image: {
     height: 20,

@@ -9,10 +9,16 @@ import {
 } from "react-native";
 
 class DisplayCustomer extends Component {
-  latestAmount = this.props.status == "paid"
+  
+    componentWillMount() {
+      /*let latestAmount = this.props.status == "paid"
     ? this.props.debt
-    : this.props.status == "balance" ? this.props.balance : this.props.debt;
-  render() {
+    : this.props.status == "balance" ? this.props.balance : this.props.debt;*/
+  
+      /*let realColor = (this.props.status == "paid") ? "#c0c0c0" : (this.props.status == "balance") ? "#42c5f4" : "rgba(218,11,11,59)";*/
+    }
+  
+    render() {
     return (
       <TouchableOpacity onPress={this.onPress}>
         <View style={styles.row}>
@@ -23,20 +29,8 @@ class DisplayCustomer extends Component {
             <Text style={styles.rowText1}>{this.props.customerName}</Text>
           </View>
           <View style={styles.view3}>
-            <Text style={styles.text1}>NGN {this.props.amount}.00</Text>
-            <Text
-              style={[
-                styles.lilFont,
-                {
-                  color:
-                    this.props.status == "paid"
-                      ? "#c0c0c0"
-                      : this.props.status == "balance"
-                        ? "#00FFFF"
-                        : "rgba(218,11,11,59)"
-                }
-              ]}
-            >
+            <Text style={styles.text1}>N {this.props.amount}.00</Text>
+            <Text style={styles.lilFont}>
               {this.props.latestAmount}.00
             </Text>
           </View>
@@ -66,7 +60,7 @@ const styles = StyleSheet.create({
     rowText1: {
       flex: 1,
       fontWeight: "bold",
-      fontSize: 18,
+      fontSize: 13,
       paddingLeft: 20,
       paddingTop: 15,
       color: "#000"
@@ -77,7 +71,7 @@ const styles = StyleSheet.create({
     rowText3: {
       color: "#000",
       paddingRight: 18,
-      fontSize: 18
+      fontSize: 13
     },
     image: {
       height: 20,
@@ -96,7 +90,8 @@ const styles = StyleSheet.create({
       width: 25
     },
     lilFont: {
-      fontSize: 13
+      fontSize: 10,
+      color: this.props.realColor
     },
     view1: { 
       height: 68, 
@@ -113,7 +108,7 @@ const styles = StyleSheet.create({
         width: "30%"
     },
     text1: {
-        fontSize: 15, 
+        fontSize: 12, 
         fontWeight: "bold"
     }
   });

@@ -125,24 +125,14 @@ export default class CustomerList extends Component {
   onPress = () => {};
 
   renderRow(user) {
-    /*if (user.status == "paid") {
-      return (
-        
-      );
-    } else if (user.status == "balance") {
-      return (
-      
-      );
-    } else if (user.status == "debt") {
-      return (
-        
-      );
-    }*/
     let latestAmount;
     latestAmount =
       user.status == "paid"
         ? user.debt
         : user.status == "balance" ? user.balance : user.debt;
+
+    let realColor = (user.status == "paid") ? "#c0c0c0" : (user.status == "balance") ? "#42c5f4" : "rgba(218,11,11,59)";    
+    
     return (
       <DisplayCustomer
         status={user.status}
@@ -152,6 +142,7 @@ export default class CustomerList extends Component {
         amount={user.amount}
         images={user.images}
         latestAmount={latestAmount}
+        realColor={realColor}
       />
     );
   }
@@ -186,7 +177,7 @@ const styles = StyleSheet.create({
   rowText1: {
     flex: 1,
     fontWeight: "bold",
-    fontSize: 18,
+    fontSize: 13,
     paddingLeft: 20,
     paddingTop: 15,
     color: "#000"
@@ -197,7 +188,7 @@ const styles = StyleSheet.create({
   rowText3: {
     color: "#000",
     paddingRight: 18,
-    fontSize: 18
+    fontSize: 13
   },
   image: {
     height: 20,
@@ -216,6 +207,6 @@ const styles = StyleSheet.create({
     width: 25
   },
   lilFont: {
-    fontSize: 13
+    fontSize: 10
   }
 });
