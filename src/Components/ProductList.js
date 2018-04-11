@@ -207,7 +207,9 @@ const users = [
   const styles = StyleSheet.create({
     container: {
       backgroundColor: "#c0c0c0",
+        flex: 1
     },
+<<<<<<< HEAD
     row: {
       flexDirection: "row",
       top: 0,
@@ -248,4 +250,7 @@ const users = [
       height: 25,
       width: 25
     }
+=======
+
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
   });

@@ -17,7 +17,11 @@ class OrderListItem extends React.Component {
             <View style={styles.view3}>
               <Text style={styles.rowText3}>
                 {this.props.number}</Text>
+<<<<<<< HEAD
                 <Text style={styles.rowText2}>{this.props.time} </Text>
+=======
+                <Text style={styles.rowText2}>{this.props.time}</Text>
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
               
             </View>
           </View>
@@ -46,7 +50,11 @@ const styles = StyleSheet.create({
     rowText1: {
       fontWeight: "bold",
       fontSize: 12,
+<<<<<<< HEAD
       color: "grey"
+=======
+      color: "#000"
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
     },
     rowText2: {
       color: "lightgrey",
@@ -75,12 +83,12 @@ const styles = StyleSheet.create({
     },
     view1: { 
       height: 68, 
-      width: "20%", 
+      width: "25%", 
       alignItems: "center"
     },
     view2: {
       flexDirection: "column", 
-      width:"60%"
+      width:"55%"
     },
     view3: {
         flexDirection: "column",

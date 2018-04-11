@@ -33,12 +33,12 @@ class CustomerScreen extends Component {
         // do change the list to the appropriate molecule
         return (
             <View style={ styles.centerContainer }>
+                <CustomerList />
                 <FabAtom
-                    routeName={'NewBusiness'}
+                    routeName={'NewCustomer'}
                     name={'md-person-add'}
                     navigation={this.props.navigation}
                 />
-                <CustomerList />
             </View>
         )
     }

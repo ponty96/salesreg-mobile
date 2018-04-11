@@ -39,6 +39,6 @@ export default StyleSheet.create(
             alignItems: 'center',
             paddingVertical: 20,
             paddingHorizontal: 16
-        }
+        },
     }
 )

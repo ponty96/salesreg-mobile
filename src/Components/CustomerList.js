@@ -125,6 +125,7 @@ export default class CustomerList extends Component {
   onPress = () => {};
 
   renderRow(user) {
+<<<<<<< HEAD
     let latestAmount;
     latestAmount =
       user.status == "paid"
@@ -133,6 +134,21 @@ export default class CustomerList extends Component {
 
     let realColor = (user.status == "paid") ? "#c0c0c0" : (user.status == "balance") ? "#42c5f4" : "rgba(218,11,11,59)";    
     
+=======
+
+    let latestAmount =
+      user.status == "paid"
+        ? user.debt
+        : user.status == "balance" ? user.balance : user.debt;
+    let realStyle;
+    if (user.status == "paid"){
+       realStyle = "paid";
+    } else if (user.status == "balance"){
+       realStyle = "balance";
+    } else {
+       realStyle = "debt";
+    }
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
     return (
       <DisplayCustomer
         status={user.status}
@@ -142,14 +158,18 @@ export default class CustomerList extends Component {
         amount={user.amount}
         images={user.images}
         latestAmount={latestAmount}
+<<<<<<< HEAD
         realColor={realColor}
+=======
+        realStyle={realStyle}
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
       />
     );
   }
 
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <ListView
           dataSource={this.state.userDataSource}
           renderRow={this.renderRow.bind(this)}
@@ -208,5 +228,20 @@ const styles = StyleSheet.create({
   },
   lilFont: {
     fontSize: 10
+<<<<<<< HEAD
+=======
+  },
+  paid: {
+    fontSize: 10,
+    color: "#c0c0c0"
+  },
+  balance: {
+    fontSize: 10,
+    color: "#42c5f4"
+  },
+  debt: {
+    fontSize: 10,
+    color: "rgba(218,11,11,59)"
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
   }
 });

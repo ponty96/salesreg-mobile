@@ -33,13 +33,13 @@ class OrderScreen extends Component {
         // do change the list to the appropriate molecule
         return (
             <View style={ styles.centerContainer }>
+                <OrderList />
                 <FabAtom
-                    routeName={'NewBusiness'}
+                    routeName={'NewOrder'}
                     name={'add-shopping-cart'}
-                    type={'MaterialIcons'}                    
+                    type={'MaterialIcons'}
                     navigation={this.props.navigation}
                 />
-                <OrderList />
             </View>
         )
     }
