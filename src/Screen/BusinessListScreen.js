@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { List, ListItem, Icon } from 'native-base'
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { List, ListItem, Icon } from 'native-base';
 
-import FabAtom from './../Atom/FabAtom'
-import styles from './../Style/Screen'
-import { color } from './../Style/Color'
+import FabAtom from './../Atom/FabAtom';
+import styles from './../Style/Screen';
 
 class BusinessListScreen extends Component {
 

@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-export default class TotalOrder extends React.Component {
+export default class TotalOrderAtom extends React.Component {
   render() {
     return (
         <View style={styles.container}>
@@ -24,7 +24,7 @@ const styles = StyleSheet.create({
   },
   totalView: {
     width: '30%',
-    height: 75,
+    height: 55,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#fff',
@@ -41,7 +41,7 @@ const styles = StyleSheet.create({
   },
   redNumberView: {
     width: '70%',
-    height: 75,
+    height: 55,
     alignItems: 'center',
     justifyContent: 'center',
     backgroundColor: '#FFC0CB',

@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Icon } from "native-base";
-import DisplayCustomer from "../Atom/DisplayCustomer";
+import CustomerListAtom from "../Atom/CustomerListAtom";
 
 
 const users = [
@@ -139,7 +139,7 @@ export default class CustomerList extends Component {
        realStyle = "debt";
     }
     return (
-      <DisplayCustomer
+      <CustomerListAtom
         status={user.status}
         debt={user.debt}
         balance={user.balance}
@@ -154,7 +154,7 @@ export default class CustomerList extends Component {
 
   render() {
     return (
-      <View>
+      <View style={{flex: 1}}>
         <ListView
           dataSource={this.state.userDataSource}
           renderRow={this.renderRow.bind(this)}

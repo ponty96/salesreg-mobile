@@ -9,9 +9,9 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Icon } from "native-base";
-import DateOrder from "../Atom/DateOrder";
-import TotalOrder from "../Atom/TotalOrder";
-import OrderListItem from "../Atom/OrderListItem";
+import DateOrderAtom from "../Atom/DateOrderAtom";
+import TotalOrderAtom from "../Atom/TotalOrderAtom";
+import OrderListAtom from "../Atom/OrderListAtom";
 
 export default class OrderList extends Component {
   constructor() {
@@ -314,7 +314,7 @@ export default class OrderList extends Component {
       return <DateOrder date={item.date} />;
     } else if (item.header == "middle") {
       return (
-        <OrderListItem
+        <OrderListAtom
           onPress={this.onPress}
           images={item.images}
           name={item.name}
@@ -348,7 +348,8 @@ export default class OrderList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#c0c0c0"
+    backgroundColor: "#c0c0c0",
+      flex: 1
   },
   row: {
     flex: 1,

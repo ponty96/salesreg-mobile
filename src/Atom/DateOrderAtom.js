@@ -1,7 +1,7 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 
-export default class DateOrder extends React.Component {
+export default class DateOrderAtom extends React.Component {
   render() {
     return (
       <View style={styles.container}>
@@ -15,7 +15,7 @@ const styles = StyleSheet.create({
   container: {
     flexDirection: "row",
     flex: 1,
-    height: 75,
+    height: 60,
     backgroundColor: "#F0F0F0",
     alignItems: "center",
     justifyContent: "center",

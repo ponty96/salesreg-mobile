@@ -1,34 +1,42 @@
 import React from "react";
-import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
+/*import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";*/
+import { ListItem, Left, Body, Right, Text, Thumbnail } from "native-base";
+import PropTypes from "prop-types";
+import styles from "./../Style/List";
 
-class OrderListItem extends React.Component {
+class OrderListAtom extends React.Component {
   render() {
+    const defaultImg = require("./../Images/default.jpg");
+    const avatar = this.props.items.image ? this.props.items.image : defaultImg;
+
     return (
-        <TouchableOpacity onPress={this.props.onPress}>
-          <View style={styles.row}>
-            <View style={styles.view1}>
-              <Image source={{ uri: this.props.images }} style={styles.dp} />
-            </View>
-            <View style={styles.view2}>
+          <ListItem style={styles.row} onPress={this.props.onPress}>
+            <Left style={styles.view1}>
+              <Thumbnail source={{ uri: this.props.items.images }} style={styles.dp} />
+            </Left>
+            <Body style={styles.view2}>
               <Text style={styles.rowText1}>{this.props.name}</Text>
 
               <Text style={styles.rowText2}>{this.props.customerName}</Text>
-            </View>
-            <View style={styles.view3}>
+            </Body>
+            <Right style={styles.view3}>
               <Text style={styles.rowText3}>
                 {this.props.number}</Text>
                 <Text style={styles.rowText2}>{this.props.time}</Text>
               
-            </View>
-          </View>
-        </TouchableOpacity>
+            </Right>
+          </ListItem>
     );
   }
 }
 
-export default OrderListItem;
+OrderListAtom.propTypes = {
+  items: PropTypes.object.isRequired
+};
 
-const styles = StyleSheet.create({
+export default OrderListAtom;
+
+/*const styles = StyleSheet.create({
     container: {
       backgroundColor: "#c0c0c0",
     },
@@ -87,6 +95,6 @@ const styles = StyleSheet.create({
         alignItems: "flex-end",
         width: "20%",
     }
-  });
+  });*/
 
        
