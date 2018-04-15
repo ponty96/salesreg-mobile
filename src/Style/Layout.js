@@ -8,12 +8,19 @@ export default StyleSheet.create(
             padding: 16,
             fontSize: 28
         },
+        defaultPadding: {
+            paddingHorizontal: 16
+        },
         sidebarContainer: {
             paddingHorizontal: 8,
             height: Dimensions.get('window').height-16
         },
         itemsContainer: {
             flex: 4
+        },
+        formViewContainer: {
+            flex: 1,
+            backgroundColor: color.secondary
         },
         itemText: {
             flex: 1,
