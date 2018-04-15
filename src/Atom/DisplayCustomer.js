@@ -10,8 +10,21 @@ import {
 
 
 class DisplayCustomer extends Component {
+<<<<<<< HEAD
+  
+    componentWillMount() {
+      /*let latestAmount = this.props.status == "paid"
+    ? this.props.debt
+    : this.props.status == "balance" ? this.props.balance : this.props.debt;*/
+  
+      /*let realColor = (this.props.status == "paid") ? "#c0c0c0" : (this.props.status == "balance") ? "#42c5f4" : "rgba(218,11,11,59)";*/
+    }
+  
+    render() {
+=======
     render() {
 
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
     return (
       <TouchableOpacity onPress={this.onPress}>
         <View style={styles.row}>
@@ -23,7 +36,11 @@ class DisplayCustomer extends Component {
           </View>
           <View style={styles.view3}>
             <Text style={styles.text1}>N {this.props.amount}.00</Text>
+<<<<<<< HEAD
+            <Text style={styles.lilFont}>
+=======
             <Text style={[styles.lilFont, this.props.realStyle=="paid" ? styles.paid : this.props.realStyle=="balance" ? styles.balance : styles.debt]}>
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
               {this.props.latestAmount}.00
             </Text>
           </View>
@@ -84,6 +101,9 @@ const styles = StyleSheet.create({
     },
     lilFont: {
       fontSize: 10,
+<<<<<<< HEAD
+      color: this.props.realColor
+=======
       color: "black"
     },
     paid: {
@@ -97,6 +117,7 @@ const styles = StyleSheet.create({
     debt: {
       fontSize: 10,
       color: "rgba(218,11,11,59)"
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
     },
     view1: { 
       height: 68, 

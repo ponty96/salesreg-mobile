@@ -125,6 +125,16 @@ export default class CustomerList extends Component {
   onPress = () => {};
 
   renderRow(user) {
+<<<<<<< HEAD
+    let latestAmount;
+    latestAmount =
+      user.status == "paid"
+        ? user.debt
+        : user.status == "balance" ? user.balance : user.debt;
+
+    let realColor = (user.status == "paid") ? "#c0c0c0" : (user.status == "balance") ? "#42c5f4" : "rgba(218,11,11,59)";    
+    
+=======
 
     let latestAmount =
       user.status == "paid"
@@ -138,6 +148,7 @@ export default class CustomerList extends Component {
     } else {
        realStyle = "debt";
     }
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
     return (
       <DisplayCustomer
         status={user.status}
@@ -147,7 +158,11 @@ export default class CustomerList extends Component {
         amount={user.amount}
         images={user.images}
         latestAmount={latestAmount}
+<<<<<<< HEAD
+        realColor={realColor}
+=======
         realStyle={realStyle}
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
       />
     );
   }
@@ -213,6 +228,8 @@ const styles = StyleSheet.create({
   },
   lilFont: {
     fontSize: 10
+<<<<<<< HEAD
+=======
   },
   paid: {
     fontSize: 10,
@@ -225,5 +242,6 @@ const styles = StyleSheet.create({
   debt: {
     fontSize: 10,
     color: "rgba(218,11,11,59)"
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
   }
 });

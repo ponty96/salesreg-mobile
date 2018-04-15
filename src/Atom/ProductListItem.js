@@ -44,19 +44,29 @@ const styles = StyleSheet.create({
     flex: 1,
     fontWeight: "bold",
     fontSize: 12,
+<<<<<<< HEAD
+    paddingLeft: 20,
+    color: 'grey',
+=======
     color: '#000',
     marginTop: 30,
     textAlign: 'left'
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
   },
   rowText2: {
     flex: 1
   },
   rowText3: {
     color: 'red',
+<<<<<<< HEAD
+    paddingRight: 18,
+    fontSize: 13,
+=======
     fontSize: 13,
     textAlign: 'right',
     marginBottom: 30,
     paddingRight: 15
+>>>>>>> e8bfbe5031b32f79ab4dfc0989f89365a27f52a3
   },
   image: {
     height: 20,
