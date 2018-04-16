@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { StyleSheet } from "react-native";
 import { ListItem, Left, Body, Right, Text, Thumbnail } from "native-base";
 import PropTypes from "prop-types";
-//import styles from "./../Style/List";
+
 
 class ProductListAtom extends React.Component {
   render() {

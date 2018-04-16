@@ -10,7 +10,6 @@ import {
   Body,
   Right
 } from "native-base";
-//import styles from './../Style/List';
 
 class CustomerListAtom extends Component {
 
