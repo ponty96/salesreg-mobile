@@ -140,12 +140,7 @@ export default class CustomerList extends Component {
     }
     return (
       <CustomerListAtom
-        status={user.status}
-        debt={user.debt}
-        balance={user.balance}
-        customerName={user.customerName}
-        amount={user.amount}
-        images={user.images}
+        items={user}
         latestAmount={latestAmount}
         realStyle={realStyle}
       />
@@ -154,7 +149,7 @@ export default class CustomerList extends Component {
 
   render() {
     return (
-      <View style={{flex: 1}}>
+      <View style={styles.container}>
         <ListView
           dataSource={this.state.userDataSource}
           renderRow={this.renderRow.bind(this)}
@@ -166,7 +161,9 @@ export default class CustomerList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#c0c0c0"
+    backgroundColor: "#c0c0c0",
+    flex: 1,
+    width: "100%",
   },
   row: {
     flexDirection: "row",

@@ -1,6 +1,6 @@
 import React from 'react'
 import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
-import { DrawerItems, SafeAreaView } from 'react-navigation'
+import { SafeAreaView } from 'react-navigation'
 import { Icon } from 'native-base'
 
 import styles from './../Style/Layout'

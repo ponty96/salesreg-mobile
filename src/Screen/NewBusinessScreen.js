@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, KeyboardAvoidingView } from 'react-native'
 import { Icon } from 'native-base'
 
 import styles from './../Style/Screen'
-import { color } from './../Style/Color'
+import NewBusinessForm from "../Components/NewBusinessForm";
 
 class NewBusinessScreen extends Component {    
-    static navigationOptions = ({ navigation, navigationOptions }) => {
+    static navigationOptions = ({ navigation }) => {
         const { params } = navigation.state;
         let right = (params && params.items && params.items.length > 0)
                     ?   <Icon
@@ -37,9 +37,7 @@ class NewBusinessScreen extends Component {
     
     render() {
         return (
-            <View style={ styles.centerContainer }>
-                <Text>{'NewBusinessScreen'}</Text>
-            </View>
+            <NewBusinessForm navigation={this.props.navigation}/>
         )
     }
 }

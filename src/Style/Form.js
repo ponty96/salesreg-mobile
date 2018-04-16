@@ -32,6 +32,24 @@ export default StyleSheet.create(
             paddingHorizontal: 32,
             alignSelf: 'center',
             marginVertical: 8
+        },
+        saveCancelContainer: {
+            flexDirection: 'row'
+        },
+        imgContainer: {
+            alignItems: 'center',
+            justifyContent: 'center',
+            height: 150,
+            width: 150,
+            borderRadius: 75,
+            marginVertical: 16,
+        },
+        imgPlaceholderText: {
+            fontWeight: 'bold',
+            fontSize: 20
+        },
+        selfAlign: {
+            alignSelf: 'center'
         }
     }
 )

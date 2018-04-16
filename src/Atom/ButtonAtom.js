@@ -21,12 +21,13 @@ class ButtonAtom extends Component {
                 style = {
                     [
                         this.props.transparent ? styles.buttonTransparent : styles.buttonRed,
-                        this.props.disabled && styles.buttonDisabled
+                        this.props.disabled && styles.buttonDisabled,
+                        this.props.btnStyle
                     ]
                 }
                 onPress = {() => this.props.onPress(this.props.funcValue)}
             >
-                <Text style = {this.props.transparent ? styles.textRed : styles.textTransparent}>
+                <Text style = {[this.props.transparent ? styles.textRed : styles.textTransparent, this.props.textStyle]}>
                     { this.props.btnText }
                 </Text>
             </Button>
@@ -39,7 +40,9 @@ ButtonAtom.propTypes = {
     transparent: PropTypes.bool,
     disabled: PropTypes.bool,
     onPress: PropTypes.func,
-    funcValue: PropTypes.string
+    funcValue: PropTypes.string,
+    btnStyle: PropTypes.object,
+    textStyle: PropTypes.object
 }
 
 export default ButtonAtom;

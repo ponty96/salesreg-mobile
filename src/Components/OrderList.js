@@ -311,20 +311,16 @@ export default class OrderList extends Component {
 
   renderItem = ({ item }) => {
     if (item.header == "start") {
-      return <DateOrder date={item.date} />;
+      return <DateOrderAtom date={item.date} />;
     } else if (item.header == "middle") {
       return (
         <OrderListAtom
           onPress={this.onPress}
-          images={item.images}
-          name={item.name}
-          customerName={item.customerName}
-          number={item.number}
-          time={item.time}
+          items={item}
         />
       );
     } else if (item.header == "end") {
-      return <TotalOrder totalAmount={item.amount} />;
+      return <TotalOrderAtom totalAmount={item.amount} />;
     }
   };
 

@@ -8,7 +8,7 @@ import {
   TouchableOpacity
 } from "react-native";
 import { Icon } from 'native-base';
-import ProductlistAtom from "../Atom/ProductListAtom";
+import ProductListAtom from "../Atom/ProductListAtom";
 
 const users = [
     {
@@ -183,11 +183,9 @@ const users = [
     };
     renderRow(user) {
       return (
-        <ProductlistAtom
+        <ProductListAtom
         onPress={this.onPress}
-        images={user.images}
-        name={user.name}
-        number={user.number}
+        items = {user}
         />
       );
     }
@@ -206,7 +204,8 @@ const users = [
   
   const styles = StyleSheet.create({
     container: {
-      backgroundColor: "#c0c0c0",
-        flex: 1
+        backgroundColor: "#c0c0c0",
+        flex: 1,
+        width: "100%"
     },
   });
