@@ -2,9 +2,9 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Icon} from 'native-base';
 
-import DetailItem from './DetailItem';
+import DetailItemAtom from './DetailItemAtom';
 
-export default class DetailsBody extends Component{
+export default class DetailsBodyAtom extends Component{
     render(){
         const detail = [];
         detail[0] = '6 Salem street Morogbo, Lagos';
@@ -13,9 +13,9 @@ export default class DetailsBody extends Component{
 
         return(
             <View style = {styles.wrapper}>
-                <DetailItem icon = 'pin' text = {detail[0]} />
-                <DetailItem icon = 'mail' text = {detail[1]} />
-                <DetailItem icon = 'document' text = {detail[2]} />
+                <DetailItemAtom icon = 'pin' text = {detail[0]} />
+                <DetailItemAtom icon = 'mail' text = {detail[1]} />
+                <DetailItemAtom icon = 'document' text = {detail[2]} />
             </View>
             );
     }

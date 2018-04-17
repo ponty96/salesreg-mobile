@@ -25,7 +25,7 @@ export default class NameDisplayAtom extends Component{
     }
 }
 
-NameDisplayAtom.PropTypes = {
+NameDisplayAtom.propTypes = {
     businessName: PropTypes.string
 }
 
