@@ -1,7 +1,8 @@
 import React, { Component } from "react";
+import { StyleSheet } from "react-native";
 import { ListItem, Left, Body, Right, Text, Thumbnail } from "native-base";
 import PropTypes from "prop-types";
-import styles from "./../Style/List";
+
 
 class ProductListAtom extends React.Component {
   render() {
@@ -11,22 +12,18 @@ class ProductListAtom extends React.Component {
     return (
       <ListItem style={styles.row} onPress={this.props.onPress}>
         <Left
-          style={{
-            alignSelf: "flex-start",
-            alignItems: "center",
-            width: "25%"
-          }}
+          style={styles.leftView}
         >
           <Thumbnail
             source={{ uri: avatar }}
             style={styles.dp}
           />
         </Left>
-        <Body style={{ width: "50%" }}>
-          <Text style={styles.rowText1}>{this.props.name}</Text>
+        <Body style={styles.bodyView}>
+          <Text style={styles.rowText1}>{this.props.items.name}</Text>
         </Body>
-        <Right style={{ alignSelf: "flex-end", width: "25%" }}>
-          <Text style={styles.rowText3}> {this.props.number}</Text>
+        <Right style={styles.rightView}>
+          <Text style={styles.rowText3}> {this.props.items.number}</Text>
         </Right>
       </ListItem>
     );
@@ -39,52 +36,56 @@ ProductListAtom.propTypes = {
 
 export default ProductListAtom;
 
-/*const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#c0c0c0"
-  },
+const styles = StyleSheet.create({
   row: {
     flexDirection: "row",
     flex: 1,
     top: 0,
     height: 75,
+    paddingLeft: 0,
+    marginLeft: 0,
     width: "100%",
-    alignItems: "center",
     backgroundColor: "#fff",
     marginBottom: 0.5
   },
   rowText1: {
-    flex: 1,
-    fontWeight: "bold",
-    fontSize: 12,
+    fontWeight: "200",
+    fontSize: 13,
     color: "#000",
-    marginTop: 30,
     textAlign: "left"
-  },
-  rowText2: {
-    flex: 1
   },
   rowText3: {
     color: "red",
     fontSize: 13,
     textAlign: "right",
-    marginBottom: 30,
-    paddingRight: 15
-  },
-  image: {
-    height: 20,
-    width: 20,
-    padding: 6
+    paddingRight: 5,
+    marginTop: 0,
+    paddingTop: 0,
+    paddingBottom: 15
   },
   dp: {
+    flex: 1,
+    flexGrow: 1,
     height: 55,
     width: 55,
+    marginTop: 0,
+    paddingTop: 0,
     borderRadius: 55 / 2,
-    margin: 8
+    margin: 8,
+    marginBottom: 15
   },
-  icons: {
-    backgroundColor: "#fff",
-    height: 25,
-    width: 25
-  }
-});*/
+  leftView: {
+    height: 55,
+    paddingBottom: 30
+  },
+  bodyView: {
+    flex: 0, 
+    width: "55%" 
+  }, 
+  rightView: { 
+    alignSelf: "flex-end", 
+    width: "25%", 
+    marginLeft: "20%", 
+    alignItems: "center"
+  },
+});

@@ -185,9 +185,7 @@ const users = [
       return (
         <ProductListAtom
         onPress={this.onPress}
-        images={user.images}
-        name={user.name}
-        number={user.number}
+        items = {user}
         />
       );
     }
@@ -206,7 +204,13 @@ const users = [
   
   const styles = StyleSheet.create({
     container: {
+<<<<<<< HEAD
+        backgroundColor: "#c0c0c0",
+        flex: 1,
+        width: "100%"
+=======
       backgroundColor: "#c0c0c0",
         flex: 1
+>>>>>>> d7b2b7fc99bf6b9c83679e5059527c970638f88d
     },
   });

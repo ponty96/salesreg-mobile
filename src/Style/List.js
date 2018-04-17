@@ -2,14 +2,19 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-      backgroundColor: "#c0c0c0"
+      backgroundColor: "#c0c0c0",
+      flex: 1,
+      width: "100%"
     },
     row: {
       flexDirection: "row",
+      paddingLeft: 0,
+      marginLeft: 0,
       top: 0,
       padding: 10,
+      width: "100%",
       height: 75,
-      alignItems: "center",
+      //alignItems: "center",
       backgroundColor: "#fff",
       marginBottom: 0.5,
       borderBottomWidth: 0.5,
@@ -17,18 +22,16 @@ export default StyleSheet.create({
     },
     rowText1: {
       flex: 1,
-      fontWeight: "bold",
+      fontWeight: "300",
       fontSize: 13,
-      paddingLeft: 20,
-      paddingTop: 15,
       color: "#000"
     },
     rowText2: {
-      flex: 1
+      flex: 1,
+      fontSize: 11,
     },
     rowText3: {
-      color: "#000",
-      paddingRight: 18,
+      color: "rgba(218,11,11,59)",
       fontSize: 13
     },
     image: {
@@ -65,21 +68,27 @@ export default StyleSheet.create({
     },
     view1: {
       height: 68,
-      width: "20%",
-      alignItems: "center"
+      //width: "20%",
+      alignItems: "center",
+      marginRight: 0,
+      paddingRight: 0
     },
     view2: {
       flexDirection: "column",
+      flex: 0,
+      paddingLeft: 0,
+      marginLeft: 0,
       width: "50%"
     },
     view3: {
+      flex:1,
       flexDirection: "column",
       alignItems: "flex-end",
-      width: "30%"
+      width: "30%",
+      marginLeft:"10%"
     },
     text1: {
       fontSize: 12,
       fontWeight: "bold"
     }
   });
-  
