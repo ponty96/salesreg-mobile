@@ -54,5 +54,18 @@ export default StyleSheet.create(
             justifyContent: 'flex-start',
             alignItems: 'center'
         },
+        modalCloseIcon: {
+            color: color.inactive
+        },
+        modalWarningIcon: {
+            color: color.primary
+        },
+        modalHeaderText: {
+            flex: 1
+        },
+        modalHeader: {
+            padding: 16,
+            backgroundColor: color.grey
+        }
     }
 )

@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
 import { View, Text } from 'react-native';
 import { List, ListItem, Icon } from 'native-base';
 
 import FabAtom from './../Atom/FabAtom';
 import styles from './../Style/Screen';
+import DeleteModal from './../Container/DeleteBuzModal';
 
 class BusinessListScreen extends Component {
     static defaultProps = {
@@ -83,7 +85,7 @@ class BusinessListScreen extends Component {
                     name={'md-add'}
                     navigation={this.props.navigation}
                 />
-
+                <DeleteModal />
                 {
                     this.props.items.length > 0
                     ? this.renderEmpty()

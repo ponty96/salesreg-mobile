@@ -30,7 +30,7 @@ class SaveCancelButton extends React.Component {
                 />
 
                 <ButtonAtom
-                    btnText={this.props.feature}
+                    btnText={this.props.positiveButtonName}
                     transparent={true}
                     onPress={this.create}
                     btnStyle={saveCancelButton}
@@ -43,7 +43,8 @@ class SaveCancelButton extends React.Component {
 
 SaveCancelButton.propTypes = {
     navigation: PropTypes.object.isRequired,
-    createfunc: PropTypes.func
+    createfunc: PropTypes.func,
+    positiveButtonName: PropTypes.string.isRequired
 }
 
 export default SaveCancelButton;
