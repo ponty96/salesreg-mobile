@@ -65,6 +65,7 @@ class NewBusinessForm extends React.Component {
                                 label="Business name"
                                 getValue={this.getName}
                                 required={true}
+                                defaultValue={this.props.item ? this.props.item.businessName : undefined}
                                 contStyle={marginlessInput}
                             />
 
@@ -72,12 +73,14 @@ class NewBusinessForm extends React.Component {
                                 label="Business address"
                                 getValue={this.getAddress}
                                 required={true}
+                                defaultValue={this.props.item ? this.props.item.address : undefined}
                                 contStyle={marginlessInput}
                             />
 
                             <InputAtom
                                 label="Email"
                                 getValue={this.getEmail}
+                                defaultValue={this.props.item ? this.props.item.email : undefined}
                                 contStyle={marginlessInput}
                             />
 
@@ -85,19 +88,25 @@ class NewBusinessForm extends React.Component {
                                 label="About(give description of your business)"
                                 getValue={this.getAbout}
                                 contStyle={marginlessInput}
+                                defaultValue={this.props.item ? this.props.item.description : undefined}
                             />
 
                         </Form>
                     </ScrollView>
                 </KeyboardAvoidingView>
-                <SaveCancelButton navigation={this.props.navigation} createfunc={this.create} positiveButtonName="CREATE" />
+                <SaveCancelButton
+                    navigation={this.props.navigation}
+                    createfunc={this.create}
+                    positiveButtonName= {this.props.item ? 'SAVE' : 'CREATE'}
+                />
             </View>
         );
     }
 }
 
 NewBusinessForm.propTypes = {
-    navigation: PropTypes.object.isRequired
+    navigation: PropTypes.object.isRequired,
+    item: PropTypes.object
 }
 
 export default NewBusinessForm;

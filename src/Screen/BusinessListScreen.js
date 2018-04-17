@@ -9,12 +9,13 @@ import DeleteModal from './../Container/DeleteBuzModal';
 
 class BusinessListScreen extends Component {
     static defaultProps = {
-        items: [],
+        items: ['a', 'b'],
         auth: 'Sme'
     }
 
-    static navigationOptions = ({ navigation }, itemLength = this.props.items.length) => {
-        let right = (itemLength > 0)
+    static navigationOptions = ({ navigation }) => {
+        let itemsLength = 4;
+        let right = (itemsLength > 0)
                     ?   <Icon
                             name={'ios-search'}
                             style={styles.headerIcon}
@@ -27,7 +28,7 @@ class BusinessListScreen extends Component {
                             />
                             <Text style={styles.headerText}>Logout</Text>
                         </View>;
-        let left = (itemLength > 0) && <Icon
+        let left = (itemsLength > 0) && <Icon
                             name={'menu'}
                             onPress={() => navigation.navigate('DrawerToggle')}
                             style={styles.headerIcon}
@@ -43,16 +44,14 @@ class BusinessListScreen extends Component {
         return (
             <View style={ styles.emptyHolder }>
                 <Text style={styles.emptyHeader}>
-                    `Welcome ${this.props.authName}!`
+                    {`Welcome ${this.props.auth}!`}
                 </Text>
                 <Text>
-                    You have no business yet. Press the
-                </Text>
+                    You have no business yet. Press the&nbsp;
                 <Text style={styles.redText}>
-                    red round button
+                    red round button&nbsp;
                 </Text>
-                <Text>
-                    below to add your bussinesses.
+                    below, to add your businesses.
                 </Text>
             </View>
         );
@@ -83,6 +82,11 @@ class BusinessListScreen extends Component {
                 <FabAtom
                     routeName={'NewBusiness'}
                     name={'md-add'}
+                    params={
+                        {
+                            itemsLength: this.props.items.length
+                        }
+                    }
                     navigation={this.props.navigation}
                 />
                 <DeleteModal />

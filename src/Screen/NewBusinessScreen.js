@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
-import { View, Text, KeyboardAvoidingView } from 'react-native'
+import { View, Text } from 'react-native'
 import { Icon } from 'native-base'
 
 import styles from './../Style/Screen'
 import NewBusinessForm from "../Components/NewBusinessForm";
 
-class NewBusinessScreen extends Component {    
+class NewBusinessScreen extends Component {
+    state = {
+        item: undefined
+    }
+
     static navigationOptions = ({ navigation }) => {
-        const { params } = navigation.state;
-        let right = (params && params.itemsLength && params.itemsLength > 0)
-                    ?   <Icon
-                            name={'ios-search'}
-                            style={styles.headerIcon}
-                        />
-                    :   <View style={styles.headerItem}>
+        const { params={itemsLength: 1} } = navigation.state;
+        let itemsLength = params.itemsLength ? params.itemsLength : (params.item ? 1 : 0);
+        let right = (itemsLength < 1)
+                    && <View style={styles.headerItem}>
                             <Icon
                                 name={'logout'}
                                 style={styles.headerIconLogout}
@@ -21,22 +22,37 @@ class NewBusinessScreen extends Component {
                             />
                             <Text style={styles.headerText}>Logout</Text>
                         </View>;
-        let left = (params && params.itemsLength && params.itemsLength > 0)
-                    &&   <Icon
+        let left = (itemsLength > 0)
+                    ?  <Icon
                             name={'menu'}
                             onPress={() => navigation.navigate('DrawerToggle')}
                             style={styles.headerIcon}
-                        />;
+                        />
+                    : null;
         return {
             title: 'Ayo',
             headerRight: right,
             headerLeft: left
         };
     };
+
+    componentWillMount() {
+        this.setState({
+            item: this.props.navigation.getParam('item', undefined)
+        });
+    }
     
     render() {
         return (
-            <NewBusinessForm navigation={this.props.navigation}/>
+            this.state.item
+                ? <NewBusinessForm
+                    item={this.state.item}
+                    navigation={this.props.navigation}
+                />
+                : <NewBusinessForm
+                    navigation={this.props.navigation}
+                />
+
         )
     }
 }

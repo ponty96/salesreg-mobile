@@ -1,21 +1,27 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Icon} from 'native-base';
+import PropTypes from 'prop-types';
 
 import DetailsBodyAtom from './DetailsBodyAtom';
 
-export default class DetailsAtom extends Component{
+class DetailsAtom extends Component{
     render(){
         return(
             <View style = {styles.container}>
                 <Text style = {styles.detailsHeader}>
                     Details
                 </Text>
-                <DetailsBodyAtom />
+                <DetailsBodyAtom item={this.props.item}/>
             </View>
         );
     }
 }
+
+DetailsAtom.propTypes = {
+    item: PropTypes.object
+}
+
+export default DetailsAtom;
 
 const styles = StyleSheet.create({
   container: {

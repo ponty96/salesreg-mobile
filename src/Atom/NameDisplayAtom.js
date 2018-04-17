@@ -3,22 +3,16 @@ import {View, StyleSheet, Text} from 'react-native';
 import PropTypes from 'prop-types';
 
 export default class NameDisplayAtom extends Component{
-    static defaultProps = {
-        businessName: 'Business name'
-    }
-
     render(){
-        const businessName = this.props.businessName;
-        const firstLetterFromName = businessName.charAt(0);
         return(
             <View style = {styles.wrapper}>
                 <View style = {styles.letterDisplay}>
                     <Text>
-                        {firstLetterFromName}
+                        {this.props.businessName.charAt(0)}
                     </Text>
                 </View>
                 <Text style = {styles.name}>
-                    {businessName}
+                    {this.props.businessName}
                 </Text>
             </View>
         );
@@ -26,7 +20,7 @@ export default class NameDisplayAtom extends Component{
 }
 
 NameDisplayAtom.propTypes = {
-    businessName: PropTypes.string
+    businessName: PropTypes.string.isRequired
 }
 
 const styles = StyleSheet.create({

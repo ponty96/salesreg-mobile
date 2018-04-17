@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Form} from 'native-base';
+import {Form, Icon} from 'native-base';
 
 import ModalAtom from './../Atom/ModalAtom';
 import InputAtom from '../Atom/InputAtom';
@@ -14,7 +14,7 @@ class DeleteBuzModal extends Component {
     }
 
     static defaultProps = {
-        visibility: true
+        visibility: false
     }
 
     getPassword = (pass) => {

@@ -22,7 +22,8 @@ export default StyleSheet.create(
         },
         emptyHeader: {
             marginBottom: 16,
-            color: color.primary
+            color: color.primary,
+            fontSize: 18
         },
         redText: {
             color: color.primary
@@ -53,6 +54,17 @@ export default StyleSheet.create(
             flexDirection: 'row',
             justifyContent: 'flex-start',
             alignItems: 'center'
+        },
+        container: {
+            flex: 1,
+            backgroundColor: '#fff',
+        },
+        nameDisplay: {
+            borderBottomWidth: 1,
+            borderBottomColor: 'lightgrey',
+            paddingBottom: 40,
+            paddingTop: 30,
+            paddingHorizontal: 40
         },
         modalCloseIcon: {
             color: color.inactive
