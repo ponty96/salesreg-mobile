@@ -22,7 +22,7 @@ export default class DetailItemAtom extends Component{
     }
 }
 
-DetailItemAtom.PropTypes = {
+DetailItemAtom.propTypes = {
     text: PropTypes.string,
     icon: PropTypes.string
 }

@@ -4,12 +4,12 @@ import { StyleSheet, Text, View } from 'react-native';
 import NameDisplayAtom from '../Atom/NameDisplayAtom';
 import DetailsAtom from '../Atom/DetailsAtom';
 
-export default class ViewBusinessDetailScreeen extends React.Component {
+export default class ViewBusinessDetailScreen extends React.Component {
   render() {
     return (
       <View style={styles.container}>
         <View style = {styles.nameDisplay}>
-          <NameDisplay />
+          <NameDisplayAtom />
         </View>
         <View style = {styles.detailsAtom}>
           <DetailsAtom />
