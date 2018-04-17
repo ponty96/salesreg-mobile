@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
 import {Icon} from 'native-base';
 
-import DetailsBody from './DetailsBody';
+import DetailsBodyAtom from './DetailsBodyAtom';
 
 export default class DetailsAtom extends Component{
     render(){
@@ -11,7 +11,7 @@ export default class DetailsAtom extends Component{
                 <Text style = {styles.detailsHeader}>
                     Details
                 </Text>
-                <DetailsBody />
+                <DetailsBodyAtom />
             </View>
         );
     }

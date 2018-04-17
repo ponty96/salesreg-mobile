@@ -3,7 +3,7 @@ import {View, Text, StyleSheet} from 'react-native';
 import {Icon} from 'native-base';
 import PropTypes from 'prop-types';
 
-export default class DetailItem extends Component{
+export default class DetailItemAtom extends Component{
     static defaultProps = {
         icon: 'add',
         text: 'Add a prop'
@@ -22,7 +22,7 @@ export default class DetailItem extends Component{
     }
 }
 
-DetailItem.PropTypes = {
+DetailItemAtom.PropTypes = {
     text: PropTypes.string,
     icon: PropTypes.string
 }
