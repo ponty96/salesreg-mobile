@@ -1,4 +1,5 @@
 import {StyleSheet} from "react-native";
+import { color } from './Color'
 
 export default StyleSheet.create(
     {
@@ -8,7 +9,7 @@ export default StyleSheet.create(
         },
         redView: {
             height: "50%",
-            backgroundColor: "rgba(218,11,11,59)"
+            backgroundColor: color.primary
         },
         whiteView: {
             height: "50%",

@@ -9,6 +9,24 @@ export default StyleSheet.create(
             alignItems: 'center',
             backgroundColor: color.secondary
         },
+        plainContainer: {
+            flex: 1,
+            paddingHorizontal: 16,
+            paddingTop: 32,
+            backgroundColor: color.secondary
+        },
+        emptyHolder: {
+            backgroundColor: color.grey,
+            paddingHorizontal: 16,
+            paddingVertical: 32,
+        },
+        emptyHeader: {
+            marginBottom: 16,
+            color: color.primary
+        },
+        redText: {
+            color: color.primary
+        },
         paddingHorizontal: {
             paddingHorizontal: 16
         },

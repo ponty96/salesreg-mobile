@@ -8,7 +8,7 @@ import NewBusinessForm from "../Components/NewBusinessForm";
 class NewBusinessScreen extends Component {    
     static navigationOptions = ({ navigation }) => {
         const { params } = navigation.state;
-        let right = (params && params.items && params.items.length > 0)
+        let right = (params && params.itemsLength && params.itemsLength > 0)
                     ?   <Icon
                             name={'ios-search'}
                             style={styles.headerIcon}
@@ -21,13 +21,12 @@ class NewBusinessScreen extends Component {
                             />
                             <Text style={styles.headerText}>Logout</Text>
                         </View>;
-        let left = (params && params.items && params.items.length > 0)
-                    ?   <Icon
+        let left = (params && params.itemsLength && params.itemsLength > 0)
+                    &&   <Icon
                             name={'menu'}
                             onPress={() => navigation.navigate('DrawerToggle')}
                             style={styles.headerIcon}
-                        />
-                    :   null;
+                        />;
         return {
             title: 'Ayo',
             headerRight: right,
