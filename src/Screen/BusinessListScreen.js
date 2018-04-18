@@ -5,7 +5,7 @@ import { List, ListItem, Icon } from 'native-base';
 
 import FabAtom from './../Atom/FabAtom';
 import styles from './../Style/Screen';
-import DeleteModal from './../Container/DeleteBuzModal';
+import DeleteBuzModal from './../Container/DeleteBuzModal';
 
 class BusinessListScreen extends Component {
     static defaultProps = {
@@ -89,7 +89,7 @@ class BusinessListScreen extends Component {
                     }
                     navigation={this.props.navigation}
                 />
-                <DeleteModal />
+                <DeleteBuzModal />
                 {
                     this.props.items.length > 0
                     ? this.renderEmpty()

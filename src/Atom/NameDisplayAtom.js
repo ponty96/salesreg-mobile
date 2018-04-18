@@ -8,6 +8,9 @@ export default class NameDisplayAtom extends Component{
             <View style = {styles.wrapper}>
                 <View style = {styles.letterDisplay}>
                     <Text>
+                        {
+                            //if charAt === letter, showLetter else showImage
+                        }
                         {this.props.businessName.charAt(0)}
                     </Text>
                 </View>
