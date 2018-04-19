@@ -2,10 +2,9 @@ import React, {Component} from 'react'
 import PropTypes from 'prop-types'
 import {View, Modal } from 'react-native';
 
+import styles from './../Style/Layout';
+
 class ModalAtom extends Component {
-    state = {
-        visibility: this.props.visible
-    }
 
     static defaultProps = {
         visible: false
@@ -16,15 +15,21 @@ class ModalAtom extends Component {
             <Modal
                 animationType="slide"
                 transparent={true}
-                visible={this.state.visibility}
+                visible={this.props.visible}
                 onRequestClose={() => {
                     alert('Modal has been closed.');
                 }}
             >
-                <View>
-                    {this.props.header}
-                    {this.props.body}
-                    {this.props.footer}
+                <View
+                    style={styles.modalContainer}
+                >
+                    <View
+                        style={styles.modalBody}
+                    >
+                        {this.props.header}
+                        {this.props.body}
+                        {this.props.footer}
+                    </View>
                 </View>
             </Modal>
         );
@@ -32,7 +37,7 @@ class ModalAtom extends Component {
 }
 
 ModalAtom.propTypes = {
-    visible: PropTypes.boolean,
+    visible: PropTypes.bool,
     footer: PropTypes.element,
     header: PropTypes.element,
     body: PropTypes.element

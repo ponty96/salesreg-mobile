@@ -9,9 +9,9 @@ import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Screen';
 import { marginlessInput, modalButton } from './../Style/exportStyles';
 
-class DeleteBuzModal extends Component {
+class GetAmount extends Component {
     state = {
-        password: undefined,
+        amount: undefined,
         visibility: this.props.visibility
     }
 
@@ -19,17 +19,13 @@ class DeleteBuzModal extends Component {
         visibility: false
     }
 
-    getPassword = (pass) => {
-        this.setState(
-            {
-                password: pass
-            }
-        );
+    getAmount= (amount) => {
+        this.setState({amount});
     }
 
-    delete = () => {
+    pay = () => {
         if (this.props.getValue) {
-            this.props.getValue(this.state.password);
+            this.props.getValue(this.state.amount);
         }
     }
 
@@ -62,15 +58,15 @@ class DeleteBuzModal extends Component {
             >
                 <Form>
                     <InputAtom
-                        label="Enter Password"
-                        getValue={this.getPassword}
-                        secureTextEntry={true}
+                        label="Enter Amount"
+                        keyboardType={'numeric'}
+                        getValue={this.getAmount}
                         contStyle={marginlessInput}
                     />
 
                     <ButtonAtom
-                        btnText="Delete"
-                        onPress={this.delete}
+                        btnText="Pay"
+                        onPress={this.pay}
                         btnStyle={modalButton}
                     />
                 </Form>
@@ -89,10 +85,10 @@ class DeleteBuzModal extends Component {
     }
 }
 
-DeleteBuzModal.propTypes = {
+GetAmount.propTypes = {
     visibility: PropTypes.bool,
     headerText: PropTypes.string.isRequired,
     getValue: PropTypes.func
 }
 
-export default DeleteBuzModal;
+export default GetAmount;

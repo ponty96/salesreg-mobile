@@ -21,3 +21,20 @@ export const saveCancelButtonText = {
 export const marginlessInput = {
     marginLeft: 0
 };
+
+export const modalButton = {
+    marginTop: 32,
+    marginBottom: 16,
+    marginHorizontal: 16,
+    alignSelf: 'flex-end',
+}
+
+export const modalWarningButton = {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    marginTop: 32,
+    marginBottom: 16,
+    marginHorizontal: 8,
+    paddingHorizontal: 0
+}

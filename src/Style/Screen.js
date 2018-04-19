@@ -67,17 +67,36 @@ export default StyleSheet.create(
             paddingHorizontal: 40
         },
         modalCloseIcon: {
-            color: color.inactive
+            flex: 1,
+            color: color.inactive,
+            paddingLeft: 16
         },
         modalWarningIcon: {
-            color: color.primary
+            color: color.primary,
+            paddingRight: 16
         },
         modalHeaderText: {
-            flex: 1
+            fontSize: 16,
+            color: color.menu,
+            flex: 4
         },
         modalHeader: {
+            flexDirection: 'row',
             padding: 16,
             backgroundColor: color.grey
+        },
+        modalBody: {
+            padding: 16
+        },
+        modalWarningBody: {
+            margin: 16
+        },
+        modalButtonContainer: {
+            marginVertical: 16,
+            flexDirection: 'row'
+        },
+        modalBusinessFooter: {
+            marginLeft: 40
         }
     }
 )
