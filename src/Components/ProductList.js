@@ -9,6 +9,8 @@ import {
 } from "react-native";
 import { Icon } from 'native-base';
 import ProductListAtom from "../Atom/ProductListAtom";
+import SubHeaderAtom from "../Atom/SubHeaderAtom";
+import { ScrollView } from "react-native-gesture-handler";
 
 const users = [
     {
@@ -178,24 +180,24 @@ const users = [
     onPress = () => {
       alert("Product View Unavailable");
     };
-    addRow = () => {
-      alert("Create New Product Unavailable");
-    };
     renderRow(user) {
       return (
         <ProductListAtom
-        onPress={this.onPress}
-        items = {user}
+          onPress={this.onPress}
+          items = {user}
         />
       );
     }
     render() {
       return (
         <View style={styles.container}>
-          <ListView
-            dataSource={this.state.userDataSource}
-            renderRow={this.renderRow.bind(this)}
-          />
+          <SubHeaderAtom />
+            <ScrollView>
+              <ListView
+                dataSource={this.state.userDataSource}
+                renderRow={this.renderRow.bind(this)}
+              />
+            </ScrollView>
         </View>
       );
     }
@@ -204,13 +206,8 @@ const users = [
   
   const styles = StyleSheet.create({
     container: {
-<<<<<<< HEAD
         backgroundColor: "#c0c0c0",
         flex: 1,
         width: "100%"
-=======
-      backgroundColor: "#c0c0c0",
-        flex: 1
->>>>>>> d7b2b7fc99bf6b9c83679e5059527c970638f88d
     },
   });

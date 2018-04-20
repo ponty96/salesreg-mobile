@@ -3,8 +3,6 @@ import { StyleSheet } from 'react-native';
 export default StyleSheet.create({
     container: {
       backgroundColor: "#c0c0c0",
-      flex: 1,
-      width: "100%"
     },
     row: {
       flexDirection: "row",
@@ -84,11 +82,11 @@ export default StyleSheet.create({
       flex:1,
       flexDirection: "column",
       alignItems: "flex-end",
-      width: "30%",
+      width: "20%",
       marginLeft:"10%"
     },
     text1: {
       fontSize: 12,
-      fontWeight: "bold"
+      fontWeight: "200"
     }
   });

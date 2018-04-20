@@ -4,6 +4,7 @@ import { Icon } from 'native-base'
 
 import styles from './../Style/Screen'
 import { color } from './../Style/Color'
+import OrderForm from '../Components/OrderForm';
 
 class NewOrderScreen extends Component {    
     static navigationOptions = ({ navigation }) => {
@@ -22,8 +23,8 @@ class NewOrderScreen extends Component {
     
     render() {
         return (
-            <View style={ styles.centerContainer }>
-                <Text>{'NewOrderScreen'}</Text>
+            <View>
+               <OrderForm navigation={this.props.navigation} /> 
             </View>
         )
     }

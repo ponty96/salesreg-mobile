@@ -140,16 +140,7 @@ export default class CustomerList extends Component {
     }
     return (
       <CustomerListAtom
-<<<<<<< HEAD
         items={user}
-=======
-        status={user.status}
-        debt={user.debt}
-        balance={user.balance}
-        customerName={user.customerName}
-        amount={user.amount}
-        images={user.images}
->>>>>>> d7b2b7fc99bf6b9c83679e5059527c970638f88d
         latestAmount={latestAmount}
         realStyle={realStyle}
       />
@@ -158,11 +149,7 @@ export default class CustomerList extends Component {
 
   render() {
     return (
-<<<<<<< HEAD
       <View style={styles.container}>
-=======
-      <View style={{flex: 1}}>
->>>>>>> d7b2b7fc99bf6b9c83679e5059527c970638f88d
         <ListView
           dataSource={this.state.userDataSource}
           renderRow={this.renderRow.bind(this)}

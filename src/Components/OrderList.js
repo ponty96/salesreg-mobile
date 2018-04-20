@@ -296,7 +296,7 @@ export default class OrderList extends Component {
     };
   }
 
-  componentWillMount() {
+  componentDidMount() {
     var arr = [];
     this.state.data.map(obj => {
       if (obj.header == "start") {
@@ -309,7 +309,7 @@ export default class OrderList extends Component {
     });
   }
 
-  renderItem = ({ item }) => {
+  renderItem = ({item}) => {
     if (item.header == "start") {
       return <DateOrderAtom date={item.date} />;
     } else if (item.header == "middle") {

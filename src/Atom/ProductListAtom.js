@@ -64,19 +64,15 @@ const styles = StyleSheet.create({
     paddingBottom: 15
   },
   dp: {
-    flex: 1,
-    flexGrow: 1,
     height: 55,
     width: 55,
     marginTop: 0,
     paddingTop: 0,
     borderRadius: 55 / 2,
     margin: 8,
-    marginBottom: 15
   },
   leftView: {
     height: 55,
-    paddingBottom: 30
   },
   bodyView: {
     flex: 0, 

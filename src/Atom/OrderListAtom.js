@@ -15,15 +15,13 @@ class OrderListAtom extends React.Component {
               <Thumbnail source={{ uri: avatar }} style={styles.dp} />
             </Left>
             <Body style={styles.view2}>
-              <Text style={styles.rowText1}>{this.props.name}</Text>
-
-              <Text style={styles.rowText2}>{this.props.customerName}</Text>
+              <Text style={styles.rowText1}>{this.props.items.name}</Text>
+              <Text style={styles.rowText2}>{this.props.items.customerName}</Text>
             </Body>
             <Right style={styles.view3}>
               <Text style={styles.rowText3}>
-                {this.props.number}</Text>
-                <Text style={styles.rowText2}>{this.props.time}</Text>
-              
+                {this.props.items.number}</Text>
+                <Text style={styles.rowText2}>{this.props.items.time}</Text>
             </Right>
           </ListItem>
     );

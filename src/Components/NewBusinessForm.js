@@ -6,11 +6,7 @@ import PropTypes from "prop-types";
 import InputAtom from '../Atom/InputAtom';
 import ImageAtom from '../Atom/ImageAtom';
 import styles from './../Style/Layout'
-<<<<<<< HEAD
 import SaveCancelButton from "../Container/SaveCancelButton";
-=======
-import SaveCancelButton from "../Container/SaveCancleButton";
->>>>>>> d7b2b7fc99bf6b9c83679e5059527c970638f88d
 import {marginlessInput} from './../Style/exportStyles';
 
 class NewBusinessForm extends React.Component {
@@ -94,11 +90,7 @@ class NewBusinessForm extends React.Component {
                         </Form>
                     </ScrollView>
                 </KeyboardAvoidingView>
-<<<<<<< HEAD
                 <SaveCancelButton navigation={this.props.navigation} createfunc={this.create} feature="CREATE" />
-=======
-                <SaveCancelButton navigation={this.props.navigation} createfunc={this.create}/>
->>>>>>> d7b2b7fc99bf6b9c83679e5059527c970638f88d
             </View>
         );
     }

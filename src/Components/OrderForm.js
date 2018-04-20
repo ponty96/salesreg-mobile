@@ -3,8 +3,9 @@ import { View, KeyboardAvoidingView, ScrollView} from "react-native";
 import { Form } from "native-base";
 import PropTypes from "prop-types";
 
+import OrderFormAtom from '../Atom/OrderFormAtom';
 import InputAtom from '../Atom/InputAtom';
-import styles from './../Style/Layout'
+//import styles from './../Style/Layout'
 import SaveCancelButton from "../Container/SaveCancelButton";
 import {marginlessInput} from './../Style/exportStyles';
 
@@ -61,15 +62,18 @@ class OrderForm extends React.Component {
     render() {
         return (
             <View style={styles.formViewContainer}>
-                
-                <SaveCancelButton navigation={this.props.navigation} createfunc={this.create}/>
+                <OrderFormAtom />
+                <SaveCancelButton navigation={this.props.navigation} createfunc={this.create} feature="SAVE" />
             </View>
         );
     }
 }
 
-OrderForm.propTypes = {
-    navigation: PropTypes.object.isRequired
-}
-
 export default OrderForm;
+
+const styles = StyleSheet.create({
+    formViewContainer: {
+        flex: 1,
+        backgroundColor: "#fff"
+    }
+});

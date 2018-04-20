@@ -1,31 +1,21 @@
 import React from "react";
-import { View, KeyboardAvoidingView, ScrollView} from "react-native";
-import { Form, Header, Text } from "native-base";
+import { View, KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
+import { Form, Header, Text, Left } from "native-base";
 import PropTypes from "prop-types";
 
-import InputAtom from '../Atom/InputAtom';
-import styles from './../Style/Layout'
+import InputAtom from './InputAtom';
 import {marginlessInput} from './../Style/exportStyles';
 
 class OrderFormAtom extends React.Component {
     state = {
-        product: undefined,
-        customer: undefined,
-        quantity: undefined,
-        amountSold: undefined,
-        amountPaid: undefined,
-        balanceRem: undefined,
-        balanceDueDate: undefined,
-        purchaseDate: undefined
-    }
-
-    create = () => {
-        console.log(
-            this.state.product, this.state.customer,
-            this.state.quantity, this.state.amountSold,
-            this.state.amountPaid, this.state.balanceRem, this.state.balanceDueDate, this.state.purchaseDate
-        );
-        this.props.navigation.goBack();
+        product: "",
+        customer: "",
+        quantity: "",
+        amountSold: "",
+        amountPaid: "",
+        balanceRem: "",
+        balanceDueDate: "",
+        purchaseDate: ""
     }
 
     getProduct = (product) => {
@@ -59,17 +49,18 @@ class OrderFormAtom extends React.Component {
 
     render() {
         return (
-                <KeyboardAvoidingView behavior={'padding'} style={styles.itemsContainer}>
+                <KeyboardAvoidingView behavior={'padding'} style={n.itemsContainer}>
+                    <Header style={n.header}>
+                        <Left><Text>Order ID: 123456 </Text></Left> 
+                    </Header>
                     <ScrollView>
-                        <Header />
-                        <Form style={styles.defaultPadding}>
+                        <Form>
                             <InputAtom
                                 label="Product name"
                                 getValue={this.getProduct}
                                 required={true}
                                 contStyle={marginlessInput}
                             />
-
                             <InputAtom
                                 label="Customer who bought"
                                 getValue={this.getCustomer}
@@ -82,7 +73,6 @@ class OrderFormAtom extends React.Component {
                                 getValue={this.getQuantity}
                                 contStyle={marginlessInput}
                             />
-
                             <InputAtom
                                 label="Amount sold"
                                 getValue={this.getAmountSold}
@@ -95,7 +85,6 @@ class OrderFormAtom extends React.Component {
                                 getValue={this.getAmountPaid}
                                 contStyle={marginlessInput}
                             />
-
                             <InputAtom
                                 label="Balance remaining"
                                 getValue={this.getBalanceRem}
@@ -127,17 +116,15 @@ class OrderFormAtom extends React.Component {
     }
 }
 
-OrderFormAtom.propTypes = {
-    navigation: PropTypes.object.isRequired
-}
-
 export default OrderFormAtom;
 
 const n = StyleSheet.create({
-    row: {
-
+    itemsContainer: {
+        flex: 1,
+        width: "92%"
     },
-    font: {
-        
+    header: {
+        backgroundColor: "#F0F0F0",
+        height: 40,
     }
 });
