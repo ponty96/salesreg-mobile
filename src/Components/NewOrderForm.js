@@ -1,15 +1,15 @@
 import React from "react";
-import { View, KeyboardAvoidingView, ScrollView} from "react-native";
-import { Form } from "native-base";
+import { View, KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
+import { Form, Text } from "native-base";
 import PropTypes from "prop-types";
 
 import OrderFormAtom from '../Atom/OrderFormAtom';
 import InputAtom from '../Atom/InputAtom';
-//import styles from './../Style/Layout'
+import ButtonAtom from '../Atom/ButtonAtom';
 import SaveCancelButton from "../Container/SaveCancelButton";
 import {marginlessInput} from './../Style/exportStyles';
 
-class OrderForm extends React.Component {
+class NewOrderForm extends React.Component {
     state = {
         product: undefined,
         customer: undefined,
@@ -63,17 +63,30 @@ class OrderForm extends React.Component {
         return (
             <View style={styles.formViewContainer}>
                 <OrderFormAtom />
-                <SaveCancelButton navigation={this.props.navigation} createfunc={this.create} feature="SAVE" />
+                <ButtonAtom
+                    btnText="+Add another order"
+                    transparent={true}
+                />
+                <SaveCancelButton navigation={this.props.navigation} createfunc={this.create} positiveButtonName="SAVE" />
             </View>
         );
     }
 }
 
-export default OrderForm;
+export default NewOrderForm;
 
 const styles = StyleSheet.create({
     formViewContainer: {
         flex: 1,
-        backgroundColor: "#fff"
+        backgroundColor: "#F0F0F0"
+    },
+    newOrder: {
+        flex: 1,
+        justifyContent: "flex-end",
+        //borderTopWidth: 0.5,
+        //borderTopColor: "#8c8c8c",
+        //marginTop: 10,
+        height: 75,
+        marginBottom: 0
     }
 });

@@ -1,10 +1,10 @@
 import React from "react";
 import { View, KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
-import { Form, Header, Text, Left } from "native-base";
+import { Form, Header, Text, Left, Right, Icon, Card, CardItem } from "native-base";
 import PropTypes from "prop-types";
 
 import InputAtom from './InputAtom';
-import {marginlessInput} from './../Style/exportStyles';
+import { marginfulInput, marginlessInput } from './../Style/exportStyles';
 
 class OrderFormAtom extends React.Component {
     state = {
@@ -50,67 +50,76 @@ class OrderFormAtom extends React.Component {
     render() {
         return (
                 <KeyboardAvoidingView behavior={'padding'} style={n.itemsContainer}>
+                    <Card>
                     <Header style={n.header}>
-                        <Left><Text>Order ID: 123456 </Text></Left> 
+                        <Left style={{ flex: 1, width: "40%" }}><Text> Order ID: 123456 </Text></Left> 
+                        <Right><Icon name="md-close"/></Right>
                     </Header>
                     <ScrollView>
-                        <Form>
+                        <Form style={{ backgroundColor: "#fff" }}>
                             <InputAtom
                                 label="Product name"
                                 getValue={this.getProduct}
-                                required={true}
-                                contStyle={marginlessInput}
+                                contStyle={marginfulInput}
                             />
                             <InputAtom
                                 label="Customer who bought"
                                 getValue={this.getCustomer}
-                                required={true}
-                                contStyle={marginlessInput}
+                                contStyle={marginfulInput}
                             />
                             <View style={{flexDirection: "row", flex: 1}}>
+                            <View style={{width: "49%"}}>
                             <InputAtom
                                 label="Quantity"
                                 getValue={this.getQuantity}
-                                contStyle={marginlessInput}
+                                contStyle={marginfulInput}
                             />
+                            </View>
+                            <View style={{width: "49%"}}>
                             <InputAtom
                                 label="Amount sold"
                                 getValue={this.getAmountSold}
-                                contStyle={marginlessInput}
+                                contStyle={marginfulInput}
                             />
                             </View>
+                            </View>
                             <View style={{flexDirection: "row", flex: 1}}>
+                            <View style={{width: "49%"}}>
                             <InputAtom
                                 label="Amount paid"
                                 getValue={this.getAmountPaid}
-                                contStyle={marginlessInput}
+                                contStyle={marginfulInput}
                             />
+                            </View>
+                            <View style={{width: "49%"}}>
                             <InputAtom
                                 label="Balance remaining"
                                 getValue={this.getBalanceRem}
-                                contStyle={marginlessInput}
+                                contStyle={marginfulInput}
                             />
                             </View>
+                            </View>
                             <View style={{flexDirection: "row", flex: 1}}>
-                            <View style={{flexDirection: "column"}}>
+                            <View style={{flexDirection: "column", width: "49%"}}>
                             <InputAtom
                                 label="Balance due date"
                                 getValue={this.getBalanceDueDate}
-                                contStyle={marginlessInput}
+                                contStyle={marginfulInput}
                             />
-                            <Text>DD-MM-YY</Text>
+                            <Text style={n.font}>DD-MM-YY</Text>
                             </View>
-                            <View style={{flexDirection: "column"}}>
+                            <View style={{flexDirection: "column", width: "49%" }}>
                             <InputAtom
                                 label="Purchase date"
                                 getValue={this.getPurchaseDate}
-                                contStyle={marginlessInput}
+                                contStyle={marginfulInput}
                             />
-                            <Text>DD-MM-YY</Text>
+                            <Text style={n.font}>DD-MM-YY</Text>
                             </View>
                             </View>
                         </Form>
                     </ScrollView>
+                    </Card>
                 </KeyboardAvoidingView>
         );
     }
@@ -121,10 +130,18 @@ export default OrderFormAtom;
 const n = StyleSheet.create({
     itemsContainer: {
         flex: 1,
-        width: "92%"
+        width: "96%",
+        alignSelf: "center",
+        marginTop: 10,
+        paddingBottom: 50
     },
     header: {
         backgroundColor: "#F0F0F0",
-        height: 40,
+        height: 50,
+    },
+    font: {
+        fontSize: 12,
+        color: "#8c8c8c",
+        paddingLeft: 4
     }
 });
