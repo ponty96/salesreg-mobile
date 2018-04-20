@@ -10,11 +10,13 @@ class BusinessDetailsScreen extends Component {
     state = {
         item: {
             businessName: 'Business',
+            image: 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
             address: '6 Salem street Morogbo, Lagos',
             email: 'kay5@gmail.com',
             description: 'Simply dummy text of the printing and typesetting industry. ' +
                             'Loren Ipsum has been the industry\'s standard dummy text ever since the 1550s, when an unknown printer took a ' +
                             'gallery of type and scrambled it'
+                            
         }
     }
 
@@ -58,10 +60,13 @@ class BusinessDetailsScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style = {styles.nameDisplay}>
-                    <NameDisplayAtom businessName={this.state.item.businessName}/>
+                    <NameDisplayAtom 
+                        businessName = { this.state.item.businessName }
+                        image = { this.state.item.image }
+                    />
                 </View>
                 <View>
-                    <DetailsAtom item={this.state.item}/>
+                    <DetailsAtom item = { this.state.item }/>
                 </View>
             </View>
         )
