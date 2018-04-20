@@ -1,57 +1,68 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { List, ListItem, Icon } from 'native-base'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Icon } from 'native-base'
 
-import FabAtom from './../Atom/FabAtom'
+import NameDisplayAtom from '../Atom/NameDisplayAtom';
+import DetailsAtom from '../Atom/DetailsAtom';
 import styles from './../Style/Screen'
-import { color } from './../Style/Color'
 
 class BusinessDetailsScreen extends Component {
+    state = {
+        item: {
+            businessName: 'Business',
+            address: '6 Salem street Morogbo, Lagos',
+            email: 'kay5@gmail.com',
+            description: 'Simply dummy text of the printing and typesetting industry. ' +
+                            'Loren Ipsum has been the industry\'s standard dummy text ever since the 1550s, when an unknown printer took a ' +
+                            'gallery of type and scrambled it'
+        }
+    }
 
-    static navigationOptions = ({ navigation, navigationOptions }) => {
+    componentDidMount() {
+        this.props.navigation.setParams({
+            item: this.state.item
+        });
+    }
+
+    static navigationOptions = ({ navigation }) => {
         const { params } = navigation.state;
         return {
             title: params.name,
-            headerRight: <Icon
+            headerLeft: <Icon
                             name={'md-arrow-back'}
                             style={styles.headerIcon}
                             onPress={() => {
                                 navigation.goBack();
                             }}
                         />,
-            headerLeft: <View style={styles.headerItem}>
-                            <Icon
-                                name={'pencil'}
-                                style={styles.headerIconLogout}
-                                type={'MaterialCommunityIcons'}
-                            />
-                            <Text style={styles.headerText}>Edit</Text>
-                        </View>
+            headerRight: <TouchableOpacity
+                            onPress={() => {
+                                navigation.navigate('NewBusiness', {
+                                    item: params.item
+                                });
+                            }}
+                        >
+                            <View style={styles.headerItem}>
+                                <Icon
+                                    name={'pencil'}
+                                    style={styles.headerIconLogout}
+                                    type={'MaterialCommunityIcons'}
+                                />
+                                <Text style={styles.headerText}>Edit</Text>
+                            </View>
+                        </TouchableOpacity>
         };
     };
 
     render() {
         return (
-            <View style={ styles.centerContainer }>
-                <FabAtom
-                    routeName={'NewBusiness'}
-                    name={'md-add'}
-                    navigation={this.props.navigation}
-                />
-
-                 <List>
-                    <ListItem
-                        onPress={() => this.props.navigation.navigate('ViewBusiness',
-                                        {
-                                            name: 'Kay5iveAttractions',
-                                            id: 'ID here for getting data at the new scrren'
-                                        }
-                                    )
-                                }
-                    >
-                        <Text>Views</Text>
-                    </ListItem>
-                </List>
+            <View style={styles.container}>
+                <View style = {styles.nameDisplay}>
+                    <NameDisplayAtom businessName={this.state.item.businessName}/>
+                </View>
+                <View>
+                    <DetailsAtom item={this.state.item}/>
+                </View>
             </View>
         )
     }

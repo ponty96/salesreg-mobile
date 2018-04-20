@@ -1,11 +1,8 @@
 import React, { Component } from "react";
 import {
-  Text,
   View,
   StyleSheet,
   ListView,
-  Image,
-  TouchableOpacity
 } from "react-native";
 import { Icon } from 'native-base';
 import ProductListAtom from "../Atom/ProductListAtom";

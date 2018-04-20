@@ -47,5 +47,18 @@ export default StyleSheet.create(
             paddingVertical: 20,
             paddingHorizontal: 16
         },
+        modalContainer: {
+            flex: 1,
+            backgroundColor: "rgba(0,0,0,.5)",
+            justifyContent: "center",
+            paddingHorizontal: 20
+        },
+        modalBody: {
+            backgroundColor: "#fff",
+            position: "absolute",
+            top: 90,
+            width: '100%',
+            marginLeft: '7%'
+        }
     }
 )

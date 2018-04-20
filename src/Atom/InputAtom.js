@@ -24,7 +24,7 @@ class InputAtom extends Component {
                     placeholder = {this.props.placeholder}
                     multiline = {this.props.multiline}
                     onChangeText={text => this.props.getValue(text)}
-                    defaultValue = {this.props.defaultValue}
+                    value = {this.props.defaultValue}
                     secureTextEntry = {this.props.secureTextEntry}
                     keyboardType = {this.props.keyboardType}
                     style = {this.props.inputStyle}

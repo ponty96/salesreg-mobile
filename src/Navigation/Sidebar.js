@@ -10,10 +10,10 @@ const SideBar = (props) => (
 		<View style={styles.itemsContainer}>
 			<ScrollView>
 				<TouchableOpacity
-					onPress={() => props.navigation.navigate('Settings',
+					onPress={() => props.navigation.navigate('BusinessDetails',
 									{
 										name: 'Kay5iveAttractions',
-										id: 'ID here for getting data at the new scrren'
+										id: 'ID here for getting data at the new screen'
 									}
 								)
 							}
