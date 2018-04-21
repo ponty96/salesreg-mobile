@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
-<<<<<<< HEAD
 
 export default class NameDisplayAtom extends Component {
     render() {
@@ -21,19 +20,6 @@ export default class NameDisplayAtom extends Component {
                             style = {styles.image}
                         />
                     }
-=======
-export default class NameDisplayAtom extends Component{
-    render(){
-        return(
-            <View style = {styles.wrapper}>
-                <View style = {styles.letterDisplay}>
-                    <Text>
-                        {
-                            //if charAt === letter, showLetter else showImage
-                        }
-                        {this.props.businessName.charAt(0)}
-                    </Text>
->>>>>>> 7d83bc1ee10bc23d1579dd698aae92d8f3467392
                 </View>
                 <Text style = {styles.name}>
                     {this.props.businessName}
