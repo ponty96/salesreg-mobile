@@ -94,11 +94,15 @@ class NewBusinessForm extends React.Component {
                         </Form>
                     </ScrollView>
                 </KeyboardAvoidingView>
+<<<<<<< HEAD
+                <SaveCancelButton navigation={this.props.navigation} createfunc={this.create} feature="CREATE" />
+=======
                 <SaveCancelButton
                     navigation={this.props.navigation}
                     createfunc={this.create}
                     positiveButtonName= {this.props.item ? 'SAVE' : 'CREATE'}
                 />
+>>>>>>> 90fff446e37f4a8ca7ddf7e24bbce292a88a14ec
             </View>
         );
     }

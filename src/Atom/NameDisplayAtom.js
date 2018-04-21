@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { View, StyleSheet, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
+
 export default class NameDisplayAtom extends Component {
     render() {
         return(

@@ -6,6 +6,8 @@ import {
 } from "react-native";
 import { Icon } from 'native-base';
 import ProductListAtom from "../Atom/ProductListAtom";
+import SubHeaderAtom from "../Atom/SubHeaderAtom";
+import { ScrollView } from "react-native-gesture-handler";
 
 const users = [
     {
@@ -175,24 +177,24 @@ const users = [
     onPress = () => {
       alert("Product View Unavailable");
     };
-    addRow = () => {
-      alert("Create New Product Unavailable");
-    };
     renderRow(user) {
       return (
         <ProductListAtom
-        onPress={this.onPress}
-        items = {user}
+          onPress={this.onPress}
+          items = {user}
         />
       );
     }
     render() {
       return (
         <View style={styles.container}>
-          <ListView
-            dataSource={this.state.userDataSource}
-            renderRow={this.renderRow.bind(this)}
-          />
+          <SubHeaderAtom />
+            <ScrollView>
+              <ListView
+                dataSource={this.state.userDataSource}
+                renderRow={this.renderRow.bind(this)}
+              />
+            </ScrollView>
         </View>
       );
     }
