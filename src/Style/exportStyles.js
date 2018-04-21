@@ -10,7 +10,8 @@ export const saveCancelButton = {
     alignContent: 'center',
     justifyContent: 'center',
     alignItems: 'center',
-    borderColor: color.grey
+    borderColor: color.grey,
+    backgroundColor: color.secondary
 };
 
 export const saveCancelButtonText = {
@@ -22,6 +23,9 @@ export const marginlessInput = {
     marginLeft: 0
 };
 
+export const marginfulInput = {
+    marginLeft: 4
+}
 export const modalButton = {
     marginTop: 32,
     marginBottom: 16,
