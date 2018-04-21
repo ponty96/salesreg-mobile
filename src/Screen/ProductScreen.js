@@ -4,7 +4,6 @@ import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
 import styles from './../Style/Screen'
-import { color } from './../Style/Color'
 import ProductList from './../Components/ProductList'
 
 class ProductScreen extends Component {

@@ -7,7 +7,8 @@ import styles from './../Style/Layout';
 class ModalAtom extends Component {
 
     static defaultProps = {
-        visible: false
+        visible: false,
+        centered: false
     }
 
     render() {
@@ -24,7 +25,7 @@ class ModalAtom extends Component {
                     style={styles.modalContainer}
                 >
                     <View
-                        style={styles.modalBody}
+                        style={this.props.centered ? styles.centerModal : styles.modalBody}
                     >
                         {this.props.header}
                         {this.props.body}
@@ -40,7 +41,8 @@ ModalAtom.propTypes = {
     visible: PropTypes.bool,
     footer: PropTypes.element,
     header: PropTypes.element,
-    body: PropTypes.element
+    body: PropTypes.element,
+    centered: PropTypes.bool
 }
 
 export default ModalAtom;

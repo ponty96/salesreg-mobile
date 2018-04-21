@@ -16,7 +16,6 @@ class BusinessDetailsScreen extends Component {
             description: 'Simply dummy text of the printing and typesetting industry. ' +
                             'Loren Ipsum has been the industry\'s standard dummy text ever since the 1550s, when an unknown printer took a ' +
                             'gallery of type and scrambled it'
-                            
         }
     }
 

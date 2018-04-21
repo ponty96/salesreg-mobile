@@ -26,6 +26,7 @@ export const marginlessInput = {
 export const marginfulInput = {
     marginLeft: 4
 }
+
 export const modalButton = {
     marginTop: 32,
     marginBottom: 16,

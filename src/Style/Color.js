@@ -4,5 +4,7 @@ export const color = {
     inactive: '#8c8c8c',
     menu: '#444444',
     disabled: '#ccc',
-    grey: '#f6f6f6'
+    grey: '#f6f6f6',
+    warning: '#ff9630',
+    black: '#000'
 }

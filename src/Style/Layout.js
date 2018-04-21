@@ -53,6 +53,9 @@ export default StyleSheet.create(
             justifyContent: "center",
             paddingHorizontal: 20
         },
+        centerModal: {
+            backgroundColor: "#fff",
+        },
         modalBody: {
             backgroundColor: "#fff",
             position: "absolute",

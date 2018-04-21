@@ -6,18 +6,19 @@ import { List, ListItem, Icon } from 'native-base';
 import FabAtom from './../Atom/FabAtom';
 import styles from './../Style/Screen';
 import DeleteModal from './../Container/DeleteBuzModal';
-import GetAmount from './../Container/GetAmount';
-import DebtLimit from './../Container/DebtLimit';
+import GetAmountModal from './../Container/GetAmountModal';
+import DebtLimitModal from './../Container/DebtLimitModal';
 import WarningModal from './../Container/WarningModal';
+import DebtWarningModal from "../Container/DebtWarningModal";
 
 class BusinessListScreen extends Component {
     static defaultProps = {
-        items: [],
+        items: ['a', 'b'],
         auth: 'Sme'
     }
 
     static navigationOptions = ({ navigation }) => {
-        let itemsLength = 0;
+        let itemsLength = 2;
         let right = (itemsLength > 0)
                     ?   <Icon
                             name={'ios-search'}
@@ -87,7 +88,7 @@ class BusinessListScreen extends Component {
         ///>
 
         //adding to wallet and paying of deb can use GetAmount
-        //<GetAmount
+        //<GetAmountModal
             //visibility={true}
             //headerText={"Salomy's debt"}
         ///>
@@ -100,9 +101,16 @@ class BusinessListScreen extends Component {
         //    limit={7000}
         ///>
 
-        //<DebtLimit
+        //<DebtLimitModal
             //visibility={true}
             //headerText={"Total debt limit(N)"}
+        ///>
+
+
+        //<DebtWarningModal
+        //    visibility={true}
+        //    currentAmount={2000}
+        //    debtLimit={66000}
         ///>
         return (
             <View style={ styles.plainContainer }>
@@ -127,7 +135,7 @@ class BusinessListScreen extends Component {
 }
 
 BusinessListScreen.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.object),
+    items: PropTypes.arrayOf(PropTypes.string),
     authName: PropTypes.string
 }
 
