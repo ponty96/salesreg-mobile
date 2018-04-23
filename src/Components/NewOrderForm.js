@@ -83,9 +83,6 @@ const styles = StyleSheet.create({
     newOrder: {
         flex: 1,
         justifyContent: "flex-end",
-        //borderTopWidth: 0.5,
-        //borderTopColor: "#8c8c8c",
-        //marginTop: 10,
         height: 75,
         marginBottom: 0
     }
