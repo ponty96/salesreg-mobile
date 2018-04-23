@@ -9,7 +9,7 @@ import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Screen';
 import { marginlessInput, modalButton } from './../Style/exportStyles';
 
-class DebtLimit extends Component {
+class DebtLimitModal extends Component {
     state = {
         amount: undefined,
         visibility: this.props.visibility
@@ -85,10 +85,10 @@ class DebtLimit extends Component {
     }
 }
 
-DebtLimit.propTypes = {
+DebtLimitModal.propTypes = {
     visibility: PropTypes.bool,
     headerText: PropTypes.string.isRequired,
     getValue: PropTypes.func
 }
 
-export default DebtLimit;
+export default DebtLimitModal;

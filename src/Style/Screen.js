@@ -28,6 +28,13 @@ export default StyleSheet.create(
         redText: {
             color: color.primary
         },
+        orangeText: {
+            color: color.warning
+        },
+        blackText: {
+            color: color.black,
+            fontWeight: 'bold'
+        },
         paddingHorizontal: {
             paddingHorizontal: 16
         },
@@ -71,6 +78,10 @@ export default StyleSheet.create(
             color: color.inactive,
             paddingLeft: 16
         },
+        modalInfoIcon: {
+            paddingHorizontal: 8,
+            color: color.inactive
+        },
         modalWarningIcon: {
             color: color.primary,
             paddingRight: 16
@@ -85,11 +96,17 @@ export default StyleSheet.create(
             padding: 16,
             backgroundColor: color.grey
         },
+        debtLimitWarning: {
+            flexDirection: 'row'
+        },
         modalBody: {
             padding: 16
         },
         modalWarningBody: {
             margin: 16
+        },
+        debtLimitWarningText: {
+            textAlign: 'justify'
         },
         modalButtonContainer: {
             marginVertical: 16,
@@ -97,6 +114,45 @@ export default StyleSheet.create(
         },
         modalBusinessFooter: {
             marginLeft: 40
+        },
+        boxView: {
+            flexDirection: 'row',
+            borderWidth: 0.5,
+            borderColor: color.inactive,
+            padding: 10
+        },
+        menuColor: {
+            color: color.menu
+        },
+        boxlabel: {
+            marginRight: 16
+        },
+        firstBox: {
+            marginBottom: 6
+        },
+        secondBox: {
+            marginBottom: 32
+        },
+        thumbStyle: {
+            height: 30,
+            width: 30,
+            borderRadius: 15
+        },
+        trackStyle: {
+            height: 8,
+            borderRadius: 4
+        },
+        sliderStyle: {
+            marginTop: 16
+        },
+        legendStyle: {
+            marginBottom: 16,
+            flexDirection: 'row',
+            justifyContent: 'flex-end'
+        },
+        legendLabel: {
+            flex: 1,
+            alignSelf: 'flex-start'
         }
     }
 )

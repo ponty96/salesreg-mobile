@@ -10,7 +10,7 @@ export default StyleSheet.create(
             marginVertical: 8
         },
         buttonTransparent: {
-            backgroundColor: "rgba(255, 255, 255, 0)",
+            backgroundColor: color.secondary,
             paddingHorizontal: 32,
             alignSelf: 'center',
             marginVertical: 8

@@ -9,16 +9,14 @@ export default class NameDisplayAtom extends Component {
             <View style = {styles.wrapper}>
                 <View style = { styles.letterDisplay }>
                     {
-                        (this.props.image === null)
-                        ?
-                        <Text>
-                            { this.props.businessName.charAt(0).toUpperCase() }
-                        </Text>
-                        :
-                        <Image 
+                        this.props.image
+                        ? <Image
                             source = {{uri: this.props.image}}
                             style = {styles.image}
                         />
+                        : <Text>
+                            { this.props.businessName.charAt(0).toUpperCase() }
+                        </Text>
                     }
                 </View>
                 <Text style = {styles.name}>

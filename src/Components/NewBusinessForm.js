@@ -59,6 +59,7 @@ class NewBusinessForm extends React.Component {
                         <Form style={styles.defaultPadding}>
                             <ImageAtom
                                 getValue={this.getImage}
+                                source={this.props.item ? this.props.item.image : undefined}
                             />
 
                             <InputAtom
