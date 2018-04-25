@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { Icon } from 'native-base'
 
 import NameDisplayAtom from '../Atom/NameDisplayAtom';
-import DetailsAtom from '../Atom/DetailsAtom';
-import styles from './../Style/Screen'
+import DetailItemAtom from '../Atom/DetailItemAtom';
+import styles from './../Style/Screen';
 
 class BusinessDetailsScreen extends Component {
     state = {
@@ -15,7 +15,12 @@ class BusinessDetailsScreen extends Component {
             email: 'kay5@gmail.com',
             description: 'Simply dummy text of the printing and typesetting industry. ' +
                             'Loren Ipsum has been the industry\'s standard dummy text ever since the 1550s, when an unknown printer took a ' +
-                            'gallery of type and scrambled it'
+                            'gallery of type and scrambled it',
+            icon: {
+                addressIcon: 'map-marker',
+                emailIcon: 'envelope',
+                documentIcon: 'file'
+            }
         }
     }
 
@@ -64,8 +69,30 @@ class BusinessDetailsScreen extends Component {
                         image = { this.state.item.image }
                     />
                 </View>
+                <View style = {styles.detailsWrapper}>
+                    <Text style = { styles.details }>
+                        Details
+                    </Text>
+                </View>
                 <View>
-                    <DetailsAtom item = { this.state.item }/>
+                    <View style = { styles.detailItemWrapper }>
+                        <DetailItemAtom 
+                            icon = { this.state.item.icon.addressIcon }
+                            text = { this.state.item.address }
+                        />
+                    </View>
+                    <View style = { styles.detailItemWrapper }>
+                        <DetailItemAtom 
+                            icon = { this.state.item.icon.emailIcon }
+                            text = { this.state.item.email }
+                        />
+                    </View>
+                    <View style = { styles.detailItemWrapper }>
+                        <DetailItemAtom 
+                            icon = { this.state.item.icon.documentIcon }
+                            text = { this.state.item.description }
+                        />
+                    </View>
                 </View>
             </View>
         )

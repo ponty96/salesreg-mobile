@@ -1,19 +1,27 @@
 import React, {Component} from 'react';
 import {View, Text, StyleSheet} from 'react-native';
-import {Icon} from 'native-base';
+import Icon1 from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
 import PropTypes from 'prop-types';
 
 export default class DetailItemAtom extends Component{
-    static defaultProps = {
-        icon: 'add',
-        text: 'Add a prop'
-    }
-
     render(){
         return(
             <View style = {styles.wrapper}>
                 <Text>
-                    <Icon ios = {'ios-' +this.props.icon} android = {'md-' +this.props.icon} style = {styles.icon}/>
+                    {
+                        this.props.icon === 'ring'
+                        ?
+                        <Icon2
+                            name = { this.props.icon } 
+                            size = { 14 }
+                        />
+                        :
+                        <Icon1
+                            name = { this.props.icon }
+                            size = { 14 } 
+                        />
+                    }
                 </Text>
                 <Text style = {styles.text}>
                     {this.props.text}
@@ -23,14 +31,15 @@ export default class DetailItemAtom extends Component{
 }
 
 DetailItemAtom.propTypes = {
-    text: PropTypes.string,
-    icon: PropTypes.string
+    text: PropTypes.string.isRequired,
+    icon: PropTypes.string.isRequired
 }
 
 const styles = StyleSheet.create({
     wrapper: {
         flexDirection: 'row',
-        marginVertical: 15
+        alignItems: 'center',
+        marginLeft: 35
     },
     text: {
         marginLeft: 20,
