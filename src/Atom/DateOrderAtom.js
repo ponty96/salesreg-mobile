@@ -16,9 +16,11 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     flex: 1,
     height: 60,
-    backgroundColor: "#F0F0F0",
+    backgroundColor: "#FFF",
     alignItems: "center",
     justifyContent: "center",
+    borderBottomWidth: 0.5,
+    borderBottomColor: "#f0f0f0"
   },
   dateText: {
     fontSize: 20,

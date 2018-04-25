@@ -19,17 +19,19 @@ export default StyleSheet.create({
     },
     rowText1: {
       flex: 1,
-      fontWeight: "300",
+      fontWeight: "500",
       fontSize: 13,
       color: "#000"
     },
     rowText2: {
       flex: 1,
-      fontSize: 11,
+      fontSize: 13,
+      paddingTop: 12,
+      color: "rgba(218,11,11,59)",
     },
     rowText3: {
-      color: "rgba(218,11,11,59)",
-      fontSize: 13
+      fontSize: 13,
+
     },
     image: {
       height: 20,

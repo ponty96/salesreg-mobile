@@ -26,7 +26,7 @@ export default StyleSheet.create({
         marginBottom: 0.5
     },
     rowText1: {
-        fontWeight: "200",
+        fontWeight: "500",
         fontSize: 13,
         color: "#000",
         textAlign: "left"
@@ -89,22 +89,22 @@ export default StyleSheet.create({
     },
     view1: {
         height: 68,
-        width: "40%",
+        width: "20%",
         alignItems: "center"
     },
     view2: {
-        flex: 1,
+        flex: 0,
         paddingLeft: 0,
         marginLeft: 0,
         paddingRight: 0,
         marginRight: 0,
-        width: "70%"
+        width: "35%"
     },
     view3: {
         flex: 1,
         flexDirection: "column",
         alignItems: "flex-end",
-        width: "70%",
+        width: "35%",
         marginLeft: "20%",
     },
     text1: {

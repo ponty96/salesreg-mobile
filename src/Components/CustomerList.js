@@ -165,7 +165,7 @@ export default class CustomerList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#c0c0c0",
+    backgroundColor: "#FFF",
     flex: 1,
     width: "100%",
   },
