@@ -153,6 +153,58 @@ export default StyleSheet.create(
         legendLabel: {
             flex: 1,
             alignSelf: 'flex-start'
+        },
+        details: {
+            marginTop: 20,
+            marginLeft: 35,
+            color: 'grey'
+        },
+        detailsWrapper: {
+            marginVertical: 25
+        },
+        topCompartment: {
+            flexDirection: 'row',
+            borderBottomWidth: 1,
+            borderBottomColor: 'lightgrey',
+            justifyContent: 'space-between',
+            paddingBottom: 40
+        },
+        container: {
+            flex: 1
+        },
+        textWrapper: {
+            marginRight: 30,
+            marginTop:  35,
+            justifyContent: 'space-between'
+        },
+        purchaseWrapper: {
+            alignItems: 'flex-end',
+        },
+        textTitle: {          
+            color: 'grey',
+            fontWeight: '400',
+            fontSize: 14
+        },
+        textContent: {
+            fontWeight: '400',
+            fontSize: 14
+        },
+        redText: {
+            color: 'red'
+        },
+        details: {
+            marginTop: 20,
+            marginLeft: 35,
+            color: 'grey',
+            marginBottom: 5
+        },
+        detailItemWrapper: {
+            marginVertical: 10
+        },
+        secondCompartment: {
+            borderBottomWidth: 1,
+            borderBottomColor: 'lightgrey',
+            paddingBottom: 30
         }
     }
 )
