@@ -167,14 +167,14 @@ export default StyleSheet.create(
             borderBottomWidth: 1,
             borderBottomColor: 'lightgrey',
             justifyContent: 'space-between',
-            paddingBottom: 40
+            paddingBottom: 30
         },
         container: {
             flex: 1
         },
         textWrapper: {
-            marginRight: 30,
-            marginTop:  35,
+            marginRight: 20,
+            marginTop:  25,
             justifyContent: 'space-between'
         },
         purchaseWrapper: {
@@ -194,7 +194,7 @@ export default StyleSheet.create(
         },
         details: {
             marginTop: 20,
-            marginLeft: 35,
+            marginLeft: 25,
             color: 'grey',
             marginBottom: 5
         },
@@ -204,7 +204,27 @@ export default StyleSheet.create(
         secondCompartment: {
             borderBottomWidth: 1,
             borderBottomColor: 'lightgrey',
-            paddingBottom: 30
+            paddingBottom: 10
+        },
+        compartmentItemWrapper: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
+            marginRight: 25,
+        },
+        compartmentItem: {
+            marginLeft: 35,
+            color: 'grey',
+        },
+        creditLimit: {
+            paddingTop: 15
+        },
+        walletText: {
+            color: 'blue',
+            marginTop: 15
+        },
+        walletWrapper: {
+            marginBottom: 5
         }
     }
 )

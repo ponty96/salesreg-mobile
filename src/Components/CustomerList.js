@@ -9,7 +9,8 @@ import {
 } from "react-native";
 import { Icon } from "native-base";
 import CustomerListAtom from "../Atom/CustomerListAtom";
-
+import SubHeaderAtom from "../Atom/SubHeaderAtom";
+import { ScrollView } from "react-native-gesture-handler";
 
 const users = [
   {
@@ -150,10 +151,13 @@ export default class CustomerList extends Component {
   render() {
     return (
       <View style={styles.container}>
-        <ListView
-          dataSource={this.state.userDataSource}
-          renderRow={this.renderRow.bind(this)}
-        />
+        <SubHeaderAtom total = "250" />
+          <ScrollView>
+            <ListView
+              dataSource={this.state.userDataSource}
+              renderRow={this.renderRow.bind(this)}
+            />
+          </ScrollView>
       </View>
     );
   }
@@ -161,7 +165,7 @@ export default class CustomerList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#c0c0c0",
+    backgroundColor: "#FFF",
     flex: 1,
     width: "100%",
   },

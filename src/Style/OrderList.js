@@ -12,7 +12,6 @@ export default StyleSheet.create({
       padding: 10,
       width: "100%",
       height: 75,
-      //alignItems: "center",
       backgroundColor: "#fff",
       marginBottom: 0.5,
       borderBottomWidth: 0.5,
@@ -20,17 +19,19 @@ export default StyleSheet.create({
     },
     rowText1: {
       flex: 1,
-      fontWeight: "300",
+      fontWeight: "500",
       fontSize: 13,
       color: "#000"
     },
     rowText2: {
       flex: 1,
-      fontSize: 11,
+      fontSize: 13,
+      paddingTop: 12,
+      color: "rgba(218,11,11,59)",
     },
     rowText3: {
-      color: "rgba(218,11,11,59)",
-      fontSize: 13
+      fontSize: 13,
+
     },
     image: {
       height: 20,
@@ -66,7 +67,6 @@ export default StyleSheet.create({
     },
     view1: {
       height: 68,
-      //width: "20%",
       alignItems: "center",
       marginRight: 0,
       paddingRight: 0

@@ -344,8 +344,8 @@ export default class OrderList extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#c0c0c0",
-      flex: 1
+    backgroundColor: "#FFF",
+    flex: 1
   },
   row: {
     flex: 1,
@@ -356,7 +356,6 @@ const styles = StyleSheet.create({
     width: "100%",
     alignItems: "center",
     backgroundColor: "#fff",
-    marginBottom: 0.5
   },
   rowText1: {
     fontWeight: "bold",
