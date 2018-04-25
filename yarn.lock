@@ -5377,7 +5377,10 @@ react-native-maps@0.19.0:
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.19.0.tgz#ce94fad1cf360e335cb4338a68c95f791e869074"
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> c2749190746b28f2f8e4bc856d3532eb961aa1ae
 react-native-modal-popover@^0.0.7:
   version "0.0.7"
   resolved "https://registry.yarnpkg.com/react-native-modal-popover/-/react-native-modal-popover-0.0.7.tgz#46d46a781d5e287b52a228029276e4cd877d5254"
@@ -5390,6 +5393,9 @@ react-native-popover-view@^0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/react-native-popover-view/-/react-native-popover-view-0.6.3.tgz#e209c2130b7ba24ddbfcddab8aaa34a5feae61ae"
 
+<<<<<<< HEAD
+>>>>>>> c2749190746b28f2f8e4bc856d3532eb961aa1ae
+=======
 >>>>>>> c2749190746b28f2f8e4bc856d3532eb961aa1ae
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
