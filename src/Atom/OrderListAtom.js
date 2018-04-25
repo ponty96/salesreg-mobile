@@ -2,12 +2,12 @@ import React from "react";
 /*import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";*/
 import { ListItem, Left, Body, Right, Text, Thumbnail } from "native-base";
 import PropTypes from "prop-types";
-import styles from "./../Style/List";
+import styles from "./../Style/OrderList";
 
 class OrderListAtom extends React.Component {
   render() {
     const defaultImg = "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7";
-    const avatar = this.props.items.image ? this.props.items.image : defaultImg;
+    const avatar = this.props.items.images ? this.props.items.images : defaultImg;
 
     return (
           <ListItem style={styles.row} onPress={this.props.onPress}>

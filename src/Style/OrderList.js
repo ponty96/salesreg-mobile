@@ -12,7 +12,6 @@ export default StyleSheet.create({
       padding: 10,
       width: "100%",
       height: 75,
-      //alignItems: "center",
       backgroundColor: "#fff",
       marginBottom: 0.5,
       borderBottomWidth: 0.5,
@@ -66,7 +65,6 @@ export default StyleSheet.create({
     },
     view1: {
       height: 68,
-      //width: "20%",
       alignItems: "center",
       marginRight: 0,
       paddingRight: 0
