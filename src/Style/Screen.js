@@ -18,7 +18,7 @@ export default StyleSheet.create(
         emptyHolder: {
             backgroundColor: color.grey,
             paddingHorizontal: 16,
-            paddingVertical: 32,
+            paddingVertical: 32
         },
         emptyHeader: {
             marginBottom: 16,
@@ -64,7 +64,7 @@ export default StyleSheet.create(
         },
         container: {
             flex: 1,
-            backgroundColor: '#fff',
+            backgroundColor: '#fff'
         },
         nameDisplay: {
             borderBottomWidth: 1,
@@ -154,11 +154,6 @@ export default StyleSheet.create(
             flex: 1,
             alignSelf: 'flex-start'
         },
-        details: {
-            marginTop: 20,
-            marginLeft: 35,
-            color: 'grey'
-        },
         detailsWrapper: {
             marginVertical: 25
         },
@@ -169,16 +164,13 @@ export default StyleSheet.create(
             justifyContent: 'space-between',
             paddingBottom: 30
         },
-        container: {
-            flex: 1
-        },
         textWrapper: {
             marginRight: 20,
             marginTop:  25,
             justifyContent: 'space-between'
         },
         purchaseWrapper: {
-            alignItems: 'flex-end',
+            alignItems: 'flex-end'
         },
         textTitle: {          
             color: 'grey',
@@ -188,9 +180,6 @@ export default StyleSheet.create(
         textContent: {
             fontWeight: '400',
             fontSize: 14
-        },
-        redText: {
-            color: 'red'
         },
         details: {
             marginTop: 20,
@@ -210,11 +199,11 @@ export default StyleSheet.create(
             flexDirection: 'row',
             justifyContent: 'space-between',
             alignItems: 'flex-end',
-            marginRight: 25,
+            marginRight: 25
         },
         compartmentItem: {
             marginLeft: 35,
-            color: 'grey',
+            color: 'grey'
         },
         creditLimit: {
             paddingTop: 15
@@ -225,6 +214,9 @@ export default StyleSheet.create(
         },
         walletWrapper: {
             marginBottom: 5
+        },
+        bottomPadding: {
+            paddingBottom: 30
         }
     }
 )

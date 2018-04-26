@@ -1,13 +1,13 @@
 import React from 'react';
 
 //import Routes from './src/Navigation/Routes';
-import CustomerDetailScreen from './src/Screen/CustomerDetailScreen';
+import UserProfileScreen from './src/Screen/UserProfileScreen';
 
 export default class App extends React.Component {
   render() {
     return (
-	  //<Routes />
-	  <CustomerDetailScreen />
+	//<Routes />
+	<UserProfileScreen />
     );
   }
 }
