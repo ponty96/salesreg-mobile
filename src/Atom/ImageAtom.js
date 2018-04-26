@@ -12,13 +12,15 @@ class ImageAtom extends Component {
     }
 
     handleSelection = async () => {
-        let result = await ImagePicker.launchImageLibraryAsync({
-            allowsEditing: false
-        });
+        if (this.props.getValue) {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: false
+            });
 
-        if (result && !result.cancelled) {
-            this.setState({ image: result.uri });
-            this.props.getValue(this.state.image);
+            if (result && !result.cancelled) {
+                this.setState({image: result.uri});
+                this.props.getValue(this.state.image);
+            }
         }
     }
 
