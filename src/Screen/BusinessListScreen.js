@@ -13,12 +13,12 @@ import DebtWarningModal from "../Container/DebtWarningModal";
 
 class BusinessListScreen extends Component {
     static defaultProps = {
-        items: [],
+        items: ['a', 'b'],
         auth: 'Sme'
     }
 
     static navigationOptions = ({ navigation }) => {
-        let itemsLength = 0;
+        let itemsLength = 2;
         let right = (itemsLength > 0)
                     ?   <Icon
                             name={'ios-search'}
@@ -126,8 +126,8 @@ class BusinessListScreen extends Component {
                 />
                 {
                     this.props.items.length > 0
-                    ? this.renderEmpty()
-                    : this.renderList()
+                    ? this.renderList()
+                    : this.renderEmpty()
                 }
             </View>
         )

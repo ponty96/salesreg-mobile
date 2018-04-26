@@ -6,5 +6,6 @@ export const color = {
     disabled: '#ccc',
     grey: '#f6f6f6',
     warning: '#ff9630',
-    black: '#000'
+    black: '#000',
+    textBorderBottom: '#E8E8E8'
 }
