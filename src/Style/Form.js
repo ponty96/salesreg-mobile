@@ -4,7 +4,7 @@ import { color } from './Color'
 export default StyleSheet.create(
     {
         buttonRed: {
-            backgroundColor: color.primary,
+            backgroundColor: color.redButton,
             paddingHorizontal: 32,
             alignSelf: 'center',
             marginVertical: 8

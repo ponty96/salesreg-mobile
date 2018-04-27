@@ -6,7 +6,7 @@ import styles from './../Style/Screen';
 import { color } from './../Style/Color';
 
 const FabAtom = (props) => (
-	<Fab
+    <Fab
         position="bottomRight"
         style={styles.fab}
         active={true}

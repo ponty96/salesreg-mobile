@@ -55,7 +55,7 @@ export default StyleSheet.create(
             fontSize: 18
         },
         fab: {
-            backgroundColor: color.primary
+            backgroundColor: color.redButton
         },
         headerItem: {
             flexDirection: 'row',
