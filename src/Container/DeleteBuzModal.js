@@ -11,8 +11,7 @@ import { marginlessInput, modalButton } from './../Style/exportStyles';
 
 class DeleteBuzModal extends Component {
     state = {
-        password: undefined,
-        visibility: this.props.visibility
+        password: undefined
     }
 
     static defaultProps = {
@@ -44,7 +43,7 @@ class DeleteBuzModal extends Component {
                     {this.props.headerText}
                 </Text>
                 <TouchableOpacity
-                    onPress={() => this.setState({visibility: !this.state.visibility})}
+                    onPress={() => this.props.closeModal()}
                 >
                     <Icon
                         name={'md-close'}
@@ -81,7 +80,7 @@ class DeleteBuzModal extends Component {
     render() {
         return (
             <ModalAtom
-                visible={this.state.visibility}
+                visible={this.props.visibility}
                 body={this.renderBody()}
                 header={this.renderHeader()}
             />
@@ -92,7 +91,8 @@ class DeleteBuzModal extends Component {
 DeleteBuzModal.propTypes = {
     visibility: PropTypes.bool,
     headerText: PropTypes.string.isRequired,
-    getValue: PropTypes.func
+    getValue: PropTypes.func,
+    closeModal: PropTypes.func.isRequired
 }
 
 export default DeleteBuzModal;

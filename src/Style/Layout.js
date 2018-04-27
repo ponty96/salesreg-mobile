@@ -47,6 +47,18 @@ export default StyleSheet.create(
             paddingVertical: 20,
             paddingHorizontal: 16
         },
+        debtItem: {
+            borderColor: color.textBorderBottom,
+            alignSelf: 'flex-end',
+            flexDirection: 'row',
+            justifyContent: 'flex-start',
+            alignItems: 'center',
+            paddingVertical: 8,
+            marginRight: 16
+        },
+        itemRightIcon: {
+            alignSelf: 'center'
+        },
         modalContainer: {
             flex: 1,
             backgroundColor: "rgba(0,0,0,.5)",
@@ -69,6 +81,9 @@ export default StyleSheet.create(
             borderBottomWidth: 1,
             borderColor: color.textBorderBottom
         },
+        debtContainer: {
+            paddingRight: 4
+        },
         listTextCont: {
             flex: 1,
             justifyContent: 'center'
@@ -80,7 +95,7 @@ export default StyleSheet.create(
             height: 50,
             width: 50,
             borderRadius: 25,
-            backgroundColor: '#E8E8E8',
+            backgroundColor: color.textBorderBottom,
             marginRight: 16,
             justifyContent: 'center'
         },
@@ -93,6 +108,13 @@ export default StyleSheet.create(
         },
         innerText: {
             alignSelf: 'center'
+        },
+        deleteIcon: {
+            color: color.textBorderBottom
+        },
+        listTouchCont: {
+            flex: 1,
+            flexDirection: 'row'
         }
     }
 )

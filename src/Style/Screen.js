@@ -12,7 +12,6 @@ export default StyleSheet.create(
         plainContainer: {
             flex: 1,
             paddingHorizontal: 16,
-            paddingTop: 32,
             backgroundColor: color.secondary
         },
         emptyHolder: {
@@ -55,7 +54,7 @@ export default StyleSheet.create(
             fontSize: 18
         },
         fab: {
-            backgroundColor: color.redButton
+            backgroundColor: color.primary
         },
         headerItem: {
             flexDirection: 'row',
@@ -64,7 +63,7 @@ export default StyleSheet.create(
         },
         container: {
             flex: 1,
-            backgroundColor: '#fff'
+            backgroundColor: color.secondary
         },
         nameDisplay: {
             borderBottomWidth: 1,
@@ -180,6 +179,9 @@ export default StyleSheet.create(
         textContent: {
             fontWeight: '400',
             fontSize: 14
+        },
+        redText: {
+            color: 'red'
         },
         details: {
             marginTop: 20,
