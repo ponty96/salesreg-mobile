@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import {
   Text,
   View,
-  StyleSheet,
   ListView,
   FlatList,
   Image,
@@ -12,6 +11,7 @@ import { Icon } from "native-base";
 import DateOrderAtom from "../Atom/DateOrderAtom";
 import TotalOrderAtom from "../Atom/TotalOrderAtom";
 import OrderListAtom from "../Atom/OrderListAtom";
+import styles from './../Style/OrderList';
 
 export default class OrderList extends Component {
   constructor() {
@@ -326,7 +326,7 @@ export default class OrderList extends Component {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.orderContainer}>
         <FlatList
           ref={ref => (this.scrollView = ref)}
           onContentSizeChange={() => {
@@ -341,50 +341,3 @@ export default class OrderList extends Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    backgroundColor: "#FFF",
-    flex: 1
-  },
-  row: {
-    flex: 1,
-    flexDirection: "row",
-    top: 0,
-    padding: 10,
-    height: 75,
-    width: "100%",
-    alignItems: "center",
-    backgroundColor: "#fff",
-  },
-  rowText1: {
-    fontWeight: "bold",
-    fontSize: 12,
-    color: "grey"
-  },
-  rowText2: {
-    color: "lightgrey",
-    fontSize: 13
-  },
-  rowText3: {
-    color: "red",
-    textAlign: "right",
-    fontSize: 13
-  },
-  image: {
-    height: 20,
-    width: 20,
-    padding: 6
-  },
-  dp: {
-    height: 55,
-    width: 55,
-    borderRadius: 55 / 2,
-    margin: 8
-  },
-  icons: {
-    backgroundColor: "#fff",
-    height: 25,
-    width: 25
-  }
-});

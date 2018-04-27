@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import {
   View,
-  StyleSheet,
   ListView,
 } from "react-native";
 import { Icon } from 'native-base';
 import ProductListAtom from "../Atom/ProductListAtom";
 import SubHeaderAtom from "../Atom/SubHeaderAtom";
 import { ScrollView } from "react-native-gesture-handler";
+import styles from '../Style/ProductAndCustomerList';
 
 const users = [
     {
@@ -199,12 +199,3 @@ const users = [
       );
     }
   }
-
-  
-  const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#FFF",
-        flex: 1,
-        width: "100%"
-    },
-  });

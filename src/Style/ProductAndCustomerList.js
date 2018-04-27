@@ -12,7 +12,7 @@ export default StyleSheet.create({
         backgroundColor: "#fff",
         marginBottom: 0.5,
         borderBottomWidth: .5,
-        borderBottomColor: "#c0c0c0",
+        borderBottomColor: "#c0c0c0"
     },
     rowP: {
         flexDirection: "row",
@@ -27,7 +27,7 @@ export default StyleSheet.create({
     },
     rowText1: {
         fontWeight: "500",
-        fontSize: 13,
+        fontSize: 14,
         color: "#000",
         textAlign: "left"
     },
@@ -37,11 +37,11 @@ export default StyleSheet.create({
     rowText3: {
         color: "#000",
         paddingRight: 18,
-        fontSize: 13
+        fontSize: 14
     },
     rowText3P: {
         color: "red",
-        fontSize: 13,
+        fontSize: 14,
         textAlign: "right",
         paddingRight: 5,
         marginTop: 0,
@@ -65,7 +65,7 @@ export default StyleSheet.create({
         marginTop: 0,
         paddingTop: 0,
         borderRadius: 55 / 2,
-        margin: 8,
+        margin: 8
       },
     icons: {
         backgroundColor: "#fff",
@@ -76,7 +76,7 @@ export default StyleSheet.create({
         fontSize: 11
     },
     paid: {
-        fontSize: 10,
+        fontSize: 12,
         color: "#c0c0c0"
     },
     balance: {
@@ -105,14 +105,14 @@ export default StyleSheet.create({
         flexDirection: "column",
         alignItems: "flex-end",
         width: "35%",
-        marginLeft: "20%",
+        marginLeft: "20%"
     },
     text1: {
-        fontSize: 13,
+        fontSize: 14,
         fontWeight: "200"
     },
     leftView: {
-        height: 55,
+        height: 55
     },
     bodyView: {
         flex: 0, 
@@ -124,4 +124,9 @@ export default StyleSheet.create({
         marginLeft: "20%", 
         alignItems: "center"
     },
+    container: {
+        backgroundColor: "#FFF",
+        flex: 1,
+        width: "100%"
+    }
   });

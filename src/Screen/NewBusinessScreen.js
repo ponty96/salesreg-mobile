@@ -53,7 +53,7 @@ class NewBusinessScreen extends Component {
                     navigation={this.props.navigation}
                 />
 
-        )
+        );
     }
 }
 

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, Text } from 'react-native';
 
 import ImageDisplayAtom from './../Atom/ImageDisplayAtom';
 import DetailItemAtom from './../Atom/DetailItemAtom';

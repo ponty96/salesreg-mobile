@@ -2,7 +2,7 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     container: {
-      backgroundColor: "#c0c0c0",
+      backgroundColor: "#c0c0c0"
     },
     row: {
       flexDirection: "row",
@@ -20,17 +20,17 @@ export default StyleSheet.create({
     rowText1: {
       flex: 1,
       fontWeight: "500",
-      fontSize: 13,
+      fontSize: 12,
       color: "#000"
     },
     rowText2: {
       flex: 1,
       fontSize: 13,
       paddingTop: 12,
-      color: "rgba(218,11,11,59)",
+      color: "rgba(218,11,11,59)"
     },
     rowText3: {
-      fontSize: 13,
+      fontSize: 12
 
     },
     image: {
@@ -88,5 +88,27 @@ export default StyleSheet.create({
     text1: {
       fontSize: 12,
       fontWeight: "200"
+    },
+    listContainer: {
+        backgroundColor: "#FFF",
+        flex: 1,
+        width: "100%"
+    },
+    listView: {
+      paddingVertical: 10
+    },
+    formViewContainer: {
+        flex: 1,
+        backgroundColor: "#F0F0F0"
+    },
+    newOrder: {
+        flex: 1,
+        justifyContent: "flex-end",
+        height: 75,
+        marginBottom: 0
+    },
+    orderContainer: {
+        backgroundColor: "#FFF",
+        flex: 1
     }
   });
