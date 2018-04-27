@@ -9,7 +9,9 @@ import styles2 from './../Style/Form';
 export default class UserProfileScreen extends Component {
     state = {
         image: undefined,
-        name: 'Ayo Anwakang'
+        name: 'Ayo Anwakang',
+        gender: 'Female',
+        phoneNumber: '09034567889, 08067654323'
     }
 
     render() {
@@ -32,8 +34,26 @@ export default class UserProfileScreen extends Component {
                         />
                     }
                     </View>
-                    <Text style = {styles2.selfAlign}>
-                            { this.state.name }
+                    <Text style = {[ styles2.selfAlign, styles1.detailItemWrapper ]}>
+                        { this.state.name }
+                    </Text>
+                </View>
+                <View style = { styles1.smallCompartment }>
+                    <Text style = { styles1.indentLeft }>
+                        Gender
+                    </Text>
+                    <Text style = { styles1.indentRight }>
+                        { this.state.gender }
+                    </Text>
+                </View>
+                <View style = { styles1.smallCompartment }>
+                    <Icon
+                        name = 'phone'
+                        size = { 14 }
+                        style = { styles1.indentLeft }
+                    />
+                    <Text style = { styles1.indentRight }>
+                        { this.state.phoneNumber }
                     </Text>
                 </View>
             </View>

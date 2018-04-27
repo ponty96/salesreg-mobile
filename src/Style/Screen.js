@@ -217,6 +217,20 @@ export default StyleSheet.create(
         },
         bottomPadding: {
             paddingBottom: 30
+        },
+        smallCompartment: {
+            height: 60,
+            borderBottomWidth: 1,
+            borderBottomColor: 'lightgrey',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+        },
+        indentLeft: {
+            marginLeft: 20
+        },
+        indentRight: {
+            marginRight: 20
         }
     }
 )
