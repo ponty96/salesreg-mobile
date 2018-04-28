@@ -25,7 +25,7 @@ class NewCustomerScreen extends Component {
             <View style={ styles.centerContainer }>
                 <Text>{'NewCustomerScreen'}</Text>
             </View>
-        )
+        );
     }
 }
 

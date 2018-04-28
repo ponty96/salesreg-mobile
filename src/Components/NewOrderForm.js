@@ -8,6 +8,7 @@ import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import SaveCancelButton from "../Container/SaveCancelButton";
 import {marginlessInput} from './../Style/exportStyles';
+import styles from './../Style/OrderList';
 
 class NewOrderForm extends React.Component {
     state = {
@@ -74,16 +75,3 @@ class NewOrderForm extends React.Component {
 }
 
 export default NewOrderForm;
-
-const styles = StyleSheet.create({
-    formViewContainer: {
-        flex: 1,
-        backgroundColor: "#F0F0F0"
-    },
-    newOrder: {
-        flex: 1,
-        justifyContent: "flex-end",
-        height: 75,
-        marginBottom: 0
-    }
-});

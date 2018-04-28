@@ -4,7 +4,7 @@ import { color } from './Color'
 export default StyleSheet.create(
     {
         buttonRed: {
-            backgroundColor: color.primary,
+            backgroundColor: color.redButton,
             paddingHorizontal: 32,
             alignSelf: 'center',
             marginVertical: 8
@@ -42,7 +42,7 @@ export default StyleSheet.create(
             height: 150,
             width: 150,
             borderRadius: 75,
-            marginVertical: 16,
+            marginVertical: 16
         },
         imgPlaceholderText: {
             fontWeight: 'bold',
@@ -50,6 +50,10 @@ export default StyleSheet.create(
         },
         selfAlign: {
             alignSelf: 'center'
+        },
+        icon: {
+            marginTop: 15,
+            color: 'grey'
         }
     }
 )

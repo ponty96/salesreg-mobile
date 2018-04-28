@@ -126,7 +126,7 @@ const BusinessStack = StackNavigator(
                         />,
                 headerTintColor: color.secondary,
                 headerStyle: {
-                    backgroundColor: color.primary
+                    backgroundColor: color.header
                 }
             }
         )

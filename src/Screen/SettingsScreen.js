@@ -1,8 +1,10 @@
-import React, { Component } from 'react'
-import { View, Text, Button } from 'react-native'
-import { Icon } from 'native-base'
+import React, { Component } from 'react';
+import { View, TouchableOpacity} from 'react-native';
+import { Icon } from 'native-base';
 
-import styles from './../Style/Screen'
+import screenStyles from './../Style/Screen';
+import styles from './../Style/Layout';
+import ListItemAtom from './../Atom/ListItemAtom';
 
 class SettingsScreen extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -10,7 +12,7 @@ class SettingsScreen extends Component {
             title: 'Settings',
             headerLeft: <Icon
                         name={'md-arrow-back'}
-                        style={styles.headerIcon}
+                        style={screenStyles.headerIcon}
                         onPress={() => {
                             navigation.goBack();
                         }}
@@ -20,16 +22,20 @@ class SettingsScreen extends Component {
 
     render() {
         return (
-            <View style={ styles.centerContainer }>
-                <Text>{'SettingsScreen'}</Text>
-                <Button
-                    onPress={() => {
-                        this.props.navigation.navigate('Debt');
-                    }}
-                    title={'debt'}
+            <View
+                style={[styles.defaultPadding, styles.formViewContainer]}
+            >
+                <ListItemAtom
+                    item={
+                        {
+                            name: 'kay5',
+                        }
+                    }
+                    type={'debt'}
+                    rightIconFunc={() => this.props.navigation.navigate('Debt')}
                 />
             </View>
-        )
+        );
     }
 }
 

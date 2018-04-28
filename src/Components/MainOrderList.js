@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { View, StyleSheet, ListView } from "react-native";
+import { View, ListView } from "react-native";
 import { Font, AppLoading } from "expo";
 import { Root, Icon, Button, Right, Header, Text } from 'native-base';
-import MainOrderListAtom from "../Atom/MainOrderListAtom";
 import { ScrollView } from "react-native-gesture-handler";
+
+import MainOrderListAtom from "../Atom/MainOrderListAtom";
+import styles from "../Style/OrderList";
 
 const users = [
     {
@@ -122,7 +124,7 @@ const users = [
         );
       }
       return (
-        <View style={styles.container}>
+        <View style={styles.listContainer}>
           <Header style={{backgroundColor: "#fff", width: "100%"}}>
               <Right style={{flexDirection: "row"}}><Button transparent><Text uppercase={false} style={{color: "#000", fontSize: 20}}>View Products</Text><Icon style={{color: "#000", marginBottom: 8}} name= "md-arrow-forward"/></Button></Right>
           </Header>
@@ -137,15 +139,3 @@ const users = [
       );
     }
   }
-
-  
-  const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#FFF",
-        flex: 1,
-        width: "100%"
-    },
-    listView: {
-      paddingVertical: 10
-    }
-  });

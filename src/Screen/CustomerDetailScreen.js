@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
+import { View, Text } from 'react-native';
 
 import ImageDisplayAtom from './../Atom/ImageDisplayAtom';
 import DetailItemAtom from './../Atom/DetailItemAtom';
+import GoldRatingsAtom from './../Atom/GoldRatingsAtom'
+import ButtonAtom from './../Atom/ButtonAtom'
 import styles from './../Style/Screen';
 
 export default class CustomerDetailScreen extends React.Component {
@@ -16,7 +18,9 @@ export default class CustomerDetailScreen extends React.Component {
             address: '6 Salem street Morogbo, Lagos',
             email: 'salosalo@gmail.com',
             birthday: '03 March',
-            weddingDay: '25 November',
+            marriageAniversary: '25 November',
+            creditLimit: '7000.00',
+            wallet: '0.00',
             icon: {
                 addressIcon: 'map-marker',
                 emailIcon: 'envelope',
@@ -85,9 +89,40 @@ export default class CustomerDetailScreen extends React.Component {
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = { this.state.item.icon.ringIcon }
-                        text = { this.state.item.weddingDay }
+                        text = { this.state.item.marriageAniversary }
                     />
                 </View>
+            </View>
+            <View style = { styles.secondCompartment }>
+                <View style = { styles.compartmentItemWrapper }>
+                    <Text style = { styles.compartmentItem }>
+                        Rating
+                    </Text>
+                    <GoldRatingsAtom /> 
+                </View>
+            </View>
+            <View style = { styles.secondCompartment }>
+                <View style = { [ styles.compartmentItemWrapper, styles.creditLimit ] }>
+                    <Text style = { styles.compartmentItem }>
+                        Credit Limit
+                    </Text>
+                    <Text style = { [styles.textContent, styles.redText] }>
+                        N{ this.state.item.creditLimit }
+                    </Text>
+                </View>
+            </View>
+            <View style = { [ styles.compartmentItemWrapper, styles.creditLimit ] }>
+                <View style = { styles.walletWrapper }>
+                    <Text style = { styles.compartmentItem }>
+                        Wallet
+                    </Text>
+                    <Text style = { [styles.compartmentItem, styles.walletText] }>
+                        { this.state.item.wallet }
+                    </Text>
+                </View>
+                <ButtonAtom 
+                    btnText = 'Add to wallet'
+                />
             </View>
         </View>
       );

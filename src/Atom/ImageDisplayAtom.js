@@ -29,8 +29,8 @@ ImageDisplayAtom.propTypes = {
 
 const styles = StyleSheet.create({
     container: {
-        marginTop: 40,
-        marginLeft: 40
+        marginTop: 30,
+        marginLeft: 30
     },
     imageWrapper: {
         height: 90,

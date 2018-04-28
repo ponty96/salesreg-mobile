@@ -12,13 +12,12 @@ export default StyleSheet.create(
         plainContainer: {
             flex: 1,
             paddingHorizontal: 16,
-            paddingTop: 32,
             backgroundColor: color.secondary
         },
         emptyHolder: {
             backgroundColor: color.grey,
             paddingHorizontal: 16,
-            paddingVertical: 32,
+            paddingVertical: 32
         },
         emptyHeader: {
             marginBottom: 16,
@@ -64,7 +63,7 @@ export default StyleSheet.create(
         },
         container: {
             flex: 1,
-            backgroundColor: '#fff',
+            backgroundColor: color.secondary
         },
         nameDisplay: {
             borderBottomWidth: 1,
@@ -154,11 +153,6 @@ export default StyleSheet.create(
             flex: 1,
             alignSelf: 'flex-start'
         },
-        details: {
-            marginTop: 20,
-            marginLeft: 35,
-            color: 'grey'
-        },
         detailsWrapper: {
             marginVertical: 25
         },
@@ -167,18 +161,15 @@ export default StyleSheet.create(
             borderBottomWidth: 1,
             borderBottomColor: 'lightgrey',
             justifyContent: 'space-between',
-            paddingBottom: 40
-        },
-        container: {
-            flex: 1
+            paddingBottom: 30
         },
         textWrapper: {
-            marginRight: 30,
-            marginTop:  35,
+            marginRight: 20,
+            marginTop:  25,
             justifyContent: 'space-between'
         },
         purchaseWrapper: {
-            alignItems: 'flex-end',
+            alignItems: 'flex-end'
         },
         textTitle: {          
             color: 'grey',
@@ -194,7 +185,7 @@ export default StyleSheet.create(
         },
         details: {
             marginTop: 20,
-            marginLeft: 35,
+            marginLeft: 25,
             color: 'grey',
             marginBottom: 5
         },
@@ -204,6 +195,29 @@ export default StyleSheet.create(
         secondCompartment: {
             borderBottomWidth: 1,
             borderBottomColor: 'lightgrey',
+            paddingBottom: 10
+        },
+        compartmentItemWrapper: {
+            flexDirection: 'row',
+            justifyContent: 'space-between',
+            alignItems: 'flex-end',
+            marginRight: 25
+        },
+        compartmentItem: {
+            marginLeft: 35,
+            color: 'grey'
+        },
+        creditLimit: {
+            paddingTop: 15
+        },
+        walletText: {
+            color: 'blue',
+            marginTop: 15
+        },
+        walletWrapper: {
+            marginBottom: 5
+        },
+        bottomPadding: {
             paddingBottom: 30
         }
     }
