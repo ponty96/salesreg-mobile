@@ -5318,6 +5318,12 @@ react-native-branch@2.0.0-beta.3:
   version "2.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.0.0-beta.3.tgz#2167af86bbc9f964bd45bd5f37684e5b54965e32"
 
+react-native-collapsible@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.11.2.tgz#35a2e7a335f5acf8c959c889731a604cfc3fcd09"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-dismiss-keyboard@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/react-native-dismiss-keyboard/-/react-native-dismiss-keyboard-1.0.0.tgz#32886242b3f2317e121f3aeb9b0a585e2b879b49"
@@ -5377,10 +5383,6 @@ react-native-modal-popover@^0.0.7:
     "@types/prop-types" "^15.5.2"
     lodash.debounce "^4.0.8"
     prop-types "^15.6.0"
-
-react-native-popover-view@^0.6.3:
-  version "0.6.3"
-  resolved "https://registry.yarnpkg.com/react-native-popover-view/-/react-native-popover-view-0.6.3.tgz#e209c2130b7ba24ddbfcddab8aaa34a5feae61ae"
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"

@@ -1,12 +1,5 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  StyleSheet,
-  ListView,
-  Image,
-  TouchableOpacity
-} from "react-native";
+import { Text, View, StyleSheet, ListView, Image, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
 import CustomerListAtom from "../Atom/CustomerListAtom";
 import SubHeaderAtom from "../Atom/SubHeaderAtom";
@@ -117,12 +110,6 @@ export default class CustomerList extends Component {
     };
   }
 
-  static navigationOptions = {
-    tabBarIcon: ({ tintColor }) => (
-      <Icon name="md-person" style={{ color: tintColor }} />
-    )
-  };
-
   onPress = () => {};
 
   renderRow(user) {
@@ -168,63 +155,5 @@ const styles = StyleSheet.create({
     backgroundColor: "#FFF",
     flex: 1,
     width: "100%",
-  },
-  row: {
-    flexDirection: "row",
-    top: 0,
-    padding: 10,
-    height: 75,
-    alignItems: "center",
-    backgroundColor: "#fff",
-    marginBottom: 0.5,
-    borderBottomWidth: .5,
-    borderBottomColor: "#c0c0c0",
-  },
-  rowText1: {
-    flex: 1,
-    fontWeight: "bold",
-    fontSize: 13,
-    paddingLeft: 20,
-    paddingTop: 15,
-    color: "#000"
-  },
-  rowText2: {
-    flex: 1
-  },
-  rowText3: {
-    color: "#000",
-    paddingRight: 18,
-    fontSize: 13
-  },
-  image: {
-    height: 20,
-    width: 20,
-    padding: 6
-  },
-  dp: {
-    height: 55,
-    width: 55,
-    borderRadius: 55 / 2,
-    margin: 8
-  },
-  icons: {
-    backgroundColor: "#fff",
-    height: 25,
-    width: 25
-  },
-  lilFont: {
-    fontSize: 10
-  },
-  paid: {
-    fontSize: 10,
-    color: "#c0c0c0"
-  },
-  balance: {
-    fontSize: 10,
-    color: "#42c5f4"
-  },
-  debt: {
-    fontSize: 10,
-    color: "rgba(218,11,11,59)"
   }
-});
+ });

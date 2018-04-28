@@ -14,6 +14,19 @@ export default StyleSheet.create({
         borderBottomWidth: .5,
         borderBottomColor: "#c0c0c0",
     },
+    rowD: {
+        flex: 1,
+        flexDirection: "row",
+        top: 0,
+        padding: 10,
+        paddingLeft: 0,
+        marginLeft: 0,
+        height: 65,
+        backgroundColor: "#fff",
+        marginBottom: 0.5,
+        borderBottomWidth: .5,
+        borderBottomColor: "#c0c0c0",
+    },
     rowP: {
         flexDirection: "row",
         flex: 1,
@@ -26,7 +39,13 @@ export default StyleSheet.create({
         marginBottom: 0.5
     },
     rowText1: {
-        fontWeight: "500",
+        fontWeight: "400",
+        fontSize: 13,
+        color: "#000",
+        textAlign: "left"
+    },
+    rowText1D: {
+        fontWeight: "400",
         fontSize: 13,
         color: "#000",
         textAlign: "left"
@@ -48,6 +67,24 @@ export default StyleSheet.create({
         paddingTop: 0,
         paddingBottom: 15
     },
+    rowText3D: {
+        color: "rgba(218,11,11,59)",
+        fontSize: 13,
+        textAlign: "right",
+        paddingRight: 5,
+        marginTop: 0,
+        paddingTop: 0,
+        paddingBottom: 15
+    },
+    rowText3DA: {
+        color: "rgba(218,11,11,59)",
+        fontSize: 13,
+        textAlign: "right",
+        paddingRight: 5,
+        marginTop: 0,
+        paddingTop: 3,
+        paddingBottom: 10
+    },
     image: {
         height: 20,
         width: 20,
@@ -57,6 +94,12 @@ export default StyleSheet.create({
         height: 55,
         width: 55,
         borderRadius: 55 / 2,
+        margin: 8
+    },
+    dpD: {
+        height: 45,
+        width: 45,
+        borderRadius: 45 / 2,
         margin: 8
     },
     dpP: {
@@ -74,6 +117,16 @@ export default StyleSheet.create({
     },
     lilFont: {
         fontSize: 11
+    },
+    lilFontD: {
+        fontSize: 11,
+        paddingRight: 8
+    },
+    lilFontDA: {
+        fontSize: 14,
+        paddingRight: 8,
+        paddingBottom: 3,
+        paddingTop: 5
     },
     paid: {
         fontSize: 10,
