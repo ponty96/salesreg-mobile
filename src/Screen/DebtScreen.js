@@ -1,8 +1,8 @@
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Icon } from 'native-base'
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { Icon } from 'native-base';
 
-import styles from './../Style/Screen'
+import styles from './../Style/Screen';
 
 class DebtScreen extends Component {
     static navigationOptions = ({ navigation }) => {
@@ -22,10 +22,10 @@ class DebtScreen extends Component {
     render() {
         return (
             <View style={ styles.centerContainer }>
-                <Text>{'DebtScreen'}</Text>
+                <Text>Debt Screen</Text>
             </View>
         )
     }
 }
 
-export default DebtScreen
+export default DebtScreen;

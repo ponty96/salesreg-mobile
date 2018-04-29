@@ -5318,9 +5318,15 @@ react-native-branch@2.0.0-beta.3:
   version "2.0.0-beta.3"
   resolved "https://registry.yarnpkg.com/react-native-branch/-/react-native-branch-2.0.0-beta.3.tgz#2167af86bbc9f964bd45bd5f37684e5b54965e32"
 
+<<<<<<< HEAD
+react-native-collapsible@^0.11.2:
+  version "0.11.2"
+  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.11.2.tgz#35a2e7a335f5acf8c959c889731a604cfc3fcd09"
+=======
 react-native-button@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/react-native-button/-/react-native-button-2.3.0.tgz#7d0a90095d415b0edf98a904556a7c4439646568"
+>>>>>>> cca8aa4b5335d6f7ac7246ab47e9ff4b3370801d
   dependencies:
     prop-types "^15.5.10"
 
@@ -5389,6 +5395,8 @@ react-native-modal-popover@^0.0.7:
     lodash.debounce "^4.0.8"
     prop-types "^15.6.0"
 
+<<<<<<< HEAD
+=======
 react-native-popover-view@^0.6.3:
   version "0.6.3"
   resolved "https://registry.yarnpkg.com/react-native-popover-view/-/react-native-popover-view-0.6.3.tgz#e209c2130b7ba24ddbfcddab8aaa34a5feae61ae"
@@ -5397,6 +5405,7 @@ react-native-popover-view@^0.6.3:
 >>>>>>> c2749190746b28f2f8e4bc856d3532eb961aa1ae
 =======
 >>>>>>> c2749190746b28f2f8e4bc856d3532eb961aa1ae
+>>>>>>> cca8aa4b5335d6f7ac7246ab47e9ff4b3370801d
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.7.0.tgz#38f5ab9368d6ef9e5d18ab64212938af3ec39421"

@@ -1,17 +1,9 @@
 import React, { Component } from "react";
-import {
-  Text,
-  View,
-  ListView,
-  FlatList,
-  Image,
-  TouchableOpacity
-} from "react-native";
+import { Text, View, StyleSheet, ListView, FlatList, Image, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
 import DateOrderAtom from "../Atom/DateOrderAtom";
 import TotalOrderAtom from "../Atom/TotalOrderAtom";
 import OrderListAtom from "../Atom/OrderListAtom";
-import styles from './../Style/OrderList';
 
 export default class OrderList extends Component {
   constructor() {
@@ -326,7 +318,7 @@ export default class OrderList extends Component {
 
   render() {
     return (
-      <View style={styles.orderContainer}>
+      <View style={styles.container}>
         <FlatList
           ref={ref => (this.scrollView = ref)}
           onContentSizeChange={() => {
@@ -341,3 +333,10 @@ export default class OrderList extends Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    backgroundColor: "#FFF",
+    flex: 1
+  }
+});

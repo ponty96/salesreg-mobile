@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import { View, Text } from 'react-native';
-import { List, ListItem, Icon } from 'native-base';
+import { View, Text, TouchableOpacity } from 'react-native';
+import { List, Icon } from 'native-base';
 
 import FabAtom from './../Atom/FabAtom';
 import styles from './../Style/Screen';
+import ListItemAtom from './../Atom/ListItemAtom';
 import DeleteModal from './../Container/DeleteBuzModal';
 import GetAmountModal from './../Container/GetAmountModal';
 import DebtLimitModal from './../Container/DebtLimitModal';
@@ -12,6 +13,10 @@ import WarningModal from './../Container/WarningModal';
 import DebtWarningModal from "../Container/DebtWarningModal";
 
 class BusinessListScreen extends Component {
+    state = {
+        modalVisibility: false
+    }
+
     static defaultProps = {
         items: ['a', 'b'],
         auth: 'Sme'
@@ -44,6 +49,29 @@ class BusinessListScreen extends Component {
         };
     };
 
+    handleNavigation = () => {
+        this.props.navigation.navigate('ViewBusiness');
+    }
+
+    handleDelete = (value) => {
+        console.log(value);
+        this.setState({
+            modalVisibility: false
+        });
+    }
+
+    openModal = () => {
+        this.setState({
+            modalVisibility: true
+        });
+    }
+
+    closeModal = () => {
+        this.setState({
+            modalVisibility: false
+        });
+    }
+
     renderEmpty = () => {
         return (
             <View style={ styles.emptyHolder }>
@@ -64,17 +92,16 @@ class BusinessListScreen extends Component {
     renderList = () => {
         return (
             <List>
-                <ListItem
-                    onPress={() => this.props.navigation.navigate('ViewBusiness',
+                <ListItemAtom
+                    item={
                         {
-                            name: 'Kay5iveAttractions',
-                            id: 'ID here for getting data at the new scrren'
+                            name: 'kay5',
                         }
-                    )
                     }
-                >
-                    <Text>Views</Text>
-                </ListItem>
+                    type={'business'}
+                    bodyfunction={this.handleNavigation}
+                    rightIconFunc={this.openModal}
+                />
             </List>
         );
     }
@@ -112,8 +139,16 @@ class BusinessListScreen extends Component {
         //    currentAmount={2000}
         //    debtLimit={66000}
         ///>
+
+        let empty = this.props.items.length <= 0;
         return (
-            <View style={ styles.plainContainer }>
+            <View style={[styles.plainContainer]}>
+                {this.state.modalVisibility && <DeleteModal
+                    visibility={this.state.modalVisibility}
+                    closeModal={this.closeModal}
+                    getValue={this.handleDelete}
+                    headerText={'Delete Kay5Attractions'}
+                />}
                 <FabAtom
                     routeName={'NewBusiness'}
                     name={'md-add'}
@@ -125,9 +160,9 @@ class BusinessListScreen extends Component {
                     navigation={this.props.navigation}
                 />
                 {
-                    this.props.items.length > 0
-                    ? this.renderList()
-                    : this.renderEmpty()
+                    empty
+                    ? this.renderEmpty()
+                    : this.renderList()
                 }
             </View>
         )

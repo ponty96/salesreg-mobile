@@ -12,7 +12,10 @@ export default StyleSheet.create(
         plainContainer: {
             flex: 1,
             paddingHorizontal: 16,
+<<<<<<< HEAD
             paddingTop: 32,
+=======
+>>>>>>> e72f3b75407370bf7278511fd44b5bf1f3f18051
             backgroundColor: color.secondary
         },
         emptyHolder: {
@@ -55,7 +58,11 @@ export default StyleSheet.create(
             fontSize: 18
         },
         fab: {
+<<<<<<< HEAD
             backgroundColor: color.redButton
+=======
+            backgroundColor: color.primary
+>>>>>>> e72f3b75407370bf7278511fd44b5bf1f3f18051
         },
         headerItem: {
             flexDirection: 'row',
@@ -64,7 +71,11 @@ export default StyleSheet.create(
         },
         container: {
             flex: 1,
+<<<<<<< HEAD
             backgroundColor: '#fff'
+=======
+            backgroundColor: color.secondary
+>>>>>>> e72f3b75407370bf7278511fd44b5bf1f3f18051
         },
         nameDisplay: {
             borderBottomWidth: 1,
@@ -181,6 +192,12 @@ export default StyleSheet.create(
             fontWeight: '400',
             fontSize: 14
         },
+<<<<<<< HEAD
+=======
+        redText: {
+            color: 'red'
+        },
+>>>>>>> e72f3b75407370bf7278511fd44b5bf1f3f18051
         details: {
             marginTop: 20,
             marginLeft: 25,
@@ -217,6 +234,7 @@ export default StyleSheet.create(
         },
         bottomPadding: {
             paddingBottom: 30
+<<<<<<< HEAD
         },
         smallCompartment: {
             height: 60,
@@ -235,6 +253,8 @@ export default StyleSheet.create(
         editDetailsWrapper: {
             marginTop: 30,
             marginBottom: 10
+=======
+>>>>>>> e72f3b75407370bf7278511fd44b5bf1f3f18051
         }
     }
 )

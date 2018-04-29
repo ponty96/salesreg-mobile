@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import { View, Text } from 'react-native'
-import { Icon } from 'native-base'
+import React, { Component } from 'react';
+import { View, Text } from 'react-native';
+import { Icon } from 'native-base';
+import DebtList from './../Components/DebtList';
 
-import styles from './../Style/Screen'
-import { color } from './../Style/Color'
+import styles from './../Style/Screen';
+import { color } from './../Style/Color';
 
 class DebtsScreen extends Component {
 
@@ -31,10 +32,10 @@ class DebtsScreen extends Component {
         // do change the list to the appropriate molecule
         return (
             <View style={ styles.centerContainer }>
-                <Text>Debts Screen</Text>
+                <DebtList />
             </View>
         )
     }
 }
 
-export default DebtsScreen
+export default DebtsScreen;
