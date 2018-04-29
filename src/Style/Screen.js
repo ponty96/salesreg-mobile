@@ -231,6 +231,10 @@ export default StyleSheet.create(
         },
         indentRight: {
             marginRight: 20
+        },
+        editDetailsWrapper: {
+            marginTop: 30,
+            marginBottom: 10
         }
     }
 )
