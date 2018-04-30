@@ -109,11 +109,6 @@ class BusinessListScreen extends Component {
     render() {
         // do change the list to the appropriate molecule
 
-        //<DeleteModal
-            //visibility={true}
-            //headerText={'Delete Kay5Attractions'}
-        ///>
-
         //adding to wallet and paying of deb can use GetAmount
         //<GetAmountModal
             //visibility={true}
