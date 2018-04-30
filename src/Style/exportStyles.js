@@ -43,3 +43,27 @@ export const modalWarningButton = {
     marginHorizontal: 8,
     paddingHorizontal: 0
 }
+
+export const smallImageDisplay = {
+    container: {
+        marginTop: 30,
+        marginLeft: 30
+    },
+    imageWrapper: {
+        height: 90,
+        width: 90,
+        borderRadius: 45,
+        backgroundColor: '#f2f3f4'
+    },
+    image: {
+        height: 90,
+        width: 90,
+        borderRadius: 45,
+    },
+    name: {
+        marginTop: 20,
+        marginLeft: 20,
+        fontSize: 14,
+        fontWeight: '400',
+    }
+}
