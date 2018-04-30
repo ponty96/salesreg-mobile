@@ -115,6 +115,42 @@ export default StyleSheet.create(
         listTouchCont: {
             flex: 1,
             flexDirection: 'row'
+        },
+        dateOrderContainer: {
+            flexDirection: "row",
+            flex: 1,
+            height: 60,
+            backgroundColor: "#FFF",
+            alignItems: "center",
+            justifyContent: "center",
+            borderBottomWidth: 0.5,
+            borderBottomColor: "#f0f0f0"
+          },
+          dateText: {
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "darkgrey",
+          },
+          detailItemWrapper: {
+            flexDirection: 'row',
+            alignItems: 'center',
+            marginLeft: 35
+          },
+          detailText: {
+            marginLeft: 20,
+            marginRight: 30,
+            fontSize: 12
+        },
+        goldRatingsContainer: {
+            alignSelf: "center",
+            justifyContent: "center",
+        },
+        addText: {
+            textAlign: "center", 
+            fontSize: 12, 
+            color: "#FFDF00",
+            fontWeight: "400", 
+            paddingBottom: 10
         }
     }
 )

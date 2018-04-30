@@ -7,14 +7,14 @@ import smallImageDisplay from './../Style/exportStyles';
 export default class ImageDisplayAtom extends Component {
     render() {
         return (
-            <View style = { styles.container }>
-                <View style = { styles.imageWrapper }>
+            <View style = { smallImageDisplay.container }>
+                <View style = { smallImageDisplay.imageWrapper }>
                     <Image 
                         source = {{ uri: this.props.image }}
-                        style = { styles.image }
+                        style = { smallImageDisplay.image }
                     />
                 </View>
-                <Text style = { styles.name }>
+                <Text style = { smallImageDisplay.name }>
                     { this.props.name }
                 </Text>
             </View>

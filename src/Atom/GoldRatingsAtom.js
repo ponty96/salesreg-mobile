@@ -1,7 +1,8 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { View, Text } from "react-native";
 
 import StarRating from 'react-native-star-rating';
+import styles from './../Style/Layout';
 
 class GoldRatings extends React.Component {
 
@@ -44,7 +45,7 @@ class GoldRatings extends React.Component {
 
   render() {
     return (
-		<View style={styles.container}>
+		<View style={styles.goldRatingsContainer}>
 		<Text style={styles.addText}> {this.state.value} </Text>
 			<StarRating
 				disabled={false}
@@ -53,7 +54,6 @@ class GoldRatings extends React.Component {
 				rating={this.state.starCount}
 				selectedStar={(rating) => this.onStarRatingPress(rating)}
                 starSize = { 14 }
-                //starStyle = {}
 			/>
 	  </View>
     );
@@ -61,17 +61,3 @@ class GoldRatings extends React.Component {
 }
 
 export default GoldRatings;
-
-const styles = StyleSheet.create({
-	container: {
-	  alignSelf: "center",
-      justifyContent: "center",
-	},
-	addText: {
-		textAlign: "center", 
-		fontSize: 12, 
-		color: "#FFDF00", 
-		fontWeight: "400", 
-		paddingBottom: 10
-    },
-  });
