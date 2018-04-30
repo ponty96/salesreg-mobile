@@ -1,10 +1,11 @@
 import React from "react";
-import { View, KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
+import { View, KeyboardAvoidingView, ScrollView } from "react-native";
 import { Form, Header, Text, Left, Right, Icon, Card, CardItem } from "native-base";
 import PropTypes from "prop-types";
 
 import InputAtom from './InputAtom';
 import { marginfulInput, marginlessInput } from './../Style/exportStyles';
+import styles from './../Style/Form';
 
 class OrderFormAtom extends React.Component {
     state = {
@@ -49,9 +50,9 @@ class OrderFormAtom extends React.Component {
 
     render() {
         return (
-                <KeyboardAvoidingView behavior={'padding'} style={n.itemsContainer}>
+                <KeyboardAvoidingView behavior={'padding'} style={styles.itemsContainer}>
                     <Card>
-                    <Header style={n.header}>
+                    <Header style={styles.header}>
                         <Left style={{ flex: 1, width: "40%" }}><Text> Order ID: 123456 </Text></Left> 
                         <Right><Icon name="md-close"/></Right>
                     </Header>
@@ -106,7 +107,7 @@ class OrderFormAtom extends React.Component {
                                 getValue={this.getBalanceDueDate}
                                 contStyle={marginfulInput}
                             />
-                            <Text style={n.font}>DD-MM-YY</Text>
+                            <Text style={styles.font}>DD-MM-YY</Text>
                             </View>
                             <View style={{flexDirection: "column", width: "49%" }}>
                             <InputAtom
@@ -114,7 +115,7 @@ class OrderFormAtom extends React.Component {
                                 getValue={this.getPurchaseDate}
                                 contStyle={marginfulInput}
                             />
-                            <Text style={n.font}>DD-MM-YY</Text>
+                            <Text style={styles.font}>DD-MM-YY</Text>
                             </View>
                             </View>
                         </Form>
@@ -126,22 +127,3 @@ class OrderFormAtom extends React.Component {
 }
 
 export default OrderFormAtom;
-
-const n = StyleSheet.create({
-    itemsContainer: {
-        flex: 1,
-        width: "96%",
-        alignSelf: "center",
-        marginTop: 10,
-        paddingBottom: 50
-    },
-    header: {
-        backgroundColor: "#F0F0F0",
-        height: 50,
-    },
-    font: {
-        fontSize: 12,
-        color: "#8c8c8c",
-        paddingLeft: 4
-    }
-});
