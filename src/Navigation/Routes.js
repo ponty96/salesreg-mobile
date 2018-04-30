@@ -16,8 +16,10 @@ import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen';
 import DebtScreen from './../Screen/DebtScreen';
 import ProductScreen from './../Screen/ProductScreen';
 import OrderScreen from './../Screen/OrderScreen';
+import OrderDetailsScreen from './../Screen/OrderDetailsScreen';
 import CustomerScreen from './../Screen/CustomerScreen';
 import DebtsScreen from './../Screen/DebtsScreen';
+import DebtDetailsScreen from './../Screen/DebtDetailsScreen';
 import Sidebar from './Sidebar';
 import styles from './../Style/Layout';
 import { color } from './../Style/Color';
@@ -109,6 +111,12 @@ const BusinessStack = StackNavigator(
         },
         NewOrder: {
             screen: NewOrderScreen
+        },
+        OrderDetails: {
+            screen: OrderDetailsScreen
+        },
+        DebtDetails: {
+            screen: DebtDetailsScreen
         },
         NewProduct: {
             screen: NewProductScreen

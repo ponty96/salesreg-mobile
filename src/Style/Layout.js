@@ -66,10 +66,10 @@ export default StyleSheet.create(
             paddingHorizontal: 20
         },
         centerModal: {
-            backgroundColor: "#fff",
+            backgroundColor: color.secondary,
         },
         modalBody: {
-            backgroundColor: "#fff",
+            backgroundColor: color.secondary,
             position: "absolute",
             top: 90,
             width: '100%',
@@ -115,6 +115,10 @@ export default StyleSheet.create(
         listTouchCont: {
             flex: 1,
             flexDirection: 'row'
+        },
+        minimalPadding: {
+            paddingHorizontal: 8,
+            paddingVertical: 16
         }
     }
 )

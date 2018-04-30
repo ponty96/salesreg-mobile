@@ -23,6 +23,7 @@ class SideBar extends PureComponent {
                     <ScrollView>
                         <TouchableOpacity
                             onPress={() => this.handleNavigation()}
+                            activeOpacity={1}
                         >
                             <ListItemAtom
                                 item={
@@ -37,6 +38,7 @@ class SideBar extends PureComponent {
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => this.handleNavigation()}
+                            activeOpacity={1}
                         >
                             <ListItemAtom
                                 item={
@@ -49,6 +51,7 @@ class SideBar extends PureComponent {
                         </TouchableOpacity>
                         <TouchableOpacity
                             onPress={() => this.props.navigation.navigate('Settings')}
+                            activeOpacity={1}
                         >
                             <View style={styles.sidebarItem}>
                                 <Icon

@@ -181,9 +181,6 @@ export default StyleSheet.create(
             fontWeight: '400',
             fontSize: 14
         },
-        redText: {
-            color: 'red'
-        },
         details: {
             marginTop: 20,
             marginLeft: 25,
