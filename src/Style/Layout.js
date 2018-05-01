@@ -116,7 +116,6 @@ export default StyleSheet.create(
             flex: 1,
             flexDirection: 'row'
         },
-<<<<<<< HEAD
         dateOrderContainer: {
             flexDirection: "row",
             flex: 1,
@@ -152,11 +151,10 @@ export default StyleSheet.create(
             color: "#FFDF00",
             fontWeight: "400", 
             paddingBottom: 10
-=======
+        },
         minimalPadding: {
             paddingHorizontal: 8,
             paddingVertical: 16
->>>>>>> 2b6aeb858d5df7f8183be678a2d0ada880ffa417
         }
     }
 )

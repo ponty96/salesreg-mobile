@@ -271,3 +271,18 @@ export const totalOrderStyle = {
         backgroundColor:'#FDD7E4'
       }
 }
+
+export const customerListStyles = {
+    container: {
+        backgroundColor: "#FFF",
+        flex: 1,
+        width: "100%"
+      }
+}
+
+export const orderListStyles = {
+    container: {
+        backgroundColor: "#FFF",
+        flex: 1
+    }
+}
