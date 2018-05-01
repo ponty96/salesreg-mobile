@@ -64,7 +64,7 @@ class BusinessDetailsScreen extends Component {
         return (
             <View style={styles.container}>
                 <View style = {styles.nameDisplay}>
-                    <NameDisplayAtom 
+                    <NameDisplayAtom
                         businessName = { this.state.item.businessName }
                         image = { this.state.item.image }
                     />

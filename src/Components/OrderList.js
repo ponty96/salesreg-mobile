@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Text, View, ListView, FlatList, Image, TouchableOpacity } from "react-native";
 import { Icon } from "native-base";
 
-import orderListStyles from './../Style/exportStyle';
+import orderListStyles from './../Style/exportStyles';
 import DateOrderAtom from "../Atom/DateOrderAtom";
 import TotalOrderAtom from "../Atom/TotalOrderAtom";
 import OrderListAtom from "../Atom/OrderListAtom";
