@@ -1,5 +1,7 @@
 import React from "react";
-import { StyleSheet, View, Text } from "react-native";
+import { View, Text } from "react-native";
+
+import totalOrderStyle from './../Style/exportStyles';
 
 export default class TotalOrderAtom extends React.Component {
   render() {
@@ -25,48 +27,3 @@ export default class TotalOrderAtom extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  column: {
-    borderBottomWidth: 1,
-    borderBottomColor: "red"
-  },
-  container: {
-      flexDirection: 'row',
-      flex: 1,
-      borderTopWidth: 0.5,
-      borderTopColor: "#f0f0f0"
-  },
-  totalView: {
-    width: '30%',
-    height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#fff',
-  },
-  totalText: {
-    fontSize: 15,
-    fontWeight: "400",
-    color: "#000",
-  },
-  redNumber: {
-    color: 'rgba(218,11,11,59)',
-    fontSize: 18,
-    fontWeight: 'bold',
-  },
-  redNumberView: {
-    width: '70%',
-    height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor: '#FDEEF4',
-  },
-  peachView: {
-    width: '70%',
-    height: 45,
-    alignItems: 'center',
-    justifyContent: 'center',
-    backgroundColor:'#FDD7E4'
-  }
-
-});

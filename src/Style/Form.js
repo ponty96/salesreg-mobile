@@ -54,6 +54,22 @@ export default StyleSheet.create(
         icon: {
             marginTop: 15,
             color: 'grey'
+        },
+        itemsContainer: {
+            flex: 1,
+            width: "96%",
+            alignSelf: "center",
+            marginTop: 10,
+            paddingBottom: 50
+        },
+        header: {
+            backgroundColor: "#F0F0F0",
+            height: 50,
+        },
+        font: {
+            fontSize: 12,
+            color: "#8c8c8c",
+            paddingLeft: 4
         }
     }
 )

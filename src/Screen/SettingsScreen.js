@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, TouchableOpacity} from 'react-native';
+import { View, TouchableOpacity } from 'react-native';
 import { Icon } from 'native-base';
 
 import screenStyles from './../Style/Screen';
@@ -25,15 +25,20 @@ class SettingsScreen extends Component {
             <View
                 style={[styles.defaultPadding, styles.formViewContainer]}
             >
-                <ListItemAtom
-                    item={
-                        {
-                            name: 'kay5',
+                <TouchableOpacity
+                    onPress={() => this.props.navigation.navigate('Debt')}
+                    activeOpacity={1}
+                >
+                    <ListItemAtom
+                        item={
+                            {
+                                name: 'kay5',
+                            }
                         }
-                    }
-                    type={'debt'}
-                    rightIconFunc={() => this.props.navigation.navigate('Debt')}
-                />
+                        type={'debt'}
+                        bodyfunction={() => this.props.navigation.navigate('Debt')}
+                    />
+                </TouchableOpacity>
             </View>
         );
     }

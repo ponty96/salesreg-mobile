@@ -12,6 +12,7 @@ export default StyleSheet.create(
         plainContainer: {
             flex: 1,
             paddingHorizontal: 16,
+            paddingTop: 32,
             backgroundColor: color.secondary
         },
         emptyHolder: {
@@ -180,9 +181,6 @@ export default StyleSheet.create(
             fontWeight: '400',
             fontSize: 14
         },
-        redText: {
-            color: 'red'
-        },
         details: {
             marginTop: 20,
             marginLeft: 25,
@@ -219,6 +217,27 @@ export default StyleSheet.create(
         },
         bottomPadding: {
             paddingBottom: 30
+        },
+        smallCompartment: {
+            height: 60,
+            borderBottomWidth: 1,
+            borderBottomColor: 'lightgrey',
+            flexDirection: 'row',
+            alignItems: 'center',
+            justifyContent: 'space-between'
+        },
+        indentLeft: {
+            marginLeft: 20
+        },
+        indentRight: {
+            marginRight: 20
+        },
+        editDetailsWrapper: {
+            marginTop: 30,
+            marginBottom: 10
+        },
+        genderPickerWidth: {
+            width: 150
         }
     }
 )

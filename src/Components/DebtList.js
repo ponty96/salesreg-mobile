@@ -1,10 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, ListView, Image, TouchableOpacity } from "react-native";
+import { Text, View, ListView, Image, TouchableOpacity } from "react-native";
 import { Icon, Header, Right } from "native-base";
 import PickerAtom from "../Atom/PickerAtom";
 import DebtListAtom from "../Atom/DebtListAtom";
 import TotalDebtAtom from "../Atom/TotalDebtAtom";
 import { ScrollView } from "react-native-gesture-handler";
+
+import customerListStyles from './../Style/exportStyles';
 
 const users = [
     {
@@ -123,7 +125,7 @@ const users = [
   
     render() {
       return (
-        <View style={styles.container}>
+        <View style={customerListStyles.container}>
             <Header style={{backgroundColor: "#fff", width: "100%", height: 40}}>
                 <Right style={{flexDirection: "row"}}><Text style={{paddingBottom: 10, fontSize: 14}}>Sort By:</Text><PickerAtom /></Right>
             </Header>
@@ -138,12 +140,3 @@ const users = [
       );
     }
   }
-  
-  const styles = StyleSheet.create({
-    container: {
-      backgroundColor: "#FFF",
-      flex: 1,
-      width: "100%"
-    }
-   });
-  

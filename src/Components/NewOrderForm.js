@@ -1,5 +1,5 @@
 import React from "react";
-import { View, KeyboardAvoidingView, ScrollView, StyleSheet } from "react-native";
+import { View, KeyboardAvoidingView, ScrollView } from "react-native";
 import { Form, Text } from "native-base";
 import PropTypes from "prop-types";
 

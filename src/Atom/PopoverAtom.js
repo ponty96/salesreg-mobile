@@ -1,7 +1,9 @@
 import React from 'react';
-import { StyleSheet, TouchableOpacity, View } from 'react-native';
+import { TouchableOpacity, View } from 'react-native';
 import { Icon, Text, CheckBox, Left, Right, Body } from 'native-base';
 import { Popover, PopoverController, PopoverTouchable } from 'react-native-modal-popover';
+
+import popoverStyles from './../Style/exportStyles';
 
 export default class PopoverAtom extends React.Component {
   constructor(props) {
@@ -37,9 +39,9 @@ export default class PopoverAtom extends React.Component {
             <React.Fragment>
               <TouchableOpacity style={{flex: 0, alignSelf: "flex-end", flexDirection: "row", marginTop: 15}} ref={setPopoverAnchor} onPress={openPopover}><Text style={{color: "red", fontSize: 13, paddingTop: 5, paddingBottom: 5, paddingRight: 5}}>{this.props.tag}</Text><Icon style={{paddingTop: 4 }} name={this.state.icon}/></TouchableOpacity>
               <Popover 
-                contentStyle={styles.content}
-                arrowStyle={styles.arrow}
-                backgroundStyle={styles.background}
+                contentStyle={popoverStyles.content}
+                arrowStyle={popoverStyles.arrow}
+                backgroundStyle={popoverStyles.background}
                 placement={this.props.position}
                 visible={popoverVisible}
                 onClose={closePopover}
@@ -65,27 +67,3 @@ export default class PopoverAtom extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-  content: {
-    width: 342,
-    height: 95,
-    paddingTop: 14,
-    paddingBottom: 14,
-    paddingLeft: 12,
-    paddingRight: 12,
-    margin:0,
-    backgroundColor: '#fff',
-    borderWidth: 0.5,
-    borderRadius: 2,
-    borderColor: 'grey'
-  },
-  arrow: {
-    borderTopColor: 'rgba(0, 0, 0, 0.1)',
-    margin:0,
-    padding: 0
-  },
-  background: {
-    backgroundColor: 'rgba(255, 255, 255, 0.1)'
-  },
-});

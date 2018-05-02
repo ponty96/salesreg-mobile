@@ -1,25 +1,26 @@
 import React, { Component } from 'react';
-import { View, StyleSheet, Text, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
+import nameDisplayStyles from './../Style/exportStyles';
 
 export default class NameDisplayAtom extends Component {
     render() {
         return(
-            <View style = {styles.wrapper}>
-                <View style = { styles.letterDisplay }>
+            <View style = {nameDisplayStyles.wrapper}>
+                <View style = { nameDisplayStyles.letterDisplay }>
                     {
                         this.props.image
                         ? <Image
                             source = {{uri: this.props.image}}
-                            style = {styles.image}
+                            style = {nameDisplayStyles.image}
                         />
                         : <Text>
                             { this.props.businessName.charAt(0).toUpperCase() }
                         </Text>
                     }
                 </View>
-                <Text style = {styles.name}>
+                <Text style = {nameDisplayStyles.name}>
                     {this.props.businessName}
                 </Text>
             </View>
@@ -30,29 +31,3 @@ export default class NameDisplayAtom extends Component {
 NameDisplayAtom.propTypes = {
     businessName: PropTypes.string.isRequired
 }
-
-const styles = StyleSheet.create({
-    wrapper: {
-        flexDirection: 'row',
-        alignItems: 'center', 
-    },
-    letterDisplay: {
-        height: 90,
-        width: 90,
-        borderRadius: 45,
-        backgroundColor: '#f2f3f4',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    image: {
-        height: 90,
-        width: 90,
-        borderRadius: 45
-    },
-    name: {
-        fontSize: 14,
-        fontWeight: '400',
-        marginLeft: 20
-
-    }
-});

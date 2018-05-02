@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ListItem, Text, Thumbnail, Left, Body, Right } from "native-base";
-import { StyleSheet } from "react-native";
 import styles from "./../Style/ProductAndCustomerList";
 
 class DebtListAtom extends Component {
