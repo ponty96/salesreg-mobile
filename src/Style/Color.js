@@ -1,6 +1,6 @@
 export const color = {
     primary: '#a50404',
-    secondary: '#fff',
+    secondary: 'transparent',
     inactive: '#8c8c8c',
     menu: '#444444',
     disabled: '#ccc',
