@@ -237,7 +237,7 @@ export default StyleSheet.create(
             marginBottom: 10
         },
         genderPickerWidth: {
-            width: 150
+            width: 200
         }
     }
 )

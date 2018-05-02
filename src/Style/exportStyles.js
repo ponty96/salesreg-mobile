@@ -73,7 +73,7 @@ export const aboveAccordionStyles = {
         flexDirection: 'row',
         flex: 0,
         borderTopWidth: 0.5,
-        borderTopColor: "#f0f0f0"
+        borderTopColor: color.listBorderColor
     },
     pictureView: {
       flexDirection: "column",
@@ -81,16 +81,16 @@ export const aboveAccordionStyles = {
       height: 200,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#fff',
+      //backgroundColor: '#fff',
     },
     pictureText: {
       paddingTop: 10,
       fontSize: 18,
       fontWeight: "400",
-      color: "grey",
+      color: color.grey,
     },
     redNumber: {
-      color: 'rgba(218,11,11,59)',
+      color: color.primary,
       fontSize: 25,
       fontWeight: 'bold',
     },
@@ -99,7 +99,7 @@ export const aboveAccordionStyles = {
       height: 200,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#FFF',
+      //backgroundColor: '#FFF',
     },
     dp: {
         height: 90,
@@ -272,5 +272,11 @@ export const orderListStyles = {
     container: {
         //backgroundColor: "#FFF",
         flex: 1
+    }
+}
+
+export const selectGenderStyles = {
+    pickerColor: {
+        color: color.inactive
     }
 }

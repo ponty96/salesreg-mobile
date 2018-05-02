@@ -120,7 +120,7 @@ export default StyleSheet.create(
             flexDirection: "row",
             flex: 1,
             height: 60,
-            backgroundColor: "#FFF",
+            backgroundColor: color.secondary,
             alignItems: "center",
             justifyContent: "center",
             borderBottomWidth: 0.5,
@@ -129,7 +129,7 @@ export default StyleSheet.create(
           dateText: {
             fontSize: 20,
             fontWeight: "bold",
-            color: "darkgrey",
+            color: color.inactive
           },
           detailItemWrapper: {
             flexDirection: 'row',
