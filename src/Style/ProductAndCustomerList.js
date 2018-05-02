@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native';
+import { color } from './Color';
 
 export default StyleSheet.create({
     row: {
@@ -9,10 +10,10 @@ export default StyleSheet.create({
         paddingLeft: 0,
         marginLeft: 0,
         height: 75,
-        backgroundColor: "#fff",
+        //backgroundColor: "#fff",
         marginBottom: 0.5,
         borderBottomWidth: .5,
-        borderBottomColor: "#c0c0c0",
+        borderBottomColor: color.listBorderColor
     },
     rowD: {
         flex: 1,
@@ -22,10 +23,10 @@ export default StyleSheet.create({
         paddingLeft: 0,
         marginLeft: 0,
         height: 65,
-        backgroundColor: "#fff",
+        //backgroundColor: "#fff",
         marginBottom: 0.5,
         borderBottomWidth: .5,
-        borderBottomColor: "#c0c0c0",
+        borderBottomColor: color.listBorderColor
     },
     rowP: {
         flexDirection: "row",
@@ -35,31 +36,31 @@ export default StyleSheet.create({
         paddingLeft: 0,
         marginLeft: 0,
         width: "100%",
-        backgroundColor: "#fff",
+        //backgroundColor: "#fff",
         marginBottom: 0.5
     },
     rowText1: {
         fontWeight: "400",
         fontSize: 13,
-        color: "#000",
+        //color: "#000",
         textAlign: "left"
     },
     rowText1D: {
         fontWeight: "400",
         fontSize: 13,
-        color: "#000",
+        //color: "#000",
         textAlign: "left"
     },
     rowText2: {
         flex: 1
     },
     rowText3: {
-        color: "#000",
+        //color: "#000",
         paddingRight: 18,
         fontSize: 13
     },
     rowText3P: {
-        color: "red",
+        color: "#B10000",
         fontSize: 13,
         textAlign: "right",
         paddingRight: 5,
@@ -111,15 +112,15 @@ export default StyleSheet.create({
         margin: 8,
       },
     icons: {
-        backgroundColor: "#fff",
+        //backgroundColor: "#fff",
         height: 25,
         width: 25
     },
     lilFont: {
-        fontSize: 11
+        fontSize: 12
     },
     lilFontD: {
-        fontSize: 11,
+        fontSize: 12,
         paddingRight: 8
     },
     lilFontDA: {
@@ -129,15 +130,15 @@ export default StyleSheet.create({
         paddingTop: 5
     },
     paid: {
-        fontSize: 10,
+        fontSize: 12,
         color: "#c0c0c0"
     },
     balance: {
-        fontSize: 10,
+        fontSize: 12,
         color: "#42c5f4"
     },
     debt: {
-        fontSize: 10,
+        fontSize: 12,
         color: "rgba(218,11,11,59)"
     },
     view1: {
@@ -177,4 +178,9 @@ export default StyleSheet.create({
         marginLeft: "20%", 
         alignItems: "center"
     },
+    container: {
+        //backgroundColor: "#FFF",
+        flex: 1,
+        width: "100%"
+      }
   });

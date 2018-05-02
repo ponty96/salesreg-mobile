@@ -14,7 +14,7 @@ export default StyleSheet.create(
         whiteView: {
             height: "50%",
             flex: 1,
-            backgroundColor: "#f0f0f0"
+            backgroundColor: color.grey
         },
         formContainer: {
             position: "absolute",

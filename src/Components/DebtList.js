@@ -6,7 +6,7 @@ import DebtListAtom from "../Atom/DebtListAtom";
 import TotalDebtAtom from "../Atom/TotalDebtAtom";
 import { ScrollView } from "react-native-gesture-handler";
 
-import customerListStyles from './../Style/exportStyles';
+import { customerListStyles } from './../Style/exportStyles';
 
 const users = [
     {

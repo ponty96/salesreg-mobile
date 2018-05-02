@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Icon } from 'native-base';
 
-import screenStyles from './../Style/Screen';
-import styles from './../Style/Layout';
+import styles from './../Style/Screen';
+//import styles from './../Style/Layout';
 import SettingsAtom from './../Atom/SettingsAtom';
 import DebtLimitModal from './../Container/DebtLimitModal';
 import DebtWarningModal from "../Container/DebtWarningModal";

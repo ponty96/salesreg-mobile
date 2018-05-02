@@ -78,19 +78,19 @@ class BusinessDetailsScreen extends Component {
                     <View style = { styles.detailItemWrapper }>
                         <DetailItemAtom 
                             icon = { this.state.item.icon.addressIcon }
-                            text = { this.state.item.address }
+                            detailText = { this.state.item.address }
                         />
                     </View>
                     <View style = { styles.detailItemWrapper }>
                         <DetailItemAtom 
                             icon = { this.state.item.icon.emailIcon }
-                            text = { this.state.item.email }
+                            detailText = { this.state.item.email }
                         />
                     </View>
                     <View style = { styles.detailItemWrapper }>
                         <DetailItemAtom 
                             icon = { this.state.item.icon.documentIcon }
-                            text = { this.state.item.description }
+                            detailText = { this.state.item.description }
                         />
                     </View>
                 </View>

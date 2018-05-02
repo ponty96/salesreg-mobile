@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { color } from './Color'
+import { StyleSheet } from 'react-native';
+import { color } from './Color';
 
 export default StyleSheet.create(
     {
@@ -173,7 +173,7 @@ export default StyleSheet.create(
             alignItems: 'flex-end'
         },
         textTitle: {          
-            color: 'grey',
+            color: color.grey,
             fontWeight: '400',
             fontSize: 14
         },
@@ -184,7 +184,7 @@ export default StyleSheet.create(
         details: {
             marginTop: 20,
             marginLeft: 25,
-            color: 'grey',
+            color: color.grey,
             marginBottom: 5
         },
         detailItemWrapper: {
@@ -203,7 +203,7 @@ export default StyleSheet.create(
         },
         compartmentItem: {
             marginLeft: 35,
-            color: 'grey'
+            color: color.grey
         },
         creditLimit: {
             paddingTop: 15

@@ -124,7 +124,7 @@ export default StyleSheet.create(
             alignItems: "center",
             justifyContent: "center",
             borderBottomWidth: 0.5,
-            borderBottomColor: "#f0f0f0"
+            borderBottomColor: color.listBorderColor
           },
           dateText: {
             fontSize: 20,

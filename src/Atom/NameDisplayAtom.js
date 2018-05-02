@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image } from 'react-native';
 import PropTypes from 'prop-types';
 
-import nameDisplayStyles from './../Style/exportStyles';
+import { nameDisplayStyles } from './../Style/exportStyles';
 
 export default class NameDisplayAtom extends Component {
     render() {

@@ -53,7 +53,7 @@ export const smallImageDisplay = {
         height: 90,
         width: 90,
         borderRadius: 45,
-        backgroundColor: '#f2f3f4'
+        backgroundColor: color.grey
     },
     image: {
         height: 90,
@@ -116,7 +116,7 @@ export const nameDisplayStyles = {
         height: 90,
         width: 90,
         borderRadius: 45,
-        backgroundColor: '#f2f3f4',
+        backgroundColor: color.grey,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -159,7 +159,7 @@ export const popoverStyles = {
 export const subHeaderStyles = {
     header: {
         height: 40,
-        backgroundColor: "#fff",
+        backgroundColor: "#fff"
       },
       row: {
         flexDirection: "row",
@@ -167,7 +167,7 @@ export const subHeaderStyles = {
       },
       pad: {
         paddingLeft: 10,
-        paddingTop: 5,
+        paddingTop: 5
       },
       font: {
         fontSize: 13,
@@ -180,7 +180,7 @@ export const totalDebtStyle = {
         flexDirection: 'row',
         flex: 0,
         borderTopWidth: 0.5,
-        borderTopColor: "#f0f0f0"
+        borderTopColor: color.listBorderColor
     },
     totalView: {
       flexDirection: "row",
@@ -188,29 +188,17 @@ export const totalDebtStyle = {
       height: 55,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#fff',
+      //backgroundColor: '#fff',
     },
     totalText: {
-      fontSize: 15,
+      fontSize: 14,
       fontWeight: "400",
-      color: "#000",
-    },
-    redNumber: {
-      color: 'rgba(218,11,11,59)',
-      fontSize: 20,
-      fontWeight: 'bold',
+      //color: "#000",
     },
     redNumber1: {
       color: '#FFF',
       fontSize: 20,
       fontWeight: 'bold',
-    },
-    redNumberView: {
-      width: '70%',
-      height: 55,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#FDEEF4',
     },
     redNumberView1: {
       width: '70%',
@@ -231,50 +219,50 @@ export const totalDebtStyle = {
 export const totalOrderStyle = {
     column: {
         borderBottomWidth: 1,
-        borderBottomColor: "red"
+        borderBottomColor: color.primary
       },
       container: {
           flexDirection: 'row',
           flex: 1,
           borderTopWidth: 0.5,
-          borderTopColor: "#f0f0f0"
+          borderTopColor: color.listBorderColor
       },
       totalView: {
         width: '30%',
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fff',
+        //backgroundColor: '#fff',
       },
       totalText: {
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: "400",
-        color: "#000",
+        //color: "#000",
       },
       redNumber: {
-        color: 'rgba(218,11,11,59)',
+        color: color.primary,
         fontSize: 18,
         fontWeight: 'bold',
       },
       redNumberView: {
         width: '70%',
-        height: 45,
+        height: 55,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#FDEEF4',
+        backgroundColor: color.totalSales
       },
       peachView: {
         width: '70%',
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#FDD7E4'
+        backgroundColor: color.totalProfit
       }
 }
 
 export const customerListStyles = {
     container: {
-        backgroundColor: "#FFF",
+        //backgroundColor: "#FFF",
         flex: 1,
         width: "100%"
       }
@@ -282,7 +270,7 @@ export const customerListStyles = {
 
 export const orderListStyles = {
     container: {
-        backgroundColor: "#FFF",
+        //backgroundColor: "#FFF",
         flex: 1
     }
 }

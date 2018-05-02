@@ -5,7 +5,7 @@ import CustomerListAtom from "../Atom/CustomerListAtom";
 import SubHeaderAtom from "../Atom/SubHeaderAtom";
 import { ScrollView } from "react-native-gesture-handler";
 
-import customerListStyles from './../Style/exportStyles';
+import { customerListStyles } from './../Style/exportStyles';
 
 const users = [
   {
