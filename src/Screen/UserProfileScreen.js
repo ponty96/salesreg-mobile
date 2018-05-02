@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import { Icon } from 'native-base';
 import { Image, View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/FontAwesome';
+import Icon1 from 'react-native-vector-icons/FontAwesome';
 
 import styles1 from './../Style/Screen';
 import styles2 from './../Style/Form';
@@ -27,7 +28,7 @@ export default class UserProfileScreen extends Component {
                             style = { styles2.imgContainer }
                         />
                         :
-                        <Icon
+                        <Icon1
                             name = "user-circle"
                             size = { 150 }
                             style = { styles2.icon }
@@ -49,8 +50,8 @@ export default class UserProfileScreen extends Component {
                 <View style = { styles1.smallCompartment }>
                     <Icon
                         name = 'phone'
-                        size = { 14 }
                         style = { styles1.indentLeft }
+                        type={'FontAwesome'}
                     />
                     <Text style = { styles1.indentRight }>
                         { this.state.phoneNumber }

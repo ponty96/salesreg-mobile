@@ -29,14 +29,18 @@ class BusinessListScreen extends Component {
                             name={'ios-search'}
                             style={styles.headerIcon}
                         />
-                    :   <View style={styles.headerItem}>
+                    :   <TouchableOpacity
+                            style={styles.headerItem}
+                            activeOpacity={1}
+                            onPress={() => navigation.navigate('Auth')}
+                        >
                             <Icon
                                 name={'logout'}
                                 style={styles.headerIconLogout}
                                 type={'MaterialCommunityIcons'}
                             />
                             <Text style={styles.headerText}>Logout</Text>
-                        </View>;
+                        </TouchableOpacity>;
         let left = (itemsLength > 0) && <Icon
                             name={'menu'}
                             onPress={() => navigation.navigate('DrawerToggle')}

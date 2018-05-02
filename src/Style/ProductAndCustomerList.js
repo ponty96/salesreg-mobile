@@ -48,7 +48,7 @@ export default StyleSheet.create({
     rowText1D: {
         fontWeight: "400",
         fontSize: 13,
-        //color: "#000",
+        color: "#000",
         textAlign: "left"
     },
     rowText2: {
@@ -179,8 +179,7 @@ export default StyleSheet.create({
         alignItems: "center"
     },
     container: {
-        //backgroundColor: "#FFF",
-        flex: 1,
-        width: "100%"
-      }
+        backgroundColor: "#FFF",
+        flex: 1
+    }
   });

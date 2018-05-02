@@ -20,6 +20,7 @@ import OrderDetailsScreen from './../Screen/OrderDetailsScreen';
 import CustomerScreen from './../Screen/CustomerScreen';
 import DebtsScreen from './../Screen/DebtsScreen';
 import DebtDetailsScreen from './../Screen/DebtDetailsScreen';
+import ProductDetailsScreen from './../Screen/ProductDetailsScreen';
 import Sidebar from './Sidebar';
 import styles from './../Style/Layout';
 import { color } from './../Style/Color';
@@ -106,6 +107,9 @@ const BusinessStack = StackNavigator(
         Debt: {
             screen: DebtScreen
         },
+        DebtDetails: {
+            screen: DebtDetailsScreen
+        },
         NewCustomer: {
             screen: NewCustomerScreen
         },
@@ -115,12 +119,12 @@ const BusinessStack = StackNavigator(
         OrderDetails: {
             screen: OrderDetailsScreen
         },
-        DebtDetails: {
-            screen: DebtDetailsScreen
-        },
         NewProduct: {
             screen: NewProductScreen
-        }
+        },
+        ProductDetails: {
+            screen: ProductDetailsScreen
+        },
     },
     {
         initialRouteName: 'BusinessList',

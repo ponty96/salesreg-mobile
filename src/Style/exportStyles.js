@@ -1,4 +1,4 @@
-import {color} from "./Color";
+import { color } from "./Color";
 
 export const saveCancelButton = {
     borderWidth: 1,
