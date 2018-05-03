@@ -3,7 +3,6 @@ import { View, TouchableOpacity } from 'react-native';
 import { Icon } from 'native-base';
 
 import styles from './../Style/Screen';
-//import styles from './../Style/Layout';
 import SettingsAtom from './../Atom/SettingsAtom';
 import DebtLimitModal from './../Container/DebtLimitModal';
 import DebtWarningModal from "../Container/DebtWarningModal";
@@ -20,7 +19,7 @@ class DebtScreen extends Component {
             title: 'Debt',
             headerLeft: <Icon
                         name={'md-arrow-back'}
-                        style={screenStyles.headerIcon}
+                        style={styles.headerIcon}
                         onPress={() => {
                             navigation.goBack();
                         }}
@@ -30,30 +29,45 @@ class DebtScreen extends Component {
 
     renderLimitModal = () => {
         this.setState({
-            limitModalVisibility: !this.state.limitModalVisibility
+            limitModalVisibility: true
         });
     }
 
     renderWarningModal = () => {
         this.setState({
-            warningModalVisibility: !this.state.warningModalVisibility
+            warningModalVisibility: true
+        });
+    }
+
+    closeLimitModal = () => {
+        this.setState({
+            limitModalVisibility: false
+        });
+    }
+
+    closeWarningModal = () => {
+        this.setState({
+            warningModalVisibility: false
         });
     }
 
     render() {
         return (
             <View
-                style={[styles.defaultPadding, {backgroundColor: '#fff', flex: 1}]}
+                style={[styles.defaultPadding, styles.container]}
             >
                 {this.state.limitModalVisibility
                     && <DebtLimitModal
                         visibility={this.state.limitModalVisibility}
+                        closeModal={this.closeLimitModal}
+                        placeholder={'0.00'}
                         headerText={"Total debt limit(N)"}
                     />
                 }
                 {this.state.warningModalVisibility
                     && <DebtWarningModal
                         visibility={this.state.warningModalVisibility}
+                        closeModal={this.closeWarningModal}
                         currentAmount={2000}
                         debtLimit={66000}
                     />

@@ -11,8 +11,7 @@ import { marginlessInput, modalButton } from './../Style/exportStyles';
 
 class DebtLimitModal extends Component {
     state = {
-        amount: undefined,
-        visibility: this.props.visibility
+        amount: undefined
     }
 
     static defaultProps = {
@@ -27,6 +26,7 @@ class DebtLimitModal extends Component {
         if (this.props.getValue) {
             this.props.getValue(this.state.amount);
         }
+        this.props.closeModal();
     }
 
     renderHeader = () => {
@@ -40,7 +40,7 @@ class DebtLimitModal extends Component {
                     {this.props.headerText}
                 </Text>
                 <TouchableOpacity
-                    onPress={() => this.setState({visibility: !this.state.visibility})}
+                    onPress={() => this.props.closeModal()}
                 >
                     <Icon
                         name={'md-close'}
@@ -52,6 +52,7 @@ class DebtLimitModal extends Component {
     }
 
     renderBody = () => {
+        let amount = parseInt(this.state.amount);
         return (
             <View
                 style={styles.modalBody}
@@ -62,7 +63,37 @@ class DebtLimitModal extends Component {
                         keyboardType={'numeric'}
                         getValue={this.getAmount}
                         contStyle={marginlessInput}
+                        placeholder={this.props.placeholder}
                     />
+
+                    {(amount > 0)
+                        && <View
+                            style={[styles.debtLimitWarning, styles.creditLimit]}
+                        >
+                            <Icon
+                                name={'info'}
+                                style={styles.modalInfoIcon}
+                                type={'Entypo'}
+                            />
+                            <Text
+                                style={
+                                    [
+                                        styles.modalHeaderText,
+                                        styles.debtLimitWarningText,
+                                        styles.menuColor
+                                    ]
+                                }
+                            >
+                                Your total debt box turns &nbsp;
+                                <Text
+                                    style={styles.redText}
+                                >
+                                    RED
+                                </Text>
+                                &nbsp;when your total debt reaches the above amount
+                            </Text>
+                        </View>
+                    }
 
                     <ButtonAtom
                         btnText="OK"
@@ -77,7 +108,7 @@ class DebtLimitModal extends Component {
     render() {
         return (
             <ModalAtom
-                visible={this.state.visibility}
+                visible={this.props.visibility}
                 body={this.renderBody()}
                 header={this.renderHeader()}
             />
@@ -88,7 +119,9 @@ class DebtLimitModal extends Component {
 DebtLimitModal.propTypes = {
     visibility: PropTypes.bool,
     headerText: PropTypes.string.isRequired,
-    getValue: PropTypes.func
+    getValue: PropTypes.func,
+    closeModal: PropTypes.func.isRequired,
+    placeholder: PropTypes.string
 }
 
 export default DebtLimitModal;
