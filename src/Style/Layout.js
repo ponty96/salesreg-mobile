@@ -155,6 +155,14 @@ export default StyleSheet.create(
         minimalPadding: {
             paddingHorizontal: 8,
             paddingVertical: 16
+        },
+        rowD: {
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        },
+        radioMarginRight: {
+            marginRight: 4,
+            borderColor: color.primary
         }
     }
 )

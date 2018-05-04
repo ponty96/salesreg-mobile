@@ -1,18 +1,23 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 import {View, Text, TouchableOpacity} from 'react-native';
-import {Form, Icon} from 'native-base';
+import {Form, Icon, Radio, StyleProvider} from 'native-base';
 
 import ModalAtom from './../Atom/ModalAtom';
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Screen';
 import { marginlessInput, modalButton } from './../Style/exportStyles';
+import getTheme from './../native-base-theme/components';
+import material from './../native-base-theme/variables/material';
+import styleLayout from "../Style/Layout";
 
 class RestockModal extends Component {
     state = {
         quantity: undefined,
-        cost: undefined
+        cost: undefined,
+        packs: false,
+        units: true
     }
 
     static defaultProps = {
@@ -55,12 +60,50 @@ class RestockModal extends Component {
         );
     }
 
+    handleSelection = (value) => {
+        if (value === 'units') {
+            this.setState({units: true, packs: false})
+        }
+
+        if (value === 'packs') {
+            this.setState({packs: true, units: false})
+        }
+    }
+
     renderBody = () => {
         return (
+            <StyleProvider style={getTheme(material)}>
             <View
                 style={styles.modalBody}
             >
                 <Form>
+                    <View
+                        style={styleLayout.rowD}
+                    >
+                        <Text>Enter quantity</Text>
+                        <View
+                            style={styleLayout.rowD}
+                        >
+                            <Radio
+                                selected={this.state.units}
+                                onPress={() => this.handleSelection('units')}
+                                activeOpacity={1}
+                                style={styleLayout.radioMarginRight}
+                            />
+                            <Text>In units</Text>
+                        </View>
+                        <View
+                            style={styleLayout.rowD}
+                        >
+                            <Radio
+                                selected={this.state.packs}
+                                onPress={() => this.handleSelection('packs')}
+                                style={styleLayout.radioMarginRight}
+                                activeOpacity={1}
+                            />
+                            <Text>In packs</Text>
+                        </View>
+                    </View>
                     <InputAtom
                         label="Quantity"
                         keyboardType={'numeric'}
@@ -82,6 +125,7 @@ class RestockModal extends Component {
                     />
                 </Form>
             </View>
+            </StyleProvider>
         )
     }
 
