@@ -14,7 +14,8 @@ export default class EditUserProfileScreen extends Component {
     state = {
         name: 'Ayo Anwakasng',
         phoneNumber: '09034567889, 08067654323',
-        image: 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+        image: 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
+        gender: undefined
     }
 
     getName = (text) => {
@@ -36,6 +37,12 @@ export default class EditUserProfileScreen extends Component {
     getImage = (pic) => {
         this.setState({
             image: pic
+        })
+    }
+
+    updateGender = (selectedGender) => {
+        this.setState({
+            gender: selectedGender
         })
     }
 
@@ -70,7 +77,10 @@ export default class EditUserProfileScreen extends Component {
                                 <Text style = { styles.textTitle }>
                                     Gender
                                 </Text>
-                                <SelectGenderAtom />
+                                <SelectGenderAtom
+                                    gender = { this.state.gender }
+                                    updateGender = { this.updateGender }
+                                />
                             </View>
                         </ScrollView>
                     </KeyboardAvoidingView>

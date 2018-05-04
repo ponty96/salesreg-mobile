@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { color } from './Color'
+import { color } from './Color';
 
 export default StyleSheet.create(
     {
@@ -53,7 +53,7 @@ export default StyleSheet.create(
         },
         icon: {
             marginTop: 15,
-            color: 'grey'
+            color: color.grey
         },
         itemsContainer: {
             flex: 1,

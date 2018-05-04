@@ -1,4 +1,4 @@
-import {color} from "./Color";
+import { color } from "./Color";
 
 export const saveCancelButton = {
     borderWidth: 1,
@@ -23,16 +23,24 @@ export const marginlessInput = {
     marginLeft: 0
 };
 
+export const flexfull = {
+    flex: 1
+};
+
+export const marginRight = {
+    marginRight: 8
+};
+
 export const marginfulInput = {
     marginLeft: 4
-}
+};
 
 export const modalButton = {
     marginTop: 32,
     marginBottom: 16,
     marginHorizontal: 16,
     alignSelf: 'flex-end',
-}
+};
 
 export const modalWarningButton = {
     flex: 1,
@@ -42,7 +50,7 @@ export const modalWarningButton = {
     marginBottom: 16,
     marginHorizontal: 8,
     paddingHorizontal: 0
-}
+};
 
 export const smallImageDisplay = {
     container: {
@@ -53,7 +61,7 @@ export const smallImageDisplay = {
         height: 90,
         width: 90,
         borderRadius: 45,
-        backgroundColor: '#f2f3f4'
+        backgroundColor: color.grey
     },
     image: {
         height: 90,
@@ -175,7 +183,7 @@ export const aboveAccordionStyles = {
         flexDirection: 'row',
         flex: 0,
         borderTopWidth: 0.5,
-        borderTopColor: "#f0f0f0"
+        borderTopColor: color.listBorderColor
     },
     containerP: {
         flexDirection: 'row',
@@ -191,7 +199,7 @@ export const aboveAccordionStyles = {
       height: 200,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#fff',
+      //backgroundColor: '#fff',
     },
     pictureViewP: {
         flexDirection: "column",
@@ -206,10 +214,10 @@ export const aboveAccordionStyles = {
       paddingTop: 10,
       fontSize: 18,
       fontWeight: "400",
-      color: "grey",
+      color: color.grey,
     },
     redNumber: {
-      color: 'rgba(218,11,11,59)',
+      color: color.primary,
       fontSize: 25,
       fontWeight: 'bold',
     },
@@ -218,7 +226,7 @@ export const aboveAccordionStyles = {
       height: 200,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#FFF',
+      //backgroundColor: '#FFF',
     },
     dp: {
         height: 90,
@@ -266,7 +274,7 @@ export const aboveAccordionStyles = {
         fontSize: 16,
         color: "red"
     }
-}
+};
 
 export const nameDisplayStyles = {
     wrapper: {
@@ -277,7 +285,7 @@ export const nameDisplayStyles = {
         height: 90,
         width: 90,
         borderRadius: 45,
-        backgroundColor: '#f2f3f4',
+        backgroundColor: color.grey,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -291,7 +299,7 @@ export const nameDisplayStyles = {
         fontWeight: '400',
         marginLeft: 20
     }
-}
+};
 
 export const popoverStyles = {
     content: {
@@ -393,7 +401,7 @@ export const popoverStyles = {
 export const subHeaderStyles = {
     header: {
         height: 40,
-        backgroundColor: "#fff",
+        backgroundColor: "#fff"
       },
       row: {
         flexDirection: "row",
@@ -401,7 +409,7 @@ export const subHeaderStyles = {
       },
       pad: {
         paddingLeft: 10,
-        paddingTop: 5,
+        paddingTop: 5
       },
       font: {
         fontSize: 13,
@@ -410,14 +418,14 @@ export const subHeaderStyles = {
       iconColor: {
         color: "#F0F0F0"
       }
-}
+};
 
 export const totalDebtStyle = {
     container: {
         flexDirection: 'row',
         flex: 0,
         borderTopWidth: 0.5,
-        borderTopColor: "#f0f0f0"
+        borderTopColor: color.listBorderColor
     },
     totalView: {
       flexDirection: "row",
@@ -425,29 +433,17 @@ export const totalDebtStyle = {
       height: 55,
       alignItems: 'center',
       justifyContent: 'center',
-      backgroundColor: '#fff',
+      //backgroundColor: '#fff',
     },
     totalText: {
-      fontSize: 15,
+      fontSize: 14,
       fontWeight: "400",
-      color: "#000",
-    },
-    redNumber: {
-      color: 'rgba(218,11,11,59)',
-      fontSize: 20,
-      fontWeight: 'bold',
+      //color: "#000",
     },
     redNumber1: {
       color: '#FFF',
       fontSize: 20,
       fontWeight: 'bold',
-    },
-    redNumberView: {
-      width: '70%',
-      height: 55,
-      alignItems: 'center',
-      justifyContent: 'center',
-      backgroundColor: '#FDEEF4',
     },
     redNumberView1: {
       width: '70%',
@@ -463,55 +459,55 @@ export const totalDebtStyle = {
       justifyContent: 'center',
       backgroundColor: 'rgba(218,11,11,59)',
     }
-}
+};
 
 export const totalOrderStyle = {
     column: {
         borderBottomWidth: 1,
-        borderBottomColor: "red"
+        borderBottomColor: color.primary
       },
       container: {
           flexDirection: 'row',
           flex: 1,
           borderTopWidth: 0.5,
-          borderTopColor: "#f0f0f0"
+          borderTopColor: color.listBorderColor
       },
       totalView: {
         width: '30%',
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#fff',
+        //backgroundColor: '#fff',
       },
       totalText: {
-        fontSize: 15,
+        fontSize: 14,
         fontWeight: "400",
-        color: "#000",
+        //color: "#000",
       },
       redNumber: {
-        color: 'rgba(218,11,11,59)',
+        color: color.primary,
         fontSize: 18,
         fontWeight: 'bold',
       },
       redNumberView: {
         width: '70%',
-        height: 45,
+        height: 55,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#FDEEF4',
+        backgroundColor: color.totalSales
       },
       peachView: {
         width: '70%',
         height: 45,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor:'#FDD7E4'
+        backgroundColor: color.totalProfit
       }
-}
+};
 
 export const customerListStyles = {
     container: {
-        backgroundColor: "#FFF",
+        //backgroundColor: "#FFF",
         flex: 1,
         width: "100%"
       },
@@ -531,7 +527,24 @@ export const customerListStyles = {
 
 export const orderListStyles = {
     container: {
-        backgroundColor: "#FFF",
+        //backgroundColor: "#FFF",
         flex: 1
     }
-}
+};
+
+export const selectGenderStyles = {
+    pickerColor: {
+        color: color.inactive
+    }
+};
+
+export const signupButton = {
+    width: '49%',
+    marginHorizontal: 1,
+    justifyContent: 'center',
+    height: 55
+};
+
+export const redButtonText = {
+    color: color.white
+};

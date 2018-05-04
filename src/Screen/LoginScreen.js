@@ -3,21 +3,22 @@ import { Text, View, KeyboardAvoidingView } from "react-native";
 
 import styles from './../Style/Auth';
 import LoginForm from './../Components/LoginForm';
+import AuthenticationHeader from './../Components/AuthenticationHeader';
 
 class LoginScreen extends React.Component {
     render() {
         return (
             <View style={styles.container}>
-                <View style={styles.redView}>
-                    <View style={styles.appName}>
-                        <Text style={styles.appText}>{'SME APP'}</Text>
+                <AuthenticationHeader />
+                <Text style = { styles.signUpText }>
+                    LOGIN
+                </Text>
+                <View style = {styles.signUpFormWrapper} >
+                    <View style={styles.formContainer}>
+                        <KeyboardAvoidingView style={styles.formInnerLayer} behaviour="position">
+                            <LoginForm navigation={this.props.navigation}/>
+                        </KeyboardAvoidingView>
                     </View>
-                </View>
-                <View style={styles.whiteView} />
-                <View style={styles.formContainer}>
-                    <KeyboardAvoidingView style={styles.formInnerLayer} behaviour="position">
-                        <LoginForm navigation={this.props.navigation}/>
-                    </KeyboardAvoidingView>
                 </View>
             </View>
         );

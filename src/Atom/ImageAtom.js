@@ -41,7 +41,7 @@ class ImageAtom extends Component {
                     <Text
                         style={styles.selfAlign}
                     >
-                        Upload Image
+                        Upload logo
                     </Text>
                 </TouchableOpacity>
             );
@@ -66,7 +66,7 @@ class ImageAtom extends Component {
                     <Text
                         style={styles.selfAlign}
                     >
-                        Upload Image
+                        Upload logo
                     </Text>
                 </TouchableOpacity>
             );

@@ -1,45 +1,53 @@
-import {StyleSheet} from "react-native";
-import { color } from './Color'
+import { StyleSheet } from "react-native";
+import { color } from './Color';
 
 export default StyleSheet.create(
     {
+        smallHeader: {
+            height: '18%',
+            backgroundColor: color.primary,
+            justifyContent: 'center',
+            alignItems:'center'
+        },
+        bigHeader: {
+            height: '40%'
+        },
         container: {
-            flex: 1,
-            flexDirection: "column"
+            flex: 1
         },
-        redView: {
-            height: "50%",
-            backgroundColor: color.primary
-        },
-        whiteView: {
-            height: "50%",
-            flex: 1,
-            backgroundColor: "#f0f0f0"
-        },
-        formContainer: {
-            position: "absolute",
-            top: 120,
-            alignItems: "center",
-            alignSelf: "center",
-            justifyContent: "center",
-            width: "90%",
-            backgroundColor: "#fff",
-            borderRadius: 5
-        },
-        formInnerLayer: {
-            paddingVertical: 32,
-            paddingHorizontal: 16,
-            width: '100%'
-        },
-        appName: {
+        signUpText: {
+            color: color.primary,
+            marginVertical: 30,
+            fontSize: 14,
             alignSelf: 'center',
-            marginTop: 50,
-            marginBottom: 20
+            fontWeight: '400'
         },
-        appText: {
-            color: '#fff',
-            fontWeight: 'bold',
-            fontSize: 24
+        signUpFormWrapper: {
+            marginLeft: 20,
+            marginRight: 35
+        },
+        boardingScreenFeatureText: {
+            marginVertical: 40,
+            marginHorizontal: 30
+        },
+        blueCheck: {
+            color: color.blueCheck
+        },
+        appFunctionWrapper: {
+            flexDirection: 'row',
+            marginVertical: 10
+        },
+        appDetailsText: {
+            marginLeft: 20,
+            color: color.appDetailsText,
+            fontSize: 14
+        },
+        buttomButtonsWrapper: {
+            flexDirection: 'row',
+            alignSelf: 'center',
+            width: '88%',
+            position: 'absolute',
+            bottom: 60
         }
     }
 );

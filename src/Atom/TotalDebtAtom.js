@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { Icon } from "native-base";
 
-import { totalDebtStyle } from "./../Style/exportStyles";
+import { totalDebtStyle, totalOrderStyle } from './../Style/exportStyles';
 
 export default class TotalDebtAtom extends React.Component {
   render() {
@@ -14,32 +14,26 @@ export default class TotalDebtAtom extends React.Component {
       }
     };
     displayView = () => {
-      if (this.props.limit <= 100000) {
-        return (
-          <View style={totalDebtStyle.redNumberView}>
-            <Text style={totalDebtStyle.redNumber}>
-              NGN {this.props.totalAmount}.00
-            </Text>
-          </View>
-        );
-      } else if (this.props.limit > 100000 && this.props.limit <= 299999) {
-        return (
-          <View style={totalDebtStyle.redNumberView1}>
-            <Text style={totalDebtStyle.redNumber1}>
-              NGN {this.props.totalAmount}.00
-            </Text>
-          </View>
-        );
-      } else {
-        return (
-          <View style={totalDebtStyle.redNumberView2}>
-            <Text style={totalDebtStyle.redNumber1}>
-              NGN {this.props.totalAmount}.00
-            </Text>
-          </View>
-        );
-      }
-    };
+        if (this.props.limit <= 100000) {
+            return(
+                <View style={totalOrderStyle.redNumberView}>
+                    <Text style={totalOrderStyle.redNumber}>NGN {this.props.totalAmount}.00</Text>
+                </View>
+            );
+        } else if (this.props.limit > 100000 && this.props.limit <= 299999) {
+            return(
+                <View style={totalDebtStyle.redNumberView1}>
+                    <Text style={totalDebtStyle.redNumber1}>NGN {this.props.totalAmount}.00</Text>
+                </View>
+            );
+        } else {
+            return(
+                <View style={totalDebtStyle.redNumberView2}>
+                    <Text style={totalDebtStyle.redNumber1}>NGN {this.props.totalAmount}.00</Text>
+                </View>
+            );
+        }
+    }
     return (
       <View style={totalDebtStyle.container}>
         <View style={totalDebtStyle.totalView}>

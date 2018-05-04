@@ -1,14 +1,20 @@
 export const color = {
-    primary: '#a50404',
-    secondary: 'transparent',
-    inactive: '#8c8c8c',
+    primary: '#B10000',
+    secondary: '#fff',
+    inactive: '#999999',
     menu: '#444444',
     disabled: '#ccc',
-    grey: '#f6f6f6',
     warning: '#ff9630',
     black: '#000',
     white: '#fff',
     textBorderBottom: '#E8E8E8',
-    redButton: '#dd0f0f',
-    header: '#c10505'
+    redButton: '#E50000',
+    header: '#c10505',
+    grey: '#F6F6F6',
+    listBorderColor: '#F3F3F3',
+    totalProfit: "#FFE4D7",
+    totalSales: '#FBF3ED',
+    blueCheck: '#27CBD3',
+    appDetailsText: '#000000',
+    white: '#FFFFFF'
 }

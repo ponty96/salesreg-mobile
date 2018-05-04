@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Icon } from 'native-base'
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import { Icon } from 'native-base';
 
-import FabAtom from './../Atom/FabAtom'
-import styles from './../Style/Screen'
-import ProductList from './../Components/ProductList'
+import FabAtom from './../Atom/FabAtom';
+import styles from './../Style/Screen';
+import ProductList from './../Components/ProductList';
 
 class ProductScreen extends Component {
 
@@ -31,7 +31,7 @@ class ProductScreen extends Component {
     render() {
         // do change the list to the appropriate molecule
         return (
-            <View style={ styles.centerContainer }>
+            <View style={ styles.container }>
                 <ProductList />
                 <FabAtom
                     routeName={'NewProduct'}

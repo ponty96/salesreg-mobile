@@ -1,24 +1,17 @@
 import React, { Component } from 'react';
 import { Picker, Icon } from 'native-base';
 
+import { selectGenderStyles } from './../Style/exportStyles';
+
 class SelectGenderAtom extends Component {
-    state = {
-        gender: undefined
-    }
-
-    updateGender = (selectedGender) => {
-        this.setState({
-            gender: selectedGender
-        })
-    }
-
     render() {
         return (
             <Picker
                 mode = 'dropdown'
-                iosHeader = 'Select one...'
-                selectedValue = { this.state.gender }
-                onValueChange = { this.updateGender }
+                iosHeader = 'Gender'
+                selectedValue = { this.props.gender }
+                onValueChange = { this.props.updateGender }
+                style = { selectGenderStyles.pickerColor }
             >
                 <Picker.Item label = 'Male' value = 'Male' />
                 <Picker.Item label = 'Female' value = 'Female' />

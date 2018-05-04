@@ -120,16 +120,16 @@ export default StyleSheet.create(
             flexDirection: "row",
             flex: 1,
             height: 60,
-            backgroundColor: "#FFF",
+            backgroundColor: color.secondary,
             alignItems: "center",
             justifyContent: "center",
             borderBottomWidth: 0.5,
-            borderBottomColor: "#f0f0f0"
+            borderBottomColor: color.listBorderColor
           },
           dateText: {
             fontSize: 20,
             fontWeight: "bold",
-            color: "darkgrey",
+            color: color.inactive
           },
           detailItemWrapper: {
             flexDirection: 'row',
@@ -155,6 +155,14 @@ export default StyleSheet.create(
         minimalPadding: {
             paddingHorizontal: 8,
             paddingVertical: 16
+        },
+        rowD: {
+            flexDirection: 'row',
+            justifyContent: 'space-between'
+        },
+        radioMarginRight: {
+            marginRight: 4,
+            borderColor: color.primary
         }
     }
 )

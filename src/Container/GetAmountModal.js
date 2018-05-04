@@ -11,8 +11,7 @@ import { marginlessInput, modalButton } from './../Style/exportStyles';
 
 class GetAmountModal extends Component {
     state = {
-        amount: undefined,
-        visibility: this.props.visibility
+        amount: undefined
     }
 
     static defaultProps = {
@@ -40,7 +39,7 @@ class GetAmountModal extends Component {
                     {this.props.headerText}
                 </Text>
                 <TouchableOpacity
-                    onPress={() => this.setState({visibility: !this.state.visibility})}
+                    onPress={() => this.props.closeModal()}
                 >
                     <Icon
                         name={'md-close'}
@@ -77,7 +76,7 @@ class GetAmountModal extends Component {
     render() {
         return (
             <ModalAtom
-                visible={this.state.visibility}
+                visible={this.props.visibility}
                 body={this.renderBody()}
                 header={this.renderHeader()}
             />
@@ -88,7 +87,8 @@ class GetAmountModal extends Component {
 GetAmountModal.propTypes = {
     visibility: PropTypes.bool,
     headerText: PropTypes.string.isRequired,
-    getValue: PropTypes.func
+    getValue: PropTypes.func,
+    closeModal: PropTypes.func.isRequired
 }
 
 export default GetAmountModal;

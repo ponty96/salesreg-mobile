@@ -4,9 +4,10 @@ import {
   ListView,
 } from "react-native";
 import { Icon } from 'native-base';
+import { ScrollView } from "react-native-gesture-handler";
+
 import ProductListAtom from "../Atom/ProductListAtom";
 import SubHeaderAtom from "../Atom/SubHeaderAtom";
-import { ScrollView } from "react-native-gesture-handler";
 import styles from '../Style/ProductAndCustomerList';
 import { productList } from "../config/data";
 
@@ -34,6 +35,7 @@ const users = productList;
     onPress = () => {
       alert("Product View Unavailable");
     };
+
     renderRow(user) {
       return (
         <ProductListAtom
@@ -42,6 +44,7 @@ const users = productList;
         />
       );
     }
+
     render() {
       return (
         <View style={styles.container}>

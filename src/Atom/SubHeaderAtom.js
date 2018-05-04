@@ -8,8 +8,9 @@ import { subHeaderStyles } from './../Style/exportStyles';
 
  class SubHeaderAtom extends React.Component {
   static defaultProps = {
-    total: "800",
+    total: "800"
   }
+
   render() {
     return (
         <Header style={subHeaderStyles.header}>

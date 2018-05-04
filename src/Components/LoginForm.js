@@ -4,11 +4,13 @@ import PropTypes from "prop-types";
 
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
+import { redButtonText } from '../Style/exportStyles';
 
 class LoginForm extends React.Component {
     state = {
         phone: undefined,
-        password: undefined
+        password: undefined,
+        underlineColorAndroid: 'red'
     }
 
     login = () => {
@@ -49,6 +51,7 @@ class LoginForm extends React.Component {
           label="Password"
           getValue={this.getPassword}
           secureTextEntry={true}
+          underneathText = 'Not less than 6 characters long'
         />
 
         <ButtonAtom
@@ -60,6 +63,7 @@ class LoginForm extends React.Component {
         <ButtonAtom
             btnText="Login"
             onPress={this.login}
+            textStyle = { redButtonText }
         />
         <ButtonAtom
             btnText="I don't have an account"

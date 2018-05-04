@@ -1,8 +1,9 @@
 import { StyleSheet } from 'react-native';
+import { color } from './Color';
 
 export default StyleSheet.create({
     container: {
-      backgroundColor: "#c0c0c0"
+      //backgroundColor: "#c0c0c0"
     },
     row: {
       flexDirection: "row",
@@ -12,26 +13,25 @@ export default StyleSheet.create({
       padding: 10,
       width: "100%",
       height: 75,
-      backgroundColor: "#fff",
+      //backgroundColor: "#fff",
       marginBottom: 0.5,
       borderBottomWidth: 0.5,
-      borderBottomColor: "#c0c0c0"
+      borderBottomColor: color.listBorderColor
     },
     rowText1: {
       flex: 1,
       fontWeight: "500",
       fontSize: 12,
-      color: "#000"
+      //color: "#000"
     },
     rowText2: {
       flex: 1,
       fontSize: 13,
       paddingTop: 12,
-      color: "rgba(218,11,11,59)"
+      color: color.primary
     },
     rowText3: {
       fontSize: 12
-
     },
     image: {
       height: 20,
@@ -45,16 +45,16 @@ export default StyleSheet.create({
       margin: 8
     },
     icons: {
-      backgroundColor: "#fff",
+      //backgroundColor: "#fff",
       height: 25,
       width: 25
     },
     lilFont: {
-      fontSize: 10,
-      color: "black"
+      fontSize: 12,
+      //color: "black"
     },
     paid: {
-      fontSize: 10,
+      fontSize: 12,
       color: "#c0c0c0"
     },
     balance: {
@@ -63,7 +63,7 @@ export default StyleSheet.create({
     },
     debt: {
       fontSize: 10,
-      color: "rgba(218,11,11,59)"
+      color: color.primary
     },
     view1: {
       height: 68,
@@ -90,7 +90,7 @@ export default StyleSheet.create({
       fontWeight: "200"
     },
     listContainer: {
-        backgroundColor: "#FFF",
+        //backgroundColor: "#FFF",
         flex: 1,
         width: "100%"
     },
@@ -99,7 +99,7 @@ export default StyleSheet.create({
     },
     formViewContainer: {
         flex: 1,
-        backgroundColor: "#F0F0F0"
+        //backgroundColor: "#F0F0F0"
     },
     formViewContainer1: {
       flex: 1,
@@ -112,7 +112,7 @@ export default StyleSheet.create({
         marginBottom: 0
     },
     orderContainer: {
-        backgroundColor: "#FFF",
+        //backgroundColor: "#FFF",
         flex: 1
     },
     mainList: { 

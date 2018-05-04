@@ -7,8 +7,8 @@ import styles from './../Style/Layout';
 import ListItemAtom from './../Atom/ListItemAtom';
 
 class SideBar extends PureComponent {
-    handleNavigation = () => {
-        this.props.navigation.navigate('BusinessDetails',
+    handleNavigation = (location) => {
+        this.props.navigation.navigate(location,
             {
                 name: 'Kay5iveAttractions',
                 id: 'ID here for getting data at the new screen'
@@ -22,7 +22,7 @@ class SideBar extends PureComponent {
                 <View style={styles.itemsContainer}>
                     <ScrollView>
                         <TouchableOpacity
-                            onPress={() => this.handleNavigation()}
+                            onPress={() => this.handleNavigation('BusinessDetails')}
                             activeOpacity={1}
                         >
                             <ListItemAtom
@@ -33,11 +33,11 @@ class SideBar extends PureComponent {
                                     }
                                 }
                                 business={false}
-                                bodyfunction={() => this.handleNavigation()}
+                                bodyfunction={() => this.handleNavigation('BusinessDetails')}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
-                            onPress={() => this.handleNavigation()}
+                            onPress={() => this.handleNavigation('BusinessDetails')}
                             activeOpacity={1}
                         >
                             <ListItemAtom
@@ -46,7 +46,7 @@ class SideBar extends PureComponent {
                                         name: 'kay5'
                                     }
                                 }
-                                bodyfunction={() => this.handleNavigation()}
+                                bodyfunction={() => this.handleNavigation('BusinessDetails')}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -78,7 +78,11 @@ class SideBar extends PureComponent {
                         </TouchableOpacity>
                     </ScrollView>
                 </View>
-                <View style={styles.logoutItem}>
+                <TouchableOpacity
+                    style={styles.logoutItem}
+                    activeOpacity={1}
+                    onPress={() => this.handleNavigation('BusinessList')}
+                >
                     <Icon
                         name={'md-briefcase'}
                         style={styles.itemIcon}
@@ -86,8 +90,12 @@ class SideBar extends PureComponent {
                     <Text style={styles.itemText}>
                         My businesses
                     </Text>
-                </View>
-                <View style={styles.logoutItem}>
+                </TouchableOpacity>
+                <TouchableOpacity
+                    style={styles.logoutItem}
+                    activeOpacity={1}
+                    onPress={() => this.handleNavigation('Auth')}
+                >
                     <Icon
                         name={'logout'}
                         style={styles.itemIcon}
@@ -96,7 +104,7 @@ class SideBar extends PureComponent {
                     <Text style={styles.itemText}>
                         Logout
                     </Text>
-                </View>
+                </TouchableOpacity>
             </SafeAreaView>
         )
     }

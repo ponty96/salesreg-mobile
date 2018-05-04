@@ -4,8 +4,7 @@ import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
 import styles from './../Style/Screen'
-import { color } from './../Style/Color'
-import OrderList from './../Components/OrderList'
+import  OrderList  from './../Components/OrderList'
 
 class OrderScreen extends Component {
 
