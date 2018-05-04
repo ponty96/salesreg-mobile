@@ -177,4 +177,26 @@ export default StyleSheet.create({
         marginLeft: "20%", 
         alignItems: "center"
     },
+    leftText: {
+        color: "#c0c0c0", 
+        fontSize: 16, 
+        fontWeight:"400", 
+        textAlign: "left", 
+        paddingLeft: 16
+    },
+    rightText1: {
+        color: "#000", 
+        fontSize: 14, 
+        paddingBottom: 8
+    },
+    rightText2: {
+        color: "red", 
+        fontSize: 14, 
+        paddingTop: 8
+    },
+    debtAccord: {
+        flex: 1, 
+        width: "100%", 
+        backgroundColor: "#FFF"
+    }
   });

@@ -1,9 +1,10 @@
-import React from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import { Icon, Text, CheckBox, Left, Right, Body } from 'native-base';
-import { Popover, PopoverController, PopoverTouchable } from 'react-native-modal-popover';
+import React from "react";
+import { TouchableOpacity, View } from "react-native";
+import { Icon, Text, CheckBox, Left, Right, Body } from "native-base";
+import { Popover, PopoverController, PopoverTouchable } from "react-native-modal-popover";
+import PropTypes from 'prop-types';
 
-import popoverStyles from './../Style/exportStyles';
+import { popoverStyles } from "./../Style/exportStyles";
 
 export default class PopoverAtom extends React.Component {
   constructor(props) {
@@ -15,30 +16,43 @@ export default class PopoverAtom extends React.Component {
   }
 
   onHot = () => {
-    if (this.state.icon == "md-arrow-dropdown"){
+    if (this.state.icon == "md-arrow-dropdown") {
       this.setState({
-        icon: "md-arrow-dropup",
+        icon: "md-arrow-dropup"
       });
-  } else if (this.state.icon == "md-arrow-dropup"){
-    this.setState({
-      icon: "md-arrow-dropdown",
-    });
-  }
-  }
+    } else if (this.state.icon == "md-arrow-dropup") {
+      this.setState({
+        icon: "md-arrow-dropdown"
+      });
+    }
+  };
   checked = () => {
     this.setState({
       check: !this.state.check
     });
-  }
+  };
 
   render() {
     return (
-        <View>
+      <View>
         <PopoverController>
-    {({ openPopover, closePopover, popoverVisible, setPopoverAnchor, popoverAnchorRect }) => (
+          {({
+            openPopover,
+            closePopover,
+            popoverVisible,
+            setPopoverAnchor,
+            popoverAnchorRect
+          }) => (
             <React.Fragment>
-              <TouchableOpacity style={{flex: 0, alignSelf: "flex-end", flexDirection: "row", marginTop: 15}} ref={setPopoverAnchor} onPress={openPopover}><Text style={{color: "red", fontSize: 13, paddingTop: 5, paddingBottom: 5, paddingRight: 5}}>{this.props.tag}</Text><Icon style={{paddingTop: 4 }} name={this.state.icon}/></TouchableOpacity>
-              <Popover 
+              <TouchableOpacity
+                style={popoverStyles.touchable}
+                ref={setPopoverAnchor}
+                onPress={openPopover}
+              >
+                <Text style={popoverStyles.redClick}>{this.props.tag}</Text>
+                <Icon style={popoverStyles.iconTouch} name={this.state.icon} />
+              </TouchableOpacity>
+              <Popover
                 contentStyle={popoverStyles.content}
                 arrowStyle={popoverStyles.arrow}
                 backgroundStyle={popoverStyles.background}
@@ -46,17 +60,36 @@ export default class PopoverAtom extends React.Component {
                 visible={popoverVisible}
                 onClose={closePopover}
                 fromRect={popoverAnchorRect}
-                supportedOrientations={['portrait', 'landscape']}
+                supportedOrientations={["portrait", "landscape"]}
               >
-                <View style={{flexDirection: "column"}}>
-                  <View style={{flexDirection: "row"}}>
-                      <View style={{flexDirection: "row",  marginRight: 50, alignItems: "center"}}><View style={{width: 12, height: 12, borderRadius: 12/2, backgroundColor: "#c0c0c0"}}/><Text style={{fontSize: 12, paddingLeft: 4}}>Pending</Text></View>
-                      <View style={{flexDirection: "row", marginRight: 50, alignItems: "center"}}><View style={{width: 12, height: 12, borderRadius: 12/2, backgroundColor: "#c0c0c0"}}/><Text style={{fontSize: 12, paddingLeft: 4}}>Pending Delivery</Text></View>
-                      <View style={{flexDirection: "row", marginRight: 0, alignItems: "center"}}><View style={{width: 12, height: 12, borderRadius: 12/2, backgroundColor: "#c0c0c0"}}/><Text style={{fontSize: 12, paddingLeft: 4}}>Delivering</Text></View>
+                <View style={popoverStyles.column}>
+                  <View style={popoverStyles.row}>
+                    <View style={popoverStyles.mainFirst}>
+                      <View style={popoverStyles.viewX} />
+                      <Text style={popoverStyles.textX}>Pending</Text>
+                    </View>
+                    <View style={popoverStyles.mainFirst}>
+                      <View style={popoverStyles.viewX} />
+                      <Text style={popoverStyles.textX}>Pending Delivery</Text>
+                    </View>
+                    <View style={popoverStyles.mainSecond}>
+                      <View style={popoverStyles.viewX} />
+                      <Text style={popoverStyles.textX}>Delivering</Text>
+                    </View>
                   </View>
-                  <View style={{flexDirection: "row", marginTop: 30}}>
-                    <Left style={{flexDirection: "row", marginRight: 100, alignItems: "center"}}><View style={{width: 12, height: 12, borderRadius: 12/2, backgroundColor: "red"}}/><Text style={{fontSize: 12, paddingLeft: 4}}>Delivered</Text></Left>
-                    <Right style={{flex:0, flexDirection: "row", alignSelf: "flex-end", marginRight: 0, marginBottom: 8}}><CheckBox checked={this.state.check} color="red" onPress={this.checked} /><Text style={{textAlign: "right", fontSize: 12, paddingLeft: 16}}>Recalled</Text></Right>
+                  <View style={popoverStyles.notMain}>
+                    <Left style={popoverStyles.leftSide}>
+                      <View style={popoverStyles.innerLeft} />
+                      <Text style={popoverStyles.innerLeftText}>Delivered</Text>
+                    </Left>
+                    <Right style={popoverStyles.rightSide}>
+                      <CheckBox
+                        checked={this.state.check}
+                        color="red"
+                        onPress={this.checked}
+                      />
+                      <Text style={popoverStyles.recall}>Recalled</Text>
+                    </Right>
                   </View>
                 </View>
               </Popover>
@@ -66,4 +99,10 @@ export default class PopoverAtom extends React.Component {
       </View>
     );
   }
+}
+
+PopoverAtom.propTypes = {
+  position: PropTypes.string.isRequired,
+  tag: PropTypes.string.isRequired,
+  check: PropTypes.bool
 }

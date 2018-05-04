@@ -7,6 +7,7 @@ export const color = {
     grey: '#f6f6f6',
     warning: '#ff9630',
     black: '#000',
+    white: '#fff',
     textBorderBottom: '#E8E8E8',
     redButton: '#dd0f0f',
     header: '#c10505'

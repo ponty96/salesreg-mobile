@@ -88,7 +88,7 @@ const users = [
   
     render() {
       return (
-        <View style={{flex: 1, width: "100%", backgroundColor: "#FFF"}}>
+        <View style={styles.debtAccord}>
             <ScrollView>
                 <ListView
                     dataSource={this.state.userDataSource}

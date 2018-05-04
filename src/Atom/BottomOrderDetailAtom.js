@@ -2,6 +2,8 @@ import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { ListItem, Left, Right } from 'native-base';
 
+import styles from './../Style/OrderList';
+
 export default class BottomOrderDetailAtom extends React.Component {
   render() {
     return (
@@ -26,57 +28,3 @@ export default class BottomOrderDetailAtom extends React.Component {
     );
   }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        backgroundColor: "#FFF",
-        flex: 1,
-        width: "100%",
-    },
-    redList: {
-        height: 65, 
-        width: "100%", 
-        backgroundColor: "red",
-        paddingLeft: 0,
-        marginLeft: 0,
-    },
-    whiteTextL: {
-        fontSize: 16,
-        color: "#FFF",
-        paddingLeft: 16
-    },
-    whiteTextR: {
-        fontSize: 16,
-        color: "#FFF"
-    },
-    whiteList: {
-        height: 65, 
-        width: "100%", 
-        backgroundColor: "#FFF",
-        paddingLeft: 0,
-        marginLeft: 0,
-    },
-    blackTextL: {
-        fontSize: 16,
-        color: "#c0c0c0",
-        paddingLeft: 16
-    },
-    blackTextR: {
-        fontSize: 16,
-        color: "#000",
-    },
-    redTextR: {
-        fontSize: 16,
-        color: "red",
-    },
-    greyText: {
-        fontSize: 16,
-        color: "#c0c0c0",
-        paddingLeft: 16
-    },
-    redText: {
-        fontSize: 16,
-        color: "red"
-    }
-   });
-  

@@ -6,6 +6,7 @@ import Accordion from 'react-native-collapsible/Accordion';
 
 import DebtAccordionAtom from './DebtAccordionAtom';
 import { ScrollView } from 'react-native-gesture-handler';
+import styles from "../Style/OrderList";
 
 const SECTIONS = [
   {
@@ -77,18 +78,18 @@ export default class AccordionAtom extends Component {
   }
   _renderHeader(section) {
     return (
-      <View style={{ flex: 1, flexDirection: "row", height: 75, width: "100%", alignSelf: "center", marginRight: 10, backgroundColor: "#fff", paddingVertical: 8, borderBottomColor:"#f0f0f0", borderBottomWidth: 1}}>
-        <View style={{flex: 1, flexDirection: "column", width: "40%", marginLeft: 0, paddingLeft: 0, height: 75}}>
-            <View style={{marginLeft: 16}}>
-              <Text style={{textAlign: "left", paddingBottom: 10, paddingLeft: 5, marginLeft: 0, fontWeight: "400"}}>{section.orderId}{'   '}<Text style={{fontSize: 13, color: "#000", fontWeight: "400"}}>{section.date}</Text></Text>
+      <View style={styles.mainAccord}>
+        <View style={styles.accordView1}>
+            <View style={styles.viewMargin}>
+              <Text style={styles.accordTextL1}>{section.orderId}{'   '}<Text style={styles.wrapAccordText}>{section.date}</Text></Text>
             </View>
-            <View style={{marginLeft: 16}}>
-              <Text style={{textAlign: "left", paddingTop: 10, paddingLeft: 5, marginLeft:0, fontSize: 13, color: "red"}}>#{section.debt}.00</Text>
+            <View style={styles.viewMargin}>
+              <Text style={accordTextL2}>#{section.debt}.00</Text>
             </View>
         </View>
-        <View style={{flex: 1, flexDirection: "column", marginRight: 16, marginLeft: "20%", width: "40%", height: 75, alignItems: "flex-end"}}>
-            <Text style={{fontWeight: "500", fontSize: 13, paddingTop: 5, paddingBottom: 8}}>{section.amount}</Text>
-            <Icon style={{paddingTop: 4, color: "#c0c0c0" }} name="md-arrow-dropdown" />
+        <View style={styles.accordView2}>
+            <Text style={styles.accordTextR}>{section.amount}</Text>
+            <Icon style={styles.accordIcon} name="md-arrow-dropdown" />
         </View>
       </View>
     );

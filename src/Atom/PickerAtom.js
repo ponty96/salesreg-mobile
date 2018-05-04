@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View } from 'react-native';
 import { Picker, Icon } from 'native-base';
 import PropTypes from 'prop-types';
 
@@ -9,33 +10,33 @@ class PickerAtom extends Component {
           selected: ""
         };
       }
-      handleChange(value) {
+    handleChange(value) {
         this.setState({
-          selected: value
+            selected: value
         });
-      }
+    }
     
     render() {
+        var list = this.props.list
         return (
             <Picker
                 iosHeader="Select one"
                 mode="dropdown"
                 iosIcon={<Icon name="ios-arrow-down-outline" />}
-                style={{ width: 130, height: 35 }}
+                style={{ width: 130, height: 35}}
                 selectedValue={this.state.selected}
                 onValueChange={this.handleChange.bind(this)}
             >
-              <Picker.Item label="Fastest Selling" value="key0" />
-              <Picker.Item label="Slowest Selling" value="key1" />
-              <Picker.Item label="Highest Profit" value="key2" />
-              <Picker.Item label="Lowest Profit" value="key3" />
-            </Picker>
+                {list.map((element, key) => 
+                <Picker.Item label={element} value={element} key={key}/>
+                )}
+            </Picker> 
         );
     }
 };
 
 PickerAtom.propTypes = {
-    selectedValue: PropTypes.string,
+    list: PropTypes.array.isRequired
 }
 
 export default PickerAtom;

@@ -4,123 +4,79 @@ import { Form, Header, Text, Left, Right, Icon, Card, CardItem } from "native-ba
 import PropTypes from "prop-types";
 
 import InputAtom from './InputAtom';
+import NewOrderCardAtom from "./NewOrderCardAtom";
+import ButtonAtom from "./ButtonAtom";
 import { marginfulInput, marginlessInput } from './../Style/exportStyles';
 import styles from './../Style/Form';
 
 class OrderFormAtom extends React.Component {
     state = {
-        product: "",
         customer: "",
-        quantity: "",
-        amountSold: "",
-        amountPaid: "",
-        balanceRem: "",
-        balanceDueDate: "",
-        purchaseDate: ""
+        textInput: []
     }
 
-    getProduct = (product) => {
-        this.setState({product});
-    }
     getCustomer = (customer) => {
         this.setState({customer});
     }
-    getQuantity = (quantity) => {
-        this.setState({quantity});
+    makePayment = () => {}
+    removeTextInput = () => {
+        this.state.textInput.pop();
+        let textInput = this.state.textInput;
+        this.setState({
+          textInput
+        });
     }
-    getAmountSold = (amountSold) => {
-        this.setState({amountSold});
+    addTextInput = (key) => {
+        let textInput = this.state.textInput;
+        textInput.push(<NewOrderCardAtom key={key} onPress={this.removeTextInput}/>);
+        this.setState({ textInput })
     }
-    getAmountPaid = (amountPaid) => {
-        this.setState({amountPaid});
-    }
-    getBalanceRem = (balanceRem) => {
-        this.setState({balanceRem});
-    }
-    getBalanceDueDate = (balanceDueDate) => {
-        this.setState({balanceDueDate});
-    }
-    getPurchaseDate = (purchaseDate) => {
-        this.setState({purchaseDate});
-    }
-
     navigate = (location) => {
         this.props.navigation.navigate(location)
     }
 
     render() {
         return (
-                <KeyboardAvoidingView behavior={'padding'} style={styles.itemsContainer}>
-                    <Card>
-                    <Header style={styles.header}>
-                        <Left style={{ flex: 1, width: "40%" }}><Text> Order ID: 123456 </Text></Left> 
-                        <Right><Icon name="md-close"/></Right>
+                <KeyboardAvoidingView behavior={'padding'} style={styles.itemsContainer1}>
+                    <Header style={styles.headerOrder}>
+                        <Left style={styles.leftOrder}><Icon style={styles.iconOrder} name="md-cart"/><Text>0</Text></Left> 
+                        <Right><Text>Total: <Text style={styles.redColorText}>#0.00</Text></Text></Right>
                     </Header>
                     <ScrollView>
-                        <Form style={{ backgroundColor: "#fff" }}>
-                            <InputAtom
-                                label="Product name"
-                                getValue={this.getProduct}
-                                contStyle={marginfulInput}
-                            />
-                            <InputAtom
-                                label="Customer who bought"
-                                getValue={this.getCustomer}
-                                contStyle={marginfulInput}
-                            />
-                            <View style={{flexDirection: "row", flex: 1}}>
-                            <View style={{width: "49%"}}>
-                            <InputAtom
-                                label="Quantity"
-                                getValue={this.getQuantity}
-                                contStyle={marginfulInput}
-                            />
+                        <View style={innerItemContainer}>
+                            <View style={styles.cusName}>
+                                <InputAtom
+                                    label="Customer"
+                                    getValue={this.getCustomer}
+                                    contStyle={marginfulInput}
+                                />
                             </View>
-                            <View style={{width: "49%"}}>
-                            <InputAtom
-                                label="Amount sold"
-                                getValue={this.getAmountSold}
-                                contStyle={marginfulInput}
-                            />
-                            </View>
-                            </View>
-                            <View style={{flexDirection: "row", flex: 1}}>
-                            <View style={{width: "49%"}}>
-                            <InputAtom
-                                label="Amount paid"
-                                getValue={this.getAmountPaid}
-                                contStyle={marginfulInput}
-                            />
-                            </View>
-                            <View style={{width: "49%"}}>
-                            <InputAtom
-                                label="Balance remaining"
-                                getValue={this.getBalanceRem}
-                                contStyle={marginfulInput}
-                            />
-                            </View>
-                            </View>
-                            <View style={{flexDirection: "row", flex: 1}}>
-                            <View style={{flexDirection: "column", width: "49%"}}>
-                            <InputAtom
-                                label="Balance due date"
-                                getValue={this.getBalanceDueDate}
-                                contStyle={marginfulInput}
-                            />
-                            <Text style={styles.font}>DD-MM-YY</Text>
-                            </View>
-                            <View style={{flexDirection: "column", width: "49%" }}>
-                            <InputAtom
-                                label="Purchase date"
-                                getValue={this.getPurchaseDate}
-                                contStyle={marginfulInput}
-                            />
-                            <Text style={styles.font}>DD-MM-YY</Text>
-                            </View>
-                            </View>
-                        </Form>
+                            <NewOrderCardAtom />
+                                {this.state.textInput.map((value) => {
+                                return value
+                                })}
+                                <ButtonAtom 
+                                onPress={() => this.addTextInput(this.state.textInput.length)} 
+                                btnText="+ Pay debt"
+                                transparent={true}
+                                btnStyle={styles.btn1}
+                                textStyle={styles.txt1}
+                                />
+                        </View>
                     </ScrollView>
-                    </Card>
+                    <View style={styles.bottomSide}>
+                        <View style={styles.innerBottom}>
+                            <Text style={styles.bottomGrey}>Amount paid</Text>
+                            <Text style={styles.bottomRed}>#0.00</Text>
+                        </View>
+                        
+                        <ButtonAtom 
+                        onPress={this.makePayment}
+                        btnText="Make Payment"
+                        btnStyle={styles.btn2}
+                        textStyle={styles.txt2}
+                        />
+                    </View>
                 </KeyboardAvoidingView>
         );
     }

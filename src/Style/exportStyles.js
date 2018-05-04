@@ -11,7 +11,7 @@ export const saveCancelButton = {
     justifyContent: 'center',
     alignItems: 'center',
     borderColor: color.grey,
-    backgroundColor: color.secondary
+    backgroundColor: color.white
 };
 
 export const saveCancelButtonText = {
@@ -67,6 +67,108 @@ export const smallImageDisplay = {
         fontWeight: '400',
     }
 }
+export const stylesDetail = {
+    container: {
+        flexDirection: 'row',
+        flex: 0,
+        borderTopWidth: 0.5,
+        borderTopColor: "#f0f0f0"
+    },
+    content: {
+        height: 130,
+        width: "100%",
+        paddingLeft: 0,
+        marginLeft: 0,
+    },
+    pictureView: {
+      flexDirection: "column",
+      width: '50%',
+      height: 120,
+      alignItems: 'center',
+      justifyContent: 'center',
+      backgroundColor: '#fff',
+    },
+    pictureText: {
+      paddingTop: 10,
+      fontSize: 18,
+      fontWeight: "400",
+      color: "grey",
+    },
+    greyText: {
+      color: '#c0c0c0',
+      fontSize: 16,
+      fontWeight: '400',
+      paddingLeft: 16
+    },
+    moneyView: {
+      width: '50%',
+      height: 120,
+      alignItems: 'center',
+      backgroundColor: '#FFF',
+    },
+    dp: {
+        height: 45,
+        width: 45,
+    },
+    whiteList: {
+        flex: 1,
+        height: 65, 
+        width: "100%", 
+        paddingLeft: 0,
+        marginLeft: 0,
+        backgroundColor: "#FFF"
+    },
+    blackText: {
+        fontSize: 16,
+        color: "#000"
+    },
+    redText: {
+        fontSize: 16,
+        color: "red",
+        paddingLeft: 16
+    }
+}
+
+export const newOrderCard = {
+    container: {
+        backgroundColor: "#FFF", 
+        width: "98%", 
+        alignSelf: "center", 
+        borderRadius:2, 
+        borderWidth: 1, 
+        borderColor:"#f0f0f0", 
+        marginVertical: 16
+    },
+    header: {
+        backgroundColor: "#FFF", 
+        height: 40, 
+        marginBottom: 3
+    },
+    icon: {
+        fontSize: 30, 
+        textAlign: "right"
+    },
+    innerContainer: {
+        flexDirection:"column", 
+        alignSelf: "center" , 
+        width: "98%"
+    },
+    firstInput: {
+        width: "96%", 
+        marginBottom: 3
+    },
+    secondInput: {
+        flexDirection: "row", 
+        flex: 0, 
+        marginBottom: 16
+    },
+    half: {
+        width: "48%"
+    },
+    close: {
+        width: 60
+    }
+}
 
 export const aboveAccordionStyles = {
     container: {
@@ -74,6 +176,14 @@ export const aboveAccordionStyles = {
         flex: 0,
         borderTopWidth: 0.5,
         borderTopColor: "#f0f0f0"
+    },
+    containerP: {
+        flexDirection: 'row',
+        flex: 0,
+        borderTopWidth: 0.5,
+        borderBottomWidth: 0.5,
+        borderTopColor: "#f0f0f0",
+        borderBottomColor: "#c0c0c0"
     },
     pictureView: {
       flexDirection: "column",
@@ -83,6 +193,15 @@ export const aboveAccordionStyles = {
       justifyContent: 'center',
       backgroundColor: '#fff',
     },
+    pictureViewP: {
+        flexDirection: "column",
+        width: '50%',
+        height: 200,
+        alignItems: 'flex-start',
+        padding: 16,
+        justifyContent: 'center',
+        backgroundColor: '#fff',
+      },
     pictureText: {
       paddingTop: 10,
       fontSize: 18,
@@ -104,6 +223,48 @@ export const aboveAccordionStyles = {
     dp: {
         height: 90,
         width: 90,
+    },
+    dpP: {
+        height: 60,
+        width: 60,
+    },
+    boldFont: {
+        fontWeight: "bold",
+        fontSize: 18,
+        textAlign: "right"
+    },
+    whiteList: {
+        height: 65, 
+        width: "100%", 
+        backgroundColor: "#FFF",
+        paddingLeft: 0,
+        marginLeft: 0,
+    },
+    blackTextL: {
+        fontSize: 16,
+        color: "#c0c0c0",
+        paddingLeft: 16
+    },
+    blackTextR: {
+        fontSize: 16,
+        color: "#000"
+    },
+    redTextR: {
+        fontSize: 16,
+        color: "red",
+    },
+    greyText: {
+        fontSize: 16,
+        color: "#c0c0c0",
+        paddingLeft: 16
+    },
+    greyFont: {
+        fontSize: 16,
+        color: "#c0c0c0"
+    },
+    redText: {
+        fontSize: 16,
+        color: "red"
     }
 }
 
@@ -145,15 +306,88 @@ export const popoverStyles = {
         borderWidth: 0.5,
         borderRadius: 2,
         borderColor: 'grey'
-      },
-      arrow: {
+    },
+    arrow: {
         borderTopColor: 'rgba(0, 0, 0, 0.1)',
         margin:0,
         padding: 0
-      },
-      background: {
+    },
+        background: {
         backgroundColor: 'rgba(255, 255, 255, 0.1)'
-      }
+    },
+    touchable: {
+        flex: 0, 
+        alignSelf: "flex-end", 
+        flexDirection: "row", 
+        marginTop: 15
+    },
+    redClick: {
+        color: "red", 
+        fontSize: 13, 
+        paddingTop: 5, 
+        paddingBottom: 5, 
+        paddingRight: 5
+    },
+    iconTouch: {
+        paddingTop: 4 
+    },
+    column: {
+        flexDirection: "column"
+    },
+    row: {
+        flexDirection: "row"
+    },
+    mainFirst: {
+        flexDirection: "row", 
+        marginRight: 50, 
+        alignItems: "center"
+    },
+    mainSecond: {
+        flexDirection: "row", 
+        marginRight: 0, 
+        alignItems: "center"
+    },
+    viewX: {
+        width: 12, 
+        height: 12, 
+        borderRadius: 12/2, 
+        backgroundColor: "#c0c0c0"
+    },
+    textX: {
+        fontSize: 12, 
+        paddingLeft: 4
+    },
+    notMain: {
+        flexDirection: "row", 
+        marginTop: 30
+    },
+    leftSide: {
+        flexDirection: "row",
+        marginRight: 100, 
+        alignItems: "center"
+    },
+    rightSide: {
+        flex:0, 
+        flexDirection: "row", 
+        alignSelf: "flex-end", 
+        marginRight: 0, 
+        marginBottom: 8
+    },
+    innerLeft: {
+        width: 12,
+        height: 12,
+        borderRadius: 12 / 2,
+        backgroundColor: "red"
+    },
+    recall: {
+        textAlign: "right",
+        fontSize: 12,
+        paddingLeft: 16
+    },
+    innerLeftText: { 
+        fontSize: 12, 
+        paddingLeft: 4 
+    }
 }
 
 export const subHeaderStyles = {
@@ -172,6 +406,9 @@ export const subHeaderStyles = {
       font: {
         fontSize: 13,
         paddingBottom: 9
+      },
+      iconColor: {
+        color: "#F0F0F0"
       }
 }
 
@@ -277,7 +514,19 @@ export const customerListStyles = {
         backgroundColor: "#FFF",
         flex: 1,
         width: "100%"
-      }
+      },
+    header: {
+        backgroundColor: "#fff", 
+        width: "100%", 
+        height: 40
+    },
+    direct: {
+        flexDirection: "row"
+    },
+    dropText: {
+        paddingBottom: 10, 
+        fontSize: 14
+    }
 }
 
 export const orderListStyles = {
