@@ -1,13 +1,11 @@
 import React from 'react';
 
-//import Routes from './src/Navigation/Routes';
-import SplashScreen from './src/Screen/SplashScreen';
+import Routes from './src/Navigation/Routes';
 
 export default class App extends React.Component {
   render() {
     return (
-	  //<Routes />
-    <SplashScreen />
+	  <Routes />
     );
   }
 }
