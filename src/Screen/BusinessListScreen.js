@@ -8,9 +8,9 @@ import styles from './../Style/Screen';
 import ListItemAtom from './../Atom/ListItemAtom';
 import DeleteModal from './../Container/DeleteBuzModal';
 import GetAmountModal from './../Container/GetAmountModal';
-import DebtLimitModal from './../Container/DebtLimitModal';
+import RestockModal from './../Container/RestockModal';
 import WarningModal from './../Container/WarningModal';
-import DebtWarningModal from "../Container/DebtWarningModal";
+import PaymentModal from './../Container/PaymentModal';
 
 class BusinessListScreen extends Component {
     state = {
@@ -127,17 +127,17 @@ class BusinessListScreen extends Component {
         //    limit={7000}
         ///>
 
-        //<DebtLimitModal
-            //visibility={true}
-            //headerText={"Total debt limit(N)"}
-        ///>
+        //for restocking modal
+        // {/*<RestockModal*/}
+        //     {/*visibility={true}*/}
+        //     {/*headerText={"Re-stock No.5 Channel perfume"}*/}
+        // {/*/>*/}
 
-
-        //<DebtWarningModal
-        //    visibility={true}
-        //    currentAmount={2000}
-        //    debtLimit={66000}
-        ///>
+        //for payment modal
+        {/*<PaymentModal*/}
+            {/*visibility={true}*/}
+            {/*headerText={"Pay for order 234432"}*/}
+        {/*/>*/}
 
         let empty = this.props.items.length <= 0;
         return (

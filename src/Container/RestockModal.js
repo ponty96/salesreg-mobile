@@ -9,22 +9,27 @@ import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Screen';
 import { marginlessInput, modalButton } from './../Style/exportStyles';
 
-class GetAmountModal extends Component {
+class RestockModal extends Component {
     state = {
-        amount: undefined
+        quantity: undefined,
+        cost: undefined
     }
 
     static defaultProps = {
         visibility: false
     }
 
-    getAmount= (amount) => {
-        this.setState({amount});
+    getQuantity= (quantity) => {
+        this.setState({quantity});
     }
 
-    pay = () => {
+    getCost= (cost) => {
+        this.setState({cost});
+    }
+
+    save = () => {
         if (this.props.getValue) {
-            this.props.getValue(this.state.amount);
+            this.props.getValue(this.state.quantity, this.state.cost);
         }
     }
 
@@ -39,7 +44,7 @@ class GetAmountModal extends Component {
                     {this.props.headerText}
                 </Text>
                 <TouchableOpacity
-                    onPress={() => this.props.closeModal()}
+                    oonPress={() => this.props.closeModal()}
                 >
                     <Icon
                         name={'md-close'}
@@ -57,15 +62,22 @@ class GetAmountModal extends Component {
             >
                 <Form>
                     <InputAtom
-                        label="Enter Amount"
+                        label="Quantity"
                         keyboardType={'numeric'}
-                        getValue={this.getAmount}
+                        getValue={this.getQuantity}
+                        contStyle={marginlessInput}
+                    />
+
+                    <InputAtom
+                        label="Cost price per pack"
+                        keyboardType={'numeric'}
+                        getValue={this.getCost}
                         contStyle={marginlessInput}
                     />
 
                     <ButtonAtom
-                        btnText="Pay"
-                        onPress={this.pay}
+                        btnText="Save"
+                        onPress={this.save}
                         btnStyle={modalButton}
                     />
                 </Form>
@@ -84,11 +96,11 @@ class GetAmountModal extends Component {
     }
 }
 
-GetAmountModal.propTypes = {
+RestockModal.propTypes = {
     visibility: PropTypes.bool,
     headerText: PropTypes.string.isRequired,
     getValue: PropTypes.func,
     closeModal: PropTypes.func.isRequired
 }
 
-export default GetAmountModal;
+export default RestockModal;

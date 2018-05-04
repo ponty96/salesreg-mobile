@@ -23,16 +23,24 @@ export const marginlessInput = {
     marginLeft: 0
 };
 
+export const flexfull = {
+    flex: 1
+};
+
+export const marginRight = {
+    marginRight: 8
+};
+
 export const marginfulInput = {
     marginLeft: 4
-}
+};
 
 export const modalButton = {
     marginTop: 32,
     marginBottom: 16,
     marginHorizontal: 16,
     alignSelf: 'flex-end',
-}
+};
 
 export const modalWarningButton = {
     flex: 1,
@@ -42,7 +50,7 @@ export const modalWarningButton = {
     marginBottom: 16,
     marginHorizontal: 8,
     paddingHorizontal: 0
-}
+};
 
 export const smallImageDisplay = {
     container: {
@@ -66,7 +74,7 @@ export const smallImageDisplay = {
         fontSize: 14,
         fontWeight: '400',
     }
-}
+};
 
 export const aboveAccordionStyles = {
     container: {
@@ -105,7 +113,7 @@ export const aboveAccordionStyles = {
         height: 90,
         width: 90,
     }
-}
+};
 
 export const nameDisplayStyles = {
     wrapper: {
@@ -130,7 +138,7 @@ export const nameDisplayStyles = {
         fontWeight: '400',
         marginLeft: 20
     }
-}
+};
 
 export const popoverStyles = {
     content: {
@@ -154,7 +162,7 @@ export const popoverStyles = {
       background: {
         backgroundColor: 'rgba(255, 255, 255, 0.1)'
       }
-}
+};
 
 export const subHeaderStyles = {
     header: {
@@ -173,7 +181,7 @@ export const subHeaderStyles = {
         fontSize: 13,
         paddingBottom: 9
       }
-}
+};
 
 export const totalDebtStyle = {
     container: {
@@ -214,7 +222,7 @@ export const totalDebtStyle = {
       justifyContent: 'center',
       backgroundColor: 'rgba(218,11,11,59)',
     }
-}
+};
 
 export const totalOrderStyle = {
     column: {
@@ -258,7 +266,7 @@ export const totalOrderStyle = {
         justifyContent: 'center',
         backgroundColor: color.totalProfit
       }
-}
+};
 
 export const customerListStyles = {
     container: {
@@ -266,17 +274,17 @@ export const customerListStyles = {
         flex: 1,
         width: "100%"
       }
-}
+};
 
 export const orderListStyles = {
     container: {
         //backgroundColor: "#FFF",
         flex: 1
     }
-}
+};
 
 export const selectGenderStyles = {
     pickerColor: {
         color: color.inactive
     }
-}
+};

@@ -27,7 +27,7 @@ class SigupForm extends React.Component {
 
     getPhone = (phone) => {
         this.setState({
-                phone
+            phone
         });
     }
 
