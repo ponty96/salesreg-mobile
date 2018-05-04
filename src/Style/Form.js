@@ -1,5 +1,5 @@
 import { StyleSheet } from 'react-native'
-import { color } from './Color'
+import { color } from './Color';
 
 export default StyleSheet.create(
     {
@@ -77,6 +77,12 @@ export default StyleSheet.create(
         },
         buttonsWrapper: {
             marginTop: 20
+        },
+        underneathText: {
+            marginLeft: 15,
+            color: color.inactive,
+            fontSize: 12,
+            marginBottom: 25
         }
     }
 )

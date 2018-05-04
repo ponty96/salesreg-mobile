@@ -280,3 +280,14 @@ export const selectGenderStyles = {
         color: color.inactive
     }
 }
+
+export const signupButton = {
+    width: '49%',
+    marginHorizontal: 1,
+    justifyContent: 'center',
+    height: 55
+}
+
+export const redButtonText = {
+    color: color.white,
+}

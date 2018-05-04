@@ -6,6 +6,7 @@ import DetailItemAtom from './../Atom/DetailItemAtom';
 import GoldRatingsAtom from './../Atom/GoldRatingsAtom'
 import ButtonAtom from './../Atom/ButtonAtom'
 import styles from './../Style/Screen';
+import { redButtonText } from '../Style/exportStyles';
 
 export default class CustomerDetailScreen extends React.Component {
     state = {
@@ -65,31 +66,31 @@ export default class CustomerDetailScreen extends React.Component {
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = { this.state.item.icon.callIcon }
-                        text = { this.state.item.phoneNumber}
+                        detailText = { this.state.item.phoneNumber}
                     />
                 </View>
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = { this.state.item.icon.addressIcon }
-                        text = { this.state.item.address }
+                        detailText = { this.state.item.address }
                     />
                 </View>
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = { this.state.item.icon.emailIcon }
-                        text = { this.state.item.email }
+                        detailText = { this.state.item.email }
                     />
                 </View>
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = { this.state.item.icon.birthdayIcon }
-                        text = { this.state.item.birthday }
+                        detailText = { this.state.item.birthday }
                     />
                 </View>
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = { this.state.item.icon.ringIcon }
-                        text = { this.state.item.marriageAniversary }
+                        detailText = { this.state.item.marriageAniversary }
                     />
                 </View>
             </View>
@@ -122,6 +123,7 @@ export default class CustomerDetailScreen extends React.Component {
                 </View>
                 <ButtonAtom 
                     btnText = 'Add to wallet'
+                    textStyle = { redButtonText }
                 />
             </View>
         </View>

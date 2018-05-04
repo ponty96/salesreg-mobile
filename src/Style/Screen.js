@@ -173,7 +173,7 @@ export default StyleSheet.create(
             alignItems: 'flex-end'
         },
         textTitle: {          
-            color: color.grey,
+            color: color.inactive,
             fontWeight: '400',
             fontSize: 14
         },
@@ -184,7 +184,7 @@ export default StyleSheet.create(
         details: {
             marginTop: 20,
             marginLeft: 25,
-            color: color.grey,
+            color: color.inactive,
             marginBottom: 5
         },
         detailItemWrapper: {
@@ -203,7 +203,7 @@ export default StyleSheet.create(
         },
         compartmentItem: {
             marginLeft: 35,
-            color: color.grey
+            color: color.inactive
         },
         creditLimit: {
             paddingTop: 15
@@ -238,6 +238,18 @@ export default StyleSheet.create(
         },
         genderPickerWidth: {
             width: 200
+        },
+        splashScreenLogo: {
+            position: 'absolute',
+            top: '30%',
+            left: '40%'
+        },
+        progressBar: {
+            position: 'absolute',
+            top: '70%',
+            left: '30%',
+            height: 5,
+            borderColor: color.inactive
         }
     }
 )

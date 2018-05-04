@@ -13,9 +13,11 @@ class SignupScreen extends React.Component {
                 <Text style = { styles.signUpText }>
                     SIGN UP
                 </Text>
-                <View>
-                    <KeyboardAvoidingView style={styles.formInnerLayer} behaviour="position">
-                        <SignupForm  navigation={this.props.navigation}/>
+                <View style = {styles.signUpFormWrapper} >
+                    <KeyboardAvoidingView 
+                        behaviour="position"
+                    >
+                        <SignupForm  navigation = {this.props.navigation}/>
                     </KeyboardAvoidingView>
                 </View>
             </View>

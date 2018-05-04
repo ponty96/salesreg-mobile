@@ -8,6 +8,7 @@ import ButtonAtom from '../Atom/ButtonAtom';
 import SelectGenderAtom from '../Atom/SelectGenderAtom';
 import styles from '../Style/Screen';
 import styles1 from '../Style/Form';
+import { redButtonText } from '../Style/exportStyles';
 
 class SigupForm extends React.Component {
     state = {
@@ -97,6 +98,7 @@ class SigupForm extends React.Component {
                     <ButtonAtom
                         btnText="Sign up"
                         onPress={this.signup}
+                        textStyle = { redButtonText }
                     />
                     <ButtonAtom
                         btnText="I have an account already"

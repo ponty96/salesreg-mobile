@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
+import { redButtonText } from '../Style/exportStyles';
 
 class ResetForm extends React.Component {
     state = {
@@ -12,7 +13,7 @@ class ResetForm extends React.Component {
     }
 
     static defaultProps = {
-        secretPhone: 'xxxxxxxxx948'
+        secretPhone: 'xxxxxxxxx678'
     }
 
     reset = () => {
@@ -57,6 +58,7 @@ class ResetForm extends React.Component {
                     btnText="Reset Password"
                     onPress={this.reset}
                     disabled={this.state.code ? false : true}
+                    textStyle = { redButtonText }
                 />
                 <ButtonAtom
                     btnText="I don't have an account"

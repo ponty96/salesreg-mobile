@@ -1,6 +1,6 @@
 export const color = {
     primary: '#B10000',
-    secondary: 'transparent',
+    secondary: '#FFFF',
     inactive: '#999999',
     menu: '#444444',
     disabled: '#ccc',
@@ -12,5 +12,8 @@ export const color = {
     grey: '#F6F6F6',
     listBorderColor: '#F3F3F3',
     totalProfit: "#FFE4D7",
-    totalSales: '#FBF3ED'
+    totalSales: '#FBF3ED',
+    blueCheck: '#27CBD3',
+    appDetailsText: '#000000',
+    white: '#FFFFFF'
 }

@@ -102,13 +102,8 @@
   resolved "https://registry.yarnpkg.com/@types/minimatch/-/minimatch-3.0.3.tgz#3dca0e3f33b200fc7d1139c0cd96c1268cadfd9d"
 
 "@types/node@*":
-<<<<<<< HEAD
-  version "10.0.2"
-  resolved "https://registry.yarnpkg.com/@types/node/-/node-10.0.2.tgz#180046ebbc37de8b64777765c2486ebecb59448e"
-=======
   version "10.0.0"
   resolved "https://registry.yarnpkg.com/@types/node/-/node-10.0.0.tgz#c40f8e07dce607d3ef25a626b93a6a7cdcf97881"
->>>>>>> 02c4bfef31d1c400d727b4a1520b6e20fd65b4e9
 
 "@types/prop-types@^15.5.2":
   version "15.5.2"
@@ -4408,11 +4403,7 @@ native-base-shoutem-theme@0.2.2:
     lodash "^4.10.1"
     prop-types "^15.5.10"
 
-<<<<<<< HEAD
-native-base@^2.4.2:
-=======
 native-base@^2.4.3:
->>>>>>> 02c4bfef31d1c400d727b4a1520b6e20fd65b4e9
   version "2.4.3"
   resolved "https://registry.yarnpkg.com/native-base/-/native-base-2.4.3.tgz#a821a4e21b83a167c59d00b6477f4b10d3f9a17d"
   dependencies:
@@ -5170,15 +5161,6 @@ react-native-branch@2.0.0-beta.3:
 react-native-button@^2.3.0:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/react-native-button/-/react-native-button-2.3.0.tgz#7d0a90095d415b0edf98a904556a7c4439646568"
-<<<<<<< HEAD
-  dependencies:
-    prop-types "^15.5.10"
-
-react-native-collapsible@^0.11.2:
-  version "0.11.2"
-  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.11.2.tgz#35a2e7a335f5acf8c959c889731a604cfc3fcd09"
-=======
->>>>>>> 02c4bfef31d1c400d727b4a1520b6e20fd65b4e9
   dependencies:
     prop-types "^15.5.10"
 
@@ -5247,6 +5229,12 @@ react-native-modal-popover@^0.0.7:
     "@types/prop-types" "^15.5.2"
     lodash.debounce "^4.0.8"
     prop-types "^15.6.0"
+
+react-native-progress@^3.4.0:
+  version "3.4.0"
+  resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-3.4.0.tgz#c002e6efb2f0b82dd6889510e669c492da2718ac"
+  dependencies:
+    prop-types "^15.5.8"
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
@@ -5774,11 +5762,7 @@ safe-buffer@5.1.1:
   version "5.1.1"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.1.tgz#893312af69b2123def71f57889001671eeb2c853"
 
-<<<<<<< HEAD
 safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@^5.1.2, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
-=======
-safe-buffer@^5.0.1, safe-buffer@^5.1.1, safe-buffer@~5.1.0, safe-buffer@~5.1.1:
->>>>>>> 02c4bfef31d1c400d727b4a1520b6e20fd65b4e9
   version "5.1.2"
   resolved "https://registry.yarnpkg.com/safe-buffer/-/safe-buffer-5.1.2.tgz#991ec69d296e0313747d59bdfd2b745c35f8828d"
 
@@ -6337,20 +6321,15 @@ symbol-tree@^3.2.2:
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
 
 tar@^4, tar@^4.0.2:
-<<<<<<< HEAD
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.2.tgz#60685211ba46b38847b1ae7ee1a24d744a2cd462"
-=======
   version "4.4.1"
   resolved "https://registry.yarnpkg.com/tar/-/tar-4.4.1.tgz#b25d5a8470c976fd7a9a8a350f42c59e9fa81749"
->>>>>>> 02c4bfef31d1c400d727b4a1520b6e20fd65b4e9
   dependencies:
     chownr "^1.0.1"
     fs-minipass "^1.2.5"
     minipass "^2.2.4"
     minizlib "^1.1.0"
     mkdirp "^0.5.0"
-    safe-buffer "^5.1.2"
+    safe-buffer "^5.1.1"
     yallist "^3.0.2"
 
 temp@0.8.3:
