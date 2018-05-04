@@ -12,7 +12,6 @@ export default StyleSheet.create(
         plainContainer: {
             flex: 1,
             paddingHorizontal: 16,
-            paddingTop: 32,
             backgroundColor: color.secondary
         },
         emptyHolder: {

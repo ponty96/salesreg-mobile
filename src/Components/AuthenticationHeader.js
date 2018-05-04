@@ -15,9 +15,13 @@ class AuthenticationHeader extends Component {
                 {
                     this.props.smallHeader 
                     ?
-                    <Image source = { require('../Images/SalesReg-authication-screens.png') } />
+                    <Image
+                        source = { require('./../Images/logo_mini.png') }
+                    />
                     :
-                    <Image source = { require('../Images/SalesReg-logo-onboarding-and-homepage.png') } />
+                    <Image
+                        source = { require('./../Images/logo.png') }
+                    />
                 }
             </View>
         )

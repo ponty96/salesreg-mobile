@@ -31,7 +31,7 @@ class ProductScreen extends Component {
     render() {
         // do change the list to the appropriate molecule
         return (
-            <View style={ styles.centerContainer }>
+            <View style={ styles.container }>
                 <ProductList />
                 <FabAtom
                     routeName={'NewProduct'}

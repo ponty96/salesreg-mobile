@@ -83,7 +83,7 @@ class BusinessDetailsScreen extends Component {
                     </View>
                     <View style = { styles.detailItemWrapper }>
                         <DetailItemAtom 
-                            icon = { this.state.item.icon.emailIcon }
+                            icon = {'email'}
                             detailText = { this.state.item.email }
                         />
                     </View>

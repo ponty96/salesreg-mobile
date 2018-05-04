@@ -55,7 +55,7 @@ InputAtom.propTypes = {
     floatingLabel: PropTypes.bool,
     secureTextEntry: PropTypes.bool,
     getValue: PropTypes.func,
-    contStyle: PropTypes.object,
+    contStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
     inputStyle: PropTypes.object,
     keyboardType: PropTypes.oneOf(['default', 'numeric', 'email-address', 'phone-pad']),
     underneathText: PropTypes.string

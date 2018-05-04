@@ -16,7 +16,7 @@ import { subHeaderStyles } from './../Style/exportStyles';
     return (
         <Header style={subHeaderStyles.header}>
             <Left style={subHeaderStyles.row}>
-              <Icon /*style = {{color: "#F0F0F0"}}*/ name='md-briefcase'/>
+              <Icon name='md-briefcase'/>
               <Text style={subHeaderStyles.pad}>
                 {this.props.total}
               </Text>

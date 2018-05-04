@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
-import { View, Text } from 'react-native';
-import Icon1 from 'react-native-vector-icons/FontAwesome';
-import Icon2 from 'react-native-vector-icons/MaterialCommunityIcons';
+import {View, Text} from 'react-native';
+import {Icon} from 'native-base';
 import PropTypes from 'prop-types';
 
 import styles from './../Style/Layout';
@@ -14,14 +13,14 @@ export default class DetailItemAtom extends Component{
                     {
                         this.props.icon === 'ring'
                         ?
-                        <Icon2
+                        <Icon
                             name = { this.props.icon } 
-                            size = { 14 }
+                            type={'FontAwesome'}
                         />
                         :
-                        <Icon1
+                        <Icon
                             name = { this.props.icon }
-                            size = { 14 } 
+                            type = {'MaterialCommunityIcons'}
                         />
                     }
                 </Text>

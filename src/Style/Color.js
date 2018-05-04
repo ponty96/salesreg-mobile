@@ -1,6 +1,6 @@
 export const color = {
     primary: '#B10000',
-    secondary: '#FFFF',
+    secondary: '#fff',
     inactive: '#999999',
     menu: '#444444',
     disabled: '#ccc',

@@ -18,7 +18,6 @@ class DebtWarningModal extends Component {
     }
 
     state = {
-        visibility: this.props.visibility,
         value: undefined
     }
 
@@ -46,7 +45,7 @@ class DebtWarningModal extends Component {
                     Debt warning level (%)
                 </Text>
                 <TouchableOpacity
-                    onPress={() => this.setState({visibility: !this.state.visibility})}
+                    onPress={() => this.props.closeModal()}
                 >
                     <Icon
                         name={'md-close'}
@@ -159,7 +158,7 @@ class DebtWarningModal extends Component {
 
                 <ButtonAtom
                     btnText="OK"
-                    onPress={() => this.setState({visibility: !this.state.visibility})}
+                    onPress={() => this.props.closeModal()}
                     btnStyle={modalButton}
                 />
             </View>
@@ -169,7 +168,7 @@ class DebtWarningModal extends Component {
     render() {
         return (
             <ModalAtom
-                visible={this.state.visibility}
+                visible={this.props.visibility}
                 centered={true}
                 body={this.renderBody()}
                 header={this.renderHeader()}
@@ -181,7 +180,8 @@ class DebtWarningModal extends Component {
 DebtWarningModal.propTypes = {
     visibility: PropTypes.bool,
     currentAmount: PropTypes.number.isRequired,
-    debtLimit: PropTypes.number.isRequired
+    debtLimit: PropTypes.number.isRequired,
+    closeModal: PropTypes.func.isRequired
 }
 
 export default DebtWarningModal;
