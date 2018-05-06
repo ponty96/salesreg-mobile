@@ -53,7 +53,8 @@ export default StyleSheet.create(
         },
         icon: {
             marginTop: 15,
-            color: color.grey
+            color: color.inactive,
+            fontSize: 150
         },
         itemsContainer: {
             flex: 1,
@@ -203,6 +204,11 @@ export default StyleSheet.create(
         txt2: {
             fontWeight: "bold",
             color: "#fff"
+        },
+        underneathText: {
+            color: color.inactive,
+            marginLeft: 15,
+            fontSize: 12
         }
     }
 )
