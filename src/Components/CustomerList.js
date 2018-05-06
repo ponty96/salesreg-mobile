@@ -1,23 +1,19 @@
 import React, { Component } from "react";
-import { Text, View, ListView, Image, TouchableOpacity } from "react-native";
-import { Icon } from "native-base";
+import PropTypes from 'prop-types';
+import { View, ListView, ScrollView } from "react-native";
+
 import CustomerListAtom from "../Atom/CustomerListAtom";
 import SubHeaderAtom from "../Atom/SubHeaderAtom";
-import { ScrollView } from "react-native-gesture-handler";
-
 import { customerListStyles } from './../Style/exportStyles';
-import { customerList } from "../config/data";
 
-const users = customerList;
-
-export default class CustomerList extends Component {
-  constructor() {
-    super();
+class CustomerList extends Component {
+  constructor(props) {
+    super(props);
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     });
     this.state = {
-      userDataSource: ds.cloneWithRows(users)
+      userDataSource: ds.cloneWithRows(this.props.items)
     };
   }
 
@@ -60,3 +56,9 @@ export default class CustomerList extends Component {
     );
   }
 }
+
+CustomerList.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+export default CustomerList;

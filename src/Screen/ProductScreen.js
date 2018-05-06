@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View } from 'react-native';
 import { Icon } from 'native-base';
 
@@ -6,9 +6,9 @@ import FabAtom from './../Atom/FabAtom';
 import styles from './../Style/Screen';
 import ProductList from './../Components/ProductList';
 
-class ProductScreen extends Component {
+class ProductScreen extends PureComponent {
 
-    static navigationOptions = ({ navigation, navigationOptions }) => {
+    static navigationOptions = ({ navigation }) => {
         const { params } = navigation.state;
         let right = <Icon
                         name={'ios-search'}
@@ -29,10 +29,12 @@ class ProductScreen extends Component {
     };
 
     render() {
-        // do change the list to the appropriate molecule
+        const { params } = this.props.navigation.state;
+        const items = params.data.products;
+
         return (
             <View style={ styles.container }>
-                <ProductList />
+                <ProductList items={items}/>
                 <FabAtom
                     routeName={'NewProduct'}
                     name={'basket-fill'}

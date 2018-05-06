@@ -72,7 +72,9 @@ class ListItemAtom extends Component {
 
     handleBodyPress = () => {
         if (this.props.bodyfunction) {
-            this.props.bodyfunction();
+            this.props.business
+            ? this.props.bodyfunction(this.props.item)
+            : this.props.bodyfunction();
         }
     }
 

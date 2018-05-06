@@ -7,6 +7,7 @@ import FabAtom from './../Atom/FabAtom';
 import styles from './../Style/Screen';
 import ListItemAtom from './../Atom/ListItemAtom';
 import DeleteModal from './../Container/DeleteBuzModal';
+import { userData } from '../config/default';
 import GetAmountModal from './../Container/GetAmountModal';
 import RestockModal from './../Container/RestockModal';
 import WarningModal from './../Container/WarningModal';
@@ -18,7 +19,7 @@ class BusinessListScreen extends Component {
     }
 
     static defaultProps = {
-        items: ['a', 'b'],
+        items: userData.business,
         auth: 'Sme'
     }
 
@@ -53,8 +54,8 @@ class BusinessListScreen extends Component {
         };
     };
 
-    handleNavigation = () => {
-        this.props.navigation.navigate('ViewBusiness');
+    handleNavigation = (data) => {
+        this.props.navigation.navigate('ViewBusiness', {data});
     }
 
     handleDelete = (value) => {
@@ -96,16 +97,15 @@ class BusinessListScreen extends Component {
     renderList = () => {
         return (
             <List>
-                <ListItemAtom
-                    item={
-                        {
-                            name: 'kay5',
-                        }
-                    }
-                    type={'business'}
-                    bodyfunction={this.handleNavigation}
-                    rightIconFunc={this.openModal}
-                />
+                {this.props.items.map((item, index) => {
+                    return <ListItemAtom
+                        item={item}
+                        key={index}
+                        type={'business'}
+                        bodyfunction={this.handleNavigation}
+                        rightIconFunc={this.openModal}
+                    />
+                })}
             </List>
         );
     }
@@ -169,7 +169,7 @@ class BusinessListScreen extends Component {
 }
 
 BusinessListScreen.propTypes = {
-    items: PropTypes.arrayOf(PropTypes.string),
+    items: PropTypes.arrayOf(PropTypes.object),
     authName: PropTypes.string
 }
 

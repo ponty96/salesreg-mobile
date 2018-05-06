@@ -1,11 +1,12 @@
 import React from "react";
-import { View, Text } from "react-native";
-import {Form} from "native-base";
+import { Text } from "react-native";
+import { Form } from "native-base";
 import PropTypes from 'prop-types';
 
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import { redButtonText } from '../Style/exportStyles';
+import InputAtom from './../Atom/InputAtom';
+import ButtonAtom from './../Atom/ButtonAtom';
+import { redButtonText, marginlessInput } from './../Style/exportStyles';
+import styles from './../Style/Form';
 
 class ResetForm extends React.Component {
     state = {
@@ -37,16 +38,17 @@ class ResetForm extends React.Component {
     render() {
         return (
             <Form>
-                <View>
-                    <Text>
-                        A reset code will be sent to {this.props.secretPhone}. Enter the code to reset your password
-                    </Text>
-                </View>
+                <Text
+                    style={styles.buttonsWrapper}
+                >
+                    A reset code will be sent to {this.props.secretPhone}. Enter the code to reset your password
+                </Text>
 
                 <InputAtom
                     placeholder={'Enter Reset Code'}
                     floatingLabel={false}
                     getValue={this.getCode}
+                    contStyle={marginlessInput}
                 />
 
                 <ButtonAtom

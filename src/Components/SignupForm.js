@@ -6,9 +6,8 @@ import { View } from 'react-native';
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import SelectGenderAtom from '../Atom/SelectGenderAtom';
-import styles from '../Style/Screen';
-import styles1 from '../Style/Form';
-import { redButtonText } from '../Style/exportStyles';
+import styles from '../Style/Form';
+import { redButtonText, marginlessInput } from '../Style/exportStyles';
 
 class SigupForm extends React.Component {
     state = {
@@ -67,15 +66,17 @@ class SigupForm extends React.Component {
                 <InputAtom
                     label="Full name"
                     getValue={this.getName}
+                    contStyle={marginlessInput}
                 />
 
                 <InputAtom
                     label="Phone number"
                     getValue={this.getPhone}
                     keyboardType="numeric"
+                    contStyle={marginlessInput}
                 />
 
-                <View style = { [styles.genderPickerWidth, styles1.genderPickerStyle] }>
+                <View style = { styles.genderPickerStyle }>
                     <SelectGenderAtom
                         gender = { this.state.gender }
                         updateGender = { this.updateGender }
@@ -86,15 +87,17 @@ class SigupForm extends React.Component {
                     label="Password"
                     getValue={this.getPassword}
                     secureTextEntry={true}
+                    contStyle={marginlessInput}
                 />
 
                 <InputAtom
                     label="Reenter-password"
                     getValue={this.getConfirm}
                     secureTextEntry={true}
+                    contStyle={marginlessInput}
                 />
 
-                <View style = { styles1.buttonsWrapper }>
+                <View style = { styles.buttonsWrapper }>
                     <ButtonAtom
                         btnText="Sign up"
                         onPress={this.signup}

@@ -93,14 +93,27 @@ export default StyleSheet.create(
             color: "#8c8c8c",
             paddingLeft: 4
         },
+        genderPickerStyle: {
+            marginTop: 25,
+            marginLeft: 10
+        },
+        buttonsWrapper: {
+            marginTop: 20
+        },
+        underneathText: {
+            marginLeft: 15,
+            color: color.inactive,
+            fontSize: 12,
+            marginBottom: 25
+        },
         font1: {
             fontSize: 11,
             color: "#000",
             paddingLeft: 4
         },
         inputView: {
-            flexDirection:"row", 
-            width: "100%", 
+            flexDirection:"row",
+            width: "100%",
             flex:1
         },
         innerStart: {
@@ -120,67 +133,67 @@ export default StyleSheet.create(
         innerFirstPicker: {
             flex: 1,
             alignItems: "flex-start",
-            alignSelf: "flex-start", 
+            alignSelf: "flex-start",
             paddingTop: 20
         },
         headerOrder: {
             backgroundColor: "#FFF"
         },
-        leftOrder: { 
-            flex: 1, 
-            width: "40%", 
-            flexDirection: "row" 
+        leftOrder: {
+            flex: 1,
+            width: "40%",
+            flexDirection: "row"
         },
         iconOrder: {
-            fontSize: 20, 
-            color: "#c0c0c0", 
+            fontSize: 20,
+            color: "#c0c0c0",
             paddingRight: 5
         },
         redColorText: {
             color: "red"
         },
         innerItemContainer: {
-            flexDirection:"column", 
-            alignSelf: "center" , 
+            flexDirection:"column",
+            alignSelf: "center" ,
             width: "98%"
         },
         cusName: {
-            width: "98%", 
-            height: 70, 
-            marginBottom: 3, 
-            borderRadius:2, 
+            width: "98%",
+            height: 70,
+            marginBottom: 3,
+            borderRadius:2,
             alignSelf: "center" ,
-            borderWidth: 1, 
-            borderColor:"#f0f0f0", 
+            borderWidth: 1,
+            borderColor:"#f0f0f0",
             marginVertical: 16
         },
         btn1: {
-            alignSelf: "flex-start", 
+            alignSelf: "flex-start",
         },
         txt1: {
             fontWeight: "bold",
             fontSize: 16,
             textAlign: "left"
         },
-        bottomSide: { 
-            width: "100%", 
-            height: 80, 
-            flexDirection: "row", 
-            borderTopColor: "#f0f0f0", 
+        bottomSide: {
+            width: "100%",
+            height: 80,
+            flexDirection: "row",
+            borderTopColor: "#f0f0f0",
             borderTopWidth:1
         },
-        innerBottom: { 
+        innerBottom: {
             flexDirection: "column",
-            alignSelf: "flex-start", 
-            width: "55%", 
+            alignSelf: "flex-start",
+            width: "55%",
             marginTop: 20
         },
         bottomGrey: {
-            color:"#c0c0c0", 
+            color:"#c0c0c0",
             paddingLeft: 16
         },
         bottomRed: {
-            color:"red", 
+            color:"red",
             paddingLeft: 16
         },
         btn2: {

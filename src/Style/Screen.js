@@ -9,6 +9,9 @@ export default StyleSheet.create(
             alignItems: 'center',
             backgroundColor: color.secondary
         },
+        defaultPadding: {
+            paddingHorizontal: 16
+        },
         plainContainer: {
             flex: 1,
             paddingHorizontal: 16,
@@ -234,9 +237,6 @@ export default StyleSheet.create(
         editDetailsWrapper: {
             marginTop: 30,
             marginBottom: 10
-        },
-        genderPickerWidth: {
-            width: 200
         },
         splashScreenLogo: {
             position: 'absolute',

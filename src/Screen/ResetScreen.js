@@ -11,15 +11,13 @@ class ResetScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <AuthenticationHeader />
-                <Text style = { styles.signUpText }>
-                    RESET PASSWORD
-                </Text>
-                <View style = {styles.signUpFormWrapper} >
-                    <View style={styles.formContainer}>
-                        <KeyboardAvoidingView style={styles.formInnerLayer} behaviour="position">
-                            <ResetForm navigation={this.props.navigation}/>
-                        </KeyboardAvoidingView>
-                    </View>
+                <View style = {styles.wrapper} >
+                    <Text style = { styles.signUpText }>
+                        RESET PASSWORD
+                    </Text>
+                    <KeyboardAvoidingView style={styles.formInnerLayer} behaviour="position">
+                        <ResetForm navigation={this.props.navigation}/>
+                    </KeyboardAvoidingView>
                 </View>
             </View>
         );

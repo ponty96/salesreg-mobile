@@ -1,24 +1,21 @@
 import React, { Component } from "react";
-import { Text, View, ListView, Image, TouchableOpacity } from "react-native";
-import { Icon, Header, Right } from "native-base";
+import PropTypes from 'prop-types';
+import { Text, View, ListView, ScrollView } from "react-native";
+import { Header, Right } from "native-base";
+
 import PickerAtom from "../Atom/PickerAtom";
 import DebtListAtom from "../Atom/DebtListAtom";
 import TotalDebtAtom from "../Atom/TotalDebtAtom";
-import { ScrollView } from "react-native-gesture-handler";
-
 import { customerListStyles } from './../Style/exportStyles';
-import { debtList } from "../config/data";
-
-const users = debtList;
   
-  export default class DebtList extends Component {
-    constructor() {
-      super();
+class DebtList extends Component {
+    constructor(props) {
+      super(props);
       const ds = new ListView.DataSource({
         rowHasChanged: (r1, r2) => r1 !== r2
       });
       this.state = {
-        userDataSource: ds.cloneWithRows(users)
+        userDataSource: ds.cloneWithRows(this.props.items)
       };
     }
     
@@ -38,7 +35,7 @@ const users = debtList;
             <Header style={customerListStyles.header}>
                 <Right style={customerListStyles.direct}>
                   <Text style={customerListStyles.dropText}>Sort By:</Text>
-                  <PickerAtom />
+                  <PickerAtom list={["Fasting selling", "Slowest selling", "Highest profit", "Lowest profit"]}/>
                 </Right>
             </Header>
                 <ScrollView>
@@ -52,3 +49,9 @@ const users = debtList;
       );
     }
   }
+
+DebtList.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+export default DebtList;

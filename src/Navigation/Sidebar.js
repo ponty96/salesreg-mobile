@@ -5,15 +5,11 @@ import { Icon } from 'native-base';
 
 import styles from './../Style/Layout';
 import ListItemAtom from './../Atom/ListItemAtom';
+import { userData } from './../config/default';
 
 class SideBar extends PureComponent {
-    handleNavigation = (location) => {
-        this.props.navigation.navigate(location,
-            {
-                name: 'Kay5iveAttractions',
-                id: 'ID here for getting data at the new screen'
-            }
-        )
+    handleNavigation = (location, data = undefined) => {
+        this.props.navigation.navigate(location, {data});
     }
 
     render() {
@@ -22,18 +18,13 @@ class SideBar extends PureComponent {
                 <View style={styles.itemsContainer}>
                     <ScrollView>
                         <TouchableOpacity
-                            onPress={() => this.handleNavigation('BusinessDetails')}
+                            onPress={() => this.handleNavigation('UserProfile', userData.profile)}
                             activeOpacity={1}
                         >
                             <ListItemAtom
-                                item={
-                                    {
-                                        name: 'kay5',
-                                        image: "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e"
-                                    }
-                                }
+                                item={userData.profile}
                                 business={false}
-                                bodyfunction={() => this.handleNavigation('BusinessDetails')}
+                                bodyfunction={() => this.handleNavigation('UserProfile', userData.profile)}
                             />
                         </TouchableOpacity>
                         <TouchableOpacity
@@ -64,7 +55,9 @@ class SideBar extends PureComponent {
                                 </Text>
                             </View>
                         </TouchableOpacity>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                            activeOpacity={1}
+                        >
                             <View style={styles.sidebarItem}>
                                 <Icon
                                     name={'help'}
