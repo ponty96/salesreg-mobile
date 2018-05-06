@@ -10,7 +10,7 @@ class SplashScreen extends Component {
         return (
             <View style = { styles.container }>
                 <Image 
-                    source = { require('../Images/SalesReg-logo-splah-sceeen.png') }
+                    source = { require('../Images/splashScreenLogo.png') }
                     style = { styles.splashScreenLogo }
                 />
                 <ProgressBar 

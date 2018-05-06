@@ -191,7 +191,7 @@ export default StyleSheet.create(
         },
         secondCompartment: {
             borderBottomWidth: 1,
-            borderBottomColor: 'lightgrey',
+            borderBottomColor: color.textBorderBottom,
             paddingBottom: 10
         },
         compartmentItemWrapper: {
@@ -220,7 +220,7 @@ export default StyleSheet.create(
         smallCompartment: {
             height: 60,
             borderBottomWidth: 1,
-            borderBottomColor: 'lightgrey',
+            borderBottomColor: color.textBorderBottom,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between'

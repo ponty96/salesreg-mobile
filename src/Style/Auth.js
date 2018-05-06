@@ -13,7 +13,8 @@ export default StyleSheet.create(
             height: '40%'
         },
         container: {
-            flex: 1
+            flex: 1,
+            backgroundColor: color.secondary
         },
         signUpText: {
             color: color.primary,

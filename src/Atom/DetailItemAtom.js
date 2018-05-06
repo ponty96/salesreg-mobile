@@ -15,12 +15,12 @@ export default class DetailItemAtom extends Component{
                         ?
                         <Icon
                             name = { this.props.icon } 
-                            type={'FontAwesome'}
+                            type={'MaterialCommunityIcons'}
                         />
                         :
                         <Icon
                             name = { this.props.icon }
-                            type = {'MaterialCommunityIcons'}
+                            type = {'FontAwesome'}
                         />
                     }
                 </Text>
