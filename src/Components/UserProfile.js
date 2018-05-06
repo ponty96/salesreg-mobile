@@ -13,10 +13,10 @@ class UserProfile extends Component {
                 <View style = { [styles.secondCompartment, styles.bottomPadding] }>
                     <View style = { styles1.selfAlign }>
                         {
-                            this.props.image
+                            this.props.item.image
                             ?
                             <Image
-                                source = {{ uri: this.props.image }}
+                                source = {{ uri: this.props.item.image }}
                                 style = { styles1.imgContainer }
                             />
                             :
@@ -28,7 +28,7 @@ class UserProfile extends Component {
                         }
                     </View>
                     <Text style = {[ styles1.selfAlign, styles.detailItemWrapper ]}>
-                        { this.props.name }
+                        { this.props.item.name }
                     </Text>
                 </View>
 
@@ -37,7 +37,7 @@ class UserProfile extends Component {
                         Gender
                     </Text>
                     <Text style = { styles.indentRight }>
-                        { this.props.gender }
+                        { this.props.item.gender }
                     </Text>
                 </View>
                 
@@ -48,7 +48,7 @@ class UserProfile extends Component {
                         type={'FontAwesome'}
                     />
                     <Text style = { styles.indentRight }>
-                        { this.props.phoneNumber }
+                        { this.props.item.phoneNumber }
                     </Text>
                 </View>
             </View>
@@ -57,10 +57,7 @@ class UserProfile extends Component {
 }
 
 UserProfile.propTypes = {
-    image: PropTypes.string,
-    name: PropTypes.string.isRequired,
-    gender: PropTypes.string.isRequired,
-    phoneNumber: PropTypes.string.isRequired
+    item: PropTypes.object.isRequired
 }
 
 export default UserProfile;

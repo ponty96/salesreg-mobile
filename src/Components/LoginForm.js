@@ -65,7 +65,6 @@ class LoginForm extends React.Component {
         <ButtonAtom
             btnText="Login"
             onPress={this.login}
-            textStyle = { redButtonText }
         />
         <ButtonAtom
             btnText="I don't have an account"

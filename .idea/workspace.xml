@@ -2,34 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/src/config/default.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Atom/ListItemAtom.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/ListItemAtom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CustomerList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CustomerList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/DebtList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DebtList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/LoginForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/OrderList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/OrderList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ProductList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProductList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ResetForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ResetForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/SignupForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/SignupForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation/Routes.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation/Routes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Navigation/Sidebar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/BusinessListScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/BusinessListScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/CustomerScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/CustomerScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/DebtsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/DebtsScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/LoginScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/LoginScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/NewBusinessScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/NewBusinessScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/OrderScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/OrderScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/ProductScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/ProductScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/ResetScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/ResetScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/SettingsScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/SettingsScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/SignupScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/SignupScreen.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/UserProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/UserProfile.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Screen/UserProfileScreen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/UserProfileScreen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Style/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style/Auth.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Style/Form.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style/Form.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Style/Screen.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style/Screen.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/data.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/config/data.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -43,54 +19,47 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="375">
-      <file leaf-file-name="BusinessDetailsScreen.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js">
+      <file leaf-file-name="LoginForm.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/LoginForm.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-910">
-              <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="data.js" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/config/data.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="187">
-              <caret line="715" lean-forward="true" selection-start-line="715" selection-end-line="715" />
+            <state relative-caret-position="279">
+              <caret line="62" column="25" lean-forward="true" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
               <folding>
-                <element signature="e#29#2566#0" />
-                <element signature="e#2593#4919#0" />
-                <element signature="e#4951#6282#0" />
-                <element signature="e#6313#7136#0" />
-                <element signature="e#7164#13789#0" />
-                <element signature="e#13819#17779#0" />
+                <element signature="e#0#26#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="default.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/config/default.js">
+      <file leaf-file-name="ButtonAtom.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Atom/ButtonAtom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="14" selection-start-line="7" selection-start-column="14" selection-end-line="7" selection-end-column="14" />
+            <state relative-caret-position="246">
+              <caret line="29" column="84" lean-forward="true" selection-start-line="29" selection-start-column="84" selection-end-line="29" selection-end-column="84" />
               <folding>
-                <element signature="e#278#74244#0" />
-                <element signature="e#372#6318#0" />
-                <element signature="e#390#819#0" />
-                <element signature="e#6340#17303#0" />
-                <element signature="e#17328#21131#0" />
-                <element signature="e#21152#24928#0" />
-                <element signature="e#25024#30970#0" />
-                <element signature="e#30992#41955#0" />
-                <element signature="e#31010#31501#0" />
-                <element signature="e#41980#45783#0" />
-                <element signature="e#45804#49580#0" />
-                <element signature="e#49672#55618#0" />
-                <element signature="e#55640#66603#0" />
-                <element signature="e#66628#70431#0" />
-                <element signature="e#70452#74228#0" />
+                <element signature="e#0#41#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Form.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Style/Form.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Color.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Style/Color.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="34">
+              <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
             </state>
           </provider>
         </entry>
@@ -106,8 +75,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>head</find>
-      <find>SaveCancelButton</find>
       <find>PropTypes</find>
       <find>this.state</find>
       <find>conso</find>
@@ -136,6 +103,8 @@
       <find>row</find>
       <find>defaultPadding</find>
       <find>mainOrderList</find>
+      <find>inn</find>
+      <find>props</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\taiwo\Documents\Lidstack\smeapp\src\Style</dir>
@@ -149,9 +118,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Atom/NameDisplayAtom.js" />
-        <option value="$PROJECT_DIR$/src/Components/NewBusinessForm.js" />
-        <option value="$PROJECT_DIR$/src/Atom/SettingsAtom.js" />
         <option value="$PROJECT_DIR$/src/Screen/DebtDetailsScreen.js" />
         <option value="$PROJECT_DIR$/src/Screen/OrderDetailsScreen.js" />
         <option value="$PROJECT_DIR$/App.js" />
@@ -178,10 +144,8 @@
         <option value="$PROJECT_DIR$/src/Style/Auth.js" />
         <option value="$PROJECT_DIR$/src/Screen/SignupScreen.js" />
         <option value="$PROJECT_DIR$/src/Components/SignupForm.js" />
-        <option value="$PROJECT_DIR$/src/Style/Form.js" />
         <option value="$PROJECT_DIR$/src/Navigation/Routes.js" />
         <option value="$PROJECT_DIR$/src/Screen/NewBusinessScreen.js" />
-        <option value="$PROJECT_DIR$/src/Screen/UserProfileScreen.js" />
         <option value="$PROJECT_DIR$/src/Screen/SettingsScreen.js" />
         <option value="$PROJECT_DIR$/src/Style/Layout.js" />
         <option value="$PROJECT_DIR$/src/Screen/DebtScreen.js" />
@@ -200,6 +164,11 @@
         <option value="$PROJECT_DIR$/src/Components/DebtList.js" />
         <option value="$PROJECT_DIR$/src/config/default.js" />
         <option value="$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js" />
+        <option value="$PROJECT_DIR$/src/Components/NewOrderForm.js" />
+        <option value="$PROJECT_DIR$/src/Atom/OrderFormAtom.js" />
+        <option value="$PROJECT_DIR$/src/Components/UserProfile.js" />
+        <option value="$PROJECT_DIR$/src/Screen/UserProfileScreen.js" />
+        <option value="$PROJECT_DIR$/src/Style/Form.js" />
       </list>
     </option>
   </component>
@@ -249,13 +218,13 @@
               <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
               <item name="smeapp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
+              <item name="Atom" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
               <item name="smeapp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="Screen" type="462c0819:PsiDirectoryNode" />
+              <item name="Style" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -299,33 +268,13 @@
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
           <PATH vcs="Git" revision="">$PROJECT_DIR$/App.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/AboveAccordionAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/AccordionAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/BottomOrderDetailAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DebtAccordionAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/MainOrderListAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/OrderDetailListAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/OrderFormAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/PickerAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/PopoverAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/SubHeaderAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/TopOrderDetailAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/TotalDebtAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/TotalOrderAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/CustomerList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/DebtList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/InnerDebtList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/MainOrderList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/NewOrderForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/OrderDetails.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/OrderList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/ProductList.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DetailItemAtom.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/CustomerDetailScreen.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/SplashScreen.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/UserProfileScreen.js</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/Color.js</PATH>
           <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/Form.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/OrderList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/ProductAndCustomerList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/exportStyles.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/config/data.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/Screen.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -333,15 +282,8 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/CustomerFormAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/EditCustomerAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/NewOrderCardAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ProductDetailAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ProductFormAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/EditCustomerForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/NewCustomerForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/NewProductForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/ProductDetails.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/UserProfile.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Images/splashScreenLogo.png</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -349,6 +291,7 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Images/SalesReg-logo-splah-sceeen.png</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -463,7 +406,7 @@
       <workItem from="1524236933809" duration="12216000" />
       <workItem from="1524482822919" duration="2121000" />
       <workItem from="1524683833415" duration="42997000" />
-      <workItem from="1525274497867" duration="44185000" />
+      <workItem from="1525274497867" duration="45474000" />
     </task>
     <task id="LOCAL-00001" summary="Implementation of full coupling">
       <created>1525284122443</created>
@@ -493,11 +436,25 @@
       <option name="project" value="LOCAL" />
       <updated>1525473003098</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="moving of data">
+      <created>1525628480230</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1525628480230</updated>
+    </task>
+    <task id="LOCAL-00006" summary="moving of data">
+      <created>1525628859825</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1525628859825</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="210897000" />
+    <option name="totallyTimeSpent" value="212186000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
@@ -571,7 +528,8 @@
     <MESSAGE value="finished modal refactoring" />
     <MESSAGE value="j10 and i modal" />
     <MESSAGE value="finsh the modal" />
-    <option name="LAST_COMMIT_MESSAGE" value="finsh the modal" />
+    <MESSAGE value="moving of data" />
+    <option name="LAST_COMMIT_MESSAGE" value="moving of data" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -579,40 +537,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Style/Color.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="15" column="1" lean-forward="true" selection-start-line="15" selection-start-column="1" selection-end-line="15" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Style/ProductAndCustomerList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="17">
-          <caret line="1" column="32" selection-start-line="1" selection-start-column="32" selection-end-line="1" selection-end-column="32" />
-          <folding>
-            <element signature="e#0#42#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Container/DebtLimitModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="451">
-          <caret line="89" column="33" lean-forward="true" selection-start-line="89" selection-start-column="33" selection-end-line="89" selection-end-column="33" />
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Container/DebtWarningModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="463">
-          <caret line="154" column="30" lean-forward="true" selection-start-line="154" selection-start-column="30" selection-end-line="154" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/SignUp.js">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -630,16 +554,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="171">
           <caret line="69" column="13" lean-forward="true" selection-start-line="69" selection-start-column="13" selection-end-line="69" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Atom/ButtonAtom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="21" lean-forward="true" selection-start-line="21" selection-start-column="21" selection-end-line="21" selection-end-column="21" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -708,16 +622,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/LoginForm.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="259">
-          <caret line="47" column="37" selection-start-line="47" selection-start-column="37" selection-end-line="47" selection-end-column="37" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Screen/LoginScreen.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -754,16 +658,6 @@
           <caret line="53" column="34" lean-forward="true" selection-start-line="53" selection-start-column="34" selection-end-line="53" selection-end-column="34" />
           <folding>
             <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Style/Form.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="263">
-          <caret line="66" column="22" lean-forward="true" selection-start-line="66" selection-start-column="22" selection-end-line="66" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -854,16 +748,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen/UserProfileScreen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="178">
-          <caret line="74" column="27" lean-forward="true" selection-start-line="74" selection-start-column="27" selection-end-line="74" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Screen/SettingsScreen.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="195">
@@ -888,13 +772,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
           <caret line="10" column="20" lean-forward="true" selection-start-line="10" selection-start-column="20" selection-end-line="10" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Style/Screen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="25" column="6" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
         </state>
       </provider>
     </entry>
@@ -931,16 +808,6 @@
     <entry file="file://$PROJECT_DIR$/src/Screen/OnBoardingScreen.js">
       <provider selected="true" editor-type-id="text-editor">
         <state>
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen/BusinessListScreen.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="467">
-          <caret line="170" column="26" selection-start-line="170" selection-start-column="26" selection-end-line="170" selection-end-column="26" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>
@@ -1018,6 +885,28 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/config/data.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="715" lean-forward="true" selection-start-line="715" selection-end-line="715" />
+          <folding>
+            <element signature="e#29#2566#0" />
+            <element signature="e#2593#4919#0" />
+            <element signature="e#4951#6282#0" />
+            <element signature="e#6313#7136#0" />
+            <element signature="e#7164#13789#0" />
+            <element signature="e#13819#17779#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-910">
+          <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/config/default.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
@@ -1042,24 +931,87 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js">
+    <entry file="file://$PROJECT_DIR$/src/Screen/BusinessListScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-910">
-          <caret line="15" column="35" lean-forward="true" selection-start-line="15" selection-start-column="35" selection-end-line="15" selection-end-column="35" />
+        <state relative-caret-position="85">
+          <caret line="5" column="40" lean-forward="true" selection-start-line="5" selection-start-column="40" selection-end-line="5" selection-end-column="40" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/config/data.js">
+    <entry file="file://$PROJECT_DIR$/src/Screen/UserProfileScreen.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="715" lean-forward="true" selection-start-line="715" selection-end-line="715" />
+        <state relative-caret-position="34">
+          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/Screen.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="408">
+          <caret line="25" column="6" selection-start-line="25" selection-start-column="6" selection-end-line="25" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/UserProfile.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="867">
+          <caret line="51" column="27" lean-forward="true" selection-start-line="51" selection-start-column="27" selection-end-line="51" selection-end-column="27" />
           <folding>
-            <element signature="e#29#2566#0" />
-            <element signature="e#2593#4919#0" />
-            <element signature="e#4951#6282#0" />
-            <element signature="e#6313#7136#0" />
-            <element signature="e#7164#13789#0" />
-            <element signature="e#13819#17779#0" />
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/OrderFormAtom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="272">
+          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/NewOrderForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" column="36" selection-start-line="1" selection-start-column="36" selection-end-line="1" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/LoginForm.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="279">
+          <caret line="62" column="25" lean-forward="true" selection-start-line="62" selection-start-column="25" selection-end-line="62" selection-end-column="25" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/Color.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="4" selection-start-line="2" selection-start-column="4" selection-end-line="2" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/ButtonAtom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="246">
+          <caret line="29" column="84" lean-forward="true" selection-start-line="29" selection-start-column="84" selection-end-line="29" selection-end-column="84" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/Form.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="24" selection-start-line="21" selection-start-column="24" selection-end-line="21" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

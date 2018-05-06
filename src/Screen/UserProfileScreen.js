@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
 import { Icon } from 'native-base';
-import { Image, View, Text } from 'react-native';
-import { Image, View, Text, TouchableOpacity } from 'react-native';
+import PropTypes from 'prop-types';
+import { View, Text, TouchableOpacity } from 'react-native';
 
 import UserProfile from '../Components/UserProfile';
+import styles from './../Style/Screen';
 
 class UserProfileScreen extends Component {
     state = {
@@ -43,10 +44,7 @@ class UserProfileScreen extends Component {
     render() {
         return (
             <UserProfile
-                image = { this.state.image }
-                name = { this.state.name }
-                gender = { this.state.gender }
-                phoneNumber = { this.state.phoneNumber }
+                item={this.state.item}
             />
         );
     }

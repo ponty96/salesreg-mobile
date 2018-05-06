@@ -60,7 +60,6 @@ class ResetForm extends React.Component {
                     btnText="Reset Password"
                     onPress={this.reset}
                     disabled={this.state.code ? false : true}
-                    textStyle = { redButtonText }
                 />
                 <ButtonAtom
                     btnText="I don't have an account"

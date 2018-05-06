@@ -101,7 +101,6 @@ class SigupForm extends React.Component {
                     <ButtonAtom
                         btnText="Sign up"
                         onPress={this.signup}
-                        textStyle = { redButtonText }
                     />
                     <ButtonAtom
                         btnText="I have an account already"

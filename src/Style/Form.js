@@ -53,8 +53,7 @@ export default StyleSheet.create(
         },
         icon: {
             marginTop: 15,
-            color: color.inactive,
-            fontSize: 150
+            color: color.inactive
         },
         itemsContainer: {
             flex: 1,
