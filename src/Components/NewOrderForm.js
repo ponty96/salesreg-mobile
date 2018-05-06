@@ -1,10 +1,8 @@
 import React from "react";
-import { View, KeyboardAvoidingView, ScrollView } from "react-native";
-import PropTypes from "prop-types";
+import { View } from "react-native";
 
 import OrderFormAtom from '../Atom/OrderFormAtom';
 import SaveCancelButton from "../Container/SaveCancelButton";
-import {marginlessInput} from './../Style/exportStyles';
 import styles from './../Style/OrderList';
 
 class NewOrderForm extends React.Component {
