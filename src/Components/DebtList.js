@@ -1,15 +1,13 @@
 import React, { Component } from "react";
-import { Text, View, ListView, FlatList, Image, TouchableOpacity } from "react-native";
+import { Text, View, FlatList, ScrollView } from "react-native";
 import { Icon, Header, Right } from "native-base";
 import PickerAtom from "../Atom/PickerAtom";
 import DebtListAtom from "../Atom/DebtListAtom";
 import TotalDebtAtom from "../Atom/TotalDebtAtom";
-import { ScrollView } from "react-native-gesture-handler";
-
 import { customerListStyles } from './../Style/exportStyles';
 import { debtList } from "../config/data";
   
-  export default class DebtList extends Component {
+class DebtList extends Component {
    
     onPress = () => {};
   
@@ -42,3 +40,9 @@ import { debtList } from "../config/data";
       );
     }
   }
+
+DebtList.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+export default DebtList;

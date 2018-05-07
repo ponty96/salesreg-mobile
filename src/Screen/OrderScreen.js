@@ -29,10 +29,12 @@ class OrderScreen extends Component {
     };
 
     render() {
-        // do change the list to the appropriate molecule
+        const { params } = this.props.navigation.state;
+        const items = params.data.orders;
+
         return (
             <View style={ styles.centerContainer }>
-                <OrderList />
+                <OrderList items={items}/>
                 <FabAtom
                     routeName={'NewOrder'}
                     name={'add-shopping-cart'}

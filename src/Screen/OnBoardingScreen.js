@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text } from 'react-native';
-import Icon from 'react-native-vector-icons/Entypo';
+import { Icon } from 'native-base';
 
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from '../Style/Auth';
@@ -29,8 +29,8 @@ class OnBoardingScreen extends Component {
                             >
                                 <Icon
                                     name = 'check'
-                                    size = { 14 }
                                     style = { styles.blueCheck }
+                                    type = 'Entypo'
                                 />
                                 <Text style = { styles.appDetailsText }>
                                     { details }

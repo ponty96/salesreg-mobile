@@ -1,14 +1,13 @@
 import React, { Component } from 'react';
-import { View, Text } from 'react-native';
+import { View } from 'react-native';
 import { Icon } from 'native-base';
-import DebtList from './../Components/DebtList';
 
+import DebtList from './../Components/DebtList';
 import styles from './../Style/Screen';
-import { color } from './../Style/Color';
 
 class DebtsScreen extends Component {
 
-    static navigationOptions = ({ navigation, navigationOptions }) => {
+    static navigationOptions = ({ navigation }) => {
         const { params } = navigation.state;
         let right = <Icon
                         name={'ios-search'}
@@ -29,10 +28,12 @@ class DebtsScreen extends Component {
     };
 
     render() {
-        // do change the list to the appropriate molecule
+        const { params } = this.props.navigation.state;
+        const items = params.data.debts;
+
         return (
             <View style={ styles.centerContainer }>
-                <DebtList />
+                <DebtList items={items}/>
             </View>
         )
     }

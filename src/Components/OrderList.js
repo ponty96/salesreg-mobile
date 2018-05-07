@@ -1,18 +1,17 @@
 import React, { Component } from "react";
-import { Text, View, ListView, FlatList, Image, TouchableOpacity } from "react-native";
-import { Icon } from "native-base";
+import PropTypes from 'prop-types';
+import { View, FlatList } from "react-native";
 
 import { orderListStyles } from './../Style/exportStyles';
 import DateOrderAtom from "../Atom/DateOrderAtom";
 import TotalOrderAtom from "../Atom/TotalOrderAtom";
 import OrderListAtom from "../Atom/OrderListAtom";
-import { orderList } from "../config/data";
 
-export default class OrderList extends Component {
-  constructor() {
-    super();
+class OrderList extends Component {
+  constructor(props) {
+    super(props);
     this.state = {
-      data: orderList,
+      data: this.props.items,
       stickyHeaderIndices: []
     };
   }
@@ -62,3 +61,9 @@ export default class OrderList extends Component {
     );
   }
 }
+
+OrderList.propTypes = {
+  items: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+export default OrderList;

@@ -1,10 +1,6 @@
 import React, { Component } from "react";
-import {
-  View,
-  FlatList
-} from "react-native";
+import { View, FlatList, ScrollView } from "react-native";
 import { Icon } from 'native-base';
-import { ScrollView } from "react-native-gesture-handler";
 
 import ProductListAtom from "../Atom/ProductListAtom";
 import SubHeaderAtom from "../Atom/SubHeaderAtom";
@@ -13,11 +9,11 @@ import { productList } from "../config/data";
 
 
   
-  export default class ProductList extends Component {
+class ProductList extends Component {
   
     onPress = () => {
       alert("Product View Unavailable");
-    };
+    }
 
     renderItem = ({item}) => {
       return (
@@ -43,3 +39,10 @@ import { productList } from "../config/data";
       );
     }
   }
+  
+
+  ProductList.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired
+  }
+
+  export default ProductList;

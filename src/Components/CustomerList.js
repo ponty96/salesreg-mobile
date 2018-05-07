@@ -1,16 +1,14 @@
 import React, { Component } from "react";
-import { Text, View, ListView, FlatList, Image, TouchableOpacity } from "react-native";
+import { Text, View, FlatList, ScrollView } from "react-native";
 import { Icon } from "native-base";
 import CustomerListAtom from "../Atom/CustomerListAtom";
 import SubHeaderAtom from "../Atom/SubHeaderAtom";
-import { ScrollView } from "react-native-gesture-handler";
-
 import { customerListStyles } from './../Style/exportStyles';
 import { customerList } from "../config/data";
 
 
 
-export default class CustomerList extends Component {
+class CustomerList extends Component {
 
   onPress = () => {};
 
@@ -51,3 +49,9 @@ export default class CustomerList extends Component {
     );
   }
 }
+
+CustomerList.propTypes = {
+    items: PropTypes.arrayOf(PropTypes.object).isRequired
+}
+
+export default CustomerList;

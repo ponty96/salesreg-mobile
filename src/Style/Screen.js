@@ -9,6 +9,9 @@ export default StyleSheet.create(
             alignItems: 'center',
             backgroundColor: color.secondary
         },
+        defaultPadding: {
+            paddingHorizontal: 16
+        },
         plainContainer: {
             flex: 1,
             paddingHorizontal: 16,
@@ -191,7 +194,7 @@ export default StyleSheet.create(
         },
         secondCompartment: {
             borderBottomWidth: 1,
-            borderBottomColor: 'lightgrey',
+            borderBottomColor: color.textBorderBottom,
             paddingBottom: 10
         },
         compartmentItemWrapper: {
@@ -220,7 +223,7 @@ export default StyleSheet.create(
         smallCompartment: {
             height: 60,
             borderBottomWidth: 1,
-            borderBottomColor: 'lightgrey',
+            borderBottomColor: color.textBorderBottom,
             flexDirection: 'row',
             alignItems: 'center',
             justifyContent: 'space-between'
@@ -234,9 +237,6 @@ export default StyleSheet.create(
         editDetailsWrapper: {
             marginTop: 30,
             marginBottom: 10
-        },
-        genderPickerWidth: {
-            width: 200
         },
         splashScreenLogo: {
             position: 'absolute',

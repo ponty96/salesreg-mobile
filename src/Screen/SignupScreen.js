@@ -1,5 +1,5 @@
 import React from "react";
-import { Text, View, KeyboardAvoidingView } from "react-native";
+import { Text, View, KeyboardAvoidingView, ScrollView } from "react-native";
 
 import styles from './../Style/Auth';
 import SignupForm from './../Components/SignupForm';
@@ -10,16 +10,16 @@ class SignupScreen extends React.Component {
         return (
             <View style = { styles.container }>
                 <AuthenticationHeader />
-                <Text style = { styles.signUpText }>
-                    SIGN UP
-                </Text>
-                <View style = {styles.signUpFormWrapper} >
-                    <KeyboardAvoidingView 
-                        behaviour="position"
-                    >
-                        <SignupForm  navigation = {this.props.navigation}/>
-                    </KeyboardAvoidingView>
-                </View>
+                <ScrollView>
+                    <View style = {styles.wrapper} >
+                        <Text style = { styles.signUpText }>
+                            SIGN UP
+                        </Text>
+                        <KeyboardAvoidingView  behaviour="position">
+                            <SignupForm  navigation = {this.props.navigation}/>
+                        </KeyboardAvoidingView>
+                    </View>
+                </ScrollView>
             </View>
         );
     }

@@ -1,12 +1,11 @@
 import React from "react";
 import { View, KeyboardAvoidingView, ScrollView } from "react-native";
-import { Form, Header, Text, Left, Right, Icon, Card, CardItem } from "native-base";
-import PropTypes from "prop-types";
+import { Header, Text, Left, Right, Icon } from "native-base";
 
 import InputAtom from './InputAtom';
 import NewOrderCardAtom from "./NewOrderCardAtom";
 import ButtonAtom from "./ButtonAtom";
-import { marginfulInput, marginlessInput } from './../Style/exportStyles';
+import { marginfulInput } from './../Style/exportStyles';
 import styles from './../Style/Form';
 
 class OrderFormAtom extends React.Component {
@@ -43,7 +42,7 @@ class OrderFormAtom extends React.Component {
                         <Right><Text>Total: <Text style={styles.redColorText}>#0.00</Text></Text></Right>
                     </Header>
                     <ScrollView>
-                        <View style={innerItemContainer}>
+                        <View style={styles.innerItemContainer}>
                             <View style={styles.cusName}>
                                 <InputAtom
                                     label="Customer"

@@ -6,7 +6,6 @@ export const color = {
     disabled: '#ccc',
     warning: '#ff9630',
     black: '#000',
-    white: '#fff',
     textBorderBottom: '#E8E8E8',
     redButton: '#E50000',
     header: '#c10505',
@@ -15,6 +14,5 @@ export const color = {
     totalProfit: "#FFE4D7",
     totalSales: '#FBF3ED',
     blueCheck: '#27CBD3',
-    appDetailsText: '#000000',
-    white: '#FFFFFF'
+    appDetailsText: '#000000'
 }

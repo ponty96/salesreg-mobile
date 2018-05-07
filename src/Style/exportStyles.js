@@ -546,5 +546,5 @@ export const signupButton = {
 };
 
 export const redButtonText = {
-    color: color.white
+    color: color.secondary
 };

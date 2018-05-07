@@ -21,14 +21,7 @@ export default class CustomerDetailScreen extends React.Component {
             birthday: '03 March',
             marriageAniversary: '25 November',
             creditLimit: '7000.00',
-            wallet: '0.00',
-            icon: {
-                addressIcon: 'map-marker',
-                emailIcon: 'envelope',
-                callIcon: 'phone',
-                birthdayIcon: 'birthday-cake',
-                ringIcon: 'ring'
-            }
+            wallet: '0.00'
         }
     }
   
@@ -65,31 +58,31 @@ export default class CustomerDetailScreen extends React.Component {
                 </Text>
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
-                        icon = { this.state.item.icon.callIcon }
+                        icon = 'phone'
                         detailText = { this.state.item.phoneNumber}
                     />
                 </View>
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
-                        icon = { this.state.item.icon.addressIcon }
+                        icon = 'map-marker'
                         detailText = { this.state.item.address }
                     />
                 </View>
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
-                        icon = { this.state.item.icon.emailIcon }
+                        icon = 'envelope'
                         detailText = { this.state.item.email }
                     />
                 </View>
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
-                        icon = { this.state.item.icon.birthdayIcon }
+                        icon = 'birthday-cake'
                         detailText = { this.state.item.birthday }
                     />
                 </View>
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
-                        icon = { this.state.item.icon.ringIcon }
+                        icon = 'ring'
                         detailText = { this.state.item.marriageAniversary }
                     />
                 </View>

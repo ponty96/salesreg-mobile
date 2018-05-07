@@ -38,8 +38,9 @@ class NewBusinessScreen extends Component {
 
     componentWillMount() {
         this.setState({
-            item: this.props.navigation.getParam('item', undefined)
+            item: this.props.navigation.getParam('data', undefined)
         });
+        console.log(this.state.item);
     }
     
     render() {

@@ -1,15 +1,14 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Icon } from 'native-base'
+import React, { Component } from 'react';
+import { View } from 'react-native';
+import { Icon } from 'native-base';
 
-import styles from './../Style/Screen'
-import FabAtom from './../Atom/FabAtom'
-import CustomerList from './../Components/CustomerList'
-import { color } from './../Style/Color'
+import styles from './../Style/Screen';
+import FabAtom from './../Atom/FabAtom';
+import CustomerList from './../Components/CustomerList';
 
 class CustomerScreen extends Component {
 
-    static navigationOptions = ({ navigation, navigationOptions }) => {
+    static navigationOptions = ({ navigation }) => {
         const { params } = navigation.state;
         let right = <Icon
                         name={'ios-search'}
@@ -30,10 +29,12 @@ class CustomerScreen extends Component {
     };
 
     render() {
-        // do change the list to the appropriate molecule
+        const { params } = this.props.navigation.state;
+        const items = params.data.customers;
+
         return (
             <View style={ styles.centerContainer }>
-                <CustomerList />
+                <CustomerList items={items}/>
                 <FabAtom
                     routeName={'NewCustomer'}
                     name={'md-person-add'}
