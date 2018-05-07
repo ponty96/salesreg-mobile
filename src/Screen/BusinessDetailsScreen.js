@@ -15,12 +15,7 @@ class BusinessDetailsScreen extends Component {
             email: 'kay5@gmail.com',
             description: 'Simply dummy text of the printing and typesetting industry. ' +
                             'Loren Ipsum has been the industry\'s standard dummy text ever since the 1550s, when an unknown printer took a ' +
-                            'gallery of type and scrambled it',
-            icon: {
-                addressIcon: 'map-marker',
-                emailIcon: 'envelope',
-                documentIcon: 'file'
-            }
+                            'gallery of type and scrambled it'
         }
     }
 
@@ -65,7 +60,7 @@ class BusinessDetailsScreen extends Component {
             <View style={styles.container}>
                 <View style = {styles.nameDisplay}>
                     <NameDisplayAtom
-                        businessName = { this.state.item.name }
+                        businessName = { this.state.item.businessName }
                         image = { this.state.item.image }
                     />
                 </View>
@@ -77,20 +72,23 @@ class BusinessDetailsScreen extends Component {
                 <View>
                     <View style = { styles.detailItemWrapper }>
                         <DetailItemAtom 
-                            icon = { this.state.item.icon.addressIcon }
+                            icon = 'map-marker'
                             detailText = { this.state.item.address }
+                            type = 'FontAwesome'
                         />
                     </View>
                     <View style = { styles.detailItemWrapper }>
                         <DetailItemAtom 
-                            icon = {'email'}
+                            icon = 'envelope'
                             detailText = { this.state.item.email }
+                            type = 'FontAwesome'
                         />
                     </View>
                     <View style = { styles.detailItemWrapper }>
                         <DetailItemAtom 
-                            icon = { this.state.item.icon.documentIcon }
+                            icon = 'file'
                             detailText = { this.state.item.description }
+                            type = 'FontAwesome'
                         />
                     </View>
                 </View>
