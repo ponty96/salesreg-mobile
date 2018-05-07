@@ -196,6 +196,13 @@ export default StyleSheet.create(
             color: color.inactive,
             marginLeft: 15,
             fontSize: 12
+        },
+        genderPickerStyle: {
+            marginTop: 25,
+            marginLeft: 10
+        },
+        buttonsWrapper: {
+            marginTop: 20
         }
     }
 )

@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import { Icon } from 'native-base';
-import { Image, View, Text } from 'react-native';
 
 import UserProfile from '../Components/UserProfile';
 
