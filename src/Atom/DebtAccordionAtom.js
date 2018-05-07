@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ListItem, Text, Thumbnail, Left, Body, Right } from "native-base";
-import { ListView, View } from "react-native";
+import { FlatList, View } from "react-native";
 import styles from "./../Style/ProductAndCustomerList";
-import { ScrollView } from "react-native-gesture-handler";
+import { ScrollView, FlatList } from "react-native-gesture-handler";
+import { innerAccordion } from "../config/data";
 
 class InnerList extends Component {
   render() {
@@ -30,58 +31,15 @@ InnerList.propTypes = {
   items: PropTypes.object.isRequired,
 };
 
-const users = [
-    {
-      name: "Iman Powder",
-      date: "20-03-2018",
-      amount: "400",
-      quantity: 1,
-      images:
-        "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa"
-    },
-    {
-      name: "Close up",
-      date: "20-04-2018",
-      amount: "150",
-      quantity: 1,
-      images:
-        "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7"
-    },
-    {
-      name: "Honey Soap",
-      date: "20-04-2018",
-      amount: "3,000",
-      quantity: 2,
-      images:
-        "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa"
-    },
-    {
-        name: "Tresee liquid bath",
-        date: "20-05-2018",
-        amount: "700",
-        quantity: 1,
-        images:
-        "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d"
-    }
-  ];
+const users = innerAccordion;
   
   export default class DebtAccordionAtom extends Component {
-    constructor() {
-      super();
-      const ds = new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2
-      });
-      this.state = {
-        userDataSource: ds.cloneWithRows(users)
-      };
-    }
-    
     onPress = () => {};
   
-    renderRow(user) {
+    renderItem = ({item}) => {
       return (
         <InnerList
-          items={user}
+          items={item}
         />
       );
     }
@@ -90,9 +48,10 @@ const users = [
       return (
         <View style={styles.debtAccord}>
             <ScrollView>
-                <ListView
-                    dataSource={this.state.userDataSource}
-                    renderRow={this.renderRow.bind(this)}
+                <FlatList
+                  data={users}
+                  renderItem={this.renderItem}
+                  keyExtractor={item => item.key}
                 />
             </ScrollView>
         </View>
