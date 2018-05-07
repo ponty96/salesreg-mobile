@@ -7,7 +7,7 @@ import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import PickerAtom from '../Atom/PickerAtom';
 import styles from '../Style/Form';
-import { marginlessInput } from '../Style/exportStyles';
+import { marginlessInput, faintPicker } from '../Style/exportStyles';
 
 class SigupForm extends React.Component {
     state = {
@@ -79,6 +79,7 @@ class SigupForm extends React.Component {
                 <View style = { styles.genderPickerStyle }>
                     <PickerAtom
                         list = { ['Male', 'Female'] }
+                        style = { faintPicker }
                     />
                 </View>
 

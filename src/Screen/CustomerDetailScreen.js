@@ -52,6 +52,7 @@ export default class CustomerDetailScreen extends React.Component {
                     </View>
                 </View>
             </View>
+            
             <View style = { styles.secondCompartment }>
                 <Text style = { styles.details }>
                     Details
@@ -60,30 +61,39 @@ export default class CustomerDetailScreen extends React.Component {
                     <DetailItemAtom 
                         icon = 'phone'
                         detailText = { this.state.item.phoneNumber}
+                        type = 'FontAwesome'
                     />
                 </View>
+
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = 'map-marker'
                         detailText = { this.state.item.address }
+                        type = 'FontAwesome'
                     />
                 </View>
+
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = 'envelope'
                         detailText = { this.state.item.email }
+                        type = 'FontAwesome'
                     />
                 </View>
+
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = 'birthday-cake'
                         detailText = { this.state.item.birthday }
+                        type = 'FontAwesome'
                     />
                 </View>
+
                 <View style = { styles.detailItemWrapper }>
                     <DetailItemAtom 
                         icon = 'ring'
                         detailText = { this.state.item.marriageAniversary }
+                        type = 'MaterialCommunityIcons'
                     />
                 </View>
             </View>
@@ -95,6 +105,7 @@ export default class CustomerDetailScreen extends React.Component {
                     <GoldRatingsAtom /> 
                 </View>
             </View>
+
             <View style = { styles.secondCompartment }>
                 <View style = { [ styles.compartmentItemWrapper, styles.creditLimit ] }>
                     <Text style = { styles.compartmentItem }>
@@ -105,6 +116,7 @@ export default class CustomerDetailScreen extends React.Component {
                     </Text>
                 </View>
             </View>
+
             <View style = { [ styles.compartmentItemWrapper, styles.creditLimit ] }>
                 <View style = { styles.walletWrapper }>
                     <Text style = { styles.compartmentItem }>

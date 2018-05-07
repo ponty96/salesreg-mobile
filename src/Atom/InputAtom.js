@@ -32,6 +32,7 @@ class InputAtom extends Component {
                         style = {this.props.inputStyle}
                         numberOfLines={6}
                         underlineColorAndroid = {'transparent'}
+                        placeholderTextColor = { styles.placeholderColor }
                     />
                 </Item>
                 { 

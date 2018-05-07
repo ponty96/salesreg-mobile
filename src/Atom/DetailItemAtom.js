@@ -10,19 +10,10 @@ export default class DetailItemAtom extends Component{
         return(
             <View style = {styles.detailItemWrapper}>
                 <Text>
-                    {
-                        this.props.icon === 'ring'
-                        ?
-                        <Icon
-                            name = { this.props.icon } 
-                            type={'MaterialCommunityIcons'}
-                        />
-                        :
-                        <Icon
-                            name = { this.props.icon }
-                            type = {'FontAwesome'}
-                        />
-                    }
+                    <Icon
+                        name = { this.props.icon }
+                        type = { this.props.type }
+                    />
                 </Text>
                 <Text style = {styles.detailText}>
                     {this.props.detailText}
