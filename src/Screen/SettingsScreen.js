@@ -32,7 +32,7 @@ class SettingsScreen extends Component {
                     <ListItemAtom
                         item={
                             {
-                                name: 'kay5',
+                                name: 'Debt',
                             }
                         }
                         type={'debt'}

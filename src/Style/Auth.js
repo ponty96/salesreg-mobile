@@ -14,41 +14,38 @@ export default StyleSheet.create(
         },
         container: {
             flex: 1,
-            backgroundColor: color.secondary
+            backgroundColor: '#fff'
+        },
+        wrapper: {
+            paddingHorizontal: 32
         },
         signUpText: {
             color: color.primary,
-            marginVertical: 30,
-            fontSize: 14,
-            alignSelf: 'center',
-            fontWeight: '400'
+            marginTop: 32,
+            alignSelf: 'center'
         },
-        signUpFormWrapper: {
-            marginLeft: 20,
-            marginRight: 35
-        },
-        boardingScreenFeatureText: {
-            marginVertical: 40,
-            marginHorizontal: 30
-        },
-        blueCheck: {
-            color: color.blueCheck
-        },
-        appFunctionWrapper: {
-            flexDirection: 'row',
-            marginVertical: 10
-        },
-        appDetailsText: {
-            marginLeft: 20,
-            color: color.appDetailsText,
-            fontSize: 14
-        },
-        buttomButtonsWrapper: {
-            flexDirection: 'row',
-            alignSelf: 'center',
-            width: '88%',
-            position: 'absolute',
-            bottom: 60
-        }
+        // boardingScreenFeatureText: {
+        //     marginVertical: 40,
+        //     marginHorizontal: 30
+        // },
+        // blueCheck: {
+        //     color: color.blueCheck
+        // },
+        // appFunctionWrapper: {
+        //     flexDirection: 'row',
+        //     marginVertical: 10
+        // },
+        // appDetailsText: {
+        //     marginLeft: 20,
+        //     color: color.appDetailsText,
+        //     fontSize: 14
+        // },
+        // buttomButtonsWrapper: {
+        //     flexDirection: 'row',
+        //     alignSelf: 'center',
+        //     width: '88%',
+        //     position: 'absolute',
+        //     bottom: 60
+        // }
     }
 );

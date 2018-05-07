@@ -65,7 +65,7 @@ class BusinessDetailsScreen extends Component {
             <View style={styles.container}>
                 <View style = {styles.nameDisplay}>
                     <NameDisplayAtom
-                        businessName = { this.state.item.businessName }
+                        businessName = { this.state.item.name }
                         image = { this.state.item.image }
                     />
                 </View>

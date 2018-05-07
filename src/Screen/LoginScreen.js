@@ -10,15 +10,13 @@ class LoginScreen extends React.Component {
         return (
             <View style={styles.container}>
                 <AuthenticationHeader />
-                <Text style = { styles.signUpText }>
-                    LOGIN
-                </Text>
-                <View style = {styles.signUpFormWrapper} >
-                    <View style={styles.formContainer}>
-                        <KeyboardAvoidingView style={styles.formInnerLayer} behaviour="position">
-                            <LoginForm navigation={this.props.navigation}/>
-                        </KeyboardAvoidingView>
-                    </View>
+                <View style = {styles.wrapper} >
+                    <Text style = { styles.signUpText }>
+                        LOGIN
+                    </Text>
+                    <KeyboardAvoidingView behaviour="position">
+                        <LoginForm navigation={this.props.navigation}/>
+                    </KeyboardAvoidingView>
                 </View>
             </View>
         );
