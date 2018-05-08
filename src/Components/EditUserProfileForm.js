@@ -9,7 +9,7 @@ import ImageAtom from '../Atom/ImageAtom';
 import styles1 from './../Style/Layout';
 import styles from './../Style/Screen';
 import SaveCancelButton from "../Container/SaveCancelButton";
-import { marginlessInput } from './../Style/exportStyles';
+import { marginlessInput, pickerStyle } from './../Style/exportStyles';
 
 class EditUserProfileForm extends Component {
     render() {
@@ -46,6 +46,7 @@ class EditUserProfileForm extends Component {
                         </Text>
                         <PickerAtom
                             list = { ['Male', 'Female'] }
+                            style = { pickerStyle }
                         />
                     </View>
                 </ScrollView>
