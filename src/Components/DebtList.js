@@ -1,30 +1,20 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
-import { Text, View, ListView, ScrollView } from "react-native";
-import { Header, Right } from "native-base";
-
+import { Text, View, FlatList, ScrollView } from "react-native";
+import { Icon, Header, Right } from "native-base";
 import PickerAtom from "../Atom/PickerAtom";
 import DebtListAtom from "../Atom/DebtListAtom";
 import TotalDebtAtom from "../Atom/TotalDebtAtom";
 import { customerListStyles } from './../Style/exportStyles';
+import { debtList } from "../config/data";
   
 class DebtList extends Component {
-    constructor(props) {
-      super(props);
-      const ds = new ListView.DataSource({
-        rowHasChanged: (r1, r2) => r1 !== r2
-      });
-      this.state = {
-        userDataSource: ds.cloneWithRows(this.props.items)
-      };
-    }
-    
+   
     onPress = () => {};
   
-    renderRow(user) {
+    renderItem = ({item}) => {
       return (
         <DebtListAtom
-          items={user}
+          items={item}
         />
       );
     }
@@ -39,9 +29,10 @@ class DebtList extends Component {
                 </Right>
             </Header>
                 <ScrollView>
-                    <ListView
-                        dataSource={this.state.userDataSource}
-                        renderRow={this.renderRow.bind(this)}
+                    <FlatList
+                      data={debtList}
+                      renderItem={this.renderItem}
+                      keyExtractor={item => item.key}
                     />
                 </ScrollView>
             <TotalDebtAtom limit={80000} totalAmount="80,000"/>

@@ -7,55 +7,9 @@ import Accordion from 'react-native-collapsible/Accordion';
 import DebtAccordionAtom from './DebtAccordionAtom';
 import { ScrollView } from 'react-native-gesture-handler';
 import styles from "../Style/OrderList";
+import { sections } from '../config/data';
 
-const SECTIONS = [
-  {
-    orderId: 1112343,
-    customerName: "Salomy",
-    date: "03-10-2018",
-    time: "02:00pm",
-    amount: 20,
-    debt: 2000,
-    position: "bottom",
-    tag: "Delivered",
-    check: false
-  },
-  {
-    orderId: 1226389,
-    customerName: "Mummy Ella",
-    date: "14-09-2018",
-    time: "11:57pm",
-    amount: 3,
-    debt: 1500,
-    position: "bottom",
-    tag: "Delivered",
-    check: false
-  },
-  {
-    orderId: 5363782,
-    customerName: "Mr David",
-    date: "11-09-2018",
-    time: "10:00am",
-    amount: 1,
-    debt: 3000,
-    position: "bottom",
-    tag: "Pending",
-    check: false
-  },
-  {
-    orderId: 1164897,
-    customerName: "Klazbaba",
-    date: "08-08-2018",
-    time: "09:31am",
-    amount: 10,
-    debt: 4500,
-    position: "bottom",
-    tag: "Delivered | Recalled",
-    check: true
-  },
-];
-
-  
+const SECTIONS = sections;
 
 export default class AccordionAtom extends Component {
   constructor() {

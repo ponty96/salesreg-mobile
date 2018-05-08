@@ -1,57 +1,45 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
-import { View, ListView, ScrollView } from "react-native";
+import { View, FlatList, ScrollView } from "react-native";
 import { Icon } from 'native-base';
 
 import ProductListAtom from "../Atom/ProductListAtom";
 import SubHeaderAtom from "../Atom/SubHeaderAtom";
 import styles from '../Style/ProductAndCustomerList';
+import { productList } from "../config/data";
 
+
+  
 class ProductList extends Component {
-  constructor(props) {
-    super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-    this.state = {
-      userDataSource: ds.cloneWithRows(this.props.items)
-    };
-  }
+  
+    onPress = () => {
+      alert("Product View Unavailable");
+    }
 
-  static navigationOptions = {
-    tabBarIcon: ({tintColor})=>(
-      <Icon name="md-briefcase" style={{color: tintColor}} />
-    )
-  }
-
-
-  onPress = () => {
-    alert("Product View Unavailable");
-  };
-
-  renderRow = (user) => {
-    return (
-      <ProductListAtom
-        onPress={this.onPress}
-        items = {user}
-      />
-    );
-  }
+    renderItem = ({item}) => {
+      return (
+        <ProductListAtom
+          onPress={this.onPress}
+          items = {item}
+        />
+      );
+    }
 
     render() {
       return (
         <View style={styles.container}>
           <SubHeaderAtom list={["Fasting selling", "Slowest selling", "Highest profit", "Lowest profit"]}/>
             <ScrollView>
-              <ListView
-                dataSource={this.state.userDataSource}
-                renderRow={this.renderRow.bind(this)}
+              <FlatList
+                data={productList}
+                renderItem={this.renderItem}
+                keyExtractor={item => item.key}
               />
             </ScrollView>
         </View>
       );
     }
   }
+  
 
   ProductList.propTypes = {
     items: PropTypes.arrayOf(PropTypes.object).isRequired
