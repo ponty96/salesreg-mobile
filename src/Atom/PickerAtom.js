@@ -23,7 +23,7 @@ class PickerAtom extends Component {
                 iosHeader="Select one"
                 mode="dropdown"
                 iosIcon={<Icon name="ios-arrow-down-outline" />}
-                style={{ width: 130, height: 35}}
+                style={ this.props.style }
                 selectedValue={this.state.selected}
                 onValueChange={this.handleChange.bind(this)}
             >
@@ -36,7 +36,8 @@ class PickerAtom extends Component {
 };
 
 PickerAtom.propTypes = {
-    list: PropTypes.array.isRequired
+    list: PropTypes.array.isRequired,
+    style: PropTypes.object
 }
 
 export default PickerAtom;

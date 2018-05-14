@@ -5,9 +5,9 @@ import { View } from 'react-native';
 
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
-import SelectGenderAtom from '../Atom/SelectGenderAtom';
+import PickerAtom from '../Atom/PickerAtom';
 import styles from '../Style/Form';
-import { redButtonText, marginlessInput } from '../Style/exportStyles';
+import { marginlessInput, faintPicker } from '../Style/exportStyles';
 
 class SigupForm extends React.Component {
     state = {
@@ -77,9 +77,9 @@ class SigupForm extends React.Component {
                 />
 
                 <View style = { styles.genderPickerStyle }>
-                    <SelectGenderAtom
-                        gender = { this.state.gender }
-                        updateGender = { this.updateGender }
+                    <PickerAtom
+                        list = { ['Male', 'Female'] }
+                        style = { faintPicker }
                     />
                 </View>
 

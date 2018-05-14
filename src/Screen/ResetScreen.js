@@ -5,7 +5,6 @@ import styles from './../Style/Auth';
 import ResetForm from './../Components/ResetForm';
 import AuthenticationHeader from './../Components/AuthenticationHeader';
 
-
 class ResetScreen extends React.Component {
     render() {
         return (

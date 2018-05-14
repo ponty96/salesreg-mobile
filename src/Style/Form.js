@@ -204,10 +204,14 @@ export default StyleSheet.create(
             fontWeight: "bold",
             color: "#fff"
         },
-        underneathText: {
-            color: color.inactive,
-            marginLeft: 15,
-            fontSize: 12
+        genderPickerStyle: {
+            marginTop: 25
+        },
+        buttonsWrapper: {
+            marginTop: 20
+        },
+        placeholderColor: {
+            color: color.inactive
         }
     }
 )

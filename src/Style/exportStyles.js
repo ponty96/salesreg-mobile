@@ -532,10 +532,10 @@ export const orderListStyles = {
     }
 };
 
-export const selectGenderStyles = {
-    pickerColor: {
-        color: color.inactive
-    }
+export const faintPicker = {
+    color: color.inactive,
+    width: 100,
+    height: 35
 };
 
 export const signupButton = {
@@ -546,5 +546,10 @@ export const signupButton = {
 };
 
 export const redButtonText = {
-    color: color.white
+    color: color.secondary
 };
+
+export const pickerStyle = {
+    width: 130,
+    height: 35
+}
