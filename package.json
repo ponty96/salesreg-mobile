@@ -3,9 +3,19 @@
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
+    "@types/jest": "^22.2.3",
+    "@types/react": "^16.3.14",
+    "@types/react-dom": "^16.0.5",
+    "@types/react-native": "^0.55.12",
+    "@types/react-test-renderer": "^16.0.1",
+    "concurrently": "^3.5.1",
     "jest-expo": "25.0.0",
     "react-native-scripts": "1.11.1",
-    "react-test-renderer": "16.2.0"
+    "react-test-renderer": "16.2.0",
+    "rimraf": "^2.6.2",
+    "ts-jest": "^22.4.6",
+    "tslint": "^5.10.0",
+    "typescript": "^2.8.3"
   },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
@@ -13,7 +23,18 @@
     "eject": "react-native-scripts eject",
     "android": "react-native-scripts android",
     "ios": "react-native-scripts ios",
-    "test": "node node_modules/jest/bin/jest.js"
+    "test": "node node_modules/jest/bin/jest.js",
+    "lint": "tslint src/**/*.ts",
+    "tsc": "tsc",
+    "clean": "rimraf build",
+    "build": "yarn run clean && yarn run tsc --",
+    "watch": "yarn run build -- -w",
+    "watch-run-android": "concurrently \"yarn run watch\" \"yarn run android\"",
+    "build-run-android": "yarn run build && yarn run watch-run-android ",
+    "watch-run-ios": "concurrently \"yarn run watch\" \"yarn run ios\"",
+    "build-run-ios": "yarn run build && yarn run watch-run-ios ",
+    "watch-start": "concurrently \"yarn run watch\" \"yarn run start\"",
+    "build-start": "yarn run build && yarn run watch-Start "
   },
   "jest": {
     "preset": "jest-expo"
@@ -21,6 +42,7 @@
   "dependencies": {
     "@expo/vector-icons": "^6.3.1",
     "expo": "^25.0.0",
+    "global": "^4.3.2",
     "native-base": "^2.4.3",
     "prop-types": "^15.6.1",
     "react": "16.2.0",
