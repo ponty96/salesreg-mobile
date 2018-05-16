@@ -9,7 +9,7 @@ import ImageAtom from '../Atom/ImageAtom';
 import styles1 from './../Style/Layout';
 import styles from './../Style/Screen';
 import SaveCancelButton from "../Container/SaveCancelButton";
-import { marginlessInput, pickerStyle } from './../Style/exportStyles';
+import styles2 from '../Style/exportStyles';
 
 class EditUserProfileForm extends Component {
     render() {
@@ -23,7 +23,7 @@ class EditUserProfileForm extends Component {
                         source = { this.props.image }
                         getValue = { this.props.getImage }
                     />
-                    <View style = {[ styles.indentLeft, styles.indentRight, styles.editDetailsWrapper ]}>
+                    <View style = { [styles.indentLeft, styles.indentRight, styles.editDetailsWrapper] }>
                         <InputAtom 
                             label = 'Name:'
                             defaultValue = { this.props.name }
@@ -31,7 +31,7 @@ class EditUserProfileForm extends Component {
                         />
                     </View>
 
-                    <View style = {[ styles.indentLeft, styles.indentRight, styles.editDetailsWrapper ]}>
+                    <View style = { [styles.indentLeft, styles.indentRight, styles.editDetailsWrapper] }>
                         <InputAtom 
                             label = 'Phone number (separate multiple with commas):'
                             defaultValue = { this.props.phoneNumber }
@@ -40,13 +40,13 @@ class EditUserProfileForm extends Component {
                         />
                     </View>
 
-                    <View style = {[ styles.indentLeft, styles.editDetailsWrapper, styles.genderPickerWidth ]}>
+                    <View style = { [styles.indentLeft, styles.editDetailsWrapper, styles.genderPickerWidth] }>
                         <Text style = { styles.textTitle }>
                             Gender
                         </Text>
                         <PickerAtom
                             list = { ['Male', 'Female'] }
-                            style = { pickerStyle }
+                            style = { styles2.pickerStyle }
                         />
                     </View>
                 </ScrollView>

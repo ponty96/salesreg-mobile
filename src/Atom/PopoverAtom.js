@@ -4,7 +4,7 @@ import { Icon, Text, CheckBox, Left, Right, Body } from "native-base";
 import { Popover, PopoverController, PopoverTouchable } from "react-native-modal-popover";
 import PropTypes from 'prop-types';
 
-import { popoverStyles } from "./../Style/exportStyles";
+import styles from "../Style/exportStyles";
 
 export default class PopoverAtom extends React.Component {
   constructor(props) {
@@ -45,50 +45,50 @@ export default class PopoverAtom extends React.Component {
           }) => (
             <React.Fragment>
               <TouchableOpacity
-                style={popoverStyles.touchable}
+                style={styles.popoverTouchable}
                 ref={setPopoverAnchor}
                 onPress={openPopover}
               >
-                <Text style={popoverStyles.redClick}>{this.props.tag}</Text>
-                <Icon style={popoverStyles.iconTouch} name={this.state.icon} />
+                <Text style={styles.popoverRedClick}>{this.props.tag}</Text>
+                <Icon style={styles.popoverIconTouch} name={this.state.icon} />
               </TouchableOpacity>
               <Popover
-                contentStyle={popoverStyles.content}
-                arrowStyle={popoverStyles.arrow}
-                backgroundStyle={popoverStyles.background}
+                contentStyle={styles.popoverContent}
+                arrowStyle={styles.popoverArrow}
+                backgroundStyle={styles.popoverBackground}
                 placement={this.props.position}
                 visible={popoverVisible}
                 onClose={closePopover}
                 fromRect={popoverAnchorRect}
                 supportedOrientations={["portrait", "landscape"]}
               >
-                <View style={popoverStyles.column}>
-                  <View style={popoverStyles.row}>
-                    <View style={popoverStyles.mainFirst}>
-                      <View style={popoverStyles.viewX} />
-                      <Text style={popoverStyles.textX}>Pending</Text>
+                <View style={styles.popoverColumn}>
+                  <View style={styles.popoverRow}>
+                    <View style={styles.popoverStyles.mainFirst}>
+                      <View style={styles.popoverStyles.viewX} />
+                      <Text style={styles.popoverStyles.textX}>Pending</Text>
                     </View>
-                    <View style={popoverStyles.mainFirst}>
-                      <View style={popoverStyles.viewX} />
-                      <Text style={popoverStyles.textX}>Pending Delivery</Text>
+                    <View style={styles.popoverMainFirst}>
+                      <View style={styles.popoverViewX} />
+                      <Text style={styles.popoverTextX}>Pending Delivery</Text>
                     </View>
-                    <View style={popoverStyles.mainSecond}>
-                      <View style={popoverStyles.viewX} />
-                      <Text style={popoverStyles.textX}>Delivering</Text>
+                    <View style={styles.popoverMainSecond}>
+                      <View style={styles.popoverViewX} />
+                      <Text style={styles.popoverTextX}>Delivering</Text>
                     </View>
                   </View>
-                  <View style={popoverStyles.notMain}>
-                    <Left style={popoverStyles.leftSide}>
-                      <View style={popoverStyles.innerLeft} />
-                      <Text style={popoverStyles.innerLeftText}>Delivered</Text>
+                  <View style={styles.popoverNotMain}>
+                    <Left style={styles.popoverLeftSide}>
+                      <View style={styles.popoverInnerLeft} />
+                      <Text style={styles.popoverInnerLeftText}>Delivered</Text>
                     </Left>
-                    <Right style={popoverStyles.rightSide}>
+                    <Right style={styles.popoverRightSide}>
                       <CheckBox
                         checked={this.state.check}
                         color="red"
                         onPress={this.checked}
                       />
-                      <Text style={popoverStyles.recall}>Recalled</Text>
+                      <Text style={styles.popoverRecall}>Recalled</Text>
                     </Right>
                   </View>
                 </View>

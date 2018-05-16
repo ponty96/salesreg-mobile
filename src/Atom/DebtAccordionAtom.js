@@ -2,9 +2,11 @@ import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { ListItem, Text, Thumbnail, Left, Body, Right } from "native-base";
 import { FlatList, View } from "react-native";
-import styles from "./../Style/ProductAndCustomerList";
 import { ScrollView, FlatList } from "react-native-gesture-handler";
+
 import { innerAccordion } from "../config/data";
+import styles from "./../Style/ProductAndCustomerList";
+
 
 class InnerList extends Component {
   render() {

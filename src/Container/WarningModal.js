@@ -6,7 +6,7 @@ import {Form, Icon} from 'native-base';
 import ModalAtom from './../Atom/ModalAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Screen';
-import { modalWarningButton } from './../Style/exportStyles';
+import styles1 from './../Style/exportStyles';
 
 class DebtLimit extends Component {
     state = {
@@ -89,14 +89,14 @@ class DebtLimit extends Component {
                     <ButtonAtom
                         btnText="Grant debt"
                         transparent={true}
-                        btnStyle={modalWarningButton}
+                        btnStyle={styles1.modalWarningButton}
                         onPress={this.grant}
                     />
 
                     <ButtonAtom
                         btnText="Stop debt"
                         onPress={this.stop}
-                        btnStyle={modalWarningButton}
+                        btnStyle={styles1.modalWarningButton}
                     />
                 </Form>
             </View>

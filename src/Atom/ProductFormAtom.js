@@ -1,12 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { ScrollView } from "react-native-gesture-handler";
 
 import ImageAtom from "./ImageAtom";
 import InputAtom from './InputAtom';
-
-import { marginfulInput, marginlessInput } from './../Style/exportStyles';
 import styles from '../Style/Form';
-import { ScrollView } from "react-native-gesture-handler";
+import styles1 from '../Style/exportStyles';
 
 export default class ProductFormAtom extends React.Component {
     state = {
@@ -39,7 +38,7 @@ export default class ProductFormAtom extends React.Component {
                 <InputAtom 
                     label="  Product name"
                     getValue={this.getProduct}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
             </View>
             <View>
@@ -47,7 +46,7 @@ export default class ProductFormAtom extends React.Component {
                     label="  Stock quantity"
                     keyboardType="numeric"
                     getValue={this.getSQuanity}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
                 <Text style={styles.font1}>Quantity available in store</Text>
             </View>
@@ -56,7 +55,7 @@ export default class ProductFormAtom extends React.Component {
                     label="  Pack quantity"
                     keyboardType="numeric"
                     getValue={this.getPQuanity}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
                 <Text style={styles.font1}>Quantity in a pack e.g. Dozen, caton, packet, container</Text>
             </View>
@@ -65,7 +64,7 @@ export default class ProductFormAtom extends React.Component {
                     label="  Cost price per pack"
                     keyboardType="numeric"
                     getValue={this.getCostPP}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
             </View>
             <View>
@@ -73,7 +72,7 @@ export default class ProductFormAtom extends React.Component {
                     label="  Unit cost price"
                     keyboardType="numeric"
                     getValue={this.getUCost}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
                 <Text style={styles.font1}>Cost price of 1 unit e.g. 1 piece, 1 dozen, 1 caton, 1 liter</Text>
             </View>
@@ -82,7 +81,7 @@ export default class ProductFormAtom extends React.Component {
                     label="  Selling price"
                     keyboardType="numeric"
                     getValue={this.getSellP}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
             </View>
             <View>
@@ -90,7 +89,7 @@ export default class ProductFormAtom extends React.Component {
                     label="  Minimum stock quanity"
                     keyboardType="numeric"
                     getValue={this.getCostPP}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
                 <Text style={styles.font1}>Minimum amount required for re-stock</Text>
             </View>

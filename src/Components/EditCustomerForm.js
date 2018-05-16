@@ -1,10 +1,11 @@
 import React from 'react';
 import { View, Text } from 'react-native';
+import { ScrollView } from "react-native-gesture-handler";
+
 import EditCustomerAtom from '../Atom/EditCustomerAtom';
 import styles from "../Style/OrderList";
-
 import SaveCancelButton from '../Container/SaveCancelButton';
-import { ScrollView } from "react-native-gesture-handler";
+
 
 export default class NewCustomerForm extends React.Component {
 

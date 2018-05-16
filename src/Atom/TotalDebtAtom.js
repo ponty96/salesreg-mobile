@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text } from "react-native";
 import { Icon } from "native-base";
 
-import { totalDebtStyle, totalOrderStyle } from './../Style/exportStyles';
+import styles from './../Style/exportStyles';
 
 export default class TotalDebtAtom extends React.Component {
   render() {
@@ -10,35 +10,35 @@ export default class TotalDebtAtom extends React.Component {
     let iconc = this.props.limit >= 300000 ? "red" : "transparent";
     display = () => {
       if (this.props.limit >= 300000) {
-        return <Icon name={icon} style={{ color: iconc, fontSize: 22 }} />;
+        return <Icon name={icon} style={ styles.totalOrderIcon } />;
       }
     };
     displayView = () => {
         if (this.props.limit <= 100000) {
             return(
-                <View style={totalOrderStyle.redNumberView}>
-                    <Text style={totalOrderStyle.redNumber}>NGN {this.props.totalAmount}.00</Text>
+                <View style={styles.totalOrderRedNumberView}>
+                    <Text style={styles.totalOrderRedNumber}>NGN {this.props.totalAmount}.00</Text>
                 </View>
             );
         } else if (this.props.limit > 100000 && this.props.limit <= 299999) {
             return(
-                <View style={totalDebtStyle.redNumberView1}>
-                    <Text style={totalDebtStyle.redNumber1}>NGN {this.props.totalAmount}.00</Text>
+                <View style={styles.totalDebtRedNumberView1}>
+                    <Text style={styles.totalDebtRedNumber1}>NGN {this.props.totalAmount}.00</Text>
                 </View>
             );
         } else {
             return(
-                <View style={totalDebtStyle.redNumberView2}>
-                    <Text style={totalDebtStyle.redNumber1}>NGN {this.props.totalAmount}.00</Text>
+                <View style={styles.totalDebtRedNumberView2}>
+                    <Text style={styles.totalDebtRedNumber1}>NGN {this.props.totalAmount}.00</Text>
                 </View>
             );
         }
     }
     return (
-      <View style={totalDebtStyle.container}>
-        <View style={totalDebtStyle.totalView}>
+      <View style={styles.totalDebtContainer}>
+        <View style={styles.totalDebtTotalView}>
           {display()}
-          <Text style={totalDebtStyle.totalText}> TOTAL</Text>
+          <Text style={styles.totalDebtTotalText}> TOTAL</Text>
         </View>
         {displayView()}
       </View>

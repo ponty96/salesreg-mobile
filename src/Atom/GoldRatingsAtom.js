@@ -1,7 +1,7 @@
 import React from "react";
 import { View, Text } from "react-native";
-
 import StarRating from 'react-native-star-rating';
+
 import styles from './../Style/Layout';
 
 class GoldRatings extends React.Component {

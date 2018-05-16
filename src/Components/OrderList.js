@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import PropTypes from 'prop-types';
 import { View, FlatList } from "react-native";
 
-import { orderListStyles } from './../Style/exportStyles';
+import styles from './../Style/exportStyles';
 import DateOrderAtom from "../Atom/DateOrderAtom";
 import TotalOrderAtom from "../Atom/TotalOrderAtom";
 import OrderListAtom from "../Atom/OrderListAtom";
@@ -46,7 +46,7 @@ class OrderList extends Component {
 
   render() {
     return (
-      <View style={orderListStyles.container}>
+      <View style={styles.orderListContainer}>
         <FlatList
           ref={ref => (this.scrollView = ref)}
           onContentSizeChange={() => {

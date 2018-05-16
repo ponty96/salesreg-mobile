@@ -7,7 +7,7 @@ import ModalAtom from './../Atom/ModalAtom';
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Screen';
-import { marginlessInput, modalButton } from './../Style/exportStyles';
+import styles1 from '../Style/exportStyles';
 
 class DeleteBuzModal extends Component {
     state = {
@@ -64,13 +64,13 @@ class DeleteBuzModal extends Component {
                         label="Enter Password"
                         getValue={this.getPassword}
                         secureTextEntry={true}
-                        contStyle={marginlessInput}
+                        contStyle={styles1.marginlessInput}
                     />
 
                     <ButtonAtom
                         btnText="Delete"
                         onPress={this.delete}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>

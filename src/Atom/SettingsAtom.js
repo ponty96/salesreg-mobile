@@ -51,7 +51,7 @@ class SettingsAtom extends Component {
                         {this.props.item.name}
                     </Text>
                     <Text
-                        style={{color: '#8c8c8c'}}
+                        style={styles.settingsChildText}
                     >
                         {this.props.item.child}
                     </Text>

@@ -7,7 +7,7 @@ import ModalAtom from './../Atom/ModalAtom';
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Screen';
-import { marginlessInput, modalButton } from './../Style/exportStyles';
+import styles1 from '../Style/exportStyles';
 
 class DebtLimitModal extends Component {
     state = {
@@ -62,7 +62,7 @@ class DebtLimitModal extends Component {
                         floatingLabel={false}
                         keyboardType={'numeric'}
                         getValue={this.getAmount}
-                        contStyle={marginlessInput}
+                        contStyle={styles1.marginlessInput}
                         placeholder={this.props.placeholder}
                     />
 
@@ -98,7 +98,7 @@ class DebtLimitModal extends Component {
                     <ButtonAtom
                         btnText="OK"
                         onPress={this.set}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>

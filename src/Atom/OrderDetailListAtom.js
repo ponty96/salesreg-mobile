@@ -1,8 +1,9 @@
 import React from 'react';
 import { StyleSheet, View, Text } from 'react-native';
 import { ListItem, Left, Right } from 'native-base';
-import styles from '../Style/ProductAndCustomerList';
 import PropTypes from "prop-types";
+
+import styles from '../Style/ProductAndCustomerList';
 
 class OrderDetailListAtom extends React.Component {
   render() {

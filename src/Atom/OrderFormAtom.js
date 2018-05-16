@@ -5,8 +5,8 @@ import { Header, Text, Left, Right, Icon } from "native-base";
 import InputAtom from './InputAtom';
 import NewOrderCardAtom from "./NewOrderCardAtom";
 import ButtonAtom from "./ButtonAtom";
-import { marginfulInput } from './../Style/exportStyles';
 import styles from './../Style/Form';
+import styles1 from '../Style/exportStyles';
 
 class OrderFormAtom extends React.Component {
     state = {
@@ -47,7 +47,7 @@ class OrderFormAtom extends React.Component {
                                 <InputAtom
                                     label="Customer"
                                     getValue={this.getCustomer}
-                                    contStyle={marginfulInput}
+                                    contStyle={styles1.marginfulInput}
                                 />
                             </View>
                             <NewOrderCardAtom />

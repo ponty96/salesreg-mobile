@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Header, Left, Right, Icon, Text } from 'native-base';
 import PickerAtom from "./PickerAtom";
 
-import { subHeaderStyles, pickerStyle } from './../Style/exportStyles';
+import styles from '../Style/exportStyles';
 
  class SubHeaderAtom extends React.Component {
   static defaultProps = {
@@ -13,16 +13,16 @@ import { subHeaderStyles, pickerStyle } from './../Style/exportStyles';
 
   render() {
     return (
-        <Header style={subHeaderStyles.header}>
-            <Left style={subHeaderStyles.row}>
-              <Icon style={subHeaderStyles.iconColor} name='md-briefcase'/>
-              <Text style={subHeaderStyles.pad}>{this.props.total}</Text>
+        <Header style={styles.subHeaderHeader}>
+            <Left style={styles.subHeaderRow}>
+              <Icon style={styles.subHeaderIconColor} name='md-briefcase'/>
+              <Text style={styles.subHeaderPad}>{this.props.total}</Text>
             </Left>
-            <Right style={subHeaderStyles.row}>
-              <Text style={subHeaderStyles.font}>Sort By:</Text>
+            <Right style={styles.subHeaderRow}>
+              <Text style={styles.subHeaderFont}>Sort By:</Text>
               <PickerAtom 
                 list={this.props.list}
-                style = { pickerStyle }
+                style = { styles.pickerStyle }
               />
             </Right>
         </Header>

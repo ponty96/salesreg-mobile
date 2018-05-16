@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
-import { redButtonText, marginlessInput } from '../Style/exportStyles';
+import styles from '../Style/exportStyles';
 
 class LoginForm extends React.Component {
     state = {
@@ -45,14 +45,14 @@ class LoginForm extends React.Component {
           label="Phone number"
           getValue={this.getPhone}
           keyboardType="numeric"
-          contStyle={marginlessInput}
+          contStyle={styles.marginlessInput}
         />
 
         <InputAtom
           label="Password"
           getValue={this.getPassword}
           secureTextEntry={true}
-          contStyle={marginlessInput}
+          contStyle={styles.marginlessInput}
           underneathText = 'Not less than 6 characters long'
         />
 

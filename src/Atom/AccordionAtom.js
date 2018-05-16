@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import { Icon, ListItem, Left, Right } from 'native-base';
+import { ScrollView } from 'react-native-gesture-handler';
 import PropTypes from "prop-types";
 import Accordion from 'react-native-collapsible/Accordion';
 
 import DebtAccordionAtom from './DebtAccordionAtom';
-import { ScrollView } from 'react-native-gesture-handler';
 import styles from "../Style/OrderList";
 import { sections } from '../config/data';
 

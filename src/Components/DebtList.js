@@ -1,10 +1,11 @@
 import React, { Component } from "react";
 import { Text, View, FlatList, ScrollView } from "react-native";
 import { Icon, Header, Right } from "native-base";
+
 import PickerAtom from "../Atom/PickerAtom";
 import DebtListAtom from "../Atom/DebtListAtom";
 import TotalDebtAtom from "../Atom/TotalDebtAtom";
-import { customerListStyles } from './../Style/exportStyles';
+import styles from '../Style/exportStyles';
 import { debtList } from "../config/data";
   
 class DebtList extends Component {
@@ -21,10 +22,10 @@ class DebtList extends Component {
   
     render() {
       return (
-        <View style={customerListStyles.container}>
-            <Header style={customerListStyles.header}>
-                <Right style={customerListStyles.direct}>
-                  <Text style={customerListStyles.dropText}>Sort By:</Text>
+        <View style={styles.customerListContainer}>
+            <Header style={styles.customerListHeader}>
+                <Right style={styles.customerListDirect}>
+                  <Text style={styles.customerListDropText}>Sort By:</Text>
                   <PickerAtom list={["Fasting selling", "Slowest selling", "Highest profit", "Lowest profit"]}/>
                 </Right>
             </Header>

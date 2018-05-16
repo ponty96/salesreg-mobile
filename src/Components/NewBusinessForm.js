@@ -7,7 +7,7 @@ import InputAtom from '../Atom/InputAtom';
 import ImageAtom from '../Atom/ImageAtom';
 import styles from './../Style/Layout'
 import SaveCancelButton from "../Container/SaveCancelButton";
-import {marginlessInput} from './../Style/exportStyles';
+import styles1 from './../Style/exportStyles';
 
 class NewBusinessForm extends React.Component {
     state = {
@@ -67,7 +67,7 @@ class NewBusinessForm extends React.Component {
                                 getValue={this.getName}
                                 required={true}
                                 defaultValue={this.props.item ? this.props.item.businessName : undefined}
-                                contStyle={marginlessInput}
+                                contStyle={styles1.marginlessInput}
                             />
 
                             <InputAtom
@@ -75,20 +75,20 @@ class NewBusinessForm extends React.Component {
                                 getValue={this.getAddress}
                                 required={true}
                                 defaultValue={this.props.item ? this.props.item.address : undefined}
-                                contStyle={marginlessInput}
+                                contStyle={styles1.marginlessInput}
                             />
 
                             <InputAtom
                                 label="Email"
                                 getValue={this.getEmail}
                                 defaultValue={this.props.item ? this.props.item.email : undefined}
-                                contStyle={marginlessInput}
+                                contStyle={styles1.marginlessInput}
                             />
 
                             <InputAtom
                                 label="About(give description of your business)"
                                 getValue={this.getAbout}
-                                contStyle={marginlessInput}
+                                contStyle={styles1.marginlessInput}
                                 defaultValue={this.props.item ? this.props.item.description : undefined}
                             />
 

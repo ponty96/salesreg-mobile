@@ -8,7 +8,7 @@ import ModalAtom from './../Atom/ModalAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Screen';
 import { color } from './../Style/Color'
-import { modalButton } from './../Style/exportStyles';
+import styles1 from './../Style/exportStyles';
 
 class DebtWarningModal extends Component {
     componentDidMount() {
@@ -159,7 +159,7 @@ class DebtWarningModal extends Component {
                 <ButtonAtom
                     btnText="OK"
                     onPress={() => this.props.closeModal()}
-                    btnStyle={modalButton}
+                    btnStyle={styles1.modalButton}
                 />
             </View>
         )

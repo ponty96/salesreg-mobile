@@ -2,25 +2,25 @@ import React from "react";
 import { StyleSheet, View, Text } from "react-native";
 import { ListItem, Left, Right, Thumbnail } from "native-base";
 
-import { stylesDetail } from "../Style/exportStyles";
+import styles from "../Style/exportStyles";
 
 export default class TopOrderDetailAtom extends React.Component {
   render() {
     return (
       <View>
-        <ListItem style={stylesDetail.whiteList}>
+        <ListItem style={styles.stylesDetailWhiteList}>
           <Left>
-            <Text style={stylesDetail.redText}>ORDER ID</Text>
+            <Text style={styles.stylesDetailRedText}>ORDER ID</Text>
           </Left>
           <Right>
-            <Text style={stylesDetail.redText}>233232</Text>
+            <Text style={styles.stylesDetailRedText}>233232</Text>
           </Right>
         </ListItem>
-        <ListItem style={stylesDetail.content}>
-          <Left style={stylesDetail.moneyView}>
-            <Text style={stylesDetail.greyText}>Bought by</Text>
+        <ListItem style={styles.stylesDetailContent}>
+          <Left style={styles.stylesDetailMoneyView}>
+            <Text style={styles.stylesDetailGreyText}>Bought by</Text>
           </Left>
-          <Right style={stylesDetail.pictureView}>
+          <Right style={styles.stylesDetailPictureView}>
             <Thumbnail
               source={{
                 uri:
@@ -28,15 +28,15 @@ export default class TopOrderDetailAtom extends React.Component {
               }}
               style={styles.dp}
             />
-            <Text style={stylesDetail.pictureText}>Chito</Text>
+            <Text style={styles.stylesDetailPictureText}>Chito</Text>
           </Right>
         </ListItem>
-        <ListItem style={stylesDetail.whiteList}>
+        <ListItem style={styles.stylesDetailWhiteList}>
           <Left>
-            <Text style={stylesDetail.greyText}>Status</Text>
+            <Text style={styles.stylesDetailGreyText}>Status</Text>
           </Left>
           <Right>
-            <Text style={stylesDetail.blackText}>Pending</Text>
+            <Text style={styles.stylesDetailBlackText}>Pending</Text>
           </Right>
         </ListItem>
       </View>

@@ -3,7 +3,6 @@ import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { Form } from "native-base";
 
 import SaveCancelButton from "../Container/SaveCancelButton";
-import { marginlessInput } from './../Style/exportStyles';
 import EditUserProfileForm from '../Components/EditUserProfileForm';
 import styles from './../Style/Layout';
 

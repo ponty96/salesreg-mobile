@@ -3,8 +3,8 @@ import { View } from "react-native";
 import PropTypes from "prop-types";
 
 import ButtonAtom from '../Atom/ButtonAtom';
-import {saveCancelButton, saveCancelButtonText} from './../Style/exportStyles';
 import styles from './../Style/Form';
+import styles1 from '../Style/exportStyles';
 
 class SaveCancelButton extends React.Component {
 
@@ -25,16 +25,16 @@ class SaveCancelButton extends React.Component {
                     btnText="CANCEL"
                     transparent={true}
                     onPress={this.navigateBack}
-                    btnStyle={saveCancelButton}
-                    textStyle={saveCancelButtonText}
+                    btnStyle={styles1.saveCancelButton}
+                    textStyle={styles1.saveCancelButtonText}
                 />
 
                 <ButtonAtom
                     btnText={this.props.positiveButtonName}
                     transparent={true}
                     onPress={this.create}
-                    btnStyle={saveCancelButton}
-                    textStyle={saveCancelButtonText}
+                    btnStyle={styles1.saveCancelButton}
+                    textStyle={styles1.saveCancelButtonText}
                 />
             </View>
         );

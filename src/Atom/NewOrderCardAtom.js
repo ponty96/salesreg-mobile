@@ -1,9 +1,9 @@
 import React, { Component } from "react";
 import { View, TextInput, TouchableOpacity } from "react-native";
-import InputAtom from "./InputAtom";
 import { Header, Icon, Right } from "native-base";
-import { marginfulInput, marginlessInput, newOrderCard } from "./../Style/exportStyles";
-import PropTypes from "prop-types";
+
+import InputAtom from "./InputAtom";
+import styles from "../Style/exportStyles";
 
 export default class NewOrderCardAtom extends Component {
   state = {
@@ -22,40 +22,40 @@ export default class NewOrderCardAtom extends Component {
   };
   render() {
     return (
-      <View style={newOrderCard.container}>
-        <Header style={newOrderCard.header}>
+      <View style={styles.newOrderContainer}>
+        <Header style={styles.newOrderHeader}>
           <Right>
             <TouchableOpacity
-              style={newOrderCard.close}
+              style={styles.newOrderClose}
               onPress={this.props.onPress}
             >
-              <Icon style={newOrderCard.icon} name="md-close" />
+              <Icon style={styles.newOrderIcon} name="md-close" />
             </TouchableOpacity>
           </Right>
         </Header>
-        <View style={newOrderCard.innerContainer}>
-          <View style={newOrderCard.firstInput}>
+        <View style={styles.newOrderInnerContainer}>
+          <View style={styles.newOrderFirstInput}>
             <InputAtom
               label="Product Name"
               getValue={this.getProduct}
-              contStyle={marginfulInput}
+              contStyle={styles.marginfulInput}
             />
           </View>
-          <View style={newOrderCard.secondInput}>
-            <View style={newOrderCard.half}>
+          <View style={styles.newOrderSecondInput}>
+            <View style={styles.newOrderHalf}>
               <InputAtom
                 label="Quantity"
                 getValue={this.getQuantity}
                 keyboardType="numeric"
-                contStyle={marginfulInput}
+                contStyle={styles.marginfulInput}
               />
             </View>
-            <View style={newOrderCard.half}>
+            <View style={styles.newOrderHalf}>
               <InputAtom
                 label="Price"
                 getValue={this.getPrice}
                 keyboardType="numeric"
-                contStyle={marginfulInput}
+                contStyle={styles.marginfulInput}
               />
             </View>
           </View>
@@ -65,6 +65,6 @@ export default class NewOrderCardAtom extends Component {
   }
 }
 
-NewOrderCardAtom.propTypes = {
+styles.NewOrderCardAtom.propTypes = {
   onPress: PropTypes.func
 };  

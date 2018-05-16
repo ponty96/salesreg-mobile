@@ -5,8 +5,8 @@ import PropTypes from 'prop-types';
 
 import InputAtom from './../Atom/InputAtom';
 import ButtonAtom from './../Atom/ButtonAtom';
-import { redButtonText, marginlessInput } from './../Style/exportStyles';
 import styles from './../Style/Form';
+import styles1 from './../Style/exportStyles';
 
 class ResetForm extends React.Component {
     state = {
@@ -48,7 +48,7 @@ class ResetForm extends React.Component {
                     placeholder={'Enter Reset Code'}
                     floatingLabel={false}
                     getValue={this.getCode}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
 
                 <ButtonAtom

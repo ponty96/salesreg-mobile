@@ -1,14 +1,13 @@
 import React from "react";
 import { View, Text } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 import ImageAtom from "./ImageAtom";
 import InputAtom from "./InputAtom";
 import PickerAtom from "./PickerAtom";
 import GoldRatingsAtom from "./GoldRatingsAtom";
-
-import { marginfulInput, marginlessInput } from "./../Style/exportStyles";
 import styles from "../Style/Form";
-import { ScrollView } from "react-native-gesture-handler";
+import styles1 from '..Style/exportStyles';
 
 export default class EditCustomerAtom extends React.Component {
   state = {
@@ -39,7 +38,7 @@ export default class EditCustomerAtom extends React.Component {
             <InputAtom
               label="  Name"
               getValue={this.getProduct}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View>
@@ -47,7 +46,7 @@ export default class EditCustomerAtom extends React.Component {
               label="  Phone number(separate numbers with commas):"
               keyboardType="numeric"
               getValue={this.getPhone}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View style={styles.innerFirstPicker}>
@@ -58,7 +57,7 @@ export default class EditCustomerAtom extends React.Component {
               label="  Address"
               keyboardType="numeric"
               getValue={this.getAddress}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View>
@@ -66,7 +65,7 @@ export default class EditCustomerAtom extends React.Component {
               label="  Type Email Address"
               keyboardType="email-address"
               getValue={this.getUCost}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View style={styles.inputView}>
@@ -75,7 +74,7 @@ export default class EditCustomerAtom extends React.Component {
                 label="  Debt limit"
                 keyboardType="numeric"
                 getValue={this.getUCost}
-                contStyle={marginlessInput}
+                contStyle={styles1.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
@@ -83,7 +82,7 @@ export default class EditCustomerAtom extends React.Component {
                 label="  Birthday"
                 keyboardType="numeric"
                 getValue={this.getUCost}
-                contStyle={marginfulInput}
+                contStyle={styles1.marginfulInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
@@ -97,7 +96,7 @@ export default class EditCustomerAtom extends React.Component {
                 label="  Marriage Anniversary"
                 keyboardType="numeric"
                 getValue={this.getSellP}
-                contStyle={marginlessInput}
+                contStyle={styles1.marginlessInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>

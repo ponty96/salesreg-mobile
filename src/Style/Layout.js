@@ -163,6 +163,9 @@ export default StyleSheet.create(
         radioMarginRight: {
             marginRight: 4,
             borderColor: color.primary
+        },
+        settingsChildText: {
+            color: color.settingsChildText
         }
     }
 )

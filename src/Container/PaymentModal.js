@@ -8,7 +8,7 @@ import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Screen';
 import styleLayout from './../Style/Layout';
-import { marginlessInput, modalButton, flexfull, marginRight } from './../Style/exportStyles';
+import styles1 from './../Style/exportStyles';
 
 class PaymentModal extends Component {
     state = {
@@ -69,14 +69,14 @@ class PaymentModal extends Component {
                             label="Amount paid"
                             keyboardType={'numeric'}
                             getValue={this.getAmount}
-                            contStyle={[marginlessInput, marginRight, flexfull]}
+                            contStyle={[styles1.marginlessInput, styles1.marginRight, styles1.flexfull]}
                         />
 
                         <InputAtom
                             label="Balance"
                             keyboardType={'numeric'}
                             getValue={this.getBalance}
-                            contStyle={[marginlessInput, flexfull]}
+                            contStyle={[styles1.marginlessInput, styles1.flexfull]}
                         />
                     </View>
 
@@ -90,7 +90,7 @@ class PaymentModal extends Component {
                                 label="Balance due date"
                                 keyboardType={'numeric'}
                                 getValue={this.getAmount}
-                                contStyle={[marginlessInput, marginRight, flexfull]}
+                                contStyle={[styles1.marginlessInput, styles1.marginRight, styles1.flexfull]}
                             />
                             <Text> dd-mm-yyyy </Text>
                         </View>
@@ -103,7 +103,7 @@ class PaymentModal extends Component {
                     <ButtonAtom
                         btnText="Pay"
                         onPress={this.pay}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>

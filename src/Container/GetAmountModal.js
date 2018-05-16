@@ -3,11 +3,11 @@ import PropTypes from 'prop-types';
 import {View, Text, TouchableOpacity} from 'react-native';
 import {Form, Icon} from 'native-base';
 
-import ModalAtom from './../Atom/ModalAtom';
+import ModalAtom from '../Atom/ModalAtom';
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
-import styles from './../Style/Screen';
-import { marginlessInput, modalButton } from './../Style/exportStyles';
+import styles from '../Style/Screen';
+import styles1 from '../Style/exportStyles';
 
 class GetAmountModal extends Component {
     state = {
@@ -60,13 +60,13 @@ class GetAmountModal extends Component {
                         label="Enter Amount"
                         keyboardType={'numeric'}
                         getValue={this.getAmount}
-                        contStyle={marginlessInput}
+                        contStyle={styles1.marginlessInput}
                     />
 
                     <ButtonAtom
                         btnText="Pay"
                         onPress={this.pay}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>
