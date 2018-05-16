@@ -1,7 +1,7 @@
-import React from 'react'
-import { Text, View } from 'react-native'
-import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom, SwitchNavigator } from 'react-navigation'
-import { Icon } from 'native-base'
+import React from 'react';
+import { Text, View } from 'react-native';
+import { StackNavigator, DrawerNavigator, TabNavigator, TabBarBottom, SwitchNavigator } from 'react-navigation';
+import { Icon } from 'native-base';
 
 import SignupScreen from './../Screen/SignupScreen';
 import ResetScreen from './../Screen/ResetScreen';

@@ -24,28 +24,28 @@ export default StyleSheet.create(
             marginTop: 32,
             alignSelf: 'center'
         },
-        // boardingScreenFeatureText: {
-        //     marginVertical: 40,
-        //     marginHorizontal: 30
-        // },
-        // blueCheck: {
-        //     color: color.blueCheck
-        // },
-        // appFunctionWrapper: {
-        //     flexDirection: 'row',
-        //     marginVertical: 10
-        // },
-        // appDetailsText: {
-        //     marginLeft: 20,
-        //     color: color.appDetailsText,
-        //     fontSize: 14
-        // },
-        // buttomButtonsWrapper: {
-        //     flexDirection: 'row',
-        //     alignSelf: 'center',
-        //     width: '88%',
-        //     position: 'absolute',
-        //     bottom: 60
-        // }
+        boardingScreenFeatureText: {
+            marginVertical: 40,
+            marginHorizontal: 30
+        },
+        blueCheck: {
+            color: color.blueCheck
+        },
+        appFunctionWrapper: {
+            flexDirection: 'row',
+            marginVertical: 10
+        },
+        appDetailsText: {
+            marginLeft: 20,
+            color: color.appDetailsText,
+            fontSize: 14
+        },
+        buttomButtonsWrapper: {
+            flexDirection: 'row',
+            alignSelf: 'center',
+            width: '88%',
+            position: 'absolute',
+            bottom: 60
+        }
     }
 );

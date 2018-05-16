@@ -101,6 +101,7 @@ export default StyleSheet.create(
             marginTop: 20
         },
         underneathText: {
+            marginLeft: 15,
             color: color.inactive,
             fontSize: 12,
             marginBottom: 25
