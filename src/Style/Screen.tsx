@@ -174,7 +174,7 @@ export default StyleSheet.create(
         purchaseWrapper: {
             alignItems: 'flex-end'
         },
-        textTitle: {          
+        textTitle: {
             color: color.inactive,
             fontWeight: '400',
             fontSize: 14
@@ -251,4 +251,4 @@ export default StyleSheet.create(
             borderColor: color.inactive
         }
     }
-)
+);

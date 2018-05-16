@@ -13,7 +13,7 @@ export default StyleSheet.create(
         },
         sidebarContainer: {
             paddingHorizontal: 8,
-            height: Dimensions.get('window').height-16
+            height: Dimensions.get('window').height - 16
         },
         itemsContainer: {
             flex: 4
@@ -29,7 +29,7 @@ export default StyleSheet.create(
             color: color.menu
         },
         itemIcon: {
-            color: color.menu,
+            color: color.menu
         },
         sidebarItem: {
             flexDirection: 'row',
@@ -61,16 +61,16 @@ export default StyleSheet.create(
         },
         modalContainer: {
             flex: 1,
-            backgroundColor: "rgba(0,0,0,.5)",
-            justifyContent: "center",
+            backgroundColor: 'rgba(0,0,0,.5)',
+            justifyContent: 'center',
             paddingHorizontal: 20
         },
         centerModal: {
-            backgroundColor: color.secondary,
+            backgroundColor: color.secondary
         },
         modalBody: {
             backgroundColor: color.secondary,
-            position: "absolute",
+            position: 'absolute',
             top: 90,
             width: '100%',
             marginLeft: '7%'
@@ -117,18 +117,18 @@ export default StyleSheet.create(
             flexDirection: 'row'
         },
         dateOrderContainer: {
-            flexDirection: "row",
+            flexDirection: 'row',
             flex: 1,
             height: 60,
             backgroundColor: color.secondary,
-            alignItems: "center",
-            justifyContent: "center",
+            alignItems: 'center',
+            justifyContent: 'center',
             borderBottomWidth: 0.5,
             borderBottomColor: color.listBorderColor
           },
           dateText: {
             fontSize: 20,
-            fontWeight: "bold",
+            fontWeight: 'bold',
             color: color.inactive
           },
           detailItemWrapper: {
@@ -142,14 +142,14 @@ export default StyleSheet.create(
             fontSize: 12
         },
         goldRatingsContainer: {
-            alignSelf: "center",
-            justifyContent: "center",
+            alignSelf: 'center',
+            justifyContent: 'center'
         },
         addText: {
-            textAlign: "center", 
-            fontSize: 12, 
-            color: "#FFDF00",
-            fontWeight: "400", 
+            textAlign: 'center',
+            fontSize: 12,
+            color: '#FFDF00',
+            fontWeight: '400',
             paddingBottom: 10
         },
         minimalPadding: {
@@ -168,4 +168,4 @@ export default StyleSheet.create(
             color: color.settingsChildText
         }
     }
-)
+);

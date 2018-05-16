@@ -1,4 +1,4 @@
-import { StyleSheet } from "react-native";
+import { StyleSheet } from 'react-native';
 import { color } from './Color';
 
 export default StyleSheet.create(
@@ -7,7 +7,7 @@ export default StyleSheet.create(
             height: '18%',
             backgroundColor: color.primary,
             justifyContent: 'center',
-            alignItems:'center'
+            alignItems: 'center'
         },
         bigHeader: {
             height: '40%'

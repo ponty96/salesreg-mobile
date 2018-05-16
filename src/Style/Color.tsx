@@ -11,9 +11,9 @@ export const color = {
     header: '#c10505',
     grey: '#F6F6F6',
     listBorderColor: '#F3F3F3',
-    totalProfit: "#FFE4D7",
+    totalProfit: '#FFE4D7',
     totalSales: '#FBF3ED',
     blueCheck: '#27CBD3',
     appDetailsText: '#000000',
     settingsChildText: '#8c8c8c'
-}
+};

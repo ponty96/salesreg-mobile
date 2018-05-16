@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native';
 import { color } from './Color';
 
 export default StyleSheet.create(
@@ -57,15 +57,15 @@ export default StyleSheet.create(
         },
         itemsContainer: {
             flex: 1,
-            width: "96%",
-            alignSelf: "center",
+            width: '96%',
+            alignSelf: 'center',
             marginTop: 10,
             paddingBottom: 50
         },
         itemsContainer1: {
             flex: 1,
-            width: "100%",
-            alignSelf: "center",
+            width: '100%',
+            alignSelf: 'center',
             marginTop: 10,
             paddingBottom: 50
         },
@@ -85,20 +85,17 @@ export default StyleSheet.create(
             color: 'grey'
         },
         header: {
-            backgroundColor: "#F0F0F0",
-            height: 50,
+            backgroundColor: '#F0F0F0',
+            height: 50
         },
         font: {
             fontSize: 12,
-            color: "#8c8c8c",
+            color: '#8c8c8c',
             paddingLeft: 4
         },
         genderPickerStyle: {
             marginTop: 25,
             marginLeft: 10
-        },
-        buttonsWrapper: {
-            marginTop: 20
         },
         underneathText: {
             marginLeft: 15,
@@ -108,104 +105,101 @@ export default StyleSheet.create(
         },
         font1: {
             fontSize: 11,
-            color: "#000",
+            color: '#000',
             paddingLeft: 4
         },
         inputView: {
-            flexDirection:"row",
-            width: "100%",
-            flex:1
+            flexDirection: 'row',
+            width: '100%',
+            flex: 1
         },
         innerStart: {
             flex: 1,
-            alignItems: "flex-start",
-            alignSelf: "flex-start"
+            alignItems: 'flex-start',
+            alignSelf: 'flex-start'
         },
         innerEnd: {
             flex: 1,
-            alignItems: "flex-end",
-            alignSelf: "flex-end"
+            alignItems: 'flex-end',
+            alignSelf: 'flex-end'
         },
         underText: {
-            marginRight: "65%",
-            fontSize:11
+            marginRight: '65%',
+            fontSize: 11
         },
         innerFirstPicker: {
             flex: 1,
-            alignItems: "flex-start",
-            alignSelf: "flex-start",
+            alignItems: 'flex-start',
+            alignSelf: 'flex-start',
             paddingTop: 20
         },
         headerOrder: {
-            backgroundColor: "#FFF"
+            backgroundColor: '#FFF'
         },
         leftOrder: {
             flex: 1,
-            width: "40%",
-            flexDirection: "row"
+            width: '40%',
+            flexDirection: 'row'
         },
         iconOrder: {
             fontSize: 20,
-            color: "#c0c0c0",
+            color: '#c0c0c0',
             paddingRight: 5
         },
         redColorText: {
-            color: "red"
+            color: 'red'
         },
         innerItemContainer: {
-            flexDirection:"column",
-            alignSelf: "center" ,
-            width: "98%"
+            flexDirection: 'column',
+            alignSelf: 'center' ,
+            width: '98%'
         },
         cusName: {
-            width: "98%",
+            width: '98%',
             height: 70,
             marginBottom: 3,
-            borderRadius:2,
-            alignSelf: "center" ,
+            borderRadius: 2,
+            alignSelf: 'center' ,
             borderWidth: 1,
-            borderColor:"#f0f0f0",
+            borderColor: '#f0f0f0',
             marginVertical: 16
         },
         btn1: {
-            alignSelf: "flex-start",
+            alignSelf: 'flex-start'
         },
         txt1: {
-            fontWeight: "bold",
+            fontWeight: 'bold',
             fontSize: 16,
-            textAlign: "left"
+            textAlign: 'left'
         },
         bottomSide: {
-            width: "100%",
+            width: '100%',
             height: 80,
-            flexDirection: "row",
-            borderTopColor: "#f0f0f0",
-            borderTopWidth:1
+            flexDirection: 'row',
+            borderTopColor: '#f0f0f0',
+            borderTopWidth: 1
         },
         innerBottom: {
-            flexDirection: "column",
-            alignSelf: "flex-start",
-            width: "55%",
+            flexDirection: 'column',
+            alignSelf: 'flex-start',
+            width: '55%',
             marginTop: 20
         },
         bottomGrey: {
-            color:"#c0c0c0",
+            color: '#c0c0c0',
             paddingLeft: 16
         },
         bottomRed: {
-            color:"red",
+            color: 'red',
             paddingLeft: 16
         },
         btn2: {
-            alignSelf: "flex-end",
+            alignSelf: 'flex-end',
             marginBottom: 15
         },
         txt2: {
-            fontWeight: "bold",
-            color: "#fff"
-        },
-        genderPickerStyle: {
-            marginTop: 25
+            fontWeight: 'bold',
+            color: '#fff'
         },
         buttonsWrapper: {
             marginTop: 20
@@ -214,4 +208,4 @@ export default StyleSheet.create(
             color: color.inactive
         }
     }
-)
+);

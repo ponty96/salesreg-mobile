@@ -14,7 +14,7 @@ export default StyleSheet.create(
             justifyContent: 'center',
             alignItems: 'center',
             borderColor: color.grey,
-            backgroundColor: color.white
+            backgroundColor: color.secondary
         },
 
         saveCancelButtonText: {
