@@ -5,8 +5,8 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import ButtonAtom from '../Atom/ButtonAtom';
 import InputAtom from '../Atom/InputAtom';
 import ModalAtom from './../Atom/ModalAtom';
-import { marginlessInput, modalButton } from './../Style/exportStyles';
 import styles from './../Style/Screen';
+import styles1 from '../Style/exportStyles';
 
 interface ILimitModalProps {
     getValue: (a: any) => void;
@@ -74,13 +74,13 @@ class GetAmountModal extends Component<ILimitModalProps, ILimitModalState> {
                         label='Enter Amount'
                         keyboardType={'numeric'}
                         getValue={this.getAmount}
-                        contStyle={marginlessInput}
+                        contStyle={styles1.marginlessInput}
                     />
 
                     <ButtonAtom
                         btnText='Pay'
                         onPress={this.pay}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>

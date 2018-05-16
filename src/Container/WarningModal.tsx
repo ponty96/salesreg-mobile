@@ -5,8 +5,8 @@ import {Text, TouchableOpacity, View} from 'react-native';
 
 import ButtonAtom from '../Atom/ButtonAtom';
 import ModalAtom from './../Atom/ModalAtom';
-import { modalWarningButton } from './../Style/exportStyles';
 import styles from './../Style/Screen';
+import styles1 from './../Style/exportStyles';
 
 interface IWarnProps {
     getValue: (a: string) => void;
@@ -105,14 +105,14 @@ class DebtLimit extends Component<IWarnProps, IWarnState> {
                     <ButtonAtom
                         btnText='Grant debt'
                         transparent={true}
-                        btnStyle={modalWarningButton}
+                        btnStyle={styles1.modalWarningButton}
                         onPress={this.grant}
                     />
 
                     <ButtonAtom
                         btnText='Stop debt'
                         onPress={this.stop}
-                        btnStyle={modalWarningButton}
+                        btnStyle={styles1.modalWarningButton}
                     />
                 </Form>
             </View>

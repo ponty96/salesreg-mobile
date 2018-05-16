@@ -8,8 +8,8 @@ import styleLayout from '../Style/Layout';
 import ModalAtom from './../Atom/ModalAtom';
 import getTheme from './../native-base-theme/components';
 import material from './../native-base-theme/variables/material';
-import { marginlessInput, modalButton } from './../Style/exportStyles';
 import styles from './../Style/Screen';
+import styles1 from '../Style/exportStyles';
 
 interface IRestockModalProps {
     getValue: (a: any, b: any) => void;
@@ -124,20 +124,20 @@ class RestockModal extends Component<IRestockModalProps, IRestockModalState> {
                         label='Quantity'
                         keyboardType={'numeric'}
                         getValue={this.getQuantity}
-                        contStyle={marginlessInput}
+                        contStyle={styles1.marginlessInput}
                     />
 
                     <InputAtom
                         label='Cost price per pack'
                         keyboardType={'numeric'}
                         getValue={this.getCost}
-                        contStyle={marginlessInput}
+                        contStyle={styles1.marginlessInput}
                     />
 
                     <ButtonAtom
                         btnText='Save'
                         onPress={this.save}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>

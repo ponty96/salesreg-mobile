@@ -6,8 +6,8 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import ButtonAtom from '../Atom/ButtonAtom';
 import ModalAtom from './../Atom/ModalAtom';
 // import { color } from './../Style/Color';
-import { modalButton } from './../Style/exportStyles';
 import styles from './../Style/Screen';
+import styles1 from '../Style/exportStyles';
 
 interface IWarnModalProps {
     getValue: (a: string) => void;
@@ -174,7 +174,7 @@ class DebtWarningModal extends Component<IWarnModalProps, IWarnModalState> {
                 <ButtonAtom
                     btnText='OK'
                     onPress={() => this.props.closeModal()}
-                    btnStyle={modalButton}
+                    btnStyle={styles1.modalButton}
                 />
             </View>
         );

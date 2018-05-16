@@ -1,4 +1,4 @@
-import { color } from "./Color";
+import { color } from './Color';
 import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create(
@@ -34,104 +34,104 @@ export default StyleSheet.create(
             flex: 0,
             borderTopWidth: 0.5,
             borderBottomWidth: 0.5,
-            borderTopColor: "#f0f0f0",
-            borderBottomColor: "#c0c0c0"
+            borderTopColor: '#f0f0f0',
+            borderBottomColor: '#c0c0c0'
         },
 
         aboveAccordionPictureView: {
-            flexDirection: "column",
+            flexDirection: 'column',
             width: '50%',
             height: 200,
             alignItems: 'center',
-            justifyContent: 'center',
-            //backgroundColor: '#fff',
+            justifyContent: 'center'
+            //  backgroundColor: '#fff',
         },
 
         aboveAccordionPictureText: {
             paddingTop: 10,
             fontSize: 18,
-            fontWeight: "400",
-            color: color.grey,
+            fontWeight: '400',
+            color: color.grey
         },
 
         aboveAccordionMoneyView: {
             width: '50%',
             height: 200,
             alignItems: 'center',
-            justifyContent: 'center',
-            //backgroundColor: '#FFF',
+            justifyContent: 'center'
+            // backgroundColor: '#FFF',
         },
 
         aboveAccordionRedNumber: {
             color: color.primary,
             fontSize: 25,
-            fontWeight: 'bold',
+            fontWeight: 'bold'
         },
 
         aboveAccordionPictureViewP: {
-            flexDirection: "column",
+            flexDirection: 'column',
             width: '50%',
             height: 200,
             alignItems: 'flex-start',
             padding: 16,
             justifyContent: 'center',
-            backgroundColor: '#fff',
+            backgroundColor: '#fff'
         },
 
         aboveAccordionDp: {
             height: 90,
-            width: 90,
+            width: 90
         },
 
         aboveAccordionDpP: {
             height: 60,
-            width: 60,
+            width: 60
         },
 
         aboveAccordionBoldFont: {
-            fontWeight: "bold",
+            fontWeight: 'bold',
             fontSize: 18,
-            textAlign: "right"
+            textAlign: 'right'
         },
 
         aboveAccordionWhiteList: {
-            height: 65, 
-            width: "100%", 
-            backgroundColor: "#FFF",
+            height: 65,
+            width: '100%',
+            backgroundColor: '#FFF',
             paddingLeft: 0,
-            marginLeft: 0,
+            marginLeft: 0
         },
 
         aboveAccordionBlackTextL: {
             fontSize: 16,
-            color: "#c0c0c0",
+            color: '#c0c0c0',
             paddingLeft: 16
         },
 
         aboveAccordionBlackTextR: {
             fontSize: 16,
-            color: "#000"
+            color: '#000'
         },
 
         aboveAccordionRedTextR: {
             fontSize: 16,
-            color: "red",
+            color: 'red'
         },
 
         aboveAccordionGreyText: {
             fontSize: 16,
-            color: "#c0c0c0",
+            color: '#c0c0c0',
             paddingLeft: 16
         },
 
         aboveAccordionGreyFont: {
             fontSize: 16,
-            color: "#c0c0c0"
+            color: '#c0c0c0'
         },
 
         aboveAccordionRedText: {
             fontSize: 16,
-            color: "red"
+            color: 'red'
         },
 
         marginfulInput: {
@@ -157,19 +157,19 @@ export default StyleSheet.create(
         smallImageDisplayImage: {
             height: 90,
             width: 90,
-            borderRadius: 45,
+            borderRadius: 45
         },
 
         smallImageDisplayName: {
             marginTop: 20,
             marginLeft: 20,
             fontSize: 14,
-            fontWeight: '400',
+            fontWeight: '400'
         },
 
         nameDisplayWrapper: {
             flexDirection: 'row',
-            alignItems: 'center', 
+            alignItems: 'center'
         },
 
         nameDisplayLetterDisplay: {
@@ -194,45 +194,45 @@ export default StyleSheet.create(
         },
 
         newOrderContainer: {
-            backgroundColor: "#FFF", 
-            width: "98%", 
-            alignSelf: "center", 
-            borderRadius:2, 
-            borderWidth: 1, 
-            borderColor:"#f0f0f0", 
+            backgroundColor: '#FFF',
+            width: '98%',
+            alignSelf: 'center',
+            borderRadius: 2,
+            borderWidth: 1,
+            borderColor: '#f0f0f0',
             marginVertical: 16
         },
 
         newOrderHeader: {
-            backgroundColor: "#FFF", 
-            height: 40, 
+            backgroundColor: '#FFF',
+            height: 40,
             marginBottom: 3
         },
 
         newOrderIcon: {
-            fontSize: 30, 
-            textAlign: "right"
+            fontSize: 30,
+            textAlign: 'right'
         },
 
         newOrderInnerContainer: {
-            flexDirection:"column", 
-            alignSelf: "center" , 
-            width: "98%"
+            flexDirection: 'column',
+            alignSelf: 'center',
+            width: '98%'
         },
-        
+
         newOrderFirstInput: {
-            width: "96%", 
+            width: '96%',
             marginBottom: 3
         },
 
         newOrderSecondInput: {
-            flexDirection: "row", 
-            flex: 0, 
+            flexDirection: 'row',
+            flex: 0,
             marginBottom: 16
         },
 
         newOrderHalf: {
-            width: "48%"
+            width: '48%'
         },
 
         newOrderClose: {
@@ -246,16 +246,16 @@ export default StyleSheet.create(
             paddingBottom: 14,
             paddingLeft: 12,
             paddingRight: 12,
-            margin:0,
+            margin: 0,
             backgroundColor: '#fff',
             borderWidth: 0.5,
             borderRadius: 2,
             borderColor: 'grey'
         },
-        
+
         popoverArrow: {
             borderTopColor: 'rgba(0, 0, 0, 0.1)',
-            margin:0,
+            margin: 0,
             padding: 0
         },
 
@@ -264,72 +264,72 @@ export default StyleSheet.create(
         },
 
         popoverTouchable: {
-            flex: 0, 
-            alignSelf: "flex-end", 
-            flexDirection: "row", 
+            flex: 0,
+            alignSelf: 'flex-end',
+            flexDirection: 'row',
             marginTop: 15
         },
 
         popoverRedClick: {
-            color: "red", 
-            fontSize: 13, 
-            paddingTop: 5, 
-            paddingBottom: 5, 
+            color: 'red',
+            fontSize: 13,
+            paddingTop: 5,
+            paddingBottom: 5,
             paddingRight: 5
         },
 
         popoverIconTouch: {
-            paddingTop: 4 
+            paddingTop: 4
         },
-        
+
         popoverColumn: {
-            flexDirection: "column"
+            flexDirection: 'column'
         },
 
         popoverRow: {
-            flexDirection: "row"
+            flexDirection: 'row'
         },
 
         popoverMainFirst: {
-            flexDirection: "row", 
-            marginRight: 50, 
-            alignItems: "center"
+            flexDirection: 'row',
+            marginRight: 50,
+            alignItems: 'center'
         },
 
         popoverMainSecond: {
-            flexDirection: "row", 
-            marginRight: 0, 
-            alignItems: "center"
+            flexDirection: 'row',
+            marginRight: 0,
+            alignItems: 'center'
         },
 
         popoverViewX: {
-            width: 12, 
-            height: 12, 
-            borderRadius: 12/2, 
-            backgroundColor: "#c0c0c0"
+            width: 12,
+            height: 12,
+            borderRadius: 12 / 2,
+            backgroundColor: '#c0c0c0'
         },
 
         popoverTextX: {
-            fontSize: 12, 
+            fontSize: 12,
             paddingLeft: 4
         },
 
         popoverNotMain: {
-            flexDirection: "row", 
+            flexDirection: 'row',
             marginTop: 30
         },
 
         popoverLeftSide: {
-            flexDirection: "row",
-            marginRight: 100, 
-            alignItems: "center"
+            flexDirection: 'row',
+            marginRight: 100,
+            alignItems: 'center'
         },
 
         popoverRightSide: {
-            flex:0, 
-            flexDirection: "row", 
-            alignSelf: "flex-end", 
-            marginRight: 0, 
+            flex: 0,
+            flexDirection: 'row',
+            alignSelf: 'flex-end',
+            marginRight: 0,
             marginBottom: 8
         },
 
@@ -337,28 +337,28 @@ export default StyleSheet.create(
             width: 12,
             height: 12,
             borderRadius: 12 / 2,
-            backgroundColor: "red"
+            backgroundColor: 'red'
         },
 
         popoverRecall: {
-            textAlign: "right",
+            textAlign: 'right',
             fontSize: 12,
             paddingLeft: 16
         },
 
-        popoverInnerLeftText: { 
-            fontSize: 12, 
-            paddingLeft: 4 
+        popoverInnerLeftText: {
+            fontSize: 12,
+            paddingLeft: 4
         },
 
         subHeaderHeader: {
             height: 40,
-            backgroundColor: "#fff"
+            backgroundColor: '#fff'
         },
 
         subHeaderRow: {
-            flexDirection: "row",
-            width: "40%"
+            flexDirection: 'row',
+            width: '40%'
         },
 
         subHeaderPad: {
@@ -372,7 +372,7 @@ export default StyleSheet.create(
         },
 
         subHeaderIconColor: {
-            color: "#F0F0F0"
+            color: '#F0F0F0'
         },
 
         pickerStyle: {
@@ -381,7 +381,7 @@ export default StyleSheet.create(
         },
 
         totalOrderIcon: {
-            color: color.totalSales, 
+            color: color.totalSales,
             fontSize: 22
         },
 
@@ -389,30 +389,30 @@ export default StyleSheet.create(
             flexDirection: 'row',
             flex: 0,
             borderTopWidth: 0.5,
-            borderTopColor: "#f0f0f0"
+            borderTopColor: '#f0f0f0'
         },
 
         stylesDetailContent: {
             height: 130,
-            width: "100%",
+            width: '100%',
             paddingLeft: 0,
-            marginLeft: 0,
+            marginLeft: 0
         },
 
         stylesDetailPictureView: {
-            flexDirection: "column",
+            flexDirection: 'column',
             width: '50%',
             height: 120,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#fff',
+            backgroundColor: '#fff'
         },
 
           stylesDetailPictureText: {
             paddingTop: 10,
             fontSize: 18,
-            fontWeight: "400",
-            color: "grey",
+            fontWeight: '400',
+            color: 'grey'
         },
 
         stylesDetailGreyText: {
@@ -426,31 +426,31 @@ export default StyleSheet.create(
             width: '50%',
             height: 120,
             alignItems: 'center',
-            backgroundColor: '#FFF',
+            backgroundColor: '#FFF'
         },
-        
+
         stylesDetailDp: {
             height: 45,
-            width: 45,
+            width: 45
         },
-        
+
         stylesDetailWhiteList: {
             flex: 1,
-            height: 65, 
-            width: "100%", 
+            height: 65,
+            width: '100%',
             paddingLeft: 0,
             marginLeft: 0,
-            backgroundColor: "#FFF"
+            backgroundColor: '#FFF'
         },
 
         stylesDetailBlackText: {
             fontSize: 16,
-            color: "#000"
+            color: '#000'
         },
 
         stylesDetailRedText: {
             fontSize: 16,
-            color: "red",
+            color: 'red',
             paddingLeft: 16
         },
 
@@ -462,24 +462,24 @@ export default StyleSheet.create(
         },
 
         totalDebtTotalView: {
-            flexDirection: "row",
+            flexDirection: 'row',
             width: '30%',
             height: 55,
             alignItems: 'center',
-            justifyContent: 'center',
-            //backgroundColor: '#fff',
+            justifyContent: 'center'
+            // backgroundColor: '#fff',
         },
 
         totalDebtTotalText: {
             fontSize: 14,
-            fontWeight: "400",
-            //color: "#000",
+            fontWeight: '400'
+            // color: '#000',
         },
 
         totalDebtRedNumber1: {
             color: '#FFF',
             fontSize: 20,
-            fontWeight: 'bold',
+            fontWeight: 'bold'
         },
 
         totalDebtRedNumberView1: {
@@ -487,7 +487,7 @@ export default StyleSheet.create(
             height: 55,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: '#FF8C00',
+            backgroundColor: '#FF8C00'
         },
 
         totalDebtRedNumberView2: {
@@ -495,8 +495,8 @@ export default StyleSheet.create(
             height: 55,
             alignItems: 'center',
             justifyContent: 'center',
-            backgroundColor: 'rgba(218,11,11,59)',
-        },        
+            backgroundColor: 'rgba(218,11,11,59)'
+        },
 
         totalOrderColumn: {
             borderBottomWidth: 1,
@@ -514,20 +514,20 @@ export default StyleSheet.create(
             width: '30%',
             height: 45,
             alignItems: 'center',
-            justifyContent: 'center',
-            //backgroundColor: '#fff',
+            justifyContent: 'center'
+            // backgroundColor: '#fff',
         },
 
         totalOrderTotalText: {
             fontSize: 14,
-            fontWeight: "400",
-            //color: "#000",
+            fontWeight: '400'
+            // color: '#000',
         },
 
         totalOrderRedNumber: {
             color: color.primary,
             fontSize: 18,
-            fontWeight: 'bold',
+            fontWeight: 'bold'
         },
 
         totalOrderRedNumberView: {
@@ -537,7 +537,7 @@ export default StyleSheet.create(
             justifyContent: 'center',
             backgroundColor: color.totalSales
         },
-        
+
         totalOrderPeachView: {
             width: '70%',
             height: 45,
@@ -547,30 +547,30 @@ export default StyleSheet.create(
         },
 
         customerListContainer: {
-            //backgroundColor: "#FFF",
+            // backgroundColor: '#FFF',
             flex: 1,
-            width: "100%"
+            width: '100%'
         },
-        
+
         customerListHeader: {
-            backgroundColor: "#fff", 
-            width: "100%", 
+            backgroundColor: '#fff',
+            width: '100%',
             height: 40
         },
 
         customerListDirect: {
-            flexDirection: "row"
+            flexDirection: 'row'
         },
 
         customerListDropText: {
-            paddingBottom: 10, 
+            paddingBottom: 10,
             fontSize: 14
         },
 
         orderListContainer: {
-            //backgroundColor: "#FFF",
+            // backgroundColor: '#FFF',
             flex: 1
-        },        
+        },
 
         faintPicker: {
             color: color.inactive,
@@ -614,4 +614,4 @@ export default StyleSheet.create(
             height: 55
         }
     }
-)
+);

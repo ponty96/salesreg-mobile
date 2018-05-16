@@ -5,8 +5,8 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import ButtonAtom from '../Atom/ButtonAtom';
 import InputAtom from '../Atom/InputAtom';
 import ModalAtom from './../Atom/ModalAtom';
-import { marginlessInput, modalButton } from './../Style/exportStyles';
 import styles from './../Style/Screen';
+import styles1 from '../Style/exportStyles';
 
 interface IDeleteBuzProps {
     getValue: (a: any) => void;
@@ -78,13 +78,13 @@ class DeleteBuzModal extends Component<IDeleteBuzProps, IDeleteBuzState> {
                         label='Enter Password'
                         getValue={this.getPassword}
                         secureTextEntry={true}
-                        contStyle={marginlessInput}
+                        contStyle={styles1.marginlessInput}
                     />
 
                     <ButtonAtom
                         btnText='Delete'
                         onPress={this.delete}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>
