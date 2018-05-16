@@ -136,6 +136,10 @@ class RestockModal extends Component<IRestockModalProps, IRestockModalState> {
 
                     <ButtonAtom
                         btnText='Save'
+                        transparent={false}
+                        disabled={false}
+                        funcValue=''
+                        textStyle={false}
                         onPress={this.save}
                         btnStyle={modalButton}
                     />

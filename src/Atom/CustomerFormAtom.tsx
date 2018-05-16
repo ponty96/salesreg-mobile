@@ -1,0 +1,136 @@
+import React from 'react';
+import { View, Text } from 'react-native';
+
+import ImageAtom from './ImageAtom';
+import InputAtom from './InputAtom';
+
+import { marginfulInput, marginlessInput } from './../Style/exportStyles';
+import styles from '../Style/Form';
+import { ScrollView } from 'react-native-gesture-handler';
+import PickerAtom from './PickerAtom';
+
+interface ICustomerFormProps {
+    navigation: any
+}
+
+export default class CustomerFormAtom extends React.Component<ICustomerFormProps, any> {
+  state = {
+    product: '',
+    image: '',
+    quantity: 0,
+    Pquantity: 0,
+    costPP: 0,
+    birth: '',
+    marriage: '',
+    debt: 0
+  };
+
+  create = () => {
+    this.props.navigation.goBack();
+  }
+
+  getProduct = (product: string) => {
+    this.setState({ product });
+  }
+
+  getImage = (pic: any) => {
+    this.setState({ image: pic });
+  }
+  getSQuantity = (quantity: number) => {
+    this.setState({ quantity });
+  }
+  getPQuantity = (Pquantity: number) => {
+    this.setState({ Pquantity });
+  }
+  getCostPP = (costPP: number) => {
+    this.setState({ costPP });
+  }
+  getBirth = (birth: string) => {
+    this.setState({ birth });
+  }
+  getMarry = (marriage: string) => {
+    this.setState({ marriage });
+  }
+  getDebt = (debt: number) => {
+    this.setState({ debt });
+  }
+
+  render() {
+    return (
+      <ScrollView>
+        <View>
+          <ImageAtom getValue={this.getImage} />
+          <View>
+            <InputAtom
+              label='  Name'
+              getValue={this.getProduct}
+              contStyle={marginlessInput}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <View style={styles.innerStart}>
+              <InputAtom
+                label='  Phone number'
+                keyboardType='numeric'
+                getValue={this.getSQuantity}
+                contStyle={marginlessInput}
+              />
+            </View>
+            <View style={styles.innerEnd}>
+              <PickerAtom list={['Gender', 'Male', 'Female']} />
+            </View>
+          </View>
+          <View>
+            <InputAtom
+              label='  Home address'
+              keyboardType='numeric'
+              getValue={this.getPQuantity}
+              contStyle={marginlessInput}
+            />
+          </View>
+          <View>
+            <InputAtom
+              label='  Email'
+              keyboardType='numeric'
+              getValue={this.getCostPP}
+              contStyle={marginlessInput}
+            />
+          </View>
+          <View style={styles.inputView}>
+            <View style={styles.innerStart}>
+              <InputAtom
+                label='  Debt limit'
+                keyboardType='numeric'
+                getValue={this.getDebt}
+                contStyle={marginlessInput}
+              />
+            </View>
+            <View style={styles.innerEnd}>
+              <InputAtom
+                label='  Birthday'
+                keyboardType='numeric'
+                getValue={this.getBirth}
+                contStyle={marginfulInput}
+              />
+              <Text style={styles.underText}>DD/MM/YYYY</Text>
+            </View>
+          </View>
+          <View style={styles.inputView}>
+            <View style={styles.innerFirstPicker}>
+              <PickerAtom list={['Marital Status', 'Married', 'Single']} />
+            </View>
+            <View style={styles.innerEnd}>
+              <InputAtom
+                label='  Marriage Anniversary'
+                keyboardType='numeric'
+                getValue={this.getMarry}
+                contStyle={marginlessInput}
+              />
+              <Text style={styles.underText}>DD/MM/YYYY</Text>
+            </View>
+          </View>
+        </View>
+      </ScrollView>
+    );
+  }
+}

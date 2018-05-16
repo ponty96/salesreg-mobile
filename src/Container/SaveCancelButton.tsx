@@ -1,7 +1,6 @@
 import PropTypes from 'prop-types';
 import React from 'react';
 import { View } from 'react-native';
-
 import ButtonAtom from '../Atom/ButtonAtom';
 import {saveCancelButton, saveCancelButtonText} from './../Style/exportStyles';
 import styles from './../Style/Form';
@@ -36,6 +35,8 @@ class SaveCancelButton extends React.Component<ISaveCancelProps, any> {
                 <ButtonAtom
                     btnText='CANCEL'
                     transparent={true}
+                    disabled={false}
+                    funcValue=''
                     onPress={this.navigateBack}
                     btnStyle={saveCancelButton}
                     textStyle={saveCancelButtonText}
@@ -44,6 +45,8 @@ class SaveCancelButton extends React.Component<ISaveCancelProps, any> {
                 <ButtonAtom
                     btnText={this.props.positiveButtonName}
                     transparent={true}
+                    disabled={false}
+                    funcValue=''
                     onPress={this.create}
                     btnStyle={saveCancelButton}
                     textStyle={saveCancelButtonText}

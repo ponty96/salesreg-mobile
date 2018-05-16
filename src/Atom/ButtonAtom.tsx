@@ -1,21 +1,29 @@
 import React, { Component } from 'react';
-import PropTypes from 'prop-types';
 import { Button } from 'native-base';
 import { Text } from 'react-native';
-
 import styles from './../Style/Form';
 
-class ButtonAtom extends Component {
+interface IButtonAtomProps {
+    btnText: string;
+    transparent: boolean;
+    disabled: boolean;
+    onPress: (a: string) => void;
+    funcValue: string;
+    btnStyle: any;
+    textStyle: any;
+}
+
+class ButtonAtom extends Component<IButtonAtomProps, any> {
+    // static defaultProps: IButtonAtomProps;
     static defaultProps = {
         transparent: false,
         disabled: false,
-        funcValue: undefined
-    }
-
+        funcValue: ''
+    };
     render() {
         return (
             <Button
-                transparent = {this.props.transparent}
+                transparent = {this.props.transparent ? this.props.transparent : false}
                 disabled = {this.props.disabled}
                 light = {this.props.disabled}
                 style = {
@@ -35,14 +43,14 @@ class ButtonAtom extends Component {
     }
 }
 
-ButtonAtom.propTypes = {
-    btnText: PropTypes.string.isRequired,
-    transparent: PropTypes.bool,
-    disabled: PropTypes.bool,
-    onPress: PropTypes.func,
-    funcValue: PropTypes.string,
-    btnStyle: PropTypes.object,
-    textStyle: PropTypes.object
-}
-
 export default ButtonAtom;
+
+/*ButtonAtom.defaultProps = {
+    btnText: '',
+    transparent: false,
+    disabled: false,
+    funcValue: '',
+    btnStyle: styles.buttonRed,
+    textStyle: styles.textTransparent,
+    onPress: () => { console.log(); }
+};*/

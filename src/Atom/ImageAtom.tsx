@@ -1,15 +1,20 @@
 import React, { Component } from 'react';
 import { Image, View, Text, TouchableOpacity } from 'react-native';
-import PropTypes from 'prop-types';
 import { ImagePicker } from 'expo';
-
 import styles from './../Style/Form';
 
-class ImageAtom extends Component {
+interface IProps {
+    source: string
+    placeholder: string
+    imgStyle: object
+    getValue: (a: string) => void
+}
+
+class ImageAtom extends Component<IProps, any> {
 
     state = {
-        image: undefined
-    }
+        image: ''
+    };
 
     handleSelection = async () => {
         if (this.props.getValue) {
@@ -18,7 +23,7 @@ class ImageAtom extends Component {
             });
 
             if (result && !result.cancelled) {
-                this.setState({image: result.uri});
+                this.setState({image: result});
                 this.props.getValue(this.state.image);
             }
         }
@@ -72,13 +77,6 @@ class ImageAtom extends Component {
             );
         }
     }
-}
-
-ImageAtom.propTypes = {
-    source: PropTypes.string,
-    placeholder: PropTypes.string,
-    imgStyle: PropTypes.object,
-    getValue: PropTypes.func
 }
 
 export default ImageAtom;

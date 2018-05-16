@@ -6,7 +6,7 @@ import {Text, TouchableOpacity, View} from 'react-native';
 import ButtonAtom from '../Atom/ButtonAtom';
 import InputAtom from '../Atom/InputAtom';
 import ModalAtom from './../Atom/ModalAtom';
-import { marginlessInput, modalButton } from './../Style/exportStyles';
+import { marginlessInput, modalButton, modalText } from './../Style/exportStyles';
 import styles from './../Style/Screen';
 
 interface ILimitModalProps {
@@ -112,6 +112,10 @@ class DebtLimitModal extends Component<ILimitModalProps, ILimitModalState> {
 
                     <ButtonAtom
                         btnText='OK'
+                        transparent={false}
+                        disabled={false}
+                        funcValue=''
+                        textStyle={modalText}
                         onPress={this.set}
                         btnStyle={modalButton}
                     />

@@ -1,9 +1,12 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-
+import React from 'react';
+import { View, Text } from 'react-native';
 import styles from './../Style/Layout';
 
-export default class DateOrderAtom extends React.Component {
+interface IProps {
+    date: string
+}
+
+export default class DateOrderAtom extends React.Component<IProps, any> {
   render() {
     return (
       <View style={styles.dateOrderContainer}>

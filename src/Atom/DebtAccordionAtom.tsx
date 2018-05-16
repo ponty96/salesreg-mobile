@@ -1,15 +1,19 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { ListItem, Text, Thumbnail, Left, Body, Right } from "native-base";
-import { FlatList, View } from "react-native";
-import styles from "./../Style/ProductAndCustomerList";
-import { ScrollView, FlatList } from "react-native-gesture-handler";
-import { innerAccordion } from "../config/data";
+import React, { Component } from 'react';
+import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
+import { FlatList, View } from 'react-native';
+import styles from './../Style/ProductAndCustomerList';
+import { ScrollView } from 'react-native-gesture-handler';
+import { innerAccordion } from '../config/data';
 
-class InnerList extends Component {
+interface IProps {
+    items: { images: string, name: string, quantity: string, amount: any}
+    onPress: () => void
+}
+
+class InnerList extends Component<IProps, any> {
   render() {
-    const defaultImg = "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7";
-    const avatar = this.props.items.images != "" ? this.props.items.images : defaultImg;
+    const defaultImg = 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
+    const avatar = this.props.items.images !== '' ? this.props.items.images : defaultImg;
     return (
         <ListItem style={styles.rowD} onPress={this.props.onPress}>
             <Left style={styles.view1}>
@@ -27,23 +31,22 @@ class InnerList extends Component {
   }
 }
 
-InnerList.propTypes = {
-  items: PropTypes.object.isRequired,
-};
-
 const users = innerAccordion;
-  
+
   export default class DebtAccordionAtom extends Component {
-    onPress = () => {};
-  
-    renderItem = ({item}) => {
+    onPress = () => {
+        console.log('it ran');
+    }
+
+    renderItem = (item: any) => {
       return (
         <InnerList
           items={item}
+          onPress={this.onPress}
         />
       );
     }
-  
+
     render() {
       return (
         <View style={styles.debtAccord}>
@@ -51,11 +54,10 @@ const users = innerAccordion;
                 <FlatList
                   data={users}
                   renderItem={this.renderItem}
-                  keyExtractor={item => item.key}
+                  keyExtractor={item => item.key.toString()}
                 />
             </ScrollView>
         </View>
       );
     }
   }
-

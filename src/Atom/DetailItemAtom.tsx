@@ -1,12 +1,16 @@
 import React, {Component} from 'react';
 import {View, Text} from 'react-native';
 import {Icon} from 'native-base';
-import PropTypes from 'prop-types';
-
 import styles from './../Style/Layout';
 
-export default class DetailItemAtom extends Component{
-    render(){
+interface IProps {
+    icon: string
+    type: any
+    detailText: string
+}
+
+export default class DetailItemAtom extends Component<IProps, any> {
+    render() {
         return(
             <View style = {styles.detailItemWrapper}>
                 <Text>
@@ -20,9 +24,4 @@ export default class DetailItemAtom extends Component{
                 </Text>
             </View>);
     }
-}
-
-DetailItemAtom.propTypes = {
-    detailText: PropTypes.string.isRequired,
-    icon: PropTypes.string.isRequired
 }

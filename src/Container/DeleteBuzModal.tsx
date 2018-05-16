@@ -83,6 +83,10 @@ class DeleteBuzModal extends Component<IDeleteBuzProps, IDeleteBuzState> {
 
                     <ButtonAtom
                         btnText='Delete'
+                        transparent={false}
+                        disabled={false}
+                        funcValue=''
+                        textStyle={false}
                         onPress={this.delete}
                         btnStyle={modalButton}
                     />

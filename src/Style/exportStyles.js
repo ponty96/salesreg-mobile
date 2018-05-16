@@ -19,6 +19,11 @@ export const saveCancelButtonText = {
     fontWeight: 'bold'
 };
 
+export const modalText = {
+    color: '#fff',
+    fontWeight: 'bold'
+};
+
 export const marginlessInput = {
     marginLeft: 0
 };
