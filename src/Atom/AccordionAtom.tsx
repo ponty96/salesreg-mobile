@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Icon } from 'native-base';
 import Accordion from 'react-native-collapsible';
@@ -18,7 +18,7 @@ interface IAccordState {
 }
 const namer = 'md-arrow-dropdown';
 
-export default class AccordionAtom extends Component<IAccordProps, IAccordState> {
+export default class AccordionAtom extends React.Component<IAccordProps, IAccordState> {
   constructor(props?: IAccordProps, context?: any) {
     super(props, context);
     this.state = {
