@@ -6,7 +6,7 @@ import DetailItemAtom from './../Atom/DetailItemAtom';
 import GoldRatingsAtom from './../Atom/GoldRatingsAtom';
 import ButtonAtom from './../Atom/ButtonAtom';
 import styles from './../Style/Screen';
-import { redButtonText } from '../Style/exportStyles';
+import { redButtonText } from './../Style/exportStyles';
 
 interface IProps {
 

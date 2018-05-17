@@ -7,8 +7,16 @@ import styles from './../Style/Layout';
 import ListItemAtom from './../Atom/ListItemAtom';
 import { userData } from './../config/default';
 
-class SideBar extends PureComponent {
-    handleNavigation = (location, data = undefined) => {
+interface IProps {
+    navigation: any;
+}
+
+interface Istate {
+
+}
+
+class SideBar extends PureComponent<IProps, Istate> {
+    handleNavigation = (location: string, data: any = undefined) => {
         this.props.navigation.navigate(location, {data});
     }
 
