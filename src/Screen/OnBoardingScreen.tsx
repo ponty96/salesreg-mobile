@@ -1,13 +1,21 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import { View, Text } from 'react-native';
 import { Icon } from 'native-base';
 
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from '../Style/Auth';
-import styles1 from '../Style/exportStyles';
+import { signupButton, redButtonText } from '../Style/exportStyles';
 import AuthenticationHeader from '../Components/AuthenticationHeader';
 
-class OnBoardingScreen extends Component {
+interface IProps {
+
+}
+
+interface IState {
+
+}
+
+class OnBoardingScreen extends PureComponent<IProps, IState> {
     render() {
         const appDetails = [
             'All your businesses in one place',
@@ -15,16 +23,16 @@ class OnBoardingScreen extends Component {
             'Make your customers happy',
             'Control your credits/debts',
             'Increase your profit'
-        ]
+        ];
 
         return (
             <View style = { styles.container }>
                 <AuthenticationHeader smallHeader = { false } />
                 <View style = { styles.boardingScreenFeatureText }>
                     {
-                        appDetails.map((details, i) => 
-                            <View 
-                                style = { styles.appFunctionWrapper } 
+                        appDetails.map((details, i) =>
+                            <View
+                                style = { styles.appFunctionWrapper }
                                 key = { i }
                             >
                                 <Icon
@@ -42,17 +50,17 @@ class OnBoardingScreen extends Component {
                 <View style = { styles.buttomButtonsWrapper }>
                     <ButtonAtom
                         btnText = 'SIGN UP'
-                        textStyle = { styles1.redButtonText }
-                        btnStyle = { styles1.signupButton }
+                        textStyle = { redButtonText }
+                        btnStyle = { signupButton }
                     />
                     <ButtonAtom
                         btnText = 'LOGIN'
-                        textStyle = { styles1.redButtonText }
-                        btnStyle = { styles1.signupButton }
+                        textStyle = { redButtonText }
+                        btnStyle = { signupButton }
                     />
                 </View>
             </View>
-        )
+        );
     }
 }
 

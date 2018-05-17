@@ -1,45 +1,55 @@
 import React, { Component } from 'react';
-import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native';
-import { Form } from "native-base";
+import { View } from 'react-native';
 
-import SaveCancelButton from "../Container/SaveCancelButton";
+import SaveCancelButton from '../Container/SaveCancelButton';
 import EditUserProfileForm from '../Components/EditUserProfileForm';
 import styles from './../Style/Layout';
 
-export default class EditUserProfileScreen extends Component {
+interface IProps {
+
+}
+
+interface IState {
+    name: string;
+    phoneNumber: string;
+    image: string;
+    gender: string;
+}
+
+class EditUserProfileScreen extends Component<IProps, IState> {
     state = {
         name: 'Ayo Anwakasng',
         phoneNumber: '09034567889, 08067654323',
         image: 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
         gender: 'Female'
-    }
+    };
 
-    getName = (text) => {
+    getName = (text: string) => {
         this.setState(
             {
                 name: text
             }
-        )
+        );
     }
 
-    getPhoneNumber = (number) => {
+    getPhoneNumber = (number_text: string) => {
         this.setState(
             {
-                phoneNumber: number
+                phoneNumber: number_text
             }
-        )
+        );
     }
 
-    getImage = (pic) => {
+    getImage = (pic: string) => {
         this.setState({
             image: pic
-        })
+        });
     }
 
-    updateGender = (selectedGender) => {
+    updateGender = (selectedGender: string) => {
         this.setState({
             gender: selectedGender
-        })
+        });
     }
 
     render() {
@@ -53,12 +63,14 @@ export default class EditUserProfileScreen extends Component {
                         phoneNumber = { this.state.phoneNumber }
                         getPhoneNumber = { this.getPhoneNumber }
                         gender = { this.state.gender }
-                        updateGender = { this.state.updateGender }
+                        updateGender = { this.updateGender }
                     />
                     <SaveCancelButton
                         positiveButtonName = 'SAVE'
                     />
                 </View>
-        )
+        );
     }
 }
+
+export default EditUserProfileScreen;

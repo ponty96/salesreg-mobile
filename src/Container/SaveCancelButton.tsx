@@ -7,9 +7,9 @@ import styles from './../Style/Form';
 import styles1 from '../Style/exportStyles';
 
 interface ISaveCancelProps {
-    navigation: any;
-    createfunc: () => void;
-    goBack: () => void;
+    navigation?: any;
+    createfunc?: () => void;
+    goBack?: () => void;
     positiveButtonName: string;
 }
 
