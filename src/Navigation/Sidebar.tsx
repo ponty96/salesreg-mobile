@@ -1,28 +1,36 @@
-import React, { PureComponent } from "react";
-import { ScrollView, View, Text, TouchableOpacity } from "react-native";
-import { SafeAreaView } from "react-navigation";
-import { Icon } from "native-base";
+import React, { PureComponent } from 'react';
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import { Icon } from 'native-base';
 
-import styles from "./../Style/Layout";
-import ListItemAtom from "./../Atom/ListItemAtom";
-import { userData } from "./../config/default";
+import styles from './../Style/Layout';
+import ListItemAtom from './../Atom/ListItemAtom';
+import { userData } from './../config/default';
 
-class SideBar extends PureComponent {
-  handleNavigation = (location, data = undefined) => {
+interface IProps {
+  navigation: any;
+}
+
+interface Istate {
+
+}
+
+class SideBar extends PureComponent<IProps, Istate> {
+  handleNavigation = (location: string, data: any = undefined) => {
     this.props.navigation.navigate(location, { data });
-  };
+  }
 
   render() {
     return (
       <SafeAreaView
         style={styles.sidebarContainer}
-        forceInset={{ top: "always", horizontal: "never" }}
+        forceInset={{ top: 'always', horizontal: 'never' }}
       >
         <View style={styles.itemsContainer}>
           <ScrollView>
             <TouchableOpacity
               onPress={() =>
-                this.handleNavigation("UserProfile", userData.profile)
+                this.handleNavigation('UserProfile', userData.profile)
               }
               activeOpacity={1}
             >
@@ -30,30 +38,30 @@ class SideBar extends PureComponent {
                 item={userData.profile}
                 business={false}
                 bodyfunction={() =>
-                  this.handleNavigation("UserProfile", userData.profile)
+                  this.handleNavigation('UserProfile', userData.profile)
                 }
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.handleNavigation("BusinessDetails")}
+              onPress={() => this.handleNavigation('BusinessDetails')}
               activeOpacity={1}
             >
               <ListItemAtom
                 item={{
-                  name: "kay5"
+                  name: 'kay5'
                 }}
-                bodyfunction={() => this.handleNavigation("BusinessDetails")}
+                bodyfunction={() => this.handleNavigation('BusinessDetails')}
               />
             </TouchableOpacity>
             <TouchableOpacity
-              onPress={() => this.props.navigation.navigate("Settings")}
+              onPress={() => this.props.navigation.navigate('Settings')}
               activeOpacity={1}
             >
               <View style={styles.sidebarItem}>
                 <Icon
-                  name={"settings"}
+                  name={'settings'}
                   style={styles.itemIcon}
-                  type={"MaterialCommunityIcons"}
+                  type={'MaterialCommunityIcons'}
                 />
                 <Text style={styles.itemText}>Settings</Text>
               </View>
@@ -61,9 +69,9 @@ class SideBar extends PureComponent {
             <TouchableOpacity activeOpacity={1}>
               <View style={styles.sidebarItem}>
                 <Icon
-                  name={"help"}
+                  name={'help'}
                   style={styles.itemIcon}
-                  type={"MaterialCommunityIcons"}
+                  type={'MaterialCommunityIcons'}
                 />
                 <Text style={styles.itemText}>Need help</Text>
               </View>
@@ -73,20 +81,20 @@ class SideBar extends PureComponent {
         <TouchableOpacity
           style={styles.logoutItem}
           activeOpacity={1}
-          onPress={() => this.handleNavigation("BusinessList")}
+          onPress={() => this.handleNavigation('BusinessList')}
         >
-          <Icon name={"md-briefcase"} style={styles.itemIcon} />
+          <Icon name={'md-briefcase'} style={styles.itemIcon} />
           <Text style={styles.itemText}>My businesses</Text>
         </TouchableOpacity>
         <TouchableOpacity
           style={styles.logoutItem}
           activeOpacity={1}
-          onPress={() => this.handleNavigation("Auth")}
+          onPress={() => this.handleNavigation('Auth')}
         >
           <Icon
-            name={"logout"}
+            name={'logout'}
             style={styles.itemIcon}
-            type={"MaterialCommunityIcons"}
+            type={'MaterialCommunityIcons'}
           />
           <Text style={styles.itemText}>Logout</Text>
         </TouchableOpacity>
