@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base';
 import styles from './../Style/ProductAndCustomerList';
 

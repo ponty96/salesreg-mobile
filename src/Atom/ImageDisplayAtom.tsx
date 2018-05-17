@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Image, Text, View } from 'react-native';
 import styles from '../Style/exportStyles';
 
@@ -7,7 +7,7 @@ interface IProps {
     name: string
 }
 
-export default class ImageDisplayAtom extends Component<IProps, any> {
+export default class ImageDisplayAtom extends React.Component<IProps, any> {
     render() {
         return (
             <View style = { styles.smallImageDisplayContainer }>

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Button } from 'native-base';
 import { Text } from 'react-native';
 import styles from './../Style/Form';
@@ -13,7 +13,7 @@ interface IProps {
     textStyle?: any;
 }
 
-class ButtonAtom extends Component<IProps, any> {
+class ButtonAtom extends React.Component<IProps, any> {
     static defaultProps: IProps = {
         transparent: false,
         disabled: false

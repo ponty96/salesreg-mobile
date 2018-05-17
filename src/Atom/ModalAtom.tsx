@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import {View, Modal } from 'react-native';
 import styles from './../Style/Layout';
 
@@ -10,7 +10,7 @@ interface IProps {
     centered?: boolean
 }
 
-class ModalAtom extends Component<IProps, any> {
+class ModalAtom extends React.Component<IProps, any> {
 
     static defaultProps: IProps = {
         visible: false,

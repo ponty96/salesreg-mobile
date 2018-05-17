@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { View, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { Header, Text, Left, Right, Icon } from 'native-base';
 import InputAtom from './InputAtom';

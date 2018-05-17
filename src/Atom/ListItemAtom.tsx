@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import {View, Text, Image, TouchableOpacity} from 'react-native';
 import {Icon} from 'native-base';
 import styles from '../Style/Layout';
@@ -13,7 +13,7 @@ interface IProps {
     rightIconFunc?: () => void
 }
 
-class ListItemAtom extends Component<IProps, any> {
+class ListItemAtom extends React.Component<IProps, any> {
     static defaultProps: IProps = {
         business: true,
         type: 'sidebar'

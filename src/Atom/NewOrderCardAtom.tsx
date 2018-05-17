@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { View, TouchableOpacity } from 'react-native';
 import { Header, Icon, Right } from 'native-base';
 import InputAtom from './InputAtom';
@@ -8,7 +8,7 @@ interface IProps {
     onPress: () => void
 }
 
-export default class NewOrderCardAtom extends Component<IProps, any> {
+export default class NewOrderCardAtom extends React.Component<IProps, any> {
   state = {
     product: '',
     price: '',

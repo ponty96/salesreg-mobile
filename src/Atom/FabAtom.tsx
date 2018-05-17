@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Icon, Fab } from 'native-base';
 import styles from './../Style/Screen';
 import { color } from './../Style/Color';

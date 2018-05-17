@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { Header, Left, Right, Icon, Text } from 'native-base';
 import PickerAtom from './PickerAtom';
 import styles from '../Style/exportStyles';

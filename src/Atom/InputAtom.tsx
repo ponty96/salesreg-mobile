@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import {Item, Input, Label, Text } from 'native-base';
 import { View } from 'react-native';
 import styles from './../Style/Form';
@@ -20,7 +20,7 @@ interface IProps {
     underneathText?: string
 }
 
-class InputAtom extends Component<IProps, any> {
+class InputAtom extends React.Component<IProps, any> {
     static defaultProps: IProps = {
         required: false,
         floatingLabel: true,

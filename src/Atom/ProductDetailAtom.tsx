@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { View, Text } from 'react-native';
 import { Thumbnail, ListItem, Left, Right } from 'native-base';
 import styles from '../Style/exportStyles';

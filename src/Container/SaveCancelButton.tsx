@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { View } from 'react-native';
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from './../Style/Form';

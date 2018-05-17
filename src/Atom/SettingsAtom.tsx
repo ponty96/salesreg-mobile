@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import * as React from 'react';
 import {View, Text} from 'react-native';
 import {Icon} from 'native-base';
 import styles from '../Style/Layout';
@@ -9,7 +9,7 @@ interface IProps {
     rightIcon?: boolean
 }
 
-class SettingsAtom extends Component<IProps, any> {
+class SettingsAtom extends React.Component<IProps, any> {
     static defaultProps: IProps = {
         rightIcon: false
     };

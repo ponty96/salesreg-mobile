@@ -1,5 +1,5 @@
 import {Form, Icon} from 'native-base';
-import React, {Component} from 'react';
+import * as React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 import ButtonAtom from '../Atom/ButtonAtom';
@@ -20,7 +20,7 @@ interface IState {
     visibility: boolean;
 }
 
-class DebtLimit extends Component<IProps, IState> {
+class DebtLimit extends React.PureComponent<IProps, IState> {
     static defaultProps: IProps = {
         visibility: false
     };

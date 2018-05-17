@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
 import styles from './../Style/ProductAndCustomerList';
 
@@ -8,7 +8,7 @@ interface IProps {
     onPress?: () => void;
 }
 
-class DebtListAtom extends Component<IProps, any> {
+class DebtListAtom extends React.Component<IProps, any> {
     display = () => {
         if (this.props.limit >= 200000) {
           return (

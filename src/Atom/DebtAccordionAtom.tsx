@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
 import { FlatList, View } from 'react-native';
 import styles from './../Style/ProductAndCustomerList';
@@ -10,7 +10,7 @@ interface IProps {
     onPress?: () => void
 }
 
-class InnerList extends Component<IProps, any> {
+class InnerList extends React.Component<IProps, any> {
   render() {
     const defaultImg = 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
     const avatar = this.props.items.images !== '' ? this.props.items.images : defaultImg;
@@ -33,7 +33,7 @@ class InnerList extends Component<IProps, any> {
 
 const users = innerAccordion;
 
-  export default class DebtAccordionAtom extends Component {
+  export default class DebtAccordionAtom extends React.Component {
     onPress = () => {
         console.log('it ran');
     }

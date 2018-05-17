@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
 import styles from './../Style/ProductAndCustomerList';
 
@@ -9,7 +9,7 @@ interface IProps {
     onPress?: () => void
 }
 
-class CustomerListAtom extends Component<IProps, any> {
+class CustomerListAtom extends React.Component<IProps, any> {
   render() {
     const defaultImg = 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
     const avatar = this.props.items.images !== '' ? this.props.items.images : defaultImg;

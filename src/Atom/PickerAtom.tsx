@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import * as React from 'react';
 import { Picker, Icon } from 'native-base';
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IState {
     selected: string
 }
 
-class PickerAtom extends Component<IProps, IState> {
+class PickerAtom extends React.Component<IProps, IState> {
     constructor(props: any) {
         super(props);
         this.state = {

@@ -1,4 +1,4 @@
-import React from 'react';
+import * as React from 'react';
 import { TouchableOpacity, View } from 'react-native';
 import { Icon, Text, CheckBox, Left, Right } from 'native-base';
 import { Popover, PopoverController } from 'react-native-modal-popover';

@@ -1,5 +1,5 @@
 import {Icon} from 'native-base';
-import React, {Component} from 'react';
+import * as React from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 // import Slider from 'react-native-slider';
 import ButtonAtom from '../Atom/ButtonAtom';
@@ -21,7 +21,7 @@ interface IState {
     value: any;
 }
 
-class DebtWarningModal extends Component<IProps, IState> {
+class DebtWarningModal extends React.Component<IProps, IState> {
     static defaultProps: IProps = {
         visibility: false
     };
