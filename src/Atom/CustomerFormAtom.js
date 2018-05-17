@@ -5,7 +5,7 @@ import { ScrollView } from "react-native-gesture-handler";
 import ImageAtom from "./ImageAtom";
 import InputAtom from "./InputAtom";
 import styles from "../Style/Form";
-import styles1 from '../Style/exportStyles';
+import styles1 from "../Style/exportStyles";
 import PickerAtom from "./PickerAtom";
 
 export default class CustomerFormAtom extends React.Component {

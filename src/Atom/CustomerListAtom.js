@@ -5,8 +5,10 @@ import styles from "./../Style/ProductAndCustomerList";
 
 class CustomerListAtom extends Component {
   render() {
-    const defaultImg = "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7";
-    const avatar = this.props.items.images != "" ? this.props.items.images : defaultImg;
+    const defaultImg =
+      "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7";
+    const avatar =
+      this.props.items.images != "" ? this.props.items.images : defaultImg;
     var paid = "paid";
     var balance = "balance";
     return (
@@ -38,7 +40,7 @@ class CustomerListAtom extends Component {
 }
 
 CustomerListAtom.propTypes = {
-  items: PropTypes.object.isRequired,
+  items: PropTypes.object.isRequired
 };
 
 export default CustomerListAtom;

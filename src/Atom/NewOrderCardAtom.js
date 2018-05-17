@@ -67,4 +67,4 @@ export default class NewOrderCardAtom extends Component {
 
 styles.NewOrderCardAtom.propTypes = {
   onPress: PropTypes.func
-};  
+};

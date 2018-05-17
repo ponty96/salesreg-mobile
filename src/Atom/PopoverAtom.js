@@ -1,8 +1,12 @@
 import React from "react";
 import { TouchableOpacity, View } from "react-native";
 import { Icon, Text, CheckBox, Left, Right, Body } from "native-base";
-import { Popover, PopoverController, PopoverTouchable } from "react-native-modal-popover";
-import PropTypes from 'prop-types';
+import {
+  Popover,
+  PopoverController,
+  PopoverTouchable
+} from "react-native-modal-popover";
+import PropTypes from "prop-types";
 
 import styles from "../Style/exportStyles";
 
@@ -105,4 +109,4 @@ PopoverAtom.propTypes = {
   position: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   check: PropTypes.bool
-}
+};

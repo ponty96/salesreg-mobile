@@ -7,7 +7,7 @@ import InputAtom from "./InputAtom";
 import PickerAtom from "./PickerAtom";
 import GoldRatingsAtom from "./GoldRatingsAtom";
 import styles from "../Style/Form";
-import styles1 from '..Style/exportStyles';
+import styles1 from "..Style/exportStyles";
 
 export default class EditCustomerAtom extends React.Component {
   state = {

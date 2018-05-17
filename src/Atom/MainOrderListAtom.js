@@ -19,7 +19,9 @@ class MainOrderListAtom extends React.Component {
             </Text>
           </View>
           <View style={styles.viewMargin}>
-            <Text style={styles.leftText2}>{this.props.items.customerName}</Text>
+            <Text style={styles.leftText2}>
+              {this.props.items.customerName}
+            </Text>
           </View>
         </Left>
         <Right style={styles.mainRight}>

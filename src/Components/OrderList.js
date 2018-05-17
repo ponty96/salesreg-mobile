@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import PropTypes from 'prop-types';
+import PropTypes from "prop-types";
 import { View, FlatList } from "react-native";
 
-import styles from './../Style/exportStyles';
+import styles from "./../Style/exportStyles";
 import DateOrderAtom from "../Atom/DateOrderAtom";
 import TotalOrderAtom from "../Atom/TotalOrderAtom";
 import OrderListAtom from "../Atom/OrderListAtom";
@@ -29,16 +29,11 @@ class OrderList extends Component {
     });
   }
 
-  renderItem = ({item}) => {
+  renderItem = ({ item }) => {
     if (item.header == "start") {
       return <DateOrderAtom date={item.date} />;
     } else if (item.header == "middle") {
-      return (
-        <OrderListAtom
-          onPress={this.onPress}
-          items={item}
-        />
-      );
+      return <OrderListAtom onPress={this.onPress} items={item} />;
     } else if (item.header == "end") {
       return <TotalOrderAtom totalAmount={item.amount} />;
     }
@@ -64,6 +59,6 @@ class OrderList extends Component {
 
 OrderList.propTypes = {
   items: PropTypes.arrayOf(PropTypes.object).isRequired
-}
+};
 
 export default OrderList;
