@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { ListItem, Text, Thumbnail, Left, Body, Right } from "native-base";
-import { FlatList, View } from "react-native";
-import { ScrollView, FlatList } from "react-native-gesture-handler";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
+import { FlatList, View } from 'react-native'
+import { ScrollView, FlatList } from 'react-native-gesture-handler'
 
-import { innerAccordion } from "../config/data";
-import styles from "./../Style/ProductAndCustomerList";
+import { innerAccordion } from '../config/data'
+import styles from './../Style/ProductAndCustomerList'
 
 class InnerList extends Component {
   render() {
     const defaultImg =
-      "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7";
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
     const avatar =
-      this.props.items.images != "" ? this.props.items.images : defaultImg;
+      this.props.items.images != '' ? this.props.items.images : defaultImg
     return (
       <ListItem style={styles.rowD} onPress={this.props.onPress}>
         <Left style={styles.view1}>
@@ -26,22 +26,22 @@ class InnerList extends Component {
           <Text style={styles.rowText3DA}># {this.props.items.amount}.00</Text>
         </Right>
       </ListItem>
-    );
+    )
   }
 }
 
 InnerList.propTypes = {
   items: PropTypes.object.isRequired
-};
+}
 
-const users = innerAccordion;
+const users = innerAccordion
 
 export default class DebtAccordionAtom extends Component {
-  onPress = () => {};
+  onPress = () => {}
 
   renderItem = ({ item }) => {
-    return <InnerList items={item} />;
-  };
+    return <InnerList items={item} />
+  }
 
   render() {
     return (
@@ -54,6 +54,6 @@ export default class DebtAccordionAtom extends Component {
           />
         </ScrollView>
       </View>
-    );
+    )
   }
 }

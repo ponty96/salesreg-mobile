@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { View, Image } from "react-native";
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import { View, Image } from 'react-native'
+import PropTypes from 'prop-types'
 
-import styles from "../Style/Auth";
+import styles from '../Style/Auth'
 
 class AuthenticationHeader extends Component {
   static defaultProps = {
     smallHeader: true
-  };
+  }
 
   render() {
     return (
@@ -19,17 +19,17 @@ class AuthenticationHeader extends Component {
         }
       >
         {this.props.smallHeader ? (
-          <Image source={require("./../Images/logo_mini.png")} />
+          <Image source={require('./../Images/logo_mini.png')} />
         ) : (
-          <Image source={require("./../Images/logo.png")} />
+          <Image source={require('./../Images/logo.png')} />
         )}
       </View>
-    );
+    )
   }
 }
 
 AuthenticationHeader.propTypes = {
   smallHeader: PropTypes.bool
-};
+}
 
-export default AuthenticationHeader;
+export default AuthenticationHeader

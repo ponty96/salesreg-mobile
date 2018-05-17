@@ -1,38 +1,38 @@
-import React from "react";
-import { Form } from "native-base";
-import PropTypes from "prop-types";
+import React from 'react'
+import { Form } from 'native-base'
+import PropTypes from 'prop-types'
 
-import InputAtom from "../Atom/InputAtom";
-import ButtonAtom from "../Atom/ButtonAtom";
-import styles from "../Style/exportStyles";
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import styles from '../Style/exportStyles'
 
 class LoginForm extends React.Component {
   state = {
     phone: undefined,
     password: undefined,
-    underlineColorAndroid: "red"
-  };
+    underlineColorAndroid: 'red'
+  }
 
   login = () => {
-    console.log(this.state.phone, this.state.password);
-    this.props.navigation.navigate("App");
-  };
+    console.log(this.state.phone, this.state.password)
+    this.props.navigation.navigate('App')
+  }
 
   getPhone = phone => {
     this.setState({
       phone
-    });
-  };
+    })
+  }
 
   getPassword = pass => {
     this.setState({
       password: pass
-    });
-  };
+    })
+  }
 
   navigate = location => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     return (
@@ -55,23 +55,23 @@ class LoginForm extends React.Component {
         <ButtonAtom
           btnText="Forgot password"
           transparent={true}
-          funcValue={"Reset"}
+          funcValue={'Reset'}
           onPress={this.navigate}
         />
         <ButtonAtom btnText="Login" onPress={this.login} />
         <ButtonAtom
           btnText="I don't have an account"
           transparent={true}
-          funcValue={"Signup"}
+          funcValue={'Signup'}
           onPress={this.navigate}
         />
       </Form>
-    );
+    )
   }
 }
 
 LoginForm.propTypes = {
   navigation: PropTypes.object.isRequired
-};
+}
 
-export default LoginForm;
+export default LoginForm

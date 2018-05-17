@@ -1,28 +1,28 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 
-import AboveAccordionAtom from "../Atom/AboveAccordionAtom";
-import styles from "../Style/OrderList";
-import AccordionAtom from "../Atom/AccordionAtom";
-import GetAmountModal from "../Container/GetAmountModal";
-import ButtonAtom from "../Atom/ButtonAtom";
+import AboveAccordionAtom from '../Atom/AboveAccordionAtom'
+import styles from '../Style/OrderList'
+import AccordionAtom from '../Atom/AccordionAtom'
+import GetAmountModal from '../Container/GetAmountModal'
+import ButtonAtom from '../Atom/ButtonAtom'
 
 export default class App extends React.Component {
   constructor() {
-    super();
+    super()
     this.state = {
       visibility: false
-    };
+    }
   }
 
   onHot = () => {
     if (this.state.visibility == false) {
-      this.setState({ visibility: true });
+      this.setState({ visibility: true })
     } else {
-      this.setState({ visibility: false });
+      this.setState({ visibility: false })
     }
-  };
+  }
   render() {
     return (
       <View style={styles.ababa}>
@@ -40,6 +40,6 @@ export default class App extends React.Component {
           />
         </ScrollView>
       </View>
-    );
+    )
   }
 }

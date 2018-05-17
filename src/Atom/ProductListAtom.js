@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import { ListItem, Left, Body, Right, Text, Thumbnail } from "native-base";
-import PropTypes from "prop-types";
-import styles from "./../Style/ProductAndCustomerList";
+import React, { Component } from 'react'
+import { ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base'
+import PropTypes from 'prop-types'
+import styles from './../Style/ProductAndCustomerList'
 
 class ProductListAtom extends React.Component {
   render() {
     const defaultImg =
-      "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7";
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
     const avatar =
-      this.props.items.images != "" ? this.props.items.images : defaultImg;
+      this.props.items.images != '' ? this.props.items.images : defaultImg
 
     return (
       <ListItem style={styles.rowP} onPress={this.props.onPress}>
@@ -22,12 +22,12 @@ class ProductListAtom extends React.Component {
           <Text style={styles.rowText3P}> {this.props.items.number}</Text>
         </Right>
       </ListItem>
-    );
+    )
   }
 }
 
 ProductListAtom.propTypes = {
   items: PropTypes.object.isRequired
-};
+}
 
-export default ProductListAtom;
+export default ProductListAtom

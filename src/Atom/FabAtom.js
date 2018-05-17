@@ -1,9 +1,9 @@
-import React from "react";
-import PropTypes from "prop-types";
-import { Icon, Fab } from "native-base";
+import React from 'react'
+import PropTypes from 'prop-types'
+import { Icon, Fab } from 'native-base'
 
-import styles from "./../Style/Screen";
-import { color } from "./../Style/Color";
+import styles from './../Style/Screen'
+import { color } from './../Style/Color'
 
 const FabAtom = props => (
   <Fab
@@ -14,14 +14,14 @@ const FabAtom = props => (
   >
     <Icon
       name={props.name}
-      type={props.type ? props.type : "Ionicons"}
+      type={props.type ? props.type : 'Ionicons'}
       color={color.secondary}
     />
   </Fab>
-);
+)
 
 FabAtom.propTypes = {
   params: PropTypes.object
-};
+}
 
-export default FabAtom;
+export default FabAtom

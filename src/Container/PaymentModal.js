@@ -1,49 +1,49 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Form, Icon } from "native-base";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Form, Icon } from 'native-base'
 
-import ModalAtom from "./../Atom/ModalAtom";
-import InputAtom from "../Atom/InputAtom";
-import ButtonAtom from "../Atom/ButtonAtom";
-import styles from "./../Style/Screen";
-import styleLayout from "./../Style/Layout";
-import styles1 from "./../Style/exportStyles";
+import ModalAtom from './../Atom/ModalAtom'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import styles from './../Style/Screen'
+import styleLayout from './../Style/Layout'
+import styles1 from './../Style/exportStyles'
 
 class PaymentModal extends Component {
   state = {
     amount: undefined,
     balance: undefined
-  };
+  }
 
   static defaultProps = {
     visibility: false
-  };
+  }
 
   getAmount = amount => {
-    this.setState({ amount });
-  };
+    this.setState({ amount })
+  }
 
   getBalance = balance => {
-    this.setState({ balance });
-  };
+    this.setState({ balance })
+  }
 
   pay = () => {
     if (this.props.getValue) {
-      this.props.getValue(this.state.amount, this.state.balance);
+      this.props.getValue(this.state.amount, this.state.balance)
     }
-  };
+  }
 
   renderHeader = () => {
     return (
       <View style={styles.modalHeader}>
         <Text style={styles.modalHeaderText}>{this.props.headerText}</Text>
         <TouchableOpacity oonPress={() => this.props.closeModal()}>
-          <Icon name={"md-close"} style={styles.modalCloseIcon} />
+          <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    );
-  };
+    )
+  }
 
   renderBody = () => {
     return (
@@ -52,7 +52,7 @@ class PaymentModal extends Component {
           <View style={styleLayout.listTouchCont}>
             <InputAtom
               label="Amount paid"
-              keyboardType={"numeric"}
+              keyboardType={'numeric'}
               getValue={this.getAmount}
               contStyle={[
                 styles1.marginlessInput,
@@ -63,7 +63,7 @@ class PaymentModal extends Component {
 
             <InputAtom
               label="Balance"
-              keyboardType={"numeric"}
+              keyboardType={'numeric'}
               getValue={this.getBalance}
               contStyle={[styles1.marginlessInput, styles1.flexfull]}
             />
@@ -73,7 +73,7 @@ class PaymentModal extends Component {
             <View style={styleLayout.formViewContainer}>
               <InputAtom
                 label="Balance due date"
-                keyboardType={"numeric"}
+                keyboardType={'numeric'}
                 getValue={this.getAmount}
                 contStyle={[
                   styles1.marginlessInput,
@@ -94,8 +94,8 @@ class PaymentModal extends Component {
           />
         </Form>
       </View>
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -104,7 +104,7 @@ class PaymentModal extends Component {
         body={this.renderBody()}
         header={this.renderHeader()}
       />
-    );
+    )
   }
 }
 
@@ -113,6 +113,6 @@ PaymentModal.propTypes = {
   headerText: PropTypes.string.isRequired,
   getValue: PropTypes.func,
   closeModal: PropTypes.func.isRequired
-};
+}
 
-export default PaymentModal;
+export default PaymentModal

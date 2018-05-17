@@ -1,10 +1,10 @@
-import React, { Component } from "react";
-import { Icon } from "native-base";
-import { Image, View, Text } from "react-native";
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import { Icon } from 'native-base'
+import { Image, View, Text } from 'react-native'
+import PropTypes from 'prop-types'
 
-import styles from "../Style/Screen";
-import styles1 from "../Style/Form";
+import styles from '../Style/Screen'
+import styles1 from '../Style/Form'
 
 class UserProfile extends Component {
   render() {
@@ -36,16 +36,16 @@ class UserProfile extends Component {
         </View>
 
         <View style={styles.smallCompartment}>
-          <Icon name="phone" style={styles.indentLeft} type={"FontAwesome"} />
+          <Icon name="phone" style={styles.indentLeft} type={'FontAwesome'} />
           <Text style={styles.indentRight}>{this.props.item.phoneNumber}</Text>
         </View>
       </View>
-    );
+    )
   }
 }
 
 UserProfile.propTypes = {
   item: PropTypes.object.isRequired
-};
+}
 
-export default UserProfile;
+export default UserProfile

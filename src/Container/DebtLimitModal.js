@@ -1,53 +1,53 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Form, Icon } from "native-base";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Form, Icon } from 'native-base'
 
-import ModalAtom from "./../Atom/ModalAtom";
-import InputAtom from "../Atom/InputAtom";
-import ButtonAtom from "../Atom/ButtonAtom";
-import styles from "./../Style/Screen";
-import styles1 from "../Style/exportStyles";
+import ModalAtom from './../Atom/ModalAtom'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import styles from './../Style/Screen'
+import styles1 from '../Style/exportStyles'
 
 class DebtLimitModal extends Component {
   state = {
     amount: undefined
-  };
+  }
 
   static defaultProps = {
     visibility: false
-  };
+  }
 
   getAmount = amount => {
-    this.setState({ amount });
-  };
+    this.setState({ amount })
+  }
 
   set = () => {
     if (this.props.getValue) {
-      this.props.getValue(this.state.amount);
+      this.props.getValue(this.state.amount)
     }
-    this.props.closeModal();
-  };
+    this.props.closeModal()
+  }
 
   renderHeader = () => {
     return (
       <View style={styles.modalHeader}>
         <Text style={styles.modalHeaderText}>{this.props.headerText}</Text>
         <TouchableOpacity onPress={() => this.props.closeModal()}>
-          <Icon name={"md-close"} style={styles.modalCloseIcon} />
+          <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    );
-  };
+    )
+  }
 
   renderBody = () => {
-    let amount = parseInt(this.state.amount);
+    let amount = parseInt(this.state.amount)
     return (
       <View style={styles.modalBody}>
         <Form>
           <InputAtom
             floatingLabel={false}
-            keyboardType={"numeric"}
+            keyboardType={'numeric'}
             getValue={this.getAmount}
             contStyle={styles1.marginlessInput}
             placeholder={this.props.placeholder}
@@ -56,9 +56,9 @@ class DebtLimitModal extends Component {
           {amount > 0 && (
             <View style={[styles.debtLimitWarning, styles.creditLimit]}>
               <Icon
-                name={"info"}
+                name={'info'}
                 style={styles.modalInfoIcon}
-                type={"Entypo"}
+                type={'Entypo'}
               />
               <Text
                 style={[
@@ -81,8 +81,8 @@ class DebtLimitModal extends Component {
           />
         </Form>
       </View>
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -91,7 +91,7 @@ class DebtLimitModal extends Component {
         body={this.renderBody()}
         header={this.renderHeader()}
       />
-    );
+    )
   }
 }
 
@@ -101,6 +101,6 @@ DebtLimitModal.propTypes = {
   getValue: PropTypes.func,
   closeModal: PropTypes.func.isRequired,
   placeholder: PropTypes.string
-};
+}
 
-export default DebtLimitModal;
+export default DebtLimitModal

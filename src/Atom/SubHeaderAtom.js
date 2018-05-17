@@ -1,15 +1,15 @@
-import React from "react";
-import { View } from "react-native";
-import PropTypes from "prop-types";
-import { Header, Left, Right, Icon, Text } from "native-base";
-import PickerAtom from "./PickerAtom";
+import React from 'react'
+import { View } from 'react-native'
+import PropTypes from 'prop-types'
+import { Header, Left, Right, Icon, Text } from 'native-base'
+import PickerAtom from './PickerAtom'
 
-import styles from "../Style/exportStyles";
+import styles from '../Style/exportStyles'
 
 class SubHeaderAtom extends React.Component {
   static defaultProps = {
-    total: "800"
-  };
+    total: '800'
+  }
 
   render() {
     return (
@@ -23,12 +23,12 @@ class SubHeaderAtom extends React.Component {
           <PickerAtom list={this.props.list} style={styles.pickerStyle} />
         </Right>
       </Header>
-    );
+    )
   }
 }
 
 SubHeaderAtom.propTypes = {
   total: PropTypes.string
-};
+}
 
-export default SubHeaderAtom;
+export default SubHeaderAtom

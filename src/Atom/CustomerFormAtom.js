@@ -1,32 +1,32 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import React from 'react'
+import { View, Text } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 
-import ImageAtom from "./ImageAtom";
-import InputAtom from "./InputAtom";
-import styles from "../Style/Form";
-import styles1 from "../Style/exportStyles";
-import PickerAtom from "./PickerAtom";
+import ImageAtom from './ImageAtom'
+import InputAtom from './InputAtom'
+import styles from '../Style/Form'
+import styles1 from '../Style/exportStyles'
+import PickerAtom from './PickerAtom'
 
 export default class CustomerFormAtom extends React.Component {
   state = {
-    product: "",
-    image: ""
-  };
+    product: '',
+    image: ''
+  }
 
   create = () => {
-    this.props.navigation.goBack();
-  };
+    this.props.navigation.goBack()
+  }
 
   getProduct = product => {
-    this.setState({ product });
-  };
+    this.setState({ product })
+  }
 
   getImage = pic => {
     this.setState({
       image: pic
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -50,7 +50,7 @@ export default class CustomerFormAtom extends React.Component {
               />
             </View>
             <View style={styles.innerEnd}>
-              <PickerAtom list={["Gender", "Male", "Female"]} />
+              <PickerAtom list={['Gender', 'Male', 'Female']} />
             </View>
           </View>
           <View>
@@ -90,7 +90,7 @@ export default class CustomerFormAtom extends React.Component {
           </View>
           <View style={styles.inputView}>
             <View style={styles.innerFirstPicker}>
-              <PickerAtom list={["Marital Status", "Married", "Single"]} />
+              <PickerAtom list={['Marital Status', 'Married', 'Single']} />
             </View>
             <View style={styles.innerEnd}>
               <InputAtom
@@ -104,6 +104,6 @@ export default class CustomerFormAtom extends React.Component {
           </View>
         </View>
       </ScrollView>
-    );
+    )
   }
 }

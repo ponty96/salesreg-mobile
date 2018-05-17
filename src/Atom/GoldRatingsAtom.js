@@ -1,44 +1,44 @@
-import React from "react";
-import { View, Text } from "react-native";
-import StarRating from "react-native-star-rating";
+import React from 'react'
+import { View, Text } from 'react-native'
+import StarRating from 'react-native-star-rating'
 
-import styles from "./../Style/Layout";
+import styles from './../Style/Layout'
 
 class GoldRatings extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
       starCount: 0,
-      value: ""
-    };
+      value: ''
+    }
   }
 
   onStarRatingPress(rating) {
     if (rating == 1) {
       this.setState({
         starCount: rating,
-        value: "Terrible"
-      });
+        value: 'Terrible'
+      })
     } else if (rating == 2) {
       this.setState({
         starCount: rating,
-        value: "Not so Bad"
-      });
+        value: 'Not so Bad'
+      })
     } else if (rating == 3) {
       this.setState({
         starCount: rating,
-        value: "Good!"
-      });
+        value: 'Good!'
+      })
     } else if (rating == 4) {
       this.setState({
         starCount: rating,
-        value: "Very Good!!"
-      });
+        value: 'Very Good!!'
+      })
     } else if (rating == 5) {
       this.setState({
         starCount: rating,
-        value: "Amazing!!!"
-      });
+        value: 'Amazing!!!'
+      })
     }
   }
 
@@ -55,8 +55,8 @@ class GoldRatings extends React.Component {
           starSize={14}
         />
       </View>
-    );
+    )
   }
 }
 
-export default GoldRatings;
+export default GoldRatings

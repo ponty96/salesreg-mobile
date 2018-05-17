@@ -1,8 +1,8 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { ListItem, Left, Right } from "native-base";
+import React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
+import { ListItem, Left, Right } from 'native-base'
 
-import styles from "./../Style/OrderList";
+import styles from './../Style/OrderList'
 
 export default class BottomOrderDetailAtom extends React.Component {
   render() {
@@ -41,6 +41,6 @@ export default class BottomOrderDetailAtom extends React.Component {
           </Right>
         </ListItem>
       </View>
-    );
+    )
   }
 }

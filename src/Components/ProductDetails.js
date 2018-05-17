@@ -1,16 +1,16 @@
-import React from "react";
-import { View, Text } from "react-native";
-import ProductDetailAtom from "../Atom/ProductDetailAtom";
+import React from 'react'
+import { View, Text } from 'react-native'
+import ProductDetailAtom from '../Atom/ProductDetailAtom'
 
-import SaveCancelButton from "../Container/SaveCancelButton";
-import { ScrollView } from "react-native-gesture-handler";
-import ButtonAtom from "../Atom/ButtonAtom";
-import styles from "../Style/OrderList";
+import SaveCancelButton from '../Container/SaveCancelButton'
+import { ScrollView } from 'react-native-gesture-handler'
+import ButtonAtom from '../Atom/ButtonAtom'
+import styles from '../Style/OrderList'
 
 export default class ProductDetails extends React.Component {
   create = () => {
-    this.props.navigation.goBack();
-  };
+    this.props.navigation.goBack()
+  }
 
   render() {
     return (
@@ -26,6 +26,6 @@ export default class ProductDetails extends React.Component {
           />
         </View>
       </View>
-    );
+    )
   }
 }

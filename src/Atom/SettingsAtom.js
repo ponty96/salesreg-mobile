@@ -1,31 +1,31 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { View, Text } from "react-native";
-import { Icon } from "native-base";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text } from 'react-native'
+import { Icon } from 'native-base'
 
-import styles from "../Style/Layout";
-import screenStyles from "../Style/Screen";
+import styles from '../Style/Layout'
+import screenStyles from '../Style/Screen'
 
 class SettingsAtom extends Component {
   static defaultProps = {
     rightIcon: false
-  };
+  }
 
   renderNumber = () => {
-    return <Text style={screenStyles.redText}>{this.props.item.number}</Text>;
-  };
+    return <Text style={screenStyles.redText}>{this.props.item.number}</Text>
+  }
 
   renderRightIcon = () => {
     return (
       <View style={styles.itemRightIcon}>
         <Icon
-          name={"chevron-right"}
+          name={'chevron-right'}
           style={styles.itemIcon}
-          type={"MaterialCommunityIcons"}
+          type={'MaterialCommunityIcons'}
         />
       </View>
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -38,13 +38,13 @@ class SettingsAtom extends Component {
         </View>
         {this.props.rightIcon ? this.renderRightIcon() : this.renderNumber()}
       </View>
-    );
+    )
   }
 }
 
 SettingsAtom.propTypes = {
   rightIcon: PropTypes.bool.isRequired,
   item: PropTypes.object.isRequired
-};
+}
 
-export default SettingsAtom;
+export default SettingsAtom

@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Form, Icon, Radio, StyleProvider } from "native-base";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Form, Icon, Radio, StyleProvider } from 'native-base'
 
-import ModalAtom from "./../Atom/ModalAtom";
-import InputAtom from "../Atom/InputAtom";
-import ButtonAtom from "../Atom/ButtonAtom";
-import styles from "./../Style/Screen";
-import styles1 from "./../Style/exportStyles";
-import getTheme from "./../native-base-theme/components";
-import material from "./../native-base-theme/variables/material";
-import styleLayout from "../Style/Layout";
+import ModalAtom from './../Atom/ModalAtom'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import styles from './../Style/Screen'
+import styles1 from './../Style/exportStyles'
+import getTheme from './../native-base-theme/components'
+import material from './../native-base-theme/variables/material'
+import styleLayout from '../Style/Layout'
 
 // TODO: remove theming for radio button and use props
 class RestockModal extends Component {
@@ -19,46 +19,46 @@ class RestockModal extends Component {
     cost: undefined,
     packs: false,
     units: true
-  };
+  }
 
   static defaultProps = {
     visibility: false
-  };
+  }
 
   getQuantity = quantity => {
-    this.setState({ quantity });
-  };
+    this.setState({ quantity })
+  }
 
   getCost = cost => {
-    this.setState({ cost });
-  };
+    this.setState({ cost })
+  }
 
   save = () => {
     if (this.props.getValue) {
-      this.props.getValue(this.state.quantity, this.state.cost);
+      this.props.getValue(this.state.quantity, this.state.cost)
     }
-  };
+  }
 
   renderHeader = () => {
     return (
       <View style={styles.modalHeader}>
         <Text style={styles.modalHeaderText}>{this.props.headerText}</Text>
         <TouchableOpacity oonPress={() => this.props.closeModal()}>
-          <Icon name={"md-close"} style={styles.modalCloseIcon} />
+          <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    );
-  };
+    )
+  }
 
   handleSelection = value => {
-    if (value === "units") {
-      this.setState({ units: true, packs: false });
+    if (value === 'units') {
+      this.setState({ units: true, packs: false })
     }
 
-    if (value === "packs") {
-      this.setState({ packs: true, units: false });
+    if (value === 'packs') {
+      this.setState({ packs: true, units: false })
     }
-  };
+  }
 
   renderBody = () => {
     return (
@@ -70,7 +70,7 @@ class RestockModal extends Component {
               <View style={styleLayout.rowD}>
                 <Radio
                   selected={this.state.units}
-                  onPress={() => this.handleSelection("units")}
+                  onPress={() => this.handleSelection('units')}
                   activeOpacity={1}
                   style={styleLayout.radioMarginRight}
                 />
@@ -79,7 +79,7 @@ class RestockModal extends Component {
               <View style={styleLayout.rowD}>
                 <Radio
                   selected={this.state.packs}
-                  onPress={() => this.handleSelection("packs")}
+                  onPress={() => this.handleSelection('packs')}
                   style={styleLayout.radioMarginRight}
                   activeOpacity={1}
                 />
@@ -88,14 +88,14 @@ class RestockModal extends Component {
             </View>
             <InputAtom
               label="Quantity"
-              keyboardType={"numeric"}
+              keyboardType={'numeric'}
               getValue={this.getQuantity}
               contStyle={styles1.marginlessInput}
             />
 
             <InputAtom
               label="Cost price per pack"
-              keyboardType={"numeric"}
+              keyboardType={'numeric'}
               getValue={this.getCost}
               contStyle={styles1.marginlessInput}
             />
@@ -108,8 +108,8 @@ class RestockModal extends Component {
           </Form>
         </View>
       </StyleProvider>
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -118,7 +118,7 @@ class RestockModal extends Component {
         body={this.renderBody()}
         header={this.renderHeader()}
       />
-    );
+    )
   }
 }
 
@@ -127,6 +127,6 @@ RestockModal.propTypes = {
   headerText: PropTypes.string.isRequired,
   getValue: PropTypes.func,
   closeModal: PropTypes.func.isRequired
-};
+}
 
-export default RestockModal;
+export default RestockModal

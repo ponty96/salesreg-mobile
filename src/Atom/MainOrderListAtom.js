@@ -1,10 +1,10 @@
-import React from "react";
-import { StyleSheet, View } from "react-native";
-import { Icon, ListItem, Left, Right, Text } from "native-base";
-import PropTypes from "prop-types";
+import React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { Icon, ListItem, Left, Right, Text } from 'native-base'
+import PropTypes from 'prop-types'
 
-import styles from "../Style/OrderList";
-import PopoverAtom from "./PopoverAtom";
+import styles from '../Style/OrderList'
+import PopoverAtom from './PopoverAtom'
 
 class MainOrderListAtom extends React.Component {
   render() {
@@ -14,7 +14,7 @@ class MainOrderListAtom extends React.Component {
           <View style={styles.viewMargin}>
             <Text style={styles.leftText1}>
               {this.props.items.orderId}
-              {"   "}
+              {'   '}
               <Text style={styles.wrapText}>{this.props.items.time}</Text>
             </Text>
           </View>
@@ -33,12 +33,12 @@ class MainOrderListAtom extends React.Component {
           />
         </Right>
       </ListItem>
-    );
+    )
   }
 }
 
 MainOrderListAtom.propTypes = {
   items: PropTypes.object.isRequired
-};
+}
 
-export default MainOrderListAtom;
+export default MainOrderListAtom

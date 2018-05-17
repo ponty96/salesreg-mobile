@@ -1,9 +1,9 @@
-import React from "react";
-import { StyleSheet, View, Text } from "react-native";
-import { ListItem, Left, Right } from "native-base";
-import PropTypes from "prop-types";
+import React from 'react'
+import { StyleSheet, View, Text } from 'react-native'
+import { ListItem, Left, Right } from 'native-base'
+import PropTypes from 'prop-types'
 
-import styles from "../Style/ProductAndCustomerList";
+import styles from '../Style/ProductAndCustomerList'
 
 class OrderDetailListAtom extends React.Component {
   render() {
@@ -17,12 +17,12 @@ class OrderDetailListAtom extends React.Component {
           <Text style={styles.rightText2}>#{this.props.items.amount}.00</Text>
         </Right>
       </ListItem>
-    );
+    )
   }
 }
 
 OrderDetailListAtom.propTypes = {
   items: PropTypes.object.isRequired
-};
+}
 
-export default OrderDetailListAtom;
+export default OrderDetailListAtom

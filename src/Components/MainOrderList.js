@@ -1,37 +1,37 @@
-import React, { Component } from "react";
-import { View, ListView } from "react-native";
-import { Font, AppLoading } from "expo";
-import { Root, Icon, Button, Right, Header, Text } from "native-base";
-import { ScrollView } from "react-native-gesture-handler";
+import React, { Component } from 'react'
+import { View, ListView } from 'react-native'
+import { Font, AppLoading } from 'expo'
+import { Root, Icon, Button, Right, Header, Text } from 'native-base'
+import { ScrollView } from 'react-native-gesture-handler'
 
-import MainOrderListAtom from "../Atom/MainOrderListAtom";
-import styles from "../Style/OrderList";
-import { mainOrderList } from "../config/data";
+import MainOrderListAtom from '../Atom/MainOrderListAtom'
+import styles from '../Style/OrderList'
+import { mainOrderList } from '../config/data'
 
-const users = mainOrderList;
+const users = mainOrderList
 
 export default class MainOrderList extends Component {
   constructor() {
-    super();
+    super()
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
-    });
+    })
     this.state = {
       userDataSource: ds.cloneWithRows(users),
       loading: true
-    };
+    }
   }
 
   async componentWillMount() {
     await Font.loadAsync({
-      Roboto: require("native-base/Fonts/Roboto.ttf"),
-      Roboto_medium: require("native-base/Fonts/Roboto_medium.ttf")
-    });
-    this.setState({ loading: false });
+      Roboto: require('native-base/Fonts/Roboto.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
+    })
+    this.setState({ loading: false })
   }
 
   renderRow(user) {
-    return <MainOrderListAtom items={user} />;
+    return <MainOrderListAtom items={user} />
   }
   render() {
     if (this.state.loading) {
@@ -39,7 +39,7 @@ export default class MainOrderList extends Component {
         <Root>
           <AppLoading />
         </Root>
-      );
+      )
     }
     return (
       <View style={styles.listContainer}>
@@ -61,6 +61,6 @@ export default class MainOrderList extends Component {
           />
         </ScrollView>
       </View>
-    );
+    )
   }
 }

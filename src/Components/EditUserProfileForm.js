@@ -1,15 +1,15 @@
-import React, { Component } from "react";
-import { View, Text, KeyboardAvoidingView, ScrollView } from "react-native";
-import { Form } from "native-base";
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { Form } from 'native-base'
+import PropTypes from 'prop-types'
 
-import InputAtom from "../Atom/InputAtom";
-import PickerAtom from "../Atom/PickerAtom";
-import ImageAtom from "../Atom/ImageAtom";
-import styles1 from "./../Style/Layout";
-import styles from "./../Style/Screen";
-import SaveCancelButton from "../Container/SaveCancelButton";
-import styles2 from "../Style/exportStyles";
+import InputAtom from '../Atom/InputAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import ImageAtom from '../Atom/ImageAtom'
+import styles1 from './../Style/Layout'
+import styles from './../Style/Screen'
+import SaveCancelButton from '../Container/SaveCancelButton'
+import styles2 from '../Style/exportStyles'
 
 class EditUserProfileForm extends Component {
   render() {
@@ -54,11 +54,11 @@ class EditUserProfileForm extends Component {
             ]}
           >
             <Text style={styles.textTitle}>Gender</Text>
-            <PickerAtom list={["Male", "Female"]} style={styles2.pickerStyle} />
+            <PickerAtom list={['Male', 'Female']} style={styles2.pickerStyle} />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-    );
+    )
   }
 }
 
@@ -71,6 +71,6 @@ EditUserProfileForm.propTypes = {
   getPhoneNumber: PropTypes.func,
   gender: PropTypes.string.isRequired,
   updateGender: PropTypes.func
-};
+}
 
-export default EditUserProfileForm;
+export default EditUserProfileForm

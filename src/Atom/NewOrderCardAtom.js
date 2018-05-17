@@ -1,25 +1,25 @@
-import React, { Component } from "react";
-import { View, TextInput, TouchableOpacity } from "react-native";
-import { Header, Icon, Right } from "native-base";
+import React, { Component } from 'react'
+import { View, TextInput, TouchableOpacity } from 'react-native'
+import { Header, Icon, Right } from 'native-base'
 
-import InputAtom from "./InputAtom";
-import styles from "../Style/exportStyles";
+import InputAtom from './InputAtom'
+import styles from '../Style/exportStyles'
 
 export default class NewOrderCardAtom extends Component {
   state = {
-    product: "",
-    price: "",
-    quantity: ""
-  };
+    product: '',
+    price: '',
+    quantity: ''
+  }
   getProduct = product => {
-    this.setState({ product });
-  };
+    this.setState({ product })
+  }
   getPrice = price => {
-    this.setState({ price });
-  };
+    this.setState({ price })
+  }
   getQuantity = quantity => {
-    this.setState({ quantity });
-  };
+    this.setState({ quantity })
+  }
   render() {
     return (
       <View style={styles.newOrderContainer}>
@@ -61,10 +61,10 @@ export default class NewOrderCardAtom extends Component {
           </View>
         </View>
       </View>
-    );
+    )
   }
 }
 
 styles.NewOrderCardAtom.propTypes = {
   onPress: PropTypes.func
-};
+}

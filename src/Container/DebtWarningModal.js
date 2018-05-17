@@ -1,51 +1,51 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { View, Text, TouchableOpacity } from "react-native";
-import { Icon } from "native-base";
-import Slider from "react-native-slider";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Icon } from 'native-base'
+import Slider from 'react-native-slider'
 
-import ModalAtom from "./../Atom/ModalAtom";
-import ButtonAtom from "../Atom/ButtonAtom";
-import styles from "./../Style/Screen";
-import { color } from "./../Style/Color";
-import styles1 from "./../Style/exportStyles";
+import ModalAtom from './../Atom/ModalAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import styles from './../Style/Screen'
+import { color } from './../Style/Color'
+import styles1 from './../Style/exportStyles'
 
 class DebtWarningModal extends Component {
   componentDidMount() {
     this.setState({
       value: this.calcPercent()
-    });
+    })
   }
 
   state = {
     value: undefined
-  };
+  }
 
   static defaultProps = {
     visibility: false
-  };
+  }
 
   calcPercent = () => {
     let percent = Math.ceil(
       this.props.currentAmount / this.props.debtLimit * 100
-    );
-    return percent;
-  };
+    )
+    return percent
+  }
 
   handleSlide = value => {
-    this.setState({ value });
-  };
+    this.setState({ value })
+  }
 
   renderHeader = () => {
     return (
       <View style={styles.modalHeader}>
         <Text style={styles.modalHeaderText}>Debt warning level (%)</Text>
         <TouchableOpacity onPress={() => this.props.closeModal()}>
-          <Icon name={"md-close"} style={styles.modalCloseIcon} />
+          <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    );
-  };
+    )
+  }
 
   renderBody = () => {
     return (
@@ -79,7 +79,7 @@ class DebtWarningModal extends Component {
           <Text style={styles.blackText}>{this.props.debtLimit}</Text>
         </View>
         <View style={styles.debtLimitWarning}>
-          <Icon name={"info"} style={styles.modalInfoIcon} type={"Entypo"} />
+          <Icon name={'info'} style={styles.modalInfoIcon} type={'Entypo'} />
           <Text
             style={[
               styles.modalHeaderText,
@@ -99,8 +99,8 @@ class DebtWarningModal extends Component {
           btnStyle={styles1.modalButton}
         />
       </View>
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -110,7 +110,7 @@ class DebtWarningModal extends Component {
         body={this.renderBody()}
         header={this.renderHeader()}
       />
-    );
+    )
   }
 }
 
@@ -119,6 +119,6 @@ DebtWarningModal.propTypes = {
   currentAmount: PropTypes.number.isRequired,
   debtLimit: PropTypes.number.isRequired,
   closeModal: PropTypes.func.isRequired
-};
+}
 
-export default DebtWarningModal;
+export default DebtWarningModal

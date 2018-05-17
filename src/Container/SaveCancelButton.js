@@ -1,21 +1,21 @@
-import React from "react";
-import { View } from "react-native";
-import PropTypes from "prop-types";
+import React from 'react'
+import { View } from 'react-native'
+import PropTypes from 'prop-types'
 
-import ButtonAtom from "../Atom/ButtonAtom";
-import styles from "./../Style/Form";
-import styles1 from "../Style/exportStyles";
+import ButtonAtom from '../Atom/ButtonAtom'
+import styles from './../Style/Form'
+import styles1 from '../Style/exportStyles'
 
 class SaveCancelButton extends React.Component {
   navigateBack = () => {
-    this.props.navigation.goBack();
-  };
+    this.props.navigation.goBack()
+  }
 
   create = () => {
     if (this.props.createfunc) {
-      this.props.createfunc();
+      this.props.createfunc()
     }
-  };
+  }
 
   render() {
     return (
@@ -36,7 +36,7 @@ class SaveCancelButton extends React.Component {
           textStyle={styles1.saveCancelButtonText}
         />
       </View>
-    );
+    )
   }
 }
 
@@ -44,6 +44,6 @@ SaveCancelButton.propTypes = {
   navigation: PropTypes.object.isRequired,
   createfunc: PropTypes.func,
   positiveButtonName: PropTypes.string.isRequired
-};
+}
 
-export default SaveCancelButton;
+export default SaveCancelButton

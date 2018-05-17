@@ -1,13 +1,13 @@
-import React from "react";
-import { Form } from "native-base";
-import PropTypes from "prop-types";
-import { View } from "react-native";
+import React from 'react'
+import { Form } from 'native-base'
+import PropTypes from 'prop-types'
+import { View } from 'react-native'
 
-import InputAtom from "../Atom/InputAtom";
-import ButtonAtom from "../Atom/ButtonAtom";
-import PickerAtom from "../Atom/PickerAtom";
-import styles from "../Style/Form";
-import styles1 from "../Style/exportStyles";
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import styles from '../Style/Form'
+import styles1 from '../Style/exportStyles'
 
 class SigupForm extends React.Component {
   state = {
@@ -16,7 +16,7 @@ class SigupForm extends React.Component {
     name: undefined,
     confirm_password: undefined,
     gender: undefined
-  };
+  }
 
   signup = () => {
     console.log(
@@ -25,42 +25,42 @@ class SigupForm extends React.Component {
       this.state.name,
       this.state.confirm_password,
       this.state.gender
-    );
-  };
+    )
+  }
 
   getPhone = phone => {
     this.setState({
       phone
-    });
-  };
+    })
+  }
 
   getPassword = pass => {
     this.setState({
       password: pass
-    });
-  };
+    })
+  }
 
   getName = name => {
     this.setState({
       name
-    });
-  };
+    })
+  }
 
   getConfirm = confirm_pass => {
     this.setState({
       confirm_password: confirm_pass
-    });
-  };
+    })
+  }
 
   updateGender = selectedGender => {
     this.setState({
       gender: selectedGender
-    });
-  };
+    })
+  }
 
   navigate = location => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     return (
@@ -79,7 +79,7 @@ class SigupForm extends React.Component {
         />
 
         <View style={styles.genderPickerStyle}>
-          <PickerAtom list={["Male", "Female"]} style={styles1.faintPicker} />
+          <PickerAtom list={['Male', 'Female']} style={styles1.faintPicker} />
         </View>
 
         <InputAtom
@@ -101,17 +101,17 @@ class SigupForm extends React.Component {
           <ButtonAtom
             btnText="I have an account already"
             transparent={true}
-            funcValue={"Login"}
+            funcValue={'Login'}
             onPress={this.navigate}
           />
         </View>
       </Form>
-    );
+    )
   }
 }
 
 SigupForm.propTypes = {
   navigation: PropTypes.object.isRequired
-};
+}
 
-export default SigupForm;
+export default SigupForm

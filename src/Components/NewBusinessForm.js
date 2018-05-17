@@ -1,13 +1,13 @@
-import React from "react";
-import { View, KeyboardAvoidingView, ScrollView } from "react-native";
-import { Form } from "native-base";
-import PropTypes from "prop-types";
+import React from 'react'
+import { View, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { Form } from 'native-base'
+import PropTypes from 'prop-types'
 
-import InputAtom from "../Atom/InputAtom";
-import ImageAtom from "../Atom/ImageAtom";
-import styles from "./../Style/Layout";
-import SaveCancelButton from "../Container/SaveCancelButton";
-import styles1 from "./../Style/exportStyles";
+import InputAtom from '../Atom/InputAtom'
+import ImageAtom from '../Atom/ImageAtom'
+import styles from './../Style/Layout'
+import SaveCancelButton from '../Container/SaveCancelButton'
+import styles1 from './../Style/exportStyles'
 
 class NewBusinessForm extends React.Component {
   state = {
@@ -16,7 +16,7 @@ class NewBusinessForm extends React.Component {
     email: undefined,
     about: undefined,
     image: undefined
-  };
+  }
 
   create = () => {
     console.log(
@@ -25,39 +25,39 @@ class NewBusinessForm extends React.Component {
       this.state.email,
       this.state.about,
       this.state.image
-    );
-    this.props.navigation.goBack();
-  };
+    )
+    this.props.navigation.goBack()
+  }
 
   getAddress = address => {
-    this.setState({ address });
-  };
+    this.setState({ address })
+  }
 
   getEmail = email => {
-    this.setState({ email });
-  };
+    this.setState({ email })
+  }
 
   getName = name => {
-    this.setState({ name });
-  };
+    this.setState({ name })
+  }
 
   getAbout = about => {
-    this.setState({ about });
-  };
+    this.setState({ about })
+  }
 
   getImage = image => {
-    this.setState({ image });
-  };
+    this.setState({ image })
+  }
 
   navigate = location => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     return (
       <View style={styles.formViewContainer}>
         <KeyboardAvoidingView
-          behavior={"padding"}
+          behavior={'padding'}
           style={styles.itemsContainer}
         >
           <ScrollView>
@@ -110,16 +110,16 @@ class NewBusinessForm extends React.Component {
         <SaveCancelButton
           navigation={this.props.navigation}
           createfunc={this.create}
-          positiveButtonName={this.props.item ? "SAVE" : "CREATE"}
+          positiveButtonName={this.props.item ? 'SAVE' : 'CREATE'}
         />
       </View>
-    );
+    )
   }
 }
 
 NewBusinessForm.propTypes = {
   navigation: PropTypes.object.isRequired,
   item: PropTypes.object
-};
+}
 
-export default NewBusinessForm;
+export default NewBusinessForm

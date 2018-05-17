@@ -1,7 +1,7 @@
-import React from "react";
-import { View, Text } from "react-native";
+import React from 'react'
+import { View, Text } from 'react-native'
 
-import styles from "./../Style/exportStyles";
+import styles from './../Style/exportStyles'
 
 export default class TotalOrderAtom extends React.Component {
   render() {
@@ -31,6 +31,6 @@ export default class TotalOrderAtom extends React.Component {
           </View>
         </View>
       </View>
-    );
+    )
   }
 }

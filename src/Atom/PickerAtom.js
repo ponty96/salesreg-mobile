@@ -1,23 +1,23 @@
-import React, { Component } from "react";
-import { View } from "react-native";
-import { Picker, Icon } from "native-base";
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import { View } from 'react-native'
+import { Picker, Icon } from 'native-base'
+import PropTypes from 'prop-types'
 
 class PickerAtom extends Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      selected: ""
-    };
+      selected: ''
+    }
   }
   handleChange(value) {
     this.setState({
       selected: value
-    });
+    })
   }
 
   render() {
-    var list = this.props.list;
+    var list = this.props.list
     return (
       <Picker
         iosHeader="Select one"
@@ -31,13 +31,13 @@ class PickerAtom extends Component {
           <Picker.Item label={element} value={element} key={key} />
         ))}
       </Picker>
-    );
+    )
   }
 }
 
 PickerAtom.propTypes = {
   list: PropTypes.array.isRequired,
   style: PropTypes.object
-};
+}
 
-export default PickerAtom;
+export default PickerAtom

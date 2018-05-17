@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { Image, Text, View, StyleSheet } from "react-native";
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import { Image, Text, View, StyleSheet } from 'react-native'
+import PropTypes from 'prop-types'
 
-import styles from "../Style/exportStyles";
+import styles from '../Style/exportStyles'
 
 export default class ImageDisplayAtom extends Component {
   render() {
@@ -16,11 +16,11 @@ export default class ImageDisplayAtom extends Component {
         </View>
         <Text style={styles.smallImageDisplayName}>{this.props.name}</Text>
       </View>
-    );
+    )
   }
 }
 
 ImageDisplayAtom.propTypes = {
   name: PropTypes.string.isRequired,
   image: PropTypes.string
-};
+}

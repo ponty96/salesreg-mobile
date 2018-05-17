@@ -1,39 +1,39 @@
-import React from "react";
-import { Text } from "react-native";
-import { Form } from "native-base";
-import PropTypes from "prop-types";
+import React from 'react'
+import { Text } from 'react-native'
+import { Form } from 'native-base'
+import PropTypes from 'prop-types'
 
-import InputAtom from "./../Atom/InputAtom";
-import ButtonAtom from "./../Atom/ButtonAtom";
-import styles from "./../Style/Form";
-import styles1 from "./../Style/exportStyles";
+import InputAtom from './../Atom/InputAtom'
+import ButtonAtom from './../Atom/ButtonAtom'
+import styles from './../Style/Form'
+import styles1 from './../Style/exportStyles'
 
 class ResetForm extends React.Component {
   state = {
     code: undefined
-  };
+  }
 
   static defaultProps = {
-    secretPhone: "xxxxxxxxx678"
-  };
+    secretPhone: 'xxxxxxxxx678'
+  }
 
   reset = () => {
-    console.log(this.state.code);
-  };
+    console.log(this.state.code)
+  }
 
   resend = () => {
-    console.log("Put resend logic here");
-  };
+    console.log('Put resend logic here')
+  }
 
   getCode = code => {
     this.setState({
       code
-    });
-  };
+    })
+  }
 
   navigate = location => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     return (
@@ -44,7 +44,7 @@ class ResetForm extends React.Component {
         </Text>
 
         <InputAtom
-          placeholder={"Enter Reset Code"}
+          placeholder={'Enter Reset Code'}
           floatingLabel={false}
           getValue={this.getCode}
           contStyle={styles1.marginlessInput}
@@ -63,17 +63,17 @@ class ResetForm extends React.Component {
         <ButtonAtom
           btnText="I don't have an account"
           transparent={true}
-          funcValue={"Signup"}
+          funcValue={'Signup'}
           onPress={this.navigate}
         />
       </Form>
-    );
+    )
   }
 }
 
 ResetForm.propTypes = {
   secretPhone: PropTypes.string.isRequired,
   navigation: PropTypes.object.isRequired
-};
+}
 
-export default ResetForm;
+export default ResetForm

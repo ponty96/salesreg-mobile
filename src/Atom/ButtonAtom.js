@@ -1,16 +1,16 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Button } from "native-base";
-import { Text } from "react-native";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Button } from 'native-base'
+import { Text } from 'react-native'
 
-import styles from "./../Style/Form";
+import styles from './../Style/Form'
 
 class ButtonAtom extends Component {
   static defaultProps = {
     transparent: false,
     disabled: false,
     funcValue: undefined
-  };
+  }
 
   render() {
     return (
@@ -34,7 +34,7 @@ class ButtonAtom extends Component {
           {this.props.btnText}
         </Text>
       </Button>
-    );
+    )
   }
 }
 
@@ -46,6 +46,6 @@ ButtonAtom.propTypes = {
   funcValue: PropTypes.string,
   btnStyle: PropTypes.object,
   textStyle: PropTypes.object
-};
+}
 
-export default ButtonAtom;
+export default ButtonAtom

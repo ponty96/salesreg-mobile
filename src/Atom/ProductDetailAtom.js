@@ -1,8 +1,8 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { Thumbnail, ListItem, Left, Right } from "native-base";
+import React from 'react'
+import { View, Text } from 'react-native'
+import { Thumbnail, ListItem, Left, Right } from 'native-base'
 
-import styles from "../Style/exportStyles";
+import styles from '../Style/exportStyles'
 
 export default class ProductDetailAtom extends React.Component {
   render() {
@@ -13,7 +13,7 @@ export default class ProductDetailAtom extends React.Component {
             <Thumbnail
               source={{
                 uri:
-                  "https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7"
+                  'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
               }}
               style={styles.aboveAccordionStyles.dpP}
             />
@@ -83,6 +83,6 @@ export default class ProductDetailAtom extends React.Component {
           </ListItem>
         </View>
       </View>
-    );
+    )
   }
 }

@@ -1,40 +1,40 @@
-import React from "react";
-import { TouchableOpacity, View } from "react-native";
-import { Icon, Text, CheckBox, Left, Right, Body } from "native-base";
+import React from 'react'
+import { TouchableOpacity, View } from 'react-native'
+import { Icon, Text, CheckBox, Left, Right, Body } from 'native-base'
 import {
   Popover,
   PopoverController,
   PopoverTouchable
-} from "react-native-modal-popover";
-import PropTypes from "prop-types";
+} from 'react-native-modal-popover'
+import PropTypes from 'prop-types'
 
-import styles from "../Style/exportStyles";
+import styles from '../Style/exportStyles'
 
 export default class PopoverAtom extends React.Component {
   constructor(props) {
-    super(props);
+    super(props)
     this.state = {
-      icon: "md-arrow-dropdown",
+      icon: 'md-arrow-dropdown',
       check: this.props.check
-    };
+    }
   }
 
   onHot = () => {
-    if (this.state.icon == "md-arrow-dropdown") {
+    if (this.state.icon == 'md-arrow-dropdown') {
       this.setState({
-        icon: "md-arrow-dropup"
-      });
-    } else if (this.state.icon == "md-arrow-dropup") {
+        icon: 'md-arrow-dropup'
+      })
+    } else if (this.state.icon == 'md-arrow-dropup') {
       this.setState({
-        icon: "md-arrow-dropdown"
-      });
+        icon: 'md-arrow-dropdown'
+      })
     }
-  };
+  }
   checked = () => {
     this.setState({
       check: !this.state.check
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -64,7 +64,7 @@ export default class PopoverAtom extends React.Component {
                 visible={popoverVisible}
                 onClose={closePopover}
                 fromRect={popoverAnchorRect}
-                supportedOrientations={["portrait", "landscape"]}
+                supportedOrientations={['portrait', 'landscape']}
               >
                 <View style={styles.popoverColumn}>
                   <View style={styles.popoverRow}>
@@ -101,7 +101,7 @@ export default class PopoverAtom extends React.Component {
           )}
         </PopoverController>
       </View>
-    );
+    )
   }
 }
 
@@ -109,4 +109,4 @@ PopoverAtom.propTypes = {
   position: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   check: PropTypes.bool
-};
+}

@@ -1,31 +1,31 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { ScrollView } from "react-native-gesture-handler";
+import React from 'react'
+import { View, Text } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
 
-import ImageAtom from "./ImageAtom";
-import InputAtom from "./InputAtom";
-import styles from "../Style/Form";
-import styles1 from "../Style/exportStyles";
+import ImageAtom from './ImageAtom'
+import InputAtom from './InputAtom'
+import styles from '../Style/Form'
+import styles1 from '../Style/exportStyles'
 
 export default class ProductFormAtom extends React.Component {
   state = {
-    product: "",
-    image: ""
-  };
+    product: '',
+    image: ''
+  }
 
   create = () => {
-    this.props.navigation.goBack();
-  };
+    this.props.navigation.goBack()
+  }
 
   getProduct = product => {
-    this.setState({ product });
-  };
+    this.setState({ product })
+  }
 
   getImage = pic => {
     this.setState({
       image: pic
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -99,6 +99,6 @@ export default class ProductFormAtom extends React.Component {
           </View>
         </View>
       </ScrollView>
-    );
+    )
   }
 }

@@ -1,14 +1,14 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { View, Modal } from "react-native";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { View, Modal } from 'react-native'
 
-import styles from "./../Style/Layout";
+import styles from './../Style/Layout'
 
 class ModalAtom extends Component {
   static defaultProps = {
     visible: false,
     centered: false
-  };
+  }
 
   render() {
     return (
@@ -17,7 +17,7 @@ class ModalAtom extends Component {
         transparent={true}
         visible={this.props.visible}
         onRequestClose={() => {
-          alert("Modal has been closed.");
+          alert('Modal has been closed.')
         }}
       >
         <View style={styles.modalContainer}>
@@ -30,7 +30,7 @@ class ModalAtom extends Component {
           </View>
         </View>
       </Modal>
-    );
+    )
   }
 }
 
@@ -40,6 +40,6 @@ ModalAtom.propTypes = {
   header: PropTypes.element,
   body: PropTypes.element,
   centered: PropTypes.bool
-};
+}
 
-export default ModalAtom;
+export default ModalAtom

@@ -1,8 +1,8 @@
-import React, { Component } from "react";
-import { View, Text, Image } from "react-native";
-import PropTypes from "prop-types";
+import React, { Component } from 'react'
+import { View, Text, Image } from 'react-native'
+import PropTypes from 'prop-types'
 
-import styles from "./../Style/exportStyles";
+import styles from './../Style/exportStyles'
 
 export default class NameDisplayAtom extends Component {
   render() {
@@ -20,10 +20,10 @@ export default class NameDisplayAtom extends Component {
         </View>
         <Text style={styles.nameDisplayName}>{this.props.businessName}</Text>
       </View>
-    );
+    )
   }
 }
 
 NameDisplayAtom.propTypes = {
   businessName: PropTypes.string.isRequired
-};
+}

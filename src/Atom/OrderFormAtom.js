@@ -1,44 +1,44 @@
-import React from "react";
-import { View, KeyboardAvoidingView, ScrollView } from "react-native";
-import { Header, Text, Left, Right, Icon } from "native-base";
+import React from 'react'
+import { View, KeyboardAvoidingView, ScrollView } from 'react-native'
+import { Header, Text, Left, Right, Icon } from 'native-base'
 
-import InputAtom from "./InputAtom";
-import NewOrderCardAtom from "./NewOrderCardAtom";
-import ButtonAtom from "./ButtonAtom";
-import styles from "./../Style/Form";
-import styles1 from "../Style/exportStyles";
+import InputAtom from './InputAtom'
+import NewOrderCardAtom from './NewOrderCardAtom'
+import ButtonAtom from './ButtonAtom'
+import styles from './../Style/Form'
+import styles1 from '../Style/exportStyles'
 
 class OrderFormAtom extends React.Component {
   state = {
-    customer: "",
+    customer: '',
     textInput: []
-  };
+  }
 
   getCustomer = customer => {
-    this.setState({ customer });
-  };
-  makePayment = () => {};
+    this.setState({ customer })
+  }
+  makePayment = () => {}
   removeTextInput = () => {
-    this.state.textInput.pop();
-    let textInput = this.state.textInput;
+    this.state.textInput.pop()
+    let textInput = this.state.textInput
     this.setState({
       textInput
-    });
-  };
+    })
+  }
   addTextInput = key => {
-    let textInput = this.state.textInput;
+    let textInput = this.state.textInput
     textInput.push(
       <NewOrderCardAtom key={key} onPress={this.removeTextInput} />
-    );
-    this.setState({ textInput });
-  };
+    )
+    this.setState({ textInput })
+  }
   navigate = location => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     return (
-      <KeyboardAvoidingView behavior={"padding"} style={styles.itemsContainer1}>
+      <KeyboardAvoidingView behavior={'padding'} style={styles.itemsContainer1}>
         <Header style={styles.headerOrder}>
           <Left style={styles.leftOrder}>
             <Icon style={styles.iconOrder} name="md-cart" />
@@ -61,7 +61,7 @@ class OrderFormAtom extends React.Component {
             </View>
             <NewOrderCardAtom />
             {this.state.textInput.map(value => {
-              return value;
+              return value
             })}
             <ButtonAtom
               onPress={() => this.addTextInput(this.state.textInput.length)}
@@ -86,8 +86,8 @@ class OrderFormAtom extends React.Component {
           />
         </View>
       </KeyboardAvoidingView>
-    );
+    )
   }
 }
 
-export default OrderFormAtom;
+export default OrderFormAtom

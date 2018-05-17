@@ -1,18 +1,18 @@
-import React, { Component } from "react";
-import PropTypes from "prop-types";
-import { Item, Input, Label, Text } from "native-base";
-import { View } from "react-native";
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { Item, Input, Label, Text } from 'native-base'
+import { View } from 'react-native'
 
-import styles from "./../Style/Form";
+import styles from './../Style/Form'
 
 class InputAtom extends Component {
   static defaultProps = {
     required: false,
     floatingLabel: true,
     secureTextEntry: false,
-    keyboardType: "default",
+    keyboardType: 'default',
     multiline: false
-  };
+  }
 
   render() {
     return (
@@ -35,7 +35,7 @@ class InputAtom extends Component {
             keyboardType={this.props.keyboardType}
             style={this.props.inputStyle}
             numberOfLines={6}
-            underlineColorAndroid={"transparent"}
+            underlineColorAndroid={'transparent'}
             placeholderTextColor={styles.placeholderColor}
           />
         </Item>
@@ -43,7 +43,7 @@ class InputAtom extends Component {
           <Text style={styles.underneathText}>{this.props.underneathText}</Text>
         ) : null}
       </View>
-    );
+    )
   }
 }
 
@@ -59,12 +59,12 @@ InputAtom.propTypes = {
   contStyle: PropTypes.oneOfType([PropTypes.object, PropTypes.array]),
   inputStyle: PropTypes.object,
   keyboardType: PropTypes.oneOf([
-    "default",
-    "numeric",
-    "email-address",
-    "phone-pad"
+    'default',
+    'numeric',
+    'email-address',
+    'phone-pad'
   ]),
   underneathText: PropTypes.string
-};
+}
 
-export default InputAtom;
+export default InputAtom

@@ -1,18 +1,18 @@
-import React from "react";
-import { View, Text } from "react-native";
-import { Icon } from "native-base";
+import React from 'react'
+import { View, Text } from 'react-native'
+import { Icon } from 'native-base'
 
-import styles from "./../Style/exportStyles";
+import styles from './../Style/exportStyles'
 
 export default class TotalDebtAtom extends React.Component {
   render() {
-    let icon = this.props.limit >= 300000 ? "md-warning" : "md-add";
-    let iconc = this.props.limit >= 300000 ? "red" : "transparent";
+    let icon = this.props.limit >= 300000 ? 'md-warning' : 'md-add'
+    let iconc = this.props.limit >= 300000 ? 'red' : 'transparent'
     display = () => {
       if (this.props.limit >= 300000) {
-        return <Icon name={icon} style={styles.totalOrderIcon} />;
+        return <Icon name={icon} style={styles.totalOrderIcon} />
       }
-    };
+    }
     displayView = () => {
       if (this.props.limit <= 100000) {
         return (
@@ -21,7 +21,7 @@ export default class TotalDebtAtom extends React.Component {
               NGN {this.props.totalAmount}.00
             </Text>
           </View>
-        );
+        )
       } else if (this.props.limit > 100000 && this.props.limit <= 299999) {
         return (
           <View style={styles.totalDebtRedNumberView1}>
@@ -29,7 +29,7 @@ export default class TotalDebtAtom extends React.Component {
               NGN {this.props.totalAmount}.00
             </Text>
           </View>
-        );
+        )
       } else {
         return (
           <View style={styles.totalDebtRedNumberView2}>
@@ -37,9 +37,9 @@ export default class TotalDebtAtom extends React.Component {
               NGN {this.props.totalAmount}.00
             </Text>
           </View>
-        );
+        )
       }
-    };
+    }
     return (
       <View style={styles.totalDebtContainer}>
         <View style={styles.totalDebtTotalView}>
@@ -48,6 +48,6 @@ export default class TotalDebtAtom extends React.Component {
         </View>
         {displayView()}
       </View>
-    );
+    )
   }
 }
