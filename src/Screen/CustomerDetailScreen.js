@@ -6,7 +6,7 @@ import DetailItemAtom from './../Atom/DetailItemAtom';
 import GoldRatingsAtom from './../Atom/GoldRatingsAtom'
 import ButtonAtom from './../Atom/ButtonAtom'
 import styles from './../Style/Screen';
-import { redButtonText } from '../Style/exportStyles';
+import styles1 from '../Style/exportStyles';
 
 export default class CustomerDetailScreen extends React.Component {
     state = {
@@ -117,7 +117,7 @@ export default class CustomerDetailScreen extends React.Component {
                 </View>
             </View>
 
-            <View style = { [ styles.compartmentItemWrapper, styles.creditLimit ] }>
+            <View style = { [styles.compartmentItemWrapper, styles.creditLimit] }>
                 <View style = { styles.walletWrapper }>
                     <Text style = { styles.compartmentItem }>
                         Wallet
@@ -128,7 +128,7 @@ export default class CustomerDetailScreen extends React.Component {
                 </View>
                 <ButtonAtom 
                     btnText = 'Add to wallet'
-                    textStyle = { redButtonText }
+                    textStyle = { styles1.redButtonText }
                 />
             </View>
         </View>

@@ -3,9 +3,9 @@ import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
 import styles from './../Style/ProductAndCustomerList';
 
 interface IProps {
-    items: { images: string, customerName: string, amount: any, date: string };
-    limit: number;
-    onPress: () => void;
+    items?: { images: string, customerName: string, amount: any, date: string };
+    limit?: number;
+    onPress?: () => void;
 }
 
 class DebtListAtom extends Component<IProps, any> {

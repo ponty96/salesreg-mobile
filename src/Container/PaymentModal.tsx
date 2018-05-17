@@ -1,36 +1,32 @@
 import {Form, Icon} from 'native-base';
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
 import ButtonAtom from '../Atom/ButtonAtom';
 import InputAtom from '../Atom/InputAtom';
 import ModalAtom from './../Atom/ModalAtom';
-import { flexfull, marginlessInput, marginRight, modalButton } from './../Style/exportStyles';
 import styleLayout from './../Style/Layout';
 import styles from './../Style/Screen';
+import styles1 from '../Style/exportStyles';
 
-interface IPayModalProps {
-    getValue: (a: any, b: any) => void;
-    closeModal: () => void;
-    headerText: string;
+interface IProps {
+    getValue?: (a: any, b: any) => void;
+    closeModal?: () => void;
+    headerText?: string;
     visibility: boolean;
-    amount: string;
+    amount?: string;
 }
-interface IPayModalState {
+interface IState {
     amount: any;
     balance: any;
 }
 
-class PaymentModal extends Component<IPayModalProps, IPayModalState> {
-    public static defaultProps = {
-        closeModal: PropTypes.func.isRequired,
-        getValue: PropTypes.func,
-        headerText: PropTypes.string.isRequired,
+class PaymentModal extends Component<IProps, IState> {
+    static defaultProps: IProps = {
         visibility: false
     };
 
-    public state = {
+    state: IState = {
         amount: '',
         balance: ''
     };
@@ -84,14 +80,14 @@ class PaymentModal extends Component<IPayModalProps, IPayModalState> {
                             label='Amount paid'
                             keyboardType={'numeric'}
                             getValue={this.getAmount}
-                            contStyle={[marginlessInput, marginRight, flexfull]}
+                            contStyle={[styles1.marginlessInput, styles1.marginRight, styles1.flexfull]}
                         />
 
                         <InputAtom
                             label='Balance'
                             keyboardType={'numeric'}
                             getValue={this.getBalance}
-                            contStyle={[marginlessInput, flexfull]}
+                            contStyle={[styles1.marginlessInput, styles1.flexfull]}
                         />
                     </View>
 
@@ -105,7 +101,7 @@ class PaymentModal extends Component<IPayModalProps, IPayModalState> {
                                 label='Balance due date'
                                 keyboardType={'numeric'}
                                 getValue={this.getAmount}
-                                contStyle={[marginlessInput, marginRight, flexfull]}
+                                contStyle={[styles1.marginlessInput, styles1.marginRight, styles1.flexfull]}
                             />
                             <Text> dd-mm-yyyy </Text>
                         </View>
@@ -118,7 +114,7 @@ class PaymentModal extends Component<IPayModalProps, IPayModalState> {
                     <ButtonAtom
                         btnText='Pay'
                         onPress={this.pay}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>

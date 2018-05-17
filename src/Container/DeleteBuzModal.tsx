@@ -1,38 +1,34 @@
 import {Form, Icon} from 'native-base';
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import ButtonAtom from '../Atom/ButtonAtom';
 import InputAtom from '../Atom/InputAtom';
 import ModalAtom from './../Atom/ModalAtom';
-import { marginlessInput, modalButton } from './../Style/exportStyles';
 import styles from './../Style/Screen';
+import styles1 from '../Style/exportStyles';
 
-interface IDeleteBuzProps {
-    getValue: (a: any) => void;
-    closeModal: () => void;
-    headerText: string;
-    amount: string;
-    placeholder: string;
+interface IProps {
+    getValue?: (a: any) => void;
+    closeModal?: () => void;
+    headerText?: string;
+    amount?: string;
+    placeholder?: string;
     visibility: boolean;
 }
-interface IDeleteBuzState {
+interface IState {
     password: any;
 }
 
-class DeleteBuzModal extends Component<IDeleteBuzProps, IDeleteBuzState> {
-    public static defaultProps = {
-        closeModal: PropTypes.func.isRequired,
-        getValue: PropTypes.func,
-        headerText: PropTypes.string.isRequired,
+class DeleteBuzModal extends Component<IProps, IState> {
+    static defaultProps: IProps = {
         visibility: false
     };
 
-    public state = {
+    state: IState = {
         password: ''
     };
 
-    public getPassword = (pass: any) => {
+    getPassword = (pass: any) => {
         this.setState(
             {
                 password: pass
@@ -40,13 +36,13 @@ class DeleteBuzModal extends Component<IDeleteBuzProps, IDeleteBuzState> {
         );
     }
 
-    public delete = () => {
+    delete = () => {
         if (this.props.getValue) {
             this.props.getValue(this.state.password);
         }
     }
 
-    public renderHeader = () => {
+    renderHeader = () => {
         return (
             <View
                 style={styles.modalHeader}
@@ -68,7 +64,7 @@ class DeleteBuzModal extends Component<IDeleteBuzProps, IDeleteBuzState> {
         );
     }
 
-    public renderBody = () => {
+    renderBody = () => {
         return (
             <View
                 style={styles.modalBody}
@@ -78,24 +74,20 @@ class DeleteBuzModal extends Component<IDeleteBuzProps, IDeleteBuzState> {
                         label='Enter Password'
                         getValue={this.getPassword}
                         secureTextEntry={true}
-                        contStyle={marginlessInput}
+                        contStyle={styles1.marginlessInput}
                     />
 
                     <ButtonAtom
                         btnText='Delete'
-                        transparent={false}
-                        disabled={false}
-                        funcValue=''
-                        textStyle={false}
                         onPress={this.delete}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>
         );
     }
 
-    public render() {
+    render() {
         return (
             <ModalAtom
                 visible={this.props.visibility}

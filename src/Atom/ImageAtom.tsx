@@ -5,9 +5,9 @@ import styles from './../Style/Form';
 
 interface IProps {
     source: string
-    placeholder: string
-    imgStyle: object
-    getValue: (a: string) => void
+    placeholder?: string
+    imgStyle?: object
+    getValue?: any
 }
 
 class ImageAtom extends Component<IProps, any> {

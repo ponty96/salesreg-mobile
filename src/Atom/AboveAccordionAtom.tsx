@@ -1,8 +1,7 @@
 import React from 'react';
 import { View, Text } from 'react-native';
 import { Thumbnail } from 'native-base';
-
-import { aboveAccordionStyles } from './../Style/exportStyles';
+import styles from './../Style/exportStyles';
 
 interface IAboveAccordProps {
     uri: string;
@@ -18,20 +17,20 @@ class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
     };
     render() {
     return (
-      <View style={aboveAccordionStyles.container}>
-        <View style={aboveAccordionStyles.pictureView}>
+      <View style={styles.aboveAccordionContainer}>
+        <View style={styles.aboveAccordionPictureView}>
           <Thumbnail
             source={{
               uri: this.props.uri
             }}
-            style={aboveAccordionStyles.dp}
+            style={styles.aboveAccordiondp}
           />
-          <Text style={aboveAccordionStyles.pictureText}>
+          <Text style={styles.aboveAccordionPictureText}>
             {this.props.name}
           </Text>
         </View>
-        <View style={aboveAccordionStyles.moneyView}>
-          <Text style={aboveAccordionStyles.redNumber}>
+        <View style={styles.aboveAccordionMoneyView}>
+          <Text style={styles.aboveAccordionRedNumber}>
             # {this.props.totalAmount}.00
           </Text>
         </View>

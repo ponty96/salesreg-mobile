@@ -1,7 +1,35 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="" />
+    <list default="true" id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="setting up of typescript">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/BusinessListScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/CustomerDetailScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/CustomerScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/DebtDetailsScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/DebtScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/DebtsScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/EditUserProfileScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/HomeTabNavigator.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/LoginScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/NewBusinessScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/NewCustomerScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/NewOrderScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/NewProductScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/OnBoardingScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/OrderDetailsScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/OrderScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/ProductDetailsScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/ProductScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/ResetScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/SettingsScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/SignupScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/SplashScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/UserProfileScreen.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Style/Auth.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style/Auth.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tslint.json" beforeDir="false" afterPath="$PROJECT_DIR$/tslint.json" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -13,7 +41,30 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="375" />
+    <leaf>
+      <file leaf-file-name="DebtLimitModal.tsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Container/DebtLimitModal.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="DebtLimitModal.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Container/DebtLimitModal.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state>
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -155,6 +206,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -162,11 +214,28 @@
               <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
               <item name="smeapp" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Container" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Container" type="462c0819:PsiDirectoryNode" />
+              <item name="DebtLimitModal.tsx" type="620a8d5e:NestingTreeNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -180,7 +249,7 @@
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_package_manager_path" value="yarn" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
-    <property name="ts.external.directory.path" value="$APPLICATION_HOME_DIR$/plugins/JavaScriptLanguage/jsLanguageServicesImpl/external" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
     <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/Container/SaveCancelButton.js" />
   </component>
   <component name="RecentsManager">
@@ -205,24 +274,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/AccordionAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DebtAccordionAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DetailItemAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/InputAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/PickerAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/SubHeaderAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/CustomerList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/DebtList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/ProductList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/SignupForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/CustomerDetailScreen.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/EditUserProfileScreen.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/OnBoardingScreen.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/ResetScreen.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/Form.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/exportStyles.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/config/data.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Created" />
@@ -230,7 +281,14 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="false" />
           <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/EditUserProfileForm.js</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/DebtLimitModal.tsx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/DebtWarningModal.tsx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/DeleteBuzModal.tsx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/GetAmountModal.tsx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/PaymentModal.tsx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/RestockModal.tsx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/SaveCancelButton.tsx</PATH>
+          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/WarningModal.tsx</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Deleted" />
@@ -238,7 +296,6 @@
           <option name="mySupportsDeletion" value="false" />
           <option name="myCanBeAbsent" value="true" />
           <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/SelectGenderAtom.js</PATH>
         </FILE-GROUP>
         <FILE-GROUP>
           <option name="myUpdateName" value="Restored" />
@@ -356,7 +413,8 @@
       <workItem from="1525274497867" duration="45669000" />
       <workItem from="1525685184380" duration="1801000" />
       <workItem from="1525865558205" duration="289000" />
-      <workItem from="1526306645126" duration="255000" />
+      <workItem from="1526306645126" duration="1130000" />
+      <workItem from="1526405271017" duration="1178000" />
     </task>
     <task id="LOCAL-00001" summary="Implementation of full coupling">
       <created>1525284122443</created>
@@ -407,23 +465,31 @@
       <option name="project" value="LOCAL" />
       <updated>1525629826411</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="setting up of typescript">
+      <created>1526307133637</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1526307133637</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="214726000" />
+    <option name="totallyTimeSpent" value="216779000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info anchor="bottom" id="TypeScript" />
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1784534" />
+      <window_info anchor="bottom" id="TypeScript" order="7" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1784534" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" weight="0.32905984" />
-      <window_info active="true" anchor="bottom" id="Version Control" order="9" visible="true" weight="0.32905984" />
-      <window_info id="npm" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" weight="0.32905984" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32905984" />
+      <window_info id="npm" order="2" side_tool="true" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="bottom" id="Terminal" order="8" weight="0.32905984" />
       <window_info id="Favorites" order="3" side_tool="true" />
@@ -486,7 +552,8 @@
     <MESSAGE value="j10 and i modal" />
     <MESSAGE value="finsh the modal" />
     <MESSAGE value="moving of data" />
-    <option name="LAST_COMMIT_MESSAGE" value="moving of data" />
+    <MESSAGE value="setting up of typescript" />
+    <option name="LAST_COMMIT_MESSAGE" value="setting up of typescript" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -494,30 +561,10 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Style/exportStyles.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="9299">
-          <caret line="547" column="13" selection-start-line="547" selection-start-column="13" selection-end-line="547" selection-end-column="13" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Atom/ButtonAtom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="493">
-          <caret line="29" column="84" lean-forward="true" selection-start-line="29" selection-start-column="84" selection-end-line="29" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Style/Form.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="21" column="34" lean-forward="true" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -532,9 +579,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1037">
           <caret line="61" column="61" selection-start-line="61" selection-start-column="61" selection-end-line="61" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -822,9 +866,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="340">
           <caret line="21" column="34" selection-start-line="21" selection-start-column="34" selection-end-line="21" selection-end-column="34" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -832,9 +873,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="408">
           <caret line="29" column="84" selection-start-line="29" selection-start-column="84" selection-end-line="29" selection-end-column="84" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -849,9 +887,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="620">
           <caret line="61" column="61" selection-start-line="61" selection-start-column="61" selection-end-line="61" selection-end-column="61" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -859,9 +894,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="620">
           <caret line="103" column="22" selection-start-line="103" selection-start-column="22" selection-end-line="103" selection-end-column="22" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -869,8 +901,23 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="620">
           <caret line="70" column="30" selection-start-line="70" selection-start-column="30" selection-end-line="70" selection-end-column="30" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Container/DebtLimitModal.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Container/DebtLimitModal.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>

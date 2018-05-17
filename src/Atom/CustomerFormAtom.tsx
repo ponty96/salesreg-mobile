@@ -1,11 +1,9 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-
 import ImageAtom from './ImageAtom';
 import InputAtom from './InputAtom';
-
-import { marginfulInput, marginlessInput } from './../Style/exportStyles';
 import styles from '../Style/Form';
+import styles1 from '../Style/exportStyles';
 import { ScrollView } from 'react-native-gesture-handler';
 import PickerAtom from './PickerAtom';
 
@@ -18,7 +16,7 @@ export default class CustomerFormAtom extends React.Component<ICustomerFormProps
     product: '',
     image: '',
     quantity: 0,
-    Pquantity: 0,
+    pquantity: 0,
     costPP: 0,
     birth: '',
     marriage: '',
@@ -39,8 +37,8 @@ export default class CustomerFormAtom extends React.Component<ICustomerFormProps
   getSQuantity = (quantity: number) => {
     this.setState({ quantity });
   }
-  getPQuantity = (Pquantity: number) => {
-    this.setState({ Pquantity });
+  getPQuantity = (pquantity: number) => {
+    this.setState({ pquantity });
   }
   getCostPP = (costPP: number) => {
     this.setState({ costPP });
@@ -59,12 +57,17 @@ export default class CustomerFormAtom extends React.Component<ICustomerFormProps
     return (
       <ScrollView>
         <View>
-          <ImageAtom getValue={this.getImage} />
+          <ImageAtom
+            getValue={this.getImage}
+            source={this.state.image}
+            placeholder=''
+            imgStyle={styles.imgContainer}
+          />
           <View>
             <InputAtom
               label='  Name'
               getValue={this.getProduct}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View style={styles.inputView}>
@@ -73,7 +76,7 @@ export default class CustomerFormAtom extends React.Component<ICustomerFormProps
                 label='  Phone number'
                 keyboardType='numeric'
                 getValue={this.getSQuantity}
-                contStyle={marginlessInput}
+                contStyle={styles1.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
@@ -85,7 +88,7 @@ export default class CustomerFormAtom extends React.Component<ICustomerFormProps
               label='  Home address'
               keyboardType='numeric'
               getValue={this.getPQuantity}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View>
@@ -93,7 +96,7 @@ export default class CustomerFormAtom extends React.Component<ICustomerFormProps
               label='  Email'
               keyboardType='numeric'
               getValue={this.getCostPP}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View style={styles.inputView}>
@@ -102,7 +105,7 @@ export default class CustomerFormAtom extends React.Component<ICustomerFormProps
                 label='  Debt limit'
                 keyboardType='numeric'
                 getValue={this.getDebt}
-                contStyle={marginlessInput}
+                contStyle={styles1.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
@@ -110,7 +113,7 @@ export default class CustomerFormAtom extends React.Component<ICustomerFormProps
                 label='  Birthday'
                 keyboardType='numeric'
                 getValue={this.getBirth}
-                contStyle={marginfulInput}
+                contStyle={styles1.marginfulInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
@@ -124,7 +127,7 @@ export default class CustomerFormAtom extends React.Component<ICustomerFormProps
                 label='  Marriage Anniversary'
                 keyboardType='numeric'
                 getValue={this.getMarry}
-                contStyle={marginlessInput}
+                contStyle={styles1.marginlessInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>

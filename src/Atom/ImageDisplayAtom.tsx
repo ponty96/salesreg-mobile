@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Image, Text, View } from 'react-native';
-import { smallImageDisplay } from './../Style/exportStyles';
+import styles from '../Style/exportStyles';
 
 interface IProps {
     image: string
@@ -10,14 +10,14 @@ interface IProps {
 export default class ImageDisplayAtom extends Component<IProps, any> {
     render() {
         return (
-            <View style = { smallImageDisplay.container }>
-                <View style = { smallImageDisplay.imageWrapper }>
+            <View style = { styles.smallImageDisplayContainer }>
+                <View style = { styles.smallImageDisplayImageWrapper }>
                     <Image
                         source = {{ uri: this.props.image }}
-                        style = { smallImageDisplay.image }
+                        style = { styles.smallImageDisplayImage }
                     />
                 </View>
-                <Text style={ smallImageDisplay.name}>
+                <Text style={styles.smallImageDisplayName}>
                     { this.props.name }
                 </Text>
             </View>

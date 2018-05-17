@@ -4,7 +4,7 @@ import { Icon } from 'native-base';
 
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from '../Style/Auth';
-import { signupButton, redButtonText } from '../Style/exportStyles';
+import styles1 from '../Style/exportStyles';
 import AuthenticationHeader from '../Components/AuthenticationHeader';
 
 class OnBoardingScreen extends Component {
@@ -42,13 +42,13 @@ class OnBoardingScreen extends Component {
                 <View style = { styles.buttomButtonsWrapper }>
                     <ButtonAtom
                         btnText = 'SIGN UP'
-                        textStyle = { redButtonText }
-                        btnStyle = { signupButton }
+                        textStyle = { styles1.redButtonText }
+                        btnStyle = { styles1.signupButton }
                     />
                     <ButtonAtom
                         btnText = 'LOGIN'
-                        textStyle = { redButtonText }
-                        btnStyle = { signupButton }
+                        textStyle = { styles1.redButtonText }
+                        btnStyle = { styles1.signupButton }
                     />
                 </View>
             </View>

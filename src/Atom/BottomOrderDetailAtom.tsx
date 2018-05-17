@@ -4,19 +4,16 @@ import { ListItem, Left, Right } from 'native-base';
 
 import styles from './../Style/OrderList';
 
-interface IBottomOrderDetailProps {
-    total: string;
-    amount: string;
-    balance: string;
-    dueDate: string;
+interface IProps {
+    total?: string;
+    amount?: string;
+    balance?: string;
+    dueDate?: string;
 }
 
-export default class BottomOrderDetailAtom extends React.Component <IBottomOrderDetailProps, any> {
-    public static defaultProps = {
-        amount: '6,000',
-        balance: '5,350',
-        dueDate: '21-02-2018',
-        total: '11,350'
+export default class BottomOrderDetailAtom extends React.Component <IProps, any> {
+    static defaultProps: IProps = {
+        total: '0'
     };
   render() {
     return (

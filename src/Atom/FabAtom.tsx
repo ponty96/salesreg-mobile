@@ -3,7 +3,7 @@ import { Icon, Fab } from 'native-base';
 import styles from './../Style/Screen';
 import { color } from './../Style/Color';
 
-const FabAtom = (props: any) => (
+const fabAtom = (props: any) => (
     <Fab
         position='bottomRight'
         style={styles.fab}
@@ -18,4 +18,4 @@ const FabAtom = (props: any) => (
     </Fab>
 );
 
-export default FabAtom;
+export default fabAtom;

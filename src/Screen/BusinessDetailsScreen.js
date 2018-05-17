@@ -4,7 +4,7 @@ import { Icon } from 'native-base'
 
 import NameDisplayAtom from '../Atom/NameDisplayAtom';
 import DetailItemAtom from '../Atom/DetailItemAtom';
-import styles from './../Style/Screen';
+import styles from '../Style/Screen';
 
 class BusinessDetailsScreen extends Component {
     state = {

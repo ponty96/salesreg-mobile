@@ -7,7 +7,7 @@ import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import PickerAtom from '../Atom/PickerAtom';
 import styles from '../Style/Form';
-import { marginlessInput, faintPicker } from '../Style/exportStyles';
+import styles1 from '../Style/exportStyles';
 
 class SigupForm extends React.Component {
     state = {
@@ -66,20 +66,20 @@ class SigupForm extends React.Component {
                 <InputAtom
                     label="Full name"
                     getValue={this.getName}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
 
                 <InputAtom
                     label="Phone number"
                     getValue={this.getPhone}
                     keyboardType="numeric"
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
 
                 <View style = { styles.genderPickerStyle }>
                     <PickerAtom
                         list = { ['Male', 'Female'] }
-                        style = { faintPicker }
+                        style = { styles1.faintPicker }
                     />
                 </View>
 
@@ -87,14 +87,14 @@ class SigupForm extends React.Component {
                     label="Password"
                     getValue={this.getPassword}
                     secureTextEntry={true}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
 
                 <InputAtom
                     label="Reenter-password"
                     getValue={this.getConfirm}
                     secureTextEntry={true}
-                    contStyle={marginlessInput}
+                    contStyle={styles1.marginlessInput}
                 />
 
                 <View style = { styles.buttonsWrapper }>

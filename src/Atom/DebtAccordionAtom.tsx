@@ -6,8 +6,8 @@ import { ScrollView } from 'react-native-gesture-handler';
 import { innerAccordion } from '../config/data';
 
 interface IProps {
-    items: { images: string, name: string, quantity: string, amount: any}
-    onPress: () => void
+    items?: { images: string, name: string, quantity: string, amount: any}
+    onPress?: () => void
 }
 
 class InnerList extends Component<IProps, any> {

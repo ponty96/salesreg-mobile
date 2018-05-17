@@ -1,55 +1,50 @@
 import {Icon} from 'native-base';
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 // import Slider from 'react-native-slider';
 import ButtonAtom from '../Atom/ButtonAtom';
 import ModalAtom from './../Atom/ModalAtom';
-// import { color } from './../Style/Color';
-import { modalButton } from './../Style/exportStyles';
 import styles from './../Style/Screen';
+import styles1 from '../Style/exportStyles';
 
-interface IWarnModalProps {
-    getValue: (a: string) => void;
-    handleSlide: (a: any) => void;
-    closeModal: () => void;
-    headerText: string;
-    amount: string;
-    debtLimit: number;
-    currentAmount: number;
+interface IProps {
+    getValue?: (a: string) => void;
+    handleSlide?: (a: any) => void;
+    closeModal?: () => void;
+    headerText?: string;
+    amount?: string;
+    debtLimit?: number;
+    currentAmount?: number;
     visibility: boolean;
 }
-interface IWarnModalState {
+interface IState {
     value: any;
 }
 
-class DebtWarningModal extends Component<IWarnModalProps, IWarnModalState> {
-    public static defaultProps = {
-        closeModal: PropTypes.func.isRequired,
-        currentAmount: PropTypes.number.isRequired,
-        debtLimit: PropTypes.number.isRequired,
+class DebtWarningModal extends Component<IProps, IState> {
+    static defaultProps: IProps = {
         visibility: false
     };
 
-    public state = {
+    state: IState = {
         value: ''
     };
-    public componentDidMount() {
+    componentDidMount() {
         this.setState({
             value: this.calcPercent()
         });
     }
 
-    public calcPercent = () => {
+    calcPercent = () => {
         const percent = Math.ceil((this.props.currentAmount / this.props.debtLimit ) * 100);
         return percent;
     }
 
-    public handleSlide = (value: any) => {
+    handleSlide = (value: any) => {
         this.setState({value});
     }
 
-    public renderHeader = () => {
+    renderHeader = () => {
         return (
             <View
                 style={styles.modalHeader}
@@ -71,7 +66,7 @@ class DebtWarningModal extends Component<IWarnModalProps, IWarnModalState> {
         );
     }
 
-    public renderBody = () => {
+    renderBody = () => {
         return (
             <View
                 style={styles.modalBody}
@@ -174,13 +169,13 @@ class DebtWarningModal extends Component<IWarnModalProps, IWarnModalState> {
                 <ButtonAtom
                     btnText='OK'
                     onPress={() => this.props.closeModal()}
-                    btnStyle={modalButton}
+                    btnStyle={styles1.modalButton}
                 />
             </View>
         );
     }
 
-    public render() {
+    render() {
         return (
             <ModalAtom
                 visible={this.props.visibility}

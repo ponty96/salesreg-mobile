@@ -3,22 +3,20 @@ import { Button } from 'native-base';
 import { Text } from 'react-native';
 import styles from './../Style/Form';
 
-interface IButtonAtomProps {
-    btnText: string;
-    transparent: boolean;
-    disabled: boolean;
-    onPress: (a: string) => void;
-    funcValue: string;
-    btnStyle: any;
-    textStyle: any;
+interface IProps {
+    btnText?: string;
+    transparent?: boolean;
+    disabled?: boolean;
+    onPress?: (a: string) => void;
+    funcValue?: string;
+    btnStyle?: any;
+    textStyle?: any;
 }
 
-class ButtonAtom extends Component<IButtonAtomProps, any> {
-    // static defaultProps: IButtonAtomProps;
-    static defaultProps = {
+class ButtonAtom extends Component<IProps, any> {
+    static defaultProps: IProps = {
         transparent: false,
-        disabled: false,
-        funcValue: ''
+        disabled: false
     };
     render() {
         return (
@@ -44,13 +42,3 @@ class ButtonAtom extends Component<IButtonAtomProps, any> {
 }
 
 export default ButtonAtom;
-
-/*ButtonAtom.defaultProps = {
-    btnText: '',
-    transparent: false,
-    disabled: false,
-    funcValue: '',
-    btnStyle: styles.buttonRed,
-    textStyle: styles.textTransparent,
-    onPress: () => { console.log(); }
-};*/

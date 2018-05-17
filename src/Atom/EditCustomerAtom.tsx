@@ -1,12 +1,10 @@
 import React from 'react';
 import { View, Text } from 'react-native';
-
 import ImageAtom from './ImageAtom';
 import InputAtom from './InputAtom';
 import PickerAtom from './PickerAtom';
 import GoldRatingsAtom from './GoldRatingsAtom';
-
-import { marginfulInput, marginlessInput } from './../Style/exportStyles';
+import styles1 from './../Style/exportStyles';
 import styles from '../Style/Form';
 import { ScrollView } from 'react-native-gesture-handler';
 
@@ -67,12 +65,17 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
     return (
       <ScrollView>
         <View>
-          <ImageAtom getValue={this.getImage} />
+          <ImageAtom
+            getValue={this.getImage}
+            source={this.state.image}
+            placeholder=''
+            imgStyle={styles.imgContainer}
+           />
           <View>
             <InputAtom
               label='  Name'
               getValue={this.getProduct}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View>
@@ -80,7 +83,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
               label='  Phone number(separate numbers with commas):'
               keyboardType='numeric'
               getValue={this.getPhone}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View style={styles.innerFirstPicker}>
@@ -91,7 +94,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
               label='  Address'
               keyboardType='numeric'
               getValue={this.getAddress}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View>
@@ -99,7 +102,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
               label='  Type Email Address'
               keyboardType='email-address'
               getValue={this.getEmail}
-              contStyle={marginlessInput}
+              contStyle={styles1.marginlessInput}
             />
           </View>
           <View style={styles.inputView}>
@@ -108,7 +111,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
                 label='  Debt limit'
                 keyboardType='numeric'
                 getValue={this.getDebt}
-                contStyle={marginlessInput}
+                contStyle={styles1.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
@@ -116,7 +119,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
                 label='  Birthday'
                 keyboardType='numeric'
                 getValue={this.getBirth}
-                contStyle={marginfulInput}
+                contStyle={styles1.marginfulInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
@@ -130,7 +133,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
                 label='  Marriage Anniversary'
                 keyboardType='numeric'
                 getValue={this.getMarry}
-                contStyle={marginlessInput}
+                contStyle={styles1.marginlessInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>

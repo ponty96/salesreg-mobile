@@ -1,49 +1,42 @@
 import {Form, Icon} from 'native-base';
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
-
 import ButtonAtom from '../Atom/ButtonAtom';
 import InputAtom from '../Atom/InputAtom';
 import ModalAtom from './../Atom/ModalAtom';
-import { marginlessInput, modalButton, modalText } from './../Style/exportStyles';
 import styles from './../Style/Screen';
+import styles1 from '../Style/exportStyles';
 
-interface ILimitModalProps {
-    getValue: (a: string) => void;
-    closeModal: () => void;
-    headerText: string;
-    amount: string;
-    placeholder: string;
+interface IProps {
+    getValue?: (a: string) => void;
+    closeModal?: () => void;
+    headerText?: string;
+    amount?: string;
+    placeholder?: string;
     visibility: boolean;
 }
-interface ILimitModalState {
+interface IState {
     amount: string;
 }
-class DebtLimitModal extends Component<ILimitModalProps, ILimitModalState> {
-    public static defaultProps = {
-        amount: '',
-        closeModal: PropTypes.func.isRequired,
-        getValue: PropTypes.func,
-        headerText: PropTypes.string.isRequired,
-        placeholder: PropTypes.string,
+class DebtLimitModal extends Component<IProps, IState> {
+    static defaultProps: IProps = {
         visibility: false
     };
-    public state = {
+    state: IState = {
         amount: ''
     };
-    public getAmount = (amount: string) => {
+    getAmount = (amount: string) => {
         this.setState({amount});
     }
 
-    public set = () => {
+    set = () => {
         if (this.props.getValue) {
             this.props.getValue(this.state.amount);
         }
         this.props.closeModal();
     }
 
-    public renderHeader = () => {
+    renderHeader = () => {
         return (
             <View
                 style={styles.modalHeader}
@@ -65,7 +58,7 @@ class DebtLimitModal extends Component<ILimitModalProps, ILimitModalState> {
         );
     }
 
-    public renderBody = () => {
+    renderBody = () => {
         // tslint:disable-next-line:radix
         const amount = parseInt(this.state.amount);
         return (
@@ -77,7 +70,7 @@ class DebtLimitModal extends Component<ILimitModalProps, ILimitModalState> {
                         floatingLabel={false}
                         keyboardType={'numeric'}
                         getValue={this.getAmount}
-                        contStyle={marginlessInput}
+                        contStyle={styles1.marginlessInput}
                         placeholder={this.props.placeholder}
                     />
 
@@ -112,19 +105,15 @@ class DebtLimitModal extends Component<ILimitModalProps, ILimitModalState> {
 
                     <ButtonAtom
                         btnText='OK'
-                        transparent={false}
-                        disabled={false}
-                        funcValue=''
-                        textStyle={modalText}
                         onPress={this.set}
-                        btnStyle={modalButton}
+                        btnStyle={styles1.modalButton}
                     />
                 </Form>
             </View>
         );
     }
 
-    public render() {
+    render() {
         return (
             <ModalAtom
                 visible={this.props.visibility}

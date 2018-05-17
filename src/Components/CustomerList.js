@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import { Text, View, FlatList, ScrollView } from "react-native";
 import { Icon } from "native-base";
+
 import CustomerListAtom from "../Atom/CustomerListAtom";
 import SubHeaderAtom from "../Atom/SubHeaderAtom";
-import { customerListStyles } from './../Style/exportStyles';
+import styles from '../Style/exportStyles';
 import { customerList } from "../config/data";
 
 
@@ -36,7 +37,7 @@ class CustomerList extends Component {
 
   render() {
     return (
-      <View style={customerListStyles.container}>
+      <View style={styles.customerListContainer}>
         <SubHeaderAtom total = "250" list={["Highest Purchase", "Lowest Purchase", "Resent Purchase", "Frequent Purchase", "Earliest Payment", "Latest Payment", "Customer Rating"]}/>
           <ScrollView>
             <FlatList

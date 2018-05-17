@@ -1,55 +1,40 @@
-import PropTypes from 'prop-types';
 import React from 'react';
 import { View } from 'react-native';
 import ButtonAtom from '../Atom/ButtonAtom';
-import {saveCancelButton, saveCancelButtonText} from './../Style/exportStyles';
 import styles from './../Style/Form';
+import styles1 from '../Style/exportStyles';
 
-interface ISaveCancelProps {
-    navigation: any;
-    createfunc: () => void;
-    goBack: () => void;
+interface IProps {
+    navigation?: any;
+    createfunc?: () => void;
     positiveButtonName: string;
 }
 
-class SaveCancelButton extends React.Component<ISaveCancelProps, any> {
-    public static defaultProps = {
-        createfunc: PropTypes.func,
-        navigation: PropTypes.object.isRequired,
-        positiveButtonName: PropTypes.string.isRequired
-    };
+class SaveCancelButton extends React.Component<IProps, any> {
 
-    public navigateBack = () => {
-        this.props.navigation.goBack();
-    }
-
-    public create = () => {
+    create = () => {
         if (this.props.createfunc) {
             this.props.createfunc();
         }
     }
 
-    public render() {
+    render() {
         return (
             <View style={styles.saveCancelContainer}>
                 <ButtonAtom
                     btnText='CANCEL'
                     transparent={true}
-                    disabled={false}
-                    funcValue=''
-                    onPress={this.navigateBack}
-                    btnStyle={saveCancelButton}
-                    textStyle={saveCancelButtonText}
+                    onPress={() => this.props.navigation.goBack()}
+                    btnStyle={styles1.saveCancelButton}
+                    textStyle={styles1.saveCancelButtonText}
                 />
 
                 <ButtonAtom
                     btnText={this.props.positiveButtonName}
                     transparent={true}
-                    disabled={false}
-                    funcValue=''
                     onPress={this.create}
-                    btnStyle={saveCancelButton}
-                    textStyle={saveCancelButtonText}
+                    btnStyle={styles1.saveCancelButton}
+                    textStyle={styles1.saveCancelButtonText}
                 />
             </View>
         );

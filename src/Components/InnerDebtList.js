@@ -1,11 +1,11 @@
 import React from "react";
 import { StyleSheet, View, Text } from "react-native";
+import { ScrollView } from "react-native-gesture-handler";
 
 import AboveAccordionAtom from "../Atom/AboveAccordionAtom";
 import styles from "../Style/OrderList";
 import AccordionAtom from "../Atom/AccordionAtom";
 import GetAmountModal from "../Container/GetAmountModal";
-import { ScrollView } from "react-native-gesture-handler";
 import ButtonAtom from "../Atom/ButtonAtom";
 
 export default class App extends React.Component {
