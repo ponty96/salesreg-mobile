@@ -32,10 +32,10 @@ class EditUserProfileScreen extends Component<IProps, IState> {
         );
     }
 
-    getPhoneNumber = (number_text: string) => {
+    getPhoneNumber = (numberText: string) => {
         this.setState(
             {
-                phoneNumber: number_text
+                phoneNumber: numberText
             }
         );
     }
