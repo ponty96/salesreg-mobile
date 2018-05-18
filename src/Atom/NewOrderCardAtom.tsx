@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { View, TouchableOpacity } from 'react-native';
-import { Header, Icon, Right } from 'native-base';
-import InputAtom from './InputAtom';
-import styles from '../Style/exportStyles';
+import * as React from 'react'
+import { View, TouchableOpacity } from 'react-native'
+import { Header, Icon, Right } from 'native-base'
+import InputAtom from './InputAtom'
+import styles from '../Style/exportStyles'
 
 interface IProps {
-    onPress: () => void
+  onPress: () => void
 }
 
 export default class NewOrderCardAtom extends React.Component<IProps, any> {
@@ -13,15 +13,15 @@ export default class NewOrderCardAtom extends React.Component<IProps, any> {
     product: '',
     price: '',
     quantity: ''
-  };
+  }
   getProduct = (product: string) => {
-    this.setState({ product });
+    this.setState({ product })
   }
   getPrice = (price: number) => {
-    this.setState({ price });
+    this.setState({ price })
   }
   getQuantity = (quantity: number) => {
-    this.setState({ quantity });
+    this.setState({ quantity })
   }
   render() {
     return (
@@ -32,14 +32,14 @@ export default class NewOrderCardAtom extends React.Component<IProps, any> {
               style={styles.newOrderClose}
               onPress={this.props.onPress}
             >
-              <Icon style={styles.newOrderIcon} name='md-close' />
+              <Icon style={styles.newOrderIcon} name="md-close" />
             </TouchableOpacity>
           </Right>
         </Header>
         <View style={styles.newOrderInnerContainer}>
           <View style={styles.newOrderFirstInput}>
             <InputAtom
-              label='Product Name'
+              label="Product Name"
               getValue={this.getProduct}
               contStyle={styles.marginfulInput}
             />
@@ -47,23 +47,23 @@ export default class NewOrderCardAtom extends React.Component<IProps, any> {
           <View style={styles.newOrderSecondInput}>
             <View style={styles.newOrderHalf}>
               <InputAtom
-                label='Quantity'
+                label="Quantity"
                 getValue={this.getQuantity}
-                keyboardType='numeric'
+                keyboardType="numeric"
                 contStyle={styles.marginfulInput}
               />
             </View>
             <View style={styles.newOrderHalf}>
               <InputAtom
-                label='Price'
+                label="Price"
                 getValue={this.getPrice}
-                keyboardType='numeric'
+                keyboardType="numeric"
                 contStyle={styles.marginfulInput}
               />
             </View>
           </View>
         </View>
       </View>
-    );
+    )
   }
 }

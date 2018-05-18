@@ -1,16 +1,16 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import ImageAtom from './ImageAtom';
-import InputAtom from './InputAtom';
-import PickerAtom from './PickerAtom';
-import GoldRatingsAtom from './GoldRatingsAtom';
-import styles1 from './../Style/exportStyles';
-import styles from '../Style/Form';
-import { ScrollView } from 'react-native-gesture-handler';
+import * as React from 'react'
+import { View, Text } from 'react-native'
+import ImageAtom from './ImageAtom'
+import InputAtom from './InputAtom'
+import PickerAtom from './PickerAtom'
+import GoldRatingsAtom from './GoldRatingsAtom'
+import styles1 from './../Style/exportStyles'
+import styles from '../Style/Form'
+import { ScrollView } from 'react-native-gesture-handler'
 
 interface IProps {
-    navigation: any
-    customerName: string
+  navigation: any
+  customerName: string
 }
 
 export default class EditCustomerAtom extends React.Component<IProps, any> {
@@ -24,41 +24,41 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
     address: '',
     ucost: 0,
     birth: ''
-  };
+  }
 
   create = () => {
-    this.props.navigation.goBack();
+    this.props.navigation.goBack()
   }
 
   getProduct = (product: string) => {
-    this.setState({ product });
+    this.setState({ product })
   }
 
   getImage = (pic: string) => {
     this.setState({
-        image: pic
-    });
+      image: pic
+    })
   }
   getPhone = (phone: number) => {
-    this.setState({ phone });
+    this.setState({ phone })
   }
   getAddress = (address: string) => {
-    this.setState({ address });
+    this.setState({ address })
   }
   getUCost = (ucost: number) => {
-    this.setState({ ucost });
+    this.setState({ ucost })
   }
   getBirth = (birth: string) => {
-    this.setState({ birth });
+    this.setState({ birth })
   }
   getMarry = (marriage: string) => {
-    this.setState({ marriage });
+    this.setState({ marriage })
   }
   getDebt = (debt: number) => {
-    this.setState({ debt });
+    this.setState({ debt })
   }
   getEmail = (email: string) => {
-    this.setState({ email });
+    this.setState({ email })
   }
 
   render() {
@@ -68,20 +68,20 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
           <ImageAtom
             getValue={this.getImage}
             source={this.state.image}
-            placeholder=''
+            placeholder=""
             imgStyle={styles.imgContainer}
-           />
+          />
           <View>
             <InputAtom
-              label='  Name'
+              label="  Name"
               getValue={this.getProduct}
               contStyle={styles1.marginlessInput}
             />
           </View>
           <View>
             <InputAtom
-              label='  Phone number(separate numbers with commas):'
-              keyboardType='numeric'
+              label="  Phone number(separate numbers with commas):"
+              keyboardType="numeric"
               getValue={this.getPhone}
               contStyle={styles1.marginlessInput}
             />
@@ -91,16 +91,16 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
           </View>
           <View>
             <InputAtom
-              label='  Address'
-              keyboardType='numeric'
+              label="  Address"
+              keyboardType="numeric"
               getValue={this.getAddress}
               contStyle={styles1.marginlessInput}
             />
           </View>
           <View>
             <InputAtom
-              label='  Type Email Address'
-              keyboardType='email-address'
+              label="  Type Email Address"
+              keyboardType="email-address"
               getValue={this.getEmail}
               contStyle={styles1.marginlessInput}
             />
@@ -108,16 +108,16 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
           <View style={styles.inputView}>
             <View style={styles.innerStart}>
               <InputAtom
-                label='  Debt limit'
-                keyboardType='numeric'
+                label="  Debt limit"
+                keyboardType="numeric"
                 getValue={this.getDebt}
                 contStyle={styles1.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
               <InputAtom
-                label='  Birthday'
-                keyboardType='numeric'
+                label="  Birthday"
+                keyboardType="numeric"
                 getValue={this.getBirth}
                 contStyle={styles1.marginfulInput}
               />
@@ -130,8 +130,8 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
             </View>
             <View style={styles.innerEnd}>
               <InputAtom
-                label='  Marriage Anniversary'
-                keyboardType='numeric'
+                label="  Marriage Anniversary"
+                keyboardType="numeric"
                 getValue={this.getMarry}
                 contStyle={styles1.marginlessInput}
               />
@@ -148,6 +148,6 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
           </View>
         </View>
       </ScrollView>
-    );
+    )
   }
 }

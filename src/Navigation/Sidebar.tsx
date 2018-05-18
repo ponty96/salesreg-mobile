@@ -1,23 +1,21 @@
-import React, { PureComponent } from 'react';
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-import { Icon } from 'native-base';
+import React, { PureComponent } from 'react'
+import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
+import { SafeAreaView } from 'react-navigation'
+import { Icon } from 'native-base'
 
-import styles from './../Style/Layout';
-import ListItemAtom from './../Atom/ListItemAtom';
-import { userData } from './../config/default';
+import styles from './../Style/Layout'
+import ListItemAtom from './../Atom/ListItemAtom'
+import { userData } from './../config/default'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
-interface Istate {
-
-}
+interface Istate {}
 
 class SideBar extends PureComponent<IProps, Istate> {
   handleNavigation = (location: string, data: any = undefined) => {
-    this.props.navigation.navigate(location, { data });
+    this.props.navigation.navigate(location, { data })
   }
 
   render() {
@@ -99,8 +97,8 @@ class SideBar extends PureComponent<IProps, Istate> {
           <Text style={styles.itemText}>Logout</Text>
         </TouchableOpacity>
       </SafeAreaView>
-    );
+    )
   }
 }
 
-export default SideBar;
+export default SideBar

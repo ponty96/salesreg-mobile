@@ -8,11 +8,8 @@
     "@types/react": "^16.3.14",
     "@types/react-dom": "^16.0.5",
     "@types/react-native": "^0.55.12",
-<<<<<<< HEAD
-    "@types/react-navigation": "^1.5.11",
-=======
     "@types/react-native-star-rating": "^1.0.0",
->>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb
+    "@types/react-navigation": "^1.5.11",
     "@types/react-test-renderer": "^16.0.1",
     "@wli/react-native-modal-popover": "^0.0.7",
     "concurrently": "^3.5.1",
@@ -64,6 +61,6 @@
     "react-native-slider": "^0.11.0",
     "react-native-star-rating": "^1.0.9",
     "react-navigation": "^1.5.8",
-    "standard": "^11.0.1"
+    "tslint-config-prettier": "^1.12.0"
   }
 }

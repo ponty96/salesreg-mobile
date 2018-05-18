@@ -1,7 +1,7 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { ListItem, Left, Right, Thumbnail } from 'native-base';
-import styles from '../Style/exportStyles';
+import * as React from 'react'
+import { View, Text } from 'react-native'
+import { ListItem, Left, Right, Thumbnail } from 'native-base'
+import styles from '../Style/exportStyles'
 
 interface IProps {
   uri: string
@@ -12,9 +12,10 @@ interface IProps {
 
 export default class TopOrderDetailAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
-    uri: 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
+    uri:
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
     status: 'Unknown'
-  };
+  }
   render() {
     return (
       <View>
@@ -32,9 +33,12 @@ export default class TopOrderDetailAtom extends React.Component<IProps, any> {
           </Left>
           <Right style={styles.stylesDetailPictureView}>
             <Thumbnail
-              source={{ uri: this.props.uri }} style={styles.aboveAccordiondp}
+              source={{ uri: this.props.uri }}
+              style={styles.aboveAccordiondp}
             />
-            <Text style={styles.stylesDetailPictureText}>{this.props.name}</Text>
+            <Text style={styles.stylesDetailPictureText}>
+              {this.props.name}
+            </Text>
           </Right>
         </ListItem>
         <ListItem style={styles.stylesDetailWhiteList}>
@@ -42,10 +46,12 @@ export default class TopOrderDetailAtom extends React.Component<IProps, any> {
             <Text style={styles.stylesDetailGreyText}>Status</Text>
           </Left>
           <Right>
-            <Text style={styles.stylesDetailBlackText}>{this.props.status}</Text>
+            <Text style={styles.stylesDetailBlackText}>
+              {this.props.status}
+            </Text>
           </Right>
         </ListItem>
       </View>
-    );
+    )
   }
 }

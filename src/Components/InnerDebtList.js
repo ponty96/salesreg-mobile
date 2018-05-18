@@ -14,7 +14,7 @@ export default class App extends React.Component {
     this.state = {
       visibility: false,
       icon: 'md-arrow-dropdown'
-    };
+    }
   }
 
   onHot = () => {
@@ -23,10 +23,7 @@ export default class App extends React.Component {
     } else {
       this.setState({ visibility: false })
     }
-<<<<<<< HEAD
   }
-=======
-  };
   /*
   changeIcon = () => {
     if (this.state.icon == 'md-arrow-dropdown') {
@@ -35,7 +32,6 @@ export default class App extends React.Component {
       this.setState({ visibility: false });
     }
   };*/
->>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb
   render() {
     return (
       <View style={styles.ababa}>

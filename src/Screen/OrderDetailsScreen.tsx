@@ -1,57 +1,56 @@
-import React, { Component } from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
-import { Icon } from 'native-base';
+import React, { Component } from 'react'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Icon } from 'native-base'
 
-import styles from './../Style/Screen';
+import styles from './../Style/Screen'
 
-interface IProps {
+interface IProps {}
 
-}
-
-interface IState {
-
-}
+interface IState {}
 
 class OrderDetailsScreen extends Component<IProps, IState> {
-
-    static navigationOptions = ({ navigation }: any) => {
-        const { params } = navigation.state;
-        return {
-            title: 'Order Details',
-            headerLeft: <Icon
-                name={'md-arrow-back'}
-                style={styles.headerIcon}
-                onPress={() => {
-                    navigation.goBack();
-                }}
-            />,
-            headerRight: <TouchableOpacity
-                onPress={() => {
-                    navigation.navigate('NewOrderScreen', {
-                        item: params.item
-                    });
-                }}
-            >
-                <View style={styles.headerItem}>
-                    <Icon
-                        name={'pencil'}
-                        style={styles.headerIconLogout}
-                        type={'MaterialCommunityIcons'}
-                    />
-                    <Text style={styles.headerText}>Edit</Text>
-                </View>
-            </TouchableOpacity>
-        };
+  static navigationOptions = ({ navigation }: any) => {
+    const { params } = navigation.state
+    return {
+      title: 'Order Details',
+      headerLeft: (
+        <Icon
+          name={'md-arrow-back'}
+          style={styles.headerIcon}
+          onPress={() => {
+            navigation.goBack()
+          }}
+        />
+      ),
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('NewOrderScreen', {
+              item: params.item
+            })
+          }}
+        >
+          <View style={styles.headerItem}>
+            <Icon
+              name={'pencil'}
+              style={styles.headerIconLogout}
+              type={'MaterialCommunityIcons'}
+            />
+            <Text style={styles.headerText}>Edit</Text>
+          </View>
+        </TouchableOpacity>
+      )
     }
+  }
 
-    render() {
-        // do change the list to the appropriate molecule
-        return (
-            <View style={ styles.centerContainer }>
-                <Text>Order details Screen</Text>
-            </View>
-        );
-    }
+  render() {
+    // do change the list to the appropriate molecule
+    return (
+      <View style={styles.centerContainer}>
+        <Text>Order details Screen</Text>
+      </View>
+    )
+  }
 }
 
-export default OrderDetailsScreen;
+export default OrderDetailsScreen

@@ -1,6 +1,6 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import styles from './../Style/exportStyles';
+import * as React from 'react'
+import { View, Text } from 'react-native'
+import styles from './../Style/exportStyles'
 
 interface IProps {
   totalAmount: any
@@ -32,6 +32,6 @@ export default class TotalOrderAtom extends React.Component<IProps, any> {
           </View>
         </View>
       </View>
-    );
+    )
   }
 }

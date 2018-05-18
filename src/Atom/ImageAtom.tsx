@@ -1,33 +1,32 @@
-import * as React from 'react';
-import { Image, View, Text, TouchableOpacity } from 'react-native';
-import { ImagePicker } from 'expo';
-import styles from './../Style/Form';
+import * as React from 'react'
+import { Image, View, Text, TouchableOpacity } from 'react-native'
+import { ImagePicker } from 'expo'
+import styles from './../Style/Form'
 
 interface IProps {
-    source: string
-    placeholder?: string
-    imgStyle?: object
-    getValue?: any
+  source: string
+  placeholder?: string
+  imgStyle?: object
+  getValue?: any
 }
 
 class ImageAtom extends React.Component<IProps, any> {
+  state = {
+    image: ''
+  }
 
-    state = {
-        image: ''
-    };
+  handleSelection = async () => {
+    if (this.props.getValue) {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: false
+      })
 
-    handleSelection = async () => {
-        if (this.props.getValue) {
-            let result = await ImagePicker.launchImageLibraryAsync({
-                allowsEditing: false
-            });
-
-            if (result && !result.cancelled) {
-                this.setState({image: result});
-                this.props.getValue(this.state.image);
-            }
-        }
+      if (result && !result.cancelled) {
+        this.setState({ image: result })
+        this.props.getValue(this.state.image)
+      }
     }
+  }
 
   render() {
     if (this.props.source || this.state.image) {
@@ -42,7 +41,7 @@ class ImageAtom extends React.Component<IProps, any> {
           />
           <Text style={styles.selfAlign}>Upload logo</Text>
         </TouchableOpacity>
-      );
+      )
     } else {
       return (
         <TouchableOpacity
@@ -57,9 +56,9 @@ class ImageAtom extends React.Component<IProps, any> {
           </View>
           <Text style={styles.selfAlign}>Upload logo</Text>
         </TouchableOpacity>
-      );
+      )
     }
   }
 }
 
-export default ImageAtom;
+export default ImageAtom

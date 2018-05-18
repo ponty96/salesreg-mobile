@@ -1,11 +1,19 @@
-import * as React from 'react';
-import { View } from 'react-native';
-import { ListItem, Left, Right, Text } from 'native-base';
-import styles from '../Style/OrderList';
-import PopoverAtom from './PopoverAtom';
+import * as React from 'react'
+import { View } from 'react-native'
+import { ListItem, Left, Right, Text } from 'native-base'
+import styles from '../Style/OrderList'
+import PopoverAtom from './PopoverAtom'
 
 interface IProps {
-    items?: {orderId: number, time: string, customerName: string, amount: number, position: string, check: boolean, tag: any}
+  items?: {
+    orderId: number
+    time: string
+    customerName: string
+    amount: number
+    position: string
+    check: boolean
+    tag: any
+  }
 }
 
 class MainOrderListAtom extends React.Component<IProps, any> {
@@ -21,7 +29,9 @@ class MainOrderListAtom extends React.Component<IProps, any> {
             </Text>
           </View>
           <View style={styles.viewMargin}>
-            <Text style={styles.leftText2}>{this.props.items.customerName}</Text>
+            <Text style={styles.leftText2}>
+              {this.props.items.customerName}
+            </Text>
           </View>
         </Left>
         <Right style={styles.mainRight}>
@@ -33,8 +43,8 @@ class MainOrderListAtom extends React.Component<IProps, any> {
           />
         </Right>
       </ListItem>
-    );
+    )
   }
 }
 
-export default MainOrderListAtom;
+export default MainOrderListAtom

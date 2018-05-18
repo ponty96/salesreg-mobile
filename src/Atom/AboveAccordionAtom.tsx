@@ -1,21 +1,22 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import { Thumbnail } from 'native-base';
-import styles from './../Style/exportStyles';
+import * as React from 'react'
+import { View, Text } from 'react-native'
+import { Thumbnail } from 'native-base'
+import styles from './../Style/exportStyles'
 
 interface IAboveAccordProps {
-    uri: string;
-    name: string;
-    totalAmount: any;
+  uri: string
+  name: string
+  totalAmount: any
 }
 
 class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
-    public static defaultProps = {
-        uri: 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
-        name: 'Customer Name',
-        totalAmount: 0
-    };
-    render() {
+  public static defaultProps = {
+    uri:
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
+    name: 'Customer Name',
+    totalAmount: 0
+  }
+  render() {
     return (
       <View style={styles.aboveAccordionContainer}>
         <View style={styles.aboveAccordionPictureView}>
@@ -35,8 +36,8 @@ class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
           </Text>
         </View>
       </View>
-    );
+    )
   }
 }
 
-export default AboveAccordionAtom;
+export default AboveAccordionAtom
