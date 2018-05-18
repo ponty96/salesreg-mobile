@@ -78,12 +78,12 @@ export default StyleSheet.create(
             backgroundColor: '#fff'
         },
 
-        aboveAccordionDp: {
+        aboveAccordiondp: {
             height: 90,
             width: 90
         },
 
-        aboveAccordionDpP: {
+        aboveAccordiondpP: {
             height: 60,
             width: 60
         },

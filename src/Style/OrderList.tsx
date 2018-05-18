@@ -158,7 +158,7 @@ export default StyleSheet.create({
         fontSize: 13,
         color: '#c0c0c0'
     },
-    marginRight: {
+    mainRight: {
         flex: 0,
         flexDirection: 'column',
         marginRight: 16,

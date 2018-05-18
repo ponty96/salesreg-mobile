@@ -35,13 +35,14 @@ class ResetForm extends React.Component {
     this.props.navigation.navigate(location)
   }
 
-  render() {
-    return (
-      <Form>
-        <Text style={styles.buttonsWrapper}>
-          A reset code will be sent to {this.props.secretPhone}. Enter the code
-          to reset your password
-        </Text>
+    render() {
+        return (
+            <Form>
+                <Text
+                    style={styles.buttonsWrapper}
+                >
+                    A reset code will be sent to {this.props.secretPhone}. Enter the code to reset your password
+                </Text>
 
         <InputAtom
           placeholder={'Enter Reset Code'}

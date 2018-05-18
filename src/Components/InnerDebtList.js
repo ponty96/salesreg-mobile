@@ -12,8 +12,9 @@ export default class App extends React.Component {
   constructor() {
     super()
     this.state = {
-      visibility: false
-    }
+      visibility: false,
+      icon: 'md-arrow-dropdown'
+    };
   }
 
   onHot = () => {
@@ -22,13 +23,27 @@ export default class App extends React.Component {
     } else {
       this.setState({ visibility: false })
     }
+<<<<<<< HEAD
   }
+=======
+  };
+  /*
+  changeIcon = () => {
+    if (this.state.icon == 'md-arrow-dropdown') {
+      this.setState({ visibility: true });
+    } else {
+      this.setState({ visibility: false });
+    }
+  };*/
+>>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb
   render() {
     return (
       <View style={styles.ababa}>
         <ScrollView>
           <AboveAccordionAtom totalAmount="10,000" name="Ayo Aregbede" />
-          <AccordionAtom />
+          <TouchableOpacity onPress={this.changeIcon}>
+            <AccordionAtom icon="md-arrow-dropdown" />
+          </TouchableOpacity>
           <ButtonAtom
             onPress={this.onHot}
             btnText="Pay debt"

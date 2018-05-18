@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/Atom/ImageAtom.js
 import React, { Component } from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
 import PropTypes from 'prop-types'
@@ -22,6 +23,38 @@ class ImageAtom extends Component {
       }
     }
   }
+=======
+import * as React from 'react';
+import { Image, View, Text, TouchableOpacity } from 'react-native';
+import { ImagePicker } from 'expo';
+import styles from './../Style/Form';
+
+interface IProps {
+    source: string
+    placeholder?: string
+    imgStyle?: object
+    getValue?: any
+}
+
+class ImageAtom extends React.Component<IProps, any> {
+
+    state = {
+        image: ''
+    };
+
+    handleSelection = async () => {
+        if (this.props.getValue) {
+            let result = await ImagePicker.launchImageLibraryAsync({
+                allowsEditing: false
+            });
+
+            if (result && !result.cancelled) {
+                this.setState({image: result});
+                this.props.getValue(this.state.image);
+            }
+        }
+    }
+>>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb:src/Atom/ImageAtom.tsx
 
   render() {
     if (this.props.source || this.state.image) {
@@ -56,6 +89,7 @@ class ImageAtom extends Component {
   }
 }
 
+<<<<<<< HEAD:src/Atom/ImageAtom.js
 ImageAtom.propTypes = {
   source: PropTypes.string,
   placeholder: PropTypes.string,
@@ -64,3 +98,6 @@ ImageAtom.propTypes = {
 }
 
 export default ImageAtom
+=======
+export default ImageAtom;
+>>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb:src/Atom/ImageAtom.tsx

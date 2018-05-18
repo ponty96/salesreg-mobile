@@ -89,6 +89,18 @@
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@types/events/-/events-1.2.0.tgz#81a6731ce4df43619e5c8c945383b3e62a89ea86"
 
+"@types/expo@^26.0.3":
+  version "26.0.3"
+  resolved "https://registry.yarnpkg.com/@types/expo/-/expo-26.0.3.tgz#ae2a1b00a4540d717f235222194c62a8e58d73c0"
+  dependencies:
+    "@types/fbemitter" "*"
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/fbemitter@*":
+  version "2.0.32"
+  resolved "https://registry.yarnpkg.com/@types/fbemitter/-/fbemitter-2.0.32.tgz#8ed204da0f54e9c8eaec31b1eec91e25132d082c"
+
 "@types/glob@*":
   version "5.0.35"
   resolved "https://registry.yarnpkg.com/@types/glob/-/glob-5.0.35.tgz#1ae151c802cece940443b5ac246925c85189f32a"
@@ -120,9 +132,22 @@
     "@types/node" "*"
     "@types/react" "*"
 
+<<<<<<< HEAD
+"@types/react-native-star-rating@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native-star-rating/-/react-native-star-rating-1.0.0.tgz#32bf47afe1b71710059394dac55e367a4a5871b4"
+  dependencies:
+    "@types/react" "*"
+    "@types/react-native" "*"
+
+"@types/react-native@*":
+  version "0.55.13"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.55.13.tgz#5ff5243998f06aaa656d7858ddfa7cdd6ab63c57"
+=======
 "@types/react-native@*":
   version "0.55.14"
   resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.55.14.tgz#9a702845c7d72f2774b4e2004cb698c099f9b50e"
+>>>>>>> 87ee2c28db555139533842a8448519549560f7b3
   dependencies:
     "@types/react" "*"
 
@@ -150,6 +175,14 @@
   resolved "https://registry.yarnpkg.com/@types/react/-/react-16.3.14.tgz#f90ac6834de172e13ecca430dcb6814744225d36"
   dependencies:
     csstype "^2.2.0"
+
+"@wli/react-native-modal-popover@^0.0.7":
+  version "0.0.7"
+  resolved "https://registry.yarnpkg.com/@wli/react-native-modal-popover/-/react-native-modal-popover-0.0.7.tgz#c9dc264152dc9cb76c7556d146e5b4193af60a4b"
+  dependencies:
+    "@types/prop-types" "^15.5.2"
+    lodash.debounce "^4.0.8"
+    prop-types "^15.6.0"
 
 Base64@~0.1.3:
   version "0.1.4"

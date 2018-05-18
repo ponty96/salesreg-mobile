@@ -1,5 +1,4 @@
 import {Form, Icon} from 'native-base';
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import ButtonAtom from '../Atom/ButtonAtom';
@@ -8,41 +7,38 @@ import ModalAtom from './../Atom/ModalAtom';
 import styles from './../Style/Screen';
 import styles1 from '../Style/exportStyles';
 
-interface ILimitModalProps {
-    getValue: (a: any) => void;
-    closeModal: () => void;
-    headerText: string;
-    amount: string;
-    placeholder: string;
+interface IProps {
+    getValue?: (a: any) => void;
+    closeModal?: () => void;
+    headerText?: string;
+    amount?: string;
+    placeholder?: string;
     visibility: boolean;
 }
-interface ILimitModalState {
+interface IState {
     amount: string;
 }
 
-class GetAmountModal extends Component<ILimitModalProps, ILimitModalState> {
-    public static defaultProps = {
-        closeModal: PropTypes.func.isRequired,
-        getValue: PropTypes.func,
-        headerText: PropTypes.string.isRequired,
+class GetAmountModal extends Component<IProps, IState> {
+    static defaultProps: IProps = {
         visibility: false
     };
 
-    public state = {
+    state: IState = {
         amount: ''
     };
 
-    public getAmount = (amount: string) => {
+    getAmount = (amount: string) => {
         this.setState({amount});
     }
 
-    public pay = () => {
+    pay = () => {
         if (this.props.getValue) {
             this.props.getValue(this.state.amount);
         }
     }
 
-    public renderHeader = () => {
+    renderHeader = () => {
         return (
             <View
                 style={styles.modalHeader}
@@ -64,7 +60,7 @@ class GetAmountModal extends Component<ILimitModalProps, ILimitModalState> {
         );
     }
 
-    public renderBody = () => {
+    renderBody = () => {
         return (
             <View
                 style={styles.modalBody}
@@ -87,7 +83,7 @@ class GetAmountModal extends Component<ILimitModalProps, ILimitModalState> {
         );
     }
 
-    public render() {
+    render() {
         return (
             <ModalAtom
                 visible={this.props.visibility}

@@ -1,5 +1,4 @@
 import {Form, Icon} from 'native-base';
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 
@@ -8,40 +7,36 @@ import ModalAtom from './../Atom/ModalAtom';
 import styles from './../Style/Screen';
 import styles1 from './../Style/exportStyles';
 
-interface IWarnProps {
-    getValue: (a: string) => void;
-    closeModal: () => void;
-    headerText: string;
-    limit: any;
-    name: string;
-    type: string;
+interface IProps {
+    getValue?: (a: string) => void;
+    closeModal?: () => void;
+    headerText?: string;
+    limit?: any;
+    name?: string;
+    type?: 'customer' | 'business'
     visibility: boolean;
 }
-interface IWarnState {
+interface IState {
     visibility: boolean;
 }
 
-class DebtLimit extends Component<IWarnProps, IWarnState> {
-    public static defaultProps = {
-        getValue: PropTypes.func,
-        limit: PropTypes.number.isRequired,
-        name: PropTypes.string.isRequired,
-        type: PropTypes.oneOf(['customer', 'business']).isRequired,
+class DebtLimit extends Component<IProps, IState> {
+    static defaultProps: IProps = {
         visibility: false
     };
-    public state = {
+    state: IState = {
         visibility: this.props.visibility
     };
 
-    public grant = () => {
+    grant = () => {
         // console.log("grant is pressed");
     }
 
-    public stop = () => {
+    stop = () => {
         // console.log("stop is pressed");
     }
 
-    public renderHeader = () => {
+    renderHeader = () => {
         return (
             <View
                 style={styles.modalHeader}
@@ -68,7 +63,7 @@ class DebtLimit extends Component<IWarnProps, IWarnState> {
         );
     }
 
-    public renderBody = () => {
+    renderBody = () => {
         return (
             <View
                 style={styles.modalWarningBody}

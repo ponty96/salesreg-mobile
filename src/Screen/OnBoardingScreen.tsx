@@ -4,7 +4,7 @@ import { Icon } from 'native-base';
 
 import ButtonAtom from '../Atom/ButtonAtom';
 import styles from '../Style/Auth';
-import styles1 from '../Style/exportStyles';
+import { signupButton, redButtonText } from '../Style/exportStyles';
 import AuthenticationHeader from '../Components/AuthenticationHeader';
 
 interface IProps {
@@ -26,37 +26,37 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
         ];
 
         return (
-            <View style={styles.container}>
-                <AuthenticationHeader smallHeader={false} />
-                <View style={styles.boardingScreenFeatureText}>
+            <View style = { styles.container }>
+                <AuthenticationHeader smallHeader = { false } />
+                <View style = { styles.boardingScreenFeatureText }>
                     {
                         appDetails.map((details, i) =>
                             <View
-                                style={styles.appFunctionWrapper}
-                                key={i}
+                                style = { styles.appFunctionWrapper }
+                                key = { i }
                             >
                                 <Icon
-                                    name='check'
-                                    style={styles.blueCheck}
-                                    type='Entypo'
+                                    name = 'check'
+                                    style = { styles.blueCheck }
+                                    type = 'Entypo'
                                 />
-                                <Text style={styles.appDetailsText}>
-                                    {details}
+                                <Text style = { styles.appDetailsText }>
+                                    { details }
                                 </Text>
                             </View>
                         )
                     }
                 </View>
-                <View style={styles.buttomButtonsWrapper}>
+                <View style = { styles.buttomButtonsWrapper }>
                     <ButtonAtom
-                        btnText='SIGN UP'
-                        textStyle={styles1.redButtonText}
-                        btnStyle={styles1.signupButton}
+                        btnText = 'SIGN UP'
+                        textStyle = { redButtonText }
+                        btnStyle = { signupButton }
                     />
                     <ButtonAtom
-                        btnText='LOGIN'
-                        textStyle={styles1.redButtonText}
-                        btnStyle={styles1.signupButton}
+                        btnText = 'LOGIN'
+                        textStyle = { redButtonText }
+                        btnStyle = { signupButton }
                     />
                 </View>
             </View>

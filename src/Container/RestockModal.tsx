@@ -1,5 +1,4 @@
 import {Form, Icon, Radio, StyleProvider} from 'native-base';
-import PropTypes from 'prop-types';
 import React, {Component} from 'react';
 import {Text, TouchableOpacity, View} from 'react-native';
 import ButtonAtom from '../Atom/ButtonAtom';
@@ -11,50 +10,47 @@ import material from './../native-base-theme/variables/material';
 import styles from './../Style/Screen';
 import styles1 from '../Style/exportStyles';
 
-interface IRestockModalProps {
-    getValue: (a: any, b: any) => void;
-    closeModal: () => void;
-    headerText: string;
-    amount: string;
-    placeholder: string;
+interface IProps {
+    getValue?: (a: any, b: any) => void;
+    closeModal?: () => void;
+    headerText?: string;
+    amount?: string;
+    placeholder?: string;
     visibility: boolean;
 }
-interface IRestockModalState {
+interface IState {
     packs: boolean;
     units: boolean;
     cost: any;
     quantity: any;
 }
 
-class RestockModal extends Component<IRestockModalProps, IRestockModalState> {
-    public static defaultProps = {
-        closeModal: PropTypes.func.isRequired,
-        getValue: PropTypes.func,
-        headerText: PropTypes.string.isRequired,
+class RestockModal extends Component<IProps, IState> {
+    static defaultProps: IProps = {
         visibility: false
     };
-    public state = {
+    state: IState = {
         cost: 0,
         packs: false,
         quantity: 0,
         units: true
     };
 
-    public getQuantity = (quantity: number) => {
+    getQuantity = (quantity: number) => {
         this.setState({quantity});
     }
 
-    public getCost = (cost: number) => {
+    getCost = (cost: number) => {
         this.setState({cost});
     }
 
-    public save = () => {
+    save = () => {
         if (this.props.getValue) {
             this.props.getValue(this.state.quantity, this.state.cost);
         }
     }
 
-    public renderHeader = () => {
+    renderHeader = () => {
         return (
             <View
                 style={styles.modalHeader}
@@ -76,7 +72,7 @@ class RestockModal extends Component<IRestockModalProps, IRestockModalState> {
         );
     }
 
-    public handleSelection = (value: string) => {
+    handleSelection = (value: string) => {
         if (value === 'units') {
             this.setState({units: true, packs: false});
         }
@@ -86,7 +82,7 @@ class RestockModal extends Component<IRestockModalProps, IRestockModalState> {
         }
     }
 
-    public renderBody = () => {
+    renderBody = () => {
         return (
             <StyleProvider style={getTheme(material)}>
             <View
@@ -145,7 +141,7 @@ class RestockModal extends Component<IRestockModalProps, IRestockModalState> {
         );
     }
 
-    public render() {
+    render() {
         return (
             <ModalAtom
                 visible={this.props.visibility}

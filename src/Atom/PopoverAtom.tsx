@@ -1,3 +1,4 @@
+<<<<<<< HEAD:src/Atom/PopoverAtom.js
 import React from 'react'
 import { TouchableOpacity, View } from 'react-native'
 import { Icon, Text, CheckBox, Left, Right, Body } from 'native-base'
@@ -13,6 +14,28 @@ import styles from '../Style/exportStyles'
 export default class PopoverAtom extends React.Component {
   constructor(props) {
     super(props)
+=======
+import React from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import { Icon, Text, CheckBox, Left, Right } from 'native-base';
+import { Popover, PopoverController } from 'react-native-modal-popover';
+import styles from '../Style/exportStyles';
+
+interface IProps {
+  check?: boolean
+  tag: string
+  position: string
+}
+
+interface IState {
+  icon: string
+  check: boolean
+}
+
+export default class PopoverAtom extends React.Component<IProps, IState> {
+  constructor(props: any) {
+    super(props);
+>>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb:src/Atom/PopoverAtom.tsx
     this.state = {
       icon: 'md-arrow-dropdown',
       check: this.props.check
@@ -20,6 +43,7 @@ export default class PopoverAtom extends React.Component {
   }
 
   onHot = () => {
+<<<<<<< HEAD:src/Atom/PopoverAtom.js
     if (this.state.icon == 'md-arrow-dropdown') {
       this.setState({
         icon: 'md-arrow-dropup'
@@ -28,25 +52,39 @@ export default class PopoverAtom extends React.Component {
       this.setState({
         icon: 'md-arrow-dropdown'
       })
+=======
+    if (this.state.icon === 'md-arrow-dropdown') {
+      this.setState({
+        icon: 'md-arrow-dropup'
+      });
+    } else if (this.state.icon === 'md-arrow-dropup') {
+      this.setState({
+        icon: 'md-arrow-dropdown'
+      });
+>>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb:src/Atom/PopoverAtom.tsx
     }
   }
   checked = () => {
     this.setState({
       check: !this.state.check
+<<<<<<< HEAD:src/Atom/PopoverAtom.js
     })
+=======
+    });
+>>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb:src/Atom/PopoverAtom.tsx
   }
 
   render() {
     return (
       <View>
         <PopoverController>
-          {({
-            openPopover,
-            closePopover,
-            popoverVisible,
-            setPopoverAnchor,
-            popoverAnchorRect
-          }) => (
+          {(
+            openPopover: any,
+            closePopover: any,
+            popoverVisible: any,
+            setPopoverAnchor: any,
+            popoverAnchorRect: any
+          ) => (
             <React.Fragment>
               <TouchableOpacity
                 style={styles.popoverTouchable}
@@ -68,9 +106,9 @@ export default class PopoverAtom extends React.Component {
               >
                 <View style={styles.popoverColumn}>
                   <View style={styles.popoverRow}>
-                    <View style={styles.popoverStyles.mainFirst}>
-                      <View style={styles.popoverStyles.viewX} />
-                      <Text style={styles.popoverStyles.textX}>Pending</Text>
+                    <View style={styles.popoverMainFirst}>
+                      <View style={styles.popoverViewX} />
+                      <Text style={styles.popoverTextX}>Pending</Text>
                     </View>
                     <View style={styles.popoverMainFirst}>
                       <View style={styles.popoverViewX} />
@@ -89,7 +127,7 @@ export default class PopoverAtom extends React.Component {
                     <Right style={styles.popoverRightSide}>
                       <CheckBox
                         checked={this.state.check}
-                        color="red"
+                        color='red'
                         onPress={this.checked}
                       />
                       <Text style={styles.popoverRecall}>Recalled</Text>
@@ -104,9 +142,12 @@ export default class PopoverAtom extends React.Component {
     )
   }
 }
+<<<<<<< HEAD:src/Atom/PopoverAtom.js
 
 PopoverAtom.propTypes = {
   position: PropTypes.string.isRequired,
   tag: PropTypes.string.isRequired,
   check: PropTypes.bool
 }
+=======
+>>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb:src/Atom/PopoverAtom.tsx

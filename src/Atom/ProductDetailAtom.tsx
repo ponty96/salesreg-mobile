@@ -1,10 +1,28 @@
+<<<<<<< HEAD:src/Atom/ProductDetailAtom.js
 import React from 'react'
 import { View, Text } from 'react-native'
 import { Thumbnail, ListItem, Left, Right } from 'native-base'
 
 import styles from '../Style/exportStyles'
+=======
+import React from 'react';
+import { View, Text } from 'react-native';
+import { Thumbnail, ListItem, Left, Right } from 'native-base';
+import styles from '../Style/exportStyles';
 
-export default class ProductDetailAtom extends React.Component {
+interface IProps {
+    product: string | 'Product Name'
+    units: any | 0
+    packs: any| 0
+    quantity: any | 0
+    cost: any | 0
+    ucost: any | 0
+    sell: any | 0
+    stock: any | 0
+}
+>>>>>>> 3b6ce905eb847d45b69771fd2118de2997533fdb:src/Atom/ProductDetailAtom.tsx
+
+export default class ProductDetailAtom extends React.Component<IProps, any> {
   render() {
     return (
       <View>
@@ -15,22 +33,22 @@ export default class ProductDetailAtom extends React.Component {
                 uri:
                   'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
               }}
-              style={styles.aboveAccordionStyles.dpP}
+              style={styles.aboveAccordiondpP}
             />
-            <Text style={styles.aboveAccordionPictureText}>No.5 Chanel</Text>
+            <Text style={styles.aboveAccordionPictureText}>{this.props.product}</Text>
           </View>
           <View style={styles.aboveAccordionMoneyView}>
             <View>
               <Text style={styles.aboveAccordionGreyFont}>
                 Stock quantity(in units)
               </Text>
-              <Text style={styles.aboveAccordionBoldFont}>23</Text>
+              <Text style={styles.aboveAccordionBoldFont}>{this.props.units}</Text>
             </View>
             <View>
               <Text style={styles.aboveAccordionGreyFont}>
                 Stock quantity(in packs)
               </Text>
-              <Text style={styles.aboveAccordionBoldFont}>0.76</Text>
+              <Text style={styles.aboveAccordionBoldFont}>{this.props.packs}</Text>
             </View>
           </View>
         </View>
@@ -40,7 +58,7 @@ export default class ProductDetailAtom extends React.Component {
               <Text style={styles.aboveAccordionBlackTextL}>Pack quantity</Text>
             </Left>
             <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>30</Text>
+              <Text style={styles.aboveAccordionBlackTextR}>{this.props.quantity}</Text>
             </Right>
           </ListItem>
           <ListItem style={styles.aboveAccordionWhiteList}>
@@ -50,7 +68,7 @@ export default class ProductDetailAtom extends React.Component {
               </Text>
             </Left>
             <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>#34,000.00</Text>
+              <Text style={styles.aboveAccordionBlackTextR}>{this.props.cost}</Text>
             </Right>
           </ListItem>
           <ListItem style={styles.aboveAccordionWhiteList}>
@@ -60,7 +78,7 @@ export default class ProductDetailAtom extends React.Component {
               </Text>
             </Left>
             <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>#1,133.00</Text>
+              <Text style={styles.aboveAccordionBlackTextR}>{this.props.ucost}</Text>
             </Right>
           </ListItem>
           <ListItem style={styles.aboveAccordionWhiteList}>
@@ -68,7 +86,7 @@ export default class ProductDetailAtom extends React.Component {
               <Text style={styles.aboveAccordionBlackTextL}>Seling price</Text>
             </Left>
             <Right>
-              <Text style={styles.aboveAccordionRedTextR}>#2,100.00</Text>
+              <Text style={styles.aboveAccordionRedTextR}>{this.props.sell}</Text>
             </Right>
           </ListItem>
           <ListItem style={styles.aboveAccordionWhiteList}>
@@ -78,7 +96,7 @@ export default class ProductDetailAtom extends React.Component {
               </Text>
             </Left>
             <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>5</Text>
+              <Text style={styles.aboveAccordionBlackTextR}>{this.props.stock}</Text>
             </Right>
           </ListItem>
         </View>

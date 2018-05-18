@@ -49,7 +49,7 @@ export default class MainOrderList extends Component {
               <Text uppercase={false} style={styles.btnTxt}>
                 View Products
               </Text>
-              <Icon style={styles.iconic} name="md-arrow-forward" />
+              <Icon style={styles.iconic} name='md-arrow-forward' />
             </Button>
           </Right>
         </Header>

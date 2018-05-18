@@ -7,10 +7,12 @@ import SubHeaderAtom from '../Atom/SubHeaderAtom'
 import styles from '../Style/exportStyles'
 import { customerList } from '../config/data'
 
+
+
 class CustomerList extends Component {
   onPress = () => {}
 
-  renderItem = ({ item }) => {
+  renderItem = ({item}) => {
     let latestAmount =
       item.status == 'paid'
         ? item.debt

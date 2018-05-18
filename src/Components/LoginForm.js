@@ -49,21 +49,24 @@ class LoginForm extends React.Component {
           getValue={this.getPassword}
           secureTextEntry={true}
           contStyle={styles.marginlessInput}
-          underneathText="Not less than 6 characters long"
+          underneathText = 'Not less than 6 characters long'
         />
 
         <ButtonAtom
-          btnText="Forgot password"
+          btnText='Forgot password'
           transparent={true}
           funcValue={'Reset'}
           onPress={this.navigate}
         />
-        <ButtonAtom btnText="Login" onPress={this.login} />
         <ButtonAtom
-          btnText="I don't have an account"
-          transparent={true}
-          funcValue={'Signup'}
-          onPress={this.navigate}
+            btnText="Login"
+            onPress={this.login}
+        />
+        <ButtonAtom
+            btnText="I don't have an account"
+            transparent={true}
+            funcValue = {'Signup'}
+            onPress={this.navigate}
         />
       </Form>
     )
