@@ -5,7 +5,7 @@ import styles from '../Style/Layout';
 import screenStyles from '../Style/Screen';
 
 interface IProps {
-    item?: {number: number, name: string, child: string}
+    item?: {number?: string, name?: string, child?: string}
     rightIcon?: boolean
 }
 

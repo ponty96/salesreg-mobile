@@ -5,10 +5,10 @@ import styles from '../Style/Layout';
 import screenStyles from '../Style/Screen';
 
 interface IProps {
-    type: 'sidebar' | 'debt' | 'business'
-    item?: {image: string, name: string}
+    type?: string
+    item?: {image?: any, name?: any}
     imgStyle?: object
-    business: boolean
+    business?: boolean
     bodyfunction?: Function
     rightIconFunc?: () => void
 }
@@ -16,7 +16,7 @@ interface IProps {
 class ListItemAtom extends React.Component<IProps, any> {
     static defaultProps: IProps = {
         business: true,
-        type: 'sidebar'
+        type: 'sidebar' || 'debt' || 'business'
     };
 
     renderAvatar = () => {

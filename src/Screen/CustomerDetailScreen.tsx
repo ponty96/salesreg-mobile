@@ -6,7 +6,7 @@ import DetailItemAtom from './../Atom/DetailItemAtom';
 import GoldRatingsAtom from './../Atom/GoldRatingsAtom';
 import ButtonAtom from './../Atom/ButtonAtom';
 import styles from './../Style/Screen';
-import { redButtonText } from '../Style/exportStyles';
+import styles1 from '../Style/exportStyles';
 
 interface IProps {
 
@@ -136,7 +136,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
                 </View>
                 <ButtonAtom
                     btnText = 'Add to wallet'
-                    textStyle = { redButtonText }
+                    textStyle = { styles1.redButtonText }
                 />
             </View>
         </View>
