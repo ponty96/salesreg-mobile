@@ -4,7 +4,7 @@ import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
 import styles from './../Style/Screen'
-import ProductList from './../Components/ProductList'
+import ProductList from '../Components/ProductList'
 
 interface IProps {
   navigation: any

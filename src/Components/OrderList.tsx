@@ -1,14 +1,23 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { View, FlatList } from 'react-native'
+import React, { Component } from 'react';
+import { View, FlatList } from 'react-native';
 
-import styles from './../Style/exportStyles'
-import DateOrderAtom from '../Atom/DateOrderAtom'
-import TotalOrderAtom from '../Atom/TotalOrderAtom'
-import OrderListAtom from '../Atom/OrderListAtom'
+import styles from './../Style/exportStyles';
+import DateOrderAtom from '../Atom/DateOrderAtom';
+import TotalOrderAtom from '../Atom/TotalOrderAtom';
+import OrderListAtom from '../Atom/OrderListAtom';
 
-class OrderList extends Component {
-  constructor(props) {
+interface IProps {
+    navigation: any;
+    items: any[];
+}
+
+interface IState {
+    data: any[];
+    stickyHeaderIndices: any[];
+}
+
+class OrderList extends Component<IProps, IState> {
+  constructor(props: any) {
     super(props)
     this.state = {
       data: this.props.items,
@@ -17,7 +26,7 @@ class OrderList extends Component {
   }
 
   componentDidMount() {
-    var arr = []
+    var arr: any[] = [];
     this.state.data.map(obj => {
       if (obj.header == 'start') {
         arr.push(this.state.data.indexOf(obj))
@@ -29,7 +38,7 @@ class OrderList extends Component {
     })
   }
 
-  renderItem = ({ item }) => {
+  renderItem = ({ item }: any): any => {
     if (item.header == 'start') {
       return <DateOrderAtom date={item.date} />
     } else if (item.header == 'middle') {
@@ -37,7 +46,7 @@ class OrderList extends Component {
     } else if (item.header == 'end') {
       return <TotalOrderAtom totalAmount={item.amount} />
     }
-  }
+  };
 
   render() {
     return (
@@ -57,8 +66,4 @@ class OrderList extends Component {
   }
 }
 
-OrderList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired
-}
-
-export default OrderList
+export default OrderList;

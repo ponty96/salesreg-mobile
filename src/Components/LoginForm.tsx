@@ -1,15 +1,24 @@
-import React from 'react'
-import { Form } from 'native-base'
-import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react';
+import { Form } from 'native-base';
 
-import InputAtom from '../Atom/InputAtom'
-import ButtonAtom from '../Atom/ButtonAtom'
-import styles from '../Style/exportStyles'
+import InputAtom from '../Atom/InputAtom';
+import ButtonAtom from '../Atom/ButtonAtom';
+import styles from '../Style/exportStyles';
 
-class LoginForm extends React.Component {
+interface IProps {
+    navigation: any;
+}
+
+interface IState {
+    phone: string;
+    password: string;
+    underlineColorAndroid: string;
+}
+
+class LoginForm extends PureComponent<IProps, IState> {
   state = {
-    phone: undefined,
-    password: undefined,
+    phone: '',
+    password: '',
     underlineColorAndroid: 'red'
   }
 
@@ -18,19 +27,19 @@ class LoginForm extends React.Component {
     this.props.navigation.navigate('App')
   }
 
-  getPhone = phone => {
+  getPhone = (phone: any) => {
     this.setState({
       phone
     })
   }
 
-  getPassword = pass => {
+  getPassword = (pass: any) => {
     this.setState({
       password: pass
     })
   }
 
-  navigate = location => {
+  navigate = (location: any) => {
     this.props.navigation.navigate(location)
   }
 
@@ -71,10 +80,6 @@ class LoginForm extends React.Component {
       </Form>
     )
   }
-}
-
-LoginForm.propTypes = {
-  navigation: PropTypes.object.isRequired
 }
 
 export default LoginForm

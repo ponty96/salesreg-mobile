@@ -1,18 +1,23 @@
-import React, { Component } from 'react'
-import { Text, View, FlatList, ScrollView } from 'react-native'
-import { Icon } from 'native-base'
+import React, { Component } from 'react';
+import { View, FlatList, ScrollView } from 'react-native';
 
-import CustomerListAtom from '../Atom/CustomerListAtom'
-import SubHeaderAtom from '../Atom/SubHeaderAtom'
-import styles from '../Style/exportStyles'
-import { customerList } from '../config/data'
+import CustomerListAtom from '../Atom/CustomerListAtom';
+import SubHeaderAtom from '../Atom/SubHeaderAtom';
+import styles from '../Style/exportStyles';
+import { customerList } from '../config/data';
 
+interface IProps {
+    items: any[];
+}
 
+interface IState {
 
-class CustomerList extends Component {
+}
+
+class CustomerList extends Component<IProps, IState> {
   onPress = () => {}
 
-  renderItem = ({item}) => {
+  renderItem = ({item} : any) => {
     let latestAmount =
       item.status == 'paid'
         ? item.debt
@@ -61,10 +66,6 @@ class CustomerList extends Component {
       </View>
     )
   }
-}
-
-CustomerList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default CustomerList

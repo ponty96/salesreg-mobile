@@ -1,22 +1,33 @@
-import React from 'react'
-import { Form } from 'native-base'
-import PropTypes from 'prop-types'
-import { View } from 'react-native'
+import React, { PureComponent } from 'react';
+import { Form } from 'native-base';
+import { View } from 'react-native';
 
-import InputAtom from '../Atom/InputAtom'
-import ButtonAtom from '../Atom/ButtonAtom'
-import PickerAtom from '../Atom/PickerAtom'
-import styles from '../Style/Form'
-import styles1 from '../Style/exportStyles'
+import InputAtom from '../Atom/InputAtom';
+import ButtonAtom from '../Atom/ButtonAtom';
+import PickerAtom from '../Atom/PickerAtom';
+import styles from '../Style/Form';
+import styles1 from '../Style/exportStyles';
 
-class SigupForm extends React.Component {
+interface IProps {
+    navigation: any;
+}
+
+interface IState {
+    phone: string;
+    password: string;
+    name: string;
+    confirm_password: string;
+    gender: string;
+}
+
+class SigupForm extends PureComponent<IProps, IState> {
   state = {
-    phone: undefined,
-    password: undefined,
-    name: undefined,
-    confirm_password: undefined,
-    gender: undefined
-  }
+    phone: '',
+    password: '',
+    name: '',
+    confirm_password: '',
+    gender: ''
+  };
 
   signup = () => {
     console.log(
@@ -26,41 +37,41 @@ class SigupForm extends React.Component {
       this.state.confirm_password,
       this.state.gender
     )
-  }
+  };
 
-  getPhone = phone => {
+  getPhone = (phone: string) => {
     this.setState({
       phone
     })
-  }
+  };
 
-  getPassword = pass => {
+  getPassword = (pass: string) => {
     this.setState({
       password: pass
     })
-  }
+  };
 
-  getName = name => {
+  getName = (name: string) => {
     this.setState({
       name
     })
-  }
+  };
 
-  getConfirm = confirm_pass => {
+  getConfirm = (confirm_pass: string) => {
     this.setState({
       confirm_password: confirm_pass
     })
-  }
+  };
 
-  updateGender = selectedGender => {
+  updateGender = (selectedGender: string) => {
     this.setState({
       gender: selectedGender
     })
-  }
+  };
 
-  navigate = location => {
+  navigate = (location: string) => {
     this.props.navigation.navigate(location)
-  }
+  };
 
   render() {
     return (
@@ -110,8 +121,4 @@ class SigupForm extends React.Component {
   }
 }
 
-SigupForm.propTypes = {
-  navigation: PropTypes.object.isRequired
-}
-
-export default SigupForm
+export default SigupForm;

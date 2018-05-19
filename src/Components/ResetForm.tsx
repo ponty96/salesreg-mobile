@@ -1,39 +1,47 @@
-import React from 'react'
-import { Text } from 'react-native'
-import { Form } from 'native-base'
-import PropTypes from 'prop-types'
+import React from 'react';
+import { Text } from 'react-native';
+import { Form } from 'native-base';
 
-import InputAtom from './../Atom/InputAtom'
-import ButtonAtom from './../Atom/ButtonAtom'
-import styles from './../Style/Form'
-import styles1 from './../Style/exportStyles'
+import InputAtom from './../Atom/InputAtom';
+import ButtonAtom from './../Atom/ButtonAtom';
+import styles from './../Style/Form';
+import styles1 from './../Style/exportStyles';
 
-class ResetForm extends React.Component {
+interface IProps {
+    navigation: any;
+    secretPhone: string;
+}
+
+interface IState {
+    code: string;
+}
+
+class ResetForm extends React.Component<IProps, IState> {
   state = {
-    code: undefined
-  }
+    code: ''
+  };
 
   static defaultProps = {
     secretPhone: 'xxxxxxxxx678'
-  }
+  };
 
   reset = () => {
     console.log(this.state.code)
-  }
+  };
 
   resend = () => {
     console.log('Put resend logic here')
-  }
+  };
 
-  getCode = code => {
+  getCode = (code: string) => {
     this.setState({
       code
     })
-  }
+  };
 
-  navigate = location => {
+  navigate = (location: string) => {
     this.props.navigation.navigate(location)
-  }
+  };
 
     render() {
         return (
@@ -70,11 +78,6 @@ class ResetForm extends React.Component {
       </Form>
     )
   }
-}
-
-ResetForm.propTypes = {
-  secretPhone: PropTypes.string.isRequired,
-  navigation: PropTypes.object.isRequired
 }
 
 export default ResetForm

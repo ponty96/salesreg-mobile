@@ -2,8 +2,8 @@ import React from 'react'
 import { Text, View, KeyboardAvoidingView } from 'react-native'
 
 import styles from './../Style/Auth'
-import LoginForm from './../Components/LoginForm'
-import AuthenticationHeader from './../Components/AuthenticationHeader'
+import LoginForm from '../Components/LoginForm'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
 
 interface IProps {
   navigation: any

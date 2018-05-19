@@ -1,12 +1,20 @@
-import React, { Component } from 'react'
-import { Icon } from 'native-base'
-import { Image, View, Text } from 'react-native'
-import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react';
+import { Icon } from 'native-base';
+import { Image, View, Text } from 'react-native';
 
-import styles from '../Style/Screen'
-import styles1 from '../Style/Form'
+import styles from '../Style/Screen';
+import styles1 from '../Style/Form';
 
-class UserProfile extends Component {
+interface IProps {
+    navigation: any;
+    item: any;
+}
+
+interface IState {
+
+}
+
+class UserProfile extends PureComponent<IProps, IState> {
     render() {
         return (
             <View style = { styles.container }>
@@ -44,10 +52,6 @@ class UserProfile extends Component {
       </View>
     )
   }
-}
-
-UserProfile.propTypes = {
-  item: PropTypes.object.isRequired
 }
 
 export default UserProfile

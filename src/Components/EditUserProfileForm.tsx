@@ -1,7 +1,6 @@
-import React, { Component } from 'react'
-import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native'
-import { Form } from 'native-base'
-import PropTypes from 'prop-types'
+import React, { Component } from 'react';
+import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native';
+import PropTypes from 'prop-types';
 
 import InputAtom from '../Atom/InputAtom'
 import PickerAtom from '../Atom/PickerAtom'

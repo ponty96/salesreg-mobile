@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import { Text, View, KeyboardAvoidingView, ScrollView } from 'react-native'
 
 import styles from './../Style/Auth'
-import SignupForm from './../Components/SignupForm'
-import AuthenticationHeader from './../Components/AuthenticationHeader'
+import SignupForm from '../Components/SignupForm'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
 
 interface IProps {
   navigation: any

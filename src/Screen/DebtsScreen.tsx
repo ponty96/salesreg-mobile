@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View } from 'react-native'
 import { Icon } from 'native-base'
 
-import DebtList from './../Components/DebtList'
+import DebtList from '../Components/DebtList'
 import styles from './../Style/Screen'
 
 interface IProps {

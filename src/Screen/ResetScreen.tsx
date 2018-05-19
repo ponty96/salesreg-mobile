@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import { Text, View, KeyboardAvoidingView } from 'react-native'
 
 import styles from './../Style/Auth'
-import ResetForm from './../Components/ResetForm'
-import AuthenticationHeader from './../Components/AuthenticationHeader'
+import ResetForm from '../Components/ResetForm'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
 
 interface IProps {
   navigation: any

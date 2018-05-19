@@ -1,21 +1,33 @@
-import React from 'react'
-import { View, KeyboardAvoidingView, ScrollView } from 'react-native'
-import { Form } from 'native-base'
-import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react';
+import { View, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { Form } from 'native-base';
 
-import InputAtom from '../Atom/InputAtom'
-import ImageAtom from '../Atom/ImageAtom'
-import styles from './../Style/Layout'
-import SaveCancelButton from '../Container/SaveCancelButton'
-import styles1 from './../Style/exportStyles'
+import InputAtom from '../Atom/InputAtom';
+import ImageAtom from '../Atom/ImageAtom';
+import styles from './../Style/Layout';
+import SaveCancelButton from '../Container/SaveCancelButton';
+import styles1 from './../Style/exportStyles';
 
-class NewBusinessForm extends React.Component {
+interface IProps {
+    navigation: any;
+    item?: any;
+}
+
+interface IState {
+    address: string;
+    name: string;
+    email: string;
+    about: string;
+    image: string;
+}
+
+class NewBusinessForm extends PureComponent<IProps, IState> {
   state = {
-    address: undefined,
-    name: undefined,
-    email: undefined,
-    about: undefined,
-    image: undefined
+    address: '',
+    name: '',
+    email: '',
+    about: '',
+    image: ''
   }
 
   create = () => {
@@ -25,33 +37,33 @@ class NewBusinessForm extends React.Component {
       this.state.email,
       this.state.about,
       this.state.image
-    )
+    );
     this.props.navigation.goBack()
-  }
+  };
 
-  getAddress = address => {
+  getAddress = (address: any) => {
     this.setState({ address })
-  }
+  };
 
-  getEmail = email => {
+  getEmail = (email: any) => {
     this.setState({ email })
-  }
+  };
 
-  getName = name => {
+  getName = (name: any) => {
     this.setState({ name })
-  }
+  };
 
-  getAbout = about => {
+  getAbout = (about: any) => {
     this.setState({ about })
-  }
+  };
 
-  getImage = image => {
+  getImage = (image: any) => {
     this.setState({ image })
-  }
+  };
 
-  navigate = location => {
+  navigate = (location: any) => {
     this.props.navigation.navigate(location)
-  }
+  };
 
   render() {
     return (
@@ -115,11 +127,6 @@ class NewBusinessForm extends React.Component {
       </View>
     )
   }
-}
-
-NewBusinessForm.propTypes = {
-  navigation: PropTypes.object.isRequired,
-  item: PropTypes.object
 }
 
 export default NewBusinessForm

@@ -1,10 +1,17 @@
-import React, { Component } from 'react'
-import { View, Image } from 'react-native'
-import PropTypes from 'prop-types'
+import React, { PureComponent } from 'react';
+import { View, Image } from 'react-native';
 
-import styles from '../Style/Auth'
+import styles from '../Style/Auth';
 
-class AuthenticationHeader extends Component {
+interface IProps {
+    smallHeader?: boolean;
+}
+
+interface IState {
+
+}
+
+class AuthenticationHeader extends PureComponent<IProps, IState> {
   static defaultProps = {
     smallHeader: true
   }
@@ -26,10 +33,6 @@ class AuthenticationHeader extends Component {
       </View>
     )
   }
-}
-
-AuthenticationHeader.propTypes = {
-  smallHeader: PropTypes.bool
 }
 
 export default AuthenticationHeader

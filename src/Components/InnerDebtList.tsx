@@ -1,16 +1,24 @@
-import React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import React, { PureComponent } from 'react';
+import { View, ScrollView, TouchableOpacity } from 'react-native';
 
-import AboveAccordionAtom from '../Atom/AboveAccordionAtom'
-import styles from '../Style/OrderList'
-import AccordionAtom from '../Atom/AccordionAtom'
-import GetAmountModal from '../Container/GetAmountModal'
-import ButtonAtom from '../Atom/ButtonAtom'
+import AboveAccordionAtom from '../Atom/AboveAccordionAtom';
+import styles from '../Style/OrderList';
+import AccordionAtom from '../Atom/AccordionAtom';
+import GetAmountModal from '../Container/GetAmountModal';
+import ButtonAtom from '../Atom/ButtonAtom';
 
-export default class App extends React.Component {
-  constructor() {
-    super()
+interface IProps {
+
+}
+
+interface IState {
+    visibility: boolean;
+    icon: string;
+}
+
+class InnerDebtList extends PureComponent<IProps, IState> {
+  constructor(props: any) {
+    super(props)
     this.state = {
       visibility: false,
       icon: 'md-arrow-dropdown'
@@ -24,19 +32,20 @@ export default class App extends React.Component {
       this.setState({ visibility: false })
     }
   }
-  /*
+
   changeIcon = () => {
     if (this.state.icon == 'md-arrow-dropdown') {
       this.setState({ visibility: true });
     } else {
       this.setState({ visibility: false });
     }
-  };*/
+  };
+
   render() {
     return (
       <View style={styles.ababa}>
         <ScrollView>
-          <AboveAccordionAtom totalAmount="10,000" name="Ayo Aregbede" />
+          <AboveAccordionAtom uri={undefined} name={'10,000'} totalAmount={'Ayo Aregbede'}/>
           <TouchableOpacity onPress={this.changeIcon}>
             <AccordionAtom icon="md-arrow-dropdown" />
           </TouchableOpacity>
@@ -54,3 +63,5 @@ export default class App extends React.Component {
     )
   }
 }
+
+export default InnerDebtList;

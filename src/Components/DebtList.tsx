@@ -1,17 +1,25 @@
-import React, { Component } from 'react'
-import { Text, View, FlatList, ScrollView } from 'react-native'
-import { Icon, Header, Right } from 'native-base'
+import React, { PureComponent } from 'react';
+import { Text, View, FlatList, ScrollView } from 'react-native';
+import { Header, Right } from 'native-base';
 
-import PickerAtom from '../Atom/PickerAtom'
-import DebtListAtom from '../Atom/DebtListAtom'
-import TotalDebtAtom from '../Atom/TotalDebtAtom'
-import styles from '../Style/exportStyles'
-import { debtList } from '../config/data'
+import PickerAtom from '../Atom/PickerAtom';
+import DebtListAtom from '../Atom/DebtListAtom';
+import TotalDebtAtom from '../Atom/TotalDebtAtom';
+import styles from '../Style/exportStyles';
+import { debtList } from '../config/data';
 
-class DebtList extends Component {
+interface IProps {
+
+}
+
+interface IState {
+
+}
+
+class DebtList extends PureComponent<IProps, IState> {
   onPress = () => {}
 
-  renderItem = ({ item }) => {
+  renderItem = ({ item }: any) => {
     return <DebtListAtom items={item} />
   }
 
@@ -42,10 +50,6 @@ class DebtList extends Component {
       </View>
     )
   }
-}
-
-DebtList.propTypes = {
-  items: PropTypes.arrayOf(PropTypes.object).isRequired
 }
 
 export default DebtList
