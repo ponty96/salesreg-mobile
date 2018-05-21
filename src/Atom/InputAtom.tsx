@@ -14,7 +14,7 @@ interface IProps {
   floatingLabel?: boolean | true
   secureTextEntry?: boolean | false
   getValue?: (a: string | number) => void
-  contStyle: object | Array<any>
+  contStyle?: object | Array<any>
   inputStyle?: object
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string
@@ -22,6 +22,7 @@ interface IProps {
 
 class InputAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
+    label: '',
     required: false,
     floatingLabel: true,
     secureTextEntry: false,

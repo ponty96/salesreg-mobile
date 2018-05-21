@@ -53,7 +53,7 @@ class UserProfileScreen extends Component<IProps, IState> {
   }
 
   render() {
-    return <UserProfile item={this.state.item} />
+    return <UserProfile item={this.state.item} navigation={this.props.navigation} />
   }
 }
 

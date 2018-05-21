@@ -38,7 +38,7 @@ class ProductScreen extends PureComponent<IProps, IState> {
 
     return (
       <View style={styles.container}>
-        <ProductList items={items} />
+        <ProductList items={items} navigation={this.props.navigation}/>
         <FabAtom
           routeName={'NewProduct'}
           name={'basket-fill'}

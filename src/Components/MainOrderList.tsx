@@ -1,18 +1,27 @@
-import React, { Component } from 'react'
-import { View, ListView } from 'react-native'
-import { Font, AppLoading } from 'expo'
-import { Root, Icon, Button, Right, Header, Text } from 'native-base'
-import { ScrollView } from 'react-native-gesture-handler'
+import React, { Component } from 'react';
+import { View, ListView } from 'react-native';
+import { Font, AppLoading } from 'expo';
+import { Root, Icon, Button, Right, Header, Text } from 'native-base';
+import { ScrollView } from 'react-native-gesture-handler';
 
-import MainOrderListAtom from '../Atom/MainOrderListAtom'
-import styles from '../Style/OrderList'
-import { mainOrderList } from '../config/data'
+import MainOrderListAtom from '../Atom/MainOrderListAtom';
+import styles from '../Style/OrderList';
+import { mainOrderList } from '../config/data';
 
-const users = mainOrderList
+const users = mainOrderList;
 
-export default class MainOrderList extends Component {
-  constructor() {
-    super()
+interface IProps {
+
+}
+
+interface IState {
+    loading: boolean;
+    userDataSource: any;
+}
+
+export default class MainOrderList extends Component<IProps, IState> {
+  constructor(props: any) {
+    super(props)
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
     })
@@ -30,7 +39,7 @@ export default class MainOrderList extends Component {
     this.setState({ loading: false })
   }
 
-  renderRow(user) {
+  renderRow(user: any) {
     return <MainOrderListAtom items={user} />
   }
   render() {

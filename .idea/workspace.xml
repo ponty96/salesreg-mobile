@@ -1,39 +1,26 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="converting the navigation to typescript">
+    <list default="true" id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/AuthenticationHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/AuthenticationHeader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/CustomerList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CustomerList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/DebtList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DebtList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/EditCustomerForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/EditCustomerForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/EditUserProfileForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/EditUserProfileForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/InnerDebtList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/InnerDebtList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/LoginForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/LoginForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/MainOrderList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MainOrderList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/NewBusinessForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/NewBusinessForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/NewCustomerForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/NewCustomerForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/NewOrderForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/NewOrderForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/NewProductForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/NewProductForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/OrderDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/OrderDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/OrderList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/OrderList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ProductDetails.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProductDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ProductList.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProductList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ResetForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ResetForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/SignupForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/SignupForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/UserProfile.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/UserProfile.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation/Routes.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Navigation/Sidebar.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/CustomerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/CustomerScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Atom/AccordionAtom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/AccordionAtom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Atom/InputAtom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/InputAtom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Atom/PopoverAtom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/PopoverAtom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Atom/ProductDetailAtom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/ProductDetailAtom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Atom/SubHeaderAtom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/SubHeaderAtom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/CustomerList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/CustomerList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/DebtList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/DebtList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/EditUserProfileForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/EditUserProfileForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/MainOrderList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/MainOrderList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/OrderList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/OrderList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProductList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProductList.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Screen/DebtsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/DebtsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/LoginScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/LoginScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Screen/OrderScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/OrderScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Screen/ProductScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/ProductScreen.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Screen/ResetScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/ResetScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/SignupScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/SignupScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/data.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/config/default.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Screen/UserProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/UserProfileScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/yarn.lock" beforeDir="false" afterPath="$PROJECT_DIR$/yarn.lock" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -46,69 +33,24 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf>
-      <file leaf-file-name="ProductDetails.tsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/ProductDetails.tsx">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="PopoverAtom.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Atom/PopoverAtom.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="102">
-              <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+            <state relative-caret-position="552">
+              <caret line="135" selection-start-line="135" selection-end-line="135" />
               <folding>
-                <element signature="e#0#45#0" expanded="true" />
+                <element signature="e#0#31#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="NewOrderForm.tsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/NewOrderForm.tsx">
+      <file leaf-file-name="package.json" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="391">
-              <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="NewProductForm.tsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/NewProductForm.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="51">
-              <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ProductList.tsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/ProductList.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-94">
-              <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="ResetForm.tsx" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/Components/ResetForm.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="153">
-              <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="SignupForm.tsx" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/Components/SignupForm.tsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="314">
-              <caret line="110" column="55" selection-start-line="110" selection-start-column="55" selection-end-line="110" selection-end-column="55" />
-              <folding>
-                <element signature="e#0#45#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="575">
+              <caret line="67" selection-start-line="67" selection-end-line="67" />
             </state>
           </provider>
         </entry>
@@ -124,7 +66,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>visibility</find>
       <find>modalButton</find>
       <find>charAt</find>
       <find>rado</find>
@@ -154,6 +95,7 @@
       <find>native-base-theme</find>
       <find>global</find>
       <find>native-base-</find>
+      <find>gender</find>
     </findStrings>
     <dirStrings>
       <dir>C:\Users\taiwo\Documents\Lidstack\smeapp\src\Style</dir>
@@ -167,19 +109,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Atom/ListItemAtom.js" />
-        <option value="$PROJECT_DIR$/src/config/data.js" />
-        <option value="$PROJECT_DIR$/src/Components/ProductList.js" />
-        <option value="$PROJECT_DIR$/src/Screen/ProductScreen.js" />
-        <option value="$PROJECT_DIR$/src/Screen/OrderScreen.js" />
-        <option value="$PROJECT_DIR$/src/Components/OrderList.js" />
-        <option value="$PROJECT_DIR$/src/Screen/CustomerScreen.js" />
-        <option value="$PROJECT_DIR$/src/Screen/DebtsScreen.js" />
-        <option value="$PROJECT_DIR$/src/Components/DebtList.js" />
-        <option value="$PROJECT_DIR$/src/config/default.js" />
-        <option value="$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js" />
-        <option value="$PROJECT_DIR$/src/Components/NewOrderForm.js" />
-        <option value="$PROJECT_DIR$/src/Atom/OrderFormAtom.js" />
         <option value="$PROJECT_DIR$/src/Components/UserProfile.js" />
         <option value="$PROJECT_DIR$/src/Screen/UserProfileScreen.js" />
         <option value="$PROJECT_DIR$/src/Style/Form.js" />
@@ -195,13 +124,10 @@
         <option value="$PROJECT_DIR$/src/Navigation/Sidebar.tsx" />
         <option value="$PROJECT_DIR$/src/Screen/SignupScreen.tsx" />
         <option value="$PROJECT_DIR$/src/Screen/LoginScreen.tsx" />
-        <option value="$PROJECT_DIR$/src/Screen/EditUserProfileScreen.tsx" />
         <option value="$PROJECT_DIR$/src/Container/RestockModal.js" />
         <option value="$PROJECT_DIR$/src/Components/CustomerList.js" />
         <option value="$PROJECT_DIR$/src/Components/EditUserProfileForm.js" />
         <option value="$PROJECT_DIR$/src/Components/InnerDebtList.js" />
-        <option value="$PROJECT_DIR$/src/Components/DebtList.tsx" />
-        <option value="$PROJECT_DIR$/src/Components/CustomerList.tsx" />
         <option value="$PROJECT_DIR$/src/Components/AuthenticationHeader.tsx" />
         <option value="$PROJECT_DIR$/src/Components/EditCustomerForm.tsx" />
         <option value="$PROJECT_DIR$/src/Components/InnerDebtList.tsx" />
@@ -213,11 +139,27 @@
         <option value="$PROJECT_DIR$/src/Components/NewProductForm.tsx" />
         <option value="$PROJECT_DIR$/src/Components/UserProfile.tsx" />
         <option value="$PROJECT_DIR$/src/Components/OrderDetails.tsx" />
-        <option value="$PROJECT_DIR$/src/Components/OrderList.tsx" />
-        <option value="$PROJECT_DIR$/src/Components/ProductDetails.tsx" />
-        <option value="$PROJECT_DIR$/src/Components/ProductList.tsx" />
         <option value="$PROJECT_DIR$/src/Components/ResetForm.tsx" />
         <option value="$PROJECT_DIR$/src/Components/SignupForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/UserProfileScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/ResetScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/ProductScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/ProductList.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/SubHeaderAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/AccordionAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/OrderScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/OrderList.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/MainOrderList.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/InputAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/ProductDetails.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/ProductDetailAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/CustomerList.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/DebtList.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/DebtsScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/EditUserProfileScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/EditUserProfileForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/PopoverAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/PopoverAtom.js" />
       </list>
     </option>
   </component>
@@ -255,6 +197,7 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -267,11 +210,34 @@
               <item name="smeapp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
             </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Atom" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Screen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Style" type="462c0819:PsiDirectoryNode" />
+            </path>
           </expand>
           <select />
         </subPane>
       </pane>
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -295,315 +261,6 @@
       <recent name="C:\Users\taiwo\Documents\Lidstack\smeapp\src\Screen" />
       <recent name="C:\Users\taiwo\Documents\Lidstack\smeapp\Components" />
     </key>
-  </component>
-  <component name="RestoreUpdateTree" date="Moments ago" ActionInfo="_Update">
-    <UpdatedFiles>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Updated from server" />
-        <option name="myStatusName" value="Changed on server" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="CHANGED_ON_SERVER" />
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Updated" />
-          <option name="myStatusName" value="Changed" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="UPDATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/App.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/jest.config.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/package.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/App.test.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/App.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/AuthenticationHeader.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/CustomerList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/DebtList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/EditCustomerForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/EditUserProfileForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/InnerDebtList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/LoginForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/MainOrderList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/NewBusinessForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/NewCustomerForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/NewOrderForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/NewProductForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/OrderDetails.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/OrderList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/ProductDetails.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/ProductList.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/ResetForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/SignupForm.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Components/UserProfile.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/DebtLimitModal.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/DebtWarningModal.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/DeleteBuzModal.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/GetAmountModal.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/PaymentModal.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/RestockModal.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/SaveCancelButton.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/WarningModal.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Navigation/Routes.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Navigation/Sidebar.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/BusinessListScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/CustomerDetailScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/CustomerScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/DebtDetailsScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/DebtScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/DebtsScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/EditUserProfileScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/LoginScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/NewBusinessScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/NewCustomerScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/NewOrderScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/NewProductScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/OnBoardingScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/OrderDetailsScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/OrderScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/ProductDetailsScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/ProductScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/ResetScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/SettingsScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/SignupScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/SplashScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/UserProfileScreen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/Auth.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/Color.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/Form.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/Layout.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/OrderList.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/ProductAndCustomerList.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/Screen.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Style/exportStyles.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/config/data.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/config/default.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Badge.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Body.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Button.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Card.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/CardItem.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/CheckBox.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Container.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Content.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Fab.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Footer.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/FooterTab.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Form.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/H1.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/H2.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/H3.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Header.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Icon.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Input.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/InputGroup.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Item.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Label.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Left.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/ListItem.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Picker.android.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Picker.ios.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Picker.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Radio.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Right.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Segment.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Separator.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Spinner.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Subtitle.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/SwipeRow.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Switch.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Tab.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/TabBar.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/TabContainer.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/TabHeading.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Text.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Textarea.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Thumbnail.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Title.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/Toast.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/View.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/components/index.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/variables/commonColor.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/variables/material.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/variables/platform.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/native-base-theme/variables/variables.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/tslint.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/yarn.lock</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Created" />
-          <option name="myStatusName" value="Created" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="CREATED" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/.vscode/settings.json</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/AboveAccordionAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/AccordionAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/BottomOrderDetailAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ButtonAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/CustomerFormAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/CustomerListAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DateOrderAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DebtAccordionAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DebtListAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DetailItemAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/EditCustomerAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/FabAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/GoldRatingsAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ImageAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ImageDisplayAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/InputAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ListItemAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/MainOrderListAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ModalAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/NameDisplayAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/NewOrderCardAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/OrderDetailListAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/OrderFormAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/OrderListAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/PickerAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/PopoverAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ProductDetailAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ProductFormAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ProductListAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/SettingsAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/SubHeaderAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/TopOrderDetailAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/TotalDebtAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/TotalOrderAtom.tsx</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Navigation/Routes.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Navigation/Sidebar.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/config/data.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/config/default.js</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Deleted" />
-          <option name="myStatusName" value="Deleted" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="true" />
-          <option name="myId" value="REMOVED_FROM_REPOSITORY" />
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/AboveAccordionAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/AccordionAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/BottomOrderDetailAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ButtonAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/CustomerFormAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/CustomerListAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DateOrderAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DebtAccordionAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DebtListAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/DetailItemAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/EditCustomerAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/FabAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/GoldRatingsAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ImageAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ImageDisplayAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/InputAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ListItemAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/MainOrderListAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ModalAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/NameDisplayAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/NewOrderCardAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/OrderDetailListAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/OrderFormAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/OrderListAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/PickerAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/PopoverAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ProductDetailAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ProductFormAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/ProductListAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/SettingsAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/SubHeaderAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/TopOrderDetailAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/TotalDebtAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Atom/TotalOrderAtom.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/DebtLimitModal.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/DebtWarningModal.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/DeleteBuzModal.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/GetAmountModal.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/PaymentModal.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/RestockModal.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/SaveCancelButton.js</PATH>
-          <PATH vcs="Git" revision="">$PROJECT_DIR$/src/Container/WarningModal.js</PATH>
-        </FILE-GROUP>
-        <FILE-GROUP>
-          <option name="myUpdateName" value="Restored" />
-          <option name="myStatusName" value="Will be restored" />
-          <option name="mySupportsDeletion" value="false" />
-          <option name="myCanBeAbsent" value="false" />
-          <option name="myId" value="RESTORED" />
-        </FILE-GROUP>
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Modified" />
-        <option name="myStatusName" value="Modified" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MODIFIED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Skipped" />
-        <option name="myStatusName" value="Skipped" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SKIPPED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with conflicts" />
-        <option name="myStatusName" value="Will be merged with conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_CONFLICTS" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with tree conflicts" />
-        <option name="myStatusName" value="Merged with tree conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_TREE_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged with property conflicts" />
-        <option name="myStatusName" value="Will be merged with property conflicts" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED_WITH_PROPERTY_CONFLICT" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Merged" />
-        <option name="myStatusName" value="Will be merged" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="MERGED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Not in repository" />
-        <option name="myStatusName" value="Not in repository" />
-        <option name="mySupportsDeletion" value="true" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="UNKNOWN" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally added" />
-        <option name="myStatusName" value="Locally added" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_ADDED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Locally removed" />
-        <option name="myStatusName" value="Locally removed" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="LOCALLY_REMOVED" />
-      </FILE-GROUP>
-      <FILE-GROUP>
-        <option name="myUpdateName" value="Switched" />
-        <option name="myStatusName" value="Switched" />
-        <option name="mySupportsDeletion" value="false" />
-        <option name="myCanBeAbsent" value="false" />
-        <option name="myId" value="SWITCHED" />
-      </FILE-GROUP>
-    </UpdatedFiles>
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -647,7 +304,8 @@
       <workItem from="1526545647081" duration="140000" />
       <workItem from="1526550334552" duration="4741000" />
       <workItem from="1526592025769" duration="20000" />
-      <workItem from="1526732271671" duration="5104000" />
+      <workItem from="1526732271671" duration="5329000" />
+      <workItem from="1526892390524" duration="4583000" />
     </task>
     <task id="LOCAL-00001" summary="Implementation of full coupling">
       <created>1525284122443</created>
@@ -726,35 +384,42 @@
       <option name="project" value="LOCAL" />
       <updated>1526556179213</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="converting the components to typescript">
+      <created>1526743965652</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1526743965653</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="227039000" />
+    <option name="totallyTimeSpent" value="231847000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
+      <window_info anchor="bottom" id="TypeScript" order="8" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.17911434" />
       <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="11" side_tool="true" weight="0.32905984" />
       <window_info anchor="bottom" id="Version Control" order="10" weight="0.32905984" />
       <window_info id="npm" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Run" order="2" weight="0.32905984" />
-      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32905984" />
-      <window_info anchor="bottom" id="TypeScript" order="8" />
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.1784534" />
-      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" order="9" weight="0.32905984" />
       <window_info id="Favorites" order="3" side_tool="true" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
-      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="right" id="Commander" order="0" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -809,55 +474,16 @@
     <MESSAGE value="setting up of typescript" />
     <MESSAGE value="converting the screens to typescript" />
     <MESSAGE value="converting the navigation to typescript" />
-    <option name="LAST_COMMIT_MESSAGE" value="converting the navigation to typescript" />
+    <MESSAGE value="converting the components to typescript" />
+    <option name="LAST_COMMIT_MESSAGE" value="converting the components to typescript" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
-      <option name="time" value="9" />
+      <option name="time" value="11" />
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/Screen/CustomerScreen.js" />
-    <entry file="file://$PROJECT_DIR$/src/Screen/DebtsScreen.js" />
-    <entry file="file://$PROJECT_DIR$/src/Screen/OrderScreen.js" />
-    <entry file="file://$PROJECT_DIR$/src/Screen/ProductScreen.js" />
-    <entry file="file://$PROJECT_DIR$/src/Screen/BusinessDetailsScreen.js" />
-    <entry file="file://$PROJECT_DIR$/src/Screen/BusinessListScreen.js" />
-    <entry file="file://$PROJECT_DIR$/src/Screen/UserProfileScreen.js" />
-    <entry file="file://$PROJECT_DIR$/src/Style/Screen.js" />
-    <entry file="file://$PROJECT_DIR$/src/Atom/OrderFormAtom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="33" lean-forward="true" selection-start-line="16" selection-start-column="33" selection-end-line="16" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Style/Color.js" />
-    <entry file="file://$PROJECT_DIR$/src/Style/Form.js" />
-    <entry file="file://$PROJECT_DIR$/src/Atom/ButtonAtom.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="29" column="84" selection-start-line="29" selection-start-column="84" selection-end-line="29" selection-end-column="84" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Style/exportStyles.js" />
-    <entry file="file://$PROJECT_DIR$/src/Container/DebtLimitModal.tsx">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Atom/AboveAccordionAtom.js">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Style/Screen.tsx">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Container/DebtLimitModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="18" column="5" selection-start-line="18" selection-start-column="5" selection-end-line="18" selection-end-column="5" />
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Container/DebtLimitModal.js" />
     <entry file="file://$PROJECT_DIR$/src/Container/SaveCancelButton.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -883,13 +509,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="136">
           <caret line="8" column="18" lean-forward="true" selection-start-line="8" selection-start-column="18" selection-end-line="8" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/package.json">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="233">
-          <caret line="50" column="29" lean-forward="true" selection-start-line="50" selection-start-column="29" selection-end-line="50" selection-end-column="29" />
         </state>
       </provider>
     </entry>
@@ -935,13 +554,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen/EditUserProfileScreen.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="187">
-          <caret line="11" column="18" lean-forward="true" selection-start-line="11" selection-start-column="18" selection-end-line="11" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Screen/LoginScreen.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -963,51 +575,11 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Container/RestockModal.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="408">
-          <caret line="24" column="25" lean-forward="true" selection-start-line="24" selection-start-column="25" selection-end-line="24" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/EditUserProfileForm.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="34">
-          <caret line="2" column="35" selection-start-line="2" selection-start-column="35" selection-end-line="2" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/EditCustomerForm.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="18" column="34" lean-forward="true" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/DebtList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="374">
-          <caret line="22" column="40" lean-forward="true" selection-start-line="22" selection-start-column="40" selection-end-line="22" selection-end-column="40" />
-          <folding>
-            <element signature="e#0#45#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Container/RestockModal.js" />
     <entry file="file://$PROJECT_DIR$/src/Components/InnerDebtList.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="102">
           <caret line="6" column="27" selection-start-line="6" selection-start-column="27" selection-end-line="6" selection-end-column="27" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/CustomerList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-502">
-          <caret line="9" column="17" selection-start-line="9" selection-start-column="17" selection-end-line="9" selection-end-column="17" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1074,64 +646,271 @@
     <entry file="file://$PROJECT_DIR$/src/Components/NewProductForm.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
-          <caret line="9" column="19" lean-forward="true" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/OrderList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="195">
-          <caret line="48" column="4" lean-forward="true" selection-start-line="48" selection-start-column="4" selection-end-line="48" selection-end-column="4" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+          <caret line="9" column="19" selection-start-line="9" selection-start-column="19" selection-end-line="9" selection-end-column="19" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/NewOrderForm.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="391">
-          <caret line="28" column="19" lean-forward="true" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
+          <caret line="28" column="19" selection-start-line="28" selection-start-column="19" selection-end-line="28" selection-end-column="19" />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/ProductDetails.tsx">
+    <entry file="file://$PROJECT_DIR$/src/Atom/AboveAccordionAtom.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" column="40" selection-start-line="6" selection-start-column="40" selection-end-line="6" selection-end-column="40" />
+        <state relative-caret-position="107">
+          <caret line="16" column="18" lean-forward="true" selection-start-line="16" selection-start-column="18" selection-end-line="16" selection-end-column="18" />
           <folding>
-            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/ProductList.tsx">
+    <entry file="file://$PROJECT_DIR$/src/Screen/ResetScreen.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-94">
-          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        <state relative-caret-position="510">
+          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
           <folding>
-            <element signature="e#0#41#0" expanded="true" />
+            <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/ResetForm.tsx">
+    <entry file="file://$PROJECT_DIR$/src/Screen/UserProfileScreen.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="153">
-          <caret line="9" column="18" lean-forward="true" selection-start-line="9" selection-start-column="18" selection-end-line="9" selection-end-column="18" />
+        <state relative-caret-position="399">
+          <caret line="51" column="5" selection-start-line="51" selection-start-column="5" selection-end-line="51" selection-end-column="5" />
           <folding>
-            <element signature="e#0#26#0" expanded="true" />
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/AccordionAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" lean-forward="true" selection-start-line="10" selection-end-line="10" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/ProductScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-9">
+          <caret line="20" column="34" lean-forward="true" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/GoldRatingsAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="3" selection-start-line="17" selection-start-column="3" selection-end-line="17" selection-end-column="3" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Components/SignupForm.tsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="314">
-          <caret line="110" column="55" selection-start-line="110" selection-start-column="55" selection-end-line="110" selection-end-column="55" />
+        <state relative-caret-position="229">
+          <caret line="105" column="32" selection-start-line="105" selection-start-column="32" selection-end-line="105" selection-end-column="32" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/ProductAndCustomerList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/SubHeaderAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="170">
+          <caret line="10" column="18" selection-start-line="10" selection-start-column="18" selection-end-line="10" selection-end-column="18" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/ProductList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="20" selection-start-line="28" selection-start-column="20" selection-end-line="28" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/OrderScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="663">
+          <caret line="39" column="43" selection-start-line="39" selection-start-column="43" selection-end-line="39" selection-end-column="43" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/Screen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/MainOrderList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="255">
+          <caret line="15" lean-forward="true" selection-start-line="15" selection-end-line="15" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/OrderList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="569">
+          <caret line="50" column="12" selection-start-line="50" selection-start-column="12" selection-end-line="50" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/InputAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="21" selection-start-line="29" selection-start-column="21" selection-end-line="29" selection-end-column="21" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/EditUserProfileForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/EditUserProfileScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="45" column="28" lean-forward="true" selection-start-line="45" selection-start-column="28" selection-end-line="45" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/ResetForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="245">
+          <caret line="57" selection-start-line="57" selection-end-line="58" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/EditCustomerForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="18" column="34" selection-start-line="18" selection-start-column="34" selection-end-line="18" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/DebtsScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="232">
+          <caret line="14" column="55" selection-start-line="14" selection-start-column="55" selection-end-line="14" selection-end-column="55" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/DebtList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="18" selection-start-line="18" selection-end-line="18" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+            <element signature="e#179#223#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CustomerList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="61" column="37" selection-start-line="61" selection-start-column="37" selection-end-line="61" selection-end-column="37" />
+          <folding>
+            <element signature="e#104#152#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/CustomerListAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/ProductDetailAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="221">
+          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/ProductDetails.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="24" column="20" selection-start-line="24" selection-start-column="20" selection-end-line="24" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/PopoverAtom.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="552">
+          <caret line="135" selection-start-line="135" selection-end-line="135" />
+          <folding>
+            <element signature="e#0#31#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="575">
+          <caret line="67" selection-start-line="67" selection-end-line="67" />
         </state>
       </provider>
     </entry>

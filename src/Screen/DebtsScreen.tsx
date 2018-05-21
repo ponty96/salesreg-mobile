@@ -32,12 +32,12 @@ class DebtsScreen extends Component<IProps, IState> {
   }
 
   render() {
-    const { params } = this.props.navigation.state
-    const items = params.data.debts
+    // const { params } = this.props.navigation.state
+    // const items = params.data.debts
 
     return (
       <View style={styles.centerContainer}>
-        <DebtList items={items} />
+        <DebtList />
       </View>
     )
   }

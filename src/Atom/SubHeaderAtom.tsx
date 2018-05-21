@@ -4,8 +4,8 @@ import PickerAtom from './PickerAtom'
 import styles from '../Style/exportStyles'
 
 interface IProps {
-  total: any
-  list?: Array<any>
+  total?: any
+  list?: any[]
 }
 
 class SubHeaderAtom extends React.Component<IProps, any> {

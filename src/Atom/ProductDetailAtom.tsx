@@ -4,14 +4,14 @@ import { Thumbnail, ListItem, Left, Right } from 'native-base'
 import styles from '../Style/exportStyles'
 
 interface IProps {
-  product: string | 'Product Name'
-  units: any | 0
-  packs: any | 0
-  quantity: any | 0
-  cost: any | 0
-  ucost: any | 0
-  sell: any | 0
-  stock: any | 0
+  product?: string | 'Product Name'
+  units?: any | 0
+  packs?: any | 0
+  quantity?: any | 0
+  cost?: any | 0
+  ucost?: any | 0
+  sell?: any | 0
+  stock?: any | 0
 }
 
 export default class ProductDetailAtom extends React.Component<IProps, any> {

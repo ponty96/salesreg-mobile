@@ -1,22 +1,22 @@
-import * as React from 'react'
-import { TouchableOpacity, View } from 'react-native'
-import { Icon, Text, CheckBox, Left, Right } from 'native-base'
-import { Popover, PopoverController } from 'react-native-modal-popover'
-import styles from '../Style/exportStyles'
+import * as React from 'react';
+import { TouchableOpacity, View } from 'react-native';
+import { Icon, Text, CheckBox, Left, Right } from 'native-base';
+import { Popover, PopoverController } from 'react-native-modal-popover';
+import styles from '../Style/exportStyles';
 
-interface IProps {
-    check?: boolean
-    tag: string
-    position: string
-}
+// interface IProps {
+//     check?: boolean
+//     tag: string
+//     position: string
+// }
+//
+// interface IState {
+//     icon: string
+//     check: boolean
+// }
 
-interface IState {
-    icon: string
-    check: boolean
-}
-
-export default class PopoverAtom extends React.Component<IProps, IState> {
-    constructor(props: any) {
+export default class PopoverAtom extends React.Component {
+    constructor(props) {
         super(props)
         this.state = {
             icon: 'md-arrow-dropdown',
@@ -46,11 +46,11 @@ export default class PopoverAtom extends React.Component<IProps, IState> {
             <View>
                 <PopoverController>
                     {(
-                        openPopover: any,
-                        closePopover: any,
-                        popoverVisible: any,
-                        setPopoverAnchor: any,
-                        popoverAnchorRect: any
+                        openPopover,
+                        closePopover,
+                        popoverVisible,
+                        setPopoverAnchor,
+                        popoverAnchorRect
                     ) => (
                         <React.Fragment>
                             <TouchableOpacity

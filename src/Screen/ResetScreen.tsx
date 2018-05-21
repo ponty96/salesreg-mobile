@@ -19,7 +19,7 @@ class ResetScreen extends PureComponent<IProps, IState> {
         <View style={styles.wrapper}>
           <Text style={styles.signUpText}>RESET PASSWORD</Text>
           <KeyboardAvoidingView behavior="position">
-            <ResetForm navigation={this.props.navigation} />
+            <ResetForm navigation={this.props.navigation} secretPhone={''}/>
           </KeyboardAvoidingView>
         </View>
       </View>

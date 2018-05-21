@@ -1,12 +1,13 @@
 import React, { PureComponent } from 'react';
-import { Text, View, FlatList, ScrollView } from 'react-native';
+import { Text, View, ScrollView } from 'react-native';
+// import { Text, View, FlatList, ScrollView } from 'react-native';
 import { Header, Right } from 'native-base';
 
 import PickerAtom from '../Atom/PickerAtom';
 import DebtListAtom from '../Atom/DebtListAtom';
 import TotalDebtAtom from '../Atom/TotalDebtAtom';
 import styles from '../Style/exportStyles';
-import { debtList } from '../config/data';
+// import { debtList } from '../config/data';
 
 interface IProps {
 
@@ -40,11 +41,11 @@ class DebtList extends PureComponent<IProps, IState> {
           </Right>
         </Header>
         <ScrollView>
-          <FlatList
-            data={debtList}
-            renderItem={this.renderItem}
-            keyExtractor={item => item.key}
-          />
+          {/*<FlatList*/}
+            {/*data={debtList}*/}
+            {/*renderItem={this.renderItem}*/}
+            {/*keyExtractor={item => item.key}*/}
+          {/*/>*/}
         </ScrollView>
         <TotalDebtAtom limit={80000} totalAmount="80,000" />
       </View>

@@ -38,7 +38,7 @@ class OrderScreen extends PureComponent<IProps, IState> {
 
     return (
       <View style={styles.centerContainer}>
-        <OrderList items={items} />
+        <OrderList navigation={this.props.navigation} items={items}/>
         <FabAtom
           routeName={'NewOrder'}
           name={'add-shopping-cart'}

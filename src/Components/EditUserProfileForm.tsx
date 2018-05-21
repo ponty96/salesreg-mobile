@@ -1,16 +1,29 @@
 import React, { Component } from 'react';
 import { View, Text, KeyboardAvoidingView, ScrollView } from 'react-native';
-import PropTypes from 'prop-types';
 
-import InputAtom from '../Atom/InputAtom'
-import PickerAtom from '../Atom/PickerAtom'
-import ImageAtom from '../Atom/ImageAtom'
-import styles1 from './../Style/Layout'
-import styles from './../Style/Screen'
-import SaveCancelButton from '../Container/SaveCancelButton'
-import styles2 from '../Style/exportStyles'
+import InputAtom from '../Atom/InputAtom';
+import PickerAtom from '../Atom/PickerAtom';
+import ImageAtom from '../Atom/ImageAtom';
+import styles1 from './../Style/Layout';
+import styles from './../Style/Screen';
+import styles2 from '../Style/exportStyles';
 
-class EditUserProfileForm extends Component {
+interface IProps {
+    image?: string;
+    getImage?: (pic: string) => void;
+    name: string;
+    getName?: (name: string) => any;
+    phoneNumber: string,
+    getPhoneNumber?: (number: string) => any;
+    gender: string;
+    updateGender?: (gender: string) => any;
+}
+
+interface IState {
+
+}
+
+class EditUserProfileForm extends Component<IProps, IState> {
     render() {
         return (
             <KeyboardAvoidingView 
@@ -39,7 +52,7 @@ class EditUserProfileForm extends Component {
                         />
                     </View>
 
-                    <View style = { [styles.indentLeft, styles.editDetailsWrapper, styles.genderPickerWidth] }>
+                    <View style = { [styles.indentLeft, styles.editDetailsWrapper ] }>
                         <Text style = { styles.textTitle }>
                             Gender
                         </Text>
@@ -52,18 +65,6 @@ class EditUserProfileForm extends Component {
             </KeyboardAvoidingView>
         )
     }
-}
-
-EditUserProfileForm.propTypes = {
-    image: PropTypes.string,
-    getImage: PropTypes.func,
-    name: PropTypes.string.isRequired,
-    getName: PropTypes.func,
-    phoneNumber: PropTypes.string.isRequired,
-    getPhoneNumber: PropTypes.func,
-    gender: PropTypes.string.isRequired,
-    updateGender: PropTypes.func
-
 }
 
 export default EditUserProfileForm;

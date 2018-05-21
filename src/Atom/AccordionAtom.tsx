@@ -5,9 +5,9 @@ import Accordion from 'react-native-collapsible'
 import DebtAccordionAtom from './DebtAccordionAtom'
 import { ScrollView } from 'react-native-gesture-handler'
 import styles from '../Style/OrderList'
-import { sections } from '../config/data'
+// import { sections } from '../config/data'
 
-const SECTIONS = sections
+// const SECTIONS = sections;
 
 interface IAccordProps {
   icon: string
@@ -71,13 +71,14 @@ export default class AccordionAtom extends React.Component<
   render() {
     return (
       <ScrollView>
-        <Accordion
-          sections={SECTIONS}
-          activeSection={this.state.activeSection}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-          onChange={this._setHeader.bind(this)}
-        />
+        <Accordion/>
+        {/*<Accordion*/}
+          {/*sections={SECTIONS}*/}
+          {/*activeSection={this.state.activeSection}*/}
+          {/*renderHeader={this._renderHeader}*/}
+          {/*renderContent={this._renderContent}*/}
+          {/*onChange={this._setHeader.bind(this)}*/}
+        {/*/>*/}
       </ScrollView>
     )
   }

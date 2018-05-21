@@ -4,10 +4,10 @@ import { View, FlatList, ScrollView } from 'react-native';
 import ProductListAtom from '../Atom/ProductListAtom';
 import SubHeaderAtom from '../Atom/SubHeaderAtom';
 import styles from '../Style/ProductAndCustomerList';
-import { productList } from '../config/data';
 
 interface IProps {
-    navigation: any
+    navigation: any;
+    items: any;
 }
 
 interface IState {
@@ -25,7 +25,7 @@ class ProductList extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View style={styles.row}>
         <SubHeaderAtom
           list={[
             'Fasting selling',
@@ -36,9 +36,9 @@ class ProductList extends PureComponent<IProps, IState> {
         />
         <ScrollView>
           <FlatList
-            data={productList}
+            data={this.props.items}
             renderItem={this.renderItem}
-            keyExtractor={item => item.key}
+            keyExtractor={(item: any) => item.key}
           />
         </ScrollView>
       </View>

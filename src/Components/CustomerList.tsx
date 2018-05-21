@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
-import { View, FlatList, ScrollView } from 'react-native';
+// import { View, FlatList, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native';
 
 import CustomerListAtom from '../Atom/CustomerListAtom';
 import SubHeaderAtom from '../Atom/SubHeaderAtom';
 import styles from '../Style/exportStyles';
-import { customerList } from '../config/data';
+// import { customerList } from '../config/data';
 
 interface IProps {
     items: any[];
@@ -57,11 +58,11 @@ class CustomerList extends Component<IProps, IState> {
           ]}
         />
         <ScrollView>
-          <FlatList
-            data={customerList}
-            renderItem={this.renderItem}
-            keyExtractor={item => item.key}
-          />
+          {/*<FlatList*/}
+            {/*data={customerList}*/}
+            {/*renderItem={this.renderItem}*/}
+            {/*keyExtractor={item => item.key}*/}
+          {/*/>*/}
         </ScrollView>
       </View>
     )

@@ -42,20 +42,26 @@ class OrderList extends Component<IProps, IState> {
     if (item.header == 'start') {
       return <DateOrderAtom date={item.date} />
     } else if (item.header == 'middle') {
-      return <OrderListAtom onPress={this.onPress} items={item} />
+      return <OrderListAtom items={item} />
     } else if (item.header == 'end') {
-      return <TotalOrderAtom totalAmount={item.amount} />
+      return <TotalOrderAtom totalAmount={item.amount} profit={item.profit}/>
     }
   };
 
   render() {
     return (
       <View style={styles.orderListContainer}>
+        {/*<FlatList*/}
+          {/*ref={ref => (this.scrollView = ref)}*/}
+          {/*onContentSizeChange={() => {*/}
+            {/*this.scrollView.scrollToEnd({ animated: false })*/}
+          {/*}}*/}
+          {/*data={this.state.data}*/}
+          {/*renderItem={this.renderItem}*/}
+          {/*keyExtractor={item => item.key}*/}
+          {/*stickyHeaderIndices={this.state.stickyHeaderIndices}*/}
+        {/*/>*/}
         <FlatList
-          ref={ref => (this.scrollView = ref)}
-          onContentSizeChange={() => {
-            this.scrollView.scrollToEnd({ animated: false })
-          }}
           data={this.state.data}
           renderItem={this.renderItem}
           keyExtractor={item => item.key}
