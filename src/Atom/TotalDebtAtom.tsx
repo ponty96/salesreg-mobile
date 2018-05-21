@@ -8,7 +8,9 @@ interface IProps {
   totalAmount: any
 }
 
-let icon = this.props.limit >= 300000 ? 'md-warning' : 'md-add'
+// let limit = this.props.limit ? this.props.limit : 0;
+let limit = 0;
+let icon = limit >= 300000 ? 'md-warning' : 'md-add';
 // let iconc = this.props.limit >= 300000 ? 'red' : 'transparent';
 
 export default class TotalDebtAtom extends React.Component<IProps, any> {
