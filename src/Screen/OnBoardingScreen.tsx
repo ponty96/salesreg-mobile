@@ -7,11 +7,17 @@ import styles from '../Style/Auth'
 import styles1 from '../Style/exportStyles'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
 
-interface IProps {}
+interface IProps {
+    navigation: any;
+}
 
 interface IState {}
 
 class OnBoardingScreen extends PureComponent<IProps, IState> {
+    navigate = (location: string) => {
+        this.props.navigation.navigate(location)
+    };
+
   render() {
     const appDetails = [
       'All your businesses in one place',
@@ -37,11 +43,15 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
             btnText="SIGN UP"
             textStyle={styles1.redButtonText}
             btnStyle={styles1.signupButton}
+            funcValue={'Signup'}
+            onPress={this.navigate}
           />
           <ButtonAtom
             btnText="LOGIN"
             textStyle={styles1.redButtonText}
             btnStyle={styles1.signupButton}
+            funcValue={'Login'}
+            onPress={this.navigate}
           />
         </View>
       </View>
