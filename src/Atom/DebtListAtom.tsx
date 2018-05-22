@@ -22,9 +22,9 @@ class DebtListAtom extends React.Component<IProps, any> {
   }
   render() {
     const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
     const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
+      this.props.items.images !== '' ? this.props.items.images : defaultImg;
 
     return (
       <ListItem style={styles.row} onPress={this.props.onPress}>

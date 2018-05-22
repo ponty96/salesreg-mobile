@@ -14,13 +14,11 @@ let icon = limit >= 300000 ? 'md-warning' : 'md-add';
 // let iconc = this.props.limit >= 300000 ? 'red' : 'transparent';
 
 export default class TotalDebtAtom extends React.Component<IProps, any> {
-  display = () => {
+  display = (): any => {
     if (this.props.limit >= 300000) {
       return <Icon name={icon} style={styles.totalOrderIcon} />
-    } else {
-      return ''
     }
-  }
+  };
   displayView = () => {
     if (this.props.limit <= 100000) {
       return (
@@ -47,7 +45,7 @@ export default class TotalDebtAtom extends React.Component<IProps, any> {
         </View>
       )
     }
-  }
+  };
   render() {
     return (
       <View style={styles.totalDebtContainer}>
