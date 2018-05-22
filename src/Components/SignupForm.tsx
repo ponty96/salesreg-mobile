@@ -1,23 +1,23 @@
-import React, { PureComponent } from 'react';
-import { Form } from 'native-base';
-import { View } from 'react-native';
+import React, { PureComponent } from 'react'
+import { Form } from 'native-base'
+import { View } from 'react-native'
 
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import styles from '../Style/Form';
-import styles1 from '../Style/exportStyles';
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import styles from '../Style/Form'
+import styles1 from '../Style/exportStyles'
 
 interface IProps {
-    navigation: any;
+  navigation: any
 }
 
 interface IState {
-    phone: string;
-    password: string;
-    name: string;
-    confirm_password: string;
-    gender: string;
+  phone: string
+  password: string
+  name: string
+  confirm_password: string
+  gender: string
 }
 
 class SigupForm extends PureComponent<IProps, IState> {
@@ -27,7 +27,7 @@ class SigupForm extends PureComponent<IProps, IState> {
     name: '',
     confirm_password: '',
     gender: ''
-  };
+  }
 
   signup = () => {
     console.log(
@@ -37,41 +37,41 @@ class SigupForm extends PureComponent<IProps, IState> {
       this.state.confirm_password,
       this.state.gender
     )
-  };
+  }
 
   getPhone = (phone: string) => {
     this.setState({
       phone
     })
-  };
+  }
 
   getPassword = (pass: string) => {
     this.setState({
       password: pass
     })
-  };
+  }
 
   getName = (name: string) => {
     this.setState({
       name
     })
-  };
+  }
 
-  getConfirm = (confirm_pass: string) => {
+  getConfirm = (confirmPass: string) => {
     this.setState({
-      confirm_password: confirm_pass
+      confirm_password: confirmPass
     })
-  };
+  }
 
   updateGender = (selectedGender: string) => {
     this.setState({
       gender: selectedGender
     })
-  };
+  }
 
   navigate = (location: string) => {
     this.props.navigation.navigate(location)
-  };
+  }
 
   render() {
     return (
@@ -89,7 +89,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           contStyle={styles1.marginlessInput}
         />
 
-        <View style={styles.genderPickerStyle}>
+        <View style={[styles.genderPickerStyle, styles1.marginlessInput]}>
           <PickerAtom list={['Male', 'Female']} style={styles1.faintPicker} />
         </View>
 
@@ -98,6 +98,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           getValue={this.getPassword}
           secureTextEntry={true}
           contStyle={styles1.marginlessInput}
+          underneathText="Must be at least 6 characters"
         />
 
         <InputAtom
@@ -108,7 +109,12 @@ class SigupForm extends PureComponent<IProps, IState> {
         />
 
         <View style={styles.buttonsWrapper}>
-          <ButtonAtom btnText="Sign up" onPress={this.signup} />
+          <ButtonAtom
+            btnText="SIGN UP"
+            onPress={this.signup}
+            btnStyle={styles.fullWidth}
+            textStyle={styles.centeredText}
+          />
           <ButtonAtom
             btnText="I have an account already"
             transparent={true}
@@ -121,4 +127,4 @@ class SigupForm extends PureComponent<IProps, IState> {
   }
 }
 
-export default SigupForm;
+export default SigupForm

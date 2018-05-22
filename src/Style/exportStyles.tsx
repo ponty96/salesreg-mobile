@@ -573,7 +573,7 @@ export default StyleSheet.create({
 
   faintPicker: {
     color: color.inactive,
-    width: 100,
+    width: '50%',
     height: 35
   },
 

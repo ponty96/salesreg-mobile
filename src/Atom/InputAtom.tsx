@@ -59,7 +59,7 @@ class InputAtom extends React.Component<IProps, any> {
         {this.props.underneathText ? (
           <Text style={styles.underneathText}>{this.props.underneathText}</Text>
         ) : (
-          <Text>''</Text>
+          <Text />
         )}
       </View>
     )

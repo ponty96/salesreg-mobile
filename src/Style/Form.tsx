@@ -97,7 +97,7 @@ export default StyleSheet.create({
     marginLeft: 10
   },
   underneathText: {
-    marginLeft: 15,
+    marginLeft: 0,
     color: color.inactive,
     fontSize: 12,
     marginBottom: 25
@@ -205,5 +205,11 @@ export default StyleSheet.create({
   },
   placeholderColor: {
     color: color.inactive
+  },
+  fullWidth: {
+    width: '100%'
+  },
+  centeredText: {
+    alignSelf: 'center'
   }
 })

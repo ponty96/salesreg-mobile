@@ -1,34 +1,32 @@
-import React, { Component } from 'react';
+ import React, { Component } from 'react'
 // import { View, FlatList, ScrollView } from 'react-native';
-import { View, ScrollView } from 'react-native';
+import { View, ScrollView } from 'react-native'
 
-import CustomerListAtom from '../Atom/CustomerListAtom';
-import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import styles from '../Style/exportStyles';
+import CustomerListAtom from '../Atom/CustomerListAtom'
+import SubHeaderAtom from '../Atom/SubHeaderAtom'
+import styles from '../Style/exportStyles'
 // import { customerList } from '../config/data';
 
 interface IProps {
-    items: any[];
+  items: any[]
 }
 
-interface IState {
-
-}
+interface IState {}
 
 class CustomerList extends Component<IProps, IState> {
   onPress = () => {}
 
-  renderItem = ({item} : any) => {
+  renderItem = ({ item }: any) => {
     let latestAmount =
-      item.status == 'paid'
+      item.status === 'paid'
         ? item.debt
-        : item.status == 'balance'
+        : item.status === 'balance'
           ? item.balance
           : item.debt
     let realStyle
-    if (item.status == 'paid') {
+    if (item.status === 'paid') {
       realStyle = 'paid'
-    } else if (item.status == 'balance') {
+    } else if (item.status === 'balance') {
       realStyle = 'balance'
     } else {
       realStyle = 'debt'
@@ -59,9 +57,9 @@ class CustomerList extends Component<IProps, IState> {
         />
         <ScrollView>
           {/*<FlatList*/}
-            {/*data={customerList}*/}
-            {/*renderItem={this.renderItem}*/}
-            {/*keyExtractor={item => item.key}*/}
+          {/*data={customerList}*/}
+          {/*renderItem={this.renderItem}*/}
+          {/*keyExtractor={item => item.key}*/}
           {/*/>*/}
         </ScrollView>
       </View>
