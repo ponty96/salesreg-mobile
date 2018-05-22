@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { Icon } from 'native-base'
+import NewProductForm  from '../Components/NewProductForm'
 
 import styles from './../Style/Screen'
 
@@ -29,7 +30,7 @@ class NewProductScreen extends PureComponent<IProps, IState> {
   render() {
     return (
       <View style={styles.centerContainer}>
-        <Text>{'NewProductScreen'}</Text>
+        <NewProductForm navigation={this.props.navigation} />
       </View>
     )
   }

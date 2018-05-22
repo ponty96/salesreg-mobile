@@ -3,7 +3,7 @@ import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
 import styles from './../Style/ProductAndCustomerList'
 
 interface IProps {
-  items?: { images: string; customerName: string; amount: string }
+  items?: { images: string; customerName: string; amount: any }
   latestAmount: string
   realStyle: string
   onPress?: () => void
