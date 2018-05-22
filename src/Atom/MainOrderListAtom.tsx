@@ -10,7 +10,7 @@ interface IProps {
     time: string
     customerName: string
     amount: number
-    position: string
+    position?: 'bottom' | 'left' | 'right' | 'top' | 'auto'
     check: boolean
     tag: any
   }

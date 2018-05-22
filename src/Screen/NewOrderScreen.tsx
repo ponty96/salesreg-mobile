@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
 import { Icon } from 'native-base'
 
 import styles from './../Style/Screen'
