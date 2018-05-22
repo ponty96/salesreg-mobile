@@ -29,9 +29,7 @@ class NewOrderScreen extends Component<IProps, IState> {
 
   render() {
     return (
-      <View>
-        <NewOrderForm navigation={this.props.navigation} />
-      </View>
+      <NewOrderForm navigation={this.props.navigation} />
     )
   }
 }
