@@ -4,7 +4,7 @@ import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
 import styles from './../Style/Screen'
-import OrderList from '../Components/OrderList'
+import MainOrderList from '../Components/MainOrderList'
 
 interface IProps {
   navigation: any
@@ -33,12 +33,12 @@ class OrderScreen extends PureComponent<IProps, IState> {
   }
 
   render() {
-    const { params } = this.props.navigation.state
-    const items = params.data.orders
+    // const { params } = this.props.navigation.state
+    // const items = params.data.orders
 
     return (
       <View style={styles.centerContainer}>
-        <OrderList navigation={this.props.navigation} items={items}/>
+        <MainOrderList />
         <FabAtom
           routeName={'NewOrder'}
           name={'add-shopping-cart'}

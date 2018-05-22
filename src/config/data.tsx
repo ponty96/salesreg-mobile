@@ -1,6 +1,6 @@
 export const customerList = [
   {
-    key: 1,
+    key: '1',
     customerName: 'Mr James',
     date: '19 March 2018',
     amount: '12,000',
@@ -11,7 +11,7 @@ export const customerList = [
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
-    key: 2,
+    key: '2',
     customerName: 'Mrs Salomy',
     date: '19 March 2018',
     amount: '12,000',
@@ -22,7 +22,7 @@ export const customerList = [
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
-    key: 3,
+    key: '3',
     customerName: 'Mummy Ella',
     date: '19 March 2018',
     amount: '3,500',
@@ -33,7 +33,7 @@ export const customerList = [
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
-    key: 4,
+    key: '4',
     customerName: 'Mr David',
     date: '19 March 2018',
     time: '10:00am',
@@ -45,7 +45,7 @@ export const customerList = [
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
-    key: 5,
+    key: '5',
     customerName: 'Klazbaba',
     date: '19 March 2018',
     amount: '5,000',
@@ -56,7 +56,7 @@ export const customerList = [
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
-    key: 6,
+    key: '6',
     customerName: 'Mummy Ella',
     date: '20 March 2018',
     amount: '3,000',
@@ -67,7 +67,7 @@ export const customerList = [
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
-    key: 7,
+    key: '7',
     customerName: 'Frank Basit',
     date: '20 March 2018',
     amount: '3,000',
@@ -78,7 +78,7 @@ export const customerList = [
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
-    key: 8,
+    key: '8',
     customerName: 'Emanbe',
     date: '20 March 2018',
     amount: '13,000',
@@ -89,7 +89,7 @@ export const customerList = [
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
-    key: 9,
+    key: '9',
     customerName: 'Tracy Baddass',
     date: '20 March 2018',
     amount: '10,000',
