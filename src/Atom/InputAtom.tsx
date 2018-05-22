@@ -56,11 +56,7 @@ class InputAtom extends React.Component<IProps, any> {
             placeholderTextColor={color.inactive}
           />
         </Item>
-        {this.props.underneathText ? (
-          <Text style={styles.underneathText}>{this.props.underneathText}</Text>
-        ) : (
-          <Text>''</Text>
-        )}
+        {this.props.underneathText && <Text style={styles.underneathText}>{this.props.underneathText}</Text> }
       </View>
     )
   }
