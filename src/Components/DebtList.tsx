@@ -18,11 +18,11 @@ interface IState {
 }
 
 class DebtList extends PureComponent<IProps, IState> {
-  onPress = () => {}
+  onPress = () => {};
 
   renderItem = ({ item }: any) => {
     return <DebtListAtom items={item} />
-  }
+  };
 
   render() {
     return (
