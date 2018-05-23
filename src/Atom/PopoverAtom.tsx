@@ -4,25 +4,22 @@ import { Icon, Text, CheckBox, Left, Right } from 'native-base';
 import { Popover, PopoverController } from 'react-native-modal-popover';
 import styles from '../Style/exportStyles';
 
-// interface IProps {
-//     check?: boolean
-//     tag: string
-//     position: string
-// }
-//
-// interface IState {
-//     icon: string
-//     check: boolean
-// }
+ interface IProps {
+     check?: boolean
+     tag: string
+     position?: 'bottom' | 'left' | 'right' | 'top' | 'auto'
+ }
 
-export default class PopoverAtom extends React.Component {
-    constructor(props) {
-        super(props)
-        this.state = {
+ interface IState {
+     icon: string
+     check: boolean
+ }
+
+class PopoverAtom extends React.Component<IProps, IState> {
+    state: IState = {
             icon: 'md-arrow-dropdown',
             check: this.props.check
         }
-    }
 
     onHot = () => {
         if (this.state.icon === 'md-arrow-dropdown') {
@@ -45,13 +42,13 @@ export default class PopoverAtom extends React.Component {
         return (
             <View>
                 <PopoverController>
-                    {(
+                    {({
                         openPopover,
                         closePopover,
                         popoverVisible,
                         setPopoverAnchor,
                         popoverAnchorRect
-                    ) => (
+                    }) => (
                         <React.Fragment>
                             <TouchableOpacity
                                 style={styles.popoverTouchable}
@@ -133,3 +130,5 @@ export default class PopoverAtom extends React.Component {
         )
     }
 }
+
+export default PopoverAtom;
