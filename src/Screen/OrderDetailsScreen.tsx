@@ -3,8 +3,11 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { Icon } from 'native-base'
 
 import styles from './../Style/Screen'
+import OrderDetails from '../Components/OrderDetails'
 
-interface IProps {}
+interface IProps {
+  navigation: any
+}
 
 interface IState {}
 
@@ -47,7 +50,7 @@ class OrderDetailsScreen extends Component<IProps, IState> {
     // do change the list to the appropriate molecule
     return (
       <View style={styles.centerContainer}>
-        <Text>Order details Screen</Text>
+        <OrderDetails navigation={this.props.navigation} />
       </View>
     )
   }

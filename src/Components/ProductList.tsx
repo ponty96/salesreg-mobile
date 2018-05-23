@@ -1,22 +1,19 @@
-import React, { PureComponent } from 'react';
-import { View, FlatList, ScrollView } from 'react-native';
-
-import ProductListAtom from '../Atom/ProductListAtom';
-import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import styles from '../Style/ProductAndCustomerList';
+import React, { PureComponent } from 'react'
+import { View, FlatList, ScrollView } from 'react-native'
+import ProductListAtom from '../Atom/ProductListAtom'
+import SubHeaderAtom from '../Atom/SubHeaderAtom'
+import styles from '../Style/ProductAndCustomerList'
 
 interface IProps {
-    navigation: any;
-    items: any;
+  navigation: any
+  items: any
 }
 
-interface IState {
-
-}
+interface IState {}
 
 class ProductList extends PureComponent<IProps, IState> {
   onPress = () => {
-    alert('Product View Unavailable')
+    this.props.navigation.navigate('ProductDetails')
   }
 
   renderItem = ({ item }: any) => {

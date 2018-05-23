@@ -1,22 +1,24 @@
-import React, { Component } from 'react';
-import { View, ListView } from 'react-native';
-import { Font, AppLoading } from 'expo';
-import { Root, Icon, Button, Right, Header, Text } from 'native-base';
-import { ScrollView } from 'react-native-gesture-handler';
+import React, { Component } from 'react'
+import { View, ListView } from 'react-native'
+import { Font, AppLoading } from 'expo'
+import { Root, Icon, Button, Right, Header, Text } from 'native-base'
+import { ScrollView } from 'react-native-gesture-handler'
 
-import MainOrderListAtom from '../Atom/MainOrderListAtom';
-import styles from '../Style/OrderList';
-import { mainOrderList } from '../config/data';
+import MainOrderListAtom from '../Atom/MainOrderListAtom'
+import styles from '../Style/OrderList'
+import { mainOrderList } from '../config/data'
 
-const users = mainOrderList;
+const users = mainOrderList
 
 interface IProps {
-
+  navigation: any
+  onPress: () => void
+  onClick: () => void
 }
 
 interface IState {
-    loading: boolean;
-    userDataSource: any;
+  loading: boolean
+  userDataSource: any
 }
 
 export default class MainOrderList extends Component<IProps, IState> {
@@ -40,8 +42,9 @@ export default class MainOrderList extends Component<IProps, IState> {
   }
 
   renderRow(user: any) {
-    return <MainOrderListAtom items={user} />
+    return <MainOrderListAtom items={user} onPress={this.props.onClick} />
   }
+
   render() {
     if (this.state.loading) {
       return (
@@ -54,11 +57,11 @@ export default class MainOrderList extends Component<IProps, IState> {
       <View style={styles.listContainer}>
         <Header style={styles.headerMain}>
           <Right style={styles.direct}>
-            <Button transparent>
+            <Button transparent onPress={this.props.onPress}>
               <Text uppercase={false} style={styles.btnTxt}>
                 View Products
               </Text>
-              <Icon style={styles.iconic} name='md-arrow-forward' />
+              <Icon style={styles.iconic} name="md-arrow-forward" />
             </Button>
           </Right>
         </Header>

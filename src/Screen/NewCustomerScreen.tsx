@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View } from 'react-native'
 import { Icon } from 'native-base'
+import NewCustomerForm  from '../Components/NewCustomerForm'
 
 import styles from './../Style/Screen'
 
@@ -27,7 +28,7 @@ class NewCustomerScreen extends Component<IProps, IState> {
   render() {
     return (
       <View style={styles.centerContainer}>
-        <Text>{'NewCustomerScreen'}</Text>
+        <NewCustomerForm navigation={this.props} />
       </View>
     )
   }

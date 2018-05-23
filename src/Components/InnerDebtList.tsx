@@ -1,19 +1,17 @@
-import React, { PureComponent } from 'react';
-import { View, ScrollView, TouchableOpacity } from 'react-native';
+import React, { PureComponent } from 'react'
+import { View, ScrollView, TouchableOpacity } from 'react-native'
 
-import AboveAccordionAtom from '../Atom/AboveAccordionAtom';
-import styles from '../Style/OrderList';
-import AccordionAtom from '../Atom/AccordionAtom';
-import GetAmountModal from '../Container/GetAmountModal';
-import ButtonAtom from '../Atom/ButtonAtom';
+import AboveAccordionAtom from '../Atom/AboveAccordionAtom'
+import styles from '../Style/OrderList'
+import AccordionAtom from '../Atom/AccordionAtom'
+import GetAmountModal from '../Container/GetAmountModal'
+import ButtonAtom from '../Atom/ButtonAtom'
 
-interface IProps {
-
-}
+interface IProps {}
 
 interface IState {
-    visibility: boolean;
-    icon: string;
+  visibility: boolean
+  icon: string
 }
 
 class InnerDebtList extends PureComponent<IProps, IState> {
@@ -26,7 +24,7 @@ class InnerDebtList extends PureComponent<IProps, IState> {
   }
 
   onHot = () => {
-    if (this.state.visibility == false) {
+    if (this.state.visibility === false) {
       this.setState({ visibility: true })
     } else {
       this.setState({ visibility: false })
@@ -34,18 +32,22 @@ class InnerDebtList extends PureComponent<IProps, IState> {
   }
 
   changeIcon = () => {
-    if (this.state.icon == 'md-arrow-dropdown') {
-      this.setState({ visibility: true });
+    if (this.state.icon === 'md-arrow-dropdown') {
+      this.setState({ visibility: true })
     } else {
-      this.setState({ visibility: false });
+      this.setState({ visibility: false })
     }
-  };
+  }
 
   render() {
     return (
       <View style={styles.ababa}>
         <ScrollView>
-          <AboveAccordionAtom uri={undefined} name={'10,000'} totalAmount={'Ayo Aregbede'}/>
+          <AboveAccordionAtom
+            uri={undefined}
+            name="Ayo Aregbede"
+            totalAmount="10,000"
+          />
           <TouchableOpacity onPress={this.changeIcon}>
             <AccordionAtom icon="md-arrow-dropdown" />
           </TouchableOpacity>
@@ -64,4 +66,4 @@ class InnerDebtList extends PureComponent<IProps, IState> {
   }
 }
 
-export default InnerDebtList;
+export default InnerDebtList

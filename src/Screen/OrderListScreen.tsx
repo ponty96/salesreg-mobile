@@ -1,18 +1,21 @@
-import React, { Component } from 'react'
+import React, { PureComponent } from 'react'
 import { View } from 'react-native'
 import { Icon } from 'native-base'
+import OrderList from '../Components/OrderList'
+import { orderList } from '../config/data'
 
 import styles from './../Style/Screen'
-import InnerDebtList from '../Components/InnerDebtList'
 
-interface IProps {}
+interface IProps {
+  navigation: any
+}
 
 interface IState {}
 
-class DebtDetailsScreen extends Component<IProps, IState> {
+class OrderListScreen extends PureComponent<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Debt Details',
+      title: 'Order',
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
@@ -26,13 +29,12 @@ class DebtDetailsScreen extends Component<IProps, IState> {
   }
 
   render() {
-    // do change the list to the appropriate molecule
     return (
       <View style={styles.centerContainer}>
-        <InnerDebtList />
+        <OrderList items={orderList} navigation={this.props.navigation} />
       </View>
     )
   }
 }
 
-export default DebtDetailsScreen
+export default OrderListScreen

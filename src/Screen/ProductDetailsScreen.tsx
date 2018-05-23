@@ -3,8 +3,11 @@ import { View, Text, TouchableOpacity } from 'react-native'
 import { Icon } from 'native-base'
 
 import styles from './../Style/Screen'
+import ProductDetails from '../Components/ProductDetails'
 
-interface IProps {}
+interface IProps {
+  navigation?: any
+}
 
 interface IState {}
 
@@ -12,7 +15,7 @@ class ProductDetailsScreen extends PureComponent<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     const { params } = navigation.state
     return {
-      title: 'Order Details',
+      title: 'Product Details',
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
@@ -25,7 +28,7 @@ class ProductDetailsScreen extends PureComponent<IProps, IState> {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('NewOrderScreen', {
+            navigation.navigate('NewProduct', {
               item: params.item
             })
           }}
@@ -47,7 +50,7 @@ class ProductDetailsScreen extends PureComponent<IProps, IState> {
     // do change the list to the appropriate molecule
     return (
       <View style={styles.centerContainer}>
-        <Text>Order details Screen</Text>
+        <ProductDetails navigation={this.props.navigation} />
       </View>
     )
   }

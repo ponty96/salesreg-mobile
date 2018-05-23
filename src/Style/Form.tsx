@@ -209,7 +209,7 @@ export default StyleSheet.create({
   fullWidth: {
     width: '100%'
   },
-  centeredText: {
-    alignSelf: 'center'
+  longButtonCenteredText: {
+    marginLeft: '40%'
   }
 })

@@ -1,5 +1,6 @@
 import React, { PureComponent } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
+import { Icon } from 'native-base'
 
 import ImageDisplayAtom from './../Atom/ImageDisplayAtom'
 import DetailItemAtom from './../Atom/DetailItemAtom'
@@ -8,7 +9,9 @@ import ButtonAtom from './../Atom/ButtonAtom'
 import styles from './../Style/Screen'
 import styles1 from '../Style/exportStyles'
 
-interface IProps {}
+interface IProps {
+  navigation?: any
+}
 
 interface IState {
   item: any
@@ -29,6 +32,40 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
       marriageAniversary: '25 November',
       creditLimit: '7000.00',
       wallet: '0.00'
+    }
+  }
+
+  static navigationOptions = ({ navigation }: any) => {
+    const { params } = navigation.state
+    return {
+      title: 'Customer Details',
+      headerLeft: (
+        <Icon
+          name={'md-arrow-back'}
+          style={styles.headerIcon}
+          onPress={() => {
+            navigation.goBack()
+          }}
+        />
+      ),
+      headerRight: (
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate('NewCustomer', {
+              item: params.item
+            })
+          }}
+        >
+          <View style={styles.headerItem}>
+            <Icon
+              name={'pencil'}
+              style={styles.headerIconLogout}
+              type={'MaterialCommunityIcons'}
+            />
+            <Text style={styles.headerText}>Edit</Text>
+          </View>
+        </TouchableOpacity>
+      )
     }
   }
 

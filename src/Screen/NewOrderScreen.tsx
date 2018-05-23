@@ -1,9 +1,8 @@
-import React, { Component } from 'react'
-import { View } from 'react-native'
-import { Icon } from 'native-base'
+import React, { Component } from 'react';
+import { Icon } from 'native-base';
 
-import styles from './../Style/Screen'
-import NewOrderForm from '../Components/NewOrderForm'
+import styles from './../Style/Screen';
+import NewOrderForm from '../Components/NewOrderForm';
 
 interface IProps {
   navigation: any

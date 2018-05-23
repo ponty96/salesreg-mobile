@@ -34,7 +34,7 @@ class UserProfileScreen extends Component<IProps, IState> {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('NewBusiness', {
+            navigation.navigate('EditUserProfile', {
               data: params.data
             })
           }}
@@ -53,7 +53,9 @@ class UserProfileScreen extends Component<IProps, IState> {
   }
 
   render() {
-    return <UserProfile item={this.state.item} navigation={this.props.navigation} />
+    return (
+      <UserProfile item={this.state.item} navigation={this.props.navigation} />
+    )
   }
 }
 

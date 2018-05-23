@@ -31,13 +31,17 @@ class DebtsScreen extends Component<IProps, IState> {
     }
   }
 
+  onPress = () => {
+      this.props.navigation.navigate('DebtDetails')
+  }
+
   render() {
     // const { params } = this.props.navigation.state
     // const items = params.data.debts
 
     return (
       <View style={styles.centerContainer}>
-        <DebtList />
+        <DebtList onPress={this.onPress} />
       </View>
     )
   }

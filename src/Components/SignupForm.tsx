@@ -113,7 +113,7 @@ class SigupForm extends PureComponent<IProps, IState> {
             btnText="SIGN UP"
             onPress={this.signup}
             btnStyle={styles.fullWidth}
-            textStyle={styles.centeredText}
+            textStyle={styles.longButtonCenteredText}
           />
           <ButtonAtom
             btnText="I have an account already"

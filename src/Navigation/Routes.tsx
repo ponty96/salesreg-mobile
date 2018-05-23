@@ -1,38 +1,42 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React from 'react'
+import { Text, View } from 'react-native'
 import {
   StackNavigator,
   DrawerNavigator,
   TabNavigator,
   TabBarBottom,
   SwitchNavigator
-} from 'react-navigation';
-import { Icon } from 'native-base';
+} from 'react-navigation'
+import { Icon } from 'native-base'
 
-import OnBoardingScreen from './../Screen/OnBoardingScreen';
+import OnBoardingScreen from './../Screen/OnBoardingScreen'
 // import SplashScreen from './../Screen/SplashScreen';
-import SignupScreen from './../Screen/SignupScreen';
-import ResetScreen from './../Screen/ResetScreen';
-import LoginScreen from './../Screen/LoginScreen';
-import BusinessListScreen from './../Screen/BusinessListScreen';
-import NewBusinessScreen from './../Screen/NewBusinessScreen';
-import NewOrderScreen from './../Screen/NewOrderScreen';
-import NewProductScreen from './../Screen/NewProductScreen';
-import NewCustomerScreen from './../Screen/NewCustomerScreen';
-import SettingsScreen from './../Screen/SettingsScreen';
-import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen';
-import DebtScreen from './../Screen/DebtScreen';
-import ProductScreen from './../Screen/ProductScreen';
-import OrderScreen from './../Screen/OrderScreen';
-import OrderDetailsScreen from './../Screen/OrderDetailsScreen';
-import CustomerScreen from './../Screen/CustomerScreen';
-import DebtsScreen from './../Screen/DebtsScreen';
-import DebtDetailsScreen from './../Screen/DebtDetailsScreen';
-import ProductDetailsScreen from './../Screen/ProductDetailsScreen';
-import UserProfileScreen from '../Screen/UserProfileScreen';
-import Sidebar from './Sidebar';
-import styles from './../Style/Layout';
-import { color } from './../Style/Color';
+import SignupScreen from './../Screen/SignupScreen'
+import ResetScreen from './../Screen/ResetScreen'
+import LoginScreen from './../Screen/LoginScreen'
+import BusinessListScreen from './../Screen/BusinessListScreen'
+import NewBusinessScreen from './../Screen/NewBusinessScreen'
+import NewOrderScreen from './../Screen/NewOrderScreen'
+import NewProductScreen from './../Screen/NewProductScreen'
+import NewCustomerScreen from './../Screen/NewCustomerScreen'
+import SettingsScreen from './../Screen/SettingsScreen'
+import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen'
+import DebtScreen from './../Screen/DebtScreen'
+import ProductScreen from './../Screen/ProductScreen'
+import OrderScreen from './../Screen/OrderScreen'
+import OrderDetailsScreen from './../Screen/OrderDetailsScreen'
+import CustomerScreen from './../Screen/CustomerScreen'
+import DebtsScreen from './../Screen/DebtsScreen'
+import DebtDetailsScreen from './../Screen/DebtDetailsScreen'
+import ProductDetailsScreen from './../Screen/ProductDetailsScreen'
+import UserProfileScreen from '../Screen/UserProfileScreen'
+import OrderListScreen from '../Screen/OrderListScreen'
+import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
+import MainOrderList from '../Components/MainOrderList'
+import Sidebar from './Sidebar'
+import styles from './../Style/Layout'
+import { color } from './../Style/Color'
+import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 
 const viewBusinessStack = TabNavigator(
   {
@@ -139,12 +143,24 @@ const businessStack = StackNavigator(
     },
     UserProfile: {
       screen: UserProfileScreen
+    },
+    OrderList: {
+      screen: OrderListScreen
+    },
+    MainOrder: {
+      screen: MainOrderList
+    },
+    CustomerDetails: {
+      screen: CustomerDetailScreen
+    },
+    EditUserProfile: {
+      screen: EditUserProfileScreen
     }
   },
   {
     initialRouteName: 'BusinessList',
     navigationOptions: ({ navigation }: any) => ({
-      title: 'BusinessList',
+      title: 'Business List',
       headerLeft: (
         <Icon
           name={'menu'}

@@ -14,12 +14,13 @@ interface IProps {
     check: boolean
     tag: any
   }
+  onPress: () => void
 }
 
 class MainOrderListAtom extends React.Component<IProps, any> {
   render() {
     return (
-      <ListItem style={styles.mainList}>
+      <ListItem style={styles.mainList} onPress={this.props.onPress}>
         <Left style={styles.mainLeft}>
           <View style={styles.viewMargin}>
             <Text style={styles.leftText1}>

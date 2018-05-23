@@ -31,6 +31,9 @@ class CustomerScreen extends Component<IProps, IState> {
       headerLeft: left
     }
   }
+  onPress = () => {
+    this.props.navigation.navigate('CustomerDetails')
+  }
 
   render() {
     const { params } = this.props.navigation.state
@@ -38,7 +41,7 @@ class CustomerScreen extends Component<IProps, IState> {
 
     return (
       <View style={styles.centerContainer}>
-        <CustomerList items={items} />
+        <CustomerList items={items} onPress={this.onPress} />
         <FabAtom
           routeName={'NewCustomer'}
           name={'md-person-add'}

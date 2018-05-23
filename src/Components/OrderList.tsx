@@ -26,9 +26,9 @@ class OrderList extends Component<IProps, IState> {
   }
 
   componentDidMount() {
-    var arr: any[] = [];
+    let arr: any[] = [];
     this.state.data.map(obj => {
-      if (obj.header == 'start') {
+      if (obj.header === 'start') {
         arr.push(this.state.data.indexOf(obj))
       }
     })
@@ -39,11 +39,11 @@ class OrderList extends Component<IProps, IState> {
   }
 
   renderItem = ({ item }: any): any => {
-    if (item.header == 'start') {
+    if (item.header === 'start') {
       return <DateOrderAtom date={item.date} />
-    } else if (item.header == 'middle') {
+    } else if (item.header === 'middle') {
       return <OrderListAtom items={item} />
-    } else if (item.header == 'end') {
+    } else if (item.header === 'end') {
       return <TotalOrderAtom totalAmount={item.amount} profit={item.profit}/>
     }
   };
