@@ -607,7 +607,7 @@ export default StyleSheet.create({
   },
 
   signupButton: {
-    width: '49%',
+    width: '80%',
     marginHorizontal: 1,
     justifyContent: 'center',
     height: 55

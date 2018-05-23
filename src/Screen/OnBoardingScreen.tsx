@@ -8,22 +8,22 @@ import styles1 from '../Style/exportStyles'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
 
 interface IProps {
-    navigation: any;
+  navigation: any
 }
 
 interface IState {}
 
 class OnBoardingScreen extends PureComponent<IProps, IState> {
-    navigate = (location: string) => {
-        this.props.navigation.navigate(location)
-    };
+  navigate = (location: string) => {
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     const appDetails = [
       'All your businesses in one place',
       'Manage all your produts',
       'Make your customers happy',
-      'Control your credits/debts',
+      'Reduce debts',
       'Increase your profit'
     ]
 
@@ -38,22 +38,23 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
             </View>
           ))}
         </View>
-        <View style={styles.buttomButtonsWrapper}>
-          <ButtonAtom
-            btnText="SIGN UP"
-            textStyle={styles1.redButtonText}
-            btnStyle={styles1.signupButton}
-            funcValue={'Signup'}
-            onPress={this.navigate}
-          />
-          <ButtonAtom
-            btnText="LOGIN"
-            textStyle={styles1.redButtonText}
-            btnStyle={styles1.signupButton}
-            funcValue={'Login'}
-            onPress={this.navigate}
-          />
-        </View>
+
+        <ButtonAtom
+          btnText="TRY FOR FREE"
+          textStyle={styles1.redButtonText}
+          btnStyle={styles1.signupButton}
+          funcValue={'Signup'}
+          onPress={this.navigate}
+        />
+        <Text style={styles.haveAccount}>Or you have an account?</Text>
+
+        <ButtonAtom
+          btnText="LOGIN"
+          transparent={true}
+          funcValue={'Login'}
+          onPress={this.navigate}
+          btnStyle={styles.loginButton}
+        />
       </View>
     )
   }

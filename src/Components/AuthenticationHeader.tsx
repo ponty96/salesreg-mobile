@@ -1,15 +1,13 @@
-import React, { PureComponent } from 'react';
-import { View, Image } from 'react-native';
+import React, { PureComponent } from 'react'
+import { View, Image } from 'react-native'
 
-import styles from '../Style/Auth';
+import styles from '../Style/Auth'
 
 interface IProps {
-    smallHeader?: boolean;
+  smallHeader?: boolean
 }
 
-interface IState {
-
-}
+interface IState {}
 
 class AuthenticationHeader extends PureComponent<IProps, IState> {
   static defaultProps = {

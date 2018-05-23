@@ -3,17 +3,17 @@ import { color } from './Color'
 
 export default StyleSheet.create({
   smallHeader: {
-    height: '18%',
+    height: '15%',
     backgroundColor: color.primary,
     justifyContent: 'center',
     alignItems: 'center'
   },
   bigHeader: {
-    height: '40%'
+    height: '30%'
   },
   container: {
     flex: 1,
-    backgroundColor: '#fff'
+    backgroundColor: color.secondary
   },
   wrapper: {
     paddingHorizontal: 32
@@ -24,8 +24,8 @@ export default StyleSheet.create({
     alignSelf: 'center'
   },
   boardingScreenFeatureText: {
-    marginVertical: 40,
-    marginHorizontal: 30
+    marginVertical: '7%',
+    marginHorizontal: '10%'
   },
   blueCheck: {
     color: color.blueCheck
@@ -37,7 +37,8 @@ export default StyleSheet.create({
   appDetailsText: {
     marginLeft: 20,
     color: color.appDetailsText,
-    fontSize: 14
+    fontSize: 14,
+    alignSelf: 'flex-end'
   },
   buttomButtonsWrapper: {
     flexDirection: 'row',
@@ -45,5 +46,14 @@ export default StyleSheet.create({
     width: '88%',
     position: 'absolute',
     bottom: 60
+  },
+  haveAccount: {
+    marginTop: '5%',
+    textAlign: 'center',
+    color: color.menu
+  },
+  loginButton: {
+    marginVertical: 0,
+    paddingHorizontal: 0
   }
 })

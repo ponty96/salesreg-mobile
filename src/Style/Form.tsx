@@ -6,7 +6,8 @@ export default StyleSheet.create({
     backgroundColor: color.redButton,
     paddingHorizontal: 32,
     alignSelf: 'center',
-    marginVertical: 8
+    marginVertical: 8,
+    borderRadius: 3
   },
   buttonTransparent: {
     backgroundColor: color.secondary,
