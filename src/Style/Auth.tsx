@@ -55,5 +55,15 @@ export default StyleSheet.create({
   loginButton: {
     marginVertical: 0,
     paddingHorizontal: 0
+  },
+  bigHeaderLogo: {
+    flex: 0.6,
+    alignSelf: 'center',
+    width: '23%'
+  },
+  smallHeaderLogo: {
+    flex: 0.4,
+    alignSelf: 'center',
+    width: '44%'
   }
 })

@@ -608,8 +608,23 @@ export default StyleSheet.create({
 
   signupButton: {
     width: '80%',
-    marginHorizontal: 1,
     justifyContent: 'center',
-    height: 55
+    height: '5%'
+  },
+
+  loginButton: {
+    width: '100%',
+    height: '13%',
+    justifyContent: 'center'
+  },
+  noAccount: {
+    color: color.menu,
+    textAlign: 'center',
+    marginTop: '6%'
+  },
+  resetButton: {
+    width: '100%',
+    height: '17%',
+    justifyContent: 'center'
   }
 })

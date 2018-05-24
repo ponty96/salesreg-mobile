@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Form } from 'native-base'
+import { Form, Text } from 'native-base'
 
 import InputAtom from '../Atom/InputAtom'
 import ButtonAtom from '../Atom/ButtonAtom'
@@ -58,7 +58,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           getValue={this.getPassword}
           secureTextEntry={true}
           contStyle={styles.marginlessInput}
-          underneathText="Not less than 6 characters long"
+          underneathText="Must be at least 6 characters"
         />
 
         <ButtonAtom
@@ -67,9 +67,17 @@ class LoginForm extends PureComponent<IProps, IState> {
           funcValue={'Reset'}
           onPress={this.navigate}
         />
-        <ButtonAtom btnText="Login" onPress={this.login} />
+
         <ButtonAtom
-          btnText="I don't have an account"
+          btnText="LOGIN"
+          btnStyle={styles.loginButton}
+          onPress={this.login}
+        />
+
+        <Text style={styles.noAccount}>Don't have an account?</Text>
+
+        <ButtonAtom
+          btnText="SIGN UP"
           transparent={true}
           funcValue={'Signup'}
           onPress={this.navigate}

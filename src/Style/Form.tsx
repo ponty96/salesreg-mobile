@@ -99,7 +99,7 @@ export default StyleSheet.create({
   },
   underneathText: {
     marginLeft: 0,
-    color: color.inactive,
+    color: color.menu,
     fontSize: 12,
     marginBottom: 25
   },
@@ -212,5 +212,11 @@ export default StyleSheet.create({
   },
   longButtonCenteredText: {
     marginLeft: '40%'
+  },
+  resetPasswordText: {
+    color: color.menu
+  },
+  resetFormContainer: {
+    marginTop: '4%'
   }
 })
