@@ -13,7 +13,6 @@ interface IState {}
 
 class OrderDetailsScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
     return {
       title: 'Order Details',
       headerLeft: (
@@ -28,9 +27,7 @@ class OrderDetailsScreen extends Component<IProps, IState> {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('NewOrderScreen', {
-              item: params.item
-            })
+            navigation.navigate('NewOrder')
           }}
         >
           <View style={styles.headerItem}>

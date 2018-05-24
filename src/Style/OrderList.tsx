@@ -103,7 +103,8 @@ export default StyleSheet.create({
   },
   formViewContainer1: {
     flex: 1,
-    backgroundColor: '#FFF'
+    backgroundColor: '#FFF',
+    width: '100%'
   },
   newOrder: {
     flex: 1,
@@ -275,7 +276,8 @@ export default StyleSheet.create({
     color: '#c0c0c0'
   },
   ababa: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#fff'
   },
   compInner: {
     alignSelf: 'flex-end',

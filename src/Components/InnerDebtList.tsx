@@ -23,13 +23,17 @@ class InnerDebtList extends PureComponent<IProps, IState> {
     }
   }
 
-  onHot = () => {
-    if (this.state.visibility === false) {
-      this.setState({ visibility: true })
-    } else {
-      this.setState({ visibility: false })
-    }
-  }
+    openModal = () => {
+        this.setState({
+            visibility: true
+        })
+    };
+
+    closeModal = () => {
+        this.setState({
+            visibility: false
+        })
+    };
 
   changeIcon = () => {
     if (this.state.icon === 'md-arrow-dropdown') {
@@ -52,12 +56,13 @@ class InnerDebtList extends PureComponent<IProps, IState> {
             <AccordionAtom icon="md-arrow-dropdown" />
           </TouchableOpacity>
           <ButtonAtom
-            onPress={this.onHot}
+            onPress={this.openModal}
             btnText="Pay debt"
             btnStyle={styles.compInner}
           />
-          <GetAmountModal
+            <GetAmountModal
             headerText="Pay Debt"
+            closeModal={this.closeModal}
             visibility={this.state.visibility}
           />
         </ScrollView>

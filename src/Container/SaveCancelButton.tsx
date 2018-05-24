@@ -5,7 +5,7 @@ import styles from './../Style/Form'
 import styles1 from '../Style/exportStyles'
 
 interface IProps {
-  navigation?: any
+  navigation: any
   createfunc?: () => void
   positiveButtonName: string
 }
@@ -15,7 +15,7 @@ class SaveCancelButton extends React.Component<IProps, any> {
     if (this.props.createfunc) {
       this.props.createfunc()
     }
-  }
+  };
 
   render() {
     return (
@@ -40,4 +40,4 @@ class SaveCancelButton extends React.Component<IProps, any> {
   }
 }
 
-export default SaveCancelButton
+export default SaveCancelButton;

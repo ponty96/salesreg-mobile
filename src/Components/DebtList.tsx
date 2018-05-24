@@ -1,24 +1,23 @@
-import React, { PureComponent } from 'react'
-import { Text, View, ScrollView, FlatList } from 'react-native'
-// import { Text, View, FlatList, ScrollView } from 'react-native';
-import { Header, Right } from 'native-base'
+import React, { PureComponent } from 'react';
+import { Text, View, ScrollView, FlatList } from 'react-native';
+import { Header, Right } from 'native-base';
 
-import PickerAtom from '../Atom/PickerAtom'
-import DebtListAtom from '../Atom/DebtListAtom'
-import TotalDebtAtom from '../Atom/TotalDebtAtom'
-import styles from '../Style/exportStyles'
-import { debtList } from '../config/data'
+import PickerAtom from '../Atom/PickerAtom';
+import DebtListAtom from '../Atom/DebtListAtom';
+import TotalDebtAtom from '../Atom/TotalDebtAtom';
+import styles from '../Style/exportStyles';
+import { debtList } from '../config/data';
 
 interface IProps {
-  onPress: () => void
+  onPress: () => void;
 }
 
 interface IState {}
 
 class DebtList extends PureComponent<IProps, IState> {
   renderItem = ({ item }: any) => {
-    return <DebtListAtom items={item} onPress={this.props.onPress} />
-  }
+    return <DebtListAtom items={item} onPress={this.props.onPress} />;
+  };
 
   render() {
     return (
@@ -33,6 +32,7 @@ class DebtList extends PureComponent<IProps, IState> {
                 'Highest profit',
                 'Lowest profit'
               ]}
+              style={styles.pickerStyle}
             />
           </Right>
         </Header>
@@ -45,8 +45,8 @@ class DebtList extends PureComponent<IProps, IState> {
         </ScrollView>
         <TotalDebtAtom limit={80000} totalAmount="80,000" />
       </View>
-    )
+    );
   }
 }
 
-export default DebtList
+export default DebtList;

@@ -26,7 +26,7 @@ class NewCustomerForm extends PureComponent<IProps, IState> {
             <CustomerFormAtom navigation={this.props.navigation}/>
         </ScrollView>
         <SaveCancelButton
-          navigation={{ fakeObject: 'To stop giving errors' }}
+          navigation={this.props.navigation}
           createfunc={this.create}
           positiveButtonName="SAVE"
         />

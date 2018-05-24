@@ -1,14 +1,14 @@
-import * as React from 'react'
-import { View, Text } from 'react-native'
-import ImageAtom from './ImageAtom'
-import InputAtom from './InputAtom'
-import styles from '../Style/Form'
-import styles1 from '../Style/exportStyles'
-import { ScrollView } from 'react-native-gesture-handler'
-import PickerAtom from './PickerAtom'
+import * as React from 'react';
+import { View, Text } from 'react-native';
+import ImageAtom from './ImageAtom';
+import InputAtom from './InputAtom';
+import styles from '../Style/Form';
+import styles1 from '../Style/exportStyles';
+import { ScrollView } from 'react-native-gesture-handler';
+import PickerAtom from './PickerAtom';
 
 interface ICustomerFormProps {
-  navigation: any
+  navigation: any;
 }
 
 export default class CustomerFormAtom extends React.Component<
@@ -24,37 +24,37 @@ export default class CustomerFormAtom extends React.Component<
     birth: '',
     marriage: '',
     debt: 0
-  }
+  };
 
   create = () => {
-    this.props.navigation.goBack()
-  }
+    this.props.navigation.goBack();
+  };
 
   getProduct = (product: string) => {
-    this.setState({ product })
-  }
+    this.setState({ product });
+  };
 
   getImage = (pic: any) => {
-    this.setState({ image: pic })
-  }
+    this.setState({ image: pic });
+  };
   getSQuantity = (quantity: number) => {
-    this.setState({ quantity })
-  }
+    this.setState({ quantity });
+  };
   getPQuantity = (pquantity: number) => {
-    this.setState({ pquantity })
-  }
+    this.setState({ pquantity });
+  };
   getCostPP = (costPP: number) => {
-    this.setState({ costPP })
-  }
+    this.setState({ costPP });
+  };
   getBirth = (birth: string) => {
-    this.setState({ birth })
-  }
+    this.setState({ birth });
+  };
   getMarry = (marriage: string) => {
-    this.setState({ marriage })
-  }
+    this.setState({ marriage });
+  };
   getDebt = (debt: number) => {
-    this.setState({ debt })
-  }
+    this.setState({ debt });
+  };
 
   render() {
     return (
@@ -125,7 +125,7 @@ export default class CustomerFormAtom extends React.Component<
             <View style={styles.innerFirstPicker}>
               <PickerAtom list={['Marital Status', 'Married', 'Single']} />
             </View>
-            <View style={styles.innerEnd}>
+            <View style={styles.innerLastEnd}>
               <InputAtom
                 label="  Marriage Anniversary"
                 keyboardType="numeric"
@@ -137,6 +137,6 @@ export default class CustomerFormAtom extends React.Component<
           </View>
         </View>
       </ScrollView>
-    )
+    );
   }
 }

@@ -36,6 +36,7 @@ class GetAmountModal extends React.Component<IProps, IState> {
     if (this.props.getValue) {
       this.props.getValue(this.state.amount)
     }
+    this.props.closeModal();
   }
 
   renderHeader = () => {

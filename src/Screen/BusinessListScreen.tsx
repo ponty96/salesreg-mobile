@@ -74,19 +74,19 @@ class BusinessListScreen extends Component<IProps, IState> {
     this.setState({
       modalVisibility: false
     })
-  }
+  };
 
   openModal = () => {
     this.setState({
       modalVisibility: true
     })
-  }
+  };
 
   closeModal = () => {
     this.setState({
       modalVisibility: false
     })
-  }
+  };
 
   renderEmpty = () => {
     return (

@@ -17,7 +17,14 @@ class ButtonAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
     transparent: false,
     disabled: false
+  };
+
+  onPress = () => {
+      if (this.props.onPress) {
+          this.props.onPress(this.props.funcValue);
+      }
   }
+
   render() {
     return (
       <Button
@@ -29,7 +36,7 @@ class ButtonAtom extends React.Component<IProps, any> {
           this.props.disabled && styles.buttonDisabled,
           this.props.btnStyle
         ]}
-        onPress={() => this.props.onPress(this.props.funcValue)}
+        onPress={this.onPress}
       >
         <Text
           style={[

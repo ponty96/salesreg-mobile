@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View } from 'react-native'
+// import { View } from 'react-native'
 import { Icon } from 'native-base'
 import NewProductForm  from '../Components/NewProductForm'
 
@@ -29,9 +29,7 @@ class NewProductScreen extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <View style={styles.centerContainer}>
         <NewProductForm navigation={this.props.navigation} />
-      </View>
     )
   }
 }
