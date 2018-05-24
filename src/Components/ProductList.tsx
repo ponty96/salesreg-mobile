@@ -1,8 +1,9 @@
-import React, { PureComponent } from 'react'
-import { View, FlatList, ScrollView } from 'react-native'
-import ProductListAtom from '../Atom/ProductListAtom'
-import SubHeaderAtom from '../Atom/SubHeaderAtom'
-import styles from '../Style/ProductAndCustomerList'
+import React, { PureComponent } from 'react';
+import { View, FlatList, ScrollView } from 'react-native';
+import ProductListAtom from '../Atom/ProductListAtom';
+import SubHeaderAtom from '../Atom/SubHeaderAtom';
+// import styles from '../Style/ProductAndCustomerList';
+import styles_screen from './../Style/Screen';
 
 interface IProps {
   navigation: any
@@ -22,7 +23,7 @@ class ProductList extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <View style={styles.row}>
+      <View>
         <SubHeaderAtom
           list={[
             'Fasting selling',
@@ -31,7 +32,9 @@ class ProductList extends PureComponent<IProps, IState> {
             'Lowest profit'
           ]}
         />
-        <ScrollView>
+        <ScrollView
+            style={styles_screen.defaultPadding}
+        >
           <FlatList
             data={this.props.items}
             renderItem={this.renderItem}
