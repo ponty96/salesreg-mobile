@@ -35,7 +35,6 @@ export default StyleSheet.create({
     height: 75,
     paddingLeft: 0,
     marginLeft: 0,
-    width: '100%',
     // backgroundColor: '#fff',
     marginBottom: 0.5
   },
@@ -169,13 +168,10 @@ export default StyleSheet.create({
     height: 55
   },
   bodyView: {
-    flex: 0,
-    width: '55%'
+    flex: 2
   },
   rightView: {
     alignSelf: 'flex-end',
-    width: '25%',
-    marginLeft: '20%',
     alignItems: 'center'
   },
   leftText: {

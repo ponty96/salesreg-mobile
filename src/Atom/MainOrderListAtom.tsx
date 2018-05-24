@@ -25,8 +25,7 @@ class MainOrderListAtom extends React.Component<IProps, any> {
           <View style={styles.viewMargin}>
             <Text style={styles.leftText1}>
               {this.props.items.orderId}
-              {'   '}
-              <Text style={styles.wrapText}>{this.props.items.time}</Text>
+              <Text style={styles.wrapText}>  {this.props.items.time}</Text>
             </Text>
           </View>
           <View style={styles.viewMargin}>

@@ -1,22 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="fix debt list bug">
+    <list default="true" id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Atom/ButtonAtom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/ButtonAtom.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/NewCustomerForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/NewCustomerForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/NewProductForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/NewProductForm.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Components/ProductDetails.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProductDetails.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Container/GetAmountModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Container/GetAmountModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Container/RestockModal.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Container/RestockModal.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Container/SaveCancelButton.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Container/SaveCancelButton.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/BusinessListScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/BusinessListScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/CustomerDetailScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/CustomerDetailScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/EditUserProfileScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/EditUserProfileScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/NewCustomerScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/NewCustomerScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/OnBoardingScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/OnBoardingScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/OrderDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/OrderDetailsScreen.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Screen/ProductDetailsScreen.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Screen/ProductDetailsScreen.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Atom/MainOrderListAtom.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Atom/MainOrderListAtom.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Components/ProductList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Components/ProductList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Style/OrderList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style/OrderList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Style/ProductAndCustomerList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/Style/ProductAndCustomerList.tsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,7 +19,68 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300" />
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="OrderListScreen.tsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Screen/OrderListScreen.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="473">
+              <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+              <folding>
+                <element signature="e#0#44#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderList.tsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Components/OrderList.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="505">
+              <caret line="64" column="32" lean-forward="true" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderListAtom.tsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Atom/OrderListAtom.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="442">
+              <caret line="27" column="15" lean-forward="true" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="MainOrderListAtom.tsx" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/Atom/MainOrderListAtom.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="240">
+              <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="OrderList.tsx" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/Style/OrderList.tsx">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="642">
+              <caret line="165" column="22" lean-forward="true" selection-start-line="165" selection-start-column="22" selection-end-line="165" selection-end-column="22" />
+              <folding>
+                <element signature="e#0#41#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
@@ -90,11 +141,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/src/Components/EditUserProfileForm.js" />
-        <option value="$PROJECT_DIR$/src/Components/InnerDebtList.js" />
-        <option value="$PROJECT_DIR$/src/Components/EditCustomerForm.tsx" />
-        <option value="$PROJECT_DIR$/src/Components/InnerDebtList.tsx" />
-        <option value="$PROJECT_DIR$/src/Components/LoginForm.tsx" />
         <option value="$PROJECT_DIR$/src/Components/NewBusinessForm.js" />
         <option value="$PROJECT_DIR$/src/Components/NewBusinessForm.tsx" />
         <option value="$PROJECT_DIR$/src/Components/UserProfile.tsx" />
@@ -102,8 +148,6 @@
         <option value="$PROJECT_DIR$/src/Components/SignupForm.tsx" />
         <option value="$PROJECT_DIR$/src/Screen/UserProfileScreen.tsx" />
         <option value="$PROJECT_DIR$/src/Screen/ResetScreen.tsx" />
-        <option value="$PROJECT_DIR$/src/Screen/ProductScreen.tsx" />
-        <option value="$PROJECT_DIR$/src/Components/ProductList.tsx" />
         <option value="$PROJECT_DIR$/src/Atom/SubHeaderAtom.tsx" />
         <option value="$PROJECT_DIR$/src/Atom/AccordionAtom.tsx" />
         <option value="$PROJECT_DIR$/src/Screen/OrderScreen.tsx" />
@@ -141,6 +185,13 @@
         <option value="$PROJECT_DIR$/src/Screen/OrderDetailsScreen.tsx" />
         <option value="$PROJECT_DIR$/src/Screen/CustomerDetailScreen.tsx" />
         <option value="$PROJECT_DIR$/src/Container/GetAmountModal.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/InnerDebtList.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/ProductScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/ProductList.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/ProductListAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Style/ProductAndCustomerList.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/MainOrderListAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Style/OrderList.tsx" />
       </list>
     </option>
   </component>
@@ -189,6 +240,30 @@
               <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
               <item name="smeapp" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Atom" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Components" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Screen" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="Style" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -413,7 +488,7 @@
       <workItem from="1526988521068" duration="8099000" />
       <workItem from="1527078286679" duration="200000" />
       <workItem from="1527078559280" duration="311000" />
-      <workItem from="1527149779933" duration="6970000" />
+      <workItem from="1527149779933" duration="11030000" />
     </task>
     <task id="LOCAL-00001" summary="Implementation of full coupling">
       <created>1525284122443</created>
@@ -541,14 +616,22 @@
       <option name="project" value="LOCAL" />
       <updated>1526995954608</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="major fix">
+      <created>1527162305653</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1527162305653</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="251191000" />
+    <option name="totallyTimeSpent" value="255251000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.32905984" />
@@ -631,7 +714,8 @@
     <MESSAGE value="fix the new order screen" />
     <MESSAGE value="fix splash screen" />
     <MESSAGE value="fix debt list bug" />
-    <option name="LAST_COMMIT_MESSAGE" value="fix debt list bug" />
+    <MESSAGE value="major fix" />
+    <option name="LAST_COMMIT_MESSAGE" value="major fix" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -639,58 +723,6 @@
     </breakpoint-manager>
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/build/Components/AuthenticationHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="238">
-          <caret line="14" column="40" selection-start-line="14" selection-start-column="40" selection-end-line="14" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/AuthenticationHeader.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="382">
-          <caret line="28" column="68" selection-start-line="28" selection-start-column="68" selection-end-line="28" selection-end-column="68" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tsconfig.json">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Atom/InputAtom.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="433">
-          <caret line="58" column="93" lean-forward="true" selection-start-line="58" selection-start-column="93" selection-end-line="58" selection-end-column="93" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/LoginForm.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="223">
-          <caret line="41" column="33" lean-forward="true" selection-start-line="41" selection-start-column="33" selection-end-line="41" selection-end-column="33" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen/LoginScreen.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="35" selection-start-line="3" selection-start-column="35" selection-end-line="3" selection-end-column="35" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen/SignupScreen.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="68">
-          <caret line="9" column="1" lean-forward="true" selection-start-line="9" selection-start-column="1" selection-end-line="9" selection-end-column="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/SignupForm.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="547">
-          <caret line="71" column="2" selection-start-line="71" selection-start-column="2" selection-end-line="71" selection-end-column="2" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Navigation/Routes.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-2582">
@@ -756,9 +788,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen/DebtScreen.tsx">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/app.json">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="153">
@@ -796,13 +825,6 @@
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Style/Screen.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="16" column="31" selection-start-line="16" selection-start-column="31" selection-end-line="16" selection-end-column="31" />
         </state>
       </provider>
     </entry>
@@ -923,24 +945,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Atom/OrderListAtom.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Atom/MainOrderListAtom.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-315">
-          <folding>
-            <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Atom/DateOrderAtom.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state>
@@ -965,26 +969,6 @@
           <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
           <folding>
             <element signature="e#0#30#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Components/OrderList.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-400">
-          <caret line="19" column="27" lean-forward="true" selection-start-line="19" selection-start-column="27" selection-end-line="19" selection-end-column="27" />
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen/OrderListScreen.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="320">
-          <caret line="25" column="10" lean-forward="true" selection-start-line="25" selection-start-column="10" selection-end-line="25" selection-end-column="10" />
-          <folding>
-            <element signature="e#0#44#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -1036,16 +1020,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Screen/BusinessListScreen.tsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="170">
-          <caret line="10" column="12" lean-forward="true" selection-start-line="10" selection-start-column="12" selection-end-line="10" selection-end-column="12" />
-          <folding>
-            <element signature="e#0#40#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/Container/GetAmountModal.tsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
@@ -1062,6 +1036,150 @@
           <caret line="89" column="39" lean-forward="true" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
           <folding>
             <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/BusinessListScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/InnerDebtList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="62" column="27" lean-forward="true" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/DebtDetailsScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/DebtScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#40#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/ProductList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+          <folding>
+            <element signature="e#0#45#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/ProductAndCustomerList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="166" column="13" selection-start-line="166" selection-start-column="13" selection-end-line="166" selection-end-column="13" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/ProductListAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/Screen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/Layout.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#53#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/ProductScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="44" column="41" lean-forward="true" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/OrderListScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+          <folding>
+            <element signature="e#0#44#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/OrderList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="505">
+          <caret line="64" column="32" lean-forward="true" selection-start-line="64" selection-start-column="32" selection-end-line="64" selection-end-column="32" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/OrderListAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="27" column="15" lean-forward="true" selection-start-line="27" selection-start-column="15" selection-end-line="27" selection-end-column="15" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/MainOrderListAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="22" column="36" selection-start-line="22" selection-start-column="36" selection-end-line="22" selection-end-column="36" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/OrderList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="642">
+          <caret line="165" column="22" lean-forward="true" selection-start-line="165" selection-start-column="22" selection-end-line="165" selection-end-column="22" />
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
           </folding>
         </state>
       </provider>

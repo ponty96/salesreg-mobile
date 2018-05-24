@@ -119,16 +119,14 @@ export default StyleSheet.create({
   mainList: {
     flex: 1,
     height: 75,
-    width: '103%',
+    width: '100%',
     alignSelf: 'center',
     marginRight: 10,
     backgroundColor: '#fff',
     paddingVertical: 8
   },
   mainLeft: {
-    flex: 0,
     flexDirection: 'column',
-    width: '40%',
     alignItems: 'flex-start',
     justifyContent: 'flex-start',
     marginLeft: 0,
@@ -160,11 +158,9 @@ export default StyleSheet.create({
     color: '#c0c0c0'
   },
   mainRight: {
-    flex: 0,
+    flex: 1,
     flexDirection: 'column',
-    marginRight: 16,
-    marginLeft: '20%',
-    width: '35%'
+    marginRight: 16
   },
   rightText: {
     fontWeight: '500',
