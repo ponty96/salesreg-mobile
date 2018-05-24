@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { color } from './Color'
+import { StyleSheet } from 'react-native';
+import { color } from './Color';
 
 export default StyleSheet.create({
   buttonRed: {
@@ -111,27 +111,32 @@ export default StyleSheet.create({
   inputView: {
     flexDirection: 'row',
     width: '100%',
+    alignSelf: 'center',
     flex: 1
   },
   innerStart: {
+    width: '50%',
     flex: 1,
-    alignItems: 'flex-start',
     alignSelf: 'flex-start'
   },
   innerEnd: {
+    width: '50%',
     flex: 1,
-    alignItems: 'flex-end',
-    alignSelf: 'flex-end'
+    alignSelf: 'center'
+  },
+  innerLastEnd: {
+    width: '50%',
+    flex: 0,
+    alignSelf: 'flex-end',
+    paddingTop: 20
   },
   underText: {
-    marginRight: '65%',
-    fontSize: 11
+    marginRight: '50%',
+    fontSize: 10
   },
   innerFirstPicker: {
     flex: 1,
-    alignItems: 'flex-start',
-    alignSelf: 'flex-start',
-    paddingTop: 20
+    alignSelf: 'center'
   },
   headerOrder: {
     backgroundColor: '#FFF'
@@ -213,4 +218,4 @@ export default StyleSheet.create({
   longButtonCenteredText: {
     marginLeft: '40%'
   }
-})
+});

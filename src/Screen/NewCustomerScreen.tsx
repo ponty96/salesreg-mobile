@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+// import { View } from 'react-native'
 import { Icon } from 'native-base'
 import NewCustomerForm  from '../Components/NewCustomerForm'
 
@@ -27,9 +27,7 @@ class NewCustomerScreen extends Component<IProps, IState> {
 
   render() {
     return (
-      <View style={styles.centerContainer}>
         <NewCustomerForm navigation={this.props} />
-      </View>
     )
   }
 }
