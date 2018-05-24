@@ -46,8 +46,9 @@ class RestockModal extends React.Component<IProps, IState> {
 
   save = () => {
     if (this.props.getValue) {
-      this.props.getValue(this.state.quantity, this.state.cost)
+      this.props.getValue(this.state.quantity, this.state.cost);
     }
+      this.props.closeModal();
   }
 
   renderHeader = () => {

@@ -5,7 +5,9 @@ import NewCustomerForm  from '../Components/NewCustomerForm'
 
 import styles from './../Style/Screen'
 
-interface IProps {}
+interface IProps {
+    navigation: any;
+}
 
 interface IState {}
 
@@ -27,7 +29,7 @@ class NewCustomerScreen extends Component<IProps, IState> {
 
   render() {
     return (
-        <NewCustomerForm navigation={this.props} />
+      <NewCustomerForm navigation={this.props.navigation} />
     )
   }
 }

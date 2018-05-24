@@ -5,6 +5,7 @@ import ProductFormAtom from '../Atom/ProductFormAtom';
 import SaveCancelButton from '../Container/SaveCancelButton';
 import { ScrollView } from 'react-native-gesture-handler';
 import styles from '../Style/OrderList';
+import style_screen from './../Style/Screen';
 
 interface IProps {
     navigation: any
@@ -21,12 +22,12 @@ class NewProductForm extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <View style={styles.ababa}>
+      <View style={[styles.ababa, style_screen.defaultPadding]}>
         <ScrollView>
             <ProductFormAtom navigation={this.props.navigation}/>
         </ScrollView>
         <SaveCancelButton
-          navigation={{ fakeObject: 'To stop giving errors' }}
+          navigation={this.props.navigation}
           createfunc={this.create}
           positiveButtonName="SAVE"
         />

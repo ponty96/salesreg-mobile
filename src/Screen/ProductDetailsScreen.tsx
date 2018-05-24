@@ -13,7 +13,8 @@ interface IState {}
 
 class ProductDetailsScreen extends PureComponent<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
+    const { params } = navigation.state;
+    console.log(params);
     return {
       title: 'Product Details',
       headerLeft: (
@@ -28,9 +29,7 @@ class ProductDetailsScreen extends PureComponent<IProps, IState> {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('NewProduct', {
-              item: params.item
-            })
+            navigation.navigate('NewProduct')
           }}
         >
           <View style={styles.headerItem}>
@@ -56,4 +55,4 @@ class ProductDetailsScreen extends PureComponent<IProps, IState> {
   }
 }
 
-export default ProductDetailsScreen
+export default ProductDetailsScreen;

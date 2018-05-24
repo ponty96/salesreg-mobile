@@ -5,13 +5,15 @@ import SaveCancelButton from '../Container/SaveCancelButton'
 import EditUserProfileForm from '../Components/EditUserProfileForm'
 import styles from './../Style/Layout'
 
-interface IProps {}
+interface IProps {
+    navigation: any;
+}
 
 interface IState {
-  name: string
-  phoneNumber: string
-  image: string
-  gender: string
+  name: string;
+  phoneNumber: string;
+  image: string;
+  gender: string;
 }
 
 class EditUserProfileScreen extends Component<IProps, IState> {
@@ -60,10 +62,10 @@ class EditUserProfileScreen extends Component<IProps, IState> {
           gender={this.state.gender}
           updateGender={this.updateGender}
         />
-        <SaveCancelButton positiveButtonName="SAVE" />
+        <SaveCancelButton positiveButtonName="SAVE" navigation={this.props.navigation}/>
       </View>
     )
   }
 }
 
-export default EditUserProfileScreen
+export default EditUserProfileScreen;

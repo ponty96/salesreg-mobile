@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, ScrollView } from 'react-native'
 import { Icon } from 'native-base'
 
 import ButtonAtom from '../Atom/ButtonAtom'
@@ -30,32 +30,34 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
     return (
       <View style={styles.container}>
         <AuthenticationHeader smallHeader={false} />
-        <View style={styles.boardingScreenFeatureText}>
-          {appDetails.map((details, i) => (
-            <View style={styles.appFunctionWrapper} key={i}>
-              <Icon name="check" style={styles.blueCheck} type="Entypo" />
-              <Text style={styles.appDetailsText}>{details}</Text>
+          <ScrollView>
+            <View style={styles.boardingScreenFeatureText}>
+              {appDetails.map((details, i) => (
+                <View style={styles.appFunctionWrapper} key={i}>
+                  <Icon name="check" style={styles.blueCheck} type="Entypo" />
+                  <Text style={styles.appDetailsText}>{details}</Text>
+                </View>
+              ))}
             </View>
-          ))}
+
+            <ButtonAtom
+              btnText="TRY FOR FREE"
+              textStyle={styles1.redButtonText}
+              btnStyle={styles1.signupButton}
+              funcValue={'Signup'}
+              onPress={this.navigate}
+            />
+            <Text style={styles.haveAccount}>Or you have an account?</Text>
+
+            <ButtonAtom
+              btnText="LOGIN"
+              transparent={true}
+              funcValue={'Login'}
+              onPress={this.navigate}
+              btnStyle={styles.loginButton}
+            />
+          </ScrollView>
         </View>
-
-        <ButtonAtom
-          btnText="TRY FOR FREE"
-          textStyle={styles1.redButtonText}
-          btnStyle={styles1.signupButton}
-          funcValue={'Signup'}
-          onPress={this.navigate}
-        />
-        <Text style={styles.haveAccount}>Or you have an account?</Text>
-
-        <ButtonAtom
-          btnText="LOGIN"
-          transparent={true}
-          funcValue={'Login'}
-          onPress={this.navigate}
-          btnStyle={styles.loginButton}
-        />
-      </View>
     )
   }
 }
