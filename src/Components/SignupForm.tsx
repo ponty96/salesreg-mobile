@@ -90,7 +90,10 @@ class SigupForm extends PureComponent<IProps, IState> {
         />
 
         <View style={[styles.genderPickerStyle, styles1.marginlessInput]}>
-          <PickerAtom list={['Male', 'Female']} style={styles1.faintPicker} />
+          <PickerAtom
+            list={['Gender', 'Male', 'Female']}
+            style={styles1.faintPicker}
+          />
         </View>
 
         <InputAtom

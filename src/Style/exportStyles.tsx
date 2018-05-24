@@ -50,7 +50,7 @@ export default StyleSheet.create({
     paddingTop: 10,
     fontSize: 18,
     fontWeight: '400',
-    color: color.grey
+    color: color.menu
   },
 
   aboveAccordionMoneyView: {
@@ -609,7 +609,7 @@ export default StyleSheet.create({
   signupButton: {
     width: '80%',
     justifyContent: 'center',
-    height: '5%'
+    height: '10%'
   },
 
   loginButton: {
