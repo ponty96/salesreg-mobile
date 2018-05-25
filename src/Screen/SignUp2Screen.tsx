@@ -11,7 +11,7 @@ interface IProps {
 
 interface IState {}
 
-class SignupScreen extends PureComponent<IProps, IState> {
+class Signup2Screen extends PureComponent<IProps, IState> {
   render() {
     return (
       <View style={styles.container}>
@@ -45,7 +45,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
               />
               <View
                 style={{
-                  backgroundColor: 'white',
+                  backgroundColor: 'red',
                   borderWidth: 1,
                   borderColor: 'red',
                   borderRadius: 20,
@@ -54,7 +54,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
                 }}
               />
             </View>
-            <Text style={styles.signUpText}>PERSONAL INFORMATION</Text>
+            <Text style={styles.signUpText}>BUSINESS INFORMATION</Text>
             <KeyboardAvoidingView behavior={'position'}>
               <SignupForm navigation={this.props.navigation} />
             </KeyboardAvoidingView>
@@ -65,4 +65,4 @@ class SignupScreen extends PureComponent<IProps, IState> {
   }
 }
 
-export default SignupScreen;
+export default Signup2Screen;

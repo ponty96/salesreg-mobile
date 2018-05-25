@@ -74,7 +74,7 @@ class OrderFormAtom extends React.Component<IProps, IState> {
             })}
             <ButtonAtom
               onPress={() => this.addTextInput(this.state.textInput.length)}
-              btnText="+ Pay debt"
+              btnText="+ Add Product"
               transparent={true}
               btnStyle={styles.btn1}
               textStyle={styles.txt1}

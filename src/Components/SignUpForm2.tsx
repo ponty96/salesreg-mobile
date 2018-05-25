@@ -1,28 +1,28 @@
 import React, { PureComponent } from 'react';
-import { Form, Icon } from 'native-base';
-import { View, TouchableOpacity } from 'react-native';
+import { Form } from 'native-base';
+import { View, Text } from 'react-native';
 
 import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
-import PickerAtom from '../Atom/PickerAtom';
 import styles from '../Style/Form';
 import styles1 from '../Style/exportStyles';
+import ImageAtom from '../Atom/ImageAtom';
 
 interface IProps {
   navigation: any;
 }
 
 interface IState {
-  phone: string;
+  image: string;
   password: string;
   name: string;
   confirm_password: string;
   gender: string;
 }
 
-class SigupForm extends PureComponent<IProps, IState> {
+class SigupForm2 extends PureComponent<IProps, IState> {
   state = {
-    phone: '',
+    image: '',
     password: '',
     name: '',
     confirm_password: '',
@@ -31,7 +31,7 @@ class SigupForm extends PureComponent<IProps, IState> {
 
   signup = () => {
     console.log(
-      this.state.phone,
+      this.state.image,
       this.state.password,
       this.state.name,
       this.state.confirm_password,
@@ -39,10 +39,8 @@ class SigupForm extends PureComponent<IProps, IState> {
     );
   };
 
-  getPhone = (phone: string) => {
-    this.setState({
-      phone
-    });
+  getImage = (pic: any) => {
+    this.setState({ image: pic });
   };
 
   getPassword = (pass: string) => {
@@ -76,72 +74,59 @@ class SigupForm extends PureComponent<IProps, IState> {
   render() {
     return (
       <Form>
+        <ImageAtom
+          getValue={this.getImage}
+          source={this.state.image}
+          placeholder=""
+          imgStyle={styles.imgContainer}
+        />
         <InputAtom
-          label="Full name"
+          label="Business Name"
           getValue={this.getName}
           contStyle={styles1.marginlessInput}
         />
 
         <InputAtom
-          label="Phone number"
-          getValue={this.getPhone}
-          keyboardType="numeric"
+          label="Business Address"
+          getValue={this.getName}
           contStyle={styles1.marginlessInput}
         />
 
-        <View style={[styles.genderPickerStyle, styles1.marginlessInput]}>
-          <PickerAtom
-            list={['Gender', 'Male', 'Female']}
-            style={styles1.faintPicker}
-          />
-        </View>
-
         <InputAtom
-          label="Password"
-          getValue={this.getPassword}
-          secureTextEntry={true}
+          label="Email"
+          getValue={this.getName}
+          keyboardType="email-address"
           contStyle={styles1.marginlessInput}
-          underneathText="Must be at least 6 characters"
         />
 
         <InputAtom
-          label="Reenter-password"
-          getValue={this.getConfirm}
-          secureTextEntry={true}
+          label="About (Give a description of your business)"
+          getValue={this.getName}
           contStyle={styles1.marginlessInput}
         />
 
         <View style={styles.buttonsWrapper}>
-          <TouchableOpacity
-            style={{ flexDirection: 'row', alignSelf: 'flex-end' }}
-          >
-            <ButtonAtom
-              btnText="NEXT"
-              transparent={true}
-              funcValue={'SignUp2'}
-              onPress={this.navigate}
-            />
-            <Icon
-              name="md-arrow-round-forward"
-              style={{ color: 'red', fontSize: 20, alignSelf: 'center' }}
-            />
-          </TouchableOpacity>
-          {/*<ButtonAtom
+          <ButtonAtom
             btnText="SIGN UP"
             onPress={this.signup}
             btnStyle={styles.fullWidth}
             textStyle={styles.longButtonCenteredText}
           />
+          <Text>
+            Signing up means you agree with out <Text>Terms</Text> &{' '}
+            <Text>Privacy Policy</Text>
+          </Text>
+          <Text>Or do you have an account? </Text>
           <ButtonAtom
             btnText="I have an account already"
             transparent={true}
             funcValue={'Login'}
             onPress={this.navigate}
-          />*/}
+          />
         </View>
       </Form>
     );
   }
 }
 
-export default SigupForm;
+export default SigupForm2;

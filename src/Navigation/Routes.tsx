@@ -1,42 +1,43 @@
-import React from 'react'
-import { Text, View } from 'react-native'
+import React from 'react';
+import { Text, View } from 'react-native';
 import {
   StackNavigator,
   DrawerNavigator,
   TabNavigator,
   TabBarBottom,
   SwitchNavigator
-} from 'react-navigation'
-import { Icon } from 'native-base'
+} from 'react-navigation';
+import { Icon } from 'native-base';
 
-import OnBoardingScreen from './../Screen/OnBoardingScreen'
+import OnBoardingScreen from './../Screen/OnBoardingScreen';
 // import SplashScreen from './../Screen/SplashScreen';
-import SignupScreen from './../Screen/SignupScreen'
-import ResetScreen from './../Screen/ResetScreen'
-import LoginScreen from './../Screen/LoginScreen'
-import BusinessListScreen from './../Screen/BusinessListScreen'
-import NewBusinessScreen from './../Screen/NewBusinessScreen'
-import NewOrderScreen from './../Screen/NewOrderScreen'
-import NewProductScreen from './../Screen/NewProductScreen'
-import NewCustomerScreen from './../Screen/NewCustomerScreen'
-import SettingsScreen from './../Screen/SettingsScreen'
-import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen'
-import DebtScreen from './../Screen/DebtScreen'
-import ProductScreen from './../Screen/ProductScreen'
-import OrderScreen from './../Screen/OrderScreen'
-import OrderDetailsScreen from './../Screen/OrderDetailsScreen'
-import CustomerScreen from './../Screen/CustomerScreen'
-import DebtsScreen from './../Screen/DebtsScreen'
-import DebtDetailsScreen from './../Screen/DebtDetailsScreen'
-import ProductDetailsScreen from './../Screen/ProductDetailsScreen'
-import UserProfileScreen from '../Screen/UserProfileScreen'
-import OrderListScreen from '../Screen/OrderListScreen'
-import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
-import MainOrderList from '../Components/MainOrderList'
-import Sidebar from './Sidebar'
-import styles from './../Style/Layout'
-import { color } from './../Style/Color'
-import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
+import SignupScreen from './../Screen/SignupScreen';
+import ResetScreen from './../Screen/ResetScreen';
+import LoginScreen from './../Screen/LoginScreen';
+import BusinessListScreen from './../Screen/BusinessListScreen';
+import NewBusinessScreen from './../Screen/NewBusinessScreen';
+import NewOrderScreen from './../Screen/NewOrderScreen';
+import NewProductScreen from './../Screen/NewProductScreen';
+import NewCustomerScreen from './../Screen/NewCustomerScreen';
+import SettingsScreen from './../Screen/SettingsScreen';
+import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen';
+import DebtScreen from './../Screen/DebtScreen';
+import ProductScreen from './../Screen/ProductScreen';
+import OrderScreen from './../Screen/OrderScreen';
+import OrderDetailsScreen from './../Screen/OrderDetailsScreen';
+import CustomerScreen from './../Screen/CustomerScreen';
+import DebtsScreen from './../Screen/DebtsScreen';
+import DebtDetailsScreen from './../Screen/DebtDetailsScreen';
+import ProductDetailsScreen from './../Screen/ProductDetailsScreen';
+import UserProfileScreen from '../Screen/UserProfileScreen';
+import OrderListScreen from '../Screen/OrderListScreen';
+import SignUp2Screen from '../Screen/SignUp2Screen';
+import CustomerDetailScreen from '../Screen/CustomerDetailScreen';
+import MainOrderList from '../Components/MainOrderList';
+import Sidebar from './Sidebar';
+import styles from './../Style/Layout';
+import { color } from './../Style/Color';
+import EditUserProfileScreen from '../Screen/EditUserProfileScreen';
 
 const viewBusinessStack = TabNavigator(
   {
@@ -56,21 +57,21 @@ const viewBusinessStack = TabNavigator(
   {
     navigationOptions: ({ navigation }: any) => ({
       tabBarIcon: ({ focused }: any) => {
-        const { routeName } = navigation.state
-        let iconName
-        let tabColor
+        const { routeName } = navigation.state;
+        let iconName;
+        let tabColor;
         if (routeName === 'Product') {
-          iconName = 'basket'
-          tabColor = focused ? color.primary : color.inactive
+          iconName = 'basket';
+          tabColor = focused ? color.primary : color.inactive;
         } else if (routeName === 'Order') {
-          iconName = 'cart'
-          tabColor = focused ? color.primary : color.inactive
+          iconName = 'cart';
+          tabColor = focused ? color.primary : color.inactive;
         } else if (routeName === 'Customers') {
-          iconName = 'person'
-          tabColor = focused ? color.primary : color.inactive
+          iconName = 'person';
+          tabColor = focused ? color.primary : color.inactive;
         } else if (routeName === 'Debts') {
-          iconName = 'database'
-          tabColor = focused ? color.primary : color.inactive
+          iconName = 'database';
+          tabColor = focused ? color.primary : color.inactive;
         }
         return (
           <View style={{ alignItems: 'center' }}>
@@ -83,7 +84,7 @@ const viewBusinessStack = TabNavigator(
             />
             <Text style={{ color: tabColor }}>{routeName}</Text>
           </View>
-        )
+        );
       }
     }),
     tabBarOptions: {
@@ -101,7 +102,7 @@ const viewBusinessStack = TabNavigator(
     animationEnabled: false,
     swipeEnabled: true
   }
-)
+);
 
 const businessStack = StackNavigator(
   {
@@ -155,6 +156,9 @@ const businessStack = StackNavigator(
     },
     EditUserProfile: {
       screen: EditUserProfileScreen
+    },
+    SignUp2: {
+      screen: SignUp2Screen
     }
   },
   {
@@ -174,7 +178,7 @@ const businessStack = StackNavigator(
       }
     })
   }
-)
+);
 
 const drawerStack = DrawerNavigator(
   {
@@ -189,7 +193,7 @@ const drawerStack = DrawerNavigator(
       inactiveTintColor: color.primary
     }
   }
-)
+);
 
 const authStack = StackNavigator(
   {
@@ -201,7 +205,7 @@ const authStack = StackNavigator(
   {
     headerMode: 'none'
   }
-)
+);
 
 const switchStack = SwitchNavigator(
   {
@@ -211,6 +215,6 @@ const switchStack = SwitchNavigator(
   {
     initialRouteName: 'Auth'
   }
-)
+);
 
-export default switchStack
+export default switchStack;
