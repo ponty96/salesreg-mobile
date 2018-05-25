@@ -1,5 +1,5 @@
-import { color } from './Color'
-import { StyleSheet } from 'react-native'
+import { color } from './Color';
+import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
   saveCancelButton: {
@@ -351,7 +351,7 @@ export default StyleSheet.create({
   },
 
   subHeaderHeader: {
-    height: 40,
+    minHeight: 50,
     backgroundColor: '#fff'
   },
 
@@ -627,4 +627,4 @@ export default StyleSheet.create({
     height: '17%',
     justifyContent: 'center'
   }
-})
+});
