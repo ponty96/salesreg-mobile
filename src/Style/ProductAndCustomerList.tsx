@@ -1,5 +1,5 @@
-import { StyleSheet } from 'react-native'
-import { color } from './Color'
+import { StyleSheet } from 'react-native';
+import { color } from './Color';
 
 export default StyleSheet.create({
   row: {
@@ -13,7 +13,9 @@ export default StyleSheet.create({
     // backgroundColor: '#fff',
     marginBottom: 0.5,
     borderBottomWidth: 0.5,
-    borderBottomColor: color.listBorderColor
+    borderBottomColor: color.listBorderColor,
+    paddingVertical: 10,
+    paddingHorizontal: 10
   },
   rowD: {
     flex: 1,
@@ -36,7 +38,9 @@ export default StyleSheet.create({
     paddingLeft: 0,
     marginLeft: 0,
     // backgroundColor: '#fff',
-    marginBottom: 0.5
+    marginBottom: 0.5,
+    paddingVertical: 10,
+    paddingHorizontal: 10
   },
   rowText1: {
     fontWeight: '400',
@@ -108,7 +112,8 @@ export default StyleSheet.create({
     marginTop: 0,
     paddingTop: 0,
     borderRadius: 55 / 2,
-    margin: 8
+    margin: 8,
+    paddingLeft: 8
   },
   icons: {
     // backgroundColor: '#fff',
@@ -168,7 +173,7 @@ export default StyleSheet.create({
     height: 55
   },
   bodyView: {
-    flex: 2
+    flex: 3
   },
   rightView: {
     alignSelf: 'flex-end',
@@ -196,4 +201,4 @@ export default StyleSheet.create({
     width: '100%',
     backgroundColor: '#FFF'
   }
-})
+});

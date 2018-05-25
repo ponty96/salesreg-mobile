@@ -3,7 +3,7 @@ import { View, FlatList, ScrollView } from 'react-native';
 import ProductListAtom from '../Atom/ProductListAtom';
 import SubHeaderAtom from '../Atom/SubHeaderAtom';
 // import styles from '../Style/ProductAndCustomerList';
-import styles_screen from './../Style/Screen';
+// import styles_screen from './../Style/Screen';
 
 interface IProps {
   navigation: any
@@ -32,9 +32,8 @@ class ProductList extends PureComponent<IProps, IState> {
             'Lowest profit'
           ]}
         />
-        <ScrollView
-            style={styles_screen.defaultPadding}
-        >
+
+        <ScrollView>
           <FlatList
             data={this.props.items}
             renderItem={this.renderItem}
