@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
-import styles from './../Style/Screen'
 import ProductList from '../Components/ProductList'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -38,7 +38,7 @@ class ProductScreen extends PureComponent<IProps, IState> {
 
     return (
       <View style={styles.container}>
-        <ProductList items={items} navigation={this.props.navigation}/>
+        <ProductList items={items} navigation={this.props.navigation} />
         <FabAtom
           routeName={'NewProduct'}
           name={'basket-fill'}
@@ -51,3 +51,15 @@ class ProductScreen extends PureComponent<IProps, IState> {
 }
 
 export default ProductScreen
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

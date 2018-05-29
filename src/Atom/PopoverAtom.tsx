@@ -1,42 +1,41 @@
-import * as React from 'react';
-import { TouchableOpacity, View } from 'react-native';
-import { Icon, Text, CheckBox, Left, Right } from 'native-base';
-import { Popover, PopoverController } from 'react-native-modal-popover';
-import styles from '../Style/exportStyles';
+import * as React from 'react'
+import { TouchableOpacity, View, StyleSheet } from 'react-native'
+import { Icon, Text, CheckBox, Left, Right } from 'native-base'
+import { Popover, PopoverController } from 'react-native-modal-popover'
 
 interface IProps {
-  check?: boolean;
-  tag: string;
-  position?: 'bottom' | 'left' | 'right' | 'top' | 'auto';
+  check?: boolean
+  tag: string
+  position?: 'bottom' | 'left' | 'right' | 'top' | 'auto'
 }
 
 interface IState {
-  icon: string;
-  check: boolean;
+  icon: string
+  check: boolean
 }
 
 class PopoverAtom extends React.Component<IProps, IState> {
   state: IState = {
     icon: 'md-arrow-dropdown',
     check: this.props.check
-  };
+  }
 
   onHot = () => {
     if (this.state.icon === 'md-arrow-dropdown') {
       this.setState({
         icon: 'md-arrow-dropup'
-      });
+      })
     } else if (this.state.icon === 'md-arrow-dropup') {
       this.setState({
         icon: 'md-arrow-dropdown'
-      });
+      })
     }
-  };
+  }
   checked = () => {
     this.setState({
       check: !this.state.check
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -103,8 +102,105 @@ class PopoverAtom extends React.Component<IProps, IState> {
           )}
         </PopoverController>
       </View>
-    );
+    )
   }
 }
 
-export default PopoverAtom;
+export default PopoverAtom
+
+const styles = StyleSheet.create({
+  popoverContent: {
+    width: 342,
+    height: 95,
+    paddingTop: 14,
+    paddingBottom: 14,
+    paddingLeft: 12,
+    paddingRight: 12,
+    margin: 0,
+    backgroundColor: '#fff',
+    borderWidth: 0.5,
+    borderRadius: 2,
+    borderColor: 'grey'
+  },
+  popoverArrow: {
+    borderTopColor: 'rgba(0, 0, 0, 0.1)',
+    margin: 0,
+    padding: 0
+  },
+  popoverBackground: {
+    backgroundColor: 'rgba(255, 255, 255, 0.1)'
+  },
+  popoverTouchable: {
+    flex: 0,
+    alignSelf: 'flex-end',
+    flexDirection: 'row',
+    marginTop: 15
+  },
+  popoverRedClick: {
+    color: 'red',
+    fontSize: 13,
+    paddingTop: 5,
+    paddingBottom: 5,
+    paddingRight: 5
+  },
+  popoverIconTouch: {
+    paddingTop: 4
+  },
+  popoverColumn: {
+    flexDirection: 'column'
+  },
+  popoverRow: {
+    flexDirection: 'row'
+  },
+  popoverMainFirst: {
+    flexDirection: 'row',
+    marginRight: 50,
+    alignItems: 'center'
+  },
+  popoverMainSecond: {
+    flexDirection: 'row',
+    marginRight: 0,
+    alignItems: 'center'
+  },
+  popoverViewX: {
+    width: 12,
+    height: 12,
+    borderRadius: 12 / 2,
+    backgroundColor: '#c0c0c0'
+  },
+  popoverTextX: {
+    fontSize: 12,
+    paddingLeft: 4
+  },
+  popoverNotMain: {
+    flexDirection: 'row',
+    marginTop: 30
+  },
+  popoverLeftSide: {
+    flexDirection: 'row',
+    marginRight: 100,
+    alignItems: 'center'
+  },
+  popoverRightSide: {
+    flex: 0,
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    marginRight: 0,
+    marginBottom: 8
+  },
+  popoverInnerLeft: {
+    width: 12,
+    height: 12,
+    borderRadius: 12 / 2,
+    backgroundColor: 'red'
+  },
+  popoverRecall: {
+    textAlign: 'right',
+    fontSize: 12,
+    paddingLeft: 16
+  },
+  popoverInnerLeftText: {
+    fontSize: 12,
+    paddingLeft: 4
+  }
+})

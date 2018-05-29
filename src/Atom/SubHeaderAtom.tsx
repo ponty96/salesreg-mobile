@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Header, Left, Right, Icon, Text } from 'native-base'
 import PickerAtom from './PickerAtom'
-import styles from '../Style/exportStyles'
+import { StyleSheet } from 'react-native'
 
 interface IProps {
   total?: any
@@ -30,3 +30,29 @@ class SubHeaderAtom extends React.Component<IProps, any> {
 }
 
 export default SubHeaderAtom
+
+const styles = StyleSheet.create({
+  subHeaderHeader: {
+    minHeight: 50,
+    backgroundColor: '#fff'
+  },
+  subHeaderRow: {
+    flexDirection: 'row',
+    width: '40%'
+  },
+  subHeaderPad: {
+    paddingLeft: 10,
+    paddingTop: 5
+  },
+  subHeaderFont: {
+    fontSize: 13,
+    paddingBottom: 9
+  },
+  subHeaderIconColor: {
+    color: '#F0F0F0'
+  },
+  pickerStyle: {
+    width: '50%',
+    height: 35
+  }
+})

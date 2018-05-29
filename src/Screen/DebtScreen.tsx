@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import styles from './../Style/Screen'
 import SettingsAtom from './../Atom/SettingsAtom'
 import DebtLimitModal from './../Container/DebtLimitModal'
 import DebtWarningModal from '../Container/DebtWarningModal'
+import { color } from '../Style/Color'
 
 interface IProps {}
 
@@ -113,3 +113,24 @@ class DebtScreen extends Component<IProps, IState> {
 }
 
 export default DebtScreen
+
+const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  },
+  container: {
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  defaultPadding: {
+    paddingHorizontal: 16
+  }
+})

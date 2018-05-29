@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base'
-import styles from './../Style/OrderList'
+import { StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   items?: {
@@ -40,3 +41,60 @@ class OrderListAtom extends React.Component<IProps, any> {
 }
 
 export default OrderListAtom
+
+const styles = StyleSheet.create({
+  row: {
+    flexDirection: 'row',
+    paddingLeft: 0,
+    marginLeft: 0,
+    top: 0,
+    padding: 10,
+    width: '100%',
+    height: 75,
+    // backgroundColor: '#fff',
+    marginBottom: 0.5,
+    borderBottomWidth: 0.5,
+    borderBottomColor: color.listBorderColor
+  },
+  rowText1: {
+    flex: 1,
+    fontWeight: '500',
+    fontSize: 12
+    // color: '#000'
+  },
+  rowText2: {
+    flex: 1,
+    fontSize: 13,
+    paddingTop: 12,
+    color: color.primary
+  },
+  rowText3: {
+    fontSize: 12
+  },
+  view1: {
+    height: 68,
+    alignItems: 'center',
+    marginRight: 0,
+    paddingRight: 0
+  },
+  view2: {
+    flexDirection: 'column',
+    flex: 0,
+    paddingLeft: 0,
+    marginLeft: 0,
+    width: '50%'
+  },
+  view3: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    width: '20%',
+    marginLeft: '10%'
+  },
+  dp: {
+    height: 55,
+    width: 55,
+    borderRadius: 55 / 2,
+    margin: 8
+  }
+})

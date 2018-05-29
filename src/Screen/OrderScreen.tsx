@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
-import styles from './../Style/Screen'
 import MainOrderList from '../Components/MainOrderList'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -61,3 +61,17 @@ class OrderScreen extends PureComponent<IProps, IState> {
 }
 
 export default OrderScreen
+
+const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

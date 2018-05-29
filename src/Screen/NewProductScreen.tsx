@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-// import { View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
-import NewProductForm  from '../Components/NewProductForm'
-
-import styles from './../Style/Screen'
+import NewProductForm from '../Components/NewProductForm'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -28,10 +27,16 @@ class NewProductScreen extends PureComponent<IProps, IState> {
   }
 
   render() {
-    return (
-        <NewProductForm navigation={this.props.navigation} />
-    )
+    return <NewProductForm navigation={this.props.navigation} />
   }
 }
 
 export default NewProductScreen
+
+const styles = StyleSheet.create({
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

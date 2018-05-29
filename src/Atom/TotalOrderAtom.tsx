@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
-import styles from './../Style/exportStyles'
+import { View, Text, StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   totalAmount: any
@@ -35,3 +35,47 @@ export default class TotalOrderAtom extends React.Component<IProps, any> {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  totalOrderRedNumberView: {
+    width: '70%',
+    height: 55,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: color.totalSales
+  },
+  totalOrderRedNumber: {
+    color: color.primary,
+    fontSize: 18,
+    fontWeight: 'bold'
+  },
+  totalOrderTotalText: {
+    fontSize: 14,
+    fontWeight: '400'
+    // color: '#000',
+  },
+  totalOrderPeachView: {
+    width: '70%',
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: color.totalProfit
+  },
+  totalOrderTotalView: {
+    width: '30%',
+    height: 45,
+    alignItems: 'center',
+    justifyContent: 'center'
+    // backgroundColor: '#fff',
+  },
+  totalOrderContainer: {
+    flexDirection: 'row',
+    flex: 1,
+    borderTopWidth: 0.5,
+    borderTopColor: color.listBorderColor
+  },
+  totalOrderColumn: {
+    borderBottomWidth: 1,
+    borderBottomColor: color.primary
+  }
+})

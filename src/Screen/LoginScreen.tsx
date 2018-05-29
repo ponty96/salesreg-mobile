@@ -1,9 +1,9 @@
 import React from 'react'
-import { Text, View, KeyboardAvoidingView } from 'react-native'
+import { Text, View, KeyboardAvoidingView, StyleSheet } from 'react-native'
 
-import styles from './../Style/Auth'
 import LoginForm from '../Components/LoginForm'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -28,3 +28,18 @@ class LoginScreen extends React.Component<IProps, IState> {
 }
 
 export default LoginScreen
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  signUpText: {
+    color: color.primary,
+    marginTop: 32,
+    alignSelf: 'center'
+  },
+  wrapper: {
+    paddingHorizontal: 32
+  }
+})

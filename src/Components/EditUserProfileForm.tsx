@@ -1,5 +1,11 @@
 import React, { Component } from 'react';
-import { View, Text, KeyboardAvoidingView, ScrollView, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet
+} from 'react-native';
 import InputAtom from '../Atom/InputAtom';
 import PickerAtom from '../Atom/PickerAtom';
 import ImageAtom from '../Atom/ImageAtom';
@@ -11,7 +17,7 @@ interface IProps {
   name: string;
   getName?: (name: string) => any;
   phoneNumber: string;
-  getPhoneNumber?: (number: string) => any;
+  getPhoneNumber?: (num: string) => any;
   gender: string;
   updateGender?: (gender: string) => any;
 }

@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { View, Modal } from 'react-native'
-import styles from './../Style/Layout'
+import { View, Modal, StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   visible: boolean
@@ -41,3 +41,22 @@ class ModalAtom extends React.Component<IProps, any> {
 }
 
 export default ModalAtom
+
+const styles = StyleSheet.create({
+  modalContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(0,0,0,.5)',
+    justifyContent: 'center',
+    paddingHorizontal: 20
+  },
+  centerModal: {
+    backgroundColor: color.secondary
+  },
+  modalBody: {
+    backgroundColor: color.secondary,
+    position: 'absolute',
+    top: 90,
+    width: '100%',
+    marginLeft: '7%'
+  }
+})

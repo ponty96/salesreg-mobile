@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
 import NameDisplayAtom from '../Atom/NameDisplayAtom'
 import DetailItemAtom from '../Atom/DetailItemAtom'
-import styles from './../Style/Screen'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -110,3 +110,50 @@ class BusinessDetailsScreen extends Component<IProps, IState> {
 }
 
 export default BusinessDetailsScreen
+
+const styles = StyleSheet.create({
+  detailItemWrapper: {
+    marginVertical: 10
+  },
+  details: {
+    marginTop: 20,
+    marginLeft: 25,
+    color: color.inactive,
+    marginBottom: 5
+  },
+  nameDisplay: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'lightgrey',
+    paddingBottom: 40,
+    paddingTop: 30,
+    paddingHorizontal: 40
+  },
+  headerText: {
+    color: color.secondary,
+    fontWeight: 'bold',
+    paddingRight: 16,
+    fontSize: 18
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  },
+  headerIconLogout: {
+    color: color.secondary,
+    padding: 8,
+    fontSize: 28
+  },
+  detailsWrapper: {
+    marginVertical: 25
+  },
+  container: {
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  headerItem: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  }
+})

@@ -1,10 +1,9 @@
 import React, { PureComponent } from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import screenStyles from './../Style/Screen'
-import styles from './../Style/Layout'
 import ListItemAtom from './../Atom/ListItemAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -19,7 +18,7 @@ class SettingsScreen extends PureComponent<IProps, IState> {
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
-          style={screenStyles.headerIcon}
+          style={styles.headerIcon}
           onPress={() => {
             navigation.goBack()
           }}
@@ -49,3 +48,18 @@ class SettingsScreen extends PureComponent<IProps, IState> {
 }
 
 export default SettingsScreen
+
+const styles = StyleSheet.create({
+  formViewContainer: {
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  defaultPadding: {
+    paddingHorizontal: 16
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})
