@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import StarRating from 'react-native-star-rating'
-import styles from './../Style/Layout'
 
 interface IState {
   value: string
@@ -64,3 +63,17 @@ class GoldRatings extends React.Component<any, IState> {
 }
 
 export default GoldRatings
+
+const styles = StyleSheet.create({
+  goldRatingsContainer: {
+    alignSelf: 'center',
+    justifyContent: 'center'
+  },
+  addText: {
+    textAlign: 'center',
+    fontSize: 12,
+    color: '#FFDF00',
+    fontWeight: '400',
+    paddingBottom: 10
+  }
+})

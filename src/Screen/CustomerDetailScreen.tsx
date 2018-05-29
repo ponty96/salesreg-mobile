@@ -1,22 +1,28 @@
-import React, { PureComponent } from 'react';
-import { View, Text, TouchableOpacity, ScrollView } from 'react-native';
-import { Icon } from 'native-base';
+import React, { PureComponent } from 'react'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+  StyleSheet
+} from 'react-native'
+import { Icon } from 'native-base'
 
-import ImageDisplayAtom from './../Atom/ImageDisplayAtom';
-import DetailItemAtom from './../Atom/DetailItemAtom';
-import GoldRatingsAtom from './../Atom/GoldRatingsAtom';
-import ButtonAtom from './../Atom/ButtonAtom';
-import styles from './../Style/Screen';
-import styles1 from '../Style/exportStyles';
-import GetAmountModal from './../Container/GetAmountModal';
+import ImageDisplayAtom from './../Atom/ImageDisplayAtom'
+import DetailItemAtom from './../Atom/DetailItemAtom'
+import GoldRatingsAtom from './../Atom/GoldRatingsAtom'
+import ButtonAtom from './../Atom/ButtonAtom'
+import styles1 from '../Style/exportStyles'
+import GetAmountModal from './../Container/GetAmountModal'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation?: any
 }
 
 interface IState {
-  item: any;
-  modalVisibility: boolean;
+  item: any
+  modalVisibility: boolean
 }
 
 class CustomerDetailScreen extends PureComponent<IProps, IState> {
@@ -69,26 +75,28 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
     }
   }
 
-    openModal = () => {
-        this.setState({
-            modalVisibility: true
-        })
-    };
+  openModal = () => {
+    this.setState({
+      modalVisibility: true
+    })
+  }
 
-    closeModal = () => {
-        this.setState({
-            modalVisibility: false
-        })
-    };
+  closeModal = () => {
+    this.setState({
+      modalVisibility: false
+    })
+  }
 
   render() {
     return (
       <View style={styles.container}>
-          {this.state.modalVisibility && <GetAmountModal
+        {this.state.modalVisibility && (
+          <GetAmountModal
             visibility={this.state.modalVisibility}
             headerText={"Salomy's wallet"}
             closeModal={this.closeModal}
-          />}
+          />
+        )}
         <ScrollView>
           <View style={styles.topCompartment}>
             <ImageDisplayAtom
@@ -189,3 +197,93 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
 }
 
 export default CustomerDetailScreen
+
+const styles = StyleSheet.create({
+  secondCompartment: {
+    borderBottomWidth: 1,
+    borderBottomColor: color.textBorderBottom,
+    paddingBottom: 10
+  },
+  compartmentItemWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    marginRight: 25
+  },
+  compartmentItem: {
+    marginLeft: 35,
+    color: color.inactive
+  },
+  creditLimit: {
+    paddingTop: 15
+  },
+  walletText: {
+    color: 'blue',
+    marginTop: 15
+  },
+  walletWrapper: {
+    marginBottom: 5
+  },
+  bottomPadding: {
+    paddingBottom: 30
+  },
+  container: {
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  detailItemWrapper: {
+    marginVertical: 10
+  },
+  details: {
+    marginTop: 20,
+    marginLeft: 25,
+    color: color.inactive,
+    marginBottom: 5
+  },
+  redText: { color: color.primary },
+  textContent: {
+    fontWeight: '400',
+    fontSize: 14
+  },
+  purchaseWrapper: {
+    alignItems: 'flex-end'
+  },
+  textTitle: {
+    color: color.inactive,
+    fontWeight: '400',
+    fontSize: 14
+  },
+  textWrapper: {
+    marginRight: 20,
+    marginTop: 25,
+    justifyContent: 'space-between'
+  },
+  topCompartment: {
+    flexDirection: 'row',
+    borderBottomWidth: 1,
+    borderBottomColor: 'lightgrey',
+    justifyContent: 'space-between',
+    paddingBottom: 30
+  },
+  headerIconLogout: {
+    color: color.secondary,
+    padding: 8,
+    fontSize: 28
+  },
+  headerItem: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  headerText: {
+    color: color.secondary,
+    fontWeight: 'bold',
+    paddingRight: 16,
+    fontSize: 18
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

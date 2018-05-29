@@ -1,8 +1,7 @@
 import * as React from 'react'
-import { View, Text, Image, TouchableOpacity } from 'react-native'
+import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
-import styles from '../Style/Layout'
-import screenStyles from '../Style/Screen'
+import { color } from '../Style/Color'
 
 interface IProps {
   type?: string
@@ -30,7 +29,7 @@ class ListItemAtom extends React.Component<IProps, any> {
         <Text
           style={[
             styles.innerText,
-            this.props.type === 'business' && screenStyles.redText,
+            this.props.type === 'business' && styles.redText,
             this.props.type === 'business' && styles.boldText
           ]}
         >
@@ -120,3 +119,63 @@ class ListItemAtom extends React.Component<IProps, any> {
 }
 
 export default ListItemAtom
+
+const styles = StyleSheet.create({
+  imageIconCont: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    marginRight: 16,
+    justifyContent: 'center'
+  },
+  textIconCont: {
+    height: 50,
+    width: 50,
+    borderRadius: 25,
+    backgroundColor: color.textBorderBottom,
+    marginRight: 16,
+    justifyContent: 'center'
+  },
+  innerText: {
+    alignSelf: 'center'
+  },
+  debtItem: {
+    borderColor: color.textBorderBottom,
+    alignSelf: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingVertical: 8,
+    marginRight: 16
+  },
+  boldText: {
+    fontWeight: 'bold'
+  },
+  itemRightIcon: {
+    alignSelf: 'center'
+  },
+  deleteIcon: {
+    color: color.textBorderBottom
+  },
+  itemIcon: {
+    color: color.menu
+  },
+  listTextCont: {
+    flex: 1,
+    justifyContent: 'center'
+  },
+  sidebarListCont: {
+    flexDirection: 'row',
+    padding: 16,
+    borderBottomWidth: 1,
+    borderColor: color.textBorderBottom
+  },
+  debtContainer: {
+    paddingRight: 4
+  },
+  listTouchCont: {
+    flex: 1,
+    flexDirection: 'row'
+  },
+  redText: { color: color.primary }
+})

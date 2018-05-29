@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
-// import { View } from 'react-native'
+import { StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
-import NewCustomerForm  from '../Components/NewCustomerForm'
-
-import styles from './../Style/Screen'
+import NewCustomerForm from '../Components/NewCustomerForm'
+import { color } from '../Style/Color'
 
 interface IProps {
-    navigation: any;
+  navigation: any
 }
 
 interface IState {}
@@ -28,10 +27,16 @@ class NewCustomerScreen extends Component<IProps, IState> {
   }
 
   render() {
-    return (
-      <NewCustomerForm navigation={this.props.navigation} />
-    )
+    return <NewCustomerForm navigation={this.props.navigation} />
   }
 }
 
 export default NewCustomerScreen
+
+const styles = StyleSheet.create({
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

@@ -1,6 +1,6 @@
 import * as React from 'react'
-import { View, Text, Image } from 'react-native'
-import styles from './../Style/exportStyles'
+import { View, Text, Image, StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   businessName: string
@@ -26,3 +26,28 @@ export default class NameDisplayAtom extends React.Component<IProps, any> {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  nameDisplayWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  nameDisplayName: {
+    fontSize: 14,
+    fontWeight: '400',
+    marginLeft: 20
+  },
+  nameDisplayImage: {
+    height: 90,
+    width: 90,
+    borderRadius: 45
+  },
+  nameDisplayLetterDisplay: {
+    height: 90,
+    width: 90,
+    borderRadius: 45,
+    backgroundColor: color.grey,
+    justifyContent: 'center',
+    alignItems: 'center'
+  }
+})

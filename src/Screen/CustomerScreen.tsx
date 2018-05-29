@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import styles from './../Style/Screen'
 import FabAtom from './../Atom/FabAtom'
 import CustomerList from '../Components/CustomerList'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -53,3 +53,17 @@ class CustomerScreen extends Component<IProps, IState> {
 }
 
 export default CustomerScreen
+
+const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

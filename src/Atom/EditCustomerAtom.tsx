@@ -1,11 +1,9 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import ImageAtom from './ImageAtom'
 import InputAtom from './InputAtom'
 import PickerAtom from './PickerAtom'
 import GoldRatingsAtom from './GoldRatingsAtom'
-import styles1 from './../Style/exportStyles'
-import styles from '../Style/Form'
 import { ScrollView } from 'react-native-gesture-handler'
 
 interface IProps {
@@ -75,7 +73,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
             <InputAtom
               label="  Name"
               getValue={this.getProduct}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View>
@@ -83,7 +81,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
               label="  Phone number(separate numbers with commas):"
               keyboardType="numeric"
               getValue={this.getPhone}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View style={styles.innerFirstPicker}>
@@ -94,7 +92,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
               label="  Address"
               keyboardType="numeric"
               getValue={this.getAddress}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View>
@@ -102,7 +100,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
               label="  Type Email Address"
               keyboardType="email-address"
               getValue={this.getEmail}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View style={styles.inputView}>
@@ -111,7 +109,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
                 label="  Debt limit"
                 keyboardType="numeric"
                 getValue={this.getDebt}
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
@@ -119,7 +117,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
                 label="  Birthday"
                 keyboardType="numeric"
                 getValue={this.getBirth}
-                contStyle={styles1.marginfulInput}
+                contStyle={styles.marginfulInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
@@ -133,7 +131,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
                 label="  Marriage Anniversary"
                 keyboardType="numeric"
                 getValue={this.getMarry}
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
@@ -151,3 +149,59 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  imgContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+    marginVertical: 16
+  },
+  innerFirstPicker: {
+    flex: 1,
+    alignSelf: 'center'
+  },
+  inputView: {
+    flexDirection: 'row',
+    width: '100%',
+    alignSelf: 'center',
+    flex: 1
+  },
+  innerEnd: {
+    width: '50%',
+    flex: 1,
+    alignSelf: 'center'
+  },
+  innerStart: {
+    width: '50%',
+    flex: 1,
+    alignSelf: 'flex-start'
+  },
+  underText: {
+    marginRight: '50%',
+    fontSize: 10
+  },
+  secondCompartment: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'lightgrey',
+    paddingBottom: 10
+  },
+  compartmentItemWrapper: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    marginRight: 25
+  },
+  compartmentItem: {
+    marginLeft: 35,
+    color: 'grey'
+  },
+  marginlessInput: {
+    marginLeft: 0
+  },
+  marginfulInput: {
+    marginLeft: 4
+  }
+})

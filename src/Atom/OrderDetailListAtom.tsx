@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Text } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import { ListItem, Left, Right } from 'native-base'
-import styles from '../Style/ProductAndCustomerList'
+import { color } from '../Style/Color'
 
 interface IProps {
   items?: { name: string; number: number; amount: any }
@@ -24,3 +24,38 @@ class OrderDetailListAtom extends React.Component<IProps, any> {
 }
 
 export default OrderDetailListAtom
+
+const styles = StyleSheet.create({
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    top: 0,
+    padding: 10,
+    paddingLeft: 0,
+    marginLeft: 0,
+    height: 75,
+    // backgroundColor: '#fff',
+    marginBottom: 0.5,
+    borderBottomWidth: 0.5,
+    borderBottomColor: color.listBorderColor,
+    paddingVertical: 10,
+    paddingHorizontal: 10
+  },
+  leftText: {
+    color: '#c0c0c0',
+    fontSize: 16,
+    fontWeight: '400',
+    textAlign: 'left',
+    paddingLeft: 16
+  },
+  rightText1: {
+    color: '#000',
+    fontSize: 14,
+    paddingBottom: 8
+  },
+  rightText2: {
+    color: 'red',
+    fontSize: 14,
+    paddingTop: 8
+  }
+})

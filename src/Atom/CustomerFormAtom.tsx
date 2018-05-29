@@ -1,14 +1,12 @@
-import * as React from 'react';
-import { View, Text } from 'react-native';
-import ImageAtom from './ImageAtom';
-import InputAtom from './InputAtom';
-import styles from '../Style/Form';
-import styles1 from '../Style/exportStyles';
-import { ScrollView } from 'react-native-gesture-handler';
-import PickerAtom from './PickerAtom';
+import * as React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import ImageAtom from './ImageAtom'
+import InputAtom from './InputAtom'
+import { ScrollView } from 'react-native-gesture-handler'
+import PickerAtom from './PickerAtom'
 
 interface ICustomerFormProps {
-  navigation: any;
+  navigation: any
 }
 
 export default class CustomerFormAtom extends React.Component<
@@ -24,37 +22,37 @@ export default class CustomerFormAtom extends React.Component<
     birth: '',
     marriage: '',
     debt: 0
-  };
+  }
 
   create = () => {
-    this.props.navigation.goBack();
-  };
+    this.props.navigation.goBack()
+  }
 
   getProduct = (product: string) => {
-    this.setState({ product });
-  };
+    this.setState({ product })
+  }
 
   getImage = (pic: any) => {
-    this.setState({ image: pic });
-  };
+    this.setState({ image: pic })
+  }
   getSQuantity = (quantity: number) => {
-    this.setState({ quantity });
-  };
+    this.setState({ quantity })
+  }
   getPQuantity = (pquantity: number) => {
-    this.setState({ pquantity });
-  };
+    this.setState({ pquantity })
+  }
   getCostPP = (costPP: number) => {
-    this.setState({ costPP });
-  };
+    this.setState({ costPP })
+  }
   getBirth = (birth: string) => {
-    this.setState({ birth });
-  };
+    this.setState({ birth })
+  }
   getMarry = (marriage: string) => {
-    this.setState({ marriage });
-  };
+    this.setState({ marriage })
+  }
   getDebt = (debt: number) => {
-    this.setState({ debt });
-  };
+    this.setState({ debt })
+  }
 
   render() {
     return (
@@ -70,7 +68,7 @@ export default class CustomerFormAtom extends React.Component<
             <InputAtom
               label="  Name"
               getValue={this.getProduct}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View style={styles.inputView}>
@@ -79,7 +77,7 @@ export default class CustomerFormAtom extends React.Component<
                 label="  Phone number"
                 keyboardType="numeric"
                 getValue={this.getSQuantity}
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
@@ -91,7 +89,7 @@ export default class CustomerFormAtom extends React.Component<
               label="  Home address"
               keyboardType="numeric"
               getValue={this.getPQuantity}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View>
@@ -99,7 +97,7 @@ export default class CustomerFormAtom extends React.Component<
               label="  Email"
               keyboardType="numeric"
               getValue={this.getCostPP}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View style={styles.inputView}>
@@ -108,7 +106,7 @@ export default class CustomerFormAtom extends React.Component<
                 label="  Debt limit"
                 keyboardType="numeric"
                 getValue={this.getDebt}
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
@@ -116,7 +114,7 @@ export default class CustomerFormAtom extends React.Component<
                 label="  Birthday"
                 keyboardType="numeric"
                 getValue={this.getBirth}
-                contStyle={styles1.marginfulInput}
+                contStyle={styles.marginfulInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
@@ -130,13 +128,60 @@ export default class CustomerFormAtom extends React.Component<
                 label="  Marriage Anniversary"
                 keyboardType="numeric"
                 getValue={this.getMarry}
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
           </View>
         </View>
       </ScrollView>
-    );
+    )
   }
 }
+
+const styles = StyleSheet.create({
+  imgContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+    marginVertical: 16
+  },
+  inputView: {
+    flexDirection: 'row',
+    width: '100%',
+    alignSelf: 'center',
+    flex: 1
+  },
+  innerStart: {
+    width: '50%',
+    flex: 1,
+    alignSelf: 'flex-start'
+  },
+  innerEnd: {
+    width: '50%',
+    flex: 1,
+    alignSelf: 'center'
+  },
+  underText: {
+    marginRight: '50%',
+    fontSize: 10
+  },
+  innerFirstPicker: {
+    flex: 1,
+    alignSelf: 'center'
+  },
+  innerLastEnd: {
+    width: '50%',
+    flex: 0,
+    alignSelf: 'flex-end',
+    paddingTop: 20
+  },
+  marginlessInput: {
+    marginLeft: 0
+  },
+  marginfulInput: {
+    marginLeft: 4
+  }
+})

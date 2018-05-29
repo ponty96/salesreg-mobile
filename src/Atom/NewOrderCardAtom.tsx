@@ -1,8 +1,7 @@
 import * as React from 'react'
-import { View, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { Header, Icon, Right } from 'native-base'
 import InputAtom from './InputAtom'
-import styles from '../Style/exportStyles'
 
 interface IProps {
   onPress: () => void
@@ -67,3 +66,54 @@ export default class NewOrderCardAtom extends React.Component<IProps, any> {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  newOrderContainer: {
+    backgroundColor: '#FFF',
+    width: '98%',
+    alignSelf: 'center',
+    borderRadius: 2,
+    borderWidth: 1,
+    borderColor: '#f0f0f0',
+    marginVertical: 16
+  },
+
+  newOrderHeader: {
+    backgroundColor: '#FFF',
+    height: 40,
+    marginBottom: 3
+  },
+
+  newOrderIcon: {
+    fontSize: 30,
+    textAlign: 'right'
+  },
+
+  newOrderInnerContainer: {
+    flexDirection: 'column',
+    alignSelf: 'center',
+    width: '98%'
+  },
+
+  newOrderFirstInput: {
+    width: '96%',
+    marginBottom: 3
+  },
+
+  newOrderSecondInput: {
+    flexDirection: 'row',
+    flex: 0,
+    marginBottom: 16
+  },
+
+  newOrderHalf: {
+    width: '48%'
+  },
+
+  newOrderClose: {
+    width: 60
+  },
+  marginfulInput: {
+    marginLeft: 4
+  }
+})

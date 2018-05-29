@@ -1,17 +1,15 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
 import DebtList from '../Components/DebtList'
-import styles from './../Style/Screen'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
 }
 
-interface IState {}
-
-class DebtsScreen extends Component<IProps, IState> {
+class DebtsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     const { params } = navigation.state
     let right = <Icon name={'ios-search'} style={styles.headerIcon} />
@@ -32,7 +30,7 @@ class DebtsScreen extends Component<IProps, IState> {
   }
 
   onPress = () => {
-      this.props.navigation.navigate('DebtDetails')
+    this.props.navigation.navigate('DebtDetails')
   }
 
   render() {
@@ -48,3 +46,17 @@ class DebtsScreen extends Component<IProps, IState> {
 }
 
 export default DebtsScreen
+
+const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

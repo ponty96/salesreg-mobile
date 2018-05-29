@@ -1,23 +1,22 @@
-import React, { PureComponent } from 'react';
-import { Form, Icon } from 'native-base';
-import { View, TouchableOpacity } from 'react-native';
+import React, { PureComponent } from 'react'
+import { Form, Icon } from 'native-base'
+import { View, TouchableOpacity, Text } from 'react-native'
 
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import styles from '../Style/Form';
-import styles1 from '../Style/exportStyles';
+import InputAtom from '../Atom/InputAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import styles from '../Style/Form'
+import styles1 from '../Style/exportStyles'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  phone: string;
-  password: string;
-  name: string;
-  confirm_password: string;
-  gender: string;
+  phone: string
+  password: string
+  name: string
+  confirm_password: string
+  gender: string
 }
 
 class SigupForm extends PureComponent<IProps, IState> {
@@ -27,7 +26,7 @@ class SigupForm extends PureComponent<IProps, IState> {
     name: '',
     confirm_password: '',
     gender: ''
-  };
+  }
 
   signup = () => {
     console.log(
@@ -36,42 +35,38 @@ class SigupForm extends PureComponent<IProps, IState> {
       this.state.name,
       this.state.confirm_password,
       this.state.gender
-    );
-  };
+    )
+  }
 
   getPhone = (phone: string) => {
     this.setState({
       phone
-    });
-  };
+    })
+  }
 
   getPassword = (pass: string) => {
     this.setState({
       password: pass
-    });
-  };
+    })
+  }
 
   getName = (name: string) => {
     this.setState({
       name
-    });
-  };
+    })
+  }
 
   getConfirm = (confirmPass: string) => {
     this.setState({
       confirm_password: confirmPass
-    });
-  };
+    })
+  }
 
   updateGender = (selectedGender: string) => {
     this.setState({
       gender: selectedGender
-    });
-  };
-
-  navigate = (location: string) => {
-    this.props.navigation.navigate(location);
-  };
+    })
+  }
 
   render() {
     return (
@@ -111,37 +106,22 @@ class SigupForm extends PureComponent<IProps, IState> {
           contStyle={styles1.marginlessInput}
         />
 
-        <View style={styles.buttonsWrapper}>
+        <View>
           <TouchableOpacity
-            style={{ flexDirection: 'row', alignSelf: 'flex-end' }}
+            style={styles.nextButtonContainer}
+            onPress={() => this.props.navigation.navigate('SignUp2')}
           >
-            <ButtonAtom
-              btnText="NEXT"
-              transparent={true}
-              funcValue={'SignUp2'}
-              onPress={this.navigate}
-            />
+            <Text style={styles.nextText}>NEXT </Text>
             <Icon
-              name="md-arrow-round-forward"
-              style={{ color: 'red', fontSize: 20, alignSelf: 'center' }}
+              name="trending-flat"
+              type="MaterialIcons"
+              style={styles.nextIcon}
             />
           </TouchableOpacity>
-          {/*<ButtonAtom
-            btnText="SIGN UP"
-            onPress={this.signup}
-            btnStyle={styles.fullWidth}
-            textStyle={styles.longButtonCenteredText}
-          />
-          <ButtonAtom
-            btnText="I have an account already"
-            transparent={true}
-            funcValue={'Login'}
-            onPress={this.navigate}
-          />*/}
         </View>
       </Form>
-    );
+    )
   }
 }
 
-export default SigupForm;
+export default SigupForm

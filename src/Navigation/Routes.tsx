@@ -156,9 +156,6 @@ const businessStack = StackNavigator(
     },
     EditUserProfile: {
       screen: EditUserProfileScreen
-    },
-    SignUp2: {
-      screen: SignUp2Screen
     }
   },
   {
@@ -200,7 +197,8 @@ const authStack = StackNavigator(
     OnBoarding: OnBoardingScreen,
     Login: LoginScreen,
     Reset: ResetScreen,
-    Signup: SignupScreen
+    Signup: SignupScreen,
+    SignUp2: SignUp2Screen
   },
   {
     headerMode: 'none'

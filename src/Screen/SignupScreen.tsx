@@ -1,12 +1,19 @@
-import React, { PureComponent } from 'react';
-import { Text, View, KeyboardAvoidingView, ScrollView } from 'react-native';
+import React, { PureComponent } from 'react'
+import {
+  Text,
+  View,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet
+} from 'react-native'
 
-import styles from './../Style/Auth';
-import SignupForm from '../Components/SignupForm';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
+import SignupForm from '../Components/SignupForm'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import TransitionAtom from '../Atom/TransitionAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {}
@@ -19,50 +26,36 @@ class SignupScreen extends PureComponent<IProps, IState> {
         <ScrollView>
           <View style={styles.wrapper}>
             <Text style={styles.signUpText}>SIGN UP</Text>
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                justifyContent: 'center'
-              }}
-            >
-              <View
-                style={{
-                  backgroundColor: 'red',
-                  borderRadius: 20,
-                  height: 20,
-                  width: 20
-                }}
-              />
-              <View
-                style={{
-                  borderBottomColor: 'red',
-                  borderBottomWidth: 2,
-                  marginTop: 10,
-                  marginBottom: 10,
-                  width: 30
-                }}
-              />
-              <View
-                style={{
-                  backgroundColor: 'white',
-                  borderWidth: 1,
-                  borderColor: 'red',
-                  borderRadius: 20,
-                  height: 20,
-                  width: 20
-                }}
-              />
-            </View>
-            <Text style={styles.signUpText}>PERSONAL INFORMATION</Text>
+            <TransitionAtom screen1={true} />
+            <Text style={styles.personalInfoText}>PERSONAL INFORMATION</Text>
             <KeyboardAvoidingView behavior={'position'}>
               <SignupForm navigation={this.props.navigation} />
             </KeyboardAvoidingView>
           </View>
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default SignupScreen;
+export default SignupScreen
+
+const styles = StyleSheet.create({
+  personalInfoText: {
+    marginTop: '3%',
+    color: color.primary,
+    textAlign: 'center'
+  },
+  wrapper: {
+    paddingHorizontal: 32
+  },
+  signUpText: {
+    color: color.primary,
+    marginTop: 32,
+    alignSelf: 'center'
+  },
+  container: {
+    flex: 1,
+    backgroundColor: color.secondary
+  }
+})

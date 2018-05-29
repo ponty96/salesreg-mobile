@@ -1,55 +1,9 @@
-import { StyleSheet } from 'react-native';
-import { color } from './Color';
+import { StyleSheet } from 'react-native'
+import { color } from './Color'
 
 export default StyleSheet.create({
-  buttonRed: {
-    backgroundColor: color.redButton,
-    paddingHorizontal: 32,
-    alignSelf: 'center',
-    marginVertical: 8,
-    borderRadius: 3
-  },
-  buttonTransparent: {
-    backgroundColor: color.secondary,
-    paddingHorizontal: 32,
-    alignSelf: 'center',
-    marginVertical: 8
-  },
-  textRed: {
-    color: color.primary
-  },
-  textTransparent: {
-    color: color.secondary
-  },
-  label: {
-    color: color.inactive
-  },
-  required: {
-    color: color.primary
-  },
-  buttonDisabled: {
-    backgroundColor: color.disabled,
-    paddingHorizontal: 32,
-    alignSelf: 'center',
-    marginVertical: 8
-  },
   saveCancelContainer: {
     flexDirection: 'row'
-  },
-  imgContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-    marginVertical: 16
-  },
-  imgPlaceholderText: {
-    fontWeight: 'bold',
-    fontSize: 20
-  },
-  selfAlign: {
-    alignSelf: 'center'
   },
   icon: {
     marginTop: 15,
@@ -61,28 +15,6 @@ export default StyleSheet.create({
     alignSelf: 'center',
     marginTop: 10,
     paddingBottom: 50
-  },
-  itemsContainer1: {
-    flex: 1,
-    width: '100%',
-    alignSelf: 'center',
-    marginTop: 10,
-    paddingBottom: 50
-  },
-  secondCompartment: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
-    paddingBottom: 10
-  },
-  compartmentItemWrapper: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'flex-end',
-    marginRight: 25
-  },
-  compartmentItem: {
-    marginLeft: 35,
-    color: 'grey'
   },
   header: {
     backgroundColor: '#F0F0F0',
@@ -97,115 +29,6 @@ export default StyleSheet.create({
     marginTop: 25,
     marginLeft: 10
   },
-  underneathText: {
-    marginLeft: 0,
-    color: color.menu,
-    fontSize: 12,
-    marginBottom: 25
-  },
-  font1: {
-    fontSize: 11,
-    color: '#000',
-    paddingLeft: 4
-  },
-  inputView: {
-    flexDirection: 'row',
-    width: '100%',
-    alignSelf: 'center',
-    flex: 1
-  },
-  innerStart: {
-    width: '50%',
-    flex: 1,
-    alignSelf: 'flex-start'
-  },
-  innerEnd: {
-    width: '50%',
-    flex: 1,
-    alignSelf: 'center'
-  },
-  innerLastEnd: {
-    width: '50%',
-    flex: 0,
-    alignSelf: 'flex-end',
-    paddingTop: 20
-  },
-  underText: {
-    marginRight: '50%',
-    fontSize: 10
-  },
-  innerFirstPicker: {
-    flex: 1,
-    alignSelf: 'center'
-  },
-  headerOrder: {
-    backgroundColor: '#FFF'
-  },
-  leftOrder: {
-    flex: 1,
-    width: '40%',
-    flexDirection: 'row'
-  },
-  iconOrder: {
-    fontSize: 20,
-    color: '#c0c0c0',
-    paddingRight: 5
-  },
-  redColorText: {
-    color: 'red'
-  },
-  innerItemContainer: {
-    flexDirection: 'column',
-    alignSelf: 'center',
-    width: '98%'
-  },
-  cusName: {
-    width: '98%',
-    height: 70,
-    marginBottom: 3,
-    borderRadius: 2,
-    alignSelf: 'center',
-    borderWidth: 1,
-    borderColor: '#f0f0f0',
-    marginVertical: 16
-  },
-  btn1: {
-    alignSelf: 'flex-start'
-  },
-  txt1: {
-    fontWeight: 'bold',
-    fontSize: 16,
-    textAlign: 'left'
-  },
-  bottomSide: {
-    width: '100%',
-    height: 80,
-    flexDirection: 'row',
-    borderTopColor: '#f0f0f0',
-    borderTopWidth: 1
-  },
-  innerBottom: {
-    flexDirection: 'column',
-    alignSelf: 'flex-start',
-    width: '55%',
-    marginTop: 20
-  },
-  bottomGrey: {
-    color: '#c0c0c0',
-    paddingLeft: 16
-  },
-  bottomRed: {
-    color: 'red',
-    paddingLeft: 16
-  },
-  btn2: {
-    alignSelf: 'flex-end',
-    marginBottom: 15
-  },
-  txt2: {
-    fontWeight: 'bold',
-    color: '#fff'
-  },
   buttonsWrapper: {
     marginTop: 20
   },
@@ -213,15 +36,39 @@ export default StyleSheet.create({
     color: color.inactive
   },
   fullWidth: {
-    width: '100%'
-  },
-  longButtonCenteredText: {
-    marginLeft: '40%'
+    width: '100%',
+    paddingHorizontal: 0,
+    justifyContent: 'center'
   },
   resetPasswordText: {
     color: color.menu
   },
   resetFormContainer: {
     marginTop: '4%'
+  },
+  nextButtonContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    marginVertical: '2%'
+  },
+  nextText: {
+    color: color.redButton
+  },
+  nextIcon: {
+    color: color.redButton
+  },
+
+  placeholderIcon: {
+    color: color.inactive,
+    fontSize: 120
+  },
+
+  termsText: {
+    color: color.menu,
+    textAlign: 'center'
+  },
+  redTermText: {
+    color: color.redButton
   }
-});
+})

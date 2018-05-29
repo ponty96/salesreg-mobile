@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import styles from './../Style/Screen'
 import NewBusinessForm from '../Components/NewBusinessForm'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -48,7 +48,7 @@ class NewBusinessScreen extends Component<IProps, IState> {
   componentWillMount() {
     this.setState({
       item: this.props.navigation.getParam('data', undefined)
-    });
+    })
   }
 
   render() {
@@ -64,3 +64,27 @@ class NewBusinessScreen extends Component<IProps, IState> {
 }
 
 export default NewBusinessScreen
+
+const styles = StyleSheet.create({
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  },
+  headerText: {
+    color: color.secondary,
+    fontWeight: 'bold',
+    paddingRight: 16,
+    fontSize: 18
+  },
+  headerIconLogout: {
+    color: color.secondary,
+    padding: 8,
+    fontSize: 28
+  },
+  headerItem: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  }
+})

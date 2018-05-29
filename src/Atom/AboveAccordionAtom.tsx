@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { Thumbnail } from 'native-base'
-import styles from './../Style/exportStyles'
+import { color } from '../Style/Color'
 
 interface IAboveAccordProps {
   uri: string
@@ -39,5 +39,49 @@ class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  aboveAccordionContainer: {
+    flexDirection: 'row',
+    flex: 0,
+    borderTopWidth: 0.5,
+    borderTopColor: color.listBorderColor
+  },
+
+  aboveAccordionPictureView: {
+    flexDirection: 'column',
+    width: '50%',
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'center'
+    //  backgroundColor: '#fff',
+  },
+
+  aboveAccordiondp: {
+    height: 90,
+    width: 90
+  },
+
+  aboveAccordionPictureText: {
+    paddingTop: 10,
+    fontSize: 18,
+    fontWeight: '400',
+    color: color.menu
+  },
+
+  aboveAccordionMoneyView: {
+    width: '50%',
+    height: 200,
+    alignItems: 'center',
+    justifyContent: 'center'
+    // backgroundColor: '#FFF',
+  },
+
+  aboveAccordionRedNumber: {
+    color: color.primary,
+    fontSize: 25,
+    fontWeight: 'bold'
+  }
+})
 
 export default AboveAccordionAtom
