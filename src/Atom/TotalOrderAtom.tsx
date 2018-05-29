@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import styles from './../Style/exportStyles'
 import { color } from '../Style/Color'
 
 interface IProps {
