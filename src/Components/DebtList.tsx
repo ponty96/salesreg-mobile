@@ -1,11 +1,9 @@
 import React, { PureComponent } from 'react';
-import { Text, View, ScrollView, FlatList } from 'react-native';
+import { Text, View, ScrollView, FlatList, StyleSheet } from 'react-native';
 import { Header, Right } from 'native-base';
-
 import PickerAtom from '../Atom/PickerAtom';
 import DebtListAtom from '../Atom/DebtListAtom';
 import TotalDebtAtom from '../Atom/TotalDebtAtom';
-import styles from '../Style/exportStyles';
 import { debtList } from '../config/data';
 
 interface IProps {
@@ -50,3 +48,27 @@ class DebtList extends PureComponent<IProps, IState> {
 }
 
 export default DebtList;
+
+const styles = StyleSheet.create({
+  customerListContainer: {
+    // backgroundColor: '#FFF',
+    flex: 1,
+    width: '100%'
+  },
+  customerListHeader: {
+    backgroundColor: '#fff',
+    width: '100%',
+    height: 40
+  },
+  customerListDirect: {
+    flexDirection: 'row'
+  },
+  customerListDropText: {
+    paddingBottom: 10,
+    fontSize: 14
+  },
+  pickerStyle: {
+    width: 130,
+    height: 35
+  }
+});

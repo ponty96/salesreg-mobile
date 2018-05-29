@@ -1,49 +1,46 @@
-import { Form, Icon } from 'native-base'
-import * as React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-
-import ButtonAtom from '../Atom/ButtonAtom'
-import InputAtom from '../Atom/InputAtom'
-import ModalAtom from './../Atom/ModalAtom'
-import styleLayout from './../Style/Layout'
-import styles from './../Style/Screen'
-import styles1 from '../Style/exportStyles'
+import { Form, Icon } from 'native-base';
+import * as React from 'react';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import ButtonAtom from '../Atom/ButtonAtom';
+import InputAtom from '../Atom/InputAtom';
+import ModalAtom from './../Atom/ModalAtom';
+import { color } from './../Style/Color';
 
 interface IProps {
-  getValue?: (a: any, b: any) => void
-  closeModal?: () => void
-  headerText?: string
-  visibility: boolean
-  amount?: string
+  getValue?: (a: any, b: any) => void;
+  closeModal?: () => void;
+  headerText?: string;
+  visibility: boolean;
+  amount?: string;
 }
 interface IState {
-  amount: any
-  balance: any
+  amount: any;
+  balance: any;
 }
 
 class PaymentModal extends React.Component<IProps, IState> {
   static defaultProps: IProps = {
     visibility: false
-  }
+  };
 
   state: IState = {
     amount: '',
     balance: ''
-  }
+  };
 
   public getAmount = (amount: any) => {
-    this.setState({ amount })
-  }
+    this.setState({ amount });
+  };
 
   public getBalance = (balance: any) => {
-    this.setState({ balance })
-  }
+    this.setState({ balance });
+  };
 
   public pay = () => {
     if (this.props.getValue) {
-      this.props.getValue(this.state.amount, this.state.balance)
+      this.props.getValue(this.state.amount, this.state.balance);
     }
-  }
+  };
 
   public renderHeader = () => {
     return (
@@ -53,22 +50,22 @@ class PaymentModal extends React.Component<IProps, IState> {
           <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    )
-  }
+    );
+  };
 
   public renderBody = () => {
     return (
       <View style={styles.modalBody}>
         <Form>
-          <View style={styleLayout.listTouchCont}>
+          <View style={styles.listTouchCont}>
             <InputAtom
               label="Amount paid"
               keyboardType={'numeric'}
               getValue={this.getAmount}
               contStyle={[
-                styles1.marginlessInput,
-                styles1.marginRight,
-                styles1.flexfull
+                styles.marginlessInput,
+                styles.marginRight,
+                styles.flexfull
               ]}
             />
 
@@ -76,37 +73,37 @@ class PaymentModal extends React.Component<IProps, IState> {
               label="Balance"
               keyboardType={'numeric'}
               getValue={this.getBalance}
-              contStyle={[styles1.marginlessInput, styles1.flexfull]}
+              contStyle={[styles.marginlessInput, styles.flexfull]}
             />
           </View>
 
-          <View style={styleLayout.listTouchCont}>
-            <View style={styleLayout.formViewContainer}>
+          <View style={styles.listTouchCont}>
+            <View style={styles.formViewContainer}>
               <InputAtom
                 label="Balance due date"
                 keyboardType={'numeric'}
                 getValue={this.getAmount}
                 contStyle={[
-                  styles1.marginlessInput,
-                  styles1.marginRight,
-                  styles1.flexfull
+                  styles.marginlessInput,
+                  styles.marginRight,
+                  styles.flexfull
                 ]}
               />
               <Text> dd-mm-yyyy </Text>
             </View>
 
-            <Text style={styleLayout.formViewContainer} />
+            <Text style={styles.formViewContainer} />
           </View>
 
           <ButtonAtom
             btnText="Pay"
             onPress={this.pay}
-            btnStyle={styles1.modalButton}
+            btnStyle={styles.modalButton}
           />
         </Form>
       </View>
-    )
-  }
+    );
+  };
 
   public render() {
     return (
@@ -115,8 +112,52 @@ class PaymentModal extends React.Component<IProps, IState> {
         body={this.renderBody()}
         header={this.renderHeader()}
       />
-    )
+    );
   }
 }
 
-export default PaymentModal
+export default PaymentModal;
+
+const styles = StyleSheet.create({
+  modalHeader: {
+    flexDirection: 'row',
+    padding: 16,
+    backgroundColor: color.grey
+  },
+  modalHeaderText: {
+    fontSize: 16,
+    color: color.menu,
+    flex: 4
+  },
+  modalCloseIcon: {
+    flex: 1,
+    color: color.inactive,
+    paddingLeft: 16
+  },
+  modalBody: {
+    padding: 16
+  },
+  marginlessInput: {
+    marginLeft: 0
+  },
+  modalButton: {
+    marginTop: 32,
+    marginBottom: 16,
+    marginHorizontal: 16,
+    alignSelf: 'flex-end'
+  },
+  flexfull: {
+    flex: 1
+  },
+  marginRight: {
+    marginRight: 8
+  },
+  formViewContainer: {
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  listTouchCont: {
+    flex: 1,
+    flexDirection: 'row'
+  }
+});

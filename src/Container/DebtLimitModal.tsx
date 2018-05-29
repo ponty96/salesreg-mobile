@@ -1,40 +1,39 @@
-import { Form, Icon } from 'native-base'
-import * as React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import ButtonAtom from '../Atom/ButtonAtom'
-import InputAtom from '../Atom/InputAtom'
-import ModalAtom from './../Atom/ModalAtom'
-import styles from './../Style/Screen'
-import styles1 from '../Style/exportStyles'
+import { Form, Icon } from 'native-base';
+import * as React from 'react';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import ButtonAtom from '../Atom/ButtonAtom';
+import InputAtom from '../Atom/InputAtom';
+import ModalAtom from './../Atom/ModalAtom';
+import { color } from './../Style/Color';
 
 interface IProps {
-  getValue?: (a: string) => void
-  closeModal?: () => void
-  headerText?: string
-  amount?: string
-  placeholder?: string
-  visibility: boolean
+  getValue?: (a: string) => void;
+  closeModal?: () => void;
+  headerText?: string;
+  amount?: string;
+  placeholder?: string;
+  visibility: boolean;
 }
 interface IState {
-  amount: string
+  amount: string;
 }
 class DebtLimitModal extends React.Component<IProps, IState> {
   static defaultProps: IProps = {
     visibility: false
-  }
+  };
   state: IState = {
     amount: ''
-  }
+  };
   getAmount = (amount: string) => {
-    this.setState({ amount })
-  }
+    this.setState({ amount });
+  };
 
   set = () => {
     if (this.props.getValue) {
-      this.props.getValue(this.state.amount)
+      this.props.getValue(this.state.amount);
     }
-    this.props.closeModal()
-  }
+    this.props.closeModal();
+  };
 
   renderHeader = () => {
     return (
@@ -44,12 +43,12 @@ class DebtLimitModal extends React.Component<IProps, IState> {
           <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    )
-  }
+    );
+  };
 
   renderBody = () => {
     // tslint:disable-next-line:radix
-    const amount = parseInt(this.state.amount)
+    const amount = parseInt(this.state.amount);
     return (
       <View style={styles.modalBody}>
         <Form>
@@ -57,7 +56,7 @@ class DebtLimitModal extends React.Component<IProps, IState> {
             floatingLabel={false}
             keyboardType={'numeric'}
             getValue={this.getAmount}
-            contStyle={styles1.marginlessInput}
+            contStyle={styles.marginlessInput}
             placeholder={this.props.placeholder}
           />
 
@@ -85,12 +84,12 @@ class DebtLimitModal extends React.Component<IProps, IState> {
           <ButtonAtom
             btnText="OK"
             onPress={this.set}
-            btnStyle={styles1.modalButton}
+            btnStyle={styles.modalButton}
           />
         </Form>
       </View>
-    )
-  }
+    );
+  };
 
   render() {
     return (
@@ -99,8 +98,57 @@ class DebtLimitModal extends React.Component<IProps, IState> {
         body={this.renderBody()}
         header={this.renderHeader()}
       />
-    )
+    );
   }
 }
 
-export default DebtLimitModal
+export default DebtLimitModal;
+
+const styles = StyleSheet.create({
+  modalHeader: {
+    flexDirection: 'row',
+    padding: 16,
+    backgroundColor: color.grey
+  },
+  modalHeaderText: {
+    fontSize: 16,
+    color: color.menu,
+    flex: 4
+  },
+  modalCloseIcon: {
+    flex: 1,
+    color: color.inactive,
+    paddingLeft: 16
+  },
+  modalBody: {
+    padding: 16
+  },
+  debtLimitWarning: {
+    flexDirection: 'row'
+  },
+  creditLimit: {
+    paddingTop: 15
+  },
+  modalInfoIcon: {
+    paddingHorizontal: 8,
+    color: color.inactive
+  },
+  debtLimitWarningText: {
+    textAlign: 'justify'
+  },
+  menuColor: {
+    color: color.menu
+  },
+  redText: {
+    color: color.primary
+  },
+  marginlessInput: {
+    marginLeft: 0
+  },
+  modalButton: {
+    marginTop: 32,
+    marginBottom: 16,
+    marginHorizontal: 16,
+    alignSelf: 'flex-end'
+  }
+});

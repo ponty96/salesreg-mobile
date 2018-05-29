@@ -1,42 +1,40 @@
-import React from 'react'
-import { Text } from 'react-native'
-import { Form } from 'native-base'
-
-import InputAtom from './../Atom/InputAtom'
-import ButtonAtom from './../Atom/ButtonAtom'
-import styles from './../Style/Form'
-import styles1 from './../Style/exportStyles'
+import React from 'react';
+import { Text, StyleSheet } from 'react-native';
+import { Form } from 'native-base';
+import InputAtom from './../Atom/InputAtom';
+import ButtonAtom from './../Atom/ButtonAtom';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  code: string
+  code: string;
 }
 
 class ResetForm extends React.Component<IProps, IState> {
   state = {
     code: ''
-  }
+  };
 
   reset = () => {
-    console.log(this.state.code)
-  }
+    console.log(this.state.code);
+  };
 
   resend = () => {
-    console.log('Put resend logic here')
-  }
+    console.log('Put resend logic here');
+  };
 
   getCode = (code: string) => {
     this.setState({
       code
-    })
-  }
+    });
+  };
 
   navigate = (location: string) => {
-    this.props.navigation.navigate(location)
-  }
+    this.props.navigation.navigate(location);
+  };
 
   render() {
     return (
@@ -50,7 +48,7 @@ class ResetForm extends React.Component<IProps, IState> {
           placeholder={'Enter reset code'}
           floatingLabel={false}
           getValue={this.getCode}
-          contStyle={styles1.marginlessInput}
+          contStyle={styles.marginlessInput}
         />
 
         <ButtonAtom
@@ -62,9 +60,9 @@ class ResetForm extends React.Component<IProps, IState> {
           btnText="RESET PASSWORD"
           onPress={this.reset}
           disabled={this.state.code ? false : true}
-          btnStyle={styles1.resetButton}
+          btnStyle={styles.resetButton}
         />
-        <Text style={styles1.noAccount}>Don't have an account?</Text>
+        <Text style={styles.noAccount}>Don't have an account?</Text>
         <ButtonAtom
           btnText="SIGN UP"
           transparent={true}
@@ -72,8 +70,30 @@ class ResetForm extends React.Component<IProps, IState> {
           onPress={this.navigate}
         />
       </Form>
-    )
+    );
   }
 }
 
-export default ResetForm
+export default ResetForm;
+
+const styles = StyleSheet.create({
+  resetPasswordText: {
+    color: color.menu
+  },
+  resetFormContainer: {
+    marginTop: '4%'
+  },
+  marginlessInput: {
+    marginLeft: 0
+  },
+  noAccount: {
+    color: color.menu,
+    textAlign: 'center',
+    marginTop: '6%'
+  },
+  resetButton: {
+    width: '100%',
+    height: '17%',
+    justifyContent: 'center'
+  }
+});

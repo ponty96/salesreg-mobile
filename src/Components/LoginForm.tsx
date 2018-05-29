@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react'
-import { Form, Text } from 'native-base'
-
-import InputAtom from '../Atom/InputAtom'
-import ButtonAtom from '../Atom/ButtonAtom'
-import styles from '../Style/exportStyles'
+import React, { PureComponent } from 'react';
+import { Form, Text } from 'native-base';
+import { StyleSheet } from 'react-native';
+import InputAtom from '../Atom/InputAtom';
+import ButtonAtom from '../Atom/ButtonAtom';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  phone: string
-  password: string
-  underlineColorAndroid: string
+  phone: string;
+  password: string;
+  underlineColorAndroid: string;
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
@@ -20,28 +20,28 @@ class LoginForm extends PureComponent<IProps, IState> {
     phone: '',
     password: '',
     underlineColorAndroid: 'red'
-  }
+  };
 
   login = () => {
-    console.log(this.state.phone, this.state.password)
-    this.props.navigation.navigate('App')
-  }
+    console.log(this.state.phone, this.state.password);
+    this.props.navigation.navigate('App');
+  };
 
   getPhone = (phone: any) => {
     this.setState({
       phone
-    })
-  }
+    });
+  };
 
   getPassword = (pass: any) => {
     this.setState({
       password: pass
-    })
-  }
+    });
+  };
 
   navigate = (location: any) => {
-    this.props.navigation.navigate(location)
-  }
+    this.props.navigation.navigate(location);
+  };
 
   render() {
     return (
@@ -83,8 +83,24 @@ class LoginForm extends PureComponent<IProps, IState> {
           onPress={this.navigate}
         />
       </Form>
-    )
+    );
   }
 }
 
-export default LoginForm
+export default LoginForm;
+
+const styles = StyleSheet.create({
+  marginlessInput: {
+    marginLeft: 0
+  },
+  loginButton: {
+    width: '100%',
+    height: '13%',
+    justifyContent: 'center'
+  },
+  noAccount: {
+    color: color.menu,
+    textAlign: 'center',
+    marginTop: '6%'
+  }
+});

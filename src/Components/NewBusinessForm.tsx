@@ -1,24 +1,27 @@
 import React, { PureComponent } from 'react';
-import { View, KeyboardAvoidingView, ScrollView } from 'react-native';
+import {
+  View,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet
+} from 'react-native';
 import { Form } from 'native-base';
-
 import InputAtom from '../Atom/InputAtom';
 import ImageAtom from '../Atom/ImageAtom';
-import styles from './../Style/Layout';
 import SaveCancelButton from '../Container/SaveCancelButton';
-import styles1 from './../Style/exportStyles';
+import { color } from './../Style/Color';
 
 interface IProps {
-    navigation: any;
-    item?: any;
+  navigation: any;
+  item?: any;
 }
 
 interface IState {
-    address: string;
-    name: string;
-    email: string;
-    about: string;
-    image: string;
+  address: string;
+  name: string;
+  email: string;
+  about: string;
+  image: string;
 }
 
 class NewBusinessForm extends PureComponent<IProps, IState> {
@@ -28,7 +31,7 @@ class NewBusinessForm extends PureComponent<IProps, IState> {
     email: '',
     about: '',
     image: ''
-  }
+  };
 
   create = () => {
     console.log(
@@ -38,31 +41,31 @@ class NewBusinessForm extends PureComponent<IProps, IState> {
       this.state.about,
       this.state.image
     );
-    this.props.navigation.goBack()
+    this.props.navigation.goBack();
   };
 
   getAddress = (address: any) => {
-    this.setState({ address })
+    this.setState({ address });
   };
 
   getEmail = (email: any) => {
-    this.setState({ email })
+    this.setState({ email });
   };
 
   getName = (name: any) => {
-    this.setState({ name })
+    this.setState({ name });
   };
 
   getAbout = (about: any) => {
-    this.setState({ about })
+    this.setState({ about });
   };
 
   getImage = (image: any) => {
-    this.setState({ image })
+    this.setState({ image });
   };
 
   navigate = (location: any) => {
-    this.props.navigation.navigate(location)
+    this.props.navigation.navigate(location);
   };
 
   render() {
@@ -86,7 +89,7 @@ class NewBusinessForm extends PureComponent<IProps, IState> {
                 defaultValue={
                   this.props.item ? this.props.item.businessName : undefined
                 }
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
 
               <InputAtom
@@ -96,7 +99,7 @@ class NewBusinessForm extends PureComponent<IProps, IState> {
                 defaultValue={
                   this.props.item ? this.props.item.address : undefined
                 }
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
 
               <InputAtom
@@ -105,13 +108,13 @@ class NewBusinessForm extends PureComponent<IProps, IState> {
                 defaultValue={
                   this.props.item ? this.props.item.email : undefined
                 }
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
 
               <InputAtom
                 label="About(give description of your business)"
                 getValue={this.getAbout}
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
                 defaultValue={
                   this.props.item ? this.props.item.description : undefined
                 }
@@ -125,8 +128,24 @@ class NewBusinessForm extends PureComponent<IProps, IState> {
           positiveButtonName={this.props.item ? 'SAVE' : 'CREATE'}
         />
       </View>
-    )
+    );
   }
 }
 
-export default NewBusinessForm
+export default NewBusinessForm;
+
+const styles = StyleSheet.create({
+  defaultPadding: {
+    paddingHorizontal: 16
+  },
+  itemsContainer: {
+    flex: 4
+  },
+  formViewContainer: {
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  marginlessInput: {
+    marginLeft: 0
+  }
+});
