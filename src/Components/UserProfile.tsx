@@ -1,13 +1,11 @@
-import React, { PureComponent } from 'react'
-import { Icon } from 'native-base'
-import { Image, View, Text } from 'react-native'
-
-import styles from '../Style/Screen'
-import styles1 from '../Style/Form'
+import React, { PureComponent } from 'react';
+import { Icon } from 'native-base';
+import { Image, View, Text, StyleSheet } from 'react-native';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
-  item: any
+  navigation: any;
+  item: any;
 }
 
 interface IState {}
@@ -17,21 +15,17 @@ class UserProfile extends PureComponent<IProps, IState> {
     return (
       <View style={styles.container}>
         <View style={[styles.secondCompartment, styles.bottomPadding]}>
-          <View style={styles1.selfAlign}>
+          <View style={styles.selfAlign}>
             {this.props.item.image ? (
               <Image
                 source={{ uri: this.props.item.image }}
-                style={styles1.imgContainer}
+                style={styles.imgContainer}
               />
             ) : (
-              <Icon
-                name="user-circle"
-                style={styles1.icon}
-                type="FontAwesome"
-              />
+              <Icon name="user-circle" style={styles.icon} type="FontAwesome" />
             )}
           </View>
-          <Text style={[styles1.selfAlign, styles.detailItemWrapper]}>
+          <Text style={[styles.selfAlign, styles.detailItemWrapper]}>
             {this.props.item.name}
           </Text>
         </View>
@@ -46,8 +40,55 @@ class UserProfile extends PureComponent<IProps, IState> {
           <Text style={styles.indentRight}>{this.props.item.phoneNumber}</Text>
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default UserProfile
+export default UserProfile;
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  secondCompartment: {
+    borderBottomWidth: 1,
+    borderBottomColor: 'lightgrey',
+    paddingBottom: 10
+  },
+  bottomPadding: {
+    paddingBottom: 30
+  },
+  detailItemWrapper: {
+    marginVertical: 10
+  },
+  smallCompartment: {
+    height: 60,
+    borderBottomWidth: 1,
+    borderBottomColor: color.textBorderBottom,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between'
+  },
+  indentLeft: {
+    marginLeft: 20
+  },
+  indentRight: {
+    marginRight: 20
+  },
+  selfAlign: {
+    alignSelf: 'center'
+  },
+  icon: {
+    marginTop: 15,
+    color: color.inactive
+  },
+  imgContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+    marginVertical: 16
+  }
+});

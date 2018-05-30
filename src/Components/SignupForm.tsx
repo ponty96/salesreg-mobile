@@ -1,22 +1,21 @@
-import React, { PureComponent } from 'react'
-import { Form, Icon } from 'native-base'
-import { View, TouchableOpacity, Text } from 'react-native'
+import React, { PureComponent } from 'react';
+import { Form, Icon } from 'native-base';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-import InputAtom from '../Atom/InputAtom'
-import PickerAtom from '../Atom/PickerAtom'
-import styles from '../Style/Form'
-import styles1 from '../Style/exportStyles'
+import InputAtom from '../Atom/InputAtom';
+import PickerAtom from '../Atom/PickerAtom';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  phone: string
-  password: string
-  name: string
-  confirm_password: string
-  gender: string
+  phone: string;
+  password: string;
+  name: string;
+  confirm_password: string;
+  gender: string;
 }
 
 class SigupForm extends PureComponent<IProps, IState> {
@@ -26,7 +25,7 @@ class SigupForm extends PureComponent<IProps, IState> {
     name: '',
     confirm_password: '',
     gender: ''
-  }
+  };
 
   signup = () => {
     console.log(
@@ -35,38 +34,38 @@ class SigupForm extends PureComponent<IProps, IState> {
       this.state.name,
       this.state.confirm_password,
       this.state.gender
-    )
-  }
+    );
+  };
 
   getPhone = (phone: string) => {
     this.setState({
       phone
-    })
-  }
+    });
+  };
 
   getPassword = (pass: string) => {
     this.setState({
       password: pass
-    })
-  }
+    });
+  };
 
   getName = (name: string) => {
     this.setState({
       name
-    })
-  }
+    });
+  };
 
   getConfirm = (confirmPass: string) => {
     this.setState({
       confirm_password: confirmPass
-    })
-  }
+    });
+  };
 
   updateGender = (selectedGender: string) => {
     this.setState({
       gender: selectedGender
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -74,20 +73,20 @@ class SigupForm extends PureComponent<IProps, IState> {
         <InputAtom
           label="Full name"
           getValue={this.getName}
-          contStyle={styles1.marginlessInput}
+          contStyle={styles.marginlessInput}
         />
 
         <InputAtom
           label="Phone number"
           getValue={this.getPhone}
           keyboardType="numeric"
-          contStyle={styles1.marginlessInput}
+          contStyle={styles.marginlessInput}
         />
 
-        <View style={[styles.genderPickerStyle, styles1.marginlessInput]}>
+        <View style={[styles.genderPickerStyle, styles.marginlessInput]}>
           <PickerAtom
             list={['Gender', 'Male', 'Female']}
-            style={styles1.faintPicker}
+            style={styles.faintPicker}
           />
         </View>
 
@@ -95,7 +94,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           label="Password"
           getValue={this.getPassword}
           secureTextEntry={true}
-          contStyle={styles1.marginlessInput}
+          contStyle={styles.marginlessInput}
           underneathText="Must be at least 6 characters"
         />
 
@@ -103,7 +102,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           label="Reenter-password"
           getValue={this.getConfirm}
           secureTextEntry={true}
-          contStyle={styles1.marginlessInput}
+          contStyle={styles.marginlessInput}
         />
 
         <View>
@@ -120,8 +119,35 @@ class SigupForm extends PureComponent<IProps, IState> {
           </TouchableOpacity>
         </View>
       </Form>
-    )
+    );
   }
 }
 
-export default SigupForm
+export default SigupForm;
+
+const styles = StyleSheet.create({
+  marginlessInput: {
+    marginLeft: 0
+  },
+  faintPicker: {
+    color: color.inactive,
+    width: '50%',
+    height: 35
+  },
+  genderPickerStyle: {
+    marginTop: 25,
+    marginLeft: 10
+  },
+  nextButtonContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    marginVertical: '2%'
+  },
+  nextText: {
+    color: color.redButton
+  },
+  nextIcon: {
+    color: color.redButton
+  }
+});
