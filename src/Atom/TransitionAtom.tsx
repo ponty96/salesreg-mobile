@@ -37,7 +37,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     alignSelf: 'center',
-    marginTop: '6%'
+    marginTop: '5%'
   },
   filledCircle: {
     backgroundColor: color.primary,

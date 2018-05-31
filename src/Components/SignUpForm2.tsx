@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react';
-import { Form } from 'native-base';
-import { View, Text, StyleSheet } from 'react-native';
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import ImageAtom from '../Atom/ImageAtom';
-import { color } from '../Style/Color';
+import React, { PureComponent } from 'react'
+import { Form } from 'native-base'
+import { View, Text, StyleSheet } from 'react-native'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import ImageAtom from '../Atom/ImageAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  image: string;
-  password: string;
-  name: string;
-  confirm_password: string;
-  gender: string;
+  image: string
+  password: string
+  name: string
+  confirm_password: string
+  gender: string
 }
 
 class SigupForm2 extends PureComponent<IProps, IState> {
@@ -25,7 +25,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
     name: '',
     confirm_password: '',
     gender: ''
-  };
+  }
 
   signup = () => {
     console.log(
@@ -34,40 +34,40 @@ class SigupForm2 extends PureComponent<IProps, IState> {
       this.state.name,
       this.state.confirm_password,
       this.state.gender
-    );
-  };
+    )
+  }
 
   getImage = (pic: any) => {
-    this.setState({ image: pic });
-  };
+    this.setState({ image: pic })
+  }
 
   getPassword = (pass: string) => {
     this.setState({
       password: pass
-    });
-  };
+    })
+  }
 
   getName = (name: string) => {
     this.setState({
       name
-    });
-  };
+    })
+  }
 
   getConfirm = (confirmPass: string) => {
     this.setState({
       confirm_password: confirmPass
-    });
-  };
+    })
+  }
 
   updateGender = (selectedGender: string) => {
     this.setState({
       gender: selectedGender
-    });
-  };
+    })
+  }
 
   navigate = (location: string) => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     return (
@@ -108,7 +108,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           <ButtonAtom
             btnText="SIGN UP"
             onPress={this.signup}
-            btnStyle={styles.fullWidth}
+            btnStyle={styles.longButton}
           />
           <Text style={styles.termsText}>
             Signing up means you agree with our{' '}
@@ -117,18 +117,18 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           </Text>
           <Text style={styles.haveAccount}>Or you have an account? </Text>
           <ButtonAtom
-            btnText="I have an account already"
+            btnText="LOGIN"
             transparent={true}
             funcValue={'Login'}
             onPress={this.navigate}
           />
         </View>
       </Form>
-    );
+    )
   }
 }
 
-export default SigupForm2;
+export default SigupForm2
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -144,8 +144,8 @@ const styles = StyleSheet.create({
     color: color.inactive,
     fontSize: 120
   },
-  fullWidth: {
-    width: '100%',
+  longButton: {
+    width: '90%',
     paddingHorizontal: 0,
     justifyContent: 'center'
   },
@@ -157,11 +157,11 @@ const styles = StyleSheet.create({
     color: color.redButton
   },
   haveAccount: {
-    marginTop: '5%',
+    marginTop: '4%',
     textAlign: 'center',
     color: color.menu
   },
   resetFormContainer: {
     marginTop: '4%'
   }
-});
+})

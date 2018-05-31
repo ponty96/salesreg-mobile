@@ -82,12 +82,6 @@ export default StyleSheet.create({
     color: color.secondary
   },
 
-  signupButton: {
-    width: '80%',
-    justifyContent: 'center',
-    height: '10%'
-  },
-
   loginButton: {
     width: '100%',
     height: '13%',

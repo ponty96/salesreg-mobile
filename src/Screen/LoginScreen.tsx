@@ -1,5 +1,11 @@
 import React from 'react'
-import { Text, View, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import {
+  Text,
+  View,
+  KeyboardAvoidingView,
+  StyleSheet,
+  ScrollView
+} from 'react-native'
 
 import LoginForm from '../Components/LoginForm'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
@@ -16,12 +22,14 @@ class LoginScreen extends React.Component<IProps, IState> {
     return (
       <View style={styles.container}>
         <AuthenticationHeader />
-        <View style={styles.wrapper}>
-          <Text style={styles.signUpText}>LOGIN</Text>
-          <KeyboardAvoidingView behavior="position">
-            <LoginForm navigation={this.props.navigation} />
-          </KeyboardAvoidingView>
-        </View>
+        <ScrollView>
+          <View style={styles.wrapper}>
+            <Text style={styles.signUpText}>LOGIN</Text>
+            <KeyboardAvoidingView behavior="position">
+              <LoginForm navigation={this.props.navigation} />
+            </KeyboardAvoidingView>
+          </View>
+        </ScrollView>
       </View>
     )
   }

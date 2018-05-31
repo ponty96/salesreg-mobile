@@ -3,7 +3,6 @@ import { View, Text, ScrollView, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
 import ButtonAtom from '../Atom/ButtonAtom'
-import styles1 from '../Style/exportStyles'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
 import { color } from '../Style/Color'
 
@@ -42,8 +41,7 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
 
           <ButtonAtom
             btnText="TRY FOR FREE"
-            textStyle={styles1.redButtonText}
-            btnStyle={styles1.signupButton}
+            btnStyle={styles.signupButton}
             funcValue={'Signup'}
             onPress={this.navigate}
           />
@@ -70,8 +68,13 @@ const styles = StyleSheet.create({
     paddingHorizontal: 0,
     marginBottom: '4%'
   },
+  signupButton: {
+    width: '80%',
+    justifyContent: 'center',
+    height: '10%'
+  },
   haveAccount: {
-    marginTop: '5%',
+    marginTop: '4%',
     textAlign: 'center',
     color: color.menu
   },

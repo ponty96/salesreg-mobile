@@ -72,7 +72,7 @@ class ImageAtom extends React.Component<IProps, any> {
                 this.props.placeholder.substr(0, 1).toUpperCase()}
             </Text>
           </View>
-          <Text style={styles.selfAlign}>Upload logo</Text>
+          <Text style={[styles.selfAlign, styles.menuColor]}>Upload logo</Text>
         </TouchableOpacity>
       )
     }
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     height: 150,
     width: 150,
     borderRadius: 75,
-    marginVertical: 16
+    marginVertical: 15
   },
   iconBackground: {
     height: 150,
@@ -104,5 +104,8 @@ const styles = StyleSheet.create({
   imgPlaceholderText: {
     fontWeight: 'bold',
     fontSize: 20
+  },
+  menuColor: {
+    color: color.menu
   }
 })
