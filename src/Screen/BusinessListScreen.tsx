@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { List, Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
-import styles from './../Style/Screen'
 import ListItemAtom from './../Atom/ListItemAtom'
 import DeleteModal from './../Container/DeleteBuzModal'
 import { userData } from '../config/default'
+import { color } from '../Style/Color'
 // import GetAmountModal from './../Container/GetAmountModal';
 // import RestockModal from './../Container/RestockModal';
 // import WarningModal from './../Container/WarningModal';
@@ -182,3 +182,45 @@ class BusinessListScreen extends Component<IProps, IState> {
 }
 
 export default BusinessListScreen
+
+const styles = StyleSheet.create({
+  plainContainer: {
+    flex: 1,
+    paddingHorizontal: 16,
+    backgroundColor: color.secondary
+  },
+  redText: {
+    color: color.primary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  },
+  headerText: {
+    color: color.secondary,
+    fontWeight: 'bold',
+    paddingRight: 16,
+    fontSize: 18
+  },
+  emptyHolder: {
+    backgroundColor: color.grey,
+    paddingHorizontal: 16,
+    paddingVertical: 32
+  },
+  emptyHeader: {
+    marginBottom: 16,
+    color: color.primary,
+    fontSize: 18
+  },
+  headerItem: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  },
+  headerIconLogout: {
+    color: color.secondary,
+    padding: 8,
+    fontSize: 28
+  }
+})

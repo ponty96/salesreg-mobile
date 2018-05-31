@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
-import { FlatList, View } from 'react-native'
-import styles from './../Style/ProductAndCustomerList'
+import { FlatList, View, StyleSheet } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import { innerAccordion } from '../config/data'
+import { color } from '../Style/Color'
 
 interface IProps {
   items?: { images: string; name: string; quantity: string; amount: any }
@@ -58,3 +58,71 @@ export default class DebtAccordionAtom extends React.Component {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  rowD: {
+    flex: 1,
+    flexDirection: 'row',
+    top: 0,
+    padding: 10,
+    paddingLeft: 0,
+    marginLeft: 0,
+    height: 65,
+    // backgroundColor: '#fff',
+    marginBottom: 0.5,
+    borderBottomWidth: 0.5,
+    borderBottomColor: color.listBorderColor
+  },
+  view1: {
+    height: 68,
+    width: '20%',
+    alignItems: 'center'
+  },
+  dpD: {
+    height: 45,
+    width: 45,
+    borderRadius: 45 / 2,
+    margin: 8
+  },
+  view2: {
+    flex: 0,
+    paddingLeft: 0,
+    marginLeft: 0,
+    paddingRight: 0,
+    marginRight: 0,
+    width: '35%'
+  },
+  rowText1: {
+    fontWeight: '400',
+    fontSize: 13,
+    // color: '#000',
+    textAlign: 'left'
+  },
+  view3: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    width: '35%',
+    marginLeft: '20%'
+  },
+  lilFontDA: {
+    fontSize: 14,
+    paddingRight: 8,
+    paddingBottom: 3,
+    paddingTop: 5
+  },
+  rowText3DA: {
+    color: 'rgba(218,11,11,59)',
+    fontSize: 13,
+    textAlign: 'right',
+    paddingRight: 5,
+    marginTop: 0,
+    paddingTop: 3,
+    paddingBottom: 10
+  },
+  debtAccord: {
+    flex: 1,
+    width: '100%',
+    backgroundColor: '#FFF'
+  }
+})

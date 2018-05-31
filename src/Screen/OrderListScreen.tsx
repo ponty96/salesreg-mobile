@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
-import NewProductForm from '../Components/NewProductForm'
+import OrderList from '../Components/OrderList'
+import { orderList } from '../config/data'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -10,10 +11,10 @@ interface IProps {
 
 interface IState {}
 
-class NewProductScreen extends PureComponent<IProps, IState> {
+class OrderListScreen extends PureComponent<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'kay5ive Attractions',
+      title: 'Order',
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
@@ -27,13 +28,23 @@ class NewProductScreen extends PureComponent<IProps, IState> {
   }
 
   render() {
-    return <NewProductForm navigation={this.props.navigation} />
+    return (
+      <View style={styles.centerContainer}>
+        <OrderList items={orderList} navigation={this.props.navigation} />
+      </View>
+    )
   }
 }
 
-export default NewProductScreen
+export default OrderListScreen
 
 const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
+  },
   headerIcon: {
     color: color.secondary,
     padding: 16,

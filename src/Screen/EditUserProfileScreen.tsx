@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
 import SaveCancelButton from '../Container/SaveCancelButton'
 import EditUserProfileForm from '../Components/EditUserProfileForm'
-import styles from './../Style/Layout'
+import { color } from '../Style/Color'
 
-interface IProps {}
+interface IProps {
+  navigation: any
+}
 
 interface IState {
   name: string
@@ -60,10 +62,20 @@ class EditUserProfileScreen extends Component<IProps, IState> {
           gender={this.state.gender}
           updateGender={this.updateGender}
         />
-        <SaveCancelButton positiveButtonName="SAVE" />
+        <SaveCancelButton
+          positiveButtonName="SAVE"
+          navigation={this.props.navigation}
+        />
       </View>
     )
   }
 }
 
 export default EditUserProfileScreen
+
+const styles = StyleSheet.create({
+  formViewContainer: {
+    flex: 1,
+    backgroundColor: color.secondary
+  }
+})

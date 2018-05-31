@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import styles from './../Style/Screen'
 import FabAtom from './../Atom/FabAtom'
 import CustomerList from '../Components/CustomerList'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -31,6 +31,9 @@ class CustomerScreen extends Component<IProps, IState> {
       headerLeft: left
     }
   }
+  onPress = () => {
+    this.props.navigation.navigate('CustomerDetails')
+  }
 
   render() {
     const { params } = this.props.navigation.state
@@ -38,7 +41,7 @@ class CustomerScreen extends Component<IProps, IState> {
 
     return (
       <View style={styles.centerContainer}>
-        <CustomerList items={items} />
+        <CustomerList items={items} onPress={this.onPress} />
         <FabAtom
           routeName={'NewCustomer'}
           name={'md-person-add'}
@@ -50,3 +53,17 @@ class CustomerScreen extends Component<IProps, IState> {
 }
 
 export default CustomerScreen
+
+const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

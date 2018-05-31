@@ -1,9 +1,8 @@
 import React, { Component } from 'react'
-import { View } from 'react-native'
 import { Icon } from 'native-base'
-
-import styles from './../Style/Screen'
+import { StyleSheet } from 'react-native'
 import NewOrderForm from '../Components/NewOrderForm'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -28,12 +27,16 @@ class NewOrderScreen extends Component<IProps, IState> {
   }
 
   render() {
-    return (
-      <View>
-        <NewOrderForm navigation={this.props.navigation} />
-      </View>
-    )
+    return <NewOrderForm navigation={this.props.navigation} />
   }
 }
 
 export default NewOrderScreen
+
+const styles = StyleSheet.create({
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

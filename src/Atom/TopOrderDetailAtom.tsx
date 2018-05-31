@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { ListItem, Left, Right, Thumbnail } from 'native-base'
-import styles from '../Style/exportStyles'
 
 interface IProps {
   uri: string
@@ -55,3 +54,69 @@ export default class TopOrderDetailAtom extends React.Component<IProps, any> {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  stylesDetailContainer: {
+    flexDirection: 'row',
+    flex: 0,
+    borderTopWidth: 0.5,
+    borderTopColor: '#f0f0f0'
+  },
+  stylesDetailContent: {
+    height: 130,
+    width: '100%',
+    paddingLeft: 0,
+    marginLeft: 0
+  },
+  stylesDetailPictureView: {
+    flexDirection: 'column',
+    width: '50%',
+    height: 120,
+    alignItems: 'center',
+    justifyContent: 'center',
+    backgroundColor: '#fff'
+  },
+  stylesDetailPictureText: {
+    paddingTop: 10,
+    fontSize: 18,
+    fontWeight: '400',
+    color: 'grey'
+  },
+  stylesDetailGreyText: {
+    color: '#c0c0c0',
+    fontSize: 16,
+    fontWeight: '400',
+    paddingLeft: 16
+  },
+  stylesDetailMoneyView: {
+    width: '50%',
+    height: 120,
+    alignItems: 'center',
+    backgroundColor: '#FFF'
+  },
+  stylesDetailDp: {
+    height: 45,
+    width: 45
+  },
+  stylesDetailWhiteList: {
+    flex: 1,
+    height: 65,
+    width: '100%',
+    paddingLeft: 0,
+    marginLeft: 0,
+    backgroundColor: '#FFF'
+  },
+  stylesDetailBlackText: {
+    fontSize: 16,
+    color: '#000'
+  },
+  stylesDetailRedText: {
+    fontSize: 16,
+    color: 'red',
+    paddingLeft: 16
+  },
+  aboveAccordiondp: {
+    height: 90,
+    width: 90
+  }
+})

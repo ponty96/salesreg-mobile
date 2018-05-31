@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
-import { View } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
-import styles from './../Style/Screen'
-import OrderList from '../Components/OrderList'
+import MainOrderList from '../Components/MainOrderList'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -31,14 +31,24 @@ class OrderScreen extends PureComponent<IProps, IState> {
       headerLeft: left
     }
   }
+  goThere = () => {
+    this.props.navigation.navigate('OrderList')
+  }
+  details = () => {
+    this.props.navigation.navigate('OrderDetails')
+  }
 
   render() {
-    const { params } = this.props.navigation.state
-    const items = params.data.orders
+    // const { params } = this.props.navigation.state
+    // const items = params.data.orders
 
     return (
       <View style={styles.centerContainer}>
-        <OrderList items={items} />
+        <MainOrderList
+          navigation={this.props.navigation}
+          onPress={this.goThere}
+          onClick={this.details}
+        />
         <FabAtom
           routeName={'NewOrder'}
           name={'add-shopping-cart'}
@@ -51,3 +61,17 @@ class OrderScreen extends PureComponent<IProps, IState> {
 }
 
 export default OrderScreen
+
+const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  }
+})

@@ -1,42 +1,42 @@
-import { Form, Icon } from 'native-base'
-import * as React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
-import ButtonAtom from '../Atom/ButtonAtom'
-import InputAtom from '../Atom/InputAtom'
-import ModalAtom from './../Atom/ModalAtom'
-import styles from './../Style/Screen'
-import styles1 from '../Style/exportStyles'
+import { Form, Icon } from 'native-base';
+import * as React from 'react';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import ButtonAtom from '../Atom/ButtonAtom';
+import InputAtom from '../Atom/InputAtom';
+import ModalAtom from './../Atom/ModalAtom';
+import { color } from './../Style/Color';
 
 interface IProps {
-  getValue?: (a: any) => void
-  closeModal?: () => void
-  headerText?: string
-  amount?: string
-  placeholder?: string
-  visibility: boolean
+  getValue?: (a: any) => void;
+  closeModal?: () => void;
+  headerText?: string;
+  amount?: string;
+  placeholder?: string;
+  visibility: boolean;
 }
 interface IState {
-  amount: string
+  amount: string;
 }
 
 class GetAmountModal extends React.Component<IProps, IState> {
   static defaultProps: IProps = {
     visibility: false
-  }
+  };
 
   state: IState = {
     amount: ''
-  }
+  };
 
   getAmount = (amount: string) => {
-    this.setState({ amount })
-  }
+    this.setState({ amount });
+  };
 
   pay = () => {
     if (this.props.getValue) {
-      this.props.getValue(this.state.amount)
+      this.props.getValue(this.state.amount);
     }
-  }
+    this.props.closeModal();
+  };
 
   renderHeader = () => {
     return (
@@ -46,8 +46,8 @@ class GetAmountModal extends React.Component<IProps, IState> {
           <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    )
-  }
+    );
+  };
 
   renderBody = () => {
     return (
@@ -57,18 +57,18 @@ class GetAmountModal extends React.Component<IProps, IState> {
             label="Enter Amount"
             keyboardType={'numeric'}
             getValue={this.getAmount}
-            contStyle={styles1.marginlessInput}
+            contStyle={styles.marginlessInput}
           />
 
           <ButtonAtom
             btnText="Pay"
             onPress={this.pay}
-            btnStyle={styles1.modalButton}
+            btnStyle={styles.modalButton}
           />
         </Form>
       </View>
-    )
-  }
+    );
+  };
 
   render() {
     return (
@@ -77,8 +77,38 @@ class GetAmountModal extends React.Component<IProps, IState> {
         body={this.renderBody()}
         header={this.renderHeader()}
       />
-    )
+    );
   }
 }
 
-export default GetAmountModal
+export default GetAmountModal;
+
+const styles = StyleSheet.create({
+  modalHeader: {
+    flexDirection: 'row',
+    padding: 16,
+    backgroundColor: color.grey
+  },
+  modalHeaderText: {
+    fontSize: 16,
+    color: color.menu,
+    flex: 4
+  },
+  modalCloseIcon: {
+    flex: 1,
+    color: color.inactive,
+    paddingLeft: 16
+  },
+  modalBody: {
+    padding: 16
+  },
+  marginlessInput: {
+    marginLeft: 0
+  },
+  modalButton: {
+    marginTop: 32,
+    marginBottom: 16,
+    marginHorizontal: 16,
+    alignSelf: 'flex-end'
+  }
+});

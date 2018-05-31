@@ -1,13 +1,16 @@
 import * as React from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
 import { ImagePicker } from 'expo'
-import styles from './../Style/Form'
+import { Icon } from 'native-base'
+import { StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   source: string
   placeholder?: string
   imgStyle?: object
   getValue?: any
+  type?: string
 }
 
 class ImageAtom extends React.Component<IProps, any> {
@@ -29,6 +32,21 @@ class ImageAtom extends React.Component<IProps, any> {
   }
 
   render() {
+    if (this.props.type === 'business')
+      return (
+        <View>
+          <TouchableOpacity
+            onPress={this.handleSelection}
+            style={[styles.selfAlign, styles.imgContainer]}
+          >
+            <View style={styles.iconBackground}>
+              <Icon name="shop" type="Entypo" style={this.props.imgStyle} />
+            </View>
+          </TouchableOpacity>
+          <Text style={styles.selfAlign}>Upload logo</Text>
+        </View>
+      )
+
     if (this.props.source || this.state.image) {
       return (
         <TouchableOpacity
@@ -54,7 +72,7 @@ class ImageAtom extends React.Component<IProps, any> {
                 this.props.placeholder.substr(0, 1).toUpperCase()}
             </Text>
           </View>
-          <Text style={styles.selfAlign}>Upload logo</Text>
+          <Text style={[styles.selfAlign, styles.menuColor]}>Upload logo</Text>
         </TouchableOpacity>
       )
     }
@@ -62,3 +80,32 @@ class ImageAtom extends React.Component<IProps, any> {
 }
 
 export default ImageAtom
+
+const styles = StyleSheet.create({
+  selfAlign: {
+    alignSelf: 'center'
+  },
+  imgContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+    marginVertical: 15
+  },
+  iconBackground: {
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+    backgroundColor: color.grey,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  imgPlaceholderText: {
+    fontWeight: 'bold',
+    fontSize: 20
+  },
+  menuColor: {
+    color: color.menu
+  }
+})

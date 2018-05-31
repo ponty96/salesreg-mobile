@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
-import { View, Image } from 'react-native'
-// import ProgressBar from 'react-native-progress/Bar';
-
-import styles from '../Style/Screen'
+import { View, Image, StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 // import { color } from '../Style/Color';
 
 class SplashScreen extends Component {
@@ -10,7 +8,7 @@ class SplashScreen extends Component {
     return (
       <View style={styles.container}>
         <Image
-          source={require('../Images/splashScreenLogo.png')}
+          source={require('../../build/Images/splashScreenLogo.png')}
           style={styles.splashScreenLogo}
         />
         {/* <ProgressBar
@@ -25,3 +23,15 @@ class SplashScreen extends Component {
 }
 
 export default SplashScreen
+
+const styles = StyleSheet.create({
+  splashScreenLogo: {
+    position: 'absolute',
+    top: '30%',
+    left: '40%'
+  },
+  container: {
+    flex: 1,
+    backgroundColor: color.secondary
+  }
+})

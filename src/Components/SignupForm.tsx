@@ -1,23 +1,21 @@
 import React, { PureComponent } from 'react';
-import { Form } from 'native-base';
-import { View } from 'react-native';
+import { Form, Icon } from 'native-base';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
 import PickerAtom from '../Atom/PickerAtom';
-import styles from '../Style/Form';
-import styles1 from '../Style/exportStyles';
+import { color } from '../Style/Color';
 
 interface IProps {
-    navigation: any;
+  navigation: any;
 }
 
 interface IState {
-    phone: string;
-    password: string;
-    name: string;
-    confirm_password: string;
-    gender: string;
+  phone: string;
+  password: string;
+  name: string;
+  confirm_password: string;
+  gender: string;
 }
 
 class SigupForm extends PureComponent<IProps, IState> {
@@ -36,41 +34,37 @@ class SigupForm extends PureComponent<IProps, IState> {
       this.state.name,
       this.state.confirm_password,
       this.state.gender
-    )
+    );
   };
 
   getPhone = (phone: string) => {
     this.setState({
       phone
-    })
+    });
   };
 
   getPassword = (pass: string) => {
     this.setState({
       password: pass
-    })
+    });
   };
 
   getName = (name: string) => {
     this.setState({
       name
-    })
+    });
   };
 
-  getConfirm = (confirm_pass: string) => {
+  getConfirm = (confirmPass: string) => {
     this.setState({
-      confirm_password: confirm_pass
-    })
+      confirm_password: confirmPass
+    });
   };
 
   updateGender = (selectedGender: string) => {
     this.setState({
       gender: selectedGender
-    })
-  };
-
-  navigate = (location: string) => {
-    this.props.navigation.navigate(location)
+    });
   };
 
   render() {
@@ -79,46 +73,81 @@ class SigupForm extends PureComponent<IProps, IState> {
         <InputAtom
           label="Full name"
           getValue={this.getName}
-          contStyle={styles1.marginlessInput}
+          contStyle={styles.marginlessInput}
         />
 
         <InputAtom
           label="Phone number"
           getValue={this.getPhone}
           keyboardType="numeric"
-          contStyle={styles1.marginlessInput}
+          contStyle={styles.marginlessInput}
         />
 
-        <View style={styles.genderPickerStyle}>
-          <PickerAtom list={['Male', 'Female']} style={styles1.faintPicker} />
+        <View style={[styles.genderPickerStyle, styles.marginlessInput]}>
+          <PickerAtom
+            list={['Gender', 'Male', 'Female']}
+            style={styles.faintPicker}
+          />
         </View>
 
         <InputAtom
           label="Password"
           getValue={this.getPassword}
           secureTextEntry={true}
-          contStyle={styles1.marginlessInput}
+          contStyle={styles.marginlessInput}
+          underneathText="Must be at least 6 characters"
         />
 
         <InputAtom
           label="Reenter-password"
           getValue={this.getConfirm}
           secureTextEntry={true}
-          contStyle={styles1.marginlessInput}
+          contStyle={styles.marginlessInput}
         />
 
-        <View style={styles.buttonsWrapper}>
-          <ButtonAtom btnText="Sign up" onPress={this.signup} />
-          <ButtonAtom
-            btnText="I have an account already"
-            transparent={true}
-            funcValue={'Login'}
-            onPress={this.navigate}
-          />
+        <View>
+          <TouchableOpacity
+            style={styles.nextButtonContainer}
+            onPress={() => this.props.navigation.navigate('SignUp2')}
+          >
+            <Text style={styles.nextText}>NEXT </Text>
+            <Icon
+              name="trending-flat"
+              type="MaterialIcons"
+              style={styles.nextIcon}
+            />
+          </TouchableOpacity>
         </View>
       </Form>
-    )
+    );
   }
 }
 
 export default SigupForm;
+
+const styles = StyleSheet.create({
+  marginlessInput: {
+    marginLeft: 0
+  },
+  faintPicker: {
+    color: color.inactive,
+    width: '50%',
+    height: 35
+  },
+  genderPickerStyle: {
+    marginTop: 25,
+    marginLeft: 10
+  },
+  nextButtonContainer: {
+    flexDirection: 'row',
+    alignSelf: 'flex-end',
+    alignItems: 'center',
+    marginVertical: '2%'
+  },
+  nextText: {
+    color: color.redButton
+  },
+  nextIcon: {
+    color: color.redButton
+  }
+});

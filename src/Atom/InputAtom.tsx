@@ -1,8 +1,6 @@
 import * as React from 'react'
 import { Item, Input, Label, Text } from 'native-base'
-import { View } from 'react-native'
-import styles from './../Style/Form'
-import styles1 from '../Style/exportStyles'
+import { View, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -14,7 +12,7 @@ interface IProps {
   floatingLabel?: boolean | true
   secureTextEntry?: boolean | false
   getValue?: (a: string | number) => void
-  contStyle: object | Array<any>
+  contStyle?: object | Array<any>
   inputStyle?: object
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string
@@ -22,12 +20,13 @@ interface IProps {
 
 class InputAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
+    label: '',
     required: false,
     floatingLabel: true,
     secureTextEntry: false,
     keyboardType: 'default',
     multiline: false,
-    contStyle: styles1.marginfulInput || styles1.marginlessInput
+    contStyle: {marginLeft: 4} || {marginLeft: 0}
   }
 
   render() {
@@ -58,7 +57,7 @@ class InputAtom extends React.Component<IProps, any> {
         {this.props.underneathText ? (
           <Text style={styles.underneathText}>{this.props.underneathText}</Text>
         ) : (
-          <Text>''</Text>
+          <Text />
         )}
       </View>
     )
@@ -66,3 +65,24 @@ class InputAtom extends React.Component<IProps, any> {
 }
 
 export default InputAtom
+
+const styles = StyleSheet.create({
+    marginlessInput: {
+        marginLeft: 0
+      },
+      marginfulInput: {
+        marginLeft: 4
+      },
+      label: {
+        color: color.inactive
+      },
+      required: {
+        color: color.primary
+      },
+      underneathText: {
+        marginLeft: 0,
+        color: color.menu,
+        fontSize: 12,
+        marginBottom: 25
+      }
+})

@@ -1,6 +1,7 @@
 import * as React from 'react'
+import { StyleSheet } from 'react-native'
 import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
-import styles from './../Style/ProductAndCustomerList'
+import { color } from '../Style/Color'
 
 interface IProps {
   items?: { images: string; customerName: string; amount: any; date: string }
@@ -42,3 +43,72 @@ class DebtListAtom extends React.Component<IProps, any> {
 }
 
 export default DebtListAtom
+
+const styles = StyleSheet.create({
+  rowText1D: {
+    fontWeight: '400',
+    fontSize: 13,
+    color: '#000',
+    textAlign: 'left'
+  },
+  rowText1: {
+    fontWeight: '400',
+    fontSize: 13,
+    // color: '#000',
+    textAlign: 'left'
+  },
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    top: 0,
+    padding: 10,
+    paddingLeft: 0,
+    marginLeft: 0,
+    height: 75,
+    // backgroundColor: '#fff',
+    marginBottom: 0.5,
+    borderBottomWidth: 0.5,
+    borderBottomColor: color.listBorderColor,
+    paddingVertical: 10,
+    paddingHorizontal: 10
+  },
+  view1: {
+    height: 68,
+    width: '20%',
+    alignItems: 'center'
+  },
+  dp: {
+    height: 55,
+    width: 55,
+    borderRadius: 55 / 2,
+    margin: 8
+  },
+  view2: {
+    flex: 0,
+    paddingLeft: 0,
+    marginLeft: 0,
+    paddingRight: 0,
+    marginRight: 0,
+    width: '35%'
+  },
+  view3: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    width: '35%',
+    marginLeft: '20%'
+  },
+  rowText3D: {
+    color: 'rgba(218,11,11,59)',
+    fontSize: 13,
+    textAlign: 'right',
+    paddingRight: 5,
+    marginTop: 0,
+    paddingTop: 0,
+    paddingBottom: 15
+  },
+  lilFontD: {
+    fontSize: 12,
+    paddingRight: 8
+  }
+})

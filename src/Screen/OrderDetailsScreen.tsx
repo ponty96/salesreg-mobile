@@ -1,16 +1,18 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import styles from './../Style/Screen'
+import OrderDetails from '../Components/OrderDetails'
+import { color } from '../Style/Color'
 
-interface IProps {}
+interface IProps {
+  navigation: any
+}
 
 interface IState {}
 
 class OrderDetailsScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
     return {
       title: 'Order Details',
       headerLeft: (
@@ -25,9 +27,7 @@ class OrderDetailsScreen extends Component<IProps, IState> {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('NewOrderScreen', {
-              item: params.item
-            })
+            navigation.navigate('NewOrder')
           }}
         >
           <View style={styles.headerItem}>
@@ -47,10 +47,40 @@ class OrderDetailsScreen extends Component<IProps, IState> {
     // do change the list to the appropriate molecule
     return (
       <View style={styles.centerContainer}>
-        <Text>Order details Screen</Text>
+        <OrderDetails navigation={this.props.navigation} />
       </View>
     )
   }
 }
 
 export default OrderDetailsScreen
+
+const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  },
+  headerText: {
+    color: color.secondary,
+    fontWeight: 'bold',
+    paddingRight: 16,
+    fontSize: 18
+  },
+  headerIconLogout: {
+    color: color.secondary,
+    padding: 8,
+    fontSize: 28
+  },
+  headerItem: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  }
+})

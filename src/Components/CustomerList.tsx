@@ -1,45 +1,43 @@
 import React, { Component } from 'react';
-import { View, FlatList, ScrollView } from 'react-native';
-
+import { View, FlatList, ScrollView, StyleSheet } from 'react-native';
 import CustomerListAtom from '../Atom/CustomerListAtom';
 import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import styles from '../Style/exportStyles';
 import { customerList } from '../config/data';
 
 interface IProps {
-    items: any[];
+  items: any[];
+  onPress: () => void;
 }
 
-interface IState {
-
-}
+interface IState {}
 
 class CustomerList extends Component<IProps, IState> {
-  onPress = () => {}
+  // onPress = () => {}
 
-  renderItem = ({item} : any) => {
+  renderItem = ({ item }: any) => {
     let latestAmount =
-      item.status == 'paid'
+      item.status === 'paid'
         ? item.debt
-        : item.status == 'balance'
+        : item.status === 'balance'
           ? item.balance
-          : item.debt
-    let realStyle
-    if (item.status == 'paid') {
-      realStyle = 'paid'
-    } else if (item.status == 'balance') {
-      realStyle = 'balance'
+          : item.debt;
+    let realStyle;
+    if (item.status === 'paid') {
+      realStyle = 'paid';
+    } else if (item.status === 'balance') {
+      realStyle = 'balance';
     } else {
-      realStyle = 'debt'
+      realStyle = 'debt';
     }
     return (
       <CustomerListAtom
         items={item}
         latestAmount={latestAmount}
         realStyle={realStyle}
+        onPress={this.props.onPress}
       />
-    )
-  }
+    );
+  };
 
   render() {
     return (
@@ -64,8 +62,16 @@ class CustomerList extends Component<IProps, IState> {
           />
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
-export default CustomerList
+export default CustomerList;
+
+const styles = StyleSheet.create({
+  customerListContainer: {
+    // backgroundColor: '#FFF',
+    flex: 1,
+    width: '100%'
+  }
+});

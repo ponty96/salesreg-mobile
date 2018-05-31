@@ -132,6 +132,12 @@
     "@types/node" "*"
     "@types/react" "*"
 
+"@types/react-native-collapsible@^0.11.0":
+  version "0.11.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native-collapsible/-/react-native-collapsible-0.11.0.tgz#2f8c42843d1602709ad8c9cd6180bc690dbd0879"
+  dependencies:
+    react-native-collapsible "*"
+
 "@types/react-native-star-rating@^1.0.0":
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/@types/react-native-star-rating/-/react-native-star-rating-1.0.0.tgz#32bf47afe1b71710059394dac55e367a4a5871b4"
@@ -5623,6 +5629,12 @@ react-native-button@^2.3.0:
   dependencies:
     prop-types "^15.5.10"
 
+react-native-collapsible@*:
+  version "0.11.3"
+  resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.11.3.tgz#5974d9b81f29677372340a21675c9e1c363b410e"
+  dependencies:
+    prop-types "^15.5.10"
+
 react-native-collapsible@^0.11.2:
   version "0.11.2"
   resolved "https://registry.yarnpkg.com/react-native-collapsible/-/react-native-collapsible-0.11.2.tgz#35a2e7a335f5acf8c959c889731a604cfc3fcd09"
@@ -5681,19 +5693,13 @@ react-native-maps@0.19.0:
   version "0.19.0"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.19.0.tgz#ce94fad1cf360e335cb4338a68c95f791e869074"
 
-react-native-modal-popover@^0.0.7:
-  version "0.0.7"
-  resolved "https://registry.yarnpkg.com/react-native-modal-popover/-/react-native-modal-popover-0.0.7.tgz#46d46a781d5e287b52a228029276e4cd877d5254"
+react-native-modal-popover@^0.0.10:
+  version "0.0.10"
+  resolved "https://registry.yarnpkg.com/react-native-modal-popover/-/react-native-modal-popover-0.0.10.tgz#89271eb45f6c3f83702669378c6af97f0c258711"
   dependencies:
     "@types/prop-types" "^15.5.2"
     lodash.debounce "^4.0.8"
     prop-types "^15.6.0"
-
-react-native-progress@^3.4.0:
-  version "3.4.0"
-  resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-3.4.0.tgz#c002e6efb2f0b82dd6889510e669c492da2718ac"
-  dependencies:
-    prop-types "^15.5.8"
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"

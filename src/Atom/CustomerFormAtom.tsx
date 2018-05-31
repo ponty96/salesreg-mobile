@@ -1,9 +1,7 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import ImageAtom from './ImageAtom'
 import InputAtom from './InputAtom'
-import styles from '../Style/Form'
-import styles1 from '../Style/exportStyles'
 import { ScrollView } from 'react-native-gesture-handler'
 import PickerAtom from './PickerAtom'
 
@@ -70,7 +68,7 @@ export default class CustomerFormAtom extends React.Component<
             <InputAtom
               label="  Name"
               getValue={this.getProduct}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View style={styles.inputView}>
@@ -79,7 +77,7 @@ export default class CustomerFormAtom extends React.Component<
                 label="  Phone number"
                 keyboardType="numeric"
                 getValue={this.getSQuantity}
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
@@ -91,7 +89,7 @@ export default class CustomerFormAtom extends React.Component<
               label="  Home address"
               keyboardType="numeric"
               getValue={this.getPQuantity}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View>
@@ -99,7 +97,7 @@ export default class CustomerFormAtom extends React.Component<
               label="  Email"
               keyboardType="numeric"
               getValue={this.getCostPP}
-              contStyle={styles1.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View style={styles.inputView}>
@@ -108,7 +106,7 @@ export default class CustomerFormAtom extends React.Component<
                 label="  Debt limit"
                 keyboardType="numeric"
                 getValue={this.getDebt}
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
             </View>
             <View style={styles.innerEnd}>
@@ -116,7 +114,7 @@ export default class CustomerFormAtom extends React.Component<
                 label="  Birthday"
                 keyboardType="numeric"
                 getValue={this.getBirth}
-                contStyle={styles1.marginfulInput}
+                contStyle={styles.marginfulInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
@@ -125,12 +123,12 @@ export default class CustomerFormAtom extends React.Component<
             <View style={styles.innerFirstPicker}>
               <PickerAtom list={['Marital Status', 'Married', 'Single']} />
             </View>
-            <View style={styles.innerEnd}>
+            <View style={styles.innerLastEnd}>
               <InputAtom
                 label="  Marriage Anniversary"
                 keyboardType="numeric"
                 getValue={this.getMarry}
-                contStyle={styles1.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
               <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
@@ -140,3 +138,50 @@ export default class CustomerFormAtom extends React.Component<
     )
   }
 }
+
+const styles = StyleSheet.create({
+  imgContainer: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    height: 150,
+    width: 150,
+    borderRadius: 75,
+    marginVertical: 16
+  },
+  inputView: {
+    flexDirection: 'row',
+    width: '100%',
+    alignSelf: 'center',
+    flex: 1
+  },
+  innerStart: {
+    width: '50%',
+    flex: 1,
+    alignSelf: 'flex-start'
+  },
+  innerEnd: {
+    width: '50%',
+    flex: 1,
+    alignSelf: 'center'
+  },
+  underText: {
+    marginRight: '50%',
+    fontSize: 10
+  },
+  innerFirstPicker: {
+    flex: 1,
+    alignSelf: 'center'
+  },
+  innerLastEnd: {
+    width: '50%',
+    flex: 0,
+    alignSelf: 'flex-end',
+    paddingTop: 20
+  },
+  marginlessInput: {
+    marginLeft: 0
+  },
+  marginfulInput: {
+    marginLeft: 4
+  }
+})

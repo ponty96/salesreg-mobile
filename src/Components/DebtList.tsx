@@ -1,27 +1,21 @@
 import React, { PureComponent } from 'react';
-import { Text, View, FlatList, ScrollView } from 'react-native';
+import { Text, View, ScrollView, FlatList, StyleSheet } from 'react-native';
 import { Header, Right } from 'native-base';
-
 import PickerAtom from '../Atom/PickerAtom';
 import DebtListAtom from '../Atom/DebtListAtom';
 import TotalDebtAtom from '../Atom/TotalDebtAtom';
-import styles from '../Style/exportStyles';
 import { debtList } from '../config/data';
 
 interface IProps {
-
+  onPress: () => void;
 }
 
-interface IState {
-
-}
+interface IState {}
 
 class DebtList extends PureComponent<IProps, IState> {
-  onPress = () => {}
-
   renderItem = ({ item }: any) => {
-    return <DebtListAtom items={item} />
-  }
+    return <DebtListAtom items={item} onPress={this.props.onPress} />;
+  };
 
   render() {
     return (
@@ -36,6 +30,7 @@ class DebtList extends PureComponent<IProps, IState> {
                 'Highest profit',
                 'Lowest profit'
               ]}
+              style={styles.pickerStyle}
             />
           </Right>
         </Header>
@@ -43,13 +38,37 @@ class DebtList extends PureComponent<IProps, IState> {
           <FlatList
             data={debtList}
             renderItem={this.renderItem}
-            keyExtractor={item => item.key}
+            keyExtractor={(item: any) => item.key}
           />
         </ScrollView>
         <TotalDebtAtom limit={80000} totalAmount="80,000" />
       </View>
-    )
+    );
   }
 }
 
-export default DebtList
+export default DebtList;
+
+const styles = StyleSheet.create({
+  customerListContainer: {
+    // backgroundColor: '#FFF',
+    flex: 1,
+    width: '100%'
+  },
+  customerListHeader: {
+    backgroundColor: '#fff',
+    width: '100%',
+    height: 40
+  },
+  customerListDirect: {
+    flexDirection: 'row'
+  },
+  customerListDropText: {
+    paddingBottom: 10,
+    fontSize: 14
+  },
+  pickerStyle: {
+    width: 130,
+    height: 35
+  }
+});

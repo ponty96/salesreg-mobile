@@ -1,19 +1,24 @@
 import React, { PureComponent } from 'react'
-import { ScrollView, View, Text, TouchableOpacity } from 'react-native'
+import {
+  ScrollView,
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  Dimensions
+} from 'react-native'
 import { SafeAreaView } from 'react-navigation'
 import { Icon } from 'native-base'
 
-import styles from './../Style/Layout'
 import ListItemAtom from './../Atom/ListItemAtom'
 import { userData } from './../config/default'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
 }
 
-interface Istate {}
-
-class SideBar extends PureComponent<IProps, Istate> {
+class SideBar extends PureComponent<IProps> {
   handleNavigation = (location: string, data: any = undefined) => {
     this.props.navigation.navigate(location, { data })
   }
@@ -102,3 +107,38 @@ class SideBar extends PureComponent<IProps, Istate> {
 }
 
 export default SideBar
+
+const styles = StyleSheet.create({
+  itemText: {
+    flex: 1,
+    alignContent: 'center',
+    paddingLeft: 12,
+    color: color.menu
+  },
+  itemIcon: {
+    color: color.menu
+  },
+  logoutItem: {
+    borderTopWidth: 1,
+    borderColor: color.textBorderBottom,
+    alignSelf: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 16
+  },
+  sidebarItem: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    padding: 16
+  },
+  sidebarContainer: {
+    paddingHorizontal: 8,
+    height: Dimensions.get('window').height - 16
+  },
+  itemsContainer: {
+    flex: 4
+  }
+})

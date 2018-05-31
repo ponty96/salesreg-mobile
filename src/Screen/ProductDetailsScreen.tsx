@@ -1,18 +1,22 @@
 import React, { PureComponent } from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import styles from './../Style/Screen'
+import ProductDetails from '../Components/ProductDetails'
+import { color } from '../Style/Color'
 
-interface IProps {}
+interface IProps {
+  navigation?: any
+}
 
 interface IState {}
 
 class ProductDetailsScreen extends PureComponent<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     const { params } = navigation.state
+    console.log(params)
     return {
-      title: 'Order Details',
+      title: 'Product Details',
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
@@ -25,9 +29,7 @@ class ProductDetailsScreen extends PureComponent<IProps, IState> {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('NewOrderScreen', {
-              item: params.item
-            })
+            navigation.navigate('NewProduct')
           }}
         >
           <View style={styles.headerItem}>
@@ -47,10 +49,40 @@ class ProductDetailsScreen extends PureComponent<IProps, IState> {
     // do change the list to the appropriate molecule
     return (
       <View style={styles.centerContainer}>
-        <Text>Order details Screen</Text>
+        <ProductDetails navigation={this.props.navigation} />
       </View>
     )
   }
 }
 
 export default ProductDetailsScreen
+
+const styles = StyleSheet.create({
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
+  },
+  headerText: {
+    color: color.secondary,
+    fontWeight: 'bold',
+    paddingRight: 16,
+    fontSize: 18
+  },
+  headerIconLogout: {
+    color: color.secondary,
+    padding: 8,
+    fontSize: 28
+  },
+  headerItem: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center'
+  }
+})

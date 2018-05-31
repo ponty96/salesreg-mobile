@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Button } from 'native-base'
-import { Text } from 'react-native'
-import styles from './../Style/Form'
+import { Text, StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   btnText?: string
@@ -18,6 +18,13 @@ class ButtonAtom extends React.Component<IProps, any> {
     transparent: false,
     disabled: false
   }
+
+  onPress = () => {
+    if (this.props.onPress) {
+      this.props.onPress(this.props.funcValue)
+    }
+  }
+
   render() {
     return (
       <Button
@@ -29,7 +36,7 @@ class ButtonAtom extends React.Component<IProps, any> {
           this.props.disabled && styles.buttonDisabled,
           this.props.btnStyle
         ]}
-        onPress={() => this.props.onPress(this.props.funcValue)}
+        onPress={this.onPress}
       >
         <Text
           style={[
@@ -45,3 +52,31 @@ class ButtonAtom extends React.Component<IProps, any> {
 }
 
 export default ButtonAtom
+
+const styles = StyleSheet.create({
+  buttonTransparent: {
+    backgroundColor: color.secondary,
+    paddingHorizontal: 32,
+    alignSelf: 'center',
+    marginVertical: 8
+  },
+  buttonRed: {
+    backgroundColor: color.redButton,
+    paddingHorizontal: 32,
+    alignSelf: 'center',
+    marginVertical: 8,
+    borderRadius: 3
+  },
+  buttonDisabled: {
+    backgroundColor: color.disabled,
+    paddingHorizontal: 32,
+    alignSelf: 'center',
+    marginVertical: 8
+  },
+  textRed: {
+    color: color.primary
+  },
+  textTransparent: {
+    color: color.secondary
+  }
+})

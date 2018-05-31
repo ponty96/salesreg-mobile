@@ -1,7 +1,6 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
-import styles from './../Style/Layout'
 
 interface IProps {
   icon: string
@@ -21,3 +20,16 @@ export default class DetailItemAtom extends React.Component<IProps, any> {
     )
   }
 }
+
+const styles = StyleSheet.create({
+  detailItemWrapper: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    marginLeft: 35
+  },
+  detailText: {
+    marginLeft: 20,
+    marginRight: 30,
+    fontSize: 12
+  }
+})

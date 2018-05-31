@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base'
-import styles from './../Style/ProductAndCustomerList'
+import { StyleSheet } from 'react-native'
 
 interface IProps {
   items: { images: string; name: string; number: any }
@@ -31,3 +31,52 @@ class ProductListAtom extends React.Component<IProps, any> {
 }
 
 export default ProductListAtom
+
+const styles = StyleSheet.create({
+  rowP: {
+    flexDirection: 'row',
+    flex: 1,
+    top: 0,
+    height: 75,
+    paddingLeft: 0,
+    marginLeft: 0,
+    // backgroundColor: '#fff',
+    marginBottom: 0.5,
+    paddingVertical: 10,
+    paddingHorizontal: 10
+  },
+  rowText3P: {
+    color: '#B10000',
+    fontSize: 13,
+    textAlign: 'right',
+    paddingRight: 5,
+    marginTop: 0,
+    paddingTop: 0,
+    paddingBottom: 15
+  },
+  rowText1: {
+    fontWeight: '400',
+    fontSize: 13,
+    // color: '#000',
+    textAlign: 'left'
+  },
+  leftView: {
+    height: 55
+  },
+  bodyView: {
+    flex: 3
+  },
+  dpP: {
+    height: 55,
+    width: 55,
+    marginTop: 0,
+    paddingTop: 0,
+    borderRadius: 55 / 2,
+    margin: 8,
+    paddingLeft: 8
+  },
+  rightView: {
+    alignSelf: 'flex-end',
+    alignItems: 'center'
+  }
+})

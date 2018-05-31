@@ -1,22 +1,20 @@
 import React, { PureComponent } from 'react';
 import { View, FlatList, ScrollView } from 'react-native';
-
 import ProductListAtom from '../Atom/ProductListAtom';
 import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import styles from '../Style/ProductAndCustomerList';
-import { productList } from '../config/data';
+// import styles from '../Style/ProductAndCustomerList';
+// import styles_screen from './../Style/Screen';
 
 interface IProps {
-    navigation: any
+  navigation: any
+  items: any
 }
 
-interface IState {
-
-}
+interface IState {}
 
 class ProductList extends PureComponent<IProps, IState> {
   onPress = () => {
-    alert('Product View Unavailable')
+    this.props.navigation.navigate('ProductDetails')
   }
 
   renderItem = ({ item }: any) => {
@@ -25,7 +23,7 @@ class ProductList extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <View style={styles.container}>
+      <View>
         <SubHeaderAtom
           list={[
             'Fasting selling',
@@ -34,11 +32,12 @@ class ProductList extends PureComponent<IProps, IState> {
             'Lowest profit'
           ]}
         />
+
         <ScrollView>
           <FlatList
-            data={productList}
+            data={this.props.items}
             renderItem={this.renderItem}
-            keyExtractor={item => item.key}
+            keyExtractor={(item: any) => item.key}
           />
         </ScrollView>
       </View>

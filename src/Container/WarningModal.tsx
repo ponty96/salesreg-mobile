@@ -1,40 +1,39 @@
-import { Form, Icon } from 'native-base'
-import * as React from 'react'
-import { Text, TouchableOpacity, View } from 'react-native'
+import { Form, Icon } from 'native-base';
+import * as React from 'react';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 
-import ButtonAtom from '../Atom/ButtonAtom'
-import ModalAtom from './../Atom/ModalAtom'
-import styles from './../Style/Screen'
-import styles1 from './../Style/exportStyles'
+import ButtonAtom from '../Atom/ButtonAtom';
+import ModalAtom from './../Atom/ModalAtom';
+import { color } from './../Style/Color';
 
 interface IProps {
-  getValue?: (a: string) => void
-  closeModal?: () => void
-  headerText?: string
-  limit?: any
-  name?: string
-  type?: 'customer' | 'business'
-  visibility: boolean
+  getValue?: (a: string) => void;
+  closeModal?: () => void;
+  headerText?: string;
+  limit?: any;
+  name?: string;
+  type?: 'customer' | 'business';
+  visibility: boolean;
 }
 interface IState {
-  visibility: boolean
+  visibility: boolean;
 }
 
 class DebtLimit extends React.PureComponent<IProps, IState> {
   static defaultProps: IProps = {
     visibility: false
-  }
+  };
   state: IState = {
     visibility: this.props.visibility
-  }
+  };
 
   grant = () => {
     // console.log("grant is pressed");
-  }
+  };
 
   stop = () => {
     // console.log("stop is pressed");
-  }
+  };
 
   renderHeader = () => {
     return (
@@ -50,8 +49,8 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
           <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    )
-  }
+    );
+  };
 
   renderBody = () => {
     return (
@@ -76,19 +75,19 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
           <ButtonAtom
             btnText="Grant debt"
             transparent={true}
-            btnStyle={styles1.modalWarningButton}
+            btnStyle={styles.modalWarningButton}
             onPress={this.grant}
           />
 
           <ButtonAtom
             btnText="Stop debt"
             onPress={this.stop}
-            btnStyle={styles1.modalWarningButton}
+            btnStyle={styles.modalWarningButton}
           />
         </Form>
       </View>
-    )
-  }
+    );
+  };
 
   public renderFooter = () => {
     return (
@@ -120,8 +119,8 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
           )}
         </Text>
       </View>
-    )
-  }
+    );
+  };
 
   public render() {
     return (
@@ -131,8 +130,52 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
         header={this.renderHeader()}
         footer={this.renderFooter()}
       />
-    )
+    );
   }
 }
 
-export default DebtLimit
+export default DebtLimit;
+
+const styles = StyleSheet.create({
+  modalHeader: {
+    flexDirection: 'row',
+    padding: 16,
+    backgroundColor: color.grey
+  },
+  modalHeaderText: {
+    fontSize: 16,
+    color: color.menu,
+    flex: 4
+  },
+  modalCloseIcon: {
+    flex: 1,
+    color: color.inactive,
+    paddingLeft: 16
+  },
+  modalWarningIcon: {
+    color: color.primary,
+    paddingRight: 16
+  },
+  modalWarningBody: {
+    margin: 16
+  },
+  modalButtonContainer: {
+    marginVertical: 16,
+    flexDirection: 'row'
+  },
+  redText: {
+    color: color.primary
+  },
+  modalBusinessFooter: {
+    marginLeft: 40
+  },
+  modalWarningButton: {
+    flex: 1,
+    justifyContent: 'center',
+    alignContent: 'center',
+    marginTop: 32,
+    marginBottom: 16,
+    marginHorizontal: 8,
+    paddingHorizontal: 0
+  }
+});

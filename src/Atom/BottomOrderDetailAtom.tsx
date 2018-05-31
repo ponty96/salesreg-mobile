@@ -1,8 +1,6 @@
 import * as React from 'react'
-import { View, Text } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { ListItem, Left, Right } from 'native-base'
-
-import styles from './../Style/OrderList'
 
 interface IProps {
   total?: string
@@ -57,3 +55,48 @@ export default class BottomOrderDetailAtom extends React.Component<
     )
   }
 }
+
+const styles = StyleSheet.create({
+  redList: {
+    height: 65,
+    width: '100%',
+    backgroundColor: 'red',
+    paddingLeft: 0,
+    marginLeft: 0
+  },
+
+  whiteTextL: {
+    fontSize: 16,
+    color: '#FFF',
+    paddingLeft: 16
+  },
+
+  whiteTextR: {
+    fontSize: 16,
+    color: '#FFF'
+  },
+
+  whiteList: {
+    height: 65,
+    width: '100%',
+    backgroundColor: '#FFF',
+    paddingLeft: 0,
+    marginLeft: 0
+  },
+
+  blackTextL: {
+    fontSize: 16,
+    color: '#c0c0c0',
+    paddingLeft: 16
+  },
+
+  blackTextR: {
+    fontSize: 16,
+    color: '#000'
+  },
+
+  redTextR: {
+    fontSize: 16,
+    color: 'red'
+  }
+})

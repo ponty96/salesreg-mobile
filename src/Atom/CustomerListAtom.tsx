@@ -1,12 +1,13 @@
 import * as React from 'react'
 import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
-import styles from './../Style/ProductAndCustomerList'
+import { StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
-  items?: { images: string; customerName: string; amount: string }
+  items?: { images: string; customerName: string; amount: any }
   latestAmount: string
   realStyle: string
-  onPress?: () => void
+  onPress: () => void
 }
 
 class CustomerListAtom extends React.Component<IProps, any> {
@@ -46,3 +47,72 @@ class CustomerListAtom extends React.Component<IProps, any> {
 }
 
 export default CustomerListAtom
+
+const styles = StyleSheet.create({
+  row: {
+    flex: 1,
+    flexDirection: 'row',
+    top: 0,
+    padding: 10,
+    paddingLeft: 0,
+    marginLeft: 0,
+    height: 75,
+    // backgroundColor: '#fff',
+    marginBottom: 0.5,
+    borderBottomWidth: 0.5,
+    borderBottomColor: color.listBorderColor,
+    paddingVertical: 10,
+    paddingHorizontal: 10
+  },
+  view1: {
+    height: 68,
+    width: '20%',
+    alignItems: 'center'
+  },
+  view2: {
+    flex: 0,
+    paddingLeft: 0,
+    marginLeft: 0,
+    paddingRight: 0,
+    marginRight: 0,
+    width: '35%'
+  },
+  rowText1: {
+    fontWeight: '400',
+    fontSize: 13,
+    // color: '#000',
+    textAlign: 'left'
+  },
+  dp: {
+    height: 55,
+    width: 55,
+    borderRadius: 55 / 2,
+    margin: 8
+  },
+  view3: {
+    flex: 1,
+    flexDirection: 'column',
+    alignItems: 'flex-end',
+    width: '35%',
+    marginLeft: '20%'
+  },
+  text1: {
+    fontSize: 13,
+    fontWeight: '200'
+  },
+  lilFont: {
+    fontSize: 12
+  },
+  paid: {
+    fontSize: 12,
+    color: '#c0c0c0'
+  },
+  balance: {
+    fontSize: 12,
+    color: '#42c5f4'
+  },
+  debt: {
+    fontSize: 12,
+    color: 'rgba(218,11,11,59)'
+  }
+})

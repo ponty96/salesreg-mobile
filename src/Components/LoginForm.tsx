@@ -1,18 +1,18 @@
-import React, { PureComponent } from 'react';
-import { Form } from 'native-base';
-
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import styles from '../Style/exportStyles';
+import React, { PureComponent } from 'react'
+import { Form, Text } from 'native-base'
+import { StyleSheet } from 'react-native'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-    navigation: any;
+  navigation: any
 }
 
 interface IState {
-    phone: string;
-    password: string;
-    underlineColorAndroid: string;
+  phone: string
+  password: string
+  underlineColorAndroid: string
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
@@ -58,24 +58,30 @@ class LoginForm extends PureComponent<IProps, IState> {
           getValue={this.getPassword}
           secureTextEntry={true}
           contStyle={styles.marginlessInput}
-          underneathText = 'Not less than 6 characters long'
+          underneathText="Must be at least 6 characters"
         />
 
         <ButtonAtom
-          btnText='Forgot password'
+          btnText="Forgot password"
           transparent={true}
           funcValue={'Reset'}
           onPress={this.navigate}
         />
+
         <ButtonAtom
-            btnText="Login"
-            onPress={this.login}
+          btnText="LOGIN"
+          btnStyle={styles.loginButton}
+          onPress={this.login}
         />
+
+        <Text style={styles.noAccount}>Don't have an account?</Text>
+
         <ButtonAtom
-            btnText="I don't have an account"
-            transparent={true}
-            funcValue = {'Signup'}
-            onPress={this.navigate}
+          btnText="SIGN UP"
+          transparent={true}
+          funcValue={'Signup'}
+          onPress={this.navigate}
+          btnStyle={styles.signupButton}
         />
       </Form>
     )
@@ -83,3 +89,22 @@ class LoginForm extends PureComponent<IProps, IState> {
 }
 
 export default LoginForm
+
+const styles = StyleSheet.create({
+  marginlessInput: {
+    marginLeft: 0
+  },
+  loginButton: {
+    width: '100%',
+    height: '12%',
+    justifyContent: 'center'
+  },
+  noAccount: {
+    color: color.menu,
+    textAlign: 'center',
+    marginTop: '6%'
+  },
+  signupButton: {
+    paddingBottom: '5%'
+  }
+})

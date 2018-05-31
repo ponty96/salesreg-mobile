@@ -7,7 +7,7 @@ import {
   StyleSheet
 } from 'react-native'
 
-import SignupForm from '../Components/SignupForm'
+import SignUpForm2 from '../Components/SignUpForm2'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
 import TransitionAtom from '../Atom/TransitionAtom'
 import { color } from '../Style/Color'
@@ -18,7 +18,7 @@ interface IProps {
 
 interface IState {}
 
-class SignupScreen extends PureComponent<IProps, IState> {
+class Signup2Screen extends PureComponent<IProps, IState> {
   render() {
     return (
       <View style={styles.container}>
@@ -26,10 +26,10 @@ class SignupScreen extends PureComponent<IProps, IState> {
         <ScrollView>
           <View style={styles.wrapper}>
             <Text style={styles.signUpText}>SIGN UP</Text>
-            <TransitionAtom screen1={true} />
-            <Text style={styles.personalInfoText}>PERSONAL INFORMATION</Text>
+            <TransitionAtom />
+            <Text style={styles.personalInfoText}>BUSINESS INFORMATION</Text>
             <KeyboardAvoidingView behavior={'position'}>
-              <SignupForm navigation={this.props.navigation} />
+              <SignUpForm2 navigation={this.props.navigation} />
             </KeyboardAvoidingView>
           </View>
         </ScrollView>
@@ -38,7 +38,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
   }
 }
 
-export default SignupScreen
+export default Signup2Screen
 
 const styles = StyleSheet.create({
   personalInfoText: {
@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     color: color.primary,
-    marginTop: '4%',
+    marginTop: 32,
     alignSelf: 'center'
   },
   container: {
