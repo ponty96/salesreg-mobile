@@ -1,21 +1,21 @@
-import * as React from 'react'
-import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
-import { FlatList, View, StyleSheet } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
-import { innerAccordion } from '../config/data'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
+import { FlatList, View, StyleSheet } from 'react-native';
+import { ScrollView } from 'react-native-gesture-handler';
+import { innerAccordion } from '../config/data';
+import { color } from '../Style/Color';
 
 interface IProps {
-  items?: { images: string; name: string; quantity: string; amount: any }
-  onPress?: () => void
+  items: { images: string; name: string; quantity: string; amount: any };
+  onPress?: () => void;
 }
 
 class InnerList extends React.Component<IProps, any> {
   render() {
     const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
     const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
+      this.props.items.images !== '' ? this.props.items.images : defaultImg;
     return (
       <ListItem style={styles.rowD} onPress={this.props.onPress}>
         <Left style={styles.view1}>
@@ -26,38 +26,41 @@ class InnerList extends React.Component<IProps, any> {
         </Body>
         <Right style={styles.view3}>
           <Text style={styles.lilFontDA}>{this.props.items.quantity}</Text>
-          <Text style={styles.rowText3DA}># {this.props.items.amount}.00</Text>
+          <Text style={styles.rowText3DA}>
+            &#8358; {this.props.items.amount}.00
+          </Text>
         </Right>
       </ListItem>
-    )
+    );
   }
 }
 
-const users = innerAccordion
+// const users = innerAccordion;
 
-export default class DebtAccordionAtom extends React.Component {
+class DebtAccordionAtom extends React.Component {
   onPress = () => {
-    console.log('it ran')
-  }
+    console.log('it ran');
+  };
 
-  renderItem = (item: any) => {
-    return <InnerList items={item} onPress={this.onPress} />
-  }
+  renderItem = ({item}: any) => {
+    return <InnerList items={item} onPress={this.onPress} />;
+  };
 
   render() {
     return (
       <View style={styles.debtAccord}>
         <ScrollView>
           <FlatList
-            data={users}
+            data={innerAccordion}
             renderItem={this.renderItem}
             keyExtractor={item => item.key.toString()}
           />
         </ScrollView>
       </View>
-    )
+    );
   }
 }
+export default DebtAccordionAtom;
 
 const styles = StyleSheet.create({
   rowD: {
@@ -125,4 +128,4 @@ const styles = StyleSheet.create({
     width: '100%',
     backgroundColor: '#FFF'
   }
-})
+});

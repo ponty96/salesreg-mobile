@@ -1,12 +1,12 @@
-import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Thumbnail } from 'native-base'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Thumbnail } from 'native-base';
+import { color } from '../Style/Color';
 
 interface IAboveAccordProps {
-  uri: string
-  name: string
-  totalAmount: any
+  uri: string;
+  name: string;
+  totalAmount: any;
 }
 
 class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
@@ -15,7 +15,7 @@ class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
     name: 'Customer Name',
     totalAmount: 0
-  }
+  };
   render() {
     return (
       <View style={styles.aboveAccordionContainer}>
@@ -32,11 +32,11 @@ class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
         </View>
         <View style={styles.aboveAccordionMoneyView}>
           <Text style={styles.aboveAccordionRedNumber}>
-            # {this.props.totalAmount}.00
+            &#8358; {this.props.totalAmount}.00
           </Text>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -82,6 +82,6 @@ const styles = StyleSheet.create({
     fontSize: 25,
     fontWeight: 'bold'
   }
-})
+});
 
-export default AboveAccordionAtom
+export default AboveAccordionAtom;

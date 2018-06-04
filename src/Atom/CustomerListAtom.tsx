@@ -1,23 +1,23 @@
-import * as React from 'react'
-import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
-import { StyleSheet } from 'react-native'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { color } from '../Style/Color';
 
 interface IProps {
-  items?: { images: string; customerName: string; amount: any }
-  latestAmount: string
-  realStyle: string
-  onPress: () => void
+  items?: { images: string; customerName: string; amount: any };
+  latestAmount: string;
+  realStyle: string;
+  onPress: () => void;
 }
 
 class CustomerListAtom extends React.Component<IProps, any> {
   render() {
     const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
     const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
-    let paid = 'paid'
-    let balance = 'balance'
+      this.props.items.images !== '' ? this.props.items.images : defaultImg;
+    let paid = 'paid';
+    let balance = 'balance';
     return (
       <ListItem style={styles.row} onPress={this.props.onPress}>
         <Left style={styles.view1}>
@@ -27,7 +27,7 @@ class CustomerListAtom extends React.Component<IProps, any> {
           <Text style={styles.rowText1}>{this.props.items.customerName}</Text>
         </Body>
         <Right style={styles.view3}>
-          <Text style={styles.text1}>N {this.props.items.amount}</Text>
+          <Text style={styles.text1}>&#8358; {this.props.items.amount}</Text>
           <Text
             style={[
               styles.lilFont,
@@ -42,11 +42,11 @@ class CustomerListAtom extends React.Component<IProps, any> {
           </Text>
         </Right>
       </ListItem>
-    )
+    );
   }
 }
 
-export default CustomerListAtom
+export default CustomerListAtom;
 
 const styles = StyleSheet.create({
   row: {
@@ -115,4 +115,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'rgba(218,11,11,59)'
   }
-})
+});

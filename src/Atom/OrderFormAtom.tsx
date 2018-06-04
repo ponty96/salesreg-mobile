@@ -1,53 +1,53 @@
-import * as React from 'react'
+import * as React from 'react';
 import {
   View,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet
-} from 'react-native'
-import { Header, Text, Left, Right, Icon } from 'native-base'
-import InputAtom from './InputAtom'
-import NewOrderCardAtom from './NewOrderCardAtom'
-import ButtonAtom from './ButtonAtom'
-import { color } from '../Style/Color'
+} from 'react-native';
+import { Header, Text, Left, Right, Icon } from 'native-base';
+import InputAtom from './InputAtom';
+import NewOrderCardAtom from './NewOrderCardAtom';
+import ButtonAtom from './ButtonAtom';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 interface IState {
-  customer: string
-  textInput: any
+  customer: string;
+  textInput: any;
 }
 
 class OrderFormAtom extends React.Component<IProps, IState> {
   state: IState = {
     customer: '',
     textInput: []
-  }
+  };
 
   getCustomer = (customer: string) => {
-    this.setState({ customer })
-  }
+    this.setState({ customer });
+  };
   makePayment = () => {
-    console.log()
-  }
+    console.log();
+  };
   removeTextInput = () => {
-    this.state.textInput.pop()
-    let textInput = this.state.textInput
+    this.state.textInput.pop();
+    let textInput = this.state.textInput;
     this.setState({
       textInput
-    })
-  }
+    });
+  };
   addTextInput = (key: any) => {
-    let textInput = this.state.textInput
+    let textInput = this.state.textInput;
     textInput.push(
       <NewOrderCardAtom key={key} onPress={this.removeTextInput} />
-    )
-    this.setState({ textInput })
-  }
+    );
+    this.setState({ textInput });
+  };
   navigate = (location: string) => {
-    this.props.navigation.navigate(location)
-  }
+    this.props.navigation.navigate(location);
+  };
 
   render() {
     return (
@@ -59,7 +59,7 @@ class OrderFormAtom extends React.Component<IProps, IState> {
           </Left>
           <Right>
             <Text>
-              Total: <Text style={styles.redColorText}>#0.00</Text>
+              Total: <Text style={styles.redColorText}>&#8358;0.00</Text>
             </Text>
           </Right>
         </Header>
@@ -74,7 +74,7 @@ class OrderFormAtom extends React.Component<IProps, IState> {
             </View>
             <NewOrderCardAtom onPress={this.makePayment} />
             {this.state.textInput.map((value: any) => {
-              return value
+              return value;
             })}
             <ButtonAtom
               onPress={() => this.addTextInput(this.state.textInput.length)}
@@ -88,7 +88,7 @@ class OrderFormAtom extends React.Component<IProps, IState> {
         <View style={styles.bottomSide}>
           <View style={styles.innerBottom}>
             <Text style={styles.bottomGrey}>Amount paid</Text>
-            <Text style={styles.bottomRed}>#0.00</Text>
+            <Text style={styles.bottomRed}>&#8358;0.00</Text>
           </View>
           <ButtonAtom
             onPress={this.makePayment}
@@ -98,11 +98,11 @@ class OrderFormAtom extends React.Component<IProps, IState> {
           />
         </View>
       </KeyboardAvoidingView>
-    )
+    );
   }
 }
 
-export default OrderFormAtom
+export default OrderFormAtom;
 
 const styles = StyleSheet.create({
   itemsContainer1: {
@@ -183,4 +183,4 @@ const styles = StyleSheet.create({
   marginfulInput: {
     marginLeft: 4
   }
-})
+});
