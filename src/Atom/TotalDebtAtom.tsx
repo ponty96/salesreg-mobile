@@ -24,7 +24,7 @@ export default class TotalDebtAtom extends React.Component<IProps, any> {
       return (
         <View style={styles.totalOrderRedNumberView}>
           <Text style={styles.totalOrderRedNumber}>
-            NGN {this.props.totalAmount}.00
+            {'\u20A6'} {this.props.totalAmount}.00
           </Text>
         </View>
       )
@@ -32,7 +32,7 @@ export default class TotalDebtAtom extends React.Component<IProps, any> {
       return (
         <View style={styles.totalDebtRedNumberView1}>
           <Text style={styles.totalDebtRedNumber1}>
-            NGN {this.props.totalAmount}.00
+            {'\u20A6'} {this.props.totalAmount}.00
           </Text>
         </View>
       )
@@ -40,7 +40,7 @@ export default class TotalDebtAtom extends React.Component<IProps, any> {
       return (
         <View style={styles.totalDebtRedNumberView2}>
           <Text style={styles.totalDebtRedNumber1}>
-            NGN {this.props.totalAmount}.00
+            {'\u20A6'} {this.props.totalAmount}.00
           </Text>
         </View>
       )

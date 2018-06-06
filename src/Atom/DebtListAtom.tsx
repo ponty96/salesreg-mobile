@@ -7,35 +7,45 @@ interface IProps {
   items?: { images: string; customerName: string; amount: any; date: string }
   limit?: number
   onPress?: () => void
+  image: string
 }
 
 class DebtListAtom extends React.Component<IProps, any> {
+  public static defaultProps = {
+    image:
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+  }
+
   display = () => {
-    if (this.props.limit >= 200000) {
+    const DUMMY_LIMIT = 200000
+    if (this.props.limit >= DUMMY_LIMIT) {
       return (
-        <Text style={styles.rowText1D}>{this.props.items.customerName}</Text>
+        <Text style={STYLES.rowText1D}>{this.props.items.customerName}</Text>
       )
     } else {
       return (
-        <Text style={styles.rowText1}>{this.props.items.customerName}</Text>
+        <Text style={STYLES.rowText1}>{this.props.items.customerName}</Text>
       )
     }
   }
+
   render() {
-    const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
     const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
+      this.props.items.images !== ''
+        ? this.props.items.images
+        : this.props.image
 
     return (
-      <ListItem style={styles.row} onPress={this.props.onPress}>
-        <Left style={styles.view1}>
-          <Thumbnail source={{ uri: avatar }} style={styles.dp} />
+      <ListItem style={STYLES.row} onPress={this.props.onPress}>
+        <Left style={STYLES.view1}>
+          <Thumbnail source={{ uri: avatar }} style={STYLES.dp} />
         </Left>
-        <Body style={styles.view2}>{this.display()}</Body>
-        <Right style={styles.view3}>
-          <Text style={styles.rowText3D}>N {this.props.items.amount}.00</Text>
-          <Text style={styles.lilFontD}>{this.props.items.date}</Text>
+        <Body style={STYLES.view2}>{this.display()}</Body>
+        <Right style={STYLES.view3}>
+          <Text style={STYLES.rowText3D}>
+            {'\u20A6'} {this.props.items.amount}.00
+          </Text>
+          <Text style={STYLES.lilFontD}>{this.props.items.date}</Text>
         </Right>
       </ListItem>
     )
@@ -44,7 +54,7 @@ class DebtListAtom extends React.Component<IProps, any> {
 
 export default DebtListAtom
 
-const styles = StyleSheet.create({
+const STYLES = StyleSheet.create({
   rowText1D: {
     fontWeight: '400',
     fontSize: 13,

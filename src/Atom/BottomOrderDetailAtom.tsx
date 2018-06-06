@@ -24,7 +24,9 @@ export default class BottomOrderDetailAtom extends React.Component<
             <Text style={styles.whiteTextL}>TOTAL</Text>
           </Left>
           <Right>
-            <Text style={styles.whiteTextR}>#{this.props.total}.00</Text>
+            <Text style={styles.whiteTextR}>
+              {'\u20A6'} {this.props.total}.00
+            </Text>
           </Right>
         </ListItem>
         <ListItem style={styles.whiteList}>
@@ -32,7 +34,9 @@ export default class BottomOrderDetailAtom extends React.Component<
             <Text style={styles.blackTextL}>Amount Pending</Text>
           </Left>
           <Right>
-            <Text style={styles.blackTextR}>#{this.props.amount}.00</Text>
+            <Text style={styles.blackTextR}>
+              {'\u20A6'} {this.props.amount}.00
+            </Text>
           </Right>
         </ListItem>
         <ListItem style={styles.whiteList}>
@@ -40,7 +44,9 @@ export default class BottomOrderDetailAtom extends React.Component<
             <Text style={styles.blackTextL}>Balance</Text>
           </Left>
           <Right>
-            <Text style={styles.redTextR}>#{this.props.balance}.00</Text>
+            <Text style={styles.redTextR}>
+              {'\u20A6'} {this.props.balance}.00
+            </Text>
           </Right>
         </ListItem>
         <ListItem style={styles.whiteList}>

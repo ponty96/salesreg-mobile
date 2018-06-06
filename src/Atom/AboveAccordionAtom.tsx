@@ -32,7 +32,7 @@ class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
         </View>
         <View style={styles.aboveAccordionMoneyView}>
           <Text style={styles.aboveAccordionRedNumber}>
-            # {this.props.totalAmount}.00
+            {'\u20A6'} {this.props.totalAmount}.00
           </Text>
         </View>
       </View>

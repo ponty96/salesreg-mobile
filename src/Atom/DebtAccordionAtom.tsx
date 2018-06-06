@@ -12,28 +12,28 @@ interface IProps {
 
 class InnerList extends React.Component<IProps, any> {
   render() {
-    const defaultImg =
+    const DEFAULT_IMAGE =
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
-    const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
+    const AVATAR =
+      this.props.items.images !== '' ? this.props.items.images : DEFAULT_IMAGE
     return (
-      <ListItem style={styles.rowD} onPress={this.props.onPress}>
-        <Left style={styles.view1}>
-          <Thumbnail source={{ uri: avatar }} style={styles.dpD} />
+      <ListItem style={STYLES.rowD} onPress={this.props.onPress}>
+        <Left style={STYLES.view1}>
+          <Thumbnail source={{ uri: AVATAR }} style={STYLES.dpD} />
         </Left>
-        <Body style={styles.view2}>
-          <Text style={styles.rowText1}>{this.props.items.name}</Text>
+        <Body style={STYLES.view2}>
+          <Text style={STYLES.rowText1}>{this.props.items.name}</Text>
         </Body>
-        <Right style={styles.view3}>
-          <Text style={styles.lilFontDA}>{this.props.items.quantity}</Text>
-          <Text style={styles.rowText3DA}># {this.props.items.amount}.00</Text>
+        <Right style={STYLES.view3}>
+          <Text style={STYLES.lilFontDA}>{this.props.items.quantity}</Text>
+          <Text style={STYLES.rowText3DA}>
+            {'\u20A6'} {this.props.items.amount}.00
+          </Text>
         </Right>
       </ListItem>
     )
   }
 }
-
-const users = innerAccordion
 
 export default class DebtAccordionAtom extends React.Component {
   onPress = () => {
@@ -46,10 +46,10 @@ export default class DebtAccordionAtom extends React.Component {
 
   render() {
     return (
-      <View style={styles.debtAccord}>
+      <View style={STYLES.debtAccord}>
         <ScrollView>
           <FlatList
-            data={users}
+            data={innerAccordion}
             renderItem={this.renderItem}
             keyExtractor={item => item.key.toString()}
           />
@@ -59,7 +59,7 @@ export default class DebtAccordionAtom extends React.Component {
   }
 }
 
-const styles = StyleSheet.create({
+const STYLES = StyleSheet.create({
   rowD: {
     flex: 1,
     flexDirection: 'row',

@@ -12,7 +12,6 @@ import ImageDisplayAtom from './../Atom/ImageDisplayAtom'
 import DetailItemAtom from './../Atom/DetailItemAtom'
 import GoldRatingsAtom from './../Atom/GoldRatingsAtom'
 import ButtonAtom from './../Atom/ButtonAtom'
-import styles1 from '../Style/exportStyles'
 import GetAmountModal from './../Container/GetAmountModal'
 import { color } from '../Style/Color'
 
@@ -107,13 +106,13 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
               <View style={styles.purchaseWrapper}>
                 <Text style={styles.textTitle}>Total purchase made</Text>
                 <Text style={styles.textContent}>
-                  N{this.state.item.purchaseMade}
+                  {'\u20A6'} {this.state.item.purchaseMade}
                 </Text>
               </View>
               <View style={styles.purchaseWrapper}>
                 <Text style={styles.textTitle}>debt</Text>
                 <Text style={[styles.textContent, styles.redText]}>
-                  #{this.state.item.credit}
+                  {'\u20A6'} {this.state.item.credit}
                 </Text>
               </View>
             </View>
@@ -172,7 +171,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
             <View style={[styles.compartmentItemWrapper, styles.creditLimit]}>
               <Text style={styles.compartmentItem}>Credit Limit</Text>
               <Text style={[styles.textContent, styles.redText]}>
-                N{this.state.item.creditLimit}
+                {'\u20A6'} {this.state.item.creditLimit}
               </Text>
             </View>
           </View>
@@ -184,11 +183,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
                 {this.state.item.wallet}
               </Text>
             </View>
-            <ButtonAtom
-              btnText="Add to wallet"
-              textStyle={styles1.redButtonText}
-              onPress={this.openModal}
-            />
+            <ButtonAtom btnText="Add to wallet" onPress={this.openModal} />
           </View>
         </ScrollView>
       </View>
