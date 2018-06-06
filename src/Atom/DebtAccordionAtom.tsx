@@ -15,6 +15,7 @@ class InnerList extends React.Component<IProps, any> {
   public static defaultProps: {
     image: 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   }
+
   render() {
     const AVATAR =
       this.props.item.images !== '' ? this.props.item.images : this.props.image

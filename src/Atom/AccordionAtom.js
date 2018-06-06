@@ -1,13 +1,13 @@
-import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Icon } from 'native-base';
-import Accordion from 'react-native-collapsible/Accordion';
-import DebtAccordionAtom from './DebtAccordionAtom';
-import { ScrollView } from 'react-native-gesture-handler';
-import { sections } from '../config/data';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import { Icon } from 'native-base'
+import Accordion from 'react-native-collapsible/Accordion'
+import DebtAccordionAtom from './DebtAccordionAtom'
+import { ScrollView } from 'react-native-gesture-handler'
+import { sections } from '../config/data'
+import { color } from '../Style/Color'
 
-const SECTIONS = sections;
+const SECTIONS = sections
 
 /*interface IProps {
   icon: string
@@ -16,21 +16,22 @@ interface IState {
   activeSection: boolean
   icon: string
 }*/
-const namer = 'md-arrow-dropdown';
+const namer = 'md-arrow-dropdown'
 
 export default class AccordionAtom extends React.Component /*<IProps, IState>*/ {
   constructor(props /*?: IProps, context?: any*/) {
-    super(props /*, context*/);
+    super(props /*, context*/)
     this.state = {
       activeSection: false
       // icon: 'md-arrow-dropdown'
-    };
+    }
   }
   setHeader = (section /*: any*/) => {
     //const { icon } = this.state
     // this.loadHeader(icon)
-    this.setState({ activeSection: section });
-  };
+    this.setState({ activeSection: section })
+  }
+
   // loadHeader = (a /*: string*/) => {
   // if (a === 'md-arrow-dropdown') {
   //  this.setState({ icon: 'md-arrow-dropup' })
@@ -60,15 +61,15 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
           <Icon style={styles.accordIcon} name={namer} />
         </View>
       </View>
-    );
+    )
   }
 
   renderContent() {
-    return <DebtAccordionAtom />;
+    return <DebtAccordionAtom />
   }
 
   render() {
-    console.log(this.state);
+    console.log(this.state)
     return (
       <ScrollView>
         <Accordion
@@ -79,7 +80,7 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
           onChange={this.setHeader}
         />
       </ScrollView>
-    );
+    )
   }
 }
 
@@ -134,4 +135,4 @@ const styles = StyleSheet.create({
   accordTextL2: {
     color: color.primary
   }
-});
+})

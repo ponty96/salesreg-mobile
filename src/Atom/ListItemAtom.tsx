@@ -35,7 +35,6 @@ class ListItemAtom extends React.Component<IProps, any> {
           ]}
         >
           {capitalizeFirstLetter(this.props.item.name)}
-          {/*{this.props.item.name.charAt(0).toUpperCase()}*/}
         </Text>
       </View>
     )
@@ -102,7 +101,7 @@ class ListItemAtom extends React.Component<IProps, any> {
           <View style={styles.listTextCont}>
             <Text style={this.props.type === 'sidebar' && styles.boldText}>
               {this.props.type === 'sidebar'
-                ? this.props.item.name.toUpperCase()
+                ? capitalizeFirstLetter(this.props.item.name)
                 : this.props.item.name}
             </Text>
             {this.props.type === 'sidebar' && (
