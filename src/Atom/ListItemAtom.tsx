@@ -8,7 +8,7 @@ interface IProps {
   item?: { image?: any; name?: any }
   imgStyle?: object
   business?: boolean
-  bodyfunction?: Function
+  bodyfunction?: (a?: any) => void
   rightIconFunc?: () => void
 }
 
