@@ -2,6 +2,7 @@ import * as React from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 import { color } from '../Style/Color'
+import { capitalizeFirstLetter } from '../Functions/capitalizeFirstLetter'
 
 interface IProps {
   type?: string
@@ -33,7 +34,8 @@ class ListItemAtom extends React.Component<IProps, any> {
             this.props.type === 'business' && styles.boldText
           ]}
         >
-          {this.props.item.name.charAt(0).toUpperCase()}
+          {capitalizeFirstLetter(this.props.item.name)}
+          {/*{this.props.item.name.charAt(0).toUpperCase()}*/}
         </Text>
       </View>
     )

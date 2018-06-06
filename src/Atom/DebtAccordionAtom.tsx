@@ -6,28 +6,31 @@ import { innerAccordion } from '../config/data'
 import { color } from '../Style/Color'
 
 interface IProps {
-  items?: { images: string; name: string; quantity: string; amount: any }
+  item?: { images: string; name: string; quantity: string; amount: any }
   onPress?: () => void
+  image?: string
 }
 
 class InnerList extends React.Component<IProps, any> {
+  public static defaultProps: {
+    image: 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+  }
   render() {
-    const DEFAULT_IMAGE =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
     const AVATAR =
-      this.props.items.images !== '' ? this.props.items.images : DEFAULT_IMAGE
+      this.props.item.images !== '' ? this.props.item.images : this.props.image
+
     return (
-      <ListItem style={STYLES.rowD} onPress={this.props.onPress}>
-        <Left style={STYLES.view1}>
-          <Thumbnail source={{ uri: AVATAR }} style={STYLES.dpD} />
+      <ListItem style={styles.rowD} onPress={this.props.onPress}>
+        <Left style={styles.view1}>
+          <Thumbnail source={{ uri: AVATAR }} style={styles.dpD} />
         </Left>
-        <Body style={STYLES.view2}>
-          <Text style={STYLES.rowText1}>{this.props.items.name}</Text>
+        <Body style={styles.view2}>
+          <Text style={styles.rowText1}>{this.props.item.name}</Text>
         </Body>
-        <Right style={STYLES.view3}>
-          <Text style={STYLES.lilFontDA}>{this.props.items.quantity}</Text>
-          <Text style={STYLES.rowText3DA}>
-            {'\u20A6'} {this.props.items.amount}.00
+        <Right style={styles.view3}>
+          <Text style={styles.lilFontDA}>{this.props.item.quantity}</Text>
+          <Text style={styles.rowText3DA}>
+            {'\u20A6'} {this.props.item.amount}.00
           </Text>
         </Right>
       </ListItem>
@@ -41,12 +44,12 @@ export default class DebtAccordionAtom extends React.Component {
   }
 
   renderItem = (item: any) => {
-    return <InnerList items={item} onPress={this.onPress} />
+    return <InnerList item={item} onPress={this.onPress} />
   }
 
   render() {
     return (
-      <View style={STYLES.debtAccord}>
+      <View style={styles.debtAccord}>
         <ScrollView>
           <FlatList
             data={innerAccordion}
@@ -59,7 +62,7 @@ export default class DebtAccordionAtom extends React.Component {
   }
 }
 
-const STYLES = StyleSheet.create({
+const styles = StyleSheet.create({
   rowD: {
     flex: 1,
     flexDirection: 'row',

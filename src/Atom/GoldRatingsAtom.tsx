@@ -17,70 +17,49 @@ class GoldRatings extends React.Component<any, IState> {
   }
 
   onStarRatingPress(rating: number) {
-    /*switch (rating) {
-      case 1: {
-        this.setState({
-          starCount: rating,
-          value: 'Terrible'
-        })
-      }
-      break
-      case 2: {
-        this.setState({
-          starCount: rating,
-          value: 'Not so bad'
-        })
-      }
-      break
-      case 3: {
-        this.setState({
-          starCount: rating,
-          value: 'Good'
-        })
-      }
-      break
-      case 4: {
-        this.setState({
-          starCount: rating,
-          value: 'Very good'
-        })
-      }
-      break
-      case 5: {
-        this.setState({
-          starCount: rating,
-          value: 'Amazing!!!'
-        })
-      }
-      break
-      default: {}
-    }*/
-
-    if (rating === 1) {
-      this.setState({
-        starCount: rating,
-        value: 'Terrible'
-      })
-    } else if (rating === 2) {
-      this.setState({
-        starCount: rating,
-        value: 'Not so Bad'
-      })
-    } else if (rating === 3) {
-      this.setState({
-        starCount: rating,
-        value: 'Good!'
-      })
-    } else if (rating === 4) {
-      this.setState({
-        starCount: rating,
-        value: 'Very Good!!'
-      })
-    } else if (rating === 5) {
-      this.setState({
-        starCount: rating,
-        value: 'Amazing!!!'
-      })
+    switch (rating) {
+      case 1:
+        {
+          this.setState({
+            starCount: rating,
+            value: 'Terrible'
+          })
+        }
+        break
+      case 2:
+        {
+          this.setState({
+            starCount: rating,
+            value: 'Not so bad'
+          })
+        }
+        break
+      case 3:
+        {
+          this.setState({
+            starCount: rating,
+            value: 'Good'
+          })
+        }
+        break
+      case 4:
+        {
+          this.setState({
+            starCount: rating,
+            value: 'Very good'
+          })
+        }
+        break
+      case 5:
+        {
+          this.setState({
+            starCount: rating,
+            value: 'Amazing!!!'
+          })
+        }
+        break
+      default:
+        break
     }
   }
 

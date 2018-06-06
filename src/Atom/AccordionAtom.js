@@ -26,19 +26,22 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
       icon: 'md-arrow-dropdown'
     }
   }
-  _setHeader(section /*: any*/) {
+
+  setHeader = (section /*: any*/) => {
     const { icon } = this.state
-    this._loadHeader(icon)
+    this.loadHeader(icon)
     this.setState({ activeSection: section })
   }
-  _loadHeader = (a /*: string*/) => {
+
+  loadHeader = (a /*: string*/) => {
     if (a === 'md-arrow-dropdown') {
       this.setState({ icon: 'md-arrow-dropup' })
     } else {
       this.setState({ icon: 'md-arrow-dropdown' })
     }
   }
-  _renderHeader(section /*: any*/) {
+
+  renderHeader(section /*: any*/) {
     return (
       <View style={styles.mainAccord}>
         <View style={styles.accordView1}>
@@ -63,7 +66,7 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
     )
   }
 
-  _renderContent() {
+  renderContent() {
     return <DebtAccordionAtom />
   }
 
@@ -74,9 +77,9 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
         <Accordion
           sections={SECTIONS}
           activeSection={this.state.activeSection}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-          onChange={this._setHeader.bind(this)}
+          renderHeader={this.renderHeader}
+          renderContent={this.renderContent}
+          onChange={this.setHeader}
         />
       </ScrollView>
     )

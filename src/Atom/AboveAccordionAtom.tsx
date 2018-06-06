@@ -16,6 +16,7 @@ class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
     name: 'Customer Name',
     totalAmount: 0
   }
+
   render() {
     return (
       <View style={styles.aboveAccordionContainer}>

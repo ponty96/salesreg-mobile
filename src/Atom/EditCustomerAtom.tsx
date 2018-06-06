@@ -67,13 +67,13 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
             getValue={this.getImage}
             source={this.state.image}
             placeholder=""
-            imgStyle={STYLES.imgContainer}
+            imgStyle={styles.imgContainer}
           />
           <View>
             <InputAtom
               label="Name"
               getValue={this.getProduct}
-              contStyle={STYLES.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View>
@@ -81,10 +81,10 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
               label="Phone number(separate numbers with commas):"
               keyboardType="numeric"
               getValue={this.getPhone}
-              contStyle={STYLES.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
-          <View style={STYLES.innerFirstPicker}>
+          <View style={styles.innerFirstPicker}>
             <PickerAtom list={['Gender', 'Male', 'Female']} />
           </View>
           <View>
@@ -92,7 +92,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
               label="Address"
               keyboardType="numeric"
               getValue={this.getAddress}
-              contStyle={STYLES.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
           <View>
@@ -100,45 +100,45 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
               label="Type Email Address"
               keyboardType="email-address"
               getValue={this.getEmail}
-              contStyle={STYLES.marginlessInput}
+              contStyle={styles.marginlessInput}
             />
           </View>
-          <View style={STYLES.inputView}>
-            <View style={STYLES.innerStart}>
+          <View style={styles.inputView}>
+            <View style={styles.innerStart}>
               <InputAtom
                 label="Debt limit"
                 keyboardType="numeric"
                 getValue={this.getDebt}
-                contStyle={STYLES.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
             </View>
-            <View style={STYLES.innerEnd}>
+            <View style={styles.innerEnd}>
               <InputAtom
                 label="Birthday"
                 keyboardType="numeric"
                 getValue={this.getBirth}
-                contStyle={STYLES.marginfulInput}
+                contStyle={styles.marginfulInput}
               />
-              <Text style={STYLES.underText}>DD/MM/YYYY</Text>
+              <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
           </View>
-          <View style={STYLES.inputView}>
-            <View style={STYLES.innerFirstPicker}>
+          <View style={styles.inputView}>
+            <View style={styles.innerFirstPicker}>
               <PickerAtom list={['Marital Status', 'Married', 'Single']} />
             </View>
-            <View style={STYLES.innerEnd}>
+            <View style={styles.innerEnd}>
               <InputAtom
                 label="Marriage Anniversary"
                 keyboardType="numeric"
                 getValue={this.getMarry}
-                contStyle={STYLES.marginlessInput}
+                contStyle={styles.marginlessInput}
               />
-              <Text style={STYLES.underText}>DD/MM/YYYY</Text>
+              <Text style={styles.underText}>DD/MM/YYYY</Text>
             </View>
           </View>
-          <View style={STYLES.secondCompartment}>
-            <View style={STYLES.compartmentItemWrapper}>
-              <Text style={STYLES.compartmentItem}>
+          <View style={styles.secondCompartment}>
+            <View style={styles.compartmentItemWrapper}>
+              <Text style={styles.compartmentItem}>
                 Rating {this.props.customerName}
               </Text>
               <GoldRatingsAtom />
@@ -150,7 +150,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
   }
 }
 
-const STYLES = StyleSheet.create({
+const styles = StyleSheet.create({
   imgContainer: {
     alignItems: 'center',
     justifyContent: 'center',

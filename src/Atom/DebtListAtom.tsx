@@ -20,32 +20,32 @@ class DebtListAtom extends React.Component<IProps, any> {
     const DUMMY_LIMIT = 200000
     if (this.props.limit >= DUMMY_LIMIT) {
       return (
-        <Text style={STYLES.rowText1D}>{this.props.items.customerName}</Text>
+        <Text style={styles.rowText1D}>{this.props.items.customerName}</Text>
       )
     } else {
       return (
-        <Text style={STYLES.rowText1}>{this.props.items.customerName}</Text>
+        <Text style={styles.rowText1}>{this.props.items.customerName}</Text>
       )
     }
   }
 
   render() {
-    const avatar =
+    const AVATAR =
       this.props.items.images !== ''
         ? this.props.items.images
         : this.props.image
 
     return (
-      <ListItem style={STYLES.row} onPress={this.props.onPress}>
-        <Left style={STYLES.view1}>
-          <Thumbnail source={{ uri: avatar }} style={STYLES.dp} />
+      <ListItem style={styles.row} onPress={this.props.onPress}>
+        <Left style={styles.view1}>
+          <Thumbnail source={{ uri: AVATAR }} style={styles.dp} />
         </Left>
-        <Body style={STYLES.view2}>{this.display()}</Body>
-        <Right style={STYLES.view3}>
-          <Text style={STYLES.rowText3D}>
+        <Body style={styles.view2}>{this.display()}</Body>
+        <Right style={styles.view3}>
+          <Text style={styles.rowText3D}>
             {'\u20A6'} {this.props.items.amount}.00
           </Text>
-          <Text style={STYLES.lilFontD}>{this.props.items.date}</Text>
+          <Text style={styles.lilFontD}>{this.props.items.date}</Text>
         </Right>
       </ListItem>
     )
@@ -54,7 +54,7 @@ class DebtListAtom extends React.Component<IProps, any> {
 
 export default DebtListAtom
 
-const STYLES = StyleSheet.create({
+const styles = StyleSheet.create({
   rowText1D: {
     fontWeight: '400',
     fontSize: 13,
