@@ -4,14 +4,16 @@ import { Thumbnail, ListItem, Left, Right } from 'native-base'
 import { color } from '../Style/Color'
 
 interface IProps {
-  product?: string | 'Product Name'
-  units?: any | 0
-  packs?: any | 0
-  quantity?: any | 0
-  cost?: any | 0
-  ucost?: any | 0
-  sell?: any | 0
-  stock?: any | 0
+  product?: string
+  units?: any
+  packs?: any
+  measurementUnit?: any
+  packingContainer?: any
+  cartonQuantity?: any
+  costppCarton?: any
+  unitCostPrice?: any
+  sellingPrice?: any
+  minStockQuantity?: any
 }
 
 export default class ProductDetailAtom extends React.Component<IProps, any> {
@@ -42,7 +44,7 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
             </View>
             <View>
               <Text style={styles.aboveAccordionGreyFont}>
-                Stock quantity(in packs)
+                Total Units Sold
               </Text>
               <Text style={styles.aboveAccordionBoldFont}>
                 {this.props.packs}
@@ -53,23 +55,45 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
         <View>
           <ListItem style={styles.aboveAccordionWhiteList}>
             <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>Pack quantity</Text>
+              <Text style={styles.aboveAccordionBlackTextL}>Measurement unit</Text>
             </Left>
             <Right>
               <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.quantity}
+                {this.props.measurementUnit}
               </Text>
             </Right>
           </ListItem>
           <ListItem style={styles.aboveAccordionWhiteList}>
             <Left>
               <Text style={styles.aboveAccordionBlackTextL}>
-                Cost price per pack
+                Packing Container
               </Text>
             </Left>
             <Right>
               <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.cost}
+                {this.props.packingContainer}
+              </Text>
+            </Right>
+          </ListItem>
+          <ListItem style={styles.aboveAccordionWhiteList}>
+            <Left>
+              <Text style={styles.aboveAccordionBlackTextL}>
+                Carton Quantity
+              </Text>
+            </Left>
+            <Right>
+              <Text style={styles.aboveAccordionBlackTextR}>
+                {this.props.cartonQuantity}
+              </Text>
+            </Right>
+          </ListItem>
+          <ListItem style={styles.aboveAccordionWhiteList}>
+            <Left>
+              <Text style={styles.aboveAccordionBlackTextL}>Cost price per Carton</Text>
+            </Left>
+            <Right>
+              <Text style={styles.aboveAccordionRedTextR}>
+                {this.props.costppCarton}
               </Text>
             </Right>
           </ListItem>
@@ -81,17 +105,19 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
             </Left>
             <Right>
               <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.ucost}
+                {this.props.unitCostPrice}
               </Text>
             </Right>
           </ListItem>
           <ListItem style={styles.aboveAccordionWhiteList}>
             <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>Seling price</Text>
+              <Text style={styles.aboveAccordionBlackTextL}>
+                Selling Price
+              </Text>
             </Left>
             <Right>
-              <Text style={styles.aboveAccordionRedTextR}>
-                {this.props.sell}
+              <Text style={styles.aboveAccordionBlackTextR}>
+                {this.props.sellingPrice}
               </Text>
             </Right>
           </ListItem>
@@ -103,7 +129,7 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
             </Left>
             <Right>
               <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.stock}
+                {this.props.minStockQuantity}
               </Text>
             </Right>
           </ListItem>
