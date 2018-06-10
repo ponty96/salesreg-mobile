@@ -39,8 +39,6 @@ class ProductDetails extends PureComponent<IProps, IState> {
         <ScrollView>
           <ProductDetailAtom />
         </ScrollView>
-        <View style={styles.foota}>
-        </View>
       </View>
     );
   }
