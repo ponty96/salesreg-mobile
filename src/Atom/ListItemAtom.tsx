@@ -2,13 +2,14 @@ import * as React from 'react'
 import { View, Text, Image, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 import { color } from '../Style/Color'
+import { capitalizeFirstLetter } from '../Functions/capitalizeFirstLetter'
 
 interface IProps {
   type?: string
   item?: { image?: any; name?: any }
   imgStyle?: object
   business?: boolean
-  bodyfunction?: Function
+  bodyfunction?: (a?: any) => void
   rightIconFunc?: () => void
 }
 
@@ -33,7 +34,7 @@ class ListItemAtom extends React.Component<IProps, any> {
             this.props.type === 'business' && styles.boldText
           ]}
         >
-          {this.props.item.name.charAt(0).toUpperCase()}
+          {capitalizeFirstLetter(this.props.item.name)}
         </Text>
       </View>
     )
@@ -100,7 +101,7 @@ class ListItemAtom extends React.Component<IProps, any> {
           <View style={styles.listTextCont}>
             <Text style={this.props.type === 'sidebar' && styles.boldText}>
               {this.props.type === 'sidebar'
-                ? this.props.item.name.toUpperCase()
+                ? capitalizeFirstLetter(this.props.item.name)
                 : this.props.item.name}
             </Text>
             {this.props.type === 'sidebar' && (

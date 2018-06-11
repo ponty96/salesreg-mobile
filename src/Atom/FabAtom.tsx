@@ -3,7 +3,7 @@ import { Icon, Fab } from 'native-base'
 import { StyleSheet } from 'react-native'
 import { color } from './../Style/Color'
 
-const fabAtom = (props: any) => (
+export const fabAtom = (props: any) => (
   <Fab
     position="bottomRight"
     style={styles.fab}
@@ -17,8 +17,6 @@ const fabAtom = (props: any) => (
     />
   </Fab>
 )
-
-export default fabAtom
 
 const styles = StyleSheet.create({
   fab: {

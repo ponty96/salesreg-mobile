@@ -1,17 +1,17 @@
-import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Thumbnail, ListItem, Left, Right } from 'native-base'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Thumbnail, ListItem, Left, Right } from 'native-base';
+import { color } from '../Style/Color';
 
 interface IProps {
-  product?: string | 'Product Name'
-  units?: any | 0
-  packs?: any | 0
-  quantity?: any | 0
-  cost?: any | 0
-  ucost?: any | 0
-  sell?: any | 0
-  stock?: any | 0
+  product?: string;
+  units?: any;
+  packs?: any;
+  quantity?: any;
+  cost?: any;
+  ucost?: any;
+  sell?: any;
+  stock?: any;
 }
 
 export default class ProductDetailAtom extends React.Component<IProps, any> {
@@ -109,7 +109,7 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
           </ListItem>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -186,4 +186,4 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
     // backgroundColor: '#FFF',
   }
-})
+});
