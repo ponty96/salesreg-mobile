@@ -31,7 +31,7 @@ import DebtDetailsScreen from './../Screen/DebtDetailsScreen';
 import ProductDetailsScreen from './../Screen/ProductDetailsScreen';
 import UserProfileScreen from '../Screen/UserProfileScreen';
 import OrderListScreen from '../Screen/OrderListScreen';
-import SignUp2Screen from '../Screen/SignUp2Screen';
+import SecondSignUpScreen from '../Screen/SecondSignUpScreen';
 import CustomerDetailScreen from '../Screen/CustomerDetailScreen';
 import MainOrderList from '../Components/MainOrderList';
 import Sidebar from './Sidebar';
@@ -198,7 +198,7 @@ const authStack = StackNavigator(
     Login: LoginScreen,
     Reset: ResetScreen,
     Signup: SignupScreen,
-    SignUp2: SignUp2Screen
+    SecondSignUp: SecondSignUpScreen
   },
   {
     headerMode: 'none'

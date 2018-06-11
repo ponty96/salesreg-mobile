@@ -83,11 +83,8 @@ class SigupForm extends PureComponent<IProps, IState> {
           contStyle={styles.marginlessInput}
         />
 
-        <View style={[styles.genderPickerStyle, styles.marginlessInput]}>
-          <PickerAtom
-            list={['Gender', 'Male', 'Female']}
-            style={styles.faintPicker}
-          />
+        <View style={styles.pickerWrapper}>
+          <PickerAtom list={['Male', 'Female']} style={styles.faintPicker} />
         </View>
 
         <InputAtom
@@ -108,7 +105,7 @@ class SigupForm extends PureComponent<IProps, IState> {
         <View>
           <TouchableOpacity
             style={styles.nextButtonContainer}
-            onPress={() => this.props.navigation.navigate('SignUp2')}
+            onPress={() => this.props.navigation.navigate('SecondSignUp')}
           >
             <Text style={styles.nextText}>NEXT </Text>
             <Icon
@@ -131,12 +128,13 @@ const styles = StyleSheet.create({
   },
   faintPicker: {
     color: color.inactive,
-    width: '50%',
     height: 35
   },
-  genderPickerStyle: {
+  pickerWrapper: {
     marginTop: 25,
-    marginLeft: 10
+    borderBottomColor: color.inactive,
+    borderBottomWidth: 0.5,
+    width: '50%'
   },
   nextButtonContainer: {
     flexDirection: 'row',
