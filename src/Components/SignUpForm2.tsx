@@ -20,7 +20,7 @@ interface IState {
 
 class SigupForm2 extends PureComponent<IProps, IState> {
   state = {
-    image: '',
+    image: 'https://www.iconsdb.com/icons/preview/gray/shop-xxl.png',
     password: '',
     name: '',
     confirm_password: '',
@@ -76,9 +76,9 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           getValue={this.getImage}
           source={this.state.image}
           placeholder=""
-          imgStyle={styles.placeholderIcon}
-          type="business"
+          shop={true}
         />
+
         <InputAtom
           label="Business name"
           getValue={this.getName}
@@ -139,10 +139,6 @@ const styles = StyleSheet.create({
   },
   placeholderColor: {
     color: color.inactive
-  },
-  placeholderIcon: {
-    color: color.inactive,
-    fontSize: 120
   },
   longButton: {
     width: '90%',

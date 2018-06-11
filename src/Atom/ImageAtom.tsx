@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
 import { ImagePicker } from 'expo'
-import { Icon } from 'native-base'
 import { StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 
@@ -10,7 +9,7 @@ interface IProps {
   placeholder?: string
   imgStyle?: object
   getValue?: any
-  type?: string
+  shop?: boolean
 }
 
 class ImageAtom extends React.Component<IProps, any> {
@@ -32,21 +31,6 @@ class ImageAtom extends React.Component<IProps, any> {
   }
 
   render() {
-    if (this.props.type === 'business')
-      return (
-        <View>
-          <TouchableOpacity
-            onPress={this.handleSelection}
-            style={[styles.selfAlign, styles.imgContainer]}
-          >
-            <View style={styles.iconBackground}>
-              <Icon name="shop" type="Entypo" style={this.props.imgStyle} />
-            </View>
-          </TouchableOpacity>
-          <Text style={styles.selfAlign}>Upload logo</Text>
-        </View>
-      )
-
     if (this.props.source || this.state.image) {
       return (
         <TouchableOpacity
@@ -55,9 +39,9 @@ class ImageAtom extends React.Component<IProps, any> {
         >
           <Image
             source={{ uri: this.state.image || this.props.source }}
-            style={[styles.imgContainer, this.props.imgStyle]}
+            style={styles.image}
           />
-          <Text style={styles.selfAlign}>Upload logo</Text>
+          <Text style={styles.imageText}>Upload logo</Text>
         </TouchableOpacity>
       )
     } else {
@@ -85,21 +69,20 @@ const styles = StyleSheet.create({
   selfAlign: {
     alignSelf: 'center'
   },
+  image: {
+    height: 120,
+    width: 120
+  },
   imgContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-    marginVertical: 15
+    height: 160,
+    width: 160,
+    borderRadius: 80,
+    marginVertical: 10
   },
-  iconBackground: {
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-    backgroundColor: color.grey,
-    justifyContent: 'center',
-    alignItems: 'center'
+  imageText: {
+    alignSelf: 'center'
   },
   imgPlaceholderText: {
     fontWeight: 'bold',
