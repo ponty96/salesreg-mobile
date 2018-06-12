@@ -39,7 +39,7 @@ import styles from './../Style/Layout'
 import { color } from './../Style/Color'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 
-let OPTION
+let OPTION = 'both'
 
 const viewBothStack = TabNavigator(
   {
@@ -54,31 +54,34 @@ const viewBothStack = TabNavigator(
     navigationOptions: ({ navigation }: any) => ({
       tabBarIcon: ({ focused }: any) => {
         const { routeName } = navigation.state
-        let iconName
         let tabColor
         if (routeName === 'Products') {
-          iconName = 'basket'
-          tabColor = focused ? color.primary : color.inactive
+          tabColor = focused ? color.secondary : color.secondary
         } else if (routeName === 'Services') {
-          iconName = 'cart'
-          tabColor = focused ? color.primary : color.inactive
+          tabColor = focused ? color.secondary : color.secondary
         }
         return (
           <View style={{ alignItems: 'center' }}>
-            <Text style={{ color: tabColor }}>{routeName}</Text>
+            <Text style={{ color: tabColor, fontWeight: 'bold', fontSize: 20 }}>
+              {routeName}
+            </Text>
           </View>
         )
       }
     }),
     tabBarOptions: {
-      activeTintColor: color.primary,
-      inactiveTintColor: color.inactive,
-      showLabel: false,
+      activeTintColor: color.secondary,
+      inactiveTintColor: color.secondary,
+      showLabel: true,
       style: {
-        backgroundColor: color.secondary,
+        backgroundColor: color.primary,
         height: 60,
         paddingVertical: 8
-      }
+      },
+      indicatorStyle: {
+        backgroundColor: 'lightblue'
+      },
+      upperCaseLabel: false
     },
     animationEnabled: false,
     swipeEnabled: true

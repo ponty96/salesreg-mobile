@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
-import { View, FlatList, ScrollView } from 'react-native';
-import ProductListAtom from '../Atom/ProductListAtom';
-import SubHeaderAtom from '../Atom/SubHeaderAtom';
+import React, { PureComponent } from 'react'
+import { View, FlatList, ScrollView, StyleSheet } from 'react-native'
+import ProductListAtom from '../Atom/ProductListAtom'
+import SubHeaderAtom from '../Atom/SubHeaderAtom'
 // import styles from '../Style/ProductAndCustomerList';
 // import styles_screen from './../Style/Screen';
 
@@ -33,7 +33,7 @@ class ProductList extends PureComponent<IProps, IState> {
           ]}
         />
 
-        <ScrollView>
+        <ScrollView style={styles.listMargin}>
           <FlatList
             data={this.props.items}
             renderItem={this.renderItem}
@@ -46,3 +46,9 @@ class ProductList extends PureComponent<IProps, IState> {
 }
 
 export default ProductList
+
+const styles = StyleSheet.create({
+  listMargin: {
+    marginBottom: 55
+  }
+})

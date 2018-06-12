@@ -7,10 +7,6 @@ interface IProps {
   product?: string
   units?: any
   packs?: any
-  measurementUnit?: any
-  packingContainer?: any
-  cartonQuantity?: any
-  costppCarton?: any
   unitCostPrice?: any
   sellingPrice?: any
   minStockQuantity?: any
@@ -34,7 +30,7 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
             </Text>
           </View>
           <View style={styles.aboveAccordionMoneyView}>
-            <View>
+            <View style={styles.viewMarginRight}>
               <Text style={styles.aboveAccordionGreyFont}>
                 Stock quantity(in units)
               </Text>
@@ -42,7 +38,7 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
                 {this.props.units}
               </Text>
             </View>
-            <View>
+            <View style={styles.viewMarginRight}>
               <Text style={styles.aboveAccordionGreyFont}>
                 Total Units Sold
               </Text>
@@ -55,69 +51,23 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
         <View>
           <ListItem style={styles.aboveAccordionWhiteList}>
             <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>Measurement unit</Text>
-            </Left>
-            <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.measurementUnit}
-              </Text>
-            </Right>
-          </ListItem>
-          <ListItem style={styles.aboveAccordionWhiteList}>
-            <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>
-                Packing Container
-              </Text>
-            </Left>
-            <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.packingContainer}
-              </Text>
-            </Right>
-          </ListItem>
-          <ListItem style={styles.aboveAccordionWhiteList}>
-            <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>
-                Carton Quantity
-              </Text>
-            </Left>
-            <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.cartonQuantity}
-              </Text>
-            </Right>
-          </ListItem>
-          <ListItem style={styles.aboveAccordionWhiteList}>
-            <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>Cost price per Carton</Text>
-            </Left>
-            <Right>
-              <Text style={styles.aboveAccordionRedTextR}>
-                {this.props.costppCarton}
-              </Text>
-            </Right>
-          </ListItem>
-          <ListItem style={styles.aboveAccordionWhiteList}>
-            <Left>
               <Text style={styles.aboveAccordionBlackTextL}>
                 Unit cost price
               </Text>
             </Left>
             <Right>
               <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.unitCostPrice}
+                &#8358;{this.props.unitCostPrice}.00
               </Text>
             </Right>
           </ListItem>
           <ListItem style={styles.aboveAccordionWhiteList}>
             <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>
-                Selling Price
-              </Text>
+              <Text style={styles.aboveAccordionBlackTextL}>Selling Price</Text>
             </Left>
             <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.sellingPrice}
+              <Text style={styles.aboveAccordionGreenTextR}>
+                &#8358;{this.props.sellingPrice}.00
               </Text>
             </Right>
           </ListItem>
@@ -151,7 +101,7 @@ const styles = StyleSheet.create({
   aboveAccordionPictureViewP: {
     flexDirection: 'column',
     width: '50%',
-    height: 200,
+    height: 170,
     alignItems: 'flex-start',
     padding: 16,
     justifyContent: 'center',
@@ -163,7 +113,7 @@ const styles = StyleSheet.create({
   },
   aboveAccordionBoldFont: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 20,
     textAlign: 'right'
   },
   aboveAccordionWhiteList: {
@@ -182,6 +132,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000'
   },
+  aboveAccordionGreenTextR: {
+    fontSize: 16,
+    color: 'green'
+  },
   aboveAccordionRedTextR: {
     fontSize: 16,
     color: 'red'
@@ -192,8 +146,8 @@ const styles = StyleSheet.create({
     paddingLeft: 16
   },
   aboveAccordionGreyFont: {
-    fontSize: 16,
-    color: '#c0c0c0'
+    fontSize: 17,
+    color: '#000'
   },
   aboveAccordionRedText: {
     fontSize: 16,
@@ -207,9 +161,12 @@ const styles = StyleSheet.create({
   },
   aboveAccordionMoneyView: {
     width: '50%',
-    height: 200,
-    alignItems: 'center',
+    height: 170,
+    alignItems: 'flex-end',
     justifyContent: 'center'
     // backgroundColor: '#FFF',
+  },
+  viewMarginRight: {
+    marginRight: 16
   }
 })

@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
 import ProductDetailAtom from '../Atom/ProductDetailAtom'
 import { ScrollView } from 'react-native-gesture-handler'
-import ButtonAtom from '../Atom/ButtonAtom'
-import RestockModal from './../Container/RestockModal'
 
 interface IProps {
   navigation: any
@@ -38,7 +36,14 @@ class ProductDetails extends PureComponent<IProps, IState> {
     return (
       <View style={styles.ababa}>
         <ScrollView>
-          <ProductDetailAtom />
+          <ProductDetailAtom
+            product={'Chanel No. 5'}
+            packs={300}
+            units={23}
+            unitCostPrice={'1130'}
+            sellingPrice={'2,000'}
+            minStockQuantity={4}
+          />
         </ScrollView>
       </View>
     )

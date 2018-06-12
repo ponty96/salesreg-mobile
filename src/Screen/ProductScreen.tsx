@@ -26,7 +26,7 @@ class ProductScreen extends PureComponent<IProps, IState> {
         />
       )
     return {
-      title: 'Kay5iveAttractions',
+      title: 'Products',
       headerRight: right,
       headerLeft: left
     }
