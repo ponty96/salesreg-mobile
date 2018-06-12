@@ -61,14 +61,14 @@ const styles = StyleSheet.create({
     marginVertical: 8
   },
   buttonRed: {
-    backgroundColor: color.redButton,
+    backgroundColor: color.button,
     paddingHorizontal: 32,
     alignSelf: 'center',
     marginVertical: 8,
     borderRadius: 3
   },
   buttonDisabled: {
-    backgroundColor: color.disabled,
+    backgroundColor: color.inactive,
     paddingHorizontal: 32,
     alignSelf: 'center',
     marginVertical: 8

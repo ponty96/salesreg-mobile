@@ -53,10 +53,10 @@ export default StyleSheet.create({
     marginVertical: '2%'
   },
   nextText: {
-    color: color.redButton
+    color: color.button
   },
   nextIcon: {
-    color: color.redButton
+    color: color.button
   },
 
   placeholderIcon: {
@@ -69,6 +69,6 @@ export default StyleSheet.create({
     textAlign: 'center'
   },
   redTermText: {
-    color: color.redButton
+    color: color.button
   }
 })
