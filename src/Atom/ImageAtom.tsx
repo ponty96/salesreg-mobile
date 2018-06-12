@@ -14,7 +14,7 @@ interface IProps {
 
 class ImageAtom extends React.Component<IProps, any> {
   state = {
-    image: ''
+    image: { uri: '' }
   }
 
   handleSelection = async () => {
@@ -25,7 +25,7 @@ class ImageAtom extends React.Component<IProps, any> {
 
       if (result && !result.cancelled) {
         this.setState({ image: result })
-        this.props.getValue(this.state.image)
+        this.props.getValue(this.state.image.uri)
       }
     }
   }
@@ -37,10 +37,12 @@ class ImageAtom extends React.Component<IProps, any> {
           onPress={this.handleSelection}
           style={styles.selfAlign}
         >
-          <Image
-            source={{ uri: this.state.image || this.props.source }}
-            style={styles.image}
-          />
+          <View style={styles.imgContainer}>
+            <Image
+              source={{ uri: this.state.image.uri || this.props.source }}
+              style={styles.image}
+            />
+          </View>
           <Text style={styles.imageText}>Upload logo</Text>
         </TouchableOpacity>
       )
@@ -50,7 +52,7 @@ class ImageAtom extends React.Component<IProps, any> {
           onPress={this.handleSelection}
           style={styles.selfAlign}
         >
-          <View style={[styles.imgContainer, { backgroundColor: '#f6f6f6' }]}>
+          <View style={styles.imgContainer}>
             <Text style={styles.imgPlaceholderText}>
               {this.props.placeholder &&
                 this.props.placeholder.substr(0, 1).toUpperCase()}
@@ -76,10 +78,11 @@ const styles = StyleSheet.create({
   imgContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 160,
-    width: 160,
-    borderRadius: 80,
-    marginVertical: 10
+    height: 180,
+    width: 180,
+    borderRadius: 90,
+    marginVertical: 10,
+    backgroundColor: color.listBorderColor
   },
   imageText: {
     alignSelf: 'center'
