@@ -5,12 +5,13 @@ import { color } from '../Style/Color'
 interface IProps {
   businessName: string
   image: string
+  style?: object
 }
 
 export default class NameDisplayAtom extends React.Component<IProps, any> {
   render() {
     return (
-      <View style={styles.nameDisplayWrapper}>
+      <View style={[styles.nameDisplayWrapper, this.props.style]}>
         <View style={styles.nameDisplayLetterDisplay}>
           {this.props.image ? (
             <Image
