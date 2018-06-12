@@ -24,13 +24,7 @@ class BusinessDetailsScreen extends Component<IProps, IState> {
     item: {
       businessName: 'Kay5ive Attractions',
       image:
-        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
-      address: '6 Salem street Morogbo, Lagos',
-      email: 'kay5@gmail.com',
-      description:
-        'Simply dummy text of the printing and typesetting industry. ' +
-        "Loren Ipsum has been the industry's standard dummy text ever since the 1550s, when an unknown printer took a " +
-        'gallery of type and scrambled it'
+        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
     }
   }
 
