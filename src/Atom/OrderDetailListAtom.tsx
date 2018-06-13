@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { Text, StyleSheet } from 'react-native'
-import { ListItem, Left, Right } from 'native-base'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { Text, StyleSheet } from 'react-native';
+import { ListItem, Left, Right } from 'native-base';
+import { color } from '../Style/Color';
 
 interface IProps {
-  items?: { name: string; number: number; amount: any }
+  items?: { name: string; number: number; amount: any };
 }
 
 class OrderDetailListAtom extends React.Component<IProps, any> {
@@ -16,14 +16,16 @@ class OrderDetailListAtom extends React.Component<IProps, any> {
         </Left>
         <Right>
           <Text style={styles.rightText1}>{this.props.items.number}</Text>
-          <Text style={styles.rightText2}>#{this.props.items.amount}.00</Text>
+          <Text style={styles.rightText2}>
+            &#8358;{this.props.items.amount}.00
+          </Text>
         </Right>
       </ListItem>
-    )
+    );
   }
 }
 
-export default OrderDetailListAtom
+export default OrderDetailListAtom;
 
 const styles = StyleSheet.create({
   row: {
@@ -58,4 +60,4 @@ const styles = StyleSheet.create({
     fontSize: 14,
     paddingTop: 8
   }
-})
+});
