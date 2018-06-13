@@ -34,11 +34,11 @@ class ServicesScreen extends PureComponent<IProps, IState> {
   render() {
     return (
       <List style={styles.container}>
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
+        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} func={this.editItem} />
+        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} func={this.editItem} />
+        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} func={this.editItem} />
+        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} func={this.editItem} />
+        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} func={this.editItem} />
       </List>
     );
   }

@@ -7,14 +7,14 @@ interface IProps {
   amount: string,
   textStyle?: any,
   contStyle?: any,
-  bodyfunction?: (name: string, amount: string) => void
+  func?: (name: string, amount: string) => void
 }
 
 class ServicesListItemAtom extends React.Component<IProps, {}> {
 
   handleBodyPress = () => {
-    if (this.props.bodyfunction) {
-      this.props.bodyfunction(this.props.name, this.props.amount);
+    if (this.props.func) {
+      this.props.func(this.props.name, this.props.amount);
     }
   }
 
