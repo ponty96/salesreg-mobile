@@ -1,16 +1,15 @@
 import * as React from 'react'
-import { Button, StyleSheet, View, Text } from 'react-native'
+import { TouchableOpacity, StyleSheet, View, Text } from 'react-native'
 import { color } from '../Style/Color'
 
-const sidebarItem = (prop: any) => (
-  <View style={styles.header}>
-    <Text style={styles.title}>{prop.title}</Text>
-    <Button
-      title={prop.category}
-      onPress={() => {
-        console.log(prop.title + 'button was clicked')
-      }}
-    />
+const sidebarItem = (prop: { title: string; category: string }) => (
+  <View>
+    <View style={styles.header}>
+      <Text style={styles.title}>{prop.title}</Text>
+    </View>
+    <TouchableOpacity style={styles.categoryWrapper}>
+      <Text style={styles.category}>{prop.category}</Text>
+    </TouchableOpacity>
   </View>
 )
 
@@ -18,9 +17,22 @@ export default sidebarItem
 
 const styles = StyleSheet.create({
   header: {
-    backgroundColor: color.modal
+    backgroundColor: color.inactive
   },
   title: {
-    marginLeft: '2%'
+    marginLeft: '4%',
+    color: color.label,
+    marginVertical: '2%'
+  },
+  categoryWrapper: {
+    backgroundColor: 'transparent',
+    borderBottomWidth: 1,
+    borderBottomColor: color.listBorderColor
+  },
+  category: {
+    marginLeft: '4%',
+    backgroundColor: 'transparent',
+    color: color.modal,
+    marginVertical: '4%'
   }
 })
