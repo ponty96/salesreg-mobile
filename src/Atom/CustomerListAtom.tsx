@@ -27,7 +27,9 @@ class CustomerListAtom extends React.Component<IProps, any> {
           <Text style={styles.rowText1}>{this.props.items.customerName}</Text>
         </Body>
         <Right style={styles.view3}>
-          <Text style={styles.text1}>N {this.props.items.amount}</Text>
+          <Text style={styles.text1}>
+            {'\u20A6'} {this.props.items.amount}
+          </Text>
           <Text
             style={[
               styles.lilFont,

@@ -5,6 +5,7 @@ import Accordion from 'react-native-collapsible/Accordion'
 import DebtAccordionAtom from './DebtAccordionAtom'
 import { ScrollView } from 'react-native-gesture-handler'
 import { sections } from '../config/data'
+import { color } from '../Style/Color'
 
 const SECTIONS = sections
 
@@ -21,23 +22,24 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
   constructor(props /*?: IProps, context?: any*/) {
     super(props /*, context*/)
     this.state = {
-      activeSection: false,
-      icon: 'md-arrow-dropdown'
+      activeSection: false
+      // icon: 'md-arrow-dropdown'
     }
   }
-  _setHeader(section /*: any*/) {
-    const { icon } = this.state
-    this._loadHeader(icon)
+  setHeader = (section /*: any*/) => {
+    //const { icon } = this.state
+    // this.loadHeader(icon)
     this.setState({ activeSection: section })
   }
-  _loadHeader = (a /*: string*/) => {
-    if (a === 'md-arrow-dropdown') {
-      this.setState({ icon: 'md-arrow-dropup' })
-    } else {
-      this.setState({ icon: 'md-arrow-dropdown' })
-    }
-  }
-  _renderHeader(section /*: any*/) {
+
+  // loadHeader = (a /*: string*/) => {
+  // if (a === 'md-arrow-dropdown') {
+  //  this.setState({ icon: 'md-arrow-dropup' })
+  // } else {
+  //  this.setState({ icon: 'md-arrow-dropdown' })
+  //}
+  // }
+  renderHeader(section /*: any*/) {
     return (
       <View style={styles.mainAccord}>
         <View style={styles.accordView1}>
@@ -49,7 +51,9 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
             </Text>
           </View>
           <View style={styles.viewMargin}>
-            <Text style={styles.accordTextL2}>#{section.debt}.00</Text>
+            <Text style={styles.accordTextL2}>
+              {'\u20A6'} {section.debt}.00
+            </Text>
           </View>
         </View>
         <View style={styles.accordView2}>
@@ -60,7 +64,7 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
     )
   }
 
-  _renderContent() {
+  renderContent() {
     return <DebtAccordionAtom />
   }
 
@@ -71,9 +75,9 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
         <Accordion
           sections={SECTIONS}
           activeSection={this.state.activeSection}
-          renderHeader={this._renderHeader}
-          renderContent={this._renderContent}
-          onChange={this._setHeader.bind(this)}
+          renderHeader={this.renderHeader}
+          renderContent={this.renderContent}
+          onChange={this.setHeader}
         />
       </ScrollView>
     )
@@ -127,5 +131,8 @@ const styles = StyleSheet.create({
   accordIcon: {
     paddingTop: 4,
     color: '#c0c0c0'
+  },
+  accordTextL2: {
+    color: color.primary
   }
 })

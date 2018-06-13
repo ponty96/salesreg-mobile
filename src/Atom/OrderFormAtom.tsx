@@ -59,7 +59,7 @@ class OrderFormAtom extends React.Component<IProps, IState> {
           </Left>
           <Right>
             <Text>
-              Total: <Text style={styles.redColorText}>#0.00</Text>
+              Total: <Text style={styles.redColorText}>{'\u20A6'} 0.00</Text>
             </Text>
           </Right>
         </Header>
@@ -88,7 +88,7 @@ class OrderFormAtom extends React.Component<IProps, IState> {
         <View style={styles.bottomSide}>
           <View style={styles.innerBottom}>
             <Text style={styles.bottomGrey}>Amount paid</Text>
-            <Text style={styles.bottomRed}>#0.00</Text>
+            <Text style={styles.bottomRed}>{'\u20A6'} 0.00</Text>
           </View>
           <ButtonAtom
             onPress={this.makePayment}

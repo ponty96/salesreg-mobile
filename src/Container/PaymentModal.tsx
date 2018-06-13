@@ -28,21 +28,21 @@ class PaymentModal extends React.Component<IProps, IState> {
     balance: ''
   };
 
-  public getAmount = (amount: any) => {
+  getAmount = (amount: any) => {
     this.setState({ amount });
   };
 
-  public getBalance = (balance: any) => {
+  getBalance = (balance: any) => {
     this.setState({ balance });
   };
 
-  public pay = () => {
+  pay = () => {
     if (this.props.getValue) {
       this.props.getValue(this.state.amount, this.state.balance);
     }
   };
 
-  public renderHeader = () => {
+  renderHeader = () => {
     return (
       <View style={styles.modalHeader}>
         <Text style={styles.modalHeaderText}>{this.props.headerText}</Text>
@@ -53,7 +53,7 @@ class PaymentModal extends React.Component<IProps, IState> {
     );
   };
 
-  public renderBody = () => {
+  renderBody = () => {
     return (
       <View style={styles.modalBody}>
         <Form>
@@ -105,7 +105,7 @@ class PaymentModal extends React.Component<IProps, IState> {
     );
   };
 
-  public render() {
+  render() {
     return (
       <ModalAtom
         visible={this.props.visibility}
