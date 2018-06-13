@@ -173,7 +173,7 @@ const businessStack = StackNavigator(
             ),
             headerTintColor: color.secondary,
             headerStyle: {
-                backgroundColor: color.header
+                backgroundColor: color.menu
             }
         })
     }

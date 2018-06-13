@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center'
   },
   settingsChildText: {
-    color: color.settingsChildText
+    color: color.label
   },
   boldText: {
     fontWeight: 'bold'

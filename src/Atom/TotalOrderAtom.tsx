@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     height: 55,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: color.totalSales
+    backgroundColor: color.list
   },
   totalOrderRedNumber: {
     color: color.primary,
@@ -56,10 +56,9 @@ const styles = StyleSheet.create({
   },
   totalOrderPeachView: {
     width: '70%',
-    height: 45,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: color.totalProfit
+    backgroundColor: color.secondary
   },
   totalOrderTotalView: {
     width: '30%',

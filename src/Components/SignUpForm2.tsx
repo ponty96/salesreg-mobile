@@ -208,7 +208,7 @@ const styles = StyleSheet.create({
     textAlign: 'center'
   },
   redTermText: {
-    color: color.redButton
+    color: color.button
   },
   haveAccount: {
     marginTop: '4%',
