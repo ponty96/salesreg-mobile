@@ -39,9 +39,18 @@ export default class SideBar extends PureComponent<IProps> {
             <SidebarItem
               title="COMPANY"
               categories={['Home', 'Products & Services', 'Employees']}
+              onPress={this.handleNavigation('Root')}
             />
-            <SidebarItem title="CONTACT" categories={['Customer', 'Vendor']} />
-            <SidebarItem title="ORDER" categories={['Purchase', 'Sales']} />
+            {/*<SidebarItem
+              title="CONTACT"
+              categories={['Customer', 'Vendor']}
+              onPress={}
+            />
+            <SidebarItem
+              title="ORDER"
+              categories={['Purchase', 'Sales']}
+              onPress={}
+            />
             <SidebarItem
               title="TRANSACTIONS"
               categories={[
@@ -51,8 +60,13 @@ export default class SideBar extends PureComponent<IProps> {
                 'Invoices',
                 'Receipts'
               ]}
+              onPress={}
             />
-            <SidebarItem title="ACCOUNTING" categories={['Inventory']} />
+            <SidebarItem
+              title="ACCOUNTING"
+              categories={['Inventory']}
+              onPress={}
+            />*/}
           </ScrollView>
         </View>
       </SafeAreaView>
@@ -62,7 +76,8 @@ export default class SideBar extends PureComponent<IProps> {
 
 const styles = StyleSheet.create({
   header: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginLeft: '3%'
   },
   texts: {
     color: color.modal,
@@ -78,7 +93,7 @@ const styles = StyleSheet.create({
     color: color.menu
   },
   cross: {
-    fontSize: 50,
+    fontSize: 35,
     // backgroundColor: 'transparent',
     color: color.modal
   },
