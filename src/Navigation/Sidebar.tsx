@@ -31,12 +31,9 @@ class SideBar extends PureComponent<IProps> {
       >
         <View style={styles.itemsContainer}>
           <ScrollView>
-            <TouchableOpacity>
-              <Icon
-                name="circle-with-cross"
-                type="Entypo"
-                style={styles.cross}
-              />
+            <TouchableOpacity style={styles.header}>
+              <Icon name="cross" type="Entypo" style={styles.cross} />
+              <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
@@ -116,6 +113,13 @@ class SideBar extends PureComponent<IProps> {
 export default SideBar
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row'
+  },
+  texts: {
+    color: color.modal,
+    alignSelf: 'center'
+  },
   itemText: {
     flex: 1,
     alignContent: 'center',
@@ -126,8 +130,9 @@ const styles = StyleSheet.create({
     color: color.menu
   },
   cross: {
-    color: 'red',
-    fontSize: 50
+    fontSize: 50,
+    // backgroundColor: 'transparent',
+    color: color.modal
   },
   logoutItem: {
     borderTopWidth: 1,
@@ -147,7 +152,8 @@ const styles = StyleSheet.create({
   },
   sidebarContainer: {
     paddingHorizontal: 8,
-    height: Dimensions.get('window').height - 16
+    height: Dimensions.get('window').height - 16,
+    backgroundColor: color.primary
   },
   itemsContainer: {
     flex: 4

@@ -7,7 +7,7 @@ interface IProps {
   items?: { images: string; customerName: string; amount: any; date: string }
   limit?: number
   onPress?: () => void
-  image: string
+  image?: string
 }
 
 class DebtListAtom extends React.Component<IProps, any> {
