@@ -39,6 +39,8 @@ import styles from './../Style/Layout'
 import { color } from './../Style/Color'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 
+let BOTH = 'both'
+let ONEPRODUCT = 'product'
 let OPTION = 'both'
 
 const viewBothStack = TabNavigator(
@@ -95,9 +97,9 @@ const businessStack = StackNavigator(
     },
     ViewBusiness: {
       screen:
-        OPTION === 'both'
+        OPTION === BOTH
           ? viewBothStack
-          : OPTION === 'product'
+          : OPTION === ONEPRODUCT
             ? ProductScreen
             : ServiceScreen
     },
