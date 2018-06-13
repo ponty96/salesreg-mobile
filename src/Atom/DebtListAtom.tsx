@@ -1,12 +1,12 @@
-import * as React from 'react'
-import { StyleSheet } from 'react-native'
-import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { StyleSheet } from 'react-native';
+import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
+import { color } from '../Style/Color';
 
 interface IProps {
-  items?: { images: string; customerName: string; amount: any; date: string }
-  limit?: number
-  onPress?: () => void
+  items?: { images: string; customerName: string; amount: any; date: string };
+  limit?: number;
+  onPress?: () => void;
 }
 
 class DebtListAtom extends React.Component<IProps, any> {
@@ -14,18 +14,18 @@ class DebtListAtom extends React.Component<IProps, any> {
     if (this.props.limit >= 200000) {
       return (
         <Text style={styles.rowText1D}>{this.props.items.customerName}</Text>
-      )
+      );
     } else {
       return (
         <Text style={styles.rowText1}>{this.props.items.customerName}</Text>
-      )
+      );
     }
-  }
+  };
   render() {
     const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
     const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
+      this.props.items.images !== '' ? this.props.items.images : defaultImg;
 
     return (
       <ListItem style={styles.row} onPress={this.props.onPress}>
@@ -34,15 +34,17 @@ class DebtListAtom extends React.Component<IProps, any> {
         </Left>
         <Body style={styles.view2}>{this.display()}</Body>
         <Right style={styles.view3}>
-          <Text style={styles.rowText3D}>N {this.props.items.amount}.00</Text>
+          <Text style={styles.rowText3D}>
+            &#8358; {this.props.items.amount}.00
+          </Text>
           <Text style={styles.lilFontD}>{this.props.items.date}</Text>
         </Right>
       </ListItem>
-    )
+    );
   }
 }
 
-export default DebtListAtom
+export default DebtListAtom;
 
 const styles = StyleSheet.create({
   rowText1D: {
@@ -111,4 +113,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingRight: 8
   }
-})
+});

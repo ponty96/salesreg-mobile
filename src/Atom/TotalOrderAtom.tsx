@@ -1,10 +1,10 @@
-import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { color } from '../Style/Color';
 
 interface IProps {
-  totalAmount: any
-  profit: any
+  totalAmount: any;
+  profit: any;
 }
 
 export default class TotalOrderAtom extends React.Component<IProps, any> {
@@ -17,7 +17,7 @@ export default class TotalOrderAtom extends React.Component<IProps, any> {
           </View>
           <View style={styles.totalOrderRedNumberView}>
             <Text style={styles.totalOrderRedNumber}>
-              NGN {this.props.totalAmount}.00
+              &#8358; {this.props.totalAmount}.00
             </Text>
           </View>
         </View>
@@ -27,12 +27,12 @@ export default class TotalOrderAtom extends React.Component<IProps, any> {
           </View>
           <View style={styles.totalOrderPeachView}>
             <Text style={styles.totalOrderRedNumber}>
-              NGN {this.props.profit}.00
+              &#8358; {this.props.profit}.00
             </Text>
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -78,4 +78,4 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: color.primary
   }
-})
+});
