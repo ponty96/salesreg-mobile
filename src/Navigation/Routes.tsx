@@ -26,7 +26,7 @@ import ProductScreen from './../Screen/ProductScreen'
 import OrderDetailsScreen from './../Screen/OrderDetailsScreen'
 // import CustomerScreen from './../Screen/CustomerScreen';
 // import DebtsScreen from './../Screen/DebtsScreen';
-import ServiceScreen from './../Screen/ServiceScreen'
+import ServicesScreen from './../Screen/ServicesScreen'
 import DebtDetailsScreen from './../Screen/DebtDetailsScreen'
 import ProductDetailsScreen from './../Screen/ProductDetailsScreen'
 import UserProfileScreen from '../Screen/UserProfileScreen'
@@ -49,7 +49,7 @@ const viewBothStack = TabNavigator(
       screen: ProductScreen
     },
     Services: {
-      screen: ServiceScreen
+      screen: ServicesScreen
     }
   },
   {
@@ -101,7 +101,7 @@ const businessStack = StackNavigator(
           ? viewBothStack
           : OPTION === ONEPRODUCT
             ? ProductScreen
-            : ServiceScreen
+            : ServicesScreen
     },
     BusinessDetails: {
       screen: BusinessDetailsScreen
