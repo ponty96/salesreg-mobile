@@ -3,15 +3,13 @@ import {
   ScrollView,
   View,
   Text,
-  TouchableOpacity,
+  // TouchableOpacity,
   StyleSheet,
   Dimensions
 } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
-import { Icon } from 'native-base'
+import {Icon, List, ListItem } from 'native-base'
 
-import ListItemAtom from './../Atom/ListItemAtom'
-import { userData } from './../config/default'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -29,78 +27,56 @@ class SideBar extends PureComponent<IProps> {
         style={styles.sidebarContainer}
         forceInset={{ top: 'always', horizontal: 'never' }}
       >
-        <View style={styles.itemsContainer}>
-          <ScrollView>
-            <TouchableOpacity
-              onPress={() =>
-                this.handleNavigation('UserProfile', userData.profile)
-              }
-              activeOpacity={1}
-            >
-              <ListItemAtom
-                item={userData.profile}
-                business={false}
-                bodyfunction={() =>
-                  this.handleNavigation('UserProfile', userData.profile)
-                }
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.handleNavigation('BusinessDetails')}
-              activeOpacity={1}
-            >
-              <ListItemAtom
-                item={{
-                  name: 'kay5'
-                }}
-                bodyfunction={() => this.handleNavigation('BusinessDetails')}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Settings')}
-              activeOpacity={1}
-            >
-              <View style={styles.sidebarItem}>
-                <Icon
-                  name={'settings'}
-                  style={styles.itemIcon}
-                  type={'MaterialCommunityIcons'}
-                />
-                <Text style={styles.itemText}>Settings</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={1}>
-              <View style={styles.sidebarItem}>
-                <Icon
-                  name={'help'}
-                  style={styles.itemIcon}
-                  type={'MaterialCommunityIcons'}
-                />
-                <Text style={styles.itemText}>Need help</Text>
-              </View>
-            </TouchableOpacity>
-          </ScrollView>
+        <View>
+          <Icon name={'dividerText'} />
+          <Text>BAYONE ATRACTIONS</Text>
         </View>
-        <TouchableOpacity
-          style={styles.logoutItem}
-          activeOpacity={1}
-          onPress={() => this.handleNavigation('BusinessList')}
-        >
-          <Icon name={'md-briefcase'} style={styles.itemIcon} />
-          <Text style={styles.itemText}>My businesses</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.logoutItem}
-          activeOpacity={1}
-          onPress={() => this.handleNavigation('Auth')}
-        >
-          <Icon
-            name={'logout'}
-            style={styles.itemIcon}
-            type={'MaterialCommunityIcons'}
-          />
-          <Text style={styles.itemText}>Logout</Text>
-        </TouchableOpacity>
+        <ScrollView style={styles.itemsContainer}>
+          <List>
+            <ListItem itemDivider style={styles.divider}>
+            <Text style={styles.dividerText}>COMPANY</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                  <Text style={styles.itemText}>Home</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                <Text style={styles.itemText}>Products & Services</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                <Text style={styles.itemText}>Employees</Text>
+            </ListItem>
+            <ListItem itemDivider style={styles.divider}>
+                <Text style={styles.dividerText}>CONTACT</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                <Text style={styles.itemText}>Customer</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                <Text style={styles.itemText}>Vendor</Text>
+            </ListItem>
+            <ListItem itemDivider style={styles.divider}>
+                <Text style={styles.dividerText}>ORDER</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                <Text style={styles.itemText}>Purchase</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                <Text style={styles.itemText}>Sales</Text>
+            </ListItem>
+              <ListItem itemDivider style={styles.divider}>
+                  <Text style={styles.dividerText}>TRANSACTIONS</Text>
+              </ListItem>
+              <ListItem style={styles.item}>
+                  <Text style={styles.itemText}>Bank</Text>
+              </ListItem>
+              <ListItem style={styles.item}>
+                  <Text style={styles.itemText}>Income</Text>
+              </ListItem>
+              <ListItem style={styles.item}>
+                  <Text style={styles.itemText}>Expenses</Text>
+              </ListItem>
+          </List>
+        </ScrollView>
       </SafeAreaView>
     )
   }
@@ -109,25 +85,6 @@ class SideBar extends PureComponent<IProps> {
 export default SideBar
 
 const styles = StyleSheet.create({
-  itemText: {
-    flex: 1,
-    alignContent: 'center',
-    paddingLeft: 12,
-    color: color.menu
-  },
-  itemIcon: {
-    color: color.menu
-  },
-  logoutItem: {
-    borderTopWidth: 1,
-    borderColor: color.textBorderBottom,
-    alignSelf: 'flex-end',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 16
-  },
   sidebarItem: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -135,8 +92,26 @@ const styles = StyleSheet.create({
     padding: 16
   },
   sidebarContainer: {
-    paddingHorizontal: 8,
     height: Dimensions.get('window').height - 16
+  },
+  divider: {
+    paddingTop: 4,
+    paddingBottom: 4,
+    backgroundColor: color.label
+  },
+  item: {
+    marginLeft: 0,
+    paddingLeft: 18,
+    paddingVertical: 8,
+    borderBottomWidth: 1,
+    borderColor: color.label,
+    backgroundColor: color.menu
+  },
+  itemText: {
+    color: color.secondary
+  },
+  dividerText: {
+    color: color.inactive
   },
   itemsContainer: {
     flex: 4
