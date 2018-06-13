@@ -10,9 +10,10 @@ import {
 import { SafeAreaView } from 'react-navigation'
 import { Icon } from 'native-base'
 
-import ListItemAtom from './../Atom/ListItemAtom'
-import { userData } from './../config/default'
+// import ListItemAtom from './../Atom/ListItemAtom'
+// import { userData } from './../config/default'
 import { color } from '../Style/Color'
+import SidebarItem from '../Atom/SidebarItem'
 
 interface IProps {
   navigation: any
@@ -35,7 +36,8 @@ class SideBar extends PureComponent<IProps> {
               <Icon name="cross" type="Entypo" style={styles.cross} />
               <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
             </TouchableOpacity>
-            <TouchableOpacity
+            <SidebarItem title="COMPANY" />
+            {/*<TouchableOpacity
               onPress={() =>
                 this.handleNavigation('UserProfile', userData.profile)
               }
@@ -82,7 +84,7 @@ class SideBar extends PureComponent<IProps> {
                 />
                 <Text style={styles.itemText}>Need help</Text>
               </View>
-            </TouchableOpacity>
+            </TouchableOpacity>*/}
           </ScrollView>
         </View>
         <TouchableOpacity
