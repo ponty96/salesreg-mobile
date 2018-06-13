@@ -5,6 +5,7 @@ import { Icon } from 'native-base'
 import FabAtom from './../Atom/FabAtom'
 import CustomerList from '../Components/CustomerList'
 import { color } from '../Style/Color'
+import { customerList } from '../config/data';
 
 interface IProps {
   navigation: any
@@ -36,8 +37,9 @@ class CustomerScreen extends Component<IProps, IState> {
   }
 
   render() {
-    const { params } = this.props.navigation.state
-    const items = params.data.customers
+    // const { params } = this.props.navigation.state
+    // const items = params.data.customers
+    const items = this.props.navigation.getParam(customerList)
 
     return (
       <View style={styles.centerContainer}>

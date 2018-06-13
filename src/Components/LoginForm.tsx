@@ -3,10 +3,12 @@ import { Form, Text } from 'native-base'
 import { StyleSheet } from 'react-native'
 import InputAtom from '../Atom/InputAtom'
 import ButtonAtom from '../Atom/ButtonAtom'
+import {userData} from '../config/default'
 import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any
+  navigation: any,
+  items?: any[]
 }
 
 interface IState {
@@ -16,15 +18,20 @@ interface IState {
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
+    static defaultProps = {
+        items: userData.business[0].products
+    }
+
   state = {
     phone: '',
     password: '',
     underlineColorAndroid: 'red'
   }
 
-  login = () => {
+  login = (data: any) => {
     console.log(this.state.phone, this.state.password)
-    this.props.navigation.navigate('App')
+    data = this.props.items
+    this.props.navigation.navigate('App', data)
   }
 
   getPhone = (phone: any) => {
