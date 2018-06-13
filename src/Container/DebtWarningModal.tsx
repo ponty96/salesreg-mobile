@@ -66,7 +66,7 @@ class DebtWarningModal extends React.Component<IProps, IState> {
                     maximumValue={100}
                     step={1}
                     minimumTrackTintColor={color.warning}
-                    maximumTrackTintColor={color.disabled}
+                    maximumTrackTintColor={color.inactive}
                     thumbTintColor={color.warning}
                     thumbStyle={styles.thumbStyle}
                     onSlidingComplete={(value: any) => this.handleSlide(value)}
