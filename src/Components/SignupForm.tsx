@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react';
-import { Form, Icon } from 'native-base';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { PureComponent } from 'react'
+import { Form, Icon } from 'native-base'
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 
-import InputAtom from '../Atom/InputAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import { color } from '../Style/Color';
+import InputAtom from '../Atom/InputAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  phone: string;
-  password: string;
-  name: string;
-  confirm_password: string;
-  gender: string;
+  phone: string
+  password: string
+  name: string
+  confirm_password: string
+  gender: string
 }
 
 class SigupForm extends PureComponent<IProps, IState> {
@@ -25,7 +25,7 @@ class SigupForm extends PureComponent<IProps, IState> {
     name: '',
     confirm_password: '',
     gender: ''
-  };
+  }
 
   signup = () => {
     console.log(
@@ -34,38 +34,38 @@ class SigupForm extends PureComponent<IProps, IState> {
       this.state.name,
       this.state.confirm_password,
       this.state.gender
-    );
-  };
+    )
+  }
 
   getPhone = (phone: string) => {
     this.setState({
       phone
-    });
-  };
+    })
+  }
 
   getPassword = (pass: string) => {
     this.setState({
       password: pass
-    });
-  };
+    })
+  }
 
   getName = (name: string) => {
     this.setState({
       name
-    });
-  };
+    })
+  }
 
   getConfirm = (confirmPass: string) => {
     this.setState({
       confirm_password: confirmPass
-    });
-  };
+    })
+  }
 
   updateGender = (selectedGender: string) => {
     this.setState({
       gender: selectedGender
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -84,7 +84,11 @@ class SigupForm extends PureComponent<IProps, IState> {
         />
 
         <View style={styles.pickerWrapper}>
-          <PickerAtom list={['Male', 'Female']} style={styles.faintPicker} />
+          <PickerAtom
+            list={['Male', 'Female']}
+            style={styles.faintPicker}
+            placeholder="Gender"
+          />
         </View>
 
         <InputAtom
@@ -116,11 +120,11 @@ class SigupForm extends PureComponent<IProps, IState> {
           </TouchableOpacity>
         </View>
       </Form>
-    );
+    )
   }
 }
 
-export default SigupForm;
+export default SigupForm
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -148,4 +152,4 @@ const styles = StyleSheet.create({
   nextIcon: {
     color: color.redButton
   }
-});
+})

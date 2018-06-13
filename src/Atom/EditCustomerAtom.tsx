@@ -85,7 +85,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
             />
           </View>
           <View style={styles.innerFirstPicker}>
-            <PickerAtom list={['Gender', 'Male', 'Female']} />
+            <PickerAtom list={['Male', 'Female']} placeholder="Gender" />
           </View>
           <View>
             <InputAtom
@@ -124,7 +124,10 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
           </View>
           <View style={styles.inputView}>
             <View style={styles.innerFirstPicker}>
-              <PickerAtom list={['Marital Status', 'Married', 'Single']} />
+              <PickerAtom
+                list={['Married', 'Single']}
+                placeholder="Marital status"
+              />
             </View>
             <View style={styles.innerEnd}>
               <InputAtom

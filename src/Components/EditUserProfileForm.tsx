@@ -1,25 +1,25 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   View,
   Text,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet
-} from 'react-native';
-import InputAtom from '../Atom/InputAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import ImageAtom from '../Atom/ImageAtom';
-import { color } from '../Style/Color';
+} from 'react-native'
+import InputAtom from '../Atom/InputAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import ImageAtom from '../Atom/ImageAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  image?: string;
-  getImage?: (pic: string) => void;
-  name: string;
-  getName?: (name: string) => any;
-  phoneNumber: string;
-  getPhoneNumber?: (num: string) => any;
-  gender: string;
-  updateGender?: (gender: string) => any;
+  image?: string
+  getImage?: (pic: string) => void
+  name: string
+  getName?: (name: string) => any
+  phoneNumber: string
+  getPhoneNumber?: (num: string) => any
+  gender: string
+  updateGender?: (gender: string) => any
 }
 
 interface IState {}
@@ -61,15 +61,19 @@ class EditUserProfileForm extends Component<IProps, IState> {
 
           <View style={[styles.indentLeft, styles.editDetailsWrapper]}>
             <Text style={styles.textTitle}>Gender</Text>
-            <PickerAtom list={['Male', 'Female']} style={styles.pickerStyle} />
+            <PickerAtom
+              list={['Male', 'Female']}
+              style={styles.pickerStyle}
+              placeholder="Gender"
+            />
           </View>
         </ScrollView>
       </KeyboardAvoidingView>
-    );
+    )
   }
 }
 
-export default EditUserProfileForm;
+export default EditUserProfileForm
 
 const styles = StyleSheet.create({
   indentLeft: {
@@ -94,4 +98,4 @@ const styles = StyleSheet.create({
     width: 130,
     height: 35
   }
-});
+})

@@ -31,6 +31,13 @@ class SideBar extends PureComponent<IProps> {
       >
         <View style={styles.itemsContainer}>
           <ScrollView>
+            <TouchableOpacity>
+              <Icon
+                name="circle-with-cross"
+                type="Entypo"
+                style={styles.cross}
+              />
+            </TouchableOpacity>
             <TouchableOpacity
               onPress={() =>
                 this.handleNavigation('UserProfile', userData.profile)
@@ -117,6 +124,10 @@ const styles = StyleSheet.create({
   },
   itemIcon: {
     color: color.menu
+  },
+  cross: {
+    color: 'red',
+    fontSize: 50
   },
   logoutItem: {
     borderTopWidth: 1,
