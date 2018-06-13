@@ -12,7 +12,7 @@ import ImageDisplayAtom from './../Atom/ImageDisplayAtom'
 import DetailItemAtom from './../Atom/DetailItemAtom'
 import GoldRatingsAtom from './../Atom/GoldRatingsAtom'
 import ButtonAtom from './../Atom/ButtonAtom'
-import styles1 from '../Style/exportStyles'
+import {importedStyles} from '../Style/exportStyles'
 import GetAmountModal from './../Container/GetAmountModal'
 import { color } from '../Style/Color'
 
@@ -186,7 +186,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
             </View>
             <ButtonAtom
               btnText="Add to wallet"
-              textStyle={styles1.redButtonText}
+              textStyle={importedStyles.labelText}
               onPress={this.openModal}
             />
           </View>

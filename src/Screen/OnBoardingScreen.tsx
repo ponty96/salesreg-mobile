@@ -80,12 +80,12 @@ const styles = StyleSheet.create({
   },
   appDetailsText: {
     marginLeft: 20,
-    color: color.appDetailsText,
+    color: color.warning,
     fontSize: 14,
     alignSelf: 'flex-end'
   },
   blueCheck: {
-    color: color.blueCheck
+    color: color.check
   },
   appFunctionWrapper: {
     flexDirection: 'row',
