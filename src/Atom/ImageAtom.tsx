@@ -15,7 +15,7 @@ interface IProps {
 
 class ImageAtom extends React.Component<IProps, any> {
   state = {
-    image: ''
+    image: { uri: '' }
   }
 
   handleSelection = async () => {
@@ -26,7 +26,7 @@ class ImageAtom extends React.Component<IProps, any> {
 
       if (result && !result.cancelled) {
         this.setState({ image: result })
-        this.props.getValue(this.state.image)
+        this.props.getValue(this.state.image.uri)
       }
     }
   }
@@ -54,7 +54,7 @@ class ImageAtom extends React.Component<IProps, any> {
           style={styles.selfAlign}
         >
           <Image
-            source={{ uri: this.state.image || this.props.source }}
+            source={{ uri: this.state.image.uri || this.props.source }}
             style={[styles.imgContainer, this.props.imgStyle]}
           />
           <Text style={styles.selfAlign}>Upload logo</Text>

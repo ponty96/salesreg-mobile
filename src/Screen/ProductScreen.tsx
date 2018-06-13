@@ -14,24 +14,24 @@ interface IProps {
 interface IState {}
 
 class ProductScreen extends PureComponent<IProps, IState> {
-    static navigationOptions = ({ navigation }: any) => {
-        const { params } = navigation.state
-        let right = <Icon name={'ios-search'} style={styles.headerIcon} />
-        let left = params &&
-            params.items &&
-            params.items.length > 0 && (
-                <Icon
-                    name={'menu'}
-                    onPress={() => navigation.navigate('DrawerToggle')}
-                    style={styles.headerIcon}
-                />
-            )
-        return {
-            title: 'Kay5iveAttractions',
-            headerRight: right,
-            headerLeft: left
-        }
+  static navigationOptions = ({ navigation }: any) => {
+    const { params } = navigation.state
+    let right = <Icon name={'ios-search'} style={styles.headerIcon} />
+    let left = params &&
+      params.items &&
+      params.items.length > 0 && (
+        <Icon
+          name={'menu'}
+          onPress={() => navigation.navigate('DrawerToggle')}
+          style={styles.headerIcon}
+        />
+      )
+    return {
+      title: 'Products',
+      headerRight: right,
+      headerLeft: left
     }
+}
 
     render() {
         // const { params } = this.props.navigation.state

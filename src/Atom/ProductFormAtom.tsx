@@ -3,33 +3,26 @@ import { View, Text, StyleSheet } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import ImageAtom from './ImageAtom'
 import InputAtom from './InputAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
 }
 
-interface IState {
-  product: string
-  image: string
-  squantity: string | number
-  pquantity: string | number
-  costpp: string | number
-  ucost: string | number
-  sellp: string | number
-  stock: string | number
-}
-export default class ProductFormAtom extends React.Component<IProps, IState> {
-  state: IState = {
-    product: '',
-    image: '',
-    squantity: '',
-    pquantity: '',
-    costpp: '',
-    ucost: '',
-    sellp: '',
-    stock: ''
+export default class ProductFormAtom extends React.Component<IProps, any> {
+  constructor(props: IProps) {
+    super(props)
+    this.state = {
+      product: '',
+      image: { uri: 'https://www.iconsdb.com/icons/preview/gray/shop-xxl.png' },
+      squantity: '',
+      pquantity: '',
+      costpp: '',
+      ucost: '',
+      sellp: '',
+      stock: ''
+    }
   }
-
   create = () => {
     this.props.navigation.goBack()
   }
@@ -38,10 +31,13 @@ export default class ProductFormAtom extends React.Component<IProps, IState> {
     this.setState({ product })
   }
 
-  getImage = (pic: string) => {
-    this.setState({
-      image: pic
-    })
+  getImage = (pic: any) => {
+    this.setState((prevState: any) => ({
+      image: {
+        ...prevState.image,
+        uri: pic
+      }
+    }))
   }
 
   getSQuantity = (squantity: any) => {
@@ -65,74 +61,61 @@ export default class ProductFormAtom extends React.Component<IProps, IState> {
   getStock = (stock: any) => {
     this.setState({ stock })
   }
+
+  updateState = (key: string, value: any) => {
+    this.setState({ [key]: value })
+  }
   render() {
     return (
       <ScrollView>
         <View>
-          <ImageAtom getValue={this.getImage} source={this.state.image} />
+          <ImageAtom getValue={this.getImage} source={this.state.image.uri} />
           <View>
             <InputAtom
-              label="  Product name"
-              getValue={this.getProduct}
+              label="Product name"
+              getValue={val => this.updateState('product', val)}
               contStyle={styles.marginlessInput}
+              required={true}
             />
           </View>
           <View>
             <InputAtom
-              label="  Stock quantity"
+              label="Stock quantity"
               keyboardType="numeric"
-              getValue={this.getSQuantity}
+              getValue={val => this.updateState('squantity', val)}
               contStyle={styles.marginlessInput}
             />
             <Text style={styles.font1}>Quantity available in store</Text>
           </View>
           <View>
             <InputAtom
-              label="  Pack quantity"
-              keyboardType="numeric"
-              getValue={this.getPQuantity}
-              contStyle={styles.marginlessInput}
-            />
-            <Text style={styles.font1}>
-              Quantity in a pack e.g. Dozen, caton, packet, container
-            </Text>
-          </View>
-          <View>
-            <InputAtom
-              label="  Cost price per pack"
-              keyboardType="numeric"
-              getValue={this.getCostPP}
-              contStyle={styles.marginlessInput}
-            />
-          </View>
-          <View>
-            <InputAtom
-              label="  Unit cost price"
-              keyboardType="numeric"
-              getValue={this.getUCost}
-              contStyle={styles.marginlessInput}
-            />
-            <Text style={styles.font1}>
-              Cost price of 1 unit e.g. 1 piece, 1 dozen, 1 caton, 1 liter
-            </Text>
-          </View>
-          <View>
-            <InputAtom
-              label="  Selling price"
-              keyboardType="numeric"
-              getValue={this.getSellP}
-              contStyle={styles.marginlessInput}
-            />
-          </View>
-          <View>
-            <InputAtom
-              label="  Minimum stock quanity"
+              label="Unit cost price"
               keyboardType="numeric"
               getValue={this.getStock}
               contStyle={styles.marginlessInput}
             />
             <Text style={styles.font1}>
-              Minimum amount required for re-stock
+              Cost of 1 unit in a packing container e.g. N1 per liter
+            </Text>
+          </View>
+          <View>
+            <InputAtom
+              label="Selling price"
+              keyboardType="numeric"
+              required={true}
+              getValue={this.getStock}
+              contStyle={styles.marginlessInput}
+            />
+          </View>
+          <View>
+            <InputAtom
+              label="Minimum stock quantity"
+              keyboardType="numeric"
+              getValue={this.getStock}
+              contStyle={styles.marginlessInput}
+            />
+            <Text style={styles.font1}>
+              Minimum amount required for restock
             </Text>
           </View>
         </View>
@@ -148,6 +131,15 @@ const styles = StyleSheet.create({
   font1: {
     fontSize: 11,
     color: '#000',
-    paddingLeft: 4
+    paddingTop: 0,
+    marginTop: 0
+  },
+  pickerStyle: {
+    //  width: '50%',
+    height: 35
+  },
+  addSign: {
+    color: color.primary,
+    fontSize: 50
   }
 })
