@@ -147,7 +147,7 @@ const businessStack = StackNavigator(
     }
   },
   {
-    initialRouteName: 'BusinessList',
+    initialRouteName: 'ViewBusiness',
     navigationOptions: ({ navigation }: any) => ({
       title: 'Products & Services',
       headerLeft: (
