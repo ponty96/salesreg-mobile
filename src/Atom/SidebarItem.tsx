@@ -17,7 +17,7 @@ const sidebarItem = (prop: {
           <TouchableOpacity
             style={styles.categoryWrapper}
             key={key}
-            onPress={() => prop.onPress}
+            onPress={prop.onPress}
           >
             <Text style={styles.category}>{item}</Text>
           </TouchableOpacity>

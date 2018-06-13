@@ -39,7 +39,7 @@ export default class SideBar extends PureComponent<IProps> {
             <SidebarItem
               title="COMPANY"
               categories={['Home', 'Products & Services', 'Employees']}
-              onPress={this.handleNavigation('Root')}
+              onPress={() => this.handleNavigation('Home')}
             />
             {/*<SidebarItem
               title="CONTACT"
