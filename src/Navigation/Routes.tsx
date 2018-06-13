@@ -14,7 +14,7 @@ import OnBoardingScreen from './../Screen/OnBoardingScreen'
 import SignupScreen from './../Screen/SignupScreen'
 import ResetScreen from './../Screen/ResetScreen'
 import LoginScreen from './../Screen/LoginScreen'
-// import BusinessListScreen from './../Screen/BusinessListScreen';
+import BusinessListScreen from './../Screen/BusinessListScreen';
 import NewBusinessScreen from './../Screen/NewBusinessScreen'
 import NewOrderScreen from './../Screen/NewOrderScreen'
 import NewProductScreen from './../Screen/NewProductScreen'
@@ -108,9 +108,9 @@ const viewBusinessStack = TabNavigator(
 
 const businessStack = StackNavigator(
     {
-        /*BusinessList: {
-      screen: BusinessListScreen
-    },*/
+        BusinessList: {
+          screen: BusinessListScreen
+        },
         NewBusiness: {
             screen: NewBusinessScreen
         },
