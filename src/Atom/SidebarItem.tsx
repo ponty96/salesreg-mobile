@@ -2,16 +2,29 @@ import * as React from 'react'
 import { TouchableOpacity, StyleSheet, View, Text } from 'react-native'
 import { color } from '../Style/Color'
 
-const sidebarItem = (prop: { title: string; category: string }) => (
-  <View>
-    <View style={styles.header}>
-      <Text style={styles.title}>{prop.title}</Text>
-    </View>
-    <TouchableOpacity style={styles.categoryWrapper}>
-      <Text style={styles.category}>{prop.category}</Text>
+const renderList = (listItem: string, unique: number) => {
+  console.log(unique)
+  return (
+    <TouchableOpacity style={styles.categoryWrapper} key={unique}>
+      <Text style={styles.category}>{listItem}</Text>
     </TouchableOpacity>
-  </View>
-)
+  )
+}
+
+const numberOfListItem = (listItems: string[]) => {
+  return listItems.map((item, key) => renderList(item, key))
+}
+
+const sidebarItem = (prop: { title: string }) => {
+  return (
+    <View>
+      <View style={styles.header}>
+        <Text style={styles.title}>{prop.title}</Text>
+      </View>
+      {numberOfListItem(['Home', 'Products & Services', 'Employees'])}
+    </View>
+  )
+}
 
 export default sidebarItem
 

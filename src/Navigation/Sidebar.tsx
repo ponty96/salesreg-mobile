@@ -36,7 +36,7 @@ class SideBar extends PureComponent<IProps> {
               <Icon name="cross" type="Entypo" style={styles.cross} />
               <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
             </TouchableOpacity>
-            <SidebarItem title="COMPANY" category="Home" />
+            <SidebarItem title="COMPANY" />
             {/*<TouchableOpacity
               onPress={() =>
                 this.handleNavigation('UserProfile', userData.profile)
