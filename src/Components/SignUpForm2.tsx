@@ -1,10 +1,11 @@
 import React, { PureComponent } from 'react'
-import { Form } from 'native-base'
+import { Form, CheckBox } from 'native-base'
 import { View, Text, StyleSheet } from 'react-native'
 import InputAtom from '../Atom/InputAtom'
 import ButtonAtom from '../Atom/ButtonAtom'
 import ImageAtom from '../Atom/ImageAtom'
 import { color } from '../Style/Color'
+import PickerAtom from '../Atom/PickerAtom'
 
 interface IProps {
   navigation: any
@@ -16,15 +17,19 @@ interface IState {
   name: string
   confirm_password: string
   gender: string
+  products: boolean
+  services: boolean
 }
 
 class SigupForm2 extends PureComponent<IProps, IState> {
   state = {
-    image: '',
+    image: 'https://www.iconsdb.com/icons/preview/gray/shop-xxl.png',
     password: '',
     name: '',
     confirm_password: '',
-    gender: ''
+    gender: '',
+    products: false,
+    services: false
   }
 
   signup = () => {
@@ -69,6 +74,11 @@ class SigupForm2 extends PureComponent<IProps, IState> {
     this.props.navigation.navigate(location)
   }
 
+  flipCheckedState = (oldState: boolean, key: string) => {
+    if (key === 'products') this.setState({ products: !oldState })
+    else this.setState({ services: !oldState })
+  }
+
   render() {
     return (
       <Form style={styles.resetFormContainer}>
@@ -76,30 +86,60 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           getValue={this.getImage}
           source={this.state.image}
           placeholder=""
-          imgStyle={styles.placeholderIcon}
-          type="business"
+          shop={true}
         />
+
         <InputAtom
-          label="Business name"
+          label="*Business name"
           getValue={this.getName}
           contStyle={styles.marginlessInput}
         />
 
         <InputAtom
-          label="Business address"
+          label="*Business address"
           getValue={this.getName}
           contStyle={styles.marginlessInput}
         />
 
         <InputAtom
-          label="Email"
+          label="*Email"
           getValue={this.getName}
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
         />
 
+        <Text style={styles.whatYouSell}>*What are you selling?</Text>
+        <View style={styles.checkBoxWrapper}>
+          <CheckBox
+            checked={this.state.products}
+            onPress={() => {
+              this.flipCheckedState(this.state.products, 'products')
+            }}
+            color={color.inactive}
+          />
+          <Text style={styles.checkBoxText}>
+            Products(Traders, manufacturers, producers)
+          </Text>
+        </View>
+
+        <View style={styles.checkBoxWrapper}>
+          <CheckBox
+            checked={this.state.services}
+            onPress={() => {
+              this.flipCheckedState(this.state.services, 'services')
+            }}
+            color={color.inactive}
+          />
+          <Text style={styles.checkBoxText}>Services(Service providers)</Text>
+        </View>
+
+        <Text style={styles.whatYouSell}>Transaction currency</Text>
+        <View style={styles.pickerWrapper}>
+          <PickerAtom list={['Naira(\u20A6)']} placeholder="Naira(\u20A6)" />
+        </View>
+
         <InputAtom
-          label="About(give a description of your business)"
+          label="Give a description of your business"
           getValue={this.getName}
           contStyle={styles.marginlessInput}
         />
@@ -137,15 +177,29 @@ const styles = StyleSheet.create({
   buttonsWrapper: {
     marginTop: 20
   },
+  whatYouSell: {
+    marginTop: '10%',
+    color: color.primary
+  },
+  checkBoxWrapper: {
+    flexDirection: 'row',
+    marginTop: '3%'
+  },
+  checkBoxText: {
+    marginLeft: 15
+  },
+
+  pickerWrapper: {
+    borderBottomColor: color.listBorderColor,
+    borderBottomWidth: 1,
+    width: '50%'
+  },
+
   placeholderColor: {
     color: color.inactive
   },
-  placeholderIcon: {
-    color: color.inactive,
-    fontSize: 120
-  },
   longButton: {
-    width: '90%',
+    alignSelf: 'stretch',
     paddingHorizontal: 0,
     justifyContent: 'center'
   },

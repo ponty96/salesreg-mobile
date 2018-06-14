@@ -10,15 +10,15 @@ import {
 import { SafeAreaView } from 'react-navigation'
 import { Icon } from 'native-base'
 
-import ListItemAtom from './../Atom/ListItemAtom'
-import { userData } from './../config/default'
+// import ListItemAtom from './../Atom/ListItemAtom'
+// import { userData } from './../config/default'
 import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
 }
 
-class SideBar extends PureComponent<IProps> {
+export default class SideBar extends PureComponent<IProps> {
   handleNavigation = (location: string, data: any = undefined) => {
     this.props.navigation.navigate(location, { data })
   }
@@ -32,83 +32,182 @@ class SideBar extends PureComponent<IProps> {
         <View style={styles.itemsContainer}>
           <ScrollView>
             <TouchableOpacity
-              onPress={() =>
-                this.handleNavigation('UserProfile', userData.profile)
-              }
-              activeOpacity={1}
+              style={styles.header}
+              onPress={() => this.props.navigation.navigate('OnBoarding')}
             >
-              <ListItemAtom
-                item={userData.profile}
-                business={false}
-                bodyfunction={() =>
-                  this.handleNavigation('UserProfile', userData.profile)
-                }
-              />
+              <Icon name="cross" type="Entypo" style={styles.cross} />
+              <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
             </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.handleNavigation('BusinessDetails')}
-              activeOpacity={1}
-            >
-              <ListItemAtom
-                item={{
-                  name: 'kay5'
+
+            <View>
+              <View style={styles.listHeader}>
+                <Text style={styles.title}>COMPANY</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Home')
                 }}
-                bodyfunction={() => this.handleNavigation('BusinessDetails')}
-              />
-            </TouchableOpacity>
-            <TouchableOpacity
-              onPress={() => this.props.navigation.navigate('Settings')}
-              activeOpacity={1}
-            >
-              <View style={styles.sidebarItem}>
-                <Icon
-                  name={'settings'}
-                  style={styles.itemIcon}
-                  type={'MaterialCommunityIcons'}
-                />
-                <Text style={styles.itemText}>Settings</Text>
+              >
+                <Text style={styles.category}>Home</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('ViewBusiness')
+                }}
+              >
+                <Text style={styles.category}>Products & Services</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Employees')
+                }}
+              >
+                <Text style={styles.category}>Employees</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <View style={styles.listHeader}>
+                <Text style={styles.title}>CONTACT</Text>
               </View>
-            </TouchableOpacity>
-            <TouchableOpacity activeOpacity={1}>
-              <View style={styles.sidebarItem}>
-                <Icon
-                  name={'help'}
-                  style={styles.itemIcon}
-                  type={'MaterialCommunityIcons'}
-                />
-                <Text style={styles.itemText}>Need help</Text>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('CustomerDetails')
+                }}
+              >
+                <Text style={styles.category}>Customer</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Vendor')
+                }}
+              >
+                <Text style={styles.category}>Vendor</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <View style={styles.listHeader}>
+                <Text style={styles.title}>ORDER</Text>
               </View>
-            </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Purchase')
+                }}
+              >
+                <Text style={styles.category}>Purchase</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Sales')
+                }}
+              >
+                <Text style={styles.category}>Sales</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <View style={styles.listHeader}>
+                <Text style={styles.title}>TRANSACTIONS</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Bank')
+                }}
+              >
+                <Text style={styles.category}>Bank</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Income')
+                }}
+              >
+                <Text style={styles.category}>Income</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Expenses')
+                }}
+              >
+                <Text style={styles.category}>Expenses</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Invoice')
+                }}
+              >
+                <Text style={styles.category}>Invoices</Text>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Receipts')
+                }}
+              >
+                <Text style={styles.category}>Receipts</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View>
+              <View style={styles.listHeader}>
+                <Text style={styles.title}>ACCOUNTING</Text>
+              </View>
+              <TouchableOpacity
+                style={styles.categoryWrapper}
+                onPress={() => {
+                  this.props.navigation.navigate('Inventory')
+                }}
+              >
+                <Text style={styles.category}>Inventory</Text>
+              </TouchableOpacity>
+            </View>
           </ScrollView>
         </View>
-        <TouchableOpacity
-          style={styles.logoutItem}
-          activeOpacity={1}
-          onPress={() => this.handleNavigation('BusinessList')}
-        >
-          <Icon name={'md-briefcase'} style={styles.itemIcon} />
-          <Text style={styles.itemText}>My businesses</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.logoutItem}
-          activeOpacity={1}
-          onPress={() => this.handleNavigation('Auth')}
-        >
-          <Icon
-            name={'logout'}
-            style={styles.itemIcon}
-            type={'MaterialCommunityIcons'}
-          />
-          <Text style={styles.itemText}>Logout</Text>
-        </TouchableOpacity>
       </SafeAreaView>
     )
   }
 }
 
-export default SideBar
-
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    marginLeft: '3%'
+  },
+  listHeader: {
+    backgroundColor: color.inactive
+  },
+  texts: {
+    color: color.modal,
+    marginLeft: '3%',
+    alignSelf: 'center'
+  },
+  title: {
+    marginLeft: '10%',
+    color: color.subHeader,
+    marginVertical: '2%'
+  },
+  categoryWrapper: {
+    backgroundColor: 'transparent',
+    borderBottomWidth: 0.5,
+    borderBottomColor: color.listBorderColor
+  },
+  category: {
+    marginLeft: '10%',
+    backgroundColor: 'transparent',
+    color: color.modal,
+    marginVertical: '5%'
+  },
   itemText: {
     flex: 1,
     alignContent: 'center',
@@ -117,6 +216,11 @@ const styles = StyleSheet.create({
   },
   itemIcon: {
     color: color.menu
+  },
+  cross: {
+    fontSize: 35,
+    // backgroundColor: 'transparent',
+    color: color.modal
   },
   logoutItem: {
     borderTopWidth: 1,
@@ -131,12 +235,12 @@ const styles = StyleSheet.create({
   sidebarItem: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'stretch',
     padding: 16
   },
   sidebarContainer: {
-    paddingHorizontal: 8,
-    height: Dimensions.get('window').height - 16
+    height: Dimensions.get('window').height - 16,
+    backgroundColor: color.primary
   },
   itemsContainer: {
     flex: 4

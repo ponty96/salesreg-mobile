@@ -81,7 +81,7 @@ export default class CustomerFormAtom extends React.Component<
               />
             </View>
             <View style={styles.innerEnd}>
-              <PickerAtom list={['Gender', 'Male', 'Female']} />
+              <PickerAtom list={['Male', 'Female']} placeholder="Gender" />
             </View>
           </View>
           <View>
@@ -121,7 +121,10 @@ export default class CustomerFormAtom extends React.Component<
           </View>
           <View style={styles.inputView}>
             <View style={styles.innerFirstPicker}>
-              <PickerAtom list={['Marital Status', 'Married', 'Single']} />
+              <PickerAtom
+                list={['Married', 'Single']}
+                placeholder="Marital status"
+              />
             </View>
             <View style={styles.innerLastEnd}>
               <InputAtom

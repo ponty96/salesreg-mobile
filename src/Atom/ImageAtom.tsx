@@ -1,7 +1,6 @@
 import * as React from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
 import { ImagePicker } from 'expo'
-import { Icon } from 'native-base'
 import { StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 
@@ -10,12 +9,12 @@ interface IProps {
   placeholder?: string
   imgStyle?: object
   getValue?: any
-  type?: string
+  shop?: boolean
 }
 
 class ImageAtom extends React.Component<IProps, any> {
   state = {
-    image: ''
+    image: { uri: '' }
   }
 
   handleSelection = async () => {
@@ -26,38 +25,25 @@ class ImageAtom extends React.Component<IProps, any> {
 
       if (result && !result.cancelled) {
         this.setState({ image: result })
-        this.props.getValue(this.state.image)
+        this.props.getValue(this.state.image.uri)
       }
     }
   }
 
   render() {
-    if (this.props.type === 'business')
-      return (
-        <View>
-          <TouchableOpacity
-            onPress={this.handleSelection}
-            style={[styles.selfAlign, styles.imgContainer]}
-          >
-            <View style={styles.iconBackground}>
-              <Icon name="shop" type="Entypo" style={this.props.imgStyle} />
-            </View>
-          </TouchableOpacity>
-          <Text style={styles.selfAlign}>Upload logo</Text>
-        </View>
-      )
-
     if (this.props.source || this.state.image) {
       return (
         <TouchableOpacity
           onPress={this.handleSelection}
           style={styles.selfAlign}
         >
-          <Image
-            source={{ uri: this.state.image || this.props.source }}
-            style={[styles.imgContainer, this.props.imgStyle]}
-          />
-          <Text style={styles.selfAlign}>Upload logo</Text>
+          <View style={styles.imgContainer}>
+            <Image
+              source={{ uri: this.state.image.uri || this.props.source }}
+              style={styles.image}
+            />
+          </View>
+          <Text style={styles.imageText}>Upload logo</Text>
         </TouchableOpacity>
       )
     } else {
@@ -66,7 +52,7 @@ class ImageAtom extends React.Component<IProps, any> {
           onPress={this.handleSelection}
           style={styles.selfAlign}
         >
-          <View style={[styles.imgContainer, { backgroundColor: '#f6f6f6' }]}>
+          <View style={styles.imgContainer}>
             <Text style={styles.imgPlaceholderText}>
               {this.props.placeholder &&
                 this.props.placeholder.substr(0, 1).toUpperCase()}
@@ -85,21 +71,21 @@ const styles = StyleSheet.create({
   selfAlign: {
     alignSelf: 'center'
   },
+  image: {
+    height: 120,
+    width: 120
+  },
   imgContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-    marginVertical: 15
+    height: 180,
+    width: 180,
+    borderRadius: 90,
+    marginVertical: 10,
+    backgroundColor: color.listBorderColor
   },
-  iconBackground: {
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-    backgroundColor: color.grey,
-    justifyContent: 'center',
-    alignItems: 'center'
+  imageText: {
+    alignSelf: 'center'
   },
   imgPlaceholderText: {
     fontWeight: 'bold',

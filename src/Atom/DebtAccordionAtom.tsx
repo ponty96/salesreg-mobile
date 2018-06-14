@@ -6,34 +6,38 @@ import { innerAccordion } from '../config/data'
 import { color } from '../Style/Color'
 
 interface IProps {
-  items?: { images: string; name: string; quantity: string; amount: any }
+  item?: { images: string; name: string; quantity: string; amount: any }
   onPress?: () => void
+  image?: string
 }
 
 class InnerList extends React.Component<IProps, any> {
+  public static defaultProps: {
+    image: 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+  }
+
   render() {
-    const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
-    const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
+    const AVATAR =
+      this.props.item.images !== '' ? this.props.item.images : this.props.image
+
     return (
       <ListItem style={styles.rowD} onPress={this.props.onPress}>
         <Left style={styles.view1}>
-          <Thumbnail source={{ uri: avatar }} style={styles.dpD} />
+          <Thumbnail source={{ uri: AVATAR }} style={styles.dpD} />
         </Left>
         <Body style={styles.view2}>
-          <Text style={styles.rowText1}>{this.props.items.name}</Text>
+          <Text style={styles.rowText1}>{this.props.item.name}</Text>
         </Body>
         <Right style={styles.view3}>
-          <Text style={styles.lilFontDA}>{this.props.items.quantity}</Text>
-          <Text style={styles.rowText3DA}># {this.props.items.amount}.00</Text>
+          <Text style={styles.lilFontDA}>{this.props.item.quantity}</Text>
+          <Text style={styles.rowText3DA}>
+            {'\u20A6'} {this.props.item.amount}.00
+          </Text>
         </Right>
       </ListItem>
     )
   }
 }
-
-const users = innerAccordion
 
 export default class DebtAccordionAtom extends React.Component {
   onPress = () => {
@@ -41,7 +45,7 @@ export default class DebtAccordionAtom extends React.Component {
   }
 
   renderItem = (item: any) => {
-    return <InnerList items={item} onPress={this.onPress} />
+    return <InnerList item={item} onPress={this.onPress} />
   }
 
   render() {
@@ -49,7 +53,7 @@ export default class DebtAccordionAtom extends React.Component {
       <View style={styles.debtAccord}>
         <ScrollView>
           <FlatList
-            data={users}
+            data={innerAccordion}
             renderItem={this.renderItem}
             keyExtractor={item => item.key.toString()}
           />

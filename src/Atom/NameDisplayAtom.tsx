@@ -1,16 +1,18 @@
 import * as React from 'react'
 import { View, Text, Image, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
+import { capitalizeFirstLetter } from '../Functions/capitalizeFirstLetter'
 
 interface IProps {
   businessName: string
   image: string
+  style?: object
 }
 
 export default class NameDisplayAtom extends React.Component<IProps, any> {
   render() {
     return (
-      <View style={styles.nameDisplayWrapper}>
+      <View style={[styles.nameDisplayWrapper, this.props.style]}>
         <View style={styles.nameDisplayLetterDisplay}>
           {this.props.image ? (
             <Image
@@ -18,7 +20,7 @@ export default class NameDisplayAtom extends React.Component<IProps, any> {
               style={styles.nameDisplayImage}
             />
           ) : (
-            <Text>{this.props.businessName.charAt(0).toUpperCase()}</Text>
+            <Text>{capitalizeFirstLetter(this.props.businessName)}</Text>
           )}
         </View>
         <Text style={styles.nameDisplayName}>{this.props.businessName}</Text>

@@ -1,9 +1,14 @@
 import React, { Component } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import {
+  View,
+  Text,
+  TouchableOpacity,
+  StyleSheet,
+  ScrollView
+} from 'react-native'
 import { Icon } from 'native-base'
 
 import NameDisplayAtom from '../Atom/NameDisplayAtom'
-import DetailItemAtom from '../Atom/DetailItemAtom'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -17,22 +22,16 @@ interface IState {
 class BusinessDetailsScreen extends Component<IProps, IState> {
   state = {
     item: {
-      businessName: 'Business',
+      businessName: 'Kay5ive Attractions',
       image:
-        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
-      address: '6 Salem street Morogbo, Lagos',
-      email: 'kay5@gmail.com',
-      description:
-        'Simply dummy text of the printing and typesetting industry. ' +
-        "Loren Ipsum has been the industry's standard dummy text ever since the 1550s, when an unknown printer took a " +
-        'gallery of type and scrambled it'
+        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
     }
   }
 
   static navigationOptions = ({ navigation }: any) => {
     const { params } = navigation.state
     return {
-      title: params.name,
+      title: 'Business profile',
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
@@ -69,42 +68,44 @@ class BusinessDetailsScreen extends Component<IProps, IState> {
     })
   }
 
+  renderDetail = (label: string, detail: string) => {
+    return (
+      <View>
+        <Text style={styles.label}>{label}</Text>
+        <Text style={styles.details}>{detail}</Text>
+      </View>
+    )
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.nameDisplay}>
+      <ScrollView style={styles.container}>
+        <View style={styles.compartment}>
           <NameDisplayAtom
             businessName={this.state.item.businessName}
             image={this.state.item.image}
+            style={styles.nameDisplay}
           />
+          {this.renderDetail('Location', '6 Salem street Morogbo, Lagos')}
         </View>
-        <View style={styles.detailsWrapper}>
-          <Text style={styles.details}>Details</Text>
+
+        <View style={styles.compartment}>
+          {this.renderDetail('Email', 'kay5@gmail.com')}
         </View>
-        <View>
-          <View style={styles.detailItemWrapper}>
-            <DetailItemAtom
-              icon="map-marker"
-              detailText={this.state.item.address}
-              type="FontAwesome"
-            />
-          </View>
-          <View style={styles.detailItemWrapper}>
-            <DetailItemAtom
-              icon="envelope"
-              detailText={this.state.item.email}
-              type="FontAwesome"
-            />
-          </View>
-          <View style={styles.detailItemWrapper}>
-            <DetailItemAtom
-              icon="file"
-              detailText={this.state.item.description}
-              type="FontAwesome"
-            />
-          </View>
+
+        <View style={styles.compartment}>
+          {this.renderDetail('Category', 'Product, Services')}
+          {this.renderDetail('Currency', 'Naira(\u20A6)')}
         </View>
-      </View>
+
+        <View style={styles.compartment}>
+          {this.renderDetail(
+            'Description',
+            "Simply dummy text of the printing and typesetting industry. Lorem ipsum has been the industry's standard" +
+              'dummy text ever since the 1500s, when an unknown printer took a gallery of typa and scrambled it'
+          )}
+        </View>
+      </ScrollView>
     )
   }
 }
@@ -112,21 +113,28 @@ class BusinessDetailsScreen extends Component<IProps, IState> {
 export default BusinessDetailsScreen
 
 const styles = StyleSheet.create({
+  compartment: {
+    borderBottomWidth: 1,
+    borderBottomColor: color.listBorderColor
+  },
+
   detailItemWrapper: {
     marginVertical: 10
   },
   details: {
-    marginTop: 20,
-    marginLeft: 25,
-    color: color.inactive,
-    marginBottom: 5
+    marginHorizontal: '10%',
+    marginBottom: '3%'
   },
   nameDisplay: {
-    borderBottomWidth: 1,
-    borderBottomColor: 'lightgrey',
-    paddingBottom: 40,
-    paddingTop: 30,
-    paddingHorizontal: 40
+    marginTop: '5%',
+    marginBottom: '8%',
+    marginLeft: '15%'
+  },
+  label: {
+    color: color.primary,
+    marginLeft: '10%',
+    marginTop: '3%',
+    marginBottom: '2%'
   },
   headerText: {
     color: color.secondary,

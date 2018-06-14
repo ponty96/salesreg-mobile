@@ -26,7 +26,7 @@ class InputAtom extends React.Component<IProps, any> {
     secureTextEntry: false,
     keyboardType: 'default',
     multiline: false,
-    contStyle: {marginLeft: 4} || {marginLeft: 0}
+    contStyle: { marginLeft: 4 } || { marginLeft: 0 }
   }
 
   render() {
@@ -67,22 +67,22 @@ class InputAtom extends React.Component<IProps, any> {
 export default InputAtom
 
 const styles = StyleSheet.create({
-    marginlessInput: {
-        marginLeft: 0
-      },
-      marginfulInput: {
-        marginLeft: 4
-      },
-      label: {
-        color: color.inactive
-      },
-      required: {
-        color: color.primary
-      },
-      underneathText: {
-        marginLeft: 0,
-        color: color.menu,
-        fontSize: 12,
-        marginBottom: 25
-      }
+  marginlessInput: {
+    marginLeft: 0
+  },
+  marginfulInput: {
+    marginLeft: 4
+  },
+  label: {
+    color: color.inactive
+  },
+  required: {
+    color: color.primary
+  },
+  underneathText: {
+    marginLeft: 0,
+    color: color.menu,
+    fontSize: 12,
+    marginBottom: 25
+  }
 })

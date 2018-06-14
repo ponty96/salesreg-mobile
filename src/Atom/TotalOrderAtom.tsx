@@ -17,7 +17,7 @@ export default class TotalOrderAtom extends React.Component<IProps, any> {
           </View>
           <View style={styles.totalOrderRedNumberView}>
             <Text style={styles.totalOrderRedNumber}>
-              NGN {this.props.totalAmount}.00
+              {'\u20A6'} {this.props.totalAmount}.00
             </Text>
           </View>
         </View>
@@ -27,7 +27,7 @@ export default class TotalOrderAtom extends React.Component<IProps, any> {
           </View>
           <View style={styles.totalOrderPeachView}>
             <Text style={styles.totalOrderRedNumber}>
-              NGN {this.props.profit}.00
+              {'\u20A6'} {this.props.profit}.00
             </Text>
           </View>
         </View>

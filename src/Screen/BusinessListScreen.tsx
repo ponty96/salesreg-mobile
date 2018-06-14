@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { List, Icon } from 'native-base'
 
-import FabAtom from './../Atom/FabAtom'
+import FabAtom from '../Atom/FabAtom'
 import ListItemAtom from './../Atom/ListItemAtom'
 import DeleteModal from './../Container/DeleteBuzModal'
 import { userData } from '../config/default'
