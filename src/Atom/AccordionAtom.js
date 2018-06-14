@@ -22,24 +22,23 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
   constructor(props /*?: IProps, context?: any*/) {
     super(props /*, context*/)
     this.state = {
-      activeSection: false
-      // icon: 'md-arrow-dropdown'
+      activeSection: false,
+      icon: 'md-arrow-dropdown'
     }
   }
-  setHeader = (section /*: any*/) => {
-    //const { icon } = this.state
-    // this.loadHeader(icon)
+  _setHeader(section /*: any*/) {
+    const { icon } = this.state
+    this._loadHeader(icon)
     this.setState({ activeSection: section })
   }
-
-  // loadHeader = (a /*: string*/) => {
-  // if (a === 'md-arrow-dropdown') {
-  //  this.setState({ icon: 'md-arrow-dropup' })
-  // } else {
-  //  this.setState({ icon: 'md-arrow-dropdown' })
-  //}
-  // }
-  renderHeader(section /*: any*/) {
+  _loadHeader = (a /*: string*/) => {
+    if (a === 'md-arrow-dropdown') {
+      this.setState({ icon: 'md-arrow-dropup' })
+    } else {
+      this.setState({ icon: 'md-arrow-dropdown' })
+    }
+  }
+  _renderHeader(section /*: any*/) {
     return (
       <View style={styles.mainAccord}>
         <View style={styles.accordView1}>
@@ -51,9 +50,7 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
             </Text>
           </View>
           <View style={styles.viewMargin}>
-            <Text style={styles.accordTextL2}>
-              {'\u20A6'} {section.debt}.00
-            </Text>
+            <Text style={styles.accordTextL2}>&#8358;{section.debt}.00</Text>
           </View>
         </View>
         <View style={styles.accordView2}>
@@ -64,7 +61,7 @@ export default class AccordionAtom extends React.Component /*<IProps, IState>*/ 
     )
   }
 
-  renderContent() {
+  _renderContent() {
     return <DebtAccordionAtom />
   }
 

@@ -4,7 +4,6 @@ import {
   StackNavigator,
   DrawerNavigator,
   TabNavigator,
-  TabBarBottom,
   SwitchNavigator
 } from 'react-navigation'
 import { Icon } from 'native-base'
@@ -23,10 +22,11 @@ import SettingsScreen from './../Screen/SettingsScreen'
 import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen'
 import DebtScreen from './../Screen/DebtScreen'
 import ProductScreen from './../Screen/ProductScreen'
-import OrderScreen from './../Screen/OrderScreen'
+// import OrderScreen from './../Screen/OrderScreen';
 import OrderDetailsScreen from './../Screen/OrderDetailsScreen'
-import CustomerScreen from './../Screen/CustomerScreen'
-import DebtsScreen from './../Screen/DebtsScreen'
+// import CustomerScreen from './../Screen/CustomerScreen';
+// import DebtsScreen from './../Screen/DebtsScreen';
+import ServicesScreen from './../Screen/ServicesScreen'
 import DebtDetailsScreen from './../Screen/DebtDetailsScreen'
 import ProductDetailsScreen from './../Screen/ProductDetailsScreen'
 import UserProfileScreen from '../Screen/UserProfileScreen'
@@ -50,66 +50,52 @@ import InvoicesScreen from '../Screen/InvoicesScreen'
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
 
-const viewBusinessStack = TabNavigator(
+let BOTH = 'both'
+let ONEPRODUCT = 'product'
+let OPTION = 'both'
+
+const viewBothStack = TabNavigator(
   {
-    Product: {
+    Products: {
       screen: ProductScreen
     },
-    Order: {
-      screen: OrderScreen
-    },
-    Customers: {
-      screen: CustomerScreen
-    },
-    Debts: {
-      screen: DebtsScreen
+    Services: {
+      screen: ServicesScreen
     }
   },
   {
     navigationOptions: ({ navigation }: any) => ({
       tabBarIcon: ({ focused }: any) => {
         const { routeName } = navigation.state
-        let iconName
         let tabColor
-        if (routeName === 'Product') {
-          iconName = 'basket'
-          tabColor = focused ? color.primary : color.inactive
-        } else if (routeName === 'Order') {
-          iconName = 'cart'
-          tabColor = focused ? color.primary : color.inactive
-        } else if (routeName === 'Customers') {
-          iconName = 'person'
-          tabColor = focused ? color.primary : color.inactive
-        } else if (routeName === 'Debts') {
-          iconName = 'database'
-          tabColor = focused ? color.primary : color.inactive
+        if (routeName === 'Products') {
+          tabColor = focused ? color.secondary : color.secondary
+        } else if (routeName === 'Services') {
+          tabColor = focused ? color.secondary : color.secondary
         }
         return (
           <View style={{ alignItems: 'center' }}>
-            <Icon
-              name={iconName}
-              style={{ color: tabColor }}
-              type={
-                routeName === 'Debts' ? 'MaterialCommunityIcons' : 'Ionicons'
-              }
-            />
-            <Text style={{ color: tabColor }}>{routeName}</Text>
+            <Text style={{ color: tabColor, fontWeight: 'bold', fontSize: 20 }}>
+              {routeName}
+            </Text>
           </View>
         )
       }
     }),
     tabBarOptions: {
-      activeTintColor: color.primary,
-      inactiveTintColor: color.inactive,
-      showLabel: false,
+      activeTintColor: color.secondary,
+      inactiveTintColor: color.secondary,
+      showLabel: true,
       style: {
-        backgroundColor: color.secondary,
+        backgroundColor: color.primary,
         height: 60,
         paddingVertical: 8
-      }
+      },
+      indicatorStyle: {
+        backgroundColor: 'lightblue'
+      },
+      upperCaseLabel: false
     },
-    tabBarComponent: TabBarBottom,
-    tabBarPosition: 'bottom',
     animationEnabled: false,
     swipeEnabled: true
   }
@@ -153,9 +139,6 @@ const businessStack = StackNavigator(
     Invoice: {
       screen: InvoicesScreen
     },
-    ViewBusiness: {
-      screen: viewBusinessStack
-    },
     BusinessDetails: {
       screen: BusinessDetailsScreen
     },
@@ -173,6 +156,14 @@ const businessStack = StackNavigator(
     },
     NewOrder: {
       screen: NewOrderScreen
+    },
+    ViewBusiness: {
+      screen:
+        OPTION === BOTH
+          ? viewBothStack
+          : OPTION === ONEPRODUCT
+            ? ProductScreen
+            : ServicesScreen
     },
     OrderDetails: {
       screen: OrderDetailsScreen
@@ -213,7 +204,7 @@ const businessStack = StackNavigator(
       ),
       headerTintColor: color.secondary,
       headerStyle: {
-        backgroundColor: color.menu
+        backgroundColor: color.primary
       }
     })
   }
@@ -240,7 +231,7 @@ const authStack = StackNavigator(
     Login: LoginScreen,
     Reset: ResetScreen,
     Signup: SignupScreen,
-    SecondSignUp: SecondSignUpScreen
+    SignUp2: SecondSignUpScreen
   },
   {
     headerMode: 'none'

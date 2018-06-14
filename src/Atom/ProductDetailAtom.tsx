@@ -1,17 +1,15 @@
-import * as React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import { Thumbnail, ListItem, Left, Right } from 'native-base';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { View, Text, StyleSheet } from 'react-native'
+import { Thumbnail, ListItem, Left, Right } from 'native-base'
+import { color } from '../Style/Color'
 
 interface IProps {
-  product?: string;
-  units?: any;
-  packs?: any;
-  quantity?: any;
-  cost?: any;
-  ucost?: any;
-  sell?: any;
-  stock?: any;
+  product?: string
+  units?: any
+  packs?: any
+  unitCostPrice?: any
+  sellingPrice?: any
+  minStockQuantity?: any
 }
 
 export default class ProductDetailAtom extends React.Component<IProps, any> {
@@ -32,7 +30,7 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
             </Text>
           </View>
           <View style={styles.aboveAccordionMoneyView}>
-            <View>
+            <View style={styles.viewMarginRight}>
               <Text style={styles.aboveAccordionGreyFont}>
                 Stock quantity(in units)
               </Text>
@@ -40,9 +38,9 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
                 {this.props.units}
               </Text>
             </View>
-            <View>
+            <View style={styles.viewMarginRight}>
               <Text style={styles.aboveAccordionGreyFont}>
-                Stock quantity(in packs)
+                Total Units Sold
               </Text>
               <Text style={styles.aboveAccordionBoldFont}>
                 {this.props.packs}
@@ -53,45 +51,23 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
         <View>
           <ListItem style={styles.aboveAccordionWhiteList}>
             <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>Pack quantity</Text>
-            </Left>
-            <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.quantity}
-              </Text>
-            </Right>
-          </ListItem>
-          <ListItem style={styles.aboveAccordionWhiteList}>
-            <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>
-                Cost price per pack
-              </Text>
-            </Left>
-            <Right>
-              <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.cost}
-              </Text>
-            </Right>
-          </ListItem>
-          <ListItem style={styles.aboveAccordionWhiteList}>
-            <Left>
               <Text style={styles.aboveAccordionBlackTextL}>
                 Unit cost price
               </Text>
             </Left>
             <Right>
               <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.ucost}
+                &#8358;{this.props.unitCostPrice}.00
               </Text>
             </Right>
           </ListItem>
           <ListItem style={styles.aboveAccordionWhiteList}>
             <Left>
-              <Text style={styles.aboveAccordionBlackTextL}>Seling price</Text>
+              <Text style={styles.aboveAccordionBlackTextL}>Selling Price</Text>
             </Left>
             <Right>
-              <Text style={styles.aboveAccordionRedTextR}>
-                {this.props.sell}
+              <Text style={styles.aboveAccordionGreenTextR}>
+                &#8358;{this.props.sellingPrice}.00
               </Text>
             </Right>
           </ListItem>
@@ -103,13 +79,13 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
             </Left>
             <Right>
               <Text style={styles.aboveAccordionBlackTextR}>
-                {this.props.stock}
+                {this.props.minStockQuantity}
               </Text>
             </Right>
           </ListItem>
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -125,7 +101,7 @@ const styles = StyleSheet.create({
   aboveAccordionPictureViewP: {
     flexDirection: 'column',
     width: '50%',
-    height: 200,
+    height: 170,
     alignItems: 'flex-start',
     padding: 16,
     justifyContent: 'center',
@@ -137,7 +113,7 @@ const styles = StyleSheet.create({
   },
   aboveAccordionBoldFont: {
     fontWeight: 'bold',
-    fontSize: 18,
+    fontSize: 20,
     textAlign: 'right'
   },
   aboveAccordionWhiteList: {
@@ -156,6 +132,10 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#000'
   },
+  aboveAccordionGreenTextR: {
+    fontSize: 16,
+    color: 'green'
+  },
   aboveAccordionRedTextR: {
     fontSize: 16,
     color: 'red'
@@ -166,8 +146,8 @@ const styles = StyleSheet.create({
     paddingLeft: 16
   },
   aboveAccordionGreyFont: {
-    fontSize: 16,
-    color: '#c0c0c0'
+    fontSize: 17,
+    color: '#000'
   },
   aboveAccordionRedText: {
     fontSize: 16,
@@ -181,9 +161,12 @@ const styles = StyleSheet.create({
   },
   aboveAccordionMoneyView: {
     width: '50%',
-    height: 200,
-    alignItems: 'center',
+    height: 170,
+    alignItems: 'flex-end',
     justifyContent: 'center'
     // backgroundColor: '#FFF',
+  },
+  viewMarginRight: {
+    marginRight: 16
   }
-});
+})
