@@ -47,6 +47,8 @@ import BankScreen from '../Screen/BankScreen'
 import IncomeScreen from '../Screen/IncomeScreen'
 import ExpensesScreen from '../Screen/ExpensesScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
+import ReceiptsScreen from '../Screen/ReceiptsScreen'
+import InventoryScreen from '../Screen/InventoryScreen'
 
 const viewBusinessStack = TabNavigator(
   {
@@ -139,8 +141,14 @@ const businessStack = StackNavigator(
     Income: {
       screen: IncomeScreen
     },
+    Receipts: {
+      screen: ReceiptsScreen
+    },
     Expenses: {
       screen: ExpensesScreen
+    },
+    Inventory: {
+      screen: InventoryScreen
     },
     Invoice: {
       screen: InvoicesScreen
