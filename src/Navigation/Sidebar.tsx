@@ -31,7 +31,10 @@ export default class SideBar extends PureComponent<IProps> {
       >
         <View style={styles.itemsContainer}>
           <ScrollView>
-            <TouchableOpacity style={styles.header}>
+            <TouchableOpacity
+              style={styles.header}
+              onPress={this.props.navigation.navigate('OnBoarding')}
+            >
               <Icon name="cross" type="Entypo" style={styles.cross} />
               <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
             </TouchableOpacity>
@@ -179,14 +182,15 @@ export default class SideBar extends PureComponent<IProps> {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    marginLeft: '3%'
+    marginLeft: '3%',
+    alignSelf: 'center'
   },
   listHeader: {
     backgroundColor: color.inactive
   },
   texts: {
     color: color.modal,
-    alignSelf: 'center'
+    marginLeft: '3%'
   },
   title: {
     marginLeft: '10%',
