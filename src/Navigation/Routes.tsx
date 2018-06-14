@@ -45,6 +45,7 @@ import PurchaseScreen from '../Screen/PurchaseScreen'
 import SalesScreen from '../Screen/SalesScreen'
 import BankScreen from '../Screen/BankScreen'
 import IncomeScreen from '../Screen/IncomeScreen'
+import ExpensesScreen from '../Screen/ExpensesScreen'
 
 const viewBusinessStack = TabNavigator(
   {
@@ -136,6 +137,9 @@ const businessStack = StackNavigator(
     },
     Income: {
       screen: IncomeScreen
+    },
+    Expenses: {
+      screen: ExpensesScreen
     },
     ViewBusiness: {
       screen: viewBusinessStack
