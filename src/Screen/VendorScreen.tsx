@@ -5,10 +5,10 @@ interface IProps {
   navigation: any
 }
 
-export default class CustomersScreen extends React.Component<IProps> {
+export default class VendorScreen extends React.Component<IProps> {
   static navigationOptions = () => {
     return {
-      title: 'Customers Screen'
+      title: 'Vendor Screen'
     }
   }
 

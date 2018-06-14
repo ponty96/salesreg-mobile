@@ -73,7 +73,7 @@ export default class SideBar extends PureComponent<IProps> {
               <TouchableOpacity
                 style={styles.categoryWrapper}
                 onPress={() => {
-                  this.props.navigation.navigate('Customer')
+                  this.props.navigation.navigate('CustomerDetails')
                 }}
               >
                 <Text style={styles.category}>Customer</Text>
