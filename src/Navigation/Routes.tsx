@@ -40,6 +40,9 @@ import { color } from './../Style/Color'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 import HomeScreen from '../Screen/HomeScreen'
 import EmployeesScreen from '../Screen/EmployeesScreen'
+import VendorScreen from '../Screen/VendorScreen'
+import PurchaseScreen from '../Screen/PurchaseScreen'
+import SalesScreen from '../Screen/SalesScreen'
 
 const viewBusinessStack = TabNavigator(
   {
@@ -116,6 +119,15 @@ const businessStack = StackNavigator(
     },
     Employees: {
       screen: EmployeesScreen
+    },
+    Vendor: {
+      screen: VendorScreen
+    },
+    Purchase: {
+      screen: PurchaseScreen
+    },
+    Sales: {
+      screen: SalesScreen
     },
     ViewBusiness: {
       screen: viewBusinessStack
