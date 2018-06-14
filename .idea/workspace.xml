@@ -1,0 +1,823 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="" />
+    <ignored path="$PROJECT_DIR$/.tmp/" />
+    <ignored path="$PROJECT_DIR$/temp/" />
+    <ignored path="$PROJECT_DIR$/tmp/" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="TRACKING_ENABLED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="JavaScript File" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find>rate</find>
+      <find>this.state.v</find>
+      <find>SwipeRow</find>
+      <find>swipe</find>
+      <find>react-native-modal-popover</find>
+      <find>red</find>
+      <find>redText</find>
+      <find>info</find>
+      <find>handleNavigation</find>
+      <find>react-native-vector-icons</find>
+      <find>DetailItemAtom</find>
+      <find>conta</find>
+      <find>flex: 1</find>
+      <find>color</find>
+      <find>styles</find>
+      <find>state</find>
+      <find>paddingTop</find>
+      <find>state.vi</find>
+      <find>row</find>
+      <find>defaultPadding</find>
+      <find>mainOrderList</find>
+      <find>inn</find>
+      <find>props</find>
+      <find>native-base-theme</find>
+      <find>global</find>
+      <find>native-base-</find>
+      <find>gender</find>
+      <find>Images</find>
+      <find>Total</find>
+      <find>product</find>
+    </findStrings>
+    <dirStrings>
+      <dir>C:\Users\taiwo\Documents\Lidstack\smeapp\src\Style</dir>
+      <dir>C:\Users\taiwo\Documents\Lidstack\smeapp\src\Screen</dir>
+      <dir>C:\Users\taiwo\Documents\Lidstack\smeapp\src\Components</dir>
+      <dir>C:\Users\taiwo\Documents\Lidstack\smeapp\src\Atom</dir>
+      <dir>C:\Users\taiwo\Documents\Lidstack\smeapp\src</dir>
+    </dirStrings>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="dev" />
+      </map>
+    </option>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/src/Components/NewBusinessForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/UserProfile.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/ResetForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/SignupForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/UserProfileScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/ResetScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/SubHeaderAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/AccordionAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/OrderScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/OrderList.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/MainOrderList.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/ProductDetailAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/CustomerList.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/EditUserProfileForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/PopoverAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/PopoverAtom.js" />
+        <option value="$PROJECT_DIR$/package.json" />
+        <option value="$PROJECT_DIR$/src/Components/AuthenticationHeader.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/InputAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Navigation/Routes.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/NewBusinessScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/NewOrderForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/NewOrderScreen.tsx" />
+        <option value="$PROJECT_DIR$/app.json" />
+        <option value="$PROJECT_DIR$/src/Screen/DebtsScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/DebtListAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/DebtList.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/TotalDebtAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Container/SaveCancelButton.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/EditUserProfileScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/NewProductForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/NewCustomerForm.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/OnBoardingScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/NewCustomerScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/ProductDetailsScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/BusinessListScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/ProductDetails.tsx" />
+        <option value="$PROJECT_DIR$/src/Container/RestockModal.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/ButtonAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/OrderDetails.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/OrderDetailsScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/CustomerDetailScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Container/GetAmountModal.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/InnerDebtList.tsx" />
+        <option value="$PROJECT_DIR$/src/Screen/ProductScreen.tsx" />
+        <option value="$PROJECT_DIR$/src/Components/ProductList.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/ProductListAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Style/ProductAndCustomerList.tsx" />
+        <option value="$PROJECT_DIR$/src/Atom/MainOrderListAtom.tsx" />
+        <option value="$PROJECT_DIR$/src/Style/OrderList.tsx" />
+        <option value="$PROJECT_DIR$/src/App.tsx" />
+      </list>
+    </option>
+  </component>
+  <component name="JsBuildToolGruntFileManager" detection-done="true" sorting="DEFINITION_ORDER" />
+  <component name="JsBuildToolPackageJson" detection-done="true" sorting="DEFINITION_ORDER">
+    <package-json value="$PROJECT_DIR$/package.json" />
+  </component>
+  <component name="JsFlowSettings">
+    <service-enabled>true</service-enabled>
+    <exe-path />
+    <other-services-enabled>true</other-services-enabled>
+    <auto-save>true</auto-save>
+  </component>
+  <component name="JsGulpfileManager">
+    <detection-done>true</detection-done>
+    <sorting>DEFINITION_ORDER</sorting>
+  </component>
+  <component name="NodeModulesDirectoryManager">
+    <handled-path value="$PROJECT_DIR$/node_modules" />
+  </component>
+  <component name="NodePackageJsonFileManager">
+    <packageJsonPaths>
+      <path value="$PROJECT_DIR$/package.json" />
+    </packageJsonPaths>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="475" />
+    <option name="y" value="25" />
+    <option name="width" value="1400" />
+    <option name="height" value="990" />
+  </component>
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="smeapp" type="b2602c69:ProjectViewProjectNode" />
+              <item name="smeapp" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="Git.Branch.Popup.ShowAllRemotes" value="true" />
+    <property name="HbShouldOpenHtmlAsHb" value="" />
+    <property name="WebServerToolWindowFactoryState" value="false" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/src/Container/SaveCancelButton.js" />
+    <property name="node.js.detected.package.prettier" value="true" />
+    <property name="node.js.path.for.package.prettier" value="project" />
+    <property name="node.js.selected.package.prettier" value="" />
+    <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
+    <property name="nodejs_package_manager_path" value="yarn" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="ts.external.directory.path" value="$PROJECT_DIR$/node_modules/typescript/lib" />
+    <property name="two.files.diff.last.used.file" value="$PROJECT_DIR$/src/Container/SaveCancelButton.js" />
+  </component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\taiwo\Documents\Lidstack\smeapp\build" />
+      <recent name="C:\Users\taiwo\Documents\Lidstack\smeapp\src" />
+      <recent name="C:\Users\taiwo\Documents\Lidstack\smeapp\src\Components" />
+      <recent name="C:\Users\taiwo\Documents\Lidstack\smeapp\src\Screen" />
+      <recent name="C:\Users\taiwo\Documents\Lidstack\smeapp\Components" />
+    </key>
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="89932301-253f-4793-bea4-24b83484f20b" name="Default" comment="" />
+      <created>1522605409276</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1522605409276</updated>
+      <workItem from="1522605413948" duration="3380000" />
+      <workItem from="1523274814708" duration="257000" />
+      <workItem from="1523275169062" duration="232000" />
+      <workItem from="1523275599504" duration="41007000" />
+      <workItem from="1523697724857" duration="17363000" />
+      <workItem from="1523879252212" duration="45925000" />
+      <workItem from="1524212973259" duration="1092000" />
+      <workItem from="1524236152253" duration="122000" />
+      <workItem from="1524236933809" duration="12216000" />
+      <workItem from="1524482822919" duration="2121000" />
+      <workItem from="1524683833415" duration="42997000" />
+      <workItem from="1525274497867" duration="45669000" />
+      <workItem from="1525685184380" duration="1801000" />
+      <workItem from="1525865558205" duration="289000" />
+      <workItem from="1526306645126" duration="1130000" />
+      <workItem from="1526405271017" duration="1291000" />
+      <workItem from="1526419535916" duration="142000" />
+      <workItem from="1526545647081" duration="140000" />
+      <workItem from="1526550334552" duration="4741000" />
+      <workItem from="1526592025769" duration="20000" />
+      <workItem from="1526732271671" duration="5329000" />
+      <workItem from="1526892390524" duration="4583000" />
+      <workItem from="1526988521068" duration="8099000" />
+      <workItem from="1527078286679" duration="200000" />
+      <workItem from="1527078559280" duration="311000" />
+      <workItem from="1527149779933" duration="11030000" />
+      <workItem from="1527861984231" duration="3610000" />
+    </task>
+    <task id="LOCAL-00001" summary="Implementation of full coupling">
+      <created>1525284122443</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1525284122443</updated>
+    </task>
+    <task id="LOCAL-00002" summary="finished modal refactoring">
+      <created>1525352884908</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1525352884908</updated>
+    </task>
+    <task id="LOCAL-00003" summary="j10 and i modal">
+      <created>1525422414880</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1525422414880</updated>
+    </task>
+    <task id="LOCAL-00004" summary="finsh the modal">
+      <created>1525473003098</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1525473003098</updated>
+    </task>
+    <task id="LOCAL-00005" summary="moving of data">
+      <created>1525628480230</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1525628480230</updated>
+    </task>
+    <task id="LOCAL-00006" summary="moving of data">
+      <created>1525628859825</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1525628859825</updated>
+    </task>
+    <task id="LOCAL-00007" summary="moving of data">
+      <created>1525629826411</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1525629826411</updated>
+    </task>
+    <task id="LOCAL-00008" summary="setting up of typescript">
+      <created>1526307133637</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1526307133637</updated>
+    </task>
+    <task id="LOCAL-00009" summary="converting the screens to typescript">
+      <created>1526406506269</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1526406506270</updated>
+    </task>
+    <task id="LOCAL-00010" summary="converting the screens to typescript">
+      <created>1526552966932</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1526552966934</updated>
+    </task>
+    <task id="LOCAL-00011" summary="converting the navigation to typescript">
+      <created>1526556179213</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1526556179213</updated>
+    </task>
+    <task id="LOCAL-00012" summary="converting the components to typescript">
+      <created>1526743965652</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1526743965653</updated>
+    </task>
+    <task id="LOCAL-00013" summary="fixing the image error">
+      <created>1526905162840</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1526905162840</updated>
+    </task>
+    <task id="LOCAL-00014" summary="fix onboadring screen">
+      <created>1526990142157</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1526990142157</updated>
+    </task>
+    <task id="LOCAL-00015" summary="fix the edit user error">
+      <created>1526991652066</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1526991652067</updated>
+    </task>
+    <task id="LOCAL-00016" summary="fix the new order screen">
+      <created>1526992216835</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1526992216835</updated>
+    </task>
+    <task id="LOCAL-00017" summary="fix splash screen">
+      <created>1526995641492</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1526995641492</updated>
+    </task>
+    <task id="LOCAL-00018" summary="fix debt list bug">
+      <created>1526995954607</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1526995954608</updated>
+    </task>
+    <task id="LOCAL-00019" summary="major fix">
+      <created>1527162305653</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1527162305653</updated>
+    </task>
+    <task id="LOCAL-00020" summary="setting apollo-graphql with app">
+      <created>1527867506452</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1527867506452</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
+    <servers />
+  </component>
+  <component name="TimeTrackingManager">
+    <option name="totallyTimeSpent" value="260763000" />
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
+    <layout>
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.24983476" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="Docker" show_stripe_button="false" />
+      <window_info anchor="bottom" id="Event Log" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" weight="0.32905984" />
+      <window_info anchor="bottom" id="Run" order="2" />
+      <window_info id="npm" side_tool="true" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="bottom" id="Terminal" />
+      <window_info id="Favorites" side_tool="true" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
+      <window_info id="npm" order="2" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="11" weight="0.32905984" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.12756114" />
+      <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
+      <window_info anchor="right" id="Commander" order="0" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="bottom" id="TODO" order="6" />
+      <window_info anchor="bottom" id="TypeScript" order="9" />
+      <window_info anchor="bottom" id="Run" order="2" weight="0.32905984" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.32905984" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
+      <window_info anchor="bottom" id="Terminal" order="10" weight="0.32905984" />
+      <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" weight="0.32905984" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Messages" order="8" />
+      <window_info id="Favorites" order="3" side_tool="true" />
+    </layout>
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="Vcs.Log.History.Properties">
+    <option name="COLUMN_ORDER">
+      <list>
+        <option value="0" />
+        <option value="2" />
+        <option value="3" />
+        <option value="1" />
+      </list>
+    </option>
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="RECENTLY_FILTERED_USER_GROUPS">
+                <collection />
+              </option>
+              <option name="RECENTLY_FILTERED_BRANCH_GROUPS">
+                <collection />
+              </option>
+              <option name="COLUMN_ORDER">
+                <list>
+                  <option value="0" />
+                  <option value="1" />
+                  <option value="2" />
+                  <option value="3" />
+                </list>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsContentAnnotationSettings">
+    <option name="myLimit" value="2678400000" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="SHOW_FILE_HISTORY_DETAILS" value="false" />
+    <MESSAGE value="Implementation of full coupling" />
+    <MESSAGE value="finished modal refactoring" />
+    <MESSAGE value="j10 and i modal" />
+    <MESSAGE value="finsh the modal" />
+    <MESSAGE value="moving of data" />
+    <MESSAGE value="setting up of typescript" />
+    <MESSAGE value="converting the screens to typescript" />
+    <MESSAGE value="converting the navigation to typescript" />
+    <MESSAGE value="converting the components to typescript" />
+    <MESSAGE value="fixing the image error" />
+    <MESSAGE value="fix onboadring screen" />
+    <MESSAGE value="fix the edit user error" />
+    <MESSAGE value="fix the new order screen" />
+    <MESSAGE value="fix splash screen" />
+    <MESSAGE value="fix debt list bug" />
+    <MESSAGE value="major fix" />
+    <MESSAGE value="setting apollo-graphql with app" />
+    <option name="LAST_COMMIT_MESSAGE" value="setting apollo-graphql with app" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <option name="time" value="11" />
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/src/Components/DebtList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="27" column="23" selection-start-line="27" selection-start-column="23" selection-end-line="27" selection-end-column="23" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/AccordionAtom.tsx" />
+    <entry file="file://$PROJECT_DIR$/src/Atom/TotalDebtAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="748">
+          <caret line="44" column="15" selection-start-line="44" selection-start-column="15" selection-end-line="44" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/DebtListAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="32" column="15" selection-start-line="32" selection-start-column="15" selection-end-line="32" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/DebtsScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="450">
+          <caret line="44" column="13" selection-start-line="44" selection-start-column="13" selection-end-line="44" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/app.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/EditUserProfileForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-349">
+          <caret line="17" column="19" selection-start-line="17" selection-start-column="19" selection-end-line="17" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Container/SaveCancelButton.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="206">
+          <caret line="15" column="26" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/ProductFormAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-140" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/NewBusinessForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1582" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/NewCustomerForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1">
+          <caret column="45" selection-start-column="44" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/NewOrderForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="8" column="20" lean-forward="true" selection-start-line="8" selection-start-column="20" selection-end-line="8" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/OnBoardingScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="265">
+          <caret line="41" lean-forward="true" selection-start-line="41" selection-end-line="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/NewCustomerScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="492">
+          <caret line="29" column="12" lean-forward="true" selection-start-line="29" selection-start-column="12" selection-end-line="29" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/NewProductForm.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="456">
+          <caret line="27" column="21" lean-forward="true" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/NewProductScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="30" column="12" lean-forward="true" selection-start-line="30" selection-start-column="12" selection-end-line="30" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/EditUserProfileScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="466">
+          <caret line="64" column="52" selection-start-line="64" selection-start-column="52" selection-end-line="64" selection-end-column="52" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/ProductDetailsScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="697">
+          <caret line="43" column="7" lean-forward="true" selection-start-line="43" selection-start-column="7" selection-end-line="43" selection-end-column="7" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Container/RestockModal.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="329">
+          <caret line="46" column="16" lean-forward="true" selection-start-line="46" selection-start-column="16" selection-end-line="46" selection-end-column="16" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/ProductDetailAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="27">
+          <caret line="13" column="8" selection-start-line="13" selection-start-column="8" selection-end-line="13" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/ProductDetails.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="800">
+          <caret line="48" column="21" lean-forward="true" selection-start-line="48" selection-start-column="21" selection-end-line="49" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/ListItemAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1649">
+          <caret line="97" column="27" lean-forward="true" selection-start-line="97" selection-start-column="27" selection-end-line="97" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/DateOrderAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/OrderDetailListAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/ButtonAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="302">
+          <caret line="23" column="51" selection-start-line="23" selection-start-column="51" selection-end-line="23" selection-end-column="51" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/OrderScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="482">
+          <caret line="48" column="32" lean-forward="true" selection-start-line="48" selection-start-column="32" selection-end-line="48" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/OrderDetails.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="406">
+          <caret line="48" column="21" selection-start-line="48" selection-start-column="21" selection-end-line="48" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/OrderDetailsScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="379">
+          <caret line="40" column="27" lean-forward="true" selection-start-line="40" selection-start-column="27" selection-end-line="40" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/CustomerScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="731">
+          <caret line="43" column="18" selection-start-line="43" selection-start-column="18" selection-end-line="43" selection-end-column="18" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/CustomerList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="365">
+          <caret line="59" column="19" lean-forward="true" selection-start-line="59" selection-start-column="19" selection-end-line="59" selection-end-column="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Container/GetAmountModal.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="38" column="28" selection-start-line="38" selection-start-column="28" selection-end-line="38" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/CustomerDetailScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="218">
+          <caret line="89" column="39" lean-forward="true" selection-start-line="89" selection-start-column="39" selection-end-line="89" selection-end-column="39" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/BusinessListScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="189">
+          <caret line="82" column="4" selection-start-line="82" selection-start-column="4" selection-end-line="82" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/InnerDebtList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="348">
+          <caret line="62" column="27" lean-forward="true" selection-start-line="62" selection-start-column="27" selection-end-line="62" selection-end-column="27" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/DebtDetailsScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/DebtScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/ProductList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret line="11" lean-forward="true" selection-start-line="11" selection-end-line="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/ProductAndCustomerList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="256">
+          <caret line="166" column="13" selection-start-line="166" selection-start-column="13" selection-end-line="166" selection-end-column="13" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/ProductListAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="289">
+          <caret line="17" column="33" selection-start-line="17" selection-start-column="33" selection-end-line="17" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/Screen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="65" column="8" selection-start-line="65" selection-start-column="8" selection-end-line="65" selection-end-column="8" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/Layout.tsx">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/ProductScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="399">
+          <caret line="44" column="41" lean-forward="true" selection-start-line="44" selection-start-column="41" selection-end-line="44" selection-end-column="41" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Screen/OrderListScreen.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="473">
+          <caret line="31" column="12" lean-forward="true" selection-start-line="31" selection-start-column="12" selection-end-line="31" selection-end-column="12" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Components/OrderList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="986">
+          <caret line="62" column="32" selection-start-line="62" selection-start-column="32" selection-end-line="62" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/OrderListAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="28" column="15" selection-start-line="28" selection-start-column="15" selection-end-line="28" selection-end-column="15" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Atom/MainOrderListAtom.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" column="36" selection-start-line="21" selection-start-column="36" selection-end-line="21" selection-end-column="36" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Style/OrderList.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1122">
+          <caret line="66" column="4" selection-start-line="66" selection-start-column="4" selection-end-line="66" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/App.js">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/package.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="12">
+          <caret line="49" column="4" selection-start-line="49" selection-start-column="4" selection-end-line="49" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.tsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="238">
+          <caret line="14" column="1" selection-start-line="14" selection-start-column="1" selection-end-line="14" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/.idea/workspace.xml">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+  </component>
+</project>
