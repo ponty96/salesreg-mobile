@@ -39,7 +39,6 @@ import styles from './../Style/Layout'
 import { color } from './../Style/Color'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 import HomeScreen from '../Screen/HomeScreen'
-import Employees from '../Screen/EmployeesScreen'
 import EmployeesScreen from '../Screen/EmployeesScreen'
 
 const viewBusinessStack = TabNavigator(
