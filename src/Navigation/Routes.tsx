@@ -231,7 +231,7 @@ const authStack = StackNavigator(
     Login: LoginScreen,
     Reset: ResetScreen,
     Signup: SignupScreen,
-    SignUp2: SecondSignUpScreen
+    SecondSignUp: SecondSignUpScreen
   },
   {
     headerMode: 'none'
