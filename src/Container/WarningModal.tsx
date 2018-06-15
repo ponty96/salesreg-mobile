@@ -89,7 +89,7 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
     );
   };
 
-  public renderFooter = () => {
+  renderFooter = () => {
     return (
       <View style={styles.modalHeader}>
         {this.props.type === 'customer' && (
@@ -122,7 +122,7 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
     );
   };
 
-  public render() {
+  render() {
     return (
       <ModalAtom
         visible={this.state.visibility}

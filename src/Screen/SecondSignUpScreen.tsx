@@ -28,7 +28,7 @@ class Signup2Screen extends PureComponent<IProps, IState> {
             <Text style={styles.signUpText}>SIGN UP</Text>
             <TransitionAtom />
             <Text style={styles.personalInfoText}>BUSINESS INFORMATION</Text>
-            <KeyboardAvoidingView behavior={'position'}>
+            <KeyboardAvoidingView behavior={'padding'}>
               <SignUpForm2 navigation={this.props.navigation} />
             </KeyboardAvoidingView>
           </View>

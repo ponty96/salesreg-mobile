@@ -1,12 +1,12 @@
-import React, { Component } from 'react';
-import { View, FlatList, ScrollView, StyleSheet } from 'react-native';
-import CustomerListAtom from '../Atom/CustomerListAtom';
-import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import { customerList } from '../config/data';
+import React, { Component } from 'react'
+import { View, FlatList, ScrollView, StyleSheet } from 'react-native'
+import CustomerListAtom from '../Atom/CustomerListAtom'
+import SubHeaderAtom from '../Atom/SubHeaderAtom'
+import { customerList } from '../config/data'
 
 interface IProps {
-  items: any[];
-  onPress: () => void;
+  items: any[]
+  onPress: () => void
 }
 
 interface IState {}
@@ -20,14 +20,14 @@ class CustomerList extends Component<IProps, IState> {
         ? item.debt
         : item.status === 'balance'
           ? item.balance
-          : item.debt;
-    let realStyle;
+          : item.debt
+    let realStyle
     if (item.status === 'paid') {
-      realStyle = 'paid';
+      realStyle = 'paid'
     } else if (item.status === 'balance') {
-      realStyle = 'balance';
+      realStyle = 'balance'
     } else {
-      realStyle = 'debt';
+      realStyle = 'debt'
     }
     return (
       <CustomerListAtom
@@ -36,8 +36,8 @@ class CustomerList extends Component<IProps, IState> {
         realStyle={realStyle}
         onPress={this.props.onPress}
       />
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -62,11 +62,11 @@ class CustomerList extends Component<IProps, IState> {
           />
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default CustomerList;
+export default CustomerList
 
 const styles = StyleSheet.create({
   customerListContainer: {
@@ -74,4 +74,4 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%'
   }
-});
+})

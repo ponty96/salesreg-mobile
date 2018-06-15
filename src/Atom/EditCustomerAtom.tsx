@@ -71,25 +71,25 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
           />
           <View>
             <InputAtom
-              label="  Name"
+              label="Name"
               getValue={this.getProduct}
               contStyle={styles.marginlessInput}
             />
           </View>
           <View>
             <InputAtom
-              label="  Phone number(separate numbers with commas):"
+              label="Phone number(separate numbers with commas):"
               keyboardType="numeric"
               getValue={this.getPhone}
               contStyle={styles.marginlessInput}
             />
           </View>
           <View style={styles.innerFirstPicker}>
-            <PickerAtom list={['Gender', 'Male', 'Female']} />
+            <PickerAtom list={['Male', 'Female']} placeholder="Gender" />
           </View>
           <View>
             <InputAtom
-              label="  Address"
+              label="Address"
               keyboardType="numeric"
               getValue={this.getAddress}
               contStyle={styles.marginlessInput}
@@ -97,7 +97,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
           </View>
           <View>
             <InputAtom
-              label="  Type Email Address"
+              label="Type Email Address"
               keyboardType="email-address"
               getValue={this.getEmail}
               contStyle={styles.marginlessInput}
@@ -106,7 +106,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
           <View style={styles.inputView}>
             <View style={styles.innerStart}>
               <InputAtom
-                label="  Debt limit"
+                label="Debt limit"
                 keyboardType="numeric"
                 getValue={this.getDebt}
                 contStyle={styles.marginlessInput}
@@ -114,7 +114,7 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
             </View>
             <View style={styles.innerEnd}>
               <InputAtom
-                label="  Birthday"
+                label="Birthday"
                 keyboardType="numeric"
                 getValue={this.getBirth}
                 contStyle={styles.marginfulInput}
@@ -124,11 +124,14 @@ export default class EditCustomerAtom extends React.Component<IProps, any> {
           </View>
           <View style={styles.inputView}>
             <View style={styles.innerFirstPicker}>
-              <PickerAtom list={['Marital Status', 'Married', 'Single']} />
+              <PickerAtom
+                list={['Married', 'Single']}
+                placeholder="Marital status"
+              />
             </View>
             <View style={styles.innerEnd}>
               <InputAtom
-                label="  Marriage Anniversary"
+                label="Marriage Anniversary"
                 keyboardType="numeric"
                 getValue={this.getMarry}
                 contStyle={styles.marginlessInput}

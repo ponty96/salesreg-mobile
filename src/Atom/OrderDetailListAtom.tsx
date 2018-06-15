@@ -16,7 +16,9 @@ class OrderDetailListAtom extends React.Component<IProps, any> {
         </Left>
         <Right>
           <Text style={styles.rightText1}>{this.props.items.number}</Text>
-          <Text style={styles.rightText2}>#{this.props.items.amount}.00</Text>
+          <Text style={styles.rightText2}>
+            {'\u20A6'} {this.props.items.amount}.00
+          </Text>
         </Right>
       </ListItem>
     )

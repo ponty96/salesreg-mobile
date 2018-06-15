@@ -64,7 +64,7 @@ class DebtScreen extends Component<IProps, IState> {
             visibility={this.state.limitModalVisibility}
             closeModal={this.closeLimitModal}
             placeholder={'0.00'}
-            headerText={'Total debt limit(N)'}
+            headerText={'Total debt limit(\u20A6)'}
           />
         )}
         {this.state.warningModalVisibility && (

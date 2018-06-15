@@ -4,6 +4,7 @@ import { Picker, Icon } from 'native-base'
 interface IProps {
   list: Array<any>
   style?: object
+  placeholder: string
 }
 
 interface IState {
@@ -33,6 +34,7 @@ class PickerAtom extends React.Component<IProps, IState> {
         style={this.props.style}
         selectedValue={this.state.selected}
         onValueChange={this.handleChange.bind(this)}
+        placeholder={this.props.placeholder}
       >
         {list.map((element, key) => (
           <Picker.Item label={element} value={element} key={key} />

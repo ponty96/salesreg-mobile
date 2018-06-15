@@ -9,14 +9,13 @@ import {
 } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
 import {Icon, List, ListItem } from 'native-base'
-
 import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
 }
 
-class SideBar extends PureComponent<IProps> {
+export default class SideBar extends PureComponent<IProps> {
   handleNavigation = (location: string, data: any = undefined) => {
     this.props.navigation.navigate(location, { data })
   }
@@ -82,13 +81,11 @@ class SideBar extends PureComponent<IProps> {
   }
 }
 
-export default SideBar
-
 const styles = StyleSheet.create({
   sidebarItem: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
-    alignItems: 'center',
+    alignItems: 'stretch',
     padding: 16
   },
   sidebarContainer: {

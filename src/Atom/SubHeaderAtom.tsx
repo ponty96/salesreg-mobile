@@ -22,7 +22,11 @@ class SubHeaderAtom extends React.Component<IProps, any> {
         </Left>
         <Right style={styles.subHeaderRow}>
           <Text style={styles.subHeaderFont}>Sort By:</Text>
-          <PickerAtom list={this.props.list} style={styles.pickerStyle} />
+          <PickerAtom
+            list={this.props.list}
+            style={styles.pickerStyle}
+            placeholder="Make a selection"
+          />
         </Right>
       </Header>
     )

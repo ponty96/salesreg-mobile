@@ -1,30 +1,29 @@
-import React, { PureComponent } from 'react'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import React, { PureComponent } from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { Icon } from 'native-base';
 
-import ButtonAtom from '../Atom/ButtonAtom'
-import AuthenticationHeader from '../Components/AuthenticationHeader'
-import { color } from '../Style/Color'
+import ButtonAtom from '../Atom/ButtonAtom';
+import AuthenticationHeader from '../Components/AuthenticationHeader';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {}
 
 class OnBoardingScreen extends PureComponent<IProps, IState> {
   navigate = (location: string) => {
-    this.props.navigation.navigate(location)
-  }
+    this.props.navigation.navigate(location);
+  };
 
   render() {
     const appDetails = [
       'All your businesses in one place',
       'Manage all your produts',
       'Make your customers happy',
-      'Reduce debts',
       'Increase your profit'
-    ]
+    ];
 
     return (
       <View style={styles.container}>
@@ -56,11 +55,11 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
           />
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
-export default OnBoardingScreen
+export default OnBoardingScreen;
 
 const styles = StyleSheet.create({
   loginButton: {
@@ -71,7 +70,7 @@ const styles = StyleSheet.create({
   signupButton: {
     width: '80%',
     justifyContent: 'center',
-    height: '10%'
+    height: '11%'
   },
   haveAccount: {
     marginTop: '4%',
@@ -99,4 +98,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-})
+});

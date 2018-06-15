@@ -1,41 +1,41 @@
-import * as React from 'react'
-import { TouchableOpacity, View, StyleSheet } from 'react-native'
-import { Icon, Text, CheckBox, Left, Right } from 'native-base'
-import { Popover, PopoverController } from 'react-native-modal-popover'
+import * as React from 'react';
+import { TouchableOpacity, View, StyleSheet, Dimensions } from 'react-native';
+import { Icon, Text, CheckBox, Left, Right } from 'native-base';
+import { Popover, PopoverController } from 'react-native-modal-popover';
 
 interface IProps {
-  check?: boolean
-  tag: string
-  position?: 'bottom' | 'left' | 'right' | 'top' | 'auto'
+  check?: boolean;
+  tag: string;
+  position?: 'bottom' | 'left' | 'right' | 'top' | 'auto';
 }
 
 interface IState {
-  icon: string
-  check: boolean
+  icon: string;
+  check: boolean;
 }
 
 class PopoverAtom extends React.Component<IProps, IState> {
   state: IState = {
     icon: 'md-arrow-dropdown',
     check: this.props.check
-  }
+  };
 
   onHot = () => {
     if (this.state.icon === 'md-arrow-dropdown') {
       this.setState({
         icon: 'md-arrow-dropup'
-      })
+      });
     } else if (this.state.icon === 'md-arrow-dropup') {
       this.setState({
         icon: 'md-arrow-dropdown'
-      })
+      });
     }
-  }
+  };
   checked = () => {
     this.setState({
       check: !this.state.check
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -102,15 +102,15 @@ class PopoverAtom extends React.Component<IProps, IState> {
           )}
         </PopoverController>
       </View>
-    )
+    );
   }
 }
 
-export default PopoverAtom
+export default PopoverAtom;
 
 const styles = StyleSheet.create({
   popoverContent: {
-    width: 342,
+    width: Dimensions.get('window').width - 12,
     height: 95,
     paddingTop: 14,
     paddingBottom: 14,
@@ -154,13 +154,14 @@ const styles = StyleSheet.create({
   },
   popoverMainFirst: {
     flexDirection: 'row',
-    marginRight: 50,
+    width: (Dimensions.get('window').width - 12) / 3,
     alignItems: 'center'
   },
   popoverMainSecond: {
     flexDirection: 'row',
     marginRight: 0,
-    alignItems: 'center'
+    width: (Dimensions.get('window').width - 12) / 3 - 30,
+    justifyContent: 'flex-end'
   },
   popoverViewX: {
     width: 12,
@@ -203,4 +204,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     paddingLeft: 4
   }
-})
+});

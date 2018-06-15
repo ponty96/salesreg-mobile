@@ -1,19 +1,19 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import EditCustomerAtom from '../Atom/EditCustomerAtom';
-import SaveCancelButton from '../Container/SaveCancelButton';
+import React, { PureComponent } from 'react'
+import { View, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
+import EditCustomerAtom from '../Atom/EditCustomerAtom'
+import SaveCancelButton from '../Container/SaveCancelButton'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {}
 
 class NewCustomerForm extends PureComponent<IProps, IState> {
   create = () => {
-    this.props.navigation.goBack();
-  };
+    this.props.navigation.goBack()
+  }
 
   render() {
     return (
@@ -30,15 +30,15 @@ class NewCustomerForm extends PureComponent<IProps, IState> {
           positiveButtonName="SAVE"
         />
       </View>
-    );
+    )
   }
 }
 
-export default NewCustomerForm;
+export default NewCustomerForm
 
 const styles = StyleSheet.create({
   ababa: {
     flex: 1,
     backgroundColor: '#fff'
   }
-});
+})
