@@ -39,7 +39,7 @@ class SideBar extends PureComponent<IProps> {
             <ListItem style={styles.item}>
                   <Text style={styles.itemText}>Home</Text>
             </ListItem>
-            <ListItem style={styles.item}>
+            <ListItem style={[styles.item, styles.active]}>
                 <Text style={styles.itemText}>Products & Services</Text>
             </ListItem>
             <ListItem style={[styles.item, styles.bottomlessBorder]}>
@@ -133,5 +133,8 @@ const styles = StyleSheet.create({
     color: color.secondary,
     flex: 1,
     marginLeft: 16
+  },
+  active: {
+    backgroundColor: color.button
   }
 })
