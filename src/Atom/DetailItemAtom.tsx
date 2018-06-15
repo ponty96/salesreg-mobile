@@ -1,21 +1,20 @@
 import * as React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import { color } from './../Style/Color'
 
 interface IProps {
-  icon: string
-  type: any
-  detailText: string
+  title: any
+  value: string
 }
 
 export default class DetailItemAtom extends React.Component<IProps, any> {
   render() {
     return (
       <View style={styles.detailItemWrapper}>
-        <Text>
-          <Icon name={this.props.icon} type={this.props.type} />
+        <Text style={styles.detailTitle}>
+          {this.props.title}
         </Text>
-        <Text style={styles.detailText}>{this.props.detailText}</Text>
+        <Text style={styles.detailText}>{this.props.value}</Text>
       </View>
     )
   }
@@ -23,13 +22,16 @@ export default class DetailItemAtom extends React.Component<IProps, any> {
 
 const styles = StyleSheet.create({
   detailItemWrapper: {
-    flexDirection: 'row',
-    alignItems: 'center',
-    marginLeft: 35
+    paddingHorizontal: 32,
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: color.list
+  },
+  detailTitle: {
+    color: color.label,
+    fontSize: 16
   },
   detailText: {
-    marginLeft: 20,
-    marginRight: 30,
-    fontSize: 12
+    fontSize: 16
   }
 })

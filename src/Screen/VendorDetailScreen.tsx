@@ -20,7 +20,7 @@ interface IState {
   item: any
 }
 
-class CustomerDetailScreen extends PureComponent<IProps, IState> {
+class VendorDetailScreen extends PureComponent<IProps, IState> {
   state = {
     item: {
       image:
@@ -38,7 +38,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
 
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Customer Details',
+      title: 'Vendor Details',
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
@@ -51,7 +51,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('NewCustomer')
+            navigation.navigate('NewVendor')
           }}
         >
           <View style={styles.headerItem}>
@@ -84,7 +84,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
                 </Text>
               </View>
               <View style={styles.purchaseWrapper}>
-                <Text style={styles.textTitle}>Overdue</Text>
+                <Text style={styles.textTitle}>Outstanding</Text>
                 <Text style={styles.redText}>
                   {'\u20A6'} {this.state.item.credit}
                 </Text>
@@ -138,7 +138,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
   }
 }
 
-export default CustomerDetailScreen
+export default VendorDetailScreen
 
 const styles = StyleSheet.create({
   secondCompartment: {
