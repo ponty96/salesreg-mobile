@@ -70,6 +70,7 @@ class LoginForm extends PureComponent<IProps, IState> {
 
         <ButtonAtom
           btnText="Forgot password"
+          textStyle={styles.btnColor}
           transparent={true}
           funcValue={'Reset'}
           onPress={this.navigate}
@@ -85,6 +86,7 @@ class LoginForm extends PureComponent<IProps, IState> {
 
         <ButtonAtom
           btnText="SIGN UP"
+          textStyle={styles.btnColor}
           transparent={true}
           funcValue={'Signup'}
           onPress={this.navigate}
@@ -113,5 +115,8 @@ const styles = StyleSheet.create({
   },
   signupButton: {
     paddingBottom: '5%'
+  },
+  btnColor: {
+    color: color.button
   }
 })

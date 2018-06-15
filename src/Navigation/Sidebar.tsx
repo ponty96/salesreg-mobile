@@ -27,9 +27,9 @@ class SideBar extends PureComponent<IProps> {
         style={styles.sidebarContainer}
         forceInset={{ top: 'always', horizontal: 'never' }}
       >
-        <View>
-          <Icon name={'dividerText'} />
-          <Text>BAYONE ATRACTIONS</Text>
+        <View style={styles.sidebarName}>
+          <Icon style={styles.nameIcon} name={'md-close'} />
+          <Text style={styles.nameText}>BAYONE ATRACTIONS</Text>
         </View>
         <ScrollView style={styles.itemsContainer}>
           <List>
@@ -42,7 +42,7 @@ class SideBar extends PureComponent<IProps> {
             <ListItem style={styles.item}>
                 <Text style={styles.itemText}>Products & Services</Text>
             </ListItem>
-            <ListItem style={styles.item}>
+            <ListItem style={[styles.item, styles.bottomlessBorder]}>
                 <Text style={styles.itemText}>Employees</Text>
             </ListItem>
             <ListItem itemDivider style={styles.divider}>
@@ -51,7 +51,7 @@ class SideBar extends PureComponent<IProps> {
             <ListItem style={styles.item}>
                 <Text style={styles.itemText}>Customer</Text>
             </ListItem>
-            <ListItem style={styles.item}>
+            <ListItem style={[styles.item, styles.bottomlessBorder]}>
                 <Text style={styles.itemText}>Vendor</Text>
             </ListItem>
             <ListItem itemDivider style={styles.divider}>
@@ -60,7 +60,7 @@ class SideBar extends PureComponent<IProps> {
             <ListItem style={styles.item}>
                 <Text style={styles.itemText}>Purchase</Text>
             </ListItem>
-            <ListItem style={styles.item}>
+            <ListItem style={[styles.item, styles.bottomlessBorder]}>
                 <Text style={styles.itemText}>Sales</Text>
             </ListItem>
               <ListItem itemDivider style={styles.divider}>
@@ -72,7 +72,7 @@ class SideBar extends PureComponent<IProps> {
               <ListItem style={styles.item}>
                   <Text style={styles.itemText}>Income</Text>
               </ListItem>
-              <ListItem style={styles.item}>
+              <ListItem style={[styles.item, styles.bottomlessBorder]}>
                   <Text style={styles.itemText}>Expenses</Text>
               </ListItem>
           </List>
@@ -97,23 +97,41 @@ const styles = StyleSheet.create({
   divider: {
     paddingTop: 4,
     paddingBottom: 4,
-    backgroundColor: color.label
+    backgroundColor: color.menu
   },
   item: {
     marginLeft: 0,
     paddingLeft: 18,
     paddingVertical: 8,
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderColor: color.label,
-    backgroundColor: color.menu
+    backgroundColor: color.primary
   },
   itemText: {
     color: color.secondary
   },
   dividerText: {
-    color: color.inactive
+    color: color.subHeader
   },
   itemsContainer: {
     flex: 4
+  },
+  nameIcon: {
+    color: color.secondary
+  },
+  bottomlessBorder: {
+    borderBottomWidth: 0
+  },
+  sidebarName: {
+    padding: 16,
+    alignItems: 'center',
+    alignContent: 'center',
+    flexDirection: 'row',
+    backgroundColor: color.primary
+  },
+  nameText: {
+    color: color.secondary,
+    flex: 1,
+    marginLeft: 16
   }
 })

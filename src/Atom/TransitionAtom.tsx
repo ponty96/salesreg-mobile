@@ -40,13 +40,13 @@ const styles = StyleSheet.create({
     marginTop: '5%'
   },
   filledCircle: {
-    backgroundColor: color.primary,
+    backgroundColor: color.button,
     borderRadius: 10,
     height: 20,
     width: 20
   },
   iconDash: {
-    borderBottomColor: color.primary,
+    borderBottomColor: color.button,
     width: '7%',
     borderBottomWidth: 1,
     alignSelf: 'center'
@@ -54,7 +54,7 @@ const styles = StyleSheet.create({
   unfilledCircle: {
     backgroundColor: 'white',
     borderWidth: 1,
-    borderColor: color.primary,
+    borderColor: color.button,
     borderRadius: 10,
     height: 20,
     width: 20
