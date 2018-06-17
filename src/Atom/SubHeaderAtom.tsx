@@ -3,6 +3,8 @@ import { Header, Left, Right, Icon, Text } from 'native-base'
 import PickerAtom from './PickerAtom'
 import { StyleSheet } from 'react-native'
 
+import { color } from './../Style/Color'
+
 interface IProps {
   total?: any
   list?: any[]
@@ -17,7 +19,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
     return (
       <Header style={styles.subHeaderHeader}>
         <Left style={styles.subHeaderRow}>
-          <Icon style={styles.subHeaderIconColor} name="md-briefcase" />
+          <Icon style={styles.subHeaderIconColor} name="md-basket" />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
         </Left>
         <Right style={styles.subHeaderRow}>
@@ -38,7 +40,7 @@ export default SubHeaderAtom
 const styles = StyleSheet.create({
   subHeaderHeader: {
     minHeight: 50,
-    backgroundColor: '#fff'
+    backgroundColor: color.secondary
   },
   subHeaderRow: {
     flexDirection: 'row',
@@ -53,7 +55,7 @@ const styles = StyleSheet.create({
     paddingBottom: 9
   },
   subHeaderIconColor: {
-    color: '#F0F0F0'
+    color: color.active
   },
   pickerStyle: {
     width: '50%',

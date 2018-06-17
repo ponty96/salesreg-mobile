@@ -45,8 +45,9 @@ export default ServicesListItemAtom
 
 const styles = StyleSheet.create({
   listContainer: {
-    paddingVertical: 8,
-    borderBottomWidth: 1
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: color.subHeader
   },
   listTextCont: {
     flex: 1,
@@ -61,6 +62,6 @@ const styles = StyleSheet.create({
     flex: 1
   },
   amountText: {
-    color: color.primary
+    color: color.selling
   }
 })
