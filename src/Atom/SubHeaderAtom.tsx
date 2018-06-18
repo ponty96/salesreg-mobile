@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Header, Left, Right, Icon, Text } from 'native-base'
 import PickerAtom from './PickerAtom'
 import { StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   total?: any
@@ -16,11 +17,11 @@ class SubHeaderAtom extends React.Component<IProps, any> {
   render() {
     return (
       <Header style={styles.subHeaderHeader}>
-        <Left style={styles.subHeaderRow}>
+        <Left style={styles.subHeaderLeftRow}>
           <Icon style={styles.subHeaderIconColor} name="md-briefcase" />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
         </Left>
-        <Right style={styles.subHeaderRow}>
+        <Right style={styles.subHeaderRightRow}>
           <Text style={styles.subHeaderFont}>Sort By:</Text>
           <PickerAtom
             list={this.props.list}
@@ -37,26 +38,34 @@ export default SubHeaderAtom
 
 const styles = StyleSheet.create({
   subHeaderHeader: {
-    minHeight: 50,
+    height: 40,
     backgroundColor: '#fff'
   },
-  subHeaderRow: {
+  subHeaderLeftRow: {
     flexDirection: 'row',
     width: '40%'
   },
+  subHeaderRightRow: {
+    flexDirection: 'row',
+    width: '60%'
+  },
   subHeaderPad: {
     paddingLeft: 10,
-    paddingTop: 5
+    paddingTop: 5,
+    fontSize: 15
   },
   subHeaderFont: {
-    fontSize: 14,
-    paddingBottom: 9
+    fontSize: 15,
+    paddingBottom: 3
   },
   subHeaderIconColor: {
-    color: '#27CBD3'
+    color: color.check,
+    marginLeft: 10
   },
   pickerStyle: {
-    width: '50%',
-    height: 35
+    width: '60%',
+    height: 25,
+    borderColor: '#F0F0F0',
+    borderWidth: 0.5
   }
 })
