@@ -32,7 +32,7 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
           <View style={styles.boardingScreenFeatureText}>
             {appDetails.map((details, i) => (
               <View style={styles.appFunctionWrapper} key={i}>
-                <Icon name="check" style={styles.blueCheck} type="Entypo" />
+                <Icon name="check" style={styles.blueCheck} type="Feather" />
                 <Text style={styles.appDetailsText}>{details}</Text>
               </View>
             ))}
@@ -52,6 +52,7 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
             funcValue={'Login'}
             onPress={this.navigate}
             btnStyle={styles.loginButton}
+            textStyle={{ color: color.button, fontWeight: 'bold' }}
           />
         </ScrollView>
       </View>
@@ -70,25 +71,26 @@ const styles = StyleSheet.create({
   signupButton: {
     width: '80%',
     justifyContent: 'center',
-    height: '11%'
+    height: 50,
+    marginBottom: 16
   },
   haveAccount: {
     marginTop: '4%',
     textAlign: 'center',
     color: color.menu
   },
-  appDetailsText: {
-    marginLeft: 20,
-    color: color.warning,
-    fontSize: 14,
-    alignSelf: 'flex-end'
-  },
-  blueCheck: {
-    color: color.check
-  },
   appFunctionWrapper: {
     flexDirection: 'row',
+    alignItems: 'center',
     marginVertical: 10
+  },
+  appDetailsText: {
+    marginLeft: 20,
+    color: color.black,
+    fontSize: 14
+  },
+  blueCheck: {
+    color: color.warning
   },
   boardingScreenFeatureText: {
     marginVertical: '7%',

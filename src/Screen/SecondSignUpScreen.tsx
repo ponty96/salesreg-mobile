@@ -1,19 +1,19 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 import {
   Text,
   View,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet
-} from 'react-native'
+} from 'react-native';
 
-import SignUpForm2 from '../Components/SignUpForm2'
-import AuthenticationHeader from '../Components/AuthenticationHeader'
-import TransitionAtom from '../Atom/TransitionAtom'
-import { color } from '../Style/Color'
+import SignUpForm2 from '../Components/SignUpForm2';
+import AuthenticationHeader from '../Components/AuthenticationHeader';
+import TransitionAtom from '../Atom/TransitionAtom';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {}
@@ -25,7 +25,6 @@ class Signup2Screen extends PureComponent<IProps, IState> {
         <AuthenticationHeader />
         <ScrollView>
           <View style={styles.wrapper}>
-            <Text style={styles.signUpText}>SIGN UP</Text>
             <TransitionAtom />
             <Text style={styles.personalInfoText}>BUSINESS INFORMATION</Text>
             <KeyboardAvoidingView behavior={'padding'}>
@@ -34,23 +33,23 @@ class Signup2Screen extends PureComponent<IProps, IState> {
           </View>
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
-export default Signup2Screen
+export default Signup2Screen;
 
 const styles = StyleSheet.create({
   personalInfoText: {
     marginTop: '3%',
-    color: color.primary,
+    color: color.button,
     textAlign: 'center'
   },
   wrapper: {
     paddingHorizontal: 32
   },
   signUpText: {
-    color: color.primary,
+    color: color.button,
     marginTop: 32,
     alignSelf: 'center'
   },
@@ -58,4 +57,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-})
+});

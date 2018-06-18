@@ -55,6 +55,7 @@ class ResetForm extends React.Component<IProps, IState> {
           btnText="send another code"
           transparent={true}
           onPress={this.resend}
+          textStyle={{ color: color.button }}
         />
         <ButtonAtom
           btnText="RESET PASSWORD"
@@ -68,6 +69,7 @@ class ResetForm extends React.Component<IProps, IState> {
           transparent={true}
           funcValue={'Signup'}
           onPress={this.navigate}
+          textStyle={{ color: color.button }}
         />
       </Form>
     );
@@ -93,7 +95,7 @@ const styles = StyleSheet.create({
   },
   resetButton: {
     width: '100%',
-    height: '17%',
+    height: 50,
     justifyContent: 'center'
   }
 });
