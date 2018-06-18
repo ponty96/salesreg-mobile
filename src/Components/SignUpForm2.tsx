@@ -1,24 +1,24 @@
-import React, { PureComponent } from 'react'
-import { Form, CheckBox } from 'native-base'
-import { View, Text, StyleSheet } from 'react-native'
-import InputAtom from '../Atom/InputAtom'
-import ButtonAtom from '../Atom/ButtonAtom'
-import ImageAtom from '../Atom/ImageAtom'
-import { color } from '../Style/Color'
-import PickerAtom from '../Atom/PickerAtom'
+import React, { PureComponent } from 'react';
+import { Form, CheckBox } from 'native-base';
+import { View, Text, StyleSheet } from 'react-native';
+import InputAtom from '../Atom/InputAtom';
+import ButtonAtom from '../Atom/ButtonAtom';
+import ImageAtom from '../Atom/ImageAtom';
+import { color } from '../Style/Color';
+import PickerAtom from '../Atom/PickerAtom';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  image: string
-  password: string
-  name: string
-  confirm_password: string
-  gender: string
-  products: boolean
-  services: boolean
+  image: string;
+  password: string;
+  name: string;
+  confirm_password: string;
+  gender: string;
+  products: boolean;
+  services: boolean;
 }
 
 class SigupForm2 extends PureComponent<IProps, IState> {
@@ -30,7 +30,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
     gender: '',
     products: false,
     services: false
-  }
+  };
 
   signup = () => {
     console.log(
@@ -39,45 +39,45 @@ class SigupForm2 extends PureComponent<IProps, IState> {
       this.state.name,
       this.state.confirm_password,
       this.state.gender
-    )
-  }
+    );
+  };
 
   getImage = (pic: any) => {
-    this.setState({ image: pic })
-  }
+    this.setState({ image: pic });
+  };
 
   getPassword = (pass: string) => {
     this.setState({
       password: pass
-    })
-  }
+    });
+  };
 
   getName = (name: string) => {
     this.setState({
       name
-    })
-  }
+    });
+  };
 
   getConfirm = (confirmPass: string) => {
     this.setState({
       confirm_password: confirmPass
-    })
-  }
+    });
+  };
 
   updateGender = (selectedGender: string) => {
     this.setState({
       gender: selectedGender
-    })
-  }
+    });
+  };
 
   navigate = (location: string) => {
-    this.props.navigation.navigate(location)
-  }
+    this.props.navigation.navigate(location);
+  };
 
   flipCheckedState = (oldState: boolean, key: string) => {
-    if (key === 'products') this.setState({ products: !oldState })
-    else this.setState({ services: !oldState })
-  }
+    if (key === 'products') this.setState({ products: !oldState });
+    else this.setState({ services: !oldState });
+  };
 
   render() {
     return (
@@ -113,7 +113,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           <CheckBox
             checked={this.state.products}
             onPress={() => {
-              this.flipCheckedState(this.state.products, 'products')
+              this.flipCheckedState(this.state.products, 'products');
             }}
             color={color.inactive}
           />
@@ -126,7 +126,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           <CheckBox
             checked={this.state.services}
             onPress={() => {
-              this.flipCheckedState(this.state.services, 'services')
+              this.flipCheckedState(this.state.services, 'services');
             }}
             color={color.inactive}
           />
@@ -135,7 +135,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
 
         <Text style={styles.whatYouSell}>Transaction currency</Text>
         <View style={styles.pickerWrapper}>
-          <PickerAtom list={['Naira(\u20A6)']} placeholder="Naira(\u20A6)" />
+          <PickerAtom list={['Naira(\u20A6)']} placeholder={`Naira(\u20A6)`} />
         </View>
 
         <InputAtom
@@ -161,14 +161,15 @@ class SigupForm2 extends PureComponent<IProps, IState> {
             transparent={true}
             funcValue={'Login'}
             onPress={this.navigate}
+            textStyle={{ color: color.button, fontWeight: 'bold' }}
           />
         </View>
       </Form>
-    )
+    );
   }
 }
 
-export default SigupForm2
+export default SigupForm2;
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
   },
   whatYouSell: {
     marginTop: '10%',
-    color: color.primary
+    color: color.button
   },
   checkBoxWrapper: {
     flexDirection: 'row',
@@ -188,20 +189,19 @@ const styles = StyleSheet.create({
   checkBoxText: {
     marginLeft: 15
   },
-
   pickerWrapper: {
     borderBottomColor: color.listBorderColor,
     borderBottomWidth: 1,
     width: '50%'
   },
-
   placeholderColor: {
     color: color.inactive
   },
   longButton: {
     alignSelf: 'stretch',
     paddingHorizontal: 0,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: 50
   },
   termsText: {
     color: color.menu,
@@ -218,4 +218,4 @@ const styles = StyleSheet.create({
   resetFormContainer: {
     marginTop: '4%'
   }
-})
+});

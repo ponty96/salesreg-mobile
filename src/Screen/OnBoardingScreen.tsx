@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
   signupButton: {
     width: '80%',
     justifyContent: 'center',
-    height: '13%',
+    height: 50,
     marginBottom: 16
   },
   haveAccount: {

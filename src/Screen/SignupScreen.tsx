@@ -46,14 +46,14 @@ export default SignupScreen;
 const styles = StyleSheet.create({
   personalInfoText: {
     marginTop: '3%',
-    color: color.primary,
+    color: color.button,
     textAlign: 'center'
   },
   wrapper: {
     paddingHorizontal: 32
   },
   signUpText: {
-    color: color.primary,
+    color: color.button,
     marginTop: '4%',
     alignSelf: 'center'
   },
