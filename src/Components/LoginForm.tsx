@@ -74,7 +74,6 @@ class LoginForm extends PureComponent<IProps, IState> {
           transparent={true}
           funcValue={'Reset'}
           onPress={this.navigate}
-          textStyle={{ color: color.button }}
         />
 
         <ButtonAtom
@@ -87,7 +86,6 @@ class LoginForm extends PureComponent<IProps, IState> {
 
         <ButtonAtom
           btnText="SIGN UP"
-          textStyle={styles.btnColor}
           transparent={true}
           funcValue={'Signup'}
           onPress={this.navigate}

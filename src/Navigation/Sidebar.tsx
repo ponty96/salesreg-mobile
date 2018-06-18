@@ -1,87 +1,173 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 import {
   ScrollView,
   View,
   Text,
-  // TouchableOpacity,
+  TouchableOpacity,
   StyleSheet,
   Dimensions
-} from 'react-native'
-import { SafeAreaView } from 'react-navigation'
-import {Icon, List, ListItem } from 'native-base'
-import { color } from '../Style/Color'
+} from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import { Icon } from 'native-base';
+import { color } from '../Style/Color';
+import SidebarItem from '../Atom/SidebarItem';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 export default class SideBar extends PureComponent<IProps> {
   handleNavigation = (location: string, data: any = undefined) => {
-    this.props.navigation.navigate(location, { data })
-  }
+    this.props.navigation.navigate(location, { data });
+  };
 
   render() {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    console.log('navigation', this.props.navigation);
     return (
       <SafeAreaView
         style={styles.sidebarContainer}
         forceInset={{ top: 'always', horizontal: 'never' }}
       >
-        <View style={styles.sidebarName}>
-          <Icon style={styles.nameIcon} name={'md-close'} />
-          <Text style={styles.nameText}>BAYONE ATRACTIONS</Text>
+        <View style={styles.itemsContainer}>
+          <ScrollView>
+            <TouchableOpacity
+              style={styles.header}
+              onPress={() => navigate('DrawerClose')}
+            >
+              <Icon name="cross" type="Entypo" style={styles.cross} />
+              <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
+            </TouchableOpacity>
+            <SidebarItem
+              title="Company"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Home',
+                  routeName: 'Home'
+                },
+                {
+                  title: 'Products & Services',
+                  routeName: 'ViewBusiness'
+                },
+                {
+                  title: 'Employees',
+                  routeName: 'Employees'
+                }
+              ]}
+            />
+
+            <SidebarItem
+              title="CONTACT"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Customers',
+                  routeName: 'CustomerDetails'
+                },
+                {
+                  title: 'Vendors',
+                  routeName: 'Vendor'
+                }
+              ]}
+            />
+
+            <SidebarItem
+              title="ORDER"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Purchase',
+                  routeName: 'Purchase'
+                },
+                {
+                  title: 'Sales',
+                  routeName: 'Sales'
+                }
+              ]}
+            />
+            <SidebarItem
+              title="TRANSACTIONS"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Bank',
+                  routeName: 'Bank'
+                },
+                {
+                  title: 'Income',
+                  routeName: 'Income'
+                },
+                {
+                  title: 'Expenses',
+                  routeName: 'Expenses'
+                },
+                {
+                  title: 'Invoices',
+                  routeName: 'Invoice'
+                },
+                {
+                  title: 'Receipts',
+                  routeName: 'Receipts'
+                }
+              ]}
+            />
+
+            <SidebarItem
+              title="ACCOUNTING"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Inventory',
+                  routeName: 'Inventory'
+                }
+              ]}
+            />
+          </ScrollView>
         </View>
-        <ScrollView style={styles.itemsContainer}>
-          <List>
-            <ListItem itemDivider style={styles.divider}>
-            <Text style={styles.dividerText}>COMPANY</Text>
-            </ListItem>
-            <ListItem style={styles.item}>
-                  <Text style={styles.itemText}>Home</Text>
-            </ListItem>
-            <ListItem style={[styles.item, styles.active]}>
-                <Text style={styles.itemText}>Products & Services</Text>
-            </ListItem>
-            <ListItem style={[styles.item, styles.bottomlessBorder]}>
-                <Text style={styles.itemText}>Employees</Text>
-            </ListItem>
-            <ListItem itemDivider style={styles.divider}>
-                <Text style={styles.dividerText}>CONTACT</Text>
-            </ListItem>
-            <ListItem style={styles.item}>
-                <Text style={styles.itemText}>Customer</Text>
-            </ListItem>
-            <ListItem style={[styles.item, styles.bottomlessBorder]}>
-                <Text style={styles.itemText}>Vendor</Text>
-            </ListItem>
-            <ListItem itemDivider style={styles.divider}>
-                <Text style={styles.dividerText}>ORDER</Text>
-            </ListItem>
-            <ListItem style={styles.item}>
-                <Text style={styles.itemText}>Purchase</Text>
-            </ListItem>
-            <ListItem style={[styles.item, styles.bottomlessBorder]}>
-                <Text style={styles.itemText}>Sales</Text>
-            </ListItem>
-              <ListItem itemDivider style={styles.divider}>
-                  <Text style={styles.dividerText}>TRANSACTIONS</Text>
-              </ListItem>
-              <ListItem style={styles.item}>
-                  <Text style={styles.itemText}>Bank</Text>
-              </ListItem>
-              <ListItem style={styles.item}>
-                  <Text style={styles.itemText}>Income</Text>
-              </ListItem>
-              <ListItem style={[styles.item, styles.bottomlessBorder]}>
-                  <Text style={styles.itemText}>Expenses</Text>
-              </ListItem>
-          </List>
-        </ScrollView>
       </SafeAreaView>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    marginLeft: '3%',
+    alignItems: 'center',
+    paddingVertical: 16
+  },
+  texts: {
+    color: color.modal,
+    marginLeft: '3%',
+    alignSelf: 'center'
+  },
+  itemText: {
+    flex: 1,
+    alignContent: 'center',
+    paddingLeft: 12,
+    color: color.menu
+  },
+  itemIcon: {
+    color: color.menu
+  },
+  cross: {
+    fontSize: 35,
+    // backgroundColor: 'transparent',
+    color: color.modal
+  },
+  logoutItem: {
+    borderTopWidth: 1,
+    borderColor: color.textBorderBottom,
+    alignSelf: 'flex-end',
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    alignItems: 'center',
+    paddingVertical: 20,
+    paddingHorizontal: 16
+  },
   sidebarItem: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -89,49 +175,10 @@ const styles = StyleSheet.create({
     padding: 16
   },
   sidebarContainer: {
-    height: Dimensions.get('window').height - 16
-  },
-  divider: {
-    paddingTop: 4,
-    paddingBottom: 4,
-    backgroundColor: color.menu
-  },
-  item: {
-    marginLeft: 0,
-    paddingLeft: 18,
-    paddingVertical: 8,
-    borderBottomWidth: 0.5,
-    borderColor: color.label,
+    height: Dimensions.get('window').height - 16,
     backgroundColor: color.primary
-  },
-  itemText: {
-    color: color.secondary
-  },
-  dividerText: {
-    color: color.subHeader
   },
   itemsContainer: {
     flex: 4
-  },
-  nameIcon: {
-    color: color.secondary
-  },
-  bottomlessBorder: {
-    borderBottomWidth: 0
-  },
-  sidebarName: {
-    padding: 16,
-    alignItems: 'center',
-    alignContent: 'center',
-    flexDirection: 'row',
-    backgroundColor: color.primary
-  },
-  nameText: {
-    color: color.secondary,
-    flex: 1,
-    marginLeft: 16
-  },
-  active: {
-    backgroundColor: color.button
   }
-})
+});
