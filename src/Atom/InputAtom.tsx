@@ -31,7 +31,7 @@ class InputAtom extends React.Component<IProps, any> {
 
   render() {
     return (
-      <View>
+      <View style={styles.flexAdjust}>
         <Item
           floatingLabel={this.props.floatingLabel}
           stackedLabel={!this.props.floatingLabel}
@@ -77,12 +77,15 @@ const styles = StyleSheet.create({
     color: color.inactive
   },
   required: {
-    color: color.primary
+    color: color.inactive
   },
   underneathText: {
     marginLeft: 0,
     color: color.menu,
     fontSize: 12,
     marginBottom: 25
+  },
+  flexAdjust: {
+    flex: 1
   }
 })
