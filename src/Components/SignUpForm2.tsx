@@ -158,6 +158,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           <Text style={styles.haveAccount}>Or you have an account? </Text>
           <ButtonAtom
             btnText="LOGIN"
+            textStyle={styles.btnColor}
             transparent={true}
             funcValue={'Login'}
             onPress={this.navigate}
@@ -174,6 +175,9 @@ export default SigupForm2;
 const styles = StyleSheet.create({
   marginlessInput: {
     marginLeft: 0
+  },
+  btnColor: {
+    color: color.button
   },
   buttonsWrapper: {
     marginTop: 20

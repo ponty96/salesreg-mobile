@@ -3,15 +3,12 @@ import {
   ScrollView,
   View,
   Text,
-  TouchableOpacity,
+  // TouchableOpacity,
   StyleSheet,
   Dimensions
 } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
-import { Icon } from 'native-base'
-
-// import ListItemAtom from './../Atom/ListItemAtom'
-// import { userData } from './../config/default'
+import {Icon, List, ListItem } from 'native-base'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -29,209 +26,62 @@ export default class SideBar extends PureComponent<IProps> {
         style={styles.sidebarContainer}
         forceInset={{ top: 'always', horizontal: 'never' }}
       >
-        <View style={styles.itemsContainer}>
-          <ScrollView>
-            <TouchableOpacity
-              style={styles.header}
-              onPress={() => this.props.navigation.navigate('OnBoarding')}
-            >
-              <Icon name="cross" type="Entypo" style={styles.cross} />
-              <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
-            </TouchableOpacity>
-
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>COMPANY</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Home')
-                }}
-              >
-                <Text style={styles.category}>Home</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('ViewBusiness')
-                }}
-              >
-                <Text style={styles.category}>Products & Services</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Employees')
-                }}
-              >
-                <Text style={styles.category}>Employees</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>CONTACT</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('CustomerDetails')
-                }}
-              >
-                <Text style={styles.category}>Customer</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Vendor')
-                }}
-              >
-                <Text style={styles.category}>Vendor</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>ORDER</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Purchase')
-                }}
-              >
-                <Text style={styles.category}>Purchase</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Sales')
-                }}
-              >
-                <Text style={styles.category}>Sales</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>TRANSACTIONS</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Bank')
-                }}
-              >
-                <Text style={styles.category}>Bank</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Income')
-                }}
-              >
-                <Text style={styles.category}>Income</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Expenses')
-                }}
-              >
-                <Text style={styles.category}>Expenses</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Invoice')
-                }}
-              >
-                <Text style={styles.category}>Invoices</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Receipts')
-                }}
-              >
-                <Text style={styles.category}>Receipts</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>ACCOUNTING</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Inventory')
-                }}
-              >
-                <Text style={styles.category}>Inventory</Text>
-              </TouchableOpacity>
-            </View>
-          </ScrollView>
+        <View style={styles.sidebarName}>
+          <Icon style={styles.nameIcon} name={'md-close'} />
+          <Text style={styles.nameText}>BAYONE ATRACTIONS</Text>
         </View>
+        <ScrollView style={styles.itemsContainer}>
+          <List>
+            <ListItem itemDivider style={styles.divider}>
+            <Text style={styles.dividerText}>COMPANY</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                  <Text style={styles.itemText}>Home</Text>
+            </ListItem>
+            <ListItem style={[styles.item, styles.active]}>
+                <Text style={styles.itemText}>Products & Services</Text>
+            </ListItem>
+            <ListItem style={[styles.item, styles.bottomlessBorder]}>
+                <Text style={styles.itemText}>Employees</Text>
+            </ListItem>
+            <ListItem itemDivider style={styles.divider}>
+                <Text style={styles.dividerText}>CONTACT</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                <Text style={styles.itemText}>Customer</Text>
+            </ListItem>
+            <ListItem style={[styles.item, styles.bottomlessBorder]}>
+                <Text style={styles.itemText}>Vendor</Text>
+            </ListItem>
+            <ListItem itemDivider style={styles.divider}>
+                <Text style={styles.dividerText}>ORDER</Text>
+            </ListItem>
+            <ListItem style={styles.item}>
+                <Text style={styles.itemText}>Purchase</Text>
+            </ListItem>
+            <ListItem style={[styles.item, styles.bottomlessBorder]}>
+                <Text style={styles.itemText}>Sales</Text>
+            </ListItem>
+              <ListItem itemDivider style={styles.divider}>
+                  <Text style={styles.dividerText}>TRANSACTIONS</Text>
+              </ListItem>
+              <ListItem style={styles.item}>
+                  <Text style={styles.itemText}>Bank</Text>
+              </ListItem>
+              <ListItem style={styles.item}>
+                  <Text style={styles.itemText}>Income</Text>
+              </ListItem>
+              <ListItem style={[styles.item, styles.bottomlessBorder]}>
+                  <Text style={styles.itemText}>Expenses</Text>
+              </ListItem>
+          </List>
+        </ScrollView>
       </SafeAreaView>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  header: {
-    flexDirection: 'row',
-    marginLeft: '3%'
-  },
-  listHeader: {
-    backgroundColor: color.inactive
-  },
-  texts: {
-    color: color.modal,
-    marginLeft: '3%',
-    alignSelf: 'center'
-  },
-  title: {
-    marginLeft: '10%',
-    color: color.subHeader,
-    marginVertical: '2%'
-  },
-  categoryWrapper: {
-    backgroundColor: 'transparent',
-    borderBottomWidth: 0.5,
-    borderBottomColor: color.listBorderColor
-  },
-  category: {
-    marginLeft: '10%',
-    backgroundColor: 'transparent',
-    color: color.modal,
-    marginVertical: '5%'
-  },
-  itemText: {
-    flex: 1,
-    alignContent: 'center',
-    paddingLeft: 12,
-    color: color.menu
-  },
-  itemIcon: {
-    color: color.menu
-  },
-  cross: {
-    fontSize: 35,
-    // backgroundColor: 'transparent',
-    color: color.modal
-  },
-  logoutItem: {
-    borderTopWidth: 1,
-    borderColor: color.textBorderBottom,
-    alignSelf: 'flex-end',
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center',
-    paddingVertical: 20,
-    paddingHorizontal: 16
-  },
   sidebarItem: {
     flexDirection: 'row',
     justifyContent: 'flex-start',
@@ -239,10 +89,49 @@ const styles = StyleSheet.create({
     padding: 16
   },
   sidebarContainer: {
-    height: Dimensions.get('window').height - 16,
+    height: Dimensions.get('window').height - 16
+  },
+  divider: {
+    paddingTop: 4,
+    paddingBottom: 4,
+    backgroundColor: color.menu
+  },
+  item: {
+    marginLeft: 0,
+    paddingLeft: 18,
+    paddingVertical: 8,
+    borderBottomWidth: 0.5,
+    borderColor: color.label,
     backgroundColor: color.primary
+  },
+  itemText: {
+    color: color.secondary
+  },
+  dividerText: {
+    color: color.subHeader
   },
   itemsContainer: {
     flex: 4
+  },
+  nameIcon: {
+    color: color.secondary
+  },
+  bottomlessBorder: {
+    borderBottomWidth: 0
+  },
+  sidebarName: {
+    padding: 16,
+    alignItems: 'center',
+    alignContent: 'center',
+    flexDirection: 'row',
+    backgroundColor: color.primary
+  },
+  nameText: {
+    color: color.secondary,
+    flex: 1,
+    marginLeft: 16
+  },
+  active: {
+    backgroundColor: color.button
   }
 })
