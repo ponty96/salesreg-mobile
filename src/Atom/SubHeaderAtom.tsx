@@ -10,7 +10,7 @@ interface IProps {
 
 class SubHeaderAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
-    total: '0'
+    total: '80'
   }
 
   render() {
@@ -49,11 +49,11 @@ const styles = StyleSheet.create({
     paddingTop: 5
   },
   subHeaderFont: {
-    fontSize: 13,
+    fontSize: 14,
     paddingBottom: 9
   },
   subHeaderIconColor: {
-    color: '#F0F0F0'
+    color: '#27CBD3'
   },
   pickerStyle: {
     width: '50%',
