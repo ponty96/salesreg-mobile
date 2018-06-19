@@ -15,14 +15,7 @@ export default class VendorFormAtom extends React.Component<
   any
 > {
   state = {
-    product: '',
-    image: '',
-    quantity: 0,
-    pquantity: 0,
-    costPP: 0,
-    birth: '',
-    marriage: '',
-    debt: 0
+    product: ''
   }
 
   addFromContact = () => {
@@ -35,28 +28,6 @@ export default class VendorFormAtom extends React.Component<
 
   getProduct = (product: string) => {
     this.setState({ product })
-  }
-
-  getImage = (pic: any) => {
-    this.setState({ image: pic })
-  }
-  getSQuantity = (quantity: number) => {
-    this.setState({ quantity })
-  }
-  getPQuantity = (pquantity: number) => {
-    this.setState({ pquantity })
-  }
-  getCostPP = (costPP: number) => {
-    this.setState({ costPP })
-  }
-  getBirth = (birth: string) => {
-    this.setState({ birth })
-  }
-  getMarry = (marriage: string) => {
-    this.setState({ marriage })
-  }
-  getDebt = (debt: number) => {
-    this.setState({ debt })
   }
 
   render() {
@@ -262,44 +233,6 @@ export default class VendorFormAtom extends React.Component<
 }
 
 const styles = StyleSheet.create({
-  imgContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-    marginVertical: 16
-  },
-  inputView: {
-    flexDirection: 'row',
-    width: '100%',
-    alignSelf: 'center',
-    flex: 1
-  },
-  innerStart: {
-    width: '50%',
-    flex: 1,
-    alignSelf: 'flex-start'
-  },
-  innerEnd: {
-    width: '50%',
-    flex: 1,
-    alignSelf: 'center'
-  },
-  underText: {
-    marginRight: '50%',
-    fontSize: 10
-  },
-  innerFirstPicker: {
-    flex: 1,
-    alignSelf: 'center'
-  },
-  innerLastEnd: {
-    width: '50%',
-    flex: 0,
-    alignSelf: 'flex-end',
-    paddingTop: 20
-  },
   container: {
     flex: 1,
     paddingHorizontal: 16

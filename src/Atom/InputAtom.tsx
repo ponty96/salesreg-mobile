@@ -48,7 +48,7 @@ class InputAtom extends React.Component<IProps, any> {
             value={this.props.defaultValue}
             secureTextEntry={this.props.secureTextEntry}
             keyboardType={this.props.keyboardType}
-            style={this.props.inputStyle}
+            style={[this.props.inputStyle, styles.inputStyle]}
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
@@ -87,5 +87,8 @@ const styles = StyleSheet.create({
   },
   flexAdjust: {
     flex: 1
+  },
+  inputStyle: {
+    fontSize: 12
   }
 })
