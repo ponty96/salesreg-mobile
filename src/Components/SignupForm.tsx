@@ -97,6 +97,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           secureTextEntry={true}
           contStyle={styles.marginlessInput}
           underneathText="Must be at least 6 characters"
+          underneathStyle={styles.underneathText}
         />
 
         <InputAtom
@@ -151,5 +152,8 @@ const styles = StyleSheet.create({
   },
   nextIcon: {
     color: color.button
+  },
+  underneathText: {
+      marginBottom: 0
   }
 })
