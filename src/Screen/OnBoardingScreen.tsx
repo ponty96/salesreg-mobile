@@ -1,29 +1,29 @@
-import React, { PureComponent } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { Icon } from 'native-base';
+import React, { PureComponent } from 'react'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { Icon } from 'native-base'
 
-import ButtonAtom from '../Atom/ButtonAtom';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import { color } from '../Style/Color';
+import ButtonAtom from '../Atom/ButtonAtom'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {}
 
 class OnBoardingScreen extends PureComponent<IProps, IState> {
   navigate = (location: string) => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     const appDetails = [
-      'All your businesses in one place',
       'Manage all your produts',
-      'Make your customers happy',
-      'Increase your profit'
-    ];
+      'Process all your orders',
+      'Track all payments & outstandings',
+      'Manage all your business contacts'
+    ]
 
     return (
       <View style={styles.container}>
@@ -52,14 +52,15 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
             funcValue={'Login'}
             onPress={this.navigate}
             btnStyle={styles.loginButton}
+            textStyle={styles.loginText}
           />
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default OnBoardingScreen;
+export default OnBoardingScreen
 
 const styles = StyleSheet.create({
   loginButton: {
@@ -79,12 +80,11 @@ const styles = StyleSheet.create({
   },
   appDetailsText: {
     marginLeft: 20,
-    color: color.warning,
     fontSize: 14,
     alignSelf: 'flex-end'
   },
   blueCheck: {
-    color: color.check
+    color: color.warning
   },
   appFunctionWrapper: {
     flexDirection: 'row',
@@ -97,5 +97,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: color.secondary
-  }
-});
+  },
+  loginText: { color: color.button }
+})
