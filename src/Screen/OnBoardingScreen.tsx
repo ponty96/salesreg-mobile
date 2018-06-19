@@ -69,7 +69,8 @@ const styles = StyleSheet.create({
   signupButton: {
     width: '80%',
     justifyContent: 'center',
-    height: '11%'
+    height: '11%',
+    marginTop: '4%'
   },
   haveAccount: {
     marginTop: '4%',
@@ -77,7 +78,7 @@ const styles = StyleSheet.create({
     color: color.menu
   },
   appDetailsText: {
-    marginLeft: 20,
+    marginLeft: '4%',
     fontSize: 14,
     alignSelf: 'flex-end'
   },
