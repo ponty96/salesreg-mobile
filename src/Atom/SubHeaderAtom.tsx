@@ -12,17 +12,17 @@ interface IProps {
 
 class SubHeaderAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
-    total: '0'
+    total: '80'
   }
 
   render() {
     return (
       <Header style={styles.subHeaderHeader}>
-        <Left style={styles.subHeaderRow}>
+        <Left style={styles.subHeaderLeftRow}>
           <Icon style={styles.subHeaderIconColor} name="md-basket" />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
         </Left>
-        <Right style={styles.subHeaderRow}>
+        <Right style={styles.subHeaderRightRow}>
           <Text style={styles.subHeaderFont}>Sort By:</Text>
           <PickerAtom
             list={this.props.list}
@@ -42,23 +42,30 @@ const styles = StyleSheet.create({
     minHeight: 50,
     backgroundColor: color.secondary
   },
-  subHeaderRow: {
+  subHeaderLeftRow: {
     flexDirection: 'row',
     width: '40%'
   },
+  subHeaderRightRow: {
+    flexDirection: 'row',
+    width: '60%'
+  },
   subHeaderPad: {
     paddingLeft: 10,
-    paddingTop: 5
+    paddingTop: 5,
+    fontSize: 15
   },
   subHeaderFont: {
-    fontSize: 13,
-    paddingBottom: 9
+    fontSize: 15,
+    paddingBottom: 3
   },
   subHeaderIconColor: {
     color: color.active
   },
   pickerStyle: {
-    width: '50%',
-    height: 35
+    width: '60%',
+    height: 25,
+    borderColor: '#F0F0F0',
+    borderWidth: 0.5
   }
 })

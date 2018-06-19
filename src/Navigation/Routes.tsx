@@ -51,7 +51,7 @@ import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
 
 let BOTH = 'both'
-let ONEPRODUCT = 'product'
+let ONE_PRODUCT = 'product'
 let OPTION = 'both'
 
 const viewBothStack = TabNavigator(
@@ -92,7 +92,7 @@ const viewBothStack = TabNavigator(
         paddingVertical: 8
       },
       indicatorStyle: {
-        backgroundColor: 'lightblue'
+        backgroundColor: color.check
       },
       upperCaseLabel: false
     },
@@ -161,7 +161,7 @@ const businessStack = StackNavigator(
       screen:
         OPTION === BOTH
           ? viewBothStack
-          : OPTION === ONEPRODUCT
+          : OPTION === ONE_PRODUCT
             ? ProductScreen
             : ServicesScreen
     },
