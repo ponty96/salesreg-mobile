@@ -161,6 +161,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
             transparent={true}
             funcValue={'Login'}
             onPress={this.navigate}
+            textStyle={styles.login}
           />
         </View>
       </Form>
@@ -179,7 +180,7 @@ const styles = StyleSheet.create({
   },
   whatYouSell: {
     marginTop: '10%',
-    color: color.primary
+    color: color.button
   },
   checkBoxWrapper: {
     flexDirection: 'row',
@@ -217,5 +218,8 @@ const styles = StyleSheet.create({
   },
   resetFormContainer: {
     marginTop: '4%'
+  },
+  login: {
+    color: color.button
   }
 })

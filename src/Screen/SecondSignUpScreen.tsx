@@ -25,7 +25,6 @@ class Signup2Screen extends PureComponent<IProps, IState> {
         <AuthenticationHeader />
         <ScrollView>
           <View style={styles.wrapper}>
-            <Text style={styles.signUpText}>SIGN UP</Text>
             <TransitionAtom />
             <Text style={styles.personalInfoText}>BUSINESS INFORMATION</Text>
             <KeyboardAvoidingView behavior={'padding'}>
@@ -43,14 +42,14 @@ export default Signup2Screen
 const styles = StyleSheet.create({
   personalInfoText: {
     marginTop: '3%',
-    color: color.primary,
+    color: color.button,
     textAlign: 'center'
   },
   wrapper: {
     paddingHorizontal: 32
   },
   signUpText: {
-    color: color.primary,
+    color: color.button,
     marginTop: 32,
     alignSelf: 'center'
   },
