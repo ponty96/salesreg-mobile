@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
   },
   appFunctionWrapper: {
     flexDirection: 'row',
-    marginVertical: 10
+    marginVertical: '1%'
   },
   boardingScreenFeatureText: {
     marginVertical: '7%',
