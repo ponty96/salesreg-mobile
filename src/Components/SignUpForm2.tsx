@@ -82,9 +82,9 @@ class SigupForm2 extends PureComponent<IProps, IState> {
   }
 
   getDescription = (description: string) => {
-      this.setState({
-          description
-      })
+    this.setState({
+      description
+    })
   }
 
   render() {
@@ -143,7 +143,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
 
         <Text style={styles.whatYouSell}>Transaction currency</Text>
         <View style={styles.pickerWrapper}>
-          <PickerAtom list={['Naira(\u20A6)']} placeholder="Naira(\u20A6)" />
+          <PickerAtom list={['Naira(\u20A6)']} placeholder={`Naira(\u20A6)`} />
         </View>
 
         <InputAtom
@@ -183,6 +183,9 @@ const styles = StyleSheet.create({
   marginlessInput: {
     marginLeft: 0
   },
+  btnColor: {
+    color: color.button
+  },
   buttonsWrapper: {
     marginTop: 20
   },
@@ -197,20 +200,19 @@ const styles = StyleSheet.create({
   checkBoxText: {
     marginLeft: 15
   },
-
   pickerWrapper: {
     borderBottomColor: color.listBorderColor,
     borderBottomWidth: 1,
     width: '50%'
   },
-
   placeholderColor: {
     color: color.inactive
   },
   longButton: {
     alignSelf: 'stretch',
     paddingHorizontal: 0,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: 50
   },
   termsText: {
     color: color.menu,

@@ -10,9 +10,7 @@ interface IProps {
   navigation: any
 }
 
-interface IState {}
-
-class OnBoardingScreen extends PureComponent<IProps, IState> {
+class OnBoardingScreen extends PureComponent<IProps> {
   navigate = (location: string) => {
     this.props.navigation.navigate(location)
   }

@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { color } from '../Style/Color'
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { color } from '../Style/Color';
 
 interface IProps {
-  screen1?: boolean
+  screen1?: boolean;
 }
 
 export default class TransitionAtom extends Component<IProps> {
@@ -14,8 +14,8 @@ export default class TransitionAtom extends Component<IProps> {
         <View style={styles.iconDash} />
         <View style={styles.unfilledCircle} />
       </View>
-    )
-  }
+    );
+  };
 
   secondScreen = () => {
     return (
@@ -24,10 +24,10 @@ export default class TransitionAtom extends Component<IProps> {
         <View style={styles.iconDash} />
         <View style={styles.filledCircle} />
       </View>
-    )
-  }
+    );
+  };
   render() {
-    return this.props.screen1 ? this.firstScreen() : this.secondScreen()
+    return this.props.screen1 ? this.firstScreen() : this.secondScreen();
   }
 }
 
@@ -59,4 +59,4 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20
   }
-})
+});
