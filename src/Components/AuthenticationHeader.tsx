@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
 import { View, Image, StyleSheet } from 'react-native'
 
+import { color } from '../Style/Color'
+
 interface IProps {
   smallHeader?: boolean
 }
@@ -37,7 +39,8 @@ const styles = StyleSheet.create({
   smallHeader: {
     height: '20%',
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    backgroundColor: color.secondary
   },
   bigHeader: {
     height: 200

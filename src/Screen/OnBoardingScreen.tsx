@@ -16,7 +16,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
   }
 
   render() {
-    const appDetails = [
+    const APP_DETAILS = [
       'Manage all your produts',
       'Process all your orders',
       'Track all payments & outstandings',
@@ -26,11 +26,11 @@ class OnBoardingScreen extends PureComponent<IProps> {
     return (
       <View style={styles.container}>
         <AuthenticationHeader smallHeader={false} />
-        <ScrollView>
+        <ScrollView style={styles.bodyContainer}>
           <View style={styles.boardingScreenFeatureText}>
-            {appDetails.map((details, i) => (
+            {APP_DETAILS.map((details, i) => (
               <View style={styles.appFunctionWrapper} key={i}>
-                <Icon name="check" style={styles.blueCheck} type="Feather" />
+                <Icon name="check" style={styles.check} type="Feather" />
                 <Text style={styles.appDetailsText}>{details}</Text>
               </View>
             ))}
@@ -61,6 +61,10 @@ class OnBoardingScreen extends PureComponent<IProps> {
 export default OnBoardingScreen
 
 const styles = StyleSheet.create({
+  bodyContainer: {
+    marginTop: 10,
+    backgroundColor: color.secondary
+  },
   loginButton: {
     marginTop: 0,
     paddingHorizontal: 0,
@@ -78,11 +82,11 @@ const styles = StyleSheet.create({
     color: color.menu
   },
   appDetailsText: {
-    marginLeft: '4%',
+    marginLeft: 10,
     fontSize: 14,
     alignSelf: 'flex-end'
   },
-  blueCheck: {
+  check: {
     color: color.warning
   },
   appFunctionWrapper: {
@@ -90,12 +94,11 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   boardingScreenFeatureText: {
-    marginVertical: 10,
-    marginHorizontal: 10
+    marginVertical: 25,
+    marginHorizontal: 16
   },
   container: {
-    flex: 1,
-    backgroundColor: color.grey
+    flex: 1
   },
   loginText: {
     color: color.button
