@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react'
-import { Form, Icon } from 'native-base'
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import React, { PureComponent } from 'react';
+import { Form, Icon } from 'native-base';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-import InputAtom from '../Atom/InputAtom'
-import PickerAtom from '../Atom/PickerAtom'
-import { color } from '../Style/Color'
+import InputAtom from '../Atom/InputAtom';
+import PickerAtom from '../Atom/PickerAtom';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  phone: string
-  password: string
-  name: string
-  confirm_password: string
-  gender: string
+  phone: string;
+  password: string;
+  name: string;
+  passwordConfirmation: string;
+  gender: string;
 }
 
 class SigupForm extends PureComponent<IProps, IState> {
@@ -23,64 +23,41 @@ class SigupForm extends PureComponent<IProps, IState> {
     phone: '',
     password: '',
     name: '',
-    confirm_password: '',
+    passwordConfirmation: '',
     gender: ''
-  }
+  };
 
   signup = () => {
     console.log(
       this.state.phone,
       this.state.password,
       this.state.name,
-      this.state.confirm_password,
+      this.state.passwordConfirmation,
       this.state.gender
-    )
-  }
+    );
+  };
 
-  getPhone = (phone: string) => {
-    this.setState({
-      phone
-    })
-  }
-
-  getPassword = (pass: string) => {
-    this.setState({
-      password: pass
-    })
-  }
-
-  getName = (name: string) => {
-    this.setState({
-      name
-    })
-  }
-
-  getConfirm = (confirmPass: string) => {
-    this.setState({
-      confirm_password: confirmPass
-    })
-  }
-
-  updateGender = (selectedGender: string) => {
-    this.setState({
-      gender: selectedGender
-    })
-  }
+  updateState = (key: string, val: any) => {
+    const formData = { ...this.state, [key]: val };
+    this.setState({ ...formData });
+  };
 
   render() {
     return (
       <Form>
         <InputAtom
           label="Full name"
-          getValue={this.getName}
           contStyle={styles.marginlessInput}
+          defaultValue={this.state.name}
+          getValue={val => this.updateState('name', val)}
         />
 
         <InputAtom
           label="Phone number"
-          getValue={this.getPhone}
           keyboardType="numeric"
           contStyle={styles.marginlessInput}
+          defaultValue={this.state.phone}
+          getValue={val => this.updateState('phone', val)}
         />
 
         <View style={styles.pickerWrapper}>
@@ -88,22 +65,27 @@ class SigupForm extends PureComponent<IProps, IState> {
             list={['Male', 'Female']}
             style={styles.faintPicker}
             placeholder="Gender"
+            selected={this.state.gender}
+            handleSelection={val => this.updateState('gender', val)}
           />
         </View>
 
         <InputAtom
           label="Password"
-          getValue={this.getPassword}
           secureTextEntry={true}
           contStyle={styles.marginlessInput}
+          defaultValue={this.state.password}
+          getValue={val => this.updateState('password', val)}
           underneathText="Must be at least 6 characters"
+          underneathStyle={styles.underneathText}
         />
 
         <InputAtom
-          label="Reenter-password"
-          getValue={this.getConfirm}
+          label="Re-enter password"
           secureTextEntry={true}
           contStyle={styles.marginlessInput}
+          defaultValue={this.state.passwordConfirmation}
+          getValue={val => this.updateState('passwordConfirmation', val)}
         />
 
         <View>
@@ -120,18 +102,17 @@ class SigupForm extends PureComponent<IProps, IState> {
           </TouchableOpacity>
         </View>
       </Form>
-    )
+    );
   }
 }
 
-export default SigupForm
+export default SigupForm;
 
 const styles = StyleSheet.create({
   marginlessInput: {
     marginLeft: 0
   },
   faintPicker: {
-    color: color.inactive,
     height: 35
   },
   pickerWrapper: {
@@ -151,5 +132,8 @@ const styles = StyleSheet.create({
   },
   nextIcon: {
     color: color.button
+  },
+  underneathText: {
+      marginBottom: 0
   }
-})
+});

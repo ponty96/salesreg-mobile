@@ -1,18 +1,18 @@
-import React from 'react'
+import React from 'react';
 import {
   Text,
   View,
   KeyboardAvoidingView,
   StyleSheet,
   ScrollView
-} from 'react-native'
+} from 'react-native';
 
-import LoginForm from '../Components/LoginForm'
-import AuthenticationHeader from '../Components/AuthenticationHeader'
-import { color } from '../Style/Color'
+import LoginForm from '../Components/LoginForm';
+import AuthenticationHeader from '../Components/AuthenticationHeader';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {}
@@ -31,11 +31,11 @@ class LoginScreen extends React.Component<IProps, IState> {
           </View>
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
-export default LoginScreen
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -43,11 +43,11 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary
   },
   signUpText: {
-    color: color.primary,
+    color: color.button,
     marginTop: 32,
     alignSelf: 'center'
   },
   wrapper: {
     paddingHorizontal: 32
   }
-})
+});

@@ -1,47 +1,51 @@
-import * as React from 'react'
-import { Picker, Icon } from 'native-base'
+import * as React from 'react';
+import { Picker, Icon } from 'native-base';
 
 interface IProps {
-  list: Array<any>
-  style?: object
-  placeholder: string
+  list: Array<any>;
+  style?: object;
+  placeholder: string;
+  selected?: string;
+  handleSelection?: (value: any) => void;
 }
 
 interface IState {
-  selected: string
+  selected: string;
 }
 
 class PickerAtom extends React.Component<IProps, IState> {
   constructor(props: any) {
-    super(props)
+    super(props);
     this.state = {
-      selected: ''
-    }
+      selected: this.props.selected
+    };
   }
   handleChange(value: string) {
     this.setState({
       selected: value
-    })
+    });
+    this.props.handleSelection(value);
   }
 
   render() {
-    let list = this.props.list
+    let list = this.props.list;
     return (
       <Picker
-        iosHeader="Select one"
+        iosHeader="Select Gender"
         mode="dropdown"
         iosIcon={<Icon name="ios-arrow-down-outline" />}
         style={this.props.style}
         selectedValue={this.state.selected}
         onValueChange={this.handleChange.bind(this)}
         placeholder={this.props.placeholder}
+        textStyle={{ textAlign: 'left', paddingLeft: 0, paddingRight: 0 }}
       >
         {list.map((element, key) => (
           <Picker.Item label={element} value={element} key={key} />
         ))}
       </Picker>
-    )
+    );
   }
 }
 
-export default PickerAtom
+export default PickerAtom;

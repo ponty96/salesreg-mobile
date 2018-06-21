@@ -1,29 +1,27 @@
-import React, { PureComponent } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { Icon } from 'native-base';
+import React, { PureComponent } from 'react'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { Icon } from 'native-base'
 
-import ButtonAtom from '../Atom/ButtonAtom';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import { color } from '../Style/Color';
+import ButtonAtom from '../Atom/ButtonAtom'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
-interface IState {}
-
-class OnBoardingScreen extends PureComponent<IProps, IState> {
+class OnBoardingScreen extends PureComponent<IProps> {
   navigate = (location: string) => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     const appDetails = [
-      'All your businesses in one place',
       'Manage all your produts',
-      'Make your customers happy',
-      'Increase your profit'
-    ];
+      'Process all your orders',
+      'Track all payments & outstandings',
+      'Manage all your business contacts'
+    ]
 
     return (
       <View style={styles.container}>
@@ -32,7 +30,7 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
           <View style={styles.boardingScreenFeatureText}>
             {appDetails.map((details, i) => (
               <View style={styles.appFunctionWrapper} key={i}>
-                <Icon name="check" style={styles.blueCheck} type="Entypo" />
+                <Icon name="check" style={styles.blueCheck} type="Feather" />
                 <Text style={styles.appDetailsText}>{details}</Text>
               </View>
             ))}
@@ -52,14 +50,15 @@ class OnBoardingScreen extends PureComponent<IProps, IState> {
             funcValue={'Login'}
             onPress={this.navigate}
             btnStyle={styles.loginButton}
+            textStyle={styles.loginText}
           />
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default OnBoardingScreen;
+export default OnBoardingScreen
 
 const styles = StyleSheet.create({
   loginButton: {
@@ -70,7 +69,8 @@ const styles = StyleSheet.create({
   signupButton: {
     width: '80%',
     justifyContent: 'center',
-    height: '11%'
+    height: '11%',
+    marginTop: '4%'
   },
   haveAccount: {
     marginTop: '4%',
@@ -78,24 +78,24 @@ const styles = StyleSheet.create({
     color: color.menu
   },
   appDetailsText: {
-    marginLeft: 20,
-    color: color.warning,
+    marginLeft: '4%',
     fontSize: 14,
     alignSelf: 'flex-end'
   },
   blueCheck: {
-    color: color.check
+    color: color.warning
   },
   appFunctionWrapper: {
     flexDirection: 'row',
-    marginVertical: 10
+    marginVertical: '1%'
   },
   boardingScreenFeatureText: {
-    marginVertical: '7%',
+    marginVertical: '10%',
     marginHorizontal: '10%'
   },
   container: {
     flex: 1,
     backgroundColor: color.secondary
-  }
-});
+  },
+  loginText: { color: color.button }
+})
