@@ -30,7 +30,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
           <View style={styles.boardingScreenFeatureText}>
             {appDetails.map((details, i) => (
               <View style={styles.appFunctionWrapper} key={i}>
-                <Icon name="check" style={styles.blueCheck} type="Entypo" />
+                <Icon name="check" style={styles.blueCheck} type="Feather" />
                 <Text style={styles.appDetailsText}>{details}</Text>
               </View>
             ))}
