@@ -1,10 +1,8 @@
-import React, { PureComponent } from 'react';
-import { View, Image, StyleSheet } from 'react-native';
-
-import { color } from '../Style/Color';
+import React, { PureComponent } from 'react'
+import { View, Image, StyleSheet } from 'react-native'
 
 interface IProps {
-  smallHeader?: boolean;
+  smallHeader?: boolean
 }
 
 interface IState {}
@@ -12,7 +10,7 @@ interface IState {}
 class AuthenticationHeader extends PureComponent<IProps, IState> {
   static defaultProps = {
     smallHeader: true
-  };
+  }
 
   render() {
     return (
@@ -26,24 +24,23 @@ class AuthenticationHeader extends PureComponent<IProps, IState> {
         {this.props.smallHeader ? (
           <Image source={require('./../../Images/logo_mini.png')} />
         ) : (
-          <Image source={require('./../../Images/logo.png')} />
+          <Image source={require('./../../Images/onboardingLogo.png')} />
         )}
       </View>
-    );
+    )
   }
 }
 
-export default AuthenticationHeader;
+export default AuthenticationHeader
 
 const styles = StyleSheet.create({
   smallHeader: {
     height: '20%',
-    backgroundColor: color.primary,
     justifyContent: 'center',
     alignItems: 'center'
   },
   bigHeader: {
-    height: '36%'
+    height: 200
   },
   smallHeaderLogo: {
     flex: 0.4,
@@ -55,4 +52,4 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     width: '23%'
   }
-});
+})

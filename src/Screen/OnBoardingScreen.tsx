@@ -87,15 +87,17 @@ const styles = StyleSheet.create({
   },
   appFunctionWrapper: {
     flexDirection: 'row',
-    marginVertical: '1%'
+    marginVertical: 5
   },
   boardingScreenFeatureText: {
-    marginVertical: '10%',
-    marginHorizontal: '10%'
+    marginVertical: 10,
+    marginHorizontal: 10
   },
   container: {
     flex: 1,
-    backgroundColor: color.secondary
+    backgroundColor: color.grey
   },
-  loginText: { color: color.button }
+  loginText: {
+    color: color.button
+  }
 })
