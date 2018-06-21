@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Button } from 'native-base'
+import { Font, AppLoading } from 'expo'
+import { Root, Button } from 'native-base'
 import { Text, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 
@@ -24,8 +25,26 @@ class ButtonAtom extends React.Component<IProps, any> {
       this.props.onPress(this.props.funcValue)
     }
   }
+  state = {
+    loading: true
+  }
+  async componentDidMount() {
+    await Font.loadAsync({
+      SourceSansPro: require('../../Fonts/SourceSansPro-Regular.ttf'),
+      SourceSansPro_Semibold: require('../../Fonts/SourceSansPro-Semibold.ttf'),
+      SourceSansPro_Bold: require('../../Fonts/SourceSansPro-Bold.ttf')
+    })
+    this.setState({ loading: false })
+  }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <Root>
+          <AppLoading />
+        </Root>
+      )
+    }
     return (
       <Button
         transparent={this.props.transparent ? this.props.transparent : false}
@@ -41,7 +60,8 @@ class ButtonAtom extends React.Component<IProps, any> {
         <Text
           style={[
             this.props.transparent ? styles.textRed : styles.textTransparent,
-            this.props.textStyle
+            this.props.textStyle,
+            { fontFamily: 'SourceSansPro' }
           ]}
         >
           {this.props.btnText}

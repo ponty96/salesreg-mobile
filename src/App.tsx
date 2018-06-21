@@ -1,8 +1,8 @@
-import React from 'react';
-import { StatusBar } from 'react-native';
-import { Root } from 'native-base';
+import React from 'react'
+import { StatusBar } from 'react-native'
+import { Root } from 'native-base'
 
-import Routes from './Navigation/Routes';
+import Routes from './Navigation/Routes'
 
 export default class App extends React.Component {
   render() {
@@ -11,6 +11,6 @@ export default class App extends React.Component {
         <StatusBar barStyle="light-content" />
         <Routes />
       </Root>
-    );
+    )
   }
 }

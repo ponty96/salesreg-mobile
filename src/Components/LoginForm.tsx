@@ -1,56 +1,74 @@
-import React, { PureComponent } from 'react';
-import { Form, Text } from 'native-base';
-import { StyleSheet } from 'react-native';
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import { userData } from '../config/default';
-import { color } from '../Style/Color';
+import React, { PureComponent } from 'react'
+import { Font, AppLoading } from 'expo'
+import { Root, Form, Text } from 'native-base'
+import { StyleSheet } from 'react-native'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import { userData } from '../config/default'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
-  items?: any[];
+  navigation: any
+  items?: any[]
 }
 
 interface IState {
-  phone: string;
-  password: string;
-  underlineColorAndroid: string;
+  phone: string
+  password: string
+  underlineColorAndroid: string
+  loading: boolean
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
   static defaultProps = {
     items: userData.business[0].products
-  };
+  }
 
   state = {
     phone: '',
     password: '',
-    underlineColorAndroid: 'red'
-  };
+    underlineColorAndroid: 'red',
+    loading: true
+  }
+  async componentDidMount() {
+    await Font.loadAsync({
+      SourceSansPro: require('../../Fonts/SourceSansPro-Regular.ttf'),
+      SourceSansPro_Semibold: require('../../Fonts/SourceSansPro-Semibold.ttf'),
+      SourceSansPro_Bold: require('../../Fonts/SourceSansPro-Bold.ttf')
+    })
+    this.setState({ loading: false })
+  }
 
   login = (data: any) => {
-    console.log(this.state.phone, this.state.password);
-    data = this.props.items;
-    this.props.navigation.navigate('App', data);
-  };
+    console.log(this.state.phone, this.state.password)
+    data = this.props.items
+    this.props.navigation.navigate('App', data)
+  }
 
   getPhone = (phone: any) => {
     this.setState({
       phone
-    });
-  };
+    })
+  }
 
   getPassword = (pass: any) => {
     this.setState({
       password: pass
-    });
-  };
+    })
+  }
 
   navigate = (location: any) => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <Root>
+          <AppLoading />
+        </Root>
+      )
+    }
     return (
       <Form>
         <InputAtom
@@ -82,7 +100,9 @@ class LoginForm extends PureComponent<IProps, IState> {
           onPress={this.login}
         />
 
-        <Text style={styles.noAccount}>Don't have an account?</Text>
+        <Text style={[styles.noAccount, { fontFamily: 'SourceSansPro' }]}>
+          Don't have an account?
+        </Text>
 
         <ButtonAtom
           btnText="SIGN UP"
@@ -90,14 +110,14 @@ class LoginForm extends PureComponent<IProps, IState> {
           funcValue={'Signup'}
           onPress={this.navigate}
           btnStyle={styles.signupButton}
-          textStyle={{ color: color.button, fontWeight: 'bold' }}
+          textStyle={styles.signupText}
         />
       </Form>
-    );
+    )
   }
 }
 
-export default LoginForm;
+export default LoginForm
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -116,7 +136,11 @@ const styles = StyleSheet.create({
   signupButton: {
     paddingBottom: '5%'
   },
+  signupText: {
+    color: color.button,
+    fontWeight: 'bold'
+  },
   btnColor: {
     color: color.button
   }
-});
+})

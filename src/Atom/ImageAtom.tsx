@@ -43,7 +43,9 @@ class ImageAtom extends React.Component<IProps, any> {
               style={styles.image}
             />
           </View>
-          <Text style={styles.imageText}>Upload logo</Text>
+          <Text style={[styles.imageText, { fontFamily: 'SourceSansPro' }]}>
+            Upload logo
+          </Text>
         </TouchableOpacity>
       )
     } else {

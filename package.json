@@ -45,6 +45,9 @@
     "build-start": "yarn run build && yarn run watch-Start ",
     "precommit": "pretty-quick --staged"
   },
+  "packagerOpts": {
+    "assetExts": ["ttf", "otf"]
+  },
   "jest": {
     "preset": "jest-expo"
   },

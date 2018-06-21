@@ -1,5 +1,6 @@
 import * as React from 'react'
-import { Item, Input, Label, Text } from 'native-base'
+import { Font, AppLoading } from 'expo'
+import { Root, Item, Input, Label, Text } from 'native-base'
 import { View, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 
@@ -29,8 +30,26 @@ class InputAtom extends React.Component<IProps, any> {
     multiline: false,
     contStyle: { marginLeft: 4 } || { marginLeft: 0 }
   }
+  state = {
+    loading: true
+  }
+  componentDidMount() {
+    Font.loadAsync({
+      SourceSansPro: require('../../Fonts/SourceSansPro-Regular.ttf'),
+      SourceSansPro_Semibold: require('../../Fonts/SourceSansPro-Semibold.ttf'),
+      SourceSansPro_Bold: require('../../Fonts/SourceSansPro-Bold.ttf')
+    })
+    this.setState({ loading: false })
+  }
 
   render() {
+    if (this.state.loading) {
+      return (
+        <Root>
+          <AppLoading />
+        </Root>
+      )
+    }
     return (
       <View>
         <Item
@@ -40,7 +59,11 @@ class InputAtom extends React.Component<IProps, any> {
         >
           <Label style={styles.label}>
             {this.props.required && <Text style={styles.required}>* </Text>}
-            {this.props.label}
+            <Text
+              style={{ color: color.inactive, fontFamily: 'SourceSansPro' }}
+            >
+              {this.props.label}
+            </Text>
           </Label>
           <Input
             placeholder={this.props.placeholder}
@@ -56,7 +79,15 @@ class InputAtom extends React.Component<IProps, any> {
           />
         </Item>
         {this.props.underneathText ? (
-          <Text style={[styles.underneathText, this.props.underneathStyle]}>{this.props.underneathText}</Text>
+          <Text
+            style={[
+              styles.underneathText,
+              this.props.underneathStyle,
+              { fontFamily: 'SourceSansPro' }
+            ]}
+          >
+            {this.props.underneathText}
+          </Text>
         ) : (
           <Text />
         )}
