@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Font, AppLoading } from 'expo'
-import { Root, Form, Text } from 'native-base'
+import { Form, Text } from 'native-base'
 import { StyleSheet } from 'react-native'
 import InputAtom from '../Atom/InputAtom'
 import ButtonAtom from '../Atom/ButtonAtom'
@@ -16,7 +15,6 @@ interface IState {
   phone: string
   password: string
   underlineColorAndroid: string
-  loading: boolean
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
@@ -27,18 +25,8 @@ class LoginForm extends PureComponent<IProps, IState> {
   state = {
     phone: '',
     password: '',
-    underlineColorAndroid: 'red',
-    loading: true
+    underlineColorAndroid: 'red'
   }
-  async componentDidMount() {
-    await Font.loadAsync({
-      SourceSansPro: require('../../Fonts/SourceSansPro-Regular.ttf'),
-      SourceSansPro_Semibold: require('../../Fonts/SourceSansPro-Semibold.ttf'),
-      SourceSansPro_Bold: require('../../Fonts/SourceSansPro-Bold.ttf')
-    })
-    this.setState({ loading: false })
-  }
-
   login = (data: any) => {
     console.log(this.state.phone, this.state.password)
     data = this.props.items
@@ -62,13 +50,6 @@ class LoginForm extends PureComponent<IProps, IState> {
   }
 
   render() {
-    if (this.state.loading) {
-      return (
-        <Root>
-          <AppLoading />
-        </Root>
-      )
-    }
     return (
       <Form>
         <InputAtom
