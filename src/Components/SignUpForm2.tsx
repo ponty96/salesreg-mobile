@@ -13,32 +13,34 @@ interface IProps {
 
 interface IState {
   image: string
-  password: string
-  name: string
-  confirm_password: string
-  gender: string
+  businessName: string
+  businessAddress: string
+  email: string
+  amount: string
   products: boolean
   services: boolean
+  description: string
 }
 
 class SigupForm2 extends PureComponent<IProps, IState> {
   state = {
     image: 'https://www.iconsdb.com/icons/preview/gray/shop-xxl.png',
-    password: '',
-    name: '',
-    confirm_password: '',
-    gender: '',
+    businessName: '',
+    businessAddress: '',
+    email: '',
+    amount: '',
     products: false,
-    services: false
+    services: false,
+    description: ''
   }
 
   signup = () => {
     console.log(
       this.state.image,
-      this.state.password,
-      this.state.name,
-      this.state.confirm_password,
-      this.state.gender
+      this.state.businessName,
+      this.state.businessAddress,
+      this.state.email,
+      this.state.amount
     )
   }
 
@@ -46,27 +48,27 @@ class SigupForm2 extends PureComponent<IProps, IState> {
     this.setState({ image: pic })
   }
 
-  getPassword = (pass: string) => {
+  getName = (businessName: string) => {
     this.setState({
-      password: pass
+      businessName
     })
   }
 
-  getName = (name: string) => {
+  getAddress = (businessAddress: string) => {
     this.setState({
-      name
+      businessAddress
     })
   }
 
-  getConfirm = (confirmPass: string) => {
+  getEmail = (email: string) => {
     this.setState({
-      confirm_password: confirmPass
+      email
     })
   }
 
-  updateGender = (selectedGender: string) => {
+  updateAmount = (amount: string) => {
     this.setState({
-      gender: selectedGender
+      amount
     })
   }
 
@@ -77,6 +79,12 @@ class SigupForm2 extends PureComponent<IProps, IState> {
   flipCheckedState = (oldState: boolean, key: string) => {
     if (key === 'products') this.setState({ products: !oldState })
     else this.setState({ services: !oldState })
+  }
+
+  getDescription = (description: string) => {
+    this.setState({
+      description
+    })
   }
 
   render() {
@@ -97,13 +105,13 @@ class SigupForm2 extends PureComponent<IProps, IState> {
 
         <InputAtom
           label="*Business address"
-          getValue={this.getName}
+          getValue={this.getAddress}
           contStyle={styles.marginlessInput}
         />
 
         <InputAtom
           label="*Email"
-          getValue={this.getName}
+          getValue={this.getEmail}
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
         />
@@ -135,12 +143,12 @@ class SigupForm2 extends PureComponent<IProps, IState> {
 
         <Text style={styles.whatYouSell}>Transaction currency</Text>
         <View style={styles.pickerWrapper}>
-          <PickerAtom list={['Naira(\u20A6)']} placeholder="Naira(\u20A6)" />
+          <PickerAtom list={['Naira(\u20A6)']} placeholder={`Naira(\u20A6)`} />
         </View>
 
         <InputAtom
           label="Give a description of your business"
-          getValue={this.getName}
+          getValue={this.getDescription}
           contStyle={styles.marginlessInput}
         />
 
@@ -161,6 +169,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
             transparent={true}
             funcValue={'Login'}
             onPress={this.navigate}
+            textStyle={styles.login}
           />
         </View>
       </Form>
@@ -174,12 +183,15 @@ const styles = StyleSheet.create({
   marginlessInput: {
     marginLeft: 0
   },
+  btnColor: {
+    color: color.button
+  },
   buttonsWrapper: {
     marginTop: 20
   },
   whatYouSell: {
     marginTop: '10%',
-    color: color.primary
+    color: color.button
   },
   checkBoxWrapper: {
     flexDirection: 'row',
@@ -188,20 +200,19 @@ const styles = StyleSheet.create({
   checkBoxText: {
     marginLeft: 15
   },
-
   pickerWrapper: {
     borderBottomColor: color.listBorderColor,
     borderBottomWidth: 1,
     width: '50%'
   },
-
   placeholderColor: {
     color: color.inactive
   },
   longButton: {
     alignSelf: 'stretch',
     paddingHorizontal: 0,
-    justifyContent: 'center'
+    justifyContent: 'center',
+    height: 50
   },
   termsText: {
     color: color.menu,
@@ -217,5 +228,8 @@ const styles = StyleSheet.create({
   },
   resetFormContainer: {
     marginTop: '4%'
+  },
+  login: {
+    color: color.button
   }
 })

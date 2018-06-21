@@ -16,6 +16,7 @@ interface IProps {
   inputStyle?: object
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string
+  underneathStyle?: object
 }
 
 class InputAtom extends React.Component<IProps, any> {
@@ -55,7 +56,7 @@ class InputAtom extends React.Component<IProps, any> {
           />
         </Item>
         {this.props.underneathText ? (
-          <Text style={styles.underneathText}>{this.props.underneathText}</Text>
+          <Text style={[styles.underneathText, this.props.underneathStyle]}>{this.props.underneathText}</Text>
         ) : (
           <Text />
         )}

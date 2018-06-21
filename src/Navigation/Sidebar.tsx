@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 import {
   ScrollView,
   View,
@@ -6,24 +6,26 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions
-} from 'react-native'
-import { SafeAreaView } from 'react-navigation'
-import { Icon } from 'native-base'
-
-// import ListItemAtom from './../Atom/ListItemAtom'
-// import { userData } from './../config/default'
-import { color } from '../Style/Color'
+} from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import { Icon } from 'native-base';
+import { color } from '../Style/Color';
+import SidebarItem from '../Atom/SidebarItem';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 export default class SideBar extends PureComponent<IProps> {
   handleNavigation = (location: string, data: any = undefined) => {
-    this.props.navigation.navigate(location, { data })
-  }
+    this.props.navigation.navigate(location, { data });
+  };
 
   render() {
+    const {
+      navigation: { navigate }
+    } = this.props;
+    console.log('navigation', this.props.navigation);
     return (
       <SafeAreaView
         style={styles.sidebarContainer}
@@ -33,180 +35,114 @@ export default class SideBar extends PureComponent<IProps> {
           <ScrollView>
             <TouchableOpacity
               style={styles.header}
-              onPress={() => this.props.navigation.navigate('OnBoarding')}
+              onPress={() => navigate('DrawerClose')}
             >
               <Icon name="cross" type="Entypo" style={styles.cross} />
               <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
             </TouchableOpacity>
+            <SidebarItem
+              title="Company"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Home',
+                  routeName: 'Home'
+                },
+                {
+                  title: 'Products & Services',
+                  routeName: 'ViewBusiness'
+                },
+                {
+                  title: 'Employees',
+                  routeName: 'Employees'
+                }
+              ]}
+            />
 
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>COMPANY</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Home')
-                }}
-              >
-                <Text style={styles.category}>Home</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('ViewBusiness')
-                }}
-              >
-                <Text style={styles.category}>Products & Services</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Employees')
-                }}
-              >
-                <Text style={styles.category}>Employees</Text>
-              </TouchableOpacity>
-            </View>
+            <SidebarItem
+              title="CONTACT"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Customers',
+                  routeName: 'CustomerDetails'
+                },
+                {
+                  title: 'Vendors',
+                  routeName: 'Vendor'
+                }
+              ]}
+            />
 
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>CONTACT</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('CustomerDetails')
-                }}
-              >
-                <Text style={styles.category}>Customer</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Vendor')
-                }}
-              >
-                <Text style={styles.category}>Vendor</Text>
-              </TouchableOpacity>
-            </View>
+            <SidebarItem
+              title="ORDER"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Purchase',
+                  routeName: 'Purchase'
+                },
+                {
+                  title: 'Sales',
+                  routeName: 'Sales'
+                }
+              ]}
+            />
+            <SidebarItem
+              title="TRANSACTIONS"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Bank',
+                  routeName: 'Bank'
+                },
+                {
+                  title: 'Income',
+                  routeName: 'Income'
+                },
+                {
+                  title: 'Expenses',
+                  routeName: 'Expenses'
+                },
+                {
+                  title: 'Invoices',
+                  routeName: 'Invoice'
+                },
+                {
+                  title: 'Receipts',
+                  routeName: 'Receipts'
+                }
+              ]}
+            />
 
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>ORDER</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Purchase')
-                }}
-              >
-                <Text style={styles.category}>Purchase</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Sales')
-                }}
-              >
-                <Text style={styles.category}>Sales</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>TRANSACTIONS</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Bank')
-                }}
-              >
-                <Text style={styles.category}>Bank</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Income')
-                }}
-              >
-                <Text style={styles.category}>Income</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Expenses')
-                }}
-              >
-                <Text style={styles.category}>Expenses</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Invoice')
-                }}
-              >
-                <Text style={styles.category}>Invoices</Text>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Receipts')
-                }}
-              >
-                <Text style={styles.category}>Receipts</Text>
-              </TouchableOpacity>
-            </View>
-
-            <View>
-              <View style={styles.listHeader}>
-                <Text style={styles.title}>ACCOUNTING</Text>
-              </View>
-              <TouchableOpacity
-                style={styles.categoryWrapper}
-                onPress={() => {
-                  this.props.navigation.navigate('Inventory')
-                }}
-              >
-                <Text style={styles.category}>Inventory</Text>
-              </TouchableOpacity>
-            </View>
+            <SidebarItem
+              title="ACCOUNTING"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Inventory',
+                  routeName: 'Inventory'
+                }
+              ]}
+            />
           </ScrollView>
         </View>
       </SafeAreaView>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    marginLeft: '3%'
-  },
-  listHeader: {
-    backgroundColor: color.inactive
+    marginLeft: '3%',
+    alignItems: 'center',
+    paddingVertical: 16
   },
   texts: {
     color: color.modal,
     marginLeft: '3%',
     alignSelf: 'center'
-  },
-  title: {
-    marginLeft: '10%',
-    color: color.subHeader,
-    marginVertical: '2%'
-  },
-  categoryWrapper: {
-    backgroundColor: 'transparent',
-    borderBottomWidth: 0.5,
-    borderBottomColor: color.listBorderColor
-  },
-  category: {
-    marginLeft: '10%',
-    backgroundColor: 'transparent',
-    color: color.modal,
-    marginVertical: '5%'
   },
   itemText: {
     flex: 1,
@@ -245,4 +181,4 @@ const styles = StyleSheet.create({
   itemsContainer: {
     flex: 4
   }
-})
+});
