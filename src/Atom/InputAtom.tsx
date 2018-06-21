@@ -32,7 +32,7 @@ class InputAtom extends React.Component<IProps, any> {
 
   render() {
     return (
-      <View>
+      <View style={styles.flexAdjust}>
         <Item
           floatingLabel={this.props.floatingLabel}
           stackedLabel={!this.props.floatingLabel}
@@ -49,7 +49,7 @@ class InputAtom extends React.Component<IProps, any> {
             value={this.props.defaultValue}
             secureTextEntry={this.props.secureTextEntry}
             keyboardType={this.props.keyboardType}
-            style={this.props.inputStyle}
+            style={[this.props.inputStyle, styles.inputStyle]}
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
@@ -78,12 +78,18 @@ const styles = StyleSheet.create({
     color: color.inactive
   },
   required: {
-    color: color.primary
+    color: color.inactive
   },
   underneathText: {
     marginLeft: 0,
     color: color.menu,
     fontSize: 12,
     marginBottom: 25
+  },
+  flexAdjust: {
+    flex: 1
+  },
+  inputStyle: {
+    fontSize: 12
   }
 })

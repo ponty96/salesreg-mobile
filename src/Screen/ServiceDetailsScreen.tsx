@@ -85,7 +85,8 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: color.secondary
   },
   nameHolder: {
     borderBottomWidth: 1,

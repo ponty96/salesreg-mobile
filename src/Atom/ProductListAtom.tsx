@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base'
 import { StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   items: { images: string; name: string; number: any }
@@ -46,7 +47,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 10
   },
   rowText3P: {
-    color: '#B10000',
+    color: color.button,
     fontSize: 13,
     textAlign: 'right',
     paddingRight: 5,
@@ -61,7 +62,8 @@ const styles = StyleSheet.create({
     textAlign: 'left'
   },
   leftView: {
-    height: 55
+    height: 55,
+    marginLeft: 8
   },
   bodyView: {
     flex: 3

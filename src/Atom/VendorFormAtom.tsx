@@ -6,12 +6,12 @@ import InputAtom from './InputAtom'
 import ButtonAtom from './ButtonAtom'
 import { color } from './../Style/Color'
 
-interface ICustomerFormProps {
+interface IVendorFormProps {
   navigation: any
 }
 
-export default class CustomerFormAtom extends React.Component<
-  ICustomerFormProps,
+export default class VendorFormAtom extends React.Component<
+  IVendorFormProps,
   any
 > {
   state = {
@@ -33,7 +33,7 @@ export default class CustomerFormAtom extends React.Component<
   render() {
     return (
       <ScrollView style={styles.container}>
-        <Text style={styles.cardTitle}>Customer ID</Text>
+        <Text style={styles.cardTitle}>Vendor ID</Text>
         <Card style={styles.cardContainer}>
           <CardItem style={styles.cardItem}>
             <InputAtom
@@ -60,7 +60,7 @@ export default class CustomerFormAtom extends React.Component<
             />
           </CardItem>
         </Card>
-        <Text style={styles.cardTitle}>Customer Contact</Text>
+        <Text style={styles.cardTitle}>Vendor Contact</Text>
         <Card style={styles.cardContainer}>
           <CardItem style={styles.cardItem}>
             <Text style={styles.leftLabel}>Phone</Text>
@@ -96,7 +96,7 @@ export default class CustomerFormAtom extends React.Component<
             />
           </CardItem>
         </Card>
-        <Text style={styles.cardTitle}>Customer Address</Text>
+        <Text style={styles.cardTitle}>Vendor Address</Text>
         <Card style={styles.cardContainer}>
           <CardItem style={styles.cardItem}>
             <InputAtom
@@ -156,7 +156,7 @@ export default class CustomerFormAtom extends React.Component<
             />
           </CardItem>
         </Card>
-        <Text style={styles.cardTitle}>Customer pays me with</Text>
+        <Text style={styles.cardTitle}>I pay this vendor with</Text>
         <Card style={styles.cardContainer}>
           <CardItem style={styles.cardItem}>
             <InputAtom

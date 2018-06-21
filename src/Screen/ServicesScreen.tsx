@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Icon, List } from 'native-base'
 
 import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
+import SubHeaderAtom from './../Atom/SubHeaderAtom'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -33,13 +34,25 @@ class ServicesScreen extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <List style={styles.container}>
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-      </List>
+      <View style={styles.container}>
+        <SubHeaderAtom
+          list={[
+            'Fasting selling',
+            'Slowest selling',
+            'Highest profit',
+            'Lowest profit'
+          ]}
+        />
+        <View style={styles.listContainer}>
+          <List>
+            <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
+            <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
+            <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
+            <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
+            <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
+          </List>
+        </View>
+      </View>
     );
   }
 }
@@ -52,8 +65,12 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 28
   },
-  container: {
+  listContainer: {
     flex: 1,
-    marginHorizontal: 16
+    paddingHorizontal: 16,
+    backgroundColor: color.secondary
+  },
+  container: {
+    flex: 1
   }
 })
