@@ -62,7 +62,7 @@ export default OnBoardingScreen
 
 const styles = StyleSheet.create({
   bodyContainer: {
-    marginTop: 10,
+    // marginTop: 10,
     backgroundColor: color.secondary
   },
   loginButton: {
