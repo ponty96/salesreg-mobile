@@ -62,28 +62,27 @@ export default OnBoardingScreen
 
 const styles = StyleSheet.create({
   bodyContainer: {
-    // marginTop: 10,
     backgroundColor: color.secondary
   },
   loginButton: {
     marginTop: 0,
     paddingHorizontal: 0,
-    marginBottom: '4%'
+    marginBottom: 10
   },
   signupButton: {
-    width: '80%',
+    alignSelf: 'stretch',
     justifyContent: 'center',
-    height: '11%',
-    marginTop: '4%'
+    height: 50,
+    marginTop: 32,
+    marginHorizontal: 32
   },
   haveAccount: {
-    marginTop: '4%',
+    marginTop: 16,
     textAlign: 'center',
     color: color.menu
   },
   appDetailsText: {
-    marginLeft: 10,
-    fontSize: 14,
+    marginLeft: 16,
     alignSelf: 'flex-end'
   },
   check: {
@@ -95,7 +94,7 @@ const styles = StyleSheet.create({
   },
   boardingScreenFeatureText: {
     marginVertical: 25,
-    marginHorizontal: 16
+    marginHorizontal: 32
   },
   container: {
     flex: 1
