@@ -1,7 +1,6 @@
 import React, { PureComponent } from 'react'
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
-import { Font, AppLoading } from 'expo'
-import { Root, Icon } from 'native-base'
+import { Icon } from 'native-base'
 
 import ButtonAtom from '../Atom/ButtonAtom'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
@@ -15,17 +14,6 @@ class OnBoardingScreen extends PureComponent<IProps> {
   navigate = (location: string) => {
     this.props.navigation.navigate(location)
   }
-  state = {
-    loading: true
-  }
-  async componentDidMount() {
-    await Font.loadAsync({
-      SourceSansPro: require('../../Fonts/SourceSansPro-Regular.ttf'),
-      SourceSansPro_Semibold: require('../../Fonts/SourceSansPro-Semibold.ttf'),
-      SourceSansPro_Bold: require('../../Fonts/SourceSansPro-Bold.ttf')
-    })
-    this.setState({ loading: false })
-  }
 
   render() {
     const appDetails = [
@@ -34,13 +22,6 @@ class OnBoardingScreen extends PureComponent<IProps> {
       'Track all payments & outstandings',
       'Manage all your business contacts'
     ]
-    if (this.state.loading) {
-      return (
-        <Root>
-          <AppLoading />
-        </Root>
-      )
-    }
 
     return (
       <View style={styles.container}>
