@@ -22,6 +22,6 @@ export default fabAtom
 
 const styles = StyleSheet.create({
   fab: {
-    backgroundColor: color.primary
+    backgroundColor: color.button
   }
 })
