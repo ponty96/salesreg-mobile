@@ -3,7 +3,7 @@ import { View, StyleSheet } from 'react-native';
 import { color } from '../Style/Color';
 
 interface IProps {
-  screen1?: boolean;
+  firstScreen?: boolean;
 }
 
 export default class TransitionAtom extends Component<IProps> {
@@ -27,7 +27,7 @@ export default class TransitionAtom extends Component<IProps> {
     );
   };
   render() {
-    return this.props.screen1 ? this.firstScreen() : this.secondScreen();
+    return this.props.firstScreen ? this.firstScreen() : this.secondScreen();
   }
 }
 

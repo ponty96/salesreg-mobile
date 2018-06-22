@@ -16,9 +16,7 @@ interface IProps {
   navigation: any
 }
 
-interface IState {}
-
-class SignupScreen extends PureComponent<IProps, IState> {
+class SignupScreen extends PureComponent<IProps> {
   render() {
     return (
       <View style={styles.container}>
@@ -26,7 +24,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
         <ScrollView>
           <View style={styles.wrapper}>
             <Text style={styles.signUpText}>SIGN UP</Text>
-            <TransitionAtom screen1={true} />
+            <TransitionAtom firstScreen={true} />
             <Text style={styles.personalInfoText}>PERSONAL INFORMATION</Text>
             <KeyboardAvoidingView
               behavior={'padding'}
@@ -54,9 +52,8 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     color: color.button,
-    marginTop: '4%',
-    alignSelf: 'center',
-    marginBottom: '3%'
+    marginVertical: 16,
+    alignSelf: 'center'
   },
   container: {
     flex: 1,
