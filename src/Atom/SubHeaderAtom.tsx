@@ -37,7 +37,7 @@ export default SubHeaderAtom
 
 const styles = StyleSheet.create({
   subHeaderHeader: {
-    minHeight: 50,
+    minHeight: 40,
     backgroundColor: '#fff'
   },
   subHeaderRow: {
@@ -50,13 +50,13 @@ const styles = StyleSheet.create({
   },
   subHeaderFont: {
     fontSize: 13,
-    paddingBottom: 9
+    paddingBottom: 2
   },
   subHeaderIconColor: {
     color: '#F0F0F0'
   },
   pickerStyle: {
-    width: '50%',
-    height: 35
+    width: '60%',
+    height: 25
   }
 })
