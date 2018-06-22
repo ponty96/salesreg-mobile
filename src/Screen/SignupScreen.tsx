@@ -27,7 +27,11 @@ class SignupScreen extends PureComponent<IProps> {
               SIGN UP
             </Text>
             <TransitionAtom firstScreen={true} />
-            <Text style={[styles.personalInfoText, { fontFamily: 'SourceSansPro' }]}>PERSONAL INFORMATION</Text>
+            <Text
+              style={[styles.personalInfoText, { fontFamily: 'SourceSansPro' }]}
+            >
+              PERSONAL INFORMATION
+            </Text>
             <KeyboardAvoidingView
               behavior={'padding'}
               keyboardVerticalOffset={95}
@@ -45,16 +49,18 @@ export default SignupScreen
 
 const styles = StyleSheet.create({
   personalInfoText: {
-    marginTop: '3%',
+    marginTop: 10,
     color: color.button,
     textAlign: 'center'
   },
   wrapper: {
-    paddingHorizontal: 32
+    paddingHorizontal: 32,
+    marginTop: 16
   },
   signUpText: {
     color: color.button,
-    marginVertical: 16,
+    marginTop: 16,
+    marginBottom: 10,
     alignSelf: 'center'
   },
   container: {

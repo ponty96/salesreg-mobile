@@ -22,7 +22,7 @@ interface IState {
   description: string
 }
 
-class SigupForm2 extends PureComponent<IProps, IState> {
+class SecondSigupForm extends PureComponent<IProps, IState> {
   state = {
     image: 'https://www.iconsdb.com/icons/preview/gray/shop-xxl.png',
     businessName: '',
@@ -116,7 +116,9 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           contStyle={styles.marginlessInput}
         />
 
-        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>*What are you selling?</Text>
+        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
+          *What are you selling?
+        </Text>
         <View style={styles.checkBoxWrapper}>
           <CheckBox
             checked={this.state.products}
@@ -138,10 +140,14 @@ class SigupForm2 extends PureComponent<IProps, IState> {
             }}
             color={color.inactive}
           />
-          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>Services(Service providers)</Text>
+          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
+            Services(Service providers)
+          </Text>
         </View>
 
-        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>Transaction currency</Text>
+        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
+          Transaction currency
+        </Text>
         <View style={styles.pickerWrapper}>
           <PickerAtom list={['Naira(\u20A6)']} placeholder={`Naira(\u20A6)`} />
         </View>
@@ -160,10 +166,17 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           />
           <Text style={[styles.termsText, { fontFamily: 'SourceSansPro' }]}>
             Signing up means you agree with our{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>Terms</Text> &{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>Privacy policy</Text>
+            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
+              Terms
+            </Text>{' '}
+            &{' '}
+            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
+              Privacy policy
+            </Text>
           </Text>
-          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>Or you have an account? </Text>
+          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
+            Or you have an account?{' '}
+          </Text>
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
@@ -177,7 +190,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
   }
 }
 
-export default SigupForm2
+export default SecondSigupForm
 
 const styles = StyleSheet.create({
   marginlessInput: {

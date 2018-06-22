@@ -37,7 +37,7 @@ export default AuthenticationHeader
 
 const styles = StyleSheet.create({
   smallHeader: {
-    height: 100,
+    height: 110,
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: color.secondary,

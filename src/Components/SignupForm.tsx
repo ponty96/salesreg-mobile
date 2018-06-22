@@ -46,7 +46,7 @@ class SigupForm extends PureComponent<IProps, IState> {
     return (
       <Form>
         <InputAtom
-          label="Full name"
+          label="*Full name"
           contStyle={styles.marginlessInput}
           defaultValue={this.state.name}
           getValue={val => this.updateState('name', val)}
@@ -64,14 +64,14 @@ class SigupForm extends PureComponent<IProps, IState> {
           <PickerAtom
             list={['Male', 'Female']}
             style={styles.faintPicker}
-            placeholder="Gender"
+            placeholder="*Gender"
             selected={this.state.gender}
             handleSelection={val => this.updateState('gender', val)}
           />
         </View>
 
         <InputAtom
-          label="Password"
+          label="*Password"
           secureTextEntry={true}
           contStyle={styles.marginlessInput}
           defaultValue={this.state.password}
@@ -81,7 +81,7 @@ class SigupForm extends PureComponent<IProps, IState> {
         />
 
         <InputAtom
-          label="Re-enter password"
+          label="Reenter-password"
           secureTextEntry={true}
           contStyle={styles.marginlessInput}
           defaultValue={this.state.passwordConfirmation}
@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignSelf: 'flex-end',
     alignItems: 'center',
-    marginVertical: '2%'
+    marginVertical: 32
   },
   nextText: {
     color: color.button

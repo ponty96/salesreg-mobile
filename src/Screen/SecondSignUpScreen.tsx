@@ -7,7 +7,7 @@ import {
   StyleSheet
 } from 'react-native'
 
-import SignUpForm2 from '../Components/SignUpForm2'
+import SecondSignUpForm from '../Components/SecondSignUpForm'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
 import TransitionAtom from '../Atom/TransitionAtom'
 import { color } from '../Style/Color'
@@ -32,7 +32,7 @@ class Signup2Screen extends PureComponent<IProps, IState> {
               BUSINESS INFORMATION
             </Text>
             <KeyboardAvoidingView behavior={'padding'}>
-              <SignUpForm2 navigation={this.props.navigation} />
+              <SecondSignUpForm navigation={this.props.navigation} />
             </KeyboardAvoidingView>
           </View>
         </ScrollView>
@@ -45,12 +45,13 @@ export default Signup2Screen
 
 const styles = StyleSheet.create({
   personalInfoText: {
-    marginTop: '3%',
+    marginTop: 10,
     color: color.button,
     textAlign: 'center'
   },
   wrapper: {
-    paddingHorizontal: 32
+    paddingHorizontal: 32,
+    paddingVertical: 10
   },
   signUpText: {
     color: color.button,
