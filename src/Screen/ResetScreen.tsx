@@ -1,5 +1,11 @@
 import React, { PureComponent } from 'react'
-import { Text, View, KeyboardAvoidingView, StyleSheet } from 'react-native'
+import {
+  Text,
+  View,
+  ScrollView,
+  KeyboardAvoidingView,
+  StyleSheet
+} from 'react-native'
 
 import ResetForm from '../Components/ResetForm'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
@@ -14,14 +20,14 @@ class ResetScreen extends PureComponent<IProps> {
     return (
       <View style={styles.container}>
         <AuthenticationHeader />
-        <View style={styles.wrapper}>
-          <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
-            RESET PASSWORD
-          </Text>
-          <KeyboardAvoidingView behavior="position">
+        <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={200}>
+          <ScrollView style={styles.wrapper}>
+            <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
+              RESET PASSWORD
+            </Text>
             <ResetForm navigation={this.props.navigation} />
-          </KeyboardAvoidingView>
-        </View>
+          </ScrollView>
+        </KeyboardAvoidingView>
       </View>
     )
   }

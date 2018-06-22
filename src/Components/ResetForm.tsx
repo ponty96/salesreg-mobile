@@ -51,10 +51,11 @@ class ResetForm extends React.Component<IProps, IState> {
           floatingLabel={false}
           getValue={this.getCode}
           contStyle={styles.marginlessInput}
+          keyboardType="numeric"
         />
 
         <ButtonAtom
-          btnText="send another code"
+          btnText="Send another code"
           transparent={true}
           onPress={this.resend}
           textStyle={{ color: color.button }}
@@ -62,7 +63,7 @@ class ResetForm extends React.Component<IProps, IState> {
         <ButtonAtom
           btnText="RESET PASSWORD"
           onPress={this.reset}
-          disabled={this.state.code ? false : true}
+          // disabled={this.state.code ? false : true}
           btnStyle={styles.resetButton}
         />
         <Text style={[styles.noAccount, { fontFamily: 'SourceSansPro' }]}>
@@ -74,6 +75,7 @@ class ResetForm extends React.Component<IProps, IState> {
           funcValue={'Signup'}
           onPress={this.navigate}
           textStyle={{ color: color.button }}
+          btnStyle={styles.signup}
         />
       </Form>
     )
@@ -84,10 +86,11 @@ export default ResetForm
 
 const styles = StyleSheet.create({
   resetPasswordText: {
-    color: color.menu
+    color: color.menu,
+    marginBottom: 16
   },
   resetFormContainer: {
-    marginTop: '4%'
+    marginTop: 16
   },
   marginlessInput: {
     marginLeft: 0
@@ -95,11 +98,14 @@ const styles = StyleSheet.create({
   noAccount: {
     color: color.menu,
     textAlign: 'center',
-    marginTop: '6%'
+    marginTop: 32
   },
   resetButton: {
-    width: '100%',
+    alignSelf: 'stretch',
     height: 50,
     justifyContent: 'center'
+  },
+  signup: {
+    marginVertical: 0
   }
 })
