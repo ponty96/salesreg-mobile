@@ -1,45 +1,47 @@
-import React from 'react';
-import { Text, StyleSheet } from 'react-native';
-import { Form } from 'native-base';
-import InputAtom from './../Atom/InputAtom';
-import ButtonAtom from './../Atom/ButtonAtom';
-import { color } from '../Style/Color';
+import React from 'react'
+import { Text, StyleSheet } from 'react-native'
+import { Form } from 'native-base'
+import InputAtom from './../Atom/InputAtom'
+import ButtonAtom from './../Atom/ButtonAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  code: string;
+  code: string
 }
 
 class ResetForm extends React.Component<IProps, IState> {
   state = {
     code: ''
-  };
+  }
 
   reset = () => {
-    console.log(this.state.code);
-  };
+    console.log(this.state.code)
+  }
 
   resend = () => {
-    console.log('Put resend logic here');
-  };
+    console.log('Put resend logic here')
+  }
 
   getCode = (code: string) => {
     this.setState({
       code
-    });
-  };
+    })
+  }
 
   navigate = (location: string) => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     return (
       <Form style={styles.resetFormContainer}>
-        <Text style={styles.resetPasswordText}>
+        <Text
+          style={[styles.resetPasswordText, { fontFamily: 'SourceSansPro' }]}
+        >
           A reset code will be sent to xxxxxxxxx678. Enter the code to reset
           your password.
         </Text>
@@ -63,7 +65,9 @@ class ResetForm extends React.Component<IProps, IState> {
           disabled={this.state.code ? false : true}
           btnStyle={styles.resetButton}
         />
-        <Text style={styles.noAccount}>Don't have an account?</Text>
+        <Text style={[styles.noAccount, { fontFamily: 'SourceSansPro' }]}>
+          Don't have an account?
+        </Text>
         <ButtonAtom
           btnText="SIGN UP"
           transparent={true}
@@ -72,11 +76,11 @@ class ResetForm extends React.Component<IProps, IState> {
           textStyle={{ color: color.button }}
         />
       </Form>
-    );
+    )
   }
 }
 
-export default ResetForm;
+export default ResetForm
 
 const styles = StyleSheet.create({
   resetPasswordText: {
@@ -98,4 +102,4 @@ const styles = StyleSheet.create({
     height: 50,
     justifyContent: 'center'
   }
-});
+})

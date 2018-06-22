@@ -52,7 +52,7 @@ class InputAtom extends React.Component<IProps, any> {
             value={this.props.defaultValue}
             secureTextEntry={this.props.secureTextEntry}
             keyboardType={this.props.keyboardType}
-            style={this.props.inputStyle}
+            style={[{ fontFamily: 'SourceSansPro' }, this.props.inputStyle]}
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}

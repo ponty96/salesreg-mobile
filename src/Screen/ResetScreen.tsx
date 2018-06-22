@@ -1,12 +1,12 @@
-import React, { PureComponent } from 'react';
-import { Text, View, KeyboardAvoidingView, StyleSheet } from 'react-native';
+import React, { PureComponent } from 'react'
+import { Text, View, KeyboardAvoidingView, StyleSheet } from 'react-native'
 
-import ResetForm from '../Components/ResetForm';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import { color } from '../Style/Color';
+import ResetForm from '../Components/ResetForm'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 class ResetScreen extends PureComponent<IProps> {
@@ -15,17 +15,19 @@ class ResetScreen extends PureComponent<IProps> {
       <View style={styles.container}>
         <AuthenticationHeader />
         <View style={styles.wrapper}>
-          <Text style={styles.signUpText}>RESET PASSWORD</Text>
+          <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
+            RESET PASSWORD
+          </Text>
           <KeyboardAvoidingView behavior="position">
             <ResetForm navigation={this.props.navigation} />
           </KeyboardAvoidingView>
         </View>
       </View>
-    );
+    )
   }
 }
 
-export default ResetScreen;
+export default ResetScreen
 
 const styles = StyleSheet.create({
   signUpText: {
@@ -40,4 +42,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-});
+})
