@@ -27,7 +27,10 @@ class LoginScreen extends React.Component<IProps, IState> {
             <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
               LOGIN
             </Text>
-            <KeyboardAvoidingView behavior="position">
+            <KeyboardAvoidingView
+              behavior="padding"
+              keyboardVerticalOffset={150}
+            >
               <LoginForm navigation={this.props.navigation} />
             </KeyboardAvoidingView>
           </View>

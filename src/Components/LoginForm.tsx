@@ -65,6 +65,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           secureTextEntry={true}
           contStyle={styles.marginlessInput}
           underneathText="Must be at least 6 characters"
+          underneathStyle={styles.underneathText}
         />
 
         <ButtonAtom
@@ -73,6 +74,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           transparent={true}
           funcValue={'Reset'}
           onPress={this.navigate}
+          btnStyle={styles.forgotPassword}
         />
 
         <ButtonAtom
@@ -104,22 +106,27 @@ const styles = StyleSheet.create({
   marginlessInput: {
     marginLeft: 0
   },
+  forgotPassword: {
+    marginVertical: 16
+  },
   loginButton: {
-    width: '100%',
+    alignSelf: 'stretch',
     height: 50,
     justifyContent: 'center'
   },
   noAccount: {
     color: color.menu,
     textAlign: 'center',
-    marginTop: '6%'
+    marginTop: 32
   },
   signupButton: {
-    paddingBottom: '5%'
+    paddingBottom: 32
   },
   signupText: {
-    color: color.button,
-    fontWeight: 'bold'
+    color: color.button
+  },
+  underneathText: {
+    marginBottom: 0
   },
   btnColor: {
     color: color.button
