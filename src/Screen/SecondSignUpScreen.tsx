@@ -16,9 +16,7 @@ interface IProps {
   navigation: any
 }
 
-interface IState {}
-
-class Signup2Screen extends PureComponent<IProps, IState> {
+class Signup2Screen extends PureComponent<IProps> {
   render() {
     return (
       <View style={styles.container}>

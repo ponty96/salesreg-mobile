@@ -140,7 +140,13 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             }}
             color={color.inactive}
           />
-          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
+          <Text
+            style={[
+              styles.checkBoxText,
+              { fontFamily: 'SourceSansPro' },
+              styles.services
+            ]}
+          >
             Services(Service providers)
           </Text>
         </View>
@@ -203,15 +209,18 @@ const styles = StyleSheet.create({
     marginTop: 20
   },
   whatYouSell: {
-    marginTop: '10%',
+    marginTop: 16,
     color: color.button
   },
   checkBoxWrapper: {
     flexDirection: 'row',
-    marginTop: '3%'
+    marginTop: 10
   },
   checkBoxText: {
     marginLeft: 15
+  },
+  services: {
+    marginBottom: 10
   },
   pickerWrapper: {
     borderBottomColor: color.listBorderColor,
