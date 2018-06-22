@@ -102,7 +102,8 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   boardingScreenFeatureText: {
-    marginVertical: 32,
+    marginTop: 48,
+    marginBottom: 32,
     marginHorizontal: 32
   },
   container: {

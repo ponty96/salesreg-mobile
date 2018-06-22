@@ -80,9 +80,9 @@ const styles = StyleSheet.create({
   imgContainer: {
     alignItems: 'center',
     justifyContent: 'center',
-    height: 180,
-    width: 180,
-    borderRadius: 90,
+    height: 200,
+    width: 200,
+    borderRadius: 100,
     marginVertical: 10,
     backgroundColor: color.listBorderColor
   },
