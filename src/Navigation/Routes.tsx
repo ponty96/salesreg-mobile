@@ -49,6 +49,7 @@ import ExpensesScreen from '../Screen/ExpensesScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
+import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen';
 
 let BOTH = 'both'
 let ONEPRODUCT = 'product'
@@ -144,6 +145,9 @@ const businessStack = StackNavigator(
     },
     Settings: {
       screen: SettingsScreen
+    },
+    Profile: {
+      screen: ProfileSettingsScreen
     },
     Debt: {
       screen: DebtScreen

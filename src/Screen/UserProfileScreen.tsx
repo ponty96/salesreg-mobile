@@ -15,13 +15,17 @@ interface IState {
 
 class UserProfileScreen extends Component<IProps, IState> {
   state = {
-    item: this.props.navigation.state.params.data
+    // item: this.props.navigation.state.params.data
+    item: {}
   }
 
   static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
     return {
-      title: params.name,
+      title: (
+        <Text style={[{ fontFamily: 'SourceSansPro' }]}>
+          Kay5ive Attractions
+        </Text>
+      ), // params.name
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
@@ -35,7 +39,7 @@ class UserProfileScreen extends Component<IProps, IState> {
         <TouchableOpacity
           onPress={() => {
             navigation.navigate('EditUserProfile', {
-              data: params.data
+              data: 'Kay5ive Attractions' // params.data
             })
           }}
         >
