@@ -8,7 +8,7 @@ interface IProps {
 export default class HomeScreen extends React.Component<IProps> {
   static navigationOptions = () => {
     return {
-      title: 'Home Screen'
+      title: 'Home'
     }
   }
 
