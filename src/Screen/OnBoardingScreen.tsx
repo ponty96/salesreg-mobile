@@ -92,7 +92,7 @@ const styles = StyleSheet.create({
   },
   appDetailsText: {
     marginLeft: 16,
-    alignSelf: 'flex-end'
+    alignSelf: 'center'
   },
   check: {
     color: color.warning
@@ -102,7 +102,7 @@ const styles = StyleSheet.create({
     marginVertical: 5
   },
   boardingScreenFeatureText: {
-    marginVertical: 25,
+    marginVertical: 32,
     marginHorizontal: 32
   },
   container: {
