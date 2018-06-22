@@ -25,9 +25,11 @@ class SignupScreen extends PureComponent<IProps, IState> {
         <AuthenticationHeader />
         <ScrollView>
           <View style={styles.wrapper}>
-            <Text style={styles.signUpText}>SIGN UP</Text>
+            <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
+              SIGN UP
+            </Text>
             <TransitionAtom screen1={true} />
-            <Text style={styles.personalInfoText}>PERSONAL INFORMATION</Text>
+            <Text style={[styles.personalInfoText, { fontFamily: 'SourceSansPro' }]}>PERSONAL INFORMATION</Text>
             <KeyboardAvoidingView
               behavior={'padding'}
               keyboardVerticalOffset={95}

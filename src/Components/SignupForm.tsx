@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react';
-import { Form, Icon } from 'native-base';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { PureComponent } from 'react'
+import { Form, Icon } from 'native-base'
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 
-import InputAtom from '../Atom/InputAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import { color } from '../Style/Color';
+import InputAtom from '../Atom/InputAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  phone: string;
-  password: string;
-  name: string;
-  passwordConfirmation: string;
-  gender: string;
+  phone: string
+  password: string
+  name: string
+  passwordConfirmation: string
+  gender: string
 }
 
 class SigupForm extends PureComponent<IProps, IState> {
@@ -25,7 +25,7 @@ class SigupForm extends PureComponent<IProps, IState> {
     name: '',
     passwordConfirmation: '',
     gender: ''
-  };
+  }
 
   signup = () => {
     console.log(
@@ -34,13 +34,13 @@ class SigupForm extends PureComponent<IProps, IState> {
       this.state.name,
       this.state.passwordConfirmation,
       this.state.gender
-    );
-  };
+    )
+  }
 
   updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val };
-    this.setState({ ...formData });
-  };
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
+  }
 
   render() {
     return (
@@ -93,7 +93,9 @@ class SigupForm extends PureComponent<IProps, IState> {
             style={styles.nextButtonContainer}
             onPress={() => this.props.navigation.navigate('SecondSignUp')}
           >
-            <Text style={styles.nextText}>NEXT </Text>
+            <Text style={[styles.nextText, { fontFamily: 'SourceSansPro' }]}>
+              NEXT{' '}
+            </Text>
             <Icon
               name="trending-flat"
               type="MaterialIcons"
@@ -102,11 +104,11 @@ class SigupForm extends PureComponent<IProps, IState> {
           </TouchableOpacity>
         </View>
       </Form>
-    );
+    )
   }
 }
 
-export default SigupForm;
+export default SigupForm
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -134,6 +136,6 @@ const styles = StyleSheet.create({
     color: color.button
   },
   underneathText: {
-      marginBottom: 0
+    marginBottom: 0
   }
-});
+})

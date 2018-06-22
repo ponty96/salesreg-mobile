@@ -1,18 +1,18 @@
-import React from 'react';
+import React from 'react'
 import {
   Text,
   View,
   KeyboardAvoidingView,
   StyleSheet,
   ScrollView
-} from 'react-native';
+} from 'react-native'
 
-import LoginForm from '../Components/LoginForm';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import { color } from '../Style/Color';
+import LoginForm from '../Components/LoginForm'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {}
@@ -24,18 +24,20 @@ class LoginScreen extends React.Component<IProps, IState> {
         <AuthenticationHeader />
         <ScrollView>
           <View style={styles.wrapper}>
-            <Text style={styles.signUpText}>LOGIN</Text>
+            <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
+              LOGIN
+            </Text>
             <KeyboardAvoidingView behavior="position">
               <LoginForm navigation={this.props.navigation} />
             </KeyboardAvoidingView>
           </View>
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default LoginScreen;
+export default LoginScreen
 
 const styles = StyleSheet.create({
   container: {
@@ -50,4 +52,4 @@ const styles = StyleSheet.create({
   wrapper: {
     paddingHorizontal: 32
   }
-});
+})

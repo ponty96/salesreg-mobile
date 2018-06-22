@@ -29,7 +29,6 @@ class InputAtom extends React.Component<IProps, any> {
     multiline: false,
     contStyle: { marginLeft: 4 } || { marginLeft: 0 }
   }
-
   render() {
     return (
       <View>
@@ -40,7 +39,11 @@ class InputAtom extends React.Component<IProps, any> {
         >
           <Label style={styles.label}>
             {this.props.required && <Text style={styles.required}>* </Text>}
-            {this.props.label}
+            <Text
+              style={{ color: color.inactive, fontFamily: 'SourceSansPro' }}
+            >
+              {this.props.label}
+            </Text>
           </Label>
           <Input
             placeholder={this.props.placeholder}
@@ -56,7 +59,15 @@ class InputAtom extends React.Component<IProps, any> {
           />
         </Item>
         {this.props.underneathText ? (
-          <Text style={[styles.underneathText, this.props.underneathStyle]}>{this.props.underneathText}</Text>
+          <Text
+            style={[
+              styles.underneathText,
+              this.props.underneathStyle,
+              { fontFamily: 'SourceSansPro' }
+            ]}
+          >
+            {this.props.underneathText}
+          </Text>
         ) : (
           <Text />
         )}
