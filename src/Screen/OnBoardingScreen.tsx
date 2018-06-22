@@ -31,7 +31,14 @@ class OnBoardingScreen extends PureComponent<IProps> {
             {appDetails.map((details, i) => (
               <View style={styles.appFunctionWrapper} key={i}>
                 <Icon name="check" style={styles.blueCheck} type="Feather" />
-                <Text style={styles.appDetailsText}>{details}</Text>
+                <Text
+                  style={[
+                    styles.appDetailsText,
+                    { fontFamily: 'SourceSansPro' }
+                  ]}
+                >
+                  {details}
+                </Text>
               </View>
             ))}
           </View>
@@ -42,7 +49,9 @@ class OnBoardingScreen extends PureComponent<IProps> {
             funcValue={'Signup'}
             onPress={this.navigate}
           />
-          <Text style={styles.haveAccount}>Or you have an account?</Text>
+          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
+            Or you have an account?
+          </Text>
 
           <ButtonAtom
             btnText="LOGIN"

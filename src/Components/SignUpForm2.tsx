@@ -116,7 +116,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
           contStyle={styles.marginlessInput}
         />
 
-        <Text style={styles.whatYouSell}>*What are you selling?</Text>
+        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>*What are you selling?</Text>
         <View style={styles.checkBoxWrapper}>
           <CheckBox
             checked={this.state.products}
@@ -125,7 +125,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
             }}
             color={color.inactive}
           />
-          <Text style={styles.checkBoxText}>
+          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
             Products(Traders, manufacturers, producers)
           </Text>
         </View>
@@ -138,10 +138,10 @@ class SigupForm2 extends PureComponent<IProps, IState> {
             }}
             color={color.inactive}
           />
-          <Text style={styles.checkBoxText}>Services(Service providers)</Text>
+          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>Services(Service providers)</Text>
         </View>
 
-        <Text style={styles.whatYouSell}>Transaction currency</Text>
+        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>Transaction currency</Text>
         <View style={styles.pickerWrapper}>
           <PickerAtom list={['Naira(\u20A6)']} placeholder={`Naira(\u20A6)`} />
         </View>
@@ -158,12 +158,12 @@ class SigupForm2 extends PureComponent<IProps, IState> {
             onPress={this.signup}
             btnStyle={styles.longButton}
           />
-          <Text style={styles.termsText}>
+          <Text style={[styles.termsText, { fontFamily: 'SourceSansPro' }]}>
             Signing up means you agree with our{' '}
-            <Text style={styles.redTermText}>Terms</Text> &{' '}
-            <Text style={styles.redTermText}>Privacy policy</Text>
+            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>Terms</Text> &{' '}
+            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>Privacy policy</Text>
           </Text>
-          <Text style={styles.haveAccount}>Or you have an account? </Text>
+          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>Or you have an account? </Text>
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
