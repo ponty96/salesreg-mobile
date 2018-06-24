@@ -93,7 +93,12 @@ class SigupForm extends PureComponent<IProps, IState> {
             style={styles.nextButtonContainer}
             onPress={() => this.props.navigation.navigate('SecondSignUp')}
           >
-            <Text style={[styles.nextText, { fontFamily: 'SourceSansPro' }]}>
+            <Text
+              style={[
+                styles.nextText,
+                { fontFamily: 'SourceSansPro_Semibold' }
+              ]}
+            >
               NEXT{' '}
             </Text>
             <Icon
