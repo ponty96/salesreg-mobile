@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, Image, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, Platform } from 'react-native'
 
 import { color } from '../Style/Color'
 
@@ -41,9 +41,22 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: color.secondary,
-    shadowOffset: { width: 5, height: 5 },
-    elevation: 5
+    ...Platform.select({
+      ios: {
+        shadowColor: color.grey,
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        shadowOffset: {
+          height: -1,
+          width: 0
+        }
+      },
+      android: {
+        elevation: 5
+      }
+    })
   },
+
   bigHeader: {
     height: 200
   }

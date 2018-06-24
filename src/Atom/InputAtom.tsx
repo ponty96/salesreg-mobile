@@ -93,7 +93,7 @@ const styles = StyleSheet.create({
   },
   underneathText: {
     marginLeft: 0,
-    color: color.menu,
+    color: color.principal,
     fontSize: 12,
     marginBottom: 25
   }

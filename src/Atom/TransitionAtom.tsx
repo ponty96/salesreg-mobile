@@ -36,8 +36,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'center',
-    marginTop: '5%'
+    alignSelf: 'center'
   },
   filledCircle: {
     backgroundColor: color.button,

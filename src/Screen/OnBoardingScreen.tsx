@@ -34,7 +34,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
                 <Text
                   style={[
                     styles.appDetailsText,
-                    { fontFamily: 'SourceSansPro' }
+                    { fontFamily: 'SourceSansPro_Semibold' }
                   ]}
                 >
                   {details}
@@ -48,6 +48,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
             btnStyle={styles.signupButton}
             funcValue={'Signup'}
             onPress={this.navigate}
+            textStyle={styles.freeTrialText}
           />
           <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
             Or you have an account?
@@ -59,7 +60,10 @@ class OnBoardingScreen extends PureComponent<IProps> {
             funcValue={'Login'}
             onPress={this.navigate}
             btnStyle={styles.loginButton}
-            textStyle={styles.loginText}
+            textStyle={[
+              styles.loginText,
+              { fontFamily: 'SourceSansPro_Semibold' }
+            ]}
           />
         </ScrollView>
       </View>
@@ -76,7 +80,7 @@ const styles = StyleSheet.create({
   loginButton: {
     marginTop: 0,
     paddingHorizontal: 0,
-    marginBottom: 10
+    marginBottom: 16
   },
   signupButton: {
     alignSelf: 'stretch',
@@ -86,7 +90,7 @@ const styles = StyleSheet.create({
     marginHorizontal: 32
   },
   haveAccount: {
-    marginTop: 16,
+    marginTop: 32,
     textAlign: 'center',
     color: color.menu
   },
@@ -110,6 +114,10 @@ const styles = StyleSheet.create({
     flex: 1
   },
   loginText: {
-    color: color.button
+    color: color.button,
+    fontSize: 16
+  },
+  freeTrialText: {
+    fontSize: 16
   }
 })
