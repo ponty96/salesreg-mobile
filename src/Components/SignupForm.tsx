@@ -47,7 +47,7 @@ class SigupForm extends PureComponent<IProps, IState> {
       <Form>
         <InputAtom
           label="*Full name"
-          contStyle={styles.marginlessInput}
+          contStyle={styles.nameInput}
           defaultValue={this.state.name}
           getValue={val => this.updateState('name', val)}
         />
@@ -55,7 +55,7 @@ class SigupForm extends PureComponent<IProps, IState> {
         <InputAtom
           label="Phone number"
           keyboardType="numeric"
-          contStyle={styles.marginlessInput}
+          contStyle={styles.input}
           defaultValue={this.state.phone}
           getValue={val => this.updateState('phone', val)}
         />
@@ -73,7 +73,7 @@ class SigupForm extends PureComponent<IProps, IState> {
         <InputAtom
           label="*Password"
           secureTextEntry={true}
-          contStyle={styles.marginlessInput}
+          contStyle={styles.input}
           defaultValue={this.state.password}
           getValue={val => this.updateState('password', val)}
           underneathText="Must be at least 6 characters"
@@ -83,7 +83,7 @@ class SigupForm extends PureComponent<IProps, IState> {
         <InputAtom
           label="Reenter-password"
           secureTextEntry={true}
-          contStyle={styles.marginlessInput}
+          contStyle={styles.input}
           defaultValue={this.state.passwordConfirmation}
           getValue={val => this.updateState('passwordConfirmation', val)}
         />
@@ -116,15 +116,20 @@ class SigupForm extends PureComponent<IProps, IState> {
 export default SigupForm
 
 const styles = StyleSheet.create({
-  marginlessInput: {
-    marginLeft: 0
+  nameInput: {
+    marginLeft: 0,
+    marginTop: 16
+  },
+  input: {
+    marginLeft: 0,
+    marginTop: 0
   },
   faintPicker: {
     height: 35
   },
   pickerWrapper: {
-    marginTop: 25,
-    borderBottomColor: color.inactive,
+    marginTop: 16,
+    borderBottomColor: color.textBorderBottom,
     borderBottomWidth: 1,
     width: '50%',
     opacity: 0.5

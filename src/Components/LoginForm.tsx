@@ -110,7 +110,7 @@ export default LoginForm
 const styles = StyleSheet.create({
   input: {
     marginLeft: 0,
-    marginTop: 48
+    marginTop: 0
   },
   forgotPassword: {
     marginVertical: 16
