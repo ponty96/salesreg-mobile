@@ -49,7 +49,7 @@ const styles = StyleSheet.create({
   },
   wrapper: {
     paddingHorizontal: 32,
-    paddingVertical: 10
+    paddingVertical: 16
   },
   signUpText: {
     color: color.button,

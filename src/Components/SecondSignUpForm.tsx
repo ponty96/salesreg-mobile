@@ -140,13 +140,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             }}
             color={color.inactive}
           />
-          <Text
-            style={[
-              styles.checkBoxText,
-              { fontFamily: 'SourceSansPro' },
-              styles.services
-            ]}
-          >
+          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
             Services(Service providers)
           </Text>
         </View>
@@ -169,6 +163,10 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             btnText="SIGN UP"
             onPress={this.signup}
             btnStyle={styles.longButton}
+            textStyle={[
+              styles.signUp,
+              { fontFamily: 'SourceSansPro_Semibold' }
+            ]}
           />
           <Text style={[styles.termsText, { fontFamily: 'SourceSansPro' }]}>
             Signing up means you agree with our{' '}
@@ -188,7 +186,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             transparent={true}
             funcValue={'Login'}
             onPress={this.navigate}
-            textStyle={styles.login}
+            textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
           />
         </View>
       </Form>
@@ -206,25 +204,24 @@ const styles = StyleSheet.create({
     color: color.button
   },
   buttonsWrapper: {
-    marginTop: 20
+    marginTop: 16
   },
   whatYouSell: {
-    marginTop: 16,
-    color: color.button
+    marginTop: 32,
+    color: color.button,
+    fontSize: 14
   },
   checkBoxWrapper: {
     flexDirection: 'row',
-    marginTop: 10
+    marginTop: 16
   },
   checkBoxText: {
-    marginLeft: 15
-  },
-  services: {
-    marginBottom: 10
+    marginLeft: 16,
+    fontSize: 14
   },
   pickerWrapper: {
     borderBottomColor: color.listBorderColor,
-    borderBottomWidth: 1,
+    borderBottomWidth: 1.5,
     width: '50%'
   },
   placeholderColor: {
@@ -238,20 +235,26 @@ const styles = StyleSheet.create({
   },
   termsText: {
     color: color.menu,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 12
   },
   redTermText: {
     color: color.button
   },
   haveAccount: {
-    marginTop: '4%',
+    marginTop: 16,
     textAlign: 'center',
-    color: color.menu
+    color: color.menu,
+    fontSize: 14
   },
   resetFormContainer: {
-    marginTop: '4%'
+    marginTop: 16
   },
   login: {
-    color: color.button
+    color: color.button,
+    fontSize: 16
+  },
+  signUp: {
+    fontSize: 16
   }
 })
