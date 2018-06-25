@@ -14,7 +14,7 @@ interface IProps {
 interface IState {
   phone: string
   password: string
-  underlineColorAndroid: string
+  isEdited: boolean
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
@@ -25,8 +25,9 @@ class LoginForm extends PureComponent<IProps, IState> {
   state = {
     phone: '',
     password: '',
-    underlineColorAndroid: 'red'
+    isEdited: false
   }
+
   login = (data: any) => {
     console.log(this.state.phone, this.state.password)
     data = this.props.items
@@ -56,21 +57,21 @@ class LoginForm extends PureComponent<IProps, IState> {
           label="Phone number"
           getValue={this.getPhone}
           keyboardType="numeric"
-          contStyle={styles.marginlessInput}
+          contStyle={styles.input}
         />
 
         <InputAtom
           label="Password"
           getValue={this.getPassword}
           secureTextEntry={true}
-          contStyle={styles.marginlessInput}
+          contStyle={styles.input}
           underneathText="Must be at least 6 characters"
           underneathStyle={styles.underneathText}
         />
 
         <ButtonAtom
           btnText="Forgot password"
-          textStyle={styles.btnColor}
+          textStyle={styles.forgotPasswordText}
           transparent={true}
           funcValue={'Reset'}
           onPress={this.navigate}
@@ -107,8 +108,9 @@ class LoginForm extends PureComponent<IProps, IState> {
 export default LoginForm
 
 const styles = StyleSheet.create({
-  marginlessInput: {
-    marginLeft: 0
+  input: {
+    marginLeft: 0,
+    marginTop: 48
   },
   forgotPassword: {
     marginVertical: 16
@@ -130,12 +132,14 @@ const styles = StyleSheet.create({
     paddingBottom: 32
   },
   signupText: {
-    color: color.button
+    color: color.button,
+    fontSize: 16
   },
   underneathText: {
     marginBottom: 0
   },
-  btnColor: {
-    color: color.button
+  forgotPasswordText: {
+    color: color.button,
+    fontSize: 16
   }
 })

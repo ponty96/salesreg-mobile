@@ -19,7 +19,11 @@ interface IProps {
   underneathStyle?: object
 }
 
-class InputAtom extends React.Component<IProps, any> {
+interface IState {
+  bottomColor: string
+}
+
+class InputAtom extends React.Component<IProps, IState> {
   static defaultProps: IProps = {
     label: '',
     required: false,
@@ -29,13 +33,21 @@ class InputAtom extends React.Component<IProps, any> {
     multiline: false,
     contStyle: { marginLeft: 4 } || { marginLeft: 0 }
   }
+
+  state = {
+    bottomColor: color.textBorderBottom
+  }
+
   render() {
     return (
       <View>
         <Item
           floatingLabel={this.props.floatingLabel}
           stackedLabel={!this.props.floatingLabel}
-          style={this.props.contStyle}
+          style={[
+            { borderBottomColor: this.state.bottomColor },
+            this.props.contStyle
+          ]}
         >
           <Label style={styles.label}>
             {this.props.required && <Text style={styles.required}>* </Text>}
@@ -56,6 +68,10 @@ class InputAtom extends React.Component<IProps, any> {
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
+            onFocus={() => this.setState({ bottomColor: color.button })}
+            onBlur={() =>
+              this.setState({ bottomColor: color.textBorderBottom })
+            }
           />
         </Item>
         {this.props.underneathText ? (
@@ -97,6 +113,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     color: color.principal,
     fontSize: 12,
-    marginBottom: 25
+    marginBottom: 25,
+    marginTop: 1
   }
 })

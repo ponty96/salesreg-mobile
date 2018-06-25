@@ -63,7 +63,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     marginBottom: 28,
     alignSelf: 'center',
-    fontSize: 14
+    fontSize: 16
   },
   container: {
     flex: 1,

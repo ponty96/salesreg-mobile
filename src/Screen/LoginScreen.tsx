@@ -50,7 +50,7 @@ const styles = StyleSheet.create({
   signUpText: {
     color: color.button,
     alignSelf: 'center',
-    fontSize: 14
+    fontSize: 16
   },
   wrapper: {
     paddingHorizontal: 32,
