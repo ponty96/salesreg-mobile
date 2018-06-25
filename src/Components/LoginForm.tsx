@@ -58,6 +58,8 @@ class LoginForm extends PureComponent<IProps, IState> {
           getValue={this.getPhone}
           keyboardType="numeric"
           contStyle={styles.input}
+          inputStyle={styles.elevateInput}
+          maxLength={11}
         />
 
         <InputAtom
@@ -67,6 +69,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           contStyle={styles.input}
           underneathText="Must be at least 6 characters"
           underneathStyle={styles.underneathText}
+          inputStyle={styles.elevateInput}
         />
 
         <ButtonAtom
@@ -141,5 +144,8 @@ const styles = StyleSheet.create({
   forgotPasswordText: {
     color: color.button,
     fontSize: 16
+  },
+  elevateInput: {
+    marginBottom: 5
   }
 })

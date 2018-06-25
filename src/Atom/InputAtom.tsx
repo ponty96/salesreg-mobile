@@ -17,6 +17,7 @@ interface IProps {
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string
   underneathStyle?: object
+  maxLength?: number
 }
 
 interface IState {
@@ -64,7 +65,11 @@ class InputAtom extends React.Component<IProps, IState> {
             value={this.props.defaultValue}
             secureTextEntry={this.props.secureTextEntry}
             keyboardType={this.props.keyboardType}
-            style={[{ fontFamily: 'SourceSansPro' }, this.props.inputStyle]}
+            style={[
+              { fontFamily: 'SourceSansPro' },
+              styles.inputText,
+              this.props.inputStyle
+            ]}
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
@@ -72,6 +77,7 @@ class InputAtom extends React.Component<IProps, IState> {
             onBlur={() =>
               this.setState({ bottomColor: color.textBorderBottom })
             }
+            maxLength={this.props.maxLength}
           />
         </Item>
         {this.props.underneathText ? (
@@ -114,6 +120,9 @@ const styles = StyleSheet.create({
     color: color.principal,
     fontSize: 12,
     marginBottom: 25,
-    marginTop: 1
+    marginTop: 2
+  },
+  inputText: {
+    color: color.principal
   }
 })

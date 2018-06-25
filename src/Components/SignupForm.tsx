@@ -50,6 +50,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           contStyle={styles.nameInput}
           defaultValue={this.state.name}
           getValue={val => this.updateState('name', val)}
+          inputStyle={styles.elevateInput}
         />
 
         <InputAtom
@@ -58,6 +59,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           contStyle={styles.input}
           defaultValue={this.state.phone}
           getValue={val => this.updateState('phone', val)}
+          inputStyle={styles.elevateInput}
         />
 
         <View style={styles.pickerWrapper}>
@@ -69,6 +71,7 @@ class SigupForm extends PureComponent<IProps, IState> {
             handleSelection={val => this.updateState('gender', val)}
           />
         </View>
+        <View style={styles.pickerUnderline} />
 
         <InputAtom
           label="*Password"
@@ -78,14 +81,16 @@ class SigupForm extends PureComponent<IProps, IState> {
           getValue={val => this.updateState('password', val)}
           underneathText="Must be at least 6 characters"
           underneathStyle={styles.underneathText}
+          inputStyle={styles.elevateInput}
         />
 
         <InputAtom
           label="Reenter-password"
           secureTextEntry={true}
-          contStyle={styles.input}
+          contStyle={styles.reenter}
           defaultValue={this.state.passwordConfirmation}
           getValue={val => this.updateState('passwordConfirmation', val)}
+          inputStyle={styles.elevateInput}
         />
 
         <View>
@@ -120,6 +125,9 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     marginTop: 16
   },
+  elevateInput: {
+    marginBottom: 5
+  },
   input: {
     marginLeft: 0,
     marginTop: 0
@@ -129,10 +137,15 @@ const styles = StyleSheet.create({
   },
   pickerWrapper: {
     marginTop: 16,
+    width: '50%',
+    opacity: 0.5,
+    marginBottom: 5
+  },
+  pickerUnderline: {
+    width: '50%',
     borderBottomColor: color.textBorderBottom,
     borderBottomWidth: 1,
-    width: '50%',
-    opacity: 0.5
+    marginBottom: 6
   },
   nextButtonContainer: {
     flexDirection: 'row',
@@ -149,5 +162,9 @@ const styles = StyleSheet.create({
   },
   underneathText: {
     marginBottom: 0
+  },
+  reenter: {
+    marginTop: 5,
+    marginLeft: 0
   }
 })
