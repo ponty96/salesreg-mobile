@@ -86,10 +86,12 @@ const styles = StyleSheet.create({
     marginLeft: 4
   },
   label: {
-    color: color.inactive
+    color: color.inactive,
+    fontSize: 14
   },
   required: {
-    color: color.primary
+    color: color.primary,
+    fontSize: 14
   },
   underneathText: {
     marginLeft: 0,

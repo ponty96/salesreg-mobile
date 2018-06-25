@@ -135,7 +135,8 @@ const styles = StyleSheet.create({
     marginVertical: 32
   },
   nextText: {
-    color: color.button
+    color: color.button,
+    fontSize: 16
   },
   nextIcon: {
     color: color.button

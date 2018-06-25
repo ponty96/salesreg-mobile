@@ -51,7 +51,8 @@ const styles = StyleSheet.create({
   personalInfoText: {
     marginTop: 16,
     color: color.button,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 14
   },
   wrapper: {
     paddingHorizontal: 32
@@ -61,7 +62,8 @@ const styles = StyleSheet.create({
     color: color.button,
     marginTop: 20,
     marginBottom: 28,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontSize: 14
   },
   container: {
     flex: 1,
