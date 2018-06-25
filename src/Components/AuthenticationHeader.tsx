@@ -24,7 +24,10 @@ class AuthenticationHeader extends PureComponent<IProps, IState> {
         }
       >
         {this.props.smallHeader ? (
-          <Image source={require('./../../Assets/Images/loginLogo.png')} />
+          <Image
+            source={require('./../../Assets/Images/loginLogo.png')}
+            style={styles.image}
+          />
         ) : (
           <Image source={require('./../../Assets/Images/onboardingLogo.png')} />
         )}
@@ -37,9 +40,9 @@ export default AuthenticationHeader
 
 const styles = StyleSheet.create({
   smallHeader: {
-    height: 110,
-    justifyContent: 'center',
+    height: 120,
     alignItems: 'center',
+    justifyContent: 'center',
     backgroundColor: color.secondary,
     ...Platform.select({
       ios: {
@@ -59,5 +62,8 @@ const styles = StyleSheet.create({
 
   bigHeader: {
     height: 200
+  },
+  image: {
+    marginTop: 20
   }
 })

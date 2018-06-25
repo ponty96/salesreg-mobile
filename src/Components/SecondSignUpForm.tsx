@@ -126,6 +126,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
               this.flipCheckedState(this.state.products, 'products')
             }}
             color={color.inactive}
+            style={styles.checkBox}
           />
           <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
             Products(Traders, manufacturers, producers)
@@ -139,6 +140,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
               this.flipCheckedState(this.state.services, 'services')
             }}
             color={color.inactive}
+            style={styles.checkBox}
           />
           <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
             Services(Service providers)
@@ -216,6 +218,11 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginTop: 16
   },
+  checkBox: {
+    paddingLeft: 0,
+    opacity: 0.2,
+    paddingBottom: 0
+  },
   checkBoxText: {
     marginLeft: 16,
     fontSize: 14
@@ -244,7 +251,7 @@ const styles = StyleSheet.create({
     color: color.button
   },
   haveAccount: {
-    marginTop: 0,
+    marginTop: 16,
     textAlign: 'center',
     color: color.menu,
     fontSize: 14

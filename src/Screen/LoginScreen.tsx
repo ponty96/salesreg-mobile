@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     color: color.button,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontSize: 14
   },
   wrapper: {
     paddingHorizontal: 32,

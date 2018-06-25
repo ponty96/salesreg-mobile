@@ -81,6 +81,10 @@ class LoginForm extends PureComponent<IProps, IState> {
           btnText="LOGIN"
           btnStyle={styles.loginButton}
           onPress={this.login}
+          textStyle={[
+            styles.loginText,
+            { fontFamily: 'SourceSansPro_Semibold' }
+          ]}
         />
 
         <Text style={[styles.noAccount, { fontFamily: 'SourceSansPro' }]}>
@@ -113,6 +117,9 @@ const styles = StyleSheet.create({
     alignSelf: 'stretch',
     height: 50,
     justifyContent: 'center'
+  },
+  loginText: {
+    fontSize: 16
   },
   noAccount: {
     color: color.menu,
