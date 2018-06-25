@@ -125,8 +125,9 @@ const styles = StyleSheet.create({
   pickerWrapper: {
     marginTop: 25,
     borderBottomColor: color.inactive,
-    borderBottomWidth: 0.5,
-    width: '50%'
+    borderBottomWidth: 1,
+    width: '50%',
+    opacity: 0.5
   },
   nextButtonContainer: {
     flexDirection: 'row',

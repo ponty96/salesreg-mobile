@@ -179,7 +179,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             </Text>
           </Text>
           <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
-            Or you have an account?{' '}
+            Or you have an account?
           </Text>
           <ButtonAtom
             btnText="LOGIN"
@@ -187,6 +187,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             funcValue={'Login'}
             onPress={this.navigate}
             textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
+            btnStyle={styles.loginButton}
           />
         </View>
       </Form>
@@ -220,9 +221,10 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   pickerWrapper: {
-    borderBottomColor: color.listBorderColor,
-    borderBottomWidth: 1.5,
-    width: '50%'
+    borderBottomColor: color.inactive,
+    borderBottomWidth: 1,
+    width: '50%',
+    opacity: 0.5
   },
   placeholderColor: {
     color: color.inactive
@@ -242,7 +244,7 @@ const styles = StyleSheet.create({
     color: color.button
   },
   haveAccount: {
-    marginTop: 16,
+    marginTop: 0,
     textAlign: 'center',
     color: color.menu,
     fontSize: 14
@@ -256,5 +258,8 @@ const styles = StyleSheet.create({
   },
   signUp: {
     fontSize: 16
+  },
+  loginButton: {
+    marginVertical: 0
   }
 })
