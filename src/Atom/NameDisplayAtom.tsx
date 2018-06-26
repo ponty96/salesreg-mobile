@@ -5,7 +5,7 @@ import { capitalizeFirstLetter } from '../Functions/capitalizeFirstLetter'
 
 interface IProps {
   businessName: string
-  image: string
+  image?: string
   style?: object
 }
 
@@ -20,7 +20,9 @@ export default class NameDisplayAtom extends React.Component<IProps, any> {
               style={styles.nameDisplayImage}
             />
           ) : (
-            <Text>{capitalizeFirstLetter(this.props.businessName)}</Text>
+            <Text style={styles.innerText}>
+              {capitalizeFirstLetter(this.props.businessName)}
+            </Text>
           )}
         </View>
         <Text style={styles.nameDisplayName}>{this.props.businessName}</Text>
@@ -32,24 +34,33 @@ export default class NameDisplayAtom extends React.Component<IProps, any> {
 const styles = StyleSheet.create({
   nameDisplayWrapper: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    height: 106,
+    borderBottomWidth: 1,
+    borderBottomColor: color.list
   },
   nameDisplayName: {
     fontSize: 14,
     fontWeight: '400',
-    marginLeft: 20
+    marginLeft: 20,
+    fontFamily: 'SourceSansPro_Bold'
   },
   nameDisplayImage: {
-    height: 90,
-    width: 90,
+    height: 70,
+    width: 70,
     borderRadius: 45
   },
   nameDisplayLetterDisplay: {
-    height: 90,
-    width: 90,
+    height: 70,
+    width: 70,
     borderRadius: 45,
+    marginLeft: 40,
     backgroundColor: color.grey,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  innerText: {
+    fontFamily: 'SourceSansPro_Bold',
+    fontSize: 16
   }
 })

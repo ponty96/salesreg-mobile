@@ -13,25 +13,31 @@ interface IState {
   list: any
 }
 
-class UserProfileScreen extends Component<IProps, IState> {
+class BusinessProfileScreen extends Component<IProps, IState> {
   state = {
     // item: this.props.navigation.state.params.data
     list: [
       {
-        section: 'Gender',
-        value: 'Female'
-      },
-      {
-        section: 'Phone',
-        value: '09034567889'
+        section: 'Location',
+        value: '6 Salem street Morogbo, Lagos'
       },
       {
         section: 'Email',
         value: 'ayo@gmail.com'
       },
       {
-        section: 'Address',
-        value: '6 Salem street Morogbo, Lagos'
+        section: 'Category',
+        value: 'Product, Services'
+      },
+      {
+        section: 'Currency',
+        value: 'Naira \u20A6'
+      },
+      {
+        section: 'Description',
+        value:
+          // tslint:disable-next-line:max-line-length
+          'Simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industrys standard of dummy text since the 1500s, when an unknown printer took a gallery'
       }
     ]
   }
@@ -39,7 +45,7 @@ class UserProfileScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       title: (
-        <Text style={[{ fontFamily: 'SourceSansPro' }]}>User Profile</Text>
+        <Text style={[{ fontFamily: 'SourceSansPro' }]}>Business Profile</Text>
       ), // params.name
       headerLeft: (
         <Icon
@@ -53,7 +59,7 @@ class UserProfileScreen extends Component<IProps, IState> {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('EditUserProfile', {
+            navigation.navigate('EditBusinessProfile', {
               data: 'Kay5ive Attractions' // params.data
             })
           }}
@@ -72,11 +78,13 @@ class UserProfileScreen extends Component<IProps, IState> {
   }
 
   render() {
-    return <UserProfile list={this.state.list} businessName="Ayo Doe" />
+    return (
+      <UserProfile list={this.state.list} businessName="Kay5ive Attractions" />
+    )
   }
 }
 
-export default UserProfileScreen
+export default BusinessProfileScreen
 
 const styles = StyleSheet.create({
   headerText: {
