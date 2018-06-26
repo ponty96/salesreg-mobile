@@ -129,7 +129,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   noAccount: {
-    color: color.menu,
+    color: color.principal,
     textAlign: 'center',
     marginTop: 32
   },

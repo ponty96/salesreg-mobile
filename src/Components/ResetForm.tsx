@@ -98,7 +98,7 @@ const styles = StyleSheet.create({
     marginLeft: 0
   },
   noAccount: {
-    color: color.menu,
+    color: color.principal,
     textAlign: 'center',
     marginTop: 32,
     fontSize: 14

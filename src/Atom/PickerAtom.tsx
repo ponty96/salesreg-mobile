@@ -22,6 +22,7 @@ class PickerAtom extends React.Component<IProps, IState> {
       loading: true
     }
   }
+
   handleChange(value: string) {
     this.setState({
       selected: value

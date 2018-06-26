@@ -46,9 +46,10 @@ const styles = StyleSheet.create({
   },
   categoryWrapper: {
     backgroundColor: 'transparent',
-    borderBottomWidth: 0.5,
+    borderBottomWidth: 0.3,
     borderBottomColor: color.listBorderColor,
-    paddingVertical: 8
+    paddingVertical: 8,
+    opacity: 0.8
   },
   category: {
     marginLeft: 32,

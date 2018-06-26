@@ -143,7 +143,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             onPress={() => {
               this.flipCheckedState(this.state.services, 'services')
             }}
-            color={color.selling}
+            color={color.inactive}
             style={styles.checkBox}
           />
           <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
@@ -206,7 +206,7 @@ export default SecondSigupForm
 const styles = StyleSheet.create({
   marginlessInput: {
     marginLeft: 0,
-    marginTop: 10
+    marginTop: 5
   },
   btnColor: {
     color: color.button
@@ -215,7 +215,7 @@ const styles = StyleSheet.create({
     marginTop: 16
   },
   whatYouSell: {
-    marginTop: 32,
+    marginTop: 28,
     color: color.button,
     fontSize: 14
   },
@@ -225,18 +225,19 @@ const styles = StyleSheet.create({
   },
   checkBox: {
     left: 0,
-    opacity: 0.2,
+    borderWidth: 1,
     paddingBottom: 0
   },
   checkBoxText: {
-    marginLeft: 16,
+    marginLeft: 10,
     fontSize: 14
   },
   pickerWrapper: {
     borderBottomColor: color.inactive,
     borderBottomWidth: 1,
-    width: '50%',
-    opacity: 0.5
+    width: '60%',
+    opacity: 0.5,
+    marginBottom: 16
   },
   placeholderColor: {
     color: color.inactive
@@ -248,7 +249,7 @@ const styles = StyleSheet.create({
     height: 50
   },
   termsText: {
-    color: color.menu,
+    color: color.principal,
     textAlign: 'center',
     fontSize: 12
   },
@@ -258,7 +259,7 @@ const styles = StyleSheet.create({
   haveAccount: {
     marginTop: 16,
     textAlign: 'center',
-    color: color.menu,
+    color: color.principal,
     fontSize: 14
   },
   resetFormContainer: {
