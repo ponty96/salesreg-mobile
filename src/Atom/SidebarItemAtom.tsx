@@ -15,7 +15,9 @@ const sideBarItemAtom = (prop: {
   return (
     <View>
       <View style={styles.listHeader}>
-        <Text style={styles.title}>{prop.title}</Text>
+        <Text style={[styles.title, { fontFamily: 'SourceSansPro' }]}>
+          {prop.title}
+        </Text>
       </View>
       {prop.categories.map((category: Category, key: number) => {
         return (
@@ -49,7 +51,9 @@ const styles = StyleSheet.create({
   },
   categoryWrapper: {
     backgroundColor: 'transparent',
-    paddingVertical: 8
+    paddingVertical: 8,
+    borderBottomWidth: 0.3,
+    borderBottomColor: color.listBorderColor
   },
   category: {
     marginLeft: 32,

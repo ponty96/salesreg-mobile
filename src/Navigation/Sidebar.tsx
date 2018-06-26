@@ -38,7 +38,9 @@ export default class SideBar extends PureComponent<IProps> {
               onPress={() => navigate('DrawerClose')}
             >
               <Icon name="cross" type="Entypo" style={styles.cross} />
-              <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
+              <Text style={[styles.texts, { fontFamily: 'SourceSansPro' }]}>
+                BAYONE ATTRACTIONS
+              </Text>
             </TouchableOpacity>
             <SideBarItemAtom
               title="COMPANY"
