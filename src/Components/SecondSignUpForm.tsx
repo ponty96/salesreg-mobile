@@ -24,7 +24,8 @@ interface IState {
 
 class SecondSigupForm extends PureComponent<IProps, IState> {
   state = {
-    image: 'https://www.iconsdb.com/icons/preview/gray/shop-xxl.png',
+    image:
+      'http://www.statelysteps.com/wp-content/uploads/2014/07/ss-icon-shop-lrg.png',
     businessName: '',
     businessAddress: '',
     email: '',
@@ -98,22 +99,25 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
         />
 
         <InputAtom
-          label="*Business name"
+          label="Business name"
           getValue={this.getName}
           contStyle={styles.marginlessInput}
+          required={true}
         />
 
         <InputAtom
-          label="*Business address"
+          label="Business address"
           getValue={this.getAddress}
           contStyle={styles.marginlessInput}
+          required={true}
         />
 
         <InputAtom
-          label="*Email"
+          label="Email"
           getValue={this.getEmail}
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
+          required={true}
         />
 
         <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
@@ -201,7 +205,8 @@ export default SecondSigupForm
 
 const styles = StyleSheet.create({
   marginlessInput: {
-    marginLeft: 0
+    marginLeft: 0,
+    marginTop: 10
   },
   btnColor: {
     color: color.button
