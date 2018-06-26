@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from 'react-native'
 import { Icon } from 'native-base'
 
 import SaveCancelButton from '../Container/SaveCancelButton'
-import EditUserProfileForm from '../Components/EditUserProfileForm'
+import EditBusinessProfileForm from '../Components/EditBusinessProfileForm'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -17,7 +17,7 @@ interface IState {
   gender: string
 }
 
-class EditUserProfileScreen extends Component<IProps, IState> {
+class EditBusinessProfileScreen extends Component<IProps, IState> {
   state = {
     name: 'Ayo Anwakasng',
     phoneNumber: '09034567889',
@@ -70,7 +70,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   render() {
     return (
       <View style={styles.formViewContainer}>
-        <EditUserProfileForm
+        <EditBusinessProfileForm
           image={this.state.image}
           getImage={this.getImage}
           name={this.state.name}
@@ -89,7 +89,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   }
 }
 
-export default EditUserProfileScreen
+export default EditBusinessProfileScreen
 
 const styles = StyleSheet.create({
   formViewContainer: {

@@ -17,7 +17,7 @@ class ProductScreen extends PureComponent<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     const { params } = navigation.state
     // tslint:disable-next-line:max-line-length
-    let right = <View style={{flexDirection: 'row'}}><Icon name={'ios-search'} style={styles.headerIcon} /><Icon name={'md-more'} style={styles.headerIcon} /></View>
+    let right = <View style={{flexDirection: 'row'}}><Icon name={'ios-search'} style={styles.headerIcon} /><Icon name={'md-more'} style={styles.headerIcon} onPress={() => {navigation.navigate('Settings')}} /></View>
     let left = params &&
       params.items &&
       params.items.length > 0 && (

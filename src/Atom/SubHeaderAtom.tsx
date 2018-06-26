@@ -38,7 +38,7 @@ export default SubHeaderAtom
 
 const styles = StyleSheet.create({
   subHeaderHeader: {
-    height: 40,
+    height: 45,
     backgroundColor: '#fff'
   },
   subHeaderLeftRow: {
@@ -52,11 +52,13 @@ const styles = StyleSheet.create({
   subHeaderPad: {
     paddingLeft: 10,
     paddingTop: 5,
+    fontFamily: 'SourceSansPro',
     fontSize: 15
   },
   subHeaderFont: {
     fontSize: 15,
-    paddingBottom: 3
+    fontFamily: 'SourceSansPro',
+    paddingBottom: 4
   },
   subHeaderIconColor: {
     color: color.check,

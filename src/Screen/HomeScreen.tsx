@@ -15,7 +15,7 @@ interface IProps {
 export default class HomeScreen extends React.Component<IProps> {
   static navigationOptions = () => {
     return {
-      title: 'Home Screen'
+      title: 'Home'
     }
   }
 
@@ -39,7 +39,7 @@ const styles = StyleSheet.create({
   },
   homeBackground: {
     backgroundColor: 'rgba(152,251,152, 0.2)', // #98FB98
-    width: Dimensions.get('window').width - 32,
+    width: Dimensions.get('screen').width - 32,
     alignSelf: 'center',
     marginTop: 16,
     borderRadius: 3
@@ -48,6 +48,7 @@ const styles = StyleSheet.create({
     color: color.selling,
     fontSize: 30,
     padding: 20,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'SourceSansPro_Semibold'
   }
 })
