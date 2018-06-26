@@ -230,7 +230,8 @@ const styles = StyleSheet.create({
   },
   checkBoxText: {
     marginLeft: 10,
-    fontSize: 14
+    fontSize: 14,
+    color: color.principal
   },
   pickerWrapper: {
     borderBottomColor: color.inactive,

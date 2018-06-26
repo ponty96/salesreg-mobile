@@ -24,7 +24,9 @@ const sideBarItemAtom = (prop: {
             key={key}
             onPress={() => prop.navigate(category.routeName)}
           >
-            <Text style={styles.category}>{category.title}</Text>
+            <Text style={[styles.category, { fontFamily: 'SourceSansPro' }]}>
+              {category.title}
+            </Text>
           </TouchableOpacity>
         )
       })}
@@ -41,20 +43,19 @@ const styles = StyleSheet.create({
   },
   title: {
     marginLeft: 32,
-    color: color.subHeader,
-    marginVertical: 2
+    color: color.secondary,
+    marginVertical: 2,
+    fontSize: 14
   },
   categoryWrapper: {
     backgroundColor: 'transparent',
-    borderBottomWidth: 0.3,
-    borderBottomColor: color.listBorderColor,
-    paddingVertical: 8,
-    opacity: 0.8
+    paddingVertical: 8
   },
   category: {
     marginLeft: 32,
     backgroundColor: 'transparent',
-    color: color.modal,
-    marginVertical: 8
+    color: color.secondary,
+    marginVertical: 8,
+    fontSize: 14
   }
 })
