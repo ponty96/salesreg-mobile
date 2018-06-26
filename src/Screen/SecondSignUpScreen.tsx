@@ -25,7 +25,7 @@ class Signup2Screen extends PureComponent<IProps> {
           <View style={styles.wrapper}>
             <TransitionAtom />
             <Text
-              style={[styles.personalInfoText, { fontFamily: 'SourceSansPro' }]}
+              style={[styles.businessInfo, { fontFamily: 'SourceSansPro' }]}
             >
               BUSINESS INFORMATION
             </Text>
@@ -42,10 +42,11 @@ class Signup2Screen extends PureComponent<IProps> {
 export default Signup2Screen
 
 const styles = StyleSheet.create({
-  personalInfoText: {
+  businessInfo: {
     marginTop: 10,
     color: color.button,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize: 16
   },
   wrapper: {
     paddingHorizontal: 32,

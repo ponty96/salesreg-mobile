@@ -46,7 +46,7 @@ const styles = StyleSheet.create({
   },
   iconDash: {
     borderBottomColor: color.button,
-    width: 25,
+    width: 28,
     borderBottomWidth: 1,
     alignSelf: 'center'
   },

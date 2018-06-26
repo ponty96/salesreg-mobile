@@ -58,13 +58,14 @@ class ResetForm extends React.Component<IProps, IState> {
           btnText="Send another code"
           transparent={true}
           onPress={this.resend}
-          textStyle={{ color: color.button }}
+          textStyle={styles.sendAnother}
         />
         <ButtonAtom
           btnText="RESET PASSWORD"
           onPress={this.reset}
           // disabled={this.state.code ? false : true}
           btnStyle={styles.resetButton}
+          textStyle={[{ fontFamily: 'SourceSansPro_Semibold' }, styles.reset]}
         />
         <Text style={[styles.noAccount, { fontFamily: 'SourceSansPro' }]}>
           Don't have an account?
@@ -74,8 +75,8 @@ class ResetForm extends React.Component<IProps, IState> {
           transparent={true}
           funcValue={'Signup'}
           onPress={this.navigate}
-          textStyle={{ color: color.button }}
-          btnStyle={styles.signup}
+          textStyle={[styles.signup]}
+          btnStyle={styles.signUpButton}
         />
       </Form>
     )
@@ -87,7 +88,8 @@ export default ResetForm
 const styles = StyleSheet.create({
   resetPasswordText: {
     color: color.menu,
-    marginBottom: 16
+    marginBottom: 16,
+    fontSize: 14
   },
   resetFormContainer: {
     marginTop: 16
@@ -98,7 +100,8 @@ const styles = StyleSheet.create({
   noAccount: {
     color: color.menu,
     textAlign: 'center',
-    marginTop: 32
+    marginTop: 32,
+    fontSize: 14
   },
   resetButton: {
     alignSelf: 'stretch',
@@ -106,6 +109,19 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   signup: {
-    marginVertical: 0
+    marginVertical: 0,
+    fontSize: 16,
+    color: color.button
+  },
+  sendAnother: {
+    color: color.button,
+    fontSize: 16
+  },
+  reset: {
+    fontSize: 16
+  },
+  signUpButton: {
+    marginVertical: 0,
+    paddingVertical: 0
   }
 })

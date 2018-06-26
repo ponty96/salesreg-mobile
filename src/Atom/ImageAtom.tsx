@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
     backgroundColor: color.listBorderColor
   },
   imageText: {
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontSize: 14
   },
   imgPlaceholderText: {
     fontWeight: 'bold',

@@ -52,7 +52,8 @@ const styles = StyleSheet.create({
     marginTop: 16,
     color: color.button,
     textAlign: 'center',
-    fontSize: 16
+    fontSize: 16,
+    marginBottom: 5
   },
   wrapper: {
     paddingHorizontal: 32

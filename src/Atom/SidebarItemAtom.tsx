@@ -1,15 +1,16 @@
-import * as React from 'react';
-import { TouchableOpacity, StyleSheet, View, Text } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { TouchableOpacity, StyleSheet, View, Text } from 'react-native'
+import { color } from '../Style/Color'
 
 interface Category {
-  title: string;
-  routeName: string;
+  title: string
+  routeName: string
 }
-const sidebarItem = (prop: {
-  title: string;
-  categories: Category[];
-  navigate: any;
+
+const sideBarItemAtom = (prop: {
+  title: string
+  categories: Category[]
+  navigate: any
 }) => {
   return (
     <View>
@@ -25,22 +26,23 @@ const sidebarItem = (prop: {
           >
             <Text style={styles.category}>{category.title}</Text>
           </TouchableOpacity>
-        );
+        )
       })}
     </View>
-  );
-};
+  )
+}
 
-export default sidebarItem;
+export default sideBarItemAtom
 
 const styles = StyleSheet.create({
   listHeader: {
-    backgroundColor: color.inactive
+    backgroundColor: color.dropdown,
+    opacity: 0.2
   },
   title: {
-    marginLeft: '10%',
+    marginLeft: 32,
     color: color.subHeader,
-    marginVertical: '2%'
+    marginVertical: 2
   },
   categoryWrapper: {
     backgroundColor: 'transparent',
@@ -49,9 +51,9 @@ const styles = StyleSheet.create({
     paddingVertical: 8
   },
   category: {
-    marginLeft: '10%',
+    marginLeft: 32,
     backgroundColor: 'transparent',
     color: color.modal,
     marginVertical: 8
   }
-});
+})
