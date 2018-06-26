@@ -26,6 +26,7 @@ export default class TransitionAtom extends Component<IProps> {
       </View>
     )
   }
+
   render() {
     return this.props.firstScreen ? this.firstScreen() : this.secondScreen()
   }
@@ -52,7 +53,7 @@ const styles = StyleSheet.create({
   },
   unfilledCircle: {
     backgroundColor: 'white',
-    borderWidth: 1,
+    borderWidth: 1.1,
     borderColor: color.button,
     borderRadius: 10,
     height: 20,

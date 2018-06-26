@@ -46,11 +46,12 @@ class SigupForm extends PureComponent<IProps, IState> {
     return (
       <Form>
         <InputAtom
-          label="*Full name"
+          label="Full name"
           contStyle={styles.nameInput}
           defaultValue={this.state.name}
           getValue={val => this.updateState('name', val)}
           inputStyle={styles.elevateInput}
+          required={true}
         />
 
         <InputAtom
@@ -74,7 +75,7 @@ class SigupForm extends PureComponent<IProps, IState> {
         <View style={styles.pickerUnderline} />
 
         <InputAtom
-          label="*Password"
+          label="Password"
           secureTextEntry={true}
           contStyle={styles.input}
           defaultValue={this.state.password}
@@ -82,6 +83,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           underneathText="Must be at least 6 characters"
           underneathStyle={styles.underneathText}
           inputStyle={styles.elevateInput}
+          required={true}
         />
 
         <InputAtom
@@ -145,7 +147,7 @@ const styles = StyleSheet.create({
     width: '50%',
     borderBottomColor: color.textBorderBottom,
     borderBottomWidth: 1,
-    marginBottom: 6
+    marginBottom: 10
   },
   nextButtonContainer: {
     flexDirection: 'row',
@@ -164,7 +166,7 @@ const styles = StyleSheet.create({
     marginBottom: 0
   },
   reenter: {
-    marginTop: 5,
+    marginTop: 10,
     marginLeft: 0
   }
 })

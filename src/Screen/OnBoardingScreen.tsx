@@ -92,13 +92,14 @@ const styles = StyleSheet.create({
   haveAccount: {
     marginTop: 32,
     textAlign: 'center',
-    color: color.menu,
+    color: color.principal,
     fontSize: 14
   },
   appDetailsText: {
     marginLeft: 16,
     alignSelf: 'center',
-    fontSize: 14
+    fontSize: 14,
+    color: color.black
   },
   check: {
     color: color.warning

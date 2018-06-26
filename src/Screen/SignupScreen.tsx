@@ -49,7 +49,7 @@ export default SignupScreen
 
 const styles = StyleSheet.create({
   personalInfoText: {
-    marginTop: 16,
+    marginTop: 10,
     color: color.button,
     textAlign: 'center',
     fontSize: 16,
@@ -60,8 +60,8 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     color: color.button,
-    marginTop: 20,
-    marginBottom: 28,
+    marginTop: 30,
+    marginBottom: 30,
     alignSelf: 'center',
     fontSize: 16
   },

@@ -139,7 +139,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             onPress={() => {
               this.flipCheckedState(this.state.services, 'services')
             }}
-            color={color.inactive}
+            color={color.selling}
             style={styles.checkBox}
           />
           <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
