@@ -25,7 +25,7 @@ interface IState {
 class SecondSigupForm extends PureComponent<IProps, IState> {
   state = {
     image:
-      'http://www.statelysteps.com/wp-content/uploads/2014/07/ss-icon-shop-lrg.png',
+      'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png',
     businessName: '',
     businessAddress: '',
     email: '',

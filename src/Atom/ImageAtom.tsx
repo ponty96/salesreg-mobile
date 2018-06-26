@@ -84,7 +84,8 @@ const styles = StyleSheet.create({
     width: 200,
     borderRadius: 100,
     marginVertical: 10,
-    backgroundColor: color.dropdown
+    backgroundColor: color.dropdown,
+    opacity: 0.9
   },
   imageText: {
     alignSelf: 'center',
