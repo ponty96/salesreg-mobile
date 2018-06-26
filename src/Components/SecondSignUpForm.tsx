@@ -219,7 +219,7 @@ const styles = StyleSheet.create({
     marginTop: 16
   },
   checkBox: {
-    paddingLeft: 0,
+    left: 0,
     opacity: 0.2,
     paddingBottom: 0
   },

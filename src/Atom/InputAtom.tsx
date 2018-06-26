@@ -18,6 +18,7 @@ interface IProps {
   underneathText?: string
   underneathStyle?: object
   maxLength?: number
+  login?: boolean
 }
 
 interface IState {
@@ -37,6 +38,10 @@ class InputAtom extends React.Component<IProps, IState> {
 
   state = {
     bottomColor: color.textBorderBottom
+  }
+
+  changeUnderline = (newColor: string): void => {
+    if (this.props.login) this.setState({ bottomColor: newColor })
   }
 
   render() {
@@ -73,10 +78,8 @@ class InputAtom extends React.Component<IProps, IState> {
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
-            onFocus={() => this.setState({ bottomColor: color.button })}
-            onBlur={() =>
-              this.setState({ bottomColor: color.textBorderBottom })
-            }
+            onFocus={() => this.changeUnderline(color.button)}
+            onBlur={() => this.changeUnderline(color.textBorderBottom)}
             maxLength={this.props.maxLength}
           />
         </Item>

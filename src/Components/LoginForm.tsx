@@ -60,6 +60,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           contStyle={styles.input}
           inputStyle={styles.elevateInput}
           maxLength={11}
+          login={true}
         />
 
         <InputAtom
@@ -70,6 +71,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           underneathText="Must be at least 6 characters"
           underneathStyle={styles.underneathText}
           inputStyle={styles.elevateInput}
+          login={true}
         />
 
         <ButtonAtom
