@@ -6,6 +6,7 @@ import FabAtom from './../Atom/FabAtom'
 import ProductList from '../Components/ProductList'
 import { color } from '../Style/Color'
 import { productList } from '../config/data'
+import MenuAtom from '../Atom/MenuAtom'
 
 interface IProps {
   navigation: any
@@ -16,8 +17,12 @@ interface IState {}
 class ProductScreen extends PureComponent<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     const { params } = navigation.state
-    // tslint:disable-next-line:max-line-length
-    let right = <View style={{flexDirection: 'row'}}><Icon name={'ios-search'} style={styles.headerIcon} /><Icon name={'md-more'} style={styles.headerIcon} onPress={() => {navigation.navigate('Settings')}} /></View>
+    let right = (
+      <View style={{ flexDirection: 'row' }}>
+        <Icon name={'ios-search'} style={styles.headerIcon} />
+        <MenuAtom navigation={navigation} />
+      </View>
+    )
     let left = params &&
       params.items &&
       params.items.length > 0 && (
