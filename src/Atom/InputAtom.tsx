@@ -40,7 +40,11 @@ class InputAtom extends React.Component<IProps, any> {
           <Label style={styles.label}>
             {this.props.required && <Text style={styles.required}>* </Text>}
             <Text
-              style={{ color: color.inactive, fontFamily: 'SourceSansPro' }}
+              style={{
+                color: color.inactive,
+                fontFamily: 'SourceSansPro',
+                padding: 3
+              }}
             >
               {this.props.label}
             </Text>
@@ -86,7 +90,8 @@ const styles = StyleSheet.create({
     marginLeft: 4
   },
   label: {
-    color: color.inactive
+    color: color.inactive,
+    padding: 3
   },
   required: {
     color: color.primary

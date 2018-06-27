@@ -7,6 +7,7 @@ import {
   ScrollView,
   StyleSheet
 } from 'react-native'
+import { Form } from 'native-base'
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 import FormImageAtom from '../Atom/FormImageAtom'
@@ -43,36 +44,38 @@ class EditUserProfileForm extends Component<IProps, any> {
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.itemsContainer}>
         <ScrollView>
-          <FormImageAtom
-            business={false}
-            getValue={this.getImage}
-            source={this.state.image.uri}
-          />
-          <View style={styles.mainView}>
-            <Text style={styles.headerText}>Contact</Text>
-            <View style={styles.inputView}>
-              <InputAtom
-                label="Phone Number"
-                defaultValue={this.props.phoneNumber}
-                getValue={this.props.getPhoneNumber}
-                keyboardType="numeric"
-              />
-              <InputAtom
-                label="Email Address"
-                getValue={this.props.getName}
-                keyboardType="email-address"
-              />
+          <Form>
+            <FormImageAtom
+              business={false}
+              getValue={this.getImage}
+              source={this.state.image.uri}
+            />
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>Contact</Text>
+              <View style={styles.inputView}>
+                <InputAtom
+                  label="Phone Number"
+                  defaultValue={this.props.phoneNumber}
+                  getValue={this.props.getPhoneNumber}
+                  keyboardType="numeric"
+                />
+                <InputAtom
+                  label="Email Address"
+                  getValue={this.props.getName}
+                  keyboardType="email-address"
+                />
+              </View>
             </View>
-          </View>
-          <View style={styles.mainView}>
-            <Text style={styles.headerText}>Address</Text>
-            <View style={styles.inputView}>
-              <InputAtom
-                label="Business Address"
-                getValue={this.props.getName}
-              />
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>Address</Text>
+              <View style={styles.inputView}>
+                <InputAtom
+                  label="Business Address"
+                  getValue={this.props.getName}
+                />
+              </View>
             </View>
-          </View>
+          </Form>
         </ScrollView>
       </KeyboardAvoidingView>
     )
