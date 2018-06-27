@@ -61,7 +61,7 @@ export default class TotalDebtAtom extends React.Component<IProps, any> {
 
 const styles = StyleSheet.create({
   totalOrderIcon: {
-    color: color.list,
+    color: color.listBorderColor,
     fontSize: 22
   },
   totalDebtContainer: {
@@ -107,7 +107,7 @@ const styles = StyleSheet.create({
     height: 55,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: color.list
+    backgroundColor: color.listBorderColor
   },
   totalOrderRedNumber: {
     color: color.primary,

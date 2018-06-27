@@ -27,7 +27,10 @@ class LoginScreen extends React.Component<IProps, IState> {
             <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
               LOGIN
             </Text>
-            <KeyboardAvoidingView behavior="position">
+            <KeyboardAvoidingView
+              behavior="padding"
+              keyboardVerticalOffset={150}
+            >
               <LoginForm navigation={this.props.navigation} />
             </KeyboardAvoidingView>
           </View>
@@ -46,10 +49,11 @@ const styles = StyleSheet.create({
   },
   signUpText: {
     color: color.button,
-    marginTop: 32,
-    alignSelf: 'center'
+    alignSelf: 'center',
+    fontSize: 16
   },
   wrapper: {
-    paddingHorizontal: 32
+    paddingHorizontal: 32,
+    marginTop: 32
   }
 })
