@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, Image, StyleSheet } from 'react-native'
+import { View, Image, StyleSheet, Platform } from 'react-native'
 
 import { color } from '../Style/Color'
 
@@ -24,9 +24,12 @@ class AuthenticationHeader extends PureComponent<IProps, IState> {
         }
       >
         {this.props.smallHeader ? (
-          <Image source={require('./../../Assets/Images/logo_mini.png')} />
+          <Image
+            source={require('./../../Assets/Images/loginLogo.png')}
+            style={styles.image}
+          />
         ) : (
-          <Image source={require('./../../Assets/Images/logo.png')} />
+          <Image source={require('./../../Assets/Images/onboardingLogo.png')} />
         )}
       </View>
     )
@@ -37,22 +40,30 @@ export default AuthenticationHeader
 
 const styles = StyleSheet.create({
   smallHeader: {
-    height: '20%',
-    backgroundColor: color.primary,
+    height: 120,
+    alignItems: 'center',
     justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: color.secondary,
+    ...Platform.select({
+      ios: {
+        shadowColor: color.grey,
+        shadowOpacity: 0.5,
+        shadowRadius: 5,
+        shadowOffset: {
+          height: -1,
+          width: 0
+        }
+      },
+      android: {
+        elevation: 5
+      }
+    })
   },
+
   bigHeader: {
-    height: '36%'
+    height: 200
   },
-  smallHeaderLogo: {
-    flex: 0.4,
-    alignSelf: 'center',
-    width: '44%'
-  },
-  bigHeaderLogo: {
-    flex: 0.6,
-    alignSelf: 'center',
-    width: '23%'
+  image: {
+    marginTop: 20
   }
 })

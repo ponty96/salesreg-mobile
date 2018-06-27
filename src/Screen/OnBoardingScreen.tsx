@@ -16,7 +16,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
   }
 
   render() {
-    const appDetails = [
+    const APP_DETAILS = [
       'Manage all your produts',
       'Process all your orders',
       'Track all payments & outstandings',
@@ -26,15 +26,15 @@ class OnBoardingScreen extends PureComponent<IProps> {
     return (
       <View style={styles.container}>
         <AuthenticationHeader smallHeader={false} />
-        <ScrollView>
+        <ScrollView style={styles.bodyContainer}>
           <View style={styles.boardingScreenFeatureText}>
-            {appDetails.map((details, i) => (
+            {APP_DETAILS.map((details, i) => (
               <View style={styles.appFunctionWrapper} key={i}>
-                <Icon name="check" style={styles.blueCheck} type="Feather" />
+                <Icon name="check" style={styles.check} type="Feather" />
                 <Text
                   style={[
                     styles.appDetailsText,
-                    { fontFamily: 'SourceSansPro' }
+                    { fontFamily: 'SourceSansPro_Semibold' }
                   ]}
                 >
                   {details}
@@ -48,6 +48,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
             btnStyle={styles.signupButton}
             funcValue={'Signup'}
             onPress={this.navigate}
+            textStyle={styles.freeTrialText}
           />
           <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
             Or you have an account?
@@ -59,7 +60,10 @@ class OnBoardingScreen extends PureComponent<IProps> {
             funcValue={'Login'}
             onPress={this.navigate}
             btnStyle={styles.loginButton}
-            textStyle={styles.loginText}
+            textStyle={[
+              styles.loginText,
+              { fontFamily: 'SourceSansPro_Semibold' }
+            ]}
           />
         </ScrollView>
       </View>
@@ -70,41 +74,53 @@ class OnBoardingScreen extends PureComponent<IProps> {
 export default OnBoardingScreen
 
 const styles = StyleSheet.create({
+  bodyContainer: {
+    backgroundColor: color.secondary
+  },
   loginButton: {
     marginTop: 0,
     paddingHorizontal: 0,
-    marginBottom: '4%'
+    marginBottom: 16
   },
   signupButton: {
-    width: '80%',
+    alignSelf: 'stretch',
     justifyContent: 'center',
-    height: '11%',
-    marginTop: '4%'
+    height: 50,
+    marginTop: 32,
+    marginHorizontal: 32
   },
   haveAccount: {
-    marginTop: '4%',
+    marginTop: 32,
     textAlign: 'center',
-    color: color.menu
+    color: color.principal,
+    fontSize: 14
   },
   appDetailsText: {
-    marginLeft: '4%',
+    marginLeft: 16,
+    alignSelf: 'center',
     fontSize: 14,
-    alignSelf: 'flex-end'
+    color: color.black
   },
-  blueCheck: {
+  check: {
     color: color.warning
   },
   appFunctionWrapper: {
     flexDirection: 'row',
-    marginVertical: '1%'
+    marginVertical: 5
   },
   boardingScreenFeatureText: {
-    marginVertical: '10%',
-    marginHorizontal: '10%'
+    marginTop: 48,
+    marginBottom: 32,
+    marginHorizontal: 32
   },
   container: {
-    flex: 1,
-    backgroundColor: color.secondary
+    flex: 1
   },
-  loginText: { color: color.button }
+  loginText: {
+    color: color.button,
+    fontSize: 16
+  },
+  freeTrialText: {
+    fontSize: 16
+  }
 })

@@ -1,9 +1,9 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import { color } from '../Style/Color';
+import React, { Component } from 'react'
+import { View, StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
-  screen1?: boolean;
+  firstScreen?: boolean
 }
 
 export default class TransitionAtom extends Component<IProps> {
@@ -14,8 +14,8 @@ export default class TransitionAtom extends Component<IProps> {
         <View style={styles.iconDash} />
         <View style={styles.unfilledCircle} />
       </View>
-    );
-  };
+    )
+  }
 
   secondScreen = () => {
     return (
@@ -24,10 +24,11 @@ export default class TransitionAtom extends Component<IProps> {
         <View style={styles.iconDash} />
         <View style={styles.filledCircle} />
       </View>
-    );
-  };
+    )
+  }
+
   render() {
-    return this.props.screen1 ? this.firstScreen() : this.secondScreen();
+    return this.props.firstScreen ? this.firstScreen() : this.secondScreen()
   }
 }
 
@@ -36,8 +37,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
-    alignSelf: 'center',
-    marginTop: '5%'
+    alignSelf: 'center'
   },
   filledCircle: {
     backgroundColor: color.button,
@@ -47,16 +47,16 @@ const styles = StyleSheet.create({
   },
   iconDash: {
     borderBottomColor: color.button,
-    width: '7%',
+    width: 28,
     borderBottomWidth: 1,
     alignSelf: 'center'
   },
   unfilledCircle: {
     backgroundColor: 'white',
-    borderWidth: 1,
+    borderWidth: 1.1,
     borderColor: color.button,
     borderRadius: 10,
     height: 20,
     width: 20
   }
-});
+})

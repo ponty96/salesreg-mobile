@@ -9,7 +9,7 @@ export const color = {
   warning: '#FF9630',
   black: '#000000',
   principal: '#444444',
-  textBorderBottom: '#E8E8E8',
+  textBorderBottom: '#E0E0E0',
   button: '#0051FF',
   dropdown: '#D0D0D0',
   list: '#F3F3F3',

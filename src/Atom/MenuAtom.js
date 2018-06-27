@@ -35,12 +35,13 @@ export default class MenuAtom extends Component /*<IProps, any>*/ {
 
 const styles = StyleSheet.create({
   buttonStyle: {
-    width: 42,
-    height: 42,
-    padding: 8
+    width: 35,
+    height: 35,
+    padding: 2
   },
   icon: {
-    color: 'white',
-    padding: 8
+    color: color.secondary,
+    padding: 1,
+    fontSize: 29
   }
 })

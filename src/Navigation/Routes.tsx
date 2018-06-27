@@ -51,7 +51,8 @@ import ExpensesScreen from '../Screen/ExpensesScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
-import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen';
+import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
+import MenuAtom from '../Atom/MenuAtom'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -199,7 +200,7 @@ const businessStack = StackNavigator(
       screen: EditUserProfileScreen
     },
     EditBusinessProfile: {
-        screen: EditBusinessProfileScreen
+      screen: EditBusinessProfileScreen
     }
   },
   {
@@ -213,6 +214,18 @@ const businessStack = StackNavigator(
           onPress={() => navigation.navigate('DrawerToggle')}
           style={styles.menuIcon}
         />
+      ),
+      headerRight: (
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Icon name={'ios-search'} style={styles.menuIcon} />
+          <MenuAtom navigation={navigation} />
+        </View>
       ),
       headerTintColor: color.secondary,
       headerStyle: {

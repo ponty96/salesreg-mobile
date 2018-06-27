@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: color.secondary,
     alignContent: 'center',
-    padding: 6,
+    padding: 3,
     borderRadius: 3,
     marginTop: 16,
     marginBottom: 16

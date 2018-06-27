@@ -56,7 +56,11 @@ class EditBusinessProfileForm extends Component<IProps, any> {
   }
   render() {
     return (
-      <KeyboardAvoidingView behavior="padding" style={styles.itemsContainer}>
+      <KeyboardAvoidingView
+        behavior="padding"
+        keyboardVerticalOffset={60}
+        style={styles.itemsContainer}
+      >
         <ScrollView>
           <FormImageAtom
             business={true}
@@ -142,7 +146,7 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: color.secondary,
     alignContent: 'center',
-    padding: 6,
+    padding: 3,
     marginTop: 16,
     marginBottom: 16,
     borderRadius: 3
