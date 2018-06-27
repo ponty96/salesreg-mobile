@@ -12,7 +12,7 @@ interface IProps {
   name?: string
   getName?: (name: string) => any
   getValue?: any
-  business: boolean
+  form: string
 }
 
 class FormImageAtom extends React.Component<IProps, any> {
@@ -32,11 +32,38 @@ class FormImageAtom extends React.Component<IProps, any> {
       }
     }
   }
+  imageFunc = (form: string) => {
+    let title
+    let type
+    switch (form) {
+      case 'business':
+        title = 'Business ID'
+        type = 'Business Name'
+        break
+      case 'user':
+        title = 'User ID'
+        type = 'User Name'
+        break
+      case 'product':
+        title = 'Product ID'
+        type = 'Product Name'
+        break
+      case 'customer':
+        title = 'Product ID'
+        type = 'Product Name'
+        break
+      default:
+        title = 'Unknown ID'
+        type = 'Error'
+    }
+    return [title, type]
+  }
 
   render() {
     if (this.props.source) {
-      let title = this.props.business ? 'Business ID' : 'User ID'
-      let type = this.props.business ? 'Business Name' : 'User Name'
+      const term = this.imageFunc(this.props.form)
+      let title = term[0]
+      let type = term[1]
       return (
         <View style={styles.mainView}>
           <Text
@@ -78,8 +105,9 @@ class FormImageAtom extends React.Component<IProps, any> {
         </View>
       )
     } else {
-      let title = this.props.business ? 'Business ID' : 'User ID'
-      let type = this.props.business ? 'Business Name' : 'User Name'
+      const term = this.imageFunc(this.props.form)
+      let title = term[0]
+      let type = term[1]
       return (
         <View style={styles.mainView}>
           <Text

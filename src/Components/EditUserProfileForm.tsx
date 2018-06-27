@@ -50,7 +50,7 @@ class EditUserProfileForm extends Component<IProps, any> {
         <ScrollView>
           <Form>
             <FormImageAtom
-              business={false}
+              form="user"
               getValue={this.getImage}
               source={this.state.image.uri}
             />

@@ -23,6 +23,7 @@ interface IProps {
 
 interface IState {
   bottomColor: string
+  labelColor: string
 }
 
 class InputAtom extends React.Component<IProps, IState> {
@@ -37,11 +38,16 @@ class InputAtom extends React.Component<IProps, IState> {
   }
 
   state = {
-    bottomColor: color.textBorderBottom
+    bottomColor: color.textBorderBottom,
+    labelColor: color.inactive
   }
 
   changeUnderline = (newColor: string): void => {
-    if (this.props.login) this.setState({ bottomColor: newColor })
+    if (this.props.login) {
+      this.setState({ bottomColor: newColor, labelColor: newColor })
+    } else {
+      this.setState({ labelColor: newColor })
+    }
   }
 
   render() {
@@ -55,15 +61,15 @@ class InputAtom extends React.Component<IProps, IState> {
             this.props.contStyle
           ]}
         >
-          <Label style={styles.label}>
+          <Label
+            style={{
+              color: this.state.labelColor,
+              padding: 3,
+              fontSize: 14
+            }}
+          >
             {this.props.required && <Text style={styles.required}>*</Text>}
-            <Text
-              style={{
-                color: color.inactive,
-                fontFamily: 'SourceSansPro',
-                padding: 3
-              }}
-            >
+            <Text style={[styles.labelText, { color: this.state.labelColor }]}>
               {this.props.label}
             </Text>
           </Label>
@@ -115,7 +121,13 @@ const styles = StyleSheet.create({
     marginLeft: 4
   },
   label: {
-    color: color.inactive,
+    // color: this.state.labelColor,
+    padding: 3,
+    fontSize: 14
+  },
+  labelText: {
+    // color: this.state.labelColor,
+    fontFamily: 'SourceSansPro',
     padding: 3,
     fontSize: 14
   },
