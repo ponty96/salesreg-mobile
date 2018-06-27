@@ -232,7 +232,9 @@ const businessStack = StackNavigator(
         backgroundColor: color.primary
       },
       headerTitleStyle: {
-          fontFamily: 'SourceSansPro', fontSize: 16
+        fontFamily: 'SourceSansPro',
+        fontSize: 16,
+        fontWeight: '400'
       }
     })
   }
