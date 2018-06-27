@@ -11,7 +11,7 @@ export const color = {
   principal: '#444444',
   textBorderBottom: '#E8E8E8',
   button: '#0051FF',
-  dropdown: '#DODODO',
+  dropdown: '#D0D0D0',
   list: '#F3F3F3',
   subHeader: '#DDDDDD',
   modal: '#F6F6F6',

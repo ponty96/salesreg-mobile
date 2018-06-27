@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 import { ListItem, Left, Right, Icon } from 'native-base'
 
@@ -49,7 +49,8 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     paddingLeft: 0,
     height: 75,
-    width: '100%',
+    width: Dimensions.get('screen').width - 22,
+    alignSelf: 'center',
     borderBottomWidth: 1,
     backgroundColor: '#FFF',
     borderBottomColor: color.list
