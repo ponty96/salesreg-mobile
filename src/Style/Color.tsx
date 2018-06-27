@@ -12,6 +12,7 @@ export const color = {
   textBorderBottom: '#E0E0E0',
   button: '#0051FF',
   dropdown: '#D0D0D0',
+  list: '#F3F3F3',
   subHeader: '#DDDDDD',
   modal: '#F6F6F6',
   check: '#27CBD3',

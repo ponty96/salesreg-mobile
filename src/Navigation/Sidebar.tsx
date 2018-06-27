@@ -25,7 +25,6 @@ export default class SideBar extends PureComponent<IProps> {
     const {
       navigation: { navigate }
     } = this.props
-    console.log('navigation', this.props.navigation)
     return (
       <SafeAreaView
         style={styles.sidebarContainer}

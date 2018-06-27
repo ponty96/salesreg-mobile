@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import ButtonAtom from '../Atom/ButtonAtom';
-import { color } from './../Style/Color';
+import * as React from 'react'
+import { View, StyleSheet } from 'react-native'
+import ButtonAtom from '../Atom/ButtonAtom'
+import { color } from './../Style/Color'
 
 interface IProps {
-  navigation: any;
-  createfunc?: () => void;
-  positiveButtonName: string;
+  navigation: any
+  createfunc?: () => void
+  positiveButtonName: string
 }
 
 class SaveCancelButton extends React.Component<IProps, any> {
   create = () => {
     if (this.props.createfunc) {
-      this.props.createfunc();
+      this.props.createfunc()
     }
-  };
+  }
 
   render() {
     return (
@@ -35,15 +35,16 @@ class SaveCancelButton extends React.Component<IProps, any> {
           textStyle={styles.saveCancelButtonText}
         />
       </View>
-    );
+    )
   }
 }
 
-export default SaveCancelButton;
+export default SaveCancelButton
 
 const styles = StyleSheet.create({
   saveCancelContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    height: 65
   },
   saveCancelButton: {
     borderWidth: 1,
@@ -62,4 +63,4 @@ const styles = StyleSheet.create({
     color: color.menu,
     fontWeight: 'bold'
   }
-});
+})

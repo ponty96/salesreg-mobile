@@ -51,6 +51,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     textAlign: 'right',
     paddingRight: 5,
+    fontFamily: 'SourceSansPro_Semibold',
     marginTop: 0,
     paddingTop: 0,
     paddingBottom: 15
@@ -58,6 +59,7 @@ const styles = StyleSheet.create({
   rowText1: {
     fontWeight: '400',
     fontSize: 13,
+    fontFamily: 'SourceSansPro',
     // color: '#000',
     textAlign: 'left'
   },

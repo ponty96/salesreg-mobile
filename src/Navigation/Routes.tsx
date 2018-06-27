@@ -30,6 +30,7 @@ import ServicesScreen from './../Screen/ServicesScreen'
 import DebtDetailsScreen from './../Screen/DebtDetailsScreen'
 import ProductDetailsScreen from './../Screen/ProductDetailsScreen'
 import UserProfileScreen from '../Screen/UserProfileScreen'
+import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
 import OrderListScreen from '../Screen/OrderListScreen'
 import SecondSignUpScreen from '../Screen/SecondSignUpScreen'
 import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
@@ -38,6 +39,7 @@ import Sidebar from './Sidebar'
 import styles from './../Style/Layout'
 import { color } from './../Style/Color'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
+import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
 import HomeScreen from '../Screen/HomeScreen'
 import EmployeesScreen from '../Screen/EmployeesScreen'
 import VendorScreen from '../Screen/VendorScreen'
@@ -49,6 +51,8 @@ import ExpensesScreen from '../Screen/ExpensesScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
+import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
+import MenuAtom from '../Atom/MenuAtom'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -145,6 +149,9 @@ const businessStack = StackNavigator(
     Settings: {
       screen: SettingsScreen
     },
+    Profile: {
+      screen: ProfileSettingsScreen
+    },
     Debt: {
       screen: DebtScreen
     },
@@ -177,6 +184,9 @@ const businessStack = StackNavigator(
     UserProfile: {
       screen: UserProfileScreen
     },
+    BusinessProfile: {
+      screen: BusinessProfileScreen
+    },
     OrderList: {
       screen: OrderListScreen
     },
@@ -188,6 +198,9 @@ const businessStack = StackNavigator(
     },
     EditUserProfile: {
       screen: EditUserProfileScreen
+    },
+    EditBusinessProfile: {
+      screen: EditBusinessProfileScreen
     }
   },
   {
@@ -201,6 +214,18 @@ const businessStack = StackNavigator(
           onPress={() => navigation.navigate('DrawerToggle')}
           style={styles.menuIcon}
         />
+      ),
+      headerRight: (
+        <View
+          style={{
+            flexDirection: 'row',
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Icon name={'ios-search'} style={styles.menuIcon} />
+          <MenuAtom navigation={navigation} />
+        </View>
       ),
       headerTintColor: color.secondary,
       headerStyle: {

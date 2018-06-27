@@ -11,10 +11,10 @@ interface IProps {
 
 interface IState {}
 
-class SettingsScreen extends PureComponent<IProps, IState> {
+class ProfileSettingsScreen extends PureComponent<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Settings',
+      title: 'Profile Settings',
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
@@ -26,7 +26,6 @@ class SettingsScreen extends PureComponent<IProps, IState> {
       )
     }
   }
-
   render() {
     const {
       navigation: { navigate }
@@ -36,16 +35,19 @@ class SettingsScreen extends PureComponent<IProps, IState> {
         navigate={navigate}
         categories={[
           {
-            section: 'Profile',
-            routeName: 'Profile'
+            section: 'User Profile',
+            routeName: 'UserProfile'
+          },
+          {
+            section: 'Business Profile',
+            routeName: 'BusinessProfile'
           }
         ]}
       />
     )
   }
 }
-
-export default SettingsScreen
+export default ProfileSettingsScreen
 
 const styles = StyleSheet.create({
   headerIcon: {
