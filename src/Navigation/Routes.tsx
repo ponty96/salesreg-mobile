@@ -230,6 +230,9 @@ const businessStack = StackNavigator(
       headerTintColor: color.secondary,
       headerStyle: {
         backgroundColor: color.primary
+      },
+      headerTitleStyle: {
+          fontFamily: 'SourceSansPro', fontSize: 16
       }
     })
   }
