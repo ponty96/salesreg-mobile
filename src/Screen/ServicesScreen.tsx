@@ -1,9 +1,10 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Icon, List } from 'native-base'
 
 import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
 import { color } from '../Style/Color'
+import SubHeaderAtom from '../Atom/SubHeaderAtom'
 
 interface IProps {
   navigation: any
@@ -33,14 +34,10 @@ class ServicesScreen extends PureComponent<IProps, IState> {
 
   render() {
     return (
-      <List style={styles.container}>
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-      </List>
-    );
+      <View style={styles.container}>
+        <SubHeaderAtom list={['Lorem ipsum']} />
+      </View>
+    )
   }
 }
 
@@ -53,7 +50,6 @@ const styles = StyleSheet.create({
     fontSize: 28
   },
   container: {
-    flex: 1,
-    marginHorizontal: 16
+    flex: 1
   }
 })
