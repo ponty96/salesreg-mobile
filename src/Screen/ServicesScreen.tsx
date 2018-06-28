@@ -42,6 +42,7 @@ const styles = StyleSheet.create({
     fontSize: 28
   },
   container: {
-    flex: 1
+    flex: 1,
+    color: color.secondary
   }
 })
