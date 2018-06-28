@@ -42,7 +42,6 @@ class PickerAtom extends React.Component<IProps, IState> {
         onValueChange={this.handleChange.bind(this)}
         placeholder={this.props.placeholder}
         textStyle={{
-          fontFamily: 'SourceSansPro',
           textAlign: 'left',
           paddingLeft: 0,
           paddingRight: 0
