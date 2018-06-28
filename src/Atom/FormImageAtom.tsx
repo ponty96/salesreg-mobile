@@ -32,7 +32,7 @@ class FormImageAtom extends React.Component<IProps, any> {
       }
     }
   }
-  imageFunc = (form: string) => {
+  determineDataBasedOnProps = (form: string) => {
     let title
     let type
     switch (form) {
@@ -53,17 +53,19 @@ class FormImageAtom extends React.Component<IProps, any> {
         type = 'Product Name'
         break
       default:
-        title = 'Unknown ID'
-        type = 'Error'
+        title = 'Avatar'
+        type = 'Avatar name'
     }
-    return [title, type]
+    const obj = {
+      title: title,
+      type: type
+    }
+    return obj
   }
 
   render() {
     if (this.props.source) {
-      const term = this.imageFunc(this.props.form)
-      let title = term[0]
-      let type = term[1]
+      const { title, type } = this.determineDataBasedOnProps(this.props.form)
       return (
         <View style={styles.mainView}>
           <Text
@@ -105,9 +107,7 @@ class FormImageAtom extends React.Component<IProps, any> {
         </View>
       )
     } else {
-      const term = this.imageFunc(this.props.form)
-      let title = term[0]
-      let type = term[1]
+      const { title, type } = this.determineDataBasedOnProps(this.props.form)
       return (
         <View style={styles.mainView}>
           <Text
