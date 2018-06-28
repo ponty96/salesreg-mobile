@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, ScrollView, FlatList } from 'react-native'
 
 import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
 import { color } from '../Style/Color'
@@ -9,17 +9,25 @@ interface IProps {
   navigation: any
 }
 
-interface IState {}
+class ServicesScreen extends PureComponent<IProps> {
+  SERVICES = [
+    { key: '1 million Braids', price: '3000' },
+    { key: 'Re-touching', price: '1000' },
+    { key: 'Steaming', price: '800' },
+    { key: 'DD', price: '400' }
+  ]
 
-class ServicesScreen extends PureComponent<IProps, IState> {
+  renderList = ({ item }: any) => {
+    return <ServiceListItemAtom name={item.key} amount={item.price} />
+  }
+
   render() {
     return (
       <View style={styles.container}>
         <SubHeaderAtom list={['Lorem ipsum']} />
-        <ServiceListItemAtom
-          name="1 million Braids"
-          amount={'\u20A6' + ' 3000'}
-        />
+        <ScrollView>
+          <FlatList data={this.SERVICES} renderItem={this.renderList} />
+        </ScrollView>
       </View>
     )
   }

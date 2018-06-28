@@ -41,7 +41,6 @@ const styles = StyleSheet.create({
     height: 75,
     paddingLeft: 0,
     marginLeft: 0,
-    // backgroundColor: '#fff',
     marginBottom: 0.5,
     paddingVertical: 10,
     paddingHorizontal: 10
@@ -60,7 +59,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 13,
     fontFamily: 'SourceSansPro',
-    // color: '#000',
     textAlign: 'left'
   },
   leftView: {

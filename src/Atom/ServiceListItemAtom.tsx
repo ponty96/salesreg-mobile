@@ -11,32 +11,34 @@ interface IProps {
 }
 
 class ServicesListItemAtom extends React.Component<IProps, {}> {
-  handleBodyPress = () => {
+  /*handleBodyPress = () => {
     if (this.props.bodyfunction) {
       this.props.bodyfunction(this.props.name, this.props.amount)
     }
-  }
+  }*/
 
   render() {
     return (
-      <View style={[styles.listContainer, this.props.contStyle]}>
-        <TouchableOpacity onPress={this.handleBodyPress} activeOpacity={1}>
-          <View style={styles.listTextCont}>
-            <Text style={[styles.nameText, { fontFamily: 'SourceSansPro' }]}>
-              {this.props.name}
-            </Text>
-            <Text
-              style={[
-                { fontFamily: 'SourceSansPro' },
-                styles.amountText,
-                this.props.textStyle
-              ]}
-            >
-              {this.props.amount}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+      <TouchableOpacity
+        // onPress={this.handleBodyPress}
+        activeOpacity={1}
+        style={[styles.listContainer, this.props.contStyle]}
+      >
+        <View style={styles.listTextCont}>
+          <Text style={[styles.nameText, { fontFamily: 'SourceSansPro' }]}>
+            {this.props.name}
+          </Text>
+          <Text
+            style={[
+              { fontFamily: 'SourceSansPro' },
+              styles.amountText,
+              this.props.textStyle
+            ]}
+          >
+            {'\u20A6 '} {this.props.amount}
+          </Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 }
@@ -51,17 +53,17 @@ const styles = StyleSheet.create({
     marginHorizontal: 16
   },
   listTextCont: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignContent: 'center',
     alignItems: 'center',
-    paddingVertical: 16,
+    paddingVertical: 8,
     paddingHorizontal: 8
   },
   nameText: {
     color: color.principal,
-    fontSize: 14
+    fontSize: 14,
+    marginVertical: 4
   },
   amountText: {
     color: color.selling,
