@@ -10,7 +10,7 @@ interface IProps {
   placeholder?: string
   imgStyle?: object
   name?: string
-  getName?: (name: string) => any
+  getName: (name: string) => any
   getValue?: any
   form: string
 }

@@ -1,7 +1,13 @@
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import {
+  View,
+  Text,
+  StyleSheet,
+  Dimensions,
+  KeyboardAvoidingView
+} from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
-import ImageAtom from './ImageAtom'
+import FormImageAtom from './FormImageAtom'
 import InputAtom from './InputAtom'
 import { color } from '../Style/Color'
 
@@ -14,21 +20,14 @@ export default class ProductFormAtom extends React.Component<IProps, any> {
     super(props)
     this.state = {
       product: '',
-      image: { uri: 'https://www.iconsdb.com/icons/preview/gray/shop-xxl.png' },
-      squantity: '',
-      pquantity: '',
-      costpp: '',
-      ucost: '',
-      sellp: '',
-      stock: ''
+      image: {
+        uri:
+          'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png'
+      },
+      currentStock: '',
+      minStock: '',
+      costPrice: ''
     }
-  }
-  create = () => {
-    this.props.navigation.goBack()
-  }
-
-  getProduct = (product: string) => {
-    this.setState({ product })
   }
 
   getImage = (pic: any) => {
@@ -40,106 +39,128 @@ export default class ProductFormAtom extends React.Component<IProps, any> {
     }))
   }
 
-  getSQuantity = (squantity: any) => {
-    this.setState({ squantity })
-  }
-
-  getPQuantity = (pquantity: any) => {
-    this.setState({ pquantity })
-  }
-
-  getCostPP = (costpp: any) => {
-    this.setState({ costpp })
-  }
-
-  getUCost = (ucost: any) => {
-    this.setState({ ucost })
-  }
-  getSellP = (sellp: any) => {
-    this.setState({ sellp })
-  }
-  getStock = (stock: any) => {
-    this.setState({ stock })
-  }
-
   updateState = (key: string, value: any) => {
     this.setState({ [key]: value })
   }
   render() {
     return (
-      <ScrollView>
-        <View>
-          <ImageAtom getValue={this.getImage} source={this.state.image.uri} />
-          <View>
-            <InputAtom
-              label="Product name"
-              getValue={val => this.updateState('product', val)}
-              contStyle={styles.marginlessInput}
-              required={true}
-            />
+      <KeyboardAvoidingView
+        behavior="padding"
+        keyboardVerticalOffset={60}
+        style={styles.itemsContainer}
+      >
+        <ScrollView>
+          <FormImageAtom
+            form="product"
+            getValue={this.getImage}
+            getName={val => this.updateState('product', val)}
+            source={this.state.image.uri}
+          />
+          <View style={styles.mainView}>
+            <Text style={styles.headerText}>Quantity</Text>
+            <View style={styles.inputView}>
+              <InputAtom
+                label="Current Stock Quantity"
+                getValue={val => this.updateState('currentStock', val)}
+                keyboardType="numeric"
+                underneathText="Quantity available in store as at now"
+                underneathStyle={{
+                  marginBottom: 0,
+                  paddingBottom: 0,
+                  paddingLeft: 8
+                }}
+              />
+              <InputAtom
+                label="Minimum Stock Quantity"
+                getValue={val => this.updateState('minStock', val)}
+                keyboardType="numeric"
+                underneathText="Minimum quantity required for re-stock"
+                underneathStyle={{
+                  marginBottom: 0,
+                  paddingBottom: 0,
+                  paddingLeft: 8
+                }}
+              />
+            </View>
           </View>
-          <View>
-            <InputAtom
-              label="Stock quantity"
-              keyboardType="numeric"
-              getValue={val => this.updateState('squantity', val)}
-              contStyle={styles.marginlessInput}
-            />
-            <Text style={styles.font1}>Quantity available in store</Text>
+          <View style={styles.mainView}>
+            <Text style={styles.headerText}>Cost/Price</Text>
+            <View style={styles.inputViewForTwo}>
+              <View>
+                <Text style={styles.blueSideText}>
+                  *Cost Price/each ({'\u20A6'})
+                </Text>
+              </View>
+              <View style={{ width: '60%' }}>
+                <InputAtom
+                  label=""
+                  getValue={val => this.updateState('costPrice', val)}
+                  keyboardType="numeric"
+                />
+              </View>
+            </View>
           </View>
-          <View>
-            <InputAtom
-              label="Unit cost price"
-              keyboardType="numeric"
-              getValue={this.getStock}
-              contStyle={styles.marginlessInput}
-            />
-            <Text style={styles.font1}>
-              Cost of 1 unit in a packing container e.g. N1 per liter
-            </Text>
-          </View>
-          <View>
-            <InputAtom
-              label="Selling price"
-              keyboardType="numeric"
-              required={true}
-              getValue={this.getStock}
-              contStyle={styles.marginlessInput}
-            />
-          </View>
-          <View>
-            <InputAtom
-              label="Minimum stock quantity"
-              keyboardType="numeric"
-              getValue={this.getStock}
-              contStyle={styles.marginlessInput}
-            />
-            <Text style={styles.font1}>
-              Minimum amount required for restock
-            </Text>
-          </View>
-        </View>
-      </ScrollView>
+        </ScrollView>
+      </KeyboardAvoidingView>
     )
   }
 }
 
 const styles = StyleSheet.create({
-  marginlessInput: {
-    marginLeft: 0
+  indentLeft: {
+    marginLeft: 20
   },
-  font1: {
-    fontSize: 11,
-    color: '#000',
-    paddingTop: 0,
-    marginTop: 0
+  indentRight: {
+    marginRight: 20
   },
-  pickerStyle: {
-    //  width: '50%',
-    height: 35
+  mainView: {
+    backgroundColor: 'transparent',
+    width: '100%'
   },
-  addSign: {
-    color: color.primary,
-    fontSize: 50
+  inputView: {
+    width: Dimensions.get('screen').width - 32,
+    alignSelf: 'center',
+    backgroundColor: color.secondary,
+    alignContent: 'center',
+    padding: 3,
+    marginTop: 16,
+    marginBottom: 16,
+    borderRadius: 3
+  },
+  inputViewForTwo: {
+    width: Dimensions.get('screen').width - 32,
+    alignSelf: 'center',
+    backgroundColor: color.secondary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    marginTop: 16,
+    marginBottom: 16,
+    borderRadius: 3
+  },
+  editDetailsWrapper: {
+    marginTop: 30,
+    marginBottom: 10
+  },
+  textTitle: {
+    color: color.inactive,
+    fontWeight: '400',
+    fontSize: 14
+  },
+  itemsContainer: {
+    flex: 4,
+    backgroundColor: '#F6F6F6'
+  },
+  headerText: {
+    alignSelf: 'center',
+    fontSize: 14,
+    color: color.button,
+    fontFamily: 'SourceSansPro_Semibold'
+  },
+  blueSideText: {
+    fontSize: 14,
+    paddingLeft: 16,
+    color: color.button,
+    fontFamily: 'SourceSansPro_Semibold'
   }
 })

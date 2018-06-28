@@ -70,16 +70,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
   render() {
     return (
       <View style={styles.formViewContainer}>
-        <EditBusinessProfileForm
-          image={this.state.image}
-          getImage={this.getImage}
-          name={this.state.name}
-          getName={this.getName}
-          phoneNumber={this.state.phoneNumber}
-          getPhoneNumber={this.getPhoneNumber}
-          gender={this.state.gender}
-          updateGender={this.updateGender}
-        />
+        <EditBusinessProfileForm />
         <SaveCancelButton
           positiveButtonName="SAVE"
           navigation={this.props.navigation}

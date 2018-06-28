@@ -13,16 +13,7 @@ import { color } from '../Style/Color'
 import FormImageAtom from '../Atom/FormImageAtom'
 import PickerAtom from '../Atom/PickerAtom'
 
-interface IProps {
-  image?: string
-  getImage?: (pic: string) => void
-  name: string
-  getName?: (name: string) => any
-  phoneNumber: string
-  getPhoneNumber?: (num: string) => any
-  gender: string
-  updateGender?: (gender: string) => any
-}
+interface IProps {}
 
 class EditBusinessProfileForm extends Component<IProps, any> {
   constructor(props: IProps) {
@@ -32,8 +23,12 @@ class EditBusinessProfileForm extends Component<IProps, any> {
         uri:
           'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png'
       },
+      businessName: '',
       check1: true,
-      check2: true
+      check2: true,
+      email: '',
+      description: '',
+      address: ''
     }
   }
   getImage = (pic: any) => {
@@ -54,6 +49,9 @@ class EditBusinessProfileForm extends Component<IProps, any> {
       check2: !this.state.check2
     })
   }
+  updateState = (key: string, value: any) => {
+    this.setState({ [key]: value })
+  }
   render() {
     return (
       <KeyboardAvoidingView
@@ -64,6 +62,7 @@ class EditBusinessProfileForm extends Component<IProps, any> {
         <ScrollView>
           <FormImageAtom
             form="business"
+            getName={val => this.updateState('businessName', val)}
             getValue={this.getImage}
             source={this.state.image.uri}
           />
@@ -72,11 +71,13 @@ class EditBusinessProfileForm extends Component<IProps, any> {
             <View style={styles.inputView}>
               <InputAtom
                 label="Email Address"
-                defaultValue={this.props.phoneNumber}
-                getValue={this.props.getPhoneNumber}
+                getValue={val => this.updateState('email', val)}
                 keyboardType="email-address"
               />
-              <InputAtom label="Address" getValue={this.props.getName} />
+              <InputAtom
+                label="Address"
+                getValue={val => this.updateState('address', val)}
+              />
             </View>
           </View>
           <View style={styles.mainView}>
@@ -119,7 +120,11 @@ class EditBusinessProfileForm extends Component<IProps, any> {
           <View style={styles.mainView}>
             <Text style={styles.headerText}>Description</Text>
             <View style={styles.inputView}>
-              <Textarea rowSpan={5} placeholder="Description" />
+              <Textarea
+                rowSpan={5}
+                placeholder="Description"
+                onChangeText={val => this.updateState('description', val)}
+              />
             </View>
           </View>
         </ScrollView>
