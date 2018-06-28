@@ -4,35 +4,35 @@ import { color } from '../Style/Color'
 
 interface IProps {
   name: string
-  amount: string,
-  textStyle?: any,
-  contStyle?: any,
+  amount: string
+  textStyle?: any
+  contStyle?: any
   bodyfunction?: (name: string, amount: string) => void
 }
 
 class ServicesListItemAtom extends React.Component<IProps, {}> {
-
   handleBodyPress = () => {
     if (this.props.bodyfunction) {
-      this.props.bodyfunction(this.props.name, this.props.amount);
+      this.props.bodyfunction(this.props.name, this.props.amount)
     }
   }
 
   render() {
     return (
-      <View
-        style={[styles.listContainer, this.props.contStyle]}
-      >
-        <TouchableOpacity
-          onPress={this.handleBodyPress}
-          activeOpacity={1}
-        >
+      <View style={[styles.listContainer, this.props.contStyle]}>
+        <TouchableOpacity onPress={this.handleBodyPress} activeOpacity={1}>
           <View style={styles.listTextCont}>
-            <Text style={styles.nameText}>
+            <Text style={[styles.nameText, { fontFamily: 'SourceSansPro' }]}>
               {this.props.name}
             </Text>
-            <Text style={[styles.amountText, this.props.textStyle]}>
-                {this.props.amount}
+            <Text
+              style={[
+                { fontFamily: 'SourceSansPro' },
+                styles.amountText,
+                this.props.textStyle
+              ]}
+            >
+              {this.props.amount}
             </Text>
           </View>
         </TouchableOpacity>
@@ -45,8 +45,10 @@ export default ServicesListItemAtom
 
 const styles = StyleSheet.create({
   listContainer: {
-    paddingVertical: 8,
-    borderBottomWidth: 1
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: color.dropdown,
+    marginHorizontal: 16
   },
   listTextCont: {
     flex: 1,
@@ -58,9 +60,11 @@ const styles = StyleSheet.create({
     paddingHorizontal: 8
   },
   nameText: {
-    flex: 1
+    color: color.principal,
+    fontSize: 14
   },
   amountText: {
-    color: color.primary
+    color: color.selling,
+    fontSize: 16
   }
 })

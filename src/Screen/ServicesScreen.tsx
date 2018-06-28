@@ -16,6 +16,10 @@ class ServicesScreen extends PureComponent<IProps, IState> {
     return (
       <View style={styles.container}>
         <SubHeaderAtom list={['Lorem ipsum']} />
+        <ServiceListItemAtom
+          name="1 million Braids"
+          amount={'\u20A6' + ' 3000'}
+        />
       </View>
     )
   }
