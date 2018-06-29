@@ -53,6 +53,8 @@ import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 import MenuAtom from '../Atom/MenuAtom'
+import EditServiceScreen from '../Screen/EditServiceScreen'
+import ServiceScreen from '../Screen/ServiceScreen'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -98,7 +100,11 @@ const viewBothStack = TabNavigator(
       indicatorStyle: {
         backgroundColor: color.check
       },
-      upperCaseLabel: false
+      upperCaseLabel: false,
+      labelStyle: {
+        fontSize: 14,
+        fontFamily: 'SourceSansPro'
+      }
     },
     animationEnabled: false,
     swipeEnabled: true
@@ -201,11 +207,12 @@ const businessStack = StackNavigator(
     },
     EditBusinessProfile: {
       screen: EditBusinessProfileScreen
-    }
+    },
+    EditServices: EditServiceScreen,
+    ShowService: ServiceScreen
   },
   {
     initialRouteName: 'Home',
-    // initialRouteName: 'ViewBusiness',
     navigationOptions: ({ navigation }: any) => ({
       title: 'Business',
       headerLeft: (

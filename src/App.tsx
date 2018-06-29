@@ -3,8 +3,7 @@ import { StatusBar } from 'react-native'
 import { Font, AppLoading } from 'expo'
 import { Root } from 'native-base'
 
-// import Routes from './Navigation/Routes'
-import EditServiceScreen from './Screen/EditServiceScreen'
+import Routes from './Navigation/Routes'
 
 export default class App extends React.Component {
   state = {
@@ -29,8 +28,7 @@ export default class App extends React.Component {
     return (
       <Root>
         <StatusBar barStyle="light-content" />
-        {/* <Routes />*/}
-        <EditServiceScreen />
+        <Routes />
       </Root>
     )
   }

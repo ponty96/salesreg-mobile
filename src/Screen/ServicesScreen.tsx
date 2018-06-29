@@ -17,8 +17,22 @@ class ServicesScreen extends PureComponent<IProps> {
     { key: 'DD', price: '400' }
   ]
 
+  handleTouch = (item: { name: string; amount: string }) => {
+    this.props.navigation.navigate('ShowService', {
+      productName: item.name,
+      price: item.amount
+    })
+    console.log(item.name)
+  }
+
   renderList = ({ item }: any) => {
-    return <ServiceListItemAtom name={item.key} amount={item.price} />
+    return (
+      <ServiceListItemAtom
+        name={item.key}
+        amount={item.price}
+        onPress={() => this.handleTouch({ name: item.key, amount: item.price })}
+      />
+    )
   }
 
   render() {

@@ -8,6 +8,7 @@ interface IProps {
   textStyle?: any
   contStyle?: any
   bodyfunction?: (name: string, amount: string) => void
+  onPress: any
 }
 
 class ServicesListItemAtom extends React.Component<IProps, {}> {
@@ -20,8 +21,7 @@ class ServicesListItemAtom extends React.Component<IProps, {}> {
   render() {
     return (
       <TouchableOpacity
-        // onPress={this.handleBodyPress}
-        activeOpacity={1}
+        onPress={this.props.onPress}
         style={[styles.listContainer, this.props.contStyle]}
       >
         <View style={styles.listTextCont}>
