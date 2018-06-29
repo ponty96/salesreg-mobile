@@ -2,8 +2,9 @@ import React from 'react'
 import { StatusBar } from 'react-native'
 import { Font, AppLoading } from 'expo'
 import { Root } from 'native-base'
+import CustomHeader from './Components/CustomHeader'
 
-import Routes from './Navigation/Routes'
+// import Routes from './Navigation/Routes'
 
 export default class App extends React.Component {
   state = {
@@ -27,8 +28,14 @@ export default class App extends React.Component {
     }
     return (
       <Root>
-        <StatusBar barStyle="light-content" />
-        <Routes />
+        <StatusBar barStyle="light-content" hidden />
+        {/*<Routes />*/}
+        <CustomHeader
+          firstRightIcon="pencil"
+          firstRightIconType="MaterialCommunityIcons"
+          title="Testing one two"
+          rightText="Edit"
+        />
       </Root>
     )
   }
