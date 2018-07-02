@@ -2,9 +2,8 @@ import React from 'react'
 import { StatusBar } from 'react-native'
 import { Font, AppLoading } from 'expo'
 import { Root } from 'native-base'
-import CustomHeader from './Components/CustomHeader'
 
-// import Routes from './Navigation/Routes'
+import Routes from './Navigation/Routes'
 
 export default class App extends React.Component {
   state = {
@@ -14,7 +13,8 @@ export default class App extends React.Component {
     await Font.loadAsync({
       SourceSansPro: require('../Fonts/SourceSansPro-Regular.ttf'),
       SourceSansPro_Semibold: require('../Fonts/SourceSansPro-Semibold.ttf'),
-      SourceSansPro_Bold: require('../Fonts/SourceSansPro-Bold.ttf')
+      SourceSansPro_Bold: require('../Fonts/SourceSansPro-Bold.ttf'),
+      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
     })
     this.setState({ loading: false })
   }
@@ -29,13 +29,7 @@ export default class App extends React.Component {
     return (
       <Root>
         <StatusBar barStyle="light-content" hidden />
-        {/*<Routes />*/}
-        <CustomHeader
-          firstRightIcon="pencil"
-          firstRightIconType="MaterialCommunityIcons"
-          title="Testing one two"
-          rightText="Edit"
-        />
+        <Routes />
       </Root>
     )
   }

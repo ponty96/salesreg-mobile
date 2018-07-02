@@ -11,24 +11,25 @@ interface IProps {
   secondRightIcon?: string
   secondRightIconType?: any
   rightText?: string
+  onBackPress?: () => void
+  onMenuPress?: () => void
 }
 
-const customHeader = (prop: IProps, { navigation }: any) => {
+const customHeader = (prop: IProps) => {
   return (
     <Header style={styles.wrapper}>
       <Left>
         {prop.menu ? (
-          <Button transparent>
-            <Icon name="menu" style={styles.headerIcon} />
-          </Button>
+          /*<Button transparent>*/
+          <Icon
+            name="menu"
+            style={styles.headerIcon}
+            onPress={prop.onMenuPress}
+          />
         ) : (
+          /*</Button>*/
           <Button transparent>
-            <Icon
-              name="arrow-back"
-              onPress={() => {
-                navigation.goBack()
-              }}
-            />
+            <Icon name="arrow-back" onPress={prop.onBackPress} />
           </Button>
         )}
       </Left>
@@ -61,7 +62,8 @@ export default customHeader
 
 const styles = StyleSheet.create({
   headerIcon: {
-    fontSize: 28
+    fontSize: 28,
+    color: color.secondary
   },
   wrapper: {
     backgroundColor: color.primary

@@ -6,7 +6,7 @@ import {
   TabNavigator,
   SwitchNavigator
 } from 'react-navigation'
-import { Icon } from 'native-base'
+// import { Icon } from 'native-base'
 
 import OnBoardingScreen from './../Screen/OnBoardingScreen'
 // import SplashScreen from './../Screen/SplashScreen';
@@ -36,7 +36,7 @@ import SecondSignUpScreen from '../Screen/SecondSignUpScreen'
 import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
 import MainOrderList from '../Components/MainOrderList'
 import Sidebar from './Sidebar'
-import styles from './../Style/Layout'
+// import styles from './../Style/Layout'
 import { color } from './../Style/Color'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
@@ -52,9 +52,10 @@ import InvoicesScreen from '../Screen/InvoicesScreen'
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
-import MenuAtom from '../Atom/MenuAtom'
+// import MenuAtom from '../Atom/MenuAtom'
 import EditServiceScreen from '../Screen/EditServiceScreen'
 import ServiceScreen from '../Screen/ServiceScreen'
+import CustomHeader from '../Components/CustomHeader'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -214,8 +215,8 @@ const businessStack = StackNavigator(
   {
     initialRouteName: 'Home',
     navigationOptions: ({ navigation }: any) => ({
-      title: 'Business',
-      headerLeft: (
+      title: 'Home',
+      /*headerLeft: (
         <Icon
           name={'menu'}
           onPress={() => navigation.navigate('DrawerToggle')}
@@ -242,7 +243,16 @@ const businessStack = StackNavigator(
         fontFamily: 'SourceSansPro',
         fontSize: 16,
         fontWeight: '400'
-      }
+      }*/
+      header: (
+        <CustomHeader
+          title="Business"
+          menu
+          onMenuPress={() => {
+            navigation.navigate('DrawerToggle')
+          }}
+        />
+      )
     })
   }
 )
