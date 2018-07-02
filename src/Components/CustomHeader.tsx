@@ -13,6 +13,8 @@ interface IProps {
   rightText?: string
   onBackPress?: () => void
   onMenuPress?: () => void
+  onPressFirstRightIcon?: () => void
+  onPressRightButton?: () => void
 }
 
 const customHeader = (prop: IProps) => {
@@ -26,31 +28,33 @@ const customHeader = (prop: IProps) => {
             onPress={prop.onMenuPress}
           />
         ) : (
-          <Button transparent>
-            <Icon name="arrow-back" onPress={prop.onBackPress} />
-          </Button>
+          <Icon
+            name="arrow-back"
+            onPress={prop.onBackPress}
+            style={styles.headerIcon}
+          />
         )}
       </Left>
       <Body style={styles.headerItemWrapper}>
         <Title style={styles.title}>{prop.title}</Title>
       </Body>
-      <Right>
-        <View style={styles.rightWrapper}>
-          <Button transparent>
+      <Right style={styles.headerItemWrapper}>
+        {prop.rightText ? (
+          <Button
+            transparent
+            onPress={prop.onPressRightButton}
+            style={styles.rightWrapper}
+            activeOpacity={1}
+          >
             <Icon name={prop.firstRightIcon} type={prop.firstRightIconType} />
-          </Button>
-          {!prop.rightText ? (
-            <Button transparent>
-              <Icon
-                name={prop.secondRightIcon}
-                type={prop.secondRightIconType}
-                style={styles.headerIcon}
-              />
-            </Button>
-          ) : (
             <Text style={styles.edit}>{prop.rightText}</Text>
-          )}
-        </View>
+          </Button>
+        ) : (
+          <View style={styles.rightWrapper}>
+            <Icon name={prop.firstRightIcon} />
+            <Icon name={prop.secondRightIcon} />
+          </View>
+        )}
       </Right>
     </Header>
   )
@@ -74,14 +78,15 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   rightWrapper: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    marginRight: 0
   },
   edit: {
     fontFamily: 'SourceSansPro',
-    marginRight: 32,
     color: color.secondary,
     alignSelf: 'center',
-    fontSize: 16
+    fontSize: 14,
+    marginLeft: 8
   },
   headerItemWrapper: {
     marginTop: 24

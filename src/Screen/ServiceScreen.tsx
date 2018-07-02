@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { Icon } from 'native-base'
+import { View, Text, StyleSheet } from 'react-native'
 
 import { color } from '../Style/Color'
 import ServiceListAtom from '../Atom/ServiceListAtom'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
@@ -12,31 +12,15 @@ interface IProps {
 export default class ServiceScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Service',
-      headerLeft: (
-        <Icon
-          name={'md-arrow-back'}
-          style={styles.headerIcon}
-          onPress={() => {
-            navigation.goBack()
-          }}
+      header: (
+        <CustomHeader
+          title="Service"
+          firstRightIcon="pencil"
+          firstRightIconType="MaterialCommunityIcons"
+          rightText="Edit"
+          onPressRightButton={() => navigation.navigate('EditServices')}
+          onBackPress={() => navigation.goBack()}
         />
-      ),
-      headerRight: (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('EditServices')
-          }}
-        >
-          <View style={styles.headerItem}>
-            <Icon
-              name={'pencil'}
-              style={styles.headerIconLogout}
-              type={'MaterialCommunityIcons'}
-            />
-            <Text style={styles.edit}>Edit</Text>
-          </View>
-        </TouchableOpacity>
       )
     }
   }

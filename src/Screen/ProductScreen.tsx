@@ -14,8 +14,8 @@ interface IProps {
 }
 
 class ProductScreen extends PureComponent<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
-    /*const { params } = navigation.state
+  /*static navigationOptions = ({ navigation }: any) => {
+    const { params } = navigation.state
     let right = (
       <View style={{ flexDirection: 'row' }}>
         <Icon name={'ios-search'} style={styles.headerIcon} />
@@ -31,10 +31,10 @@ class ProductScreen extends PureComponent<IProps> {
           style={styles.headerIcon}
         />
       )*/
-    /*return {
+  /*return {
       header: <CustomHeader title="Products & Services" />
-    }*/
-  }
+    }
+}*/
 
   render() {
     // const { params } = this.props.navigation.state

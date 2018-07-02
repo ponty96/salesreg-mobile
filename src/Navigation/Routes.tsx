@@ -88,7 +88,8 @@ const viewBothStack = TabNavigator(
           </View>
         )
       },
-      header: <CustomHeader title="Products & Services" />
+      // header: <CustomHeader title="Products & Services" />,
+      headerTitle: 'dfgfdsdsbv'
     }),
     tabBarOptions: {
       activeTintColor: color.secondary,
