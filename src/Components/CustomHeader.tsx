@@ -18,22 +18,20 @@ interface IProps {
 const customHeader = (prop: IProps) => {
   return (
     <Header style={styles.wrapper}>
-      <Left>
+      <Left style={styles.headerItemWrapper}>
         {prop.menu ? (
-          /*<Button transparent>*/
           <Icon
             name="menu"
             style={styles.headerIcon}
             onPress={prop.onMenuPress}
           />
         ) : (
-          /*</Button>*/
           <Button transparent>
             <Icon name="arrow-back" onPress={prop.onBackPress} />
           </Button>
         )}
       </Left>
-      <Body>
+      <Body style={styles.headerItemWrapper}>
         <Title style={styles.title}>{prop.title}</Title>
       </Body>
       <Right>
@@ -66,7 +64,10 @@ const styles = StyleSheet.create({
     color: color.secondary
   },
   wrapper: {
-    backgroundColor: color.primary
+    backgroundColor: color.primary,
+    paddingLeft: 16,
+    paddingRight: 16,
+    height: 88
   },
   title: {
     fontFamily: 'SourceSansPro_Semibold',
@@ -81,5 +82,8 @@ const styles = StyleSheet.create({
     color: color.secondary,
     alignSelf: 'center',
     fontSize: 16
+  },
+  headerItemWrapper: {
+    marginTop: 24
   }
 })

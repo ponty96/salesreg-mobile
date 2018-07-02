@@ -28,7 +28,7 @@ export default class App extends React.Component {
     }
     return (
       <Root>
-        <StatusBar barStyle="light-content" hidden />
+        <StatusBar barStyle="light-content" />
         <Routes />
       </Root>
     )
