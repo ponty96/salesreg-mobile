@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.primary
   },
   title: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'SourceSansPro_Semibold',
     fontSize: 16
   },
   rightWrapper: {
