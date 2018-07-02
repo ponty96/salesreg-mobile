@@ -3,13 +3,13 @@ import React from 'react'
 
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
-import ButtonAtom from '../Atom/ButtonAtom'
 
 interface IProp {
-  label: string
-  getValue: any
-  onBackPress: any
+  getName: (name: string) => void
   onSavePress: () => void
+  defaultName: string
+  defaultPrice: string
+  getPrice: (name: string) => void
 }
 
 export default class ServiceForm extends React.Component<IProp> {
@@ -19,30 +19,18 @@ export default class ServiceForm extends React.Component<IProp> {
         <View style={styles.inputView}>
           <InputAtom
             label="Service name"
-            getValue={this.props.getValue}
+            getValue={this.props.getName}
             contStyle={styles.inputWrapper}
+            defaultValue={this.props.defaultName}
           />
         </View>
         <View style={styles.inputView}>
           <InputAtom
             label="Rate/charges"
-            getValue={this.props.getValue}
+            getValue={this.props.getPrice}
             contStyle={styles.inputWrapper}
-          />
-        </View>
-        <View style={styles.buttonsWrapper}>
-          <ButtonAtom
-            btnText="CANCEL"
-            btnStyle={styles.button}
-            transparent={true}
-            onPress={this.props.onBackPress}
-          />
-          <ButtonAtom
-            btnText="SAVE"
-            btnStyle={styles.button}
-            transparent={true}
-            textStyle={styles.buttonText}
-            onPress={this.props.onSavePress}
+            defaultValue={this.props.defaultPrice}
+            keyboardType="numeric"
           />
         </View>
       </View>
@@ -68,22 +56,5 @@ const styles = StyleSheet.create({
     paddingBottom: 8,
     marginLeft: 8,
     marginRight: 8
-  },
-  buttonsWrapper: {
-    backgroundColor: 'powderblue',
-    flexDirection: 'row',
-    position: 'absolute',
-    bottom: 0
-  },
-  button: {
-    flex: 0.5,
-    borderWidth: 0.5,
-    borderColor: color.dropdown,
-    marginVertical: 0,
-    height: 80,
-    justifyContent: 'center'
-  },
-  buttonText: {
-    color: color.principal
   }
 })

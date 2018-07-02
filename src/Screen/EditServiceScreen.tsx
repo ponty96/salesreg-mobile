@@ -3,33 +3,27 @@ import { View, StyleSheet } from 'react-native'
 
 import ServiceForm from '../Components/ServiceForm'
 import { color } from '../Style/Color'
-import { Icon } from 'native-base'
+import CustomHeader from '../Components/CustomHeader'
+import SaveCancelButton from '../Container/SaveCancelButton'
 
 interface IProps {
   navigation: any
 }
 
-export default class EditServiceScreen extends Component<IProps> {
+export default class EditServiceScreen extends Component<IProps, any> {
   state = {
-    name: ''
+    name: this.props.navigation.getParam('product', 'Product name'),
+    price: this.props.navigation.getParam('price', 'Product price')
   }
 
-  getName = (name: string) => {
-    this.setState({ name: name })
+  updateState = (key: string, value: any) => {
+    this.setState({ [key]: value })
   }
 
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Service',
-      headerRight: <View />,
-      headerLeft: (
-        <Icon
-          name={'md-arrow-back'}
-          style={styles.headerIcon}
-          onPress={() => {
-            navigation.goBack()
-          }}
-        />
+      header: (
+        <CustomHeader title="Service" onBackPress={() => navigation.goBack()} />
       )
     }
   }
@@ -39,11 +33,13 @@ export default class EditServiceScreen extends Component<IProps> {
     return (
       <View style={styles.container}>
         <ServiceForm
-          label="Service name"
-          getValue={this.getName}
-          onBackPress={() => navigation.goBack()}
+          getName={val => this.updateState('name', val)}
           onSavePress={() => console.log('Save button pressed.')}
+          defaultName={this.state.name}
+          defaultPrice={this.state.price}
+          getPrice={val => this.updateState('price', val)}
         />
+        <SaveCancelButton navigation={navigation} positiveButtonName="SAVE" />
       </View>
     )
   }

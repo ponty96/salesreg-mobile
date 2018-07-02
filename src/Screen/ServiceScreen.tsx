@@ -11,6 +11,11 @@ interface IProps {
 
 export default class ServiceScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
+    const productName: string = navigation.getParam(
+      'productName',
+      'Product name'
+    )
+    const productPrice: string = navigation.getParam('price', '\u20A6 2000.00')
     return {
       header: (
         <CustomHeader
@@ -18,7 +23,12 @@ export default class ServiceScreen extends Component<IProps> {
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
           rightText="Edit"
-          onPressRightButton={() => navigation.navigate('EditServices')}
+          onPressRightButton={() =>
+            navigation.navigate('EditServices', {
+              product: productName,
+              price: productPrice
+            })
+          }
           onBackPress={() => navigation.goBack()}
         />
       )
