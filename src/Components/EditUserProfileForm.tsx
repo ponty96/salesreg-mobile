@@ -13,14 +13,7 @@ import { color } from '../Style/Color'
 import FormImageAtom from '../Atom/FormImageAtom'
 
 interface IProps {
-  image?: string
-  getImage?: (pic: string) => void
-  name: string
-  getName?: (name: string) => any
-  phoneNumber: string
-  getPhoneNumber?: (num: string) => any
-  gender: string
-  updateGender?: (gender: string) => any
+  phoneNumber?: string
 }
 
 class EditUserProfileForm extends Component<IProps, any> {
@@ -29,7 +22,11 @@ class EditUserProfileForm extends Component<IProps, any> {
     this.state = {
       image: {
         uri: 'http://downloadicons.net/sites/default/files/user-icon-2197.png'
-      }
+      },
+      userName: '',
+      phone: '',
+      email: '',
+      address: ''
     }
   }
   getImage = (pic: any) => {
@@ -39,6 +36,9 @@ class EditUserProfileForm extends Component<IProps, any> {
         uri: pic
       }
     }))
+  }
+  updateState = (key: string, value: any) => {
+    this.setState({ [key]: value })
   }
   render() {
     return (
@@ -50,7 +50,8 @@ class EditUserProfileForm extends Component<IProps, any> {
         <ScrollView>
           <Form>
             <FormImageAtom
-              business={false}
+              form="user"
+              getName={val => this.updateState('userName', val)}
               getValue={this.getImage}
               source={this.state.image.uri}
             />
@@ -60,12 +61,12 @@ class EditUserProfileForm extends Component<IProps, any> {
                 <InputAtom
                   label="Phone Number"
                   defaultValue={this.props.phoneNumber}
-                  getValue={this.props.getPhoneNumber}
+                  getValue={val => this.updateState('phone', val)}
                   keyboardType="numeric"
                 />
                 <InputAtom
                   label="Email Address"
-                  getValue={this.props.getName}
+                  getValue={val => this.updateState('email', val)}
                   keyboardType="email-address"
                 />
               </View>
@@ -75,7 +76,7 @@ class EditUserProfileForm extends Component<IProps, any> {
               <View style={styles.inputView}>
                 <InputAtom
                   label="Business Address"
-                  getValue={this.props.getName}
+                  getValue={val => this.updateState('address', val)}
                 />
               </View>
             </View>

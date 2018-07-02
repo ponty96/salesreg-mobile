@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   },
   aboveAccordionBlackTextL: {
     fontSize: 16,
-    color: '#c0c0c0',
+    color: color.dropdown,
     paddingLeft: 16
   },
   aboveAccordionBlackTextR: {
@@ -142,7 +142,7 @@ const styles = StyleSheet.create({
   },
   aboveAccordionGreyText: {
     fontSize: 16,
-    color: '#c0c0c0',
+    color: color.dropdown,
     paddingLeft: 16
   },
   aboveAccordionGreyFont: {
