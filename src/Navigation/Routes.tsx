@@ -215,8 +215,8 @@ const businessStack = StackNavigator(
   {
     initialRouteName: 'Home',
     navigationOptions: ({ navigation }: any) => ({
-      title: 'Home',
-      /*headerLeft: (
+      /*title: 'Business',
+      headerLeft: (
         <Icon
           name={'menu'}
           onPress={() => navigation.navigate('DrawerToggle')}
@@ -246,7 +246,7 @@ const businessStack = StackNavigator(
       }*/
       header: (
         <CustomHeader
-          title="Business"
+          title="Home"
           menu
           onMenuPress={() => {
             navigation.navigate('DrawerToggle')
