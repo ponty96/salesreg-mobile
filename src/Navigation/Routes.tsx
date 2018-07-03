@@ -87,9 +87,7 @@ const viewBothStack = TabNavigator(
             </Text>
           </View>
         )
-      },
-      // header: <CustomHeader title="Products & Services" />,
-      headerTitle: 'dfgfdsdsbv'
+      }
     }),
     tabBarOptions: {
       activeTintColor: color.secondary,
@@ -248,11 +246,13 @@ const businessStack = StackNavigator(
       }*/
       header: (
         <CustomHeader
-          title="Home"
+          title="Products & Services"
           menu
           onMenuPress={() => {
             navigation.navigate('DrawerToggle')
           }}
+          firstRightIcon={'ios-search'}
+          navigation={navigation}
         />
       )
     })

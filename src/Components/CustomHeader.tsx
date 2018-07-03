@@ -2,19 +2,22 @@ import { StyleSheet, View, Text } from 'react-native'
 import React from 'react'
 import { Header, Left, Body, Right, Button, Icon, Title } from 'native-base'
 import { color } from '../Style/Color'
+import MenuAtom from '../Atom/MenuAtom'
 
 interface IProps {
   menu?: boolean
   title: string
   firstRightIcon?: string
   firstRightIconType?: any
-  secondRightIcon?: string
-  secondRightIconType?: any
+  // secondRightIcon?: string
+  // secondRightIconType?: any
   rightText?: string
   onBackPress?: () => void
   onMenuPress?: () => void
   onPressFirstRightIcon?: () => void
   onPressRightButton?: () => void
+  // firstRightIconStyle?: object
+  navigation: object
 }
 
 const customHeader = (prop: IProps) => {
@@ -51,8 +54,15 @@ const customHeader = (prop: IProps) => {
           </Button>
         ) : (
           <View style={styles.rightWrapper}>
-            <Icon name={prop.firstRightIcon} />
-            <Icon name={prop.secondRightIcon} />
+            <Icon
+              name={prop.firstRightIcon}
+              type={prop.firstRightIconType}
+              style={[styles.headerIcon, styles.searchIcon]}
+            />
+            {/* <Icon name={prop.secondRightIcon} type={prop.secondRightIconType}/>*/}
+            <View style={styles.rightMenu}>
+              <MenuAtom navigation={prop.navigation} />
+            </View>
           </View>
         )}
       </Right>
@@ -90,5 +100,11 @@ const styles = StyleSheet.create({
   },
   headerItemWrapper: {
     marginTop: 24
+  },
+  rightMenu: {
+    marginLeft: 16
+  },
+  searchIcon: {
+    marginTop: 3
   }
 })

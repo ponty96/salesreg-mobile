@@ -55,6 +55,7 @@ const styles = StyleSheet.create({
     justifyContent: 'center'
   },
   buttonText: {
-    color: color.principal
+    color: color.principal,
+    fontFamily: 'SourceSansPro_Semibold'
   }
 })
