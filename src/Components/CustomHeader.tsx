@@ -61,7 +61,6 @@ const customHeader = (prop: IProps) => {
                 type={prop.firstRightIconType}
                 style={[styles.headerIcon, styles.searchIcon]}
               />
-              {/* <Icon name={prop.secondRightIcon} type={prop.secondRightIconType}/>*/}
               <View style={styles.rightMenu}>
                 <MenuAtom navigation={prop.navigation} />
               </View>
