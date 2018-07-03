@@ -7,12 +7,17 @@ import {
   Dimensions
 } from 'react-native'
 import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
 }
 
 export default class HomeScreen extends React.Component<IProps> {
+  static navigationOptions = {
+    header: <CustomHeader title="Home" menu />
+  }
+
   render() {
     return (
       <TouchableOpacity

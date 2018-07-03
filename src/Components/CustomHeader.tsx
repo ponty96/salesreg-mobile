@@ -17,7 +17,8 @@ interface IProps {
   onPressFirstRightIcon?: () => void
   onPressRightButton?: () => void
   // firstRightIconStyle?: object
-  navigation: object
+  navigation?: object
+  right?: boolean
 }
 
 const customHeader = (prop: IProps) => {
@@ -41,31 +42,35 @@ const customHeader = (prop: IProps) => {
       <Body style={styles.headerItemWrapper}>
         <Title style={styles.title}>{prop.title}</Title>
       </Body>
-      <Right style={styles.headerItemWrapper}>
-        {prop.rightText ? (
-          <Button
-            transparent
-            onPress={prop.onPressRightButton}
-            style={styles.rightWrapper}
-            activeOpacity={1}
-          >
-            <Icon name={prop.firstRightIcon} type={prop.firstRightIconType} />
-            <Text style={styles.edit}>{prop.rightText}</Text>
-          </Button>
-        ) : (
-          <View style={styles.rightWrapper}>
-            <Icon
-              name={prop.firstRightIcon}
-              type={prop.firstRightIconType}
-              style={[styles.headerIcon, styles.searchIcon]}
-            />
-            {/* <Icon name={prop.secondRightIcon} type={prop.secondRightIconType}/>*/}
-            <View style={styles.rightMenu}>
-              <MenuAtom navigation={prop.navigation} />
+      {prop.right ? (
+        <Right style={styles.headerItemWrapper}>
+          {prop.rightText ? (
+            <Button
+              transparent
+              onPress={prop.onPressRightButton}
+              style={styles.rightWrapper}
+              activeOpacity={1}
+            >
+              <Icon name={prop.firstRightIcon} type={prop.firstRightIconType} />
+              <Text style={styles.edit}>{prop.rightText}</Text>
+            </Button>
+          ) : (
+            <View style={styles.rightWrapper}>
+              <Icon
+                name={prop.firstRightIcon}
+                type={prop.firstRightIconType}
+                style={[styles.headerIcon, styles.searchIcon]}
+              />
+              {/* <Icon name={prop.secondRightIcon} type={prop.secondRightIconType}/>*/}
+              <View style={styles.rightMenu}>
+                <MenuAtom navigation={prop.navigation} />
+              </View>
             </View>
-          </View>
-        )}
-      </Right>
+          )}
+        </Right>
+      ) : (
+        <Right />
+      )}
     </Header>
   )
 }
