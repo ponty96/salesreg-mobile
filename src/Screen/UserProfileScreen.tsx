@@ -4,6 +4,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 import UserProfile from '../Components/UserProfile'
 import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
@@ -38,35 +39,11 @@ class UserProfileScreen extends Component<IProps, IState> {
 
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: (
-        <Text style={[{ fontFamily: 'SourceSansPro' }]}>User Profile</Text>
-      ), // params.name
-      headerLeft: (
-        <Icon
-          name={'md-arrow-back'}
-          style={styles.headerIcon}
-          onPress={() => {
-            navigation.goBack()
-          }}
+      header: (
+        <CustomHeader
+          title="User profile"
+          onBackPress={() => navigation.goBack()}
         />
-      ),
-      headerRight: (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('EditUserProfile', {
-              data: 'Kay5ive Attractions' // params.data
-            })
-          }}
-        >
-          <View style={styles.headerItem}>
-            <Icon
-              name={'pencil'}
-              style={styles.headerIconLogout}
-              type={'MaterialCommunityIcons'}
-            />
-            <Text style={styles.headerText}>Edit</Text>
-          </View>
-        </TouchableOpacity>
       )
     }
   }
