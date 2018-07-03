@@ -1,13 +1,10 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
-// import { Icon } from 'native-base'
 import { userData } from '../config/default'
 import FabAtom from './../Atom/FabAtom'
 import ProductList from '../Components/ProductList'
 import { color } from '../Style/Color'
 import { productList } from '../config/data'
-// import MenuAtom from '../Atom/MenuAtom'
-// import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any

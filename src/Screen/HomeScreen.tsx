@@ -14,8 +14,16 @@ interface IProps {
 }
 
 export default class HomeScreen extends React.Component<IProps> {
-  static navigationOptions = {
-    header: <CustomHeader title="Home" menu />
+  static navigationOptions = ({ navigation }: any) => {
+    return {
+      header: (
+        <CustomHeader
+          title="Home"
+          menu
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
+        />
+      )
+    }
   }
 
   render() {

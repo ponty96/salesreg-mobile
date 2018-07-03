@@ -215,35 +215,6 @@ const businessStack = StackNavigator(
   {
     initialRouteName: 'Home',
     navigationOptions: ({ navigation }: any) => ({
-      /*title: 'Business',
-      headerLeft: (
-        <Icon
-          name={'menu'}
-          onPress={() => navigation.navigate('DrawerToggle')}
-          style={styles.menuIcon}
-        />
-      ),
-      headerRight: (
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center'
-          }}
-        >
-          <Icon name={'ios-search'} style={styles.menuIcon} />
-          <MenuAtom navigation={navigation} />
-        </View>
-      ),
-      headerTintColor: color.secondary,
-      headerStyle: {
-        backgroundColor: color.primary
-      },
-      headerTitleStyle: {
-        fontFamily: 'SourceSansPro',
-        fontSize: 16,
-        fontWeight: '400'
-      }*/
       header: (
         <CustomHeader
           title="Products & Services"
@@ -253,6 +224,7 @@ const businessStack = StackNavigator(
           }}
           firstRightIcon={'ios-search'}
           navigation={navigation}
+          right
         />
       )
     })
