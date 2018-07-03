@@ -9,14 +9,11 @@ interface IProps {
   title: string
   firstRightIcon?: string
   firstRightIconType?: any
-  // secondRightIcon?: string
-  // secondRightIconType?: any
   rightText?: string
   onBackPress?: () => void
   onMenuPress?: () => void
   onPressFirstRightIcon?: () => void
   onPressRightButton?: () => void
-  // firstRightIconStyle?: object
   navigation?: object
   right?: boolean
 }

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-import { Icon } from 'native-base'
+import { View, StyleSheet } from 'react-native'
 
 import SaveCancelButton from '../Container/SaveCancelButton'
 import EditBusinessProfileForm from '../Components/EditBusinessProfileForm'
 import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
@@ -28,16 +28,10 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
 
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: (
-        <Text style={[{ fontFamily: 'SourceSansPro' }]}>Edit Profile</Text>
-      ), // params.name
-      headerLeft: (
-        <Icon
-          name={'md-arrow-back'}
-          style={styles.headerIcon}
-          onPress={() => {
-            navigation.goBack()
-          }}
+      header: (
+        <CustomHeader
+          title="Business profile"
+          onBackPress={() => navigation.goBack()}
         />
       )
     }

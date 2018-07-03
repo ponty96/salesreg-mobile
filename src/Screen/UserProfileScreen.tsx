@@ -1,9 +1,6 @@
 import React, { Component } from 'react'
-import { Icon } from 'native-base'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 
 import UserProfile from '../Components/UserProfile'
-import { color } from '../Style/Color'
 import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
@@ -54,27 +51,3 @@ class UserProfileScreen extends Component<IProps, IState> {
 }
 
 export default UserProfileScreen
-
-const styles = StyleSheet.create({
-  headerText: {
-    color: color.secondary,
-    fontWeight: 'bold',
-    paddingRight: 16,
-    fontSize: 18
-  },
-  headerIconLogout: {
-    color: color.secondary,
-    padding: 8,
-    fontSize: 28
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
-  },
-  headerItem: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  }
-})
