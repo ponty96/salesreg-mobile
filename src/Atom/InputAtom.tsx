@@ -123,13 +123,13 @@ const styles = StyleSheet.create({
   label: {
     // color: this.state.labelColor,
     padding: 3,
-    fontSize: 14
+    fontSize: 16
   },
   labelText: {
     // color: this.state.labelColor,
     fontFamily: 'SourceSansPro',
     padding: 3,
-    fontSize: 14
+    fontSize: 16
   },
   required: {
     color: color.inactive,

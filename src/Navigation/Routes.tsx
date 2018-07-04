@@ -53,6 +53,9 @@ import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 import MenuAtom from '../Atom/MenuAtom'
+import CustomerScreen from '../Screen/CustomerScreen'
+import VendorDetailScreen from '../Screen/VendorDetailsScreen'
+import NewVendorScreen from '../Screen/NewVendorScreen'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -158,8 +161,14 @@ const businessStack = StackNavigator(
     DebtDetails: {
       screen: DebtDetailsScreen
     },
+    Customer: {
+      screen: CustomerScreen
+    },
     NewCustomer: {
       screen: NewCustomerScreen
+    },
+    NewVendor: {
+      screen: NewVendorScreen
     },
     NewOrder: {
       screen: NewOrderScreen
@@ -195,6 +204,9 @@ const businessStack = StackNavigator(
     },
     CustomerDetails: {
       screen: CustomerDetailScreen
+    },
+    VendorDetails: {
+      screen: VendorDetailScreen
     },
     EditUserProfile: {
       screen: EditUserProfileScreen

@@ -1,143 +1,261 @@
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import ImageAtom from './ImageAtom'
+import {
+  View,
+  StyleSheet,
+  KeyboardAvoidingView,
+  Dimensions,
+  Text
+} from 'react-native'
 import InputAtom from './InputAtom'
-import { ScrollView } from 'react-native-gesture-handler'
 import PickerAtom from './PickerAtom'
+import ButtonAtom from './ButtonAtom'
+import { ScrollView } from 'react-native-gesture-handler'
+import FormImageAtom from './FormImageAtom'
+import { Form } from 'native-base'
+import { color } from '../Style/Color'
 
-interface ICustomerFormProps {
+interface IProps {
   navigation: any
+  type: string
+  firstHeader: string
+  secondHeader: string
+  thirdHeader: string
 }
 
-export default class CustomerFormAtom extends React.Component<
-  ICustomerFormProps,
-  any
-> {
+export default class CustomerFormAtom extends React.Component<IProps, any> {
   state = {
-    product: '',
-    image: '',
-    quantity: 0,
-    pquantity: 0,
-    costPP: 0,
-    birth: '',
-    marriage: '',
-    debt: 0
-  }
-
-  create = () => {
-    this.props.navigation.goBack()
-  }
-
-  getProduct = (product: string) => {
-    this.setState({ product })
+    image: {
+      uri: 'http://downloadicons.net/sites/default/files/user-icon-2197.png'
+    },
+    customerName: '',
+    phone: 0,
+    email: '',
+    mobile: 0,
+    fax: '',
+    bankName: '',
+    accountName: '',
+    accountNumber: '',
+    officeAddress: '',
+    homeAddress: '',
+    billingAddress: '',
+    currency: '',
+    birthday: '',
+    maritalStatus: '',
+    marriageAnn: '',
+    like: '',
+    dislike: ''
   }
 
   getImage = (pic: any) => {
-    this.setState({ image: pic })
+    this.setState((prevState: any) => ({
+      image: {
+        ...prevState.image,
+        uri: pic
+      }
+    }))
   }
-  getSQuantity = (quantity: number) => {
-    this.setState({ quantity })
+  updateState = (key: string, value: any) => {
+    this.setState({ [key]: value })
   }
-  getPQuantity = (pquantity: number) => {
-    this.setState({ pquantity })
+  addLike = () => {
+    console.log('Like added')
   }
-  getCostPP = (costPP: number) => {
-    this.setState({ costPP })
-  }
-  getBirth = (birth: string) => {
-    this.setState({ birth })
-  }
-  getMarry = (marriage: string) => {
-    this.setState({ marriage })
-  }
-  getDebt = (debt: number) => {
-    this.setState({ debt })
+  addDislike = () => {
+    console.log('Dislike added')
   }
 
   render() {
     return (
-      <ScrollView>
-        <View>
-          <ImageAtom
-            getValue={this.getImage}
-            source={this.state.image}
-            placeholder=""
-            imgStyle={styles.imgContainer}
-          />
-          <View>
-            <InputAtom
-              label="  Name"
-              getValue={this.getProduct}
-              contStyle={styles.marginlessInput}
+      <KeyboardAvoidingView
+        behavior="padding"
+        keyboardVerticalOffset={60}
+        style={styles.itemsContainer}
+      >
+        <ScrollView>
+          <Form>
+            <FormImageAtom
+              form={this.props.type}
+              getName={val => this.updateState('customerName', val)}
+              getValue={this.getImage}
+              source={this.state.image.uri}
             />
-          </View>
-          <View style={styles.inputView}>
-            <View style={styles.innerStart}>
-              <InputAtom
-                label="  Phone number"
-                keyboardType="numeric"
-                getValue={this.getSQuantity}
-                contStyle={styles.marginlessInput}
-              />
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>{this.props.firstHeader}</Text>
+              <View style={styles.inputViewForTwoAndMore}>
+                <View style={styles.innerInputViewForTwo}>
+                  <View style={{ width: '25%', alignItems: 'center' }}>
+                    <Text style={styles.blueSideText}>Phone</Text>
+                  </View>
+                  <View style={{ width: '70%' }}>
+                    <InputAtom
+                      getValue={val => this.updateState('phone', val)}
+                      keyboardType="numeric"
+                    />
+                  </View>
+                </View>
+                <View style={styles.innerInputViewForTwo}>
+                  <View style={{ width: '25%', alignItems: 'center' }}>
+                    <Text style={styles.blueSideText}>Mobile</Text>
+                  </View>
+                  <View style={{ width: '70%' }}>
+                    <InputAtom
+                      getValue={val => this.updateState('mobile', val)}
+                      keyboardType="numeric"
+                    />
+                  </View>
+                </View>
+                <View style={styles.innerInputViewForTwo}>
+                  <View style={{ width: '25%', alignItems: 'center' }}>
+                    <Text style={styles.blueSideText}>Fax</Text>
+                  </View>
+                  <View style={{ width: '70%' }}>
+                    <InputAtom
+                      getValue={val => this.updateState('fax', val)}
+                      keyboardType="numeric"
+                    />
+                  </View>
+                </View>
+                <View style={styles.innerInputViewForTwo}>
+                  <View style={{ width: '25%', alignItems: 'center' }}>
+                    <Text style={styles.blueSideText}>Email</Text>
+                  </View>
+                  <View style={{ width: '70%' }}>
+                    <InputAtom
+                      getValue={val => this.updateState('email', val)}
+                      keyboardType="email-address"
+                    />
+                  </View>
+                </View>
+              </View>
             </View>
-            <View style={styles.innerEnd}>
-              <PickerAtom list={['Male', 'Female']} placeholder="Gender" />
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>Banking detail</Text>
+              <View style={styles.inputView}>
+                <InputAtom
+                  label="Bank name"
+                  getValue={val => this.updateState('bankName', val)}
+                />
+                <InputAtom
+                  label="Account name"
+                  getValue={val => this.updateState('accountName', val)}
+                />
+                <InputAtom
+                  label="Account number"
+                  getValue={val => this.updateState('accountNumber', val)}
+                  keyboardType="numeric"
+                />
+              </View>
             </View>
-          </View>
-          <View>
-            <InputAtom
-              label="  Home address"
-              keyboardType="numeric"
-              getValue={this.getPQuantity}
-              contStyle={styles.marginlessInput}
-            />
-          </View>
-          <View>
-            <InputAtom
-              label="  Email"
-              keyboardType="numeric"
-              getValue={this.getCostPP}
-              contStyle={styles.marginlessInput}
-            />
-          </View>
-          <View style={styles.inputView}>
-            <View style={styles.innerStart}>
-              <InputAtom
-                label="  Debt limit"
-                keyboardType="numeric"
-                getValue={this.getDebt}
-                contStyle={styles.marginlessInput}
-              />
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>{this.props.secondHeader}</Text>
+              <View style={styles.inputView}>
+                <InputAtom
+                  label="Office Address"
+                  getValue={val => this.updateState('officeAddress', val)}
+                />
+                <InputAtom
+                  label="Home Address"
+                  getValue={val => this.updateState('homeAddress', val)}
+                />
+              </View>
             </View>
-            <View style={styles.innerEnd}>
-              <InputAtom
-                label="  Birthday"
-                keyboardType="numeric"
-                getValue={this.getBirth}
-                contStyle={styles.marginfulInput}
-              />
-              <Text style={styles.underText}>DD/MM/YYYY</Text>
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>Billing Address</Text>
+              <View style={styles.inputView}>
+                <InputAtom
+                  label="Billing Address"
+                  getValue={val => this.updateState('billingAddress', val)}
+                />
+              </View>
             </View>
-          </View>
-          <View style={styles.inputView}>
-            <View style={styles.innerFirstPicker}>
-              <PickerAtom
-                list={['Married', 'Single']}
-                placeholder="Marital status"
-              />
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>{this.props.thirdHeader}</Text>
+              <View style={styles.inputView}>
+                <View
+                  style={{
+                    borderBottomWidth: 1,
+                    borderBottomColor: '#F3F3F3',
+                    padding: 10
+                  }}
+                >
+                  <PickerAtom
+                    list={['Naira (\u20A6)']}
+                    style={styles.pickerStyle}
+                    placeholder="Select Currency"
+                  />
+                </View>
+              </View>
             </View>
-            <View style={styles.innerLastEnd}>
-              <InputAtom
-                label="  Marriage Anniversary"
-                keyboardType="numeric"
-                getValue={this.getMarry}
-                contStyle={styles.marginlessInput}
-              />
-              <Text style={styles.underText}>DD/MM/YYYY</Text>
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>Other details</Text>
+              <View style={styles.inputViewForTwoAndMore}>
+                <View style={styles.innerInputViewForTwo}>
+                  <View style={{ width: '50%', paddingLeft: 12 }}>
+                    <InputAtom
+                      label="Birthday"
+                      getValue={val => this.updateState('birthday', val)}
+                    />
+                  </View>
+                  <View style={{ width: '50%', paddingRight: 12 }}>
+                    <InputAtom
+                      label="Marital Status"
+                      getValue={val => this.updateState('maritalStatus', val)}
+                    />
+                  </View>
+                </View>
+                <View style={styles.innerInputViewForTwo}>
+                  <View style={{ width: '50%', paddingLeft: 12 }}>
+                    <InputAtom
+                      label="Marriage Anniversary"
+                      getValue={val => this.updateState('marriageAnn', val)}
+                    />
+                  </View>
+                </View>
+              </View>
             </View>
-          </View>
-        </View>
-      </ScrollView>
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>Likes</Text>
+              <View style={styles.inputView}>
+                <InputAtom
+                  label="Like"
+                  getValue={val => this.updateState('like', val)}
+                />
+                <ButtonAtom
+                  btnText="+ Add Like"
+                  transparent={true}
+                  onPress={this.addLike}
+                  textStyle={styles.sendAnother}
+                  btnStyle={{
+                    paddingHorizontal: 5,
+                    alignSelf: 'flex-start',
+                    marginVertical: 3
+                  }}
+                />
+              </View>
+            </View>
+            <View style={styles.mainView}>
+              <Text style={styles.headerText}>Dislikes</Text>
+              <View style={styles.inputView}>
+                <InputAtom
+                  label="Dislikes"
+                  getValue={val => this.updateState('dislike', val)}
+                />
+                <ButtonAtom
+                  btnText="+ Add Dislike"
+                  transparent={true}
+                  onPress={this.addDislike}
+                  textStyle={styles.sendAnother}
+                  btnStyle={{
+                    paddingHorizontal: 5,
+                    alignSelf: 'flex-start',
+                    marginVertical: 3
+                  }}
+                />
+              </View>
+            </View>
+          </Form>
+        </ScrollView>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -151,11 +269,53 @@ const styles = StyleSheet.create({
     borderRadius: 75,
     marginVertical: 16
   },
+  mainView: {
+    backgroundColor: 'transparent',
+    width: '100%'
+  },
   inputView: {
-    flexDirection: 'row',
-    width: '100%',
+    width: Dimensions.get('screen').width - 32,
     alignSelf: 'center',
-    flex: 1
+    backgroundColor: color.secondary,
+    alignContent: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
+    padding: 3,
+    marginTop: 16,
+    marginBottom: 16,
+    borderRadius: 3
+  },
+  inputViewForTwo: {
+    width: Dimensions.get('screen').width - 32,
+    alignSelf: 'center',
+    backgroundColor: color.secondary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
+    padding: 3,
+    marginTop: 16,
+    marginBottom: 16,
+    borderRadius: 3
+  },
+  innerInputViewForTwo: {
+    width: Dimensions.get('screen').width - 32,
+    alignSelf: 'center',
+    backgroundColor: color.secondary,
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  inputViewForTwoAndMore: {
+    width: Dimensions.get('screen').width - 32,
+    alignSelf: 'center',
+    backgroundColor: color.secondary,
+    flexDirection: 'column',
+    paddingLeft: 10,
+    paddingRight: 10,
+    padding: 3,
+    marginTop: 16,
+    marginBottom: 16,
+    borderRadius: 3
   },
   innerStart: {
     width: '50%',
@@ -171,20 +331,29 @@ const styles = StyleSheet.create({
     marginRight: '50%',
     fontSize: 10
   },
-  innerFirstPicker: {
-    flex: 1,
-    alignSelf: 'center'
+  pickerStyle: {
+    width: '100%',
+    height: 35
   },
-  innerLastEnd: {
-    width: '50%',
-    flex: 0,
-    alignSelf: 'flex-end',
-    paddingTop: 20
+  itemsContainer: {
+    flex: 4,
+    backgroundColor: '#F6F6F6'
   },
-  marginlessInput: {
-    marginLeft: 0
+  headerText: {
+    alignSelf: 'center',
+    fontSize: 14,
+    color: color.button,
+    fontFamily: 'SourceSansPro_Semibold'
   },
-  marginfulInput: {
-    marginLeft: 4
+  blueSideText: {
+    fontSize: 16,
+    paddingLeft: 16,
+    color: color.button,
+    fontFamily: 'SourceSansPro_Semibold'
+  },
+  sendAnother: {
+    color: color.button,
+    fontSize: 16,
+    fontFamily: 'SourceSansPro_Semibold'
   }
 })
