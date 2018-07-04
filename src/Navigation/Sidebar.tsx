@@ -5,7 +5,8 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions
+  Dimensions,
+  Alert
 } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
 import { Icon } from 'native-base'
@@ -34,7 +35,12 @@ export default class SideBar extends PureComponent<IProps> {
           <ScrollView>
             <TouchableOpacity
               style={styles.header}
-              onPress={() => navigate('DrawerClose')}
+              onPress={() => {
+                Alert.alert('Sign out', 'Do you want to sign out?', [
+                  { text: 'OK', onPress: () => navigate('Auth') },
+                  { text: 'Cancel' }
+                ])
+              }}
             >
               <Icon name="cross" type="Entypo" style={styles.cross} />
               <Text style={[styles.texts, { fontFamily: 'SourceSansPro' }]}>

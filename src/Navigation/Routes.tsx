@@ -224,6 +224,7 @@ const businessStack = StackNavigator(
           firstRightIcon={'ios-search'}
           navigation={navigation}
           right
+          onPressFirstRightIcon={() => console.log('Search icon pressed.')}
         />
       )
     })

@@ -57,6 +57,7 @@ const customHeader = (prop: IProps) => {
                 name={prop.firstRightIcon}
                 type={prop.firstRightIconType}
                 style={[styles.headerIcon, styles.searchIcon]}
+                onPress={prop.onPressFirstRightIcon}
               />
               <View style={styles.rightMenu}>
                 <MenuAtom navigation={prop.navigation} />
