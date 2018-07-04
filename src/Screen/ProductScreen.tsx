@@ -1,21 +1,17 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
 import { userData } from '../config/default'
 import FabAtom from './../Atom/FabAtom'
 import ProductList from '../Components/ProductList'
 import { color } from '../Style/Color'
 import { productList } from '../config/data'
-import MenuAtom from '../Atom/MenuAtom'
 
 interface IProps {
   navigation: any
 }
 
-interface IState {}
-
-class ProductScreen extends PureComponent<IProps, IState> {
-  static navigationOptions = ({ navigation }: any) => {
+class ProductScreen extends PureComponent<IProps> {
+  /*static navigationOptions = ({ navigation }: any) => {
     const { params } = navigation.state
     let right = (
       <View style={{ flexDirection: 'row' }}>
@@ -31,13 +27,11 @@ class ProductScreen extends PureComponent<IProps, IState> {
           onPress={() => navigation.navigate('DrawerToggle')}
           style={styles.headerIcon}
         />
-      )
-    return {
-      title: 'Products',
-      headerRight: right,
-      headerLeft: left
+      )*/
+  /*return {
+      header: <CustomHeader title="Products & Services" />
     }
-  }
+}*/
 
   render() {
     // const { params } = this.props.navigation.state
