@@ -11,9 +11,9 @@ export default class App extends React.Component {
   }
   async componentDidMount() {
     await Font.loadAsync({
-      SourceSansPro: require('../Fonts/SourceSansPro-Regular.ttf'),
-      SourceSansPro_Semibold: require('../Fonts/SourceSansPro-Semibold.ttf'),
-      SourceSansPro_Bold: require('../Fonts/SourceSansPro-Bold.ttf'),
+      SourceSansPro: require('../fonts/SourceSansPro-Regular.ttf'),
+      SourceSansPro_Semibold: require('../fonts/SourceSansPro-Semibold.ttf'),
+      SourceSansPro_Bold: require('../fonts/SourceSansPro-Bold.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
     })
     this.setState({ loading: false })
