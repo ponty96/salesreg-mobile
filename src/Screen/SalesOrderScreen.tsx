@@ -1,12 +1,12 @@
 import * as React from 'react'
-import { View, Button, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
 }
 
-export default class SalesScreen extends React.Component<IProps> {
+export default class SalesOrderScreen extends React.Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -17,6 +17,7 @@ export default class SalesScreen extends React.Component<IProps> {
           firstRightIcon="ios-search"
           onPressFirstRightIcon={() => console.log('Search button pressed.')}
           rightText=" "
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
     }
@@ -25,10 +26,7 @@ export default class SalesScreen extends React.Component<IProps> {
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          title={'Go to next screen'}
-          onPress={() => this.props.navigation.navigate('ViewBusiness')}
-        />
+        <Text>Sales order screen.</Text>
       </View>
     )
   }

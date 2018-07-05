@@ -44,7 +44,7 @@ import HomeScreen from '../Screen/HomeScreen'
 import EmployeesScreen from '../Screen/EmployeesScreen'
 import VendorScreen from '../Screen/VendorScreen'
 import PurchaseScreen from '../Screen/PurchaseScreen'
-import SalesScreen from '../Screen/SalesScreen'
+import SalesOrderScreen from '../Screen/SalesOrderScreen'
 import BankScreen from '../Screen/BankScreen'
 import IncomeScreen from '../Screen/IncomeScreen'
 import ExpensesScreen from '../Screen/ExpensesScreen'
@@ -129,8 +129,8 @@ const businessStack = StackNavigator(
     Purchase: {
       screen: PurchaseScreen
     },
-    Sales: {
-      screen: SalesScreen
+    SalesOrder: {
+      screen: SalesOrderScreen
     },
     Bank: {
       screen: BankScreen
