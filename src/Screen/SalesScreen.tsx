@@ -1,14 +1,24 @@
 import * as React from 'react'
 import { View, Button, StyleSheet } from 'react-native'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
 }
 
 export default class SalesScreen extends React.Component<IProps> {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Sales Screen'
+      header: (
+        <CustomHeader
+          title="Sales order"
+          menu
+          right
+          firstRightIcon="ios-search"
+          onPressFirstRightIcon={() => console.log('Search button pressed.')}
+          rightText=" "
+        />
+      )
     }
   }
 
