@@ -91,7 +91,7 @@ export default class SideBar extends PureComponent<IProps> {
                 },
                 {
                   title: 'Sales',
-                  routeName: 'SalesOrder'
+                  routeName: 'salesOrderTab'
                 }
               ]}
             />

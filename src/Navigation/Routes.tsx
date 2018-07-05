@@ -6,14 +6,11 @@ import {
   TabNavigator,
   SwitchNavigator
 } from 'react-navigation'
-// import { Icon } from 'native-base'
 
 import OnBoardingScreen from './../Screen/OnBoardingScreen'
-// import SplashScreen from './../Screen/SplashScreen';
 import SignupScreen from './../Screen/SignupScreen'
 import ResetScreen from './../Screen/ResetScreen'
 import LoginScreen from './../Screen/LoginScreen'
-// import BusinessListScreen from './../Screen/BusinessListScreen';
 import NewBusinessScreen from './../Screen/NewBusinessScreen'
 import NewOrderScreen from './../Screen/NewOrderScreen'
 import NewProductScreen from './../Screen/NewProductScreen'
@@ -25,7 +22,6 @@ import ProductScreen from './../Screen/ProductScreen'
 // import OrderScreen from './../Screen/OrderScreen';
 import OrderDetailsScreen from './../Screen/OrderDetailsScreen'
 // import CustomerScreen from './../Screen/CustomerScreen';
-// import DebtsScreen from './../Screen/DebtsScreen';
 import ServicesScreen from './../Screen/ServicesScreen'
 import DebtDetailsScreen from './../Screen/DebtDetailsScreen'
 import ProductDetailsScreen from './../Screen/ProductDetailsScreen'
@@ -36,7 +32,6 @@ import SecondSignUpScreen from '../Screen/SecondSignUpScreen'
 import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
 import MainOrderList from '../Components/MainOrderList'
 import Sidebar from './Sidebar'
-// import styles from './../Style/Layout'
 import { color } from './../Style/Color'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
@@ -55,7 +50,9 @@ import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 import EditServiceScreen from '../Screen/EditServiceScreen'
 import ServiceScreen from '../Screen/ServiceScreen'
 import CustomHeader from '../Components/CustomHeader'
-// import EditProductDetailScreen from '../screen/EditProductDetailScreen'
+import ProductSalesOrderScreen from '../Screen/ProductSalesOrderScreen'
+import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
+import EditProductDetailScreen from '../Screen/EditProductDetailScreen'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -68,6 +65,57 @@ const viewBothStack = TabNavigator(
     },
     Services: {
       screen: ServicesScreen
+    }
+  },
+  {
+    navigationOptions: ({ navigation }: any) => ({
+      tabBarIcon: ({ focused }: any) => {
+        const { routeName } = navigation.state
+        let tabColor
+        if (routeName === 'Products') {
+          tabColor = focused ? color.secondary : color.secondary
+        } else if (routeName === 'Services') {
+          tabColor = focused ? color.secondary : color.secondary
+        }
+        return (
+          <View style={{ alignItems: 'center' }}>
+            <Text style={{ color: tabColor, fontWeight: 'bold', fontSize: 20 }}>
+              {routeName}
+            </Text>
+          </View>
+        )
+      }
+    }),
+    tabBarOptions: {
+      activeTintColor: color.secondary,
+      inactiveTintColor: color.secondary,
+      showLabel: true,
+      style: {
+        backgroundColor: color.primary,
+        height: 60,
+        paddingVertical: 8
+      },
+      indicatorStyle: {
+        backgroundColor: color.check
+      },
+      upperCaseLabel: false,
+      labelStyle: {
+        fontSize: 14,
+        fontFamily: 'SourceSansPro'
+      }
+    },
+    animationEnabled: false,
+    swipeEnabled: true
+  }
+)
+
+const salesOrderTab = TabNavigator(
+  {
+    Products: {
+      screen: ProductSalesOrderScreen
+    },
+    Services: {
+      screen: ServicesSalesOrderScreen
     }
   },
   {
@@ -210,8 +258,16 @@ const businessStack = StackNavigator(
       screen: EditBusinessProfileScreen
     },
     EditServices: EditServiceScreen,
-    ShowService: ServiceScreen /*,
-    EditProductDetail: EditProductDetailScreen*/
+    ShowService: ServiceScreen,
+    EditProductDetail: EditProductDetailScreen,
+    salesOrderTab: {
+      screen:
+        OPTION === BOTH
+          ? salesOrderTab
+          : OPTION === ONE_PRODUCT
+            ? ProductSalesOrderScreen
+            : ServicesSalesOrderScreen
+    }
   },
   {
     initialRouteName: 'Home',
