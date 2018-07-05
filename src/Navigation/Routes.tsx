@@ -55,6 +55,7 @@ import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 import EditServiceScreen from '../Screen/EditServiceScreen'
 import ServiceScreen from '../Screen/ServiceScreen'
 import CustomHeader from '../Components/CustomHeader'
+// import EditProductDetailScreen from '../screen/EditProductDetailScreen'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -209,7 +210,8 @@ const businessStack = StackNavigator(
       screen: EditBusinessProfileScreen
     },
     EditServices: EditServiceScreen,
-    ShowService: ServiceScreen
+    ShowService: ServiceScreen /*,
+    EditProductDetail: EditProductDetailScreen*/
   },
   {
     initialRouteName: 'Home',
