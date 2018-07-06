@@ -2,8 +2,6 @@ import React, { PureComponent } from 'react'
 import { View, FlatList, ScrollView, StyleSheet } from 'react-native'
 import ProductListAtom from '../Atom/ProductListAtom'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
-// import styles from '../Style/ProductAndCustomerList';
-// import styles_screen from './../Style/Screen';
 
 interface IProps {
   navigation: any
@@ -49,6 +47,6 @@ export default ProductList
 
 const styles = StyleSheet.create({
   listMargin: {
-    marginBottom: 55
+    marginBottom: 52
   }
 })

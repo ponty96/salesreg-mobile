@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 import { color } from '../Style/Color'
 import AboveCustomerDetailsAtom from '../Atom/AboveCustomerDetailsAtom'
-import InnerTabAtom from '../Atom/InnerTabAtom'
+import InnerTabAtom from '../Atom/CustomerInnerTabAtom'
 
 interface IProps {
   navigation?: any
@@ -71,6 +71,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
           customerName="Salomy"
           purchaseMade={43000}
           overDue={10000}
+          redText="Overdue"
         />
         <InnerTabAtom />
       </View>

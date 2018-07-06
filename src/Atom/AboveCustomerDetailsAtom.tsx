@@ -8,6 +8,7 @@ interface IProps {
   customerName: string
   purchaseMade: number
   overDue: number
+  redText: string
 }
 
 export default class AboveCustomerDetailsAtom extends React.Component<
@@ -19,7 +20,6 @@ export default class AboveCustomerDetailsAtom extends React.Component<
   }
   sendEmail = () => {
     console.log('sending an email')
-    window.open('mailto:test@example.com')
   }
   render() {
     return (
@@ -40,7 +40,7 @@ export default class AboveCustomerDetailsAtom extends React.Component<
             <Text style={styles.blackFont}>
               {'\u20A6'} {numberWithCommas(this.props.purchaseMade)}.00{' '}
             </Text>
-            <Text style={styles.greyFont}>Overdue</Text>
+            <Text style={styles.greyFont}>{this.props.redText}</Text>
             <Text style={styles.redFont}>
               {'\u20A6'} {numberWithCommas(this.props.overDue)}.00
             </Text>

@@ -51,7 +51,7 @@ const styles = StyleSheet.create({
   },
   subHeaderPad: {
     paddingLeft: 10,
-    paddingTop: 5,
+    paddingTop: 8,
     fontFamily: 'SourceSansPro',
     fontSize: 15
   },

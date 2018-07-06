@@ -43,11 +43,18 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
           {this.sideTriangle(this.props.status, this.props.bar)}
         </View>
         <View style={styles.mainList}>
-          <Left style={{ flexDirection: 'column', paddingLeft: 12, margin: 0 }}>
+          <Left
+            style={{
+              flexDirection: 'column',
+              paddingLeft: 12,
+              paddingVertical: 16,
+              margin: 0
+            }}
+          >
             <Text style={styles.normalFont}>{this.props.title}</Text>
             <Text
               style={[
-                styles.cash,
+                styles.status,
                 {
                   color: this.props.status === 'paid' ? color.selling : 'black'
                 }
@@ -56,7 +63,13 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
               {this.props.details}
             </Text>
           </Left>
-          <Right style={{ flexDirection: 'column', paddingRight: 16 }}>
+          <Right
+            style={{
+              flexDirection: 'column',
+              paddingRight: 16,
+              paddingVertical: 16
+            }}
+          >
             <Text
               style={[
                 styles.cash,
@@ -119,7 +132,7 @@ const styles = StyleSheet.create({
     borderBottomColor: 'transparent',
     borderTopColor: 'transparent',
     borderLeftWidth: 1,
-    height: 47,
+    height: 49,
     width: 35
   },
   triangle: {
@@ -132,19 +145,25 @@ const styles = StyleSheet.create({
     transform: [{ rotate: '90deg' }]
   },
   cash: {
-    fontSize: 16,
-    fontFamily: 'SourceSansPro',
-    paddingTop: 3,
-    paddingBottom: 6
+    fontSize: 14,
+    fontFamily: 'SourceSansPro'
+    // paddingTop: 3,
+    // paddingBottom: 6
+  },
+  status: {
+    fontSize: 14,
+    fontFamily: 'SourceSansPro'
+    // paddingTop: 3,
+    // paddingBottom: 6
   },
   normalFont: {
-    fontSize: 16,
+    fontSize: 14,
     fontFamily: 'SourceSansPro',
-    paddingTop: 8,
+    // paddingTop: 8,
     color: color.button
   },
   smallFont: {
-    fontSize: 14,
+    fontSize: 12,
     fontFamily: 'SourceSansPro'
   }
 })

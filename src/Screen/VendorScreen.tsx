@@ -43,7 +43,11 @@ class VendorScreen extends Component<IProps, IState> {
 
     return (
       <View style={styles.centerContainer}>
-        <CustomerList items={items} onPress={this.onPress} />
+        <CustomerList
+          items={items}
+          onPress={this.onPress}
+          screenType="vendor"
+        />
         <FabAtom
           routeName={'NewVendor'}
           name={'md-person-add'}

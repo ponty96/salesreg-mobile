@@ -8,6 +8,7 @@ import EmptyList from './EmptyList'
 interface IProps {
   items: any[]
   onPress: () => void
+  screenType: string
 }
 
 interface IState {}
@@ -61,7 +62,9 @@ class CustomerList extends Component<IProps, IState> {
             renderItem={this.renderItem}
             // keyExtractor={item => item.key}
             ListEmptyComponent={
-              <EmptyList type={{ Text: 'customer', verifyMainList: 'main' }} />
+              <EmptyList
+                type={{ Text: this.props.screenType, verifyMainList: 'main' }}
+              />
             }
           />
         </ScrollView>

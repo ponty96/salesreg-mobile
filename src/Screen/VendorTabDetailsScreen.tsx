@@ -9,7 +9,7 @@ interface IState {
   list: any
 }
 
-class TabDetailsScreen extends Component<IProps, IState> {
+class VendorTabDetailsScreen extends Component<IProps, IState> {
   state = {
     // item: this.props.navigation.state.params.data
     list: [
@@ -49,4 +49,4 @@ class TabDetailsScreen extends Component<IProps, IState> {
   }
 }
 
-export default TabDetailsScreen
+export default VendorTabDetailsScreen

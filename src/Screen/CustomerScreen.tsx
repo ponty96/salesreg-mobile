@@ -5,7 +5,7 @@ import { Icon } from 'native-base'
 import FabAtom from './../Atom/FabAtom'
 import CustomerList from '../Components/CustomerList'
 import { color } from '../Style/Color'
-import { customerList } from '../config/data';
+import { customerList } from '../config/data'
 
 interface IProps {
   navigation: any
@@ -43,7 +43,11 @@ class CustomerScreen extends Component<IProps, IState> {
 
     return (
       <View style={styles.centerContainer}>
-        <CustomerList items={items} onPress={this.onPress} />
+        <CustomerList
+          items={items}
+          onPress={this.onPress}
+          screenType="customer"
+        />
         <FabAtom
           routeName={'NewCustomer'}
           name={'md-person-add'}

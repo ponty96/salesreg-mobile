@@ -1,15 +1,15 @@
 import { TabNavigator } from 'react-navigation'
-import TabActivitiesScreen from '../Screen/TabActivitiesScreen'
-import TabDetailsScreen from '../Screen/TabDetailsScreen'
+import VendorTabActivitiesScreen from '../Screen/VendorTabActivitiesScreen'
+import VendorTabDetailsScreen from '../Screen/VendorTabDetailsScreen'
 import { color } from '../Style/Color'
 
 const innerTabAtom = TabNavigator(
   {
     Activities: {
-      screen: TabActivitiesScreen
+      screen: VendorTabActivitiesScreen
     },
     Details: {
-      screen: TabDetailsScreen
+      screen: VendorTabDetailsScreen
     }
   },
   {
@@ -19,11 +19,14 @@ const innerTabAtom = TabNavigator(
       showLabel: true,
       style: {
         backgroundColor: color.primary,
-        height: 60,
-        paddingVertical: 8
+        height: 48,
+        padding: 0,
+        margin: 0
       },
+      labelStyle: { fontSize: 16, fontFamily: 'SourceSansPro_Semibold' },
       indicatorStyle: {
-        backgroundColor: color.check
+        backgroundColor: color.check,
+        marginTop: 20
       },
       upperCaseLabel: true
     },
