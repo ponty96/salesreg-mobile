@@ -7,6 +7,7 @@ import { color } from '../Style/Color'
 interface IProps {
   total?: any
   list?: any[]
+  image?: any
 }
 
 class SubHeaderAtom extends React.Component<IProps, any> {
@@ -18,10 +19,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
     return (
       <Header style={styles.subHeaderHeader}>
         <Left style={styles.subHeaderLeftRow}>
-          <Image
-            source={require('../../assets/Icons/subheader-icons/product-blue.png')}
-            style={styles.productIcon}
-          />
+          <Image source={this.props.image} style={styles.productIcon} />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
         </Left>
         <Right style={styles.subHeaderRightRow}>

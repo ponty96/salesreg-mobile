@@ -2,17 +2,13 @@ import React, { PureComponent } from 'react'
 import { View, FlatList, ScrollView, StyleSheet } from 'react-native'
 import ProductListAtom from '../Atom/ProductListAtom'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
-// import styles from '../Style/ProductAndCustomerList';
-// import styles_screen from './../Style/Screen';
 
 interface IProps {
   navigation: any
   items: any
 }
 
-interface IState {}
-
-class ProductList extends PureComponent<IProps, IState> {
+class ProductList extends PureComponent<IProps> {
   onPress = () => {
     this.props.navigation.navigate('ProductDetails')
   }
@@ -31,6 +27,7 @@ class ProductList extends PureComponent<IProps, IState> {
             'Highest profit',
             'Lowest profit'
           ]}
+          image={require('../../assets/Icons/subheader-icons/product-blue.png')}
         />
 
         <ScrollView style={styles.listMargin}>
