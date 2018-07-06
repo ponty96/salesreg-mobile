@@ -266,7 +266,19 @@ const businessStack = StackNavigator(
           ? salesOrderTab
           : OPTION === ONE_PRODUCT
             ? ProductSalesOrderScreen
-            : ServicesSalesOrderScreen
+            : ServicesSalesOrderScreen,
+      navigationOptions: ({ navigation }: any) => ({
+        header: (
+          <CustomHeader
+            title="Sales order"
+            menu
+            right
+            rightText=" "
+            firstRightIcon="ios-search"
+            onMenuPress={() => navigation.navigate('DrawerToggle')}
+          />
+        )
+      })
     }
   },
   {
@@ -276,9 +288,7 @@ const businessStack = StackNavigator(
         <CustomHeader
           title="Products & Services"
           menu
-          onMenuPress={() => {
-            navigation.navigate('DrawerToggle')
-          }}
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
           firstRightIcon={'ios-search'}
           navigation={navigation}
           right
