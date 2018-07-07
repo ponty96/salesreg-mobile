@@ -28,6 +28,8 @@ class ProductList extends PureComponent<IProps> {
             'Lowest profit'
           ]}
           image={require('../../assets/Icons/subheader-icons/product-blue.png')}
+          rightLabel="Sort by"
+          screen="products and services"
         />
 
         <ScrollView style={styles.listMargin}>

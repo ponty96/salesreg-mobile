@@ -1,12 +1,24 @@
 import React, { Component } from 'react'
-import { View, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import SubHeaderAtom from '../Atom/SubHeaderAtom'
 
 export default class ProductSalesOrderScreen extends Component {
   render() {
     return (
-      <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-        <Text>Product sales order screen</Text>
+      <View style={styles.container}>
+        <SubHeaderAtom
+          image={require('../../assets/Icons/subheader-icons/ordre-blue.png')}
+          total={0}
+          screen="sales order"
+          rightLabel="View products"
+        />
       </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1
+  }
+})

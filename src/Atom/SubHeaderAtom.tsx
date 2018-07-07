@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Header, Left, Right, Text } from 'native-base'
+import { Header, Left, Right, Text, Icon } from 'native-base'
 import PickerAtom from './PickerAtom'
 import { StyleSheet, View, Image } from 'react-native'
 import { color } from '../Style/Color'
@@ -8,11 +8,31 @@ interface IProps {
   total?: any
   list?: any[]
   image?: any
+  rightLabel?: string
+  screen?: string
 }
 
 class SubHeaderAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
     total: '80'
+  }
+
+  renderRightComponent = (screen: string) => {
+    screen = this.props.screen
+    if (screen === 'products and services')
+      return (
+        <View>
+          <Text style={styles.subHeaderFont}>{this.props.rightLabel}</Text>
+          <View style={styles.pickerWrapper}>
+            <PickerAtom
+              list={this.props.list}
+              style={styles.pickerStyle}
+              placeholder="Make a selection"
+            />
+          </View>
+        </View>
+      )
+    else return undefined
   }
 
   render() {
@@ -22,15 +42,24 @@ class SubHeaderAtom extends React.Component<IProps, any> {
           <Image source={this.props.image} style={styles.productIcon} />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
         </Left>
+
         <Right style={styles.subHeaderRightRow}>
-          <Text style={styles.subHeaderFont}>Sort by</Text>
-          <View style={styles.pickerWrapper}>
-            <PickerAtom
-              list={this.props.list}
-              style={styles.pickerStyle}
-              placeholder="Make a selection"
+          <Text style={styles.subHeaderFont}>{this.props.rightLabel}</Text>
+          {this.props.screen !== 'sales order' ? (
+            <View style={styles.pickerWrapper}>
+              <PickerAtom
+                list={this.props.list}
+                style={styles.pickerStyle}
+                placeholder="Make a selection"
+              />
+            </View>
+          ) : (
+            <Icon
+              name="chevron-small-right"
+              type="Entypo"
+              style={styles.rightIconLabel}
             />
-          </View>
+          )}
         </Right>
       </Header>
     )
@@ -55,7 +84,6 @@ const styles = StyleSheet.create({
   },
   subHeaderPad: {
     paddingLeft: 10,
-    paddingTop: 5,
     fontFamily: 'SourceSansPro',
     fontSize: 15
   },
@@ -85,5 +113,11 @@ const styles = StyleSheet.create({
   productIcon: {
     height: 20,
     width: 20
+  },
+  salesOrderSubHeaderRightText: {
+    fontFamily: 'SourceSansPro'
+  },
+  rightIconLabel: {
+    color: color.button
   }
 })
