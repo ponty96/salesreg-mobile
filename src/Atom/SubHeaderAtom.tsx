@@ -84,6 +84,10 @@ const styles = StyleSheet.create({
   },
   subHeaderPad: {
     paddingLeft: 10,
+<<<<<<< HEAD
+=======
+    paddingTop: 8,
+>>>>>>> d0f1f9feb074c0a0cbe94227fd41cbd70841815c
     fontFamily: 'SourceSansPro',
     fontSize: 15
   },

@@ -3,10 +3,12 @@ import { View, FlatList, ScrollView, StyleSheet } from 'react-native'
 import CustomerListAtom from '../Atom/CustomerListAtom'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
 import { customerList } from '../config/data'
+import EmptyList from './EmptyList'
 
 interface IProps {
   items: any[]
   onPress: () => void
+  screenType: string
 }
 
 interface IState {}
@@ -58,7 +60,12 @@ class CustomerList extends Component<IProps, IState> {
           <FlatList
             data={customerList}
             renderItem={this.renderItem}
-            keyExtractor={item => item.key}
+            // keyExtractor={item => item.key}
+            ListEmptyComponent={
+              <EmptyList
+                type={{ Text: this.props.screenType, verifyMainList: 'main' }}
+              />
+            }
           />
         </ScrollView>
       </View>

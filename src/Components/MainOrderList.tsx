@@ -1,46 +1,32 @@
-import React, { Component } from 'react';
-import { View, ListView, StyleSheet } from 'react-native';
-import { Font, AppLoading } from 'expo';
-import { Root, Icon, Button, Right, Header, Text } from 'native-base';
-import { ScrollView } from 'react-native-gesture-handler';
-import MainOrderListAtom from '../Atom/MainOrderListAtom';
-import { mainOrderList } from '../config/data';
-
-const users = mainOrderList;
+import React, { Component } from 'react'
+import { View, StyleSheet, FlatList } from 'react-native'
+import { Font, AppLoading } from 'expo'
+import { Root, Icon, Button, Right, Header, Text } from 'native-base'
+import { ScrollView } from 'react-native-gesture-handler'
+import MainOrderListAtom from '../Atom/MainOrderListAtom'
+import { mainOrderList } from '../config/data'
 
 interface IProps {
-  navigation: any;
-  onPress: () => void;
-  onClick: () => void;
+  navigation: any
+  onPress: () => void
+  onClick: () => void
 }
 
-interface IState {
-  loading: boolean;
-  userDataSource: any;
-}
-
-export default class MainOrderList extends Component<IProps, IState> {
-  constructor(props: any) {
-    super(props);
-    const ds = new ListView.DataSource({
-      rowHasChanged: (r1, r2) => r1 !== r2
-    });
-    this.state = {
-      userDataSource: ds.cloneWithRows(users),
-      loading: true
-    };
+export default class MainOrderList extends Component<IProps, any> {
+  state = {
+    loading: true
   }
 
   async componentDidMount() {
     await Font.loadAsync({
       Roboto: require('native-base/Fonts/Roboto.ttf'),
       Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
-    });
-    this.setState({ loading: false });
+    })
+    this.setState({ loading: false })
   }
 
-  renderRow(user: any) {
-    return <MainOrderListAtom items={user} onPress={this.props.onClick} />;
+  renderRow = (user: any) => {
+    return <MainOrderListAtom items={user} onPress={this.props.onClick} />
   }
 
   render() {
@@ -49,7 +35,7 @@ export default class MainOrderList extends Component<IProps, IState> {
         <Root>
           <AppLoading />
         </Root>
-      );
+      )
     }
     return (
       <View style={styles.listContainer}>
@@ -64,14 +50,14 @@ export default class MainOrderList extends Component<IProps, IState> {
           </Right>
         </Header>
         <ScrollView>
-          <ListView
+          <FlatList
             style={styles.listView}
-            dataSource={this.state.userDataSource}
-            renderRow={this.renderRow.bind(this)}
+            data={mainOrderList}
+            renderItem={this.renderRow}
           />
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
@@ -99,4 +85,4 @@ const styles = StyleSheet.create({
     color: '#000',
     marginBottom: 8
   }
-});
+})

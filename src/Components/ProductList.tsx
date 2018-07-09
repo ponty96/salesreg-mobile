@@ -48,6 +48,6 @@ export default ProductList
 
 const styles = StyleSheet.create({
   listMargin: {
-    marginBottom: 55
+    marginBottom: 52
   }
 })

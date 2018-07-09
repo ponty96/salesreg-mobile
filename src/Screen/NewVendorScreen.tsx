@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
-import EditCustomerForm from '../Components/EditCustomerForm'
+import EditVendorForm from '../Components/EditVendorForm'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -10,7 +10,7 @@ interface IProps {
 
 interface IState {}
 
-class NewCustomerScreen extends Component<IProps, IState> {
+class NewVendorScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       title: 'kay5ive Attractions',
@@ -27,11 +27,11 @@ class NewCustomerScreen extends Component<IProps, IState> {
   }
 
   render() {
-    return <EditCustomerForm navigation={this.props.navigation} />
+    return <EditVendorForm navigation={this.props.navigation} />
   }
 }
 
-export default NewCustomerScreen
+export default NewVendorScreen
 
 const styles = StyleSheet.create({
   headerIcon: {
