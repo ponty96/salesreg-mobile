@@ -26,7 +26,7 @@ const emptyList = (prop: { type: Empty }) => {
     )
   } else {
     return (
-      <View>
+      <View style={styles.view}>
         <Text>{prop.type.Text}</Text>
       </View>
     )

@@ -10,6 +10,7 @@ interface IProps {
   image?: any
   rightLabel?: string
   screen?: string
+  onPressArrow?: () => void
 }
 
 class SubHeaderAtom extends React.Component<IProps, any> {
@@ -58,6 +59,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
               name="chevron-small-right"
               type="Entypo"
               style={styles.rightIconLabel}
+              onPress={this.props.onPressArrow}
             />
           )}
         </Right>
