@@ -54,7 +54,7 @@ import EditProductDetailScreen from '../Screen/EditProductDetailScreen'
 import CustomerScreen from '../Screen/CustomerScreen'
 import VendorDetailScreen from '../Screen/VendorDetailsScreen'
 import NewVendorScreen from '../Screen/NewVendorScreen'
-import EditCustomerDetailsScreen from '../Screen/EditCustomerDetailsScreen';
+import EditCustomerDetailsScreen from '../Screen/EditCustomerDetailsScreen'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -140,7 +140,7 @@ const salesOrderTab = TabNavigator(
       }
     }),
     tabBarOptions: {
-      activeTintColor: color.secondary,
+      activeTintColor: color.check,
       inactiveTintColor: color.secondary,
       showLabel: true,
       style: {

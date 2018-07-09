@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
 import FabAtom from '../Atom/FabAtom'
+import EmptyList from '../Components/EmptyList'
 
 export default class ProductSalesOrderScreen extends Component {
   render() {
@@ -14,6 +15,7 @@ export default class ProductSalesOrderScreen extends Component {
           rightLabel="View products"
         />
         <FabAtom name="shopping-cart" type="Entypo" />
+        <EmptyList type={{ verifyMainList: 'main', Text: 'orders' }} />
       </View>
     )
   }

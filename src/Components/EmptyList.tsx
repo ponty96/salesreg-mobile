@@ -11,8 +11,8 @@ const emptyList = (prop: { type: Empty }) => {
     return (
       <View style={styles.view}>
         <Text style={styles.normalText}>
-          Press the <Text style={styles.blueText}>blue</Text> button to add{' '}
-          {prop.type.Text}
+          Press the <Text style={styles.blueText}>blue</Text> round button to
+          add {prop.type.Text}
         </Text>
       </View>
     )
@@ -45,10 +45,12 @@ const styles = StyleSheet.create({
     borderRadius: 2
   },
   normalText: {
-    fontSize: 14
+    fontSize: 14,
+    fontFamily: 'SourceSansPro'
   },
   blueText: {
     color: color.button,
-    fontSize: 14
+    fontSize: 14,
+    fontFamily: 'SourceSansPro'
   }
 })
