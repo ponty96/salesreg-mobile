@@ -14,8 +14,6 @@ interface IProps {
 interface IState {}
 
 class CustomerList extends Component<IProps, IState> {
-  // onPress = () => {}
-
   renderItem = ({ item }: any) => {
     let latestAmount =
       item.status === 'paid'
@@ -55,6 +53,7 @@ class CustomerList extends Component<IProps, IState> {
             'Latest Payment',
             'Customer Rating'
           ]}
+          image={require('../../assets/Icons/subheader-icons/user-blue.png')}
         />
         <ScrollView>
           <FlatList
