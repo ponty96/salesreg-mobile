@@ -19,9 +19,7 @@ import SettingsScreen from './../Screen/SettingsScreen'
 import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen'
 import DebtScreen from './../Screen/DebtScreen'
 import ProductScreen from './../Screen/ProductScreen'
-// import OrderScreen from './../Screen/OrderScreen';
 import OrderDetailsScreen from './../Screen/OrderDetailsScreen'
-// import CustomerScreen from './../Screen/CustomerScreen';
 import ServicesScreen from './../Screen/ServicesScreen'
 import DebtDetailsScreen from './../Screen/DebtDetailsScreen'
 import ProductDetailsScreen from './../Screen/ProductDetailsScreen'
@@ -53,10 +51,10 @@ import CustomHeader from '../Components/CustomHeader'
 import ProductSalesOrderScreen from '../Screen/ProductSalesOrderScreen'
 import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
 import EditProductDetailScreen from '../Screen/EditProductDetailScreen'
-// import MenuAtom from '../Atom/MenuAtom'
 import CustomerScreen from '../Screen/CustomerScreen'
 import VendorDetailScreen from '../Screen/VendorDetailsScreen'
 import NewVendorScreen from '../Screen/NewVendorScreen'
+import EditCustomerDetailsScreen from '../Screen/EditCustomerDetailsScreen';
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -273,6 +271,7 @@ const businessStack = StackNavigator(
     EditServices: EditServiceScreen,
     ShowService: ServiceScreen,
     EditProductDetail: EditProductDetailScreen,
+    EditCustomerDetails: EditCustomerDetailsScreen,
     salesOrderTab: {
       screen:
         OPTION === BOTH
