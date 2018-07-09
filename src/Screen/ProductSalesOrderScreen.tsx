@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
+import FabAtom from '../Atom/FabAtom'
 
 export default class ProductSalesOrderScreen extends Component {
   render() {
@@ -12,6 +13,7 @@ export default class ProductSalesOrderScreen extends Component {
           screen="sales order"
           rightLabel="View products"
         />
+        <FabAtom name="shopping-cart" type="Entypo" />
       </View>
     )
   }
