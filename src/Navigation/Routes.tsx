@@ -47,19 +47,16 @@ import InvoicesScreen from '../Screen/InvoicesScreen'
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
-<<<<<<< HEAD
 import EditServiceScreen from '../Screen/EditServiceScreen'
 import ServiceScreen from '../Screen/ServiceScreen'
 import CustomHeader from '../Components/CustomHeader'
 import ProductSalesOrderScreen from '../Screen/ProductSalesOrderScreen'
 import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
 import EditProductDetailScreen from '../Screen/EditProductDetailScreen'
-=======
-import MenuAtom from '../Atom/MenuAtom'
+// import MenuAtom from '../Atom/MenuAtom'
 import CustomerScreen from '../Screen/CustomerScreen'
 import VendorDetailScreen from '../Screen/VendorDetailsScreen'
 import NewVendorScreen from '../Screen/NewVendorScreen'
->>>>>>> d0f1f9feb074c0a0cbe94227fd41cbd70841815c
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'

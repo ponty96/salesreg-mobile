@@ -46,13 +46,9 @@ const styles = StyleSheet.create({
     flex: 1,
     height: 75,
     paddingLeft: 0,
-<<<<<<< HEAD
-    marginLeft: 0,
-=======
     marginLeft: 16,
     marginRight: 16,
     // backgroundColor: '#fff',
->>>>>>> d0f1f9feb074c0a0cbe94227fd41cbd70841815c
     marginBottom: 0.5,
     maxWidth: '100%',
     paddingVertical: 10,

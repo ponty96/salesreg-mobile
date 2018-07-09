@@ -20,6 +20,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           rightText="Edit"
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
+          onPressRightButton={() => navigation.navigate('EditProductDetail')}
         />
       )
     }

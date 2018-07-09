@@ -3,9 +3,11 @@ import { View, Text } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 
 export default class EditProductDetailScreen extends Component {
-  static navigationOptions = ({ navigate }: any) => {
+  static navigationOptions = ({ navigation }: any) => {
     return {
-      header: <CustomHeader title="Product" onBackPress={navigate.goBack()} />
+      header: (
+        <CustomHeader title="Product" onBackPress={() => navigation.goBack()} />
+      )
     }
   }
   render() {
