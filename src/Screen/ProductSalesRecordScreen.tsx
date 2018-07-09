@@ -5,12 +5,12 @@ import { color } from '../Style/Color'
 import CustomHeader from '../Components/CustomHeader'
 
 export default class ProductSalesRecordScreen extends Component {
-  static navigationOptions = ({ navigation }: any) => {
+  static navigationOptions = (/*{ navigation }: any*/) => {
     return {
       header: <CustomHeader title="Product sales record" />
     }
   }
-  render() {
+  render(): JSX.Element {
     return (
       <View style={styles.container}>
         <EmptyList
