@@ -54,6 +54,7 @@ class CustomerList extends Component<IProps, IState> {
             'Customer Rating'
           ]}
           image={require('../../assets/Icons/subheader-icons/user-blue.png')}
+          rightLabel="Sort by"
         />
         <ScrollView>
           <FlatList

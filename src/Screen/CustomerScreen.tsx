@@ -16,7 +16,6 @@ interface IState {}
 class CustomerScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Kay5iveAttractions',
       header: (
         <CustomHeader
           title="Customer"
