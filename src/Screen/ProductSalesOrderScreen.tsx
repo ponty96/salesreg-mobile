@@ -33,11 +33,29 @@ export default class ProductSalesOrderScreen extends Component<IState> {
   }
 
   render(): JSX.Element {
-    const DATA: [
-      { key: string; time: string; name: string; num: number; status: string }
-    ] = [
+    const DATA: {
+      key: string
+      time: string
+      name: string
+      num: number
+      status: string
+    }[] = [
       {
-        key: '0122323',
+        key: '0122320',
+        time: '3:30pm',
+        name: 'Salomy Kayadeja',
+        num: 20,
+        status: 'Pending'
+      },
+      {
+        key: '0122321',
+        time: '3:00pm',
+        name: 'Salomy Kayadeja',
+        num: 1,
+        status: 'Pending'
+      },
+      {
+        key: '0122322',
         time: '3:30pm',
         name: 'Salomy Kayadeja',
         num: 20,

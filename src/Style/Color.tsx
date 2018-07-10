@@ -18,5 +18,8 @@ export const color = {
   check: '#27CBD3',
   grey: '#F6F6F6',
   listBorderColor: '#F3F3F3',
-  secondary: '#FFFFFF'
+  secondary: '#FFFFFF',
+  red: '#D00000',
+  yellow: '#F8E71C',
+  orange: '#FBA518'
 }

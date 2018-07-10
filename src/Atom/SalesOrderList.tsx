@@ -11,10 +11,39 @@ interface IProps {
   status: string
 }
 
+const renderStatusIndicator = (status: string): JSX.Element => {
+  let colour
+  switch (status) {
+    case 'Pending': {
+      colour = color.red
+      break
+    }
+    case 'Delivered': {
+      colour = color.selling
+      break
+    }
+    case 'Delivering': {
+      colour = color.active
+      break
+    }
+    case 'Delivered | Recalled': {
+      colour = color.yellow
+      break
+    }
+    case 'Pending delivery': {
+      colour = color.orange
+      break
+    }
+    default:
+      console.log('Status not present.')
+  }
+  return <View style={[styles.statusIndicator, { backgroundColor: colour }]} />
+}
+
 const salesOrderList = (props: IProps) => {
   return (
     <View style={styles.wrapper}>
-      <Left>
+      <Left style={styles.leftWrapper}>
         <View style={styles.wrapperForTopLeft}>
           <Text style={[styles.serialNumber, styles.top]}>
             {props.serialNumber}
@@ -23,10 +52,11 @@ const salesOrderList = (props: IProps) => {
         </View>
         <Text style={[styles.text, styles.bottom]}>{props.name}</Text>
       </Left>
-      <Right>
+      <Right style={styles.rightWrapper}>
         <Text style={[styles.text, styles.top]}>{props.num}</Text>
         <Text style={[styles.status, styles.bottom]}>{props.status}</Text>
       </Right>
+      {renderStatusIndicator(props.status)}
     </View>
   )
 }
@@ -68,5 +98,14 @@ const styles = StyleSheet.create({
   status: {
     color: color.selling,
     fontFamily: 'SourceSansPro'
+  },
+  rightWrapper: {
+    marginRight: 16
+  },
+  leftWrapper: {
+    marginLeft: 16
+  },
+  statusIndicator: {
+    width: 5
   }
 })
