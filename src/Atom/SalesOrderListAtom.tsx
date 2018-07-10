@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { color } from '../Style/Color'
 import { Left, Right } from 'native-base'
 
@@ -9,6 +9,7 @@ interface IProps {
   time: string
   num: number
   status: string
+  onPress: () => void
 }
 
 const renderStatusIndicator = (status: string): JSX.Element => {
@@ -40,9 +41,9 @@ const renderStatusIndicator = (status: string): JSX.Element => {
   return <View style={[styles.statusIndicator, { backgroundColor: colour }]} />
 }
 
-const salesOrderList = (props: IProps) => {
+const salesOrderListAtom = (props: IProps) => {
   return (
-    <View style={styles.wrapper}>
+    <TouchableOpacity style={styles.wrapper} onPress={props.onPress}>
       <Left style={styles.leftWrapper}>
         <View style={styles.wrapperForTopLeft}>
           <Text style={[styles.serialNumber, styles.top]}>
@@ -57,11 +58,11 @@ const salesOrderList = (props: IProps) => {
         <Text style={[styles.status, styles.bottom]}>{props.status}</Text>
       </Right>
       {renderStatusIndicator(props.status)}
-    </View>
+    </TouchableOpacity>
   )
 }
 
-export default salesOrderList
+export default salesOrderListAtom
 
 const styles = StyleSheet.create({
   wrapper: {

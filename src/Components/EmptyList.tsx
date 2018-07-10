@@ -5,6 +5,7 @@ import { color } from '../Style/Color'
 interface Empty {
   Text: string
   verifyMainList?: string
+  style?: object
 }
 const emptyList = (prop: { type: Empty }) => {
   if (prop.type.verifyMainList === 'main') {
@@ -26,8 +27,8 @@ const emptyList = (prop: { type: Empty }) => {
     )
   } else {
     return (
-      <View style={styles.view}>
-        <Text>{prop.type.Text}</Text>
+      <View style={[styles.view, prop.type.style]}>
+        <Text style={styles.normalText}>{prop.type.Text}</Text>
       </View>
     )
   }
@@ -46,7 +47,8 @@ const styles = StyleSheet.create({
   },
   normalText: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'SourceSansPro',
+    color: color.principal
   },
   blueText: {
     color: color.button,

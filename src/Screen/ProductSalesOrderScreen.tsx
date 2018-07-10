@@ -3,20 +3,28 @@ import { View, StyleSheet, FlatList } from 'react-native'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
 import FabAtom from '../Atom/FabAtom'
 import EmptyList from '../Components/EmptyList'
-import SalesOrderList from '../Atom/SalesOrderList'
+import SalesOrderList from '../Atom/SalesOrderListAtom'
+
+interface IProps {
+  navigation: any
+}
 
 interface IState {
   total: string
   empty: boolean
 }
 
-export default class ProductSalesOrderScreen extends Component<IState> {
+export default class ProductSalesOrderScreen extends Component<IProps, IState> {
   state = {
     total: '0',
     empty: true
   }
 
-  renderList = ({ item }: any) => {
+  handleListPress = () => {
+    this.props.navigation.navigate('SalesOrderStatus')
+  }
+
+  renderList = ({ item }: any): JSX.Element => {
     return (
       <SalesOrderList
         serialNumber={item.key}
@@ -24,12 +32,14 @@ export default class ProductSalesOrderScreen extends Component<IState> {
         time={item.time}
         num={item.num}
         status={item.status}
+        onPress={this.handleListPress}
       />
     )
   }
 
-  handleArrowPresss = () => {
+  handleArrowPresss = (): void => {
     this.setState({ empty: false })
+    this.setState({ total: '840040' })
   }
 
   render(): JSX.Element {
@@ -56,10 +66,31 @@ export default class ProductSalesOrderScreen extends Component<IState> {
       },
       {
         key: '0122322',
-        time: '3:30pm',
+        time: '2:30pm',
+        name: 'Salomy Kayadeja',
+        num: 2,
+        status: 'Delivered | Recalled'
+      },
+      {
+        key: '0122323',
+        time: 'Yesterday',
+        name: 'Salomy Kayadeja',
+        num: 80,
+        status: 'Pending delivery'
+      },
+      {
+        key: '0122324',
+        time: '2 days ago',
         name: 'Salomy Kayadeja',
         num: 20,
-        status: 'Pending'
+        status: 'Delivering'
+      },
+      {
+        key: '0122325',
+        time: '3 days ago',
+        name: 'Salomy Kayadeja',
+        num: 25,
+        status: 'Delivered'
       }
     ]
 
