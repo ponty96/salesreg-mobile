@@ -10,7 +10,7 @@ interface IProps {
 const selectStatusAtom = (props: IProps): JSX.Element => {
   return (
     <View style={styles.wrapper}>
-      <Radio selected={true} />
+      <Radio selected={true} style={styles.radio} />
       <Text style={styles.text}>{props.title}</Text>
     </View>
   )
@@ -25,9 +25,15 @@ const styles = StyleSheet.create({
     borderColor: color.listBorderColor,
     marginBottom: 8,
     backgroundColor: color.grey,
-    marginLeft: 16
+    marginLeft: 16,
+    height: 56,
+    alignItems: 'center'
   },
   text: {
+    marginLeft: 16
+  },
+  radio: {
+    color: color.selling,
     marginLeft: 16
   }
 })

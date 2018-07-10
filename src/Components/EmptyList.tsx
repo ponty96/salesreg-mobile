@@ -5,7 +5,7 @@ import { color } from '../Style/Color'
 interface Empty {
   Text: string
   verifyMainList?: string
-  style?: object
+  style?: any
 }
 const emptyList = (prop: { type: Empty }) => {
   if (prop.type.verifyMainList === 'main') {
