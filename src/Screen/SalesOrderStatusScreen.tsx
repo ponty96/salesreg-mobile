@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import EmptyList from '../Components/EmptyList'
 import SelectStatusAtom from '../Atom/SelectStatusAtom'
+import { color } from '../Style/Color'
 
 export default class SalesOederStatusScreen extends Component {
   render() {
@@ -14,7 +15,10 @@ export default class SalesOederStatusScreen extends Component {
             style: { marginBottom: 8 }
           }}
         />
-        <SelectStatusAtom title="Pending" />
+        <SelectStatusAtom
+          title="Pending"
+          indicatorColor={{ backgroundColor: color.red }}
+        />
       </View>
     )
   }

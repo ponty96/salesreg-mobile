@@ -5,6 +5,7 @@ import { color } from '../Style/Color'
 
 interface IProps {
   title: string
+  indicatorColor: object
 }
 
 const selectStatusAtom = (props: IProps): JSX.Element => {
@@ -12,6 +13,7 @@ const selectStatusAtom = (props: IProps): JSX.Element => {
     <View style={styles.wrapper}>
       <Radio selected={true} style={styles.radio} />
       <Text style={styles.text}>{props.title}</Text>
+      <View style={[styles.indicator, props.indicatorColor]} />
     </View>
   )
 }
@@ -25,15 +27,23 @@ const styles = StyleSheet.create({
     borderColor: color.listBorderColor,
     marginBottom: 8,
     backgroundColor: color.grey,
-    marginLeft: 16,
-    height: 56,
+    marginHorizontal: 16,
+    height: 64,
     alignItems: 'center'
   },
   text: {
-    marginLeft: 16
+    marginLeft: 16,
+    color: color.principal,
+    fontFamily: 'SourceSansPro',
+    fontSize: 14
+  },
+  indicator: {
+    width: 5,
+    position: 'absolute',
+    right: 0,
+    height: 64
   },
   radio: {
-    color: color.selling,
     marginLeft: 16
   }
 })
