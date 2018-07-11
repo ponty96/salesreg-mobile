@@ -11,13 +11,27 @@ import SignupForm from '../Components/SignupForm'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
 import TransitionAtom from '../Atom/TransitionAtom'
 import { color } from '../Style/Color'
+import Signup2Screen from './SecondSignUpScreen'
 
 interface IProps {
   navigation: any
 }
 
-class SignupScreen extends PureComponent<IProps> {
+interface IState {
+  showSecondScreen: boolean
+}
+
+class SignupScreen extends PureComponent<IProps, IState> {
+  state = {
+    showSecondScreen: false
+  }
+  onPress = () => {
+    this.setState({ showSecondScreen: true })
+  }
   render() {
+    if (this.state.showSecondScreen) {
+      return <Signup2Screen navigation={this.props.navigation} />
+    }
     return (
       <View style={styles.container}>
         <AuthenticationHeader />
@@ -36,7 +50,10 @@ class SignupScreen extends PureComponent<IProps> {
               behavior={'padding'}
               keyboardVerticalOffset={95}
             >
-              <SignupForm navigation={this.props.navigation} />
+              <SignupForm
+                navigation={this.props.navigation}
+                onPress={this.onPress}
+              />
             </KeyboardAvoidingView>
           </View>
         </ScrollView>

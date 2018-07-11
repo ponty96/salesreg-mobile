@@ -1,9 +1,7 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
 import CustomerFormAtom from '../Atom/CustomerFormAtom'
-
 import SaveCancelButton from '../Container/SaveCancelButton'
-import { ScrollView } from 'react-native-gesture-handler'
 
 interface IProps {
   navigation: any
@@ -11,7 +9,7 @@ interface IProps {
 
 interface IState {}
 
-class NewCustomerForm extends PureComponent<IProps, IState> {
+class EditVendorForm extends PureComponent<IProps, IState> {
   create = () => {
     this.props.navigation.goBack()
   }
@@ -19,17 +17,15 @@ class NewCustomerForm extends PureComponent<IProps, IState> {
   render() {
     return (
       <View style={styles.ababa}>
-        <ScrollView>
-          <CustomerFormAtom
-            navigation={this.props.navigation}
-            type={'customer'}
-            firstHeader={'Customer contact'}
-            secondHeader={'Customer Address'}
-            thirdHeader={'Customer pays me with'}
-          />
-        </ScrollView>
-        <SaveCancelButton
+        <CustomerFormAtom
           navigation={this.props.navigation}
+          type={'vendor'}
+          firstHeader={'Vendor contact'}
+          secondHeader={'Vendor Address'}
+          thirdHeader={'I pays this Vendor with'}
+        />
+        <SaveCancelButton
+          navigation={{ fakeObject: 'To stop giving errors' }}
           createfunc={this.create}
           positiveButtonName="SAVE"
         />
@@ -38,7 +34,7 @@ class NewCustomerForm extends PureComponent<IProps, IState> {
   }
 }
 
-export default NewCustomerForm
+export default EditVendorForm
 
 const styles = StyleSheet.create({
   ababa: {

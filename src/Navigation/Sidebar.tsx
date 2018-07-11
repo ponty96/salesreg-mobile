@@ -72,7 +72,7 @@ export default class SideBar extends PureComponent<IProps> {
               categories={[
                 {
                   title: 'Customers',
-                  routeName: 'CustomerDetails'
+                  routeName: 'Customer'
                 },
                 {
                   title: 'Vendors',
@@ -118,17 +118,6 @@ export default class SideBar extends PureComponent<IProps> {
                 {
                   title: 'Receipts',
                   routeName: 'Receipts'
-                }
-              ]}
-            />
-
-            <SideBarItemAtom
-              title="ACCOUNTING"
-              navigate={navigate}
-              categories={[
-                {
-                  title: 'Inventory',
-                  routeName: 'Inventory'
                 }
               ]}
             />

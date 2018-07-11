@@ -4,6 +4,7 @@ import { ImagePicker } from 'expo'
 import { StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 import InputAtom from './InputAtom'
+import ButtonAtom from './ButtonAtom'
 
 interface IProps {
   source: string
@@ -20,6 +21,10 @@ class FormImageAtom extends React.Component<IProps, any> {
     image: { uri: '' }
   }
 
+  addFromContacts = () => {
+    console.log('Added From Contacts')
+  }
+
   handleSelection = async () => {
     if (this.props.getValue) {
       let result = await ImagePicker.launchImageLibraryAsync({
@@ -30,6 +35,45 @@ class FormImageAtom extends React.Component<IProps, any> {
         this.setState({ image: result })
         this.props.getValue(this.state.image.uri)
       }
+    }
+  }
+  forTypeOfInputToDisplay = (value: string) => {
+    if (this.props.form !== 'customer' && this.props.form !== 'vendor') {
+      return (
+        <View style={styles.inputView}>
+          <InputAtom
+            label={value}
+            defaultValue={this.props.name}
+            getValue={this.props.getName}
+          />
+        </View>
+      )
+    } else {
+      return (
+        <View style={styles.inputView}>
+          <InputAtom
+            label={'*' + value}
+            defaultValue={this.props.name}
+            getValue={this.props.getName}
+          />
+          <InputAtom
+            label={'Company Name'}
+            defaultValue={this.props.name}
+            getValue={this.props.getName}
+          />
+          <ButtonAtom
+            btnText="+Add from contacts"
+            transparent={true}
+            onPress={this.addFromContacts}
+            textStyle={styles.sendAnother}
+            btnStyle={{
+              paddingHorizontal: 5,
+              alignSelf: 'flex-start',
+              marginVertical: 3
+            }}
+          />
+        </View>
+      )
     }
   }
   determineDataBasedOnProps = (form: string) => {
@@ -49,12 +93,17 @@ class FormImageAtom extends React.Component<IProps, any> {
         type = 'Product Name'
         break
       case 'customer':
-        title = 'Product ID'
-        type = 'Product Name'
+        title = 'Customer ID'
+        type = 'Contact Name'
+        break
+      case 'vendor':
+        title = 'Vendor ID'
+        type = 'Contact Name'
         break
       default:
         title = 'Avatar'
         type = 'Avatar name'
+        break
     }
     const obj = {
       title: title,
@@ -90,20 +139,14 @@ class FormImageAtom extends React.Component<IProps, any> {
               <Text
                 style={[
                   styles.imageText,
-                  { fontFamily: 'SourceSansPro', color: color.button }
+                  { fontFamily: 'SourceSansPro_Semibold', color: color.button }
                 ]}
               >
                 Upload Image
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.inputView}>
-            <InputAtom
-              label={type}
-              defaultValue={this.props.name}
-              getValue={this.props.getName}
-            />
-          </View>
+          {this.forTypeOfInputToDisplay(type)}
         </View>
       )
     } else {
@@ -134,13 +177,7 @@ class FormImageAtom extends React.Component<IProps, any> {
               </Text>
             </TouchableOpacity>
           </View>
-          <View style={styles.inputView}>
-            <InputAtom
-              label={type}
-              defaultValue={this.props.name}
-              getValue={this.props.getName}
-            />
-          </View>
+          {this.forTypeOfInputToDisplay(type)}
         </View>
       )
     }
@@ -165,6 +202,8 @@ const styles = StyleSheet.create({
     alignSelf: 'center',
     backgroundColor: color.secondary,
     alignContent: 'center',
+    paddingLeft: 10,
+    paddingRight: 10,
     padding: 3,
     borderRadius: 3,
     marginTop: 16,
@@ -204,5 +243,10 @@ const styles = StyleSheet.create({
   },
   menuColor: {
     color: color.menu
+  },
+  sendAnother: {
+    color: color.button,
+    fontSize: 16,
+    fontFamily: 'SourceSansPro_Semibold'
   }
 })

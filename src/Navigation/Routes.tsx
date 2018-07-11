@@ -52,13 +52,12 @@ import InvoicesScreen from '../Screen/InvoicesScreen'
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
+import CustomerScreen from '../Screen/CustomerScreen'
+import VendorDetailScreen from '../Screen/VendorDetailsScreen'
+import NewVendorScreen from '../Screen/NewVendorScreen'
 import EditServiceScreen from '../Screen/EditServiceScreen'
 import ServiceScreen from '../Screen/ServiceScreen'
 import CustomHeader from '../Components/CustomHeader'
-
-let BOTH = 'both'
-let ONE_PRODUCT = 'product'
-let OPTION = 'both'
 
 const viewBothStack = TabNavigator(
   {
@@ -164,19 +163,20 @@ const businessStack = StackNavigator(
     DebtDetails: {
       screen: DebtDetailsScreen
     },
+    Customer: {
+      screen: CustomerScreen
+    },
     NewCustomer: {
       screen: NewCustomerScreen
+    },
+    NewVendor: {
+      screen: NewVendorScreen
     },
     NewOrder: {
       screen: NewOrderScreen
     },
     ViewBusiness: {
-      screen:
-        OPTION === BOTH
-          ? viewBothStack
-          : OPTION === ONE_PRODUCT
-            ? ProductScreen
-            : ServicesScreen
+      screen: viewBothStack
     },
     OrderDetails: {
       screen: OrderDetailsScreen
@@ -201,6 +201,9 @@ const businessStack = StackNavigator(
     },
     CustomerDetails: {
       screen: CustomerDetailScreen
+    },
+    VendorDetails: {
+      screen: VendorDetailScreen
     },
     EditUserProfile: {
       screen: EditUserProfileScreen

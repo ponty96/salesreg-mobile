@@ -3,7 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 import { color } from '../Style/Color'
 import AboveCustomerDetailsAtom from '../Atom/AboveCustomerDetailsAtom'
-import InnerTabAtom from '../Atom/CustomerInnerTabAtom'
+import InnerTabAtom from '../Atom/VendorInnerTabAtom'
 
 interface IProps {
   navigation?: any
@@ -14,7 +14,7 @@ interface IState {
   modalVisibility: boolean
 }
 
-class CustomerDetailScreen extends PureComponent<IProps, IState> {
+class VendorDetailScreen extends PureComponent<IProps, IState> {
   state = {
     item: {
       image:
@@ -35,7 +35,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
 
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Customer Details',
+      title: 'Vendor Details',
       headerLeft: (
         <Icon
           name={'md-arrow-back'}
@@ -48,7 +48,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
       headerRight: (
         <TouchableOpacity
           onPress={() => {
-            navigation.navigate('NewCustomer')
+            navigation.navigate('NewVendor')
           }}
         >
           <View style={styles.headerItem}>
@@ -68,10 +68,10 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
     return (
       <View style={{ flex: 1 }}>
         <AboveCustomerDetailsAtom
-          customerName="Salomy"
-          purchaseMade={43000}
+          customerName="John Doe"
+          purchaseMade={46000}
           overDue={10000}
-          redText="Overdue"
+          redText="Outstanding"
         />
         <InnerTabAtom />
       </View>
@@ -79,7 +79,7 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
   }
 }
 
-export default CustomerDetailScreen
+export default VendorDetailScreen
 
 const styles = StyleSheet.create({
   headerIconLogout: {

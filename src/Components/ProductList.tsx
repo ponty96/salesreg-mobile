@@ -2,8 +2,7 @@ import React, { PureComponent } from 'react'
 import { View, FlatList, ScrollView, StyleSheet } from 'react-native'
 import ProductListAtom from '../Atom/ProductListAtom'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
-// import styles from '../Style/ProductAndCustomerList';
-// import styles_screen from './../Style/Screen';
+import EmptyList from './EmptyList'
 
 interface IProps {
   navigation: any
@@ -37,7 +36,9 @@ class ProductList extends PureComponent<IProps, IState> {
           <FlatList
             data={this.props.items}
             renderItem={this.renderItem}
-            keyExtractor={(item: any) => item.key}
+            ListEmptyComponent={
+              <EmptyList type={{ Text: 'products', verifyMainList: 'main' }} />
+            }
           />
         </ScrollView>
       </View>
@@ -49,6 +50,6 @@ export default ProductList
 
 const styles = StyleSheet.create({
   listMargin: {
-    marginBottom: 55
+    marginBottom: 52
   }
 })
