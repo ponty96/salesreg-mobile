@@ -57,10 +57,6 @@ import CustomerScreen from '../Screen/CustomerScreen'
 import VendorDetailScreen from '../Screen/VendorDetailsScreen'
 import NewVendorScreen from '../Screen/NewVendorScreen'
 
-let BOTH = 'both'
-let ONE_PRODUCT = 'product'
-let OPTION = 'both'
-
 const viewBothStack = TabNavigator(
   {
     Products: {
@@ -174,12 +170,7 @@ const businessStack = StackNavigator(
       screen: NewOrderScreen
     },
     ViewBusiness: {
-      screen:
-        OPTION === BOTH
-          ? viewBothStack
-          : OPTION === ONE_PRODUCT
-            ? ProductScreen
-            : ServicesScreen
+      screen: viewBothStack
     },
     OrderDetails: {
       screen: OrderDetailsScreen

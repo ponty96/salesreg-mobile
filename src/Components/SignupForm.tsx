@@ -8,6 +8,7 @@ import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
+  onPress: () => void
 }
 
 interface IState {
@@ -98,7 +99,7 @@ class SigupForm extends PureComponent<IProps, IState> {
         <View>
           <TouchableOpacity
             style={styles.nextButtonContainer}
-            onPress={() => this.props.navigation.navigate('SecondSignUp')}
+            onPress={this.props.onPress}
           >
             <Text
               style={[

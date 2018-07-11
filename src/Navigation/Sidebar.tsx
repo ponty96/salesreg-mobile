@@ -115,17 +115,6 @@ export default class SideBar extends PureComponent<IProps> {
                 }
               ]}
             />
-
-            <SideBarItemAtom
-              title="ACCOUNTING"
-              navigate={navigate}
-              categories={[
-                {
-                  title: 'Inventory',
-                  routeName: 'Inventory'
-                }
-              ]}
-            />
           </ScrollView>
         </View>
       </SafeAreaView>

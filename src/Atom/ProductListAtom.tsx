@@ -16,7 +16,6 @@ class ProductListAtom extends React.Component<IProps, any> {
       this.props.items.images !== '' ? this.props.items.images : defaultImg
     const colored1 = this.props.items.status === 'debt' ? 'red' : color.button
     const colored2 = this.props.items.status === 'debt' ? 'red' : 'black'
-    console.log(this.props.items.status)
     return (
       <ListItem style={styles.rowP} onPress={this.props.onPress}>
         <Left style={styles.leftView}>
