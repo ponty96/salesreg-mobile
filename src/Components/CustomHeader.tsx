@@ -1,6 +1,6 @@
 import { StyleSheet, View, Text } from 'react-native'
 import React from 'react'
-import { Header, Left, Body, Right, Button, Icon, Title } from 'native-base'
+import { Left, Body, Right, Button, Icon, Title } from 'native-base'
 import { color } from '../Style/Color'
 import MenuAtom from '../Atom/MenuAtom'
 
@@ -20,7 +20,7 @@ interface IProps {
 
 const customHeader = (prop: IProps) => {
   return (
-    <Header style={styles.wrapper}>
+    <View style={styles.wrapper}>
       <Left style={styles.headerItemWrapper}>
         {prop.menu ? (
           <Icon
@@ -36,9 +36,18 @@ const customHeader = (prop: IProps) => {
           />
         )}
       </Left>
-      <Body style={styles.headerItemWrapper}>
+      <View
+        style={[
+          styles.headerItemWrapper,
+          {
+            alignSelf: 'flex-start',
+            alignItems: 'flex-start',
+            width: '70%'
+          }
+        ]}
+      >
         <Title style={styles.title}>{prop.title}</Title>
-      </Body>
+      </View>
       {prop.right ? (
         <Right style={styles.headerItemWrapper}>
           {prop.rightText ? (
@@ -68,7 +77,7 @@ const customHeader = (prop: IProps) => {
       ) : (
         <Right />
       )}
-    </Header>
+    </View>
   )
 }
 
@@ -83,11 +92,15 @@ const styles = StyleSheet.create({
     backgroundColor: color.primary,
     paddingLeft: 16,
     paddingRight: 16,
-    height: 88
+    height: 88,
+    flexDirection: 'row'
   },
   title: {
     fontFamily: 'SourceSansPro_Semibold',
-    fontSize: 16
+    fontSize: 16,
+    paddingLeft: 0,
+    marginLeft: 0,
+    paddingTop: 24
   },
   rightWrapper: {
     flexDirection: 'row',
