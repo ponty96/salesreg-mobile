@@ -87,7 +87,8 @@ const styles = StyleSheet.create({
   },
   title: {
     fontFamily: 'SourceSansPro_Semibold',
-    fontSize: 16
+    fontSize: 16,
+    color: color.secondary
   },
   rightWrapper: {
     flexDirection: 'row',
