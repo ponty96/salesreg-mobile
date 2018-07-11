@@ -12,13 +12,11 @@ interface IProps {
 
 interface IState {
   total: string
-  empty: boolean
 }
 
 export default class ProductSalesOrderScreen extends Component<IProps, IState> {
   state = {
-    total: '0',
-    empty: true
+    total: '840040'
   }
 
   handleListPress = () => {
