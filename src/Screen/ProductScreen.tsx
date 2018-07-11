@@ -16,7 +16,6 @@ class ProductScreen extends PureComponent<IProps> {
     let right = (
       <View style={{ flexDirection: 'row' }}>
         <Icon name={'ios-search'} style={styles.headerIcon} />
-        <MenuAtom navigation={navigation} />
       </View>
     )
     let left = params &&

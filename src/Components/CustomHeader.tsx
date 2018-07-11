@@ -1,8 +1,7 @@
 import { StyleSheet, View, Text } from 'react-native'
 import React from 'react'
-import { Left, Body, Right, Button, Icon, Title } from 'native-base'
+import { Left, Right, Button, Icon, Title } from 'native-base'
 import { color } from '../Style/Color'
-import MenuAtom from '../Atom/MenuAtom'
 
 interface IProps {
   menu?: boolean
@@ -68,9 +67,6 @@ const customHeader = (prop: IProps) => {
                 style={[styles.headerIcon, styles.searchIcon]}
                 onPress={prop.onPressFirstRightIcon}
               />
-              <View style={styles.rightMenu}>
-                <MenuAtom navigation={prop.navigation} />
-              </View>
             </View>
           )}
         </Right>

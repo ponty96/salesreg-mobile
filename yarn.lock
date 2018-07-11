@@ -5688,12 +5688,6 @@ react-native-maps@0.19.0:
   version "0.19.0"
   resolved "https://registry.yarnpkg.com/react-native-maps/-/react-native-maps-0.19.0.tgz#ce94fad1cf360e335cb4338a68c95f791e869074"
 
-react-native-menu-button@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/react-native-menu-button/-/react-native-menu-button-1.0.0.tgz#ede4636e27891aea4f22a612c954fa55b85709b1"
-  dependencies:
-    react-native-root-modal "~1.0.6"
-
 react-native-modal-popover@^0.0.10:
   version "0.0.10"
   resolved "https://registry.yarnpkg.com/react-native-modal-popover/-/react-native-modal-popover-0.0.10.tgz#89271eb45f6c3f83702669378c6af97f0c258711"
@@ -5701,18 +5695,6 @@ react-native-modal-popover@^0.0.10:
     "@types/prop-types" "^15.5.2"
     lodash.debounce "^4.0.8"
     prop-types "^15.6.0"
-
-react-native-root-modal@~1.0.6:
-  version "1.0.8"
-  resolved "https://registry.yarnpkg.com/react-native-root-modal/-/react-native-root-modal-1.0.8.tgz#6b73a86e2fb18bf25903eb87f896dba32d55e53b"
-  dependencies:
-    react-native-root-siblings "^1.1.3"
-
-react-native-root-siblings@^1.1.3:
-  version "1.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-root-siblings/-/react-native-root-siblings-1.3.0.tgz#46e40634a5ed84737965863b4dc551fa0e251c68"
-  dependencies:
-    static-container "^1.0.0"
 
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
@@ -6666,10 +6648,6 @@ stack-utils@^1.0.1:
 stacktrace-parser@^0.1.3:
   version "0.1.4"
   resolved "https://registry.yarnpkg.com/stacktrace-parser/-/stacktrace-parser-0.1.4.tgz#01397922e5f62ecf30845522c95c4fe1d25e7d4e"
-
-static-container@^1.0.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/static-container/-/static-container-1.2.0.tgz#1c6e92b869da47d32abe47f45f50bf39661d9c2f"
 
 static-extend@^0.1.1:
   version "0.1.2"

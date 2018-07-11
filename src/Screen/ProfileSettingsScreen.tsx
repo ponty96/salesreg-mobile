@@ -31,6 +31,10 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
           {
             section: 'Business Profile',
             routeName: 'BusinessProfile'
+          },
+          {
+            section: 'Sign Out',
+            routeName: 'Login'
           }
         ]}
       />

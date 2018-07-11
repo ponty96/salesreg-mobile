@@ -11,28 +11,46 @@ const settingsItem = (prop: { categories: Category[]; navigate: any }) => {
   return (
     <View style={styles.container}>
       {prop.categories.map((category: Category, key: number) => {
-        return (
-          <ListItem
-            style={styles.section}
-            key={key}
-            onPress={() => prop.navigate(category.routeName)}
-          >
-            <Left>
-              <Text
-                style={[styles.sectionText, { fontFamily: 'SourceSansPro' }]}
-              >
-                {category.section}
-              </Text>
-            </Left>
-            <Right>
-              <Icon
-                name="keyboard-arrow-right"
-                type="MaterialIcons"
-                style={styles.icon}
-              />
-            </Right>
-          </ListItem>
-        )
+        if (category.routeName === 'Login') {
+          return (
+            <ListItem
+              style={styles.section}
+              key={key}
+              onPress={() => prop.navigate(category.routeName)}
+            >
+              <Left>
+                <Text
+                  style={[styles.sectionText, { fontFamily: 'SourceSansPro' }]}
+                >
+                  {category.section}
+                </Text>
+              </Left>
+            </ListItem>
+          )
+        } else {
+          return (
+            <ListItem
+              style={styles.section}
+              key={key}
+              onPress={() => prop.navigate(category.routeName)}
+            >
+              <Left>
+                <Text
+                  style={[styles.sectionText, { fontFamily: 'SourceSansPro' }]}
+                >
+                  {category.section}
+                </Text>
+              </Left>
+              <Right>
+                <Icon
+                  name="keyboard-arrow-right"
+                  type="MaterialIcons"
+                  style={styles.icon}
+                />
+              </Right>
+            </ListItem>
+          )
+        }
       })}
     </View>
   )
