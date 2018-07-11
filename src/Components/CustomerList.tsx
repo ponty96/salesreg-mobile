@@ -60,7 +60,6 @@ class CustomerList extends Component<IProps, IState> {
           <FlatList
             data={customerList}
             renderItem={this.renderItem}
-            // keyExtractor={item => item.key}
             ListEmptyComponent={
               <EmptyList
                 type={{ Text: this.props.screenType, verifyMainList: 'main' }}
