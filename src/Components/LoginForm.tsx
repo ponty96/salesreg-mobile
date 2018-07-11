@@ -1,61 +1,58 @@
-import React, { PureComponent } from 'react'
-import { Form, Text } from 'native-base'
-import { StyleSheet } from 'react-native'
-import InputAtom from '../Atom/InputAtom'
-import ButtonAtom from '../Atom/ButtonAtom'
-import { userData } from '../config/default'
-import { color } from '../Style/Color'
+import React, { PureComponent } from 'react';
+import { Form, Text } from 'native-base';
+import { StyleSheet } from 'react-native';
+import InputAtom from '../Atom/InputAtom';
+import ButtonAtom from '../Atom/ButtonAtom';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
-  items?: any[]
+  navigation: any;
+  onSubmit?: (params: any) => void;
+  loading?: boolean;
 }
 
 interface IState {
-  phone: string
-  password: string
-  underlineColorAndroid: string
+  email: string;
+  password: string;
+  underlineColorAndroid: string;
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
-  static defaultProps = {
-    items: userData.business[0].products
-  }
-
   state = {
-    phone: '',
+    email: '',
     password: '',
     underlineColorAndroid: 'red'
-  }
-  login = (data: any) => {
-    console.log(this.state.phone, this.state.password)
-    data = this.props.items
-    this.props.navigation.navigate('App', data)
-  }
+  };
 
-  getPhone = (phone: any) => {
+  login = () => {
+    this.props.onSubmit({
+      email: this.state.email,
+      password: this.state.password
+    });
+  };
+
+  getEmail = (email: any) => {
     this.setState({
-      phone
-    })
-  }
+      email
+    });
+  };
 
   getPassword = (pass: any) => {
     this.setState({
       password: pass
-    })
-  }
+    });
+  };
 
   navigate = (location: any) => {
-    this.props.navigation.navigate(location)
-  }
+    this.props.navigation.navigate(location);
+  };
 
   render() {
     return (
       <Form>
         <InputAtom
-          label="Phone number"
-          getValue={this.getPhone}
-          keyboardType="numeric"
+          label="Email Address"
+          getValue={this.getEmail}
           contStyle={styles.marginlessInput}
         />
 
@@ -71,8 +68,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           btnText="Forgot password"
           textStyle={styles.btnColor}
           transparent={true}
-          funcValue={'Reset'}
-          onPress={this.navigate}
+          onPress={() => this.navigate('Reset')}
         />
 
         <ButtonAtom
@@ -88,17 +84,16 @@ class LoginForm extends PureComponent<IProps, IState> {
         <ButtonAtom
           btnText="SIGN UP"
           transparent={true}
-          funcValue={'Signup'}
-          onPress={this.navigate}
+          onPress={() => this.navigate('Signup')}
           btnStyle={styles.signupButton}
           textStyle={styles.signupText}
         />
       </Form>
-    )
+    );
   }
 }
 
-export default LoginForm
+export default LoginForm;
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -124,4 +119,4 @@ const styles = StyleSheet.create({
   btnColor: {
     color: color.button
   }
-})
+});

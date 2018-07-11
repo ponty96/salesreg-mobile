@@ -1,19 +1,19 @@
-import React, { PureComponent } from 'react'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import React, { PureComponent } from 'react';
+import { View, Text, ScrollView, StyleSheet } from 'react-native';
+import { Icon } from 'native-base';
 
-import ButtonAtom from '../Atom/ButtonAtom'
-import AuthenticationHeader from '../Components/AuthenticationHeader'
-import { color } from '../Style/Color'
+import ButtonAtom from '../Atom/ButtonAtom';
+import AuthenticationHeader from '../Components/AuthenticationHeader';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 class OnBoardingScreen extends PureComponent<IProps> {
   navigate = (location: string) => {
-    this.props.navigation.navigate(location)
-  }
+    this.props.navigation.navigate(location);
+  };
 
   render() {
     const appDetails = [
@@ -21,7 +21,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
       'Process all your orders',
       'Track all payments & outstandings',
       'Manage all your business contacts'
-    ]
+    ];
 
     return (
       <View style={styles.container}>
@@ -46,8 +46,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
           <ButtonAtom
             btnText="TRY FOR FREE"
             btnStyle={styles.signupButton}
-            funcValue={'Signup'}
-            onPress={this.navigate}
+            onPress={() => this.navigate('Signup')}
           />
           <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
             Or you have an account?
@@ -56,18 +55,17 @@ class OnBoardingScreen extends PureComponent<IProps> {
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
-            funcValue={'Login'}
-            onPress={this.navigate}
+            onPress={() => this.navigate('Login')}
             btnStyle={styles.loginButton}
             textStyle={styles.loginText}
           />
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
-export default OnBoardingScreen
+export default OnBoardingScreen;
 
 const styles = StyleSheet.create({
   loginButton: {
@@ -107,4 +105,4 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary
   },
   loginText: { color: color.button }
-})
+});
