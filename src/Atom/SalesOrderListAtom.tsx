@@ -70,7 +70,7 @@ const styles = StyleSheet.create({
     borderBottomColor: color.listBorderColor,
     flexDirection: 'row',
     marginHorizontal: 8,
-    backgroundColor: color.grey,
+    backgroundColor: color.secondary,
     marginVertical: 8
   },
   serialNumber: {

@@ -4,6 +4,7 @@ import SubHeaderAtom from '../Atom/SubHeaderAtom'
 import FabAtom from '../Atom/FabAtom'
 import EmptyList from '../Components/EmptyList'
 import SalesOrderList from '../Atom/SalesOrderListAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -38,8 +39,7 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
   }
 
   handleArrowPresss = (): void => {
-    this.setState({ empty: false })
-    this.setState({ total: '840040' })
+    this.props.navigation.navigate('')
   }
 
   render(): JSX.Element {
@@ -104,11 +104,13 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
           onPressArrow={this.handleArrowPresss}
         />
         <FabAtom name="shopping-cart" type="Entypo" />
-        {this.state.empty ? (
-          <EmptyList type={{ verifyMainList: 'main', Text: 'orders' }} />
-        ) : (
-          <FlatList data={DATA} renderItem={this.renderList} />
-        )}
+        <FlatList
+          data={DATA}
+          renderItem={this.renderList}
+          ListEmptyComponent={
+            <EmptyList type={{ Text: 'orders', verifyMainList: 'main' }} />
+          }
+        />
       </View>
     )
   }
@@ -116,6 +118,7 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: color.secondary
   }
 })
