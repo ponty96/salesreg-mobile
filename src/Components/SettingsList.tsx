@@ -6,41 +6,31 @@ import { ListItem, Left, Right, Icon } from 'native-base'
 interface Category {
   section: string
   routeName: string
+  showRightCaret?: boolean | true
+  onPress?: any | null
 }
-const settingsItem = (prop: { categories: Category[]; navigate: any }) => {
+const settingsList = (prop: { categories: Category[]; navigate: any }) => {
   return (
     <View style={styles.container}>
       {prop.categories.map((category: Category, key: number) => {
-        if (category.routeName === 'Login') {
-          return (
-            <ListItem
-              style={styles.section}
-              key={key}
-              onPress={() => prop.navigate(category.routeName)}
-            >
-              <Left>
-                <Text
-                  style={[styles.sectionText, { fontFamily: 'SourceSansPro' }]}
-                >
-                  {category.section}
-                </Text>
-              </Left>
-            </ListItem>
-          )
-        } else {
-          return (
-            <ListItem
-              style={styles.section}
-              key={key}
-              onPress={() => prop.navigate(category.routeName)}
-            >
-              <Left>
-                <Text
-                  style={[styles.sectionText, { fontFamily: 'SourceSansPro' }]}
-                >
-                  {category.section}
-                </Text>
-              </Left>
+        return (
+          <ListItem
+            style={styles.section}
+            key={key}
+            onPress={() =>
+              category.onPress
+                ? category.onPress()
+                : prop.navigate(category.routeName)
+            }
+          >
+            <Left>
+              <Text
+                style={[styles.sectionText, { fontFamily: 'SourceSansPro' }]}
+              >
+                {category.section}
+              </Text>
+            </Left>
+            {category.showRightCaret && (
               <Right>
                 <Icon
                   name="keyboard-arrow-right"
@@ -48,15 +38,15 @@ const settingsItem = (prop: { categories: Category[]; navigate: any }) => {
                   style={styles.icon}
                 />
               </Right>
-            </ListItem>
-          )
-        }
+            )}
+          </ListItem>
+        )
       })}
     </View>
   )
 }
 
-export default settingsItem
+export default settingsList
 
 const styles = StyleSheet.create({
   container: {

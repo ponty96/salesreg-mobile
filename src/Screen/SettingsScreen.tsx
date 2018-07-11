@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import SettingsItem from '../Components/SettingsList'
+import SettingsList from '../Components/SettingsList'
 import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
@@ -25,7 +25,7 @@ class SettingsScreen extends PureComponent<IProps, IState> {
       navigation: { navigate }
     } = this.props
     return (
-      <SettingsItem
+      <SettingsList
         navigate={navigate}
         categories={[
           {

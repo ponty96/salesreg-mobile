@@ -17,23 +17,15 @@ interface IProps {
   right?: boolean
 }
 
-const customHeader = (prop: IProps) => {
+const customHeader = (props: IProps) => {
   return (
     <View style={styles.wrapper}>
       <Left style={styles.headerItemWrapper}>
-        {prop.menu ? (
-          <Icon
-            name="menu"
-            style={styles.headerIcon}
-            onPress={prop.onMenuPress}
-          />
-        ) : (
-          <Icon
-            name="arrow-back"
-            onPress={prop.onBackPress}
-            style={styles.headerIcon}
-          />
-        )}
+        <Icon
+          name={props.menu ? 'menu' : 'arrow-back'}
+          onPress={props.menu ? props.onMenuPress : props.onBackPress}
+          style={styles.headerIcon}
+        />
       </Left>
       <View
         style={[
@@ -45,27 +37,30 @@ const customHeader = (prop: IProps) => {
           }
         ]}
       >
-        <Title style={styles.title}>{prop.title}</Title>
+        <Title style={styles.title}>{props.title}</Title>
       </View>
-      {prop.right ? (
+      {props.right ? (
         <Right style={styles.headerItemWrapper}>
-          {prop.rightText ? (
+          {props.rightText ? (
             <Button
               transparent
-              onPress={prop.onPressRightButton}
+              onPress={props.onPressRightButton}
               style={styles.rightWrapper}
               activeOpacity={1}
             >
-              <Icon name={prop.firstRightIcon} type={prop.firstRightIconType} />
-              <Text style={styles.edit}>{prop.rightText}</Text>
+              <Icon
+                name={props.firstRightIcon}
+                type={props.firstRightIconType}
+              />
+              <Text style={styles.edit}>{props.rightText}</Text>
             </Button>
           ) : (
             <View style={styles.rightWrapper}>
               <Icon
-                name={prop.firstRightIcon}
-                type={prop.firstRightIconType}
+                name={props.firstRightIcon}
+                type={props.firstRightIconType}
                 style={[styles.headerIcon, styles.searchIcon]}
-                onPress={prop.onPressFirstRightIcon}
+                onPress={props.onPressFirstRightIcon}
               />
             </View>
           )}
