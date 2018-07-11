@@ -30,6 +30,7 @@ export default class ServiceScreen extends Component<IProps> {
             })
           }
           onBackPress={() => navigation.goBack()}
+          showRight
         />
       )
     }
