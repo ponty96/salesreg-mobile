@@ -1,11 +1,11 @@
 import { StyleSheet, View, Text } from 'react-native'
 import React from 'react'
-import { Left, Body, Right, Button, Icon, Title } from 'native-base'
+import { Left, Right, Button, Icon, Title } from 'native-base'
 import { color } from '../Style/Color'
 import MenuAtom from '../Atom/MenuAtom'
 
 interface IProps {
-  menu?: boolean
+  showMenu?: boolean
   title: string
   firstRightIcon?: string
   firstRightIconType?: any
@@ -15,14 +15,14 @@ interface IProps {
   onPressFirstRightIcon?: () => void
   onPressRightButton?: () => void
   navigation?: object
-  right?: boolean
+  showRight?: boolean
 }
 
 const customHeader = (prop: IProps) => {
   return (
     <View style={styles.wrapper}>
       <Left style={styles.headerItemWrapper}>
-        {prop.menu ? (
+        {prop.showMenu ? (
           <Icon
             name="menu"
             style={styles.headerIcon}
@@ -48,16 +48,19 @@ const customHeader = (prop: IProps) => {
       >
         <Title style={styles.title}>{prop.title}</Title>
       </View>
-      {prop.right ? (
+      {prop.showRight ? (
         <Right style={styles.headerItemWrapper}>
           {prop.rightText ? (
             <Button
               transparent
               onPress={prop.onPressRightButton}
               style={styles.rightWrapper}
-              activeOpacity={1}
             >
-              <Icon name={prop.firstRightIcon} type={prop.firstRightIconType} />
+              <Icon
+                name={prop.firstRightIcon}
+                type={prop.firstRightIconType}
+                style={styles.whiteIcon}
+              />
               <Text style={styles.edit}>{prop.rightText}</Text>
             </Button>
           ) : (
@@ -120,6 +123,11 @@ const styles = StyleSheet.create({
     marginLeft: 16
   },
   searchIcon: {
-    marginTop: 3
+    marginTop: 3,
+    color: color.secondary
+  },
+  whiteIcon: {
+    color: color.secondary,
+    width: 25
   }
 })

@@ -15,7 +15,15 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     console.log(params)
     return {
       header: (
-        <CustomHeader title="Product" onBackPress={() => navigation.goBack()} />
+        <CustomHeader
+          title="Product"
+          onBackPress={() => navigation.goBack()}
+          showRight
+          rightText="Edit"
+          firstRightIcon="pencil"
+          onPressRightButton={() => navigation.navigate('NewProduct')}
+          firstRightIconType="MaterialCommunityIcons"
+        />
       )
     }
   }
