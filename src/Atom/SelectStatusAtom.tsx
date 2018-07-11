@@ -6,12 +6,19 @@ import { color } from '../Style/Color'
 interface IProps {
   title: string
   indicatorColor: object
+  selected: boolean
+  styleWrapper?: object
+  onPress?: any
 }
 
 const selectStatusAtom = (props: IProps): JSX.Element => {
   return (
-    <View style={styles.wrapper}>
-      <Radio selected={true} style={styles.radio} />
+    <View style={[styles.wrapper, props.styleWrapper]}>
+      <Radio
+        selected={props.selected}
+        style={styles.radio}
+        onPress={props.onPress}
+      />
       <Text style={styles.text}>{props.title}</Text>
       <View style={[styles.indicator, props.indicatorColor]} />
     </View>
