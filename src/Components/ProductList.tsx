@@ -24,7 +24,7 @@ class ProductList extends PureComponent<IProps, IState> {
       <View>
         <SubHeaderAtom
           list={[
-            'Fasting selling',
+            'Fastest selling',
             'Slowest selling',
             'Highest profit',
             'Lowest profit'

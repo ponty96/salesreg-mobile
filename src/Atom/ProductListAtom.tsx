@@ -67,7 +67,6 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
     fontFamily: 'SourceSansPro',
-    // color: '#000',
     textAlign: 'left'
   },
   leftView: {

@@ -6,7 +6,7 @@ import {
   TabNavigator,
   SwitchNavigator
 } from 'react-navigation'
-import { Icon } from 'native-base'
+// import { Icon } from 'native-base'
 
 import OnBoardingScreen from './../Screen/OnBoardingScreen'
 // import SplashScreen from './../Screen/SplashScreen';
@@ -36,7 +36,7 @@ import SecondSignUpScreen from '../Screen/SecondSignUpScreen'
 import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
 import MainOrderList from '../Components/MainOrderList'
 import Sidebar from './Sidebar'
-import styles from './../Style/Layout'
+// import styles from './../Style/Layout'
 import { color } from './../Style/Color'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
@@ -52,10 +52,12 @@ import InvoicesScreen from '../Screen/InvoicesScreen'
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
-import MenuAtom from '../Atom/MenuAtom'
 import CustomerScreen from '../Screen/CustomerScreen'
 import VendorDetailScreen from '../Screen/VendorDetailsScreen'
 import NewVendorScreen from '../Screen/NewVendorScreen'
+import EditServiceScreen from '../Screen/EditServiceScreen'
+import ServiceScreen from '../Screen/ServiceScreen'
+import CustomHeader from '../Components/CustomHeader'
 
 const viewBothStack = TabNavigator(
   {
@@ -97,7 +99,11 @@ const viewBothStack = TabNavigator(
       indicatorStyle: {
         backgroundColor: color.check
       },
-      upperCaseLabel: false
+      upperCaseLabel: false,
+      labelStyle: {
+        fontSize: 14,
+        fontFamily: 'SourceSansPro'
+      }
     },
     animationEnabled: false,
     swipeEnabled: true
@@ -204,36 +210,26 @@ const businessStack = StackNavigator(
     },
     EditBusinessProfile: {
       screen: EditBusinessProfileScreen
-    }
+    },
+    EditServices: EditServiceScreen,
+    ShowService: ServiceScreen
   },
   {
     initialRouteName: 'Home',
-    // initialRouteName: 'ViewBusiness',
     navigationOptions: ({ navigation }: any) => ({
-      title: 'Business',
-      headerLeft: (
-        <Icon
-          name={'menu'}
-          onPress={() => navigation.navigate('DrawerToggle')}
-          style={styles.menuIcon}
-        />
-      ),
-      headerRight: (
-        <View
-          style={{
-            flexDirection: 'row',
-            justifyContent: 'center',
-            alignItems: 'center'
+      header: (
+        <CustomHeader
+          title="Products & Services"
+          menu
+          onMenuPress={() => {
+            navigation.navigate('DrawerToggle')
           }}
-        >
-          <Icon name={'ios-search'} style={styles.menuIcon} />
-          <MenuAtom navigation={navigation} />
-        </View>
-      ),
-      headerTintColor: color.secondary,
-      headerStyle: {
-        backgroundColor: color.primary
-      }
+          firstRightIcon={'ios-search'}
+          navigation={navigation}
+          right
+          onPressFirstRightIcon={() => console.log('Search icon pressed.')}
+        />
+      )
     })
   }
 )

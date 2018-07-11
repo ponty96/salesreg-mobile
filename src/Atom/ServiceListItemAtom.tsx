@@ -4,39 +4,41 @@ import { color } from '../Style/Color'
 
 interface IProps {
   name: string
-  amount: string,
-  textStyle?: any,
-  contStyle?: any,
+  amount: string
+  textStyle?: any
+  contStyle?: any
   bodyfunction?: (name: string, amount: string) => void
+  onPress: any
 }
 
 class ServicesListItemAtom extends React.Component<IProps, {}> {
-
-  handleBodyPress = () => {
+  /*handleBodyPress = () => {
     if (this.props.bodyfunction) {
-      this.props.bodyfunction(this.props.name, this.props.amount);
+      this.props.bodyfunction(this.props.name, this.props.amount)
     }
-  }
+  }*/
 
   render() {
     return (
-      <View
+      <TouchableOpacity
+        onPress={this.props.onPress}
         style={[styles.listContainer, this.props.contStyle]}
       >
-        <TouchableOpacity
-          onPress={this.handleBodyPress}
-          activeOpacity={1}
-        >
-          <View style={styles.listTextCont}>
-            <Text style={styles.nameText}>
-              {this.props.name}
-            </Text>
-            <Text style={[styles.amountText, this.props.textStyle]}>
-                {this.props.amount}
-            </Text>
-          </View>
-        </TouchableOpacity>
-      </View>
+        <View style={styles.listTextCont}>
+          <Text style={[styles.nameText, { fontFamily: 'SourceSansPro' }]}>
+            {this.props.name}
+          </Text>
+          <Text
+            style={[
+              { fontFamily: 'SourceSansPro' },
+              styles.amountText,
+              this.props.textStyle
+            ]}
+          >
+            {'\u20A6 '} {this.props.amount}
+          </Text>
+        </View>
+      </TouchableOpacity>
     )
   }
 }
@@ -45,22 +47,26 @@ export default ServicesListItemAtom
 
 const styles = StyleSheet.create({
   listContainer: {
-    paddingVertical: 8,
-    borderBottomWidth: 1
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: color.dropdown,
+    marginHorizontal: 16
   },
   listTextCont: {
-    flex: 1,
     flexDirection: 'row',
-    justifyContent: 'center',
+    justifyContent: 'space-between',
     alignContent: 'center',
     alignItems: 'center',
-    paddingVertical: 16,
+    paddingVertical: 8,
     paddingHorizontal: 8
   },
   nameText: {
-    flex: 1
+    color: color.principal,
+    fontSize: 14,
+    marginVertical: 4
   },
   amountText: {
-    color: color.primary
+    color: color.selling,
+    fontSize: 16
   }
 })

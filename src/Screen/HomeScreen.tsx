@@ -7,15 +7,22 @@ import {
   Dimensions
 } from 'react-native'
 import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
 }
 
 export default class HomeScreen extends React.Component<IProps> {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Home'
+      header: (
+        <CustomHeader
+          title="Home"
+          menu
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
+        />
+      )
     }
   }
 

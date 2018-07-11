@@ -1,7 +1,7 @@
 import * as React from 'react'
-import { Header, Left, Right, Icon, Text } from 'native-base'
+import { Header, Left, Right, Text } from 'native-base'
 import PickerAtom from './PickerAtom'
-import { StyleSheet } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -18,16 +18,21 @@ class SubHeaderAtom extends React.Component<IProps, any> {
     return (
       <Header style={styles.subHeaderHeader}>
         <Left style={styles.subHeaderLeftRow}>
-          <Icon style={styles.subHeaderIconColor} name="md-briefcase" />
+          <Image
+            source={require('../../Assets/Icons/subheader-icons/product-blue.png')}
+            style={styles.productIcon}
+          />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
         </Left>
         <Right style={styles.subHeaderRightRow}>
-          <Text style={styles.subHeaderFont}>Sort By:</Text>
-          <PickerAtom
-            list={this.props.list}
-            style={styles.pickerStyle}
-            placeholder="Make a selection"
-          />
+          <Text style={styles.subHeaderFont}>Sort by</Text>
+          <View style={styles.pickerWrapper}>
+            <PickerAtom
+              list={this.props.list}
+              style={styles.pickerStyle}
+              placeholder="Make a selection"
+            />
+          </View>
         </Right>
       </Header>
     )
@@ -43,7 +48,8 @@ const styles = StyleSheet.create({
   },
   subHeaderLeftRow: {
     flexDirection: 'row',
-    width: '40%'
+    width: '40%',
+    marginLeft: 16
   },
   subHeaderRightRow: {
     flexDirection: 'row',
@@ -58,16 +64,28 @@ const styles = StyleSheet.create({
   subHeaderFont: {
     fontSize: 15,
     fontFamily: 'SourceSansPro',
-    paddingBottom: 4
+    alignSelf: 'center',
+    marginBottom: 2
   },
   subHeaderIconColor: {
     color: color.check,
     marginLeft: 10
   },
   pickerStyle: {
-    width: '60%',
-    height: 25,
-    borderColor: '#F0F0F0',
-    borderWidth: 0.5
+    width: '100%',
+    height: 35,
+    paddingRight: 10,
+    alignSelf: 'flex-start'
+  },
+  pickerWrapper: {
+    borderWidth: 1,
+    width: 160,
+    borderColor: color.dropdown,
+    alignItems: 'flex-end',
+    marginLeft: 16
+  },
+  productIcon: {
+    height: 20,
+    width: 20
   }
 })
