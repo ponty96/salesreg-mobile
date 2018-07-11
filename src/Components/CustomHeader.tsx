@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
   },
   whiteIcon: {
     color: color.secondary,
-    width: 25
+    width: 25,
+    left: 20
   }
 })

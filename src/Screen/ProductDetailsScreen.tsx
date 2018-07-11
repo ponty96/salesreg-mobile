@@ -11,8 +11,6 @@ interface IProps {
 
 class ProductDetailsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
-    console.log(params)
     return {
       header: (
         <CustomHeader
