@@ -47,7 +47,7 @@ class BusinessProfileScreen extends Component<IProps, IState> {
           title="Business profile"
           onBackPress={() => navigation.goBack()}
           rightText="Edit"
-          right
+          showRight
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
           onPressRightButton={() => navigation.navigate('EditBusinessProfile')}

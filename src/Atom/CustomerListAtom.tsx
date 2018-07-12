@@ -83,8 +83,9 @@ const styles = StyleSheet.create({
   rowText1: {
     fontWeight: '400',
     fontSize: 13,
-    // color: '#000',
-    textAlign: 'left'
+    color: color.principal,
+    textAlign: 'left',
+    fontFamily: 'SourceSansPro'
   },
   dp: {
     height: 55,
@@ -101,7 +102,9 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: 13,
-    fontWeight: '200'
+    fontWeight: '200',
+    color: color.principal,
+    fontFamily: 'SourceSansPro'
   },
   lilFont: {
     fontSize: 12

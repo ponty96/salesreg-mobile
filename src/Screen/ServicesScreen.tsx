@@ -22,7 +22,6 @@ class ServicesScreen extends PureComponent<IProps> {
       productName: item.name,
       price: item.amount
     })
-    console.log(item.name)
   }
 
   renderList = ({ item }: any) => {

@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import { View, Text, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 import AboveCustomerDetailsAtom from '../Atom/AboveCustomerDetailsAtom'
 import InnerTabAtom from '../Atom/CustomerInnerTabAtom'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation?: any
@@ -35,31 +35,16 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
 
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Customer Details',
-      headerLeft: (
-        <Icon
-          name={'md-arrow-back'}
-          style={styles.headerIcon}
-          onPress={() => {
-            navigation.goBack()
-          }}
+      header: (
+        <CustomHeader
+          title="Customer"
+          showRight
+          rightText="Edit"
+          firstRightIcon="pencil"
+          firstRightIconType="MaterialCommunityIcons"
+          onBackPress={() => navigation.goBack()}
+          onPressRightButton={() => navigation.navigate('NewCustomer')}
         />
-      ),
-      headerRight: (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('NewCustomer')
-          }}
-        >
-          <View style={styles.headerItem}>
-            <Icon
-              name={'pencil'}
-              style={styles.headerIconLogout}
-              type={'MaterialCommunityIcons'}
-            />
-            <Text style={styles.headerText}>Edit</Text>
-          </View>
-        </TouchableOpacity>
       )
     }
   }
