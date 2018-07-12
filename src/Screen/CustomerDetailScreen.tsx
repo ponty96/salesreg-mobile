@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { color } from '../Style/Color'
+import { View } from 'react-native'
 import AboveCustomerDetailsAtom from '../Atom/AboveCustomerDetailsAtom'
 import InnerTabAtom from '../Atom/CustomerInnerTabAtom'
 import CustomHeader from '../Components/CustomHeader'
@@ -65,27 +64,3 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
 }
 
 export default CustomerDetailScreen
-
-const styles = StyleSheet.create({
-  headerIconLogout: {
-    color: color.secondary,
-    padding: 8,
-    fontSize: 28
-  },
-  headerItem: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  headerText: {
-    color: color.secondary,
-    fontWeight: 'bold',
-    paddingRight: 16,
-    fontSize: 18
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
-  }
-})

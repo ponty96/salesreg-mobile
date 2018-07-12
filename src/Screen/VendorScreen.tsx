@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
 import CustomerList from '../Components/CustomerList'
