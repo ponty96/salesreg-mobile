@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import SettingsItem from '../Components/SettingsList'
+import SettingsList from '../Components/SettingsList'
 import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
@@ -16,21 +16,32 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
       )
     }
   }
+  handleLogOut = () => {
+    this.props.navigation.navigate('Login')
+  }
   render() {
     const {
       navigation: { navigate }
     } = this.props
     return (
-      <SettingsItem
+      <SettingsList
         navigate={navigate}
         categories={[
           {
             section: 'User Profile',
-            routeName: 'UserProfile'
+            routeName: 'UserProfile',
+            showRightCaret: true
           },
           {
             section: 'Business Profile',
-            routeName: 'BusinessProfile'
+            routeName: 'BusinessProfile',
+            showRightCaret: true
+          },
+          {
+            section: 'Log Out',
+            routeName: 'Login',
+            showRightCaret: false,
+            onPress: this.handleLogOut
           }
         ]}
       />

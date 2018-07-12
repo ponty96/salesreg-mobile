@@ -12,8 +12,6 @@ interface IProps {
 
 class ProductScreen extends PureComponent<IProps> {
   render() {
-    // const { params } = this.props.navigation.state
-    // const items = params.data.products
     const items = this.props.navigation.getParam(
       productList,
       userData.business[0].products

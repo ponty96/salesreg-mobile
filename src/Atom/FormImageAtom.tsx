@@ -1,7 +1,13 @@
 import * as React from 'react'
-import { Image, View, Text, TouchableOpacity, Dimensions } from 'react-native'
+import {
+  Image,
+  View,
+  Text,
+  TouchableOpacity,
+  Dimensions,
+  StyleSheet
+} from 'react-native'
 import { ImagePicker } from 'expo'
-import { StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 import InputAtom from './InputAtom'
 import ButtonAtom from './ButtonAtom'
@@ -113,74 +119,41 @@ class FormImageAtom extends React.Component<IProps, any> {
   }
 
   render() {
-    if (this.props.source) {
-      const { title, type } = this.determineDataBasedOnProps(this.props.form)
-      return (
-        <View style={styles.mainView}>
-          <Text
-            style={[
-              styles.headerText,
-              { fontFamily: 'SourceSansPro_Semibold', color: color.button }
-            ]}
+    const { title, type } = this.determineDataBasedOnProps(this.props.form)
+    return (
+      <View style={styles.mainView}>
+        <Text
+          style={[
+            styles.headerText,
+            { fontFamily: 'SourceSansPro_Semibold', color: color.button }
+          ]}
+        >
+          {title}
+        </Text>
+        <View style={styles.uploadView}>
+          <TouchableOpacity
+            onPress={this.handleSelection}
+            style={styles.selfAlign}
           >
-            {title}
-          </Text>
-          <View style={styles.uploadView}>
-            <TouchableOpacity
-              onPress={this.handleSelection}
-              style={styles.selfAlign}
+            <View style={styles.imgContainer}>
+              <Image
+                source={{ uri: this.state.image.uri || this.props.source }}
+                style={styles.image}
+              />
+            </View>
+            <Text
+              style={[
+                styles.imageText,
+                { fontFamily: 'SourceSansPro_Semibold', color: color.button }
+              ]}
             >
-              <View style={styles.imgContainer}>
-                <Image
-                  source={{ uri: this.state.image.uri || this.props.source }}
-                  style={styles.image}
-                />
-              </View>
-              <Text
-                style={[
-                  styles.imageText,
-                  { fontFamily: 'SourceSansPro_Semibold', color: color.button }
-                ]}
-              >
-                Upload Image
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {this.forTypeOfInputToDisplay(type)}
+              Upload Image
+            </Text>
+          </TouchableOpacity>
         </View>
-      )
-    } else {
-      const { title, type } = this.determineDataBasedOnProps(this.props.form)
-      return (
-        <View style={styles.mainView}>
-          <Text
-            style={[
-              styles.headerText,
-              { fontFamily: 'SourceSansPro', color: color.button }
-            ]}
-          >
-            {title}
-          </Text>
-          <View style={styles.uploadView}>
-            <TouchableOpacity
-              onPress={this.handleSelection}
-              style={styles.selfAlign}
-            >
-              <View style={styles.imgContainer}>
-                <Text style={styles.imgPlaceholderText}>
-                  {this.props.placeholder &&
-                    this.props.placeholder.substr(0, 1).toUpperCase()}
-                </Text>
-              </View>
-              <Text style={[styles.selfAlign, styles.menuColor]}>
-                Upload logo
-              </Text>
-            </TouchableOpacity>
-          </View>
-          {this.forTypeOfInputToDisplay(type)}
-        </View>
-      )
-    }
+        {this.forTypeOfInputToDisplay(type)}
+      </View>
+    )
   }
 }
 
