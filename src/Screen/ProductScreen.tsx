@@ -11,28 +11,6 @@ interface IProps {
 }
 
 class ProductScreen extends PureComponent<IProps> {
-  /*static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
-    let right = (
-      <View style={{ flexDirection: 'row' }}>
-        <Icon name={'ios-search'} style={styles.headerIcon} />
-        <MenuAtom navigation={navigation} />
-      </View>
-    )
-    let left = params &&
-      params.items &&
-      params.items.length > 0 && (
-        <Icon
-          name={'menu'}
-          onPress={() => navigation.navigate('DrawerToggle')}
-          style={styles.headerIcon}
-        />
-      )*/
-  /*return {
-      header: <CustomHeader title="Products & Services" />
-    }
-}*/
-
   render() {
     // const { params } = this.props.navigation.state
     // const items = params.data.products
