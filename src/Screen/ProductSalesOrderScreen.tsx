@@ -37,7 +37,7 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
   }
 
   handleArrowPresss = (): void => {
-    this.props.navigation.navigate('')
+    this.props.navigation.navigate('ViewBusiness')
   }
 
   render(): JSX.Element {
