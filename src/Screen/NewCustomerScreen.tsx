@@ -23,7 +23,6 @@ class NewCustomerScreen extends Component<IProps> {
       <EditCustomerForm
         navigation={this.props.navigation}
         onPressSave={() => console.log('Save button pressed.')}
-        navigation={this.props.navigation}
       />
     )
   }

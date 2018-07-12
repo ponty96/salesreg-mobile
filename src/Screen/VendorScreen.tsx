@@ -6,6 +6,7 @@ import FabAtom from './../Atom/FabAtom'
 import CustomerList from '../Components/CustomerList'
 import { color } from '../Style/Color'
 import { customerList } from '../config/data'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
@@ -15,21 +16,17 @@ interface IState {}
 
 class VendorScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
-    let right = <Icon name={'ios-search'} style={styles.headerIcon} />
-    let left = params &&
-      params.items &&
-      params.items.length > 0 && (
-        <Icon
-          name={'menu'}
-          onPress={() => navigation.navigate('DrawerToggle')}
-          style={styles.headerIcon}
+    return {
+      header: (
+        <CustomHeader
+          title="Vendor"
+          showMenu
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
+          showRight
+          rightText=" "
+          firstRightIcon="ios-search"
         />
       )
-    return {
-      title: 'Vendor',
-      headerRight: right,
-      headerLeft: left
     }
   }
   onPress = () => {
@@ -66,10 +63,5 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: color.secondary
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
   }
 })
