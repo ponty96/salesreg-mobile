@@ -30,7 +30,8 @@ class SettingsScreen extends PureComponent<IProps, IState> {
         categories={[
           {
             section: 'Profile',
-            routeName: 'Profile'
+            routeName: 'Profile',
+            showRightCaret: true
           }
         ]}
       />
