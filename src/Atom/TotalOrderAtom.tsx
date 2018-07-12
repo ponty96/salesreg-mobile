@@ -42,7 +42,7 @@ const styles = StyleSheet.create({
     height: 55,
     alignItems: 'center',
     justifyContent: 'center',
-    backgroundColor: color.list
+    backgroundColor: color.listBorderColor
   },
   totalOrderRedNumber: {
     color: color.primary,

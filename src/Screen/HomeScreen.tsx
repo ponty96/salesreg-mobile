@@ -7,15 +7,22 @@ import {
   Dimensions
 } from 'react-native'
 import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
 }
 
 export default class HomeScreen extends React.Component<IProps> {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Home Screen'
+      header: (
+        <CustomHeader
+          title="Home"
+          menu
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
+        />
+      )
     }
   }
 
@@ -39,7 +46,7 @@ const styles = StyleSheet.create({
   },
   homeBackground: {
     backgroundColor: 'rgba(152,251,152, 0.2)', // #98FB98
-    width: Dimensions.get('window').width - 32,
+    width: Dimensions.get('screen').width - 32,
     alignSelf: 'center',
     marginTop: 16,
     borderRadius: 3
@@ -48,6 +55,7 @@ const styles = StyleSheet.create({
     color: color.selling,
     fontSize: 30,
     padding: 20,
-    textAlign: 'center'
+    textAlign: 'center',
+    fontFamily: 'SourceSansPro_Semibold'
   }
 })

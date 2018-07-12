@@ -17,9 +17,16 @@ interface IProps {
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string
   underneathStyle?: object
+  maxLength?: number
+  login?: boolean
 }
 
-class InputAtom extends React.Component<IProps, any> {
+interface IState {
+  bottomColor: string
+  labelColor: string
+}
+
+class InputAtom extends React.Component<IProps, IState> {
   static defaultProps: IProps = {
     label: '',
     required: false,
@@ -29,19 +36,40 @@ class InputAtom extends React.Component<IProps, any> {
     multiline: false,
     contStyle: { marginLeft: 4 } || { marginLeft: 0 }
   }
+
+  state = {
+    bottomColor: color.textBorderBottom,
+    labelColor: color.inactive
+  }
+
+  changeUnderline = (newColor: string): void => {
+    if (this.props.login) {
+      this.setState({ bottomColor: newColor, labelColor: newColor })
+    } else {
+      this.setState({ labelColor: newColor })
+    }
+  }
+
   render() {
     return (
       <View>
         <Item
           floatingLabel={this.props.floatingLabel}
           stackedLabel={!this.props.floatingLabel}
-          style={this.props.contStyle}
+          style={[
+            { borderBottomColor: this.state.bottomColor },
+            this.props.contStyle
+          ]}
         >
-          <Label style={styles.label}>
-            {this.props.required && <Text style={styles.required}>* </Text>}
-            <Text
-              style={{ color: color.inactive, fontFamily: 'SourceSansPro' }}
-            >
+          <Label
+            style={{
+              color: this.state.labelColor,
+              padding: 3,
+              fontSize: 14
+            }}
+          >
+            {this.props.required && <Text style={styles.required}>*</Text>}
+            <Text style={[styles.labelText, { color: this.state.labelColor }]}>
               {this.props.label}
             </Text>
           </Label>
@@ -52,10 +80,17 @@ class InputAtom extends React.Component<IProps, any> {
             value={this.props.defaultValue}
             secureTextEntry={this.props.secureTextEntry}
             keyboardType={this.props.keyboardType}
-            style={this.props.inputStyle}
+            style={[
+              { fontFamily: 'SourceSansPro' },
+              styles.inputText,
+              this.props.inputStyle
+            ]}
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
+            onFocus={() => this.changeUnderline(color.button)}
+            onBlur={() => this.changeUnderline(color.textBorderBottom)}
+            maxLength={this.props.maxLength}
           />
         </Item>
         {this.props.underneathText ? (
@@ -86,15 +121,28 @@ const styles = StyleSheet.create({
     marginLeft: 4
   },
   label: {
-    color: color.inactive
+    // color: this.state.labelColor,
+    padding: 3,
+    fontSize: 16
+  },
+  labelText: {
+    // color: this.state.labelColor,
+    fontFamily: 'SourceSansPro',
+    padding: 3,
+    fontSize: 16
   },
   required: {
-    color: color.primary
+    color: color.inactive,
+    fontSize: 14
   },
   underneathText: {
     marginLeft: 0,
-    color: color.menu,
+    color: color.principal,
     fontSize: 12,
-    marginBottom: 25
+    marginBottom: 25,
+    marginTop: 2
+  },
+  inputText: {
+    color: color.principal
   }
 })

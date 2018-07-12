@@ -14,16 +14,15 @@ interface IProps {
 interface IState {
   email: string;
   password: string;
-  underlineColorAndroid: string;
+  isEdited: boolean;
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
   state = {
     email: '',
     password: '',
-    underlineColorAndroid: 'red'
+    isEdited: false
   };
-
   login = () => {
     this.props.onSubmit({
       email: this.state.email,
@@ -53,28 +52,38 @@ class LoginForm extends PureComponent<IProps, IState> {
         <InputAtom
           label="Email Address"
           getValue={this.getEmail}
-          contStyle={styles.marginlessInput}
+          contStyle={styles.input}
+          inputStyle={styles.elevateInput}
+          login={true}
         />
 
         <InputAtom
           label="Password"
           getValue={this.getPassword}
           secureTextEntry={true}
-          contStyle={styles.marginlessInput}
+          contStyle={styles.input}
           underneathText="Must be at least 6 characters"
+          underneathStyle={styles.underneathText}
+          inputStyle={styles.elevateInput}
+          login={true}
         />
 
         <ButtonAtom
           btnText="Forgot password"
-          textStyle={styles.btnColor}
+          textStyle={styles.forgotPasswordText}
           transparent={true}
           onPress={() => this.navigate('Reset')}
+          btnStyle={styles.forgotPassword}
         />
 
         <ButtonAtom
           btnText="LOGIN"
           btnStyle={styles.loginButton}
           onPress={this.login}
+          textStyle={[
+            styles.loginText,
+            { fontFamily: 'SourceSansPro_Semibold' }
+          ]}
         />
 
         <Text style={[styles.noAccount, { fontFamily: 'SourceSansPro' }]}>
@@ -96,27 +105,41 @@ class LoginForm extends PureComponent<IProps, IState> {
 export default LoginForm;
 
 const styles = StyleSheet.create({
-  marginlessInput: {
-    marginLeft: 0
+  input: {
+    marginLeft: 0,
+    marginTop: 0
+  },
+  forgotPassword: {
+    marginVertical: 16
   },
   loginButton: {
-    width: '100%',
+    alignSelf: 'stretch',
     height: 50,
     justifyContent: 'center'
   },
+  loginText: {
+    fontSize: 16
+  },
   noAccount: {
-    color: color.menu,
+    color: color.principal,
     textAlign: 'center',
-    marginTop: '6%'
+    marginTop: 32
   },
   signupButton: {
-    paddingBottom: '5%'
+    paddingBottom: 32
   },
   signupText: {
     color: color.button,
-    fontWeight: 'bold'
+    fontSize: 16
   },
-  btnColor: {
-    color: color.button
+  underneathText: {
+    marginBottom: 0
+  },
+  forgotPasswordText: {
+    color: color.button,
+    fontSize: 16
+  },
+  elevateInput: {
+    marginBottom: 5
   }
 });

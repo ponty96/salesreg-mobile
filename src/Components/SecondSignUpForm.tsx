@@ -22,9 +22,10 @@ interface IState {
   description: string
 }
 
-class SigupForm2 extends PureComponent<IProps, IState> {
+class SecondSigupForm extends PureComponent<IProps, IState> {
   state = {
-    image: 'https://www.iconsdb.com/icons/preview/gray/shop-xxl.png',
+    image:
+      'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png',
     businessName: '',
     businessAddress: '',
     email: '',
@@ -98,25 +99,30 @@ class SigupForm2 extends PureComponent<IProps, IState> {
         />
 
         <InputAtom
-          label="*Business name"
+          label="Business name"
           getValue={this.getName}
           contStyle={styles.marginlessInput}
+          required={true}
         />
 
         <InputAtom
-          label="*Business address"
+          label="Business address"
           getValue={this.getAddress}
           contStyle={styles.marginlessInput}
+          required={true}
         />
 
         <InputAtom
-          label="*Email"
+          label="Email"
           getValue={this.getEmail}
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
+          required={true}
         />
 
-        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>*What are you selling?</Text>
+        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
+          *What are you selling?
+        </Text>
         <View style={styles.checkBoxWrapper}>
           <CheckBox
             checked={this.state.products}
@@ -124,6 +130,7 @@ class SigupForm2 extends PureComponent<IProps, IState> {
               this.flipCheckedState(this.state.products, 'products')
             }}
             color={color.inactive}
+            style={styles.checkBox}
           />
           <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
             Products(Traders, manufacturers, producers)
@@ -137,11 +144,16 @@ class SigupForm2 extends PureComponent<IProps, IState> {
               this.flipCheckedState(this.state.services, 'services')
             }}
             color={color.inactive}
+            style={styles.checkBox}
           />
-          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>Services(Service providers)</Text>
+          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
+            Services(Service providers)
+          </Text>
         </View>
 
-        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>Transaction currency</Text>
+        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
+          Transaction currency
+        </Text>
         <View style={styles.pickerWrapper}>
           <PickerAtom list={['Naira(\u20A6)']} placeholder={`Naira(\u20A6)`} />
         </View>
@@ -157,19 +169,31 @@ class SigupForm2 extends PureComponent<IProps, IState> {
             btnText="SIGN UP"
             onPress={this.signup}
             btnStyle={styles.longButton}
+            textStyle={[
+              styles.signUp,
+              { fontFamily: 'SourceSansPro_Semibold' }
+            ]}
           />
           <Text style={[styles.termsText, { fontFamily: 'SourceSansPro' }]}>
             Signing up means you agree with our{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>Terms</Text> &{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>Privacy policy</Text>
+            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
+              Terms
+            </Text>{' '}
+            &{' '}
+            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
+              Privacy policy
+            </Text>
           </Text>
-          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>Or you have an account? </Text>
+          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
+            Or you have an account?
+          </Text>
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
             funcValue={'Login'}
             onPress={this.navigate}
-            textStyle={styles.login}
+            textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
+            btnStyle={styles.loginButton}
           />
         </View>
       </Form>
@@ -177,33 +201,44 @@ class SigupForm2 extends PureComponent<IProps, IState> {
   }
 }
 
-export default SigupForm2
+export default SecondSigupForm
 
 const styles = StyleSheet.create({
   marginlessInput: {
-    marginLeft: 0
+    marginLeft: 0,
+    marginTop: 5
   },
   btnColor: {
     color: color.button
   },
   buttonsWrapper: {
-    marginTop: 20
+    marginTop: 16
   },
   whatYouSell: {
-    marginTop: '10%',
-    color: color.button
+    marginTop: 28,
+    color: color.button,
+    fontSize: 14
   },
   checkBoxWrapper: {
     flexDirection: 'row',
-    marginTop: '3%'
+    marginTop: 16
+  },
+  checkBox: {
+    left: 0,
+    borderWidth: 1,
+    paddingBottom: 0
   },
   checkBoxText: {
-    marginLeft: 15
+    marginLeft: 10,
+    fontSize: 14,
+    color: color.principal
   },
   pickerWrapper: {
-    borderBottomColor: color.listBorderColor,
+    borderBottomColor: color.inactive,
     borderBottomWidth: 1,
-    width: '50%'
+    width: '60%',
+    opacity: 0.5,
+    marginBottom: 16
   },
   placeholderColor: {
     color: color.inactive
@@ -215,21 +250,30 @@ const styles = StyleSheet.create({
     height: 50
   },
   termsText: {
-    color: color.menu,
-    textAlign: 'center'
+    color: color.principal,
+    textAlign: 'center',
+    fontSize: 12
   },
   redTermText: {
     color: color.button
   },
   haveAccount: {
-    marginTop: '4%',
+    marginTop: 16,
     textAlign: 'center',
-    color: color.menu
+    color: color.principal,
+    fontSize: 14
   },
   resetFormContainer: {
-    marginTop: '4%'
+    marginTop: 16
   },
   login: {
-    color: color.button
+    color: color.button,
+    fontSize: 16
+  },
+  signUp: {
+    fontSize: 16
+  },
+  loginButton: {
+    marginVertical: 0
   }
 })

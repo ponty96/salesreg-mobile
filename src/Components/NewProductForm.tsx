@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
 import ProductFormAtom from '../Atom/ProductFormAtom'
 import SaveCancelButton from '../Container/SaveCancelButton'
-import { ScrollView } from 'react-native-gesture-handler'
+// import { ScrollView } from 'react-native-gesture-handler'
 
 interface IProps {
   navigation: any
@@ -18,9 +18,7 @@ class NewProductForm extends PureComponent<IProps, IState> {
   render() {
     return (
       <View style={styles.ababa}>
-        <ScrollView>
-          <ProductFormAtom navigation={this.props.navigation} />
-        </ScrollView>
+        <ProductFormAtom navigation={this.props.navigation} />
         <SaveCancelButton
           navigation={this.props.navigation}
           createfunc={this.create}

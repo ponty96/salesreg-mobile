@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
-import NewCustomerForm from '../Components/NewCustomerForm'
+import EditCustomerForm from '../Components/EditCustomerForm'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -27,7 +27,7 @@ class NewCustomerScreen extends Component<IProps, IState> {
   }
 
   render() {
-    return <NewCustomerForm navigation={this.props.navigation} />
+    return <EditCustomerForm navigation={this.props.navigation} />
   }
 }
 

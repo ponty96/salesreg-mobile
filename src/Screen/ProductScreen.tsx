@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
 import { userData } from '../config/default'
 import FabAtom from './../Atom/FabAtom'
 import ProductList from '../Components/ProductList'
@@ -11,13 +10,14 @@ interface IProps {
   navigation: any
 }
 
-interface IState {}
-
-class ProductScreen extends PureComponent<IProps, IState> {
-  static navigationOptions = ({ navigation }: any) => {
+class ProductScreen extends PureComponent<IProps> {
+  /*static navigationOptions = ({ navigation }: any) => {
     const { params } = navigation.state
-    // tslint:disable-next-line:max-line-length
-    let right = <View style={{flexDirection: 'row'}}><Icon name={'ios-search'} style={styles.headerIcon} /><Icon name={'md-more'} style={styles.headerIcon} /></View>
+    let right = (
+      <View style={{ flexDirection: 'row' }}>
+        <Icon name={'ios-search'} style={styles.headerIcon} />
+      </View>
+    )
     let left = params &&
       params.items &&
       params.items.length > 0 && (
@@ -26,13 +26,11 @@ class ProductScreen extends PureComponent<IProps, IState> {
           onPress={() => navigation.navigate('DrawerToggle')}
           style={styles.headerIcon}
         />
-      )
-    return {
-      title: 'Products',
-      headerRight: right,
-      headerLeft: left
+      )*/
+  /*return {
+      header: <CustomHeader title="Products & Services" />
     }
-  }
+}*/
 
   render() {
     // const { params } = this.props.navigation.state

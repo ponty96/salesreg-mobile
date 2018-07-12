@@ -1,31 +1,31 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import {
   ScrollView,
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions
-} from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-import { Icon } from 'native-base';
-import { color } from '../Style/Color';
-import SidebarItem from '../Atom/SidebarItem';
+  Dimensions,
+  Alert
+} from 'react-native'
+import { SafeAreaView } from 'react-navigation'
+import { Icon } from 'native-base'
+import { color } from '../Style/Color'
+import SideBarItemAtom from '../Atom/SideBarItemAtom'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 export default class SideBar extends PureComponent<IProps> {
   handleNavigation = (location: string, data: any = undefined) => {
-    this.props.navigation.navigate(location, { data });
-  };
+    this.props.navigation.navigate(location, { data })
+  }
 
   render() {
     const {
       navigation: { navigate }
-    } = this.props;
-    console.log('navigation', this.props.navigation);
+    } = this.props
     return (
       <SafeAreaView
         style={styles.sidebarContainer}
@@ -35,13 +35,20 @@ export default class SideBar extends PureComponent<IProps> {
           <ScrollView>
             <TouchableOpacity
               style={styles.header}
-              onPress={() => navigate('DrawerClose')}
+              onPress={() => {
+                Alert.alert('Sign out', 'Do you want to sign out?', [
+                  { text: 'OK', onPress: () => navigate('Auth') },
+                  { text: 'Cancel' }
+                ])
+              }}
             >
               <Icon name="cross" type="Entypo" style={styles.cross} />
-              <Text style={styles.texts}>BAYONE ATTRACTIONS</Text>
+              <Text style={[styles.texts, { fontFamily: 'SourceSansPro' }]}>
+                BAYONE ATTRACTIONS
+              </Text>
             </TouchableOpacity>
-            <SidebarItem
-              title="Company"
+            <SideBarItemAtom
+              title="COMPANY"
               navigate={navigate}
               categories={[
                 {
@@ -59,13 +66,13 @@ export default class SideBar extends PureComponent<IProps> {
               ]}
             />
 
-            <SidebarItem
+            <SideBarItemAtom
               title="CONTACT"
               navigate={navigate}
               categories={[
                 {
                   title: 'Customers',
-                  routeName: 'CustomerDetails'
+                  routeName: 'Customer'
                 },
                 {
                   title: 'Vendors',
@@ -74,7 +81,7 @@ export default class SideBar extends PureComponent<IProps> {
               ]}
             />
 
-            <SidebarItem
+            <SideBarItemAtom
               title="ORDER"
               navigate={navigate}
               categories={[
@@ -88,7 +95,7 @@ export default class SideBar extends PureComponent<IProps> {
                 }
               ]}
             />
-            <SidebarItem
+            <SideBarItemAtom
               title="TRANSACTIONS"
               navigate={navigate}
               categories={[
@@ -114,21 +121,24 @@ export default class SideBar extends PureComponent<IProps> {
                 }
               ]}
             />
-
-            <SidebarItem
-              title="ACCOUNTING"
+            <SideBarItemAtom
+              title="HELP & SETTINGS"
               navigate={navigate}
               categories={[
                 {
-                  title: 'Inventory',
-                  routeName: 'Inventory'
+                  title: 'Settings',
+                  routeName: 'Profile'
+                },
+                {
+                  title: 'Help & Feedback',
+                  routeName: 'Help'
                 }
               ]}
             />
           </ScrollView>
         </View>
       </SafeAreaView>
-    );
+    )
   }
 }
 
@@ -168,12 +178,6 @@ const styles = StyleSheet.create({
     paddingVertical: 20,
     paddingHorizontal: 16
   },
-  sidebarItem: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'stretch',
-    padding: 16
-  },
   sidebarContainer: {
     height: Dimensions.get('window').height - 16,
     backgroundColor: color.primary
@@ -181,4 +185,4 @@ const styles = StyleSheet.create({
   itemsContainer: {
     flex: 4
   }
-});
+})
