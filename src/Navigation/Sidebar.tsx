@@ -121,6 +121,20 @@ export default class SideBar extends PureComponent<IProps> {
                 }
               ]}
             />
+            <SideBarItemAtom
+              title="HELP & SETTINGS"
+              navigate={navigate}
+              categories={[
+                {
+                  title: 'Settings',
+                  routeName: 'Profile'
+                },
+                {
+                  title: 'Help & Feedback',
+                  routeName: 'Help'
+                }
+              ]}
+            />
           </ScrollView>
         </View>
       </SafeAreaView>
