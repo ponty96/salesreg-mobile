@@ -10,6 +10,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import FormImageAtom from './FormImageAtom'
 import InputAtom from './InputAtom'
 import { color } from '../Style/Color'
+import FormContainerAtom from './FormContainerAtom'
 
 interface IProps {
   navigation: any
@@ -56,33 +57,22 @@ export default class ProductFormAtom extends React.Component<IProps, any> {
             getName={val => this.updateState('product', val)}
             source={this.state.image.uri}
           />
-          <View style={styles.mainView}>
-            <Text style={styles.headerText}>Quantity</Text>
-            <View style={styles.inputView}>
-              <InputAtom
-                label="Current Stock Quantity"
-                getValue={val => this.updateState('currentStock', val)}
-                keyboardType="numeric"
-                underneathText="Quantity available in store as at now"
-                underneathStyle={{
-                  marginBottom: 0,
-                  paddingBottom: 0,
-                  paddingLeft: 8
-                }}
-              />
-              <InputAtom
-                label="Minimum Stock Quantity"
-                getValue={val => this.updateState('minStock', val)}
-                keyboardType="numeric"
-                underneathText="Minimum quantity required for re-stock"
-                underneathStyle={{
-                  marginBottom: 0,
-                  paddingBottom: 0,
-                  paddingLeft: 8
-                }}
-              />
-            </View>
-          </View>
+          <FormContainerAtom headerText="Quantity">
+            <InputAtom
+              label="Current Stock Quantity"
+              getValue={val => this.updateState('currentStock', val)}
+              keyboardType="numeric"
+              underneathText="Quantity available in store as at now"
+              underneathStyle={styles.underneathStyle}
+            />
+            <InputAtom
+              label="Minimum Stock Quantity"
+              getValue={val => this.updateState('minStock', val)}
+              keyboardType="numeric"
+              underneathText="Minimum quantity required for re-stock"
+              underneathStyle={styles.underneathStyle}
+            />
+          </FormContainerAtom>
           <View style={styles.mainView}>
             <Text style={styles.headerText}>Cost/Price</Text>
             <View style={styles.inputViewForTwo}>
@@ -116,16 +106,6 @@ const styles = StyleSheet.create({
   mainView: {
     backgroundColor: 'transparent',
     width: '100%'
-  },
-  inputView: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    alignContent: 'center',
-    padding: 3,
-    marginTop: 16,
-    marginBottom: 16,
-    borderRadius: 3
   },
   inputViewForTwo: {
     width: Dimensions.get('screen').width - 32,
@@ -162,5 +142,10 @@ const styles = StyleSheet.create({
     paddingLeft: 16,
     color: color.button,
     fontFamily: 'SourceSansPro_Semibold'
+  },
+  underneathStyle: {
+    marginBottom: 0,
+    paddingBottom: 0,
+    paddingLeft: 8
   }
 })

@@ -13,6 +13,7 @@ import { ScrollView } from 'react-native-gesture-handler'
 import FormImageAtom from './FormImageAtom'
 import { Form } from 'native-base'
 import { color } from '../Style/Color'
+import FormContainerAtom from './FormContainerAtom'
 
 interface IProps {
   navigation: any
@@ -83,10 +84,10 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
               <Text style={styles.headerText}>{this.props.firstHeader}</Text>
               <View style={styles.inputViewForTwoAndMore}>
                 <View style={styles.innerInputViewForTwo}>
-                  <View style={{ width: '25%', alignItems: 'center' }}>
+                  <View style={styles.sideTextWithInput}>
                     <Text style={styles.blueSideText}>Phone</Text>
                   </View>
-                  <View style={{ width: '70%' }}>
+                  <View style={styles.width70}>
                     <InputAtom
                       getValue={val => this.updateState('phone', val)}
                       keyboardType="numeric"
@@ -94,10 +95,10 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
                   </View>
                 </View>
                 <View style={styles.innerInputViewForTwo}>
-                  <View style={{ width: '25%', alignItems: 'center' }}>
+                  <View style={styles.sideTextWithInput}>
                     <Text style={styles.blueSideText}>Mobile</Text>
                   </View>
-                  <View style={{ width: '70%' }}>
+                  <View style={styles.width70}>
                     <InputAtom
                       getValue={val => this.updateState('mobile', val)}
                       keyboardType="numeric"
@@ -105,10 +106,10 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
                   </View>
                 </View>
                 <View style={styles.innerInputViewForTwo}>
-                  <View style={{ width: '25%', alignItems: 'center' }}>
+                  <View style={styles.sideTextWithInput}>
                     <Text style={styles.blueSideText}>Fax</Text>
                   </View>
-                  <View style={{ width: '70%' }}>
+                  <View style={styles.width70}>
                     <InputAtom
                       getValue={val => this.updateState('fax', val)}
                       keyboardType="numeric"
@@ -116,10 +117,10 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
                   </View>
                 </View>
                 <View style={styles.innerInputViewForTwo}>
-                  <View style={{ width: '25%', alignItems: 'center' }}>
+                  <View style={styles.sideTextWithInput}>
                     <Text style={styles.blueSideText}>Email</Text>
                   </View>
-                  <View style={{ width: '70%' }}>
+                  <View style={styles.width70}>
                     <InputAtom
                       getValue={val => this.updateState('email', val)}
                       keyboardType="email-address"
@@ -128,75 +129,63 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
                 </View>
               </View>
             </View>
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>Banking detail</Text>
-              <View style={styles.inputView}>
-                <InputAtom
-                  label="Bank name"
-                  getValue={val => this.updateState('bankName', val)}
-                />
-                <InputAtom
-                  label="Account name"
-                  getValue={val => this.updateState('accountName', val)}
-                />
-                <InputAtom
-                  label="Account number"
-                  getValue={val => this.updateState('accountNumber', val)}
-                  keyboardType="numeric"
+            <FormContainerAtom headerText="Banking detail">
+              <InputAtom
+                label="Bank name"
+                getValue={val => this.updateState('bankName', val)}
+              />
+              <InputAtom
+                label="Account name"
+                getValue={val => this.updateState('accountName', val)}
+              />
+              <InputAtom
+                label="Account number"
+                getValue={val => this.updateState('accountNumber', val)}
+                keyboardType="numeric"
+              />
+            </FormContainerAtom>
+            <FormContainerAtom headerText={this.props.secondHeader}>
+              <InputAtom
+                label="Office Address"
+                getValue={val => this.updateState('officeAddress', val)}
+              />
+              <InputAtom
+                label="Home Address"
+                getValue={val => this.updateState('homeAddress', val)}
+              />
+            </FormContainerAtom>
+            <FormContainerAtom headerText="Billing Address">
+              <InputAtom
+                label="Billing Address"
+                getValue={val => this.updateState('billingAddress', val)}
+              />
+            </FormContainerAtom>
+            <FormContainerAtom headerText={this.props.thirdHeader}>
+              <View
+                style={{
+                  borderBottomWidth: 1,
+                  borderBottomColor: '#F3F3F3',
+                  padding: 10
+                }}
+              >
+                <PickerAtom
+                  list={['Naira (\u20A6)']}
+                  style={styles.pickerStyle}
+                  placeholder="Select Currency"
                 />
               </View>
-            </View>
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>{this.props.secondHeader}</Text>
-              <View style={styles.inputView}>
-                <InputAtom
-                  label="Office Address"
-                  getValue={val => this.updateState('officeAddress', val)}
-                />
-                <InputAtom
-                  label="Home Address"
-                  getValue={val => this.updateState('homeAddress', val)}
-                />
-              </View>
-            </View>
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>Billing Address</Text>
-              <View style={styles.inputView}>
-                <InputAtom
-                  label="Billing Address"
-                  getValue={val => this.updateState('billingAddress', val)}
-                />
-              </View>
-            </View>
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>{this.props.thirdHeader}</Text>
-              <View style={styles.inputView}>
-                <View
-                  style={{
-                    borderBottomWidth: 1,
-                    borderBottomColor: '#F3F3F3',
-                    padding: 10
-                  }}
-                >
-                  <PickerAtom
-                    list={['Naira (\u20A6)']}
-                    style={styles.pickerStyle}
-                    placeholder="Select Currency"
-                  />
-                </View>
-              </View>
-            </View>
+            </FormContainerAtom>
             <View style={styles.mainView}>
               <Text style={styles.headerText}>Other details</Text>
               <View style={styles.inputViewForTwoAndMore}>
                 <View style={styles.innerInputViewForTwo}>
-                  <View style={{ width: '50%', paddingLeft: 12 }}>
+                  <View style={styles.wrappedInputLeft}>
                     <InputAtom
                       label="Birthday"
                       getValue={val => this.updateState('birthday', val)}
                     />
                   </View>
-                  <View style={{ width: '50%', paddingRight: 12 }}>
+                  <View style={[styles.wrappedInputLeft, { paddingRight: 12 }]}>
                     <InputAtom
                       label="Marital Status"
                       getValue={val => this.updateState('maritalStatus', val)}
@@ -204,7 +193,7 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
                   </View>
                 </View>
                 <View style={styles.innerInputViewForTwo}>
-                  <View style={{ width: '50%', paddingLeft: 12 }}>
+                  <View style={styles.wrappedInputLeft}>
                     <InputAtom
                       label="Marriage Anniversary"
                       getValue={val => this.updateState('marriageAnn', val)}
@@ -213,46 +202,32 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
                 </View>
               </View>
             </View>
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>Likes</Text>
-              <View style={styles.inputView}>
-                <InputAtom
-                  label="Like"
-                  getValue={val => this.updateState('like', val)}
-                />
-                <ButtonAtom
-                  btnText="+ Add Like"
-                  transparent={true}
-                  onPress={this.addLike}
-                  textStyle={styles.sendAnother}
-                  btnStyle={{
-                    paddingHorizontal: 5,
-                    alignSelf: 'flex-start',
-                    marginVertical: 3
-                  }}
-                />
-              </View>
-            </View>
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>Dislikes</Text>
-              <View style={styles.inputView}>
-                <InputAtom
-                  label="Dislikes"
-                  getValue={val => this.updateState('dislike', val)}
-                />
-                <ButtonAtom
-                  btnText="+ Add Dislike"
-                  transparent={true}
-                  onPress={this.addDislike}
-                  textStyle={styles.sendAnother}
-                  btnStyle={{
-                    paddingHorizontal: 5,
-                    alignSelf: 'flex-start',
-                    marginVertical: 3
-                  }}
-                />
-              </View>
-            </View>
+            <FormContainerAtom headerText="Likes">
+              <InputAtom
+                label="Like"
+                getValue={val => this.updateState('like', val)}
+              />
+              <ButtonAtom
+                btnText="+ Add Like"
+                transparent={true}
+                onPress={this.addLike}
+                textStyle={styles.sendAnother}
+                btnStyle={styles.btnStyle}
+              />
+            </FormContainerAtom>
+            <FormContainerAtom headerText="Dislikes">
+              <InputAtom
+                label="Dislikes"
+                getValue={val => this.updateState('dislike', val)}
+              />
+              <ButtonAtom
+                btnText="+ Add Dislike"
+                transparent={true}
+                onPress={this.addDislike}
+                textStyle={styles.sendAnother}
+                btnStyle={styles.btnStyle}
+              />
+            </FormContainerAtom>
           </Form>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -272,18 +247,6 @@ const styles = StyleSheet.create({
   mainView: {
     backgroundColor: 'transparent',
     width: '100%'
-  },
-  inputView: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    alignContent: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    padding: 3,
-    marginTop: 16,
-    marginBottom: 16,
-    borderRadius: 3
   },
   inputViewForTwo: {
     width: Dimensions.get('screen').width - 32,
@@ -355,5 +318,21 @@ const styles = StyleSheet.create({
     color: color.button,
     fontSize: 16,
     fontFamily: 'SourceSansPro_Semibold'
+  },
+  btnStyle: {
+    paddingHorizontal: 5,
+    alignSelf: 'flex-start',
+    marginVertical: 3
+  },
+  wrappedInputLeft: {
+    width: '50%',
+    paddingLeft: 12
+  },
+  sideTextWithInput: {
+    width: '25%',
+    alignItems: 'center'
+  },
+  width70: {
+    width: '70%'
   }
 })
