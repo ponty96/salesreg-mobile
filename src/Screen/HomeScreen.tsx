@@ -19,7 +19,7 @@ export default class HomeScreen extends React.Component<IProps> {
       header: (
         <CustomHeader
           title="Home"
-          menu
+          showMenu
           onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )

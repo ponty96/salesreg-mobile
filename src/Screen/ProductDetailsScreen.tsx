@@ -16,18 +16,17 @@ class ProductDetailsScreen extends PureComponent<IProps> {
         <CustomHeader
           title="Product"
           onBackPress={() => navigation.goBack()}
-          right
+          showRight
           rightText="Edit"
           firstRightIcon="pencil"
+          onPressRightButton={() => navigation.navigate('NewProduct')}
           firstRightIconType="MaterialCommunityIcons"
-          onPressRightButton={() => navigation.navigate('EditProductDetail')}
         />
       )
     }
   }
 
   render() {
-    // do change the list to the appropriate molecule
     return (
       <View style={styles.centerContainer}>
         <ProductDetails navigation={this.props.navigation} />

@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Picker, Icon } from 'native-base'
+import { color } from '../Style/Color'
 
 interface IProps {
   list: Array<any>
@@ -41,10 +42,12 @@ class PickerAtom extends React.Component<IProps, IState> {
         selectedValue={this.state.selected}
         onValueChange={this.handleChange.bind(this)}
         placeholder={this.props.placeholder}
+        placeholderStyle={{ color: color.principal }}
         textStyle={{
           textAlign: 'left',
           paddingLeft: 0,
-          paddingRight: 0
+          paddingRight: 0,
+          color: color.principal
         }}
       >
         {list.map((element, key) => (

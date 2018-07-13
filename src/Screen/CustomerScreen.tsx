@@ -11,30 +11,27 @@ interface IProps {
   navigation: any
 }
 
-interface IState {}
-
-class CustomerScreen extends Component<IProps, IState> {
+class CustomerScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
         <CustomHeader
           title="Customer"
-          menu
-          onMenuPress={() => navigation.navigate('DrawerToggle')}
-          right
+          showMenu
+          showRight
           firstRightIcon="ios-search"
           rightText=" "
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
     }
   }
+
   onPress = () => {
     this.props.navigation.navigate('CustomerDetails')
   }
 
   render() {
-    // const { params } = this.props.navigation.state
-    // const items = params.data.customers
     const items = this.props.navigation.getParam(customerList)
 
     return (

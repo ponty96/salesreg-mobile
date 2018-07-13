@@ -2,7 +2,6 @@ import React, { Component } from 'react'
 import {
   View,
   Text,
-  Dimensions,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet
@@ -12,6 +11,7 @@ import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 import FormImageAtom from '../Atom/FormImageAtom'
 import PickerAtom from '../Atom/PickerAtom'
+import FormContainerAtom from '../Atom/FormContainerAtom'
 
 interface IProps {}
 
@@ -66,67 +66,58 @@ class EditBusinessProfileForm extends Component<IProps, any> {
             getValue={this.getImage}
             source={this.state.image.uri}
           />
-          <View style={styles.mainView}>
-            <Text style={styles.headerText}>Contact/Address</Text>
-            <View style={styles.inputView}>
-              <InputAtom
-                label="Email Address"
-                getValue={val => this.updateState('email', val)}
-                keyboardType="email-address"
+          <FormContainerAtom headerText="Contact Address">
+            <InputAtom
+              label="Email Address"
+              getValue={val => this.updateState('email', val)}
+              keyboardType="email-address"
+            />
+            <InputAtom
+              label="Address"
+              getValue={val => this.updateState('address', val)}
+            />
+          </FormContainerAtom>
+          <FormContainerAtom headerText="What are you selling?">
+            <View style={styles.checkView}>
+              <CheckBox
+                checked={this.state.check1}
+                color={color.selling}
+                onPress={this.checked1}
+                style={styles.checkBox}
               />
-              <InputAtom
-                label="Address"
-                getValue={val => this.updateState('address', val)}
+              <Text style={styles.checkText}>
+                Products (Traders, manufacturers, producers)
+              </Text>
+            </View>
+            <View style={styles.checkView}>
+              <CheckBox
+                checked={this.state.check2}
+                color={color.selling}
+                onPress={this.checked2}
+                style={styles.checkBox}
+              />
+              <Text style={styles.checkText}>Services</Text>
+            </View>
+          </FormContainerAtom>
+          <FormContainerAtom headerText="Transaction currency">
+            <View style={[styles.bottomBorder, { padding: 10 }]}>
+              <PickerAtom
+                list={['Naira (\u20A6)']}
+                style={styles.pickerStyle}
+                placeholder="Select Currency"
               />
             </View>
-          </View>
-          <View style={styles.mainView}>
-            <Text style={styles.headerText}>What are you selling?</Text>
-            <View style={styles.inputView}>
-              <View style={styles.checkView}>
-                <CheckBox
-                  checked={this.state.check1}
-                  color={color.selling}
-                  onPress={this.checked1}
-                />
-                <Text style={styles.checkText}>
-                  Products (Traders, manufacturers, producers)
-                </Text>
-              </View>
-              <View style={styles.checkView}>
-                <CheckBox
-                  checked={this.state.check2}
-                  color={color.selling}
-                  onPress={this.checked2}
-                />
-                <Text style={styles.checkText}>Services</Text>
-              </View>
-            </View>
-          </View>
-          <View style={styles.mainView}>
-            <Text style={styles.headerText}>Transaction currency</Text>
-            <View style={styles.inputView}>
-              <View
-                style={{ borderBottomWidth: 1, borderBottomColor: '#F3F3F3' }}
-              >
-                <PickerAtom
-                  list={['Naira (\u20A6)']}
-                  style={styles.pickerStyle}
-                  placeholder="Select Currency"
-                />
-              </View>
-            </View>
-          </View>
-          <View style={styles.mainView}>
-            <Text style={styles.headerText}>Description</Text>
-            <View style={styles.inputView}>
+          </FormContainerAtom>
+          <FormContainerAtom headerText="Description">
+            <View style={styles.bottomBorder}>
               <Textarea
                 rowSpan={5}
                 placeholder="Description"
+                placeholderTextColor={color.inactive}
                 onChangeText={val => this.updateState('description', val)}
               />
             </View>
-          </View>
+          </FormContainerAtom>
         </ScrollView>
       </KeyboardAvoidingView>
     )
@@ -142,19 +133,10 @@ const styles = StyleSheet.create({
   indentRight: {
     marginRight: 20
   },
-  mainView: {
-    backgroundColor: 'transparent',
-    width: '100%'
-  },
-  inputView: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    alignContent: 'center',
-    padding: 3,
-    marginTop: 16,
-    marginBottom: 16,
-    borderRadius: 3
+  checkBox: {
+    left: 0,
+    borderWidth: 1,
+    paddingBottom: 0
   },
   editDetailsWrapper: {
     marginTop: 30,
@@ -173,17 +155,18 @@ const styles = StyleSheet.create({
     width: '100%',
     height: 35
   },
-  headerText: {
-    alignSelf: 'center',
-    fontSize: 14,
-    color: color.button,
-    fontFamily: 'SourceSansPro_Semibold'
-  },
   checkText: {
-    paddingLeft: 16
+    paddingLeft: 16,
+    color: color.principal
   },
   checkView: {
     flexDirection: 'row',
     margin: 8
+  },
+  bottomBorder: {
+    borderBottomColor: color.list,
+    borderBottomWidth: 1,
+    marginLeft: 3,
+    marginRight: 3
   }
 })

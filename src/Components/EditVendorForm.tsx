@@ -10,10 +10,6 @@ interface IProps {
 interface IState {}
 
 class EditVendorForm extends PureComponent<IProps, IState> {
-  create = () => {
-    this.props.navigation.goBack()
-  }
-
   render() {
     return (
       <View style={styles.ababa}>
@@ -25,8 +21,8 @@ class EditVendorForm extends PureComponent<IProps, IState> {
           thirdHeader={'I pays this Vendor with'}
         />
         <SaveCancelButton
-          navigation={{ fakeObject: 'To stop giving errors' }}
-          createfunc={this.create}
+          navigation={this.props.navigation}
+          createfunc={() => console.log('Save button pressed.')}
           positiveButtonName="SAVE"
         />
       </View>

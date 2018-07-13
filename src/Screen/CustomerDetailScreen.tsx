@@ -37,12 +37,12 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
       header: (
         <CustomHeader
           title="Customer"
-          onBackPress={() => navigation.goBack()}
-          right
+          showRight
           rightText="Edit"
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
-          onPressRightButton={() => navigation.navigate('EditCustomerDetails')}
+          onBackPress={() => navigation.goBack()}
+          onPressRightButton={() => navigation.navigate('NewCustomer')}
         />
       )
     }

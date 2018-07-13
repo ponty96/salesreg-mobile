@@ -40,7 +40,10 @@ class SubHeaderAtom extends React.Component<IProps, any> {
     return (
       <Header style={styles.subHeaderHeader}>
         <Left style={styles.subHeaderLeftRow}>
-          <Image source={this.props.image} style={styles.productIcon} />
+          <Image
+            source={require('../../assets/Icons/subheader-icons/product-blue.png')}
+            style={styles.productIcon}
+          />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
         </Left>
 
@@ -85,15 +88,18 @@ const styles = StyleSheet.create({
     width: '60%'
   },
   subHeaderPad: {
-    paddingLeft: 10,
+    paddingLeft: 8,
     fontFamily: 'SourceSansPro',
-    fontSize: 15
+    fontSize: 15,
+    color: color.principal,
+    marginTop: 2
   },
   subHeaderFont: {
     fontSize: 15,
     fontFamily: 'SourceSansPro',
     alignSelf: 'center',
-    marginBottom: 2
+    marginBottom: 2,
+    color: color.principal
   },
   subHeaderIconColor: {
     color: color.check,

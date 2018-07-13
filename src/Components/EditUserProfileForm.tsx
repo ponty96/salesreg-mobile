@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import {
-  View,
-  Text,
   Dimensions,
   KeyboardAvoidingView,
   ScrollView,
@@ -11,6 +9,7 @@ import { Form } from 'native-base'
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 import FormImageAtom from '../Atom/FormImageAtom'
+import FormContainerAtom from '../Atom/FormContainerAtom'
 
 interface IProps {
   phoneNumber?: string
@@ -55,31 +54,25 @@ class EditUserProfileForm extends Component<IProps, any> {
               getValue={this.getImage}
               source={this.state.image.uri}
             />
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>Contact</Text>
-              <View style={styles.inputView}>
-                <InputAtom
-                  label="Phone Number"
-                  defaultValue={this.props.phoneNumber}
-                  getValue={val => this.updateState('phone', val)}
-                  keyboardType="numeric"
-                />
-                <InputAtom
-                  label="Email Address"
-                  getValue={val => this.updateState('email', val)}
-                  keyboardType="email-address"
-                />
-              </View>
-            </View>
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>Address</Text>
-              <View style={styles.inputView}>
-                <InputAtom
-                  label="Business Address"
-                  getValue={val => this.updateState('address', val)}
-                />
-              </View>
-            </View>
+            <FormContainerAtom headerText="Contact">
+              <InputAtom
+                label="Phone Number"
+                defaultValue={this.props.phoneNumber}
+                getValue={val => this.updateState('phone', val)}
+                keyboardType="numeric"
+              />
+              <InputAtom
+                label="Email Address"
+                getValue={val => this.updateState('email', val)}
+                keyboardType="email-address"
+              />
+            </FormContainerAtom>
+            <FormContainerAtom headerText="Address">
+              <InputAtom
+                label="Business Address"
+                getValue={val => this.updateState('address', val)}
+              />
+            </FormContainerAtom>
           </Form>
         </ScrollView>
       </KeyboardAvoidingView>
@@ -106,6 +99,8 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary,
     alignContent: 'center',
     padding: 3,
+    paddingLeft: 10,
+    paddingRight: 10,
     marginTop: 16,
     marginBottom: 16,
     borderRadius: 3

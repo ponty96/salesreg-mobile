@@ -12,8 +12,8 @@ interface IProps {
 
 export default class EditServiceScreen extends Component<IProps, any> {
   state = {
-    name: this.props.navigation.getParam('product', 'Product name'),
-    price: this.props.navigation.getParam('price', 'Product price')
+    name: '',
+    price: ''
   }
 
   updateState = (key: string, value: any) => {

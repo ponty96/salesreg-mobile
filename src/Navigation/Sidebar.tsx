@@ -121,14 +121,17 @@ export default class SideBar extends PureComponent<IProps> {
                 }
               ]}
             />
-
             <SideBarItemAtom
-              title="ACCOUNTING"
+              title="HELP & SETTINGS"
               navigate={navigate}
               categories={[
                 {
-                  title: 'Inventory',
-                  routeName: 'Inventory'
+                  title: 'Settings',
+                  routeName: 'Profile'
+                },
+                {
+                  title: 'Help & Feedback',
+                  routeName: 'Help'
                 }
               ]}
             />

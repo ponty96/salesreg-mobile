@@ -5,15 +5,10 @@ import SaveCancelButton from '../Container/SaveCancelButton'
 
 interface IProps {
   navigation: any
+  onPressSave: () => void
 }
 
-interface IState {}
-
-class EditCustomerForm extends PureComponent<IProps, IState> {
-  create = () => {
-    this.props.navigation.goBack()
-  }
-
+class EditCustomerForm extends PureComponent<IProps> {
   render() {
     return (
       <View style={styles.ababa}>
@@ -25,8 +20,8 @@ class EditCustomerForm extends PureComponent<IProps, IState> {
           thirdHeader={'Customer pays me with'}
         />
         <SaveCancelButton
-          navigation={{ fakeObject: 'To stop giving errors' }}
-          createfunc={this.create}
+          navigation={this.props.navigation}
+          createfunc={this.props.onPressSave}
           positiveButtonName="SAVE"
         />
       </View>

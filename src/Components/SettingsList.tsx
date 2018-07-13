@@ -6,8 +6,10 @@ import { ListItem, Left, Right, Icon } from 'native-base'
 interface Category {
   section: string
   routeName: string
+  showRightCaret?: boolean | true
+  onPress?: any | null
 }
-const settingsItem = (prop: { categories: Category[]; navigate: any }) => {
+const settingsList = (prop: { categories: Category[]; navigate: any }) => {
   return (
     <View style={styles.container}>
       {prop.categories.map((category: Category, key: number) => {
@@ -15,7 +17,11 @@ const settingsItem = (prop: { categories: Category[]; navigate: any }) => {
           <ListItem
             style={styles.section}
             key={key}
-            onPress={() => prop.navigate(category.routeName)}
+            onPress={() =>
+              category.onPress
+                ? category.onPress()
+                : prop.navigate(category.routeName)
+            }
           >
             <Left>
               <Text
@@ -24,13 +30,15 @@ const settingsItem = (prop: { categories: Category[]; navigate: any }) => {
                 {category.section}
               </Text>
             </Left>
-            <Right>
-              <Icon
-                name="keyboard-arrow-right"
-                type="MaterialIcons"
-                style={styles.icon}
-              />
-            </Right>
+            {category.showRightCaret && (
+              <Right>
+                <Icon
+                  name="keyboard-arrow-right"
+                  type="MaterialIcons"
+                  style={styles.icon}
+                />
+              </Right>
+            )}
           </ListItem>
         )
       })}
@@ -38,7 +46,7 @@ const settingsItem = (prop: { categories: Category[]; navigate: any }) => {
   )
 }
 
-export default settingsItem
+export default settingsList
 
 const styles = StyleSheet.create({
   container: {

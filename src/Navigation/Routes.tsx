@@ -229,12 +229,7 @@ const businessStack = StackNavigator(
       screen: NewOrderScreen
     },
     ViewBusiness: {
-      screen:
-        OPTION === BOTH
-          ? viewBothStack
-          : OPTION === ONE_PRODUCT
-            ? ProductScreen
-            : ServicesScreen
+      screen: viewBothStack
     },
     OrderDetails: {
       screen: OrderDetailsScreen
@@ -285,8 +280,8 @@ const businessStack = StackNavigator(
         header: (
           <CustomHeader
             title="Sales order"
-            menu
-            right
+            showMenu
+            showRight
             rightText=" "
             firstRightIcon="ios-search"
             onMenuPress={() => navigation.navigate('DrawerToggle')}
@@ -301,11 +296,13 @@ const businessStack = StackNavigator(
       header: (
         <CustomHeader
           title="Products & Services"
-          menu
-          onMenuPress={() => navigation.navigate('DrawerToggle')}
+          showMenu
+          onMenuPress={() => {
+            navigation.navigate('DrawerToggle')
+          }}
           firstRightIcon={'ios-search'}
           navigation={navigation}
-          right
+          showRight
           onPressFirstRightIcon={() => console.log('Search icon pressed.')}
         />
       )
