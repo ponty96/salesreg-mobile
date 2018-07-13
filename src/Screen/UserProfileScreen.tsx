@@ -19,6 +19,22 @@ class UserProfileScreen extends Component<IProps, IState> {
     fullName: ''
   };
 
+  static navigationOptions = ({ navigation }: any) => {
+    return {
+      header: (
+        <CustomHeader
+          title="User profile"
+          onBackPress={() => navigation.goBack()}
+          rightText="Edit"
+          showRight
+          firstRightIcon="pencil"
+          firstRightIconType="MaterialCommunityIcons"
+          onPressRightButton={() => navigation.navigate('EditUserProfile')}
+        />
+      )
+    };
+  };
+
   componentDidMount() {
     this.updateState();
   }
@@ -35,18 +51,6 @@ class UserProfileScreen extends Component<IProps, IState> {
       fullName: `${user.firstName} ${user.lastName}`
     });
   };
-
-  static navigationOptions = ({ navigation }: any) => {
-    return {
-      header: (
-        <CustomHeader
-          title="User profile"
-          onBackPress={() => navigation.goBack()}
-        />
-      )
-    };
-  };
-
   render() {
     return <UserProfile list={this.state.list} name={this.state.fullName} />;
   }
