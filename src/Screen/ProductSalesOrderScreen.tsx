@@ -20,7 +20,7 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
   }
 
   handleListPress = () => {
-    this.props.navigation.navigate('SalesOrderStatus')
+    this.props.navigation.navigate('ProductSalesRecord')
   }
 
   renderList = ({ item }: any): JSX.Element => {

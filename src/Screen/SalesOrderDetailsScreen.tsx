@@ -12,7 +12,7 @@ export default class SalesOrderScreen extends React.Component<IProps> {
       header: (
         <CustomHeader
           title="Sales order details"
-          right
+          showRight
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
           onPressRightButton={() => console.log('Edit pressed.')}

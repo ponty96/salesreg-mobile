@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, SectionList } from 'react-native'
+import { View, StyleSheet, SectionList, Text } from 'react-native'
 import EmptyList from '../Components/EmptyList'
 import { color } from '../Style/Color'
 import CustomHeader from '../Components/CustomHeader'
+import ProductSalesRecordHeader from '../Components/ProductSalesRecordHeader'
 
 export default class ProductSalesRecordScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
@@ -15,6 +16,7 @@ export default class ProductSalesRecordScreen extends Component {
       )
     }
   }
+
   render(): JSX.Element {
     const DATA: {
       productPic: string
@@ -65,16 +67,28 @@ export default class ProductSalesRecordScreen extends Component {
         <SectionList
           sections={[
             {
-              title: '21 March 2018',
-              data: DATA
+              date: '21 March 2018',
+              data: DATA,
+              totalSales: '100,000.00',
+              profit: '36,630.00'
             }
           ]}
-        />
-        <EmptyList
-          type={{
-            Text:
-              'You have no products sold yet. Press the back arrow and start adding orders.'
-          }}
+          renderItem={({ item }) => <Text>{item.productName}</Text>}
+          renderSectionHeader={({ section }) => (
+            <ProductSalesRecordHeader title={section.date} />
+          )}
+          renderSectionFooter={({ section }) => (
+            <Text>{section.totalSales}</Text>
+          )}
+          keyExtractor={(item, index) => index}
+          ListEmptyComponent={
+            <EmptyList
+              type={{
+                Text:
+                  'You have no products sold yet. Press the back arrow and start adding orders.'
+              }}
+            />
+          }
         />
       </View>
     )
