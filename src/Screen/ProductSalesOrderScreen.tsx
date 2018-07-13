@@ -32,6 +32,7 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
         num={item.num}
         status={item.status}
         onPress={this.handleListPress}
+        redText={item.redText}
       />
     )
   }
@@ -47,48 +48,55 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
       name: string
       num: number
       status: string
+      redText: boolean
     }[] = [
       {
         key: '0122320',
         time: '3:30pm',
         name: 'Salomy Kayadeja',
         num: 20,
-        status: 'Pending'
+        status: 'Pending',
+        redText: false
       },
       {
         key: '0122321',
         time: '3:00pm',
         name: 'Salomy Kayadeja',
         num: 1,
-        status: 'Pending'
+        status: 'Pending',
+        redText: false
       },
       {
         key: '0122322',
         time: '2:30pm',
         name: 'Salomy Kayadeja',
         num: 2,
-        status: 'Delivered | Recalled'
+        status: 'Delivered | Recalled',
+        redText: true
       },
       {
         key: '0122323',
         time: 'Yesterday',
         name: 'Salomy Kayadeja',
         num: 80,
-        status: 'Pending delivery'
+        status: 'Pending delivery',
+        redText: false
       },
       {
         key: '0122324',
         time: '2 days ago',
         name: 'Salomy Kayadeja',
         num: 20,
-        status: 'Delivering'
+        status: 'Delivering',
+        redText: true
       },
       {
         key: '0122325',
         time: '3 days ago',
         name: 'Salomy Kayadeja',
         num: 25,
-        status: 'Delivered'
+        status: 'Delivered',
+        redText: false
       }
     ]
 
