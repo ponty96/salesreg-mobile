@@ -4,6 +4,7 @@ import { StyleSheet, View, ScrollView, FlatList } from 'react-native'
 import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
 import { color } from '../Style/Color'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
+import FabAtom from '../Atom/FabAtom'
 
 interface IProps {
   navigation: any
@@ -17,12 +18,8 @@ class ServicesScreen extends PureComponent<IProps> {
     { key: 'DD', price: '400' }
   ]
 
-  handleTouch = (item: { name: string; amount: string }) => {
-    this.props.navigation.navigate('ShowService', {
-      productName: item.name,
-      price: item.amount
-    })
-    console.log(item.name)
+  handleTouch = () => {
+    this.props.navigation.navigate('ShowService')
   }
 
   renderList = ({ item }: any) => {
@@ -30,7 +27,7 @@ class ServicesScreen extends PureComponent<IProps> {
       <ServiceListItemAtom
         name={item.key}
         amount={item.price}
-        onPress={() => this.handleTouch({ name: item.key, amount: item.price })}
+        onPress={() => this.handleTouch()}
       />
     )
   }
@@ -42,6 +39,12 @@ class ServicesScreen extends PureComponent<IProps> {
         <ScrollView>
           <FlatList data={this.SERVICES} renderItem={this.renderList} />
         </ScrollView>
+        <FabAtom
+          routeName={'EditServices'}
+          name={'circle-with-plus'}
+          type={'Entypo'}
+          navigation={this.props.navigation}
+        />
       </View>
     )
   }

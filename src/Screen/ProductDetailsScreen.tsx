@@ -11,11 +11,17 @@ interface IProps {
 
 class ProductDetailsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
-    console.log(params)
     return {
       header: (
-        <CustomHeader title="Product" onBackPress={() => navigation.goBack()} />
+        <CustomHeader
+          title="Product"
+          onBackPress={() => navigation.goBack()}
+          showRight
+          rightText="Edit"
+          firstRightIcon="pencil"
+          onPressRightButton={() => navigation.navigate('NewProduct')}
+          firstRightIconType="MaterialCommunityIcons"
+        />
       )
     }
   }

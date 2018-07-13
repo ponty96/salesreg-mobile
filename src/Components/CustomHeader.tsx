@@ -4,7 +4,7 @@ import { Left, Right, Button, Icon, Title } from 'native-base'
 import { color } from '../Style/Color'
 
 interface IProps {
-  menu?: boolean
+  showMenu?: boolean
   title: string
   firstRightIcon?: string
   firstRightIconType?: any
@@ -14,7 +14,7 @@ interface IProps {
   onPressFirstRightIcon?: () => void
   onPressRightButton?: () => void
   navigation?: object
-  right?: boolean
+  showRight?: boolean
 }
 
 const customHeader = (props: IProps) => {
@@ -22,8 +22,8 @@ const customHeader = (props: IProps) => {
     <View style={styles.wrapper}>
       <Left style={styles.headerItemWrapper}>
         <Icon
-          name={props.menu ? 'menu' : 'arrow-back'}
-          onPress={props.menu ? props.onMenuPress : props.onBackPress}
+          name={props.showMenu ? 'menu' : 'arrow-back'}
+          onPress={props.showMenu ? props.onMenuPress : props.onBackPress}
           style={styles.headerIcon}
         />
       </Left>
@@ -39,18 +39,18 @@ const customHeader = (props: IProps) => {
       >
         <Title style={styles.title}>{props.title}</Title>
       </View>
-      {props.right ? (
+      {props.showRight ? (
         <Right style={styles.headerItemWrapper}>
           {props.rightText ? (
             <Button
               transparent
               onPress={props.onPressRightButton}
               style={styles.rightWrapper}
-              activeOpacity={1}
             >
               <Icon
                 name={props.firstRightIcon}
                 type={props.firstRightIconType}
+                style={styles.whiteIcon}
               />
               <Text style={styles.edit}>{props.rightText}</Text>
             </Button>
@@ -111,6 +111,12 @@ const styles = StyleSheet.create({
     marginLeft: 16
   },
   searchIcon: {
-    marginTop: 3
+    marginTop: 3,
+    color: color.secondary
+  },
+  whiteIcon: {
+    color: color.secondary,
+    width: 25,
+    left: 20
   }
 })
