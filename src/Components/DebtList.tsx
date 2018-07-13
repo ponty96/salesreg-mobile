@@ -2,8 +2,8 @@ import React, { PureComponent } from 'react'
 import { Text, View, ScrollView, FlatList, StyleSheet } from 'react-native'
 import { Header, Right } from 'native-base'
 import PickerAtom from '../Atom/PickerAtom'
-import DebtListAtom from '../Atom/DebtListAtom'
-import TotalDebtAtom from '../Atom/TotalDebtAtom'
+import DebtListAtom from '../atom/DebtListAtom'
+import TotalDebtAtom from '../atom/TotalDebtAtom'
 import { debtList } from '../config/data'
 
 interface IProps {

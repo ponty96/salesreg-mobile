@@ -11,13 +11,13 @@ export default class SalesOrderScreen extends React.Component<IProps> {
     return {
       header: (
         <CustomHeader
-          title="Sales order"
-          menu
+          title="Sales order details"
           right
-          firstRightIcon="ios-search"
-          onPressFirstRightIcon={() => console.log('Search button pressed.')}
-          rightText=" "
-          onMenuPress={() => navigation.navigate('DrawerToggle')}
+          firstRightIcon="pencil"
+          firstRightIconType="MaterialCommunityIcons"
+          onPressRightButton={() => console.log('Edit pressed.')}
+          rightText="Edit"
+          onBackPress={() => navigation.goBack()}
         />
       )
     }

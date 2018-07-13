@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import DebtList from '../Components/DebtList'
+import DebtList from '../components/DebtList'
 import { color } from '../Style/Color'
 
 interface IProps {

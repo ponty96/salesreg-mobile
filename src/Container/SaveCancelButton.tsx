@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { View, StyleSheet } from 'react-native'
 import ButtonAtom from '../Atom/ButtonAtom'
-import { color } from './../Style/Color'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any

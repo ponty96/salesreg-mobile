@@ -7,22 +7,22 @@ import {
   SwitchNavigator
 } from 'react-navigation'
 
-import OnBoardingScreen from './../Screen/OnBoardingScreen'
-import SignupScreen from './../Screen/SignupScreen'
-import ResetScreen from './../Screen/ResetScreen'
-import LoginScreen from './../Screen/LoginScreen'
-import NewBusinessScreen from './../Screen/NewBusinessScreen'
-import NewOrderScreen from './../Screen/NewOrderScreen'
-import NewProductScreen from './../Screen/NewProductScreen'
-import NewCustomerScreen from './../Screen/NewCustomerScreen'
-import SettingsScreen from './../Screen/SettingsScreen'
-import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen'
-import DebtScreen from './../Screen/DebtScreen'
-import ProductScreen from './../Screen/ProductScreen'
-import OrderDetailsScreen from './../Screen/OrderDetailsScreen'
-import ServicesScreen from './../Screen/ServicesScreen'
-import DebtDetailsScreen from './../Screen/DebtDetailsScreen'
-import ProductDetailsScreen from './../Screen/ProductDetailsScreen'
+import OnBoardingScreen from '../Screen/OnBoardingScreen'
+import SignupScreen from '../Screen/SignupScreen'
+import ResetScreen from '../Screen/ResetScreen'
+import LoginScreen from '../Screen/LoginScreen'
+import NewBusinessScreen from '../Screen/NewBusinessScreen'
+import NewOrderScreen from '../Screen/NewOrderScreen'
+import NewProductScreen from '../Screen/NewProductScreen'
+import NewCustomerScreen from '../Screen/NewCustomerScreen'
+import SettingsScreen from '../Screen/SettingsScreen'
+import BusinessDetailsScreen from '../Screen/BusinessDetailsScreen'
+import DebtScreen from '../Screen/DebtScreen'
+import ProductScreen from '../Screen/ProductScreen'
+import OrderDetailsScreen from '../Screen/OrderDetailsScreen'
+import ServicesScreen from '../Screen/ServicesScreen'
+import DebtDetailsScreen from '../Screen/DebtDetailsScreen'
+import ProductDetailsScreen from '../Screen/ProductDetailsScreen'
 import UserProfileScreen from '../Screen/UserProfileScreen'
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
 import OrderListScreen from '../Screen/OrderListScreen'
@@ -30,14 +30,14 @@ import SecondSignUpScreen from '../Screen/SecondSignUpScreen'
 import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
 import MainOrderList from '../Components/MainOrderList'
 import Sidebar from './Sidebar'
-import { color } from './../Style/Color'
+import { color } from '../Style/Color'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
 import HomeScreen from '../Screen/HomeScreen'
 import EmployeesScreen from '../Screen/EmployeesScreen'
 import VendorScreen from '../Screen/VendorScreen'
 import PurchaseScreen from '../Screen/PurchaseScreen'
-import SalesOrderScreen from '../Screen/SalesOrderScreen'
+import ProductSalesRecordScreen from '../Screen/ProductSalesRecordScreen'
 import BankScreen from '../Screen/BankScreen'
 import IncomeScreen from '../Screen/IncomeScreen'
 import ExpensesScreen from '../Screen/ExpensesScreen'
@@ -180,8 +180,8 @@ const businessStack = StackNavigator(
     Purchase: {
       screen: PurchaseScreen
     },
-    SalesOrder: {
-      screen: SalesOrderScreen
+    ProductSalesRecord: {
+      screen: ProductSalesRecordScreen
     },
     Bank: {
       screen: BankScreen

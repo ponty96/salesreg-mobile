@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import FabAtom from './../Atom/FabAtom'
+import FabAtom from '../Atom/FabAtom'
 import CustomerList from '../Components/CustomerList'
 import { color } from '../Style/Color'
 import { customerList } from '../config/data'

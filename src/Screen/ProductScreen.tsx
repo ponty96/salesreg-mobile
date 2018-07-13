@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { userData } from '../config/default'
-import FabAtom from './../Atom/FabAtom'
+import FabAtom from '../Atom/FabAtom'
 import ProductList from '../Components/ProductList'
 import { color } from '../Style/Color'
 import { productList } from '../config/data'
