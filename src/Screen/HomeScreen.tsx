@@ -1,19 +1,27 @@
-import * as React from 'react'
+import * as React from 'react';
 import {
   View,
   StyleSheet,
   TouchableOpacity,
   Text,
   Dimensions
-} from 'react-native'
-import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
+} from 'react-native';
+import { color } from '../Style/Color';
+import CustomHeader from '../Components/CustomHeader';
+import Auth from '../services/auth';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
-export default class HomeScreen extends React.Component<IProps> {
+interface IState {
+  username: string;
+}
+
+export default class HomeScreen extends React.Component<IProps, IState> {
+  state = {
+    username: ''
+  };
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -23,8 +31,19 @@ export default class HomeScreen extends React.Component<IProps> {
           onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
-    }
+    };
+  };
+
+  componentWillMount() {
+    this.updateUserName();
   }
+
+  updateUserName = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser());
+    this.setState({
+      username: user.firstName
+    });
+  };
 
   render() {
     return (
@@ -33,10 +52,10 @@ export default class HomeScreen extends React.Component<IProps> {
         onPress={() => this.props.navigation.navigate('ViewBusiness')}
       >
         <View style={styles.homeBackground}>
-          <Text style={styles.homeText}>Welcome Ayo!</Text>
+          <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
       </TouchableOpacity>
-    )
+    );
   }
 }
 
@@ -58,4 +77,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'SourceSansPro_Semibold'
   }
-})
+});

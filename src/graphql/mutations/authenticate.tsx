@@ -24,6 +24,20 @@ export const LoginUserMutationGQL = gql`
               id
               title
               contactEmail
+              about
+              category
+              branches {
+                id
+                type
+                location {
+                  id
+                  city
+                  country
+                  state
+                  street1
+                  type
+                }
+              }
             }
           }
         }
