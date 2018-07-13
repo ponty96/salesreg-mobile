@@ -1,46 +1,27 @@
 import React, { PureComponent } from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import { View, StyleSheet } from 'react-native'
 
 import ProductDetails from '../Components/ProductDetails'
 import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation?: any
 }
 
-interface IState {}
-
-class ProductDetailsScreen extends PureComponent<IProps, IState> {
+class ProductDetailsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
-    console.log(params)
     return {
-      title: 'Product Details',
-      headerLeft: (
-        <Icon
-          name={'md-arrow-back'}
-          style={styles.headerIcon}
-          onPress={() => {
-            navigation.goBack()
-          }}
+      header: (
+        <CustomHeader
+          title="Product"
+          onBackPress={() => navigation.goBack()}
+          showRight
+          rightText="Edit"
+          firstRightIcon="pencil"
+          onPressRightButton={() => navigation.navigate('NewProduct')}
+          firstRightIconType="MaterialCommunityIcons"
         />
-      ),
-      headerRight: (
-        <TouchableOpacity
-          onPress={() => {
-            navigation.navigate('NewProduct')
-          }}
-        >
-          <View style={styles.headerItem}>
-            <Icon
-              name={'pencil'}
-              style={styles.headerIconLogout}
-              type={'MaterialCommunityIcons'}
-            />
-            <Text style={styles.headerText}>Edit</Text>
-          </View>
-        </TouchableOpacity>
       )
     }
   }

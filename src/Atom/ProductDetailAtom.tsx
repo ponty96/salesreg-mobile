@@ -112,7 +112,7 @@ const styles = StyleSheet.create({
     width: 60
   },
   aboveAccordionBoldFont: {
-    fontWeight: 'bold',
+    fontFamily: 'SourceSansPro_Semibold',
     fontSize: 20,
     textAlign: 'right'
   },
@@ -125,39 +125,47 @@ const styles = StyleSheet.create({
   },
   aboveAccordionBlackTextL: {
     fontSize: 16,
-    color: '#c0c0c0',
-    paddingLeft: 16
+    color: color.dropdown,
+    paddingLeft: 16,
+    fontFamily: 'SourceSansPro'
   },
   aboveAccordionBlackTextR: {
     fontSize: 16,
-    color: '#000'
+    color: '#000',
+    fontFamily: 'SourceSansPro'
   },
   aboveAccordionGreenTextR: {
     fontSize: 16,
-    color: 'green'
+    color: color.selling,
+    fontFamily: 'SourceSansPro'
   },
   aboveAccordionRedTextR: {
     fontSize: 16,
-    color: 'red'
+    color: 'red',
+    fontFamily: 'SourceSansPro'
   },
   aboveAccordionGreyText: {
     fontSize: 16,
-    color: '#c0c0c0',
-    paddingLeft: 16
+    color: color.dropdown,
+    paddingLeft: 16,
+    fontFamily: 'SourceSansPro'
   },
   aboveAccordionGreyFont: {
     fontSize: 17,
-    color: '#000'
+    color: '#000',
+    fontFamily: 'SourceSansPro'
   },
   aboveAccordionRedText: {
     fontSize: 16,
-    color: 'red'
+    color: 'red',
+    fontFamily: 'SourceSansPro'
   },
   aboveAccordionPictureText: {
     paddingTop: 10,
     fontSize: 18,
     fontWeight: '400',
-    color: color.menu
+    color: color.menu,
+    fontFamily: 'SourceSansPro'
   },
   aboveAccordionMoneyView: {
     width: '50%',

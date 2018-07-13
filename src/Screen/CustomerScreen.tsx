@@ -1,37 +1,32 @@
 import React, { Component } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
 
 import FabAtom from './../Atom/FabAtom'
 import CustomerList from '../Components/CustomerList'
 import { color } from '../Style/Color'
-import { customerList } from '../config/data';
+import { customerList } from '../config/data'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
 }
 
-interface IState {}
-
-class CustomerScreen extends Component<IProps, IState> {
+class CustomerScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const { params } = navigation.state
-    let right = <Icon name={'ios-search'} style={styles.headerIcon} />
-    let left = params &&
-      params.items &&
-      params.items.length > 0 && (
-        <Icon
-          name={'menu'}
-          onPress={() => navigation.navigate('DrawerToggle')}
-          style={styles.headerIcon}
+    return {
+      header: (
+        <CustomHeader
+          title="Customer"
+          showMenu
+          showRight
+          firstRightIcon="ios-search"
+          rightText=" "
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
-    return {
-      title: 'Kay5iveAttractions',
-      headerRight: right,
-      headerLeft: left
     }
   }
+
   onPress = () => {
     this.props.navigation.navigate('CustomerDetails')
   }
@@ -43,7 +38,11 @@ class CustomerScreen extends Component<IProps, IState> {
 
     return (
       <View style={styles.centerContainer}>
-        <CustomerList items={items} onPress={this.onPress} />
+        <CustomerList
+          items={items}
+          onPress={this.onPress}
+          screenType="customer"
+        />
         <FabAtom
           routeName={'NewCustomer'}
           name={'md-person-add'}

@@ -640,7 +640,7 @@ export const productList = [
     date: '19 March 2018',
     time: '09:31am',
     amount: 5000,
-    status: 'paid',
+    status: 'debt',
     number: 3,
     images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
@@ -652,7 +652,7 @@ export const productList = [
     date: '20 March 2018',
     time: '08:46am',
     amount: 3000,
-    status: 'paid',
+    status: 'debt',
     number: 8,
     images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'

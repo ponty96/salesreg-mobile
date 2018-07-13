@@ -1,9 +1,6 @@
 import React, { PureComponent } from 'react'
-import { View, TouchableOpacity, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
-
-import ListItemAtom from './../Atom/ListItemAtom'
-import { color } from '../Style/Color'
+import SettingsList from '../Components/SettingsList'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
   navigation: any
@@ -14,52 +11,32 @@ interface IState {}
 class SettingsScreen extends PureComponent<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Settings',
-      headerLeft: (
-        <Icon
-          name={'md-arrow-back'}
-          style={styles.headerIcon}
-          onPress={() => {
-            navigation.goBack()
-          }}
+      header: (
+        <CustomHeader
+          title="Settings"
+          onBackPress={() => navigation.goBack()}
         />
       )
     }
   }
 
   render() {
+    const {
+      navigation: { navigate }
+    } = this.props
     return (
-      <View style={[styles.defaultPadding, styles.formViewContainer]}>
-        <TouchableOpacity
-          onPress={() => this.props.navigation.navigate('Debt')}
-          activeOpacity={1}
-        >
-          <ListItemAtom
-            item={{
-              name: 'Debt'
-            }}
-            type={'debt'}
-            bodyfunction={() => this.props.navigation.navigate('Debt')}
-          />
-        </TouchableOpacity>
-      </View>
+      <SettingsList
+        navigate={navigate}
+        categories={[
+          {
+            section: 'Profile',
+            routeName: 'Profile',
+            showRightCaret: true
+          }
+        ]}
+      />
     )
   }
 }
 
 export default SettingsScreen
-
-const styles = StyleSheet.create({
-  formViewContainer: {
-    flex: 1,
-    backgroundColor: color.secondary
-  },
-  defaultPadding: {
-    paddingHorizontal: 16
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
-  }
-})

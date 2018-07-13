@@ -46,7 +46,10 @@
     "precommit": "pretty-quick --staged"
   },
   "packagerOpts": {
-    "assetExts": ["ttf", "otf"]
+    "assetExts": [
+      "ttf",
+      "otf"
+    ]
   },
   "jest": {
     "preset": "jest-expo"

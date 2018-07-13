@@ -1,46 +1,52 @@
 import React, { PureComponent } from 'react'
-import { StyleSheet } from 'react-native'
-import { Icon, List } from 'native-base'
+import { StyleSheet, View, ScrollView, FlatList } from 'react-native'
 
 import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
 import { color } from '../Style/Color'
+import SubHeaderAtom from '../Atom/SubHeaderAtom'
+import FabAtom from '../Atom/FabAtom'
 
 interface IProps {
   navigation: any
 }
 
-interface IState {}
+class ServicesScreen extends PureComponent<IProps> {
+  SERVICES = [
+    { key: '1 million Braids', price: '3000' },
+    { key: 'Re-touching', price: '1000' },
+    { key: 'Steaming', price: '800' },
+    { key: 'DD', price: '400' }
+  ]
 
-class ServicesScreen extends PureComponent<IProps, IState> {
-  static navigationOptions = ({ navigation }: any) => {
-    return {
-      title: 'Services',
-      headerLeft: (
-        <Icon
-          name={'md-arrow-back'}
-          style={styles.headerIcon}
-          onPress={() => {
-            navigation.goBack()
-          }}
-        />
-      )
-    }
+  handleTouch = () => {
+    this.props.navigation.navigate('ShowService')
   }
 
-  editItem = (name: string, amount: string) => {
-    console.log(name, amount)
+  renderList = ({ item }: any) => {
+    return (
+      <ServiceListItemAtom
+        name={item.key}
+        amount={item.price}
+        onPress={() => this.handleTouch()}
+      />
+    )
   }
 
   render() {
     return (
-      <List style={styles.container}>
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-        <ServiceListItemAtom name={'Re-Touching'} amount={'N 90000'} bodyfunction={this.editItem} />
-      </List>
-    );
+      <View style={styles.container}>
+        <SubHeaderAtom list={['Lorem ipsum']} />
+        <ScrollView>
+          <FlatList data={this.SERVICES} renderItem={this.renderList} />
+        </ScrollView>
+        <FabAtom
+          routeName={'EditServices'}
+          name={'circle-with-plus'}
+          type={'Entypo'}
+          navigation={this.props.navigation}
+        />
+      </View>
+    )
   }
 }
 
@@ -54,6 +60,6 @@ const styles = StyleSheet.create({
   },
   container: {
     flex: 1,
-    marginHorizontal: 16
+    backgroundColor: color.secondary
   }
 })

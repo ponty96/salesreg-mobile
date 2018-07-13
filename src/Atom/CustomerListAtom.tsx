@@ -54,13 +54,14 @@ const styles = StyleSheet.create({
   row: {
     flex: 1,
     flexDirection: 'row',
-    top: 0,
-    padding: 10,
+    alignSelf: 'center',
     paddingLeft: 0,
-    marginLeft: 0,
+    marginLeft: 16,
+    marginRight: 16,
     height: 75,
     // backgroundColor: '#fff',
     marginBottom: 0.5,
+    maxWidth: '100%',
     borderBottomWidth: 0.5,
     borderBottomColor: color.listBorderColor,
     paddingVertical: 10,
@@ -82,8 +83,9 @@ const styles = StyleSheet.create({
   rowText1: {
     fontWeight: '400',
     fontSize: 13,
-    // color: '#000',
-    textAlign: 'left'
+    color: color.principal,
+    textAlign: 'left',
+    fontFamily: 'SourceSansPro'
   },
   dp: {
     height: 55,
@@ -100,7 +102,9 @@ const styles = StyleSheet.create({
   },
   text1: {
     fontSize: 13,
-    fontWeight: '200'
+    fontWeight: '200',
+    color: color.principal,
+    fontFamily: 'SourceSansPro'
   },
   lilFont: {
     fontSize: 12

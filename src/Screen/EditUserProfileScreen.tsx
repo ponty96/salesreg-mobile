@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
+import { Icon } from 'native-base'
 
 import SaveCancelButton from '../Container/SaveCancelButton'
 import EditUserProfileForm from '../Components/EditUserProfileForm'
@@ -19,10 +20,27 @@ interface IState {
 class EditUserProfileScreen extends Component<IProps, IState> {
   state = {
     name: 'Ayo Anwakasng',
-    phoneNumber: '09034567889, 08067654323',
+    phoneNumber: '09034567889',
     image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
     gender: 'Female'
+  }
+
+  static navigationOptions = ({ navigation }: any) => {
+    return {
+      title: (
+        <Text style={[{ fontFamily: 'SourceSansPro' }]}>Edit Profile</Text>
+      ), // params.name
+      headerLeft: (
+        <Icon
+          name={'md-arrow-back'}
+          style={styles.headerIcon}
+          onPress={() => {
+            navigation.goBack()
+          }}
+        />
+      )
+    }
   }
 
   getName = (text: string) => {
@@ -52,16 +70,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   render() {
     return (
       <View style={styles.formViewContainer}>
-        <EditUserProfileForm
-          image={this.state.image}
-          getImage={this.getImage}
-          name={this.state.name}
-          getName={this.getName}
-          phoneNumber={this.state.phoneNumber}
-          getPhoneNumber={this.getPhoneNumber}
-          gender={this.state.gender}
-          updateGender={this.updateGender}
-        />
+        <EditUserProfileForm phoneNumber={this.state.phoneNumber} />
         <SaveCancelButton
           positiveButtonName="SAVE"
           navigation={this.props.navigation}
@@ -77,5 +86,10 @@ const styles = StyleSheet.create({
   formViewContainer: {
     flex: 1,
     backgroundColor: color.secondary
+  },
+  headerIcon: {
+    color: color.secondary,
+    padding: 16,
+    fontSize: 28
   }
 })

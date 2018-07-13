@@ -1,20 +1,20 @@
-import * as React from 'react';
-import { View, StyleSheet } from 'react-native';
-import ButtonAtom from '../Atom/ButtonAtom';
-import { color } from './../Style/Color';
+import * as React from 'react'
+import { View, StyleSheet } from 'react-native'
+import ButtonAtom from '../Atom/ButtonAtom'
+import { color } from './../Style/Color'
 
 interface IProps {
-  navigation: any;
-  createfunc?: () => void;
-  positiveButtonName: string;
+  navigation: any
+  createfunc?: () => void
+  positiveButtonName: string
 }
 
 class SaveCancelButton extends React.Component<IProps, any> {
   create = () => {
     if (this.props.createfunc) {
-      this.props.createfunc();
+      this.props.createfunc()
     }
-  };
+  }
 
   render() {
     return (
@@ -23,43 +23,39 @@ class SaveCancelButton extends React.Component<IProps, any> {
           btnText="CANCEL"
           transparent={true}
           onPress={() => this.props.navigation.goBack()}
-          btnStyle={styles.saveCancelButton}
-          textStyle={styles.saveCancelButtonText}
+          btnStyle={styles.button}
+          textStyle={styles.buttonText}
         />
 
         <ButtonAtom
           btnText={this.props.positiveButtonName}
           transparent={true}
           onPress={this.create}
-          btnStyle={styles.saveCancelButton}
-          textStyle={styles.saveCancelButtonText}
+          btnStyle={styles.button}
+          textStyle={styles.buttonText}
         />
       </View>
-    );
+    )
   }
 }
 
-export default SaveCancelButton;
+export default SaveCancelButton
 
 const styles = StyleSheet.create({
   saveCancelContainer: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    height: 65
   },
-  saveCancelButton: {
-    borderWidth: 1,
-    flex: 1,
-    height: 65,
-    borderRadius: 0,
+  button: {
+    flex: 0.5,
+    borderWidth: 0.5,
+    borderColor: color.dropdown,
     marginVertical: 0,
-    marginTop: 8,
-    alignContent: 'center',
-    justifyContent: 'center',
-    alignItems: 'center',
-    borderColor: color.grey,
-    backgroundColor: color.secondary
+    height: 80,
+    justifyContent: 'center'
   },
-  saveCancelButtonText: {
-    color: color.menu,
-    fontWeight: 'bold'
+  buttonText: {
+    color: color.principal,
+    fontFamily: 'SourceSansPro_Semibold'
   }
-});
+})
