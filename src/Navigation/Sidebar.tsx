@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 import {
   ScrollView,
   View,
@@ -7,25 +7,25 @@ import {
   StyleSheet,
   Dimensions,
   Alert
-} from 'react-native'
-import { SafeAreaView } from 'react-navigation'
-import { Icon } from 'native-base'
-import { color } from '../Style/Color'
-import SideBarItemAtom from '../Atom/SideBarItemAtom'
+} from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import { Icon } from 'native-base';
+import { color } from '../Style/Color';
+import SideBarItemAtom from '../Atom/SideBarItemAtom';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 export default class SideBar extends PureComponent<IProps> {
   handleNavigation = (location: string, data: any = undefined) => {
-    this.props.navigation.navigate(location, { data })
-  }
+    this.props.navigation.navigate(location, { data });
+  };
 
   render() {
     const {
       navigation: { navigate }
-    } = this.props
+    } = this.props;
     return (
       <SafeAreaView
         style={styles.sidebarContainer}
@@ -35,12 +35,7 @@ export default class SideBar extends PureComponent<IProps> {
           <ScrollView>
             <TouchableOpacity
               style={styles.header}
-              onPress={() => {
-                Alert.alert('Sign out', 'Do you want to sign out?', [
-                  { text: 'OK', onPress: () => navigate('Auth') },
-                  { text: 'Cancel' }
-                ])
-              }}
+              onPress={() => navigate('DrawerToggle')}
             >
               <Icon name="cross" type="Entypo" style={styles.cross} />
               <Text style={[styles.texts, { fontFamily: 'SourceSansPro' }]}>
@@ -138,7 +133,7 @@ export default class SideBar extends PureComponent<IProps> {
           </ScrollView>
         </View>
       </SafeAreaView>
-    )
+    );
   }
 }
 
@@ -185,4 +180,4 @@ const styles = StyleSheet.create({
   itemsContainer: {
     flex: 4
   }
-})
+});
