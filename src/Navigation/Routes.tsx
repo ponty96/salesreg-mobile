@@ -21,7 +21,6 @@ import NewBusinessScreen from './../Screen/NewBusinessScreen';
 import NewOrderScreen from './../Screen/NewOrderScreen';
 import NewProductScreen from './../Screen/NewProductScreen';
 import NewCustomerScreen from './../Screen/NewCustomerScreen';
-import SettingsScreen from './../Screen/SettingsScreen';
 import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen';
 import DebtScreen from './../Screen/DebtScreen';
 import ProductScreen from './../Screen/ProductScreen';
@@ -154,10 +153,7 @@ const businessStack = StackNavigator(
     BusinessDetails: {
       screen: BusinessDetailsScreen
     },
-    Settings: {
-      screen: SettingsScreen
-    },
-    Profile: {
+    ProfileSettings: {
       screen: ProfileSettingsScreen
     },
     Debt: {
