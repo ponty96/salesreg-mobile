@@ -223,13 +223,13 @@ const businessStack = StackNavigator(
       header: (
         <CustomHeader
           title="Products & Services"
-          menu
+          showMenu
           onMenuPress={() => {
             navigation.navigate('DrawerToggle');
           }}
           firstRightIcon={'ios-search'}
           navigation={navigation}
-          right
+          showRight
           onPressFirstRightIcon={() => console.log('Search icon pressed.')}
         />
       )
