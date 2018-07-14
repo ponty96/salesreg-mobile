@@ -1,76 +1,52 @@
-import React, { PureComponent } from 'react'
-import { Form, Icon } from 'native-base'
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
+import React, { PureComponent } from 'react';
+import { Form, Icon } from 'native-base';
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
-import InputAtom from '../Atom/InputAtom'
-import PickerAtom from '../Atom/PickerAtom'
-import { color } from '../Style/Color'
+import InputAtom from '../Atom/InputAtom';
+import PickerAtom from '../Atom/PickerAtom';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
-  onPress: () => void
+  onPress: (formValue: any) => void;
+  onUpdateState?: (key: string, val: any) => void;
+  email: string;
+  password: string;
+  name: string;
+  passwordConfirmation: string;
+  gender: string;
 }
 
-interface IState {
-  phone: string
-  password: string
-  name: string
-  passwordConfirmation: string
-  gender: string
-}
+interface IState {}
 
 class SigupForm extends PureComponent<IProps, IState> {
-  state = {
-    phone: '',
-    password: '',
-    name: '',
-    passwordConfirmation: '',
-    gender: ''
-  }
-
-  signup = () => {
-    console.log(
-      this.state.phone,
-      this.state.password,
-      this.state.name,
-      this.state.passwordConfirmation,
-      this.state.gender
-    )
-  }
-
-  updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val }
-    this.setState({ ...formData })
-  }
-
   render() {
     return (
       <Form>
         <InputAtom
           label="Full name"
           contStyle={styles.nameInput}
-          defaultValue={this.state.name}
-          getValue={val => this.updateState('name', val)}
+          defaultValue={this.props.name}
+          getValue={val => this.props.onUpdateState('name', val)}
           inputStyle={styles.elevateInput}
           required={true}
         />
 
         <InputAtom
-          label="Phone number"
-          keyboardType="numeric"
+          label="Email Address"
           contStyle={styles.input}
-          defaultValue={this.state.phone}
-          getValue={val => this.updateState('phone', val)}
+          defaultValue={this.props.email}
+          getValue={val => this.props.onUpdateState('email', val)}
           inputStyle={styles.elevateInput}
+          required={true}
         />
 
         <View style={styles.pickerWrapper}>
           <PickerAtom
-            list={['Male', 'Female']}
+            list={['male', 'female']}
             style={styles.faintPicker}
             placeholder="*Gender"
-            selected={this.state.gender}
-            handleSelection={val => this.updateState('gender', val)}
+            selected={this.props.gender}
+            handleSelection={val => this.props.onUpdateState('gender', val)}
           />
         </View>
         <View style={styles.pickerUnderline} />
@@ -79,8 +55,8 @@ class SigupForm extends PureComponent<IProps, IState> {
           label="Password"
           secureTextEntry={true}
           contStyle={styles.input}
-          defaultValue={this.state.password}
-          getValue={val => this.updateState('password', val)}
+          defaultValue={this.props.password}
+          getValue={val => this.props.onUpdateState('password', val)}
           underneathText="Must be at least 6 characters"
           underneathStyle={styles.underneathText}
           inputStyle={styles.elevateInput}
@@ -91,15 +67,18 @@ class SigupForm extends PureComponent<IProps, IState> {
           label="Reenter-password"
           secureTextEntry={true}
           contStyle={styles.reenter}
-          defaultValue={this.state.passwordConfirmation}
-          getValue={val => this.updateState('passwordConfirmation', val)}
+          defaultValue={this.props.passwordConfirmation}
+          getValue={val =>
+            this.props.onUpdateState('passwordConfirmation', val)
+          }
           inputStyle={styles.elevateInput}
+          required={true}
         />
 
         <View>
           <TouchableOpacity
             style={styles.nextButtonContainer}
-            onPress={this.props.onPress}
+            onPress={() => this.props.onPress(this.state)}
           >
             <Text
               style={[
@@ -117,11 +96,11 @@ class SigupForm extends PureComponent<IProps, IState> {
           </TouchableOpacity>
         </View>
       </Form>
-    )
+    );
   }
 }
 
-export default SigupForm
+export default SigupForm;
 
 const styles = StyleSheet.create({
   nameInput: {
@@ -170,4 +149,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 0
   }
-})
+});

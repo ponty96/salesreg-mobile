@@ -26,6 +26,7 @@ export const LoginUserMutationGQL = gql`
               contactEmail
               about
               category
+              currency
               branches {
                 id
                 type
@@ -40,6 +41,59 @@ export const LoginUserMutationGQL = gql`
               }
             }
           }
+        }
+      }
+    }
+  }
+`;
+
+export const RegisterCompanyMutationGQL = gql`
+  mutation registerCompany(
+    $firstName: String!
+    $lastName: String!
+    $password: String!
+    $passwordConfirmation: String!
+    $contactEmail: String!
+    $currency: String
+    $street1: String!
+    $city: String!
+    $state: String!
+    $country: String!
+    $category: Category!
+    $title: String!
+    $email: String!
+  ) {
+    registerCompany(
+      company: {
+        category: $category
+        contactEmail: $contactEmail
+        currency: $currency
+        headOffice: {
+          street1: $street1
+          city: $city
+          state: $state
+          country: $country
+        }
+        title: $title
+      }
+      user: {
+        email: $email
+        firstName: $firstName
+        gender: MALE
+        lastName: $lastName
+        password: $password
+        passwordConfirmation: $passwordConfirmation
+      }
+    ) {
+      fieldErrors {
+        key
+        message
+      }
+      success
+      data {
+        ... on Company {
+          id
+          title
         }
       }
     }

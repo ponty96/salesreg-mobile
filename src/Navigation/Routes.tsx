@@ -34,7 +34,6 @@ import ProductDetailsScreen from './../Screen/ProductDetailsScreen';
 import UserProfileScreen from '../Screen/UserProfileScreen';
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen';
 import OrderListScreen from '../Screen/OrderListScreen';
-import SecondSignUpScreen from '../Screen/SecondSignUpScreen';
 import CustomerDetailScreen from '../Screen/CustomerDetailScreen';
 import MainOrderList from '../Components/MainOrderList';
 import Sidebar from './Sidebar';
@@ -253,8 +252,7 @@ const AuthStack = StackNavigator(
     OnBoarding: OnBoardingScreen,
     Login: LoginScreen,
     Reset: ResetScreen,
-    Signup: SignupScreen,
-    SecondSignUp: SecondSignUpScreen
+    Signup: SignupScreen
   },
   {
     headerMode: 'none'
