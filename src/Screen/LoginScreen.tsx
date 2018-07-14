@@ -1,23 +1,32 @@
-import React from 'react'
+import React from 'react';
 import {
   Text,
   View,
   KeyboardAvoidingView,
   StyleSheet,
   ScrollView
-} from 'react-native'
+} from 'react-native';
 
-import LoginForm from '../Components/LoginForm'
-import AuthenticationHeader from '../Components/AuthenticationHeader'
-import { color } from '../Style/Color'
+import LoginForm from '../Components/LoginForm';
+import AuthenticationHeader from '../Components/AuthenticationHeader';
+import { color } from '../Style/Color';
+import { Mutation } from 'react-apollo';
+import { LoginUserMutationGQL } from '../graphql/mutations/authenticate';
+import { AuthenticateClientGQL } from '../graphql/client-mutations/authenticate';
+import Auth from '../services/auth';
 
 interface IProps {
-  navigation: any
+  navigation: any;
+  screenProps: any;
+  login: any;
 }
 
 interface IState {}
 
 class LoginScreen extends React.Component<IProps, IState> {
+  componentDidMount() {
+    Auth.clearVault();
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -27,20 +36,51 @@ class LoginScreen extends React.Component<IProps, IState> {
             <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
               LOGIN
             </Text>
-            <KeyboardAvoidingView
-              behavior="padding"
-              keyboardVerticalOffset={150}
+            <Mutation
+              mutation={LoginUserMutationGQL}
+              onCompleted={this.onCompleted}
             >
-              <LoginForm navigation={this.props.navigation} />
-            </KeyboardAvoidingView>
+              {(loginUser, { loading }) => (
+                <KeyboardAvoidingView behavior="position">
+                  <LoginForm
+                    navigation={this.props.navigation}
+                    loading={loading}
+                    onSubmit={params =>
+                      loginUser({
+                        variables: {
+                          ...params
+                        }
+                      })
+                    }
+                  />
+                </KeyboardAvoidingView>
+              )}
+            </Mutation>
           </View>
         </ScrollView>
       </View>
-    )
+    );
   }
-}
+  onCompleted = async data => {
+    const {
+      loginUser: {
+        data: { accessToken, refreshToken, user }
+      }
+    } = data;
+    const {
+      screenProps: { client }
+    } = this.props;
 
-export default LoginScreen
+    await Auth.clearVault();
+    await Auth.setToken(accessToken);
+    await Auth.setRefreshToken(refreshToken);
+    await Auth.setCurrentUser(user);
+    await client.resetStore();
+    client.mutate({ mutation: AuthenticateClientGQL });
+    this.props.navigation.navigate('Home');
+  };
+}
+export default LoginScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -56,4 +96,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     marginTop: 32
   }
-})
+});

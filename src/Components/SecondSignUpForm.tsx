@@ -1,120 +1,58 @@
-import React, { PureComponent } from 'react'
-import { Form, CheckBox } from 'native-base'
-import { View, Text, StyleSheet } from 'react-native'
-import InputAtom from '../Atom/InputAtom'
-import ButtonAtom from '../Atom/ButtonAtom'
-import ImageAtom from '../Atom/ImageAtom'
-import { color } from '../Style/Color'
-import PickerAtom from '../Atom/PickerAtom'
+import React, { PureComponent } from 'react';
+import { Form, CheckBox } from 'native-base';
+import { View, Text, StyleSheet } from 'react-native';
+import InputAtom from '../Atom/InputAtom';
+import ButtonAtom from '../Atom/ButtonAtom';
+import { color } from '../Style/Color';
+import PickerAtom from '../Atom/PickerAtom';
 
 interface IProps {
-  navigation: any
+  navigation: any;
+  onSubmit: () => void;
+  onUpdateState?: (key: string, val: any) => void;
+  businessName: string;
+  businessAddress: string;
+  businessEmail: string;
+  products: boolean;
+  services: boolean;
+  currency: string;
 }
 
-interface IState {
-  image: string
-  businessName: string
-  businessAddress: string
-  email: string
-  amount: string
-  products: boolean
-  services: boolean
-  description: string
-}
+interface IState {}
 
 class SecondSigupForm extends PureComponent<IProps, IState> {
-  state = {
-    image:
-      'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png',
-    businessName: '',
-    businessAddress: '',
-    email: '',
-    amount: '',
-    products: false,
-    services: false,
-    description: ''
-  }
-
-  signup = () => {
-    console.log(
-      this.state.image,
-      this.state.businessName,
-      this.state.businessAddress,
-      this.state.email,
-      this.state.amount
-    )
-  }
-
-  getImage = (pic: any) => {
-    this.setState({ image: pic })
-  }
-
-  getName = (businessName: string) => {
-    this.setState({
-      businessName
-    })
-  }
-
-  getAddress = (businessAddress: string) => {
-    this.setState({
-      businessAddress
-    })
-  }
-
-  getEmail = (email: string) => {
-    this.setState({
-      email
-    })
-  }
-
-  updateAmount = (amount: string) => {
-    this.setState({
-      amount
-    })
-  }
-
-  navigate = (location: string) => {
-    this.props.navigation.navigate(location)
-  }
-
   flipCheckedState = (oldState: boolean, key: string) => {
-    if (key === 'products') this.setState({ products: !oldState })
-    else this.setState({ services: !oldState })
-  }
-
-  getDescription = (description: string) => {
-    this.setState({
-      description
-    })
-  }
+    if (key === 'products') this.props.onUpdateState('products', !oldState);
+    else this.props.onUpdateState('services', !oldState);
+  };
 
   render() {
     return (
       <Form style={styles.resetFormContainer}>
-        <ImageAtom
-          getValue={this.getImage}
-          source={this.state.image}
-          placeholder=""
-          shop={true}
-        />
-
         <InputAtom
           label="Business name"
-          getValue={this.getName}
+          defaultValue={this.props.businessName}
+          getValue={name => this.props.onUpdateState('businessName', name)}
           contStyle={styles.marginlessInput}
           required={true}
         />
 
         <InputAtom
           label="Business address"
-          getValue={this.getAddress}
+          defaultValue={this.props.businessAddress}
+          getValue={address =>
+            this.props.onUpdateState('businessAddress', address)
+          }
           contStyle={styles.marginlessInput}
           required={true}
         />
 
         <InputAtom
-          label="Email"
-          getValue={this.getEmail}
+          label="Business Email"
+          defaultValue={this.props.businessEmail}
+          getValue={businessEmail =>
+            this.props.onUpdateState('businessEmail', businessEmail)
+          }
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
           required={true}
@@ -125,9 +63,9 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
         </Text>
         <View style={styles.checkBoxWrapper}>
           <CheckBox
-            checked={this.state.products}
+            checked={this.props.products}
             onPress={() => {
-              this.flipCheckedState(this.state.products, 'products')
+              this.flipCheckedState(this.props.products, 'products');
             }}
             color={color.inactive}
             style={styles.checkBox}
@@ -139,9 +77,9 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
 
         <View style={styles.checkBoxWrapper}>
           <CheckBox
-            checked={this.state.services}
+            checked={this.props.services}
             onPress={() => {
-              this.flipCheckedState(this.state.services, 'services')
+              this.flipCheckedState(this.props.services, 'services');
             }}
             color={color.inactive}
             style={styles.checkBox}
@@ -155,19 +93,19 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           Transaction currency
         </Text>
         <View style={styles.pickerWrapper}>
-          <PickerAtom list={['Naira(\u20A6)']} placeholder={`Naira(\u20A6)`} />
+          <PickerAtom
+            list={['Naira(\u20A6)']}
+            placeholder={`Naira(\u20A6)`}
+            selected={this.props.currency}
+            handleSelection={currency =>
+              this.props.onUpdateState('currency', currency)
+            }
+          />
         </View>
-
-        <InputAtom
-          label="Give a description of your business"
-          getValue={this.getDescription}
-          contStyle={styles.marginlessInput}
-        />
-
         <View style={styles.buttonsWrapper}>
           <ButtonAtom
             btnText="SIGN UP"
-            onPress={this.signup}
+            onPress={this.props.onSubmit}
             btnStyle={styles.longButton}
             textStyle={[
               styles.signUp,
@@ -190,18 +128,17 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
-            funcValue={'Login'}
-            onPress={this.navigate}
+            onPress={() => this.props.navigation.navigate('Login')}
             textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
             btnStyle={styles.loginButton}
           />
         </View>
       </Form>
-    )
+    );
   }
 }
 
-export default SecondSigupForm
+export default SecondSigupForm;
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -276,4 +213,4 @@ const styles = StyleSheet.create({
   loginButton: {
     marginVertical: 0
   }
-})
+});
