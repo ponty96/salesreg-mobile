@@ -5,8 +5,7 @@ import {
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions,
-  Alert
+  Dimensions
 } from 'react-native';
 import { SafeAreaView } from 'react-navigation';
 import { Icon } from 'native-base';
