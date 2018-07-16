@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import { View, StyleSheet, SectionList, Text } from 'react-native'
-import EmptyList from '../Components/EmptyList'
-import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
-import ProductSalesRecordHeader from '../Components/ProductSalesRecordHeader'
+import React, { Component } from 'react';
+import { View, StyleSheet, SectionList, Text } from 'react-native';
+import EmptyList from '../Components/EmptyList';
+import { color } from '../Style/Color';
+import CustomHeader from '../Components/CustomHeader';
+import ProductSalesRecordHeader from '../Components/ProductSalesRecordHeader';
+import ProductListAtom from '../Atom/ProductListAtom';
 
 export default class ProductSalesRecordScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
@@ -14,53 +15,53 @@ export default class ProductSalesRecordScreen extends Component {
           onBackPress={() => navigation.goBack()}
         />
       )
-    }
-  }
+    };
+  };
 
   render(): JSX.Element {
     const DATA: {
-      productPic: string
-      productName: string
-      customerName: string
-      numberSold: string
-      price: string
+      image: string;
+      name: string;
+      customerName: string;
+      number: string;
+      price: string;
     }[] = [
       {
-        productPic: '',
-        productName: 'Iman powder',
+        image: '',
+        name: 'Iman powder',
         customerName: 'Salomy',
-        numberSold: '1',
+        number: '1',
         price: '4000.00'
       },
       {
-        productPic: '',
-        productName: 'Close up',
+        image: '',
+        name: 'Close up',
         customerName: 'David',
-        numberSold: '1',
+        number: '1',
         price: '150.00'
       },
       {
-        productPic: '',
-        productName: 'Hoey soap',
+        image: '',
+        name: 'Hoey soap',
         customerName: 'Kayla',
-        numberSold: '1',
+        number: '1',
         price: '600.00'
       },
       {
-        productPic: '',
-        productName: 'Tresee liquid bath',
+        image: '',
+        name: 'Tresee liquid bath',
         customerName: 'Salomy',
-        numberSold: '1',
+        number: '1',
         price: '4000.00'
       },
       {
-        productPic: '',
-        productName: 'Big comb',
+        image: '',
+        name: 'Big comb',
         customerName: 'Salomy',
-        numberSold: '1',
+        number: '1',
         price: '50.00'
       }
-    ]
+    ];
 
     return (
       <View style={styles.container}>
@@ -73,14 +74,19 @@ export default class ProductSalesRecordScreen extends Component {
               profit: '36,630.00'
             }
           ]}
-          renderItem={({ item }) => <Text>{item.productName}</Text>}
+          renderItem={({ item }) => (
+            <ProductListAtom
+              items={item}
+              textStyle={{ color: color.principal }}
+            />
+          )}
           renderSectionHeader={({ section }) => (
             <ProductSalesRecordHeader title={section.date} />
           )}
           renderSectionFooter={({ section }) => (
             <Text>{section.totalSales}</Text>
           )}
-          keyExtractor={(item, index) => index}
+          keyExtractor={(item, index) => item + index}
           ListEmptyComponent={
             <EmptyList
               type={{
@@ -91,7 +97,7 @@ export default class ProductSalesRecordScreen extends Component {
           }
         />
       </View>
-    )
+    );
   }
 }
 
@@ -100,4 +106,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-})
+});

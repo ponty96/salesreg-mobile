@@ -1,21 +1,31 @@
-import * as React from 'react'
-import { ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base'
-import { StyleSheet } from 'react-native'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { color } from '../Style/Color';
 
 interface IProps {
-  items: { images: string; name: string; number: any; status: string }
-  onPress?: () => void
+  items: {
+    image: string;
+    name: string;
+    number: any;
+    status?: string;
+    customerName?: string;
+    bottomRightText?: string;
+  };
+  onPress?: () => void;
+  textStyle?: object;
 }
 
 class ProductListAtom extends React.Component<IProps, any> {
   render() {
     const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
     const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
-    const colored1 = this.props.items.status === 'debt' ? 'red' : color.button
-    const colored2 = this.props.items.status === 'debt' ? 'red' : 'black'
+      this.props.items.image !== '' ? this.props.items.image : defaultImg;
+    const colored1 = this.props.items.status === 'debt' ? 'red' : color.button;
+    const colored2 =
+      this.props.items.status === 'debt' ? 'red' : color.principal;
+
     return (
       <ListItem style={styles.rowP} onPress={this.props.onPress}>
         <Left style={styles.leftView}>
@@ -25,18 +35,32 @@ class ProductListAtom extends React.Component<IProps, any> {
           <Text style={[styles.rowText1, { color: colored2 }]}>
             {this.props.items.name}
           </Text>
+          {this.props.items.customerName ? (
+            <Text style={styles.bottomBodyText}>
+              {this.props.items.customerName}
+            </Text>
+          ) : (
+            undefined
+          )}
         </Body>
         <Right style={styles.rightView}>
-          <Text style={[styles.rowText3P, { color: colored1 }]}>
+          <Text
+            style={[
+              styles.rowText3P,
+              { color: colored1 },
+              this.props.textStyle
+            ]}
+          >
             {this.props.items.number}
           </Text>
+          {this.props.items.bottomRightText}
         </Right>
       </ListItem>
-    )
+    );
   }
 }
 
-export default ProductListAtom
+export default ProductListAtom;
 
 const styles = StyleSheet.create({
   rowP: {
@@ -67,7 +91,8 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 14,
     fontFamily: 'SourceSansPro',
-    textAlign: 'left'
+    textAlign: 'left',
+    color: color.principal
   },
   leftView: {
     height: 55,
@@ -88,5 +113,11 @@ const styles = StyleSheet.create({
   rightView: {
     alignSelf: 'flex-end',
     flex: 1
+  },
+  bottomBodyText: {
+    marginTop: 8,
+    fontFamily: 'SourceSansPro',
+    fontSize: 12,
+    color: color.principal
   }
-})
+});

@@ -1,21 +1,17 @@
-import React, { PureComponent } from 'react'
-import { View, StyleSheet } from 'react-native'
-import { userData } from '../config/default'
-import FabAtom from '../Atom/FabAtom'
-import ProductList from '../Components/ProductList'
-import { color } from '../Style/Color'
-import { productList } from '../config/data'
+import React, { PureComponent } from 'react';
+import { View, StyleSheet } from 'react-native';
+import { userData } from '../config/default';
+import FabAtom from '../Atom/FabAtom';
+import ProductList from '../Components/ProductList';
+import { color } from '../Style/Color';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 class ProductScreen extends PureComponent<IProps> {
   render() {
-    const items = this.props.navigation.getParam(
-      productList,
-      userData.business[0].products
-    )
+    const items = userData.business[0].products;
 
     return (
       <View style={styles.container}>
@@ -27,11 +23,11 @@ class ProductScreen extends PureComponent<IProps> {
           navigation={this.props.navigation}
         />
       </View>
-    )
+    );
   }
 }
 
-export default ProductScreen
+export default ProductScreen;
 
 const styles = StyleSheet.create({
   container: {
@@ -43,4 +39,4 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 28
   }
-})
+});
