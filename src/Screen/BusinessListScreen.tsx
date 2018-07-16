@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { List, Icon } from 'native-base'
+import { /*List,*/ Icon } from 'native-base'
 
 import FabAtom from '../Atom/FabAtom'
-import ListItemAtom from '../atom/ListItemAtom'
+// import ListItemAtom from '../atom/ListItemAtom'
 import DeleteModal from '../container/DeleteBuzModal'
 import { userData } from '../config/default'
 import { color } from '../Style/Color'
@@ -101,7 +101,7 @@ class BusinessListScreen extends Component<IProps, IState> {
     )
   }
 
-  renderList = () => {
+  /*renderList = () => {
     return (
       <List>
         {this.props.items.map((item: any, index: number) => {
@@ -117,7 +117,7 @@ class BusinessListScreen extends Component<IProps, IState> {
         })}
       </List>
     )
-  }
+  }*/
 
   render() {
     // do change the list to the appropriate molecule
@@ -156,7 +156,7 @@ class BusinessListScreen extends Component<IProps, IState> {
       /*/>*/
     }
 
-    let empty = this.props.items.length <= 0
+    // slet empty = this.props.items.length <= 0
     return (
       <View style={[styles.plainContainer]}>
         {this.state.modalVisibility && (
@@ -175,7 +175,7 @@ class BusinessListScreen extends Component<IProps, IState> {
           }}
           navigation={this.props.navigation}
         />
-        {empty ? this.renderEmpty() : this.renderList()}
+        // {/*empty ? this.renderEmpty() : this.renderList()*/}
       </View>
     )
   }

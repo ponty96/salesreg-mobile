@@ -1,10 +1,11 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, SectionList, Text } from 'react-native';
-import EmptyList from '../Components/EmptyList';
-import { color } from '../Style/Color';
-import CustomHeader from '../Components/CustomHeader';
-import ProductSalesRecordHeader from '../Components/ProductSalesRecordHeader';
-import ProductListAtom from '../Atom/ProductListAtom';
+import React, { Component } from 'react'
+import { View, StyleSheet, SectionList } from 'react-native'
+import EmptyList from '../Components/EmptyList'
+import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
+import ProductSalesRecordHeader from '../Components/ProductSalesRecordHeader'
+import ProductListAtom from '../Atom/ProductListAtom'
+import ListItemAtom from '../Atom/ListItemAtom'
 
 export default class ProductSalesRecordScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
@@ -15,16 +16,35 @@ export default class ProductSalesRecordScreen extends Component {
           onBackPress={() => navigation.goBack()}
         />
       )
-    };
-  };
+    }
+  }
+
+  renderFooter = ({ section }: any): JSX.Element => {
+    return (
+      <View>
+        <ListItemAtom
+          label="TOTAL SALES"
+          value={'\u20A6 ' + section.totalSales}
+          listItemStyle={styles.listItem}
+          rightTextStyle={{ fontSize: 16 }}
+        />
+        <ListItemAtom
+          label="PROFIT"
+          value={'\u20A6 ' + section.profit}
+          listItemStyle={styles.listItem}
+          rightTextStyle={{ fontSize: 16 }}
+        />
+      </View>
+    )
+  }
 
   render(): JSX.Element {
     const DATA: {
-      image: string;
-      name: string;
-      customer: string;
-      number: string;
-      price: string;
+      image: string
+      name: string
+      customer: string
+      number: string
+      price: string
     }[] = [
       {
         image: '',
@@ -61,7 +81,7 @@ export default class ProductSalesRecordScreen extends Component {
         number: '1',
         price: '50.00'
       }
-    ];
+    ]
 
     return (
       <View style={styles.container}>
@@ -69,6 +89,12 @@ export default class ProductSalesRecordScreen extends Component {
           sections={[
             {
               date: '21 March 2018',
+              data: DATA,
+              totalSales: '100,000.00',
+              profit: '36,630.00'
+            },
+            {
+              date: '22 March 2018',
               data: DATA,
               totalSales: '100,000.00',
               profit: '36,630.00'
@@ -86,9 +112,7 @@ export default class ProductSalesRecordScreen extends Component {
           renderSectionHeader={({ section }) => (
             <ProductSalesRecordHeader title={section.date} />
           )}
-          renderSectionFooter={({ section }) => (
-            <Text>{section.totalSales}</Text>
-          )}
+          renderSectionFooter={this.renderFooter}
           keyExtractor={(item, index) => item + index}
           ListEmptyComponent={
             <EmptyList
@@ -100,7 +124,7 @@ export default class ProductSalesRecordScreen extends Component {
           }
         />
       </View>
-    );
+    )
   }
 }
 
@@ -115,5 +139,8 @@ const styles = StyleSheet.create({
   price: {
     color: color.selling,
     fontSize: 14
+  },
+  listItem: {
+    backgroundColor: color.selling
   }
-});
+})
