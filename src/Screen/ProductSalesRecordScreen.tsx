@@ -22,42 +22,42 @@ export default class ProductSalesRecordScreen extends Component {
     const DATA: {
       image: string;
       name: string;
-      customerName: string;
+      customer: string;
       number: string;
       price: string;
     }[] = [
       {
         image: '',
         name: 'Iman powder',
-        customerName: 'Salomy',
+        customer: 'Salomy',
         number: '1',
         price: '4000.00'
       },
       {
         image: '',
         name: 'Close up',
-        customerName: 'David',
+        customer: 'David',
         number: '1',
         price: '150.00'
       },
       {
         image: '',
         name: 'Hoey soap',
-        customerName: 'Kayla',
+        customer: 'Kayla',
         number: '1',
         price: '600.00'
       },
       {
         image: '',
         name: 'Tresee liquid bath',
-        customerName: 'Salomy',
+        customer: 'Salomy',
         number: '1',
         price: '4000.00'
       },
       {
         image: '',
         name: 'Big comb',
-        customerName: 'Salomy',
+        customer: 'Salomy',
         number: '1',
         price: '50.00'
       }
@@ -78,6 +78,9 @@ export default class ProductSalesRecordScreen extends Component {
             <ProductListAtom
               items={item}
               textStyle={{ color: color.principal }}
+              topBodyTextStyle={{ fontFamily: 'SourceSansPro_Semibold' }}
+              numberTextStyle={styles.numberStyle}
+              priceStyle={styles.price}
             />
           )}
           renderSectionHeader={({ section }) => (
@@ -105,5 +108,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: color.secondary
+  },
+  numberStyle: {
+    color: color.principal
+  },
+  price: {
+    color: color.selling,
+    fontSize: 14
   }
 });
