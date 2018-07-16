@@ -1,33 +1,33 @@
-import * as React from 'react';
-import { ListItem, Left, Body, Thumbnail, Right } from 'native-base';
-import { StyleSheet, Text } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { ListItem, Left, Body, Thumbnail, Right } from 'native-base'
+import { StyleSheet, Text } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   items: {
-    image: string;
-    name: string;
-    number: any;
-    status?: string;
-    customer?: string;
-    price?: string;
-  };
-  onPress?: () => void;
-  textStyle?: object;
-  topBodyTextStyle?: object;
-  numberTextStyle?: object;
-  priceStyle?: object;
+    image: string
+    name: string
+    number: any
+    status?: string
+    customer?: string
+    price?: string
+  }
+  onPress?: () => void
+  textStyle?: object
+  topBodyTextStyle?: object
+  numberTextStyle?: object
+  priceStyle?: object
 }
 
 class ProductListAtom extends React.Component<IProps, any> {
   render() {
     const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
     const avatar =
-      this.props.items.image !== '' ? this.props.items.image : defaultImg;
-    const colored1 = this.props.items.status === 'debt' ? 'red' : color.button;
+      this.props.items.image !== '' ? this.props.items.image : defaultImg
+    const colored1 = this.props.items.status === 'debt' ? 'red' : color.button
     const colored2 =
-      this.props.items.status === 'debt' ? 'red' : color.principal;
+      this.props.items.status === 'debt' ? 'red' : color.principal
 
     return (
       <ListItem style={styles.rowP} onPress={this.props.onPress}>
@@ -72,11 +72,11 @@ class ProductListAtom extends React.Component<IProps, any> {
           )}
         </Right>
       </ListItem>
-    );
+    )
   }
 }
 
-export default ProductListAtom;
+export default ProductListAtom
 
 const styles = StyleSheet.create({
   rowP: {
@@ -124,4 +124,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: color.principal
   }
-});
+})
