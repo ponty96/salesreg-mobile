@@ -7,12 +7,13 @@ interface IProp {
   value: string
   rightTextStyle?: object
   listItemStyle?: object
+  labelStyle?: object
 }
 
 const ListItemAtom = (props: IProp): JSX.Element => {
   return (
     <View style={[styles.wrapper, props.listItemStyle]}>
-      <Text style={styles.text}>{props.label}</Text>
+      <Text style={[styles.text, props.labelStyle]}>{props.label}</Text>
       <Text style={[styles.text, props.rightTextStyle]}>{props.value}</Text>
     </View>
   )
@@ -26,7 +27,7 @@ const styles = StyleSheet.create({
     paddingLeft: 32,
     paddingRight: 16,
     justifyContent: 'space-between',
-    alignItems: 'baseline',
+    alignItems: 'center',
     marginBottom: 0.5,
     height: 64
   },

@@ -5,7 +5,7 @@ import { color } from '../Style/Color'
 
 interface IProp {
   singleRightText?: string
-  oneRightComponent: boolean
+  oneRightComponent?: boolean
   rightIcon?: boolean
 }
 
@@ -25,7 +25,7 @@ const RightListItem = (props: IProp): JSX.Element => {
             />
           </View>
         ) : (
-          <Text style={[styles.text, styles.rightText, { flex: 0 }]}>
+          <Text style={[styles.text, styles.rightText, styles.singleRightText]}>
             {props.singleRightText}
           </Text>
         )
@@ -45,7 +45,7 @@ const RightListItem = (props: IProp): JSX.Element => {
           >
             4
           </Text>
-          <Text style={[styles.text, styles.rightText, { marginTop: 3 }]}>
+          <Text style={[styles.text, styles.rightText, styles.bottomText]}>
             {'\u20A6 '}1,500.00
           </Text>
         </View>
@@ -67,11 +67,22 @@ const styles = StyleSheet.create({
     flex: 1
   },
   rightText: {
-    textAlign: 'right'
+    textAlign: 'right',
+    marginVertical: 32
   },
   rightView: {
     flexDirection: 'row',
     flex: 1,
     alignItems: 'center'
+  },
+  bottomText: {
+    marginTop: 3,
+    flex: 0,
+    color: color.selling,
+    marginBottom: 8
+  },
+  singleRightText: {
+    flex: 0,
+    marginVertical: 16
   }
 })

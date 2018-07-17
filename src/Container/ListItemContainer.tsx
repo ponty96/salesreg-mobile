@@ -27,7 +27,6 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: color.listBorderColor,
     justifyContent: 'space-between',
-    height: 64,
     alignItems: 'center'
   },
   statusIndicator: {
