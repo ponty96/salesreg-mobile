@@ -10,7 +10,6 @@ interface IProps {
   num: number
   status: string
   onPress: () => void
-  redText: boolean
 }
 
 const renderStatusIndicator = (status: string): JSX.Element => {
@@ -47,13 +46,7 @@ const salesOrderListAtom = (props: IProps) => {
     <TouchableOpacity style={styles.wrapper} onPress={props.onPress}>
       <Left style={styles.leftWrapper}>
         <View style={styles.wrapperForTopLeft}>
-          <Text
-            style={
-              !props.redText
-                ? [styles.serialNumber, styles.top]
-                : [styles.serialNumber, styles.top, styles.redText]
-            }
-          >
+          <Text style={[styles.serialNumber, styles.top]}>
             {props.serialNumber}
           </Text>
           <Text style={[styles.time, styles.top]}>{props.time}</Text>
@@ -115,8 +108,5 @@ const styles = StyleSheet.create({
   },
   statusIndicator: {
     width: 5
-  },
-  redText: {
-    color: color.red
   }
 })

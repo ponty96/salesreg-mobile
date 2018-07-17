@@ -1,6 +1,8 @@
 import * as React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
+import ListItemContainer from '../Container/ListItemContainer'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -26,7 +28,12 @@ export default class SalesOrderScreen extends React.Component<IProps> {
   render() {
     return (
       <View style={styles.container}>
-        <Text>Sales order screen.</Text>
+        <ListItemContainer>
+          <Text style={styles.text}>Agent</Text>
+          <Text style={[styles.text, { textAlign: 'right' }]}>
+            Ademola Dike
+          </Text>
+        </ListItemContainer>
       </View>
     )
   }
@@ -35,7 +42,12 @@ export default class SalesOrderScreen extends React.Component<IProps> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: color.secondary
+  },
+  text: {
+    fontFamily: 'SourceSansPro',
+    fontSize: 14,
+    color: color.principal,
+    flex: 1
   }
 })

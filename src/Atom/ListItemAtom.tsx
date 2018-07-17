@@ -27,12 +27,12 @@ const styles = StyleSheet.create({
     paddingRight: 16,
     justifyContent: 'space-between',
     alignItems: 'baseline',
-    marginBottom: 0.5
+    marginBottom: 0.5,
+    height: 64
   },
   text: {
     fontSize: 14,
     fontFamily: 'SourceSansPro_Semibold',
-    color: color.secondary,
-    marginVertical: 16
+    color: color.secondary
   }
 })
