@@ -32,7 +32,6 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
         num={item.num}
         status={item.status}
         onPress={this.handleListPress}
-        redText={item.redText}
       />
     )
   }

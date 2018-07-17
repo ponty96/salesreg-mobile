@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 import ListItemContainer from '../Container/ListItemContainer'
 import { color } from '../Style/Color'
+import RightListItem from '../Components/RightListItem'
 
 interface IProps {
   navigation: any
@@ -29,10 +30,12 @@ export default class SalesOrderScreen extends React.Component<IProps> {
     return (
       <View style={styles.container}>
         <ListItemContainer>
-          <Text style={styles.text}>Agent</Text>
-          <Text style={[styles.text, { textAlign: 'right' }]}>
-            Ademola Dike
-          </Text>
+          <Text style={styles.text}>Item 1</Text>
+          <RightListItem
+            oneRightComponent
+            singleRightText="Ademola Dike"
+            rightIcon
+          />
         </ListItemContainer>
       </View>
     )
