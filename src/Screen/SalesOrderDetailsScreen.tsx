@@ -41,6 +41,14 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
     this.setState({ visible: true })
   }
 
+  handleContinuePress = () => {
+    console.log('Continue button pressed.')
+  }
+
+  handleDontCancelPress = () => {
+    console.log("Don't cancel button pressed.")
+  }
+
   render() {
     const DATA: {}[] = [
       {
@@ -123,6 +131,8 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
         <WarningModal
           visible={this.state.visible}
           onBackPress={() => this.setState({ visible: false })}
+          onPressTopButton={() => this.handleContinuePress}
+          onPressBottomButton={() => this.handleDontCancelPress}
         />
       </ScrollView>
     )

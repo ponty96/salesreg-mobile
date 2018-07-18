@@ -108,13 +108,18 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
           rightLabel="View products"
           onPressArrow={this.handleArrowPresss}
         />
-        <FabAtom name="shopping-cart" type="Entypo" />
         <FlatList
           data={DATA}
           renderItem={this.renderList}
           ListEmptyComponent={
             <EmptyList type={{ Text: 'orders', verifyMainList: 'main' }} />
           }
+        />
+        <FabAtom
+          name="shopping-cart"
+          type="Entypo"
+          routeName="NewSalesOrder"
+          navigation={this.props.navigation}
         />
       </View>
     )

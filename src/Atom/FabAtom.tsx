@@ -3,7 +3,15 @@ import { Icon, Fab } from 'native-base'
 import { StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 
-const fabAtom = (props: any) => (
+interface IProp {
+  routeName: string
+  name: string
+  type?: any
+  navigation: any
+  params?: any
+}
+
+const fabAtom = (props: IProp) => (
   <Fab
     position="bottomRight"
     style={styles.fab}

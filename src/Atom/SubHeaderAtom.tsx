@@ -11,6 +11,7 @@ interface IProps {
   rightLabel?: string
   screen?: string
   onPressArrow?: () => void
+  children?: JSX.Element
 }
 
 class SubHeaderAtom extends React.Component<IProps, any> {
@@ -40,10 +41,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
     return (
       <Header style={styles.subHeaderHeader}>
         <Left style={styles.subHeaderLeftRow}>
-          <Image
-            source={require('../../assets/Icons/subheader-icons/product-blue.png')}
-            style={styles.productIcon}
-          />
+          <Image source={this.props.image} style={styles.productIcon} />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
         </Left>
 
@@ -58,12 +56,14 @@ class SubHeaderAtom extends React.Component<IProps, any> {
               />
             </View>
           ) : (
-            <Icon
-              name="chevron-small-right"
-              type="Entypo"
-              style={styles.rightIconLabel}
-              onPress={this.props.onPressArrow}
-            />
+            this.props.children || (
+              <Icon
+                name="chevron-small-right"
+                type="Entypo"
+                style={styles.rightIconLabel}
+                onPress={this.props.onPressArrow}
+              />
+            )
           )}
         </Right>
       </Header>

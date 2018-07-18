@@ -6,6 +6,8 @@ import ModalAtom from '../Atom/ModalAtom'
 interface IProp {
   visible: boolean
   onBackPress: () => void
+  onPressBottomButton: () => void
+  onPressTopButton: () => void
 }
 
 const WarningModal = (props: IProp) => {
@@ -21,12 +23,18 @@ const WarningModal = (props: IProp) => {
             You cannot undo this action, do you still want to cancel this order
             ?
           </Text>
-          <TouchableOpacity style={styles.buttonWrapper}>
+          <TouchableOpacity
+            style={styles.buttonWrapper}
+            onPress={props.onPressTopButton}
+          >
             <Text style={[styles.normalText, { color: color.red }]}>
               Continue
             </Text>
           </TouchableOpacity>
-          <TouchableOpacity style={styles.buttonWrapper}>
+          <TouchableOpacity
+            style={styles.buttonWrapper}
+            onPress={props.onPressBottomButton}
+          >
             <Text style={[styles.normalText, { color: color.principal }]}>
               Dont cancel
             </Text>

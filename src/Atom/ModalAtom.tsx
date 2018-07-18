@@ -9,7 +9,7 @@ interface IProps {
   body?: JSX.Element
   centered?: boolean
   modalWrapperStyle?: object
-  onBackPress: () => void
+  onBackPress?: () => void
 }
 
 class ModalAtom extends React.Component<IProps, any> {

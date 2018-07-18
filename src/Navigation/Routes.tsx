@@ -57,6 +57,7 @@ import NewVendorScreen from '../Screen/NewVendorScreen'
 import EditCustomerDetailsScreen from '../Screen/EditCustomerDetailsScreen'
 import SalesOrderStatusScreen from '../Screen/SalesOrderStatusScreen'
 import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
+import NewSalesOrderScreen from '../Screen/NewSalesOrderScreen'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -271,6 +272,7 @@ const businessStack = StackNavigator(
     EditCustomerDetails: EditCustomerDetailsScreen,
     SalesOrderStatus: SalesOrderStatusScreen,
     SalesOrderDetails: SalesOrderDetailsScreen,
+    NewSalesOrder: NewSalesOrderScreen,
     salesOrderTab: {
       screen:
         OPTION === BOTH
