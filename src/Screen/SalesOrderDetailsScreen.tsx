@@ -6,12 +6,21 @@ import ListItemAtom from '../Atom/ListItemAtom'
 import ListItemWithStatusIndicator from '../Components/ListItemWithStatusIndicator'
 import ListItemWithTwoValues from '../Components/ListItemWithTwoValues'
 import ListItemWithImage from '../Components/ListItemWithImage'
+import WarningModal from '../Components/WarningModal'
 
 interface IProps {
   navigation: any
 }
 
-export default class SalesOrderScreen extends React.Component<IProps> {
+interface IState {
+  visible: boolean
+}
+
+export default class SalesOrderScreen extends React.Component<IProps, IState> {
+  state = {
+    visible: false
+  }
+
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -28,8 +37,8 @@ export default class SalesOrderScreen extends React.Component<IProps> {
     }
   }
 
-  handlePress = () => {
-    console.log('Cancel order pressed.')
+  handleCancelPress = () => {
+    this.setState({ visible: true })
   }
 
   render() {
@@ -107,10 +116,14 @@ export default class SalesOrderScreen extends React.Component<IProps> {
         />
         <TouchableOpacity
           style={styles.buttonWrapper}
-          onPress={this.handlePress}
+          onPress={this.handleCancelPress}
         >
           <Text style={styles.buttonText}>Cancel Order</Text>
         </TouchableOpacity>
+        <WarningModal
+          visible={this.state.visible}
+          onBackPress={() => this.setState({ visible: false })}
+        />
       </ScrollView>
     )
   }

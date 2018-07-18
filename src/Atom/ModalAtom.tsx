@@ -8,6 +8,8 @@ interface IProps {
   header?: JSX.Element
   body?: JSX.Element
   centered?: boolean
+  modalWrapperStyle?: object
+  onBackPress: () => void
 }
 
 class ModalAtom extends React.Component<IProps, any> {
@@ -22,13 +24,14 @@ class ModalAtom extends React.Component<IProps, any> {
         animationType="slide"
         transparent={true}
         visible={this.props.visible}
-        onRequestClose={() => {
-          alert('Modal has been closed.')
-        }}
+        onRequestClose={this.props.onBackPress}
       >
         <View style={styles.modalContainer}>
           <View
-            style={this.props.centered ? styles.centerModal : styles.modalBody}
+            style={[
+              this.props.centered ? styles.centerModal : styles.modalBody,
+              this.props.modalWrapperStyle
+            ]}
           >
             {this.props.header}
             {this.props.body}
