@@ -143,6 +143,7 @@ const styles = StyleSheet.create({
     marginTop: 2
   },
   inputText: {
-    color: color.principal
+    color: color.principal,
+    marginTop: 8
   }
 })

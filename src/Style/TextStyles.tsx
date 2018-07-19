@@ -9,5 +9,8 @@ export const textStyles = StyleSheet.create({
   },
   greenText: {
     color: color.selling
+  },
+  blueText: {
+    color: color.button
   }
 })

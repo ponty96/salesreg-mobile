@@ -3,7 +3,8 @@ import { StyleSheet, View, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IProps {
-  headerText: string
+  headerText?: string
+  style?: object
 }
 
 class FormContainerAtom extends React.Component<IProps, any> {
@@ -11,7 +12,9 @@ class FormContainerAtom extends React.Component<IProps, any> {
     return (
       <View style={styles.mainView}>
         <Text style={styles.headerText}>{this.props.headerText}</Text>
-        <View style={styles.inputView}>{this.props.children}</View>
+        <View style={[styles.inputView, this.props.style]}>
+          {this.props.children}
+        </View>
       </View>
     )
   }
