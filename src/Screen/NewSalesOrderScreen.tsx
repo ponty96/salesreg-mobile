@@ -37,6 +37,7 @@ export default class NewSalesOrderScreen extends Component {
           <InputAtom label="Customer" />
         </FormContainerAtom>
         <FormContainerAtom style={styles.formContainer}>
+          <Text style={styles.closeSign}>&times;</Text>
           <InputAtom label="Item name" />
           <View style={styles.innerInputViewForTwo}>
             <View style={styles.wrappedInputLeft}>
@@ -113,5 +114,9 @@ const styles = StyleSheet.create({
   textsToAdd: {
     marginLeft: 16,
     marginVertical: 16
+  },
+  closeSign: {
+    textAlign: 'right',
+    fontSize: 26
   }
 })
