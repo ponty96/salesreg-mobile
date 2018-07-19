@@ -1,13 +1,26 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, Dimensions } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Text,
+  Dimensions,
+  ScrollView,
+  KeyboardAvoidingView
+} from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
 import { textStyles } from '../Style/TextStyles'
 import FormContainerAtom from '../Atom/FormContainerAtom'
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
+import PickerAtom from '../Atom/PickerAtom'
+import SaveCancelButton from '../Container/SaveCancelButton'
 
-export default class NewSalesOrderScreen extends Component {
+interface IProp {
+  navigation: {}
+}
+
+export default class NewSalesOrderScreen extends Component<IProp, any> {
   static navigationOptions = ({ navigation }: any) => {
     const ORDER_NUMBER = '234432'
     return {
@@ -18,6 +31,21 @@ export default class NewSalesOrderScreen extends Component {
         />
       )
     }
+  }
+
+  state = {
+    customer: '',
+    item: '',
+    quantity: '',
+    price: '',
+    amount: '',
+    taxRate: '',
+    amountPaid: '',
+    payMethod: ''
+  }
+
+  updateState = (key: string, value: any) => {
+    this.setState({ [key]: value })
   }
 
   render() {
@@ -33,39 +61,122 @@ export default class NewSalesOrderScreen extends Component {
             <Text style={textStyles.greenText}>{TOTAL_AMOUNT}</Text>
           </Text>
         </SubHeaderAtom>
-        <FormContainerAtom style={styles.formContainer}>
-          <InputAtom label="Customer" />
-        </FormContainerAtom>
-        <FormContainerAtom style={styles.formContainer}>
-          <Text style={styles.closeSign}>&times;</Text>
-          <InputAtom label="Item name" />
-          <View style={styles.innerInputViewForTwo}>
-            <View style={styles.wrappedInputLeft}>
+        <ScrollView>
+          <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={65}>
+            <FormContainerAtom style={styles.formContainer}>
               <InputAtom
-                label="Quantity"
-                // getValue={val => this.updateState('birthday', val)}
+                label="Customer"
+                getValue={val => this.updateState('customer', val)}
               />
-            </View>
-            <View style={[styles.wrappedInputLeft, { paddingRight: 12 }]}>
+            </FormContainerAtom>
+            <FormContainerAtom style={styles.formContainer}>
+              <Text
+                style={styles.closeSign}
+                onPress={() => console.log('Cancel pressed.')}
+              >
+                &times;
+              </Text>
               <InputAtom
-                label="Price/each"
-                // getValue={val => this.updateState('maritalStatus', val)}
+                label="Item name"
+                getValue={val => this.updateState('item', val)}
               />
-            </View>
-          </View>
-          <View style={[styles.wrappedInputLeft, { paddingLeft: 0 }]}>
-            <InputAtom label="Amount" />
-          </View>
-        </FormContainerAtom>
-        <Text
-          style={[
-            textStyles.normalText,
-            textStyles.blueText,
-            styles.textsToAdd
-          ]}
-        >
-          + Add Item
-        </Text>
+              <View style={styles.innerInputViewForTwo}>
+                <View style={styles.wrappedInputLeft}>
+                  <InputAtom
+                    label="Quantity"
+                    getValue={val => this.updateState('quantity', val)}
+                    keyboardType="numeric"
+                  />
+                </View>
+                <View style={[styles.wrappedInputLeft, { paddingRight: 12 }]}>
+                  <InputAtom
+                    label="Price/each"
+                    getValue={val => this.updateState('price', val)}
+                    keyboardType="numeric"
+                  />
+                </View>
+              </View>
+              <View style={[styles.wrappedInputLeft, { paddingLeft: 0 }]}>
+                <InputAtom
+                  label="Amount"
+                  getValue={val => this.updateState('amount', val)}
+                  keyboardType="numeric"
+                />
+              </View>
+            </FormContainerAtom>
+            <Text
+              style={[
+                textStyles.normalText,
+                textStyles.blueText,
+                styles.textsToAdd
+              ]}
+              onPress={() => console.log('Add item pressed.')}
+            >
+              + Add Item
+            </Text>
+            <FormContainerAtom
+              style={styles.formContainer}
+              containerStyle={styles.containerWrapper}
+            >
+              <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
+                <Text
+                  style={[
+                    textStyles.normalText,
+                    textStyles.blueText,
+                    styles.taxRate
+                  ]}
+                >
+                  Paying method
+                </Text>
+                <View style={styles.picker}>
+                  <PickerAtom
+                    list={['Cash', 'Cheque', 'Direct transfer', 'POS']}
+                    placeholder="Cash"
+                    handleSelection={val => this.updateState('payMethod', val)}
+                  />
+                </View>
+              </View>
+              <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
+                <Text
+                  style={[
+                    textStyles.normalText,
+                    textStyles.blueText,
+                    styles.taxRate
+                  ]}
+                >
+                  Tax rate(%)
+                </Text>
+                <View style={[styles.picker, { borderBottomWidth: 0 }]}>
+                  <InputAtom
+                    getValue={val => this.updateState('taxRate', val)}
+                    keyboardType="numeric"
+                  />
+                </View>
+              </View>
+              <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
+                <Text
+                  style={[
+                    textStyles.normalText,
+                    textStyles.blueText,
+                    styles.taxRate
+                  ]}
+                >
+                  Amount paid
+                </Text>
+                <View style={[styles.picker, { borderBottomWidth: 0 }]}>
+                  <InputAtom
+                    getValue={val => this.updateState('amountPaid', val)}
+                    keyboardType="numeric"
+                  />
+                </View>
+              </View>
+            </FormContainerAtom>
+          </KeyboardAvoidingView>
+        </ScrollView>
+        <SaveCancelButton
+          navigation={this.props.navigation}
+          positiveButtonName="DONE"
+        />
       </View>
     )
   }
@@ -113,10 +224,28 @@ const styles = StyleSheet.create({
   },
   textsToAdd: {
     marginLeft: 16,
-    marginVertical: 16
+    marginTop: 16
   },
   closeSign: {
     textAlign: 'right',
     fontSize: 26
+  },
+  itemWrapper: {
+    paddingLeft: 16,
+    marginRight: 16,
+    alignItems: 'baseline'
+  },
+  picker: {
+    borderBottomWidth: 1,
+    borderBottomColor: color.dropdown,
+    width: '70%',
+    marginLeft: 8
+  },
+  taxRate: {
+    width: '30%',
+    textAlign: 'right'
+  },
+  containerWrapper: {
+    marginBottom: 32
   }
 })

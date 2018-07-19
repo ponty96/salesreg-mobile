@@ -5,12 +5,13 @@ import { color } from '../Style/Color'
 interface IProps {
   headerText?: string
   style?: object
+  containerStyle?: object
 }
 
 class FormContainerAtom extends React.Component<IProps, any> {
   render() {
     return (
-      <View style={styles.mainView}>
+      <View style={[styles.mainView, this.props.containerStyle]}>
         <Text style={styles.headerText}>{this.props.headerText}</Text>
         <View style={[styles.inputView, this.props.style]}>
           {this.props.children}
