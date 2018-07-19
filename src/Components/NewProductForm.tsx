@@ -18,7 +18,10 @@ class NewProductForm extends PureComponent<IProps, IState> {
   render() {
     return (
       <View style={styles.ababa}>
-        <ProductFormAtom navigation={this.props.navigation} />
+        <ProductFormAtom
+          navigation={this.props.navigation}
+          header={'Product ID'}
+        />
         <SaveCancelButton
           navigation={this.props.navigation}
           createfunc={this.create}

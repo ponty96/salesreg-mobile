@@ -25,11 +25,11 @@ class AuthenticationHeader extends PureComponent<IProps, IState> {
       >
         {this.props.smallHeader ? (
           <Image
-            source={require('./../../assets/Images/loginLogo.png')}
+            source={require('./../../Assets/Images/loginLogo.png')}
             style={styles.image}
           />
         ) : (
-          <Image source={require('./../../assets/Images/onboardingLogo.png')} />
+          <Image source={require('./../../Assets/Images/onboardingLogo.png')} />
         )}
       </View>
     )

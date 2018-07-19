@@ -14,10 +14,13 @@ import FormImageAtom from './FormImageAtom'
 import { Form } from 'native-base'
 import { color } from '../Style/Color'
 import FormContainerAtom from './FormContainerAtom'
+import GoogleInputAtom from './GoogleInputAtom'
 
 interface IProps {
   navigation: any
   type: string
+  name: string
+  header: string
   firstHeader: string
   secondHeader: string
   thirdHeader: string
@@ -29,7 +32,9 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
       uri: 'http://downloadicons.net/sites/default/files/user-icon-2197.png'
     },
     customerName: '',
+    companyName: '',
     phone: 0,
+    name: '',
     email: '',
     mobile: 0,
     fax: '',
@@ -64,6 +69,9 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
   addDislike = () => {
     console.log('Dislike added')
   }
+  addFromContacts = () => {
+    console.log('Added From Contacts')
+  }
 
   render() {
     return (
@@ -80,6 +88,28 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
               getValue={this.getImage}
               source={this.state.image.uri}
             />
+            <FormContainerAtom headerText={this.props.header}>
+              <InputAtom
+                label={'*' + this.props.name}
+                getValue={val => this.updateState('name', val)}
+              />
+              <InputAtom
+                label={'Company Name'}
+                defaultValue={this.props.name}
+                getValue={val => this.updateState('companyName', val)}
+              />
+              <ButtonAtom
+                btnText="+Add from contacts"
+                transparent={true}
+                onPress={this.addFromContacts}
+                textStyle={styles.sendAnother}
+                btnStyle={{
+                  paddingHorizontal: 5,
+                  alignSelf: 'flex-start',
+                  marginVertical: 3
+                }}
+              />
+            </FormContainerAtom>
             <View style={styles.mainView}>
               <Text style={styles.headerText}>{this.props.firstHeader}</Text>
               <View style={styles.inputViewForTwoAndMore}>
@@ -145,19 +175,23 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
               />
             </FormContainerAtom>
             <FormContainerAtom headerText={this.props.secondHeader}>
-              <InputAtom
+              <GoogleInputAtom
                 label="Office Address"
-                getValue={val => this.updateState('officeAddress', val)}
+                getValue={(val: string) =>
+                  this.updateState('officeAddress', val)
+                }
               />
-              <InputAtom
+              <GoogleInputAtom
                 label="Home Address"
-                getValue={val => this.updateState('homeAddress', val)}
+                getValue={(val: string) => this.updateState('homeAddress', val)}
               />
             </FormContainerAtom>
             <FormContainerAtom headerText="Billing Address">
-              <InputAtom
+              <GoogleInputAtom
                 label="Billing Address"
-                getValue={val => this.updateState('billingAddress', val)}
+                getValue={(val: string) =>
+                  this.updateState('billingAddress', val)
+                }
               />
             </FormContainerAtom>
             <FormContainerAtom headerText={this.props.thirdHeader}>

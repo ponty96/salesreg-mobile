@@ -19,7 +19,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
       <Header style={styles.subHeaderHeader}>
         <Left style={styles.subHeaderLeftRow}>
           <Image
-            source={require('../../assets/Icons/subheader-icons/product-blue.png')}
+            source={require('../../Assets/Icons/subheader-icons/product-blue.png')}
             style={styles.productIcon}
           />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>

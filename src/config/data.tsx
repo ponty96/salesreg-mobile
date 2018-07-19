@@ -101,6 +101,49 @@ export const customerList = [
   }
 ]
 
+export const employeeList = [
+    {
+      key: '1',
+      customerName: 'John Okon',
+      location: 'POS',
+      position: 'Cashier',
+      images:
+        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
+    },
+    {
+      key: '2',
+      customerName: 'Veronica Igwe',
+      location: 'POS',
+      position: 'Sales girl',
+      images:
+        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
+    },
+    {
+      key: '3',
+      customerName: 'Sabestian doe',
+      location: 'Warehouse',
+      position: 'Store man',
+      images:
+        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+    },
+    {
+      key: '4',
+      customerName: 'AbdulAzeez Kolawole',
+      location: 'Office',
+      position: 'Team Lead',
+      images:
+        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
+    },
+    {
+      key: '5',
+      customerName: 'Klazbaba',
+      location: 'Office',
+      position: 'Javascript KING',
+      images:
+        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
+    }
+  ]
+
 export const debtList = [
   {
     key: 1,

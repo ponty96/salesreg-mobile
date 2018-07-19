@@ -14,6 +14,8 @@ import FormContainerAtom from './FormContainerAtom'
 
 interface IProps {
   navigation: any
+  header: string
+  name?: string
 }
 
 export default class ProductFormAtom extends React.Component<IProps, any> {
@@ -57,6 +59,13 @@ export default class ProductFormAtom extends React.Component<IProps, any> {
             getName={val => this.updateState('product', val)}
             source={this.state.image.uri}
           />
+          <FormContainerAtom headerText={this.props.header}>
+            <InputAtom
+              label={'Product name'}
+              defaultValue={this.props.name}
+              getValue={val => this.updateState('name', val)}
+            />
+          </FormContainerAtom>
           <FormContainerAtom headerText="Quantity">
             <InputAtom
               label="Current Stock Quantity"
