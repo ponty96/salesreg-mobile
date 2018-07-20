@@ -3,23 +3,28 @@ import { Form, Icon } from 'native-base';
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
 
 import InputAtom from '../Atom/InputAtom';
+import ButtonAtom from '../Atom/ButtonAtom';
 import PickerAtom from '../Atom/PickerAtom';
 import { color } from '../Style/Color';
 
 interface IProps {
-  onPress: (formValue: any) => void;
+  onNext: () => void;
   onUpdateState?: (key: string, val: any) => void;
   email: string;
   password: string;
   name: string;
   passwordConfirmation: string;
   gender: string;
+  fieldErrors: any;
+  onBack: () => void;
+  navigation: any;
 }
 
 interface IState {}
 
 class SigupForm extends PureComponent<IProps, IState> {
   render() {
+    const { fieldErrors } = this.props;
     return (
       <Form>
         <InputAtom
@@ -29,6 +34,12 @@ class SigupForm extends PureComponent<IProps, IState> {
           getValue={val => this.props.onUpdateState('name', val)}
           inputStyle={styles.elevateInput}
           required={true}
+          error={
+            fieldErrors &&
+            (fieldErrors['firstName'] ||
+              fieldErrors['lastName'] ||
+              fieldErrors['name'])
+          }
         />
 
         <InputAtom
@@ -38,6 +49,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           getValue={val => this.props.onUpdateState('email', val)}
           inputStyle={styles.elevateInput}
           required={true}
+          error={fieldErrors && fieldErrors['email']}
         />
 
         <View style={styles.pickerWrapper}>
@@ -50,6 +62,10 @@ class SigupForm extends PureComponent<IProps, IState> {
           />
         </View>
         <View style={styles.pickerUnderline} />
+        {fieldErrors &&
+          fieldErrors['gender'] && (
+            <Text style={styles.errorText}>{fieldErrors['gender']}</Text>
+          )}
 
         <InputAtom
           label="Password"
@@ -61,6 +77,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           underneathStyle={styles.underneathText}
           inputStyle={styles.elevateInput}
           required={true}
+          error={fieldErrors && fieldErrors['password']}
         />
 
         <InputAtom
@@ -73,28 +90,34 @@ class SigupForm extends PureComponent<IProps, IState> {
           }
           inputStyle={styles.elevateInput}
           required={true}
+          error={fieldErrors && fieldErrors['passwordConfirmation']}
         />
 
-        <View>
-          <TouchableOpacity
-            style={styles.nextButtonContainer}
-            onPress={() => this.props.onPress(this.state)}
+        <TouchableOpacity
+          style={styles.nextButtonContainer}
+          onPress={this.props.onNext}
+        >
+          <Text
+            style={[styles.nextText, { fontFamily: 'SourceSansPro_Semibold' }]}
           >
-            <Text
-              style={[
-                styles.nextText,
-                { fontFamily: 'SourceSansPro_Semibold' }
-              ]}
-            >
-              NEXT{' '}
-            </Text>
-            <Icon
-              name="trending-flat"
-              type="MaterialIcons"
-              style={styles.nextIcon}
-            />
-          </TouchableOpacity>
-        </View>
+            NEXT{' '}
+          </Text>
+          <Icon
+            name="keyboard-arrow-right"
+            type="MaterialIcons"
+            style={styles.nextIcon}
+          />
+        </TouchableOpacity>
+        <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
+          Or you have an account?
+        </Text>
+        <ButtonAtom
+          btnText="LOGIN"
+          transparent={true}
+          onPress={() => this.props.navigation.navigate('Login')}
+          textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
+          btnStyle={styles.loginButton}
+        />
       </Form>
     );
   }
@@ -148,5 +171,25 @@ const styles = StyleSheet.create({
   reenter: {
     marginTop: 10,
     marginLeft: 0
+  },
+  haveAccount: {
+    marginTop: 16,
+    textAlign: 'center',
+    color: color.principal,
+    fontSize: 14
+  },
+  login: {
+    color: color.button,
+    fontSize: 16
+  },
+  loginButton: {
+    marginVertical: 0
+  },
+  errorText: {
+    marginLeft: 0,
+    color: 'red',
+    fontSize: 12,
+    marginBottom: 25,
+    marginTop: 2
   }
 });

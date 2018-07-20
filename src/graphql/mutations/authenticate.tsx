@@ -3,6 +3,7 @@ import gql from 'graphql-tag';
 export const LoginUserMutationGQL = gql`
   mutation loginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {
+      success
       fieldErrors {
         key
         message
