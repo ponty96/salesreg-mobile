@@ -12,5 +12,11 @@ export const textStyles = StyleSheet.create({
   },
   blueText: {
     color: color.button
+  },
+  bigText: {
+    fontSize: 16
+  },
+  boldText: {
+    fontFamily: 'SourceSansPro_Semibold'
   }
 })

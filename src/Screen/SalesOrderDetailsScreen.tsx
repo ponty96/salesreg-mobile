@@ -42,11 +42,11 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
   }
 
   handleContinuePress = () => {
-    console.log('Continue button pressed.')
+    alert('Continue button pressed.')
   }
 
   handleDontCancelPress = () => {
-    console.log("Don't cancel button pressed.")
+    alert("Don't cancel button pressed.")
   }
 
   render() {
@@ -129,6 +129,11 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           <Text style={styles.buttonText}>Cancel Order</Text>
         </TouchableOpacity>
         <WarningModal
+          headerText="Warning!"
+          bodyText="You cannot undo this action, do you still want to cancel this order ?"
+          firstButtonText="Continue"
+          firstButtonTextColor={color.red}
+          secondButtonText="Don't cancel"
           visible={this.state.visible}
           onBackPress={() => this.setState({ visible: false })}
           onPressTopButton={() => this.handleContinuePress}

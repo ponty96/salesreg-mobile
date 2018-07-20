@@ -15,6 +15,8 @@ import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 import PickerAtom from '../Atom/PickerAtom'
 import SaveCancelButton from '../Container/SaveCancelButton'
+import WarningModal from '../Components/WarningModal'
+import ConfirmOrderBody from '../Components/ConfirmOrderBody'
 
 interface IProp {
   navigation: {}
@@ -41,15 +43,33 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
     amount: '',
     taxRate: '',
     amountPaid: '',
-    payMethod: ''
+    payMethod: '',
+    visible: false
   }
 
   updateState = (key: string, value: any) => {
     this.setState({ [key]: value })
   }
 
+  handleConfirmedPress = () => {
+    alert('Continue button pressed.')
+  }
+
+  handleEditPress = () => {
+    alert("Don't cancel button pressed.")
+  }
+
   render() {
     const TOTAL_AMOUNT: string = '0.00'
+    const CONFIRM_ORDER_DATA: {}[] = [
+      { NumberSold: '2' },
+      { Amt: '5050.00' },
+      { Tax: '252.50' },
+      { 'Total Amt': '5302.50' },
+      { Paid: '3000' },
+      { Balance: '2302.50' }
+    ]
+
     return (
       <View style={styles.container}>
         <SubHeaderAtom
@@ -72,7 +92,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
             <FormContainerAtom style={styles.formContainer}>
               <Text
                 style={styles.closeSign}
-                onPress={() => console.log('Cancel pressed.')}
+                onPress={() => alert('Cancel pressed.')}
               >
                 &times;
               </Text>
@@ -106,11 +126,12 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
             </FormContainerAtom>
             <Text
               style={[
-                textStyles.normalText,
+                textStyles.bigText,
                 textStyles.blueText,
+                textStyles.boldText,
                 styles.textsToAdd
               ]}
-              onPress={() => console.log('Add item pressed.')}
+              onPress={() => alert('Add item pressed.')}
             >
               + Add Item
             </Text>
@@ -176,7 +197,25 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
         <SaveCancelButton
           navigation={this.props.navigation}
           positiveButtonName="DONE"
+          createfunc={() => this.setState({ visible: true })}
         />
+        <WarningModal
+          headerText="Confirm order!"
+          bodyText="You cannot undo this action, do you still want to cancel this order ?"
+          firstButtonText="Confirmed"
+          firstButtonTextColor={color.button}
+          secondButtonText="Edit"
+          secondButtonTextColor={color.button}
+          visible={this.state.visible}
+          onBackPress={() => this.setState({ visible: false })}
+          onPressTopButton={this.handleConfirmedPress}
+          onPressBottomButton={() => this.handleEditPress}
+          modalStyle={styles.modalContainer}
+        >
+          <View style={styles.confirmOrder}>
+            <ConfirmOrderBody data={CONFIRM_ORDER_DATA} />
+          </View>
+        </WarningModal>
       </View>
     )
   }
@@ -194,7 +233,6 @@ const styles = StyleSheet.create({
     marginBottom: 0
   },
   doubleItemView: {
-    // flexDirection: 'row',
     borderWidth: 1,
     justifyContent: 'space-between'
   },
@@ -228,7 +266,7 @@ const styles = StyleSheet.create({
   },
   closeSign: {
     textAlign: 'right',
-    fontSize: 26
+    fontSize: 30
   },
   itemWrapper: {
     paddingLeft: 16,
@@ -247,5 +285,11 @@ const styles = StyleSheet.create({
   },
   containerWrapper: {
     marginBottom: 32
+  },
+  modalContainer: {
+    top: 175
+  },
+  confirmOrder: {
+    marginBottom: 16
   }
 })

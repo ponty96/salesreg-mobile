@@ -8,35 +8,48 @@ interface IProp {
   onBackPress: () => void
   onPressBottomButton: () => void
   onPressTopButton: () => void
+  headerText: string
+  bodyText?: string
+  firstButtonText: string
+  secondButtonText: string
+  firstButtonTextColor?: string
+  secondButtonTextColor?: string
+  children?: any
+  modalStyle?: object
 }
 
 const WarningModal = (props: IProp) => {
   return (
     <ModalAtom
       visible={props.visible}
-      modalWrapperStyle={styles.modalContainer}
+      modalWrapperStyle={[styles.modalContainer, props.modalStyle]}
       onBackPress={props.onBackPress}
       body={
         <View style={styles.body}>
-          <Text style={styles.header}>Warning!</Text>
-          <Text style={styles.normalText}>
-            You cannot undo this action, do you still want to cancel this order
-            ?
-          </Text>
+          <Text style={styles.header}>{props.headerText}</Text>
+          <Text style={styles.normalText}>{props.bodyText}</Text>
+          {props.children}
           <TouchableOpacity
             style={styles.buttonWrapper}
             onPress={props.onPressTopButton}
           >
-            <Text style={[styles.normalText, { color: color.red }]}>
-              Continue
+            <Text
+              style={[styles.normalText, { color: props.firstButtonTextColor }]}
+            >
+              {props.firstButtonText}
             </Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={styles.buttonWrapper}
             onPress={props.onPressBottomButton}
           >
-            <Text style={[styles.normalText, { color: color.principal }]}>
-              Dont cancel
+            <Text
+              style={[
+                styles.normalText,
+                { color: props.secondButtonTextColor }
+              ]}
+            >
+              {props.secondButtonText}
             </Text>
           </TouchableOpacity>
         </View>
@@ -59,7 +72,7 @@ const styles = StyleSheet.create({
   body: {
     borderRadius: 20,
     alignItems: 'center',
-    paddingTop: 8,
+    paddingTop: 16,
     backgroundColor: color.secondary
   },
   header: {
@@ -79,7 +92,8 @@ const styles = StyleSheet.create({
     color: color.principal,
     fontFamily: 'SourceSansPro',
     marginVertical: 16,
-    marginHorizontal: 32
+    marginHorizontal: 32,
+    textAlign: 'center'
   },
   modalContainer: {
     borderRadius: 20,
