@@ -15,6 +15,7 @@ import { LoginUserMutationGQL } from '../graphql/mutations/authenticate';
 import { AuthenticateClientGQL } from '../graphql/client-mutations/authenticate';
 import Auth from '../services/auth';
 import { parseFieldErrors } from '../Functions';
+import AppSpinner from '../Components/Spinner';
 
 interface IProps {
   navigation: any;
@@ -48,6 +49,7 @@ class LoginScreen extends React.Component<IProps, IState> {
             >
               {(loginUser, { loading }) => (
                 <KeyboardAvoidingView behavior="position">
+                  <AppSpinner visible={loading} />
                   <LoginForm
                     navigation={this.props.navigation}
                     loading={loading}

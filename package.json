@@ -84,6 +84,7 @@
     "react-apollo": "^2.1.6",
     "react-native": "0.52.0",
     "react-native-collapsible": "^0.11.2",
+    "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-modal-popover": "^0.0.10",
     "react-native-slider": "^0.11.0",
     "react-native-star-rating": "^1.0.9",

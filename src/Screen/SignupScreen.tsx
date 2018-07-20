@@ -16,6 +16,7 @@ import { color } from '../Style/Color';
 import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate';
 import { Mutation } from 'react-apollo';
 import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions';
+import AppSpinner from '../Components/Spinner';
 
 interface IProps {
   navigation: any;
@@ -95,11 +96,12 @@ class SignupScreen extends PureComponent<IProps, IState> {
               mutation={RegisterCompanyMutationGQL}
               onCompleted={this.onCompleted}
             >
-              {registerUser => (
+              {(registerUser, { loading }) => (
                 <KeyboardAvoidingView
                   behavior={'padding'}
                   keyboardVerticalOffset={95}
                 >
+                  <AppSpinner visible={loading} />
                   {this.state.currentForm == 0 ? (
                     <SignupForm
                       email={this.state.email}
