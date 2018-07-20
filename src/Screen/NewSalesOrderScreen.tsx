@@ -61,14 +61,14 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
 
   render() {
     const TOTAL_AMOUNT: string = '0.00'
-    const CONFIRM_ORDER_DATA: {}[] = [
-      { NumberSold: '2' },
-      { Amt: '5050.00' },
-      { Tax: '252.50' },
-      { 'Total Amt': '5302.50' },
-      { Paid: '3000' },
-      { Balance: '2302.50' }
-    ]
+    const CONFIRM_ORDER_DATA = {
+      NumberSold: '2',
+      Amt: '5050.00',
+      Tax: '252.50',
+      'Total Amt': '5302.50',
+      Paid: '3000',
+      Balance: '2302.50'
+    }
 
     return (
       <View style={styles.container}>

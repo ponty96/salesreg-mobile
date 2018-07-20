@@ -17,7 +17,7 @@ interface IProps {
   showRight?: boolean
 }
 
-const customHeader = (props: IProps) => {
+const CustomHeader = (props: IProps) => {
   return (
     <View style={styles.wrapper}>
       <Left style={styles.headerItemWrapper}>
@@ -72,7 +72,7 @@ const customHeader = (props: IProps) => {
   )
 }
 
-export default customHeader
+export default CustomHeader
 
 const styles = StyleSheet.create({
   headerIcon: {

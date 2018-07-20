@@ -5,10 +5,11 @@ import { color } from '../Style/Color'
 
 interface IProp {
   routeName: string
-  name: string
+  name?: string
   type?: any
   navigation: any
   params?: any
+  image?: any
 }
 
 const fabAtom = (props: IProp) => (
@@ -16,7 +17,7 @@ const fabAtom = (props: IProp) => (
     position="bottomRight"
     style={styles.fab}
     active={true}
-    onPress={() => props.navigation.navigate(props.routeName, props.params)}
+    onPress={() => props.navigation.navigate(props.routeName)}
   >
     <Icon
       name={props.name}

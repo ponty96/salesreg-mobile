@@ -3,12 +3,12 @@ import { View, Text, StyleSheet } from 'react-native'
 import { textStyles } from '../Style/TextStyles'
 
 interface IProp {
-  data: {}[]
+  data: any
 }
 
 const ConfirmOrderBody = (props: IProp): any => {
-  return props.data.map((item, key) => {
-    const objectKey: string[] = Object.keys(item)
+  return Object.keys(props.data).map((item, key) => {
+    const values: string[] = Object.values(props.data)
 
     return (
       <View style={styles.wrapper} key={key}>
@@ -20,7 +20,7 @@ const ConfirmOrderBody = (props: IProp): any => {
               styles.leftText
             ]}
           >
-            {objectKey}:
+            {item}:
           </Text>
         </View>
         <View style={styles.textWrapper}>
@@ -32,13 +32,15 @@ const ConfirmOrderBody = (props: IProp): any => {
             ]}
           >
             {key !== 0 ? '\u20A6 ' : ''}
-            {item[objectKey[0]]}
+            {values[key]}
           </Text>
         </View>
       </View>
     )
   })
 }
+
+export default ConfirmOrderBody
 
 const styles = StyleSheet.create({
   wrapper: {
@@ -58,5 +60,3 @@ const styles = StyleSheet.create({
     marginLeft: 16
   }
 })
-
-export default ConfirmOrderBody
