@@ -16,6 +16,7 @@ interface IProps {
   products: boolean;
   services: boolean;
   currency: string;
+  fieldErrors: any;
 }
 
 interface IState {}
@@ -27,6 +28,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
   };
 
   render() {
+    const { fieldErrors } = this.props;
     return (
       <Form style={styles.resetFormContainer}>
         <InputAtom
@@ -35,6 +37,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           getValue={name => this.props.onUpdateState('businessName', name)}
           contStyle={styles.marginlessInput}
           required={true}
+          error={fieldErrors && fieldErrors['title']}
         />
 
         <InputAtom
@@ -56,6 +59,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
           required={true}
+          error={fieldErrors && fieldErrors['contactEmail']}
         />
 
         <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
@@ -102,6 +106,11 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             }
           />
         </View>
+
+        {fieldErrors &&
+          fieldErrors['currency'] && (
+            <Text style={styles.errorText}>{fieldErrors['currency']}</Text>
+          )}
         <View style={styles.buttonsWrapper}>
           <ButtonAtom
             btnText="SIGN UP"
@@ -173,8 +182,8 @@ const styles = StyleSheet.create({
   pickerWrapper: {
     borderBottomColor: color.inactive,
     borderBottomWidth: 1,
-    width: '60%',
     opacity: 0.5,
+    width: '60%',
     marginBottom: 16
   },
   placeholderColor: {
@@ -212,5 +221,12 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     marginVertical: 0
+  },
+  errorText: {
+    marginLeft: 0,
+    color: 'red',
+    fontSize: 12,
+    marginBottom: 25,
+    marginTop: 2
   }
 });

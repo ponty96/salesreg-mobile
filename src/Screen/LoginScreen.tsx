@@ -14,6 +14,7 @@ import { Mutation } from 'react-apollo';
 import { LoginUserMutationGQL } from '../graphql/mutations/authenticate';
 import { AuthenticateClientGQL } from '../graphql/client-mutations/authenticate';
 import Auth from '../services/auth';
+import { parseFieldErrors } from '../Functions';
 
 interface IProps {
   navigation: any;
@@ -21,9 +22,14 @@ interface IProps {
   login: any;
 }
 
-interface IState {}
+interface IState {
+  fieldErrors: any;
+}
 
 class LoginScreen extends React.Component<IProps, IState> {
+  state = {
+    fieldErrors: null
+  };
   componentDidMount() {
     Auth.clearVault();
   }
@@ -45,6 +51,7 @@ class LoginScreen extends React.Component<IProps, IState> {
                   <LoginForm
                     navigation={this.props.navigation}
                     loading={loading}
+                    fieldErrors={this.state.fieldErrors}
                     onSubmit={params =>
                       loginUser({
                         variables: {
@@ -61,23 +68,28 @@ class LoginScreen extends React.Component<IProps, IState> {
       </View>
     );
   }
-  onCompleted = async data => {
+  onCompleted = async res => {
+    console.log('LOGINSCREEN', res);
     const {
-      loginUser: {
-        data: { accessToken, refreshToken, user }
-      }
-    } = data;
-    const {
-      screenProps: { client }
-    } = this.props;
+      loginUser: { data, fieldErrors, success }
+    } = res;
+    if (success) {
+      const {
+        screenProps: { client }
+      } = this.props;
 
-    await Auth.clearVault();
-    await Auth.setToken(accessToken);
-    await Auth.setRefreshToken(refreshToken);
-    await Auth.setCurrentUser(user);
-    await client.resetStore();
-    client.mutate({ mutation: AuthenticateClientGQL });
-    this.props.navigation.navigate('Home');
+      const { accessToken, refreshToken, user } = data;
+
+      await Auth.clearVault();
+      await Auth.setToken(accessToken);
+      await Auth.setRefreshToken(refreshToken);
+      await Auth.setCurrentUser(user);
+      await client.resetStore();
+      client.mutate({ mutation: AuthenticateClientGQL });
+      this.props.navigation.navigate('Home');
+    } else {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+    }
   };
 }
 export default LoginScreen;
