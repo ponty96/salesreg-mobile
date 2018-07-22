@@ -1,15 +1,15 @@
-import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Thumbnail, ListItem, Left, Right } from 'native-base'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Thumbnail, ListItem, Left, Right } from 'native-base';
+import { color } from '../Style/Color';
 
 interface IProps {
-  product?: string
-  units?: any
-  packs?: any
-  unitCostPrice?: any
-  sellingPrice?: any
-  minStockQuantity?: any
+  product?: string;
+  currentStockQuantity?: any;
+  packs?: any;
+  unitCostPrice?: any;
+  sellingPrice?: any;
+  minStockQuantity?: any;
 }
 
 export default class ProductDetailAtom extends React.Component<IProps, any> {
@@ -32,10 +32,10 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
           <View style={styles.aboveAccordionMoneyView}>
             <View style={styles.viewMarginRight}>
               <Text style={styles.aboveAccordionGreyFont}>
-                Stock quantity(in units)
+                Stock quantity(in currentStockQuantity)
               </Text>
               <Text style={styles.aboveAccordionBoldFont}>
-                {this.props.units}
+                {this.props.currentStockQuantity}
               </Text>
             </View>
             <View style={styles.viewMarginRight}>
@@ -57,7 +57,7 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
             </Left>
             <Right>
               <Text style={styles.aboveAccordionBlackTextR}>
-                &#8358;{this.props.unitCostPrice}.00
+                &#8358; {this.props.unitCostPrice}
               </Text>
             </Right>
           </ListItem>
@@ -67,7 +67,7 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
             </Left>
             <Right>
               <Text style={styles.aboveAccordionGreenTextR}>
-                &#8358;{this.props.sellingPrice}.00
+                &#8358; {this.props.sellingPrice}
               </Text>
             </Right>
           </ListItem>
@@ -85,7 +85,7 @@ export default class ProductDetailAtom extends React.Component<IProps, any> {
           </ListItem>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -177,4 +177,4 @@ const styles = StyleSheet.create({
   viewMarginRight: {
     marginRight: 16
   }
-})
+});

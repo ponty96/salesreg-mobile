@@ -1,56 +1,57 @@
-import React, { PureComponent } from 'react'
-import { View, StyleSheet } from 'react-native'
-import ProductDetailAtom from '../Atom/ProductDetailAtom'
-import { ScrollView } from 'react-native-gesture-handler'
+import React, { PureComponent } from 'react';
+import { View, StyleSheet } from 'react-native';
+import ProductDetailAtom from '../Atom/ProductDetailAtom';
+import { ScrollView } from 'react-native-gesture-handler';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  visibility: boolean
+  visibility: boolean;
 }
 
 class ProductDetails extends PureComponent<IProps, IState> {
   state = {
     visibility: false
-  }
+  };
 
   create = () => {
-    this.props.navigation.goBack()
-  }
+    this.props.navigation.goBack();
+  };
 
   openModal = () => {
     this.setState({
       visibility: true
-    })
-  }
+    });
+  };
 
   closeModal = () => {
     this.setState({
       visibility: false
-    })
-  }
+    });
+  };
 
   render() {
+    const product = this.props.navigation.getParam('product', {});
     return (
       <View style={styles.ababa}>
         <ScrollView>
           <ProductDetailAtom
-            product={'Chanel No. 5'}
+            product={product.name}
             packs={300}
-            units={23}
-            unitCostPrice={'1130'}
-            sellingPrice={'2,000'}
-            minStockQuantity={4}
+            currentStockQuantity={product.number}
+            unitCostPrice={parseFloat(product.costPrice)}
+            sellingPrice={parseFloat(product.sellingPrice)}
+            minStockQuantity={product.minimumStockQuantity}
           />
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
-export default ProductDetails
+export default ProductDetails;
 
 const styles = StyleSheet.create({
   ababa: {
@@ -68,4 +69,4 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 16
   }
-})
+});
