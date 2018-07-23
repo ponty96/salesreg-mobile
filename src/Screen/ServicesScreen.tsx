@@ -41,7 +41,7 @@ class ServicesScreen extends PureComponent<IProps> {
         </ScrollView>
         <FabAtom
           routeName={'EditServices'}
-          name={'circle-with-plus'}
+          name={'plus'}
           type={'Entypo'}
           navigation={this.props.navigation}
         />

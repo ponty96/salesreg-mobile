@@ -19,7 +19,7 @@ import WarningModal from '../Components/WarningModal'
 import ConfirmOrderBody from '../Components/ConfirmOrderBody'
 
 interface IProp {
-  navigation: {}
+  navigation: any
 }
 
 export default class NewSalesOrderScreen extends Component<IProp, any> {
@@ -69,6 +69,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
       Paid: '3000',
       Balance: '2302.50'
     }
+    const { navigation } = this.props
 
     return (
       <View style={styles.container}>
@@ -77,7 +78,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
           image={require('../../assets/Icons/gray-icons/grey-order.png')}
         >
           <Text style={[textStyles.normalText, styles.rightSubheader]}>
-            {'Total: ' + '\u20A6'}
+            {'Total: ' + '\u20A6 '}
             <Text style={textStyles.greenText}>{TOTAL_AMOUNT}</Text>
           </Text>
         </SubHeaderAtom>
@@ -97,7 +98,11 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
                 &times;
               </Text>
               <InputAtom
-                label="Item name"
+                label={
+                  navigation.getParam('screen') === 'services'
+                    ? 'Service name'
+                    : 'Item name'
+                }
                 getValue={val => this.updateState('item', val)}
               />
               <View style={styles.innerInputViewForTwo}>

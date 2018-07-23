@@ -10,6 +10,7 @@ interface IProp {
   navigation: any
   params?: any
   image?: any
+  goto?: { screen: string }
 }
 
 const fabAtom = (props: IProp) => (
@@ -17,7 +18,7 @@ const fabAtom = (props: IProp) => (
     position="bottomRight"
     style={styles.fab}
     active={true}
-    onPress={() => props.navigation.navigate(props.routeName)}
+    onPress={() => props.navigation.navigate(props.routeName, props.goto)}
   >
     <Icon
       name={props.name}

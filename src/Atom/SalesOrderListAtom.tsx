@@ -37,7 +37,6 @@ const renderStatusIndicator = (bottomRightText: string): JSX.Element => {
       break
     }
     default:
-      console.log('Status not present.')
   }
   return <View style={[styles.statusIndicator, { backgroundColor: colour }]} />
 }

@@ -1,5 +1,11 @@
 import * as React from 'react'
-import { ScrollView, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View
+} from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 import { color } from '../Style/Color'
 import ListItemAtom from '../Atom/ListItemAtom'
@@ -47,6 +53,43 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
 
   handleDontCancelPress = () => {
     alert("Don't cancel button pressed.")
+  }
+
+  renderBelowTotal = (): JSX.Element => {
+    return (
+      <View>
+        <ListItemAtom
+          label="Amount paid"
+          value={'\u20A6 ' + '5,350.00'}
+          labelStyle={styles.text}
+          rightTextStyle={[styles.text, { textAlign: 'right' }]}
+          listItemStyle={styles.header}
+          greenText
+        />
+        <ListItemAtom
+          label="Balance"
+          value={'\u20A6 ' + '6,000.00'}
+          labelStyle={styles.text}
+          rightTextStyle={[styles.text, { textAlign: 'right' }]}
+          listItemStyle={styles.header}
+          redText
+        />
+        <ListItemAtom
+          label="Balance due date"
+          value="02-21-2018"
+          labelStyle={styles.text}
+          rightTextStyle={[styles.text, { textAlign: 'right' }]}
+          listItemStyle={styles.header}
+          redText
+        />
+        <TouchableOpacity
+          style={styles.buttonWrapper}
+          onPress={this.handleCancelPress}
+        >
+          <Text style={styles.buttonText}>Cancel Order</Text>
+        </TouchableOpacity>
+      </View>
+    )
   }
 
   render() {
@@ -98,36 +141,7 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           value={'\u20A6 ' + '11,350.00'}
           listItemStyle={styles.totalWrapper}
         />
-        <ListItemAtom
-          label="Amount paid"
-          value={'\u20A6 ' + '5,350.00'}
-          labelStyle={styles.text}
-          rightTextStyle={[styles.text, { textAlign: 'right' }]}
-          listItemStyle={styles.header}
-          greenText
-        />
-        <ListItemAtom
-          label="Balance"
-          value={'\u20A6 ' + '6,000.00'}
-          labelStyle={styles.text}
-          rightTextStyle={[styles.text, { textAlign: 'right' }]}
-          listItemStyle={styles.header}
-          redText
-        />
-        <ListItemAtom
-          label="Balance due date"
-          value="02-21-2018"
-          labelStyle={styles.text}
-          rightTextStyle={[styles.text, { textAlign: 'right' }]}
-          listItemStyle={styles.header}
-          redText
-        />
-        <TouchableOpacity
-          style={styles.buttonWrapper}
-          onPress={this.handleCancelPress}
-        >
-          <Text style={styles.buttonText}>Cancel Order</Text>
-        </TouchableOpacity>
+        {this.renderBelowTotal()}
         <WarningModal
           headerText="Warning!"
           bodyText="You cannot undo this action, do you still want to cancel this order ?"

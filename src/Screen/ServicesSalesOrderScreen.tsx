@@ -120,6 +120,7 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
           type="Entypo"
           routeName="NewSalesOrder"
           navigation={this.props.navigation}
+          goto={{ screen: 'services' }}
         />
       </View>
     )

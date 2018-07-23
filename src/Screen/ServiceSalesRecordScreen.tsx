@@ -16,6 +16,7 @@ export default class ServiceSalesRecordScreen extends Component {
       )
     }
   }
+
   renderList = ({ item }: any): JSX.Element => {
     return (
       <SalesOrderListAtom
@@ -27,6 +28,7 @@ export default class ServiceSalesRecordScreen extends Component {
       />
     )
   }
+
   render() {
     const DATA: {
       productName: string
