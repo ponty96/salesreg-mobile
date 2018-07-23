@@ -1,11 +1,5 @@
 import * as React from 'react'
-import {
-  View,
-  Text,
-  StyleSheet,
-  Dimensions,
-  KeyboardAvoidingView
-} from 'react-native'
+import { View, Text, StyleSheet, KeyboardAvoidingView } from 'react-native'
 import { ScrollView } from 'react-native-gesture-handler'
 import FormImageAtom from './FormImageAtom'
 import InputAtom from './InputAtom'
