@@ -73,6 +73,7 @@ export default class ServiceSalesRecordScreen extends Component {
           label="TOTAL SALES"
           value={'\u20A6 ' + '62,600.00'}
           listItemStyle={styles.footer}
+          rightTextStyle={styles.totalAmount}
         />
       </View>
     )
@@ -84,9 +85,14 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary
   },
   footer: {
-    backgroundColor: color.selling
+    backgroundColor: color.selling,
+    paddingRight: 48,
+    paddingLeft: 48
   },
   listWrapper: {
     marginBottom: 0
+  },
+  totalAmount: {
+    fontSize: 16
   }
 })

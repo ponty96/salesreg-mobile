@@ -82,12 +82,6 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           listItemStyle={styles.header}
           redText
         />
-        <TouchableOpacity
-          style={styles.buttonWrapper}
-          onPress={this.handleCancelPress}
-        >
-          <Text style={styles.buttonText}>Cancel Order</Text>
-        </TouchableOpacity>
       </View>
     )
   }
@@ -110,6 +104,7 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
         bottomRight: '9,000.00'
       }
     ]
+    const { navigation } = this.props
     return (
       <ScrollView style={styles.container}>
         <ListItemAtom
@@ -141,7 +136,16 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           value={'\u20A6 ' + '11,350.00'}
           listItemStyle={styles.totalWrapper}
         />
-        {this.renderBelowTotal()}
+        {navigation.getParam('screen') === 'service'
+          ? undefined
+          : this.renderBelowTotal()}
+        {/*<View style={styles.belowTotalView} />*/}
+        <TouchableOpacity
+          style={styles.buttonWrapper}
+          onPress={this.handleCancelPress}
+        >
+          <Text style={styles.buttonText}>Cancel Order</Text>
+        </TouchableOpacity>
         <WarningModal
           headerText="Warning!"
           bodyText="You cannot undo this action, do you still want to cancel this order ?"
@@ -199,5 +203,11 @@ const styles = StyleSheet.create({
     color: color.principal,
     fontSize: 14,
     fontFamily: 'SourceSansPro'
-  }
+  } /*,
+    belowTotalView: {
+    marginTop: 8,
+    borderBottomColor: color.listBorderColor,
+    backgroundColor: color.secondary,
+    borderBottomWidth: 1
+  }*/
 })
