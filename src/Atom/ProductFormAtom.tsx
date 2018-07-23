@@ -49,14 +49,13 @@ export default class ProductFormAtom extends React.Component<IProps, any> {
     return (
       <KeyboardAvoidingView
         behavior="padding"
-        keyboardVerticalOffset={60}
+        keyboardVerticalOffset={90}
         style={styles.itemsContainer}
       >
         <ScrollView>
           <FormImageAtom
             form="product"
             getValue={this.getImage}
-            getName={val => this.updateState('product', val)}
             source={this.state.image.uri}
           />
           <FormContainerAtom headerText={this.props.header}>
@@ -82,23 +81,20 @@ export default class ProductFormAtom extends React.Component<IProps, any> {
               underneathStyle={styles.underneathStyle}
             />
           </FormContainerAtom>
-          <View style={styles.mainView}>
-            <Text style={styles.headerText}>Cost/Price</Text>
-            <View style={styles.inputViewForTwo}>
-              <View>
-                <Text style={styles.blueSideText}>
-                  *Cost Price/each ({'\u20A6'})
-                </Text>
-              </View>
-              <View style={{ width: '60%' }}>
-                <InputAtom
-                  label=""
-                  getValue={val => this.updateState('costPrice', val)}
-                  keyboardType="numeric"
-                />
-              </View>
+          <FormContainerAtom headerText="Cost/Price" change={true}>
+            <View>
+              <Text style={styles.blueSideText}>
+                *Cost Price/each ({'\u20A6'})
+              </Text>
             </View>
-          </View>
+            <View style={{ width: '60%' }}>
+              <InputAtom
+                label=""
+                getValue={val => this.updateState('costPrice', val)}
+                keyboardType="numeric"
+              />
+            </View>
+          </FormContainerAtom>
         </ScrollView>
       </KeyboardAvoidingView>
     )
@@ -115,17 +111,6 @@ const styles = StyleSheet.create({
   mainView: {
     backgroundColor: 'transparent',
     width: '100%'
-  },
-  inputViewForTwo: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    flexDirection: 'row',
-    alignItems: 'center',
-    padding: 10,
-    marginTop: 16,
-    marginBottom: 16,
-    borderRadius: 3
   },
   editDetailsWrapper: {
     marginTop: 30,

@@ -42,6 +42,7 @@ import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
 import HomeScreen from '../Screen/HomeScreen'
 import EmployeesScreen from '../Screen/EmployeesScreen'
+import EmployeeForm from '../Components/EmployeeForm'
 import VendorScreen from '../Screen/VendorScreen'
 import PurchaseScreen from '../Screen/PurchaseScreen'
 import SalesScreen from '../Screen/SalesScreen'
@@ -120,6 +121,9 @@ const businessStack = StackNavigator(
     },
     Employees: {
       screen: EmployeesScreen
+    },
+    NewEmployee: {
+      screen: EmployeeForm
     },
     Vendor: {
       screen: VendorScreen

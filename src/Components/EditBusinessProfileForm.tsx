@@ -65,7 +65,6 @@ class EditBusinessProfileForm extends Component<IProps, any> {
         <ScrollView>
           <FormImageAtom
             form="business"
-            getName={val => this.updateState('businessName', val)}
             getValue={this.getImage}
             source={this.state.image.uri}
           />
@@ -82,10 +81,6 @@ class EditBusinessProfileForm extends Component<IProps, any> {
               getValue={val => this.updateState('email', val)}
               keyboardType="email-address"
             />
-            {/*<InputAtom
-              label="Address"
-              getValue={val => this.updateState('address', val)}
-            />*/}
             <GoogleInputAtom
               label="Address City, State"
               getValue={(val: string) => this.updateState('address', val)}

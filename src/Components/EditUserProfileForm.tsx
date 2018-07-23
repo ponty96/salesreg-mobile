@@ -52,7 +52,6 @@ class EditUserProfileForm extends Component<IProps, any> {
           <Form>
             <FormImageAtom
               form="user"
-              getName={val => this.updateState('userName', val)}
               getValue={this.getImage}
               source={this.state.image.uri}
             />

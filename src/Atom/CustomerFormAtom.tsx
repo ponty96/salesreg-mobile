@@ -1,11 +1,5 @@
 import * as React from 'react'
-import {
-  View,
-  StyleSheet,
-  KeyboardAvoidingView,
-  Dimensions,
-  Text
-} from 'react-native'
+import { View, StyleSheet, KeyboardAvoidingView } from 'react-native'
 import InputAtom from './InputAtom'
 import PickerAtom from './PickerAtom'
 import ButtonAtom from './ButtonAtom'
@@ -15,6 +9,8 @@ import { Form } from 'native-base'
 import { color } from '../Style/Color'
 import FormContainerAtom from './FormContainerAtom'
 import GoogleInputAtom from './GoogleInputAtom'
+import FormContainerHalfAtom from './FormContainerHalfAtom'
+import FormContainerWrappedAtom from './FormContainerWrappedAtom'
 
 interface IProps {
   navigation: any
@@ -84,7 +80,6 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
           <Form>
             <FormImageAtom
               form={this.props.type}
-              getName={val => this.updateState('customerName', val)}
               getValue={this.getImage}
               source={this.state.image.uri}
             />
@@ -110,55 +105,34 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
                 }}
               />
             </FormContainerAtom>
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>{this.props.firstHeader}</Text>
-              <View style={styles.inputViewForTwoAndMore}>
-                <View style={styles.innerInputViewForTwo}>
-                  <View style={styles.sideTextWithInput}>
-                    <Text style={styles.blueSideText}>Phone</Text>
-                  </View>
-                  <View style={styles.width70}>
-                    <InputAtom
-                      getValue={val => this.updateState('phone', val)}
-                      keyboardType="numeric"
-                    />
-                  </View>
-                </View>
-                <View style={styles.innerInputViewForTwo}>
-                  <View style={styles.sideTextWithInput}>
-                    <Text style={styles.blueSideText}>Mobile</Text>
-                  </View>
-                  <View style={styles.width70}>
-                    <InputAtom
-                      getValue={val => this.updateState('mobile', val)}
-                      keyboardType="numeric"
-                    />
-                  </View>
-                </View>
-                <View style={styles.innerInputViewForTwo}>
-                  <View style={styles.sideTextWithInput}>
-                    <Text style={styles.blueSideText}>Fax</Text>
-                  </View>
-                  <View style={styles.width70}>
-                    <InputAtom
-                      getValue={val => this.updateState('fax', val)}
-                      keyboardType="numeric"
-                    />
-                  </View>
-                </View>
-                <View style={styles.innerInputViewForTwo}>
-                  <View style={styles.sideTextWithInput}>
-                    <Text style={styles.blueSideText}>Email</Text>
-                  </View>
-                  <View style={styles.width70}>
-                    <InputAtom
-                      getValue={val => this.updateState('email', val)}
-                      keyboardType="email-address"
-                    />
-                  </View>
-                </View>
-              </View>
-            </View>
+            <FormContainerHalfAtom
+              firstHeader={this.props.firstHeader}
+              sideText1="Phone"
+              sideText2="Mobile"
+              sideText3="Fax"
+              sideText4="Email"
+            >
+              <InputAtom
+                getValue={val => this.updateState('phone', val)}
+                keyboardType="numeric"
+                key="phone"
+              />,
+              <InputAtom
+                getValue={val => this.updateState('mobile', val)}
+                keyboardType="numeric"
+                key="mobile"
+              />,
+              <InputAtom
+                getValue={val => this.updateState('fax', val)}
+                keyboardType="numeric"
+                key="fax"
+              />,
+              <InputAtom
+                getValue={val => this.updateState('email', val)}
+                keyboardType="email-address"
+                key="email"
+              />
+            </FormContainerHalfAtom>
             <FormContainerAtom headerText="Banking detail">
               <InputAtom
                 label="Bank name"
@@ -209,33 +183,29 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
                 />
               </View>
             </FormContainerAtom>
-            <View style={styles.mainView}>
-              <Text style={styles.headerText}>Other details</Text>
-              <View style={styles.inputViewForTwoAndMore}>
-                <View style={styles.innerInputViewForTwo}>
-                  <View style={styles.wrappedInputLeft}>
-                    <InputAtom
-                      label="Birthday"
-                      getValue={val => this.updateState('birthday', val)}
-                    />
-                  </View>
-                  <View style={[styles.wrappedInputLeft, { paddingRight: 12 }]}>
-                    <InputAtom
-                      label="Marital Status"
-                      getValue={val => this.updateState('maritalStatus', val)}
-                    />
-                  </View>
-                </View>
-                <View style={styles.innerInputViewForTwo}>
-                  <View style={styles.wrappedInputLeft}>
-                    <InputAtom
-                      label="Marriage Anniversary"
-                      getValue={val => this.updateState('marriageAnn', val)}
-                    />
-                  </View>
-                </View>
+            <FormContainerWrappedAtom>
+              <View style={styles.wrappedInputLeft} key="birthday">
+                <InputAtom
+                  label="Birthday"
+                  getValue={val => this.updateState('birthday', val)}
+                />
+              </View>,
+              <View
+                style={[styles.wrappedInputLeft, { paddingRight: 12 }]}
+                key="maritalStatus"
+              >
+                <InputAtom
+                  label="Marital Status"
+                  getValue={val => this.updateState('maritalStatus', val)}
+                />
               </View>
-            </View>
+              <View style={styles.wrappedInputLeft} key="marriageAnn">
+                <InputAtom
+                  label="Marriage Anniversary"
+                  getValue={val => this.updateState('marriageAnn', val)}
+                />
+              </View>
+            </FormContainerWrappedAtom>
             <FormContainerAtom headerText="Likes">
               <InputAtom
                 label="Like"
@@ -270,64 +240,6 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
 }
 
 const styles = StyleSheet.create({
-  imgContainer: {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 150,
-    width: 150,
-    borderRadius: 75,
-    marginVertical: 16
-  },
-  mainView: {
-    backgroundColor: 'transparent',
-    width: '100%'
-  },
-  inputViewForTwo: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    flexDirection: 'row',
-    alignItems: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    padding: 3,
-    marginTop: 16,
-    marginBottom: 16,
-    borderRadius: 3
-  },
-  innerInputViewForTwo: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  inputViewForTwoAndMore: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    flexDirection: 'column',
-    paddingLeft: 10,
-    paddingRight: 10,
-    padding: 3,
-    marginTop: 16,
-    marginBottom: 16,
-    borderRadius: 3
-  },
-  innerStart: {
-    width: '50%',
-    flex: 1,
-    alignSelf: 'flex-start'
-  },
-  innerEnd: {
-    width: '50%',
-    flex: 1,
-    alignSelf: 'center'
-  },
-  underText: {
-    marginRight: '50%',
-    fontSize: 10
-  },
   pickerStyle: {
     width: '100%',
     height: 35
@@ -335,18 +247,6 @@ const styles = StyleSheet.create({
   itemsContainer: {
     flex: 4,
     backgroundColor: '#F6F6F6'
-  },
-  headerText: {
-    alignSelf: 'center',
-    fontSize: 14,
-    color: color.button,
-    fontFamily: 'SourceSansPro_Semibold'
-  },
-  blueSideText: {
-    fontSize: 16,
-    paddingLeft: 16,
-    color: color.button,
-    fontFamily: 'SourceSansPro_Semibold'
   },
   sendAnother: {
     color: color.button,
@@ -361,12 +261,5 @@ const styles = StyleSheet.create({
   wrappedInputLeft: {
     width: '50%',
     paddingLeft: 12
-  },
-  sideTextWithInput: {
-    width: '25%',
-    alignItems: 'center'
-  },
-  width70: {
-    width: '70%'
   }
 })

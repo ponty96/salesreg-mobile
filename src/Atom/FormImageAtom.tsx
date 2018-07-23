@@ -12,10 +12,7 @@ import { color } from '../Style/Color'
 
 interface IProps {
   source: string
-  placeholder?: string
   imgStyle?: object
-  name?: string
-  getName: (name: string) => any
   getValue?: any
   form: string
 }
@@ -118,18 +115,6 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary,
     borderRadius: 3
   },
-  inputView: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    alignContent: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    padding: 3,
-    borderRadius: 3,
-    marginTop: 16,
-    marginBottom: 16
-  },
   selfAlign: {
     alignSelf: 'flex-start'
   },
@@ -161,13 +146,5 @@ const styles = StyleSheet.create({
   imgPlaceholderText: {
     fontWeight: 'bold',
     fontSize: 20
-  },
-  menuColor: {
-    color: color.menu
-  },
-  sendAnother: {
-    color: color.button,
-    fontSize: 16,
-    fontFamily: 'SourceSansPro_Semibold'
   }
 })
