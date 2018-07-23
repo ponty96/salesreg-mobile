@@ -4,6 +4,7 @@ import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 import { color } from '../Style/Color'
 import ListItemAtom from '../Atom/ListItemAtom'
 import CustomHeader from '../Components/CustomHeader'
+import EmptyList from '../Components/EmptyList'
 
 export default class ServiceSalesRecordScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
@@ -36,7 +37,7 @@ export default class ServiceSalesRecordScreen extends Component {
       number: string
       price: string
     }[] = [
-      {
+      /*{
         productName: '1 million braids',
         customerName: 'Chito Amanda',
         number: '1',
@@ -59,7 +60,7 @@ export default class ServiceSalesRecordScreen extends Component {
         customerName: 'Caroline',
         number: '6',
         price: '60,000.00'
-      }
+      }*/
     ]
 
     return (
@@ -68,13 +69,25 @@ export default class ServiceSalesRecordScreen extends Component {
           data={DATA}
           renderItem={this.renderList}
           keyExtractor={(item, index) => item.productName + index}
+          ListEmptyComponent={
+            <EmptyList
+              type={{
+                Text:
+                  'You have no services sold yet. Press the back arrow and start adding orders.'
+              }}
+            />
+          }
         />
-        <ListItemAtom
-          label="TOTAL SALES"
-          value={'\u20A6 ' + '62,600.00'}
-          listItemStyle={styles.footer}
-          rightTextStyle={styles.totalAmount}
-        />
+        {DATA.length < 1 ? (
+          undefined
+        ) : (
+          <ListItemAtom
+            label="TOTAL SALES"
+            value={'\u20A6 ' + '62,600.00'}
+            listItemStyle={styles.footer}
+            rightTextStyle={styles.totalAmount}
+          />
+        )}
       </View>
     )
   }
@@ -82,7 +95,8 @@ export default class ServiceSalesRecordScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: color.secondary
+    backgroundColor: color.secondary,
+    flex: 1
   },
   footer: {
     backgroundColor: color.selling,
