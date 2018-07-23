@@ -1,38 +1,23 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import UserProfile from '../Components/UserProfile'
-import CustomHeader from '../Components/CustomHeader'
+import UserProfile from '../Components/UserProfile';
+import CustomHeader from '../Components/CustomHeader';
+import Auth from '../services/auth';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  list: any
+  list: any;
+  fullName: string;
 }
 
 class UserProfileScreen extends Component<IProps, IState> {
   state = {
-    // item: this.props.navigation.state.params.data
-    list: [
-      {
-        section: 'Gender',
-        value: 'Female'
-      },
-      {
-        section: 'Phone',
-        value: '09034567889'
-      },
-      {
-        section: 'Email',
-        value: 'ayo@gmail.com'
-      },
-      {
-        section: 'Address',
-        value: '6 Salem street Morogbo, Lagos'
-      }
-    ]
-  }
+    list: {},
+    fullName: ''
+  };
 
   static navigationOptions = ({ navigation }: any) => {
     return {
@@ -40,14 +25,35 @@ class UserProfileScreen extends Component<IProps, IState> {
         <CustomHeader
           title="User profile"
           onBackPress={() => navigation.goBack()}
+          rightText="Edit"
+          showRight
+          firstRightIcon="pencil"
+          firstRightIconType="MaterialCommunityIcons"
+          onPressRightButton={() => navigation.navigate('EditUserProfile')}
         />
       )
-    }
+    };
+  };
+
+  componentDidMount() {
+    this.updateState();
   }
 
+  updateState = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser());
+    this.setState({
+      list: {
+        Gender: user.gender || '',
+        Phone: user.phone || '',
+        Email: user.email,
+        Address: user.address || ''
+      },
+      fullName: `${user.firstName} ${user.lastName}`
+    });
+  };
   render() {
-    return <UserProfile list={this.state.list} businessName="Ayo Doe" />
+    return <UserProfile list={this.state.list} name={this.state.fullName} />;
   }
 }
 
-export default UserProfileScreen
+export default UserProfileScreen;

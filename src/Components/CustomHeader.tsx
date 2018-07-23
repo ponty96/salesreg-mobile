@@ -1,20 +1,20 @@
-import { StyleSheet, View, Text } from 'react-native'
-import React from 'react'
-import { Left, Right, Button, Icon, Title } from 'native-base'
-import { color } from '../Style/Color'
+import { StyleSheet, View, Text } from 'react-native';
+import React from 'react';
+import { Left, Right, Button, Icon, Title } from 'native-base';
+import { color } from '../Style/Color';
 
 interface IProps {
-  showMenu?: boolean
-  title: string
-  firstRightIcon?: string
-  firstRightIconType?: any
-  rightText?: string
-  onBackPress?: () => void
-  onMenuPress?: () => void
-  onPressFirstRightIcon?: () => void
-  onPressRightButton?: () => void
-  navigation?: object
-  showRight?: boolean
+  showMenu?: boolean;
+  title: string;
+  firstRightIcon?: string;
+  firstRightIconType?: any;
+  rightText?: string;
+  onBackPress?: () => void;
+  onMenuPress?: () => void;
+  onPressFirstRightIcon?: () => void;
+  onPressRightButton?: () => void;
+  navigation?: object;
+  showRight?: boolean;
 }
 
 const customHeader = (props: IProps) => {
@@ -69,10 +69,10 @@ const customHeader = (props: IProps) => {
         <Right />
       )}
     </View>
-  )
-}
+  );
+};
 
-export default customHeader
+export default customHeader;
 
 const styles = StyleSheet.create({
   headerIcon: {
@@ -91,7 +91,8 @@ const styles = StyleSheet.create({
     fontSize: 16,
     paddingLeft: 0,
     marginLeft: 0,
-    paddingTop: 24
+    paddingTop: 24,
+    color: '#fff'
   },
   rightWrapper: {
     flexDirection: 'row',
@@ -119,4 +120,4 @@ const styles = StyleSheet.create({
     width: 25,
     left: 20
   }
-})
+});
