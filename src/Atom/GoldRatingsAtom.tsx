@@ -1,6 +1,7 @@
 import * as React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import StarRating from 'react-native-star-rating'
+import { color } from '../Style/Color'
 
 interface IProps {
   showText: boolean | true
@@ -67,7 +68,7 @@ class GoldRatings extends React.Component<IProps, any> {
         )}
         <StarRating
           disabled={false}
-          fullStarColor="#FFDF00"
+          fullStarColor={color.selling} // "#FFDF00"
           maxStars={5}
           rating={this.state.starCount}
           selectedStar={(rating: number) => this.onStarRatingPress(rating)}

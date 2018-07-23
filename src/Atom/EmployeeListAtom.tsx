@@ -7,7 +7,7 @@ import GoldRatings from './GoldRatingsAtom'
 
 interface IProps {
   items?: {
-    images: string
+    image: string
     customerName: string
     location: string
     position: string
@@ -20,8 +20,8 @@ class EmployeeListAtom extends React.Component<IProps, any> {
     const defaultImg =
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
     const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
-    if (this.props.items.images !== '') {
+      this.props.items.image !== '' ? this.props.items.image : defaultImg
+    if (this.props.items.image === '') {
       return (
         <View style={styles.textIconCont}>
           <Text style={{ fontFamily: 'SourceSansPro_Bold', fontSize: 25 }}>
@@ -38,11 +38,11 @@ class EmployeeListAtom extends React.Component<IProps, any> {
       <ListItem style={styles.row} onPress={this.props.onPress}>
         <Left style={styles.view1}>{this.renderAvatar()}</Left>
         <Body style={styles.view2}>
-          <Text>{this.props.items.customerName}</Text>
-          <Text>{this.props.items.location}</Text>
+          <Text style={styles.textCus}>{this.props.items.customerName}</Text>
+          <Text style={styles.textLoc}>{this.props.items.location}</Text>
         </Body>
         <Right style={styles.view3}>
-          <Text>{this.props.items.position}</Text>
+          <Text style={styles.textPos}>{this.props.items.position}</Text>
           <GoldRatings showText={false} />
         </Right>
       </ListItem>
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
     flex: 1,
     flexDirection: 'column',
     alignItems: 'flex-end',
-    width: '35%',
+    width: '40%',
     marginLeft: '20%'
   },
   textIconCont: {
@@ -110,5 +110,17 @@ const styles = StyleSheet.create({
     margin: 8,
     justifyContent: 'center',
     alignItems: 'center'
+  },
+  textCus: {
+    fontSize: 14,
+    fontFamily: 'SourceSansPro_Semibold'
+  },
+  textLoc: {
+    fontSize: 14,
+    fontFamily: 'SourceSansPro'
+  },
+  textPos: {
+    fontSize: 16,
+    fontFamily: 'SourceSansPro_Semibold'
   }
 })
