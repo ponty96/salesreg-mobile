@@ -7,6 +7,7 @@ interface Empty {
   verifyMainList?: string
   style?: any
 }
+
 const emptyList = (prop: { type: Empty }) => {
   if (prop.type.verifyMainList === 'main') {
     return (
@@ -42,7 +43,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.grey,
     padding: 16,
     alignSelf: 'center',
-    marginTop: 16,
+    marginVertical: 16,
     borderRadius: 2
   },
   normalText: {

@@ -48,11 +48,12 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
   }
 
   handleContinuePress = () => {
-    alert('Continue button pressed.')
+    alert('OK button pressed.')
   }
 
   handleDontCancelPress = () => {
-    alert("Don't cancel button pressed.")
+    this.props.navigation.navigate('SalesOrderStatus', { screen: 'service' })
+    this.setState({ visible: false })
   }
 
   renderBelowTotal = (): JSX.Element => {
@@ -84,6 +85,39 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
         />
       </View>
     )
+  }
+
+  renderModal = () => {
+    const { getParam } = this.props.navigation
+
+    if (getParam('screen') === 'service')
+      return (
+        <WarningModal
+          headerText="Cancel order!"
+          bodyText="You cannot cancel a delivered order. Recall this order to be able to cancel."
+          firstButtonText="OK"
+          firstButtonTextColor={color.black}
+          secondButtonText="Go to status"
+          visible={this.state.visible}
+          onBackPress={() => this.setState({ visible: false })}
+          onPressTopButton={() => this.handleContinuePress()}
+          onPressBottomButton={() => this.handleDontCancelPress()}
+        />
+      )
+    else
+      return (
+        <WarningModal
+          headerText="Warning!"
+          bodyText="You cannot undo this action, do you still want to cancel this order ?"
+          firstButtonText="Continue"
+          firstButtonTextColor={color.red}
+          secondButtonText="Don't cancel"
+          visible={this.state.visible}
+          onBackPress={() => this.setState({ visible: false })}
+          onPressTopButton={() => this.handleContinuePress}
+          onPressBottomButton={() => this.handleDontCancelPress}
+        />
+      )
   }
 
   render() {
@@ -139,24 +173,13 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
         {navigation.getParam('screen') === 'service'
           ? undefined
           : this.renderBelowTotal()}
-        {/*<View style={styles.belowTotalView} />*/}
         <TouchableOpacity
           style={styles.buttonWrapper}
           onPress={this.handleCancelPress}
         >
           <Text style={styles.buttonText}>Cancel Order</Text>
         </TouchableOpacity>
-        <WarningModal
-          headerText="Warning!"
-          bodyText="You cannot undo this action, do you still want to cancel this order ?"
-          firstButtonText="Continue"
-          firstButtonTextColor={color.red}
-          secondButtonText="Don't cancel"
-          visible={this.state.visible}
-          onBackPress={() => this.setState({ visible: false })}
-          onPressTopButton={() => this.handleContinuePress}
-          onPressBottomButton={() => this.handleDontCancelPress}
-        />
+        {this.renderModal()}
       </ScrollView>
     )
   }
@@ -203,11 +226,5 @@ const styles = StyleSheet.create({
     color: color.principal,
     fontSize: 14,
     fontFamily: 'SourceSansPro'
-  } /*,
-    belowTotalView: {
-    marginTop: 8,
-    borderBottomColor: color.listBorderColor,
-    backgroundColor: color.secondary,
-    borderBottomWidth: 1
-  }*/
+  }
 })

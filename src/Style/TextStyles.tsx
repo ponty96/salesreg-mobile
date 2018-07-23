@@ -18,5 +18,8 @@ export const textStyles = StyleSheet.create({
   },
   boldText: {
     fontFamily: 'SourceSansPro_Semibold'
+  },
+  redText: {
+    color: color.red
   }
 })

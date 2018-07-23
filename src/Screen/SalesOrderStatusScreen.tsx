@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
-import { ScrollView, StyleSheet, View } from 'react-native'
+import { ScrollView, StyleSheet, View, Text } from 'react-native'
 import EmptyList from '../Components/EmptyList'
 import SelectStatusAtom from '../Atom/SelectStatusAtom'
 import { color } from '../Style/Color'
 import SaveCancelButton from '../Container/SaveCancelButton'
 import CustomHeader from '../Components/CustomHeader'
+import { textStyles } from '../Style/TextStyles'
 
 interface IProps {
   navigation: any
@@ -95,12 +96,16 @@ export default class SalesOrderStatusScreen extends Component<IProps, IState> {
   }
 
   render(): JSX.Element {
+    const { getParam } = this.props.navigation
     return (
       <View style={styles.container}>
         <EmptyList
           type={{
             Text:
-              'This order cannot be deleted nor canceled after status changes from pending to any other state.',
+              getParam('screen') === 'service'
+                ? 'This order cannot be deleted after a status change from pending to any other state.\n' +
+                  '\nApart from pending orders, no order can be canceled unless they have been recalled.'
+                : 'This order cannot be deleted nor canceled after status changes from pending to any other state.',
             style: { marginBottom: 8 }
           }}
         />
@@ -136,6 +141,19 @@ export default class SalesOrderStatusScreen extends Component<IProps, IState> {
             styleWrapper={styles.bottomSpace}
             onPress={() => this.handleRadioClick('recalled')}
           />
+          {getParam('screen') === 'service' ? (
+            <Text
+              style={[
+                textStyles.normalText,
+                textStyles.redText,
+                styles.bottomText
+              ]}
+            >
+              You cannot recall a service order
+            </Text>
+          ) : (
+            undefined
+          )}
         </ScrollView>
         <SaveCancelButton
           positiveButtonName="DONE"
@@ -152,5 +170,9 @@ const styles = StyleSheet.create({
   },
   bottomSpace: {
     marginBottom: 16
+  },
+  bottomText: {
+    marginLeft: 22,
+    marginBottom: 32
   }
 })

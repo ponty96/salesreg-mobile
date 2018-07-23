@@ -79,7 +79,7 @@ export default class ServiceSalesRecordScreen extends Component {
           }
         />
         {DATA.length < 1 ? (
-          undefined
+          <View style={styles.viewUnderEmptyList} />
         ) : (
           <ListItemAtom
             label="TOTAL SALES"
@@ -95,8 +95,7 @@ export default class ServiceSalesRecordScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: color.secondary,
-    flex: 1
+    backgroundColor: color.secondary
   },
   footer: {
     backgroundColor: color.selling,
@@ -108,5 +107,9 @@ const styles = StyleSheet.create({
   },
   totalAmount: {
     fontSize: 16
+  },
+  viewUnderEmptyList: {
+    flex: 1,
+    backgroundColor: color.secondary
   }
 })

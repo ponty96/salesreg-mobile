@@ -77,8 +77,7 @@ const styles = StyleSheet.create({
   },
   header: {
     fontFamily: 'SourceSansPro_Semibold',
-    fontSize: 14,
-    backgroundColor: color.secondary
+    fontSize: 14
   },
   buttonWrapper: {
     justifyContent: 'center',
