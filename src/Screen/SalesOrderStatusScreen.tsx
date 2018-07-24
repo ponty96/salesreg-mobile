@@ -6,6 +6,7 @@ import { color } from '../Style/Color'
 import SaveCancelButton from '../Container/SaveCancelButton'
 import CustomHeader from '../Components/CustomHeader'
 import { textStyles } from '../Style/TextStyles'
+import OrderRecallModal from '../Components/OrderRecallModal'
 
 interface IProps {
   navigation: any
@@ -17,6 +18,7 @@ interface IState {
   delivering: boolean
   delivered: boolean
   recalled: boolean
+  visible: boolean
 }
 
 export default class SalesOrderStatusScreen extends Component<IProps, IState> {
@@ -36,7 +38,8 @@ export default class SalesOrderStatusScreen extends Component<IProps, IState> {
     pendingDelivery: false,
     delivering: false,
     delivered: false,
-    recalled: false
+    recalled: false,
+    visible: false
   }
 
   handleRadioClick = (pressed: string): void => {
@@ -93,6 +96,10 @@ export default class SalesOrderStatusScreen extends Component<IProps, IState> {
       }
       default:
     }
+  }
+
+  handleOKPress = () => {
+    alert('OK button pressed.')
   }
 
   render(): JSX.Element {
@@ -158,6 +165,17 @@ export default class SalesOrderStatusScreen extends Component<IProps, IState> {
         <SaveCancelButton
           positiveButtonName="DONE"
           navigation={this.props.navigation}
+          createfunc={() => this.setState({ visible: true })}
+        />
+        <OrderRecallModal
+          headerText="Order recall!"
+          bodyText="You cannot recall a sevice order ?"
+          firstButtonText="OK"
+          secondButtonText="Close"
+          visible={this.state.visible}
+          onBackPress={() => this.setState({ visible: false })}
+          onPressTopButton={this.handleOKPress}
+          onPressBottomButton={() => this.setState({ visible: false })}
         />
       </View>
     )

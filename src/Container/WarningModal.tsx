@@ -1,39 +1,39 @@
-import { Form, Icon } from 'native-base';
-import * as React from 'react';
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import { Form, Icon } from 'native-base'
+import * as React from 'react'
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 
-import ButtonAtom from '../Atom/ButtonAtom';
-import ModalAtom from '../Atom/ModalAtom';
-import { color } from '../Style/Color';
+import ButtonAtom from '../Atom/ButtonAtom'
+import ModalAtom from '../Atom/ModalAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  getValue?: (a: string) => void;
-  closeModal?: () => void;
-  headerText?: string;
-  limit?: any;
-  name?: string;
-  type?: 'customer' | 'business';
-  visibility: boolean;
+  getValue?: (a: string) => void
+  closeModal?: () => void
+  headerText?: string
+  limit?: any
+  name?: string
+  type?: 'customer' | 'business'
+  visibility: boolean
 }
 interface IState {
-  visibility: boolean;
+  visibility: boolean
 }
 
 class DebtLimit extends React.PureComponent<IProps, IState> {
   static defaultProps: IProps = {
     visibility: false
-  };
+  }
   state: IState = {
     visibility: this.props.visibility
-  };
+  }
 
   grant = () => {
     // console.log("grant is pressed");
-  };
+  }
 
   stop = () => {
     // console.log("stop is pressed");
-  };
+  }
 
   renderHeader = () => {
     return (
@@ -49,8 +49,8 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
           <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    );
-  };
+    )
+  }
 
   renderBody = () => {
     return (
@@ -86,8 +86,8 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
           />
         </Form>
       </View>
-    );
-  };
+    )
+  }
 
   renderFooter = () => {
     return (
@@ -119,8 +119,8 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
           )}
         </Text>
       </View>
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -130,11 +130,11 @@ class DebtLimit extends React.PureComponent<IProps, IState> {
         header={this.renderHeader()}
         footer={this.renderFooter()}
       />
-    );
+    )
   }
 }
 
-export default DebtLimit;
+export default DebtLimit
 
 const styles = StyleSheet.create({
   modalHeader: {
@@ -178,4 +178,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 8,
     paddingHorizontal: 0
   }
-});
+})

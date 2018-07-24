@@ -52,11 +52,11 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
   }
 
   handleConfirmedPress = () => {
-    alert('Continue button pressed.')
+    alert('Confirmed button pressed.')
   }
 
   handleEditPress = () => {
-    alert("Don't cancel button pressed.")
+    alert('Edit button pressed.')
   }
 
   render() {
@@ -232,7 +232,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
           visible={this.state.visible}
           onBackPress={() => this.setState({ visible: false })}
           onPressTopButton={this.handleConfirmedPress}
-          onPressBottomButton={() => this.handleEditPress}
+          onPressBottomButton={this.handleEditPress}
           modalStyle={styles.modalContainer}
         >
           <View style={styles.confirmOrder}>
