@@ -104,6 +104,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
                     : 'Item name'
                 }
                 getValue={val => this.updateState('item', val)}
+                inputStyle={{ marginTop: 0 }}
               />
               <View style={styles.innerInputViewForTwo}>
                 <View style={styles.wrappedInputLeft}>
@@ -149,20 +150,28 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
                   style={[
                     textStyles.normalText,
                     textStyles.blueText,
-                    styles.taxRate
+                    styles.taxRate,
+                    styles.payingMethodText
                   ]}
                 >
                   Paying method
                 </Text>
-                <View style={styles.picker}>
+                <View style={[styles.picker, styles.pickerWrapper]}>
                   <PickerAtom
                     list={['Cash', 'Cheque', 'Direct transfer', 'POS']}
                     placeholder="Cash"
                     handleSelection={val => this.updateState('payMethod', val)}
+                    style={{ height: 30 }}
                   />
                 </View>
               </View>
-              <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
+              <View
+                style={[
+                  styles.innerInputViewForTwo,
+                  styles.itemWrapper,
+                  styles.baseAlign
+                ]}
+              >
                 <Text
                   style={[
                     textStyles.normalText,
@@ -176,10 +185,17 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
                   <InputAtom
                     getValue={val => this.updateState('taxRate', val)}
                     keyboardType="numeric"
+                    inputStyle={{ marginTop: 0 }}
                   />
                 </View>
               </View>
-              <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
+              <View
+                style={[
+                  styles.innerInputViewForTwo,
+                  styles.itemWrapper,
+                  styles.baseAlign
+                ]}
+              >
                 <Text
                   style={[
                     textStyles.normalText,
@@ -193,6 +209,8 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
                   <InputAtom
                     getValue={val => this.updateState('amountPaid', val)}
                     keyboardType="numeric"
+                    contStyle={styles.amountPaidInput}
+                    inputStyle={{ marginTop: 0 }}
                   />
                 </View>
               </View>
@@ -237,10 +255,6 @@ const styles = StyleSheet.create({
     marginTop: 0,
     marginBottom: 0
   },
-  doubleItemView: {
-    borderWidth: 1,
-    justifyContent: 'space-between'
-  },
   inputViewForTwo: {
     width: Dimensions.get('screen').width - 32,
     alignSelf: 'center',
@@ -275,14 +289,14 @@ const styles = StyleSheet.create({
   },
   itemWrapper: {
     paddingLeft: 16,
-    marginRight: 16,
-    alignItems: 'baseline'
+    marginRight: 16
   },
   picker: {
     borderBottomWidth: 1,
     borderBottomColor: color.dropdown,
     width: '70%',
-    marginLeft: 8
+    marginLeft: 8,
+    marginTop: 16
   },
   taxRate: {
     width: '30%',
@@ -296,5 +310,17 @@ const styles = StyleSheet.create({
   },
   confirmOrder: {
     marginBottom: 16
+  },
+  amountPaidInput: {
+    marginBottom: 16
+  },
+  baseAlign: {
+    alignItems: 'baseline'
+  },
+  payingMethodText: {
+    alignSelf: 'flex-end'
+  },
+  pickerWrapper: {
+    marginBottom: 5
   }
 })
