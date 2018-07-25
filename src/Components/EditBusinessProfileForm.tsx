@@ -12,8 +12,11 @@ import { color } from '../Style/Color'
 import FormImageAtom from '../Atom/FormImageAtom'
 import PickerAtom from '../Atom/PickerAtom'
 import FormContainerAtom from '../Atom/FormContainerAtom'
+import GoogleInputAtom from '../Atom/GoogleInputAtom'
 
-interface IProps {}
+interface IProps {
+  name?: string
+}
 
 class EditBusinessProfileForm extends Component<IProps, any> {
   constructor(props: IProps) {
@@ -62,19 +65,25 @@ class EditBusinessProfileForm extends Component<IProps, any> {
         <ScrollView>
           <FormImageAtom
             form="business"
-            getName={val => this.updateState('businessName', val)}
             getValue={this.getImage}
             source={this.state.image.uri}
           />
+          <FormContainerAtom headerText={'Business ID'}>
+            <InputAtom
+              label={'Business Name'}
+              defaultValue={this.props.name}
+              getValue={val => this.updateState('name', val)}
+            />
+          </FormContainerAtom>
           <FormContainerAtom headerText="Contact Address">
             <InputAtom
               label="Email Address"
               getValue={val => this.updateState('email', val)}
               keyboardType="email-address"
             />
-            <InputAtom
-              label="Address"
-              getValue={val => this.updateState('address', val)}
+            <GoogleInputAtom
+              label="Address City, State"
+              getValue={(val: string) => this.updateState('address', val)}
             />
           </FormContainerAtom>
           <FormContainerAtom headerText="What are you selling?">
@@ -136,7 +145,9 @@ const styles = StyleSheet.create({
   checkBox: {
     left: 0,
     borderWidth: 1,
-    paddingBottom: 0
+    paddingBottom: 0,
+    paddingLeft: 0,
+    marginLeft: 0
   },
   editDetailsWrapper: {
     marginTop: 30,

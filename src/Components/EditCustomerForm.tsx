@@ -13,6 +13,8 @@ class EditCustomerForm extends PureComponent<IProps> {
     return (
       <View style={styles.ababa}>
         <CustomerFormAtom
+          header={'Customer ID'}
+          name={'Customer Name'}
           navigation={this.props.navigation}
           type={'customer'}
           firstHeader={'Customer contact'}

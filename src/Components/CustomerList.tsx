@@ -14,8 +14,6 @@ interface IProps {
 interface IState {}
 
 class CustomerList extends Component<IProps, IState> {
-  // onPress = () => {}
-
   renderItem = ({ item }: any) => {
     let latestAmount =
       item.status === 'paid'

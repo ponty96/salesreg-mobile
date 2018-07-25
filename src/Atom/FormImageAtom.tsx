@@ -9,15 +9,10 @@ import {
 } from 'react-native'
 import { ImagePicker } from 'expo'
 import { color } from '../Style/Color'
-import InputAtom from './InputAtom'
-import ButtonAtom from './ButtonAtom'
 
 interface IProps {
   source: string
-  placeholder?: string
   imgStyle?: object
-  name?: string
-  getName: (name: string) => any
   getValue?: any
   form: string
 }
@@ -25,10 +20,6 @@ interface IProps {
 class FormImageAtom extends React.Component<IProps, any> {
   state = {
     image: { uri: '' }
-  }
-
-  addFromContacts = () => {
-    console.log('Added From Contacts')
   }
 
   handleSelection = async () => {
@@ -43,83 +34,37 @@ class FormImageAtom extends React.Component<IProps, any> {
       }
     }
   }
-  forTypeOfInputToDisplay = (value: string) => {
-    if (this.props.form !== 'customer' && this.props.form !== 'vendor') {
-      return (
-        <View style={styles.inputView}>
-          <InputAtom
-            label={value}
-            defaultValue={this.props.name}
-            getValue={this.props.getName}
-          />
-        </View>
-      )
-    } else {
-      return (
-        <View style={styles.inputView}>
-          <InputAtom
-            label={'*' + value}
-            defaultValue={this.props.name}
-            getValue={this.props.getName}
-          />
-          <InputAtom
-            label={'Company Name'}
-            defaultValue={this.props.name}
-            getValue={this.props.getName}
-          />
-          <ButtonAtom
-            btnText="+Add from contacts"
-            transparent={true}
-            onPress={this.addFromContacts}
-            textStyle={styles.sendAnother}
-            btnStyle={{
-              paddingHorizontal: 5,
-              alignSelf: 'flex-start',
-              marginVertical: 3
-            }}
-          />
-        </View>
-      )
-    }
-  }
+
   determineDataBasedOnProps = (form: string) => {
     let title
-    let type
     switch (form) {
       case 'business':
         title = 'Business ID'
-        type = 'Business Name'
         break
       case 'user':
         title = 'User ID'
-        type = 'User Name'
         break
       case 'product':
         title = 'Product ID'
-        type = 'Product Name'
         break
       case 'customer':
         title = 'Customer ID'
-        type = 'Contact Name'
         break
       case 'vendor':
         title = 'Vendor ID'
-        type = 'Contact Name'
         break
       default:
         title = 'Avatar'
-        type = 'Avatar name'
         break
     }
     const obj = {
-      title: title,
-      type: type
+      title: title
     }
     return obj
   }
 
   render() {
-    const { title, type } = this.determineDataBasedOnProps(this.props.form)
+    const { title } = this.determineDataBasedOnProps(this.props.form)
     return (
       <View style={styles.mainView}>
         <Text
@@ -151,7 +96,6 @@ class FormImageAtom extends React.Component<IProps, any> {
             </Text>
           </TouchableOpacity>
         </View>
-        {this.forTypeOfInputToDisplay(type)}
       </View>
     )
   }
@@ -162,25 +106,14 @@ export default FormImageAtom
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: 'transparent',
-    width: '100%'
+    width: '100%',
+    marginBottom: 16
   },
   uploadView: {
     width: Dimensions.get('screen').width - 32,
     alignSelf: 'center',
     backgroundColor: color.secondary,
     borderRadius: 3
-  },
-  inputView: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    alignContent: 'center',
-    paddingLeft: 10,
-    paddingRight: 10,
-    padding: 3,
-    borderRadius: 3,
-    marginTop: 16,
-    marginBottom: 16
   },
   selfAlign: {
     alignSelf: 'flex-start'
@@ -213,13 +146,5 @@ const styles = StyleSheet.create({
   imgPlaceholderText: {
     fontWeight: 'bold',
     fontSize: 20
-  },
-  menuColor: {
-    color: color.menu
-  },
-  sendAnother: {
-    color: color.button,
-    fontSize: 16,
-    fontFamily: 'SourceSansPro_Semibold'
   }
 })
