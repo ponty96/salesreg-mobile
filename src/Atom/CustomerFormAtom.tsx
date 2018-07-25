@@ -1,25 +1,24 @@
-import * as React from 'react'
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native'
-import InputAtom from './InputAtom'
-import PickerAtom from './PickerAtom'
-import ButtonAtom from './ButtonAtom'
-import { ScrollView } from 'react-native-gesture-handler'
-import FormImageAtom from './FormImageAtom'
-import { Form } from 'native-base'
-import { color } from '../Style/Color'
-import FormContainerAtom from './FormContainerAtom'
-import GoogleInputAtom from './GoogleInputAtom'
-import FormContainerHalfAtom from './FormContainerHalfAtom'
-import FormContainerWrappedAtom from './FormContainerWrappedAtom'
+import * as React from 'react';
+import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
+import InputAtom from './InputAtom';
+import PickerAtom from './PickerAtom';
+import ButtonAtom from './ButtonAtom';
+import { ScrollView } from 'react-native-gesture-handler';
+import FormImageAtom from './FormImageAtom';
+import { Form } from 'native-base';
+import { color } from '../Style/Color';
+import FormContainerAtom from './FormContainerAtom';
+import GoogleInputAtom from './GoogleInputAtom';
+import FormContainerWrappedAtom from './FormContainerWrappedAtom';
 
 interface IProps {
-  navigation: any
-  type: string
-  name: string
-  header: string
-  firstHeader: string
-  secondHeader: string
-  thirdHeader: string
+  navigation: any;
+  type: string;
+  name: string;
+  header: string;
+  firstHeader: string;
+  secondHeader: string;
+  thirdHeader: string;
 }
 
 export default class CustomerFormAtom extends React.Component<IProps, any> {
@@ -46,7 +45,7 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
     marriageAnn: '',
     like: '',
     dislike: ''
-  }
+  };
 
   getImage = (pic: any) => {
     this.setState((prevState: any) => ({
@@ -54,20 +53,20 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
         ...prevState.image,
         uri: pic
       }
-    }))
-  }
+    }));
+  };
   updateState = (key: string, value: any) => {
-    this.setState({ [key]: value })
-  }
+    this.setState({ [key]: value });
+  };
   addLike = () => {
-    console.log('Like added')
-  }
+    console.log('Like added');
+  };
   addDislike = () => {
-    console.log('Dislike added')
-  }
+    console.log('Dislike added');
+  };
   addFromContacts = () => {
-    console.log('Added From Contacts')
-  }
+    console.log('Added From Contacts');
+  };
 
   render() {
     return (
@@ -105,34 +104,32 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
                 }}
               />
             </FormContainerAtom>
-            <FormContainerHalfAtom
-              firstHeader={this.props.firstHeader}
-              sideText1="Phone"
-              sideText2="Mobile"
-              sideText3="Fax"
-              sideText4="Email"
-            >
+            <FormContainerAtom headerText={this.props.firstHeader}>
               <InputAtom
                 getValue={val => this.updateState('phone', val)}
                 keyboardType="numeric"
                 key="phone"
-              />,
+                label="Phone"
+              />
               <InputAtom
                 getValue={val => this.updateState('mobile', val)}
                 keyboardType="numeric"
                 key="mobile"
-              />,
+                label="Mobile"
+              />
               <InputAtom
                 getValue={val => this.updateState('fax', val)}
                 keyboardType="numeric"
                 key="fax"
-              />,
+                label="Fax"
+              />
               <InputAtom
                 getValue={val => this.updateState('email', val)}
                 keyboardType="email-address"
                 key="email"
+                label="Email Address"
               />
-            </FormContainerHalfAtom>
+            </FormContainerAtom>
             <FormContainerAtom headerText="Banking detail">
               <InputAtom
                 label="Bank name"
@@ -235,7 +232,7 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
           </Form>
         </ScrollView>
       </KeyboardAvoidingView>
-    )
+    );
   }
 }
 
@@ -262,4 +259,4 @@ const styles = StyleSheet.create({
     width: '50%',
     paddingLeft: 12
   }
-})
+});

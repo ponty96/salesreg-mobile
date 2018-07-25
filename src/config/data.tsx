@@ -99,7 +99,7 @@ export const customerList = [
     images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   }
-]
+];
 
 export const employeeList = [
   {
@@ -243,7 +243,7 @@ export const debtList = [
     images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   }
-]
+];
 
 export const mainOrderList = [
   {
@@ -323,7 +323,7 @@ export const mainOrderList = [
     tag: 'Pending Delivery',
     check: false
   }
-]
+];
 
 export const orderDetails = [
   {
@@ -359,7 +359,7 @@ export const orderDetails = [
     images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   }
-]
+];
 
 export const orderList = [
   {
@@ -635,7 +635,7 @@ export const orderList = [
     images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   }
-]
+];
 
 export const productList = [
   {
@@ -647,7 +647,7 @@ export const productList = [
     time: '02:00pm',
     amount: 9000,
     status: 'paid',
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -659,7 +659,7 @@ export const productList = [
     amount: 3500,
     status: 'paid',
     number: 4,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -671,7 +671,7 @@ export const productList = [
     amount: 2500,
     status: 'paid',
     number: 7,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -683,7 +683,7 @@ export const productList = [
     amount: 5000,
     status: 'debt',
     number: 3,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -695,7 +695,7 @@ export const productList = [
     amount: 3000,
     status: 'debt',
     number: 8,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -707,7 +707,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 24,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -719,7 +719,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 20,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280'
   },
   {
@@ -731,7 +731,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 12,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -743,7 +743,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 20,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   },
   {
@@ -755,7 +755,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 32,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280'
   },
   {
@@ -767,7 +767,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 1,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -779,7 +779,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 0.5,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   },
   {
@@ -791,10 +791,10 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 3,
-    images:
+    image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   }
-]
+];
 
 export const sections = [
   {
@@ -845,7 +845,7 @@ export const sections = [
     tag: 'Delivered | Recalled',
     check: true
   }
-]
+];
 
 export const innerAccordion = [
   {
@@ -884,4 +884,4 @@ export const innerAccordion = [
     images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   }
-]
+];
