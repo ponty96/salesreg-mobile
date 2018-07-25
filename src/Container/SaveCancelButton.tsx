@@ -43,6 +43,7 @@ export default SaveCancelButton
 
 const styles = StyleSheet.create({
   saveCancelContainer: {
+    alignSelf: 'flex-end',
     flexDirection: 'row',
     height: 65
   },

@@ -21,6 +21,8 @@ class NewCustomerForm extends PureComponent<IProps, IState> {
       <View style={styles.ababa}>
         <ScrollView>
           <CustomerFormAtom
+            header={'Customer ID'}
+            name={'Customer Name'}
             navigation={this.props.navigation}
             type={'customer'}
             firstHeader={'Customer contact'}

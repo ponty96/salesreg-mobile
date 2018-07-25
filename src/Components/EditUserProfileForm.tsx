@@ -10,9 +10,11 @@ import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 import FormImageAtom from '../Atom/FormImageAtom'
 import FormContainerAtom from '../Atom/FormContainerAtom'
+import GoogleInputAtom from '../Atom/GoogleInputAtom'
 
 interface IProps {
   phoneNumber?: string
+  name?: string
 }
 
 class EditUserProfileForm extends Component<IProps, any> {
@@ -50,10 +52,16 @@ class EditUserProfileForm extends Component<IProps, any> {
           <Form>
             <FormImageAtom
               form="user"
-              getName={val => this.updateState('userName', val)}
               getValue={this.getImage}
               source={this.state.image.uri}
             />
+            <FormContainerAtom headerText={'User ID'}>
+              <InputAtom
+                label={'User Name'}
+                defaultValue={this.props.name}
+                getValue={val => this.updateState('name', val)}
+              />
+            </FormContainerAtom>
             <FormContainerAtom headerText="Contact">
               <InputAtom
                 label="Phone Number"
@@ -68,9 +76,9 @@ class EditUserProfileForm extends Component<IProps, any> {
               />
             </FormContainerAtom>
             <FormContainerAtom headerText="Address">
-              <InputAtom
-                label="Business Address"
-                getValue={val => this.updateState('address', val)}
+              <GoogleInputAtom
+                label="Business Address City, State"
+                getValue={(val: string) => this.updateState('address', val)}
               />
             </FormContainerAtom>
           </Form>

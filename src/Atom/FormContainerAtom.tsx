@@ -3,7 +3,8 @@ import { StyleSheet, View, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IProps {
-  headerText: string
+  headerText?: string
+  change?: boolean
 }
 
 class FormContainerAtom extends React.Component<IProps, any> {
@@ -11,7 +12,15 @@ class FormContainerAtom extends React.Component<IProps, any> {
     return (
       <View style={styles.mainView}>
         <Text style={styles.headerText}>{this.props.headerText}</Text>
-        <View style={styles.inputView}>{this.props.children}</View>
+        <View
+          style={
+            this.props.change === false
+              ? styles.inputView
+              : styles.inputViewForTwo
+          }
+        >
+          {this.props.children}
+        </View>
       </View>
     )
   }
@@ -32,6 +41,17 @@ const styles = StyleSheet.create({
     padding: 3,
     paddingLeft: 10,
     paddingRight: 10,
+    marginTop: 16,
+    marginBottom: 16,
+    borderRadius: 3
+  },
+  inputViewForTwo: {
+    width: Dimensions.get('screen').width - 32,
+    alignSelf: 'center',
+    backgroundColor: color.secondary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
     marginTop: 16,
     marginBottom: 16,
     borderRadius: 3
