@@ -18,6 +18,8 @@ const selectStatusAtom = (props: IProps): JSX.Element => {
         selected={props.selected}
         style={styles.radio}
         onPress={props.onPress}
+        color={color.inactive}
+        selectedColor={color.selling}
       />
       <Text style={styles.text}>{props.title}</Text>
       <View style={[styles.indicator, props.indicatorColor]} />
