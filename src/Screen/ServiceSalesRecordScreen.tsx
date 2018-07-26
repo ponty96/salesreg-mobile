@@ -37,7 +37,7 @@ export default class ServiceSalesRecordScreen extends Component {
       number: string
       price: string
     }[] = [
-      /*{
+      {
         productName: '1 million braids',
         customerName: 'Chito Amanda',
         number: '1',
@@ -60,7 +60,7 @@ export default class ServiceSalesRecordScreen extends Component {
         customerName: 'Caroline',
         number: '6',
         price: '60,000.00'
-      }*/
+      }
     ]
 
     return (
@@ -79,7 +79,7 @@ export default class ServiceSalesRecordScreen extends Component {
           }
         />
         {DATA.length < 1 ? (
-          <View style={styles.viewUnderEmptyList} />
+          undefined
         ) : (
           <ListItemAtom
             label="TOTAL SALES"

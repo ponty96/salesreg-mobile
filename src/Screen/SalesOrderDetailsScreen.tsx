@@ -35,7 +35,7 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           showRight
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
-          onPressRightButton={() => console.log('Edit pressed.')}
+          onPressRightButton={() => alert('Edit pressed.')}
           rightText="Edit"
           onBackPress={() => navigation.goBack()}
         />
@@ -48,10 +48,19 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
   }
 
   handleContinuePress = () => {
+    alert('Continue button pressed.')
+  }
+
+  handleOKPress = () => {
     alert('OK button pressed.')
   }
 
   handleDontCancelPress = () => {
+    this.props.navigation.navigate('SalesOrderStatus')
+    this.setState({ visible: false })
+  }
+
+  handleGotoStatusPress = () => {
     this.props.navigation.navigate('SalesOrderStatus', { screen: 'service' })
     this.setState({ visible: false })
   }
@@ -100,8 +109,8 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           secondButtonText="Go to status"
           visible={this.state.visible}
           onBackPress={() => this.setState({ visible: false })}
-          onPressTopButton={() => this.handleContinuePress()}
-          onPressBottomButton={() => this.handleDontCancelPress()}
+          onPressTopButton={this.handleOKPress}
+          onPressBottomButton={this.handleGotoStatusPress}
         />
       )
     else
@@ -114,8 +123,8 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           secondButtonText="Don't cancel"
           visible={this.state.visible}
           onBackPress={() => this.setState({ visible: false })}
-          onPressTopButton={() => this.handleContinuePress}
-          onPressBottomButton={() => this.handleDontCancelPress}
+          onPressTopButton={this.handleContinuePress}
+          onPressBottomButton={this.handleDontCancelPress}
         />
       )
   }
