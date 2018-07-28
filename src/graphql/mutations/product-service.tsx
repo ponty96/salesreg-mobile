@@ -6,7 +6,7 @@ export const UpsertProductGQL = gql`
     $companyId: Uuid!
     $costPrice: String!
     $description: String
-    $featuredImage: String!
+    $featuredImage: String
     $minimumStockQuantity: String!
     $name: String!
     $sellingPrice: String!

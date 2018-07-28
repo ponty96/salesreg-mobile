@@ -11,11 +11,11 @@ interface IProps {
   status: string;
 }
 
-class ProductListAtom extends React.Component<IProps, any> {
+class ProductListItemAtom extends React.Component<IProps, any> {
   render() {
     const defaultImg =
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
-    const avatar = this.props.image !== '' ? this.props.image : defaultImg;
+    const avatar = this.props.image ? this.props.image : defaultImg;
     const colored1 = this.props.status === 'debt' ? 'red' : color.button;
     const colored2 = this.props.status === 'debt' ? 'red' : 'black';
     return (
@@ -38,7 +38,7 @@ class ProductListAtom extends React.Component<IProps, any> {
   }
 }
 
-export default ProductListAtom;
+export default ProductListItemAtom;
 
 const styles = StyleSheet.create({
   rowP: {

@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, FlatList, ScrollView, StyleSheet } from 'react-native';
-import ProductListAtom from '../Atom/ProductListAtom';
+import ProductListItemAtom from '../Atom/ProductListItemAtom';
 import SubHeaderAtom from '../Atom/SubHeaderAtom';
 import EmptyList from './EmptyList';
 
@@ -19,7 +19,7 @@ class ProductList extends PureComponent<IProps, IState> {
   renderItem = ({ item }: any) => {
     const { image, name, number, minimumStockQuantity, id } = item;
     return (
-      <ProductListAtom
+      <ProductListItemAtom
         key={id}
         onPress={() => this.onPress(item)}
         image={image}

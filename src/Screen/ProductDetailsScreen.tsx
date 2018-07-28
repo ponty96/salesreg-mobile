@@ -12,6 +12,7 @@ interface IProps {
 
 class ProductDetailsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
+    const product = navigation.getParam('product', {});
     return {
       header: (
         <CustomHeader
@@ -20,7 +21,9 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           showRight
           rightText="Edit"
           firstRightIcon="pencil"
-          onPressRightButton={() => navigation.navigate('NewProduct')}
+          onPressRightButton={() =>
+            navigation.navigate('NewProduct', { product })
+          }
           firstRightIconType="MaterialCommunityIcons"
         />
       )
