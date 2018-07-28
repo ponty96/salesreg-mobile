@@ -19,3 +19,14 @@ export const ListCompanyProductsGQL = gql`
     }
   }
 `;
+
+export const ListCompanyServicesGQL = gql`
+  query listCompanyServices($companyId: Uuid!) {
+    listCompanyServices(companyId: $companyId) {
+      description
+      id
+      name
+      price
+    }
+  }
+`;

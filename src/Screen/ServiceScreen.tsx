@@ -1,14 +1,19 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import React, { Component } from 'react';
+import { View, Text, StyleSheet } from 'react-native';
 
-import { color } from '../Style/Color'
-import ServiceListAtom from '../Atom/ServiceListAtom'
-import CustomHeader from '../Components/CustomHeader'
+import { color } from '../Style/Color';
+import CustomHeader from '../Components/CustomHeader';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
+const ListItem = ({ label, priceColor, amount }: any) => (
+  <View style={styles.listContainer}>
+    <Text style={styles.listText}>{label}</Text>
+    <Text style={[styles.listText, priceColor]}>{amount}</Text>
+  </View>
+);
 export default class ServiceScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
@@ -23,13 +28,12 @@ export default class ServiceScreen extends Component<IProps> {
           showRight
         />
       )
-    }
-  }
+    };
+  };
 
   render() {
-    const productName: string = '1 million braids'
-    let price: string = '2000.00'
-    price = '\u20A6 ' + price
+    const service = this.props.navigation.getParam('service', {});
+    const price = '\u20A6 ' + service.price;
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -39,17 +43,17 @@ export default class ServiceScreen extends Component<IProps> {
               { fontFamily: 'SourceSansPro_Semibold' }
             ]}
           >
-            {productName}
+            {service.name}
           </Text>
         </View>
-        <ServiceListAtom
-          priceOrNumberSold={price}
+        <ListItem
+          amount={price}
           label="Selling price"
           priceColor={{ color: color.selling }}
         />
-        <ServiceListAtom priceOrNumberSold="100" label="Amount sold" />
+        <ListItem amount="100" label="Amount sold" />
       </View>
-    )
+    );
   }
 }
 
@@ -87,5 +91,16 @@ const styles = StyleSheet.create({
     fontFamily: 'SourceSansPro',
     marginRight: 32,
     color: color.secondary
+  },
+  listContainer: {
+    paddingVertical: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: color.dropdown,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  listText: {
+    fontFamily: 'SourceSansPro',
+    marginHorizontal: 32
   }
-})
+});
