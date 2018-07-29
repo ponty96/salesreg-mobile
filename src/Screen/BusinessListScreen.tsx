@@ -3,8 +3,8 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
 import { List, Icon } from 'native-base'
 
 import FabAtom from '../Atom/FabAtom'
-import ListItemAtom from './../Atom/ListItemAtom'
-import DeleteModal from './../Container/DeleteBuzModal'
+import ListItemAtom from '../Atom/ListItemAtom'
+import DeleteModal from '../Container/DeleteBuzModal'
 import { userData } from '../config/default'
 import { color } from '../Style/Color'
 // import GetAmountModal from './../Container/GetAmountModal';

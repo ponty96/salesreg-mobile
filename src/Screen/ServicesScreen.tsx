@@ -1,56 +1,96 @@
-import React, { PureComponent } from 'react'
-import { StyleSheet, View, ScrollView, FlatList } from 'react-native'
+import React, { PureComponent } from 'react';
+import { StyleSheet, View, ScrollView, FlatList } from 'react-native';
 
-import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
-import { color } from '../Style/Color'
-import SubHeaderAtom from '../Atom/SubHeaderAtom'
-import FabAtom from '../Atom/FabAtom'
+import ServiceListItemAtom from '../Atom/ServiceListItemAtom';
+import { color } from '../Style/Color';
+import SubHeaderAtom from '../Atom/SubHeaderAtom';
+import FabAtom from '../Atom/FabAtom';
+import { ListCompanyServicesGQL } from '../graphql/queries/product-service';
+import { Query } from 'react-apollo';
+import AppSpinner from '../Components/Spinner';
+import Auth from '../services/auth';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
-class ServicesScreen extends PureComponent<IProps> {
-  SERVICES = [
-    { key: '1 million Braids', price: '3000' },
-    { key: 'Re-touching', price: '1000' },
-    { key: 'Steaming', price: '800' },
-    { key: 'DD', price: '400' }
-  ]
+interface IState {
+  business: any;
+}
 
-  handleTouch = () => {
-    this.props.navigation.navigate('ShowService')
+class ServicesScreen extends PureComponent<IProps, IState> {
+  state = {
+    business: null
+  };
+
+  componentDidMount() {
+    this.updateState();
   }
+  updateState = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser());
+    this.setState({
+      business: user.company
+    });
+  };
+
+  handleTouch = service => {
+    this.props.navigation.navigate('ShowService', { service });
+  };
 
   renderList = ({ item }: any) => {
     return (
       <ServiceListItemAtom
-        name={item.key}
+        name={item.name}
         amount={item.price}
-        onPress={() => this.handleTouch()}
+        onPress={() => this.handleTouch(item)}
       />
-    )
-  }
+    );
+  };
 
   render() {
+    const { business } = this.state;
     return (
-      <View style={styles.container}>
-        <SubHeaderAtom list={['Lorem ipsum']} />
-        <ScrollView>
-          <FlatList data={this.SERVICES} renderItem={this.renderList} />
-        </ScrollView>
-        <FabAtom
-          routeName={'EditServices'}
-          name={'circle-with-plus'}
-          type={'Entypo'}
-          navigation={this.props.navigation}
-        />
-      </View>
-    )
+      <Query
+        query={ListCompanyServicesGQL}
+        variables={{ companyId: `${business && business.id}` }}
+        fetchPolicy="cache-and-network"
+      >
+        {({ loading, data }) => {
+          return (
+            <View style={styles.container}>
+              <AppSpinner visible={loading} />
+              <SubHeaderAtom
+                list={[
+                  'Fastest selling',
+                  'Slowest selling',
+                  'Highest profit',
+                  'Lowest profit'
+                ]}
+                total={
+                  data.listCompanyServices ? data.listCompanyServices.length : 0
+                }
+              />
+              <ScrollView>
+                <FlatList
+                  data={data.listCompanyServices}
+                  renderItem={this.renderList}
+                />
+              </ScrollView>
+              <FabAtom
+                routeName={'EditServices'}
+                name={'circle-with-plus'}
+                type={'Entypo'}
+                navigation={this.props.navigation}
+              />
+            </View>
+          );
+        }}
+      </Query>
+    );
   }
 }
 
-export default ServicesScreen
+export default ServicesScreen;
 
 const styles = StyleSheet.create({
   headerIcon: {
@@ -62,4 +102,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-})
+});

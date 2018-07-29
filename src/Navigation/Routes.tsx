@@ -11,54 +11,54 @@ import {
 import { Query } from 'react-apollo';
 import { AuthenticateQueryGQL } from '../graphql/queries/Authenticate';
 
-import CustomHeader from '../Components/CustomHeader'
-import EmployeeForm from '../Components/EmployeeForm'
+import CustomHeader from '../Components/CustomHeader';
+import EmployeeForm from '../Components/EmployeeForm';
 import MainOrderList from '../Components/MainOrderList';
-import BankScreen from '../Screen/BankScreen'
+import BankScreen from '../Screen/BankScreen';
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen';
 import CustomerDetailScreen from '../Screen/CustomerDetailScreen';
-import CustomerScreen from '../Screen/CustomerScreen'
-import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
-import EditServiceScreen from '../Screen/EditServiceScreen'
-import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
-import EmployeesScreen from '../Screen/EmployeesScreen'
-import ExpensesScreen from '../Screen/ExpensesScreen'
-import HomeScreen from '../Screen/HomeScreen'
-import IncomeScreen from '../Screen/IncomeScreen'
-import InventoryScreen from '../Screen/InventoryScreen'
-import InvoicesScreen from '../Screen/InvoicesScreen'
-import NewVendorScreen from '../Screen/NewVendorScreen'
+import CustomerScreen from '../Screen/CustomerScreen';
+import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen';
+import UpsertServiceScreen from '../Screen/UpsertServiceScreen';
+import EditUserProfileScreen from '../Screen/EditUserProfileScreen';
+import EmployeesScreen from '../Screen/EmployeesScreen';
+import ExpensesScreen from '../Screen/ExpensesScreen';
+import HomeScreen from '../Screen/HomeScreen';
+import IncomeScreen from '../Screen/IncomeScreen';
+import InventoryScreen from '../Screen/InventoryScreen';
+import InvoicesScreen from '../Screen/InvoicesScreen';
+import NewVendorScreen from '../Screen/NewVendorScreen';
 import OrderListScreen from '../Screen/OrderListScreen';
-import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
-import PurchaseScreen from '../Screen/PurchaseScreen'
-import ReceiptsScreen from '../Screen/ReceiptsScreen'
-import SalesScreen from '../Screen/SalesScreen'
-import ServiceScreen from '../Screen/ServiceScreen'
+import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen';
+import PurchaseScreen from '../Screen/PurchaseScreen';
+import ReceiptsScreen from '../Screen/ReceiptsScreen';
+import SalesScreen from '../Screen/SalesScreen';
+import ServiceScreen from '../Screen/ServiceDetailsScreen';
 import UserProfileScreen from '../Screen/UserProfileScreen';
-import VendorDetailScreen from '../Screen/VendorDetailsScreen'
-import VendorScreen from '../Screen/VendorScreen'
-import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen';
-import DebtDetailsScreen from './../Screen/DebtDetailsScreen';
-import DebtScreen from './../Screen/DebtScreen';
-import LoginScreen from './../Screen/LoginScreen';
+import VendorDetailScreen from '../Screen/VendorDetailsScreen';
+import VendorScreen from '../Screen/VendorScreen';
+import BusinessDetailsScreen from '../Screen/BusinessDetailsScreen';
+import DebtDetailsScreen from '../Screen/DebtDetailsScreen';
+import DebtScreen from '../Screen/DebtScreen';
+import LoginScreen from '../Screen/LoginScreen';
 // import BusinessListScreen from './../Screen/BusinessListScreen';
-import NewBusinessScreen from './../Screen/NewBusinessScreen';
-import NewCustomerScreen from './../Screen/NewCustomerScreen';
-import NewOrderScreen from './../Screen/NewOrderScreen';
-import NewProductScreen from './../Screen/NewProductScreen';
-import OnBoardingScreen from './../Screen/OnBoardingScreen';
+import NewBusinessScreen from '../Screen/NewBusinessScreen';
+import NewCustomerScreen from '../Screen/NewCustomerScreen';
+import NewOrderScreen from '../Screen/NewOrderScreen';
+import UpsertProductScreen from '../Screen/UpsertProductScreen';
+import OnBoardingScreen from '../Screen/OnBoardingScreen';
 // import OrderScreen from './../Screen/OrderScreen';
-import OrderDetailsScreen from './../Screen/OrderDetailsScreen';
-import ProductDetailsScreen from './../Screen/ProductDetailsScreen';
-import ProductScreen from './../Screen/ProductScreen';
-import ResetScreen from './../Screen/ResetScreen';
+import OrderDetailsScreen from '../Screen/OrderDetailsScreen';
+import ProductDetailsScreen from '../Screen/ProductDetailsScreen';
+import ProductScreen from '../Screen/ProductScreen';
+import ResetScreen from '../Screen/ResetScreen';
 // import CustomerScreen from './../Screen/CustomerScreen';
 // import DebtsScreen from './../Screen/DebtsScreen';
-import ServicesScreen from './../Screen/ServicesScreen';
+import ServicesScreen from '../Screen/ServicesScreen';
 // import SplashScreen from './../Screen/SplashScreen';
-import SignupScreen from './../Screen/SignupScreen';
+import SignupScreen from '../Screen/SignupScreen';
 // import styles from './../Style/Layout'
-import { color } from './../Style/Color'
+import { color } from '../Style/Color';
 import Sidebar from './Sidebar';
 
 const viewBothStack = TabNavigator(
@@ -184,7 +184,7 @@ const businessStack = StackNavigator(
       screen: OrderDetailsScreen
     },
     NewProduct: {
-      screen: NewProductScreen
+      screen: UpsertProductScreen
     },
     ProductDetails: {
       screen: ProductDetailsScreen
@@ -213,7 +213,7 @@ const businessStack = StackNavigator(
     EditBusinessProfile: {
       screen: EditBusinessProfileScreen
     },
-    EditServices: EditServiceScreen,
+    EditServices: UpsertServiceScreen,
     ShowService: ServiceScreen
   },
   {
@@ -277,10 +277,16 @@ export default class Routes extends React.Component<IProps> {
           console.log('loading', loading);
           console.log('error', error);
           console.log('data', data);
-          if (loading) { return <Text>'Loading...'</Text>; }
-          if (error) { return <Text>{`Error! ${error.message}`}</Text>; }
+          if (loading) {
+            return <Text>'Loading...'</Text>;
+          }
+          if (error) {
+            return <Text>{`Error! ${error.message}`}</Text>;
+          }
 
-          if (!data.authenticate) { return <AuthStack screenProps={{ client }} />; }
+          if (!data.authenticate) {
+            return <AuthStack screenProps={{ client }} />;
+          }
           return <DrawerStack screenProps={{ client }} />;
         }}
       </Query>
