@@ -52,3 +52,38 @@ export const UpsertProductGQL = gql`
     }
   }
 `;
+
+export const UpsertServiceGQL = gql`
+  mutation UpsertService(
+    $serviceId: Uuid
+    $companyId: Uuid!
+    $description: String
+    $name: String!
+    $price: String
+    $userId: Uuid!
+  ) {
+    upsertService(
+      service: {
+        name: $name
+        price: $price
+        description: $description
+        companyId: $companyId
+        userId: $userId
+      }
+      serviceId: $serviceId
+    ) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Service {
+          id
+          name
+          price
+        }
+      }
+    }
+  }
+`;

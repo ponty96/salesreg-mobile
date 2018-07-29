@@ -9,7 +9,7 @@ import { Form } from 'native-base';
 import InputAtom from '../Atom/InputAtom';
 import ImageAtom from '../Atom/ImageAtom';
 import SaveCancelButton from '../Container/SaveCancelButton';
-import { color } from './../Style/Color';
+import { color } from '../Style/Color';
 
 interface IProps {
   navigation: any;

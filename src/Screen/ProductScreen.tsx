@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet } from 'react-native';
-import FabAtom from './../Atom/FabAtom';
+import FabAtom from '../Atom/FabAtom';
 import ProductList from '../Components/ProductList';
 import { color } from '../Style/Color';
 import { ListCompanyProductsGQL } from '../graphql/queries/product-service';

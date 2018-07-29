@@ -16,6 +16,7 @@ const ListItem = ({ label, priceColor, amount }: any) => (
 );
 export default class ServiceScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
+    const service = navigation.getParam('service', {});
     return {
       header: (
         <CustomHeader
@@ -23,7 +24,9 @@ export default class ServiceScreen extends Component<IProps> {
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
           rightText="Edit"
-          onPressRightButton={() => navigation.navigate('EditServices')}
+          onPressRightButton={() =>
+            navigation.navigate('EditServices', { service })
+          }
           onBackPress={() => navigation.goBack()}
           showRight
         />

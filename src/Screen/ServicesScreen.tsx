@@ -19,13 +19,6 @@ interface IState {
 }
 
 class ServicesScreen extends PureComponent<IProps, IState> {
-  SERVICES = [
-    { key: '1 million Braids', price: '3000' },
-    { key: 'Re-touching', price: '1000' },
-    { key: 'Steaming', price: '800' },
-    { key: 'DD', price: '400' }
-  ];
-
   state = {
     business: null
   };

@@ -3,8 +3,8 @@ import * as React from 'react';
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
 // import Slider from 'react-native-slider';
 import ButtonAtom from '../Atom/ButtonAtom';
-import ModalAtom from './../Atom/ModalAtom';
-import { color } from './../Style/Color';
+import ModalAtom from '../Atom/ModalAtom';
+import { color } from '../Style/Color';
 
 interface IProps {
   getValue?: (a: string) => void;

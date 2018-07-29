@@ -2,8 +2,8 @@ import React, { Component } from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import SettingsAtom from './../Atom/SettingsAtom'
-import DebtLimitModal from './../Container/DebtLimitModal'
+import SettingsAtom from '../Atom/SettingsAtom'
+import DebtLimitModal from '../Container/DebtLimitModal'
 import DebtWarningModal from '../Container/DebtWarningModal'
 import { color } from '../Style/Color'
 

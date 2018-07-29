@@ -29,7 +29,7 @@ interface IState {
   fieldErrors: any;
 }
 
-class NewProductScreen extends PureComponent<IProps, IState> {
+class UpsertProductScreen extends PureComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props);
     this.state = {
@@ -46,8 +46,19 @@ class NewProductScreen extends PureComponent<IProps, IState> {
       fieldErrors: null
     };
   }
+  static navigationOptions = ({ navigation }: any) => {
+    const product = navigation.getParam('product', null);
+    return {
+      header: (
+        <CustomHeader
+          title={product ? `Edit Product ${product.name}` : 'New Product'}
+          onBackPress={() => navigation.goBack()}
+        />
+      )
+    };
+  };
   componentDidMount() {
-    const product = this.props.navigation.getParam('product', {});
+    const product = this.props.navigation.getParam('product', null);
     if (product) {
       this.setState({
         ...product,
@@ -85,13 +96,6 @@ class NewProductScreen extends PureComponent<IProps, IState> {
   updateState = (key: string, value: any) => {
     const state = { ...this.state, [key]: value };
     this.setState(state);
-  };
-  static navigationOptions = ({ navigation }: any) => {
-    return {
-      header: (
-        <CustomHeader title="Product" onBackPress={() => navigation.goBack()} />
-      )
-    };
   };
 
   render() {
@@ -221,7 +225,7 @@ class NewProductScreen extends PureComponent<IProps, IState> {
   };
 }
 
-export default NewProductScreen;
+export default UpsertProductScreen;
 
 const styles = StyleSheet.create({
   ababa: {
