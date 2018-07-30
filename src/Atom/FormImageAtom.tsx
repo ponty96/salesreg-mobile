@@ -1,4 +1,4 @@
-import * as React from 'react'
+import * as React from 'react';
 import {
   Image,
   View,
@@ -6,71 +6,74 @@ import {
   TouchableOpacity,
   Dimensions,
   StyleSheet
-} from 'react-native'
-import { ImagePicker } from 'expo'
-import { color } from '../Style/Color'
+} from 'react-native';
+import { ImagePicker } from 'expo';
+import { color } from '../Style/Color';
 
 interface IProps {
-  source: string
-  imgStyle?: object
-  getValue?: any
-  form: string
+  source: string;
+  imgStyle?: object;
+  getValue?: any;
+  form: string;
 }
 
 class FormImageAtom extends React.Component<IProps, any> {
   state = {
     image: { uri: '' }
-  }
+  };
 
   handleSelection = async () => {
     if (this.props.getValue) {
       let result = await ImagePicker.launchImageLibraryAsync({
         allowsEditing: false
-      })
+      });
 
       if (result && !result.cancelled) {
-        this.setState({ image: result })
-        this.props.getValue(this.state.image.uri)
+        this.setState({ image: result });
+        this.props.getValue(this.state.image.uri);
       }
     }
-  }
+  };
 
   determineDataBasedOnProps = (form: string) => {
-    let title
+    let title;
     switch (form) {
       case 'business':
-        title = 'Business ID'
-        break
+        title = 'Business ID';
+        break;
       case 'user':
-        title = 'User ID'
-        break
+        title = 'User ID';
+        break;
       case 'product':
-        title = 'Product ID'
-        break
+        title = 'Product ID';
+        break;
       case 'customer':
-        title = 'Customer ID'
-        break
+        title = 'Customer ID';
+        break;
       case 'vendor':
-        title = 'Vendor ID'
-        break
+        title = 'Vendor ID';
+        break;
       default:
-        title = 'Avatar'
-        break
+        title = 'Avatar';
+        break;
     }
     const obj = {
       title: title
-    }
-    return obj
-  }
+    };
+    return obj;
+  };
 
   render() {
-    const { title } = this.determineDataBasedOnProps(this.props.form)
+    const { title } = this.determineDataBasedOnProps(this.props.form);
     return (
       <View style={styles.mainView}>
         <Text
           style={[
             styles.headerText,
-            { fontFamily: 'SourceSansPro_Semibold', color: color.button }
+            {
+              fontFamily: 'SourceSansPro_Semibold',
+              color: color.blueLabelColor
+            }
           ]}
         >
           {title}
@@ -89,7 +92,10 @@ class FormImageAtom extends React.Component<IProps, any> {
             <Text
               style={[
                 styles.imageText,
-                { fontFamily: 'SourceSansPro_Semibold', color: color.button }
+                {
+                  fontFamily: 'SourceSansPro_Semibold',
+                  color: color.blueLabelColor
+                }
               ]}
             >
               Upload Image
@@ -97,11 +103,11 @@ class FormImageAtom extends React.Component<IProps, any> {
           </TouchableOpacity>
         </View>
       </View>
-    )
+    );
   }
 }
 
-export default FormImageAtom
+export default FormImageAtom;
 
 const styles = StyleSheet.create({
   mainView: {
@@ -147,4 +153,4 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 20
   }
-})
+});

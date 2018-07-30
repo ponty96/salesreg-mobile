@@ -91,7 +91,7 @@ class InputAtom extends React.Component<IProps, IState> {
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
-            onFocus={() => this.changeUnderline(color.button)}
+            onFocus={() => this.changeUnderline(color.blueLabelColor)}
             onBlur={() => this.changeUnderline(color.textBorderBottom)}
             maxLength={this.props.maxLength}
           />

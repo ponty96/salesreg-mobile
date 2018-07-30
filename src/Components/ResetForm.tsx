@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 import { Form } from 'native-base'
-import InputAtom from './../Atom/InputAtom'
-import ButtonAtom from './../Atom/ButtonAtom'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
 import { color } from '../Style/Color'
 
 interface IProps {

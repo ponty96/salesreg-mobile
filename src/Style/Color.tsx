@@ -18,5 +18,6 @@ export const color = {
   check: '#27CBD3',
   grey: '#F6F6F6',
   listBorderColor: '#F3F3F3',
-  secondary: '#FFFFFF'
-}
+  secondary: '#FFFFFF',
+  blueLabelColor: '#32559F'
+};

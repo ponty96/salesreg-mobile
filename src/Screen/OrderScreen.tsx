@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import FabAtom from './../Atom/FabAtom'
+import FabAtom from '../Atom/FabAtom'
 import MainOrderList from '../Components/MainOrderList'
 import { color } from '../Style/Color'
 
