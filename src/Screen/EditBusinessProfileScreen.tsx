@@ -1,20 +1,20 @@
-import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import SaveCancelButton from '../Container/SaveCancelButton'
-import EditBusinessProfileForm from '../Components/EditBusinessProfileForm'
-import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
+import SaveCancelButton from '../Container/SaveCancelButton';
+import EditBusinessProfileForm from '../Components/EditBusinessProfileForm';
+import { color } from '../Style/Color';
+import CustomHeader from '../Components/CustomHeader';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  name: string
-  phoneNumber: string
-  image: string
-  gender: string
+  name: string;
+  phoneNumber: string;
+  image: string;
+  gender: string;
 }
 
 class EditBusinessProfileScreen extends Component<IProps, IState> {
@@ -24,42 +24,42 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     image:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
     gender: 'Female'
-  }
+  };
 
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
         <CustomHeader
-          title="Business profile"
+          title="Edit Business Profile"
           onBackPress={() => navigation.goBack()}
         />
       )
-    }
-  }
+    };
+  };
 
   getName = (text: string) => {
     this.setState({
       name: text
-    })
-  }
+    });
+  };
 
   getPhoneNumber = (numberText: string) => {
     this.setState({
       phoneNumber: numberText
-    })
-  }
+    });
+  };
 
   getImage = (pic: string) => {
     this.setState({
       image: pic
-    })
-  }
+    });
+  };
 
   updateGender = (selectedGender: string) => {
     this.setState({
       gender: selectedGender
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -70,11 +70,11 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
           navigation={this.props.navigation}
         />
       </View>
-    )
+    );
   }
 }
 
-export default EditBusinessProfileScreen
+export default EditBusinessProfileScreen;
 
 const styles = StyleSheet.create({
   formViewContainer: {
@@ -86,4 +86,4 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 28
   }
-})
+});

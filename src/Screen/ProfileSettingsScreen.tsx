@@ -1,10 +1,20 @@
-import React, { PureComponent } from 'react'
-import SettingsList from '../Components/SettingsList'
-import CustomHeader from '../Components/CustomHeader'
+import React, { PureComponent } from 'react';
+import SettingsList from '../Components/SettingsList';
+import CustomHeader from '../Components/CustomHeader';
+import gql from 'graphql-tag';
+import Auth from '../services/auth';
 
 interface IProps {
-  navigation: any
+  navigation: any;
+  screenProps: any;
 }
+
+const LogoutClientGQL = gql`
+  mutation logout {
+    logout @client
+  }
+`;
+
 class ProfileSettingsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
@@ -14,15 +24,21 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
           onBackPress={() => navigation.goBack()}
         />
       )
-    }
-  }
-  handleLogOut = () => {
-    this.props.navigation.navigate('Login')
-  }
+    };
+  };
+  handleLogOut = async () => {
+    const {
+      screenProps: { client }
+    } = this.props;
+    await Auth.clearVault();
+    await client.resetStore();
+    client.mutate({ mutation: LogoutClientGQL });
+    this.props.navigation.navigate('Login');
+  };
   render() {
     const {
       navigation: { navigate }
-    } = this.props
+    } = this.props;
     return (
       <SettingsList
         navigate={navigate}
@@ -45,7 +61,7 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
           }
         ]}
       />
-    )
+    );
   }
 }
-export default ProfileSettingsScreen
+export default ProfileSettingsScreen;
