@@ -37,12 +37,9 @@ import ServiceScreen from '../Screen/ServiceDetailsScreen';
 import UserProfileScreen from '../Screen/UserProfileScreen';
 import VendorDetailScreen from '../Screen/VendorDetailsScreen';
 import VendorScreen from '../Screen/VendorScreen';
-import BusinessDetailsScreen from '../Screen/BusinessDetailsScreen';
 import DebtDetailsScreen from '../Screen/DebtDetailsScreen';
 import DebtScreen from '../Screen/DebtScreen';
 import LoginScreen from '../Screen/LoginScreen';
-// import BusinessListScreen from './../Screen/BusinessListScreen';
-import NewBusinessScreen from '../Screen/NewBusinessScreen';
 import NewCustomerScreen from '../Screen/NewCustomerScreen';
 import NewOrderScreen from '../Screen/NewOrderScreen';
 import UpsertProductScreen from '../Screen/UpsertProductScreen';
@@ -114,9 +111,6 @@ const viewBothStack = TabNavigator(
 
 const businessStack = StackNavigator(
   {
-    NewBusiness: {
-      screen: NewBusinessScreen
-    },
     Home: {
       screen: HomeScreen
     },
@@ -152,9 +146,6 @@ const businessStack = StackNavigator(
     },
     Invoice: {
       screen: InvoicesScreen
-    },
-    BusinessDetails: {
-      screen: BusinessDetailsScreen
     },
     ProfileSettings: {
       screen: ProfileSettingsScreen
