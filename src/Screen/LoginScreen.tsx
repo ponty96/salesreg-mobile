@@ -1,33 +1,33 @@
-import React from 'react';
+import React from 'react'
 import {
-  Text,
-  View,
   KeyboardAvoidingView,
+  ScrollView,
   StyleSheet,
-  ScrollView
-} from 'react-native';
+  Text,
+  View
+} from 'react-native'
 
-import LoginForm from '../Components/LoginForm';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import { color } from '../Style/Color';
-import { Mutation } from 'react-apollo';
-import { LoginUserMutationGQL } from '../graphql/mutations/authenticate';
-import { AuthenticateClientGQL } from '../graphql/client-mutations/authenticate';
-import Auth from '../services/auth';
+import { Mutation } from 'react-apollo'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import LoginForm from '../Components/LoginForm'
+import { AuthenticateClientGQL } from '../graphql/client-mutations/authenticate'
+import { LoginUserMutationGQL } from '../graphql/mutations/authenticate'
+import Auth from '../services/auth'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
-  screenProps: any;
-  login: any;
+  navigation: any
+  screenProps: any
+  login: any
 }
 
-interface IState {}
+// interface IState {}
 
-class LoginScreen extends React.Component<IProps, IState> {
-  componentDidMount() {
-    Auth.clearVault();
+class LoginScreen extends React.Component<IProps, any> {
+  public componentDidMount() {
+    Auth.clearVault()
   }
-  render() {
+  public render() {
     return (
       <View style={styles.container}>
         <AuthenticationHeader />
@@ -45,6 +45,7 @@ class LoginScreen extends React.Component<IProps, IState> {
                   <LoginForm
                     navigation={this.props.navigation}
                     loading={loading}
+                    // tslint:disable-next-line:jsx-no-lambda
                     onSubmit={params =>
                       loginUser({
                         variables: {
@@ -59,28 +60,28 @@ class LoginScreen extends React.Component<IProps, IState> {
           </View>
         </ScrollView>
       </View>
-    );
+    )
   }
-  onCompleted = async data => {
+  public onCompleted = async data => {
     const {
       loginUser: {
         data: { accessToken, refreshToken, user }
       }
-    } = data;
+    } = data
     const {
       screenProps: { client }
-    } = this.props;
+    } = this.props
 
-    await Auth.clearVault();
-    await Auth.setToken(accessToken);
-    await Auth.setRefreshToken(refreshToken);
-    await Auth.setCurrentUser(user);
-    await client.resetStore();
-    client.mutate({ mutation: AuthenticateClientGQL });
-    this.props.navigation.navigate('Home');
-  };
+    await Auth.clearVault()
+    await Auth.setToken(accessToken)
+    await Auth.setRefreshToken(refreshToken)
+    await Auth.setCurrentUser(user)
+    await client.resetStore()
+    client.mutate({ mutation: AuthenticateClientGQL })
+    this.props.navigation.navigate('Home')
+  }
 }
-export default LoginScreen;
+export default LoginScreen
 
 const styles = StyleSheet.create({
   container: {
@@ -96,4 +97,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     marginTop: 32
   }
-});
+})

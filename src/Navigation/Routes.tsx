@@ -1,8 +1,8 @@
 import React from 'react';
 import { Text, View } from 'react-native';
 import {
-  StackNavigator,
   DrawerNavigator,
+  StackNavigator,
   TabNavigator
 } from 'react-navigation';
 // import { Icon } from 'native-base'
@@ -11,54 +11,54 @@ import {
 import { Query } from 'react-apollo';
 import { AuthenticateQueryGQL } from '../graphql/queries/Authenticate';
 
-import OnBoardingScreen from './../Screen/OnBoardingScreen';
-// import SplashScreen from './../Screen/SplashScreen';
-import SignupScreen from './../Screen/SignupScreen';
-import ResetScreen from './../Screen/ResetScreen';
+import CustomHeader from '../Components/CustomHeader';
+import MainOrderList from '../Components/MainOrderList';
+import BankScreen from '../Screen/BankScreen';
+import BusinessProfileScreen from '../Screen/BusinessProfileScreen';
+import CustomerDetailScreen from '../Screen/CustomerDetailScreen';
+import CustomerScreen from '../Screen/CustomerScreen';
+import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen';
+import EditServiceScreen from '../Screen/EditServiceScreen';
+import EditUserProfileScreen from '../Screen/EditUserProfileScreen';
+import EmployeesScreen from '../Screen/EmployeesScreen';
+import ExpensesScreen from '../Screen/ExpensesScreen';
+import HomeScreen from '../Screen/HomeScreen';
+import IncomeScreen from '../Screen/IncomeScreen';
+import InventoryScreen from '../Screen/InventoryScreen';
+import InvoicesScreen from '../Screen/InvoicesScreen';
+import NewVendorScreen from '../Screen/NewVendorScreen';
+import OrderListScreen from '../Screen/OrderListScreen';
+import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen';
+import PurchaseScreen from '../Screen/PurchaseScreen';
+import ReceiptsScreen from '../Screen/ReceiptsScreen';
+import SalesScreen from '../Screen/SalesScreen';
+import ServiceScreen from '../Screen/ServiceScreen';
+import UserProfileScreen from '../Screen/UserProfileScreen';
+import VendorDetailScreen from '../Screen/VendorDetailsScreen';
+import VendorScreen from '../Screen/VendorScreen';
+import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen';
+import DebtDetailsScreen from './../Screen/DebtDetailsScreen';
+import DebtScreen from './../Screen/DebtScreen';
 import LoginScreen from './../Screen/LoginScreen';
 // import BusinessListScreen from './../Screen/BusinessListScreen';
 import NewBusinessScreen from './../Screen/NewBusinessScreen';
+import NewCustomerScreen from './../Screen/NewCustomerScreen';
 import NewOrderScreen from './../Screen/NewOrderScreen';
 import NewProductScreen from './../Screen/NewProductScreen';
-import NewCustomerScreen from './../Screen/NewCustomerScreen';
-import BusinessDetailsScreen from './../Screen/BusinessDetailsScreen';
-import DebtScreen from './../Screen/DebtScreen';
-import ProductScreen from './../Screen/ProductScreen';
+import OnBoardingScreen from './../Screen/OnBoardingScreen';
 // import OrderScreen from './../Screen/OrderScreen';
 import OrderDetailsScreen from './../Screen/OrderDetailsScreen';
+import ProductDetailsScreen from './../Screen/ProductDetailsScreen';
+import ProductScreen from './../Screen/ProductScreen';
+import ResetScreen from './../Screen/ResetScreen';
 // import CustomerScreen from './../Screen/CustomerScreen';
 // import DebtsScreen from './../Screen/DebtsScreen';
 import ServicesScreen from './../Screen/ServicesScreen';
-import DebtDetailsScreen from './../Screen/DebtDetailsScreen';
-import ProductDetailsScreen from './../Screen/ProductDetailsScreen';
-import UserProfileScreen from '../Screen/UserProfileScreen';
-import BusinessProfileScreen from '../Screen/BusinessProfileScreen';
-import OrderListScreen from '../Screen/OrderListScreen';
-import CustomerDetailScreen from '../Screen/CustomerDetailScreen';
-import MainOrderList from '../Components/MainOrderList';
-import Sidebar from './Sidebar';
+// import SplashScreen from './../Screen/SplashScreen';
+import SignupScreen from './../Screen/SignupScreen';
 // import styles from './../Style/Layout'
 import { color } from './../Style/Color';
-import EditUserProfileScreen from '../Screen/EditUserProfileScreen';
-import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen';
-import HomeScreen from '../Screen/HomeScreen';
-import EmployeesScreen from '../Screen/EmployeesScreen';
-import VendorScreen from '../Screen/VendorScreen';
-import PurchaseScreen from '../Screen/PurchaseScreen';
-import SalesScreen from '../Screen/SalesScreen';
-import BankScreen from '../Screen/BankScreen';
-import IncomeScreen from '../Screen/IncomeScreen';
-import ExpensesScreen from '../Screen/ExpensesScreen';
-import InvoicesScreen from '../Screen/InvoicesScreen';
-import ReceiptsScreen from '../Screen/ReceiptsScreen';
-import InventoryScreen from '../Screen/InventoryScreen';
-import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen';
-import CustomerScreen from '../Screen/CustomerScreen';
-import VendorDetailScreen from '../Screen/VendorDetailsScreen';
-import NewVendorScreen from '../Screen/NewVendorScreen';
-import EditServiceScreen from '../Screen/EditServiceScreen';
-import ServiceScreen from '../Screen/ServiceScreen';
-import CustomHeader from '../Components/CustomHeader';
+import Sidebar from './Sidebar';
 
 const viewBothStack = TabNavigator(
   {
@@ -218,13 +218,15 @@ const businessStack = StackNavigator(
       header: (
         <CustomHeader
           title="Products & Services"
-          showMenu
+          showMenu={true}
+          // tslint:disable-next-line:jsx-no-lambda
           onMenuPress={() => {
             navigation.navigate('DrawerToggle');
           }}
           firstRightIcon={'ios-search'}
           navigation={navigation}
-          showRight
+          showRight={true}
+          // tslint:disable-next-line:jsx-no-lambda
           onPressFirstRightIcon={() => console.log('Search icon pressed.')}
         />
       )
@@ -263,7 +265,7 @@ interface IProps {
   client: any;
 }
 export default class Routes extends React.Component<IProps> {
-  render() {
+  public render() {
     const { client } = this.props;
     return (
       <Query query={AuthenticateQueryGQL}>
@@ -271,10 +273,10 @@ export default class Routes extends React.Component<IProps> {
           console.log('loading', loading);
           console.log('error', error);
           console.log('data', data);
-          if (loading) return <Text>'Loading...'</Text>;
-          if (error) return <Text>{`Error! ${error.message}`}</Text>;
+          if (loading) { return <Text>'Loading...'</Text>; }
+          if (error) { return <Text>{`Error! ${error.message}`}</Text>; }
 
-          if (!data.authenticate) return <AuthStack screenProps={{ client }} />;
+          if (!data.authenticate) { return <AuthStack screenProps={{ client }} />; }
           return <DrawerStack screenProps={{ client }} />;
         }}
       </Query>

@@ -1,31 +1,32 @@
-import React, { PureComponent } from 'react';
-import { Form, Icon } from 'native-base';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Form, Icon } from 'native-base'
+import React, { PureComponent } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
-import InputAtom from '../Atom/InputAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import { color } from '../Style/Color';
+import InputAtom from '../Atom/InputAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  onPress: (formValue: any) => void;
-  onUpdateState?: (key: string, val: any) => void;
-  email: string;
-  password: string;
-  name: string;
-  passwordConfirmation: string;
-  gender: string;
+  onPress: (formValue: any) => void
+  onUpdateState?: (key: string, val: any) => void
+  email: string
+  password: string
+  name: string
+  passwordConfirmation: string
+  gender: string
 }
 
-interface IState {}
+// interface IState {}
 
-class SigupForm extends PureComponent<IProps, IState> {
-  render() {
+class SigupForm extends PureComponent<IProps, any> {
+  public render() {
     return (
       <Form>
         <InputAtom
           label="Full name"
           contStyle={styles.nameInput}
           defaultValue={this.props.name}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={val => this.props.onUpdateState('name', val)}
           inputStyle={styles.elevateInput}
           required={true}
@@ -35,6 +36,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           label="Email Address"
           contStyle={styles.input}
           defaultValue={this.props.email}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={val => this.props.onUpdateState('email', val)}
           inputStyle={styles.elevateInput}
           required={true}
@@ -46,6 +48,7 @@ class SigupForm extends PureComponent<IProps, IState> {
             style={styles.faintPicker}
             placeholder="*Gender"
             selected={this.props.gender}
+            // tslint:disable-next-line:jsx-no-lambda
             handleSelection={val => this.props.onUpdateState('gender', val)}
           />
         </View>
@@ -56,6 +59,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           secureTextEntry={true}
           contStyle={styles.input}
           defaultValue={this.props.password}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={val => this.props.onUpdateState('password', val)}
           underneathText="Must be at least 6 characters"
           underneathStyle={styles.underneathText}
@@ -68,6 +72,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           secureTextEntry={true}
           contStyle={styles.reenter}
           defaultValue={this.props.passwordConfirmation}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={val =>
             this.props.onUpdateState('passwordConfirmation', val)
           }
@@ -78,6 +83,7 @@ class SigupForm extends PureComponent<IProps, IState> {
         <View>
           <TouchableOpacity
             style={styles.nextButtonContainer}
+            // tslint:disable-next-line:jsx-no-lambda
             onPress={() => this.props.onPress(this.state)}
           >
             <Text
@@ -96,11 +102,11 @@ class SigupForm extends PureComponent<IProps, IState> {
           </TouchableOpacity>
         </View>
       </Form>
-    );
+    )
   }
 }
 
-export default SigupForm;
+export default SigupForm
 
 const styles = StyleSheet.create({
   nameInput: {
@@ -149,4 +155,4 @@ const styles = StyleSheet.create({
     marginTop: 10,
     marginLeft: 0
   }
-});
+})

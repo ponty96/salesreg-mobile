@@ -1,6 +1,6 @@
-import * as React from 'react';
 import { Button } from 'native-base';
-import { Text, StyleSheet } from 'react-native';
+import * as React from 'react';
+import { StyleSheet, Text } from 'react-native';
 import { color } from '../Style/Color';
 
 interface IProps {
@@ -14,12 +14,12 @@ interface IProps {
 }
 
 class ButtonAtom extends React.Component<IProps, any> {
-  static defaultProps: IProps = {
+  public static defaultProps: IProps = {
     transparent: false,
     disabled: false
   };
 
-  render() {
+  public render() {
     return (
       <Button
         transparent={this.props.transparent ? this.props.transparent : false}

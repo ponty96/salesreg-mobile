@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const LoginUserMutationGQL = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -45,7 +45,7 @@ export const LoginUserMutationGQL = gql`
       }
     }
   }
-`;
+`
 
 export const RegisterCompanyMutationGQL = gql`
   mutation registerCompany(
@@ -98,4 +98,58 @@ export const RegisterCompanyMutationGQL = gql`
       }
     }
   }
-`;
+`
+
+export const EditUserProfileMutationGQL = gql`
+  mutation editUserProfile(
+    $profilePicture: String!
+    $phoneNumber: Int!
+    $email: String!
+    $street1: String!
+    $city: String!
+    $state: String!
+    $country: String!
+  ) {
+    editUserProfile(
+      company: {
+        profilePicture: $profilePicture
+        email: $email
+        phoneNumber: $phoneNumber
+        headOffice: {
+          street1: $street1
+          city: $city
+          state: $state
+          country: $country
+        }
+      }
+    ) {
+      data {
+        ... on User {
+          message
+          accessToken
+          refreshToken
+          user {
+            id
+            email
+            phoneNumber
+            profilePicture
+            company {
+              id
+              branches {
+                id
+                location {
+                  id
+                  city
+                  country
+                  state
+                  street1
+                  type
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`

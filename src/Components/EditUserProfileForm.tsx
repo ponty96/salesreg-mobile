@@ -1,3 +1,4 @@
+import { Form } from 'native-base'
 import React, { Component } from 'react'
 import {
   Dimensions,
@@ -5,14 +6,14 @@ import {
   ScrollView,
   StyleSheet
 } from 'react-native'
-import { Form } from 'native-base'
+import FormContainerAtom from '../Atom/FormContainerAtom'
+import FormImageAtom from '../Atom/FormImageAtom'
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
-import FormImageAtom from '../Atom/FormImageAtom'
-import FormContainerAtom from '../Atom/FormContainerAtom'
 
 interface IProps {
   phoneNumber?: string
+  navigation?: any
 }
 
 class EditUserProfileForm extends Component<IProps, any> {
@@ -28,7 +29,7 @@ class EditUserProfileForm extends Component<IProps, any> {
       address: ''
     }
   }
-  getImage = (pic: any) => {
+  public getImage = (pic: any) => {
     this.setState((prevState: any) => ({
       image: {
         ...prevState.image,
@@ -36,10 +37,11 @@ class EditUserProfileForm extends Component<IProps, any> {
       }
     }))
   }
-  updateState = (key: string, value: any) => {
+  public updateState = (key: string, value: any) => {
     this.setState({ [key]: value })
   }
-  render() {
+
+  public render() {
     return (
       <KeyboardAvoidingView
         behavior="padding"
@@ -50,6 +52,7 @@ class EditUserProfileForm extends Component<IProps, any> {
           <Form>
             <FormImageAtom
               form="user"
+              // tslint:disable-next-line:jsx-no-lambda
               getName={val => this.updateState('userName', val)}
               getValue={this.getImage}
               source={this.state.image.uri}
@@ -58,11 +61,13 @@ class EditUserProfileForm extends Component<IProps, any> {
               <InputAtom
                 label="Phone Number"
                 defaultValue={this.props.phoneNumber}
+                // tslint:disable-next-line:jsx-no-lambda
                 getValue={val => this.updateState('phone', val)}
                 keyboardType="numeric"
               />
               <InputAtom
                 label="Email Address"
+                // tslint:disable-next-line:jsx-no-lambda
                 getValue={val => this.updateState('email', val)}
                 keyboardType="email-address"
               />
@@ -70,6 +75,7 @@ class EditUserProfileForm extends Component<IProps, any> {
             <FormContainerAtom headerText="Address">
               <InputAtom
                 label="Business Address"
+                // tslint:disable-next-line:jsx-no-lambda
                 getValue={val => this.updateState('address', val)}
               />
             </FormContainerAtom>

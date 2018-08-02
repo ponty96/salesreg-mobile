@@ -1,6 +1,6 @@
+import { Input, Item, Label, Text } from 'native-base'
 import * as React from 'react'
-import { Item, Input, Label, Text } from 'native-base'
-import { View, StyleSheet } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -12,7 +12,7 @@ interface IProps {
   floatingLabel?: boolean | true
   secureTextEntry?: boolean | false
   getValue?: (a: string | number) => void
-  contStyle?: object | Array<any>
+  contStyle?: object | any[]
   inputStyle?: object
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string
@@ -27,7 +27,7 @@ interface IState {
 }
 
 class InputAtom extends React.Component<IProps, IState> {
-  static defaultProps: IProps = {
+  public static defaultProps: IProps = {
     label: '',
     required: false,
     floatingLabel: true,
@@ -37,12 +37,12 @@ class InputAtom extends React.Component<IProps, IState> {
     contStyle: { marginLeft: 4 } || { marginLeft: 0 }
   }
 
-  state = {
+  public state = {
     bottomColor: color.textBorderBottom,
     labelColor: color.inactive
   }
 
-  changeUnderline = (newColor: string): void => {
+  public changeUnderline = (newColor: string): void => {
     if (this.props.login) {
       this.setState({ bottomColor: newColor, labelColor: newColor })
     } else {
@@ -50,7 +50,7 @@ class InputAtom extends React.Component<IProps, IState> {
     }
   }
 
-  render() {
+  public render() {
     return (
       <View>
         <Item
@@ -76,6 +76,7 @@ class InputAtom extends React.Component<IProps, IState> {
           <Input
             placeholder={this.props.placeholder}
             multiline={this.props.multiline}
+            // tslint:disable-next-line:jsx-no-lambda
             onChangeText={text => this.props.getValue(text)}
             value={this.props.defaultValue}
             secureTextEntry={this.props.secureTextEntry}
@@ -88,7 +89,9 @@ class InputAtom extends React.Component<IProps, IState> {
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
+            // tslint:disable-next-line:jsx-no-lambda
             onFocus={() => this.changeUnderline(color.button)}
+            // tslint:disable-next-line:jsx-no-lambda
             onBlur={() => this.changeUnderline(color.textBorderBottom)}
             maxLength={this.props.maxLength}
           />

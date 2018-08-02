@@ -1,42 +1,42 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import {
-  Text,
-  View,
+  Alert,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
-  Alert
-} from 'react-native';
+  Text,
+  View
+} from 'react-native'
 
-import SignupForm from '../Components/SignupForm';
-import SecondSignUpForm from '../Components/SecondSignUpForm';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import TransitionAtom from '../Atom/TransitionAtom';
-import { color } from '../Style/Color';
-import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate';
-import { Mutation } from 'react-apollo';
+import { Mutation } from 'react-apollo'
+import TransitionAtom from '../Atom/TransitionAtom'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import SecondSignUpForm from '../Components/SecondSignUpForm'
+import SignupForm from '../Components/SignupForm'
+import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  showSecondScreen: boolean;
-  email: string;
-  password: string;
-  name: string;
-  passwordConfirmation: string;
-  gender: string;
-  businessName: string;
-  businessAddress: string;
-  businessEmail: string;
-  products: boolean;
-  services: boolean;
-  currency: string;
+  showSecondScreen: boolean
+  email: string
+  password: string
+  name: string
+  passwordConfirmation: string
+  gender: string
+  businessName: string
+  businessAddress: string
+  businessEmail: string
+  products: boolean
+  services: boolean
+  currency: string
 }
 
 class SignupScreen extends PureComponent<IProps, IState> {
-  state = {
+  public state = {
     showSecondScreen: false,
     email: '',
     password: '',
@@ -49,21 +49,21 @@ class SignupScreen extends PureComponent<IProps, IState> {
     products: false,
     services: false,
     currency: ''
-  };
+  }
 
-  onPress = () => {
-    this.setState({ showSecondScreen: true });
-  };
+  public onPress = () => {
+    this.setState({ showSecondScreen: true })
+  }
 
-  updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val };
-    this.setState({ ...formData });
-  };
+  public updateState = (key: string, val: any) => {
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
+  }
 
-  handleSignUpForm = () => {
-    this.setState({ showSecondScreen: true });
-  };
-  render() {
+  public handleSignUpForm = () => {
+    this.setState({ showSecondScreen: true })
+  }
+  public render() {
     return (
       <View style={styles.container}>
         <AuthenticationHeader />
@@ -101,6 +101,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
                     />
                   ) : (
                     <SecondSignUpForm
+                      // tslint:disable-next-line:jsx-no-lambda
                       onSubmit={() =>
                         registerUser({
                           variables: this.parseMutationVariables()
@@ -122,10 +123,10 @@ class SignupScreen extends PureComponent<IProps, IState> {
           </View>
         </ScrollView>
       </View>
-    );
+    )
   }
 
-  parseMutationVariables = () => {
+  public parseMutationVariables = () => {
     const {
       email,
       password,
@@ -137,7 +138,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
       products,
       services,
       currency
-    } = this.state;
+    } = this.state
     return {
       firstName: name ? name.split(' ')[0] : '',
       lastName: name ? name.split(' ')[1] : '',
@@ -150,10 +151,10 @@ class SignupScreen extends PureComponent<IProps, IState> {
       currency,
       category: this.parseCategory(products, services),
       ...this.parseAddress()
-    };
-  };
+    }
+  }
 
-  parseAddress = (): any => {
+  public parseAddress = (): any => {
     /**
      * This is for now a dummy component that uses an address placeholder until we can add google maps address
      */
@@ -162,22 +163,22 @@ class SignupScreen extends PureComponent<IProps, IState> {
       city: 'Akure',
       state: 'Ondo',
       country: 'Nigeria'
-    };
-  };
-
-  parseCategory = (products, services) => {
-    if (products && services) {
-      return 'PRODUCT_SERVICE';
-    } else if (products) {
-      return 'PRODUCT';
-    } else if (services) {
-      return 'SERVICE';
     }
-    return 'PRODUCT_SERVICE';
-  };
+  }
 
-  onCompleted = async data => {
-    const { registerCompany } = data;
+  public parseCategory = (products, services) => {
+    if (products && services) {
+      return 'PRODUCT_SERVICE'
+    } else if (products) {
+      return 'PRODUCT'
+    } else if (services) {
+      return 'SERVICE'
+    }
+    return 'PRODUCT_SERVICE'
+  }
+
+  public onCompleted = async data => {
+    const { registerCompany } = data
     if (registerCompany.success) {
       Alert.alert(
         'Registration Success',
@@ -186,12 +187,12 @@ class SignupScreen extends PureComponent<IProps, IState> {
           { text: 'OK', onPress: () => this.props.navigation.navigate('Login') }
         ],
         { cancelable: false }
-      );
+      )
     }
-  };
+  }
 }
 
-export default SignupScreen;
+export default SignupScreen
 
 const styles = StyleSheet.create({
   personalInfoText: {
@@ -215,4 +216,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-});
+})
