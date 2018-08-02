@@ -1,37 +1,38 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
-import CustomHeader from '../Components/CustomHeader';
-import { ScrollView } from 'react-native-gesture-handler';
-import FormImageAtom from '../Atom/FormImageAtom';
-import InputAtom from '../Atom/InputAtom';
-import FormContainerAtom from '../Atom/FormContainerAtom';
-import SaveCancelButton from '../Container/SaveCancelButton';
-import { Mutation } from 'react-apollo';
-import { UpsertProductGQL } from '../graphql/mutations/product-service';
-import AppSpinner from '../Components/Spinner';
-import Auth from '../services/auth';
-import { parseFieldErrors } from '../Functions';
+import React, { PureComponent } from 'react'
+import { Mutation } from 'react-apollo'
+import { KeyboardAvoidingView, StyleSheet, View } from 'react-native'
+// tslint:disable-next-line:no-implicit-dependencies
+import { ScrollView } from 'react-native-gesture-handler'
+import FormContainerAtom from '../Atom/FormContainerAtom'
+import FormImageAtom from '../Atom/FormImageAtom'
+import InputAtom from '../Atom/InputAtom'
+import CustomHeader from '../Components/CustomHeader'
+import AppSpinner from '../Components/Spinner'
+import SaveCancelButton from '../Container/SaveCancelButton'
+import { parseFieldErrors } from '../Functions'
+import { UpsertProductGQL } from '../graphql/mutations/product-service'
+import Auth from '../services/auth'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  image: any;
-  name: string;
-  currentStock: string;
-  minStock: string;
-  costPrice: string;
-  sellingPrice: string;
-  description: string;
-  userId: string;
-  companyId: string;
-  fieldErrors: any;
+  image: any
+  name: string
+  currentStock: string
+  minStock: string
+  costPrice: string
+  sellingPrice: string
+  description: string
+  userId: string
+  companyId: string
+  fieldErrors: any
 }
 
 class UpsertProductScreen extends PureComponent<IProps, IState> {
   constructor(props: IProps) {
-    super(props);
+    super(props)
     this.state = {
       name: '',
       image:
@@ -44,21 +45,23 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
       companyId: '',
       userId: '',
       fieldErrors: null
-    };
+    }
   }
-  static navigationOptions = ({ navigation }: any) => {
-    const product = navigation.getParam('product', null);
+  // tslint:disable-next-line:member-ordering
+  public static navigationOptions = ({ navigation }: any) => {
+    const product = navigation.getParam('product', null)
     return {
       header: (
         <CustomHeader
           title={product ? `Edit Product ${product.name}` : 'New Product'}
+          // tslint:disable-next-line:jsx-no-lambda
           onBackPress={() => navigation.goBack()}
         />
       )
-    };
-  };
-  componentDidMount() {
-    const product = this.props.navigation.getParam('product', null);
+    }
+  }
+  public componentDidMount() {
+    const product = this.props.navigation.getParam('product', null)
     if (product) {
       this.setState({
         ...product,
@@ -67,39 +70,39 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
           : 'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png',
         minStock: product.minimumStockQuantity,
         currentStock: product.number
-      });
+      })
     }
-    this.updateDetails();
+    this.updateDetails()
   }
 
-  updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+  public updateDetails = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       userId: user.id,
       companyId: user.company.id
-    });
-  };
+    })
+  }
 
-  create = () => {
-    this.props.navigation.goBack();
-  };
+  public create = () => {
+    this.props.navigation.goBack()
+  }
 
-  getImage = (pic: any) => {
+  public getImage = (pic: any) => {
     this.setState((prevState: any) => ({
       image: {
         ...prevState.image,
         uri: pic
       }
-    }));
-  };
+    }))
+  }
 
-  updateState = (key: string, value: any) => {
-    const state = { ...this.state, [key]: value };
-    this.setState(state);
-  };
+  public updateState = (key: string, value: any) => {
+    const state = { ...this.state, [key]: value }
+    this.setState(state)
+  }
 
-  render() {
-    const { fieldErrors } = this.state;
+  public render() {
+    const { fieldErrors } = this.state
     return (
       <Mutation mutation={UpsertProductGQL} onCompleted={this.onCompleted}>
         {(upsertProduct, { loading }) => (
@@ -121,8 +124,9 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                   <InputAtom
                     label="*Product name"
                     defaultValue={this.state.name}
+                    // tslint:disable-next-line:jsx-no-lambda
                     getValue={val => this.updateState('name', val)}
-                    error={fieldErrors && fieldErrors['name']}
+                    error={fieldErrors && fieldErrors.name}
                     underneathStyle={styles.underneathStyle}
                   />
                 </FormContainerAtom>
@@ -130,51 +134,56 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                   <View>
                     <InputAtom
                       label="*Current Stock Quantity"
+                      // tslint:disable-next-line:jsx-no-lambda
                       getValue={val => this.updateState('currentStock', val)}
                       keyboardType="numeric"
                       underneathText="Quantity available in store as at now"
                       underneathStyle={styles.underneathStyle}
                       defaultValue={this.state.currentStock}
-                      error={fieldErrors && fieldErrors['stockQuantity']}
+                      error={fieldErrors && fieldErrors.stockQuantity}
                     />
                   </View>
                   <View>
                     <InputAtom
                       label="*Minimum Stock Quantity"
+                      // tslint:disable-next-line:jsx-no-lambda
                       getValue={val => this.updateState('minStock', val)}
                       keyboardType="numeric"
                       underneathText="Minimum quantity required for re-stock"
                       underneathStyle={styles.underneathStyle}
                       defaultValue={this.state.minStock}
-                      error={fieldErrors && fieldErrors['minimumStockQuantity']}
+                      error={fieldErrors && fieldErrors.minimumStockQuantity}
                     />
                   </View>
                 </FormContainerAtom>
                 <FormContainerAtom headerText="Cost/Selling Price for each">
                   <InputAtom
                     label={`*Cost Price each \u20A6`}
+                    // tslint:disable-next-line:jsx-no-lambda
                     getValue={val => this.updateState('costPrice', val)}
                     keyboardType="numeric"
                     defaultValue={this.state.costPrice}
-                    error={fieldErrors && fieldErrors['costPrice']}
+                    error={fieldErrors && fieldErrors.costPrice}
                     underneathStyle={styles.underneathStyle}
                   />
                   <InputAtom
                     label={`*Selling Price each \u20A6`}
+                    // tslint:disable-next-line:jsx-no-lambda
                     getValue={val => this.updateState('sellingPrice', val)}
                     keyboardType="numeric"
                     defaultValue={this.state.sellingPrice}
                     underneathStyle={styles.underneathStyle}
-                    error={fieldErrors && fieldErrors['sellingPrice']}
+                    error={fieldErrors && fieldErrors.sellingPrice}
                   />
                 </FormContainerAtom>
                 <FormContainerAtom headerText="Description">
                   <View>
                     <InputAtom
                       label="Product Description"
+                      // tslint:disable-next-line:jsx-no-lambda
                       getValue={val => this.updateState('description', val)}
                       defaultValue={this.state.description}
-                      error={fieldErrors && fieldErrors['description']}
+                      error={fieldErrors && fieldErrors.description}
                       underneathStyle={styles.underneathStyle}
                     />
                   </View>
@@ -184,6 +193,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
 
             <SaveCancelButton
               navigation={this.props.navigation}
+              // tslint:disable-next-line:jsx-no-lambda
               createfunc={() =>
                 upsertProduct({
                   variables: this.parseMutationVariables()
@@ -194,11 +204,11 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
           </View>
         )}
       </Mutation>
-    );
+    )
   }
 
-  parseMutationVariables = () => {
-    const product = this.props.navigation.getParam('product', {});
+  public parseMutationVariables = () => {
+    const product = this.props.navigation.getParam('product', {})
     return {
       companyId: this.state.companyId,
       costPrice: this.state.costPrice,
@@ -211,21 +221,21 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
       stockQuantity: this.state.currentStock,
       userId: this.state.userId,
       productId: product ? product.id : null
-    };
-  };
-  onCompleted = async res => {
+    }
+  }
+  public onCompleted = async res => {
     const {
       upsertProduct: { success, fieldErrors }
-    } = res;
+    } = res
     if (success) {
-      this.props.navigation.navigate('Products');
+      this.props.navigation.navigate('Products')
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default UpsertProductScreen;
+export default UpsertProductScreen
 
 const styles = StyleSheet.create({
   ababa: {
@@ -241,4 +251,4 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     paddingLeft: 8
   }
-});
+})

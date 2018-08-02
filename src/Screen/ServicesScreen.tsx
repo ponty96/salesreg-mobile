@@ -1,54 +1,55 @@
-import React, { PureComponent } from 'react';
-import { StyleSheet, View, ScrollView, FlatList } from 'react-native';
+import React, { PureComponent } from 'react'
+import { FlatList, ScrollView, StyleSheet, View } from 'react-native'
 
-import ServiceListItemAtom from '../Atom/ServiceListItemAtom';
-import { color } from '../Style/Color';
-import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import FabAtom from '../Atom/FabAtom';
-import { ListCompanyServicesGQL } from '../graphql/queries/product-service';
-import { Query } from 'react-apollo';
-import AppSpinner from '../Components/Spinner';
-import Auth from '../services/auth';
+import { Query } from 'react-apollo'
+import FabAtom from '../Atom/FabAtom'
+import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
+import SubHeaderAtom from '../Atom/SubHeaderAtom'
+import AppSpinner from '../Components/Spinner'
+import { ListCompanyServicesGQL } from '../graphql/queries/product-service'
+import Auth from '../services/auth'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  business: any;
+  business: any
 }
 
 class ServicesScreen extends PureComponent<IProps, IState> {
-  state = {
+  public state = {
     business: null
-  };
-
-  componentDidMount() {
-    this.updateState();
   }
-  updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+
+  public componentDidMount() {
+    this.updateState()
+  }
+  public updateState = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       business: user.company
-    });
-  };
+    })
+  }
 
-  handleTouch = service => {
-    this.props.navigation.navigate('ShowService', { service });
-  };
+  public handleTouch = service => {
+    this.props.navigation.navigate('ShowService', { service })
+  }
 
-  renderList = ({ item }: any) => {
+  public renderList = ({ item }: any) => {
     return (
       <ServiceListItemAtom
         name={item.name}
         amount={item.price}
+        // tslint:disable-next-line:jsx-no-lambda
         onPress={() => this.handleTouch(item)}
       />
-    );
-  };
+    )
+  }
 
-  render() {
-    const { business } = this.state;
+  public render() {
+    const { business } = this.state
     return (
       <Query
         query={ListCompanyServicesGQL}
@@ -83,14 +84,14 @@ class ServicesScreen extends PureComponent<IProps, IState> {
                 navigation={this.props.navigation}
               />
             </View>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }
 
-export default ServicesScreen;
+export default ServicesScreen
 
 const styles = StyleSheet.create({
   headerIcon: {
@@ -102,4 +103,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-});
+})

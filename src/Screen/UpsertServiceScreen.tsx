@@ -1,72 +1,74 @@
-import React, { Component } from 'react';
-import { View, StyleSheet, Dimensions } from 'react-native';
-import { color } from '../Style/Color';
-import CustomHeader from '../Components/CustomHeader';
-import SaveCancelButton from '../Container/SaveCancelButton';
-import InputAtom from '../Atom/InputAtom';
+import React, { Component } from 'react'
+import { Dimensions, StyleSheet, View } from 'react-native'
+import InputAtom from '../Atom/InputAtom'
+import CustomHeader from '../Components/CustomHeader'
+import SaveCancelButton from '../Container/SaveCancelButton'
+import { color } from '../Style/Color'
 
-import { Mutation } from 'react-apollo';
-import { UpsertServiceGQL } from '../graphql/mutations/product-service';
-import AppSpinner from '../Components/Spinner';
-import Auth from '../services/auth';
-import { parseFieldErrors } from '../Functions';
+import { Mutation } from 'react-apollo'
+import AppSpinner from '../Components/Spinner'
+import { parseFieldErrors } from '../Functions'
+import { UpsertServiceGQL } from '../graphql/mutations/product-service'
+import Auth from '../services/auth'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  name: string;
-  price: string;
-  userId: string;
-  companyId: string;
-  fieldErrors: any;
+  name: string
+  price: string
+  userId: string
+  companyId: string
+  fieldErrors: any
 }
 
 export default class UpsertServiceScreen extends Component<IProps, IState> {
-  state = {
+  public state = {
     name: '',
     price: '',
     userId: '',
     companyId: '',
     fieldErrors: null
-  };
+  }
 
-  updateState = (key: string, value: any) => {
-    const state = { ...this.state, [key]: value };
-    this.setState(state);
-  };
+  public updateState = (key: string, value: any) => {
+    const state = { ...this.state, [key]: value }
+    this.setState(state)
+  }
 
-  static navigationOptions = ({ navigation }: any) => {
-    const service = navigation.getParam('service', null);
+  // tslint:disable-next-line:member-ordering
+  public static navigationOptions = ({ navigation }: any) => {
+    const service = navigation.getParam('service', null)
     return {
       header: (
         <CustomHeader
           title={service ? `Edit Service ${service.name}` : 'New Service'}
+          // tslint:disable-next-line:jsx-no-lambda
           onBackPress={() => navigation.goBack()}
         />
       )
-    };
-  };
-
-  componentDidMount() {
-    const service = this.props.navigation.getParam('service', null);
-    if (service) {
-      this.setState({ ...service });
     }
-    this.updateDetails();
   }
 
-  updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+  public componentDidMount() {
+    const service = this.props.navigation.getParam('service', null)
+    if (service) {
+      this.setState({ ...service })
+    }
+    this.updateDetails()
+  }
+
+  public updateDetails = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       userId: user.id,
       companyId: user.company.id
-    });
-  };
+    })
+  }
 
-  render() {
-    const { navigation } = this.props;
+  public render() {
+    const { navigation } = this.props
     return (
       <Mutation mutation={UpsertServiceGQL} onCompleted={this.onCompleted}>
         {(upsertService, { loading }) => (
@@ -76,6 +78,7 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
               <View style={styles.inputView}>
                 <InputAtom
                   label="Service name"
+                  // tslint:disable-next-line:jsx-no-lambda
                   getValue={val => this.updateState('name', val)}
                   contStyle={styles.inputWrapper}
                   defaultValue={this.state.name}
@@ -84,6 +87,7 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
               <View style={styles.inputView}>
                 <InputAtom
                   label="Rate/charges"
+                  // tslint:disable-next-line:jsx-no-lambda
                   getValue={val => this.updateState('price', val)}
                   contStyle={styles.inputWrapper}
                   defaultValue={this.state.price}
@@ -94,6 +98,7 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
             <SaveCancelButton
               navigation={navigation}
               positiveButtonName="SAVE"
+              // tslint:disable-next-line:jsx-no-lambda
               createfunc={() =>
                 upsertService({
                   variables: this.parseMutationVariables()
@@ -103,31 +108,31 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
           </View>
         )}
       </Mutation>
-    );
+    )
   }
 
-  parseMutationVariables = () => {
-    const service = this.props.navigation.getParam('service', {});
-    const { name, price, userId, companyId } = this.state;
+  public parseMutationVariables = () => {
+    const service = this.props.navigation.getParam('service', {})
+    const { name, price, userId, companyId } = this.state
     return {
       name,
       price,
       userId,
       companyId,
       serviceId: service ? service.id : null
-    };
-  };
+    }
+  }
 
-  onCompleted = async res => {
+  public onCompleted = async res => {
     const {
       upsertService: { success, fieldErrors }
-    } = res;
+    } = res
     if (success) {
-      this.props.navigation.navigate('Services');
+      this.props.navigation.navigate('Services')
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
 const styles = StyleSheet.create({
@@ -155,4 +160,4 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginRight: 8
   }
-});
+})
