@@ -8,12 +8,13 @@ import {
 } from 'react-native'
 import FormContainerAtom from '../Atom/FormContainerAtom'
 import FormImageAtom from '../Atom/FormImageAtom'
+import GoogleInputAtom from '../Atom/GoogleInputAtom'
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 
 interface IProps {
   phoneNumber?: string
-  navigation?: any
+  name?: string
 }
 
 class EditUserProfileForm extends Component<IProps, any> {
@@ -52,11 +53,17 @@ class EditUserProfileForm extends Component<IProps, any> {
           <Form>
             <FormImageAtom
               form="user"
-              // tslint:disable-next-line:jsx-no-lambda
-              getName={val => this.updateState('userName', val)}
               getValue={this.getImage}
               source={this.state.image.uri}
             />
+            <FormContainerAtom headerText={'User ID'}>
+              <InputAtom
+                label={'User Name'}
+                defaultValue={this.props.name}
+                // tslint:disable-next-line:jsx-no-lambda
+                getValue={val => this.updateState('name', val)}
+              />
+            </FormContainerAtom>
             <FormContainerAtom headerText="Contact">
               <InputAtom
                 label="Phone Number"
@@ -73,10 +80,10 @@ class EditUserProfileForm extends Component<IProps, any> {
               />
             </FormContainerAtom>
             <FormContainerAtom headerText="Address">
-              <InputAtom
-                label="Business Address"
+              <GoogleInputAtom
+                label="Business Address City, State"
                 // tslint:disable-next-line:jsx-no-lambda
-                getValue={val => this.updateState('address', val)}
+                getValue={(val: string) => this.updateState('address', val)}
               />
             </FormContainerAtom>
           </Form>

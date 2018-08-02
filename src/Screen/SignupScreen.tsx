@@ -13,6 +13,8 @@ import TransitionAtom from '../Atom/TransitionAtom'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
 import SecondSignUpForm from '../Components/SecondSignUpForm'
 import SignupForm from '../Components/SignupForm'
+import AppSpinner from '../Components/Spinner'
+import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions'
 import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
 import { color } from '../Style/Color'
 
@@ -21,7 +23,7 @@ interface IProps {
 }
 
 interface IState {
-  showSecondScreen: boolean
+  currentForm: number
   email: string
   password: string
   name: string
@@ -33,14 +35,14 @@ interface IState {
   products: boolean
   services: boolean
   currency: string
+  fieldErrors: any
 }
 
 class SignupScreen extends PureComponent<IProps, IState> {
   public state = {
-    showSecondScreen: false,
     email: '',
-    password: '',
     name: '',
+    password: '',
     passwordConfirmation: '',
     gender: '',
     businessName: '',
@@ -48,11 +50,19 @@ class SignupScreen extends PureComponent<IProps, IState> {
     businessEmail: '',
     products: false,
     services: false,
-    currency: ''
+    currency: '',
+    fieldErrors: null,
+    currentForm: 0
   }
 
-  public onPress = () => {
-    this.setState({ showSecondScreen: true })
+  public next = () => {
+    const errors = validateRegStep1FormInputs(this.state)
+    console.log('ERORS ', errors)
+    if (errors && Object.keys(errors).length > 0) {
+      this.setState({ fieldErrors: errors })
+    } else {
+      this.setState({ currentForm: 1 })
+    }
   }
 
   public updateState = (key: string, val: any) => {
@@ -61,7 +71,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
   }
 
   public handleSignUpForm = () => {
-    this.setState({ showSecondScreen: true })
+    // this.setState({ currentForm: true });
   }
   public render() {
     return (
@@ -72,11 +82,13 @@ class SignupScreen extends PureComponent<IProps, IState> {
             <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
               SIGN UP
             </Text>
-            <TransitionAtom firstScreen={!this.state.showSecondScreen} />
+            <TransitionAtom
+              firstScreen={this.state.currentForm === 0 ? true : false}
+            />
             <Text
               style={[styles.personalInfoText, { fontFamily: 'SourceSansPro' }]}
             >
-              {!this.state.showSecondScreen
+              {this.state.currentForm === 0
                 ? 'PERSONAL INFORMATION'
                 : 'BUSINESS INFORMATION'}
             </Text>
@@ -84,20 +96,25 @@ class SignupScreen extends PureComponent<IProps, IState> {
               mutation={RegisterCompanyMutationGQL}
               onCompleted={this.onCompleted}
             >
-              {registerUser => (
+              {(registerUser, { loading }) => (
                 <KeyboardAvoidingView
                   behavior={'padding'}
                   keyboardVerticalOffset={95}
                 >
-                  {!this.state.showSecondScreen ? (
+                  <AppSpinner visible={loading} />
+                  {this.state.currentForm === 0 ? (
                     <SignupForm
-                      onPress={this.handleSignUpForm}
                       email={this.state.email}
                       password={this.state.password}
                       passwordConfirmation={this.state.passwordConfirmation}
                       name={this.state.name}
                       gender={this.state.gender}
                       onUpdateState={this.updateState}
+                      fieldErrors={this.state.fieldErrors}
+                      onNext={this.next}
+                      // tslint:disable-next-line:jsx-no-lambda
+                      onBack={() => this.props.navigation.navigate('Login')}
+                      navigation={this.props.navigation}
                     />
                   ) : (
                     <SecondSignUpForm
@@ -115,6 +132,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
                       services={this.state.services}
                       currency={this.state.currency}
                       navigation={this.props.navigation}
+                      fieldErrors={this.state.fieldErrors}
                     />
                   )}
                 </KeyboardAvoidingView>
@@ -178,8 +196,11 @@ class SignupScreen extends PureComponent<IProps, IState> {
   }
 
   public onCompleted = async data => {
-    const { registerCompany } = data
-    if (registerCompany.success) {
+    console.log('SignupScreen', data)
+    const {
+      registerCompany: { success, fieldErrors }
+    } = data
+    if (success) {
       Alert.alert(
         'Registration Success',
         'Verify your account via the link sent to your email',
@@ -188,6 +209,8 @@ class SignupScreen extends PureComponent<IProps, IState> {
         ],
         { cancelable: false }
       )
+    } else {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
   }
 }

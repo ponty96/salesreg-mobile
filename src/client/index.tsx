@@ -13,7 +13,7 @@ import authenticate from '../graphql/resolvers/auth'
 import Auth from '../services/auth'
 import absintheSocketLink from './absinthe-socket-link'
 
-const GRAPHQL_API_ENDPOINT = 'http://284651fd.ngrok.io/api'
+const GRAPHQL_API_ENDPOINT = 'http://localhost:5000/api'
 const cache = new InMemoryCache()
 
 const authLink = setContext(async (_: any, { headers }: any) => {
@@ -21,7 +21,7 @@ const authLink = setContext(async (_: any, { headers }: any) => {
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : ''
+      authorization: token ? `${token}` : ''
     }
   }
 })

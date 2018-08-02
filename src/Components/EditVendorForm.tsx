@@ -14,6 +14,8 @@ class EditVendorForm extends PureComponent<IProps, IState> {
     return (
       <View style={styles.ababa}>
         <CustomerFormAtom
+          header={'Vendor ID'}
+          name={'Vendor Name'}
           navigation={this.props.navigation}
           type={'vendor'}
           firstHeader={'Vendor contact'}

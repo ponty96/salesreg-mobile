@@ -10,6 +10,8 @@ import {
 import { Mutation } from 'react-apollo'
 import AuthenticationHeader from '../Components/AuthenticationHeader'
 import LoginForm from '../Components/LoginForm'
+import AppSpinner from '../Components/Spinner'
+import { parseFieldErrors } from '../Functions'
 import { AuthenticateClientGQL } from '../graphql/client-mutations/authenticate'
 import { LoginUserMutationGQL } from '../graphql/mutations/authenticate'
 import Auth from '../services/auth'
@@ -21,9 +23,14 @@ interface IProps {
   login: any
 }
 
-// interface IState {}
+interface IState {
+  fieldErrors: any
+}
 
-class LoginScreen extends React.Component<IProps, any> {
+class LoginScreen extends React.Component<IProps, IState> {
+  public state = {
+    fieldErrors: null
+  }
   public componentDidMount() {
     Auth.clearVault()
   }
@@ -42,9 +49,11 @@ class LoginScreen extends React.Component<IProps, any> {
             >
               {(loginUser, { loading }) => (
                 <KeyboardAvoidingView behavior="position">
+                  <AppSpinner visible={loading} />
                   <LoginForm
                     navigation={this.props.navigation}
                     loading={loading}
+                    fieldErrors={this.state.fieldErrors}
                     // tslint:disable-next-line:jsx-no-lambda
                     onSubmit={params =>
                       loginUser({
@@ -62,23 +71,28 @@ class LoginScreen extends React.Component<IProps, any> {
       </View>
     )
   }
-  public onCompleted = async data => {
+  public onCompleted = async res => {
+    console.log('LOGINSCREEN', res)
     const {
-      loginUser: {
-        data: { accessToken, refreshToken, user }
-      }
-    } = data
-    const {
-      screenProps: { client }
-    } = this.props
+      loginUser: { data, fieldErrors, success }
+    } = res
+    if (success) {
+      const {
+        screenProps: { client }
+      } = this.props
 
-    await Auth.clearVault()
-    await Auth.setToken(accessToken)
-    await Auth.setRefreshToken(refreshToken)
-    await Auth.setCurrentUser(user)
-    await client.resetStore()
-    client.mutate({ mutation: AuthenticateClientGQL })
-    this.props.navigation.navigate('Home')
+      const { accessToken, refreshToken, user } = data
+
+      await Auth.clearVault()
+      await Auth.setToken(accessToken)
+      await Auth.setRefreshToken(refreshToken)
+      await Auth.setCurrentUser(user)
+      await client.resetStore()
+      client.mutate({ mutation: AuthenticateClientGQL })
+      this.props.navigation.navigate('Home')
+    } else {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
+    }
   }
 }
 export default LoginScreen

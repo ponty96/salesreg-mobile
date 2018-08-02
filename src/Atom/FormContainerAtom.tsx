@@ -1,17 +1,25 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Dimensions } from 'react-native'
+import { Dimensions, StyleSheet, Text, View } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IProps {
-  headerText: string
+  headerText?: string
+  change?: boolean
+  inputForTwo?: boolean
 }
 
 class FormContainerAtom extends React.Component<IProps, any> {
-  render() {
+  public render() {
     return (
       <View style={styles.mainView}>
         <Text style={styles.headerText}>{this.props.headerText}</Text>
-        <View style={styles.inputView}>{this.props.children}</View>
+        <View
+          style={
+            this.props.inputForTwo ? styles.inputViewForTwo : styles.inputView
+          }
+        >
+          {this.props.children}
+        </View>
       </View>
     )
   }
@@ -36,10 +44,21 @@ const styles = StyleSheet.create({
     marginBottom: 16,
     borderRadius: 3
   },
+  inputViewForTwo: {
+    width: Dimensions.get('screen').width - 32,
+    alignSelf: 'center',
+    backgroundColor: color.secondary,
+    flexDirection: 'row',
+    alignItems: 'center',
+    padding: 10,
+    marginTop: 16,
+    marginBottom: 16,
+    borderRadius: 3
+  },
   headerText: {
     alignSelf: 'center',
     fontSize: 14,
-    color: color.button,
+    color: color.blueLabelColor,
     fontFamily: 'SourceSansPro_Semibold'
   }
 })

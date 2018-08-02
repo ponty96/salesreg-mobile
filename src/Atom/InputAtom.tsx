@@ -19,6 +19,7 @@ interface IProps {
   underneathStyle?: object
   maxLength?: number
   login?: boolean
+  error?: any
 }
 
 interface IState {
@@ -43,7 +44,9 @@ class InputAtom extends React.Component<IProps, IState> {
   }
 
   public changeUnderline = (newColor: string): void => {
-    if (this.props.login) {
+    if (this.props.error) {
+      this.setState({ bottomColor: 'red', labelColor: 'red' })
+    } else if (this.props.login) {
       this.setState({ bottomColor: newColor, labelColor: newColor })
     } else {
       this.setState({ labelColor: newColor })
@@ -90,27 +93,35 @@ class InputAtom extends React.Component<IProps, IState> {
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
             // tslint:disable-next-line:jsx-no-lambda
-            onFocus={() => this.changeUnderline(color.button)}
+            onFocus={() => this.changeUnderline(color.blueLabelColor)}
             // tslint:disable-next-line:jsx-no-lambda
             onBlur={() => this.changeUnderline(color.textBorderBottom)}
             maxLength={this.props.maxLength}
           />
         </Item>
-        {this.props.underneathText ? (
-          <Text
-            style={[
-              styles.underneathText,
-              this.props.underneathStyle,
-              { fontFamily: 'SourceSansPro' }
-            ]}
-          >
-            {this.props.underneathText}
-          </Text>
-        ) : (
-          <Text />
-        )}
+        {this.renderUnderNeathText()}
       </View>
     )
+  }
+
+  public renderUnderNeathText = () => {
+    if (this.props.error || this.props.underneathText) {
+      return (
+        <Text
+          style={[
+            styles.underneathText,
+            this.props.underneathStyle,
+            {
+              fontFamily: 'SourceSansPro',
+              color: this.props.error ? 'red' : color.principal
+            }
+          ]}
+        >
+          {this.props.error || this.props.underneathText}
+        </Text>
+      )
+    }
+    return <Text />
   }
 }
 
