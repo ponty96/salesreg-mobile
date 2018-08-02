@@ -66,6 +66,7 @@ export const EditUserProfileMutationGQL = gql`
 
 export const EditBusinessProfileMutationGQL = gql`
   mutation EditBusinessProfile(
+    companyId: Uuid!
     $profilePicture: String!
     $firstName: String!
     $lastName: String!
@@ -96,6 +97,11 @@ export const EditBusinessProfileMutationGQL = gql`
               type
             }
           }
+      }
+      user {
+        firstName: $firstName
+        lastName: $lastName
+        phoneNumber: $phoneNumber
       }
     ) {
       fieldErrors {
