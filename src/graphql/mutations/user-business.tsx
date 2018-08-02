@@ -69,6 +69,7 @@ export const EditBusinessProfileMutationGQL = gql`
     companyId: Uuid!
     $profilePicture: String!
     $firstName: String!
+    $description: String!
     $lastName: String!
     $phoneNumber: Int!
     $email: String!
@@ -76,27 +77,23 @@ export const EditBusinessProfileMutationGQL = gql`
     $city: String!
     $state: String!
     $country: String!
+    $check: String!
   ) {
     editBusinessProfile(
       company: {
-        id
-        title
-        contactEmail
-        about
-        category
-        currency
+        contactEmail: $contactEmail
+        description: $description
+        category: $check
+        currency: NAIRA
+        check: $check
         branches {
-            id
-            type
             location {
-              id
-              city
-              country
-              state
-              street1
-              type
+              city: $city
+              country: $country
+              state: $state
+              street1: $street1
             }
-          }
+        }
       }
       user {
         firstName: $firstName

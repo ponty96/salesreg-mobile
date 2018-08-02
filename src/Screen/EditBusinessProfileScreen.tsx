@@ -119,7 +119,7 @@ class EditBusinessProfileScreen extends Component<IProps, any> {
                     label={'Business Name'}
                     defaultValue={this.state.businessName}
                     // tslint:disable-next-line:jsx-no-lambda
-                    getValue={val => this.updateState('name', val)}
+                    getValue={val => this.updateState('buinessName', val)}
                   />
                 </FormContainerAtom>
                 <FormContainerAtom headerText="Contact Address">
@@ -198,10 +198,12 @@ class EditBusinessProfileScreen extends Component<IProps, any> {
     return {
       phoneNumber: this.state.phone,
       email: this.state.email,
-      userName: this.state.userName,
+      businessName: this.state.businessName,
+      description: this.state.description,
+      check: this.state.check1 + ' ' + this.state.check2,
       address: this.state.address,
       profilePicture: this.state.image.uri,
-      userId: this.state.userId
+      companyId: this.state.companyId
     }
   }
   public onCompleted = async res => {
