@@ -38,8 +38,6 @@ import UserProfileScreen from '../Screen/UserProfileScreen';
 import VendorDetailScreen from '../Screen/VendorDetailsScreen';
 import VendorScreen from '../Screen/VendorScreen';
 import BusinessDetailsScreen from '../Screen/BusinessDetailsScreen';
-import DebtDetailsScreen from '../Screen/DebtDetailsScreen';
-import DebtScreen from '../Screen/DebtScreen';
 import LoginScreen from '../Screen/LoginScreen';
 // import BusinessListScreen from './../Screen/BusinessListScreen';
 import NewBusinessScreen from '../Screen/NewBusinessScreen';
@@ -53,7 +51,6 @@ import ProductDetailsScreen from '../Screen/ProductDetailsScreen';
 import ProductScreen from '../Screen/ProductScreen';
 import ResetScreen from '../Screen/ResetScreen';
 // import CustomerScreen from './../Screen/CustomerScreen';
-// import DebtsScreen from './../Screen/DebtsScreen';
 import ServicesScreen from '../Screen/ServicesScreen';
 // import SplashScreen from './../Screen/SplashScreen';
 import SignupScreen from '../Screen/SignupScreen';
@@ -158,12 +155,6 @@ const businessStack = StackNavigator(
     },
     ProfileSettings: {
       screen: ProfileSettingsScreen
-    },
-    Debt: {
-      screen: DebtScreen
-    },
-    DebtDetails: {
-      screen: DebtDetailsScreen
     },
     Customer: {
       screen: CustomerScreen
