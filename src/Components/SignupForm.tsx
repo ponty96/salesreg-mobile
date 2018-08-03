@@ -55,13 +55,11 @@ class SigupForm extends PureComponent<IProps, IState> {
         <View style={styles.pickerWrapper}>
           <PickerAtom
             list={['male', 'female']}
-            style={styles.faintPicker}
             placeholder="*Gender"
             selected={this.props.gender}
             handleSelection={val => this.props.onUpdateState('gender', val)}
           />
         </View>
-        <View style={styles.pickerUnderline} />
         {fieldErrors &&
           fieldErrors['gender'] && (
             <Text style={styles.errorText}>{fieldErrors['gender']}</Text>
@@ -145,12 +143,6 @@ const styles = StyleSheet.create({
     width: '50%',
     opacity: 0.5,
     marginBottom: 5
-  },
-  pickerUnderline: {
-    width: '50%',
-    borderBottomColor: color.textBorderBottom,
-    borderBottomWidth: 1,
-    marginBottom: 10
   },
   nextButtonContainer: {
     flexDirection: 'row',

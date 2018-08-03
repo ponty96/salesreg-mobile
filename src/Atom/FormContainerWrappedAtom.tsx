@@ -1,5 +1,5 @@
 import * as React from 'react';
-import { StyleSheet, View, Dimensions } from 'react-native';
+import { StyleSheet, View } from 'react-native';
 import { color } from '../Style/Color';
 
 interface IProps {
@@ -29,16 +29,16 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   innerInputViewForTwo: {
-    width: Dimensions.get('screen').width - 32,
+    // width: Dimensions.get('screen').width - 32,
     alignSelf: 'center',
     backgroundColor: color.secondary,
     flexDirection: 'row',
     alignItems: 'center',
-    paddingRight: 12,
+    // paddingRight: 12,
     flexWrap: 'wrap'
   },
   wrappedInputLeft: {
     width: '50%',
-    paddingLeft: 12
+    paddingLeft: 6
   }
 });

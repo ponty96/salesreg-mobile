@@ -175,25 +175,26 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
               >
                 <PickerAtom
                   list={['Naira (\u20A6)']}
-                  style={styles.pickerStyle}
                   placeholder="Select Currency"
                 />
               </View>
             </FormContainerAtom>
-            <FormContainerWrappedAtom>
-              <InputAtom
-                label="Birthday"
-                getValue={val => this.updateState('birthday', val)}
-              />
-              <InputAtom
-                label="Marital Status"
-                getValue={val => this.updateState('maritalStatus', val)}
-              />
-              <InputAtom
-                label="Marriage Anniversary"
-                getValue={val => this.updateState('marriageAnn', val)}
-              />
-            </FormContainerWrappedAtom>
+            <FormContainerAtom>
+              <FormContainerWrappedAtom>
+                <InputAtom
+                  label="Birthday"
+                  getValue={val => this.updateState('birthday', val)}
+                />
+                <InputAtom
+                  label="Marital Status"
+                  getValue={val => this.updateState('maritalStatus', val)}
+                />
+                <InputAtom
+                  label="Marriage Anniversary"
+                  getValue={val => this.updateState('marriageAnn', val)}
+                />
+              </FormContainerWrappedAtom>
+            </FormContainerAtom>
             <FormContainerAtom headerText="Likes">
               <InputAtom
                 label="Like"
@@ -228,10 +229,6 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
 }
 
 const styles = StyleSheet.create({
-  pickerStyle: {
-    width: '100%',
-    height: 35
-  },
   itemsContainer: {
     flex: 4,
     backgroundColor: '#F6F6F6'

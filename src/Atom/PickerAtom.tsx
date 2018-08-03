@@ -5,10 +5,11 @@ import { color } from '../Style/Color';
 
 interface IProps {
   list: Array<any>;
-  style?: object;
   placeholder: string;
   selected?: string;
   handleSelection?: (value: any) => void;
+  width?: string;
+  pickerStyle?: any;
 }
 
 interface IState {
@@ -24,7 +25,9 @@ class PickerAtom extends React.Component<IProps, IState> {
       loading: true
     };
   }
-
+  static defaultProps = {
+    width: '100%'
+  };
   handleChange(value: string) {
     this.setState({
       selected: value
@@ -39,17 +42,35 @@ class PickerAtom extends React.Component<IProps, IState> {
         <Picker
           iosHeader="Select Gender"
           mode="dropdown"
-          iosIcon={<Icon name="ios-arrow-down-outline" />}
-          style={this.props.style}
+          iosIcon={
+            <Icon
+              name="caret-down"
+              type="FontAwesome"
+              style={{ color: color.inactive, fontSize: 16 }}
+            />
+          }
+          style={{
+            height: 35,
+            borderBottomWidth: 1,
+            borderBottomColor: color.textBorderBottom,
+            marginBottom: 10,
+            width: this.props.width,
+            ...this.props.pickerStyle
+          }}
           selectedValue={this.state.selected}
           onValueChange={this.handleChange.bind(this)}
           placeholder={this.props.placeholder}
-          placeholderStyle={{ color: color.principal }}
+          placeholderStyle={{
+            color: color.inactive,
+            fontSize: 16,
+            textAlign: 'left',
+            paddingLeft: 8
+          }}
           textStyle={{
             textAlign: 'left',
-            paddingLeft: 0,
-            paddingRight: 0,
-            color: color.principal
+            color: color.principal,
+            fontSize: 16,
+            paddingLeft: 8
           }}
         >
           {list.map((element, key) => (
