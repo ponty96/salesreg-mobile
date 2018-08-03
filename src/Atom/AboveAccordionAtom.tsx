@@ -1,6 +1,6 @@
-import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
 import { Thumbnail } from 'native-base'
+import * as React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IAboveAccordProps {
@@ -17,7 +17,7 @@ class AboveAccordionAtom extends React.Component<IAboveAccordProps, any> {
     totalAmount: 0
   }
 
-  render() {
+  public render() {
     return (
       <View style={styles.aboveAccordionContainer}>
         <View style={styles.aboveAccordionPictureView}>

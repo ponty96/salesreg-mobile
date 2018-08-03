@@ -1,44 +1,45 @@
-import React, { PureComponent } from 'react';
-import SettingsList from '../Components/SettingsList';
-import CustomHeader from '../Components/CustomHeader';
-import gql from 'graphql-tag';
-import Auth from '../services/auth';
+import gql from 'graphql-tag'
+import React, { PureComponent } from 'react'
+import CustomHeader from '../Components/CustomHeader'
+import SettingsList from '../Components/SettingsList'
+import Auth from '../services/auth'
 
 interface IProps {
-  navigation: any;
-  screenProps: any;
+  navigation: any
+  screenProps: any
 }
 
 const LogoutClientGQL = gql`
   mutation logout {
     logout @client
   }
-`;
+`
 
 class ProfileSettingsScreen extends PureComponent<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+  public static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
         <CustomHeader
           title="Profile settings"
+          // tslint:disable-next-line:jsx-no-lambda
           onBackPress={() => navigation.goBack()}
         />
       )
-    };
-  };
-  handleLogOut = async () => {
+    }
+  }
+  public handleLogOut = async () => {
     const {
       screenProps: { client }
-    } = this.props;
-    await Auth.clearVault();
-    await client.resetStore();
-    client.mutate({ mutation: LogoutClientGQL });
-    this.props.navigation.navigate('Login');
-  };
-  render() {
+    } = this.props
+    await Auth.clearVault()
+    await client.resetStore()
+    client.mutate({ mutation: LogoutClientGQL })
+    this.props.navigation.navigate('Login')
+  }
+  public render() {
     const {
       navigation: { navigate }
-    } = this.props;
+    } = this.props
     return (
       <SettingsList
         navigate={navigate}
@@ -61,7 +62,7 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
           }
         ]}
       />
-    );
+    )
   }
 }
-export default ProfileSettingsScreen;
+export default ProfileSettingsScreen

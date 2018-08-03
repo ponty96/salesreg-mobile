@@ -1,15 +1,15 @@
-import React from 'react';
-import { View } from 'react-native';
-import Spinner from 'react-native-loading-spinner-overlay';
+import React from 'react'
+import { View } from 'react-native'
+import Spinner from 'react-native-loading-spinner-overlay'
 
 interface IProps {
-  visible: boolean | false;
+  visible: boolean | false
 }
 
 export default class AppSpinner extends React.Component<IProps> {
-  render() {
+  public render() {
     if (!this.props.visible) {
-      return <View />;
+      return <View />
     } else {
       return (
         <Spinner
@@ -17,7 +17,7 @@ export default class AppSpinner extends React.Component<IProps> {
           overlayColor="#f6f8fa8f"
           color="#000"
         />
-      );
+      )
     }
   }
 }

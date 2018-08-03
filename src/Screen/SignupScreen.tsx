@@ -1,45 +1,45 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import {
-  Text,
-  View,
+  Alert,
   KeyboardAvoidingView,
   ScrollView,
   StyleSheet,
-  Alert
-} from 'react-native';
+  Text,
+  View
+} from 'react-native'
 
-import SignupForm from '../Components/SignupForm';
-import SecondSignUpForm from '../Components/SecondSignUpForm';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import TransitionAtom from '../Atom/TransitionAtom';
-import { color } from '../Style/Color';
-import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate';
-import { Mutation } from 'react-apollo';
-import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions';
-import AppSpinner from '../Components/Spinner';
+import { Mutation } from 'react-apollo'
+import TransitionAtom from '../Atom/TransitionAtom'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import SecondSignUpForm from '../Components/SecondSignUpForm'
+import SignupForm from '../Components/SignupForm'
+import AppSpinner from '../Components/Spinner'
+import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions'
+import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  currentForm: number;
-  email: string;
-  password: string;
-  name: string;
-  passwordConfirmation: string;
-  gender: string;
-  businessName: string;
-  businessAddress: string;
-  businessEmail: string;
-  products: boolean;
-  services: boolean;
-  currency: string;
-  fieldErrors: any;
+  currentForm: number
+  email: string
+  password: string
+  name: string
+  passwordConfirmation: string
+  gender: string
+  businessName: string
+  businessAddress: string
+  businessEmail: string
+  products: boolean
+  services: boolean
+  currency: string
+  fieldErrors: any
 }
 
 class SignupScreen extends PureComponent<IProps, IState> {
-  state = {
+  public state = {
     email: '',
     name: '',
     password: '',
@@ -53,27 +53,27 @@ class SignupScreen extends PureComponent<IProps, IState> {
     currency: '',
     fieldErrors: null,
     currentForm: 0
-  };
+  }
 
-  next = () => {
-    const errors = validateRegStep1FormInputs(this.state);
-    console.log('ERORS ', errors);
+  public next = () => {
+    const errors = validateRegStep1FormInputs(this.state)
+    console.log('ERORS ', errors)
     if (errors && Object.keys(errors).length > 0) {
-      this.setState({ fieldErrors: errors });
+      this.setState({ fieldErrors: errors })
     } else {
-      this.setState({ currentForm: 1 });
+      this.setState({ currentForm: 1 })
     }
-  };
+  }
 
-  updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val };
-    this.setState({ ...formData });
-  };
+  public updateState = (key: string, val: any) => {
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
+  }
 
-  handleSignUpForm = () => {
+  public handleSignUpForm = () => {
     // this.setState({ currentForm: true });
-  };
-  render() {
+  }
+  public render() {
     return (
       <View style={styles.container}>
         <AuthenticationHeader />
@@ -83,12 +83,12 @@ class SignupScreen extends PureComponent<IProps, IState> {
               SIGN UP
             </Text>
             <TransitionAtom
-              firstScreen={this.state.currentForm == 0 ? true : false}
+              firstScreen={this.state.currentForm === 0 ? true : false}
             />
             <Text
               style={[styles.personalInfoText, { fontFamily: 'SourceSansPro' }]}
             >
-              {this.state.currentForm == 0
+              {this.state.currentForm === 0
                 ? 'PERSONAL INFORMATION'
                 : 'BUSINESS INFORMATION'}
             </Text>
@@ -102,7 +102,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
                   keyboardVerticalOffset={95}
                 >
                   <AppSpinner visible={loading} />
-                  {this.state.currentForm == 0 ? (
+                  {this.state.currentForm === 0 ? (
                     <SignupForm
                       email={this.state.email}
                       password={this.state.password}
@@ -112,11 +112,13 @@ class SignupScreen extends PureComponent<IProps, IState> {
                       onUpdateState={this.updateState}
                       fieldErrors={this.state.fieldErrors}
                       onNext={this.next}
+                      // tslint:disable-next-line:jsx-no-lambda
                       onBack={() => this.props.navigation.navigate('Login')}
                       navigation={this.props.navigation}
                     />
                   ) : (
                     <SecondSignUpForm
+                      // tslint:disable-next-line:jsx-no-lambda
                       onSubmit={() =>
                         registerUser({
                           variables: this.parseMutationVariables()
@@ -139,10 +141,10 @@ class SignupScreen extends PureComponent<IProps, IState> {
           </View>
         </ScrollView>
       </View>
-    );
+    )
   }
 
-  parseMutationVariables = () => {
+  public parseMutationVariables = () => {
     const {
       email,
       password,
@@ -154,7 +156,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
       products,
       services,
       currency
-    } = this.state;
+    } = this.state
     return {
       firstName: name ? name.split(' ')[0] : '',
       lastName: name ? name.split(' ')[1] : '',
@@ -167,10 +169,10 @@ class SignupScreen extends PureComponent<IProps, IState> {
       currency,
       category: this.parseCategory(products, services),
       ...this.parseAddress()
-    };
-  };
+    }
+  }
 
-  parseAddress = (): any => {
+  public parseAddress = (): any => {
     /**
      * This is for now a dummy component that uses an address placeholder until we can add google maps address
      */
@@ -179,25 +181,25 @@ class SignupScreen extends PureComponent<IProps, IState> {
       city: 'Akure',
       state: 'Ondo',
       country: 'Nigeria'
-    };
-  };
-
-  parseCategory = (products, services) => {
-    if (products && services) {
-      return 'PRODUCT_SERVICE';
-    } else if (products) {
-      return 'PRODUCT';
-    } else if (services) {
-      return 'SERVICE';
     }
-    return 'PRODUCT_SERVICE';
-  };
+  }
 
-  onCompleted = async data => {
-    console.log('SignupScreen', data);
+  public parseCategory = (products, services) => {
+    if (products && services) {
+      return 'PRODUCT_SERVICE'
+    } else if (products) {
+      return 'PRODUCT'
+    } else if (services) {
+      return 'SERVICE'
+    }
+    return 'PRODUCT_SERVICE'
+  }
+
+  public onCompleted = async data => {
+    console.log('SignupScreen', data)
     const {
       registerCompany: { success, fieldErrors }
-    } = data;
+    } = data
     if (success) {
       Alert.alert(
         'Registration Success',
@@ -206,14 +208,14 @@ class SignupScreen extends PureComponent<IProps, IState> {
           { text: 'OK', onPress: () => this.props.navigation.navigate('Login') }
         ],
         { cancelable: false }
-      );
+      )
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default SignupScreen;
+export default SignupScreen
 
 const styles = StyleSheet.create({
   personalInfoText: {
@@ -237,4 +239,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-});
+})

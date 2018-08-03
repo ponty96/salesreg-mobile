@@ -1,0 +1,134 @@
+import gql from 'graphql-tag'
+
+export const EditUserProfileMutationGQL = gql`
+  mutation EditUserProfile(
+    $userId: Uuid!
+    $profilePicture: String!
+    $firstName: String!
+    $lastName: String!
+    $phoneNumber: Int!
+    $email: String!
+    $street1: String!
+    $city: String!
+    $state: String!
+    $country: String!
+  ) {
+    editUserProfile(
+      user: {
+        profilePicture: $profilePicture
+        email: $email
+        firstName: $firstName
+        lastName: $lastName
+        phoneNumber: $phoneNumber
+        userId: $userId
+        headOffice: {
+          street1: $street1
+          city: $city
+          state: $state
+          country: $country
+        }
+      }
+    ) {
+      fieldErrors {
+        key
+        message
+      }
+      success
+      data {
+        ... on User {
+          user {
+            id
+            firstName
+            lastName
+            email
+            phoneNumber
+            profilePicture
+            company {
+              id
+              branches {
+                id
+                location {
+                  id
+                  city
+                  country
+                  state
+                  street1
+                  type
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const EditBusinessProfileMutationGQL = gql`
+  mutation EditBusinessProfile(
+    companyId: Uuid!
+    $profilePicture: String!
+    $firstName: String!
+    $description: String!
+    $lastName: String!
+    $phoneNumber: Int!
+    $email: String!
+    $street1: String!
+    $city: String!
+    $state: String!
+    $country: String!
+    $check: String!
+  ) {
+    editBusinessProfile(
+      company: {
+        contactEmail: $contactEmail
+        description: $description
+        category: $check
+        currency: NAIRA
+        check: $check
+        branches {
+            location {
+              city: $city
+              country: $country
+              state: $state
+              street1: $street1
+            }
+        }
+      }
+      user {
+        firstName: $firstName
+        lastName: $lastName
+        phoneNumber: $phoneNumber
+      }
+    ) {
+      fieldErrors {
+        key
+        message
+      }
+      success
+      data {
+        ... on Company {
+          company {
+            id
+            title
+            contactEmail
+            about
+            category
+            currency
+            branches {
+            id
+            location {
+                id
+                city
+                country
+                state
+                street1
+                type
+            }
+            }
+          }
+        }
+      }
+    }
+  }
+`

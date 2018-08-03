@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const LoginUserMutationGQL = gql`
   mutation loginUser($email: String!, $password: String!) {
@@ -46,7 +46,7 @@ export const LoginUserMutationGQL = gql`
       }
     }
   }
-`;
+`
 
 export const RegisterCompanyMutationGQL = gql`
   mutation registerCompany(
@@ -99,4 +99,4 @@ export const RegisterCompanyMutationGQL = gql`
       }
     }
   }
-`;
+`

@@ -1,48 +1,53 @@
-import React, { PureComponent } from 'react';
-import { Form, CheckBox } from 'native-base';
-import { View, Text, StyleSheet } from 'react-native';
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import { color } from '../Style/Color';
-import PickerAtom from '../Atom/PickerAtom';
+import { CheckBox, Form } from 'native-base'
+import React, { PureComponent } from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import ButtonAtom from '../Atom/ButtonAtom'
+import InputAtom from '../Atom/InputAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
-  onSubmit: () => void;
-  onUpdateState?: (key: string, val: any) => void;
-  businessName: string;
-  businessAddress: string;
-  businessEmail: string;
-  products: boolean;
-  services: boolean;
-  currency: string;
-  fieldErrors: any;
+  navigation: any
+  onSubmit: () => void
+  onUpdateState?: (key: string, val: any) => void
+  businessName: string
+  businessAddress: string
+  businessEmail: string
+  products: boolean
+  services: boolean
+  currency: string
+  fieldErrors: any
 }
 
-interface IState {}
+// interface IState {}
 
-class SecondSigupForm extends PureComponent<IProps, IState> {
-  flipCheckedState = (oldState: boolean, key: string) => {
-    if (key === 'products') this.props.onUpdateState('products', !oldState);
-    else this.props.onUpdateState('services', !oldState);
-  };
+class SecondSigupForm extends PureComponent<IProps, any> {
+  public flipCheckedState = (oldState: boolean, key: string) => {
+    if (key === 'products') {
+      this.props.onUpdateState('products', !oldState)
+    } else {
+      this.props.onUpdateState('services', !oldState)
+    }
+  }
 
-  render() {
-    const { fieldErrors } = this.props;
+  public render() {
+    const { fieldErrors } = this.props
     return (
       <Form style={styles.resetFormContainer}>
         <InputAtom
           label="Business name"
           defaultValue={this.props.businessName}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={name => this.props.onUpdateState('businessName', name)}
           contStyle={styles.marginlessInput}
           required={true}
-          error={fieldErrors && fieldErrors['title']}
+          error={fieldErrors && fieldErrors.title}
         />
 
         <InputAtom
           label="Business address"
           defaultValue={this.props.businessAddress}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={address =>
             this.props.onUpdateState('businessAddress', address)
           }
@@ -53,13 +58,14 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
         <InputAtom
           label="Business Email"
           defaultValue={this.props.businessEmail}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={businessEmail =>
             this.props.onUpdateState('businessEmail', businessEmail)
           }
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
           required={true}
-          error={fieldErrors && fieldErrors['contactEmail']}
+          error={fieldErrors && fieldErrors.contactEmail}
         />
 
         <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
@@ -68,8 +74,9 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
         <View style={styles.checkBoxWrapper}>
           <CheckBox
             checked={this.props.products}
+            // tslint:disable-next-line:jsx-no-lambda
             onPress={() => {
-              this.flipCheckedState(this.props.products, 'products');
+              this.flipCheckedState(this.props.products, 'products')
             }}
             color={color.inactive}
             style={styles.checkBox}
@@ -82,8 +89,9 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
         <View style={styles.checkBoxWrapper}>
           <CheckBox
             checked={this.props.services}
+            // tslint:disable-next-line:jsx-no-lambda
             onPress={() => {
-              this.flipCheckedState(this.props.services, 'services');
+              this.flipCheckedState(this.props.services, 'services')
             }}
             color={color.inactive}
             style={styles.checkBox}
@@ -101,6 +109,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             list={['Naira(\u20A6)']}
             placeholder={`Naira(\u20A6)`}
             selected={this.props.currency}
+            // tslint:disable-next-line:jsx-no-lambda
             handleSelection={currency =>
               this.props.onUpdateState('currency', currency)
             }
@@ -108,8 +117,8 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
         </View>
 
         {fieldErrors &&
-          fieldErrors['currency'] && (
-            <Text style={styles.errorText}>{fieldErrors['currency']}</Text>
+          fieldErrors.currency && (
+            <Text style={styles.errorText}>{fieldErrors.currency}</Text>
           )}
         <View style={styles.buttonsWrapper}>
           <ButtonAtom
@@ -137,17 +146,18 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
+            // tslint:disable-next-line:jsx-no-lambda
             onPress={() => this.props.navigation.navigate('Login')}
             textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
             btnStyle={styles.loginButton}
           />
         </View>
       </Form>
-    );
+    )
   }
 }
 
-export default SecondSigupForm;
+export default SecondSigupForm
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -229,4 +239,4 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     marginTop: 2
   }
-});
+})

@@ -1,37 +1,37 @@
-import { AsyncStorage } from 'react-native';
+import { AsyncStorage } from 'react-native'
 
 class Auth {
-  static getToken() {
-    return AsyncStorage.getItem('token');
+  public static getToken() {
+    return AsyncStorage.getItem('token')
   }
 
-  static getRefreshToken() {
-    return AsyncStorage.getItem('refreshToken');
+  public static getRefreshToken() {
+    return AsyncStorage.getItem('refreshToken')
   }
 
-  static getCurrentUser() {
-    return AsyncStorage.getItem('currentUser');
+  public static getCurrentUser() {
+    return AsyncStorage.getItem('currentUser')
   }
 
-  static setToken(token: string) {
-    AsyncStorage.setItem('token', token);
+  public static setToken(token: string) {
+    AsyncStorage.setItem('token', token)
   }
 
-  static setRefreshToken(token: string) {
-    return AsyncStorage.setItem('refreshToken', token);
+  public static setRefreshToken(token: string) {
+    return AsyncStorage.setItem('refreshToken', token)
   }
 
-  static setCurrentUser(user: any) {
-    return AsyncStorage.setItem('currentUser', JSON.stringify(user));
+  public static setCurrentUser(user: any) {
+    return AsyncStorage.setItem('currentUser', JSON.stringify(user))
   }
 
-  static clearToken() {
-    return AsyncStorage.removeItem('token');
+  public static clearToken() {
+    return AsyncStorage.removeItem('token')
   }
 
-  static clearVault() {
-    return AsyncStorage.multiRemove(['token', 'refreshToken', 'currentUser']);
+  public static clearVault() {
+    return AsyncStorage.multiRemove(['token', 'refreshToken', 'currentUser'])
   }
 }
 
-export default Auth;
+export default Auth

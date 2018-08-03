@@ -1,34 +1,34 @@
-import * as React from 'react';
-import { Item, Input, Label, Text } from 'native-base';
-import { View, StyleSheet } from 'react-native';
-import { color } from '../Style/Color';
+import { Input, Item, Label, Text } from 'native-base'
+import * as React from 'react'
+import { StyleSheet, View } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
-  required?: boolean | false;
-  label?: string;
-  defaultValue?: string;
-  multiline?: boolean;
-  placeholder?: string;
-  floatingLabel?: boolean | true;
-  secureTextEntry?: boolean | false;
-  getValue?: (a: string | number) => void;
-  contStyle?: object | Array<any>;
-  inputStyle?: object;
-  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad';
-  underneathText?: string;
-  underneathStyle?: object;
-  maxLength?: number;
-  login?: boolean;
-  error?: any;
+  required?: boolean | false
+  label?: string
+  defaultValue?: string
+  multiline?: boolean
+  placeholder?: string
+  floatingLabel?: boolean | true
+  secureTextEntry?: boolean | false
+  getValue?: (a: string | number) => void
+  contStyle?: object | any[]
+  inputStyle?: object
+  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
+  underneathText?: string
+  underneathStyle?: object
+  maxLength?: number
+  login?: boolean
+  error?: any
 }
 
 interface IState {
-  bottomColor: string;
-  labelColor: string;
+  bottomColor: string
+  labelColor: string
 }
 
 class InputAtom extends React.Component<IProps, IState> {
-  static defaultProps: IProps = {
+  public static defaultProps: IProps = {
     label: '',
     required: false,
     floatingLabel: true,
@@ -36,24 +36,24 @@ class InputAtom extends React.Component<IProps, IState> {
     keyboardType: 'default',
     multiline: false,
     contStyle: { marginLeft: 4 } || { marginLeft: 0 }
-  };
+  }
 
-  state = {
+  public state = {
     bottomColor: color.textBorderBottom,
     labelColor: color.inactive
-  };
+  }
 
-  changeUnderline = (newColor: string): void => {
+  public changeUnderline = (newColor: string): void => {
     if (this.props.error) {
-      this.setState({ bottomColor: 'red', labelColor: 'red' });
+      this.setState({ bottomColor: 'red', labelColor: 'red' })
     } else if (this.props.login) {
-      this.setState({ bottomColor: newColor, labelColor: newColor });
+      this.setState({ bottomColor: newColor, labelColor: newColor })
     } else {
-      this.setState({ labelColor: newColor });
+      this.setState({ labelColor: newColor })
     }
-  };
+  }
 
-  render() {
+  public render() {
     return (
       <View>
         <Item
@@ -79,6 +79,7 @@ class InputAtom extends React.Component<IProps, IState> {
           <Input
             placeholder={this.props.placeholder}
             multiline={this.props.multiline}
+            // tslint:disable-next-line:jsx-no-lambda
             onChangeText={text => this.props.getValue(text)}
             value={this.props.defaultValue}
             secureTextEntry={this.props.secureTextEntry}
@@ -91,17 +92,19 @@ class InputAtom extends React.Component<IProps, IState> {
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
+            // tslint:disable-next-line:jsx-no-lambda
             onFocus={() => this.changeUnderline(color.blueLabelColor)}
+            // tslint:disable-next-line:jsx-no-lambda
             onBlur={() => this.changeUnderline(color.textBorderBottom)}
             maxLength={this.props.maxLength}
           />
         </Item>
         {this.renderUnderNeathText()}
       </View>
-    );
+    )
   }
 
-  renderUnderNeathText = () => {
+  public renderUnderNeathText = () => {
     if (this.props.error || this.props.underneathText) {
       return (
         <Text
@@ -116,13 +119,13 @@ class InputAtom extends React.Component<IProps, IState> {
         >
           {this.props.error || this.props.underneathText}
         </Text>
-      );
+      )
     }
-    return <Text />;
-  };
+    return <Text />
+  }
 }
 
-export default InputAtom;
+export default InputAtom
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -156,4 +159,4 @@ const styles = StyleSheet.create({
   inputText: {
     color: color.principal
   }
-});
+})

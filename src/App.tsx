@@ -1,19 +1,19 @@
-import React from 'react';
-import { StatusBar } from 'react-native';
-import { Font, AppLoading } from 'expo';
+import { AppLoading, Font } from 'expo';
 import { Root } from 'native-base';
+import React from 'react';
 import { ApolloProvider } from 'react-apollo';
+import { StatusBar } from 'react-native';
 import client from './client';
 
+import { AuthenticateClientGQL } from './graphql/client-mutations/authenticate';
 import Routes from './Navigation/Routes';
 import Auth from './services/auth';
-import { AuthenticateClientGQL } from './graphql/client-mutations/authenticate';
 
 export default class App extends React.Component {
-  state = {
+  public state = {
     loading: true
   };
-  async componentDidMount() {
+  public async componentDidMount() {
     await Font.loadAsync({
       SourceSansPro: require('../Fonts/SourceSansPro-Regular.ttf'),
       SourceSansPro_Semibold: require('../Fonts/SourceSansPro-Semibold.ttf'),
@@ -24,7 +24,7 @@ export default class App extends React.Component {
     this.authenticate();
     this.setState({ loading: true });
   }
-  authenticate = async () => {
+  public authenticate = async () => {
     const token = await Auth.getToken();
     const refreshToken = await Auth.getRefreshToken();
     if (token && refreshToken) {
@@ -35,7 +35,7 @@ export default class App extends React.Component {
       this.setState({ loading: false });
     }
   };
-  render() {
+  public render() {
     if (this.state.loading) {
       return (
         <Root>

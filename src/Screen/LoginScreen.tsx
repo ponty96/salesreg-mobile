@@ -1,40 +1,40 @@
-import React from 'react';
+import React from 'react'
 import {
-  Text,
-  View,
   KeyboardAvoidingView,
+  ScrollView,
   StyleSheet,
-  ScrollView
-} from 'react-native';
+  Text,
+  View
+} from 'react-native'
 
-import LoginForm from '../Components/LoginForm';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import { color } from '../Style/Color';
-import { Mutation } from 'react-apollo';
-import { LoginUserMutationGQL } from '../graphql/mutations/authenticate';
-import { AuthenticateClientGQL } from '../graphql/client-mutations/authenticate';
-import Auth from '../services/auth';
-import { parseFieldErrors } from '../Functions';
-import AppSpinner from '../Components/Spinner';
+import { Mutation } from 'react-apollo'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import LoginForm from '../Components/LoginForm'
+import AppSpinner from '../Components/Spinner'
+import { parseFieldErrors } from '../Functions'
+import { AuthenticateClientGQL } from '../graphql/client-mutations/authenticate'
+import { LoginUserMutationGQL } from '../graphql/mutations/authenticate'
+import Auth from '../services/auth'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
-  screenProps: any;
-  login: any;
+  navigation: any
+  screenProps: any
+  login: any
 }
 
 interface IState {
-  fieldErrors: any;
+  fieldErrors: any
 }
 
 class LoginScreen extends React.Component<IProps, IState> {
-  state = {
+  public state = {
     fieldErrors: null
-  };
-  componentDidMount() {
-    Auth.clearVault();
   }
-  render() {
+  public componentDidMount() {
+    Auth.clearVault()
+  }
+  public render() {
     return (
       <View style={styles.container}>
         <AuthenticationHeader />
@@ -54,6 +54,7 @@ class LoginScreen extends React.Component<IProps, IState> {
                     navigation={this.props.navigation}
                     loading={loading}
                     fieldErrors={this.state.fieldErrors}
+                    // tslint:disable-next-line:jsx-no-lambda
                     onSubmit={params =>
                       loginUser({
                         variables: {
@@ -68,33 +69,33 @@ class LoginScreen extends React.Component<IProps, IState> {
           </View>
         </ScrollView>
       </View>
-    );
+    )
   }
-  onCompleted = async res => {
-    console.log('LOGINSCREEN', res);
+  public onCompleted = async res => {
+    console.log('LOGINSCREEN', res)
     const {
       loginUser: { data, fieldErrors, success }
-    } = res;
+    } = res
     if (success) {
       const {
         screenProps: { client }
-      } = this.props;
+      } = this.props
 
-      const { accessToken, refreshToken, user } = data;
+      const { accessToken, refreshToken, user } = data
 
-      await Auth.clearVault();
-      await Auth.setToken(accessToken);
-      await Auth.setRefreshToken(refreshToken);
-      await Auth.setCurrentUser(user);
-      await client.resetStore();
-      client.mutate({ mutation: AuthenticateClientGQL });
-      this.props.navigation.navigate('Home');
+      await Auth.clearVault()
+      await Auth.setToken(accessToken)
+      await Auth.setRefreshToken(refreshToken)
+      await Auth.setCurrentUser(user)
+      await client.resetStore()
+      client.mutate({ mutation: AuthenticateClientGQL })
+      this.props.navigation.navigate('Home')
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
-export default LoginScreen;
+export default LoginScreen
 
 const styles = StyleSheet.create({
   container: {
@@ -110,4 +111,4 @@ const styles = StyleSheet.create({
     paddingHorizontal: 32,
     marginTop: 32
   }
-});
+})

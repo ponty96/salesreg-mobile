@@ -1,18 +1,18 @@
+import { CheckBox, Textarea } from 'native-base'
 import React, { Component } from 'react'
 import {
-  View,
-  Text,
   KeyboardAvoidingView,
   ScrollView,
-  StyleSheet
+  StyleSheet,
+  Text,
+  View
 } from 'react-native'
-import { CheckBox, Textarea } from 'native-base'
-import InputAtom from '../Atom/InputAtom'
-import { color } from '../Style/Color'
-import FormImageAtom from '../Atom/FormImageAtom'
-import PickerAtom from '../Atom/PickerAtom'
 import FormContainerAtom from '../Atom/FormContainerAtom'
+import FormImageAtom from '../Atom/FormImageAtom'
 import GoogleInputAtom from '../Atom/GoogleInputAtom'
+import InputAtom from '../Atom/InputAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
   name?: string
@@ -34,7 +34,7 @@ class EditBusinessProfileForm extends Component<IProps, any> {
       address: ''
     }
   }
-  getImage = (pic: any) => {
+  public getImage = (pic: any) => {
     this.setState((prevState: any) => ({
       image: {
         ...prevState.image,
@@ -42,20 +42,20 @@ class EditBusinessProfileForm extends Component<IProps, any> {
       }
     }))
   }
-  checked1 = () => {
+  public checked1 = () => {
     this.setState({
       check1: !this.state.check1
     })
   }
-  checked2 = () => {
+  public checked2 = () => {
     this.setState({
       check2: !this.state.check2
     })
   }
-  updateState = (key: string, value: any) => {
+  public updateState = (key: string, value: any) => {
     this.setState({ [key]: value })
   }
-  render() {
+  public render() {
     return (
       <KeyboardAvoidingView
         behavior="padding"
@@ -72,17 +72,20 @@ class EditBusinessProfileForm extends Component<IProps, any> {
             <InputAtom
               label={'Business Name'}
               defaultValue={this.props.name}
+              // tslint:disable-next-line:jsx-no-lambda
               getValue={val => this.updateState('name', val)}
             />
           </FormContainerAtom>
           <FormContainerAtom headerText="Contact Address">
             <InputAtom
               label="Email Address"
+              // tslint:disable-next-line:jsx-no-lambda
               getValue={val => this.updateState('email', val)}
               keyboardType="email-address"
             />
             <GoogleInputAtom
               label="Address City, State"
+              // tslint:disable-next-line:jsx-no-lambda
               getValue={(val: string) => this.updateState('address', val)}
             />
           </FormContainerAtom>
@@ -123,6 +126,7 @@ class EditBusinessProfileForm extends Component<IProps, any> {
                 rowSpan={5}
                 placeholder="Description"
                 placeholderTextColor={color.inactive}
+                // tslint:disable-next-line:jsx-no-lambda
                 onChangeText={val => this.updateState('description', val)}
               />
             </View>

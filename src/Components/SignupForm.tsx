@@ -1,44 +1,43 @@
-import React, { PureComponent } from 'react';
-import { Form, Icon } from 'native-base';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { Form, Icon } from 'native-base'
+import React, { PureComponent } from 'react'
+import { StyleSheet, Text, TouchableOpacity, View } from 'react-native'
 
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import { color } from '../Style/Color';
+import ButtonAtom from '../Atom/ButtonAtom'
+import InputAtom from '../Atom/InputAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  onNext: () => void;
-  onUpdateState?: (key: string, val: any) => void;
-  email: string;
-  password: string;
-  name: string;
-  passwordConfirmation: string;
-  gender: string;
-  fieldErrors: any;
-  onBack: () => void;
-  navigation: any;
+  onNext: () => void
+  onUpdateState?: (key: string, val: any) => void
+  email: string
+  password: string
+  name: string
+  passwordConfirmation: string
+  gender: string
+  fieldErrors: any
+  onBack: () => void
+  navigation: any
 }
 
-interface IState {}
+// interface IState {}
 
-class SigupForm extends PureComponent<IProps, IState> {
-  render() {
-    const { fieldErrors } = this.props;
+class SigupForm extends PureComponent<IProps, any> {
+  public render() {
+    const { fieldErrors } = this.props
     return (
       <Form>
         <InputAtom
           label="Full name"
           contStyle={styles.nameInput}
           defaultValue={this.props.name}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={val => this.props.onUpdateState('name', val)}
           inputStyle={styles.elevateInput}
           required={true}
           error={
             fieldErrors &&
-            (fieldErrors['firstName'] ||
-              fieldErrors['lastName'] ||
-              fieldErrors['name'])
+            (fieldErrors.firstName || fieldErrors.lastName || fieldErrors.name)
           }
         />
 
@@ -46,10 +45,11 @@ class SigupForm extends PureComponent<IProps, IState> {
           label="Email Address"
           contStyle={styles.input}
           defaultValue={this.props.email}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={val => this.props.onUpdateState('email', val)}
           inputStyle={styles.elevateInput}
           required={true}
-          error={fieldErrors && fieldErrors['email']}
+          error={fieldErrors && fieldErrors.email}
         />
 
         <View style={styles.pickerWrapper}>
@@ -58,13 +58,14 @@ class SigupForm extends PureComponent<IProps, IState> {
             style={styles.faintPicker}
             placeholder="*Gender"
             selected={this.props.gender}
+            // tslint:disable-next-line:jsx-no-lambda
             handleSelection={val => this.props.onUpdateState('gender', val)}
           />
         </View>
         <View style={styles.pickerUnderline} />
         {fieldErrors &&
-          fieldErrors['gender'] && (
-            <Text style={styles.errorText}>{fieldErrors['gender']}</Text>
+          fieldErrors.gender && (
+            <Text style={styles.errorText}>{fieldErrors.gender}</Text>
           )}
 
         <InputAtom
@@ -72,12 +73,13 @@ class SigupForm extends PureComponent<IProps, IState> {
           secureTextEntry={true}
           contStyle={styles.input}
           defaultValue={this.props.password}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={val => this.props.onUpdateState('password', val)}
           underneathText="Must be at least 6 characters"
           underneathStyle={styles.underneathText}
           inputStyle={styles.elevateInput}
           required={true}
-          error={fieldErrors && fieldErrors['password']}
+          error={fieldErrors && fieldErrors.password}
         />
 
         <InputAtom
@@ -85,12 +87,13 @@ class SigupForm extends PureComponent<IProps, IState> {
           secureTextEntry={true}
           contStyle={styles.reenter}
           defaultValue={this.props.passwordConfirmation}
+          // tslint:disable-next-line:jsx-no-lambda
           getValue={val =>
             this.props.onUpdateState('passwordConfirmation', val)
           }
           inputStyle={styles.elevateInput}
           required={true}
-          error={fieldErrors && fieldErrors['passwordConfirmation']}
+          error={fieldErrors && fieldErrors.passwordConfirmation}
         />
 
         <TouchableOpacity
@@ -114,16 +117,17 @@ class SigupForm extends PureComponent<IProps, IState> {
         <ButtonAtom
           btnText="LOGIN"
           transparent={true}
+          // tslint:disable-next-line:jsx-no-lambda
           onPress={() => this.props.navigation.navigate('Login')}
           textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
           btnStyle={styles.loginButton}
         />
       </Form>
-    );
+    )
   }
 }
 
-export default SigupForm;
+export default SigupForm
 
 const styles = StyleSheet.create({
   nameInput: {
@@ -192,4 +196,4 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     marginTop: 2
   }
-});
+})
