@@ -181,27 +181,18 @@ export default class CustomerFormAtom extends React.Component<IProps, any> {
               </View>
             </FormContainerAtom>
             <FormContainerWrappedAtom>
-              <View style={styles.wrappedInputLeft} key="birthday">
-                <InputAtom
-                  label="Birthday"
-                  getValue={val => this.updateState('birthday', val)}
-                />
-              </View>,
-              <View
-                style={[styles.wrappedInputLeft, { paddingRight: 12 }]}
-                key="maritalStatus"
-              >
-                <InputAtom
-                  label="Marital Status"
-                  getValue={val => this.updateState('maritalStatus', val)}
-                />
-              </View>
-              <View style={styles.wrappedInputLeft} key="marriageAnn">
-                <InputAtom
-                  label="Marriage Anniversary"
-                  getValue={val => this.updateState('marriageAnn', val)}
-                />
-              </View>
+              <InputAtom
+                label="Birthday"
+                getValue={val => this.updateState('birthday', val)}
+              />
+              <InputAtom
+                label="Marital Status"
+                getValue={val => this.updateState('maritalStatus', val)}
+              />
+              <InputAtom
+                label="Marriage Anniversary"
+                getValue={val => this.updateState('marriageAnn', val)}
+              />
             </FormContainerWrappedAtom>
             <FormContainerAtom headerText="Likes">
               <InputAtom
