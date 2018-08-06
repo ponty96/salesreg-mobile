@@ -62,8 +62,14 @@
     "native-base": "^2.4.3",
     "prop-types": "^15.6.1",
     "react": "16.2.0",
+<<<<<<< HEAD
+=======
+    "react-apollo": "^2.1.9",
+>>>>>>> 7fd317c5db1043c8d05782c3d7fb1e63e2b7ffab
     "react-native": "0.52.0",
     "react-native-collapsible": "^0.11.2",
+    "react-native-google-places-autocomplete": "^1.3.6",
+    "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-modal-popover": "^0.0.10",
     "react-native-slider": "^0.11.0",
     "react-native-star-rating": "^1.0.9",

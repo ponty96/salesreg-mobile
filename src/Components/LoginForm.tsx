@@ -3,40 +3,38 @@ import { Form, Text } from 'native-base'
 import { StyleSheet } from 'react-native'
 import InputAtom from '../Atom/InputAtom'
 import ButtonAtom from '../Atom/ButtonAtom'
-import { userData } from '../config/default'
 import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
-  items?: any[]
+  onSubmit?: (params: any) => void
+  loading?: boolean
+  fieldErrors: any
 }
 
 interface IState {
-  phone: string
+  email: string
   password: string
   isEdited: boolean
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
-  static defaultProps = {
-    items: userData.business[0].products
-  }
-
   state = {
-    phone: '',
+    email: '',
     password: '',
     isEdited: false
   }
-
-  login = (data: any) => {
-    console.log(this.state.phone, this.state.password)
-    data = this.props.items
-    this.props.navigation.navigate('App', data)
+  
+  login = () => {
+    this.props.onSubmit({
+      email: this.state.email,
+      password: this.state.password
+    })
   }
 
-  getPhone = (phone: any) => {
+  getEmail = (email: any) => {
     this.setState({
-      phone
+      email
     })
   }
 
@@ -51,16 +49,16 @@ class LoginForm extends PureComponent<IProps, IState> {
   }
 
   render() {
+    const { fieldErrors } = this.props
     return (
       <Form>
         <InputAtom
-          label="Phone number"
-          getValue={this.getPhone}
-          keyboardType="numeric"
+          label="Email Address"
+          getValue={this.getEmail}
           contStyle={styles.input}
           inputStyle={styles.elevateInput}
-          maxLength={11}
           login={true}
+          error={fieldErrors && fieldErrors.email}
         />
 
         <InputAtom
@@ -72,14 +70,14 @@ class LoginForm extends PureComponent<IProps, IState> {
           underneathStyle={styles.underneathText}
           inputStyle={styles.elevateInput}
           login={true}
+          error={fieldErrors && fieldErrors.password}
         />
 
         <ButtonAtom
           btnText="Forgot password"
           textStyle={styles.forgotPasswordText}
           transparent={true}
-          funcValue={'Reset'}
-          onPress={this.navigate}
+          onPress={() => this.navigate('Reset')}
           btnStyle={styles.forgotPassword}
         />
 
@@ -100,8 +98,7 @@ class LoginForm extends PureComponent<IProps, IState> {
         <ButtonAtom
           btnText="SIGN UP"
           transparent={true}
-          funcValue={'Signup'}
-          onPress={this.navigate}
+          onPress={() => this.navigate('Signup')}
           btnStyle={styles.signupButton}
           textStyle={styles.signupText}
         />

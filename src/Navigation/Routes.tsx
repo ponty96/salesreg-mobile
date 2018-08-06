@@ -1,64 +1,63 @@
 import React from 'react'
 import { Text, View } from 'react-native'
-import {
-  StackNavigator,
-  DrawerNavigator,
-  TabNavigator,
-  SwitchNavigator
-} from 'react-navigation'
+import { DrawerNavigator, StackNavigator, TabNavigator } from 'react-navigation'
+// import { Icon } from 'native-base'
 
-import OnBoardingScreen from '../Screen/OnBoardingScreen'
-import SignupScreen from '../Screen/SignupScreen'
-import ResetScreen from '../Screen/ResetScreen'
-import LoginScreen from '../Screen/LoginScreen'
-import NewBusinessScreen from '../Screen/NewBusinessScreen'
-import NewOrderScreen from '../Screen/NewOrderScreen'
-import NewProductScreen from '../Screen/NewProductScreen'
-import NewCustomerScreen from '../Screen/NewCustomerScreen'
-import SettingsScreen from '../Screen/SettingsScreen'
-import BusinessDetailsScreen from '../Screen/BusinessDetailsScreen'
-import DebtScreen from '../Screen/DebtScreen'
-import ProductScreen from '../Screen/ProductScreen'
-import OrderDetailsScreen from '../Screen/OrderDetailsScreen'
-import ServicesScreen from '../Screen/ServicesScreen'
-import DebtDetailsScreen from '../Screen/DebtDetailsScreen'
-import ProductDetailsScreen from '../Screen/ProductDetailsScreen'
-import UserProfileScreen from '../Screen/UserProfileScreen'
-import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
-import OrderListScreen from '../Screen/OrderListScreen'
-import SecondSignUpScreen from '../Screen/SecondSignUpScreen'
-import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
-import MainOrderList from '../Components/MainOrderList'
-import Sidebar from './Sidebar'
-import { color } from '../Style/Color'
-import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
-import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
-import HomeScreen from '../Screen/HomeScreen'
-import EmployeesScreen from '../Screen/EmployeesScreen'
-import VendorScreen from '../Screen/VendorScreen'
-import PurchaseScreen from '../Screen/PurchaseScreen'
-import ProductSalesRecordScreen from '../Screen/ProductSalesRecordScreen'
-import BankScreen from '../Screen/BankScreen'
-import IncomeScreen from '../Screen/IncomeScreen'
-import ExpensesScreen from '../Screen/ExpensesScreen'
-import InvoicesScreen from '../Screen/InvoicesScreen'
-import ReceiptsScreen from '../Screen/ReceiptsScreen'
-import InventoryScreen from '../Screen/InventoryScreen'
-import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
-import EditServiceScreen from '../Screen/EditServiceScreen'
-import ServiceScreen from '../Screen/ServiceScreen'
+// graphql
+import { Query } from 'react-apollo'
+import { AuthenticateQueryGQL } from '../graphql/queries/Authenticate'
+
 import CustomHeader from '../Components/CustomHeader'
-import ProductSalesOrderScreen from '../Screen/ProductSalesOrderScreen'
-import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
-import EditProductDetailScreen from '../Screen/EditProductDetailScreen'
+import EmployeeForm from '../Components/EmployeeForm'
+import MainOrderList from '../Components/MainOrderList'
+import BankScreen from '../Screen/BankScreen'
+import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
+import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
 import CustomerScreen from '../Screen/CustomerScreen'
-import VendorDetailScreen from '../Screen/VendorDetailsScreen'
+import UpsertServiceScreen from '../Screen/UpsertServiceScreen'
+import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
+import EmployeesScreen from '../Screen/EmployeesScreen'
+import ExpensesScreen from '../Screen/ExpensesScreen'
+import HomeScreen from '../Screen/HomeScreen'
+import IncomeScreen from '../Screen/IncomeScreen'
+import InventoryScreen from '../Screen/InventoryScreen'
+import InvoicesScreen from '../Screen/InvoicesScreen'
 import NewVendorScreen from '../Screen/NewVendorScreen'
-import EditCustomerDetailsScreen from '../Screen/EditCustomerDetailsScreen'
-import SalesOrderStatusScreen from '../Screen/SalesOrderStatusScreen'
-import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
-import NewSalesOrderScreen from '../Screen/NewSalesOrderScreen'
-import ServiceSalesRecordScreen from '../Screen/ServiceSalesRecordScreen'
+import OrderListScreen from '../Screen/OrderListScreen'
+import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
+import PurchaseScreen from '../Screen/PurchaseScreen'
+import ReceiptsScreen from '../Screen/ReceiptsScreen'
+import ServiceScreen from '../Screen/ServiceDetailsScreen'
+import UserProfileScreen from '../Screen/UserProfileScreen'
+import VendorDetailScreen from '../Screen/VendorDetailsScreen'
+import VendorScreen from '../Screen/VendorScreen'
+import BusinessDetailsScreen from '../Screen/BusinessDetailsScreen'
+import LoginScreen from '../Screen/LoginScreen'
+import NewCustomerScreen from '../Screen/NewCustomerScreen'
+import NewOrderScreen from '../Screen/NewOrderScreen'
+import UpsertProductScreen from '../Screen/UpsertProductScreen'
+import OnBoardingScreen from '../Screen/OnBoardingScreen'
+// import OrderScreen from './../Screen/OrderScreen';
+import OrderDetailsScreen from '../Screen/OrderDetailsScreen'
+import ProductDetailsScreen from '../Screen/ProductDetailsScreen'
+import ProductScreen from '../Screen/ProductScreen'
+import ResetScreen from '../Screen/ResetScreen'
+// import CustomerScreen from './../Screen/CustomerScreen';
+import ServicesScreen from '../Screen/ServicesScreen'
+import SignupScreen from '../Screen/SignupScreen'
+import { color } from '../Style/Color'
+import Sidebar from './Sidebar'
+import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen';
+import EditProductDetailScreen from '../Screen/EditProductDetailScreen';
+import EditCustomerDetailsScreen from '../Screen/EditCustomerDetailsScreen';
+import SalesOrderStatusScreen from '../Screen/SalesOrderStatusScreen';
+import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen';
+import NewSalesOrderScreen from '../Screen/NewSalesOrderScreen';
+import ServiceSalesRecordScreen from '../Screen/ServiceSalesRecordScreen';
+import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen';
+import ProductSalesOrderScreen from '../Screen/ServicesSalesOrderScreen';
+import SettingsScreen from '../Screen/SettingsScreen';
+import ProductSalesRecordScreen from '../Screen/ProductSalesRecordScreen';
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -168,14 +167,14 @@ const salesOrderTab = TabNavigator(
 
 const businessStack = StackNavigator(
   {
-    NewBusiness: {
-      screen: NewBusinessScreen
-    },
     Home: {
       screen: HomeScreen
     },
     Employees: {
       screen: EmployeesScreen
+    },
+    NewEmployee: {
+      screen: EmployeeForm
     },
     Vendor: {
       screen: VendorScreen
@@ -213,12 +212,6 @@ const businessStack = StackNavigator(
     Profile: {
       screen: ProfileSettingsScreen
     },
-    Debt: {
-      screen: DebtScreen
-    },
-    DebtDetails: {
-      screen: DebtDetailsScreen
-    },
     Customer: {
       screen: CustomerScreen
     },
@@ -238,7 +231,7 @@ const businessStack = StackNavigator(
       screen: OrderDetailsScreen
     },
     NewProduct: {
-      screen: NewProductScreen
+      screen: UpsertProductScreen
     },
     ProductDetails: {
       screen: ProductDetailsScreen
@@ -267,7 +260,7 @@ const businessStack = StackNavigator(
     EditBusinessProfile: {
       screen: EditBusinessProfileScreen
     },
-    EditServices: EditServiceScreen,
+    EditServices: UpsertServiceScreen,
     ShowService: ServiceScreen,
     EditProductDetail: EditProductDetailScreen,
     EditCustomerDetails: EditCustomerDetailsScreen,
@@ -302,13 +295,15 @@ const businessStack = StackNavigator(
       header: (
         <CustomHeader
           title="Products & Services"
-          showMenu
+          showMenu={true}
+          // tslint:disable-next-line:jsx-no-lambda
           onMenuPress={() => {
             navigation.navigate('DrawerToggle')
           }}
           firstRightIcon={'ios-search'}
           navigation={navigation}
-          showRight
+          showRight={true}
+          // tslint:disable-next-line:jsx-no-lambda
           onPressFirstRightIcon={() => console.log('Search icon pressed.')}
         />
       )
@@ -316,7 +311,7 @@ const businessStack = StackNavigator(
   }
 )
 
-const drawerStack = DrawerNavigator(
+const DrawerStack = DrawerNavigator(
   {
     ViewBusiness: businessStack
   },
@@ -331,27 +326,43 @@ const drawerStack = DrawerNavigator(
   }
 )
 
-const authStack = StackNavigator(
+const AuthStack = StackNavigator(
   {
     OnBoarding: OnBoardingScreen,
     Login: LoginScreen,
     Reset: ResetScreen,
-    Signup: SignupScreen,
-    SecondSignUp: SecondSignUpScreen
+    Signup: SignupScreen
   },
   {
     headerMode: 'none'
   }
 )
 
-const switchStack = SwitchNavigator(
-  {
-    Auth: authStack,
-    App: drawerStack
-  },
-  {
-    initialRouteName: 'Auth'
-  }
-)
+interface IProps {
+  client: any
+}
+export default class Routes extends React.Component<IProps> {
+  public render() {
+    const { client } = this.props
+    return (
+      <Query query={AuthenticateQueryGQL}>
+        {({ loading, error, data }) => {
+          console.log('loading', loading)
+          console.log('error', error)
+          console.log('data', data)
+          if (loading) {
+            return <Text>'Loading...'</Text>
+          }
+          if (error) {
+            return <Text>{`Error! ${error.message}`}</Text>
+          }
 
-export default switchStack
+          if (!data.authenticate) {
+            return <AuthStack screenProps={{ client }} />
+          }
+          return <DrawerStack screenProps={{ client }} />
+        }}
+      </Query>
+    )
+  }
+}

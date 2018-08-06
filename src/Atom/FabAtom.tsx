@@ -13,7 +13,7 @@ interface IProp {
   goto?: { screen: string }
 }
 
-const fabAtom = (props: IProp) => (
+const FabAtom = (props: IProp) => (
   <Fab
     position="bottomRight"
     style={styles.fab}
@@ -28,10 +28,11 @@ const fabAtom = (props: IProp) => (
   </Fab>
 )
 
-export default fabAtom
+export default FabAtom
 
 const styles = StyleSheet.create({
   fab: {
-    backgroundColor: color.button
+    backgroundColor: color.button,
+    zIndex: 1
   }
 })

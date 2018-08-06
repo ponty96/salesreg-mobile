@@ -43,7 +43,7 @@ const CustomHeader = (props: IProps) => {
         <Right style={styles.headerItemWrapper}>
           {props.rightText ? (
             <Button
-              transparent
+              transparent={true}
               onPress={props.onPressRightButton}
               style={styles.rightWrapper}
             >

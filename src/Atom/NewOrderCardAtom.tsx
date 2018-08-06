@@ -13,6 +13,7 @@ export default class NewOrderCardAtom extends React.Component<IProps, any> {
     price: '',
     quantity: ''
   }
+
   getProduct = (product: string) => {
     this.setState({ product })
   }
@@ -22,6 +23,7 @@ export default class NewOrderCardAtom extends React.Component<IProps, any> {
   getQuantity = (quantity: number) => {
     this.setState({ quantity })
   }
+
   render() {
     return (
       <View style={styles.newOrderContainer}>

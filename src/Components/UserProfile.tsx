@@ -6,19 +6,24 @@ import NameDisplayAtom from '../Atom/NameDisplayAtom'
 
 interface IProps {
   list: any
-  businessName: string
+  businessName?: string
+  name?: string
 }
 
-interface IState {}
-
-class UserProfile extends PureComponent<IProps, IState> {
+class UserProfile extends PureComponent<IProps> {
   displayList = () => {
-    return this.props.list.map((key: any, index: any) => {
-      let section = key.section
-      let value = key.value
-      return <ProfileListAtom section={section} value={value} key={index} />
+    console.log('keys', Object.keys(this.props.list))
+    return Object.keys(this.props.list).map((key: any, index: any) => {
+      return (
+        <ProfileListAtom
+          section={key}
+          value={this.props.list[key]}
+          key={index}
+        />
+      )
     })
   }
+
   render() {
     return (
       <View style={styles.container}>

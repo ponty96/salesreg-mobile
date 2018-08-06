@@ -8,7 +8,16 @@ import { color } from '../Style/Color'
 import PickerAtom from '../Atom/PickerAtom'
 
 interface IProps {
-  navigation: any
+  navigation: any;
+  onSubmit: () => void;
+  onUpdateState?: (key: string, val: any) => void;
+  businessName: string;
+  businessAddress: string;
+  businessEmail: string;
+  products: boolean;
+  services: boolean;
+  currency: string;
+  fieldErrors: any;
 }
 
 interface IState {
@@ -89,6 +98,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
   }
 
   render() {
+    const { fieldErrors } = this.props;
     return (
       <Form style={styles.resetFormContainer}>
         <ImageAtom
@@ -103,6 +113,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           getValue={this.getName}
           contStyle={styles.marginlessInput}
           required={true}
+          error={fieldErrors && fieldErrors['title']}
         />
 
         <InputAtom
@@ -118,6 +129,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
           required={true}
+          error={fieldErrors && fieldErrors['contactEmail']}
         />
 
         <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
@@ -158,12 +170,10 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           <PickerAtom list={['Naira(\u20A6)']} placeholder={`Naira(\u20A6)`} />
         </View>
 
-        <InputAtom
-          label="Give a description of your business"
-          getValue={this.getDescription}
-          contStyle={styles.marginlessInput}
-        />
-
+        {fieldErrors &&
+          fieldErrors['currency'] && (
+            <Text style={styles.errorText}>{fieldErrors['currency']}</Text>
+          )}
         <View style={styles.buttonsWrapper}>
           <ButtonAtom
             btnText="SIGN UP"
@@ -236,8 +246,8 @@ const styles = StyleSheet.create({
   pickerWrapper: {
     borderBottomColor: color.inactive,
     borderBottomWidth: 1,
-    width: '60%',
     opacity: 0.5,
+    width: '60%',
     marginBottom: 16
   },
   placeholderColor: {
@@ -275,5 +285,12 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     marginVertical: 0
+  },
+  errorText: {
+    marginLeft: 0,
+    color: 'red',
+    fontSize: 12,
+    marginBottom: 25,
+    marginTop: 2
   }
 })

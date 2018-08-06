@@ -89,6 +89,7 @@
     "variable-name": [true, "allow-leading-underscore", "ban-keywords"],
     "whitespace": [
       true,
+<<<<<<< HEAD
       "check-branch",
       "check-decl",
       "check-operator",
@@ -97,4 +98,21 @@
     ],
     "extends": ["tslint:latest", "tslint-config-prettier"]
   }
+=======
+      "check-format",
+      "allow-leading-underscore",
+      "allow-trailing-underscore",
+      "allow-pascal-case",
+      "allow-snake-case"
+    ],
+    "ordered-imports": false,
+    "member-access": false,
+    "jsx-no-lambda": false,
+    "member-ordering": false,
+    "jsx-boolean-value": false,
+    "no-implicit-dependencies": false,
+    "curly": false
+  },
+  "rulesDirectory": []
+>>>>>>> 7fd317c5db1043c8d05782c3d7fb1e63e2b7ffab
 }
