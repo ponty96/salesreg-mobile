@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet, Alert } from 'react-native'
+import { View, StyleSheet, Alert, SectionList } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 import FabAtom from '../Atom/FabAtom'
 
@@ -26,7 +26,8 @@ export default class ExpensesScreen extends React.Component<IProps> {
   render() {
     return (
       <View style={styles.container}>
-        <FabAtom icon="" />
+        <FabAtom name="database-minus" type="MaterialCommunityIcons" />
+        <SectionList sections={[]} />
       </View>
     )
   }

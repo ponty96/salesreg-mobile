@@ -22,6 +22,7 @@ export default FabAtom
 
 const styles = StyleSheet.create({
   fab: {
-    backgroundColor: color.button
+    backgroundColor: color.button,
+    zIndex: 1
   }
 })
