@@ -75,7 +75,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
       <View style={styles.container}>
         <SubHeaderAtom
           screen="sales order"
-          image={require('../../assets/Icons/gray-icons/grey-order.png')}
+          image={require('../../Assets/Icons/gray-icons/grey-order.png')}
         >
           <Text style={[textStyles.normalText, styles.rightSubheader]}>
             {'Total: ' + '\u20A6 '}

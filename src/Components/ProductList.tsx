@@ -28,7 +28,7 @@ class ProductList extends PureComponent<IProps> {
             'Highest profit',
             'Lowest profit'
           ]}
-          image={require('../../assets/Icons/subheader-icons/product-blue.png')}
+          image={require('../../Assets/Icons/subheader-icons/product-blue.png')}
           rightLabel="Sort by"
           screen="products and services"
         />
