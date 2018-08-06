@@ -26,7 +26,8 @@
     "jsx-no-lambda": false,
     "member-ordering": false,
     "jsx-boolean-value": false,
-    "no-implicit-dependencies": false
+    "no-implicit-dependencies": false,
+    "curly": false
   },
   "rulesDirectory": []
 }
