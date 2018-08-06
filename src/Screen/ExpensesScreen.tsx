@@ -1,24 +1,32 @@
 import * as React from 'react'
-import { View, Button, StyleSheet } from 'react-native'
+import { View, StyleSheet, Alert } from 'react-native'
+import CustomHeader from '../Components/CustomHeader'
+import FabAtom from '../Atom/FabAtom'
 
 interface IProps {
   navigation: any
 }
 
 export default class ExpensesScreen extends React.Component<IProps> {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }) => {
     return {
-      title: 'Expenses Screen'
+      header: (
+        <CustomHeader
+          title="Expenses"
+          showMenu
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
+          showRight
+          firstRightIcon="ios-search"
+          onPressFirstRightIcon={() => Alert.alert('Search icon pressed.')}
+        />
+      )
     }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Button
-          title={'Go to next screen'}
-          onPress={() => this.props.navigation.navigate('ViewBusiness')}
-        />
+        <FabAtom icon="" />
       </View>
     )
   }
