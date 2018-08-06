@@ -12,7 +12,7 @@ import { onError } from 'apollo-link-error'
 // import refreshOrLogout from '../services/refreshOrLogout';
 import { createUploadLink } from '@richeterre/apollo-upload-client'
 
-const GRAPHQL_API_ENDPOINT = 'http://salesreg.herokuapp.com'
+const GRAPHQL_API_ENDPOINT = 'https://salesreg.herokuapp.com/api'
 const cache = new InMemoryCache()
 
 const authLink = setContext(async (_: any, { headers }: any) => {
