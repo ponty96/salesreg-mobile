@@ -27,12 +27,14 @@ export default class ExpensesScreen extends React.Component<IProps> {
   }
 
   renderList = ({ item }: any): JSX.Element => {
+    const { navigation } = this.props
     return (
       <SalesOrderListAtom
         firstTopLeftText={item.name}
         bottomLeftText={item.paidTo}
         topRightText={'\u20A6 ' + item.amount}
         rightTopTextStyle={styles.amount}
+        onPress={() => navigation.navigate('ExpensesDetails')}
       />
     )
   }
@@ -110,7 +112,7 @@ export default class ExpensesScreen extends React.Component<IProps> {
             { date: 'YESTERDAY', data: DATA0 },
             { date: '23 APRIL 2018', data: DATA1 }
           ]}
-          keyExtractor={item => item.name}
+          keyExtractor={(item, index) => item.name + index}
           renderSectionFooter={this.renderListFooter}
         />
       </View>
