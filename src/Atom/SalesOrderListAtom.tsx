@@ -5,12 +5,13 @@ import { Left, Right } from 'native-base'
 
 interface IProps {
   firstTopLeftText: string
-  bottomLeftText: string
+  bottomLeftText?: string
   secondTopLeftText?: string
-  topRightText: number
-  bottomRightText: string
+  topRightText: string
+  bottomRightText?: string
   onPress?: () => void
   style?: object
+  rightTopTextStyle?: object
 }
 
 const renderStatusIndicator = (bottomRightText: string): JSX.Element => {
@@ -41,7 +42,7 @@ const renderStatusIndicator = (bottomRightText: string): JSX.Element => {
   return <View style={[styles.statusIndicator, { backgroundColor: colour }]} />
 }
 
-const salesOrderListAtom = (props: IProps) => {
+const SalesOrderListAtom = (props: IProps) => {
   return (
     <TouchableOpacity
       style={[styles.wrapper, props.style]}
@@ -59,7 +60,9 @@ const salesOrderListAtom = (props: IProps) => {
         <Text style={[styles.text, styles.bottom]}>{props.bottomLeftText}</Text>
       </Left>
       <Right style={styles.rightWrapper}>
-        <Text style={[styles.text, styles.top]}>{props.topRightText}</Text>
+        <Text style={[styles.text, styles.top, props.rightTopTextStyle]}>
+          {props.topRightText}
+        </Text>
         <Text style={[styles.status, styles.bottom]}>
           {props.bottomRightText}
         </Text>
@@ -69,7 +72,7 @@ const salesOrderListAtom = (props: IProps) => {
   )
 }
 
-export default salesOrderListAtom
+export default SalesOrderListAtom
 
 const styles = StyleSheet.create({
   wrapper: {
