@@ -4,16 +4,18 @@ import CustomHeader from '../Components/CustomHeader'
 
 export class ExpensesDetailsScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
-    return (
-      <CustomHeader
-        title="Expense"
-        onBackPress={() => navigation.goBack()}
-        showRight
-        firstRightIcon="pencil"
-        firstRightIconType="MaterialCommunityIcons"
-        rightText="Edit"
-      />
-    )
+    return {
+      header: (
+        <CustomHeader
+          title="Expense"
+          onBackPress={() => navigation.goBack()}
+          showRight
+          firstRightIcon="pencil"
+          firstRightIconType="MaterialCommunityIcons"
+          rightText="Edit"
+        />
+      )
+    }
   }
 
   render() {
