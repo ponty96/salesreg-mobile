@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, FlatList } from 'react-native'
+import { View, StyleSheet, FlatList } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 import ListItemAtom from '../Atom/ListItemAtom'
@@ -37,6 +37,7 @@ export class ExpensesDetailsScreen extends Component {
           topRightText={'\u20A6 ' + '20,700.00'}
           rightTopTextStyle={styles.headerAmountStyle}
           style={styles.listHeaderWrapper}
+          rightStyle={styles.listHeaderRight}
         />
         <FlatList
           data={DATA}
@@ -62,5 +63,8 @@ const styles = StyleSheet.create({
   },
   listHeaderWrapper: {
     paddingBottom: 16
+  },
+  listHeaderRight: {
+    marginRight: 0
   }
 })

@@ -12,6 +12,8 @@ interface IProps {
   onPress?: () => void
   style?: object
   rightTopTextStyle?: object
+  leftStyle?: object
+  rightStyle?: object
 }
 
 const renderStatusIndicator = (bottomRightText: string): JSX.Element => {
@@ -48,7 +50,7 @@ const SalesOrderListAtom = (props: IProps) => {
       style={[styles.wrapper, props.style]}
       onPress={props.onPress}
     >
-      <Left style={styles.leftWrapper}>
+      <Left style={[styles.leftWrapper, props.leftStyle]}>
         <View style={styles.wrapperForTopLeft}>
           <Text style={[styles.serialNumber, styles.top]}>
             {props.firstTopLeftText}
@@ -59,7 +61,7 @@ const SalesOrderListAtom = (props: IProps) => {
         </View>
         <Text style={[styles.text, styles.bottom]}>{props.bottomLeftText}</Text>
       </Left>
-      <Right style={styles.rightWrapper}>
+      <Right style={[styles.rightWrapper, props.rightStyle]}>
         <Text style={[styles.text, styles.top, props.rightTopTextStyle]}>
           {props.topRightText}
         </Text>
