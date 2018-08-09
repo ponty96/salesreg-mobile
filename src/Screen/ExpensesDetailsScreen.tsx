@@ -1,6 +1,9 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, FlatList } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
+import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
+import ListItemAtom from '../Atom/ListItemAtom'
+import { color } from '../Style/Color'
 
 export class ExpensesDetailsScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
@@ -19,9 +22,29 @@ export class ExpensesDetailsScreen extends Component {
   }
 
   render() {
+    const DATA: Array<{ label: string; value: string }> = [
+      {
+        label: '',
+        value: ''
+      }
+    ]
+
     return (
       <View style={styles.container}>
-        <Text>Personality</Text>
+        <SalesOrderListAtom
+          firstTopLeftText="Order PU0012"
+          bottomLeftText="06/15/2018"
+          topRightText={'\u20A6 ' + '20,700.00'}
+          rightTopTextStyle={styles.headerAmountStyle}
+          style={styles.listHeaderWrapper}
+        />
+        <FlatList
+          data={DATA}
+          renderItem={({ item }) => (
+            <ListItemAtom label={item.label} value={item.value} />
+          )}
+          keyExtractor={item => item.label}
+        />
       </View>
     )
   }
@@ -29,6 +52,15 @@ export class ExpensesDetailsScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: color.secondary
+  },
+  headerAmountStyle: {
+    color: color.selling,
+    marginTop: 20,
+    fontFamily: 'SourceSansPro_Semibold'
+  },
+  listHeaderWrapper: {
+    paddingBottom: 16
   }
 })
