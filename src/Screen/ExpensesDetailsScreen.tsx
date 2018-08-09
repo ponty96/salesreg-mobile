@@ -23,10 +23,9 @@ export class ExpensesDetailsScreen extends Component {
 
   render() {
     const DATA: Array<{ label: string; value: string }> = [
-      {
-        label: '',
-        value: ''
-      }
+      { label: 'Item 1', value: '120,500.00' },
+      { label: 'Item 2', value: '45,500.00' },
+      { label: 'Item 3', value: '34,000.00' }
     ]
 
     return (
@@ -39,12 +38,37 @@ export class ExpensesDetailsScreen extends Component {
           style={styles.listHeaderWrapper}
           rightStyle={styles.listHeaderRight}
         />
+        <ListItemAtom
+          label="Paid to"
+          value="Lere Wakoza"
+          labelStyle={styles.listLabel}
+          rightTextStyle={styles.valueStyle}
+          listItemStyle={styles.listWrapper}
+        />
+        <ListItemAtom
+          label="Paid by"
+          value="Ayo Doe"
+          labelStyle={styles.listLabel}
+          rightTextStyle={styles.valueStyle}
+          listItemStyle={styles.listWrapper}
+        />
         <FlatList
           data={DATA}
           renderItem={({ item }) => (
-            <ListItemAtom label={item.label} value={item.value} />
+            <ListItemAtom
+              label={item.label}
+              value={'\u20A6 ' + item.value}
+              labelStyle={styles.listLabel}
+              rightTextStyle={styles.greenText}
+              listItemStyle={styles.listWrapper}
+            />
           )}
           keyExtractor={item => item.label}
+        />
+        <ListItemAtom
+          label="TOTAL"
+          value={'\u20A6 ' + '200,000.00'}
+          listItemStyle={styles.footer}
         />
       </View>
     )
@@ -53,7 +77,6 @@ export class ExpensesDetailsScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
     backgroundColor: color.secondary
   },
   headerAmountStyle: {
@@ -66,5 +89,26 @@ const styles = StyleSheet.create({
   },
   listHeaderRight: {
     marginRight: 0
+  },
+  listLabel: {
+    color: color.button
+  },
+  valueStyle: {
+    color: color.principal,
+    fontFamily: 'SourceSansPro'
+  },
+  listWrapper: {
+    borderBottomColor: color.listBorderColor,
+    borderBottomWidth: 1,
+    paddingLeft: 24,
+    paddingRight: 24
+  },
+  greenText: {
+    color: color.selling
+  },
+  footer: {
+    backgroundColor: color.selling,
+    paddingLeft: 24,
+    paddingRight: 24
   }
 })
