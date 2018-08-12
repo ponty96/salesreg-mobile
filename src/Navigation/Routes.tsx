@@ -18,7 +18,6 @@ import BankScreen from '../Screen/BankScreen';
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen';
 import CustomerDetailScreen from '../Screen/CustomerDetailScreen';
 import CustomerScreen from '../Screen/CustomerScreen';
-import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen';
 import UpsertServiceScreen from '../Screen/UpsertServiceScreen';
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen';
 import EmployeesScreen from '../Screen/EmployeesScreen';
@@ -37,8 +36,6 @@ import ServiceScreen from '../Screen/ServiceDetailsScreen';
 import UserProfileScreen from '../Screen/UserProfileScreen';
 import VendorDetailScreen from '../Screen/VendorDetailsScreen';
 import VendorScreen from '../Screen/VendorScreen';
-import DebtDetailsScreen from '../Screen/DebtDetailsScreen';
-import DebtScreen from '../Screen/DebtScreen';
 import LoginScreen from '../Screen/LoginScreen';
 import NewCustomerScreen from '../Screen/NewCustomerScreen';
 import NewOrderScreen from '../Screen/NewOrderScreen';
@@ -50,11 +47,8 @@ import ProductDetailsScreen from '../Screen/ProductDetailsScreen';
 import ProductScreen from '../Screen/ProductScreen';
 import ResetScreen from '../Screen/ResetScreen';
 // import CustomerScreen from './../Screen/CustomerScreen';
-// import DebtsScreen from './../Screen/DebtsScreen';
 import ServicesScreen from '../Screen/ServicesScreen';
-// import SplashScreen from './../Screen/SplashScreen';
 import SignupScreen from '../Screen/SignupScreen';
-// import styles from './../Style/Layout'
 import { color } from '../Style/Color';
 import Sidebar from './Sidebar';
 
@@ -150,12 +144,6 @@ const businessStack = StackNavigator(
     ProfileSettings: {
       screen: ProfileSettingsScreen
     },
-    Debt: {
-      screen: DebtScreen
-    },
-    DebtDetails: {
-      screen: DebtDetailsScreen
-    },
     Customer: {
       screen: CustomerScreen
     },
@@ -200,9 +188,6 @@ const businessStack = StackNavigator(
     },
     EditUserProfile: {
       screen: EditUserProfileScreen
-    },
-    EditBusinessProfile: {
-      screen: EditBusinessProfileScreen
     },
     EditServices: UpsertServiceScreen,
     ShowService: ServiceScreen

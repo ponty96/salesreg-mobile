@@ -20,7 +20,14 @@
       "allow-trailing-underscore",
       "allow-pascal-case",
       "allow-snake-case"
-    ]
+    ],
+    "ordered-imports": false,
+    "member-access": false,
+    "jsx-no-lambda": false,
+    "member-ordering": false,
+    "jsx-boolean-value": false,
+    "no-implicit-dependencies": false,
+    "curly": false
   },
   "rulesDirectory": []
 }

@@ -1,41 +1,41 @@
-import React, { PureComponent } from 'react';
-import { StyleSheet, View, ScrollView, FlatList } from 'react-native';
+import React, { PureComponent } from 'react'
+import { StyleSheet, View, ScrollView, FlatList } from 'react-native'
 
-import ServiceListItemAtom from '../Atom/ServiceListItemAtom';
-import { color } from '../Style/Color';
-import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import FabAtom from '../Atom/FabAtom';
-import { ListCompanyServicesGQL } from '../graphql/queries/product-service';
-import { Query } from 'react-apollo';
-import AppSpinner from '../Components/Spinner';
-import Auth from '../services/auth';
+import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
+import { color } from '../Style/Color'
+import SubHeaderAtom from '../Atom/SubHeaderAtom'
+import FabAtom from '../Atom/FabAtom'
+import { ListCompanyServicesGQL } from '../graphql/queries/product-service'
+import { Query } from 'react-apollo'
+import AppSpinner from '../Components/Spinner'
+import Auth from '../services/auth'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  business: any;
+  business: any
 }
 
 class ServicesScreen extends PureComponent<IProps, IState> {
   state = {
     business: null
-  };
+  }
 
   componentDidMount() {
-    this.updateState();
+    this.updateState()
   }
   updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       business: user.company
-    });
-  };
+    })
+  }
 
   handleTouch = service => {
-    this.props.navigation.navigate('ShowService', { service });
-  };
+    this.props.navigation.navigate('ShowService', { service })
+  }
 
   renderList = ({ item }: any) => {
     return (
@@ -44,11 +44,11 @@ class ServicesScreen extends PureComponent<IProps, IState> {
         amount={item.price}
         onPress={() => this.handleTouch(item)}
       />
-    );
-  };
+    )
+  }
 
   render() {
-    const { business } = this.state;
+    const { business } = this.state
     return (
       <Query
         query={ListCompanyServicesGQL}
@@ -78,19 +78,19 @@ class ServicesScreen extends PureComponent<IProps, IState> {
               </ScrollView>
               <FabAtom
                 routeName={'EditServices'}
-                name={'circle-with-plus'}
+                name={'plus'}
                 type={'Entypo'}
                 navigation={this.props.navigation}
               />
             </View>
-          );
+          )
         }}
       </Query>
-    );
+    )
   }
 }
 
-export default ServicesScreen;
+export default ServicesScreen
 
 const styles = StyleSheet.create({
   headerIcon: {
@@ -102,4 +102,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-});
+})

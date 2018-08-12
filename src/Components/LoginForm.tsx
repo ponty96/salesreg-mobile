@@ -1,21 +1,21 @@
-import React, { PureComponent } from 'react';
-import { Form, Text } from 'native-base';
-import { StyleSheet } from 'react-native';
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import { color } from '../Style/Color';
+import React, { PureComponent } from 'react'
+import { Form, Text } from 'native-base'
+import { StyleSheet } from 'react-native'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
-  onSubmit?: (params: any) => void;
-  loading?: boolean;
-  fieldErrors: any;
+  navigation: any
+  onSubmit?: (params: any) => void
+  loading?: boolean
+  fieldErrors: any
 }
 
 interface IState {
-  email: string;
-  password: string;
-  isEdited: boolean;
+  email: string
+  password: string
+  isEdited: boolean
 }
 
 class LoginForm extends PureComponent<IProps, IState> {
@@ -23,32 +23,32 @@ class LoginForm extends PureComponent<IProps, IState> {
     email: '',
     password: '',
     isEdited: false
-  };
+  }
   login = () => {
     this.props.onSubmit({
       email: this.state.email,
       password: this.state.password
-    });
-  };
+    })
+  }
 
   getEmail = (email: any) => {
     this.setState({
       email
-    });
-  };
+    })
+  }
 
   getPassword = (pass: any) => {
     this.setState({
       password: pass
-    });
-  };
+    })
+  }
 
   navigate = (location: any) => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
-    const { fieldErrors } = this.props;
+    const { fieldErrors } = this.props
     return (
       <Form>
         <InputAtom
@@ -57,7 +57,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           contStyle={styles.input}
           inputStyle={styles.elevateInput}
           login={true}
-          error={fieldErrors && fieldErrors['email']}
+          error={fieldErrors && fieldErrors.email}
         />
 
         <InputAtom
@@ -69,7 +69,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           underneathStyle={styles.underneathText}
           inputStyle={styles.elevateInput}
           login={true}
-          error={fieldErrors && fieldErrors['password']}
+          error={fieldErrors && fieldErrors.password}
         />
 
         <ButtonAtom
@@ -102,11 +102,11 @@ class LoginForm extends PureComponent<IProps, IState> {
           textStyle={styles.signupText}
         />
       </Form>
-    );
+    )
   }
 }
 
-export default LoginForm;
+export default LoginForm
 
 const styles = StyleSheet.create({
   input: {
@@ -146,4 +146,4 @@ const styles = StyleSheet.create({
   elevateInput: {
     marginBottom: 5
   }
-});
+})
