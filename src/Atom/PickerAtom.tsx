@@ -10,10 +10,10 @@ interface IProps {
   handleSelection?: (value: any) => void;
   width?: string;
   pickerStyle?: any;
+  style?: any;
 }
 
 interface IState {
-  selected: string;
   loading: boolean;
 }
 
@@ -21,7 +21,6 @@ class PickerAtom extends React.Component<IProps, IState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      selected: this.props.selected,
       loading: true
     };
   }
@@ -29,9 +28,6 @@ class PickerAtom extends React.Component<IProps, IState> {
     width: '100%'
   };
   handleChange(value: string) {
-    this.setState({
-      selected: value
-    });
     this.props.handleSelection(value);
   }
 
@@ -53,11 +49,11 @@ class PickerAtom extends React.Component<IProps, IState> {
             height: 35,
             borderBottomWidth: 1,
             borderBottomColor: color.textBorderBottom,
-            marginBottom: 10,
+            marginBottom: 8,
             width: this.props.width,
             ...this.props.pickerStyle
           }}
-          selectedValue={this.state.selected}
+          selectedValue={this.props.selected}
           onValueChange={this.handleChange.bind(this)}
           placeholder={this.props.placeholder}
           placeholderStyle={{

@@ -60,7 +60,7 @@ class InputAtom extends React.Component<IProps, IState> {
           floatingLabel={this.props.floatingLabel}
           stackedLabel={!this.props.floatingLabel}
           style={[
-            { borderBottomColor: this.state.bottomColor },
+            { borderBottomColor: this.state.bottomColor, marginTop: 0 },
             this.props.contStyle
           ]}
         >
@@ -145,11 +145,13 @@ const styles = StyleSheet.create({
     color: color.principal,
     fontSize: 12,
     marginBottom: 25,
-    marginTop: 2
+    marginTop: 2,
+    paddingLeft: 8
   },
   inputText: {
     color: color.principal,
     fontSize: 16,
-    paddingBottom: 5
+    paddingBottom: 0,
+    top: 6
   }
 });
