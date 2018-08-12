@@ -121,12 +121,10 @@ const styles = StyleSheet.create({
     marginLeft: 4
   },
   label: {
-    // color: this.state.labelColor,
     padding: 3,
     fontSize: 16
   },
   labelText: {
-    // color: this.state.labelColor,
     fontFamily: 'SourceSansPro',
     padding: 3,
     fontSize: 16

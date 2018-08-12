@@ -98,7 +98,7 @@ export default class ExpensesScreen extends React.Component<IProps> {
     return (
       <View style={styles.container}>
         <FabAtom
-          routeName=""
+          routeName="NewExpenses"
           navigation={navigation}
           name="database-minus"
           type="MaterialCommunityIcons"
