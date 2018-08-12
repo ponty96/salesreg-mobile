@@ -5,6 +5,7 @@ import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import { color } from '../Style/Color';
 import PickerAtom from '../Atom/PickerAtom';
+import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
 
 interface IProps {
   navigation: any;
@@ -109,7 +110,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
 
         {fieldErrors &&
           fieldErrors['currency'] && (
-            <Text style={styles.errorText}>{fieldErrors['currency']}</Text>
+            <FormErrorTextAtom errorText={fieldErrors['currency']} />
           )}
         <View style={styles.buttonsWrapper}>
           <ButtonAtom
@@ -180,8 +181,6 @@ const styles = StyleSheet.create({
     color: color.principal
   },
   pickerWrapper: {
-    borderBottomColor: color.inactive,
-    borderBottomWidth: 1,
     opacity: 0.5,
     width: '60%',
     marginBottom: 16
@@ -221,12 +220,5 @@ const styles = StyleSheet.create({
   },
   loginButton: {
     marginVertical: 0
-  },
-  errorText: {
-    marginLeft: 0,
-    color: 'red',
-    fontSize: 12,
-    marginBottom: 25,
-    marginTop: 2
   }
 });

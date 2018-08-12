@@ -60,7 +60,7 @@ class InputAtom extends React.Component<IProps, IState> {
           floatingLabel={this.props.floatingLabel}
           stackedLabel={!this.props.floatingLabel}
           style={[
-            { borderBottomColor: this.state.bottomColor },
+            { borderBottomColor: this.state.bottomColor, marginTop: 0 },
             this.props.contStyle
           ]}
         >
@@ -92,7 +92,7 @@ class InputAtom extends React.Component<IProps, IState> {
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
             onFocus={() => this.changeUnderline(color.blueLabelColor)}
-            onBlur={() => this.changeUnderline(color.textBorderBottom)}
+            onBlur={() => this.changeUnderline(color.inactive)}
             maxLength={this.props.maxLength}
           />
         </Item>
@@ -125,12 +125,6 @@ class InputAtom extends React.Component<IProps, IState> {
 export default InputAtom;
 
 const styles = StyleSheet.create({
-  marginlessInput: {
-    marginLeft: 0
-  },
-  marginfulInput: {
-    marginLeft: 4
-  },
   label: {
     // color: this.state.labelColor,
     padding: 3,
@@ -151,9 +145,13 @@ const styles = StyleSheet.create({
     color: color.principal,
     fontSize: 12,
     marginBottom: 25,
-    marginTop: 2
+    marginTop: 2,
+    paddingLeft: 8
   },
   inputText: {
-    color: color.principal
+    color: color.principal,
+    fontSize: 16,
+    paddingBottom: 0,
+    top: 6
   }
 });

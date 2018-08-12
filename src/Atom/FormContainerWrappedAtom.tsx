@@ -1,66 +1,44 @@
-import * as React from 'react'
-import { StyleSheet, View, Text, Dimensions } from 'react-native'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { StyleSheet, View } from 'react-native';
+import { color } from '../Style/Color';
 
 interface IProps {
-  headerText?: string
+  headerText?: string;
 }
 
 class FormContainerWrappedAtom extends React.Component<IProps, any> {
-  getInput = (key: string) => {
-    const child: any = this.props.children
-    return child.filter((comp: any) => {
-      return comp.key === key
-    })
-  }
   render() {
+    const children = React.Children.map(this.props.children, (child, index) => (
+      <View key={index} style={styles.wrappedInputLeft}>
+        {child}
+      </View>
+    ));
     return (
       <View style={styles.mainView}>
-        <Text style={styles.headerText}>{this.props.headerText}</Text>
-        <View style={styles.inputViewForTwoAndMore}>
-          <View style={styles.innerInputViewForTwo}>
-            {this.getInput('birthday')}
-            {this.getInput('maritalStatus')}
-          </View>
-          <View style={styles.innerInputViewForTwo}>
-            {this.getInput('marriageAnn')}
-          </View>
-        </View>
+        <View style={styles.innerInputViewForTwo}>{children}</View>
       </View>
-    )
+    );
   }
 }
 
-export default FormContainerWrappedAtom
+export default FormContainerWrappedAtom;
 
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: 'transparent',
     width: '100%'
   },
-  headerText: {
-    alignSelf: 'center',
-    fontSize: 14,
-    color: color.button,
-    fontFamily: 'SourceSansPro_Semibold'
-  },
   innerInputViewForTwo: {
-    width: Dimensions.get('screen').width - 32,
+    // width: Dimensions.get('screen').width - 32,
     alignSelf: 'center',
     backgroundColor: color.secondary,
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    // paddingRight: 12,
+    flexWrap: 'wrap'
   },
-  inputViewForTwoAndMore: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    flexDirection: 'column',
-    paddingLeft: 10,
-    paddingRight: 10,
-    padding: 3,
-    marginTop: 16,
-    marginBottom: 16,
-    borderRadius: 3
+  wrappedInputLeft: {
+    width: '50%',
+    paddingLeft: 6
   }
-})
+});

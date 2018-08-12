@@ -1,6 +1,6 @@
-import React from 'react'
-import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete'
-import { color } from '../Style/Color'
+import React from 'react';
+import { GooglePlacesAutocomplete } from 'react-native-google-places-autocomplete';
+import { color } from '../Style/Color';
 
 class GoogleInputAtom extends React.Component {
   render() {
@@ -16,18 +16,18 @@ class GoogleInputAtom extends React.Component {
           row.description || row.vicinity || row.formatted_address || row.name
         } // custom description render
         onPress={(data, details) => {
-          console.log(data)
-          console.log(details)
+          console.log('ON PRESS HANDLER DATA', data);
+          console.log('ON PRESS HANDLER DETAILS', details);
         }}
         onChangeText={text => this.props.getValue(text)}
         getDefaultValue={() => {
-          return '' // text input default value
+          return ''; // text input default value
         }}
         query={{
           // available options: https://developers.google.com/places/web-service/autocomplete
           key: 'AIzaSyD8Q3_2x4OPmtwLThWkKS5RgMlN0xx-maI',
-          language: 'en', // language of the results
-          types: '(cities)' // default: 'geocode'
+          language: 'en' // language of the results
+          // types: '(cities)' // default: 'geocode'
         }}
         styles={{
           placeholder: {
@@ -81,8 +81,8 @@ class GoogleInputAtom extends React.Component {
         ]} // filter the reverse geocoding results by types - ['locality', 'administrative_area_level_3'] if you want to display only cities
         debounce={200}
       />
-    )
+    );
   }
 }
 
-export default GoogleInputAtom
+export default GoogleInputAtom;
