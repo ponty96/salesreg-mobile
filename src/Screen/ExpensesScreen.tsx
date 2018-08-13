@@ -137,7 +137,8 @@ const styles = StyleSheet.create({
     paddingVertical: 8
   },
   amount: {
-    color: color.selling
+    color: color.selling,
+    marginTop: 0
   },
   headerRight: {
     marginRight: 32,
