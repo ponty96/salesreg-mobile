@@ -7,6 +7,7 @@ import { color } from '../Style/Color'
 import { textStyles } from '../Style/TextStyles'
 import PickerAtom from '../Atom/PickerAtom'
 import SaveCancelButton from '../Container/SaveCancelButton'
+import WarningModal from '../Components/WarningModal'
 
 interface IProps {
   navigation: any
@@ -16,6 +17,7 @@ interface IState {
   expense?: string
   date?: string
   totalAmount?: string
+  visible?: boolean
 }
 
 export default class NewExpensesScreen extends Component<IProps, IState> {
@@ -33,11 +35,16 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
   state = {
     expense: '',
     date: '',
-    totalAmount: ''
+    totalAmount: '',
+    visible: false
   }
 
   updateState = (key: string, value: any) => {
     this.setState({ [key]: value })
+  }
+
+  handleOKPress = () => {
+    alert('OK button pressed.')
   }
 
   render() {
@@ -132,7 +139,23 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
             + Add split
           </Text>
         </ScrollView>
-        <SaveCancelButton positiveButtonName="DONE" navigation={navigation} />
+        <SaveCancelButton
+          positiveButtonName="DONE"
+          navigation={navigation}
+          createfunc={() => this.setState({ visible: true })}
+        />
+        <WarningModal
+          headerText="Something's not right!!"
+          bodyText={
+            'Your total split amount exceeds the total expenses by \u20A6 2000.00. ' +
+            'Split total split amountsmust be equal to the total expenses'
+          }
+          visible={this.state.visible}
+          onBackPress={() => this.setState({ visible: false })}
+          onPressTopButton={this.handleOKPress}
+          modalStyle={styles.modalContainer}
+          footerText="OK"
+        />
       </View>
     )
   }
@@ -193,5 +216,8 @@ const styles = StyleSheet.create({
   formWrapper: {
     marginTop: 0,
     marginBottom: 0
+  },
+  modalContainer: {
+    top: 360
   }
 })

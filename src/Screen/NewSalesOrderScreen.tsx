@@ -234,6 +234,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
           onPressTopButton={this.handleConfirmedPress}
           onPressBottomButton={() => this.handleEditPress}
           modalStyle={styles.modalContainer}
+          footerText="Close"
         >
           <View style={styles.confirmOrder}>
             <ConfirmOrderBody data={CONFIRM_ORDER_DATA} />
