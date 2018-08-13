@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList } from 'react-native'
+import { View, StyleSheet, FlatList, Alert } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 import ListItemAtom from '../Atom/ListItemAtom'
@@ -16,6 +16,7 @@ export class ExpensesDetailsScreen extends Component {
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
           rightText="Edit"
+          onPressRightButton={() => Alert.alert('Edit pressed.')}
         />
       )
     }
@@ -91,7 +92,8 @@ const styles = StyleSheet.create({
     marginRight: 0
   },
   listLabel: {
-    color: color.button
+    color: color.button,
+    marginLeft: 2
   },
   valueStyle: {
     color: color.principal,
