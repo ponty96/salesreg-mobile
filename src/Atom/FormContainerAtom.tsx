@@ -30,7 +30,8 @@ export default FormContainerAtom;
 const styles = StyleSheet.create({
   mainView: {
     backgroundColor: 'transparent',
-    width: '100%'
+    width: '100%',
+    paddingVertical: 8
   },
   inputView: {
     width: Dimensions.get('screen').width - 32,
