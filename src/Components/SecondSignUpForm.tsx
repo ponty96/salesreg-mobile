@@ -12,7 +12,7 @@ interface IProps {
   onSubmit: () => void;
   onUpdateState?: (key: string, val: any) => void;
   businessName: string;
-  businessAddress: string;
+  businessAddress?: string;
   businessEmail: string;
   products: boolean;
   services: boolean;
@@ -39,16 +39,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           contStyle={styles.marginlessInput}
           required={true}
           error={fieldErrors && fieldErrors['title']}
-        />
-
-        <InputAtom
-          label="Business address"
-          defaultValue={this.props.businessAddress}
-          getValue={address =>
-            this.props.onUpdateState('businessAddress', address)
-          }
-          contStyle={styles.marginlessInput}
-          required={true}
+          placeholder="Enter the Name of your Business"
         />
 
         <InputAtom
@@ -61,6 +52,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           contStyle={styles.marginlessInput}
           required={true}
           error={fieldErrors && fieldErrors['contactEmail']}
+          placeholder="Enter your Business email"
         />
 
         <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
