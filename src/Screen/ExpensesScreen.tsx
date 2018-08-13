@@ -21,6 +21,7 @@ export default class ExpensesScreen extends React.Component<IProps> {
           onMenuPress={() => navigation.navigate('DrawerToggle')}
           showRight
           firstRightIcon="ios-search"
+          rightStyle={styles.headerRight}
         />
       )
     }
@@ -137,5 +138,9 @@ const styles = StyleSheet.create({
   },
   amount: {
     color: color.selling
+  },
+  headerRight: {
+    marginRight: 32,
+    width: 30
   }
 })
