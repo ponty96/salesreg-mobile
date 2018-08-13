@@ -6,14 +6,19 @@ import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 import { textStyles } from '../Style/TextStyles'
 import PickerAtom from '../Atom/PickerAtom'
+import SaveCancelButton from '../Container/SaveCancelButton'
 
-interface IState {
-  expense: string
-  date: string
-  totalAmount: string
+interface IProps {
+  navigation: any
 }
 
-export default class NewExpensesScreen extends Component<IState> {
+interface IState {
+  expense?: string
+  date?: string
+  totalAmount?: string
+}
+
+export default class NewExpensesScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -36,6 +41,7 @@ export default class NewExpensesScreen extends Component<IState> {
   }
 
   render() {
+    const { navigation } = this.props
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -69,10 +75,7 @@ export default class NewExpensesScreen extends Component<IState> {
               </View>
             </View>
           </FormContainerAtom>
-          <FormContainerAtom
-            style={styles.formWrapper}
-            containerStyle={styles.containerWrapper}
-          >
+          <FormContainerAtom style={styles.formWrapper}>
             <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
               <Text
                 style={[
@@ -124,11 +127,12 @@ export default class NewExpensesScreen extends Component<IState> {
               textStyles.boldText,
               styles.textToAdd
             ]}
-            onPress={() => alert('Add item pressed.')}
+            onPress={() => alert('Add split pressed.')}
           >
             + Add split
           </Text>
         </ScrollView>
+        <SaveCancelButton positiveButtonName="DONE" navigation={navigation} />
       </View>
     )
   }
@@ -164,9 +168,6 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     marginTop: 16
   },
-  containerWrapper: {
-    marginBottom: 32
-  },
   payingMethodText: {
     alignSelf: 'flex-end'
   },
@@ -182,7 +183,9 @@ const styles = StyleSheet.create({
     marginLeft: 6
   },
   textToAdd: {
-    marginLeft: 16
+    marginLeft: 16,
+    marginBottom: 64,
+    marginTop: 16
   },
   paidbyInput: {
     marginBottom: 10
