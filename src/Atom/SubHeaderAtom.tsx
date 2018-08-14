@@ -1,25 +1,25 @@
-import * as React from 'react';
-import { Header, Left, Right, Text } from 'native-base';
-import PickerAtom from './PickerAtom';
-import { StyleSheet, View, Image } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { Header, Left, Right, Text } from 'native-base'
+import PickerAtom from './PickerAtom'
+import { StyleSheet, View, Image } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
-  total?: any;
-  list?: any[];
+  total?: any
+  list?: any[]
 }
 
 class SubHeaderAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
     total: '80'
-  };
+  }
 
   render() {
     return (
       <Header style={styles.subHeaderHeader}>
         <Left style={styles.subHeaderLeftRow}>
           <Image
-            source={require('../../Assets/Icons/subheader-icons/product-blue.png')}
+            source={require('../../assets/Icons/subheader-icons/product-blue.png')}
             style={styles.productIcon}
           />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
@@ -39,11 +39,11 @@ class SubHeaderAtom extends React.Component<IProps, any> {
           </View>
         </Right>
       </Header>
-    );
+    )
   }
 }
 
-export default SubHeaderAtom;
+export default SubHeaderAtom
 
 const styles = StyleSheet.create({
   subHeaderHeader: {
@@ -88,4 +88,4 @@ const styles = StyleSheet.create({
     height: 20,
     width: 20
   }
-});
+})
