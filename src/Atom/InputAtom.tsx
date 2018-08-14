@@ -40,7 +40,7 @@ class InputAtom extends React.Component<IProps, IState> {
 
   state = {
     bottomColor: color.textBorderBottom,
-    labelColor: color.inactive
+    labelColor: color.blueLabelColor
   };
 
   changeUnderline = (newColor: string): void => {

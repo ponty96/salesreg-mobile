@@ -3,7 +3,7 @@ import { Picker, Icon } from 'native-base';
 import { View, StyleSheet } from 'react-native';
 import { color } from '../Style/Color';
 
-import { Item, Label, Text } from 'native-base';
+import { Label, Text } from 'native-base';
 
 interface IProps {
   list: Array<any>;
@@ -29,7 +29,7 @@ class PickerAtom extends React.Component<IProps, IState> {
     this.state = {
       loading: true,
       bottomColor: color.textBorderBottom,
-      labelColor: color.inactive
+      labelColor: color.blueLabelColor
     };
   }
   static defaultProps = {

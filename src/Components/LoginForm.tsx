@@ -58,7 +58,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           inputStyle={styles.elevateInput}
           login={true}
           error={fieldErrors && fieldErrors.email}
-          placeholder="Enter Email"
+          placeholder="e.g lagbaja@example.com"
         />
 
         <InputAtom
@@ -71,7 +71,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           inputStyle={styles.elevateInput}
           login={true}
           error={fieldErrors && fieldErrors.password}
-          placeholder="Enter Password"
+          placeholder="your secret password"
         />
 
         <ButtonAtom

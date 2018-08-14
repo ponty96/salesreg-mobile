@@ -26,7 +26,7 @@ export default class FormAddressSection extends PureComponent<IProps> {
           defaultValue={this.props.street1}
           error={fieldErrors && fieldErrors['street1']}
           getValue={val => this.props.getValue('street1', val)}
-          placeholder="Street"
+          placeholder="e.g E close, 401 Road"
         />
         <InputAtom
           label="City"
@@ -34,17 +34,16 @@ export default class FormAddressSection extends PureComponent<IProps> {
           required={true}
           error={fieldErrors && fieldErrors['city']}
           getValue={val => this.props.getValue('city', val)}
-          placeholder="City"
+          placeholder="e.g Festac"
         />
         <FormContainerWrappedAtom>
           <View>
             <PickerAtom
               list={['Lagos']}
-              placeholder="State"
+              placeholder="e.g Lagos"
               selected={this.props.state}
               handleSelection={state => this.props.getValue('state', state)}
               label="State"
-              required={true}
             />
             {fieldErrors &&
               fieldErrors['state'] && (
@@ -54,7 +53,7 @@ export default class FormAddressSection extends PureComponent<IProps> {
           <View>
             <PickerAtom
               list={['Nigeria']}
-              placeholder="Country"
+              placeholder="e.g Nigeria"
               selected={this.props.country}
               required={true}
               handleSelection={country =>

@@ -102,7 +102,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
                   keyboardVerticalOffset={95}
                 >
                   <AppSpinner visible={loading} />
-                  {this.state.currentForm == 0 ? (
+                  {this.state.currentForm == 1 ? (
                     <SignupForm
                       email={this.state.email}
                       password={this.state.password}
