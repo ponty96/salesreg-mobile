@@ -65,7 +65,7 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
               this.setState({
                 excessFormContainer: this.additionalElement
               })
-              this.additionalElement.splice(index, 1)
+              this.additionalElement.splice(index, 1, undefined)
             }}
           >
             &times;
