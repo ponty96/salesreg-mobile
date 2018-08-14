@@ -27,7 +27,8 @@
     "member-ordering": false,
     "jsx-boolean-value": false,
     "no-implicit-dependencies": false,
-    "curly": false
+    "curly": false,
+    "prefer-object-spread": false
   },
   "rulesDirectory": []
 }

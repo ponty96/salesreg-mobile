@@ -1,6 +1,6 @@
 export const parseFieldErrors = errors => {
   return errors.reduce((acc, error) => {
-    const key = error['key'].charAt(0).toLowerCase() + error['key'].slice(1);
+    const key = error.key.charAt(0).toLowerCase() + error.key.slice(1);
     return { ...acc, [key]: error.message };
   }, {});
 };
@@ -11,7 +11,7 @@ export const capitalizeFirstLetter = (word: string): string => {
 };
 
 export const numberWithCommas = (num: number) => {
-  let parts = num.toString().split('.');
+  const parts = num.toString().split('.');
   parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',');
   return parts.join('.');
 };
@@ -23,7 +23,7 @@ export const numberWithCommas = (num: number) => {
 
 // Email Validation
 const emailValidator = email => {
-  let emailPattern = /[^\s@]+@[^\s@.]+\.[^\s@]+/;
+  const emailPattern = /[^\s@]+@[^\s@.]+\.[^\s@]+/;
   return emailPattern.test(email);
 };
 
@@ -70,7 +70,7 @@ export const validateFormInputs = formInputs => {
 
 export const validateRegStep1FormInputs = formInputs => {
   let fieldErrors = {};
-  const index = Object.keys(formInputs).findIndex(key => key == 'businessName');
+  const index = Object.keys(formInputs).findIndex(key => key === 'businessName');
   Object.keys(formInputs)
     .slice(0, index)
     .map(key => {
