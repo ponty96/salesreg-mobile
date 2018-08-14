@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react';
+import { View } from 'react-native';
 import FormContainerAtom from '../Atom/FormContainerAtom';
 import InputAtom from '../Atom/InputAtom';
 import FormContainerWrappedAtom from '../Atom/FormContainerWrappedAtom';
 import PickerAtom from '../Atom/PickerAtom';
+import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
 
 interface IProps {
   street1: string;
@@ -19,30 +21,51 @@ export default class FormAddressSection extends PureComponent<IProps> {
     return (
       <FormContainerAtom headerText="Address">
         <InputAtom
-          label="* Street"
+          label="Street"
+          required={true}
           defaultValue={this.props.street1}
           error={fieldErrors && fieldErrors['street1']}
           getValue={val => this.props.getValue('street1', val)}
+          placeholder="e.g E close, 401 Road"
         />
         <InputAtom
-          label="* City"
+          label="City"
           defaultValue={this.props.city}
+          required={true}
           error={fieldErrors && fieldErrors['city']}
           getValue={val => this.props.getValue('city', val)}
+          placeholder="e.g Festac"
         />
         <FormContainerWrappedAtom>
-          <PickerAtom
-            list={['Lagos']}
-            placeholder="State"
-            selected={this.props.state}
-            handleSelection={state => this.props.getValue('state', state)}
-          />
-          <PickerAtom
-            list={['Nigeria']}
-            placeholder="Country"
-            selected={this.props.country}
-            handleSelection={country => this.props.getValue('country', country)}
-          />
+          <View>
+            <PickerAtom
+              list={['Lagos']}
+              placeholder="e.g Lagos"
+              selected={this.props.state}
+              handleSelection={state => this.props.getValue('state', state)}
+              label="State"
+            />
+            {fieldErrors &&
+              fieldErrors['state'] && (
+                <FormErrorTextAtom errorText={fieldErrors['state']} />
+              )}
+          </View>
+          <View>
+            <PickerAtom
+              list={['Nigeria']}
+              placeholder="e.g Nigeria"
+              selected={this.props.country}
+              required={true}
+              handleSelection={country =>
+                this.props.getValue('country', country)
+              }
+              label="Country"
+            />
+            {fieldErrors &&
+              fieldErrors['country'] && (
+                <FormErrorTextAtom errorText={fieldErrors['country']} />
+              )}
+          </View>
         </FormContainerWrappedAtom>
       </FormContainerAtom>
     );

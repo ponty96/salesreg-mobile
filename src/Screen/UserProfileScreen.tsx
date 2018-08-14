@@ -44,12 +44,16 @@ class UserProfileScreen extends Component<IProps, IState> {
     this.setState({
       list: {
         Gender: user.gender || '',
-        Phone: user.phone || '',
+        Phone: user.phone ? user.phone.number : '',
         Email: user.email,
-        Address: user.address || ''
+        Address: user.location ? this.parseLocation(user.location) : ''
       },
       fullName: `${user.firstName} ${user.lastName}`
     });
+  };
+
+  parseLocation = ({ street1, city, state, country }) => {
+    return `${street1} ${city} ${state} ${country}`;
   };
   render() {
     return <UserProfile list={this.state.list} name={this.state.fullName} />;

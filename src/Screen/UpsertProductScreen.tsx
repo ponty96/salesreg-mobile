@@ -124,6 +124,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                     getValue={val => this.updateState('name', val)}
                     error={fieldErrors && fieldErrors['name']}
                     underneathStyle={styles.underneathStyle}
+                    placeholder="e.g Hublot Geneve Brown Watch"
                   />
                 </FormContainerAtom>
                 <FormContainerAtom headerText="Quantity">
@@ -136,6 +137,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                       underneathStyle={styles.underneathStyle}
                       defaultValue={this.state.currentStock}
                       error={fieldErrors && fieldErrors['stockQuantity']}
+                      placeholder="e.g 30"
                     />
                   </View>
                   <View>
@@ -147,6 +149,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                       underneathStyle={styles.underneathStyle}
                       defaultValue={this.state.minStock}
                       error={fieldErrors && fieldErrors['minimumStockQuantity']}
+                      placeholder="e.g 10"
                     />
                   </View>
                 </FormContainerAtom>
@@ -158,6 +161,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                     defaultValue={this.state.costPrice}
                     error={fieldErrors && fieldErrors['costPrice']}
                     underneathStyle={styles.underneathStyle}
+                    placeholder="e.g 10,000"
                   />
                   <InputAtom
                     label={`*Selling Price each \u20A6`}
@@ -166,6 +170,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                     defaultValue={this.state.sellingPrice}
                     underneathStyle={styles.underneathStyle}
                     error={fieldErrors && fieldErrors['sellingPrice']}
+                    placeholder="e.g 15,000"
                   />
                 </FormContainerAtom>
                 <FormContainerAtom headerText="Description">

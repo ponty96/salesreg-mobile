@@ -12,7 +12,7 @@ interface IProps {
   onSubmit: () => void;
   onUpdateState?: (key: string, val: any) => void;
   businessName: string;
-  businessAddress: string;
+  businessAddress?: string;
   businessEmail: string;
   products: boolean;
   services: boolean;
@@ -39,16 +39,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           contStyle={styles.marginlessInput}
           required={true}
           error={fieldErrors && fieldErrors['title']}
-        />
-
-        <InputAtom
-          label="Business address"
-          defaultValue={this.props.businessAddress}
-          getValue={address =>
-            this.props.onUpdateState('businessAddress', address)
-          }
-          contStyle={styles.marginlessInput}
-          required={true}
+          placeholder="e.g MayAfriq"
         />
 
         <InputAtom
@@ -61,6 +52,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           contStyle={styles.marginlessInput}
           required={true}
           error={fieldErrors && fieldErrors['contactEmail']}
+          placeholder="e.g info@mayafriq.com"
         />
 
         <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
@@ -93,14 +85,11 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             Services(Service providers)
           </Text>
         </View>
-
-        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
-          Transaction currency
-        </Text>
         <View style={styles.pickerWrapper}>
           <PickerAtom
             list={['Naira(\u20A6)']}
-            placeholder={`Naira(\u20A6)`}
+            placeholder={`e.g Naira(\u20A6)`}
+            label="Transaction Currency"
             selected={this.props.currency}
             handleSelection={currency =>
               this.props.onUpdateState('currency', currency)
@@ -181,7 +170,7 @@ const styles = StyleSheet.create({
     color: color.principal
   },
   pickerWrapper: {
-    opacity: 0.5,
+    marginTop: 28,
     width: '60%',
     marginBottom: 16
   },

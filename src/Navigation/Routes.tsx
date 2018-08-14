@@ -41,6 +41,7 @@ import NewCustomerScreen from '../Screen/NewCustomerScreen';
 import NewOrderScreen from '../Screen/NewOrderScreen';
 import UpsertProductScreen from '../Screen/UpsertProductScreen';
 import OnBoardingScreen from '../Screen/OnBoardingScreen';
+import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen';
 // import OrderScreen from './../Screen/OrderScreen';
 import OrderDetailsScreen from '../Screen/OrderDetailsScreen';
 import ProductDetailsScreen from '../Screen/ProductDetailsScreen';
@@ -188,6 +189,9 @@ const businessStack = StackNavigator(
     },
     EditUserProfile: {
       screen: EditUserProfileScreen
+    },
+    EditBusinessProfile: {
+      screen: EditBusinessProfileScreen
     },
     EditServices: UpsertServiceScreen,
     ShowService: ServiceScreen

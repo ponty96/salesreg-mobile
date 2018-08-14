@@ -1,7 +1,9 @@
 import * as React from 'react';
 import { Picker, Icon } from 'native-base';
-import { View } from 'react-native';
+import { View, StyleSheet } from 'react-native';
 import { color } from '../Style/Color';
+
+import { Label, Text } from 'native-base';
 
 interface IProps {
   list: Array<any>;
@@ -11,17 +13,23 @@ interface IProps {
   width?: string;
   pickerStyle?: any;
   style?: any;
+  required?: boolean | false;
+  label?: string;
 }
 
 interface IState {
   loading: boolean;
+  bottomColor: string;
+  labelColor: string;
 }
 
 class PickerAtom extends React.Component<IProps, IState> {
   constructor(props: any) {
     super(props);
     this.state = {
-      loading: true
+      loading: true,
+      bottomColor: color.textBorderBottom,
+      labelColor: color.blueLabelColor
     };
   }
   static defaultProps = {
@@ -30,11 +38,27 @@ class PickerAtom extends React.Component<IProps, IState> {
   handleChange(value: string) {
     this.props.handleSelection(value);
   }
+  changeUnderline = (newColor: string): void => {
+    this.setState({ labelColor: newColor });
+  };
 
   render() {
     let list = this.props.list;
     return (
-      <View>
+      <View style={{ minHeight: 65 }}>
+        <Label
+          style={{
+            color: this.state.labelColor,
+            padding: 0,
+            fontSize: 14,
+            marginLeft: 4
+          }}
+        >
+          {this.props.required && <Text style={styles.required}>*</Text>}
+          <Text style={[styles.labelText, { color: this.state.labelColor }]}>
+            {this.props.label}
+          </Text>
+        </Label>
         <Picker
           iosHeader="Select Gender"
           mode="dropdown"
@@ -46,7 +70,7 @@ class PickerAtom extends React.Component<IProps, IState> {
             />
           }
           style={{
-            height: 35,
+            height: 50,
             borderBottomWidth: 1,
             borderBottomColor: color.textBorderBottom,
             marginBottom: 8,
@@ -77,5 +101,17 @@ class PickerAtom extends React.Component<IProps, IState> {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  labelText: {
+    fontFamily: 'SourceSansPro',
+    padding: 0,
+    fontSize: 16
+  },
+  required: {
+    color: color.inactive,
+    fontSize: 14
+  }
+});
 
 export default PickerAtom;

@@ -79,6 +79,7 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
                   getValue={val => this.updateState('name', val)}
                   contStyle={styles.inputWrapper}
                   defaultValue={this.state.name}
+                  placeholder="e.g Human Hair dressing"
                 />
               </View>
               <View style={styles.inputView}>
@@ -88,6 +89,7 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
                   contStyle={styles.inputWrapper}
                   defaultValue={this.state.price}
                   keyboardType="numeric"
+                  placeholder="e.g 5,000"
                 />
               </View>
             </View>
