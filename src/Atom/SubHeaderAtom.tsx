@@ -29,7 +29,11 @@ class SubHeaderAtom extends React.Component<IProps, any> {
           <View style={styles.pickerWrapper}>
             <PickerAtom
               list={this.props.list}
-              style={styles.pickerStyle}
+              pickerStyle={{
+                paddingRight: 10,
+                alignSelf: 'flex-start'
+              }}
+              width="100%"
               placeholder="Make a selection"
             />
           </View>
@@ -72,12 +76,6 @@ const styles = StyleSheet.create({
   subHeaderIconColor: {
     color: color.check,
     marginLeft: 10
-  },
-  pickerStyle: {
-    width: '100%',
-    height: 35,
-    paddingRight: 10,
-    alignSelf: 'flex-start'
   },
   pickerWrapper: {
     borderWidth: 1,
