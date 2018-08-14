@@ -29,6 +29,7 @@ class SigupForm extends PureComponent<IProps, IState> {
       <Form>
         <InputAtom
           label="Full name"
+          placeholder="e.g John Doe"
           contStyle={styles.nameInput}
           defaultValue={this.props.name}
           getValue={val => this.props.onUpdateState('name', val)}
@@ -43,21 +44,23 @@ class SigupForm extends PureComponent<IProps, IState> {
         />
 
         <InputAtom
-          label="Email Address"
+          label="Email"
           contStyle={styles.input}
           defaultValue={this.props.email}
           getValue={val => this.props.onUpdateState('email', val)}
           inputStyle={styles.elevateInput}
           required={true}
           error={fieldErrors && fieldErrors['email']}
+          placeholder="e.g lagbaja@example.com"
         />
 
         <View style={styles.pickerWrapper}>
           <PickerAtom
-            list={['male', 'female']}
+            list={['MALE', 'FEMALE']}
             placeholder="*Gender"
-            selected={this.props.gender}
+            selected={this.props.gender || 'FEMALE'}
             handleSelection={val => this.props.onUpdateState('gender', val)}
+            label="Gender"
           />
         </View>
         {fieldErrors &&
@@ -76,10 +79,11 @@ class SigupForm extends PureComponent<IProps, IState> {
           inputStyle={styles.elevateInput}
           required={true}
           error={fieldErrors && fieldErrors['password']}
+          placeholder="Enter your super secret password"
         />
 
         <InputAtom
-          label="Reenter-password"
+          label="Password Confirmation"
           secureTextEntry={true}
           contStyle={styles.reenter}
           defaultValue={this.props.passwordConfirmation}
@@ -89,6 +93,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           inputStyle={styles.elevateInput}
           required={true}
           error={fieldErrors && fieldErrors['passwordConfirmation']}
+          placeholder="Please Re-Type Password"
         />
 
         <TouchableOpacity
@@ -141,7 +146,6 @@ const styles = StyleSheet.create({
   pickerWrapper: {
     marginTop: 16,
     width: '50%',
-    opacity: 0.5,
     marginBottom: 5
   },
   nextButtonContainer: {

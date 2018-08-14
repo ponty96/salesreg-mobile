@@ -40,7 +40,7 @@ class InputAtom extends React.Component<IProps, IState> {
 
   state = {
     bottomColor: color.textBorderBottom,
-    labelColor: color.inactive
+    labelColor: color.blueLabelColor
   };
 
   changeUnderline = (newColor: string): void => {
@@ -57,8 +57,8 @@ class InputAtom extends React.Component<IProps, IState> {
     return (
       <View>
         <Item
-          floatingLabel={this.props.floatingLabel}
-          stackedLabel={!this.props.floatingLabel}
+          // floatingLabel={this.props.floatingLabel}
+          stackedLabel={true}
           style={[
             { borderBottomColor: this.state.bottomColor, marginTop: 0 },
             this.props.contStyle
@@ -67,7 +67,7 @@ class InputAtom extends React.Component<IProps, IState> {
           <Label
             style={{
               color: this.state.labelColor,
-              padding: 3,
+              padding: 0,
               fontSize: 14
             }}
           >
@@ -117,8 +117,9 @@ class InputAtom extends React.Component<IProps, IState> {
           {this.props.error || this.props.underneathText}
         </Text>
       );
+    } else {
+      return null;
     }
-    return <Text />;
   };
 }
 
@@ -126,14 +127,12 @@ export default InputAtom;
 
 const styles = StyleSheet.create({
   label: {
-    // color: this.state.labelColor,
     padding: 3,
     fontSize: 16
   },
   labelText: {
-    // color: this.state.labelColor,
     fontFamily: 'SourceSansPro',
-    padding: 3,
+    padding: 0,
     fontSize: 16
   },
   required: {
@@ -144,7 +143,7 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     color: color.principal,
     fontSize: 12,
-    marginBottom: 25,
+    marginBottom: 0,
     marginTop: 2,
     paddingLeft: 8
   },
@@ -152,6 +151,7 @@ const styles = StyleSheet.create({
     color: color.principal,
     fontSize: 16,
     paddingBottom: 0,
-    top: 6
+    top: 6,
+    lineHeight: 0
   }
 });

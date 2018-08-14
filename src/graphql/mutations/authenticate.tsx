@@ -21,6 +21,18 @@ export const LoginUserMutationGQL = gql`
             dateOfBirth
             gender
             profilePicture
+            phone {
+              type
+              number
+            }
+            location {
+              id
+              city
+              country
+              state
+              street1
+              type
+            }
             company {
               id
               title

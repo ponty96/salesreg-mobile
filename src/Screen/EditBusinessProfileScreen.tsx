@@ -148,6 +148,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                     defaultValue={this.state.title}
                     getValue={val => this.updateState('title', val)}
                     error={fieldErrors && fieldErrors['title']}
+                    placeholder="Enter the Name of your Business"
                   />
                   <InputAtom
                     label="Email Address"
@@ -155,6 +156,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                     getValue={val => this.updateState('contactEmail', val)}
                     keyboardType="email-address"
                     error={fieldErrors && fieldErrors['contactEmail']}
+                    placeholder="Enter the your business email"
                   />
                 </FormContainerAtom>
                 <FormAddressSection
