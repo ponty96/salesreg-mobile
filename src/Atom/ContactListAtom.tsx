@@ -1,34 +1,35 @@
-import * as React from 'react'
-import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base'
-import { StyleSheet } from 'react-native'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
+import { StyleSheet } from 'react-native';
+import { color } from '../Style/Color';
 
 interface IProps {
-  items?: { images: string; customerName: string; amount: any }
-  latestAmount: string
-  realStyle: string
-  onPress: () => void
+  latestAmount: string;
+  realStyle: string;
+  onPress: () => void;
+  image: string;
+  customerName: string;
+  amount: any;
 }
 
-class CustomerListAtom extends React.Component<IProps, any> {
+class ContactListAtom extends React.Component<IProps, any> {
   render() {
     const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
-    const avatar =
-      this.props.items.images !== '' ? this.props.items.images : defaultImg
-    let paid = 'paid'
-    let balance = 'balance'
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
+    const avatar = this.props.image !== '' ? this.props.image : defaultImg;
+    let paid = 'paid';
+    let balance = 'balance';
     return (
       <ListItem style={styles.row} onPress={this.props.onPress}>
         <Left style={styles.view1}>
           <Thumbnail source={{ uri: avatar }} style={styles.dp} />
         </Left>
         <Body style={styles.view2}>
-          <Text style={styles.rowText1}>{this.props.items.customerName}</Text>
+          <Text style={styles.rowText1}>{this.props.customerName}</Text>
         </Body>
         <Right style={styles.view3}>
           <Text style={styles.text1}>
-            {'\u20A6'} {this.props.items.amount}
+            {'\u20A6'} {this.props.amount}
           </Text>
           <Text
             style={[
@@ -44,11 +45,11 @@ class CustomerListAtom extends React.Component<IProps, any> {
           </Text>
         </Right>
       </ListItem>
-    )
+    );
   }
 }
 
-export default CustomerListAtom
+export default ContactListAtom;
 
 const styles = StyleSheet.create({
   row: {
@@ -121,4 +122,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'rgba(218,11,11,59)'
   }
-})
+});

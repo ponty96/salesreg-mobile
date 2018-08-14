@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import FabAtom from '../Atom/FabAtom'
-import CustomerList from '../Components/CustomerList'
-import { color } from '../Style/Color'
-import { customerList } from '../config/data'
-import CustomHeader from '../Components/CustomHeader'
+import FabAtom from '../Atom/FabAtom';
+import ContactList from '../Components/ContactList';
+import { color } from '../Style/Color';
+import { customerList } from '../config/data';
+import CustomHeader from '../Components/CustomHeader';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 class CustomerScreen extends Component<IProps> {
@@ -24,21 +24,21 @@ class CustomerScreen extends Component<IProps> {
           onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
-    }
-  }
+    };
+  };
 
   onPress = () => {
-    this.props.navigation.navigate('CustomerDetails')
-  }
+    this.props.navigation.navigate('CustomerDetails');
+  };
 
   render() {
     // const { params } = this.props.navigation.state
     // const items = params.data.customers
-    const items = this.props.navigation.getParam(customerList)
+    const items = this.props.navigation.getParam(customerList);
 
     return (
       <View style={styles.centerContainer}>
-        <CustomerList
+        <ContactList
           items={items}
           onPress={this.onPress}
           screenType="customer"
@@ -49,11 +49,11 @@ class CustomerScreen extends Component<IProps> {
           navigation={this.props.navigation}
         />
       </View>
-    )
+    );
   }
 }
 
-export default CustomerScreen
+export default CustomerScreen;
 
 const styles = StyleSheet.create({
   centerContainer: {
@@ -67,4 +67,4 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 28
   }
-})
+});

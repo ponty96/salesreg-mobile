@@ -1,14 +1,14 @@
-import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import FabAtom from '../Atom/FabAtom'
-import CustomerList from '../Components/CustomerList'
-import { color } from '../Style/Color'
-import { customerList } from '../config/data'
-import CustomHeader from '../Components/CustomHeader'
+import FabAtom from '../Atom/FabAtom';
+import ContactList from '../Components/ContactList';
+import { color } from '../Style/Color';
+import { customerList } from '../config/data';
+import CustomHeader from '../Components/CustomHeader';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {}
@@ -26,35 +26,31 @@ class VendorScreen extends Component<IProps, IState> {
           firstRightIcon="ios-search"
         />
       )
-    }
-  }
+    };
+  };
   onPress = () => {
-    this.props.navigation.navigate('VendorDetails')
-  }
+    this.props.navigation.navigate('VendorDetails');
+  };
 
   render() {
     // const { params } = this.props.navigation.state
     // const items = params.data.customers
-    const items = this.props.navigation.getParam(customerList)
+    const items = this.props.navigation.getParam(customerList);
 
     return (
       <View style={styles.centerContainer}>
-        <CustomerList
-          items={items}
-          onPress={this.onPress}
-          screenType="vendor"
-        />
+        <ContactList items={items} onPress={this.onPress} screenType="vendor" />
         <FabAtom
           routeName={'NewVendor'}
           name={'md-person-add'}
           navigation={this.props.navigation}
         />
       </View>
-    )
+    );
   }
 }
 
-export default VendorScreen
+export default VendorScreen;
 
 const styles = StyleSheet.create({
   centerContainer: {
@@ -63,4 +59,4 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     backgroundColor: color.secondary
   }
-})
+});

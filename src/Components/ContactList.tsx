@@ -1,43 +1,45 @@
-import React, { Component } from 'react'
-import { View, FlatList, ScrollView, StyleSheet } from 'react-native'
-import CustomerListAtom from '../Atom/CustomerListAtom'
-import SubHeaderAtom from '../Atom/SubHeaderAtom'
-import { customerList } from '../config/data'
-import EmptyList from './EmptyList'
+import React, { Component } from 'react';
+import { View, FlatList, ScrollView, StyleSheet } from 'react-native';
+import ContactListAtom from '../Atom/ContactListAtom';
+import SubHeaderAtom from '../Atom/SubHeaderAtom';
+import { customerList } from '../config/data';
+import EmptyList from './EmptyList';
 
 interface IProps {
-  items: any[]
-  onPress: () => void
-  screenType: string
+  items: any[];
+  onPress: () => void;
+  screenType: string;
 }
 
 interface IState {}
 
-class CustomerList extends Component<IProps, IState> {
+class ContactList extends Component<IProps, IState> {
   renderItem = ({ item }: any) => {
     let latestAmount =
       item.status === 'paid'
         ? item.debt
         : item.status === 'balance'
           ? item.balance
-          : item.debt
-    let realStyle
+          : item.debt;
+    let realStyle;
     if (item.status === 'paid') {
-      realStyle = 'paid'
+      realStyle = 'paid';
     } else if (item.status === 'balance') {
-      realStyle = 'balance'
+      realStyle = 'balance';
     } else {
-      realStyle = 'debt'
+      realStyle = 'debt';
     }
     return (
-      <CustomerListAtom
-        items={item}
+      <ContactListAtom
+        image={item.image}
+        customerName={item.customerName}
+        amount={item.amount}
         latestAmount={latestAmount}
         realStyle={realStyle}
         onPress={this.props.onPress}
       />
-    )
-  }
+    );
+  };
 
   render() {
     return (
@@ -66,11 +68,11 @@ class CustomerList extends Component<IProps, IState> {
           />
         </ScrollView>
       </View>
-    )
+    );
   }
 }
 
-export default CustomerList
+export default ContactList;
 
 const styles = StyleSheet.create({
   customerListContainer: {
@@ -78,4 +80,4 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%'
   }
-})
+});
