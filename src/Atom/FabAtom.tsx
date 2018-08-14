@@ -1,9 +1,9 @@
 import * as React from 'react'
 import { Icon, Fab } from 'native-base'
 import { StyleSheet } from 'react-native'
-import { color } from './../Style/Color'
+import { color } from '../Style/Color'
 
-const fabAtom = (props: any) => (
+const FabAtom = (props: any) => (
   <Fab
     position="bottomRight"
     style={styles.fab}
@@ -18,10 +18,11 @@ const fabAtom = (props: any) => (
   </Fab>
 )
 
-export default fabAtom
+export default FabAtom
 
 const styles = StyleSheet.create({
   fab: {
-    backgroundColor: color.button
+    backgroundColor: color.button,
+    zIndex: 1
   }
 })

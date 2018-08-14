@@ -1,23 +1,23 @@
-import { StyleSheet, View, Text } from 'react-native';
-import React from 'react';
-import { Left, Right, Button, Icon, Title } from 'native-base';
-import { color } from '../Style/Color';
+import { Button, Icon, Left, Right, Title } from 'native-base'
+import React from 'react'
+import { StyleSheet, Text, View } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
-  showMenu?: boolean;
-  title: string;
-  firstRightIcon?: string;
-  firstRightIconType?: any;
-  rightText?: string;
-  onBackPress?: () => void;
-  onMenuPress?: () => void;
-  onPressFirstRightIcon?: () => void;
-  onPressRightButton?: () => void;
-  navigation?: object;
-  showRight?: boolean;
+  showMenu?: boolean
+  title: string
+  firstRightIcon?: string
+  firstRightIconType?: any
+  rightText?: string
+  onBackPress?: () => void
+  onMenuPress?: () => void
+  onPressFirstRightIcon?: () => void
+  onPressRightButton?: () => void
+  navigation?: object
+  showRight?: boolean
 }
 
-const customHeader = (props: IProps) => {
+const CustomHeader = (props: IProps) => {
   return (
     <View style={styles.wrapper}>
       <Left style={styles.headerItemWrapper}>
@@ -43,7 +43,7 @@ const customHeader = (props: IProps) => {
         <Right style={styles.headerItemWrapper}>
           {props.rightText ? (
             <Button
-              transparent
+              transparent={true}
               onPress={props.onPressRightButton}
               style={styles.rightWrapper}
             >
@@ -69,10 +69,10 @@ const customHeader = (props: IProps) => {
         <Right />
       )}
     </View>
-  );
-};
+  )
+}
 
-export default customHeader;
+export default CustomHeader
 
 const styles = StyleSheet.create({
   headerIcon: {
@@ -120,4 +120,4 @@ const styles = StyleSheet.create({
     width: 25,
     left: 20
   }
-});
+})

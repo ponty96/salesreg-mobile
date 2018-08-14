@@ -5,17 +5,19 @@ import InputAtom from '../Atom/InputAtom';
 import ButtonAtom from '../Atom/ButtonAtom';
 import { color } from '../Style/Color';
 import PickerAtom from '../Atom/PickerAtom';
+import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
 
 interface IProps {
   navigation: any;
   onSubmit: () => void;
   onUpdateState?: (key: string, val: any) => void;
   businessName: string;
-  businessAddress: string;
+  businessAddress?: string;
   businessEmail: string;
   products: boolean;
   services: boolean;
   currency: string;
+  fieldErrors: any;
 }
 
 interface IState {}
@@ -27,6 +29,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
   };
 
   render() {
+    const { fieldErrors } = this.props;
     return (
       <Form style={styles.resetFormContainer}>
         <InputAtom
@@ -35,16 +38,8 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           getValue={name => this.props.onUpdateState('businessName', name)}
           contStyle={styles.marginlessInput}
           required={true}
-        />
-
-        <InputAtom
-          label="Business address"
-          defaultValue={this.props.businessAddress}
-          getValue={address =>
-            this.props.onUpdateState('businessAddress', address)
-          }
-          contStyle={styles.marginlessInput}
-          required={true}
+          error={fieldErrors && fieldErrors['title']}
+          placeholder="e.g MayAfriq"
         />
 
         <InputAtom
@@ -56,6 +51,8 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
           required={true}
+          error={fieldErrors && fieldErrors['contactEmail']}
+          placeholder="e.g info@mayafriq.com"
         />
 
         <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
@@ -88,20 +85,22 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             Services(Service providers)
           </Text>
         </View>
-
-        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
-          Transaction currency
-        </Text>
         <View style={styles.pickerWrapper}>
           <PickerAtom
             list={['Naira(\u20A6)']}
-            placeholder={`Naira(\u20A6)`}
+            placeholder={`e.g Naira(\u20A6)`}
+            label="Transaction Currency"
             selected={this.props.currency}
             handleSelection={currency =>
               this.props.onUpdateState('currency', currency)
             }
           />
         </View>
+
+        {fieldErrors &&
+          fieldErrors['currency'] && (
+            <FormErrorTextAtom errorText={fieldErrors['currency']} />
+          )}
         <View style={styles.buttonsWrapper}>
           <ButtonAtom
             btnText="SIGN UP"
@@ -171,10 +170,8 @@ const styles = StyleSheet.create({
     color: color.principal
   },
   pickerWrapper: {
-    borderBottomColor: color.inactive,
-    borderBottomWidth: 1,
+    marginTop: 28,
     width: '60%',
-    opacity: 0.5,
     marginBottom: 16
   },
   placeholderColor: {

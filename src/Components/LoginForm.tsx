@@ -9,6 +9,7 @@ interface IProps {
   navigation: any;
   onSubmit?: (params: any) => void;
   loading?: boolean;
+  fieldErrors: any;
 }
 
 interface IState {
@@ -47,14 +48,17 @@ class LoginForm extends PureComponent<IProps, IState> {
   };
 
   render() {
+    const { fieldErrors } = this.props;
     return (
       <Form>
         <InputAtom
-          label="Email Address"
+          label="Email"
           getValue={this.getEmail}
           contStyle={styles.input}
           inputStyle={styles.elevateInput}
           login={true}
+          error={fieldErrors && fieldErrors.email}
+          placeholder="e.g lagbaja@example.com"
         />
 
         <InputAtom
@@ -66,6 +70,8 @@ class LoginForm extends PureComponent<IProps, IState> {
           underneathStyle={styles.underneathText}
           inputStyle={styles.elevateInput}
           login={true}
+          error={fieldErrors && fieldErrors.password}
+          placeholder="your secret password"
         />
 
         <ButtonAtom
