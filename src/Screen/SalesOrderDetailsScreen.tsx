@@ -102,6 +102,7 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           onBackPress={() => this.setState({ visible: false })}
           onPressTopButton={() => this.handleContinuePress()}
           onPressBottomButton={() => this.handleDontCancelPress()}
+          footerText="Close"
         />
       )
     else
@@ -116,6 +117,7 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           onBackPress={() => this.setState({ visible: false })}
           onPressTopButton={() => this.handleContinuePress}
           onPressBottomButton={() => this.handleDontCancelPress}
+          footerText="Close"
         />
       )
   }

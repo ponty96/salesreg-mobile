@@ -18,6 +18,7 @@ interface IState {
   date?: string
   totalAmount?: string
   visible?: boolean
+  excessFormContainer?: any
 }
 
 export default class NewExpensesScreen extends Component<IProps, IState> {
@@ -36,7 +37,9 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
     expense: '',
     date: '',
     totalAmount: '',
-    visible: false
+    visible: false,
+    paidBy: '',
+    excessFormContainer: [<View key={0} />]
   }
 
   updateState = (key: string, value: any) => {
@@ -47,8 +50,53 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
     alert('OK button pressed.')
   }
 
+  additionalElement: Array<JSX.Element> = []
+  index: number = 0
+
   render() {
     const { navigation } = this.props
+    const { excessFormContainer } = this.state
+    const element = (index: number): JSX.Element => {
+      return (
+        <FormContainerAtom style={styles.formWrapper} key={this.index}>
+          <Text
+            style={styles.closeSign}
+            onPress={() => {
+              this.setState({
+                excessFormContainer: this.additionalElement
+              })
+              this.additionalElement.splice(index, 1)
+            }}
+          >
+            &times;
+          </Text>
+          <InputAtom
+            getValue={val => this.updateState('added', val)}
+            inputStyle={{ paddingBottom: 0 }}
+          />
+          <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
+            <Text
+              style={[
+                textStyles.normalText,
+                textStyles.blueText,
+                styles.leftLabel
+              ]}
+            >
+              Amount
+              {'(\u20A6)'}
+            </Text>
+            <View style={[styles.picker, styles.lastInputWrapper]}>
+              <InputAtom
+                getValue={val => this.updateState('amount', val)}
+                keyboardType="numeric"
+                contStyle={styles.paidbyInput}
+              />
+            </View>
+          </View>
+        </FormContainerAtom>
+      )
+    }
+
     return (
       <View style={styles.container}>
         <ScrollView>
@@ -104,7 +152,7 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
               </View>
             </View>
             <InputAtom
-              getValue={val => this.updateState('taxRate', val)}
+              getValue={val => this.updateState('paidTo', val)}
               label="Paid to"
               inputStyle={{ paddingBottom: 0 }}
             />
@@ -120,13 +168,16 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
               </Text>
               <View style={[styles.picker, styles.lastInputWrapper]}>
                 <InputAtom
-                  getValue={val => this.updateState('amountPaid', val)}
+                  getValue={val => this.updateState('paidBy', val)}
                   label="Owner's name default"
                   contStyle={styles.paidbyInput}
                 />
               </View>
             </View>
           </FormContainerAtom>
+          {excessFormContainer.map(item => {
+            return item
+          })}
           <Text
             style={[
               textStyles.bigText,
@@ -134,7 +185,13 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
               textStyles.boldText,
               styles.textToAdd
             ]}
-            onPress={() => alert('Add split pressed.')}
+            onPress={() => {
+              this.additionalElement.push(element(this.index))
+              this.setState({
+                excessFormContainer: this.additionalElement
+              })
+              this.index++
+            }}
           >
             + Add split
           </Text>
@@ -219,5 +276,9 @@ const styles = StyleSheet.create({
   },
   modalContainer: {
     top: 360
+  },
+  closeSign: {
+    textAlign: 'right',
+    fontSize: 30
   }
 })
