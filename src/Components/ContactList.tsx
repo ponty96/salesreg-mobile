@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { View, FlatList, ScrollView, StyleSheet } from 'react-native';
 import ContactListAtom from '../Atom/ContactListAtom';
 import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import { customerList } from '../config/data';
 import EmptyList from './EmptyList';
 
 interface IProps {
@@ -15,27 +14,15 @@ interface IState {}
 
 class ContactList extends Component<IProps, IState> {
   renderItem = ({ item }: any) => {
-    let latestAmount =
-      item.status === 'paid'
-        ? item.debt
-        : item.status === 'balance'
-          ? item.balance
-          : item.debt;
-    let realStyle;
-    if (item.status === 'paid') {
-      realStyle = 'paid';
-    } else if (item.status === 'balance') {
-      realStyle = 'balance';
-    } else {
-      realStyle = 'debt';
-    }
+    let latestAmount = item.status === 'balance' ? item.balance : item.debt;
     return (
       <ContactListAtom
+        key={item.id}
         image={item.image}
         customerName={item.customerName}
         amount={item.amount}
         latestAmount={latestAmount}
-        realStyle={realStyle}
+        realStyle={item.status}
         onPress={this.props.onPress}
       />
     );
@@ -45,7 +32,7 @@ class ContactList extends Component<IProps, IState> {
     return (
       <View style={styles.customerListContainer}>
         <SubHeaderAtom
-          total="250"
+          total={this.props.items.length}
           list={[
             'Highest Purchase',
             'Lowest Purchase',
@@ -58,7 +45,7 @@ class ContactList extends Component<IProps, IState> {
         />
         <ScrollView>
           <FlatList
-            data={customerList}
+            data={this.props.items}
             renderItem={this.renderItem}
             ListEmptyComponent={
               <EmptyList

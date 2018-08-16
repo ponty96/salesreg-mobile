@@ -14,15 +14,10 @@ interface IProps {
 
 class ContactListAtom extends React.Component<IProps, any> {
   render() {
-    const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
-    const avatar = this.props.image !== '' ? this.props.image : defaultImg;
-    let paid = 'paid';
-    let balance = 'balance';
     return (
       <ListItem style={styles.row} onPress={this.props.onPress}>
         <Left style={styles.view1}>
-          <Thumbnail source={{ uri: avatar }} style={styles.dp} />
+          <Thumbnail source={{ uri: this.props.image }} style={styles.dp} />
         </Left>
         <Body style={styles.view2}>
           <Text style={styles.rowText1}>{this.props.customerName}</Text>
@@ -31,16 +26,7 @@ class ContactListAtom extends React.Component<IProps, any> {
           <Text style={styles.text1}>
             {'\u20A6'} {this.props.amount}
           </Text>
-          <Text
-            style={[
-              styles.lilFont,
-              this.props.realStyle === paid
-                ? styles.paid
-                : this.props.realStyle === balance
-                  ? styles.balance
-                  : styles.debt
-            ]}
-          >
+          <Text style={[styles.lilFont, styles[this.props.realStyle]]}>
             {this.props.latestAmount}
           </Text>
         </Right>

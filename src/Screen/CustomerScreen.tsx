@@ -4,14 +4,22 @@ import { View, StyleSheet } from 'react-native';
 import FabAtom from '../Atom/FabAtom';
 import ContactList from '../Components/ContactList';
 import { color } from '../Style/Color';
-import { customerList } from '../config/data';
 import CustomHeader from '../Components/CustomHeader';
+
+import { CompanyCustomersGQL } from '../graphql/queries/contact';
+import { Query } from 'react-apollo';
+import AppSpinner from '../Components/Spinner';
+import Auth from '../services/auth';
 
 interface IProps {
   navigation: any;
 }
 
-class CustomerScreen extends Component<IProps> {
+interface IState {
+  companyId: string;
+}
+
+class CustomerScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -27,28 +35,47 @@ class CustomerScreen extends Component<IProps> {
     };
   };
 
+  state = {
+    companyId: ''
+  };
+
   onPress = () => {
     this.props.navigation.navigate('CustomerDetails');
   };
 
-  render() {
-    // const { params } = this.props.navigation.state
-    // const items = params.data.customers
-    const items = this.props.navigation.getParam(customerList);
+  componentDidMount() {
+    this.updateState();
+  }
+  updateState = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser());
+    this.setState({
+      companyId: user.company.id
+    });
+  };
 
+  render() {
     return (
-      <View style={styles.centerContainer}>
-        <ContactList
-          items={items}
-          onPress={this.onPress}
-          screenType="customer"
-        />
-        <FabAtom
-          routeName={'NewCustomer'}
-          name={'md-person-add'}
-          navigation={this.props.navigation}
-        />
-      </View>
+      <Query
+        query={CompanyCustomersGQL}
+        variables={{ companyId: this.state.companyId }}
+        fetchPolicy="cache-and-network"
+      >
+        {({ loading, data }) => (
+          <View style={styles.centerContainer}>
+            <AppSpinner visible={loading} />
+            <ContactList
+              items={data.companyCustomers || []}
+              onPress={this.onPress}
+              screenType="customer"
+            />
+            <FabAtom
+              routeName={'NewCustomer'}
+              name={'md-person-add'}
+              navigation={this.props.navigation}
+            />
+          </View>
+        )}
+      </Query>
     );
   }
 }
