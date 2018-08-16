@@ -1,52 +1,36 @@
-import React, { Component } from 'react'
-import DetailsList from '../Components/DetailsList'
+import React, { Component } from 'react';
+import DetailsList from '../Components/DetailsList';
 
 interface IProps {
-  navigation: any
+  navigation: any;
+  customer: any;
+  screenProps: any;
 }
-
-interface IState {
-  list: any
-}
-
-class CustomerTabDetailsScreen extends Component<IProps, IState> {
-  state = {
-    // item: this.props.navigation.state.params.data
-    list: [
+class CustomerTabDetailsScreen extends Component<IProps> {
+  getCustomerDetails = () => {
+    const {
+      screenProps: { customer }
+    } = this.props;
+    return [
+      { section: 'Email', value: customer.email },
       {
         section: 'Phone',
-        value: '09034567889'
+        value: customer && customer.phone ? customer.phone.number : ''
       },
+      { section: 'Fax', value: customer.fax || '' },
       {
-        section: 'Email',
-        value: 'ayo@gmail.com'
-      },
-      {
-        section: 'Home Address',
-        value: 'No 12 Sura Mogaji street, Ilupeju, Lagos'
-      },
-      {
-        section: 'Currency',
-        value: '\u20A6 Nigerian Naira'
-      },
-      {
-        section: 'Label 5',
-        value: 'Content 5'
-      },
-      {
-        section: 'Label 6',
-        value: 'Content 6'
-      },
-      {
-        section: 'Label 7',
-        value: 'Content 7'
+        section: 'Address',
+        value: customer.officeAdd
+          ? `${customer.officeAdd.street1} ${customer.officeAdd.city} ${
+              customer.officeAdd.state
+            } ${customer.officeAdd.country}`
+          : ''
       }
-    ]
-  }
-
+    ];
+  };
   render() {
-    return <DetailsList list={this.state.list} />
+    return <DetailsList list={this.getCustomerDetails()} />;
   }
 }
 
-export default CustomerTabDetailsScreen
+export default CustomerTabDetailsScreen;

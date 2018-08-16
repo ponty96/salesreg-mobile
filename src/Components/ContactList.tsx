@@ -6,7 +6,7 @@ import EmptyList from './EmptyList';
 
 interface IProps {
   items: any[];
-  onPress: () => void;
+  onPress: (customer?: any) => void;
   screenType: string;
 }
 
@@ -23,7 +23,7 @@ class ContactList extends Component<IProps, IState> {
         amount={item.amount}
         latestAmount={latestAmount}
         realStyle={item.status}
-        onPress={this.props.onPress}
+        onPress={() => this.props.onPress(item)}
       />
     );
   };

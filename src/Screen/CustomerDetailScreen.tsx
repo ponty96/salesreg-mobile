@@ -1,37 +1,14 @@
-import React, { PureComponent } from 'react'
-import { View } from 'react-native'
-import AboveCustomerDetailsAtom from '../Atom/AboveCustomerDetailsAtom'
-import InnerTabAtom from '../Atom/CustomerInnerTabAtom'
-import CustomHeader from '../Components/CustomHeader'
+import React, { PureComponent } from 'react';
+import { View } from 'react-native';
+import AboveCustomerDetailsAtom from '../Atom/AboveCustomerDetailsAtom';
+import InnerTabAtom from '../Atom/CustomerInnerTabAtom';
+import CustomHeader from '../Components/CustomHeader';
 
 interface IProps {
-  navigation?: any
+  navigation?: any;
 }
 
-interface IState {
-  item: any
-  modalVisibility: boolean
-}
-
-class CustomerDetailScreen extends PureComponent<IProps, IState> {
-  state = {
-    item: {
-      image:
-        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7',
-      name: 'Salomy',
-      purchaseMade: '46,000.00',
-      credit: '10,000.00',
-      phoneNumber: '09034567889, 08067654323',
-      address: '6 Salem street Morogbo, Lagos',
-      email: 'salosalo@gmail.com',
-      birthday: '03 March',
-      marriageAniversary: '25 November',
-      creditLimit: '7000.00',
-      wallet: '0.00'
-    },
-    modalVisibility: false
-  }
-
+class CustomerDetailScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -45,22 +22,24 @@ class CustomerDetailScreen extends PureComponent<IProps, IState> {
           onPressRightButton={() => navigation.navigate('NewCustomer')}
         />
       )
-    }
-  }
+    };
+  };
 
   render() {
+    const customer = this.props.navigation.getParam('customer');
     return (
       <View style={{ flex: 1 }}>
         <AboveCustomerDetailsAtom
-          customerName="Salomy"
+          customerName={customer.customerName}
           purchaseMade={43000}
           overDue={10000}
           redText="Overdue"
+          avatar={customer.image}
         />
-        <InnerTabAtom />
+        <InnerTabAtom screenProps={{ customer: customer }} />
       </View>
-    )
+    );
   }
 }
 
-export default CustomerDetailScreen
+export default CustomerDetailScreen;

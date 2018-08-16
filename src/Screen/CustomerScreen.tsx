@@ -39,8 +39,8 @@ class CustomerScreen extends Component<IProps, IState> {
     companyId: ''
   };
 
-  onPress = () => {
-    this.props.navigation.navigate('CustomerDetails');
+  onPress = customer => {
+    this.props.navigation.navigate('CustomerDetails', { customer });
   };
 
   componentDidMount() {

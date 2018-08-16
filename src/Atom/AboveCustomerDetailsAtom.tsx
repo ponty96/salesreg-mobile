@@ -1,14 +1,15 @@
-import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Thumbnail, Icon } from 'native-base'
-import { color } from '../Style/Color'
-import { numberWithCommas } from '../Functions/numberWithCommas'
+import React from 'react';
+import { View, Text, StyleSheet } from 'react-native';
+import { Thumbnail, Icon } from 'native-base';
+import { color } from '../Style/Color';
+import { numberWithCommas } from '../Functions/numberWithCommas';
 
 interface IProps {
-  customerName: string
-  purchaseMade: number
-  overDue: number
-  redText: string
+  customerName: string;
+  purchaseMade: number;
+  overDue: number;
+  redText: string;
+  avatar?: string;
 }
 
 export default class AboveCustomerDetailsAtom extends React.Component<
@@ -16,11 +17,11 @@ export default class AboveCustomerDetailsAtom extends React.Component<
   any
 > {
   makeCall = () => {
-    console.log('trying to make call')
-  }
+    console.log('trying to make call');
+  };
   sendEmail = () => {
-    console.log('sending an email')
-  }
+    console.log('sending an email');
+  };
   render() {
     return (
       <View>
@@ -28,8 +29,7 @@ export default class AboveCustomerDetailsAtom extends React.Component<
           <View style={styles.pictureView}>
             <Thumbnail
               source={{
-                uri:
-                  'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+                uri: this.props.avatar
               }}
               style={{ marginBottom: 8 }}
             />
@@ -38,11 +38,13 @@ export default class AboveCustomerDetailsAtom extends React.Component<
           <View style={styles.textView}>
             <Text style={styles.greyFont}>Total purchase made</Text>
             <Text style={styles.blackFont}>
-              {'\u20A6'} {numberWithCommas(this.props.purchaseMade)}.00{' '}
+              {'\u20A6'} {numberWithCommas(this.props.purchaseMade)}
+              .00{' '}
             </Text>
             <Text style={styles.greyFont}>{this.props.redText}</Text>
             <Text style={styles.redFont}>
-              {'\u20A6'} {numberWithCommas(this.props.overDue)}.00
+              {'\u20A6'} {numberWithCommas(this.props.overDue)}
+              .00
             </Text>
           </View>
         </View>
@@ -61,7 +63,7 @@ export default class AboveCustomerDetailsAtom extends React.Component<
           </View>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -120,4 +122,4 @@ const styles = StyleSheet.create({
     fontSize: 16,
     fontFamily: 'SourceSansPro_Semibold'
   }
-})
+});
