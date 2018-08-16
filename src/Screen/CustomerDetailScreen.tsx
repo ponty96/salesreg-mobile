@@ -35,6 +35,7 @@ class CustomerDetailScreen extends PureComponent<IProps> {
           overDue={10000}
           redText="Overdue"
           avatar={customer.image}
+          customer={customer}
         />
         <InnerTabAtom screenProps={{ customer: customer }} />
       </View>

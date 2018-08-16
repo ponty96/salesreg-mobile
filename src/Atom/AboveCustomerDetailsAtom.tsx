@@ -1,5 +1,11 @@
 import React from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import {
+  View,
+  Text,
+  StyleSheet,
+  Linking,
+  TouchableWithoutFeedback
+} from 'react-native';
 import { Thumbnail, Icon } from 'native-base';
 import { color } from '../Style/Color';
 import { numberWithCommas } from '../Functions/numberWithCommas';
@@ -10,6 +16,7 @@ interface IProps {
   overDue: number;
   redText: string;
   avatar?: string;
+  customer?: any;
 }
 
 export default class AboveCustomerDetailsAtom extends React.Component<
@@ -17,10 +24,27 @@ export default class AboveCustomerDetailsAtom extends React.Component<
   any
 > {
   makeCall = () => {
-    console.log('trying to make call');
+    const { customer } = this.props;
+    const phoneNumber = customer.phone ? customer.phone.number : '';
+    const url = `tel:${phoneNumber}`;
+    Linking.canOpenURL(url).then(supported => {
+      console.log('make call supported', supported);
+      if (supported) {
+        Linking.openURL(url).catch(() => null);
+      }
+    });
   };
   sendEmail = () => {
-    console.log('sending an email');
+    const { customer } = this.props;
+    const url = `mailto://${customer.email}&subject=Hello${
+      customer.customerName
+    }`;
+    Linking.canOpenURL(url).then(supported => {
+      console.log('send email supported', supported);
+      if (supported) {
+        Linking.openURL(url).catch(() => null);
+      }
+    });
   };
   render() {
     return (
@@ -49,18 +73,18 @@ export default class AboveCustomerDetailsAtom extends React.Component<
           </View>
         </View>
         <View style={styles.callAndEmail}>
-          <View style={styles.innerCallAndEmail}>
-            <Icon name="md-call" style={styles.icon} />
-            <Text style={styles.cusName} onPress={this.makeCall}>
-              Make call
-            </Text>
-          </View>
-          <View style={styles.innerCallAndEmail}>
-            <Icon name="md-mail" style={styles.icon} />
-            <Text style={styles.cusName} onPress={this.sendEmail}>
-              Send email
-            </Text>
-          </View>
+          <TouchableWithoutFeedback onPress={this.makeCall}>
+            <View style={styles.innerCallAndEmail}>
+              <Icon name="md-call" style={styles.icon} />
+              <Text style={styles.cusName}>Make call</Text>
+            </View>
+          </TouchableWithoutFeedback>
+          <TouchableWithoutFeedback onPress={this.sendEmail}>
+            <View style={styles.innerCallAndEmail}>
+              <Icon name="md-mail" style={styles.icon} />
+              <Text style={styles.cusName}>Send email</Text>
+            </View>
+          </TouchableWithoutFeedback>
         </View>
       </View>
     );
