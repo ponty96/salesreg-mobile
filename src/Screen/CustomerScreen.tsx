@@ -69,7 +69,7 @@ class CustomerScreen extends Component<IProps, IState> {
               screenType="customer"
             />
             <FabAtom
-              routeName={'NewCustomer'}
+              routeName={'UpsertCustomer'}
               name={'md-person-add'}
               navigation={this.props.navigation}
             />

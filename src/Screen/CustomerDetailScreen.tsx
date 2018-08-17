@@ -19,7 +19,7 @@ class CustomerDetailScreen extends PureComponent<IProps> {
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
           onBackPress={() => navigation.goBack()}
-          onPressRightButton={() => navigation.navigate('NewCustomer')}
+          onPressRightButton={() => navigation.navigate('UpsertCustomer')}
         />
       )
     };

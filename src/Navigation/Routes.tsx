@@ -37,7 +37,7 @@ import UserProfileScreen from '../Screen/UserProfileScreen';
 import VendorDetailScreen from '../Screen/VendorDetailsScreen';
 import VendorScreen from '../Screen/VendorScreen';
 import LoginScreen from '../Screen/LoginScreen';
-import NewCustomerScreen from '../Screen/NewCustomerScreen';
+import UpsertCustomerScreen from '../Screen/UpsertCustomerScreen';
 import NewOrderScreen from '../Screen/NewOrderScreen';
 import UpsertProductScreen from '../Screen/UpsertProductScreen';
 import OnBoardingScreen from '../Screen/OnBoardingScreen';
@@ -148,8 +148,8 @@ const businessStack = StackNavigator(
     Customer: {
       screen: CustomerScreen
     },
-    NewCustomer: {
-      screen: NewCustomerScreen
+    UpsertCustomer: {
+      screen: UpsertCustomerScreen
     },
     NewVendor: {
       screen: NewVendorScreen
