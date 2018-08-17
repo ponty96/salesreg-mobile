@@ -10,7 +10,7 @@ interface IProps {
 }
 
 export default class InvoicesScreen extends React.Component<IProps> {
-  static navigationOptions = () => {
+  static navigationOptions = (): object => {
     return {
       header: (
         <CustomHeader
@@ -34,6 +34,12 @@ export default class InvoicesScreen extends React.Component<IProps> {
     }
   }
 
+  renderList = ({item}): JSX.Element => {
+      return(
+
+      )
+  }
+
   render() {
     const DATA: Array<{
       transactionID: string
@@ -46,11 +52,37 @@ export default class InvoicesScreen extends React.Component<IProps> {
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
         date: '04/11/2018'
+      },
+      {
+        transactionID: '#00023',
+        customerName: 'Lakan Wanton Doe',
+        price: '3000.00',
+        date: '04/11/2018'
+      },{
+        transactionID: '#00023',
+        customerName: 'Lakan Wanton Doe',
+        price: '3000.00',
+        date: '04/11/2018'
+      },{
+        transactionID: '#00023',
+        customerName: 'Lakan Wanton Doe',
+        price: '3000.00',
+        date: '04/11/2018'
+      },{
+        transactionID: '#00023',
+        customerName: 'Lakan Wanton Doe',
+        price: '3000.00',
+        date: '04/11/2018'
+      },{
+        transactionID: '#00023',
+        customerName: 'Lakan Wanton Doe',
+        price: '3000.00',
+        date: '04/11/2018'
       }
     ]
     return (
       <View style={styles.container}>
-        <FlatList />
+        <FlatList data={DATA} renderItem={this.renderList}/>
       </View>
     )
   }
