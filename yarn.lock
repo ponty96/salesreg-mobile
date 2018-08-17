@@ -6207,6 +6207,10 @@ react-native-modal-popover@^0.0.10:
     lodash.debounce "^4.0.8"
     prop-types "^15.6.0"
 
+react-native-popup-menu@0.9:
+  version "0.9.1"
+  resolved "https://registry.yarnpkg.com/react-native-popup-menu/-/react-native-popup-menu-0.9.1.tgz#9d6e3619aff437718e6baa9c48a277577bbeea00"
+
 react-native-safe-area-view@^0.7.0:
   version "0.7.0"
   resolved "https://registry.yarnpkg.com/react-native-safe-area-view/-/react-native-safe-area-view-0.7.0.tgz#38f5ab9368d6ef9e5d18ab64212938af3ec39421"

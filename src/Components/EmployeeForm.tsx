@@ -34,14 +34,14 @@ class EmployeeForm extends Component<IProps, IState> {
   }
   onPress = () => {
     if (this.state.newInput === undefined || this.state.newInput.length === 0) {
-      let object = this.state.newInput.concat([
+      const object = this.state.newInput.concat([
         { key: 0, placeHolder: 'Employee Email', name: '' }
       ])
       this.setState({ newInput: object })
     } else {
-      let array = this.state.newInput
-      let getLastElement = array[array.length - 1]
-      let innerKeyAddition = getLastElement.key + 1
+      const array = this.state.newInput
+      const getLastElement = array[array.length - 1]
+      const innerKeyAddition = getLastElement.key + 1
       this.setState({
         newInput: [
           ...this.state.newInput,
@@ -72,17 +72,17 @@ class EmployeeForm extends Component<IProps, IState> {
   }
   removeInput = (args: any) => {
     console.log(args)
-    let array = [...this.state.newInput]
+    const array = [...this.state.newInput]
     array.splice(args, 1)
     this.setState({ newInput: array })
-    let newState = Object.assign({}, this.state.newInput)
+    const newState = Object.assign({}, this.state.newInput)
     newState[args].name = ''
   }
   updateState = (key: string, value: any) => {
     this.setState({ [key]: value })
   }
   updateStateObj = (value: any, args: number) => {
-    let newState = Object.assign({}, this.state.newInput)
+    const newState = Object.assign({}, this.state.newInput)
     newState[args].name = value
   }
   render() {

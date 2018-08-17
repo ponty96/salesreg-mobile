@@ -15,6 +15,7 @@ interface IProps {
   onPressRightButton?: () => void
   navigation?: object
   showRight?: boolean
+  children?: any
 }
 
 const CustomHeader = (props: IProps) => {
@@ -62,6 +63,7 @@ const CustomHeader = (props: IProps) => {
                 style={[styles.headerIcon, styles.searchIcon]}
                 onPress={props.onPressFirstRightIcon}
               />
+              {props.children}
             </View>
           )}
         </Right>
