@@ -3,6 +3,7 @@ import { View, StyleSheet, Alert, FlatList } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 import { Icon } from 'native-base'
 import { color } from '../Style/Color'
+import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 // import { MenuTrigger, Menu } from 'react-native-popup-menu'
 
 interface IProps {
@@ -34,10 +35,15 @@ export default class InvoicesScreen extends React.Component<IProps> {
     }
   }
 
-  renderList = ({item}): JSX.Element => {
-      return(
-
-      )
+  renderList = ({ item }): JSX.Element => {
+    return (
+      <SalesOrderListAtom
+        firstTopLeftText={item.transactionID}
+        topRightText={item.price}
+        bottomLeftText={item.customerName}
+        bottomRightText={item.date}
+      />
+    )
   }
 
   render() {
@@ -58,22 +64,26 @@ export default class InvoicesScreen extends React.Component<IProps> {
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
         date: '04/11/2018'
-      },{
+      },
+      {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
         date: '04/11/2018'
-      },{
+      },
+      {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
         date: '04/11/2018'
-      },{
+      },
+      {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
         date: '04/11/2018'
-      },{
+      },
+      {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
@@ -82,7 +92,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
     ]
     return (
       <View style={styles.container}>
-        <FlatList data={DATA} renderItem={this.renderList}/>
+        <FlatList data={DATA} renderItem={this.renderList} />
       </View>
     )
   }
