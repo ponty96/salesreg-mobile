@@ -23,6 +23,17 @@ export const CompanyCustomersGQL = gql`
         type
         number
       }
+      dislikes
+      likes
+      maritalStatus
+      currency
+      birthday
+      bank {
+        accountBank
+        accountName
+        accountNumber
+        id
+      }
     }
   }
 `;

@@ -25,6 +25,14 @@ class CustomerTabDetailsScreen extends Component<IProps> {
               customer.officeAdd.state
             } ${customer.officeAdd.country}`
           : ''
+      },
+      { section: 'Currency', value: customer.currency },
+      { section: 'Martial Status', value: customer.maritalStatus },
+      { section: 'Birthday', value: customer.birthday },
+      { section: 'Likes', value: customer.likes && customer.likes.join(', ') },
+      {
+        section: 'Dis Likes',
+        value: customer.dislikes && customer.dislikes.join(', ')
       }
     ];
   };
