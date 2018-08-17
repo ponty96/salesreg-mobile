@@ -1,30 +1,30 @@
-import * as React from 'react';
-import { Item, Input, Label, Text } from 'native-base';
-import { View, StyleSheet } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { Item, Input, Label, Text } from 'native-base'
+import { View, StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
-  required?: boolean | false;
-  label?: string;
-  defaultValue?: string;
-  multiline?: boolean;
-  placeholder?: string;
-  floatingLabel?: boolean | true;
-  secureTextEntry?: boolean | false;
-  getValue?: (a: string | number) => void;
-  contStyle?: object | Array<any>;
-  inputStyle?: object;
-  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad';
-  underneathText?: string;
-  underneathStyle?: object;
-  maxLength?: number;
-  login?: boolean;
-  error?: any;
+  required?: boolean | false
+  label?: string
+  defaultValue?: string
+  multiline?: boolean
+  placeholder?: string
+  floatingLabel?: boolean | true
+  secureTextEntry?: boolean | false
+  getValue?: (a: string | number) => void
+  contStyle?: object | any
+  inputStyle?: object
+  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
+  underneathText?: string
+  underneathStyle?: object
+  maxLength?: number
+  login?: boolean
+  error?: any
 }
 
 interface IState {
-  bottomColor: string;
-  labelColor: string;
+  bottomColor: string
+  labelColor: string
 }
 
 class InputAtom extends React.Component<IProps, IState> {
@@ -36,22 +36,22 @@ class InputAtom extends React.Component<IProps, IState> {
     keyboardType: 'default',
     multiline: false,
     contStyle: { marginLeft: 4 } || { marginLeft: 0 }
-  };
+  }
 
   state = {
     bottomColor: color.textBorderBottom,
-    labelColor: color.blueLabelColor
-  };
+    labelColor: color.label
+  }
 
   changeUnderline = (newColor: string): void => {
     if (this.props.error) {
-      this.setState({ bottomColor: 'red', labelColor: 'red' });
+      this.setState({ bottomColor: 'red', labelColor: 'red' })
     } else if (this.props.login) {
-      this.setState({ bottomColor: newColor, labelColor: newColor });
+      this.setState({ bottomColor: newColor, labelColor: newColor })
     } else {
-      this.setState({ labelColor: newColor });
+      this.setState({ labelColor: newColor })
     }
-  };
+  }
 
   render() {
     return (
@@ -91,14 +91,14 @@ class InputAtom extends React.Component<IProps, IState> {
             numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
-            onFocus={() => this.changeUnderline(color.blueLabelColor)}
+            onFocus={() => this.changeUnderline(color.label)}
             onBlur={() => this.changeUnderline(color.inactive)}
             maxLength={this.props.maxLength}
           />
         </Item>
         {this.renderUnderNeathText()}
       </View>
-    );
+    )
   }
 
   renderUnderNeathText = () => {
@@ -116,14 +116,14 @@ class InputAtom extends React.Component<IProps, IState> {
         >
           {this.props.error || this.props.underneathText}
         </Text>
-      );
+      )
     } else {
-      return null;
+      return null
     }
-  };
+  }
 }
 
-export default InputAtom;
+export default InputAtom
 
 const styles = StyleSheet.create({
   label: {
@@ -154,4 +154,4 @@ const styles = StyleSheet.create({
     top: 6,
     lineHeight: 0
   }
-});
+})

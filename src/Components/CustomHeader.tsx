@@ -28,16 +28,7 @@ const CustomHeader = (props: IProps) => {
           style={styles.headerIcon}
         />
       </Left>
-      <View
-        style={[
-          styles.headerItemWrapper,
-          {
-            alignSelf: 'flex-start',
-            alignItems: 'flex-start',
-            width: '70%'
-          }
-        ]}
-      >
+      <View style={[styles.headerItemWrapper, styles.headerItem]}>
         <Title style={styles.title}>{props.title}</Title>
       </View>
       {props.showRight ? (
@@ -121,5 +112,10 @@ const styles = StyleSheet.create({
     color: color.secondary,
     width: 25,
     left: 20
+  },
+  headerItem: {
+    alignSelf: 'flex-start',
+    alignItems: 'flex-start',
+    width: '70%'
   }
 })

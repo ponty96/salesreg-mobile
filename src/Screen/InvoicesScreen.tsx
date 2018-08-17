@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { View, StyleSheet, Alert, FlatList } from 'react-native'
+import { StyleSheet, Alert, FlatList, ScrollView } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
 import { Icon } from 'native-base'
 import { color } from '../Style/Color'
 import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
+import EmptyList from '../Components/EmptyList'
 // import { MenuTrigger, Menu } from 'react-native-popup-menu'
 
 interface IProps {
@@ -39,9 +40,15 @@ export default class InvoicesScreen extends React.Component<IProps> {
     return (
       <SalesOrderListAtom
         firstTopLeftText={item.transactionID}
-        topRightText={item.price}
+        topRightText={'\u20A6 ' + item.price}
         bottomLeftText={item.customerName}
         bottomRightText={item.date}
+        leftStyle={styles.listLeft}
+        rightStyle={styles.listRight}
+        topLeftTextColor={item.status}
+        bottomRightTextStyle={{ color: color.principal }}
+        rightTopTextStyle={{ color: color.selling }}
+        bottomRightTextColor={item.dateStatus}
       />
     )
   }
@@ -52,12 +59,22 @@ export default class InvoicesScreen extends React.Component<IProps> {
       customerName: string
       price: string
       date: string
+      status?: string
+      dateStatus?: string
     }> = [
       {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
-        date: '04/11/2018'
+        date: '04/11/2018',
+        status: color.selling
+      },
+      {
+        transactionID: '#00023',
+        customerName: 'Lakan Wanton Doe',
+        price: '3000.00',
+        date: '04/11/2018',
+        status: color.selling
       },
       {
         transactionID: '#00023',
@@ -69,19 +86,15 @@ export default class InvoicesScreen extends React.Component<IProps> {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
-        date: '04/11/2018'
+        date: '04/11/2018',
+        dateStatus: color.red
       },
       {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
-        date: '04/11/2018'
-      },
-      {
-        transactionID: '#00023',
-        customerName: 'Lakan Wanton Doe',
-        price: '3000.00',
-        date: '04/11/2018'
+        date: '04/11/2018',
+        dateStatus: color.red
       },
       {
         transactionID: '#00023',
@@ -91,9 +104,20 @@ export default class InvoicesScreen extends React.Component<IProps> {
       }
     ]
     return (
-      <View style={styles.container}>
-        <FlatList data={DATA} renderItem={this.renderList} />
-      </View>
+      <ScrollView style={styles.container}>
+        <FlatList
+          data={DATA}
+          renderItem={this.renderList}
+          keyExtractor={(item, index) => item + index}
+          ListEmptyComponent={
+            <EmptyList
+              type={{
+                Text: 'When orders are taken, the invoices appear here'
+              }}
+            />
+          }
+        />
+      </ScrollView>
     )
   }
 }
@@ -101,13 +125,18 @@ export default class InvoicesScreen extends React.Component<IProps> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
+    backgroundColor: color.secondary
   },
   headerMenuIcon: {
     color: color.secondary,
     fontSize: 28,
     marginLeft: 32,
     marginTop: 4
+  },
+  listLeft: {
+    marginLeft: 8
+  },
+  listRight: {
+    marginRight: 8
   }
 })

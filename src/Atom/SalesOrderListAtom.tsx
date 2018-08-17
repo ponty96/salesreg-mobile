@@ -14,6 +14,9 @@ interface IProps {
   rightTopTextStyle?: object
   leftStyle?: object
   rightStyle?: object
+  topLeftTextColor?: string
+  bottomRightTextStyle?: object
+  bottomRightTextColor?: string
 }
 
 const renderStatusIndicator = (bottomRightText: string): JSX.Element => {
@@ -52,7 +55,13 @@ const SalesOrderListAtom = (props: IProps) => {
     >
       <Left style={[styles.leftWrapper, props.leftStyle]}>
         <View style={styles.wrapperForTopLeft}>
-          <Text style={[styles.serialNumber, styles.top]}>
+          <Text
+            style={[
+              styles.serialNumber,
+              styles.top,
+              { color: props.topLeftTextColor }
+            ]}
+          >
             {props.firstTopLeftText}
           </Text>
           <Text style={[styles.time, styles.top]}>
@@ -65,7 +74,14 @@ const SalesOrderListAtom = (props: IProps) => {
         <Text style={[styles.text, styles.top, props.rightTopTextStyle]}>
           {props.topRightText}
         </Text>
-        <Text style={[styles.status, styles.bottom]}>
+        <Text
+          style={[
+            styles.status,
+            styles.bottom,
+            props.bottomRightTextStyle,
+            { color: props.bottomRightTextColor }
+          ]}
+        >
           {props.bottomRightText}
         </Text>
       </Right>

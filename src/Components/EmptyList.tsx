@@ -2,11 +2,12 @@ import * as React from 'react'
 import { StyleSheet, View, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 
-interface Empty {
+interface IEmpty {
   Text: string
   verifyMainList?: string
 }
-const emptyList = (prop: { type: Empty }) => {
+
+const EmptyList = (prop: { type: IEmpty }) => {
   if (prop.type.verifyMainList === 'main') {
     return (
       <View style={styles.view}>
@@ -26,14 +27,14 @@ const emptyList = (prop: { type: Empty }) => {
     )
   } else {
     return (
-      <View>
-        <Text>{prop.type.Text}</Text>
+      <View style={styles.view}>
+        <Text style={styles.normalText}>{prop.type.Text}</Text>
       </View>
     )
   }
 }
 
-export default emptyList
+export default EmptyList
 
 const styles = StyleSheet.create({
   view: {
@@ -45,7 +46,9 @@ const styles = StyleSheet.create({
     borderRadius: 2
   },
   normalText: {
-    fontSize: 14
+    fontSize: 14,
+    fontFamily: 'SourceSansPro',
+    color: color.principal
   },
   blueText: {
     color: color.button,

@@ -1,11 +1,11 @@
-import * as React from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { StyleSheet, View, Text, Dimensions } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
-  headerText?: string;
-  change?: boolean;
-  inputForTwo?: boolean;
+  headerText?: string
+  change?: boolean
+  inputForTwo?: boolean
 }
 
 class FormContainerAtom extends React.Component<IProps, any> {
@@ -21,11 +21,11 @@ class FormContainerAtom extends React.Component<IProps, any> {
           {this.props.children}
         </View>
       </View>
-    );
+    )
   }
 }
 
-export default FormContainerAtom;
+export default FormContainerAtom
 
 const styles = StyleSheet.create({
   mainView: {
@@ -59,7 +59,7 @@ const styles = StyleSheet.create({
   headerText: {
     alignSelf: 'center',
     fontSize: 14,
-    color: color.blueLabelColor,
+    color: color.label,
     fontFamily: 'SourceSansPro_Semibold'
   }
-});
+})
