@@ -9,10 +9,7 @@ interface IProps {
   onPress: () => void
   screenType: string
 }
-
-interface IState {}
-
-class EmployeeList extends Component<IProps, IState> {
+class EmployeeList extends Component<IProps> {
   renderItem = ({ item }: any) => {
     return <EmployeeListAtom items={item} onPress={this.props.onPress} />
   }

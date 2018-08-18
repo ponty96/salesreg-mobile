@@ -34,18 +34,21 @@ const CustomHeader = (props: IProps) => {
       {props.showRight ? (
         <Right style={styles.headerItemWrapper}>
           {props.rightText ? (
-            <Button
-              transparent={true}
-              onPress={props.onPressRightButton}
-              style={styles.rightWrapper}
-            >
-              <Icon
-                name={props.firstRightIcon}
-                type={props.firstRightIconType}
-                style={styles.whiteIcon}
-              />
-              <Text style={styles.edit}>{props.rightText}</Text>
-            </Button>
+            <View style={styles.rightWrapper}>
+              <Button
+                transparent={true}
+                onPress={props.onPressRightButton}
+                style={styles.rightWrapper}
+              >
+                <Icon
+                  name={props.firstRightIcon}
+                  type={props.firstRightIconType}
+                  style={styles.whiteIcon}
+                />
+                <Text style={styles.edit}>{props.rightText}</Text>
+              </Button>
+              {props.children}
+            </View>
           ) : (
             <View style={styles.rightWrapper}>
               <Icon

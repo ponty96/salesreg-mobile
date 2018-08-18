@@ -37,6 +37,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
   }
 
   renderList = ({ item }): JSX.Element => {
+    const { navigation } = this.props
     return (
       <SalesOrderListAtom
         firstTopLeftText={item.transactionID}
@@ -49,6 +50,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
         bottomRightTextStyle={{ color: color.principal }}
         rightTopTextStyle={{ color: color.selling }}
         bottomRightTextColor={item.dateStatus}
+        onPress={() => navigation.navigate('InvoiceDetails')}
       />
     )
   }
@@ -103,6 +105,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
         date: '04/11/2018'
       }
     ]
+
     return (
       <ScrollView style={styles.container}>
         <FlatList

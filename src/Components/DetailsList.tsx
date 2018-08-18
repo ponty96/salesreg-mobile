@@ -6,13 +6,11 @@ interface IProps {
   list: any
 }
 
-interface IState {}
-
-class DetailsList extends PureComponent<IProps, IState> {
+class DetailsList extends PureComponent<IProps> {
   displayList = () => {
     return this.props.list.map((key: any, index: any) => {
-      let section = key.section
-      let value = key.value
+      const section = key.section
+      const value = key.value
       return <ProfileListAtom section={section} value={value} key={index} />
     })
   }
