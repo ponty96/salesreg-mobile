@@ -4,14 +4,11 @@ export const CompanyCustomersGQL = gql`
   query companyCustomers($companyId: Uuid!) {
     companyCustomers(companyId: $companyId) {
       id
-      company {
-        id
-      }
       customerName
       email
       fax
       image
-      officeAdd {
+      residentialAdd {
         state
         street1
         city
@@ -29,7 +26,7 @@ export const CompanyCustomersGQL = gql`
       currency
       birthday
       bank {
-        accountBank
+        bankName
         accountName
         accountNumber
         id

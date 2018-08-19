@@ -49,7 +49,10 @@ class InputAtom extends React.Component<IProps, IState> {
     } else if (this.props.login) {
       this.setState({ bottomColor: newColor, labelColor: newColor });
     } else {
-      this.setState({ labelColor: newColor });
+      this.setState({
+        labelColor: newColor,
+        bottomColor: color.textBorderBottom
+      });
     }
   };
 

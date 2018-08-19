@@ -20,10 +20,12 @@ class CustomerTabDetailsScreen extends Component<IProps> {
       { section: 'Fax', value: customer.fax || '' },
       {
         section: 'Address',
-        value: customer.officeAdd
-          ? `${customer.officeAdd.street1} ${customer.officeAdd.city} ${
-              customer.officeAdd.state
-            } ${customer.officeAdd.country}`
+        value: customer.residentialAdd
+          ? `${customer.residentialAdd.street1} ${
+              customer.residentialAdd.city
+            } ${customer.residentialAdd.state} ${
+              customer.residentialAdd.country
+            }`
           : ''
       },
       { section: 'Currency', value: customer.currency },

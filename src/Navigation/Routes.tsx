@@ -145,7 +145,7 @@ const businessStack = StackNavigator(
     ProfileSettings: {
       screen: ProfileSettingsScreen
     },
-    Customer: {
+    Customers: {
       screen: CustomerScreen
     },
     UpsertCustomer: {

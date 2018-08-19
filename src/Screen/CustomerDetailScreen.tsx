@@ -10,6 +10,7 @@ interface IProps {
 
 class CustomerDetailScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
+    const customer = navigation.getParam('customer');
     return {
       header: (
         <CustomHeader
@@ -19,7 +20,9 @@ class CustomerDetailScreen extends PureComponent<IProps> {
           firstRightIcon="pencil"
           firstRightIconType="MaterialCommunityIcons"
           onBackPress={() => navigation.goBack()}
-          onPressRightButton={() => navigation.navigate('UpsertCustomer')}
+          onPressRightButton={() =>
+            navigation.navigate('UpsertCustomer', { customer })
+          }
         />
       )
     };
