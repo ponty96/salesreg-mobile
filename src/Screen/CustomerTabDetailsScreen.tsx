@@ -35,6 +35,18 @@ class CustomerTabDetailsScreen extends Component<IProps> {
       {
         section: 'Dis Likes',
         value: customer.dislikes && customer.dislikes.join(', ')
+      },
+      {
+        section: 'Bank Name',
+        value: customer.bank ? customer.bank.bankName : ''
+      },
+      {
+        section: 'Account Name',
+        value: customer.bank ? customer.bank.accountName : ''
+      },
+      {
+        section: 'Account Number',
+        value: customer.bank ? customer.bank.accountNumber : ''
       }
     ];
   };

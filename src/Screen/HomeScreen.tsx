@@ -47,14 +47,11 @@ export default class HomeScreen extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <TouchableOpacity
-        style={styles.container}
-        onPress={() => this.props.navigation.navigate('ViewBusiness')}
-      >
+      <View style={styles.container}>
         <View style={styles.homeBackground}>
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
-      </TouchableOpacity>
+      </View>
     );
   }
 }
