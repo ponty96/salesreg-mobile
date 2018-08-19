@@ -36,7 +36,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
     }
   }
 
-  renderList = ({ item }): JSX.Element => {
+  renderList = ({ item }: any): JSX.Element => {
     const { navigation } = this.props
     return (
       <SalesOrderListAtom
@@ -68,41 +68,41 @@ export default class InvoicesScreen extends React.Component<IProps> {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
-        date: '04/11/2018',
+        date: '04 / 11 / 2018',
         status: color.selling
       },
       {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
-        date: '04/11/2018',
+        date: '04 / 11 / 2018',
         status: color.selling
       },
       {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
-        date: '04/11/2018'
+        date: '04 / 11 / 2018'
       },
       {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
-        date: '04/11/2018',
+        date: '04 / 11 / 2018',
         dateStatus: color.red
       },
       {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
-        date: '04/11/2018',
+        date: '04 / 11 / 2018',
         dateStatus: color.red
       },
       {
         transactionID: '#00023',
         customerName: 'Lakan Wanton Doe',
         price: '3000.00',
-        date: '04/11/2018'
+        date: '04 / 11 / 2018'
       }
     ]
 
@@ -111,7 +111,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
         <FlatList
           data={DATA}
           renderItem={this.renderList}
-          keyExtractor={(item, index) => item + index}
+          keyExtractor={(item, index) => item.transactionID + index}
           ListEmptyComponent={
             <EmptyList
               type={{

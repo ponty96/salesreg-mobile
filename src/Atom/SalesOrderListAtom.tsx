@@ -17,6 +17,9 @@ interface IProps {
   topLeftTextColor?: string
   bottomRightTextStyle?: object
   bottomRightTextColor?: string
+  topLeftTextStyle?: object
+  bottomLeftTextStyle?: object
+  activeOpacity?: number
 }
 
 const renderStatusIndicator = (bottomRightText: string): JSX.Element => {
@@ -52,6 +55,7 @@ const SalesOrderListAtom = (props: IProps) => {
     <TouchableOpacity
       style={[styles.wrapper, props.style]}
       onPress={props.onPress}
+      activeOpacity={props.activeOpacity}
     >
       <Left style={[styles.leftWrapper, props.leftStyle]}>
         <View style={styles.wrapperForTopLeft}>
@@ -59,7 +63,8 @@ const SalesOrderListAtom = (props: IProps) => {
             style={[
               styles.serialNumber,
               styles.top,
-              { color: props.topLeftTextColor }
+              { color: props.topLeftTextColor },
+              props.topLeftTextStyle
             ]}
           >
             {props.firstTopLeftText}
@@ -68,7 +73,9 @@ const SalesOrderListAtom = (props: IProps) => {
             {props.secondTopLeftText}
           </Text>
         </View>
-        <Text style={[styles.text, styles.bottom]}>{props.bottomLeftText}</Text>
+        <Text style={[styles.text, styles.bottom, props.bottomLeftTextStyle]}>
+          {props.bottomLeftText}
+        </Text>
       </Left>
       <Right style={[styles.rightWrapper, props.rightStyle]}>
         <Text style={[styles.text, styles.top, props.rightTopTextStyle]}>
