@@ -4,6 +4,7 @@ import { color } from '../Style/Color';
 
 interface IProps {
   headerText?: string;
+  wrapperStyles?: any;
 }
 
 class FormContainerWrappedAtom extends React.Component<IProps, any> {
@@ -15,7 +16,9 @@ class FormContainerWrappedAtom extends React.Component<IProps, any> {
     ));
     return (
       <View style={styles.mainView}>
-        <View style={styles.innerInputViewForTwo}>{children}</View>
+        <View style={[styles.innerInputViewForTwo, this.props.wrapperStyles]}>
+          {children}
+        </View>
       </View>
     );
   }
@@ -35,10 +38,13 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     // paddingRight: 12,
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+
+    paddingVertical: 8
   },
   wrappedInputLeft: {
     width: '50%',
-    paddingLeft: 6
+    paddingLeft: 6,
+    marginTop: 5
   }
 });

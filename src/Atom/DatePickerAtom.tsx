@@ -21,7 +21,7 @@ interface IState {
 export default class DatePickerAtom extends React.Component<IProps, IState> {
   state = {
     bottomColor: color.textBorderBottom,
-    labelColor: color.inactive
+    labelColor: color.blueLabelColor
   };
 
   changeUnderline = (newColor: string): void => {
@@ -33,20 +33,25 @@ export default class DatePickerAtom extends React.Component<IProps, IState> {
   };
   render() {
     return (
-      <View style={{ padding: 0 }}>
+      <View>
         <Item
           stackedLabel={true}
           style={{
             borderWidth: 0,
             marginLeft: 0,
-            borderBottomWidth: 0
+            borderBottomWidth: 0,
+            marginBottom: 0
           }}
         >
           <Label
             style={{
               color: this.state.labelColor,
               padding: 0,
-              fontSize: 14
+              fontSize: 14,
+
+              top: 3,
+              paddingTop: 0,
+              paddingBottom: 0
             }}
           >
             {this.props.required && <Text style={styles.required}>*</Text>}

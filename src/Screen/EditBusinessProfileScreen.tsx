@@ -212,15 +212,13 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                     )}
                 </FormContainerAtom>
                 <FormContainerAtom headerText="Description">
-                  <View style={styles.bottomBorder}>
-                    <Textarea
-                      rowSpan={5}
-                      placeholder="Description"
-                      placeholderTextColor={color.inactive}
-                      defaultValue={this.state.about}
-                      onChangeText={val => this.updateState('about', val)}
-                    />
-                  </View>
+                  <Textarea
+                    rowSpan={5}
+                    placeholder="Description"
+                    placeholderTextColor={color.inactive}
+                    defaultValue={this.state.about}
+                    onChangeText={val => this.updateState('about', val)}
+                  />
                   {fieldErrors &&
                     fieldErrors['about'] && (
                       <FormErrorTextAtom errorText={fieldErrors['about']} />

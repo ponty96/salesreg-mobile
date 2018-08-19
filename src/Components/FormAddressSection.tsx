@@ -36,7 +36,7 @@ export default class FormAddressSection extends PureComponent<IProps> {
           getValue={val => this.props.getValue('city', val)}
           placeholder="e.g Festac"
         />
-        <FormContainerWrappedAtom>
+        <FormContainerWrappedAtom wrapperStyles={{ paddingVertical: 0 }}>
           <View>
             <PickerAtom
               list={['Lagos']}

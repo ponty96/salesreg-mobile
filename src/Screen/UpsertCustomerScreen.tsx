@@ -7,11 +7,13 @@ import FormImageAtom from '../Atom/FormImageAtom';
 import { Form } from 'native-base';
 import { color } from '../Style/Color';
 import FormContainerAtom from '../Atom/FormContainerAtom';
-import GoogleInputAtom from '../Atom/GoogleInputAtom';
-import FormContainerWrappedAtom from '../Atom/FormContainerWrappedAtom';
 import SaveCancelButton from '../Container/SaveCancelButton';
 import { ScrollView } from 'react-native-gesture-handler';
 import CustomHeader from '../Components/CustomHeader';
+import FormAddressSection from '../Components/FormAddressSection';
+import { Textarea } from 'native-base';
+import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
+import DatePickerAtom from '../Atom/DatePickerAtom';
 
 interface IProps {
   navigation: any;
@@ -36,10 +38,9 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
     },
     customerName: '',
     companyName: '',
-    phone: 0,
+    phone: '',
     name: '',
     email: '',
-    mobile: 0,
     fax: '',
     bankName: '',
     accountName: '',
@@ -51,8 +52,13 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
     birthday: '',
     maritalStatus: '',
     marriageAnn: '',
-    like: '',
-    dislike: ''
+    likes: '',
+    dislikes: '',
+    street1: '',
+    city: '',
+    state: '',
+    country: '',
+    fieldErrors: null
   };
   create = () => {
     this.props.navigation.goBack();
@@ -76,6 +82,7 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
   };
 
   render() {
+    const { fieldErrors } = this.state;
     return (
       <View style={styles.ababa}>
         <ScrollView>
@@ -93,12 +100,16 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
                 />
                 <FormContainerAtom headerText={'Customer ID'}>
                   <InputAtom
-                    // label={'*' + this.props.name}
+                    label="Customer Name"
                     getValue={val => this.updateState('name', val)}
+                    required
+                    placeholder="e.g Ayomide Aregbede"
+                    defaultValue={this.state.customerName}
                   />
                   <InputAtom
                     label={'Company Name'}
-                    // defaultValue={this.props.name}
+                    placeholder="e.g Miji Jones"
+                    defaultValue={this.state.companyName}
                     getValue={val => this.updateState('companyName', val)}
                   />
                   <ButtonAtom
@@ -119,118 +130,133 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
                     keyboardType="numeric"
                     key="phone"
                     label="Phone"
+                    required
+                    placeholder="e.g 0813443412"
+                    defaultValue={this.state.phone}
                   />
-                  <InputAtom
-                    getValue={val => this.updateState('mobile', val)}
-                    keyboardType="numeric"
-                    key="mobile"
-                    label="Mobile"
-                  />
-                  <InputAtom
+                  {/* <InputAtom
                     getValue={val => this.updateState('fax', val)}
                     keyboardType="numeric"
                     key="fax"
                     label="Fax"
-                  />
+                  /> */}
                   <InputAtom
                     getValue={val => this.updateState('email', val)}
                     keyboardType="email-address"
                     key="email"
                     label="Email Address"
+                    placeholder="e.g somebody@example.com"
+                    defaultValue={this.state.email}
                   />
                 </FormContainerAtom>
                 <FormContainerAtom headerText="Banking detail">
                   <InputAtom
                     label="Bank name"
                     getValue={val => this.updateState('bankName', val)}
+                    placeholder="e.g Guarranty Trust Bank"
+                    defaultValue={this.state.bankName}
                   />
                   <InputAtom
                     label="Account name"
                     getValue={val => this.updateState('accountName', val)}
+                    placeholder="e.g Ayomide Aregbede"
+                    defaultValue={this.state.accountName}
                   />
                   <InputAtom
                     label="Account number"
                     getValue={val => this.updateState('accountNumber', val)}
                     keyboardType="numeric"
+                    placeholder="03457806203"
+                    defaultValue={this.state.accountNumber}
                   />
                 </FormContainerAtom>
-                <FormContainerAtom headerText={'Customer Address'}>
-                  <GoogleInputAtom
-                    label="Office Address"
-                    getValue={(val: string) =>
-                      this.updateState('officeAddress', val)
-                    }
-                  />
-                  <GoogleInputAtom
-                    label="Home Address"
-                    getValue={(val: string) =>
-                      this.updateState('homeAddress', val)
-                    }
-                  />
-                </FormContainerAtom>
-                <FormContainerAtom headerText="Billing Address">
-                  <GoogleInputAtom
-                    label="Billing Address"
-                    getValue={(val: string) =>
-                      this.updateState('billingAddress', val)
-                    }
-                  />
-                </FormContainerAtom>
+                <FormAddressSection
+                  street1={this.state.street1}
+                  city={this.state.city}
+                  state={this.state.state}
+                  country={this.state.country}
+                  fieldErrors={fieldErrors}
+                  getValue={this.updateState}
+                />
                 <FormContainerAtom headerText={'Customer pays me with'}>
-                  <View
-                    style={{
-                      borderBottomWidth: 1,
-                      borderBottomColor: '#F3F3F3',
-                      padding: 10
-                    }}
-                  >
-                    <PickerAtom
-                      list={['Naira (\u20A6)']}
-                      placeholder="Select Currency"
-                    />
-                  </View>
+                  <PickerAtom
+                    list={['Naira (\u20A6)']}
+                    placeholder={`e.g Naira (\u20A6)`}
+                    selected={this.state.currency.toUpperCase()}
+                    handleSelection={val => this.updateState('currency', val)}
+                    label="Currency"
+                  />
+                  {fieldErrors &&
+                    fieldErrors['currency'] && (
+                      <FormErrorTextAtom errorText={fieldErrors['currency']} />
+                    )}
                 </FormContainerAtom>
-                <FormContainerAtom>
-                  <FormContainerWrappedAtom>
-                    <InputAtom
-                      label="Birthday"
-                      getValue={val => this.updateState('birthday', val)}
-                    />
-                    <InputAtom
-                      label="Marital Status"
-                      getValue={val => this.updateState('maritalStatus', val)}
-                    />
-                    <InputAtom
-                      label="Marriage Anniversary"
-                      getValue={val => this.updateState('marriageAnn', val)}
-                    />
-                  </FormContainerWrappedAtom>
+                <FormContainerAtom headerText="Other information">
+                  <DatePickerAtom
+                    placeholder=""
+                    date={this.state.birthday}
+                    handleDateSelection={val =>
+                      this.updateState('birthday', val)
+                    }
+                    label="Birthday"
+                    required={true}
+                    error={fieldErrors && fieldErrors['birthday']}
+                  />
+                  <PickerAtom
+                    list={['Single', 'Married']}
+                    placeholder="e.g Single"
+                    selected={this.state.maritalStatus.toUpperCase()}
+                    handleSelection={val =>
+                      this.updateState('maritalStatus', val)
+                    }
+                    label="Marital Status"
+                  />
+                  {fieldErrors &&
+                    fieldErrors['maritalStatus'] && (
+                      <FormErrorTextAtom
+                        errorText={fieldErrors['maritalStatus']}
+                      />
+                    )}
                 </FormContainerAtom>
                 <FormContainerAtom headerText="Likes">
-                  <InputAtom
-                    label="Like"
-                    getValue={val => this.updateState('like', val)}
+                  <Textarea
+                    rowSpan={5}
+                    placeholder="e.g hublot, movado, red, orange"
+                    placeholderTextColor={color.inactive}
+                    defaultValue={this.state.likes}
+                    onChangeText={val => this.updateState('likes', val)}
                   />
-                  <ButtonAtom
+                  {fieldErrors &&
+                    fieldErrors['likes'] && (
+                      <FormErrorTextAtom errorText={fieldErrors['likes']} />
+                    )}
+                  {/* <ButtonAtom
                     btnText="+ Add Like"
                     transparent={true}
                     onPress={this.addLike}
                     textStyle={styles.sendAnother}
                     btnStyle={styles.btnStyle}
-                  />
+                  /> */}
                 </FormContainerAtom>
                 <FormContainerAtom headerText="Dislikes">
-                  <InputAtom
-                    label="Dislikes"
-                    getValue={val => this.updateState('dislike', val)}
+                  <Textarea
+                    rowSpan={5}
+                    placeholder="e.g hublot, movado, red, orange"
+                    placeholderTextColor={color.inactive}
+                    defaultValue={this.state.likes}
+                    onChangeText={val => this.updateState('dislikes', val)}
                   />
-                  <ButtonAtom
+                  {fieldErrors &&
+                    fieldErrors['dislikes'] && (
+                      <FormErrorTextAtom errorText={fieldErrors['dislikes']} />
+                    )}
+                  {/* <ButtonAtom
                     btnText="+ Add Dislike"
                     transparent={true}
                     onPress={this.addDislike}
                     textStyle={styles.sendAnother}
                     btnStyle={styles.btnStyle}
-                  />
+                  /> */}
                 </FormContainerAtom>
               </Form>
             </ScrollView>
@@ -270,5 +296,11 @@ const styles = StyleSheet.create({
   wrappedInputLeft: {
     width: '50%',
     paddingLeft: 12
+  },
+  bottomBorder: {
+    borderBottomColor: color.list,
+    borderBottomWidth: 1,
+    marginLeft: 3,
+    marginRight: 3
   }
 });
