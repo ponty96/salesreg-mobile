@@ -50,7 +50,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
         bottomRightTextStyle={{ color: color.principal }}
         rightTopTextStyle={{ color: color.selling }}
         bottomRightTextColor={item.dateStatus}
-        onPress={() => navigation.navigate('InvoiceDetails')}
+        onPress={() => navigation.navigate('InvoiceDetails', {screen: 'invoiceDetail'})}
       />
     )
   }

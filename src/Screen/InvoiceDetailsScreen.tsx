@@ -9,16 +9,28 @@ import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 
 export default class InvoiceDetailsScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
+    const screen: string = navigation.getParam('screen')
+
     return {
       header: (
         <CustomHeader
           title="Invoice"
           onBackPress={() => navigation.goBack()}
           showRight
-          firstRightIcon="credit-card-multiple"
-          firstRightIconType="MaterialCommunityIcons"
-          rightText="Pay"
+          firstRightIcon={
+            screen === 'invoiceDetail' ? 'credit-card-multiple' : 'check'
+          }
+          firstRightIconType={
+            screen === 'invoiceDetail' ? 'MaterialCommunityIcons' : 'Feather'
+          }
+          rightText={screen === 'invoiceDetail' ? 'Pay' : 'Paid'}
           onPressRightButton={() => navigation.navigate('InvoicePayment')}
+          rightIconStyle={
+            screen !== 'invoiceDetail' ? styles.checkIcon : undefined
+          }
+          rightTextStyle={
+            screen !== 'invoiceDetail' ? styles.checkIcon : undefined
+          }
         >
           <Button
             transparent={true}
@@ -53,6 +65,9 @@ export default class InvoiceDetailsScreen extends Component {
   }
 
   render() {
+    const { navigation }: any = this.props
+    const screen: string = navigation.getParam('screen')
+
     const DATA: Array<{ product: string; quantity: string; price: string }> = [
       {
         product: 'Item 1',
@@ -73,13 +88,17 @@ export default class InvoiceDetailsScreen extends Component {
 
     return (
       <ScrollView style={styles.container}>
-        <ListItemAtom
-          label="INVOICE ID"
-          value="#00023"
-          labelStyle={styles.listLabel}
-          rightTextStyle={[styles.transactionID, styles.transactionValue]}
-          listItemStyle={styles.listWrapper}
-        />
+        {screen === 'invoiceDetail' ? (
+          <ListItemAtom
+            label="INVOICE ID"
+            value="#00023"
+            labelStyle={styles.listLabel}
+            rightTextStyle={[styles.transactionID, styles.transactionValue]}
+            listItemStyle={styles.listWrapper}
+          />
+        ) : (
+          undefined
+        )}
         <ListItemWithImage
           label="Issued to"
           bottomText="Chito Omenemeh"
@@ -215,5 +234,8 @@ const styles = StyleSheet.create({
   },
   dueValue: {
     fontFamily: 'SourceSansPro'
+  },
+  checkIcon: {
+    color: color.selling
   }
 })

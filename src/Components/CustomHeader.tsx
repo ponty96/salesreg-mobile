@@ -16,6 +16,8 @@ interface IProps {
   navigation?: object
   showRight?: boolean
   children?: any
+  rightIconStyle?: object
+  rightTextStyle?: object
 }
 
 const CustomHeader = (props: IProps) => {
@@ -43,9 +45,11 @@ const CustomHeader = (props: IProps) => {
                 <Icon
                   name={props.firstRightIcon}
                   type={props.firstRightIconType}
-                  style={styles.whiteIcon}
+                  style={[styles.whiteIcon, props.rightIconStyle]}
                 />
-                <Text style={styles.edit}>{props.rightText}</Text>
+                <Text style={[styles.edit, props.rightTextStyle]}>
+                  {props.rightText}
+                </Text>
               </Button>
               {props.children}
             </View>

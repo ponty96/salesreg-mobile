@@ -176,7 +176,10 @@ export default class InvoicePaymentScreen extends Component<IState> {
           visible={visibility}
           onBackPress={() => this.setState({ visibility: false })}
           onPressTopButton={() => Alert.alert('Confirmed pressed.')}
-          onPressBottomButton={() => Alert.alert('Edit pressed.')}
+          onPressBottomButton={() => {
+            navigation.navigate('InvoiceDetails')
+            this.setState({ visibility: false })
+          }}
           headerText="Confirm Payment!"
           footerText="Close"
           firstButtonText="Confirmed"
