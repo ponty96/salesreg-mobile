@@ -33,7 +33,7 @@ class CustomerDetailScreen extends PureComponent<IProps> {
     return (
       <View style={{ flex: 1 }}>
         <AboveCustomerDetailsAtom
-          customerName={customer.customerName}
+          contactName={customer.contactName}
           purchaseMade={43000}
           overDue={10000}
           redText="Overdue"

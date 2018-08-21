@@ -6,7 +6,7 @@ import ContactList from '../Components/ContactList';
 import { color } from '../Style/Color';
 import CustomHeader from '../Components/CustomHeader';
 
-import { CompanyCustomersGQL } from '../graphql/queries/contact';
+import { CompanyContactGQL } from '../graphql/queries/contact';
 import { Query } from 'react-apollo';
 import AppSpinner from '../Components/Spinner';
 import Auth from '../services/auth';
@@ -56,15 +56,15 @@ class CustomerScreen extends Component<IProps, IState> {
   render() {
     return (
       <Query
-        query={CompanyCustomersGQL}
-        variables={{ companyId: this.state.companyId }}
+        query={CompanyContactGQL}
+        variables={{ companyId: this.state.companyId, type: 'customer' }}
         fetchPolicy="cache-and-network"
       >
         {({ loading, data }) => (
           <View style={styles.centerContainer}>
             <AppSpinner visible={loading} />
             <ContactList
-              items={data.companyCustomers || []}
+              items={data.companyContacts || []}
               onPress={this.onPress}
               screenType="customer"
             />

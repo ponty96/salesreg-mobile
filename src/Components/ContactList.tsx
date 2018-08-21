@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { View, FlatList, ScrollView, StyleSheet } from 'react-native';
-import ContactListAtom from '../Atom/ContactListAtom';
+import ContactItemAtom from '../Atom/ContactItemAtom';
 import SubHeaderAtom from '../Atom/SubHeaderAtom';
 import EmptyList from './EmptyList';
 
@@ -16,10 +16,10 @@ class ContactList extends Component<IProps, IState> {
   renderItem = ({ item }: any) => {
     let latestAmount = item.status === 'balance' ? item.balance : item.debt;
     return (
-      <ContactListAtom
+      <ContactItemAtom
         key={item.id}
         image={item.image}
-        customerName={item.customerName}
+        contactName={item.contactName}
         amount={item.amount}
         latestAmount={latestAmount}
         realStyle={item.status}

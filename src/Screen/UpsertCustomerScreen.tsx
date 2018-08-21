@@ -15,7 +15,7 @@ import { Textarea } from 'native-base';
 import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
 import DatePickerAtom from '../Atom/DatePickerAtom';
 import { Mutation } from 'react-apollo';
-import { UpsertCustomerGQL } from '../graphql/mutations/contact';
+import { UpsertContactGQL } from '../graphql/mutations/contact';
 import AppSpinner from '../Components/Spinner';
 import Auth from '../services/auth';
 import { parseFieldErrors } from '../Functions';
@@ -39,7 +39,7 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
   };
   state = {
     image: 'http://downloadicons.net/sites/default/files/user-icon-2197.png',
-    customerName: '',
+    contactName: '',
     companyName: '',
     number: '',
     name: '',
@@ -109,7 +109,7 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
   render() {
     const { fieldErrors } = this.state;
     return (
-      <Mutation mutation={UpsertCustomerGQL} onCompleted={this.onCompleted}>
+      <Mutation mutation={UpsertContactGQL} onCompleted={this.onCompleted}>
         {(upsertCustomer, { loading }) => (
           <View style={styles.ababa}>
             <ScrollView>
@@ -129,11 +129,11 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
                     <FormContainerAtom headerText={'Customer ID'}>
                       <InputAtom
                         label="Customer Name"
-                        getValue={val => this.updateState('customerName', val)}
+                        getValue={val => this.updateState('contactName', val)}
                         required
                         placeholder="e.g Ayomide Aregbede"
-                        defaultValue={this.state.customerName}
-                        error={fieldErrors && fieldErrors['customerName']}
+                        defaultValue={this.state.contactName}
+                        error={fieldErrors && fieldErrors['contactName']}
                       />
                       <InputAtom
                         label={'Company Name'}
@@ -287,8 +287,9 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
     const customer = this.props.navigation.getParam('customer', {});
     return {
       ...this.state,
-      customerId: customer ? customer.id : null,
-      bank: this.parseBankDetails()
+      contactId: customer ? customer.id : null,
+      bank: this.parseBankDetails(),
+      type: 'customer'
     };
   };
 
@@ -305,7 +306,7 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
   };
   onCompleted = async res => {
     const {
-      upsertCustomer: { success, fieldErrors }
+      upsertContact: { success, fieldErrors }
     } = res;
     if (success) {
       this.props.navigation.navigate('Customers');

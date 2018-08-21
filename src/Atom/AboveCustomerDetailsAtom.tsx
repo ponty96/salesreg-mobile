@@ -11,7 +11,7 @@ import { color } from '../Style/Color';
 import { numberWithCommas } from '../Functions/numberWithCommas';
 
 interface IProps {
-  customerName: string;
+  contactName: string;
   purchaseMade: number;
   overDue: number;
   redText: string;
@@ -37,7 +37,7 @@ export default class AboveCustomerDetailsAtom extends React.Component<
   sendEmail = () => {
     const { customer } = this.props;
     const url = `mailto://${customer.email}&subject=Hello${
-      customer.customerName
+      customer.contactName
     }`;
     Linking.canOpenURL(url).then(supported => {
       console.log('send email supported', supported);
@@ -57,7 +57,7 @@ export default class AboveCustomerDetailsAtom extends React.Component<
               }}
               style={{ marginBottom: 8 }}
             />
-            <Text style={styles.cusName}>{this.props.customerName}</Text>
+            <Text style={styles.cusName}>{this.props.contactName}</Text>
           </View>
           <View style={styles.textView}>
             <Text style={styles.greyFont}>Total purchase made</Text>

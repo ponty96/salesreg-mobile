@@ -1,12 +1,13 @@
 import gql from 'graphql-tag';
 
-export const CompanyCustomersGQL = gql`
-  query companyCustomers($companyId: Uuid!) {
-    companyCustomers(companyId: $companyId) {
+export const CompanyContactGQL = gql`
+  query companyContacts($companyId: Uuid!, $type: String!) {
+    companyContacts(companyId: $companyId, type: $type) {
       id
-      customerName
+      contactName
       email
       image
+      type
       address {
         state
         street1

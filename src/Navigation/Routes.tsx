@@ -26,7 +26,6 @@ import HomeScreen from '../Screen/HomeScreen';
 import IncomeScreen from '../Screen/IncomeScreen';
 import InventoryScreen from '../Screen/InventoryScreen';
 import InvoicesScreen from '../Screen/InvoicesScreen';
-import NewVendorScreen from '../Screen/NewVendorScreen';
 import OrderListScreen from '../Screen/OrderListScreen';
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen';
 import PurchaseScreen from '../Screen/PurchaseScreen';
@@ -34,8 +33,6 @@ import ReceiptsScreen from '../Screen/ReceiptsScreen';
 import SalesScreen from '../Screen/SalesScreen';
 import ServiceScreen from '../Screen/ServiceDetailsScreen';
 import UserProfileScreen from '../Screen/UserProfileScreen';
-import VendorDetailScreen from '../Screen/VendorDetailsScreen';
-import VendorScreen from '../Screen/VendorScreen';
 import LoginScreen from '../Screen/LoginScreen';
 import UpsertCustomerScreen from '../Screen/UpsertCustomerScreen';
 import NewOrderScreen from '../Screen/NewOrderScreen';
@@ -115,9 +112,6 @@ const businessStack = StackNavigator(
     NewEmployee: {
       screen: EmployeeForm
     },
-    Vendor: {
-      screen: VendorScreen
-    },
     Purchase: {
       screen: PurchaseScreen
     },
@@ -151,9 +145,6 @@ const businessStack = StackNavigator(
     UpsertCustomer: {
       screen: UpsertCustomerScreen
     },
-    NewVendor: {
-      screen: NewVendorScreen
-    },
     NewOrder: {
       screen: NewOrderScreen
     },
@@ -183,9 +174,6 @@ const businessStack = StackNavigator(
     },
     CustomerDetails: {
       screen: CustomerDetailScreen
-    },
-    VendorDetails: {
-      screen: VendorDetailScreen
     },
     EditUserProfile: {
       screen: EditUserProfileScreen
