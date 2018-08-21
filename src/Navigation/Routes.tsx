@@ -32,23 +32,24 @@ import ServiceScreen from '../Screen/ServiceDetailsScreen'
 import UserProfileScreen from '../Screen/UserProfileScreen'
 import VendorDetailScreen from '../Screen/VendorDetailsScreen'
 import VendorScreen from '../Screen/VendorScreen'
-import LoginScreen from '../Screen/LoginScreen'
+// import LoginScreen from '../Screen/LoginScreen'
 import NewCustomerScreen from '../Screen/NewCustomerScreen'
 import NewOrderScreen from '../Screen/NewOrderScreen'
 import UpsertProductScreen from '../Screen/UpsertProductScreen'
-import OnBoardingScreen from '../Screen/OnBoardingScreen'
+// import OnBoardingScreen from '../Screen/OnBoardingScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
 // import OrderScreen from './../Screen/OrderScreen';
 import OrderDetailsScreen from '../Screen/OrderDetailsScreen'
 import ProductDetailsScreen from '../Screen/ProductDetailsScreen'
 import ProductScreen from '../Screen/ProductScreen'
-import ResetScreen from '../Screen/ResetScreen'
+// import ResetScreen from '../Screen/ResetScreen'
 // import CustomerScreen from './../Screen/CustomerScreen';
 import ServicesScreen from '../Screen/ServicesScreen'
-import SignupScreen from '../Screen/SignupScreen'
+// import SignupScreen from '../Screen/SignupScreen'
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
 import InvoiceDetailsScreen from '../Screen/InvoiceDetailsScreen'
+import InvoicePaymentScreen from '../Screen/InvoicePaymentScreen'
 
 const viewBothStack = TabNavigator(
   {
@@ -192,7 +193,8 @@ const businessStack = StackNavigator(
     },
     EditServices: UpsertServiceScreen,
     ShowService: ServiceScreen,
-    InvoiceDetails: InvoiceDetailsScreen
+    InvoiceDetails: InvoiceDetailsScreen,
+    InvoicePayment: InvoicePaymentScreen
   },
   {
     initialRouteName: 'Home',
@@ -231,7 +233,7 @@ const DrawerStack = DrawerNavigator(
   }
 )
 
-const AuthStack = StackNavigator(
+/*const AuthStack = StackNavigator(
   {
     OnBoarding: OnBoardingScreen,
     Login: LoginScreen,
@@ -241,7 +243,7 @@ const AuthStack = StackNavigator(
   {
     headerMode: 'none'
   }
-)
+)*/
 
 interface IProps {
   client: any
@@ -263,7 +265,7 @@ export default class Routes extends React.Component<IProps> {
           }
 
           if (!data.authenticate) {
-            return <AuthStack screenProps={{ client }} />
+            // return <AuthStack screenProps={{ client }} />
           }
           return <DrawerStack screenProps={{ client }} />
         }}

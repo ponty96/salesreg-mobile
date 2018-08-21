@@ -18,7 +18,7 @@ export default class InvoiceDetailsScreen extends Component {
           firstRightIcon="credit-card-multiple"
           firstRightIconType="MaterialCommunityIcons"
           rightText="Pay"
-          onPressRightButton={() => Alert.alert('Pay button pressed.')}
+          onPressRightButton={() => navigation.navigate('InvoicePayment')}
         >
           <Button
             transparent={true}

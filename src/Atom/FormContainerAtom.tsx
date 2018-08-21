@@ -6,17 +6,20 @@ interface IProps {
   headerText?: string
   change?: boolean
   inputForTwo?: boolean
+  style?: object
+  inputStyle?: object
 }
 
 class FormContainerAtom extends React.Component<IProps, any> {
   render() {
     return (
-      <View style={styles.mainView}>
+      <View style={[styles.mainView, this.props.style]}>
         <Text style={styles.headerText}>{this.props.headerText}</Text>
         <View
-          style={
-            this.props.inputForTwo ? styles.inputViewForTwo : styles.inputView
-          }
+          style={[
+            this.props.inputForTwo ? styles.inputViewForTwo : styles.inputView,
+            this.props.inputStyle
+          ]}
         >
           {this.props.children}
         </View>

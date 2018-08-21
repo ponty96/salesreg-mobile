@@ -1,30 +1,30 @@
-import React, { PureComponent } from 'react';
-import { View } from 'react-native';
-import FormContainerAtom from '../Atom/FormContainerAtom';
-import InputAtom from '../Atom/InputAtom';
-import FormContainerWrappedAtom from '../Atom/FormContainerWrappedAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
+import React, { PureComponent } from 'react'
+import { View } from 'react-native'
+import FormContainerAtom from '../Atom/FormContainerAtom'
+import InputAtom from '../Atom/InputAtom'
+import FormContainerWrappedAtom from '../Atom/FormContainerWrappedAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import FormErrorTextAtom from '../Atom/FormErrorTextAtom'
 
 interface IProps {
-  street1: string;
-  city: string;
-  state: string;
-  country: string;
-  getValue: (key: string, value: any) => void;
-  fieldErrors: any;
+  street1: string
+  city: string
+  state: string
+  country: string
+  getValue: (key: string, value: any) => void
+  fieldErrors: any
 }
 
 export default class FormAddressSection extends PureComponent<IProps> {
   render() {
-    const { fieldErrors } = this.props;
+    const { fieldErrors } = this.props
     return (
       <FormContainerAtom headerText="Address">
         <InputAtom
           label="Street"
           required={true}
           defaultValue={this.props.street1}
-          error={fieldErrors && fieldErrors['street1']}
+          error={fieldErrors && fieldErrors.street1}
           getValue={val => this.props.getValue('street1', val)}
           placeholder="e.g E close, 401 Road"
         />
@@ -32,7 +32,7 @@ export default class FormAddressSection extends PureComponent<IProps> {
           label="City"
           defaultValue={this.props.city}
           required={true}
-          error={fieldErrors && fieldErrors['city']}
+          error={fieldErrors && fieldErrors.city}
           getValue={val => this.props.getValue('city', val)}
           placeholder="e.g Festac"
         />
@@ -46,8 +46,8 @@ export default class FormAddressSection extends PureComponent<IProps> {
               label="State"
             />
             {fieldErrors &&
-              fieldErrors['state'] && (
-                <FormErrorTextAtom errorText={fieldErrors['state']} />
+              fieldErrors.state && (
+                <FormErrorTextAtom errorText={fieldErrors.state} />
               )}
           </View>
           <View>
@@ -62,12 +62,12 @@ export default class FormAddressSection extends PureComponent<IProps> {
               label="Country"
             />
             {fieldErrors &&
-              fieldErrors['country'] && (
-                <FormErrorTextAtom errorText={fieldErrors['country']} />
+              fieldErrors.country && (
+                <FormErrorTextAtom errorText={fieldErrors.country} />
               )}
           </View>
         </FormContainerWrappedAtom>
       </FormContainerAtom>
-    );
+    )
   }
 }
