@@ -17,15 +17,12 @@ class CustomerTabDetailsScreen extends Component<IProps> {
         section: 'Phone',
         value: customer && customer.phone ? customer.phone.number : ''
       },
-      { section: 'Fax', value: customer.fax || '' },
       {
         section: 'Address',
-        value: customer.residentialAdd
-          ? `${customer.residentialAdd.street1} ${
-              customer.residentialAdd.city
-            } ${customer.residentialAdd.state} ${
-              customer.residentialAdd.country
-            }`
+        value: customer.address
+          ? `${customer.address.street1} ${customer.address.city} ${
+              customer.address.state
+            } ${customer.address.country}`
           : ''
       },
       { section: 'Currency', value: customer.currency },

@@ -69,7 +69,7 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
     let details = {};
     if (customer) {
       const {
-        residentialAdd = {},
+        address = {},
         bank = {},
         likes = [],
         dislikes = [],
@@ -77,7 +77,7 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
       } = customer;
       details = {
         ...customer,
-        ...residentialAdd,
+        ...address,
         ...bank,
         ...phone,
         likes: likes.join(', '),

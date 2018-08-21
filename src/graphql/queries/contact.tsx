@@ -6,9 +6,8 @@ export const CompanyCustomersGQL = gql`
       id
       customerName
       email
-      fax
       image
-      residentialAdd {
+      address {
         state
         street1
         city

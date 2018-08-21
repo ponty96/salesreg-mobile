@@ -33,7 +33,7 @@ export const UpsertCustomerGQL = gql`
         maritalStatus: $maritalStatus
         image: $image
         phone: { number: $number }
-        residentialAdd: {
+        address: {
           state: $state
           street1: $street1
           city: $city
@@ -55,7 +55,7 @@ export const UpsertCustomerGQL = gql`
           email
           fax
           image
-          residentialAdd {
+          address {
             state
             street1
             city

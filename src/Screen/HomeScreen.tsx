@@ -1,11 +1,5 @@
 import * as React from 'react';
-import {
-  View,
-  StyleSheet,
-  TouchableOpacity,
-  Text,
-  Dimensions
-} from 'react-native';
+import { View, StyleSheet, Text, Dimensions } from 'react-native';
 import { color } from '../Style/Color';
 import CustomHeader from '../Components/CustomHeader';
 import Auth from '../services/auth';
