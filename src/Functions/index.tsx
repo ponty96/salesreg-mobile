@@ -1,6 +1,8 @@
+import * as humps from 'humps';
+
 export const parseFieldErrors = errors => {
   return errors.reduce((acc, error) => {
-    const key = error.key.charAt(0).toLowerCase() + error.key.slice(1);
+    const key = humps.camelize(error.key);
     return { ...acc, [key]: error.message };
   }, {});
 };
@@ -70,7 +72,9 @@ export const validateFormInputs = formInputs => {
 
 export const validateRegStep1FormInputs = formInputs => {
   let fieldErrors = {};
-  const index = Object.keys(formInputs).findIndex(key => key === 'businessName');
+  const index = Object.keys(formInputs).findIndex(
+    key => key === 'businessName'
+  );
   Object.keys(formInputs)
     .slice(0, index)
     .map(key => {

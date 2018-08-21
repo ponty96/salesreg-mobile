@@ -45,7 +45,14 @@ class PickerAtom extends React.Component<IProps, IState> {
   render() {
     let list = this.props.list;
     return (
-      <View style={{ minHeight: 65 }}>
+      <View
+        style={{
+          minHeight: 65,
+          borderBottomWidth: 1,
+          borderBottomColor: color.textBorderBottom,
+          marginTop: 4
+        }}
+      >
         <Label
           style={{
             color: this.state.labelColor,
@@ -71,11 +78,10 @@ class PickerAtom extends React.Component<IProps, IState> {
           }
           style={{
             height: 50,
-            borderBottomWidth: 1,
-            borderBottomColor: color.textBorderBottom,
-            marginBottom: 8,
             width: this.props.width,
-            ...this.props.pickerStyle
+            ...this.props.pickerStyle,
+            paddingTop: 0,
+            paddingBottom: 0
           }}
           selectedValue={this.props.selected}
           onValueChange={this.handleChange.bind(this)}
@@ -84,13 +90,17 @@ class PickerAtom extends React.Component<IProps, IState> {
             color: color.inactive,
             fontSize: 16,
             textAlign: 'left',
-            paddingLeft: 8
+            paddingLeft: 8,
+            paddingTop: 0,
+            paddingBottom: 0
           }}
           textStyle={{
             textAlign: 'left',
             color: color.principal,
             fontSize: 16,
-            paddingLeft: 8
+            paddingLeft: 8,
+            paddingTop: 0,
+            paddingBottom: 0
           }}
         >
           {list.map((element, key) => (

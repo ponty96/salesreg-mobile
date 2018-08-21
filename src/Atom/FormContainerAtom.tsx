@@ -43,7 +43,8 @@ const styles = StyleSheet.create({
     paddingRight: 10,
     marginTop: 16,
     marginBottom: 16,
-    borderRadius: 3
+    borderRadius: 3,
+    paddingVertical: 8
   },
   inputViewForTwo: {
     width: Dimensions.get('screen').width - 32,

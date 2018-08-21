@@ -1,17 +1,25 @@
-import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
+import React, { Component } from 'react';
+import { View, StyleSheet } from 'react-native';
 
-import FabAtom from '../Atom/FabAtom'
-import CustomerList from '../Components/CustomerList'
-import { color } from '../Style/Color'
-import { customerList } from '../config/data'
-import CustomHeader from '../Components/CustomHeader'
+import FabAtom from '../Atom/FabAtom';
+import ContactList from '../Components/ContactList';
+import { color } from '../Style/Color';
+import CustomHeader from '../Components/CustomHeader';
+
+import { CompanyCustomersGQL } from '../graphql/queries/contact';
+import { Query } from 'react-apollo';
+import AppSpinner from '../Components/Spinner';
+import Auth from '../services/auth';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
-class CustomerScreen extends Component<IProps> {
+interface IState {
+  companyId: string;
+}
+
+class CustomerScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -24,36 +32,55 @@ class CustomerScreen extends Component<IProps> {
           onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
-    }
-  }
+    };
+  };
 
-  onPress = () => {
-    this.props.navigation.navigate('CustomerDetails')
+  state = {
+    companyId: ''
+  };
+
+  onPress = customer => {
+    this.props.navigation.navigate('CustomerDetails', { customer });
+  };
+
+  componentDidMount() {
+    this.updateState();
   }
+  updateState = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser());
+    this.setState({
+      companyId: user.company.id
+    });
+  };
 
   render() {
-    // const { params } = this.props.navigation.state
-    // const items = params.data.customers
-    const items = this.props.navigation.getParam(customerList)
-
     return (
-      <View style={styles.centerContainer}>
-        <CustomerList
-          items={items}
-          onPress={this.onPress}
-          screenType="customer"
-        />
-        <FabAtom
-          routeName={'NewCustomer'}
-          name={'md-person-add'}
-          navigation={this.props.navigation}
-        />
-      </View>
-    )
+      <Query
+        query={CompanyCustomersGQL}
+        variables={{ companyId: this.state.companyId }}
+        fetchPolicy="cache-and-network"
+      >
+        {({ loading, data }) => (
+          <View style={styles.centerContainer}>
+            <AppSpinner visible={loading} />
+            <ContactList
+              items={data.companyCustomers || []}
+              onPress={this.onPress}
+              screenType="customer"
+            />
+            <FabAtom
+              routeName={'UpsertCustomer'}
+              name={'md-person-add'}
+              navigation={this.props.navigation}
+            />
+          </View>
+        )}
+      </Query>
+    );
   }
 }
 
-export default CustomerScreen
+export default CustomerScreen;
 
 const styles = StyleSheet.create({
   centerContainer: {
@@ -67,4 +94,4 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 28
   }
-})
+});

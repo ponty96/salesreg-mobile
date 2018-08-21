@@ -84,7 +84,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
               categories={[
                 {
                   title: 'Customers',
-                  routeName: 'Customer'
+                  routeName: 'Customers'
                 },
                 {
                   title: 'Vendors',

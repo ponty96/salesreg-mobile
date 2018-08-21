@@ -1,52 +1,55 @@
-import React, { Component } from 'react'
-import DetailsList from '../Components/DetailsList'
+import React, { Component } from 'react';
+import DetailsList from '../Components/DetailsList';
 
 interface IProps {
-  navigation: any
+  navigation: any;
+  customer: any;
+  screenProps: any;
 }
-
-interface IState {
-  list: any
-}
-
-class CustomerTabDetailsScreen extends Component<IProps, IState> {
-  state = {
-    // item: this.props.navigation.state.params.data
-    list: [
+class CustomerTabDetailsScreen extends Component<IProps> {
+  getCustomerDetails = () => {
+    const {
+      screenProps: { customer }
+    } = this.props;
+    return [
+      { section: 'Email', value: customer.email },
       {
         section: 'Phone',
-        value: '09034567889'
+        value: customer && customer.phone ? customer.phone.number : ''
       },
       {
-        section: 'Email',
-        value: 'ayo@gmail.com'
+        section: 'Address',
+        value: customer.address
+          ? `${customer.address.street1} ${customer.address.city} ${
+              customer.address.state
+            } ${customer.address.country}`
+          : ''
+      },
+      { section: 'Currency', value: customer.currency },
+      { section: 'Martial Status', value: customer.maritalStatus },
+      { section: 'Birthday', value: customer.birthday },
+      { section: 'Likes', value: customer.likes && customer.likes.join(', ') },
+      {
+        section: 'Dis Likes',
+        value: customer.dislikes && customer.dislikes.join(', ')
       },
       {
-        section: 'Home Address',
-        value: 'No 12 Sura Mogaji street, Ilupeju, Lagos'
+        section: 'Bank Name',
+        value: customer.bank ? customer.bank.bankName : ''
       },
       {
-        section: 'Currency',
-        value: '\u20A6 Nigerian Naira'
+        section: 'Account Name',
+        value: customer.bank ? customer.bank.accountName : ''
       },
       {
-        section: 'Label 5',
-        value: 'Content 5'
-      },
-      {
-        section: 'Label 6',
-        value: 'Content 6'
-      },
-      {
-        section: 'Label 7',
-        value: 'Content 7'
+        section: 'Account Number',
+        value: customer.bank ? customer.bank.accountNumber : ''
       }
-    ]
-  }
-
+    ];
+  };
   render() {
-    return <DetailsList list={this.state.list} />
+    return <DetailsList list={this.getCustomerDetails()} />;
   }
 }
 
-export default CustomerTabDetailsScreen
+export default CustomerTabDetailsScreen;
