@@ -16,8 +16,6 @@ import EmployeeForm from '../Components/EmployeeForm';
 import MainOrderList from '../Components/MainOrderList';
 import BankScreen from '../Screen/BankScreen';
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen';
-import CustomerDetailScreen from '../Screen/CustomerDetailScreen';
-import CustomerScreen from '../Screen/CustomerScreen';
 import UpsertServiceScreen from '../Screen/UpsertServiceScreen';
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen';
 import EmployeesScreen from '../Screen/EmployeesScreen';
@@ -26,7 +24,6 @@ import HomeScreen from '../Screen/HomeScreen';
 import IncomeScreen from '../Screen/IncomeScreen';
 import InventoryScreen from '../Screen/InventoryScreen';
 import InvoicesScreen from '../Screen/InvoicesScreen';
-import NewVendorScreen from '../Screen/NewVendorScreen';
 import OrderListScreen from '../Screen/OrderListScreen';
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen';
 import PurchaseScreen from '../Screen/PurchaseScreen';
@@ -34,10 +31,7 @@ import ReceiptsScreen from '../Screen/ReceiptsScreen';
 import SalesScreen from '../Screen/SalesScreen';
 import ServiceScreen from '../Screen/ServiceDetailsScreen';
 import UserProfileScreen from '../Screen/UserProfileScreen';
-import VendorDetailScreen from '../Screen/VendorDetailsScreen';
-import VendorScreen from '../Screen/VendorScreen';
 import LoginScreen from '../Screen/LoginScreen';
-import UpsertCustomerScreen from '../Screen/UpsertCustomerScreen';
 import NewOrderScreen from '../Screen/NewOrderScreen';
 import UpsertProductScreen from '../Screen/UpsertProductScreen';
 import OnBoardingScreen from '../Screen/OnBoardingScreen';
@@ -52,6 +46,18 @@ import ServicesScreen from '../Screen/ServicesScreen';
 import SignupScreen from '../Screen/SignupScreen';
 import { color } from '../Style/Color';
 import Sidebar from './Sidebar';
+
+/**
+ * Contacts
+ */
+
+import UpsertCustomerScreen from '../Screen/Contact/UpsertCustomerScreen';
+import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen';
+import CustomerScreen from '../Screen/Contact/CustomerScreen';
+
+import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen';
+import VendorDetailScreen from '../Screen/Contact/VendorDetailScreen';
+import VendorScreen from '../Screen/Contact/VendorScreen';
 
 const viewBothStack = TabNavigator(
   {
@@ -115,9 +121,6 @@ const businessStack = StackNavigator(
     NewEmployee: {
       screen: EmployeeForm
     },
-    Vendor: {
-      screen: VendorScreen
-    },
     Purchase: {
       screen: PurchaseScreen
     },
@@ -144,15 +147,6 @@ const businessStack = StackNavigator(
     },
     ProfileSettings: {
       screen: ProfileSettingsScreen
-    },
-    Customers: {
-      screen: CustomerScreen
-    },
-    UpsertCustomer: {
-      screen: UpsertCustomerScreen
-    },
-    NewVendor: {
-      screen: NewVendorScreen
     },
     NewOrder: {
       screen: NewOrderScreen
@@ -181,12 +175,6 @@ const businessStack = StackNavigator(
     MainOrder: {
       screen: MainOrderList
     },
-    CustomerDetails: {
-      screen: CustomerDetailScreen
-    },
-    VendorDetails: {
-      screen: VendorDetailScreen
-    },
     EditUserProfile: {
       screen: EditUserProfileScreen
     },
@@ -194,7 +182,30 @@ const businessStack = StackNavigator(
       screen: EditBusinessProfileScreen
     },
     EditServices: UpsertServiceScreen,
-    ShowService: ServiceScreen
+    ShowService: ServiceScreen,
+
+    /**
+     * Contact
+     */
+
+    Customers: {
+      screen: CustomerScreen
+    },
+    UpsertCustomer: {
+      screen: UpsertCustomerScreen
+    },
+    CustomerDetails: {
+      screen: CustomerDetailScreen
+    },
+    Vendors: {
+      screen: VendorScreen
+    },
+    UpsertVendor: {
+      screen: UpsertVendorScreen
+    },
+    VendorDetails: {
+      screen: VendorDetailScreen
+    }
   },
   {
     initialRouteName: 'Home',
