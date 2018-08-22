@@ -1,6 +1,6 @@
-import { Button, Icon, Left, Right, Title } from 'native-base'
+import { StyleSheet, View, Text } from 'react-native'
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { Left, Right, Button, Icon, Title } from 'native-base'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -15,6 +15,7 @@ interface IProps {
   onPressRightButton?: () => void
   navigation?: object
   showRight?: boolean
+  rightStyle?: object
 }
 
 const CustomHeader = (props: IProps) => {
@@ -55,7 +56,7 @@ const CustomHeader = (props: IProps) => {
               <Text style={styles.edit}>{props.rightText}</Text>
             </Button>
           ) : (
-            <View style={styles.rightWrapper}>
+            <View style={[styles.rightWrapper, props.rightStyle]}>
               <Icon
                 name={props.firstRightIcon}
                 type={props.firstRightIconType}
@@ -89,10 +90,10 @@ const styles = StyleSheet.create({
   title: {
     fontFamily: 'SourceSansPro_Semibold',
     fontSize: 16,
+    color: color.secondary,
     paddingLeft: 0,
     marginLeft: 0,
-    paddingTop: 24,
-    color: '#fff'
+    paddingTop: 24
   },
   rightWrapper: {
     flexDirection: 'row',

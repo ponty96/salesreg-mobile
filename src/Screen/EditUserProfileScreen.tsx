@@ -1,49 +1,59 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   View,
   StyleSheet,
   Dimensions,
   KeyboardAvoidingView,
   ScrollView
-} from 'react-native';
+} from 'react-native'
 
-import SaveCancelButton from '../Container/SaveCancelButton';
-import { color } from '../Style/Color';
-import { Form } from 'native-base';
-import InputAtom from '../Atom/InputAtom';
-import CustomHeader from '../Components/CustomHeader';
-import FormImageAtom from '../Atom/FormImageAtom';
-import FormContainerAtom from '../Atom/FormContainerAtom';
-import FormAddressSection from '../Components/FormAddressSection';
-import DatePickerAtom from '../Atom/DatePickerAtom';
-import { UpdateUserGQL } from '../graphql/mutations/user';
-import Auth from '../services/auth';
-import { Mutation } from 'react-apollo';
-import { parseFieldErrors } from '../Functions';
-import AppSpinner from '../Components/Spinner';
-import PickerAtom from '../Atom/PickerAtom';
-import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
+import SaveCancelButton from '../Container/SaveCancelButton'
+import { color } from '../Style/Color'
+import { Form } from 'native-base'
+import InputAtom from '../Atom/InputAtom'
+import CustomHeader from '../Components/CustomHeader'
+import FormImageAtom from '../Atom/FormImageAtom'
+import FormContainerAtom from '../Atom/FormContainerAtom'
+import FormAddressSection from '../Components/FormAddressSection'
+import DatePickerAtom from '../Atom/DatePickerAtom'
+import { UpdateUserGQL } from '../graphql/mutations/user'
+import Auth from '../services/auth'
+import { Mutation } from 'react-apollo'
+import { parseFieldErrors } from '../Functions'
+import AppSpinner from '../Components/Spinner'
+import PickerAtom from '../Atom/PickerAtom'
+import FormErrorTextAtom from '../Atom/FormErrorTextAtom'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  profilePicture: string;
-  firstName: string;
-  lastName: string;
-  phoneType: string;
-  phoneNumber: string;
-  dateOfBirth: string;
-  street1: string;
-  city: string;
-  state: string;
-  country: string;
-  gender: string;
-  fieldErrors: any;
+  profilePicture: string
+  firstName: string
+  lastName: string
+  phoneType: string
+  phoneNumber: string
+  dateOfBirth: string
+  street1: string
+  city: string
+  state: string
+  country: string
+  gender: string
+  fieldErrors: any
 }
 
 class EditUserProfileScreen extends Component<IProps, IState> {
+  static navigationOptions = ({ navigation }: any) => {
+    return {
+      header: (
+        <CustomHeader
+          title="Edit Profile"
+          onBackPress={() => navigation.goBack()}
+        />
+      )
+    }
+  }
   state = {
     profilePicture: '',
     firstName: '',
@@ -57,47 +67,77 @@ class EditUserProfileScreen extends Component<IProps, IState> {
     country: '',
     gender: '',
     fieldErrors: null
-  };
+  }
 
   componentWillMount() {
-    this.updateDetails();
+    this.updateDetails()
   }
-  getImage = (_pic: any) => {};
+  getImage = (_pic: any) => {}
   updateState = (key: string, value: any) => {
-    const data = { ...this.state, [key]: value };
-    this.setState(data);
-  };
+    const data = { ...this.state, [key]: value }
+    this.setState(data)
+  }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       ...user,
       profilePicture: user.profilePicture || '',
       phoneNumber: user.phone ? user.phone.number : '',
       phoneType: user.phone ? user.phone.type : '',
       ...this.parseLocationForForm(user.location)
-    });
-  };
+    })
+  }
 
   parseLocationForForm = location => {
     if (location) {
-      return location;
-    } else return {};
-  };
+      return location
+    } else return {}
+  }
 
   static navigationOptions = ({ navigation }: any) => {
     return {
-      header: (
-        <CustomHeader
-          title="Edit Profile"
-          onBackPress={() => navigation.goBack()}
+      title: (
+        <Text style={[{ fontFamily: 'SourceSansPro' }]}>Edit Profile</Text>
+      ), // params.name
+      headerLeft: (
+        <Icon
+          name={'md-arrow-back'}
+          style={styles.headerIcon}
+          onPress={() => {
+            navigation.goBack()
+          }}
         />
       )
-    };
-  };
+    }
+  }
+
+  getName = (text: string) => {
+    this.setState({
+      name: text
+    })
+  }
+
+  getPhoneNumber = (numberText: string) => {
+    this.setState({
+      phoneNumber: numberText
+    })
+  }
+
+  getImage = (pic: string) => {
+    this.setState({
+      image: pic
+    })
+  }
+
+  updateGender = (selectedGender: string) => {
+    this.setState({
+      gender: selectedGender
+    })
+  }
 
   render() {
-    const { fieldErrors } = this.state;
+    const { fieldErrors } = this.state
     return (
       <Mutation mutation={UpdateUserGQL} onCompleted={this.onCompleted}>
         {(updateUser, { loading }) => (
@@ -184,28 +224,28 @@ class EditUserProfileScreen extends Component<IProps, IState> {
           </View>
         )}
       </Mutation>
-    );
+    )
   }
   parseMutationVariables = () => {
-    let params = { ...this.state };
-    delete params.fieldErrors;
-    return params;
-  };
+    let params = { ...this.state }
+    delete params.fieldErrors
+    return params
+  }
   onCompleted = async res => {
-    console.log('res', res);
+    console.log('res', res)
     const {
       updateUser: { success, fieldErrors, data }
-    } = res;
+    } = res
     if (success) {
-      await Auth.setCurrentUser(data);
-      this.props.navigation.goBack();
+      await Auth.setCurrentUser(data)
+      this.props.navigation.goBack()
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default EditUserProfileScreen;
+export default EditUserProfileScreen
 
 const styles = StyleSheet.create({
   formViewContainer: {
@@ -264,4 +304,4 @@ const styles = StyleSheet.create({
     color: color.button,
     fontFamily: 'SourceSansPro_Semibold'
   }
-});
+})

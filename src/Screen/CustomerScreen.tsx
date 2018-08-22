@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { Component } from 'react'
+import { View, StyleSheet } from 'react-native'
 
-import FabAtom from '../Atom/FabAtom';
-import ContactList from '../Components/ContactList';
-import { color } from '../Style/Color';
-import CustomHeader from '../Components/CustomHeader';
+import FabAtom from '../Atom/FabAtom'
+import ContactList from '../Components/ContactList'
+import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
 
-import { CompanyCustomersGQL } from '../graphql/queries/contact';
-import { Query } from 'react-apollo';
-import AppSpinner from '../Components/Spinner';
-import Auth from '../services/auth';
+import { CompanyCustomersGQL } from '../graphql/queries/contact'
+import { Query } from 'react-apollo'
+import AppSpinner from '../Components/Spinner'
+import Auth from '../services/auth'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  companyId: string;
+  companyId: string
 }
 
 class CustomerScreen extends Component<IProps, IState> {
@@ -32,26 +32,26 @@ class CustomerScreen extends Component<IProps, IState> {
           onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
-    };
-  };
+    }
+  }
 
   state = {
     companyId: ''
-  };
+  }
 
   onPress = customer => {
-    this.props.navigation.navigate('CustomerDetails', { customer });
-  };
+    this.props.navigation.navigate('CustomerDetails', { customer })
+  }
 
   componentDidMount() {
-    this.updateState();
+    this.updateState()
   }
   updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       companyId: user.company.id
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -76,11 +76,11 @@ class CustomerScreen extends Component<IProps, IState> {
           </View>
         )}
       </Query>
-    );
+    )
   }
 }
 
-export default CustomerScreen;
+export default CustomerScreen
 
 const styles = StyleSheet.create({
   centerContainer: {
@@ -94,4 +94,4 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 28
   }
-});
+})

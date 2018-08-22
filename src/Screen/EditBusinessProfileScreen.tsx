@@ -1,47 +1,47 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
 import {
   View,
   StyleSheet,
   KeyboardAvoidingView,
   ScrollView,
   Text
-} from 'react-native';
+} from 'react-native'
 
-import SaveCancelButton from '../Container/SaveCancelButton';
-import { color } from '../Style/Color';
-import CustomHeader from '../Components/CustomHeader';
+import SaveCancelButton from '../Container/SaveCancelButton'
+import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
 
-import { CheckBox, Textarea } from 'native-base';
-import InputAtom from '../Atom/InputAtom';
-import FormImageAtom from '../Atom/FormImageAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import FormContainerAtom from '../Atom/FormContainerAtom';
-import FormAddressSection from '../Components/FormAddressSection';
-import { Mutation } from 'react-apollo';
-import { parseFieldErrors } from '../Functions';
-import AppSpinner from '../Components/Spinner';
-import { UpdateCompanyGQL } from '../graphql/mutations/business';
-import Auth from '../services/auth';
-import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
+import { CheckBox, Textarea } from 'native-base'
+import InputAtom from '../Atom/InputAtom'
+import FormImageAtom from '../Atom/FormImageAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import FormContainerAtom from '../Atom/FormContainerAtom'
+import FormAddressSection from '../Components/FormAddressSection'
+import { Mutation } from 'react-apollo'
+import { parseFieldErrors } from '../Functions'
+import AppSpinner from '../Components/Spinner'
+import { UpdateCompanyGQL } from '../graphql/mutations/business'
+import Auth from '../services/auth'
+import FormErrorTextAtom from '../Atom/FormErrorTextAtom'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  image: string;
-  about: string;
-  title: string;
-  contactEmail: string;
-  currency: string;
-  products: boolean;
-  services: boolean;
-  fieldErrors: any;
-  companyId: string;
-  street1: string;
-  city: string;
-  state: string;
-  country: string;
+  image: string
+  about: string
+  title: string
+  contactEmail: string
+  currency: string
+  products: boolean
+  services: boolean
+  fieldErrors: any
+  companyId: string
+  street1: string
+  city: string
+  state: string
+  country: string
 }
 
 class EditBusinessProfileScreen extends Component<IProps, IState> {
@@ -60,7 +60,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     products: false,
     services: false,
     fieldErrors: null
-  };
+  }
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -69,36 +69,36 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
           onBackPress={() => navigation.goBack()}
         />
       )
-    };
-  };
+    }
+  }
 
   componentDidMount() {
-    this.updateDetails();
+    this.updateDetails()
   }
 
   parseCategoryForForm = (category = 'none') => {
     switch (category.toUpperCase()) {
       case 'PRODUCT_SERVICE':
-        return { services: true, products: true };
+        return { services: true, products: true }
       case 'PRODUCT':
-        return { services: false, products: true };
+        return { services: false, products: true }
       case 'SERVICE':
-        return { services: true, products: false };
+        return { services: true, products: false }
       default:
-        return { services: false, products: false };
+        return { services: false, products: false }
     }
-  };
+  }
 
   parseAddressForForm = ({ branches }) => {
-    console.log('branches', branches);
+    console.log('branches', branches)
     const {
       location: { city, state, street1, country }
-    } = branches.find(branch => branch.type == 'head_office');
-    return { city, state, street1, country };
-  };
+    } = branches.find(branch => branch.type == 'head_office')
+    return { city, state, street1, country }
+  }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       companyId: user.company.id,
       title: user.company.title,
@@ -107,25 +107,25 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
       currency: user.company.currency,
       ...this.parseCategoryForForm(user.company.category),
       ...this.parseAddressForForm(user.company)
-    });
-  };
+    })
+  }
 
   updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val };
-    this.setState({ ...formData });
-  };
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
+  }
 
   flipCheckedState = (oldState: boolean, key: string) => {
-    if (key === 'products') this.updateState('products', !oldState);
-    else this.updateState('services', !oldState);
-  };
+    if (key === 'products') this.updateState('products', !oldState)
+    else this.updateState('services', !oldState)
+  }
 
   getImage = image => {
-    console.log('image', image);
-  };
+    console.log('image', image)
+  }
 
   render() {
-    const { fieldErrors } = this.state;
+    const { fieldErrors } = this.state
     return (
       <Mutation mutation={UpdateCompanyGQL} onCompleted={this.onCompleted}>
         {(updateCompany, { loading }) => (
@@ -172,7 +172,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                     <CheckBox
                       checked={this.state.products}
                       onPress={() => {
-                        this.flipCheckedState(this.state.products, 'products');
+                        this.flipCheckedState(this.state.products, 'products')
                       }}
                       color={color.selling}
                       style={styles.checkBox}
@@ -185,7 +185,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                     <CheckBox
                       checked={this.state.services}
                       onPress={() => {
-                        this.flipCheckedState(this.state.services, 'services');
+                        this.flipCheckedState(this.state.services, 'services')
                       }}
                       color={color.selling}
                       style={styles.checkBox}
@@ -238,48 +238,48 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
           </View>
         )}
       </Mutation>
-    );
+    )
   }
   parseCategoryForMutation = (products, services) => {
     if (products && services) {
-      return 'PRODUCT_SERVICE';
+      return 'PRODUCT_SERVICE'
     } else if (products) {
-      return 'PRODUCT';
+      return 'PRODUCT'
     } else if (services) {
-      return 'SERVICE';
+      return 'SERVICE'
     }
-    return 'PRODUCT_SERVICE';
-  };
+    return 'PRODUCT_SERVICE'
+  }
 
   parseMutationVariables = () => {
-    const { products, services } = this.state;
-    let variables = { ...this.state };
-    delete variables.products;
-    delete variables.services;
-    delete variables.fieldErrors;
+    const { products, services } = this.state
+    let variables = { ...this.state }
+    delete variables.products
+    delete variables.services
+    delete variables.fieldErrors
     return {
       ...variables,
       category: this.parseCategoryForMutation(products, services)
-    };
-  };
+    }
+  }
 
   onCompleted = async res => {
-    console.log('mutation res', res);
+    console.log('mutation res', res)
     const {
       updateCompany: { success, fieldErrors, data }
-    } = res;
+    } = res
     if (success) {
-      const user = JSON.parse(await Auth.getCurrentUser());
-      const updatedUser = { ...user, company: data };
-      await Auth.setCurrentUser(updatedUser);
-      this.props.navigation.navigate('BusinessProfile');
+      const user = JSON.parse(await Auth.getCurrentUser())
+      const updatedUser = { ...user, company: data }
+      await Auth.setCurrentUser(updatedUser)
+      this.props.navigation.navigate('BusinessProfile')
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default EditBusinessProfileScreen;
+export default EditBusinessProfileScreen
 
 const styles = StyleSheet.create({
   formViewContainer: {
@@ -331,4 +331,4 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     marginRight: 3
   }
-});
+})

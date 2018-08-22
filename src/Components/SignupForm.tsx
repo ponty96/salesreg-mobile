@@ -1,38 +1,67 @@
-import React, { PureComponent } from 'react';
-import { Form, Icon } from 'native-base';
-import { View, TouchableOpacity, Text, StyleSheet } from 'react-native';
+import React, { PureComponent } from 'react'
+import { Form, Icon } from 'native-base'
+import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
 
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import { color } from '../Style/Color';
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import PickerAtom from '../Atom/PickerAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
-  onNext: () => void;
-  onUpdateState?: (key: string, val: any) => void;
-  email: string;
-  password: string;
-  name: string;
-  passwordConfirmation: string;
-  gender: string;
-  fieldErrors: any;
-  onBack: () => void;
-  navigation: any;
+  onNext: () => void
+  onUpdateState?: (key: string, val: any) => void
+  email: string
+  password: string
+  name: string
+  passwordConfirmation: string
+  gender: string
+  fieldErrors: any
+  onBack: () => void
+  navigation: any
 }
 
-interface IState {}
+interface IState {
+  phone: string
+  password: string
+  name: string
+  passwordConfirmation: string
+  gender: string
+}
 
 class SigupForm extends PureComponent<IProps, IState> {
+  state = {
+    phone: '',
+    password: '',
+    name: '',
+    passwordConfirmation: '',
+    gender: ''
+  }
+
+  signup = () => {
+    console.log(
+      this.state.phone,
+      this.state.password,
+      this.state.name,
+      this.state.passwordConfirmation,
+      this.state.gender
+    )
+  }
+
+  updateState = (key: string, val: any) => {
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
+  }
+
   render() {
-    const { fieldErrors } = this.props;
+    const { fieldErrors } = this.props
     return (
       <Form>
         <InputAtom
           label="Full name"
           placeholder="e.g John Doe"
           contStyle={styles.nameInput}
-          defaultValue={this.props.name}
-          getValue={val => this.props.onUpdateState('name', val)}
+          defaultValue={this.state.name}
+          getValue={val => this.updateState('name', val)}
           inputStyle={styles.elevateInput}
           required={true}
           error={
@@ -46,8 +75,8 @@ class SigupForm extends PureComponent<IProps, IState> {
         <InputAtom
           label="Email"
           contStyle={styles.input}
-          defaultValue={this.props.email}
-          getValue={val => this.props.onUpdateState('email', val)}
+          defaultValue={this.state.phone}
+          getValue={val => this.updateState('phone', val)}
           inputStyle={styles.elevateInput}
           required={true}
           error={fieldErrors && fieldErrors['email']}
@@ -72,8 +101,8 @@ class SigupForm extends PureComponent<IProps, IState> {
           label="Password"
           secureTextEntry={true}
           contStyle={styles.input}
-          defaultValue={this.props.password}
-          getValue={val => this.props.onUpdateState('password', val)}
+          defaultValue={this.state.password}
+          getValue={val => this.updateState('password', val)}
           underneathText="Must be at least 6 characters"
           underneathStyle={styles.underneathText}
           inputStyle={styles.elevateInput}
@@ -86,10 +115,8 @@ class SigupForm extends PureComponent<IProps, IState> {
           label="Password Confirmation"
           secureTextEntry={true}
           contStyle={styles.reenter}
-          defaultValue={this.props.passwordConfirmation}
-          getValue={val =>
-            this.props.onUpdateState('passwordConfirmation', val)
-          }
+          defaultValue={this.state.passwordConfirmation}
+          getValue={val => this.updateState('passwordConfirmation', val)}
           inputStyle={styles.elevateInput}
           required={true}
           error={fieldErrors && fieldErrors['passwordConfirmation']}
@@ -122,11 +149,11 @@ class SigupForm extends PureComponent<IProps, IState> {
           btnStyle={styles.loginButton}
         />
       </Form>
-    );
+    )
   }
 }
 
-export default SigupForm;
+export default SigupForm
 
 const styles = StyleSheet.create({
   nameInput: {
@@ -188,4 +215,4 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     marginTop: 2
   }
-});
+})

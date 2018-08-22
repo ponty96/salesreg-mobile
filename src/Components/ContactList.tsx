@@ -42,6 +42,8 @@ class ContactList extends Component<IProps, IState> {
             'Latest Payment',
             'Customer Rating'
           ]}
+          image={require('../../Assets/Icons/subheader-icons/user-blue.png')}
+          rightLabel="Sort by"
         />
         <ScrollView>
           <FlatList

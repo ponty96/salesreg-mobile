@@ -1,48 +1,31 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import {
   ScrollView,
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions
-} from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-import { Icon } from 'native-base';
-import { color } from '../Style/Color';
-import SideBarItemAtom from '../Atom/SideBarItemAtom';
-import Auth from '../services/auth';
+  Dimensions,
+  Alert
+} from 'react-native'
+import { SafeAreaView } from 'react-navigation'
+import { Icon } from 'native-base'
+import { color } from '../Style/Color'
+import SideBarItemAtom from '../Atom/SideBarItemAtom'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
-interface IState {
-  businessName: string;
-}
-
-export default class SideBar extends PureComponent<IProps, IState> {
+export default class SideBar extends PureComponent<IProps> {
   handleNavigation = (location: string, data: any = undefined) => {
-    this.props.navigation.navigate(location, { data });
-  };
-  state = {
-    businessName: ''
-  };
-
-  componentWillMount() {
-    this.updateBusinessName();
+    this.props.navigation.navigate(location, { data })
   }
 
-  updateBusinessName = async () => {
-    const user = await Auth.getCurrentUser();
-    this.setState({
-      businessName: JSON.parse(user).company.title
-    });
-  };
   render() {
     const {
       navigation: { navigate }
-    } = this.props;
+    } = this.props
     return (
       <SafeAreaView
         style={styles.sidebarContainer}
@@ -52,11 +35,16 @@ export default class SideBar extends PureComponent<IProps, IState> {
           <ScrollView>
             <TouchableOpacity
               style={styles.header}
-              onPress={() => navigate('DrawerToggle')}
+              onPress={() => {
+                Alert.alert('Sign out', 'Do you want to sign out?', [
+                  { text: 'OK', onPress: () => navigate('Auth') },
+                  { text: 'Cancel' }
+                ])
+              }}
             >
               <Icon name="cross" type="Entypo" style={styles.cross} />
               <Text style={[styles.texts, { fontFamily: 'SourceSansPro' }]}>
-                {this.state.businessName}
+                BAYONE ATTRACTIONS
               </Text>
             </TouchableOpacity>
             <SideBarItemAtom
@@ -103,7 +91,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 },
                 {
                   title: 'Sales',
-                  routeName: 'Sales'
+                  routeName: 'salesOrderTab'
                 }
               ]}
             />
@@ -139,7 +127,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
               categories={[
                 {
                   title: 'Settings',
-                  routeName: 'ProfileSettings'
+                  routeName: 'Profile'
                 },
                 {
                   title: 'Help & Feedback',
@@ -150,7 +138,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
           </ScrollView>
         </View>
       </SafeAreaView>
-    );
+    )
   }
 }
 
@@ -197,4 +185,4 @@ const styles = StyleSheet.create({
   itemsContainer: {
     flex: 4
   }
-});
+})
