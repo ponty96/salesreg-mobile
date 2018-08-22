@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { View, FlatList, ScrollView, StyleSheet } from 'react-native';
-import ContactItemAtom from '../Atom/ContactItemAtom';
-import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import EmptyList from './EmptyList';
+import ContactItemAtom from '../../Atom/ContactItemAtom';
+import SubHeaderAtom from '../../Atom/SubHeaderAtom';
+import EmptyList from '../EmptyList';
 
 interface IProps {
   items: any[];

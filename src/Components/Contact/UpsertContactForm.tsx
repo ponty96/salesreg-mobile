@@ -1,42 +1,34 @@
 import React, { PureComponent } from 'react';
 import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
-import InputAtom from '../Atom/InputAtom';
-import PickerAtom from '../Atom/PickerAtom';
-// import ButtonAtom from '../Atom/ButtonAtom';
-import FormImageAtom from '../Atom/FormImageAtom';
+import InputAtom from '../../Atom/InputAtom';
+import PickerAtom from '../../Atom/PickerAtom';
+// import ButtonAtom from '../../Atom/ButtonAtom';
+import FormImageAtom from '../../Atom/FormImageAtom';
 import { Form } from 'native-base';
-import { color } from '../Style/Color';
-import FormContainerAtom from '../Atom/FormContainerAtom';
-import SaveCancelButton from '../Container/SaveCancelButton';
+import { color } from '../../Style/Color';
+import FormContainerAtom from '../../Atom/FormContainerAtom';
+import SaveCancelButton from '../../Container/SaveCancelButton';
 import { ScrollView } from 'react-native-gesture-handler';
-import CustomHeader from '../Components/CustomHeader';
-import FormAddressSection from '../Components/FormAddressSection';
+import FormAddressSection from '../FormAddressSection';
 import { Textarea } from 'native-base';
-import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
-import DatePickerAtom from '../Atom/DatePickerAtom';
+import FormErrorTextAtom from '../../Atom/FormErrorTextAtom';
+import DatePickerAtom from '../../Atom/DatePickerAtom';
 import { Mutation } from 'react-apollo';
-import { UpsertContactGQL } from '../graphql/mutations/contact';
-import AppSpinner from '../Components/Spinner';
-import Auth from '../services/auth';
-import { parseFieldErrors } from '../Functions';
+import AppSpinner from '../Spinner';
+import { UpsertContactGQL } from '../../graphql/mutations/contact';
+import Auth from '../../services/auth';
+import { parseFieldErrors, capitalize } from '../../Functions';
 
 interface IProps {
   navigation: any;
+  contact: any;
+  successRoute: string;
+  contactType: string;
 }
 
 interface IState {}
 
-class UpsertCustomerScreen extends PureComponent<IProps, IState> {
-  static navigationOptions = ({ navigation }: any) => {
-    return {
-      header: (
-        <CustomHeader
-          title="Customer"
-          onBackPress={() => navigation.goBack()}
-        />
-      )
-    };
-  };
+class UpsertContactForm extends PureComponent<IProps, IState> {
   state = {
     image: 'http://downloadicons.net/sites/default/files/user-icon-2197.png',
     contactName: '',
@@ -64,19 +56,18 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
   };
 
   componentDidMount() {
-    const customer = this.props.navigation.getParam('customer');
-    console.log('customer', customer);
+    const { contact } = this.props;
     let details = {};
-    if (customer) {
+    if (contact) {
       const {
         address = {},
         bank = {},
         likes = [],
         dislikes = [],
         phone
-      } = customer;
+      } = contact;
       details = {
-        ...customer,
+        ...contact,
         ...address,
         ...bank,
         ...phone,
@@ -108,9 +99,10 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
 
   render() {
     const { fieldErrors } = this.state;
+    const labelSuffix = capitalize(this.props.contactType);
     return (
       <Mutation mutation={UpsertContactGQL} onCompleted={this.onCompleted}>
-        {(upsertCustomer, { loading }) => (
+        {(upsertContact, { loading }) => (
           <View style={styles.ababa}>
             <ScrollView>
               <KeyboardAvoidingView
@@ -122,13 +114,13 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
                 <ScrollView>
                   <Form>
                     <FormImageAtom
-                      form={'customer'}
+                      form={'contact'}
                       getValue={this.getImage}
                       source={this.state.image}
                     />
-                    <FormContainerAtom headerText={'Customer ID'}>
+                    <FormContainerAtom headerText={`${labelSuffix} ID`}>
                       <InputAtom
-                        label="Customer Name"
+                        label={`${labelSuffix} Name`}
                         getValue={val => this.updateState('contactName', val)}
                         required
                         placeholder="e.g Ayomide Aregbede"
@@ -143,7 +135,7 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
                         error={fieldErrors && fieldErrors['companyName']}
                       />
                     </FormContainerAtom>
-                    <FormContainerAtom headerText={'Customer contact'}>
+                    <FormContainerAtom headerText={`${labelSuffix} contact`}>
                       <InputAtom
                         getValue={val => this.updateState('number', val)}
                         keyboardType="numeric"
@@ -274,7 +266,7 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
             <SaveCancelButton
               navigation={this.props.navigation}
               createfunc={() =>
-                upsertCustomer({ variables: this.parseMutationVariables() })
+                upsertContact({ variables: this.parseMutationVariables() })
               }
               positiveButtonName="SAVE"
             />
@@ -284,12 +276,12 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
     );
   }
   parseMutationVariables = () => {
-    const customer = this.props.navigation.getParam('customer', {});
+    const { contact = {} } = this.props;
     return {
       ...this.state,
-      contactId: customer ? customer.id : null,
+      contactId: contact ? contact.id : null,
       bank: this.parseBankDetails(),
-      type: 'customer'
+      type: this.props.contactType
     };
   };
 
@@ -309,14 +301,14 @@ class UpsertCustomerScreen extends PureComponent<IProps, IState> {
       upsertContact: { success, fieldErrors }
     } = res;
     if (success) {
-      this.props.navigation.navigate('Customers');
+      this.props.navigation.navigate(this.props.successRoute);
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
     }
   };
 }
 
-export default UpsertCustomerScreen;
+export default UpsertContactForm;
 
 const styles = StyleSheet.create({
   ababa: {

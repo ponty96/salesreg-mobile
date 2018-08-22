@@ -7,8 +7,8 @@ import {
   TouchableWithoutFeedback
 } from 'react-native';
 import { Thumbnail, Icon } from 'native-base';
-import { color } from '../Style/Color';
-import { numberWithCommas } from '../Functions/numberWithCommas';
+import { color } from '../../Style/Color';
+import { numberWithCommas } from '../../Functions/numberWithCommas';
 
 interface IProps {
   contactName: string;
@@ -16,16 +16,13 @@ interface IProps {
   overDue: number;
   redText: string;
   avatar?: string;
-  customer?: any;
+  contact?: any;
 }
 
-export default class AboveCustomerDetailsAtom extends React.Component<
-  IProps,
-  any
-> {
+export default class ContactDetailsCard extends React.Component<IProps, any> {
   makeCall = () => {
-    const { customer } = this.props;
-    const phoneNumber = customer.phone ? customer.phone.number : '';
+    const { contact } = this.props;
+    const phoneNumber = contact.phone ? contact.phone.number : '';
     const url = `tel:${phoneNumber}`;
     Linking.canOpenURL(url).then(supported => {
       console.log('make call supported', supported);
@@ -35,10 +32,8 @@ export default class AboveCustomerDetailsAtom extends React.Component<
     });
   };
   sendEmail = () => {
-    const { customer } = this.props;
-    const url = `mailto://${customer.email}&subject=Hello${
-      customer.contactName
-    }`;
+    const { contact } = this.props;
+    const url = `mailto://${contact.email}&subject=Hello${contact.contactName}`;
     Linking.canOpenURL(url).then(supported => {
       console.log('send email supported', supported);
       if (supported) {

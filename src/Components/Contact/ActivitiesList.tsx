@@ -1,12 +1,12 @@
-import React from 'react'
-import { View, FlatList } from 'react-native'
-import ExportIconAtom from '../Atom/ExportIconAtom'
-import ActivitiesAtom from '../Atom/ActivitiesAtom'
-import EmptyList from './EmptyList'
+import React from 'react';
+import { View, FlatList } from 'react-native';
+import ExportIconAtom from '../../Atom/ExportIconAtom';
+import ActivitiesAtom from '../../Atom/Contact/ActivitiesAtom';
+import EmptyList from '../EmptyList';
 
 interface IProps {
-  screenText: string
-  screenType: string
+  screenText: string;
+  screenType: string;
 }
 
 const CUS_ACTIVITIES = [
@@ -90,7 +90,7 @@ const CUS_ACTIVITIES = [
     title: 'Invoice payment',
     details: ''
   }
-]
+];
 
 const VEN_ACTIVITIES = [
   {
@@ -173,7 +173,7 @@ const VEN_ACTIVITIES = [
     title: 'Expense #2341',
     details: ''
   }
-]
+];
 
 export default class ActivitiesList extends React.Component<IProps, any> {
   renderItem = ({ item }: any) => {
@@ -189,8 +189,8 @@ export default class ActivitiesList extends React.Component<IProps, any> {
           details={item.details}
         />
       </View>
-    )
-  }
+    );
+  };
   render() {
     return (
       <FlatList
@@ -206,6 +206,6 @@ export default class ActivitiesList extends React.Component<IProps, any> {
           />
         }
       />
-    )
+    );
   }
 }

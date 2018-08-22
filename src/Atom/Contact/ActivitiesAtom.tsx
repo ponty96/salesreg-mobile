@@ -1,16 +1,16 @@
-import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
-import { Left, Right } from 'native-base'
-import { color } from '../Style/Color'
-import { numberWithCommas } from '../Functions/numberWithCommas'
+import React from 'react';
+import { View, StyleSheet, Text } from 'react-native';
+import { Left, Right } from 'native-base';
+import { color } from '../../Style/Color';
+import { numberWithCommas } from '../../Functions/numberWithCommas';
 
 interface IProps {
-  amount: number
-  dueDate: string
-  status: string
-  bar: number
-  details: string
-  title: string
+  amount: number;
+  dueDate: string;
+  status: string;
+  bar: number;
+  details: string;
+  title: string;
 }
 
 export default class ActivitiesAtom extends React.Component<IProps, any> {
@@ -34,8 +34,8 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
           ]}
         />
       </View>
-    )
-  }
+    );
+  };
   render() {
     return (
       <View style={styles.container}>
@@ -89,7 +89,7 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
           </Right>
         </View>
       </View>
-    )
+    );
   }
 }
 
@@ -166,4 +166,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     fontFamily: 'SourceSansPro'
   }
-})
+});
