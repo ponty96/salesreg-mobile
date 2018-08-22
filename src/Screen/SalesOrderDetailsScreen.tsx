@@ -109,8 +109,9 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           secondButtonText="Go to status"
           visible={this.state.visible}
           onBackPress={() => this.setState({ visible: false })}
-          onPressTopButton={this.handleOKPress}
-          onPressBottomButton={this.handleGotoStatusPress}
+          onPressTopButton={() => this.handleContinuePress()}
+          onPressBottomButton={() => this.handleDontCancelPress()}
+          footerText="Close"
         />
       )
     else
@@ -123,8 +124,9 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
           secondButtonText="Don't cancel"
           visible={this.state.visible}
           onBackPress={() => this.setState({ visible: false })}
-          onPressTopButton={this.handleContinuePress}
-          onPressBottomButton={this.handleDontCancelPress}
+          onPressTopButton={() => this.handleContinuePress}
+          onPressBottomButton={() => this.handleDontCancelPress}
+          footerText="Close"
         />
       )
   }

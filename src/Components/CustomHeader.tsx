@@ -15,6 +15,7 @@ interface IProps {
   onPressRightButton?: () => void
   navigation?: object
   showRight?: boolean
+  rightStyle?: object
 }
 
 const CustomHeader = (props: IProps) => {
@@ -55,7 +56,7 @@ const CustomHeader = (props: IProps) => {
               <Text style={styles.edit}>{props.rightText}</Text>
             </Button>
           ) : (
-            <View style={styles.rightWrapper}>
+            <View style={[styles.rightWrapper, props.rightStyle]}>
               <Icon
                 name={props.firstRightIcon}
                 type={props.firstRightIconType}

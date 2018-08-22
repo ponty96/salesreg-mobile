@@ -47,17 +47,19 @@ import ServicesScreen from '../Screen/ServicesScreen'
 import SignupScreen from '../Screen/SignupScreen'
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
-import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen';
-import EditProductDetailScreen from '../Screen/EditProductDetailScreen';
-import EditCustomerDetailsScreen from '../Screen/EditCustomerDetailsScreen';
-import SalesOrderStatusScreen from '../Screen/SalesOrderStatusScreen';
-import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen';
-import NewSalesOrderScreen from '../Screen/NewSalesOrderScreen';
-import ServiceSalesRecordScreen from '../Screen/ServiceSalesRecordScreen';
-import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen';
-import ProductSalesOrderScreen from '../Screen/ServicesSalesOrderScreen';
-import SettingsScreen from '../Screen/SettingsScreen';
-import ProductSalesRecordScreen from '../Screen/ProductSalesRecordScreen';
+import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
+import EditProductDetailScreen from '../Screen/EditProductDetailScreen'
+import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
+import ProductSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
+import SettingsScreen from '../Screen/SettingsScreen'
+import ProductSalesRecordScreen from '../Screen/ProductSalesRecordScreen'
+import EditCustomerDetailsScreen from '../Screen/EditCustomerDetailsScreen'
+import SalesOrderStatusScreen from '../Screen/SalesOrderStatusScreen'
+import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
+import NewSalesOrderScreen from '../Screen/NewSalesOrderScreen'
+import ServiceSalesRecordScreen from '../Screen/ServiceSalesRecordScreen'
+import { ExpensesDetailsScreen } from '../Screen/ExpensesDetailsScreen'
+import NewExpensesScreen from '../Screen/NewExpensesSceen'
 
 let BOTH = 'both'
 let ONE_PRODUCT = 'product'
@@ -268,6 +270,8 @@ const businessStack = StackNavigator(
     SalesOrderDetails: SalesOrderDetailsScreen,
     NewSalesOrder: NewSalesOrderScreen,
     ServiceSalesRecord: ServiceSalesRecordScreen,
+    ExpensesDetails: ExpensesDetailsScreen,
+    NewExpenses: NewExpensesScreen,
     salesOrderTab: {
       screen:
         OPTION === BOTH

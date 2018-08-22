@@ -6,16 +6,17 @@ import ModalAtom from '../Atom/ModalAtom'
 interface IProp {
   visible: boolean
   onBackPress: () => void
-  onPressBottomButton: () => void
+  onPressBottomButton?: () => void
   onPressTopButton: () => void
   headerText: string
   bodyText?: string
-  firstButtonText: string
-  secondButtonText: string
+  firstButtonText?: string
+  secondButtonText?: string
   firstButtonTextColor?: string
   secondButtonTextColor?: string
   children?: any
   modalStyle?: object
+  footerText: string
 }
 
 const WarningModal = (props: IProp) => {
@@ -29,29 +30,40 @@ const WarningModal = (props: IProp) => {
           <Text style={styles.header}>{props.headerText}</Text>
           <Text style={styles.normalText}>{props.bodyText}</Text>
           {props.children}
-          <TouchableOpacity
-            style={styles.buttonWrapper}
-            onPress={props.onPressTopButton}
-          >
-            <Text
-              style={[styles.normalText, { color: props.firstButtonTextColor }]}
+          {props.firstButtonText ? (
+            <TouchableOpacity
+              style={styles.buttonWrapper}
+              onPress={props.onPressTopButton}
             >
-              {props.firstButtonText}
-            </Text>
-          </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.buttonWrapper}
-            onPress={props.onPressBottomButton}
-          >
-            <Text
-              style={[
-                styles.normalText,
-                { color: props.secondButtonTextColor }
-              ]}
+              <Text
+                style={[
+                  styles.normalText,
+                  { color: props.firstButtonTextColor }
+                ]}
+              >
+                {props.firstButtonText}
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            undefined
+          )}
+          {props.secondButtonText ? (
+            <TouchableOpacity
+              style={styles.buttonWrapper}
+              onPress={props.onPressBottomButton}
             >
-              {props.secondButtonText}
-            </Text>
-          </TouchableOpacity>
+              <Text
+                style={[
+                  styles.normalText,
+                  { color: props.secondButtonTextColor }
+                ]}
+              >
+                {props.secondButtonText}
+              </Text>
+            </TouchableOpacity>
+          ) : (
+            undefined
+          )}
         </View>
       }
       footer={
@@ -59,7 +71,9 @@ const WarningModal = (props: IProp) => {
           style={[styles.buttonWrapper, styles.footer]}
           onPress={props.onBackPress}
         >
-          <Text style={[styles.normalText, styles.header]}>Close</Text>
+          <Text style={[styles.normalText, styles.header]}>
+            {props.footerText}
+          </Text>
         </TouchableOpacity>
       }
     />
