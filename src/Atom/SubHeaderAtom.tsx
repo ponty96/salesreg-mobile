@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Header, Left, Right, Text } from 'native-base'
+import { Header, Left, Right, Text, Icon } from 'native-base'
 import PickerAtom from './PickerAtom'
 import { StyleSheet, View, Image } from 'react-native'
 import { color } from '../Style/Color'
@@ -7,6 +7,11 @@ import { color } from '../Style/Color'
 interface IProps {
   total?: any
   list?: any[]
+  image?: any
+  rightLabel?: string
+  screen?: string
+  onPressArrow?: () => void
+  children?: JSX.Element
 }
 
 class SubHeaderAtom extends React.Component<IProps, any> {
@@ -14,29 +19,52 @@ class SubHeaderAtom extends React.Component<IProps, any> {
     total: '80'
   }
 
+  renderRightComponent = (screen: string) => {
+    screen = this.props.screen
+    if (screen === 'products and services')
+      return (
+        <View>
+          <Text style={styles.subHeaderFont}>{this.props.rightLabel}</Text>
+          <View style={styles.pickerWrapper}>
+            <PickerAtom
+              list={this.props.list}
+              style={styles.pickerStyle}
+              placeholder="Make a selection"
+            />
+          </View>
+        </View>
+      )
+    else return undefined
+  }
+
   render() {
     return (
       <Header style={styles.subHeaderHeader}>
         <Left style={styles.subHeaderLeftRow}>
-          <Image
-            source={require('../../assets/Icons/subheader-icons/product-blue.png')}
-            style={styles.productIcon}
-          />
+          <Image source={this.props.image} style={styles.productIcon} />
           <Text style={styles.subHeaderPad}>{this.props.total}</Text>
         </Left>
+
         <Right style={styles.subHeaderRightRow}>
-          <Text style={styles.subHeaderFont}>Sort by</Text>
-          <View style={styles.pickerWrapper}>
-            <PickerAtom
-              list={this.props.list}
-              pickerStyle={{
-                paddingRight: 10,
-                alignSelf: 'flex-start'
-              }}
-              width="100%"
-              placeholder="Make a selection"
-            />
-          </View>
+          <Text style={styles.subHeaderFont}>{this.props.rightLabel}</Text>
+          {this.props.screen !== 'sales order' ? (
+            <View style={styles.pickerWrapper}>
+              <PickerAtom
+                list={this.props.list}
+                style={styles.pickerStyle}
+                placeholder="Make a selection"
+              />
+            </View>
+          ) : (
+            this.props.children || (
+              <Icon
+                name="chevron-small-right"
+                type="Entypo"
+                style={styles.rightIconLabel}
+                onPress={this.props.onPressArrow}
+              />
+            )
+          )}
         </Right>
       </Header>
     )
@@ -77,6 +105,12 @@ const styles = StyleSheet.create({
     color: color.check,
     marginLeft: 10
   },
+  pickerStyle: {
+    width: '100%',
+    height: 35,
+    paddingRight: 10,
+    alignSelf: 'flex-start'
+  },
   pickerWrapper: {
     borderWidth: 1,
     width: 160,
@@ -87,5 +121,11 @@ const styles = StyleSheet.create({
   productIcon: {
     height: 20,
     width: 20
+  },
+  salesOrderSubHeaderRightText: {
+    fontFamily: 'SourceSansPro'
+  },
+  rightIconLabel: {
+    color: color.button
   }
 })

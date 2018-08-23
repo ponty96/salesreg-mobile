@@ -43,6 +43,9 @@ class ProductList extends PureComponent<IProps, IState> {
             'Highest profit',
             'Lowest profit'
           ]}
+          image={require('../../assets/Icons/subheader-icons/product-blue.png')}
+          rightLabel="Sort by"
+          screen="products and services"
           total={items ? items.length : 0}
         />
 

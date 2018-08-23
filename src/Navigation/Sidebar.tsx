@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import {
   ScrollView,
   View,
@@ -6,43 +6,43 @@ import {
   TouchableOpacity,
   StyleSheet,
   Dimensions
-} from 'react-native';
-import { SafeAreaView } from 'react-navigation';
-import { Icon } from 'native-base';
-import { color } from '../Style/Color';
-import SideBarItemAtom from '../Atom/SideBarItemAtom';
-import Auth from '../services/auth';
+} from 'react-native'
+import { SafeAreaView } from 'react-navigation'
+import { Icon } from 'native-base'
+import { color } from '../Style/Color'
+import SideBarItemAtom from '../Atom/SideBarItemAtom'
+import Auth from '../services/auth'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  businessName: string;
+  businessName: string
 }
 
 export default class SideBar extends PureComponent<IProps, IState> {
   handleNavigation = (location: string, data: any = undefined) => {
-    this.props.navigation.navigate(location, { data });
-  };
+    this.props.navigation.navigate(location, { data })
+  }
   state = {
     businessName: ''
-  };
+  }
 
   componentWillMount() {
-    this.updateBusinessName();
+    this.updateBusinessName()
   }
 
   updateBusinessName = async () => {
-    const user = await Auth.getCurrentUser();
+    const user = await Auth.getCurrentUser()
     this.setState({
       businessName: JSON.parse(user).company.title
-    });
-  };
+    })
+  }
   render() {
     const {
       navigation: { navigate }
-    } = this.props;
+    } = this.props
     return (
       <SafeAreaView
         style={styles.sidebarContainer}
@@ -103,7 +103,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 },
                 {
                   title: 'Sales',
-                  routeName: 'Sales'
+                  routeName: 'salesOrderTab'
                 }
               ]}
             />
@@ -150,7 +150,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
           </ScrollView>
         </View>
       </SafeAreaView>
-    );
+    )
   }
 }
 
@@ -197,4 +197,4 @@ const styles = StyleSheet.create({
   itemsContainer: {
     flex: 4
   }
-});
+})

@@ -1,19 +1,19 @@
-import React, { PureComponent } from 'react';
-import { View, Text, ScrollView, StyleSheet } from 'react-native';
-import { Icon } from 'native-base';
+import React, { PureComponent } from 'react'
+import { View, Text, ScrollView, StyleSheet } from 'react-native'
+import { Icon } from 'native-base'
 
-import ButtonAtom from '../Atom/ButtonAtom';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import { color } from '../Style/Color';
+import ButtonAtom from '../Atom/ButtonAtom'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import { color } from '../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 class OnBoardingScreen extends PureComponent<IProps> {
   navigate = (location: string) => {
-    this.props.navigation.navigate(location);
-  };
+    this.props.navigation.navigate(location)
+  }
 
   render() {
     const APP_DETAILS = [
@@ -21,7 +21,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
       'Process all your orders',
       'Track all payments & outstandings',
       'Manage all your business contacts'
-    ];
+    ]
 
     return (
       <View style={styles.container}>
@@ -46,7 +46,8 @@ class OnBoardingScreen extends PureComponent<IProps> {
           <ButtonAtom
             btnText="TRY FOR FREE"
             btnStyle={styles.signupButton}
-            onPress={() => this.navigate('Signup')}
+            funcValue={'Signup'}
+            onPress={this.navigate}
             textStyle={styles.freeTrialText}
           />
           <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
@@ -56,7 +57,8 @@ class OnBoardingScreen extends PureComponent<IProps> {
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
-            onPress={() => this.navigate('Login')}
+            funcValue={'Login'}
+            onPress={this.navigate}
             btnStyle={styles.loginButton}
             textStyle={[
               styles.loginText,
@@ -65,11 +67,11 @@ class OnBoardingScreen extends PureComponent<IProps> {
           />
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default OnBoardingScreen;
+export default OnBoardingScreen
 
 const styles = StyleSheet.create({
   bodyContainer: {
@@ -121,4 +123,4 @@ const styles = StyleSheet.create({
   freeTrialText: {
     fontSize: 16
   }
-});
+})

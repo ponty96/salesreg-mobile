@@ -1,49 +1,49 @@
-import * as React from 'react';
-import { Picker, Icon } from 'native-base';
-import { View, StyleSheet } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { Picker, Icon } from 'native-base'
+import { View, StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
 
-import { Label, Text } from 'native-base';
+import { Label, Text } from 'native-base'
 
 interface IProps {
-  list: Array<any>;
-  placeholder: string;
-  selected?: string;
-  handleSelection?: (value: any) => void;
-  width?: string;
-  pickerStyle?: any;
-  style?: any;
-  required?: boolean | false;
-  label?: string;
+  list: Array<any>
+  placeholder: string
+  selected?: string
+  handleSelection?: (value: any) => void
+  width?: string
+  pickerStyle?: any
+  style?: any
+  required?: boolean | false
+  label?: string
 }
 
 interface IState {
-  loading: boolean;
-  bottomColor: string;
-  labelColor: string;
+  loading: boolean
+  bottomColor: string
+  labelColor: string
 }
 
 class PickerAtom extends React.Component<IProps, IState> {
   constructor(props: any) {
-    super(props);
+    super(props)
     this.state = {
       loading: true,
       bottomColor: color.textBorderBottom,
-      labelColor: color.blueLabelColor
-    };
+      labelColor: color.label
+    }
   }
   static defaultProps = {
     width: '100%'
-  };
+  }
   handleChange(value: string) {
-    this.props.handleSelection(value);
+    this.props.handleSelection(value)
   }
   changeUnderline = (newColor: string): void => {
-    this.setState({ labelColor: newColor });
-  };
+    this.setState({ labelColor: newColor })
+  }
 
   render() {
-    let list = this.props.list;
+    let list = this.props.list
     return (
       <View
         style={{
@@ -108,7 +108,7 @@ class PickerAtom extends React.Component<IProps, IState> {
           ))}
         </Picker>
       </View>
-    );
+    )
   }
 }
 
@@ -122,6 +122,6 @@ const styles = StyleSheet.create({
     color: color.inactive,
     fontSize: 14
   }
-});
+})
 
-export default PickerAtom;
+export default PickerAtom
