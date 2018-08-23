@@ -27,7 +27,9 @@ class UserProfile extends PureComponent<IProps> {
   render() {
     return (
       <View style={styles.container}>
-        <NameDisplayAtom businessName={this.props.businessName} />
+        <NameDisplayAtom
+          businessName={this.props.businessName || this.props.name}
+        />
         {this.displayList()}
       </View>
     )

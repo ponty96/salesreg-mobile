@@ -1,15 +1,15 @@
 import gql from 'graphql-tag';
 
-export const UpsertCustomerGQL = gql`
-  mutation upsertCustomer(
-    $customerId: Uuid
+export const UpsertContactGQL = gql`
+  mutation upsertContact(
+    $contactId: Uuid
     $street1: String!
     $city: String!
     $state: String!
     $country: String!
     $dislikes: [String]
     $likes: [String]
-    $customerName: String!
+    $contactName: String!
     $currency: String
     $birthday: String
     $maritalStatus: String
@@ -19,20 +19,22 @@ export const UpsertCustomerGQL = gql`
     $email: String!
     $bank: BankInput
     $companyId: Uuid!
+    $type: String!
   ) {
-    upsertCustomer(
-      customer: {
+    upsertContact(
+      contact: {
         userId: $userId
         email: $email
         likes: $likes
         dislikes: $dislikes
         birthday: $birthday
         currency: $currency
-        customerName: $customerName
+        contactName: $contactName
         bank: $bank
         maritalStatus: $maritalStatus
         image: $image
         phone: { number: $number }
+        type: $type
         address: {
           state: $state
           street1: $street1
@@ -41,7 +43,7 @@ export const UpsertCustomerGQL = gql`
         }
         companyId: $companyId
       }
-      customerId: $customerId
+      contactId: $contactId
     ) {
       success
       fieldErrors {
@@ -49,11 +51,10 @@ export const UpsertCustomerGQL = gql`
         message
       }
       data {
-        ... on Customer {
+        ... on Contact {
           id
-          customerName
+          contactName
           email
-          fax
           image
           address {
             state

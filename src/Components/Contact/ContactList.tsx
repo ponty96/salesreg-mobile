@@ -1,32 +1,32 @@
-import React, { Component } from 'react';
-import { View, FlatList, ScrollView, StyleSheet } from 'react-native';
-import ContactListAtom from '../Atom/ContactListAtom';
-import SubHeaderAtom from '../Atom/SubHeaderAtom';
-import EmptyList from './EmptyList';
+import React, { Component } from 'react'
+import { View, FlatList, ScrollView, StyleSheet } from 'react-native'
+import ContactItemAtom from '../../Atom/ContactItemAtom'
+import SubHeaderAtom from '../../Atom/SubHeaderAtom'
+import EmptyList from '../EmptyList'
 
 interface IProps {
-  items: any[];
-  onPress: (customer?: any) => void;
-  screenType: string;
+  items: any[]
+  onPress: (customer?: any) => void
+  screenType: string
 }
 
 interface IState {}
 
 class ContactList extends Component<IProps, IState> {
   renderItem = ({ item }: any) => {
-    let latestAmount = item.status === 'balance' ? item.balance : item.debt;
+    let latestAmount = item.status === 'balance' ? item.balance : item.debt
     return (
-      <ContactListAtom
+      <ContactItemAtom
         key={item.id}
         image={item.image}
-        customerName={item.customerName}
+        contactName={item.contactName}
         amount={item.amount}
         latestAmount={latestAmount}
         realStyle={item.status}
         onPress={() => this.props.onPress(item)}
       />
-    );
-  };
+    )
+  }
 
   render() {
     return (
@@ -42,7 +42,7 @@ class ContactList extends Component<IProps, IState> {
             'Latest Payment',
             'Customer Rating'
           ]}
-          image={require('../../assets/Icons/subheader-icons/user-blue.png')}
+          image={require('../../../assets/Icons/subheader-icons/user-blue.png')}
           rightLabel="Sort by"
         />
         <ScrollView>
@@ -57,11 +57,11 @@ class ContactList extends Component<IProps, IState> {
           />
         </ScrollView>
       </View>
-    );
+    )
   }
 }
 
-export default ContactList;
+export default ContactList
 
 const styles = StyleSheet.create({
   customerListContainer: {
@@ -69,4 +69,4 @@ const styles = StyleSheet.create({
     flex: 1,
     width: '100%'
   }
-});
+})

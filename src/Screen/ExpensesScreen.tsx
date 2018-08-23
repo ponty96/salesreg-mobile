@@ -98,12 +98,6 @@ export default class ExpensesScreen extends React.Component<IProps> {
 
     return (
       <View style={styles.container}>
-        <FabAtom
-          routeName="NewExpenses"
-          navigation={navigation}
-          name="database-minus"
-          type="MaterialCommunityIcons"
-        />
         <SectionList
           renderItem={this.renderList}
           ListEmptyComponent={
@@ -115,6 +109,12 @@ export default class ExpensesScreen extends React.Component<IProps> {
           ]}
           keyExtractor={(item, index) => item.name + index}
           renderSectionFooter={this.renderListFooter}
+        />
+        <FabAtom
+          routeName="NewExpenses"
+          navigation={navigation}
+          name="database-minus"
+          type="MaterialCommunityIcons"
         />
       </View>
     )

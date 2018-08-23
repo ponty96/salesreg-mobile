@@ -8,15 +8,14 @@ import { Query } from 'react-apollo'
 import { AuthenticateQueryGQL } from '../graphql/queries/Authenticate'
 
 // Customer Screens
-import CustomerDetailScreen from '../Screen/CustomerDetailScreen'
-import CustomerScreen from '../Screen/CustomerScreen'
-import UpsertCustomerScreen from '../Screen/UpsertCustomerScreen'
-import EditCustomerDetailsScreen from '../Screen/EditCustomerDetailsScreen'
+import UpsertCustomerScreen from '../Screen/Contact/UpsertCustomerScreen'
+import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
+import CustomerScreen from '../Screen/Contact/CustomerScreen'
 
 // Vendor Screens
-import NewVendorScreen from '../Screen/NewVendorScreen'
-import VendorDetailScreen from '../Screen/VendorDetailsScreen'
-import VendorScreen from '../Screen/VendorScreen'
+import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen'
+import VendorDetailScreen from '../Screen/Contact/VendorDetailScreen'
+import VendorScreen from '../Screen/Contact/VendorScreen'
 
 // Product Screens
 import UpsertProductScreen from '../Screen/UpsertProductScreen'
@@ -77,9 +76,6 @@ import OrderListScreen from '../Screen/OrderListScreen'
 import NewOrderScreen from '../Screen/NewOrderScreen'
 import OrderDetailsScreen from '../Screen/OrderDetailsScreen'
 
-let BOTH = 'both'
-let ONE_PRODUCT = 'product'
-let OPTION = 'both'
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
 
@@ -196,9 +192,6 @@ const businessStack = StackNavigator(
     NewEmployee: {
       screen: EmployeeForm
     },
-    Vendor: {
-      screen: VendorScreen
-    },
     Purchase: {
       screen: PurchaseScreen
     },
@@ -225,15 +218,6 @@ const businessStack = StackNavigator(
     },
     ProfileSettings: {
       screen: ProfileSettingsScreen
-    },
-    Customers: {
-      screen: CustomerScreen
-    },
-    UpsertCustomer: {
-      screen: UpsertCustomerScreen
-    },
-    NewVendor: {
-      screen: NewVendorScreen
     },
     NewOrder: {
       screen: NewOrderScreen
@@ -262,12 +246,6 @@ const businessStack = StackNavigator(
     MainOrder: {
       screen: MainOrderList
     },
-    CustomerDetails: {
-      screen: CustomerDetailScreen
-    },
-    VendorDetails: {
-      screen: VendorDetailScreen
-    },
     EditUserProfile: {
       screen: EditUserProfileScreen
     },
@@ -276,20 +254,32 @@ const businessStack = StackNavigator(
     },
     EditServices: UpsertServiceScreen,
     ShowService: ServiceDetailsScreen,
-    EditCustomerDetails: EditCustomerDetailsScreen,
     SalesOrderStatus: SalesOrderStatusScreen,
     SalesOrderDetails: SalesOrderDetailsScreen,
     NewSalesOrder: NewSalesOrderScreen,
     ServiceSalesRecord: ServiceSalesRecordScreen,
     ExpensesDetails: ExpensesDetailsScreen,
     NewExpenses: NewExpensesScreen,
+    Customers: {
+      screen: CustomerScreen
+    },
+    UpsertCustomer: {
+      screen: UpsertCustomerScreen
+    },
+    CustomerDetails: {
+      screen: CustomerDetailScreen
+    },
+    Vendors: {
+      screen: VendorScreen
+    },
+    UpsertVendor: {
+      screen: UpsertVendorScreen
+    },
+    VendorDetails: {
+      screen: VendorDetailScreen
+    },
     salesOrderTab: {
-      screen:
-        OPTION === BOTH
-          ? salesOrderTab
-          : OPTION === ONE_PRODUCT
-            ? ProductSalesOrderScreen
-            : ServicesSalesOrderScreen,
+      screen: salesOrderTab,
       navigationOptions: ({ navigation }: any) => ({
         header: (
           <CustomHeader

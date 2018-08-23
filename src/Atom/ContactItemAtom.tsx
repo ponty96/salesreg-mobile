@@ -8,11 +8,11 @@ interface IProps {
   realStyle: string;
   onPress: () => void;
   image: string;
-  customerName: string;
+  contactName: string;
   amount: any;
 }
 
-class ContactListAtom extends React.Component<IProps, any> {
+class ContactItemAtom extends React.Component<IProps, any> {
   render() {
     return (
       <ListItem style={styles.row} onPress={this.props.onPress}>
@@ -20,7 +20,7 @@ class ContactListAtom extends React.Component<IProps, any> {
           <Thumbnail source={{ uri: this.props.image }} style={styles.dp} />
         </Left>
         <Body style={styles.view2}>
-          <Text style={styles.rowText1}>{this.props.customerName}</Text>
+          <Text style={styles.rowText1}>{this.props.contactName}</Text>
         </Body>
         <Right style={styles.view3}>
           <Text style={styles.text1}>
@@ -35,7 +35,7 @@ class ContactListAtom extends React.Component<IProps, any> {
   }
 }
 
-export default ContactListAtom;
+export default ContactItemAtom;
 
 const styles = StyleSheet.create({
   row: {
