@@ -1,21 +1,21 @@
-import * as React from 'react';
-import { View, StyleSheet, Text, Dimensions } from 'react-native';
-import { color } from '../Style/Color';
-import CustomHeader from '../Components/CustomHeader';
-import Auth from '../services/auth';
+import * as React from 'react'
+import { View, StyleSheet, Text, Dimensions } from 'react-native'
+import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
+import Auth from '../services/auth'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  username: string;
+  username: string
 }
 
 export default class HomeScreen extends React.Component<IProps, IState> {
   state = {
     username: ''
-  };
+  }
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -25,19 +25,19 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
-    };
-  };
+    }
+  }
 
   componentWillMount() {
-    this.updateUserName();
+    this.updateUserName()
   }
 
   updateUserName = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       username: user.firstName
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -46,7 +46,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -68,4 +68,4 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     fontFamily: 'SourceSansPro_Semibold'
   }
-});
+})

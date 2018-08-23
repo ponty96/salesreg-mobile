@@ -1,36 +1,36 @@
-import * as React from 'react';
-import DatePicker from 'react-native-datepicker';
-import { StyleSheet, View } from 'react-native';
-import { color } from '../Style/Color';
-import { Item, Label, Text } from 'native-base';
+import * as React from 'react'
+import DatePicker from 'react-native-datepicker'
+import { StyleSheet, View } from 'react-native'
+import { color } from '../Style/Color'
+import { Item, Label, Text } from 'native-base'
 
 interface IProps {
-  error: string;
-  placeholder: string;
-  date: string;
-  handleDateSelection: (date: string) => void;
-  required?: boolean | false;
-  contStyle?: any;
-  label?: string;
+  error: string
+  placeholder: string
+  date: string
+  handleDateSelection: (date: string) => void
+  required?: boolean | false
+  contStyle?: any
+  label?: string
 }
 interface IState {
-  bottomColor: string;
-  labelColor: string;
+  bottomColor: string
+  labelColor: string
 }
 
 export default class DatePickerAtom extends React.Component<IProps, IState> {
   state = {
     bottomColor: color.textBorderBottom,
-    labelColor: color.blueLabelColor
-  };
+    labelColor: color.label
+  }
 
   changeUnderline = (newColor: string): void => {
     if (this.props.error) {
-      this.setState({ bottomColor: 'red', labelColor: 'red' });
+      this.setState({ bottomColor: 'red', labelColor: 'red' })
     } else {
-      this.setState({ labelColor: newColor });
+      this.setState({ labelColor: newColor })
     }
-  };
+  }
   render() {
     return (
       <View>
@@ -82,7 +82,7 @@ export default class DatePickerAtom extends React.Component<IProps, IState> {
           />
         </Item>
       </View>
-    );
+    )
   }
 }
 
@@ -129,4 +129,4 @@ const styles = StyleSheet.create({
     color: color.inactive,
     fontSize: 14
   }
-});
+})

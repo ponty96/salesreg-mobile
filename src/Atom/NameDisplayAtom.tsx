@@ -21,7 +21,8 @@ export default class NameDisplayAtom extends React.Component<IProps, any> {
             />
           ) : (
             <Text style={styles.innerText}>
-              {capitalizeFirstLetter(this.props.businessName)}
+              {this.props.businessName &&
+                capitalizeFirstLetter(this.props.businessName)}
             </Text>
           )}
         </View>

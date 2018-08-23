@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent } from 'react'
 import {
   Text,
   View,
@@ -6,36 +6,36 @@ import {
   ScrollView,
   StyleSheet,
   Alert
-} from 'react-native';
+} from 'react-native'
 
-import SignupForm from '../Components/SignupForm';
-import SecondSignUpForm from '../Components/SecondSignUpForm';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import TransitionAtom from '../Atom/TransitionAtom';
-import { color } from '../Style/Color';
-import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate';
-import { Mutation } from 'react-apollo';
-import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions';
-import AppSpinner from '../Components/Spinner';
+import SignupForm from '../Components/SignupForm'
+import SecondSignUpForm from '../Components/SecondSignUpForm'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import TransitionAtom from '../Atom/TransitionAtom'
+import { color } from '../Style/Color'
+import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
+import { Mutation } from 'react-apollo'
+import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions'
+import AppSpinner from '../Components/Spinner'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  currentForm: number;
-  email: string;
-  password: string;
-  name: string;
-  passwordConfirmation: string;
-  gender: string;
-  businessName: string;
-  businessAddress: string;
-  businessEmail: string;
-  products: boolean;
-  services: boolean;
-  currency: string;
-  fieldErrors: any;
+  currentForm: number
+  email: string
+  password: string
+  name: string
+  passwordConfirmation: string
+  gender: string
+  businessName: string
+  businessAddress: string
+  businessEmail: string
+  products: boolean
+  services: boolean
+  currency: string
+  fieldErrors: any
 }
 
 class SignupScreen extends PureComponent<IProps, IState> {
@@ -53,26 +53,26 @@ class SignupScreen extends PureComponent<IProps, IState> {
     currency: '',
     fieldErrors: null,
     currentForm: 0
-  };
+  }
 
   next = () => {
-    const errors = validateRegStep1FormInputs(this.state);
-    console.log('ERORS ', errors);
+    const errors = validateRegStep1FormInputs(this.state)
+    console.log('ERORS ', errors)
     if (errors && Object.keys(errors).length > 0) {
-      this.setState({ fieldErrors: errors });
+      this.setState({ fieldErrors: errors })
     } else {
-      this.setState({ currentForm: 1 });
+      this.setState({ currentForm: 1 })
     }
-  };
+  }
 
   updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val };
-    this.setState({ ...formData });
-  };
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
+  }
 
   handleSignUpForm = () => {
     // this.setState({ currentForm: true });
-  };
+  }
   render() {
     return (
       <View style={styles.container}>
@@ -139,7 +139,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
           </View>
         </ScrollView>
       </View>
-    );
+    )
   }
 
   parseMutationVariables = () => {
@@ -154,7 +154,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
       products,
       services,
       currency
-    } = this.state;
+    } = this.state
     return {
       firstName: name ? name.split(' ')[0] : '',
       lastName: name ? name.split(' ')[1] : '',
@@ -167,8 +167,8 @@ class SignupScreen extends PureComponent<IProps, IState> {
       currency,
       category: this.parseCategory(products, services),
       ...this.parseAddress()
-    };
-  };
+    }
+  }
 
   parseAddress = (): any => {
     /**
@@ -179,25 +179,25 @@ class SignupScreen extends PureComponent<IProps, IState> {
       city: 'Akure',
       state: 'Ondo',
       country: 'Nigeria'
-    };
-  };
+    }
+  }
 
   parseCategory = (products, services) => {
     if (products && services) {
-      return 'PRODUCT_SERVICE';
+      return 'PRODUCT_SERVICE'
     } else if (products) {
-      return 'PRODUCT';
+      return 'PRODUCT'
     } else if (services) {
-      return 'SERVICE';
+      return 'SERVICE'
     }
-    return 'PRODUCT_SERVICE';
-  };
+    return 'PRODUCT_SERVICE'
+  }
 
   onCompleted = async data => {
-    console.log('SignupScreen', data);
+    console.log('SignupScreen', data)
     const {
       registerCompany: { success, fieldErrors }
-    } = data;
+    } = data
     if (success) {
       Alert.alert(
         'Registration Success',
@@ -206,14 +206,14 @@ class SignupScreen extends PureComponent<IProps, IState> {
           { text: 'OK', onPress: () => this.props.navigation.navigate('Login') }
         ],
         { cancelable: false }
-      );
+      )
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default SignupScreen;
+export default SignupScreen
 
 const styles = StyleSheet.create({
   personalInfoText: {
@@ -237,4 +237,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-});
+})

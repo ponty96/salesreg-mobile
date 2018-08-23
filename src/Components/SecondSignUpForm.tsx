@@ -1,35 +1,35 @@
-import React, { PureComponent } from 'react';
-import { Form, CheckBox } from 'native-base';
-import { View, Text, StyleSheet } from 'react-native';
-import InputAtom from '../Atom/InputAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import { color } from '../Style/Color';
-import PickerAtom from '../Atom/PickerAtom';
-import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
+import React, { PureComponent } from 'react'
+import { Form, CheckBox } from 'native-base'
+import { View, Text, StyleSheet } from 'react-native'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import { color } from '../Style/Color'
+import PickerAtom from '../Atom/PickerAtom'
+import FormErrorTextAtom from '../Atom/FormErrorTextAtom'
 
 interface IProps {
-  navigation: any;
-  onSubmit: () => void;
-  onUpdateState?: (key: string, val: any) => void;
-  businessName: string;
-  businessAddress?: string;
-  businessEmail: string;
-  products: boolean;
-  services: boolean;
-  currency: string;
-  fieldErrors: any;
+  navigation: any
+  onSubmit: () => void
+  onUpdateState?: (key: string, val: any) => void
+  businessName: string
+  businessAddress?: string
+  businessEmail: string
+  products: boolean
+  services: boolean
+  currency: string
+  fieldErrors: any
 }
 
 interface IState {}
 
 class SecondSigupForm extends PureComponent<IProps, IState> {
   flipCheckedState = (oldState: boolean, key: string) => {
-    if (key === 'products') this.props.onUpdateState('products', !oldState);
-    else this.props.onUpdateState('services', !oldState);
-  };
+    if (key === 'products') this.props.onUpdateState('products', !oldState)
+    else this.props.onUpdateState('services', !oldState)
+  }
 
   render() {
-    const { fieldErrors } = this.props;
+    const { fieldErrors } = this.props
     return (
       <Form style={styles.resetFormContainer}>
         <InputAtom
@@ -62,7 +62,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           <CheckBox
             checked={this.props.products}
             onPress={() => {
-              this.flipCheckedState(this.props.products, 'products');
+              this.flipCheckedState(this.props.products, 'products')
             }}
             color={color.inactive}
             style={styles.checkBox}
@@ -76,7 +76,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           <CheckBox
             checked={this.props.services}
             onPress={() => {
-              this.flipCheckedState(this.props.services, 'services');
+              this.flipCheckedState(this.props.services, 'services')
             }}
             color={color.inactive}
             style={styles.checkBox}
@@ -133,11 +133,11 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           />
         </View>
       </Form>
-    );
+    )
   }
 }
 
-export default SecondSigupForm;
+export default SecondSigupForm
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -210,4 +210,4 @@ const styles = StyleSheet.create({
   loginButton: {
     marginVertical: 0
   }
-});
+})
