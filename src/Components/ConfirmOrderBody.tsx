@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import { textStyles } from '../Style/TextStyles'
+import * as _ from 'lodash'
 
 interface IProp {
   data: any
@@ -8,7 +9,7 @@ interface IProp {
 
 const ConfirmOrderBody = (props: IProp): any => {
   return Object.keys(props.data).map((item, key) => {
-    const values: string[] = Object.values(props.data)
+    const values: string[] = _.values(props.data)
 
     return (
       <View style={styles.wrapper} key={key}>

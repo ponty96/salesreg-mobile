@@ -5,7 +5,7 @@ import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 import ListItemAtom from '../Atom/ListItemAtom'
 import { color } from '../Style/Color'
 
-export class ExpensesDetailsScreen extends Component {
+export default class ExpensesDetailsScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (

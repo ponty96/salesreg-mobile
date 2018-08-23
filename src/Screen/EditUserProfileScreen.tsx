@@ -44,16 +44,6 @@ interface IState {
 }
 
 class EditUserProfileScreen extends Component<IProps, IState> {
-  static navigationOptions = ({ navigation }: any) => {
-    return {
-      header: (
-        <CustomHeader
-          title="Edit Profile"
-          onBackPress={() => navigation.goBack()}
-        />
-      )
-    }
-  }
   state = {
     profilePicture: '',
     firstName: '',
@@ -97,43 +87,13 @@ class EditUserProfileScreen extends Component<IProps, IState> {
 
   static navigationOptions = ({ navigation }: any) => {
     return {
-      title: (
-        <Text style={[{ fontFamily: 'SourceSansPro' }]}>Edit Profile</Text>
-      ), // params.name
-      headerLeft: (
-        <Icon
-          name={'md-arrow-back'}
-          style={styles.headerIcon}
-          onPress={() => {
-            navigation.goBack()
-          }}
+      header: (
+        <CustomHeader
+          title="Edit Profile"
+          onBackPress={() => navigation.goBack()}
         />
       )
     }
-  }
-
-  getName = (text: string) => {
-    this.setState({
-      name: text
-    })
-  }
-
-  getPhoneNumber = (numberText: string) => {
-    this.setState({
-      phoneNumber: numberText
-    })
-  }
-
-  getImage = (pic: string) => {
-    this.setState({
-      image: pic
-    })
-  }
-
-  updateGender = (selectedGender: string) => {
-    this.setState({
-      gender: selectedGender
-    })
   }
 
   render() {

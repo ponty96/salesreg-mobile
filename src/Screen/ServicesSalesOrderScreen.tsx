@@ -102,7 +102,7 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
     return (
       <View style={styles.container}>
         <SubHeaderAtom
-          image={require('../../Assets/Icons/subheader-icons/ordre-blue.png')}
+          image={require('../../assets/Icons/subheader-icons/ordre-blue.png')}
           total={this.state.total}
           screen="sales order"
           rightLabel="View sales record"
