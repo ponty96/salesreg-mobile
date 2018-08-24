@@ -1,37 +1,37 @@
-import React, { PureComponent } from 'react';
-import { View, ListView, StyleSheet } from 'react-native';
-import { ScrollView } from 'react-native-gesture-handler';
-import OrderDetailListAtom from '../Atom/OrderDetailListAtom';
-import TopOrderDetailAtom from '../Atom/TopOrderDetailAtom';
-import BottomOrderDetailAtom from '../Atom/BottomOrderDetailAtom';
-import ButtonAtom from '../Atom/ButtonAtom';
-import { orderDetails } from '../config/data';
+import React, { PureComponent } from 'react'
+import { View, ListView, StyleSheet } from 'react-native'
+import { ScrollView } from 'react-native-gesture-handler'
+import OrderDetailListAtom from '../Atom/OrderDetailListAtom'
+import TopOrderDetailAtom from '../Atom/TopOrderDetailAtom'
+import BottomOrderDetailAtom from '../Atom/BottomOrderDetailAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
+import { orderDetails } from '../config/data'
 
-const users = orderDetails;
+const users = orderDetails
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  userDataSource: any;
+  userDataSource: any
 }
 
 class OrderDetails extends PureComponent<IProps, IState> {
   constructor(props: any) {
-    super(props);
+    super(props)
     const ds = new ListView.DataSource({
       rowHasChanged: (r1, r2) => r1 !== r2
-    });
+    })
     this.state = {
       userDataSource: ds.cloneWithRows(users)
-    };
+    }
   }
 
   // onPress = () => {}
 
-  renderRow(user: any) {
-    return <OrderDetailListAtom items={user} />;
+  renderRow = (user: any) => {
+    return <OrderDetailListAtom items={user} />
   }
 
   render() {
@@ -41,7 +41,7 @@ class OrderDetails extends PureComponent<IProps, IState> {
           <TopOrderDetailAtom uri={undefined} status={'false'} />
           <ListView
             dataSource={this.state.userDataSource}
-            renderRow={this.renderRow.bind(this)}
+            renderRow={this.renderRow}
           />
           <BottomOrderDetailAtom />
         </ScrollView>
@@ -54,11 +54,11 @@ class OrderDetails extends PureComponent<IProps, IState> {
           />
         </View>
       </View>
-    );
+    )
   }
 }
 
-export default OrderDetails;
+export default OrderDetails
 
 const styles = StyleSheet.create({
   containerDetails: {
@@ -81,4 +81,4 @@ const styles = StyleSheet.create({
     color: 'darkgrey',
     fontSize: 16
   }
-});
+})

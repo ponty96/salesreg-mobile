@@ -1,34 +1,33 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
-import InputAtom from '../../Atom/InputAtom';
-import PickerAtom from '../../Atom/PickerAtom';
+import React, { PureComponent } from 'react'
+import { View, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import InputAtom from '../../Atom/InputAtom'
+import PickerAtom from '../../Atom/PickerAtom'
 // import ButtonAtom from '../../Atom/ButtonAtom';
-import FormImageAtom from '../../Atom/FormImageAtom';
-import { Form } from 'native-base';
-import { color } from '../../Style/Color';
-import FormContainerAtom from '../../Atom/FormContainerAtom';
-import SaveCancelButton from '../../Container/SaveCancelButton';
-import { ScrollView } from 'react-native-gesture-handler';
-import FormAddressSection from '../FormAddressSection';
-import { Textarea } from 'native-base';
-import FormErrorTextAtom from '../../Atom/FormErrorTextAtom';
-import DatePickerAtom from '../../Atom/DatePickerAtom';
-import { Mutation } from 'react-apollo';
-import AppSpinner from '../Spinner';
-import { UpsertContactGQL } from '../../graphql/mutations/contact';
-import Auth from '../../services/auth';
-import { parseFieldErrors, capitalize } from '../../Functions';
+import FormImageAtom from '../../Atom/FormImageAtom'
+import { Form, Textarea } from 'native-base'
+import { color } from '../../Style/Color'
+import FormContainerAtom from '../../Atom/FormContainerAtom'
+import SaveCancelButton from '../../Container/SaveCancelButton'
+import { ScrollView } from 'react-native-gesture-handler'
+import FormAddressSection from '../FormAddressSection'
+import FormErrorTextAtom from '../../Atom/FormErrorTextAtom'
+import DatePickerAtom from '../../Atom/DatePickerAtom'
+import { Mutation } from 'react-apollo'
+import AppSpinner from '../Spinner'
+import { UpsertContactGQL } from '../../graphql/mutations/contact'
+import Auth from '../../services/auth'
+import { parseFieldErrors, capitalize } from '../../Functions'
 
 interface IProps {
-  navigation: any;
-  contact: any;
-  successRoute: string;
-  contactType: string;
+  navigation: any
+  contact: any
+  successRoute: string
+  contactType: string
 }
 
-interface IState {}
+// interface IState {}
 
-class UpsertContactForm extends PureComponent<IProps, IState> {
+class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
   state = {
     image: 'http://downloadicons.net/sites/default/files/user-icon-2197.png',
     contactName: '',
@@ -53,11 +52,11 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
     fieldErrors: null,
     userId: '',
     companyId: ''
-  };
+  }
 
   componentDidMount() {
-    const { contact } = this.props;
-    let details = {};
+    const { contact } = this.props
+    let details = {}
     if (contact) {
       const {
         address = {},
@@ -65,7 +64,7 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
         likes = [],
         dislikes = [],
         phone
-      } = contact;
+      } = contact
       details = {
         ...contact,
         ...address,
@@ -73,33 +72,33 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
         ...phone,
         likes: likes.join(', '),
         dislikes: dislikes.join(', ')
-      };
+      }
     }
-    this.updateDetails(details);
+    this.updateDetails(details)
   }
 
   updateDetails = async (details: any) => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       userId: user.id,
       companyId: user.company.id,
       ...details
-    });
-  };
+    })
+  }
 
   updateState = (key: string, value: any) => {
-    this.setState({ [key]: value });
-  };
+    this.setState({ [key]: value })
+  }
 
-  getImage = (_pic: any) => {};
+  getImage = (_pic: any) => undefined
 
   // addFromContacts = () => {
   //   console.log('Added From Contacts');
   // };
 
   render() {
-    const { fieldErrors } = this.state;
-    const labelSuffix = capitalize(this.props.contactType);
+    const { fieldErrors } = this.state
+    const labelSuffix = capitalize(this.props.contactType)
     return (
       <Mutation mutation={UpsertContactGQL} onCompleted={this.onCompleted}>
         {(upsertContact, { loading }) => (
@@ -125,14 +124,14 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         required
                         placeholder="e.g Ayomide Aregbede"
                         defaultValue={this.state.contactName}
-                        error={fieldErrors && fieldErrors['contactName']}
+                        error={fieldErrors && fieldErrors.contactName}
                       />
                       <InputAtom
                         label={'Company Name'}
                         placeholder="e.g Miji Jones"
                         defaultValue={this.state.companyName}
                         getValue={val => this.updateState('companyName', val)}
-                        error={fieldErrors && fieldErrors['companyName']}
+                        error={fieldErrors && fieldErrors.companyName}
                       />
                     </FormContainerAtom>
                     <FormContainerAtom headerText={`${labelSuffix} contact`}>
@@ -144,7 +143,7 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         required
                         placeholder="e.g 0813443412"
                         defaultValue={this.state.number}
-                        error={fieldErrors && fieldErrors['number']}
+                        error={fieldErrors && fieldErrors.number}
                       />
                       <InputAtom
                         getValue={val => this.updateState('email', val)}
@@ -153,7 +152,7 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         label="Email Address"
                         placeholder="e.g somebody@example.com"
                         defaultValue={this.state.email}
-                        error={fieldErrors && fieldErrors['email']}
+                        error={fieldErrors && fieldErrors.email}
                       />
                     </FormContainerAtom>
                     <FormContainerAtom headerText="Banking detail">
@@ -162,14 +161,14 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         getValue={val => this.updateState('bankName', val)}
                         placeholder="e.g Guarranty Trust Bank"
                         defaultValue={this.state.bankName}
-                        error={fieldErrors && fieldErrors['bankName']}
+                        error={fieldErrors && fieldErrors.bankName}
                       />
                       <InputAtom
                         label="Account name"
                         getValue={val => this.updateState('accountName', val)}
                         placeholder="e.g Ayomide Aregbede"
                         defaultValue={this.state.accountName}
-                        error={fieldErrors && fieldErrors['accountName']}
+                        error={fieldErrors && fieldErrors.accountName}
                       />
                       <InputAtom
                         label="Account number"
@@ -177,7 +176,7 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         keyboardType="numeric"
                         placeholder="03457806203"
                         defaultValue={this.state.accountNumber}
-                        error={fieldErrors && fieldErrors['accountNumber']}
+                        error={fieldErrors && fieldErrors.accountNumber}
                       />
 
                       <PickerAtom
@@ -190,9 +189,9 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         label="Currency"
                       />
                       {fieldErrors &&
-                        fieldErrors['currency'] && (
+                        fieldErrors.currency && (
                           <FormErrorTextAtom
-                            errorText={fieldErrors['currency']}
+                            errorText={fieldErrors.currency}
                           />
                         )}
                     </FormContainerAtom>
@@ -213,7 +212,7 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         }
                         label="Birthday"
                         required={true}
-                        error={fieldErrors && fieldErrors['birthday']}
+                        error={fieldErrors && fieldErrors.birthday}
                       />
                       <PickerAtom
                         list={['Single', 'Married']}
@@ -225,9 +224,9 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         label="Marital Status"
                       />
                       {fieldErrors &&
-                        fieldErrors['maritalStatus'] && (
+                        fieldErrors.maritalStatus && (
                           <FormErrorTextAtom
-                            errorText={fieldErrors['maritalStatus']}
+                            errorText={fieldErrors.maritalStatus}
                           />
                         )}
                     </FormContainerAtom>
@@ -240,8 +239,8 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         onChangeText={val => this.updateState('likes', val)}
                       />
                       {fieldErrors &&
-                        fieldErrors['likes'] && (
-                          <FormErrorTextAtom errorText={fieldErrors['likes']} />
+                        fieldErrors.likes && (
+                          <FormErrorTextAtom errorText={fieldErrors.likes} />
                         )}
                     </FormContainerAtom>
                     <FormContainerAtom headerText="Dislikes">
@@ -253,9 +252,9 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                         onChangeText={val => this.updateState('dislikes', val)}
                       />
                       {fieldErrors &&
-                        fieldErrors['dislikes'] && (
+                        fieldErrors.dislikes && (
                           <FormErrorTextAtom
-                            errorText={fieldErrors['dislikes']}
+                            errorText={fieldErrors.dislikes}
                           />
                         )}
                     </FormContainerAtom>
@@ -273,42 +272,42 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
           </View>
         )}
       </Mutation>
-    );
+    )
   }
   parseMutationVariables = () => {
-    const { contact = {} } = this.props;
+    const { contact = {} } = this.props
     return {
       ...this.state,
       contactId: contact ? contact.id : null,
       bank: this.parseBankDetails(),
       type: this.props.contactType
-    };
-  };
+    }
+  }
 
   parseBankDetails = (): any => {
-    const { accountName, accountNumber, bankName } = this.state;
+    const { accountName, accountNumber, bankName } = this.state
     if (accountName || accountNumber || bankName) {
       return {
         accountName,
         accountNumber,
         bankName
-      };
+      }
     }
-    return null;
-  };
+    return null
+  }
   onCompleted = async res => {
     const {
       upsertContact: { success, fieldErrors }
-    } = res;
+    } = res
     if (success) {
-      this.props.navigation.navigate(this.props.successRoute);
+      this.props.navigation.navigate(this.props.successRoute)
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default UpsertContactForm;
+export default UpsertContactForm
 
 const styles = StyleSheet.create({
   ababa: {
@@ -339,4 +338,4 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     marginRight: 3
   }
-});
+})

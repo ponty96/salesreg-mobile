@@ -41,14 +41,14 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
   }
 
   render(): JSX.Element {
-    const DATA: {
+    const DATA: Array<{
       key: string
       time: string
       name: string
       num: number
       status: string
       redText: boolean
-    }[] = [
+    }> = [
       {
         key: '0122320',
         time: '3:30pm',

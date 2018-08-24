@@ -12,7 +12,7 @@ interface IProps {
   floatingLabel?: boolean | true
   secureTextEntry?: boolean | false
   getValue?: (a: string | number) => void
-  contStyle?: object | Array<any>
+  contStyle?: object | any
   inputStyle?: object
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string

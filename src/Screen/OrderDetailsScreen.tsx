@@ -9,9 +9,7 @@ interface IProps {
   navigation: any
 }
 
-interface IState {}
-
-class OrderDetailsScreen extends Component<IProps, IState> {
+class OrderDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       title: 'Order Details',
