@@ -109,11 +109,13 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
             innerViewStyle={styles.formWrapper}
           >
             <InputAtom
-              defaultValue="*What do you call this expense"
+              label="*What do you call this expense"
+              defaultValue="Shop renovation"
               getValue={val => this.updateState('expense', val)}
             />
             <InputAtom
-              defaultValue="Date"
+              label="Date"
+              defaultValue="06/23/2018"
               getValue={val => this.updateState('date', val)}
             />
           </FormContainerCopy>
@@ -167,7 +169,8 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
             </View>
             <InputAtom
               getValue={val => this.updateState('paidTo', val)}
-              defaultValue="Paid to"
+              label="Paid to"
+              defaultValue="Ayomide"
               inputStyle={{ paddingBottom: 0 }}
             />
             <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>

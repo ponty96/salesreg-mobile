@@ -124,14 +124,14 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         required
                         placeholder="e.g Ayomide Aregbede"
                         defaultValue={this.state.contactName}
-                        error={fieldErrors && fieldErrors.contactName}
+                        error={fieldErrors && fieldErrors['contactName']}
                       />
                       <InputAtom
                         label={'Company Name'}
                         placeholder="e.g Miji Jones"
                         defaultValue={this.state.companyName}
                         getValue={val => this.updateState('companyName', val)}
-                        error={fieldErrors && fieldErrors.companyName}
+                        error={fieldErrors && fieldErrors['companyName']}
                       />
                     </FormContainerAtom>
                     <FormContainerAtom headerText={`${labelSuffix} contact`}>
@@ -143,7 +143,7 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         required
                         placeholder="e.g 0813443412"
                         defaultValue={this.state.number}
-                        error={fieldErrors && fieldErrors.number}
+                        error={fieldErrors && fieldErrors['number']}
                       />
                       <InputAtom
                         getValue={val => this.updateState('email', val)}
@@ -152,7 +152,7 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         label="Email Address"
                         placeholder="e.g somebody@example.com"
                         defaultValue={this.state.email}
-                        error={fieldErrors && fieldErrors.email}
+                        error={fieldErrors && fieldErrors['email']}
                       />
                     </FormContainerAtom>
                     <FormContainerAtom headerText="Banking detail">
@@ -161,14 +161,14 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         getValue={val => this.updateState('bankName', val)}
                         placeholder="e.g Guarranty Trust Bank"
                         defaultValue={this.state.bankName}
-                        error={fieldErrors && fieldErrors.bankName}
+                        error={fieldErrors && fieldErrors['bankName']}
                       />
                       <InputAtom
                         label="Account name"
                         getValue={val => this.updateState('accountName', val)}
                         placeholder="e.g Ayomide Aregbede"
                         defaultValue={this.state.accountName}
-                        error={fieldErrors && fieldErrors.accountName}
+                        error={fieldErrors && fieldErrors['accountName']}
                       />
                       <InputAtom
                         label="Account number"
@@ -176,7 +176,7 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         keyboardType="numeric"
                         placeholder="03457806203"
                         defaultValue={this.state.accountNumber}
-                        error={fieldErrors && fieldErrors.accountNumber}
+                        error={fieldErrors && fieldErrors['accountNumber']}
                       />
 
                       <PickerAtom
@@ -189,9 +189,9 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         label="Currency"
                       />
                       {fieldErrors &&
-                        fieldErrors.currency && (
+                        fieldErrors['currency'] && (
                           <FormErrorTextAtom
-                            errorText={fieldErrors.currency}
+                            errorText={fieldErrors['currency']}
                           />
                         )}
                     </FormContainerAtom>
@@ -212,7 +212,7 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         }
                         label="Birthday"
                         required={true}
-                        error={fieldErrors && fieldErrors.birthday}
+                        error={fieldErrors && fieldErrors['birthday']}
                       />
                       <PickerAtom
                         list={['Single', 'Married']}
@@ -224,9 +224,9 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         label="Marital Status"
                       />
                       {fieldErrors &&
-                        fieldErrors.maritalStatus && (
+                        fieldErrors['maritalStatus'] && (
                           <FormErrorTextAtom
-                            errorText={fieldErrors.maritalStatus}
+                            errorText={fieldErrors['maritalStatus']}
                           />
                         )}
                     </FormContainerAtom>
@@ -239,8 +239,8 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         onChangeText={val => this.updateState('likes', val)}
                       />
                       {fieldErrors &&
-                        fieldErrors.likes && (
-                          <FormErrorTextAtom errorText={fieldErrors.likes} />
+                        fieldErrors['likes'] && (
+                          <FormErrorTextAtom errorText={fieldErrors['likes']} />
                         )}
                     </FormContainerAtom>
                     <FormContainerAtom headerText="Dislikes">
@@ -252,9 +252,9 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                         onChangeText={val => this.updateState('dislikes', val)}
                       />
                       {fieldErrors &&
-                        fieldErrors.dislikes && (
+                        fieldErrors['dislikes'] && (
                           <FormErrorTextAtom
-                            errorText={fieldErrors.dislikes}
+                            errorText={fieldErrors['dislikes']}
                           />
                         )}
                     </FormContainerAtom>
