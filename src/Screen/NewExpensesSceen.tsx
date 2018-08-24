@@ -19,6 +19,7 @@ interface IState {
   totalAmount?: string
   visible?: boolean
   excessFormContainer?: any
+  payMethod?: string
 }
 
 export default class NewExpensesScreen extends Component<IProps, IState> {
@@ -39,7 +40,8 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
     totalAmount: '',
     visible: false,
     paidBy: '',
-    excessFormContainer: [<View key={0} />]
+    excessFormContainer: [<View key={0} />],
+    payMethod: ''
   }
 
   updateState = (key: string, value: any) => {
@@ -93,7 +95,7 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
               <InputAtom
                 getValue={val => this.updateState('amount', val)}
                 keyboardType="numeric"
-                contStyle={styles.paidbyInput}
+                contStyle={styles.bottomSpace}
               />
             </View>
           </View>
@@ -110,12 +112,12 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
           >
             <InputAtom
               label="*What do you call this expense"
-              defaultValue="Shop renovation"
+              placeholder="Shop renovation"
               getValue={val => this.updateState('expense', val)}
             />
             <InputAtom
               label="Date"
-              defaultValue="06/23/2018"
+              placeholder="06/23/2018"
               getValue={val => this.updateState('date', val)}
             />
           </FormContainerCopy>
@@ -147,7 +149,13 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
             containerStyle={styles.formContainer}
             innerViewStyle={styles.formWrapper}
           >
-            <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
+            <View
+              style={[
+                styles.innerInputViewForTwo,
+                styles.itemWrapper,
+                styles.bottomSpace
+              ]}
+            >
               <Text
                 style={[
                   textStyles.normalText,
@@ -170,7 +178,7 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
             <InputAtom
               getValue={val => this.updateState('paidTo', val)}
               label="Paid to"
-              defaultValue="Ayomide"
+              placeholder="Ayomide"
               inputStyle={{ paddingBottom: 0 }}
             />
             <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
@@ -281,7 +289,7 @@ const styles = StyleSheet.create({
     marginBottom: 64,
     marginTop: 16
   },
-  paidbyInput: {
+  bottomSpace: {
     marginBottom: 10
   },
   formWrapper: {
