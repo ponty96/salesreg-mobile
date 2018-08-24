@@ -1,12 +1,10 @@
 import * as React from 'react'
-import { Picker, Icon } from 'native-base'
+import { Picker, Icon, Label, Text } from 'native-base'
 import { View, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 
-import { Label, Text } from 'native-base'
-
 interface IProps {
-  list: Array<any>
+  list: any
   placeholder: string
   selected?: string
   handleSelection?: (value: any) => void
@@ -32,18 +30,21 @@ class PickerAtom extends React.Component<IProps, IState> {
       labelColor: color.label
     }
   }
+
   static defaultProps = {
     width: '100%'
   }
-  handleChange(value: string) {
+
+  handleChange = (value: string) => {
     this.props.handleSelection(value)
   }
+
   changeUnderline = (newColor: string): void => {
     this.setState({ labelColor: newColor })
   }
 
   render() {
-    let list = this.props.list
+    const list = this.props.list
     return (
       <View
         style={{
@@ -84,7 +85,7 @@ class PickerAtom extends React.Component<IProps, IState> {
             paddingBottom: 0
           }}
           selectedValue={this.props.selected}
-          onValueChange={this.handleChange.bind(this)}
+          onValueChange={this.handleChange}
           placeholder={this.props.placeholder}
           placeholderStyle={{
             color: color.inactive,
