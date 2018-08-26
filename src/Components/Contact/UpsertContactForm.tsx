@@ -103,7 +103,6 @@ class UpsertContactForm extends Component<IProps/*, IState*/> {
       <Mutation mutation={UpsertContactGQL} onCompleted={this.onCompleted}>
         {(upsertContact, { loading }) => (
           <View style={styles.ababa}>
-            <ScrollView>
               <KeyboardAvoidingView
                 behavior="padding"
                 keyboardVerticalOffset={60}
@@ -261,7 +260,6 @@ class UpsertContactForm extends Component<IProps/*, IState*/> {
                   </Form>
                 </ScrollView>
               </KeyboardAvoidingView>
-            </ScrollView>
             <SaveCancelButton
               navigation={this.props.navigation}
               createfunc={() =>
