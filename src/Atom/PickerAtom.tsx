@@ -69,7 +69,7 @@ class PickerAtom extends React.Component<IProps, IState> {
         </Label>
         <Picker
           iosHeader="Select Gender"
-          mode="dropdown"
+          mode="dialog"
           iosIcon={
             <Icon
               name="caret-down"

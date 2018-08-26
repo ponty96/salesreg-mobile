@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Item, Input, Label, Text } from 'native-base'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Platform } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -86,12 +86,8 @@ class InputAtom extends React.Component<IProps, IState> {
             value={this.props.defaultValue}
             secureTextEntry={this.props.secureTextEntry}
             keyboardType={this.props.keyboardType}
-            style={[
-              { fontFamily: 'SourceSansPro' },
-              styles.inputText,
-              this.props.inputStyle
-            ]}
-            numberOfLines={6}
+            style={[styles.inputText, this.props.inputStyle]}
+            // numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
             onFocus={() => this.changeUnderline(color.label)}
@@ -151,10 +147,12 @@ const styles = StyleSheet.create({
     paddingLeft: 8
   },
   inputText: {
+    fontFamily: 'SourceSansPro',
     color: color.principal,
     fontSize: 16,
-    paddingBottom: 0,
-    top: 6,
-    lineHeight: 0
+    // paddingBottom: 0,
+    // lineHeight: 8,
+
+    top: Platform.OS == 'ios' ? 6 : 6
   }
 })

@@ -1,4 +1,4 @@
-import React, { PureComponent } from 'react'
+import React, { Component } from 'react'
 import { View, StyleSheet, KeyboardAvoidingView } from 'react-native'
 import InputAtom from '../../Atom/InputAtom'
 import PickerAtom from '../../Atom/PickerAtom'
@@ -27,7 +27,7 @@ interface IProps {
 
 // interface IState {}
 
-class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
+class UpsertContactForm extends Component<IProps/*, IState*/> {
   state = {
     image: 'http://downloadicons.net/sites/default/files/user-icon-2197.png',
     contactName: '',
@@ -180,7 +180,7 @@ class UpsertContactForm extends PureComponent<IProps/*, IState*/> {
                       />
 
                       <PickerAtom
-                        list={['Naira (\u20A6)']}
+                        list={['Naira (\u20A6)', 'US Dollar']}
                         placeholder={`e.g Naira (\u20A6)`}
                         selected={this.state.currency}
                         handleSelection={val =>
