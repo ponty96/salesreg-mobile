@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     textAlign: 'right',
     paddingRight: 5,
-    fontFamily: 'SourceSansPro_Semibold',
+    fontFamily: 'SourceSansPro-Semibold',
     marginTop: 0,
     paddingTop: 0,
     paddingBottom: 15
@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
   rowText1: {
     fontWeight: '400',
     fontSize: 14,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     textAlign: 'left'
   },
   leftView: {

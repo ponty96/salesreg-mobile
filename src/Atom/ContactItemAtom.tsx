@@ -72,7 +72,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: color.principal,
     textAlign: 'left',
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   dp: {
     height: 55,
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: '200',
     color: color.principal,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   lilFont: {
     fontSize: 12

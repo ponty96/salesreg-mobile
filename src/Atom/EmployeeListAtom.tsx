@@ -24,7 +24,7 @@ class EmployeeListAtom extends React.Component<IProps, any> {
     if (this.props.items.image === '') {
       return (
         <View style={styles.textIconCont}>
-          <Text style={{ fontFamily: 'SourceSansPro_Bold', fontSize: 25 }}>
+          <Text style={{ fontFamily: 'SourceSansPro-Bold', fontSize: 25 }}>
             {capitalizeFirstLetter(this.props.items.customerName)}
           </Text>
         </View>
@@ -87,7 +87,7 @@ const styles = StyleSheet.create({
     fontSize: 13,
     color: color.principal,
     textAlign: 'left',
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   dp: {
     height: 55,
@@ -113,14 +113,14 @@ const styles = StyleSheet.create({
   },
   textCus: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   },
   textLoc: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   textPos: {
     fontSize: 16,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   }
 })

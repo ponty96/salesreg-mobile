@@ -127,7 +127,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary
   },
   footerText: {
-    fontFamily: 'SourceSansPro_Semibold',
+    fontFamily: 'SourceSansPro-Semibold',
     fontSize: 16,
     textAlign: 'center'
   },

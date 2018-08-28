@@ -40,7 +40,7 @@ class ButtonAtom extends React.Component<IProps, any> {
       >
         <Text
           style={[
-            { fontFamily: 'SourceSansPro' },
+            { fontFamily: 'Source Sans Pro' },
             this.props.transparent ? styles.textRed : styles.textTransparent,
             this.props.textStyle
           ]}

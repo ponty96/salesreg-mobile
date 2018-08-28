@@ -128,7 +128,7 @@ class SigupForm extends PureComponent<IProps, IState> {
           onPress={this.props.onNext}
         >
           <Text
-            style={[styles.nextText, { fontFamily: 'SourceSansPro_Semibold' }]}
+            style={[styles.nextText, { fontFamily: 'SourceSansPro-Semibold' }]}
           >
             NEXT{' '}
           </Text>
@@ -138,14 +138,14 @@ class SigupForm extends PureComponent<IProps, IState> {
             style={styles.nextIcon}
           />
         </TouchableOpacity>
-        <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
+        <Text style={[styles.haveAccount, { fontFamily: 'Source Sans Pro' }]}>
           Or you have an account?
         </Text>
         <ButtonAtom
           btnText="LOGIN"
           transparent={true}
           onPress={() => this.props.navigation.navigate('Login')}
-          textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
+          textStyle={[styles.login, { fontFamily: 'SourceSansPro-Semibold' }]}
           btnStyle={styles.loginButton}
         />
       </Form>

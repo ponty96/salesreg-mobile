@@ -89,14 +89,14 @@ const styles = StyleSheet.create({
   },
   subHeaderPad: {
     paddingLeft: 8,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     fontSize: 15,
     color: color.principal,
     marginTop: 2
   },
   subHeaderFont: {
     fontSize: 15,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     alignSelf: 'center',
     marginBottom: 2,
     color: color.principal
@@ -123,7 +123,7 @@ const styles = StyleSheet.create({
     width: 20
   },
   salesOrderSubHeaderRightText: {
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   rightIconLabel: {
     color: color.button

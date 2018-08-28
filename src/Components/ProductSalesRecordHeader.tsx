@@ -25,7 +25,7 @@ const styles = StyleSheet.create({
     borderBottomColor: color.listBorderColor
   },
   title: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     fontSize: 14,
     color: color.principal
   }

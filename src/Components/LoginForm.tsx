@@ -90,11 +90,11 @@ class LoginForm extends PureComponent<IProps, IState> {
           onPress={this.login}
           textStyle={[
             styles.loginText,
-            { fontFamily: 'SourceSansPro_Semibold' }
+            { fontFamily: 'SourceSansPro-Semibold' }
           ]}
         />
 
-        <Text style={[styles.noAccount, { fontFamily: 'SourceSansPro' }]}>
+        <Text style={[styles.noAccount, { fontFamily: 'Source Sans Pro' }]}>
           Don't have an account?
         </Text>
 

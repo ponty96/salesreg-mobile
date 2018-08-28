@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro_Semibold',
+    fontFamily: 'SourceSansPro-Semibold',
     color: color.secondary
   }
 })

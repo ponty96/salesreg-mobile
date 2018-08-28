@@ -66,6 +66,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     padding: 20,
     textAlign: 'center',
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   }
 })

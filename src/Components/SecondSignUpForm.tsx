@@ -55,7 +55,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           placeholder="e.g info@mayafriq.com"
         />
 
-        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
+        <Text style={[styles.whatYouSell, { fontFamily: 'Source Sans Pro' }]}>
           *What are you selling?
         </Text>
         <View style={styles.checkBoxWrapper}>
@@ -67,7 +67,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             color={color.inactive}
             style={styles.checkBox}
           />
-          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.checkBoxText, { fontFamily: 'Source Sans Pro' }]}>
             Products(Traders, manufacturers, producers)
           </Text>
         </View>
@@ -81,7 +81,7 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             color={color.inactive}
             style={styles.checkBox}
           />
-          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.checkBoxText, { fontFamily: 'Source Sans Pro' }]}>
             Services(Service providers)
           </Text>
         </View>
@@ -108,27 +108,27 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             btnStyle={styles.longButton}
             textStyle={[
               styles.signUp,
-              { fontFamily: 'SourceSansPro_Semibold' }
+              { fontFamily: 'SourceSansPro-Semibold' }
             ]}
           />
-          <Text style={[styles.termsText, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.termsText, { fontFamily: 'Source Sans Pro' }]}>
             Signing up means you agree with our{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
+            <Text style={[styles.redTermText, { fontFamily: 'Source Sans Pro' }]}>
               Terms
             </Text>{' '}
             &{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
+            <Text style={[styles.redTermText, { fontFamily: 'Source Sans Pro' }]}>
               Privacy policy
             </Text>
           </Text>
-          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.haveAccount, { fontFamily: 'Source Sans Pro' }]}>
             Or you have an account?
           </Text>
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
             onPress={() => this.props.navigation.navigate('Login')}
-            textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
+            textStyle={[styles.login, { fontFamily: 'SourceSansPro-Semibold' }]}
             btnStyle={styles.loginButton}
           />
         </View>

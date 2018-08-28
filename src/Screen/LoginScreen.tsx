@@ -40,7 +40,7 @@ class LoginScreen extends React.Component<IProps, IState> {
         <AuthenticationHeader />
         <ScrollView>
           <View style={styles.wrapper}>
-            <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
+            <Text style={[styles.signUpText, { fontFamily: 'Source Sans Pro' }]}>
               LOGIN
             </Text>
             <Mutation

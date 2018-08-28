@@ -26,7 +26,7 @@ const TAB = TabNavigator(
         padding: 0,
         margin: 0
       },
-      labelStyle: { fontSize: 16, fontFamily: 'SourceSansPro_Semibold' },
+      labelStyle: { fontSize: 16, fontFamily: 'SourceSansPro-Semibold' },
       indicatorStyle: {
         backgroundColor: color.check,
         marginTop: 20

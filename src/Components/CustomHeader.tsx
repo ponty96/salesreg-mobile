@@ -88,7 +88,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row'
   },
   title: {
-    fontFamily: 'SourceSansPro_Semibold',
+    fontFamily: 'SourceSansPro-Semibold',
     fontSize: 16,
     color: color.secondary,
     paddingLeft: 0,
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     marginRight: 0
   },
   edit: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     color: color.secondary,
     alignSelf: 'center',
     fontSize: 14,

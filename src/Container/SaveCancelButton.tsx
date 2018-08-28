@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: color.principal,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   }
 })

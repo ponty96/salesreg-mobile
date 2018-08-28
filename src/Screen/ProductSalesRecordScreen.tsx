@@ -104,7 +104,7 @@ export default class ProductSalesRecordScreen extends Component {
             <ProductListAtom
               items={item}
               textStyle={{ color: color.principal }}
-              topBodyTextStyle={{ fontFamily: 'SourceSansPro_Semibold' }}
+              topBodyTextStyle={{ fontFamily: 'SourceSansPro-Semibold' }}
               numberTextStyle={styles.numberStyle}
               priceStyle={styles.price}
             />

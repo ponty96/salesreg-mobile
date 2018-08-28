@@ -1,6 +1,5 @@
 import React from 'react'
 import { StatusBar } from 'react-native'
-import { Font, AppLoading } from 'expo'
 import { Root } from 'native-base'
 import { ApolloProvider } from 'react-apollo'
 import client from './client'
@@ -14,13 +13,6 @@ export default class App extends React.Component {
     loading: true
   }
   async componentDidMount() {
-    await Font.loadAsync({
-      SourceSansPro: require('../fonts/SourceSansPro-Regular.ttf'),
-      SourceSansPro_Semibold: require('../fonts/SourceSansPro-Semibold.ttf'),
-      SourceSansPro_Bold: require('../fonts/SourceSansPro-Bold.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
-    })
-
     this.authenticate()
     this.setState({ loading: true })
   }
@@ -36,13 +28,6 @@ export default class App extends React.Component {
     }
   }
   render() {
-    if (this.state.loading) {
-      return (
-        <Root>
-          <AppLoading />
-        </Root>
-      )
-    }
     return (
       <ApolloProvider client={client}>
         <Root>

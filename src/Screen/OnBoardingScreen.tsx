@@ -34,7 +34,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
                 <Text
                   style={[
                     styles.appDetailsText,
-                    { fontFamily: 'SourceSansPro_Semibold' }
+                    { fontFamily: 'SourceSansPro-Semibold' }
                   ]}
                 >
                   {details}
@@ -50,7 +50,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
             onPress={this.navigate}
             textStyle={styles.freeTrialText}
           />
-          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.haveAccount, { fontFamily: 'Source Sans Pro' }]}>
             Or you have an account?
           </Text>
 
@@ -62,7 +62,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
             btnStyle={styles.loginButton}
             textStyle={[
               styles.loginText,
-              { fontFamily: 'SourceSansPro_Semibold' }
+              { fontFamily: 'SourceSansPro-Semibold' }
             ]}
           />
         </ScrollView>

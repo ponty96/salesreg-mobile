@@ -43,7 +43,7 @@ export default class ServiceScreen extends Component<IProps> {
           <Text
             style={[
               styles.headerText,
-              { fontFamily: 'SourceSansPro_Semibold' }
+              { fontFamily: 'SourceSansPro-Semibold' }
             ]}
           >
             {service.name}
@@ -91,7 +91,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   edit: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     marginRight: 32,
     color: color.secondary
   },
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between'
   },
   listText: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     marginHorizontal: 32
   }
 });

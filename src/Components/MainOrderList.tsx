@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, FlatList } from 'react-native'
-import { Font, AppLoading } from 'expo'
-import { Root, Icon, Button, Right, Header, Text } from 'native-base'
+import { Icon, Button, Right, Header, Text } from 'native-base'
 import { ScrollView } from 'react-native-gesture-handler'
 import MainOrderListAtom from '../Atom/MainOrderListAtom'
 import { mainOrderList } from '../config/data'
@@ -18,10 +17,6 @@ export default class MainOrderList extends Component<IProps, any> {
   }
 
   async componentDidMount() {
-    await Font.loadAsync({
-      Roboto: require('native-base/Fonts/Roboto.ttf'),
-      Roboto_medium: require('native-base/Fonts/Roboto_medium.ttf')
-    })
     this.setState({ loading: false })
   }
 
@@ -30,13 +25,6 @@ export default class MainOrderList extends Component<IProps, any> {
   }
 
   render() {
-    if (this.state.loading) {
-      return (
-        <Root>
-          <AppLoading />
-        </Root>
-      )
-    }
     return (
       <View style={styles.listContainer}>
         <Header style={styles.headerMain}>

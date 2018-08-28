@@ -121,7 +121,7 @@ const styles = StyleSheet.create({
     color: color.principal
   },
   labelText: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     padding: 0,
     fontSize: 16
   },

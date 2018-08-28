@@ -115,7 +115,7 @@ class PickerAtom extends React.Component<IProps, IState> {
 
 const styles = StyleSheet.create({
   labelText: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     padding: 0,
     fontSize: 16
   },

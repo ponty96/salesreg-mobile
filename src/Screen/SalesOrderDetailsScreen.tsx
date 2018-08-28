@@ -202,14 +202,14 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary
   },
   text: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     fontSize: 14,
     color: color.principal,
     flex: 1
   },
   boldLabel: {
     color: color.principal,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     fontSize: 16
   },
   header: {
@@ -236,6 +236,6 @@ const styles = StyleSheet.create({
   buttonText: {
     color: color.principal,
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   }
 })

@@ -83,7 +83,7 @@ const styles = StyleSheet.create({
   headerAmountStyle: {
     color: color.selling,
     marginTop: 20,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   },
   listHeaderWrapper: {
     paddingBottom: 16
@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
   valueStyle: {
     color: color.principal,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   listWrapper: {
     borderBottomColor: color.listBorderColor,

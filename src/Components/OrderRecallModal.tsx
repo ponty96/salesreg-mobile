@@ -68,7 +68,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary
   },
   header: {
-    fontFamily: 'SourceSansPro_Semibold',
+    fontFamily: 'SourceSansPro-Semibold',
     fontSize: 14
   },
   buttonWrapper: {
@@ -81,7 +81,7 @@ const styles = StyleSheet.create({
   normalText: {
     fontSize: 14,
     color: color.principal,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     marginVertical: 16,
     marginHorizontal: 32,
     textAlign: 'center'

@@ -151,6 +151,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: color.button,
     padding: 16,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   }
 })

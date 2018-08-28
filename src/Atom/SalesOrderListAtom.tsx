@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
     marginVertical: 8
   },
   serialNumber: {
-    fontFamily: 'SourceSansPro_Semibold',
+    fontFamily: 'SourceSansPro-Semibold',
     color: color.principal
   },
   wrapperForTopLeft: {
@@ -95,10 +95,10 @@ const styles = StyleSheet.create({
   time: {
     marginLeft: 16,
     color: color.principal,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   text: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     color: color.principal
   },
   bottom: {
@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
   },
   status: {
     color: color.selling,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   rightWrapper: {
     marginRight: 16

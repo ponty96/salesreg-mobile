@@ -25,7 +25,7 @@ const settingsList = (prop: { categories: Category[]; navigate: any }) => {
           >
             <Left>
               <Text
-                style={[styles.sectionText, { fontFamily: 'SourceSansPro' }]}
+                style={[styles.sectionText, { fontFamily: 'Source Sans Pro' }]}
               >
                 {category.section}
               </Text>

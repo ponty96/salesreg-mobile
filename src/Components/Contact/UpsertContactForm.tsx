@@ -319,7 +319,7 @@ const styles = StyleSheet.create({
   sendAnother: {
     color: color.button,
     fontSize: 16,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   },
   btnStyle: {
     paddingHorizontal: 5,

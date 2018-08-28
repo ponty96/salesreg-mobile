@@ -47,7 +47,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     color: color.secondary
   },
   statusIndicator: {

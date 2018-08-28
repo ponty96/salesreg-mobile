@@ -55,7 +55,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
               onPress={() => navigate('DrawerToggle')}
             >
               <Icon name="cross" type="Entypo" style={styles.cross} />
-              <Text style={[styles.texts, { fontFamily: 'SourceSansPro' }]}>
+              <Text style={[styles.texts, { fontFamily: 'Source Sans Pro' }]}>
                 {this.state.businessName}
               </Text>
             </TouchableOpacity>

@@ -48,12 +48,12 @@ const styles = StyleSheet.create({
   },
   normalText: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     color: color.principal
   },
   blueText: {
     color: color.button,
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   }
 })

@@ -97,11 +97,11 @@ const styles = StyleSheet.create({
   rightText: {
     color: color.button,
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   rowText1: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     textAlign: 'left',
     color: color.principal
   },
@@ -120,7 +120,7 @@ const styles = StyleSheet.create({
   },
   bottomBodyText: {
     marginTop: 16,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     fontSize: 12,
     color: color.principal
   }

@@ -7,7 +7,6 @@ import {
   Dimensions,
   StyleSheet
 } from 'react-native'
-import { ImagePicker } from 'expo'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -23,16 +22,7 @@ class FormImageAtom extends React.Component<IProps, any> {
   }
 
   handleSelection = async () => {
-    if (this.props.getValue) {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: false
-      })
-
-      if (result && !result.cancelled) {
-        this.setState({ image: result })
-        this.props.getValue(this.state.image.uri)
-      }
-    }
+    // image picker functionality here
   }
 
   determineDataBasedOnProps = (form: string) => {
@@ -71,7 +61,7 @@ class FormImageAtom extends React.Component<IProps, any> {
           style={[
             styles.headerText,
             {
-              fontFamily: 'SourceSansPro_Semibold',
+              fontFamily: 'SourceSansPro-Semibold',
               color: color.label
             }
           ]}
@@ -93,7 +83,7 @@ class FormImageAtom extends React.Component<IProps, any> {
               style={[
                 styles.imageText,
                 {
-                  fontFamily: 'SourceSansPro_Semibold',
+                  fontFamily: 'SourceSansPro-Semibold',
                   color: color.label
                 }
               ]}

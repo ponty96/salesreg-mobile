@@ -79,14 +79,14 @@ class SignupScreen extends PureComponent<IProps, IState> {
         <AuthenticationHeader />
         <ScrollView>
           <View style={styles.wrapper}>
-            <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
+            <Text style={[styles.signUpText, { fontFamily: 'Source Sans Pro' }]}>
               SIGN UP
             </Text>
             <TransitionAtom
               firstScreen={this.state.currentForm == 0 ? true : false}
             />
             <Text
-              style={[styles.personalInfoText, { fontFamily: 'SourceSansPro' }]}
+              style={[styles.personalInfoText, { fontFamily: 'Source Sans Pro' }]}
             >
               {this.state.currentForm == 0
                 ? 'PERSONAL INFORMATION'

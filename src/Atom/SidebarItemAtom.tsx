@@ -15,7 +15,7 @@ const sideBarItemAtom = (prop: {
   return (
     <View>
       <View style={styles.listHeader}>
-        <Text style={[styles.title, { fontFamily: 'SourceSansPro' }]}>
+        <Text style={[styles.title, { fontFamily: 'Source Sans Pro' }]}>
           {prop.title}
         </Text>
       </View>
@@ -26,7 +26,7 @@ const sideBarItemAtom = (prop: {
             key={key}
             onPress={() => prop.navigate(category.routeName)}
           >
-            <Text style={[styles.category, { fontFamily: 'SourceSansPro' }]}>
+            <Text style={[styles.category, { fontFamily: 'Source Sans Pro' }]}>
               {category.title}
             </Text>
           </TouchableOpacity>

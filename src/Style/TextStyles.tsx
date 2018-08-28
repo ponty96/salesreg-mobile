@@ -5,7 +5,7 @@ export const textStyles = StyleSheet.create({
   normalText: {
     color: color.principal,
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   greenText: {
     color: color.selling
@@ -17,7 +17,7 @@ export const textStyles = StyleSheet.create({
     fontSize: 16
   },
   boldText: {
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   },
   redText: {
     color: color.red

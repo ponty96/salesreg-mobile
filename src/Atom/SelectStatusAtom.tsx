@@ -43,7 +43,7 @@ const styles = StyleSheet.create({
   text: {
     marginLeft: 16,
     color: color.principal,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     fontSize: 14
   },
   indicator: {

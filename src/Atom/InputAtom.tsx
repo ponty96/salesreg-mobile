@@ -108,7 +108,7 @@ class InputAtom extends React.Component<IProps, IState> {
             styles.underneathText,
             this.props.underneathStyle,
             {
-              fontFamily: 'SourceSansPro',
+              fontFamily: 'Source Sans Pro',
               color: this.props.error ? 'red' : color.principal
             }
           ]}
@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
     fontSize: 16
   },
   labelText: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     padding: 0,
     fontSize: 16
   },
@@ -147,7 +147,7 @@ const styles = StyleSheet.create({
     paddingLeft: 8
   },
   inputText: {
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     color: color.principal,
     fontSize: 16,
     // paddingBottom: 0,

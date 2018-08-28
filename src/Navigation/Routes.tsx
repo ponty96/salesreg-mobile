@@ -123,7 +123,7 @@ const viewBothStack = TabNavigator(
       upperCaseLabel: false,
       labelStyle: {
         fontSize: 14,
-        fontFamily: 'SourceSansPro'
+        fontFamily: 'Source Sans Pro'
       }
     },
     animationEnabled: false,
@@ -174,7 +174,7 @@ const salesOrderTab = TabNavigator(
       upperCaseLabel: false,
       labelStyle: {
         fontSize: 14,
-        fontFamily: 'SourceSansPro'
+        fontFamily: 'Source Sans Pro'
       }
     },
     animationEnabled: false,

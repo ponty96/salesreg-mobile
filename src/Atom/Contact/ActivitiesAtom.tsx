@@ -146,24 +146,24 @@ const styles = StyleSheet.create({
   },
   cash: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
     // paddingTop: 3,
     // paddingBottom: 6
   },
   status: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
     // paddingTop: 3,
     // paddingBottom: 6
   },
   normalFont: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     // paddingTop: 8,
     color: color.button
   },
   smallFont: {
     fontSize: 12,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   }
 });

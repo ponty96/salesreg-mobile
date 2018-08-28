@@ -262,6 +262,6 @@ const styles = StyleSheet.create({
     // marginBottom: 16,
     fontSize: 14,
     color: color.button,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   }
 })

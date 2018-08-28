@@ -1,46 +1,46 @@
-import React from 'react';
+import React from 'react'
 import {
   View,
   Text,
   StyleSheet,
   Linking,
   TouchableWithoutFeedback
-} from 'react-native';
-import { Thumbnail, Icon } from 'native-base';
-import { color } from '../../Style/Color';
-import { numberWithCommas } from '../../Functions/numberWithCommas';
+} from 'react-native'
+import { Thumbnail, Icon } from 'native-base'
+import { color } from '../../Style/Color'
+import { numberWithCommas } from '../../Functions/numberWithCommas'
 
 interface IProps {
-  contactName: string;
-  purchaseMade: number;
-  overDue: number;
-  redText: string;
-  avatar?: string;
-  contact?: any;
+  contactName: string
+  purchaseMade: number
+  overDue: number
+  redText: string
+  avatar?: string
+  contact?: any
 }
 
 export default class ContactDetailsCard extends React.Component<IProps, any> {
   makeCall = () => {
-    const { contact } = this.props;
-    const phoneNumber = contact.phone ? contact.phone.number : '';
-    const url = `tel:${phoneNumber}`;
+    const { contact } = this.props
+    const phoneNumber = contact.phone ? contact.phone.number : ''
+    const url = `tel:${phoneNumber}`
     Linking.canOpenURL(url).then(supported => {
-      console.log('make call supported', supported);
+      console.log('make call supported', supported)
       if (supported) {
-        Linking.openURL(url).catch(() => null);
+        Linking.openURL(url).catch(() => null)
       }
-    });
-  };
+    })
+  }
   sendEmail = () => {
-    const { contact } = this.props;
-    const url = `mailto://${contact.email}&subject=Hello${contact.contactName}`;
+    const { contact } = this.props
+    const url = `mailto://${contact.email}&subject=Hello${contact.contactName}`
     Linking.canOpenURL(url).then(supported => {
-      console.log('send email supported', supported);
+      console.log('send email supported', supported)
       if (supported) {
-        Linking.openURL(url).catch(() => null);
+        Linking.openURL(url).catch(() => null)
       }
-    });
-  };
+    })
+  }
   render() {
     return (
       <View>
@@ -82,7 +82,7 @@ export default class ContactDetailsCard extends React.Component<IProps, any> {
           </TouchableWithoutFeedback>
         </View>
       </View>
-    );
+    )
   }
 }
 
@@ -125,20 +125,20 @@ const styles = StyleSheet.create({
   greyFont: {
     fontSize: 14,
     color: color.dropdown,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'Source Sans Pro'
   },
   blackFont: {
     fontSize: 20,
-    fontFamily: 'SourceSansPro_Bold',
+    fontFamily: 'SourceSansPro-Bold',
     paddingVertical: 5
   },
   redFont: {
     color: 'red',
-    fontFamily: 'SourceSansPro',
+    fontFamily: 'Source Sans Pro',
     fontSize: 14
   },
   cusName: {
     fontSize: 16,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   }
-});
+})
