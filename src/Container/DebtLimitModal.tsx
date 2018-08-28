@@ -1,4 +1,5 @@
-import { Form, Icon } from 'native-base'
+import { Form } from 'native-base'
+import Icon from '../Atom/Icon'
 import * as React from 'react'
 import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
 import ButtonAtom from '../Atom/ButtonAtom'

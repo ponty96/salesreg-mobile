@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { StyleSheet, View, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
-import { ListItem, Left, Right, Icon } from 'native-base'
+import { ListItem, Left, Right } from 'native-base'
+import Icon from '../Atom/Icon'
 
 interface Category {
   section: string

@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
-import { Form, Icon } from 'native-base'
+import { Form } from 'native-base'
 import { View, TouchableOpacity, Text, StyleSheet } from 'react-native'
-
+import Icon from '../Atom/Icon'
 import InputAtom from '../Atom/InputAtom'
 import ButtonAtom from '../Atom/ButtonAtom'
 import PickerAtom from '../Atom/PickerAtom'

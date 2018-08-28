@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { View, Text, ScrollView, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import Icon from '../Atom/Icon'
 
 import ButtonAtom from '../Atom/ButtonAtom'
 import AuthenticationHeader from '../Components/AuthenticationHeader'

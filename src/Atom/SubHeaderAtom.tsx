@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { Header, Left, Right, Text, Icon } from 'native-base'
+import { Header, Left, Right, Text } from 'native-base'
 import PickerAtom from './PickerAtom'
 import { StyleSheet, View, Image } from 'react-native'
 import { color } from '../Style/Color'
+import Icon from './Icon'
 
 interface IProps {
   total?: any

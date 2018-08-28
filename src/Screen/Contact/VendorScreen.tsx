@@ -1,22 +1,22 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import React, { Component } from 'react'
+import { View, StyleSheet } from 'react-native'
 
-import FabAtom from '../../Atom/FabAtom';
-import ContactList from '../../Components/Contact/ContactList';
-import { color } from '../../Style/Color';
-import CustomHeader from '../../Components/CustomHeader';
+import FabAtom from '../../Atom/FabAtom'
+import ContactList from '../../Components/Contact/ContactList'
+import { color } from '../../Style/Color'
+import CustomHeader from '../../Components/CustomHeader'
 
-import { CompanyContactGQL } from '../../graphql/queries/contact';
-import { Query } from 'react-apollo';
-import AppSpinner from '../../Components/Spinner';
-import Auth from '../../services/auth';
+import { CompanyContactGQL } from '../../graphql/queries/contact'
+import { Query } from 'react-apollo'
+import AppSpinner from '../../Components/Spinner'
+import Auth from '../../services/auth'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  companyId: string;
+  companyId: string
 }
 
 class VendorScreen extends Component<IProps, IState> {
@@ -28,30 +28,29 @@ class VendorScreen extends Component<IProps, IState> {
           showMenu
           showRight
           firstRightIcon="ios-search"
-          rightText=" "
           onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
-    };
-  };
+    }
+  }
 
   state = {
     companyId: ''
-  };
+  }
 
   onPress = vendor => {
-    this.props.navigation.navigate('VendorDetails', { vendor });
-  };
+    this.props.navigation.navigate('VendorDetails', { vendor })
+  }
 
   componentDidMount() {
-    this.updateState();
+    this.updateState()
   }
   updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       companyId: user.company.id
-    });
-  };
+    })
+  }
 
   render() {
     return (
@@ -76,11 +75,11 @@ class VendorScreen extends Component<IProps, IState> {
           </View>
         )}
       </Query>
-    );
+    )
   }
 }
 
-export default VendorScreen;
+export default VendorScreen
 
 const styles = StyleSheet.create({
   centerContainer: {
@@ -94,4 +93,4 @@ const styles = StyleSheet.create({
     padding: 16,
     fontSize: 28
   }
-});
+})

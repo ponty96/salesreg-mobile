@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import Icon from '../Atom/Icon'
 import OrderList from '../Components/OrderList'
 import { orderList } from '../config/data'
 import { color } from '../Style/Color'

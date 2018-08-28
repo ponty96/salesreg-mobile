@@ -8,7 +8,7 @@ import {
   Dimensions
 } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
-import { Icon } from 'native-base'
+import Icon from '../Atom/Icon'
 import { color } from '../Style/Color'
 import SideBarItemAtom from '../Atom/SideBarItemAtom'
 import Auth from '../services/auth'

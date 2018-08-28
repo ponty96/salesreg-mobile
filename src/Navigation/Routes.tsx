@@ -287,7 +287,6 @@ const businessStack = StackNavigator(
             title="Sales order"
             showMenu
             showRight
-            rightText=" "
             firstRightIcon="ios-search"
             onMenuPress={() => navigation.navigate('DrawerToggle')}
           />

@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { Picker, Icon, Label, Text } from 'native-base'
+import { Picker, Label, Text } from 'native-base'
 import { View, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
+import Icon from './Icon'
 
 interface IProps {
   list: any

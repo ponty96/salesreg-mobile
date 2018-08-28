@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import { color } from '../Style/Color'
-import { Icon } from 'native-base'
+import Icon from '../Atom/Icon'
 
 interface IProp {
   label: string

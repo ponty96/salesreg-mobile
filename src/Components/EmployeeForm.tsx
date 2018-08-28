@@ -7,7 +7,7 @@ import {
   Dimensions,
   KeyboardAvoidingView
 } from 'react-native'
-import { Icon } from 'native-base'
+import Icon from '../Atom/Icon'
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 import SaveCancelButton from '../Container/SaveCancelButton'

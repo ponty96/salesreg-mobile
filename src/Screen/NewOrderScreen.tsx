@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Icon } from 'native-base'
+import Icon from '../Atom/Icon'
 import { StyleSheet } from 'react-native'
 import NewOrderForm from '../Components/NewOrderForm'
 import { color } from '../Style/Color'

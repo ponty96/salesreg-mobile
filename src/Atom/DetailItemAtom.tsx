@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import Icon from './Icon'
 
 interface IProps {
   icon: string

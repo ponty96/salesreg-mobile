@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { Icon } from 'native-base'
+import Icon from '../Atom/Icon'
 
 import OrderDetails from '../Components/OrderDetails'
 import { color } from '../Style/Color'

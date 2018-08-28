@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { /*List,*/ Icon } from 'native-base'
+import { /*List,*/ } from 'native-base'
+import Icon from '../Atom/Icon'
 
 import FabAtom from '../Atom/FabAtom'
 // import ListItemAtom from '../atom/ListItemAtom'

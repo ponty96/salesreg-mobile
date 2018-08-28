@@ -6,7 +6,8 @@ import {
   Linking,
   TouchableWithoutFeedback
 } from 'react-native'
-import { Thumbnail, Icon } from 'native-base'
+import { Thumbnail } from 'native-base'
+import Icon from '../Icon'
 import { color } from '../../Style/Color'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 

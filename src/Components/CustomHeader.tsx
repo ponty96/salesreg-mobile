@@ -1,7 +1,8 @@
 import { StyleSheet, View, Text } from 'react-native'
 import React from 'react'
-import { Left, Right, Button, Icon, Title } from 'native-base'
+import { Left, Right, Button, Title } from 'native-base'
 import { color } from '../Style/Color'
+import Icon from '../Atom/Icon'
 
 interface IProps {
   showMenu?: boolean
@@ -21,27 +22,17 @@ interface IProps {
 const CustomHeader = (props: IProps) => {
   return (
     <View style={styles.wrapper}>
-      <Left style={styles.headerItemWrapper}>
+      <Left style={{ flexDirection: 'row', alignItems: 'center' }}>
         <Icon
           name={props.showMenu ? 'menu' : 'arrow-back'}
           onPress={props.showMenu ? props.onMenuPress : props.onBackPress}
           style={styles.headerIcon}
+          type="MaterialIcons"
         />
-      </Left>
-      <View
-        style={[
-          styles.headerItemWrapper,
-          {
-            alignSelf: 'flex-start',
-            alignItems: 'flex-start',
-            width: '70%'
-          }
-        ]}
-      >
         <Title style={styles.title}>{props.title}</Title>
-      </View>
+      </Left>
       {props.showRight ? (
-        <Right style={styles.headerItemWrapper}>
+        <Right>
           {props.rightText ? (
             <Button
               transparent={true}
@@ -60,7 +51,7 @@ const CustomHeader = (props: IProps) => {
               <Icon
                 name={props.firstRightIcon}
                 type={props.firstRightIconType}
-                style={[styles.headerIcon, styles.searchIcon]}
+                style={styles.searchIcon}
                 onPress={props.onPressFirstRightIcon}
               />
             </View>
@@ -76,24 +67,26 @@ const CustomHeader = (props: IProps) => {
 export default CustomHeader
 
 const styles = StyleSheet.create({
-  headerIcon: {
-    fontSize: 28,
-    color: color.secondary
-  },
   wrapper: {
     backgroundColor: color.primary,
     paddingLeft: 16,
     paddingRight: 16,
-    height: 88,
-    flexDirection: 'row'
+    height: 70,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    // alignItems: 'center',
+    width: '100%'
+  },
+  headerIcon: {
+    fontSize: 36,
+    color: color.secondary
   },
   title: {
     fontFamily: 'SourceSansPro-Semibold',
-    fontSize: 16,
+    fontSize: 19,
     color: color.secondary,
     paddingLeft: 0,
-    marginLeft: 0,
-    paddingTop: 24
+    marginLeft: 10
   },
   rightWrapper: {
     flexDirection: 'row',
@@ -103,22 +96,19 @@ const styles = StyleSheet.create({
     fontFamily: 'Source Sans Pro',
     color: color.secondary,
     alignSelf: 'center',
-    fontSize: 14,
+    fontSize: 16,
     marginLeft: 8
   },
-  headerItemWrapper: {
-    marginTop: 24
-  },
-  rightMenu: {
-    marginLeft: 16
-  },
   searchIcon: {
-    marginTop: 3,
-    color: color.secondary
+    color: color.secondary,
+    width: 25,
+    left: 20,
+    fontSize: 28
   },
   whiteIcon: {
     color: color.secondary,
     width: 25,
-    left: 20
+    left: 20,
+    fontSize: 20
   }
 })

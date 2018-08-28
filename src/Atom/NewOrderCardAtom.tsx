@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { View, TouchableOpacity, StyleSheet } from 'react-native'
-import { Header, Icon, Right } from 'native-base'
+import { Header, Right } from 'native-base'
 import InputAtom from './InputAtom'
+import Icon from './Icon'
 
 interface IProps {
   onPress: () => void

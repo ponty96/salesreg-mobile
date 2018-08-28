@@ -5,11 +5,12 @@ import {
   ScrollView,
   StyleSheet
 } from 'react-native'
-import { Header, Text, Left, Right, Icon } from 'native-base'
+import { Header, Text, Left, Right } from 'native-base'
 import InputAtom from './InputAtom'
 import NewOrderCardAtom from './NewOrderCardAtom'
 import ButtonAtom from './ButtonAtom'
 import { color } from '../Style/Color'
+import Icon from './Icon'
 
 interface IProps {
   navigation: any
