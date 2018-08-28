@@ -10,6 +10,7 @@ import { UpsertServiceGQL } from '../graphql/mutations/product-service'
 import AppSpinner from '../Components/Spinner'
 import Auth from '../services/auth'
 import { parseFieldErrors } from '../Functions'
+import { Container, Content, Form } from 'native-base'
 
 interface IProps {
   navigation: any
@@ -70,39 +71,43 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     return (
       <Mutation mutation={UpsertServiceGQL} onCompleted={this.onCompleted}>
         {(upsertService, { loading }) => (
-          <View style={styles.container}>
-            <AppSpinner visible={loading} />
-            <View style={{ flex: 1 }}>
-              <View style={styles.inputView}>
-                <InputAtom
-                  label="Service name"
-                  getValue={val => this.updateState('name', val)}
-                  contStyle={styles.inputWrapper}
-                  defaultValue={this.state.name}
-                  placeholder="e.g Human Hair dressing"
+          <Container>
+            <Content>
+              <Form>
+                <AppSpinner visible={loading} />
+                <View style={{ flex: 1 }}>
+                  <View style={styles.inputView}>
+                    <InputAtom
+                      label="Service name"
+                      getValue={val => this.updateState('name', val)}
+                      contStyle={styles.inputWrapper}
+                      defaultValue={this.state.name}
+                      placeholder="e.g Human Hair dressing"
+                    />
+                  </View>
+                  <View style={styles.inputView}>
+                    <InputAtom
+                      label="Rate/charges"
+                      getValue={val => this.updateState('price', val)}
+                      contStyle={styles.inputWrapper}
+                      defaultValue={this.state.price}
+                      keyboardType="numeric"
+                      placeholder="e.g 5,000"
+                    />
+                  </View>
+                </View>
+                <SaveCancelButton
+                  navigation={navigation}
+                  positiveButtonName="SAVE"
+                  createfunc={() =>
+                    upsertService({
+                      variables: this.parseMutationVariables()
+                    })
+                  }
                 />
-              </View>
-              <View style={styles.inputView}>
-                <InputAtom
-                  label="Rate/charges"
-                  getValue={val => this.updateState('price', val)}
-                  contStyle={styles.inputWrapper}
-                  defaultValue={this.state.price}
-                  keyboardType="numeric"
-                  placeholder="e.g 5,000"
-                />
-              </View>
-            </View>
-            <SaveCancelButton
-              navigation={navigation}
-              positiveButtonName="SAVE"
-              createfunc={() =>
-                upsertService({
-                  variables: this.parseMutationVariables()
-                })
-              }
-            />
-          </View>
+              </Form>
+            </Content>
+          </Container>
         )}
       </Mutation>
     )

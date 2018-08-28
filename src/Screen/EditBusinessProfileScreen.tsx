@@ -1,11 +1,5 @@
 import React, { Component } from 'react'
-import {
-  View,
-  StyleSheet,
-  KeyboardAvoidingView,
-  ScrollView,
-  Text
-} from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 
 import SaveCancelButton from '../Container/SaveCancelButton'
 import { color } from '../Style/Color'
@@ -23,6 +17,7 @@ import AppSpinner from '../Components/Spinner'
 import { UpdateCompanyGQL } from '../graphql/mutations/business'
 import Auth from '../services/auth'
 import FormErrorTextAtom from '../Atom/FormErrorTextAtom'
+import { Container, Content, Form } from 'native-base'
 
 interface IProps {
   navigation: any
@@ -129,14 +124,10 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     return (
       <Mutation mutation={UpdateCompanyGQL} onCompleted={this.onCompleted}>
         {(updateCompany, { loading }) => (
-          <View style={styles.formViewContainer}>
-            <KeyboardAvoidingView
-              behavior="padding"
-              keyboardVerticalOffset={60}
-              style={styles.itemsContainer}
-            >
-              <AppSpinner visible={loading} />
-              <ScrollView>
+          <Container>
+            <Content>
+              <Form>
+                <AppSpinner visible={loading} />
                 <FormImageAtom
                   form="business"
                   getValue={this.getImage}
@@ -224,18 +215,18 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                       <FormErrorTextAtom errorText={fieldErrors['about']} />
                     )}
                 </FormContainerAtom>
-              </ScrollView>
-            </KeyboardAvoidingView>
-            <SaveCancelButton
-              positiveButtonName="SAVE"
-              navigation={this.props.navigation}
-              createfunc={() =>
-                updateCompany({
-                  variables: this.parseMutationVariables()
-                })
-              }
-            />
-          </View>
+                <SaveCancelButton
+                  positiveButtonName="SAVE"
+                  navigation={this.props.navigation}
+                  createfunc={() =>
+                    updateCompany({
+                      variables: this.parseMutationVariables()
+                    })
+                  }
+                />
+              </Form>
+            </Content>
+          </Container>
         )}
       </Mutation>
     )
@@ -264,7 +255,6 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
   }
 
   onCompleted = async res => {
-    console.log('mutation res', res)
     const {
       updateCompany: { success, fieldErrors, data }
     } = res
@@ -282,40 +272,12 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
 export default EditBusinessProfileScreen
 
 const styles = StyleSheet.create({
-  formViewContainer: {
-    flex: 1,
-    backgroundColor: color.secondary
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
-  },
-  indentLeft: {
-    marginLeft: 20
-  },
-  indentRight: {
-    marginRight: 20
-  },
   checkBox: {
     left: 0,
     borderWidth: 1,
     paddingBottom: 0,
     paddingLeft: 0,
     marginLeft: 0
-  },
-  editDetailsWrapper: {
-    marginTop: 30,
-    marginBottom: 10
-  },
-  textTitle: {
-    color: color.inactive,
-    fontWeight: '400',
-    fontSize: 14
-  },
-  itemsContainer: {
-    flex: 4,
-    backgroundColor: '#F6F6F6'
   },
   checkText: {
     paddingLeft: 16,
@@ -324,11 +286,5 @@ const styles = StyleSheet.create({
   checkView: {
     flexDirection: 'row',
     margin: 8
-  },
-  bottomBorder: {
-    borderBottomColor: color.list,
-    borderBottomWidth: 1,
-    marginLeft: 3,
-    marginRight: 3
   }
 })

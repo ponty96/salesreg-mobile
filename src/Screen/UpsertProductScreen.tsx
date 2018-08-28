@@ -1,37 +1,37 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
-import CustomHeader from '../Components/CustomHeader';
-import { ScrollView } from 'react-native-gesture-handler';
-import FormImageAtom from '../Atom/FormImageAtom';
-import InputAtom from '../Atom/InputAtom';
-import FormContainerAtom from '../Atom/FormContainerAtom';
-import SaveCancelButton from '../Container/SaveCancelButton';
-import { Mutation } from 'react-apollo';
-import { UpsertProductGQL } from '../graphql/mutations/product-service';
-import AppSpinner from '../Components/Spinner';
-import Auth from '../services/auth';
-import { parseFieldErrors } from '../Functions';
+import React, { PureComponent } from 'react'
+import { View, StyleSheet } from 'react-native'
+import CustomHeader from '../Components/CustomHeader'
+import FormImageAtom from '../Atom/FormImageAtom'
+import InputAtom from '../Atom/InputAtom'
+import FormContainerAtom from '../Atom/FormContainerAtom'
+import SaveCancelButton from '../Container/SaveCancelButton'
+import { Mutation } from 'react-apollo'
+import { UpsertProductGQL } from '../graphql/mutations/product-service'
+import AppSpinner from '../Components/Spinner'
+import Auth from '../services/auth'
+import { parseFieldErrors } from '../Functions'
+import { Container, Content, Form } from 'native-base'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  image: any;
-  name: string;
-  currentStock: string;
-  minStock: string;
-  costPrice: string;
-  sellingPrice: string;
-  description: string;
-  userId: string;
-  companyId: string;
-  fieldErrors: any;
+  image: any
+  name: string
+  currentStock: string
+  minStock: string
+  costPrice: string
+  sellingPrice: string
+  description: string
+  userId: string
+  companyId: string
+  fieldErrors: any
 }
 
 class UpsertProductScreen extends PureComponent<IProps, IState> {
   constructor(props: IProps) {
-    super(props);
+    super(props)
     this.state = {
       name: '',
       image:
@@ -44,10 +44,10 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
       companyId: '',
       userId: '',
       fieldErrors: null
-    };
+    }
   }
   static navigationOptions = ({ navigation }: any) => {
-    const product = navigation.getParam('product', null);
+    const product = navigation.getParam('product', null)
     return {
       header: (
         <CustomHeader
@@ -55,10 +55,10 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
           onBackPress={() => navigation.goBack()}
         />
       )
-    };
-  };
+    }
+  }
   componentDidMount() {
-    const product = this.props.navigation.getParam('product', null);
+    const product = this.props.navigation.getParam('product', null)
     if (product) {
       this.setState({
         ...product,
@@ -67,22 +67,22 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
           : 'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png',
         minStock: product.minimumStockQuantity,
         currentStock: product.number
-      });
+      })
     }
-    this.updateDetails();
+    this.updateDetails()
   }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       userId: user.id,
       companyId: user.company.id
-    });
-  };
+    })
+  }
 
   create = () => {
-    this.props.navigation.goBack();
-  };
+    this.props.navigation.goBack()
+  }
 
   getImage = (pic: any) => {
     this.setState((prevState: any) => ({
@@ -90,27 +90,23 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
         ...prevState.image,
         uri: pic
       }
-    }));
-  };
+    }))
+  }
 
   updateState = (key: string, value: any) => {
-    const state = { ...this.state, [key]: value };
-    this.setState(state);
-  };
+    const state = { ...this.state, [key]: value }
+    this.setState(state)
+  }
 
   render() {
-    const { fieldErrors } = this.state;
+    const { fieldErrors } = this.state
     return (
       <Mutation mutation={UpsertProductGQL} onCompleted={this.onCompleted}>
         {(upsertProduct, { loading }) => (
-          <View style={styles.ababa}>
-            <KeyboardAvoidingView
-              behavior="padding"
-              keyboardVerticalOffset={60}
-              style={styles.itemsContainer}
-            >
-              <AppSpinner visible={loading} />
-              <ScrollView>
+          <Container>
+            <Content>
+              <Form>
+                <AppSpinner visible={loading} />
                 <FormImageAtom
                   form="product"
                   getValue={this.getImage}
@@ -184,26 +180,25 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                     />
                   </View>
                 </FormContainerAtom>
-              </ScrollView>
-            </KeyboardAvoidingView>
-
-            <SaveCancelButton
-              navigation={this.props.navigation}
-              createfunc={() =>
-                upsertProduct({
-                  variables: this.parseMutationVariables()
-                })
-              }
-              positiveButtonName="SAVE"
-            />
-          </View>
+                <SaveCancelButton
+                  navigation={this.props.navigation}
+                  createfunc={() =>
+                    upsertProduct({
+                      variables: this.parseMutationVariables()
+                    })
+                  }
+                  positiveButtonName="SAVE"
+                />
+              </Form>
+            </Content>
+          </Container>
         )}
       </Mutation>
-    );
+    )
   }
 
   parseMutationVariables = () => {
-    const product = this.props.navigation.getParam('product', {});
+    const product = this.props.navigation.getParam('product', {})
     return {
       companyId: this.state.companyId,
       costPrice: this.state.costPrice,
@@ -216,21 +211,21 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
       stockQuantity: this.state.currentStock,
       userId: this.state.userId,
       productId: product ? product.id : null
-    };
-  };
+    }
+  }
   onCompleted = async res => {
     const {
       upsertProduct: { success, fieldErrors }
-    } = res;
+    } = res
     if (success) {
-      this.props.navigation.navigate('Products');
+      this.props.navigation.navigate('Products')
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default UpsertProductScreen;
+export default UpsertProductScreen
 
 const styles = StyleSheet.create({
   ababa: {
@@ -246,4 +241,4 @@ const styles = StyleSheet.create({
     paddingBottom: 0,
     paddingLeft: 8
   }
-});
+})

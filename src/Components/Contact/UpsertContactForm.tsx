@@ -1,14 +1,12 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native'
 import InputAtom from '../../Atom/InputAtom'
 import PickerAtom from '../../Atom/PickerAtom'
 // import ButtonAtom from '../../Atom/ButtonAtom';
 import FormImageAtom from '../../Atom/FormImageAtom'
-import { Form, Textarea } from 'native-base'
+import { Textarea } from 'native-base'
 import { color } from '../../Style/Color'
 import FormContainerAtom from '../../Atom/FormContainerAtom'
 import SaveCancelButton from '../../Container/SaveCancelButton'
-import { ScrollView } from 'react-native-gesture-handler'
 import FormAddressSection from '../FormAddressSection'
 import FormErrorTextAtom from '../../Atom/FormErrorTextAtom'
 import DatePickerAtom from '../../Atom/DatePickerAtom'
@@ -17,6 +15,7 @@ import AppSpinner from '../Spinner'
 import { UpsertContactGQL } from '../../graphql/mutations/contact'
 import Auth from '../../services/auth'
 import { parseFieldErrors, capitalize } from '../../Functions'
+import { Container, Content, Form } from 'native-base'
 
 interface IProps {
   navigation: any
@@ -102,15 +101,10 @@ class UpsertContactForm extends Component<IProps/*, IState*/> {
     return (
       <Mutation mutation={UpsertContactGQL} onCompleted={this.onCompleted}>
         {(upsertContact, { loading }) => (
-          <View style={styles.ababa}>
-              <KeyboardAvoidingView
-                behavior="padding"
-                keyboardVerticalOffset={60}
-                style={styles.itemsContainer}
-              >
+          <Container>
+          <Content>
+            <Form>
                 <AppSpinner visible={loading} />
-                <ScrollView>
-                  <Form>
                     <FormImageAtom
                       form={'contact'}
                       getValue={this.getImage}
@@ -257,9 +251,6 @@ class UpsertContactForm extends Component<IProps/*, IState*/> {
                           />
                         )}
                     </FormContainerAtom>
-                  </Form>
-                </ScrollView>
-              </KeyboardAvoidingView>
             <SaveCancelButton
               navigation={this.props.navigation}
               createfunc={() =>
@@ -267,7 +258,9 @@ class UpsertContactForm extends Component<IProps/*, IState*/> {
               }
               positiveButtonName="SAVE"
             />
-          </View>
+            </Form>
+            </Content>
+            </Container>
         )}
       </Mutation>
     )
@@ -306,34 +299,3 @@ class UpsertContactForm extends Component<IProps/*, IState*/> {
 }
 
 export default UpsertContactForm
-
-const styles = StyleSheet.create({
-  ababa: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  itemsContainer: {
-    flex: 4,
-    backgroundColor: '#F6F6F6'
-  },
-  sendAnother: {
-    color: color.button,
-    fontSize: 16,
-    fontFamily: 'SourceSansPro-Semibold'
-  },
-  btnStyle: {
-    paddingHorizontal: 5,
-    alignSelf: 'flex-start',
-    marginVertical: 3
-  },
-  wrappedInputLeft: {
-    width: '50%',
-    paddingLeft: 12
-  },
-  bottomBorder: {
-    borderBottomColor: color.list,
-    borderBottomWidth: 1,
-    marginLeft: 3,
-    marginRight: 3
-  }
-})

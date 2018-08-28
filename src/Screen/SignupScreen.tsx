@@ -1,12 +1,5 @@
 import React, { PureComponent } from 'react'
-import {
-  Text,
-  View,
-  KeyboardAvoidingView,
-  ScrollView,
-  StyleSheet,
-  Alert
-} from 'react-native'
+import { Text, View, StyleSheet, Alert } from 'react-native'
 
 import SignupForm from '../Components/SignupForm'
 import SecondSignUpForm from '../Components/SecondSignUpForm'
@@ -17,6 +10,7 @@ import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions'
 import AppSpinner from '../Components/Spinner'
+import { Container, Content, Form } from 'native-base'
 
 interface IProps {
   navigation: any
@@ -75,18 +69,23 @@ class SignupScreen extends PureComponent<IProps, IState> {
   }
   render() {
     return (
-      <View style={styles.container}>
+      <Container>
         <AuthenticationHeader />
-        <ScrollView>
+        <Content>
           <View style={styles.wrapper}>
-            <Text style={[styles.signUpText, { fontFamily: 'Source Sans Pro' }]}>
+            <Text
+              style={[styles.signUpText, { fontFamily: 'Source Sans Pro' }]}
+            >
               SIGN UP
             </Text>
             <TransitionAtom
               firstScreen={this.state.currentForm == 0 ? true : false}
             />
             <Text
-              style={[styles.personalInfoText, { fontFamily: 'Source Sans Pro' }]}
+              style={[
+                styles.personalInfoText,
+                { fontFamily: 'Source Sans Pro' }
+              ]}
             >
               {this.state.currentForm == 0
                 ? 'PERSONAL INFORMATION'
@@ -97,12 +96,9 @@ class SignupScreen extends PureComponent<IProps, IState> {
               onCompleted={this.onCompleted}
             >
               {(registerUser, { loading }) => (
-                <KeyboardAvoidingView
-                  behavior={'padding'}
-                  keyboardVerticalOffset={95}
-                >
+                <Form>
                   <AppSpinner visible={loading} />
-                  {this.state.currentForm == 1 ? (
+                  {this.state.currentForm == 0 ? (
                     <SignupForm
                       email={this.state.email}
                       password={this.state.password}
@@ -133,12 +129,12 @@ class SignupScreen extends PureComponent<IProps, IState> {
                       fieldErrors={this.state.fieldErrors}
                     />
                   )}
-                </KeyboardAvoidingView>
+                </Form>
               )}
             </Mutation>
           </View>
-        </ScrollView>
-      </View>
+        </Content>
+      </Container>
     )
   }
 
