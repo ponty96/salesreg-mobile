@@ -5,7 +5,6 @@ INJECTED from /Users/mac 1/srv/project/stacknbit/salesreg-mobile/android/app/src
 INJECTED from /Users/mac 1/srv/project/stacknbit/salesreg-mobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
 INJECTED from /Users/mac 1/srv/project/stacknbit/salesreg-mobile/android/app/src/main/AndroidManifest.xml:1:1-26:12
 MERGED from [:react-native-vector-icons] /Users/mac 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
-MERGED from [:react-native-gesture-handler] /Users/mac 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:2:1-11:12
 MERGED from [com.facebook.react:react-native:0.56.0] /Users/mac 1/.gradle/caches/transforms-1/files-1.1/react-native-0.56.0.aar/85bec4f675d30236522ee4364e3a0856/AndroidManifest.xml:2:1-15:12
 MERGED from [com.android.support:appcompat-v7:27.0.2] /Users/mac 1/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/8c79cd3c9709ae3da48cb3dd12d5cecc/AndroidManifest.xml:17:1-22:12
 MERGED from [com.android.support:support-fragment:27.0.2] /Users/mac 1/.gradle/caches/transforms-1/files-1.1/support-fragment-27.0.2.aar/40c19509008f18c316e89ee32dc753e6/AndroidManifest.xml:17:1-22:12
@@ -99,8 +98,6 @@ INJECTED from /Users/mac 1/srv/project/stacknbit/salesreg-mobile/android/app/src
 INJECTED from /Users/mac 1/srv/project/stacknbit/salesreg-mobile/android/app/src/main/AndroidManifest.xml
 MERGED from [:react-native-vector-icons] /Users/mac 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [:react-native-vector-icons] /Users/mac 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native-vector-icons/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-gesture-handler] /Users/mac 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
-MERGED from [:react-native-gesture-handler] /Users/mac 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native-gesture-handler/android/build/intermediates/manifests/full/debug/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.56.0] /Users/mac 1/.gradle/caches/transforms-1/files-1.1/react-native-0.56.0.aar/85bec4f675d30236522ee4364e3a0856/AndroidManifest.xml:7:5-9:41
 MERGED from [com.facebook.react:react-native:0.56.0] /Users/mac 1/.gradle/caches/transforms-1/files-1.1/react-native-0.56.0.aar/85bec4f675d30236522ee4364e3a0856/AndroidManifest.xml:7:5-9:41
 MERGED from [com.android.support:appcompat-v7:27.0.2] /Users/mac 1/.gradle/caches/transforms-1/files-1.1/appcompat-v7-27.0.2.aar/8c79cd3c9709ae3da48cb3dd12d5cecc/AndroidManifest.xml:20:5-44

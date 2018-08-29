@@ -5,12 +5,34 @@ import FabAtom from '../Atom/FabAtom'
 import EmptyList from '../Components/EmptyList'
 import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 import { color } from '../Style/Color'
+import { ListCompanyExpensesGQL } from '../graphql/queries/expense'
+import { Query } from 'react-apollo'
+import AppSpinner from '../Components/Spinner'
+import Auth from '../services/auth'
+import * as _ from 'lodash'
+import moment from 'moment'
 
 interface IProps {
   navigation: any
 }
 
-export default class ExpensesScreen extends React.Component<IProps> {
+interface IState {
+  business: any
+}
+
+export default class ExpensesScreen extends React.Component<IProps, IState> {
+  state = {
+    business: null
+  }
+  componentDidMount() {
+    this.updateState()
+  }
+  updateState = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser())
+    this.setState({
+      business: user.company
+    })
+  }
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -31,93 +53,75 @@ export default class ExpensesScreen extends React.Component<IProps> {
     const { navigation } = this.props
     return (
       <SalesOrderListAtom
-        firstTopLeftText={item.name}
+        firstTopLeftText={item.title}
         bottomLeftText={item.paidTo}
-        topRightText={'\u20A6 ' + item.amount}
+        topRightText={'\u20A6 ' + item.totalAmount}
         rightTopTextStyle={styles.amount}
-        onPress={() => navigation.navigate('ExpensesDetails')}
+        onPress={() =>
+          navigation.navigate('ExpensesDetails', { expense: item })
+        }
       />
     )
   }
 
-  renderListFooter = ({ section }: any): JSX.Element => {
+  renderSectionHeader = ({ section }: any): JSX.Element => {
     return (
       <View style={styles.footerWrapper}>
-        <Text style={styles.footerText}>{section.date}</Text>
+        <Text style={styles.footerText}>{moment(section.date).calendar()}</Text>
       </View>
     )
   }
 
   render() {
     const { navigation } = this.props
-    const DATA0: Array<{ name: string; paidTo: string; amount: string }> = [
-      {
-        name: 'Shop renovation',
-        paidTo: 'Lakan Wanton Doe',
-        amount: '3000.00'
-      },
-      {
-        name: 'Fuel',
-        paidTo: 'Unknown',
-        amount: '11,350.00'
-      },
-      {
-        name: 'Order PU0017',
-        paidTo: 'Rakuxi shoes',
-        amount: '20,350.00'
-      },
-      {
-        name: 'Fuel',
-        paidTo: 'Unknown',
-        amount: '11,350.00'
-      }
-    ]
-
-    const DATA1: Array<{ name: string; paidTo: string; amount: string }> = [
-      {
-        name: 'Order PU0012',
-        paidTo: 'Lere Wakoza',
-        amount: '200,000.00'
-      },
-      {
-        name: 'Order PU0013',
-        paidTo: 'Lere Wakoza',
-        amount: '200,000.00'
-      },
-      {
-        name: 'Nepa bill',
-        paidTo: 'PHCN',
-        amount: '5780.00'
-      },
-      {
-        name: 'Shelve',
-        paidTo: 'Carpenter',
-        amount: '12,800.00'
-      }
-    ]
-
+    const { business } = this.state
     return (
-      <View style={styles.container}>
-        <SectionList
-          renderItem={this.renderList}
-          ListEmptyComponent={
-            <EmptyList type={{ Text: 'expenses', verifyMainList: 'main' }} />
-          }
-          sections={[
-            { date: 'YESTERDAY', data: DATA0 },
-            { date: '23 APRIL 2018', data: DATA1 }
-          ]}
-          keyExtractor={(item, index) => item.name + index}
-          renderSectionFooter={this.renderListFooter}
-        />
-        <FabAtom
-          routeName="NewExpenses"
-          navigation={navigation}
-          name="database-minus"
-          type="MaterialCommunityIcons"
-        />
-      </View>
+      <Query
+        query={ListCompanyExpensesGQL}
+        variables={{ companyId: `${business && business.id}` }}
+        fetchPolicy="cache-and-network"
+      >
+        {({ loading, data }) => {
+          return (
+            <View style={styles.container}>
+              <AppSpinner visible={loading} />
+              <SectionList
+                renderItem={this.renderList}
+                ListEmptyComponent={
+                  <EmptyList
+                    type={{ Text: 'expenses', verifyMainList: 'main' }}
+                  />
+                }
+                sections={this.parseExpenses(data.companyExpenses || [])}
+                keyExtractor={(item, index) => item.id + index}
+                renderSectionHeader={this.renderSectionHeader}
+              />
+              <FabAtom
+                routeName="NewExpenses"
+                navigation={navigation}
+                name="database-minus"
+                type="MaterialCommunityIcons"
+              />
+            </View>
+          )
+        }}
+      </Query>
     )
+  }
+
+  parseExpenses = expenses => {
+    const grouped = _.groupBy(expenses, expense => expense.date) || {}
+
+    const sectionList = Object.keys(grouped).map(key => ({
+      date: key,
+      data: grouped[key]
+    }))
+    const sortedSection = sectionList.sort((sectionA, sectionB) => {
+      const a = new Date(sectionA.date)
+      const b = new Date(sectionB.date)
+      return a > b ? -1 : a < b ? 1 : 0
+    })
+    return sortedSection
   }
 }
 
