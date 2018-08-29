@@ -81,7 +81,7 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
         variables={{ companyId: `${business && business.id}` }}
         fetchPolicy="cache-and-network"
       >
-        {({ loading, data }) => {
+        {({ loading, data = { companyExpenses: [] } }) => {
           return (
             <View style={styles.container}>
               <AppSpinner visible={loading} />
@@ -92,7 +92,7 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
                     type={{ Text: 'expenses', verifyMainList: 'main' }}
                   />
                 }
-                sections={this.parseExpenses(data.companyExpenses || [])}
+                sections={this.parseExpenses(data.companyExpenses)}
                 keyExtractor={(item, index) => item.id + index}
                 renderSectionHeader={this.renderSectionHeader}
               />

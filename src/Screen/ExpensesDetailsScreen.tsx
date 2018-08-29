@@ -5,12 +5,16 @@ import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 import ListItemAtom from '../Atom/ListItemAtom'
 import { color } from '../Style/Color'
 
-export default class ExpensesDetailsScreen extends Component {
+interface IProps {
+  navigation: any
+}
+export default class ExpensesDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
+    const expense = navigation.getParam('expense', {})
     return {
       header: (
         <CustomHeader
-          title="Expense"
+          title={expense.title}
           onBackPress={() => navigation.goBack()}
           showRight
           firstRightIcon="pencil"
@@ -23,52 +27,48 @@ export default class ExpensesDetailsScreen extends Component {
   }
 
   render() {
-    const DATA: Array<{ label: string; value: string }> = [
-      { label: 'Item 1', value: '120,500.00' },
-      { label: 'Item 2', value: '45,500.00' },
-      { label: 'Item 3', value: '34,000.00' }
-    ]
-
+    const expense = this.props.navigation.getParam('expense', {})
+    const { expenseItems } = expense
     return (
       <View style={styles.container}>
         <SalesOrderListAtom
-          firstTopLeftText="Order PU0012"
-          bottomLeftText="06/15/2018"
-          topRightText={'\u20A6 ' + '20,700.00'}
+          firstTopLeftText={expense.title}
+          bottomLeftText={expense.date}
+          topRightText={'\u20A6 ' + `${expense.totalAmount}`}
           rightTopTextStyle={styles.headerAmountStyle}
           style={styles.listHeaderWrapper}
           rightStyle={styles.listHeaderRight}
         />
         <ListItemAtom
           label="Paid to"
-          value="Lere Wakoza"
+          value={expense.paidTo}
           labelStyle={styles.listLabel}
           rightTextStyle={styles.valueStyle}
           listItemStyle={styles.listWrapper}
         />
         <ListItemAtom
           label="Paid by"
-          value="Ayo Doe"
+          value={`${expense.paidBy.firstName} ${expense.paidBy.lastName}`}
           labelStyle={styles.listLabel}
           rightTextStyle={styles.valueStyle}
           listItemStyle={styles.listWrapper}
         />
         <FlatList
-          data={DATA}
-          renderItem={({ item }) => (
+          data={expenseItems}
+          renderItem={({ item }: any) => (
             <ListItemAtom
-              label={item.label}
-              value={'\u20A6 ' + item.value}
+              label={item.itemName}
+              value={'\u20A6 ' + item.amount}
               labelStyle={styles.listLabel}
               rightTextStyle={styles.greenText}
               listItemStyle={styles.listWrapper}
             />
           )}
-          keyExtractor={item => item.label}
+          keyExtractor={(item: any) => item.id}
         />
         <ListItemAtom
           label="TOTAL"
-          value={'\u20A6 ' + '200,000.00'}
+          value={'\u20A6 ' + `${expense.totalAmount}`}
           listItemStyle={styles.footer}
         />
       </View>

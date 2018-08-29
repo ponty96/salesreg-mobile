@@ -20,6 +20,7 @@ export const ListCompanyExpensesGQL = gql`
       title
       totalAmount
       expenseItems {
+        id
         itemName
         amount
         expense {
