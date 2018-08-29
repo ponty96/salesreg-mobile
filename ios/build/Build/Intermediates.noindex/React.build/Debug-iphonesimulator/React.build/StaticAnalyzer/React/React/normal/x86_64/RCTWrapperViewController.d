@@ -1,7 +1,6 @@
 dependencies: \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/RCTWrapperViewController.m \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/RCTWrapperViewController.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/RCTViewControllerProtocol.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTEventDispatcher.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTBridge.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTBridgeDelegate.h \

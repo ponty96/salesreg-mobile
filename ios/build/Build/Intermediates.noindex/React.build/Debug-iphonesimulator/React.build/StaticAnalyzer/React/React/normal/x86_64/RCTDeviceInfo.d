@@ -11,4 +11,5 @@ dependencies: \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Modules/RCTAccessibilityManager.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTAssert.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTEventDispatcher.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/UIUtils/RCTUIUtils.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTUtils.h

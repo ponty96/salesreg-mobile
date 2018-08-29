@@ -23,6 +23,5 @@ dependencies: \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/RCTView.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/RCTViewControllerProtocol.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/RCTWrapperViewController.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/UIView+React.h

@@ -1,6 +1,5 @@
 import React, { PureComponent } from 'react'
-import { View, ListView, StyleSheet } from 'react-native'
-import { ScrollView } from 'react-native-gesture-handler'
+import { View, ListView, StyleSheet, ScrollView } from 'react-native'
 import OrderDetailListAtom from '../Atom/OrderDetailListAtom'
 import TopOrderDetailAtom from '../Atom/TopOrderDetailAtom'
 import BottomOrderDetailAtom from '../Atom/BottomOrderDetailAtom'

@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTTextViewManager.m \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTTextViewManager.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/Text/RCTTextViewManager.m \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/Text/RCTTextViewManager.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTViewManager.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
@@ -23,15 +23,17 @@ dependencies: \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTInvalidating.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/UIView+React.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTComponent.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTFont.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/BaseText/RCTBaseTextViewManager.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAccessibilityManager.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView+Layout.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTShadowView.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLayout.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTRootView.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTConvert+Text.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTShadowTextView.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTTextView.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTView.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTTextInput.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTBackedTextInputViewProtocol.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTFontAttributes.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTFontAttributesDelegate.h
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUIManager.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUIManagerUtils.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTUIManagerObserverCoordinator.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/Text/RCTTextShadowView.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/BaseText/RCTBaseTextShadowView.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTTextAttributes.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTTextTransform.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/Text/RCTTextView.h

@@ -21,6 +21,7 @@ dependencies: \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTEventDispatcher.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/DevSupport/RCTInspectorDevServerHelper.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Inspector/RCTInspectorPackagerConnection.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTModuleData.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTPerformanceLogger.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Profiler/RCTProfile.h \

@@ -40,4 +40,6 @@ dependencies: \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTPropsAnimatedNode.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/NativeAnimation/Drivers/RCTSpringAnimation.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTStyleAnimatedNode.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTTransformAnimatedNode.h
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTSubtractionAnimatedNode.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTTransformAnimatedNode.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/NativeAnimation/Nodes/RCTTrackingAnimatedNode.h

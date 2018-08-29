@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager/RNVectorIconsManager.m \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/@expo/vector-icons/vendor/react-native-vector-icons/RNVectorIconsManager/RNVectorIconsManager.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native-vector-icons/RNVectorIconsManager/RNVectorIconsManager.m \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native-vector-icons/RNVectorIconsManager/RNVectorIconsManager.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeModule.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTDefines.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTLog.h \

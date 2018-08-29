@@ -1,5 +1,5 @@
 dependencies: \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Blob/RCTBlobManager.m \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Blob/RCTBlobManager.mm \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Blob/RCTBlobManager.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridge.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBridgeDelegate.h \
@@ -21,5 +21,7 @@ dependencies: \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/Yoga.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGEnums.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/yoga/YGMacros.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTWebSocketModule.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventEmitter.h
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTNetworking.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTEventEmitter.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTNetworkTask.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTWebSocketModule.h

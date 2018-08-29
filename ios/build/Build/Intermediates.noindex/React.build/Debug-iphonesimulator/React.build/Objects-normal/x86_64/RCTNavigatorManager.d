@@ -25,4 +25,5 @@ dependencies: \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/RCTComponent.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/RCTNavigator.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Modules/RCTUIManager.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTRootView.h
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTRootView.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Modules/RCTUIManagerObserverCoordinator.h

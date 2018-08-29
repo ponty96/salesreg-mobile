@@ -1,6 +1,6 @@
 dependencies: \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTTextSelection.m \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/RCTTextSelection.h \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/TextInput/RCTTextSelection.m \
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/Libraries/Text/TextInput/RCTTextSelection.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTConvert.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTAnimationType.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/ios/build/Build/Products/Debug-iphonesimulator/include/React/RCTBorderStyle.h \

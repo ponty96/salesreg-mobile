@@ -28,5 +28,4 @@ dependencies: \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Views/RCTModalHostViewController.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTTouchHandler.h \
   /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Modules/RCTUIManager.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTRootView.h \
-  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTTVRemoteHandler.h
+  /Users/mac\ 1/srv/project/stacknbit/salesreg-mobile/node_modules/react-native/React/Base/RCTRootView.h

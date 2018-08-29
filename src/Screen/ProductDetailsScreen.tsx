@@ -1,18 +1,16 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-
-import { ScrollView } from 'react-native-gesture-handler';
-import { Thumbnail, ListItem, Left, Right } from 'native-base';
-import { color } from '../Style/Color';
-import CustomHeader from '../Components/CustomHeader';
+import React, { PureComponent } from 'react'
+import { View, StyleSheet, Text, ScrollView } from 'react-native'
+import { Thumbnail, ListItem, Left, Right } from 'native-base'
+import { color } from '../Style/Color'
+import CustomHeader from '../Components/CustomHeader'
 
 interface IProps {
-  navigation?: any;
+  navigation?: any
 }
 
 class ProductDetailsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const product = navigation.getParam('product', {});
+    const product = navigation.getParam('product', {})
     return {
       header: (
         <CustomHeader
@@ -27,12 +25,12 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           firstRightIconType="MaterialCommunityIcons"
         />
       )
-    };
-  };
+    }
+  }
 
   render() {
     // do change the list to the appropriate molecule
-    const product = this.props.navigation.getParam('product', {});
+    const product = this.props.navigation.getParam('product', {})
     return (
       <View style={styles.centerContainer}>
         <View style={styles.ababa}>
@@ -110,11 +108,11 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           </ScrollView>
         </View>
       </View>
-    );
+    )
   }
 }
 
-export default ProductDetailsScreen;
+export default ProductDetailsScreen
 
 const styles = StyleSheet.create({
   centerContainer: {
@@ -246,4 +244,4 @@ const styles = StyleSheet.create({
   viewMarginRight: {
     marginRight: 16
   }
-});
+})

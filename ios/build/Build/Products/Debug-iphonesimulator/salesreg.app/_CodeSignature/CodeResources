@@ -6,7 +6,7 @@
 	<dict>
 		<key>Base.lproj/LaunchScreen.nib</key>
 		<data>
-		TvCz6Yjs+We1NNmSNkVVTNrZdK4=
+		KAimDtfku6ns/lZ23SaWbJ5Blo8=
 		</data>
 		<key>Entypo.ttf</key>
 		<data>
@@ -23,6 +23,18 @@
 		<key>FontAwesome.ttf</key>
 		<data>
 		E7HqtlqYPHpzvHmXxHnWaUP3xss=
+		</data>
+		<key>FontAwesome5_Brands.ttf</key>
+		<data>
+		GeMCdg454lpfjZDWzQFk72zXT4w=
+		</data>
+		<key>FontAwesome5_Regular.ttf</key>
+		<data>
+		wUAIWDOjir7Gt9+Z1Mysk+smYDE=
+		</data>
+		<key>FontAwesome5_Solid.ttf</key>
+		<data>
+		xEWGSpZGlI4Nf/RJMK1zLuYUJ9g=
 		</data>
 		<key>Foundation.ttf</key>
 		<data>
@@ -71,7 +83,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		4Vi4p3WqN/NZnrd2Ro464isDmh0=
+		YPzGCn1ONj225BBN6ifHbokYvW8=
 		</data>
 		<key>Ionicons.ttf</key>
 		<data>
@@ -125,10 +137,6 @@
 		<data>
 		n/uBpaEREuKS8swyPphIa61ZdZk=
 		</data>
-		<key>SourceSansPro-Bold.ttf</key>
-		<data>
-		LkSuCm/2ZuogPr94sVj488BdeNk=
-		</data>
 		<key>SourceSansPro-Regular.ttf</key>
 		<data>
 		1Doxwk4+xhnC/bZ/FeNicYsUNGo=
@@ -152,11 +160,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			TvCz6Yjs+We1NNmSNkVVTNrZdK4=
+			KAimDtfku6ns/lZ23SaWbJ5Blo8=
 			</data>
 			<key>hash2</key>
 			<data>
-			cRHRoLMkS6Z/wcl041FIzeJw08Vslku+ea6xn1thF6o=
+			JOWkb9HGndRdxfnUFoXiW/X/dCym5DiVzW1fhdt0fCg=
 			</data>
 		</dict>
 		<key>Entypo.ttf</key>
@@ -201,6 +209,39 @@
 			<key>hash2</key>
 			<data>
 			qljzPyOaD7AvXHpsRcBD16msmgkzNYBmlOzW1O3A1qg=
+			</data>
+		</dict>
+		<key>FontAwesome5_Brands.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			GeMCdg454lpfjZDWzQFk72zXT4w=
+			</data>
+			<key>hash2</key>
+			<data>
+			NlFjtwbIzvX8bGmgoN38QLXHJtWpVfwqLOxQ3qzXeSg=
+			</data>
+		</dict>
+		<key>FontAwesome5_Regular.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			wUAIWDOjir7Gt9+Z1Mysk+smYDE=
+			</data>
+			<key>hash2</key>
+			<data>
+			rlr07d3JsGDC71CcsJ6+GkaD5oljOBFDRoDfMZ/qUQc=
+			</data>
+		</dict>
+		<key>FontAwesome5_Solid.ttf</key>
+		<dict>
+			<key>hash</key>
+			<data>
+			xEWGSpZGlI4Nf/RJMK1zLuYUJ9g=
+			</data>
+			<key>hash2</key>
+			<data>
+			UvbXegBXJ/S5IFERnnbplWt+5xvywiOFgZr7GobSiqQ=
 			</data>
 		</dict>
 		<key>Foundation.ttf</key>
@@ -445,17 +486,6 @@
 			<key>hash2</key>
 			<data>
 			P1Ad2wXHCCm7tRz+nKn/9X854GBFfCV7PM8l33Z/CHA=
-			</data>
-		</dict>
-		<key>SourceSansPro-Bold.ttf</key>
-		<dict>
-			<key>hash</key>
-			<data>
-			LkSuCm/2ZuogPr94sVj488BdeNk=
-			</data>
-			<key>hash2</key>
-			<data>
-			66NjKxjwmDsytG5HYfmc7p9mna7eAjer0d/fzF3ZVAc=
 			</data>
 		</dict>
 		<key>SourceSansPro-Regular.ttf</key>

@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList } from 'react-native'
+import { View, StyleSheet, FlatList, ScrollView } from 'react-native'
 import { Button, Right, Header, Text } from 'native-base'
-import { ScrollView } from 'react-native-gesture-handler'
 import MainOrderListAtom from '../Atom/MainOrderListAtom'
 import { mainOrderList } from '../config/data'
 import Icon from '../Atom/Icon'
