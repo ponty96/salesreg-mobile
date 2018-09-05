@@ -48,7 +48,7 @@ import ServiceSalesRecordScreen from '../Screen/ServiceSalesRecordScreen'
 // Expenses Screens
 import ExpensesScreen from '../Screen/ExpensesScreen'
 import ExpensesDetailsScreen from '../Screen/ExpensesDetailsScreen'
-import NewExpensesScreen from '../Screen/NewExpensesSceen'
+import UpsertExpenseScreen from '../Screen/UpsertExpenseScreen'
 
 // Authentication Screens
 import LoginScreen from '../Screen/LoginScreen'
@@ -260,7 +260,7 @@ const businessStack = StackNavigator(
     NewSalesOrder: NewSalesOrderScreen,
     ServiceSalesRecord: ServiceSalesRecordScreen,
     ExpensesDetails: ExpensesDetailsScreen,
-    NewExpenses: NewExpensesScreen,
+    UpsertExpense: UpsertExpenseScreen,
     Customers: {
       screen: CustomerScreen
     },

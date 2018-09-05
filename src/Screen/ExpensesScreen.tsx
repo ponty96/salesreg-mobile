@@ -97,7 +97,7 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
                 renderSectionHeader={this.renderSectionHeader}
               />
               <FabAtom
-                routeName="NewExpenses"
+                routeName="UpsertExpense"
                 navigation={navigation}
                 name="database-minus"
                 type="MaterialCommunityIcons"

@@ -22,7 +22,7 @@ interface IState {
   payMethod?: string
 }
 
-export default class NewExpensesScreen extends Component<IProps, IState> {
+export default class UpsertExpenseScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
