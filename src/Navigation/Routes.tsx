@@ -72,11 +72,6 @@ import PurchaseScreen from '../Screen/PurchaseScreen'
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import IncomeScreen from '../Screen/IncomeScreen'
 
-import MainOrderList from '../Components/MainOrderList'
-import OrderListScreen from '../Screen/OrderListScreen'
-import NewOrderScreen from '../Screen/NewOrderScreen'
-import OrderDetailsScreen from '../Screen/OrderDetailsScreen'
-
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
 
@@ -220,14 +215,8 @@ const businessStack = StackNavigator(
     ProfileSettings: {
       screen: ProfileSettingsScreen
     },
-    NewOrder: {
-      screen: NewOrderScreen
-    },
     ViewBusiness: {
       screen: viewBothStack
-    },
-    OrderDetails: {
-      screen: OrderDetailsScreen
     },
     NewProduct: {
       screen: UpsertProductScreen
@@ -240,12 +229,6 @@ const businessStack = StackNavigator(
     },
     BusinessProfile: {
       screen: BusinessProfileScreen
-    },
-    OrderList: {
-      screen: OrderListScreen
-    },
-    MainOrder: {
-      screen: MainOrderList
     },
     EditUserProfile: {
       screen: EditUserProfileScreen

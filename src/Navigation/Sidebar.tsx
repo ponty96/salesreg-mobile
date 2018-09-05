@@ -10,7 +10,6 @@ import {
 import { SafeAreaView } from 'react-navigation'
 import Icon from '../Atom/Icon'
 import { color } from '../Style/Color'
-import SideBarItemAtom from '../Atom/SideBarItemAtom'
 import Auth from '../services/auth'
 
 interface IProps {
@@ -19,6 +18,47 @@ interface IProps {
 
 interface IState {
   businessName: string
+}
+
+interface Category {
+  title: string
+  routeName: string
+}
+
+const SidebarItem = (prop: {
+  title: string
+  categories: Category[]
+  navigate: any
+}) => {
+  return (
+    <View>
+      <View style={sideBarItemStyles.listHeader}>
+        <Text
+          style={[sideBarItemStyles.title, { fontFamily: 'Source Sans Pro' }]}
+        >
+          {prop.title}
+        </Text>
+      </View>
+      {prop.categories.map((category: Category, key: number) => {
+        return (
+          <TouchableOpacity
+            style={sideBarItemStyles.categoryWrapper}
+            key={key}
+            onPress={() => prop.navigate(category.routeName)}
+          >
+            <Text
+              style={[
+                sideBarItemStyles.category,
+                { fontFamily: 'Source Sans Pro' }
+              ]}
+            >
+              {category.title}
+            </Text>
+          </TouchableOpacity>
+        )
+      })}
+    </View>
+  )
 }
 
 export default class SideBar extends PureComponent<IProps, IState> {
@@ -59,7 +99,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 {this.state.businessName}
               </Text>
             </TouchableOpacity>
-            <SideBarItemAtom
+            <SidebarItem
               title="COMPANY"
               navigate={navigate}
               categories={[
@@ -78,7 +118,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
               ]}
             />
 
-            <SideBarItemAtom
+            <SidebarItem
               title="CONTACT"
               navigate={navigate}
               categories={[
@@ -93,7 +133,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
               ]}
             />
 
-            <SideBarItemAtom
+            <SidebarItem
               title="ORDER"
               navigate={navigate}
               categories={[
@@ -107,7 +147,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 }
               ]}
             />
-            <SideBarItemAtom
+            <SidebarItem
               title="TRANSACTIONS"
               navigate={navigate}
               categories={[
@@ -133,7 +173,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 }
               ]}
             />
-            <SideBarItemAtom
+            <SidebarItem
               title="HELP & SETTINGS"
               navigate={navigate}
               categories={[
@@ -154,6 +194,31 @@ export default class SideBar extends PureComponent<IProps, IState> {
   }
 }
 
+const sideBarItemStyles = StyleSheet.create({
+  listHeader: {
+    backgroundColor: color.dropdown,
+    opacity: 0.2
+  },
+  title: {
+    marginLeft: 32,
+    color: color.secondary,
+    marginVertical: 2,
+    fontSize: 14
+  },
+  categoryWrapper: {
+    backgroundColor: 'transparent',
+    paddingVertical: 8,
+    borderBottomWidth: 0.3,
+    borderBottomColor: color.listBorderColor
+  },
+  category: {
+    marginLeft: 32,
+    backgroundColor: 'transparent',
+    color: color.secondary,
+    marginVertical: 8,
+    fontSize: 14
+  }
+})
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
