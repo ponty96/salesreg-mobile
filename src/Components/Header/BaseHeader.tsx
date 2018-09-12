@@ -92,7 +92,9 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#fff',
     paddingLeft: 16,
-    paddingRight: 16
+    paddingRight: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: color.textBorderBottom
   },
   wrapper: {
     height: 70,
