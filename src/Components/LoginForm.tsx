@@ -59,6 +59,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           login={true}
           error={fieldErrors && fieldErrors.email}
           placeholder="e.g lagbaja@example.com"
+          defaultValue={this.state.email}
         />
 
         <InputAtom
@@ -72,6 +73,7 @@ class LoginForm extends PureComponent<IProps, IState> {
           login={true}
           error={fieldErrors && fieldErrors.password}
           placeholder="your secret password"
+          defaultValue={this.state.password}
         />
 
         <ButtonAtom

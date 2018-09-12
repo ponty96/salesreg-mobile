@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, ScrollView, Dimensions, Text } from 'react-native'
 import CustomHeader from '../Components/CustomHeader'
-import FormContainerAtom from '../Atom/FormContainerAtom'
+import FormContainerCopy from '../Components/FormContainerCopy'
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 import { textStyles } from '../Style/TextStyles'
@@ -19,6 +19,7 @@ interface IState {
   totalAmount?: string
   visible?: boolean
   excessFormContainer?: any
+  payMethod?: string
 }
 
 export default class NewExpensesScreen extends Component<IProps, IState> {
@@ -39,7 +40,8 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
     totalAmount: '',
     visible: false,
     paidBy: '',
-    excessFormContainer: [<View key={0} />]
+    excessFormContainer: [<View key={0} />],
+    payMethod: ''
   }
 
   updateState = (key: string, value: any) => {
@@ -50,7 +52,7 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
     alert('OK button pressed.')
   }
 
-  additionalElement: Array<JSX.Element> = []
+  additionalElement: JSX.Element[] = []
   index: number = 0
 
   render() {
@@ -58,7 +60,11 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
     const { excessFormContainer } = this.state
     const element = (index: number): JSX.Element => {
       return (
-        <FormContainerAtom style={styles.formWrapper} key={this.index}>
+        <FormContainerCopy
+          containerStyle={styles.formContainer}
+          innerViewStyle={styles.formWrapper}
+          key={this.index}
+        >
           <Text
             style={styles.closeSign}
             onPress={() => {
@@ -89,34 +95,43 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
               <InputAtom
                 getValue={val => this.updateState('amount', val)}
                 keyboardType="numeric"
-                contStyle={styles.paidbyInput}
+                contStyle={styles.bottomSpace}
               />
             </View>
           </View>
-        </FormContainerAtom>
+        </FormContainerCopy>
       )
     }
 
     return (
       <View style={styles.container}>
         <ScrollView>
-          <FormContainerAtom style={styles.formWrapper}>
+          <FormContainerCopy
+            containerStyle={styles.formContainer}
+            innerViewStyle={styles.formWrapper}
+          >
             <InputAtom
               label="*What do you call this expense"
+              placeholder="Shop renovation"
               getValue={val => this.updateState('expense', val)}
             />
             <InputAtom
               label="Date"
+              placeholder="06/23/2018"
               getValue={val => this.updateState('date', val)}
             />
-          </FormContainerAtom>
-          <FormContainerAtom style={styles.formWrapper}>
+          </FormContainerCopy>
+          <FormContainerCopy
+            containerStyle={styles.formContainer}
+            innerViewStyle={styles.formWrapper}
+          >
             <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
               <Text
                 style={[
                   textStyles.normalText,
                   textStyles.blueText,
-                  styles.taxRate
+                  styles.formLeftLabel,
+                  styles.totalAmountLabel
                 ]}
               >
                 {'Total amount(\u20A6)'}
@@ -129,20 +144,29 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
                 />
               </View>
             </View>
-          </FormContainerAtom>
-          <FormContainerAtom style={styles.formWrapper}>
-            <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
+          </FormContainerCopy>
+          <FormContainerCopy
+            containerStyle={styles.formContainer}
+            innerViewStyle={styles.formWrapper}
+          >
+            <View
+              style={[
+                styles.innerInputViewForTwo,
+                styles.itemWrapper,
+                styles.bottomSpace
+              ]}
+            >
               <Text
                 style={[
                   textStyles.normalText,
                   textStyles.blueText,
-                  styles.taxRate,
+                  styles.formLeftLabel,
                   styles.payingMethodText
                 ]}
               >
                 Paying method
               </Text>
-              <View style={[styles.picker, styles.pickerWrapper]}>
+              <View style={styles.picker}>
                 <PickerAtom
                   list={['Cash', 'Cheque', 'Direct transfer', 'POS']}
                   placeholder="Cash"
@@ -154,6 +178,7 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
             <InputAtom
               getValue={val => this.updateState('paidTo', val)}
               label="Paid to"
+              placeholder="Ayomide"
               inputStyle={{ paddingBottom: 0 }}
             />
             <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
@@ -161,20 +186,20 @@ export default class NewExpensesScreen extends Component<IProps, IState> {
                 style={[
                   textStyles.normalText,
                   textStyles.blueText,
-                  styles.leftLabel
+                  styles.formLeftLabel,
+                  styles.paidByLabel
                 ]}
               >
                 Paid by
               </Text>
-              <View style={[styles.picker, styles.lastInputWrapper]}>
+              <View style={[styles.picker, styles.paidByInput]}>
                 <InputAtom
                   getValue={val => this.updateState('paidBy', val)}
-                  label="Owner's name default"
-                  contStyle={styles.paidbyInput}
+                  inputStyle={{ marginTop: 0 }}
                 />
               </View>
             </View>
-          </FormContainerAtom>
+          </FormContainerCopy>
           {excessFormContainer.map(item => {
             return item
           })}
@@ -237,12 +262,12 @@ const styles = StyleSheet.create({
   baseAlign: {
     alignItems: 'baseline'
   },
-  taxRate: {
+  formLeftLabel: {
     width: '30%',
     textAlign: 'right'
   },
   picker: {
-    borderBottomWidth: 1,
+    borderBottomWidth: 0.5,
     borderBottomColor: color.dropdown,
     width: '70%',
     marginLeft: 8,
@@ -250,9 +275,6 @@ const styles = StyleSheet.create({
   },
   payingMethodText: {
     alignSelf: 'flex-end'
-  },
-  pickerWrapper: {
-    marginBottom: 5
   },
   lastInputWrapper: {
     borderBottomWidth: 0,
@@ -267,7 +289,7 @@ const styles = StyleSheet.create({
     marginBottom: 64,
     marginTop: 16
   },
-  paidbyInput: {
+  bottomSpace: {
     marginBottom: 10
   },
   formWrapper: {
@@ -280,5 +302,21 @@ const styles = StyleSheet.create({
   closeSign: {
     textAlign: 'right',
     fontSize: 30
+  },
+  formContainer: {
+    paddingVertical: -16
+  },
+  totalAmountLabel: {
+    marginTop: 32
+  },
+  paidByLabel: {
+    textAlign: 'left',
+    marginLeft: 8,
+    alignSelf: 'flex-end',
+    marginBottom: 16
+  },
+  paidByInput: {
+    borderBottomWidth: 0,
+    marginBottom: 8
   }
 })

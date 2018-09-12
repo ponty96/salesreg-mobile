@@ -28,7 +28,8 @@
     "jsx-boolean-value": false,
     "no-implicit-dependencies": false,
     "curly": false,
-    "prefer-object-spread": false
+    "prefer-object-spread": false,
+    "no-string-literal": false
   },
   "rulesDirectory": []
 }

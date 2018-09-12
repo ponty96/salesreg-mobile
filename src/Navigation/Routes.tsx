@@ -38,7 +38,7 @@ import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 
 // SalesOrder Screens
 import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
-import ProductSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
+import ProductSalesOrderScreen from '../Screen/ProductSalesOrderScreen'
 import ProductSalesRecordScreen from '../Screen/ProductSalesRecordScreen'
 import SalesOrderStatusScreen from '../Screen/SalesOrderStatusScreen'
 import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
@@ -54,6 +54,7 @@ import NewExpensesScreen from '../Screen/NewExpensesSceen'
 import LoginScreen from '../Screen/LoginScreen'
 import SignupScreen from '../Screen/SignupScreen'
 import OnBoardingScreen from '../Screen/OnBoardingScreen'
+import ResetScreen from '../Screen/ResetScreen'
 
 // Employee Screens
 import EmployeesScreen from '../Screen/EmployeesScreen'
@@ -67,7 +68,7 @@ import BankScreen from '../Screen/BankScreen'
 import InventoryScreen from '../Screen/InventoryScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
 import PurchaseScreen from '../Screen/PurchaseScreen'
-import ResetScreen from '../Screen/ResetScreen'
+
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import IncomeScreen from '../Screen/IncomeScreen'
 
@@ -78,18 +79,6 @@ import OrderDetailsScreen from '../Screen/OrderDetailsScreen'
 
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
-
-/**
- * Contacts
- */
-
-import UpsertCustomerScreen from '../Screen/Contact/UpsertCustomerScreen'
-import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
-import CustomerScreen from '../Screen/Contact/CustomerScreen'
-
-import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen'
-import VendorDetailScreen from '../Screen/Contact/VendorDetailScreen'
-import VendorScreen from '../Screen/Contact/VendorScreen'
 
 const viewBothStack = TabNavigator(
   {

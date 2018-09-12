@@ -1,34 +1,33 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
-import InputAtom from '../../Atom/InputAtom';
-import PickerAtom from '../../Atom/PickerAtom';
+import React, { Component } from 'react'
+import { View, StyleSheet, KeyboardAvoidingView } from 'react-native'
+import InputAtom from '../../Atom/InputAtom'
+import PickerAtom from '../../Atom/PickerAtom'
 // import ButtonAtom from '../../Atom/ButtonAtom';
-import FormImageAtom from '../../Atom/FormImageAtom';
-import { Form } from 'native-base';
-import { color } from '../../Style/Color';
-import FormContainerAtom from '../../Atom/FormContainerAtom';
-import SaveCancelButton from '../../Container/SaveCancelButton';
-import { ScrollView } from 'react-native-gesture-handler';
-import FormAddressSection from '../FormAddressSection';
-import { Textarea } from 'native-base';
-import FormErrorTextAtom from '../../Atom/FormErrorTextAtom';
-import DatePickerAtom from '../../Atom/DatePickerAtom';
-import { Mutation } from 'react-apollo';
-import AppSpinner from '../Spinner';
-import { UpsertContactGQL } from '../../graphql/mutations/contact';
-import Auth from '../../services/auth';
-import { parseFieldErrors, capitalize } from '../../Functions';
+import FormImageAtom from '../../Atom/FormImageAtom'
+import { Form, Textarea } from 'native-base'
+import { color } from '../../Style/Color'
+import FormContainerAtom from '../../Atom/FormContainerAtom'
+import SaveCancelButton from '../../Container/SaveCancelButton'
+import { ScrollView } from 'react-native-gesture-handler'
+import FormAddressSection from '../FormAddressSection'
+import FormErrorTextAtom from '../../Atom/FormErrorTextAtom'
+import DatePickerAtom from '../../Atom/DatePickerAtom'
+import { Mutation } from 'react-apollo'
+import AppSpinner from '../Spinner'
+import { UpsertContactGQL } from '../../graphql/mutations/contact'
+import Auth from '../../services/auth'
+import { parseFieldErrors, capitalize } from '../../Functions'
 
 interface IProps {
-  navigation: any;
-  contact: any;
-  successRoute: string;
-  contactType: string;
+  navigation: any
+  contact: any
+  successRoute: string
+  contactType: string
 }
 
-interface IState {}
+// interface IState {}
 
-class UpsertContactForm extends PureComponent<IProps, IState> {
+class UpsertContactForm extends Component<IProps/*, IState*/> {
   state = {
     image: 'http://downloadicons.net/sites/default/files/user-icon-2197.png',
     contactName: '',
@@ -53,11 +52,11 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
     fieldErrors: null,
     userId: '',
     companyId: ''
-  };
+  }
 
   componentDidMount() {
-    const { contact } = this.props;
-    let details = {};
+    const { contact } = this.props
+    let details = {}
     if (contact) {
       const {
         address = {},
@@ -65,7 +64,7 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
         likes = [],
         dislikes = [],
         phone
-      } = contact;
+      } = contact
       details = {
         ...contact,
         ...address,
@@ -73,38 +72,37 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
         ...phone,
         likes: likes.join(', '),
         dislikes: dislikes.join(', ')
-      };
+      }
     }
-    this.updateDetails(details);
+    this.updateDetails(details)
   }
 
   updateDetails = async (details: any) => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       userId: user.id,
       companyId: user.company.id,
       ...details
-    });
-  };
+    })
+  }
 
   updateState = (key: string, value: any) => {
-    this.setState({ [key]: value });
-  };
+    this.setState({ [key]: value })
+  }
 
-  getImage = (_pic: any) => {};
+  getImage = (_pic: any) => undefined
 
   // addFromContacts = () => {
   //   console.log('Added From Contacts');
   // };
 
   render() {
-    const { fieldErrors } = this.state;
-    const labelSuffix = capitalize(this.props.contactType);
+    const { fieldErrors } = this.state
+    const labelSuffix = capitalize(this.props.contactType)
     return (
       <Mutation mutation={UpsertContactGQL} onCompleted={this.onCompleted}>
         {(upsertContact, { loading }) => (
           <View style={styles.ababa}>
-            <ScrollView>
               <KeyboardAvoidingView
                 behavior="padding"
                 keyboardVerticalOffset={60}
@@ -181,7 +179,7 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                       />
 
                       <PickerAtom
-                        list={['Naira (\u20A6)']}
+                        list={['Naira (\u20A6)', 'US Dollar']}
                         placeholder={`e.g Naira (\u20A6)`}
                         selected={this.state.currency}
                         handleSelection={val =>
@@ -262,7 +260,6 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
                   </Form>
                 </ScrollView>
               </KeyboardAvoidingView>
-            </ScrollView>
             <SaveCancelButton
               navigation={this.props.navigation}
               createfunc={() =>
@@ -273,42 +270,42 @@ class UpsertContactForm extends PureComponent<IProps, IState> {
           </View>
         )}
       </Mutation>
-    );
+    )
   }
   parseMutationVariables = () => {
-    const { contact = {} } = this.props;
+    const { contact = {} } = this.props
     return {
       ...this.state,
       contactId: contact ? contact.id : null,
       bank: this.parseBankDetails(),
       type: this.props.contactType
-    };
-  };
+    }
+  }
 
   parseBankDetails = (): any => {
-    const { accountName, accountNumber, bankName } = this.state;
+    const { accountName, accountNumber, bankName } = this.state
     if (accountName || accountNumber || bankName) {
       return {
         accountName,
         accountNumber,
         bankName
-      };
+      }
     }
-    return null;
-  };
+    return null
+  }
   onCompleted = async res => {
     const {
       upsertContact: { success, fieldErrors }
-    } = res;
+    } = res
     if (success) {
-      this.props.navigation.navigate(this.props.successRoute);
+      this.props.navigation.navigate(this.props.successRoute)
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default UpsertContactForm;
+export default UpsertContactForm
 
 const styles = StyleSheet.create({
   ababa: {
@@ -339,4 +336,4 @@ const styles = StyleSheet.create({
     marginLeft: 3,
     marginRight: 3
   }
-});
+})

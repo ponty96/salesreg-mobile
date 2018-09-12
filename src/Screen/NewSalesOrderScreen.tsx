@@ -10,7 +10,7 @@ import {
 import CustomHeader from '../Components/CustomHeader'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
 import { textStyles } from '../Style/TextStyles'
-import FormContainerAtom from '../Atom/FormContainerAtom'
+import FormContainerCopy from '../Components/FormContainerCopy'
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
 import PickerAtom from '../Atom/PickerAtom'
@@ -84,13 +84,19 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
         </SubHeaderAtom>
         <ScrollView>
           <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={65}>
-            <FormContainerAtom style={styles.formContainer}>
+            <FormContainerCopy
+              containerStyle={styles.formContainer}
+              innerViewStyle={styles.formWrapper}
+            >
               <InputAtom
                 label="Customer"
                 getValue={val => this.updateState('customer', val)}
               />
-            </FormContainerAtom>
-            <FormContainerAtom style={styles.formContainer}>
+            </FormContainerCopy>
+            <FormContainerCopy
+              containerStyle={styles.formContainer}
+              innerViewStyle={styles.formWrapper}
+            >
               <Text
                 style={styles.closeSign}
                 onPress={() => alert('Cancel pressed.')}
@@ -129,7 +135,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
                   keyboardType="numeric"
                 />
               </View>
-            </FormContainerAtom>
+            </FormContainerCopy>
             <Text
               style={[
                 textStyles.bigText,
@@ -141,9 +147,9 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
             >
               + Add Item
             </Text>
-            <FormContainerAtom
-              style={styles.formContainer}
-              containerStyle={styles.containerWrapper}
+            <FormContainerCopy
+              containerStyle={styles.formContainer}
+              innerViewStyle={[styles.formWrapper, styles.lastForm]}
             >
               <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
                 <Text
@@ -165,13 +171,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
                   />
                 </View>
               </View>
-              <View
-                style={[
-                  styles.innerInputViewForTwo,
-                  styles.itemWrapper,
-                  styles.baseAlign
-                ]}
-              >
+              <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
                 <Text
                   style={[
                     textStyles.normalText,
@@ -186,16 +186,11 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
                     getValue={val => this.updateState('taxRate', val)}
                     keyboardType="numeric"
                     inputStyle={{ marginTop: 0 }}
+                    contStyle={{ marginBottom: 0 }}
                   />
                 </View>
               </View>
-              <View
-                style={[
-                  styles.innerInputViewForTwo,
-                  styles.itemWrapper,
-                  styles.baseAlign
-                ]}
-              >
+              <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
                 <Text
                   style={[
                     textStyles.normalText,
@@ -207,14 +202,14 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
                 </Text>
                 <View style={[styles.picker, { borderBottomWidth: 0 }]}>
                   <InputAtom
-                    getValue={val => this.updateState('amountPaid', val)}
+                    getValue={val => this.updateState('taxRate', val)}
                     keyboardType="numeric"
-                    contStyle={styles.amountPaidInput}
                     inputStyle={{ marginTop: 0 }}
+                    contStyle={{ marginBottom: 0 }}
                   />
                 </View>
               </View>
-            </FormContainerAtom>
+            </FormContainerCopy>
           </KeyboardAvoidingView>
         </ScrollView>
         <SaveCancelButton
@@ -224,7 +219,7 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
         />
         <WarningModal
           headerText="Confirm order!"
-          bodyText="You cannot undo this action, do you still want to cancel this order ?"
+          // bodyText="You cannot undo this action, do you still want to cancel this order ?"
           firstButtonText="Confirmed"
           firstButtonTextColor={color.button}
           secondButtonText="Edit"
@@ -253,8 +248,7 @@ const styles = StyleSheet.create({
     marginRight: 8
   },
   formContainer: {
-    marginTop: 0,
-    marginBottom: 0
+    paddingVertical: -16
   },
   inputViewForTwo: {
     width: Dimensions.get('screen').width - 32,
@@ -282,7 +276,8 @@ const styles = StyleSheet.create({
   },
   textsToAdd: {
     marginLeft: 16,
-    marginTop: 16
+    marginTop: 16,
+    marginBottom: 8
   },
   closeSign: {
     textAlign: 'right',
@@ -293,15 +288,14 @@ const styles = StyleSheet.create({
     marginRight: 16
   },
   picker: {
-    borderBottomWidth: 1,
-    borderBottomColor: color.dropdown,
     width: '70%',
     marginLeft: 8,
-    marginTop: 16
+    marginTop: 8
   },
   taxRate: {
     width: '30%',
-    textAlign: 'right'
+    textAlign: 'right',
+    alignSelf: 'flex-end'
   },
   containerWrapper: {
     marginBottom: 32
@@ -310,18 +304,22 @@ const styles = StyleSheet.create({
     top: 175
   },
   confirmOrder: {
-    marginBottom: 16
+    marginBottom: 32
   },
   amountPaidInput: {
     marginBottom: 16
-  },
-  baseAlign: {
-    alignItems: 'baseline'
   },
   payingMethodText: {
     alignSelf: 'flex-end'
   },
   pickerWrapper: {
     marginBottom: 5
+  },
+  formWrapper: {
+    marginBottom: 0,
+    marginTop: 0
+  },
+  lastForm: {
+    marginBottom: 16
   }
 })
