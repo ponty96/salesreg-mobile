@@ -7,7 +7,7 @@ import {
   ScrollView,
   KeyboardAvoidingView
 } from 'react-native'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
 import { textStyles } from '../Style/TextStyles'
 import FormContainerCopy from '../Components/FormContainerCopy'
@@ -27,9 +27,9 @@ export default class NewSalesOrderScreen extends Component<IProp, any> {
     const ORDER_NUMBER = '234432'
     return {
       header: (
-        <CustomHeader
+        <Header
           title={'Order: ' + ORDER_NUMBER}
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

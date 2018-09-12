@@ -4,7 +4,7 @@ import EmptyList from '../Components/EmptyList'
 import SelectStatusAtom from '../Atom/SelectStatusAtom'
 import { color } from '../Style/Color'
 import SaveCancelButton from '../Container/SaveCancelButton'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import { textStyles } from '../Style/TextStyles'
 import OrderRecallModal from '../Components/OrderRecallModal'
 
@@ -25,9 +25,9 @@ export default class SalesOrderStatusScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Sales order status"
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

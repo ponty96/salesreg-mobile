@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View } from 'react-native'
 import { DrawerNavigator, StackNavigator, TabNavigator } from 'react-navigation'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 
 // graphql
 import { Query } from 'react-apollo'
@@ -266,12 +266,9 @@ const businessStack = StackNavigator(
       screen: salesOrderTab,
       navigationOptions: ({ navigation }: any) => ({
         header: (
-          <CustomHeader
+          <Header
             title="Sales order"
-            showMenu
-            showRight
-            firstRightIcon="ios-search"
-            onMenuPress={() => navigation.navigate('DrawerToggle')}
+            onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
           />
         )
       })
@@ -281,18 +278,14 @@ const businessStack = StackNavigator(
     initialRouteName: 'Home',
     navigationOptions: ({ navigation }: any) => ({
       header: (
-        <CustomHeader
+        <Header
           title="Products & Services"
-          showMenu={true}
           // tslint:disable-next-line:jsx-no-lambda
-          onMenuPress={() => {
+          onPressLeftIcon={() => {
             navigation.navigate('DrawerToggle')
           }}
-          firstRightIcon={'ios-search'}
-          navigation={navigation}
-          showRight={true}
           // tslint:disable-next-line:jsx-no-lambda
-          onPressFirstRightIcon={() => console.log('Search icon pressed.')}
+          onPressRightIcon={() => console.log('Search icon pressed.')}
         />
       )
     })

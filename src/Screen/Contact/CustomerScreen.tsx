@@ -4,7 +4,7 @@ import { View, StyleSheet } from 'react-native'
 import FabAtom from '../../Atom/FabAtom'
 import ContactList from '../../Components/Contact/ContactList'
 import { color } from '../../Style/Color'
-import CustomHeader from '../../Components/CustomHeader'
+import Header from '../../Components/Header/BaseHeader'
 
 import { CompanyContactGQL } from '../../graphql/queries/contact'
 import { Query } from 'react-apollo'
@@ -23,12 +23,9 @@ class CustomerScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Customer"
-          showMenu
-          showRight
-          firstRightIcon="ios-search"
-          onMenuPress={() => navigation.navigate('DrawerToggle')}
+          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
         />
       )
     }

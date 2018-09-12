@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { View, StyleSheet, SectionList } from 'react-native'
 import EmptyList from '../Components/EmptyList'
 import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import ProductSalesRecordHeader from '../Components/ProductSalesRecordHeader'
 import ProductListAtom from '../Atom/ProductListAtom'
 import ListItemAtom from '../Atom/ListItemAtom'
@@ -11,9 +11,9 @@ export default class ProductSalesRecordScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Product sales record"
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

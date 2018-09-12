@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { View, StyleSheet, Text, ScrollView } from 'react-native'
 import { Thumbnail, ListItem, Left, Right } from 'native-base'
 import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/DetailsScreenHeader'
 
 interface IProps {
   navigation?: any
@@ -13,16 +13,12 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     const product = navigation.getParam('product', {})
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Product"
-          onBackPress={() => navigation.goBack()}
-          showRight
-          rightText="Edit"
-          firstRightIcon="pencil"
-          onPressRightButton={() =>
+          onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() =>
             navigation.navigate('NewProduct', { product })
           }
-          firstRightIconType="MaterialCommunityIcons"
         />
       )
     }
