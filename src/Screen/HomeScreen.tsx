@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { View, StyleSheet, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import Auth from '../services/auth'
 
 interface IProps {
@@ -19,10 +19,9 @@ export default class HomeScreen extends React.Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Home"
-          showMenu
-          onMenuPress={() => navigation.navigate('DrawerToggle')}
+          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
         />
       )
     }

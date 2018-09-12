@@ -6,13 +6,13 @@ import {
   TouchableOpacity,
   View
 } from 'react-native'
-import CustomHeader from '../Components/CustomHeader'
 import { color } from '../Style/Color'
 import ListItemAtom from '../Atom/ListItemAtom'
 import ListItemWithStatusIndicator from '../Components/ListItemWithStatusIndicator'
 import ListItemWithTwoValues from '../Components/ListItemWithTwoValues'
 import ListItemWithImage from '../Components/ListItemWithImage'
 import WarningModal from '../Components/WarningModal'
+import Header from '../Components/Header/DetailsScreenHeader'
 
 interface IProps {
   navigation: any
@@ -30,14 +30,10 @@ export default class SalesOrderScreen extends React.Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Sales order details"
-          showRight
-          firstRightIcon="pencil"
-          firstRightIconType="MaterialCommunityIcons"
-          onPressRightButton={() => alert('Edit pressed.')}
-          rightText="Edit"
-          onBackPress={() => navigation.goBack()}
+          onPressRightIcon={() => alert('Edit pressed.')}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

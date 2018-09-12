@@ -1,16 +1,17 @@
-import React, { Component } from 'react';
-import DetailsList from '../DetailsList';
+import React, { Component } from 'react'
+import { ScrollView } from 'react-native'
+import ProfileListAtom from '../../Atom/ProfileListAtom'
 
 interface IProps {
-  navigation: any;
-  screenProps: any;
+  navigation: any
+  screenProps: any
 }
 
 class ContactTabDetails extends Component<IProps> {
   getContactDetails = () => {
     const {
       screenProps: { contact }
-    } = this.props;
+    } = this.props
     return [
       { section: 'Email', value: contact.email },
       {
@@ -45,11 +46,18 @@ class ContactTabDetails extends Component<IProps> {
         section: 'Account Number',
         value: contact.bank ? contact.bank.accountNumber : ''
       }
-    ];
-  };
+    ]
+  }
+  displayList = () => {
+    return this.getContactDetails().map((key: any, index: any) => {
+      let section = key.section
+      let value = key.value
+      return <ProfileListAtom section={section} value={value} key={index} />
+    })
+  }
   render() {
-    return <DetailsList list={this.getContactDetails()} />;
+    return <ScrollView>{this.displayList()}</ScrollView>
   }
 }
 
-export default ContactTabDetails;
+export default ContactTabDetails

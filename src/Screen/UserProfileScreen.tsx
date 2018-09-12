@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import UserProfile from '../Components/UserProfile'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/DetailsScreenHeader'
 import Auth from '../services/auth'
 
 interface IProps {
@@ -22,14 +22,10 @@ class UserProfileScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="User profile"
-          onBackPress={() => navigation.goBack()}
-          rightText="Edit"
-          showRight
-          firstRightIcon="pencil"
-          firstRightIconType="MaterialCommunityIcons"
-          onPressRightButton={() => navigation.navigate('EditUserProfile')}
+          onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() => navigation.navigate('EditUserProfile')}
         />
       )
     }

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { View, StyleSheet, Alert, SectionList, Text } from 'react-native'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import FabAtom from '../Atom/FabAtom'
 import EmptyList from '../Components/EmptyList'
 import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
@@ -36,14 +36,10 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Expenses"
-          showMenu
-          onPressFirstRightIcon={() => Alert.alert('Search button pressed.')}
-          onMenuPress={() => navigation.navigate('DrawerToggle')}
-          showRight
-          firstRightIcon="ios-search"
-          rightStyle={styles.headerRight}
+          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
         />
       )
     }

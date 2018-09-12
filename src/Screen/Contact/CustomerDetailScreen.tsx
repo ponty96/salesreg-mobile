@@ -1,35 +1,31 @@
-import React, { PureComponent } from 'react';
-import ContactDetails from '../../Components/Contact/ContactDetails';
-import CustomHeader from '../../Components/CustomHeader';
+import React, { PureComponent } from 'react'
+import ContactDetails from '../../Components/Contact/ContactDetails'
+import Header from '../../Components/Header/DetailsScreenHeader'
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 export default class UpsertCustomerScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const customer = navigation.getParam('customer', {});
+    const customer = navigation.getParam('customer', {})
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Customer"
-          onBackPress={() => navigation.goBack()}
-          showRight
-          rightText="Edit"
-          firstRightIcon="pencil"
-          onPressRightButton={() =>
+          onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() =>
             navigation.navigate('UpsertCustomer', { customer })
           }
-          firstRightIconType="MaterialCommunityIcons"
         />
       )
-    };
-  };
+    }
+  }
   render() {
     return (
       <ContactDetails
         contact={this.props.navigation.getParam('customer', {})}
         contactType="customer"
       />
-    );
+    )
   }
 }

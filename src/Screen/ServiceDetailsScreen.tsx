@@ -1,11 +1,11 @@
-import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import React, { Component } from 'react'
+import { View, Text, StyleSheet } from 'react-native'
 
-import { color } from '../Style/Color';
-import CustomHeader from '../Components/CustomHeader';
+import { color } from '../Style/Color'
+import Header from '../Components/Header/DetailsScreenHeader'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 const ListItem = ({ label, priceColor, amount }: any) => (
@@ -13,30 +13,26 @@ const ListItem = ({ label, priceColor, amount }: any) => (
     <Text style={styles.listText}>{label}</Text>
     <Text style={[styles.listText, priceColor]}>{amount}</Text>
   </View>
-);
+)
 export default class ServiceScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const service = navigation.getParam('service', {});
+    const service = navigation.getParam('service', {})
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Service"
-          firstRightIcon="pencil"
-          firstRightIconType="MaterialCommunityIcons"
-          rightText="Edit"
-          onPressRightButton={() =>
+          onPressRightIcon={() =>
             navigation.navigate('EditServices', { service })
           }
-          onBackPress={() => navigation.goBack()}
-          showRight
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
-    };
-  };
+    }
+  }
 
   render() {
-    const service = this.props.navigation.getParam('service', {});
-    const price = '\u20A6 ' + service.price;
+    const service = this.props.navigation.getParam('service', {})
+    const price = '\u20A6 ' + service.price
     return (
       <View style={styles.container}>
         <View style={styles.header}>
@@ -56,7 +52,7 @@ export default class ServiceScreen extends Component<IProps> {
         />
         <ListItem amount="100" label="Amount sold" />
       </View>
-    );
+    )
   }
 }
 
@@ -106,4 +102,4 @@ const styles = StyleSheet.create({
     fontFamily: 'Source Sans Pro',
     marginHorizontal: 32
   }
-});
+})

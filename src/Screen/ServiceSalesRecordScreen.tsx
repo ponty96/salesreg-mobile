@@ -3,16 +3,16 @@ import { View, StyleSheet, FlatList } from 'react-native'
 import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 import { color } from '../Style/Color'
 import ListItemAtom from '../Atom/ListItemAtom'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import EmptyList from '../Components/EmptyList'
 
 export default class ServiceSalesRecordScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Service sales record"
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

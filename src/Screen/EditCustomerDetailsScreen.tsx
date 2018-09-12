@@ -1,12 +1,12 @@
 import React, { Component } from 'react'
 import { View, Text } from 'react-native'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 
 export default class EditCustomerDetailsScreen extends Component {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader title="Customer" onBackPress={() => navigation.goBack()} />
+        <Header title="Customer" onPressLeftIcon={() => navigation.goBack()} />
       )
     }
   }

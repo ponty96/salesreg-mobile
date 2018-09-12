@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, FlatList, Alert } from 'react-native'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/DetailsScreenHeader'
 import SalesOrderListAtom from '../Atom/SalesOrderListAtom'
 import ListItemAtom from '../Atom/ListItemAtom'
 import { color } from '../Style/Color'
@@ -13,14 +13,10 @@ export default class ExpensesDetailsScreen extends Component<IProps> {
     const expense = navigation.getParam('expense', {})
     return {
       header: (
-        <CustomHeader
+        <Header
           title={expense.title}
-          onBackPress={() => navigation.goBack()}
-          showRight
-          firstRightIcon="pencil"
-          firstRightIconType="MaterialCommunityIcons"
-          rightText="Edit"
-          onPressRightButton={() => Alert.alert('Edit pressed.')}
+          onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() => Alert.alert('Edit pressed.')}
         />
       )
     }
