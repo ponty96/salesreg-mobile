@@ -44,7 +44,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     marginLeft: 20,
-    fontFamily: 'SourceSansPro-Bold'
+    fontFamily: 'AvenirNext-Bold'
   },
   nameDisplayImage: {
     height: 70,
@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   innerText: {
-    fontFamily: 'SourceSansPro-Bold',
+    fontFamily: 'AvenirNext-Bold',
     fontSize: 16
   }
 })
