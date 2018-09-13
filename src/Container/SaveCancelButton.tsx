@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { View, StyleSheet } from 'react-native'
 import ButtonAtom from '../Atom/ButtonAtom'
-import { color } from './../Style/Color'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -43,6 +43,7 @@ export default SaveCancelButton
 
 const styles = StyleSheet.create({
   saveCancelContainer: {
+    alignSelf: 'flex-end',
     flexDirection: 'row',
     height: 65
   },
@@ -56,6 +57,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: color.principal,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   }
 })

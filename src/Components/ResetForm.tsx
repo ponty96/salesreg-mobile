@@ -1,8 +1,8 @@
 import React from 'react'
 import { Text, StyleSheet } from 'react-native'
 import { Form } from 'native-base'
-import InputAtom from './../Atom/InputAtom'
-import ButtonAtom from './../Atom/ButtonAtom'
+import InputAtom from '../Atom/InputAtom'
+import ButtonAtom from '../Atom/ButtonAtom'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -40,7 +40,7 @@ class ResetForm extends React.Component<IProps, IState> {
     return (
       <Form style={styles.resetFormContainer}>
         <Text
-          style={[styles.resetPasswordText, { fontFamily: 'SourceSansPro' }]}
+          style={[styles.resetPasswordText, { fontFamily: 'Source Sans Pro' }]}
         >
           A reset code will be sent to xxxxxxxxx678. Enter the code to reset
           your password.
@@ -65,9 +65,9 @@ class ResetForm extends React.Component<IProps, IState> {
           onPress={this.reset}
           // disabled={this.state.code ? false : true}
           btnStyle={styles.resetButton}
-          textStyle={[{ fontFamily: 'SourceSansPro_Semibold' }, styles.reset]}
+          textStyle={[{ fontFamily: 'SourceSansPro-Semibold' }, styles.reset]}
         />
-        <Text style={[styles.noAccount, { fontFamily: 'SourceSansPro' }]}>
+        <Text style={[styles.noAccount, { fontFamily: 'Source Sans Pro' }]}>
           Don't have an account?
         </Text>
         <ButtonAtom

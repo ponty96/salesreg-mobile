@@ -10,7 +10,7 @@ export const color = {
   black: '#000000',
   principal: '#444444',
   textBorderBottom: '#E0E0E0',
-  button: '#0051FF',
+  button: '#3668D3',
   dropdown: '#D0D0D0',
   list: '#F3F3F3',
   subHeader: '#DDDDDD',
@@ -18,5 +18,8 @@ export const color = {
   check: '#27CBD3',
   grey: '#F6F6F6',
   listBorderColor: '#F3F3F3',
-  secondary: '#FFFFFF'
+  secondary: '#FFFFFF',
+  red: '#D00000',
+  yellow: '#F8E71C',
+  orange: '#FBA518'
 }

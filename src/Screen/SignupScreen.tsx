@@ -1,46 +1,42 @@
-import React, { PureComponent } from 'react';
-import {
-  Text,
-  View,
-  KeyboardAvoidingView,
-  ScrollView,
-  StyleSheet,
-  Alert
-} from 'react-native';
+import React, { PureComponent } from 'react'
+import { Text, View, StyleSheet, Alert } from 'react-native'
 
-import SignupForm from '../Components/SignupForm';
-import SecondSignUpForm from '../Components/SecondSignUpForm';
-import AuthenticationHeader from '../Components/AuthenticationHeader';
-import TransitionAtom from '../Atom/TransitionAtom';
-import { color } from '../Style/Color';
-import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate';
-import { Mutation } from 'react-apollo';
+import SignupForm from '../Components/SignupForm'
+import SecondSignUpForm from '../Components/SecondSignUpForm'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import TransitionAtom from '../Atom/TransitionAtom'
+import { color } from '../Style/Color'
+import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
+import { Mutation } from 'react-apollo'
+import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions'
+import AppSpinner from '../Components/Spinner'
+import { Container, Content, Form } from 'native-base'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  showSecondScreen: boolean;
-  email: string;
-  password: string;
-  name: string;
-  passwordConfirmation: string;
-  gender: string;
-  businessName: string;
-  businessAddress: string;
-  businessEmail: string;
-  products: boolean;
-  services: boolean;
-  currency: string;
+  currentForm: number
+  email: string
+  password: string
+  name: string
+  passwordConfirmation: string
+  gender: string
+  businessName: string
+  businessAddress: string
+  businessEmail: string
+  products: boolean
+  services: boolean
+  currency: string
+  fieldErrors: any
 }
 
 class SignupScreen extends PureComponent<IProps, IState> {
   state = {
-    showSecondScreen: false,
     email: '',
-    password: '',
     name: '',
+    password: '',
     passwordConfirmation: '',
     gender: '',
     businessName: '',
@@ -48,35 +44,50 @@ class SignupScreen extends PureComponent<IProps, IState> {
     businessEmail: '',
     products: false,
     services: false,
-    currency: ''
-  };
+    currency: '',
+    fieldErrors: null,
+    currentForm: 0
+  }
 
-  onPress = () => {
-    this.setState({ showSecondScreen: true });
-  };
+  next = () => {
+    const errors = validateRegStep1FormInputs(this.state)
+    console.log('ERORS ', errors)
+    if (errors && Object.keys(errors).length > 0) {
+      this.setState({ fieldErrors: errors })
+    } else {
+      this.setState({ currentForm: 1 })
+    }
+  }
 
   updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val };
-    this.setState({ ...formData });
-  };
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
+  }
 
   handleSignUpForm = () => {
-    this.setState({ showSecondScreen: true });
-  };
+    // this.setState({ currentForm: true });
+  }
   render() {
     return (
-      <View style={styles.container}>
+      <Container>
         <AuthenticationHeader />
-        <ScrollView>
+        <Content>
           <View style={styles.wrapper}>
-            <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
+            <Text
+              style={[styles.signUpText, { fontFamily: 'Source Sans Pro' }]}
+            >
               SIGN UP
             </Text>
-            <TransitionAtom firstScreen={!this.state.showSecondScreen} />
+            <TransitionAtom
+              firstScreen={this.state.currentForm == 0 ? true : false}
+            />
             <Text
-              style={[styles.personalInfoText, { fontFamily: 'SourceSansPro' }]}
+              style={[
+                styles.personalInfoText,
+                { fontFamily: 'Source Sans Pro' }
+              ]}
             >
-              {!this.state.showSecondScreen
+              {this.state.currentForm == 0
                 ? 'PERSONAL INFORMATION'
                 : 'BUSINESS INFORMATION'}
             </Text>
@@ -84,20 +95,21 @@ class SignupScreen extends PureComponent<IProps, IState> {
               mutation={RegisterCompanyMutationGQL}
               onCompleted={this.onCompleted}
             >
-              {registerUser => (
-                <KeyboardAvoidingView
-                  behavior={'padding'}
-                  keyboardVerticalOffset={95}
-                >
-                  {!this.state.showSecondScreen ? (
+              {(registerUser, { loading }) => (
+                <Form>
+                  <AppSpinner visible={loading} />
+                  {this.state.currentForm == 0 ? (
                     <SignupForm
-                      onPress={this.handleSignUpForm}
                       email={this.state.email}
                       password={this.state.password}
                       passwordConfirmation={this.state.passwordConfirmation}
                       name={this.state.name}
                       gender={this.state.gender}
                       onUpdateState={this.updateState}
+                      fieldErrors={this.state.fieldErrors}
+                      onNext={this.next}
+                      onBack={() => this.props.navigation.navigate('Login')}
+                      navigation={this.props.navigation}
                     />
                   ) : (
                     <SecondSignUpForm
@@ -114,15 +126,16 @@ class SignupScreen extends PureComponent<IProps, IState> {
                       services={this.state.services}
                       currency={this.state.currency}
                       navigation={this.props.navigation}
+                      fieldErrors={this.state.fieldErrors}
                     />
                   )}
-                </KeyboardAvoidingView>
+                </Form>
               )}
             </Mutation>
           </View>
-        </ScrollView>
-      </View>
-    );
+        </Content>
+      </Container>
+    )
   }
 
   parseMutationVariables = () => {
@@ -137,7 +150,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
       products,
       services,
       currency
-    } = this.state;
+    } = this.state
     return {
       firstName: name ? name.split(' ')[0] : '',
       lastName: name ? name.split(' ')[1] : '',
@@ -150,8 +163,8 @@ class SignupScreen extends PureComponent<IProps, IState> {
       currency,
       category: this.parseCategory(products, services),
       ...this.parseAddress()
-    };
-  };
+    }
+  }
 
   parseAddress = (): any => {
     /**
@@ -162,23 +175,26 @@ class SignupScreen extends PureComponent<IProps, IState> {
       city: 'Akure',
       state: 'Ondo',
       country: 'Nigeria'
-    };
-  };
+    }
+  }
 
   parseCategory = (products, services) => {
     if (products && services) {
-      return 'PRODUCT_SERVICE';
+      return 'PRODUCT_SERVICE'
     } else if (products) {
-      return 'PRODUCT';
+      return 'PRODUCT'
     } else if (services) {
-      return 'SERVICE';
+      return 'SERVICE'
     }
-    return 'PRODUCT_SERVICE';
-  };
+    return 'PRODUCT_SERVICE'
+  }
 
   onCompleted = async data => {
-    const { registerCompany } = data;
-    if (registerCompany.success) {
+    console.log('SignupScreen', data)
+    const {
+      registerCompany: { success, fieldErrors }
+    } = data
+    if (success) {
       Alert.alert(
         'Registration Success',
         'Verify your account via the link sent to your email',
@@ -186,12 +202,14 @@ class SignupScreen extends PureComponent<IProps, IState> {
           { text: 'OK', onPress: () => this.props.navigation.navigate('Login') }
         ],
         { cancelable: false }
-      );
+      )
+    } else {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default SignupScreen;
+export default SignupScreen
 
 const styles = StyleSheet.create({
   personalInfoText: {
@@ -215,4 +233,4 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: color.secondary
   }
-});
+})
