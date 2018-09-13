@@ -35,7 +35,7 @@ const sideBarItemStyles = StyleSheet.create({
     marginBottom: 5
   },
   title: {
-    marginLeft: 32,
+    marginLeft: 25,
     color: '#000',
     marginVertical: 2,
     fontSize: 18
@@ -46,7 +46,7 @@ const sideBarItemStyles = StyleSheet.create({
     paddingVertical: 6
   },
   category: {
-    marginLeft: 29,
+    marginLeft: 22,
     backgroundColor: 'transparent',
     color: '#000',
     marginVertical: 6,
@@ -142,10 +142,10 @@ export default class SideBar extends PureComponent<IProps, IState> {
               style={styles.header}
               onPress={() => navigate('DrawerToggle')}
             >
-              <Icon name="cross" type="Entypo" style={styles.cross} />
-              <Text style={[styles.texts, { fontFamily: 'Source Sans Pro' }]}>
+              <Icon name="md-close" type="Ionicons" style={styles.cross} />
+              {/* <Text style={[styles.texts, { fontFamily: 'Source Sans Pro' }]}>
                 {this.state.businessName}
-              </Text>
+              </Text> */}
             </TouchableOpacity>
             <SidebarItem
               title="COMPANY"
@@ -249,9 +249,9 @@ export default class SideBar extends PureComponent<IProps, IState> {
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    marginLeft: '3%',
-    alignItems: 'center',
-    paddingVertical: 16
+    marginLeft: 27,
+    alignItems: 'center'
+    // paddingVertical: 16
   },
   texts: {
     color: color.modal,
@@ -268,9 +268,8 @@ const styles = StyleSheet.create({
     color: color.menu
   },
   cross: {
-    fontSize: 35,
-    // backgroundColor: 'transparent',
-    color: color.modal
+    fontSize: 26,
+    color: '#000'
   },
   logoutItem: {
     borderTopWidth: 1,
