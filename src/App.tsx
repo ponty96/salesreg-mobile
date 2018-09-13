@@ -3,7 +3,6 @@ import { StatusBar, SafeAreaView } from 'react-native'
 import { Root } from 'native-base'
 import { ApolloProvider } from 'react-apollo'
 import client from './client'
-import { color } from './Style/Color'
 
 import Routes from './Navigation/Routes'
 import Auth from './services/auth'
@@ -30,7 +29,7 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: color.primary }}>
+      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
         <ApolloProvider client={client}>
           <Root>
             <StatusBar barStyle="light-content" />
