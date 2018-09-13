@@ -24,7 +24,7 @@ class EmployeeListAtom extends React.Component<IProps, any> {
     if (this.props.items.image === '') {
       return (
         <View style={styles.textIconCont}>
-          <Text style={{ fontFamily: 'SourceSansPro-Bold', fontSize: 25 }}>
+          <Text style={{ fontFamily: 'AvenirNext-Bold', fontSize: 25 }}>
             {capitalizeFirstLetter(this.props.items.customerName)}
           </Text>
         </View>

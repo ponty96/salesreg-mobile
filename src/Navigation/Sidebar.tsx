@@ -14,10 +14,13 @@ import Auth from '../services/auth'
 
 interface IProps {
   navigation: any
+  onItemPress: any
+  items: any
 }
 
 interface IState {
   businessName: string
+  activeRoute: string
 }
 
 interface Category {
@@ -25,16 +28,53 @@ interface Category {
   routeName: string
 }
 
+const sideBarItemStyles = StyleSheet.create({
+  listHeader: {
+    backgroundColor: 'transparent',
+    marginTop: 16,
+    marginBottom: 5
+  },
+  title: {
+    marginLeft: 32,
+    color: '#000',
+    marginVertical: 2,
+    fontSize: 18
+  },
+  categoryWrapper: {
+    borderRadius: 5,
+    marginHorizontal: 5,
+    paddingVertical: 6
+  },
+  category: {
+    marginLeft: 29,
+    backgroundColor: 'transparent',
+    color: '#000',
+    marginVertical: 6,
+    fontSize: 16,
+    fontFamily: 'AvenirNext-Medium'
+  },
+  activeCategoryWrapper: {
+    backgroundColor: color.button
+  },
+  activeCategory: {
+    color: '#fff'
+  }
+})
+
 const SidebarItem = (prop: {
   title: string
   categories: Category[]
   navigate: any
+  activeRoute?: string | null
 }) => {
   return (
     <View>
       <View style={sideBarItemStyles.listHeader}>
         <Text
-          style={[sideBarItemStyles.title, { fontFamily: 'Source Sans Pro' }]}
+          style={[
+            sideBarItemStyles.title,
+            { fontFamily: 'AvenirNext-DemiBold' }
+          ]}
         >
           {prop.title}
         </Text>
@@ -42,14 +82,19 @@ const SidebarItem = (prop: {
       {prop.categories.map((category: Category, key: number) => {
         return (
           <TouchableOpacity
-            style={sideBarItemStyles.categoryWrapper}
+            style={[
+              sideBarItemStyles.categoryWrapper,
+              prop.activeRoute == category.routeName &&
+                sideBarItemStyles.activeCategoryWrapper
+            ]}
             key={key}
             onPress={() => prop.navigate(category.routeName)}
           >
             <Text
               style={[
                 sideBarItemStyles.category,
-                { fontFamily: 'Source Sans Pro' }
+                prop.activeRoute == category.routeName &&
+                  sideBarItemStyles.activeCategory
               ]}
             >
               {category.title}
@@ -62,11 +107,13 @@ const SidebarItem = (prop: {
 }
 
 export default class SideBar extends PureComponent<IProps, IState> {
-  handleNavigation = (location: string, data: any = undefined) => {
-    this.props.navigation.navigate(location, { data })
+  handleNavigation = (location: string) => {
+    this.setState({ activeRoute: location })
+    this.props.navigation.navigate(location)
   }
   state = {
-    businessName: ''
+    businessName: '',
+    activeRoute: ''
   }
 
   componentWillMount() {
@@ -83,6 +130,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
     const {
       navigation: { navigate }
     } = this.props
+    console.log('side bar props', this.props)
     return (
       <SafeAreaView
         style={styles.sidebarContainer}
@@ -101,7 +149,8 @@ export default class SideBar extends PureComponent<IProps, IState> {
             </TouchableOpacity>
             <SidebarItem
               title="COMPANY"
-              navigate={navigate}
+              navigate={this.handleNavigation}
+              activeRoute={this.state.activeRoute}
               categories={[
                 {
                   title: 'Home',
@@ -120,7 +169,8 @@ export default class SideBar extends PureComponent<IProps, IState> {
 
             <SidebarItem
               title="CONTACT"
-              navigate={navigate}
+              navigate={this.handleNavigation}
+              activeRoute={this.state.activeRoute}
               categories={[
                 {
                   title: 'Customers',
@@ -135,7 +185,8 @@ export default class SideBar extends PureComponent<IProps, IState> {
 
             <SidebarItem
               title="ORDER"
-              navigate={navigate}
+              navigate={this.handleNavigation}
+              activeRoute={this.state.activeRoute}
               categories={[
                 {
                   title: 'Purchase',
@@ -149,7 +200,8 @@ export default class SideBar extends PureComponent<IProps, IState> {
             />
             <SidebarItem
               title="TRANSACTIONS"
-              navigate={navigate}
+              navigate={this.handleNavigation}
+              activeRoute={this.state.activeRoute}
               categories={[
                 {
                   title: 'Bank',
@@ -175,7 +227,8 @@ export default class SideBar extends PureComponent<IProps, IState> {
             />
             <SidebarItem
               title="HELP & SETTINGS"
-              navigate={navigate}
+              navigate={this.handleNavigation}
+              activeRoute={this.state.activeRoute}
               categories={[
                 {
                   title: 'Settings',
@@ -193,32 +246,6 @@ export default class SideBar extends PureComponent<IProps, IState> {
     )
   }
 }
-
-const sideBarItemStyles = StyleSheet.create({
-  listHeader: {
-    backgroundColor: color.dropdown,
-    opacity: 0.2
-  },
-  title: {
-    marginLeft: 32,
-    color: color.secondary,
-    marginVertical: 2,
-    fontSize: 14
-  },
-  categoryWrapper: {
-    backgroundColor: 'transparent',
-    paddingVertical: 8,
-    borderBottomWidth: 0.3,
-    borderBottomColor: color.listBorderColor
-  },
-  category: {
-    marginLeft: 32,
-    backgroundColor: 'transparent',
-    color: color.secondary,
-    marginVertical: 8,
-    fontSize: 14
-  }
-})
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
@@ -257,7 +284,7 @@ const styles = StyleSheet.create({
   },
   sidebarContainer: {
     height: Dimensions.get('window').height - 16,
-    backgroundColor: color.primary
+    backgroundColor: '#fff'
   },
   itemsContainer: {
     flex: 4
