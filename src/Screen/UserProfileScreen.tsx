@@ -1,59 +1,59 @@
-import React, { Component } from 'react'
+import React, { Component } from 'react';
 
-import UserProfile from '../Components/UserProfile'
-import Header from '../Components/Header/DetailsScreenHeader'
-import Auth from '../services/auth'
+import UserProfile from '../Components/UserProfile';
+import CustomHeader from '../Components/CustomHeader';
+import Auth from '../services/auth';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  list: any
-  fullName: string
+  list: any;
+  fullName: string;
 }
 
 class UserProfileScreen extends Component<IProps, IState> {
   state = {
     list: {},
     fullName: ''
-  }
+  };
 
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <Header
+        <CustomHeader
           title="User profile"
-          onPressLeftIcon={() => navigation.goBack()}
-          onPressRightIcon={() => navigation.navigate('EditUserProfile')}
+          onBackPress={() => navigation.goBack()}
+          rightText="Edit"
+          showRight
+          firstRightIcon="pencil"
+          firstRightIconType="MaterialCommunityIcons"
+          onPressRightButton={() => navigation.navigate('EditUserProfile')}
         />
       )
-    }
-  }
+    };
+  };
 
   componentDidMount() {
-    this.updateState()
+    this.updateState();
   }
 
   updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = JSON.parse(await Auth.getCurrentUser());
     this.setState({
       list: {
         Gender: user.gender || '',
-        Phone: user.phone ? user.phone.number : '',
+        Phone: user.phone || '',
         Email: user.email,
-        Address: user.location ? this.parseLocation(user.location) : ''
+        Address: user.address || ''
       },
       fullName: `${user.firstName} ${user.lastName}`
-    })
-  }
-
-  parseLocation = ({ street1, city, state, country }) => {
-    return `${street1} ${city} ${state} ${country}`
-  }
+    });
+  };
   render() {
-    return <UserProfile list={this.state.list} name={this.state.fullName} />
+    return <UserProfile list={this.state.list} name={this.state.fullName} />;
   }
 }
 
-export default UserProfileScreen
+export default UserProfileScreen;

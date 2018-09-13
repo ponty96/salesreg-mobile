@@ -1,9 +1,9 @@
 {
-  "name": "salesreg",
+  "name": "sme-app",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
-    "@babel/core": "^7.0.0-beta.56",
+    "@types/expo": "^26.0.3",
     "@types/jest": "^22.2.3",
     "@types/react": "^16.3.14",
     "@types/react-dom": "^16.0.5",
@@ -13,35 +13,43 @@
     "@types/react-navigation": "^1.5.11",
     "@types/react-test-renderer": "^16.0.1",
     "@wli/react-native-modal-popover": "^0.0.7",
-    "babel-core": "^7.0.0-0",
-    "babel-jest": "^23.4.2",
-    "babel-preset-react-native": "^5",
     "concurrently": "^3.5.1",
     "eslint": "^4.19.1",
     "jest": "22.4.3",
-    "jest-react-native": "^18.0.0",
+    "jest-expo": "25.0.0",
     "pretty-quick": "^1.4.1",
     "react-devtools": "^3.2.1",
+    "react-native-scripts": "^1.14.0",
     "react-test-renderer": "16.3.2",
     "rimraf": "^2.6.2",
-    "ts-jest": "^22.4.6",
-    "tslint": "^5.10.0",
+    "ts-jest": "^22.4.4",
+    "tslint": "^5.9.1",
     "tslint-config-prettier": "^1.12.0",
     "tslint-eslint-rules": "^5.1.0",
     "tslint-react": "^3.5.1",
     "typescript": "^2.8.3"
   },
+  "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
   "scripts": {
+    "start": "react-native-scripts start",
+    "eject": "react-native-scripts eject",
+    "android": "react-native-scripts android",
+    "ios": "react-native-scripts ios",
+    "test": "node node_modules/jest/bin/jest.js",
+    "lint": "tslint src/**/*.ts",
     "tsc": "tsc -p tsconfig.json",
     "clean": "rimraf build",
-    "build": "npm run clean && npm run tsc --",
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest",
-    "watch": "npm run build -- -w",
-    "devtools": "react-devtools",
-    "start:ios": "npm run build && concurrently -r 'react-native run-ios'",
-    "start:android": "npm run build && concurrently -r 'react-native run-android'",
-    "start:iosx": "npm run build && react-native run-ios --simulator='iPhone X'"
+    "build": "yarn run clean && yarn run tsc --",
+    "watch": "yarn run build -- -w",
+    "watch-run-android": "concurrently \"yarn run watch\" \"yarn run android\"",
+    "start-run-android": "concurrently \"yarn run build\" \"yarn run android\"",
+    "build-run-android": "yarn run build && yarn run watch-run-android ",
+    "watch-run-ios": "concurrently \"yarn run watch\" \"yarn run ios\"",
+    "build-run-ios": "yarn run build && yarn run watch-run-ios ",
+    "watch-start": "concurrently \"yarn run watch\" \"yarn run start\"",
+    "build-start": "yarn run build && yarn run watch-Start ",
+    "precommit": "pretty-quick --staged",
+    "devtools": "react-devtools"
   },
   "packagerOpts": {
     "assetExts": [
@@ -50,14 +58,14 @@
     ]
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "jest-expo"
   },
   "dependencies": {
     "@absinthe/socket": "^0.1.10",
     "@absinthe/socket-apollo-link": "^0.1.11",
+    "@expo/vector-icons": "^6.3.1",
     "@jumpn/utils-graphql": "^0.5.3",
     "@richeterre/apollo-upload-client": "^8.0.0",
-    "@types/react-native-vector-icons": "^4.6.3",
     "apollo-cache-inmemory": "^1.2.5",
     "apollo-client": "^2.3.5",
     "apollo-link-context": "^1.0.8",
@@ -65,32 +73,21 @@
     "apollo-link-http": "^1.5.4",
     "apollo-link-state": "^0.4.1",
     "create-react-native-app": "^1.0.0",
+    "expo": "^25.0.0",
     "global": "^4.3.2",
     "graphql-tag": "^2.9.2",
     "humps": "^2.0.1",
-    "moment": "^2.22.2",
     "native-base": "^2.4.3",
     "phoenix": "^1.3.0",
     "prop-types": "^15.6.1",
-    "react": "16.4.1",
-    "react-apollo": "^2.1.9",
-    "react-native": "0.56.0",
+    "react": "16.2.0",
+    "react-apollo": "^2.1.6",
+    "react-native": "0.52.0",
     "react-native-collapsible": "^0.11.2",
-    "react-native-datepicker": "^1.6.0",
-    "react-native-google-places-autocomplete": "^1.3.6",
-    "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-modal-popover": "^0.0.10",
     "react-native-slider": "^0.11.0",
     "react-native-star-rating": "^1.0.9",
-    "react-native-typescript-transformer": "^1.2.10",
-    "react-native-vector-icons": "^5.0.0",
     "react-navigation": "^1.5.8",
-    "tslint-config-prettier": "^1.12.0",
-    "tslint-react-recommended": "^1.0.15"
-  },
-  "rnpm": {
-    "assets": [
-      "./fonts/"
-    ]
+    "tslint-config-prettier": "^1.12.0"
   }
 }

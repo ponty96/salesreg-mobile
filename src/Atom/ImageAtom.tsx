@@ -1,5 +1,6 @@
 import * as React from 'react'
 import { Image, View, Text, TouchableOpacity } from 'react-native'
+import { ImagePicker } from 'expo'
 import { StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 
@@ -17,7 +18,16 @@ class ImageAtom extends React.Component<IProps, any> {
   }
 
   handleSelection = async () => {
-    // image picker functionality here
+    if (this.props.getValue) {
+      let result = await ImagePicker.launchImageLibraryAsync({
+        allowsEditing: false
+      })
+
+      if (result && !result.cancelled) {
+        this.setState({ image: result })
+        this.props.getValue(this.state.image.uri)
+      }
+    }
   }
 
   render() {
@@ -33,7 +43,7 @@ class ImageAtom extends React.Component<IProps, any> {
               style={styles.image}
             />
           </View>
-          <Text style={[styles.imageText, { fontFamily: 'Source Sans Pro' }]}>
+          <Text style={[styles.imageText, { fontFamily: 'SourceSansPro' }]}>
             Upload logo
           </Text>
         </TouchableOpacity>

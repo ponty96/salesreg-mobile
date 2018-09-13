@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Item, Input, Label, Text } from 'native-base'
-import { View, StyleSheet, Platform } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -12,14 +12,13 @@ interface IProps {
   floatingLabel?: boolean | true
   secureTextEntry?: boolean | false
   getValue?: (a: string | number) => void
-  contStyle?: object | any
+  contStyle?: object | Array<any>
   inputStyle?: object
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string
   underneathStyle?: object
   maxLength?: number
   login?: boolean
-  error?: any
 }
 
 interface IState {
@@ -40,19 +39,14 @@ class InputAtom extends React.Component<IProps, IState> {
 
   state = {
     bottomColor: color.textBorderBottom,
-    labelColor: color.label
+    labelColor: color.inactive
   }
 
   changeUnderline = (newColor: string): void => {
-    if (this.props.error) {
-      this.setState({ bottomColor: 'red', labelColor: 'red' })
-    } else if (this.props.login) {
+    if (this.props.login) {
       this.setState({ bottomColor: newColor, labelColor: newColor })
     } else {
-      this.setState({
-        labelColor: newColor,
-        bottomColor: color.textBorderBottom
-      })
+      this.setState({ labelColor: newColor })
     }
   }
 
@@ -60,17 +54,17 @@ class InputAtom extends React.Component<IProps, IState> {
     return (
       <View>
         <Item
-          // floatingLabel={this.props.floatingLabel}
-          stackedLabel={true}
+          floatingLabel={this.props.floatingLabel}
+          stackedLabel={!this.props.floatingLabel}
           style={[
-            { borderBottomColor: this.state.bottomColor, marginTop: 0 },
+            { borderBottomColor: this.state.bottomColor },
             this.props.contStyle
           ]}
         >
           <Label
             style={{
               color: this.state.labelColor,
-              padding: 0,
+              padding: 3,
               fontSize: 14
             }}
           >
@@ -86,52 +80,55 @@ class InputAtom extends React.Component<IProps, IState> {
             value={this.props.defaultValue}
             secureTextEntry={this.props.secureTextEntry}
             keyboardType={this.props.keyboardType}
-            style={[styles.inputText, this.props.inputStyle]}
-            // numberOfLines={6}
+            style={[
+              { fontFamily: 'SourceSansPro' },
+              styles.inputText,
+              this.props.inputStyle
+            ]}
+            numberOfLines={6}
             underlineColorAndroid={'transparent'}
             placeholderTextColor={color.inactive}
-            onFocus={() => this.changeUnderline(color.label)}
-            onBlur={() => this.changeUnderline(color.inactive)}
+            onFocus={() => this.changeUnderline(color.button)}
+            onBlur={() => this.changeUnderline(color.textBorderBottom)}
             maxLength={this.props.maxLength}
           />
         </Item>
-        {this.renderUnderNeathText()}
+        {this.props.underneathText ? (
+          <Text
+            style={[
+              styles.underneathText,
+              this.props.underneathStyle,
+              { fontFamily: 'SourceSansPro' }
+            ]}
+          >
+            {this.props.underneathText}
+          </Text>
+        ) : (
+          <Text />
+        )}
       </View>
     )
-  }
-
-  renderUnderNeathText = () => {
-    if (this.props.error || this.props.underneathText) {
-      return (
-        <Text
-          style={[
-            styles.underneathText,
-            this.props.underneathStyle,
-            {
-              fontFamily: 'Source Sans Pro',
-              color: this.props.error ? 'red' : color.principal
-            }
-          ]}
-        >
-          {this.props.error || this.props.underneathText}
-        </Text>
-      )
-    } else {
-      return null
-    }
   }
 }
 
 export default InputAtom
 
 const styles = StyleSheet.create({
+  marginlessInput: {
+    marginLeft: 0
+  },
+  marginfulInput: {
+    marginLeft: 4
+  },
   label: {
+    // color: this.state.labelColor,
     padding: 3,
     fontSize: 16
   },
   labelText: {
-    fontFamily: 'Source Sans Pro',
-    padding: 0,
+    // color: this.state.labelColor,
+    fontFamily: 'SourceSansPro',
+    padding: 3,
     fontSize: 16
   },
   required: {
@@ -142,17 +139,10 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     color: color.principal,
     fontSize: 12,
-    marginBottom: 0,
-    marginTop: 2,
-    paddingLeft: 8
+    marginBottom: 25,
+    marginTop: 2
   },
   inputText: {
-    fontFamily: 'Source Sans Pro',
-    color: color.principal,
-    fontSize: 16,
-    // paddingBottom: 0,
-    // lineHeight: 8,
-
-    top: Platform.OS == 'ios' ? 6 : 6
+    color: color.principal
   }
 })

@@ -7,7 +7,7 @@ export const customerList = [
     balance: '0',
     debt: '3,000',
     status: 'debt',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -18,7 +18,7 @@ export const customerList = [
     balance: '0',
     debt: '0',
     status: 'paid',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -29,7 +29,7 @@ export const customerList = [
     balance: '500',
     debt: '0',
     status: 'balance',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -41,7 +41,7 @@ export const customerList = [
     balance: '0',
     debt: '0',
     status: 'paid',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -52,7 +52,7 @@ export const customerList = [
     balance: '0',
     debt: '5,000',
     status: 'debt',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -63,7 +63,7 @@ export const customerList = [
     balance: '0',
     debt: '0',
     status: 'paid',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -74,7 +74,7 @@ export const customerList = [
     balance: '0',
     debt: '2,000',
     status: 'debt',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -85,7 +85,7 @@ export const customerList = [
     balance: '5,000',
     debt: '0',
     status: 'balance',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -96,51 +96,10 @@ export const customerList = [
     balance: '0',
     debt: '6,000',
     status: 'debt',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   }
-];
-
-export const employeeList = [
-  {
-    key: '1',
-    customerName: 'John Okon',
-    location: 'POS',
-    position: 'Cashier',
-    image:
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
-  },
-  {
-    key: '2',
-    customerName: 'Veronica Igwe',
-    location: 'POS',
-    position: 'Sales girl',
-    image: ''
-  },
-  {
-    key: '3',
-    customerName: 'Sabestian doe',
-    location: 'Warehouse',
-    position: 'Store man',
-    image:
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
-  },
-  {
-    key: '4',
-    customerName: 'AbdulAzeez Kolawole',
-    location: 'Office',
-    position: 'Team Lead',
-    image: ''
-  },
-  {
-    key: '5',
-    customerName: 'Klazbaba',
-    location: 'Office',
-    position: 'Javascript',
-    image:
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
-  }
-];
+]
 
 export const debtList = [
   {
@@ -151,7 +110,7 @@ export const debtList = [
     balance: '0',
     debt: '3,000',
     status: 'debt',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -162,7 +121,7 @@ export const debtList = [
     balance: '0',
     debt: '0',
     status: 'paid',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -173,7 +132,7 @@ export const debtList = [
     balance: '500',
     debt: '0',
     status: 'balance',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -185,7 +144,7 @@ export const debtList = [
     balance: '0',
     debt: '0',
     status: 'paid',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -196,7 +155,7 @@ export const debtList = [
     balance: '0',
     debt: '5,000',
     status: 'debt',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -207,7 +166,7 @@ export const debtList = [
     balance: '0',
     debt: '0',
     status: 'paid',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -218,7 +177,7 @@ export const debtList = [
     balance: '0',
     debt: '2,000',
     status: 'debt',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -229,7 +188,7 @@ export const debtList = [
     balance: '5,000',
     debt: '0',
     status: 'balance',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -240,10 +199,10 @@ export const debtList = [
     balance: '0',
     debt: '6,000',
     status: 'debt',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   }
-];
+]
 
 export const mainOrderList = [
   {
@@ -323,7 +282,7 @@ export const mainOrderList = [
     tag: 'Pending Delivery',
     check: false
   }
-];
+]
 
 export const orderDetails = [
   {
@@ -334,7 +293,7 @@ export const orderDetails = [
     number: 4,
     debt: '3,000',
     status: 'debt',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -345,7 +304,7 @@ export const orderDetails = [
     number: 2,
     debt: '0',
     status: 'paid',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -356,10 +315,10 @@ export const orderDetails = [
     number: 36,
     debt: '0',
     status: 'balance',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   }
-];
+]
 
 export const orderList = [
   {
@@ -372,7 +331,7 @@ export const orderList = [
     amount: 0,
     status: 'paid',
     number: 20,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -385,7 +344,7 @@ export const orderList = [
     time: '02:00pm',
     amount: 9000,
     status: 'paid',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -398,7 +357,7 @@ export const orderList = [
     amount: 3500,
     status: 'paid',
     number: 4,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -411,7 +370,7 @@ export const orderList = [
     amount: 2500,
     status: 'paid',
     number: 7,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -424,7 +383,7 @@ export const orderList = [
     amount: 5000,
     status: 'paid',
     number: 3,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -437,7 +396,7 @@ export const orderList = [
     amount: 3000,
     status: 'paid',
     number: 8,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -450,7 +409,7 @@ export const orderList = [
     amount: 3000,
     status: 'paid',
     number: 24,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -463,7 +422,7 @@ export const orderList = [
     amount: '3000',
     status: 'paid',
     number: 20,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280'
   },
   {
@@ -476,7 +435,7 @@ export const orderList = [
     amount: '20,000',
     status: 'paid',
     number: 20,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280'
   },
   {
@@ -489,7 +448,7 @@ export const orderList = [
     amount: 0,
     status: 'paid',
     number: 20,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280'
   },
   {
@@ -502,7 +461,7 @@ export const orderList = [
     amount: 3000,
     status: 'paid',
     number: 12,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -515,7 +474,7 @@ export const orderList = [
     amount: 3000,
     status: 'paid',
     number: 20,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   },
   {
@@ -528,7 +487,7 @@ export const orderList = [
     amount: 3000,
     status: 'paid',
     number: 32,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280'
   },
   {
@@ -541,7 +500,7 @@ export const orderList = [
     amount: 3000,
     status: 'paid',
     number: 1,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -554,7 +513,7 @@ export const orderList = [
     amount: 3000,
     status: 'paid',
     number: 0.5,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   },
   {
@@ -567,7 +526,7 @@ export const orderList = [
     amount: 3000,
     status: 'paid',
     number: 0.5,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   },
   {
@@ -580,7 +539,7 @@ export const orderList = [
     amount: 3000,
     status: 'paid',
     number: 0.5,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   },
   {
@@ -593,7 +552,7 @@ export const orderList = [
     amount: '2000',
     status: 'paid',
     number: 3,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -606,7 +565,7 @@ export const orderList = [
     amount: '17,000',
     status: 'paid',
     number: 3,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -619,7 +578,7 @@ export const orderList = [
     amount: '0',
     status: 'paid',
     number: 3,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -632,10 +591,10 @@ export const orderList = [
     amount: '0',
     status: 'paid',
     number: 3,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   }
-];
+]
 
 export const productList = [
   {
@@ -647,7 +606,7 @@ export const productList = [
     time: '02:00pm',
     amount: 9000,
     status: 'paid',
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -659,7 +618,7 @@ export const productList = [
     amount: 3500,
     status: 'paid',
     number: 4,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -671,7 +630,7 @@ export const productList = [
     amount: 2500,
     status: 'paid',
     number: 7,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0ba197eed01b550b7f6d4df10153223e'
   },
   {
@@ -683,7 +642,7 @@ export const productList = [
     amount: 5000,
     status: 'debt',
     number: 3,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -695,7 +654,7 @@ export const productList = [
     amount: 3000,
     status: 'debt',
     number: 8,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -707,7 +666,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 24,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -719,7 +678,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 20,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280'
   },
   {
@@ -731,7 +690,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 12,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -743,7 +702,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 20,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   },
   {
@@ -755,7 +714,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 32,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/03c6d4d99c3d76575cc03c2a7f816280'
   },
   {
@@ -767,7 +726,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 1,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -779,7 +738,7 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 0.5,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   },
   {
@@ -791,10 +750,10 @@ export const productList = [
     amount: 3000,
     status: 'paid',
     number: 3,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   }
-];
+]
 
 export const sections = [
   {
@@ -845,7 +804,7 @@ export const sections = [
     tag: 'Delivered | Recalled',
     check: true
   }
-];
+]
 
 export const innerAccordion = [
   {
@@ -854,7 +813,7 @@ export const innerAccordion = [
     date: '20-03-2018',
     amount: '400',
     quantity: 1,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -863,7 +822,7 @@ export const innerAccordion = [
     date: '20-04-2018',
     amount: '150',
     quantity: 1,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
   },
   {
@@ -872,7 +831,7 @@ export const innerAccordion = [
     date: '20-04-2018',
     amount: '3,000',
     quantity: 2,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/ee06c63d01543a44631c3421df6ee5fa'
   },
   {
@@ -881,7 +840,7 @@ export const innerAccordion = [
     date: '20-05-2018',
     amount: '700',
     quantity: 1,
-    image:
+    images:
       'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/0815e147451c6ccdead11da27189a22d'
   }
-];
+]

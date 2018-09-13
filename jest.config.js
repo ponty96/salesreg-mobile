@@ -3,6 +3,7 @@ module.exports = {
     '^.+\\.jsx?$': '<rootDir>/node_modules/babel-jest',
     '^.+\\.tsx?$': 'ts-jest'
   },
+  preset: 'jest-expo',
   testRegex: '(/__tests__/.*|/src/.*\\.(test|spec))\\.(jsx?|tsx?)$',
   moduleFileExtensions: [
     'ts',

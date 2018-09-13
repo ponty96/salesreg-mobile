@@ -1,16 +1,19 @@
 import * as React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 import StarRating from 'react-native-star-rating'
-import { color } from '../Style/Color'
 
-interface IProps {
-  showText: boolean | true
+interface IState {
+  value: string
+  starCount: number
 }
 
-class GoldRatings extends React.Component<IProps, any> {
-  state = {
-    starCount: 0,
-    value: ''
+class GoldRatings extends React.Component<any, IState> {
+  constructor(props?: IState) {
+    super(props)
+    this.state = {
+      starCount: 0,
+      value: ''
+    }
   }
 
   onStarRatingPress(rating: number) {
@@ -63,12 +66,10 @@ class GoldRatings extends React.Component<IProps, any> {
   render() {
     return (
       <View style={styles.goldRatingsContainer}>
-        {this.props.showText && (
-          <Text style={styles.addText}> {this.state.value} </Text>
-        )}
+        <Text style={styles.addText}> {this.state.value} </Text>
         <StarRating
           disabled={false}
-          fullStarColor={color.selling} // "#FFDF00"
+          fullStarColor="#FFDF00"
           maxStars={5}
           rating={this.state.starCount}
           selectedStar={(rating: number) => this.onStarRatingPress(rating)}

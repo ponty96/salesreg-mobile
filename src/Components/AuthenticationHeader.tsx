@@ -1,16 +1,18 @@
-import React, { PureComponent } from 'react'
-import { View, Image, StyleSheet, Platform } from 'react-native'
+import React, { PureComponent } from 'react';
+import { View, Image, StyleSheet, Platform } from 'react-native';
 
-import { color } from '../Style/Color'
+import { color } from '../Style/Color';
 
 interface IProps {
-  smallHeader?: boolean
+  smallHeader?: boolean;
 }
 
-class AuthenticationHeader extends PureComponent<IProps> {
+interface IState {}
+
+class AuthenticationHeader extends PureComponent<IProps, IState> {
   static defaultProps = {
     smallHeader: true
-  }
+  };
 
   render() {
     return (
@@ -23,18 +25,18 @@ class AuthenticationHeader extends PureComponent<IProps> {
       >
         {this.props.smallHeader ? (
           <Image
-            source={require('./../../assets/Images/loginLogo.png')}
+            source={require('./../../Assets/Images/loginLogo.png')}
             style={styles.image}
           />
         ) : (
-          <Image source={require('./../../assets/Images/onboardingLogo.png')} />
+          <Image source={require('./../../Assets/Images/onboardingLogo.png')} />
         )}
       </View>
-    )
+    );
   }
 }
 
-export default AuthenticationHeader
+export default AuthenticationHeader;
 
 const styles = StyleSheet.create({
   smallHeader: {
@@ -64,4 +66,4 @@ const styles = StyleSheet.create({
   image: {
     marginTop: 20
   }
-})
+});

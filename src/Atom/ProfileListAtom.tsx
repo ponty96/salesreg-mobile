@@ -40,11 +40,11 @@ const styles = StyleSheet.create({
   blueText: {
     color: color.button,
     fontSize: 14,
-    fontFamily: 'Source Sans Pro',
+    fontFamily: 'SourceSansPro',
     paddingBottom: 5
   },
   normalText: {
     fontSize: 14,
-    fontFamily: 'Source Sans Pro'
+    fontFamily: 'SourceSansPro'
   }
 })

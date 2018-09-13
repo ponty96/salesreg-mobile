@@ -1,35 +1,32 @@
-import React, { PureComponent } from 'react'
-import { Form, CheckBox } from 'native-base'
-import { View, Text, StyleSheet } from 'react-native'
-import InputAtom from '../Atom/InputAtom'
-import ButtonAtom from '../Atom/ButtonAtom'
-import { color } from '../Style/Color'
-import PickerAtom from '../Atom/PickerAtom'
-import FormErrorTextAtom from '../Atom/FormErrorTextAtom'
+import React, { PureComponent } from 'react';
+import { Form, CheckBox } from 'native-base';
+import { View, Text, StyleSheet } from 'react-native';
+import InputAtom from '../Atom/InputAtom';
+import ButtonAtom from '../Atom/ButtonAtom';
+import { color } from '../Style/Color';
+import PickerAtom from '../Atom/PickerAtom';
 
 interface IProps {
-  navigation: any
-  onSubmit: () => void
-  onUpdateState?: (key: string, val: any) => void
-  businessName: string
-  businessAddress?: string
-  businessEmail: string
-  products: boolean
-  services: boolean
-  currency: string
-  fieldErrors: any
+  navigation: any;
+  onSubmit: () => void;
+  onUpdateState?: (key: string, val: any) => void;
+  businessName: string;
+  businessAddress: string;
+  businessEmail: string;
+  products: boolean;
+  services: boolean;
+  currency: string;
 }
 
 interface IState {}
 
 class SecondSigupForm extends PureComponent<IProps, IState> {
   flipCheckedState = (oldState: boolean, key: string) => {
-    if (key === 'products') this.props.onUpdateState('products', !oldState)
-    else this.props.onUpdateState('services', !oldState)
-  }
+    if (key === 'products') this.props.onUpdateState('products', !oldState);
+    else this.props.onUpdateState('services', !oldState);
+  };
 
   render() {
-    const { fieldErrors } = this.props
     return (
       <Form style={styles.resetFormContainer}>
         <InputAtom
@@ -38,8 +35,16 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           getValue={name => this.props.onUpdateState('businessName', name)}
           contStyle={styles.marginlessInput}
           required={true}
-          error={fieldErrors && fieldErrors['title']}
-          placeholder="e.g MayAfriq"
+        />
+
+        <InputAtom
+          label="Business address"
+          defaultValue={this.props.businessAddress}
+          getValue={address =>
+            this.props.onUpdateState('businessAddress', address)
+          }
+          contStyle={styles.marginlessInput}
+          required={true}
         />
 
         <InputAtom
@@ -51,23 +56,21 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
           required={true}
-          error={fieldErrors && fieldErrors['contactEmail']}
-          placeholder="e.g info@mayafriq.com"
         />
 
-        <Text style={[styles.whatYouSell, { fontFamily: 'Source Sans Pro' }]}>
+        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
           *What are you selling?
         </Text>
         <View style={styles.checkBoxWrapper}>
           <CheckBox
             checked={this.props.products}
             onPress={() => {
-              this.flipCheckedState(this.props.products, 'products')
+              this.flipCheckedState(this.props.products, 'products');
             }}
             color={color.inactive}
             style={styles.checkBox}
           />
-          <Text style={[styles.checkBoxText, { fontFamily: 'Source Sans Pro' }]}>
+          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
             Products(Traders, manufacturers, producers)
           </Text>
         </View>
@@ -76,31 +79,29 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
           <CheckBox
             checked={this.props.services}
             onPress={() => {
-              this.flipCheckedState(this.props.services, 'services')
+              this.flipCheckedState(this.props.services, 'services');
             }}
             color={color.inactive}
             style={styles.checkBox}
           />
-          <Text style={[styles.checkBoxText, { fontFamily: 'Source Sans Pro' }]}>
+          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
             Services(Service providers)
           </Text>
         </View>
+
+        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
+          Transaction currency
+        </Text>
         <View style={styles.pickerWrapper}>
           <PickerAtom
             list={['Naira(\u20A6)']}
-            placeholder={`e.g Naira(\u20A6)`}
-            label="Transaction Currency"
+            placeholder={`Naira(\u20A6)`}
             selected={this.props.currency}
             handleSelection={currency =>
               this.props.onUpdateState('currency', currency)
             }
           />
         </View>
-
-        {fieldErrors &&
-          fieldErrors['currency'] && (
-            <FormErrorTextAtom errorText={fieldErrors['currency']} />
-          )}
         <View style={styles.buttonsWrapper}>
           <ButtonAtom
             btnText="SIGN UP"
@@ -108,36 +109,36 @@ class SecondSigupForm extends PureComponent<IProps, IState> {
             btnStyle={styles.longButton}
             textStyle={[
               styles.signUp,
-              { fontFamily: 'SourceSansPro-Semibold' }
+              { fontFamily: 'SourceSansPro_Semibold' }
             ]}
           />
-          <Text style={[styles.termsText, { fontFamily: 'Source Sans Pro' }]}>
+          <Text style={[styles.termsText, { fontFamily: 'SourceSansPro' }]}>
             Signing up means you agree with our{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'Source Sans Pro' }]}>
+            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
               Terms
             </Text>{' '}
             &{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'Source Sans Pro' }]}>
+            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
               Privacy policy
             </Text>
           </Text>
-          <Text style={[styles.haveAccount, { fontFamily: 'Source Sans Pro' }]}>
+          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
             Or you have an account?
           </Text>
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
             onPress={() => this.props.navigation.navigate('Login')}
-            textStyle={[styles.login, { fontFamily: 'SourceSansPro-Semibold' }]}
+            textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
             btnStyle={styles.loginButton}
           />
         </View>
       </Form>
-    )
+    );
   }
 }
 
-export default SecondSigupForm
+export default SecondSigupForm;
 
 const styles = StyleSheet.create({
   marginlessInput: {
@@ -170,8 +171,10 @@ const styles = StyleSheet.create({
     color: color.principal
   },
   pickerWrapper: {
-    marginTop: 28,
+    borderBottomColor: color.inactive,
+    borderBottomWidth: 1,
     width: '60%',
+    opacity: 0.5,
     marginBottom: 16
   },
   placeholderColor: {
@@ -210,4 +213,4 @@ const styles = StyleSheet.create({
   loginButton: {
     marginVertical: 0
   }
-})
+});

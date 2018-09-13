@@ -1,44 +1,43 @@
-import { Form } from 'native-base'
-import * as React from 'react'
-import { Text, TouchableOpacity, View, StyleSheet } from 'react-native'
-import ButtonAtom from '../Atom/ButtonAtom'
-import InputAtom from '../Atom/InputAtom'
-import ModalAtom from '../Atom/ModalAtom'
-import { color } from '../Style/Color'
-import Icon from '../Atom/Icon'
+import { Form, Icon } from 'native-base';
+import * as React from 'react';
+import { Text, TouchableOpacity, View, StyleSheet } from 'react-native';
+import ButtonAtom from '../Atom/ButtonAtom';
+import InputAtom from '../Atom/InputAtom';
+import ModalAtom from './../Atom/ModalAtom';
+import { color } from './../Style/Color';
 
 interface IProps {
-  getValue?: (a: any) => void
-  closeModal?: () => void
-  headerText?: string
-  amount?: string
-  placeholder?: string
-  visibility: boolean
+  getValue?: (a: any) => void;
+  closeModal?: () => void;
+  headerText?: string;
+  amount?: string;
+  placeholder?: string;
+  visibility: boolean;
 }
 interface IState {
-  password: any
+  password: any;
 }
 
 class DeleteBuzModal extends React.Component<IProps, IState> {
   static defaultProps: IProps = {
     visibility: false
-  }
+  };
 
   state: IState = {
     password: ''
-  }
+  };
 
   getPassword = (pass: any) => {
     this.setState({
       password: pass
-    })
-  }
+    });
+  };
 
   delete = () => {
     if (this.props.getValue) {
-      this.props.getValue(this.state.password)
+      this.props.getValue(this.state.password);
     }
-  }
+  };
 
   renderHeader = () => {
     return (
@@ -48,8 +47,8 @@ class DeleteBuzModal extends React.Component<IProps, IState> {
           <Icon name={'md-close'} style={styles.modalCloseIcon} />
         </TouchableOpacity>
       </View>
-    )
-  }
+    );
+  };
 
   renderBody = () => {
     return (
@@ -69,8 +68,8 @@ class DeleteBuzModal extends React.Component<IProps, IState> {
           />
         </Form>
       </View>
-    )
-  }
+    );
+  };
 
   render() {
     return (
@@ -79,11 +78,11 @@ class DeleteBuzModal extends React.Component<IProps, IState> {
         body={this.renderBody()}
         header={this.renderHeader()}
       />
-    )
+    );
   }
 }
 
-export default DeleteBuzModal
+export default DeleteBuzModal;
 
 const styles = StyleSheet.create({
   modalHeader: {
@@ -113,4 +112,4 @@ const styles = StyleSheet.create({
     marginHorizontal: 16,
     alignSelf: 'flex-end'
   }
-})
+});

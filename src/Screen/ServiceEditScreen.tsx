@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { StyleSheet, View } from 'react-native'
-import Icon from '../Atom/Icon'
+import { Icon } from 'native-base'
 
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
@@ -49,7 +49,7 @@ class ServiceEditScreen extends PureComponent<IProps, IState> {
           contStyle={styles.marginlessInput}
         />
       </View>
-    )
+    );
   }
 }
 

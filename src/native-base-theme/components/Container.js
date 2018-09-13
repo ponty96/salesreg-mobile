@@ -1,6 +1,6 @@
 import { Platform, Dimensions } from 'react-native'
 
-import variable from '../variables/platform'
+import variable from './../variables/platform'
 
 const deviceHeight = Dimensions.get('window').height
 export default (variables = variable) => {

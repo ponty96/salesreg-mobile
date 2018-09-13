@@ -22,7 +22,6 @@ class Auth {
   }
 
   static setCurrentUser(user: any) {
-    AsyncStorage.removeItem('currentUser');
     return AsyncStorage.setItem('currentUser', JSON.stringify(user));
   }
 

@@ -1,29 +1,23 @@
-import * as React from 'react'
-import { Button } from 'native-base'
-import { Text, StyleSheet } from 'react-native'
-import { color } from '../Style/Color'
+import * as React from 'react';
+import { Button } from 'native-base';
+import { Text, StyleSheet } from 'react-native';
+import { color } from '../Style/Color';
 
 interface IProps {
-  btnText?: string
-  transparent?: boolean
-  disabled?: boolean
-  onPress?: (a: string) => void
-  funcValue?: string
-  btnStyle?: any
-  textStyle?: any
+  btnText?: string;
+  transparent?: boolean;
+  disabled?: boolean;
+  onPress?: any;
+  funcValue?: string;
+  btnStyle?: any;
+  textStyle?: any;
 }
 
 class ButtonAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
     transparent: false,
     disabled: false
-  }
-
-  onPress = () => {
-    if (this.props.onPress) {
-      this.props.onPress(this.props.funcValue)
-    }
-  }
+  };
 
   render() {
     return (
@@ -36,11 +30,11 @@ class ButtonAtom extends React.Component<IProps, any> {
           this.props.disabled && styles.buttonDisabled,
           this.props.btnStyle
         ]}
-        onPress={this.onPress}
+        onPress={this.props.onPress}
       >
         <Text
           style={[
-            { fontFamily: 'Source Sans Pro' },
+            { fontFamily: 'SourceSansPro' },
             this.props.transparent ? styles.textRed : styles.textTransparent,
             this.props.textStyle
           ]}
@@ -48,11 +42,11 @@ class ButtonAtom extends React.Component<IProps, any> {
           {this.props.btnText}
         </Text>
       </Button>
-    )
+    );
   }
 }
 
-export default ButtonAtom
+export default ButtonAtom;
 
 const styles = StyleSheet.create({
   buttonTransparent: {
@@ -80,4 +74,4 @@ const styles = StyleSheet.create({
   textTransparent: {
     color: color.secondary
   }
-})
+});

@@ -1,5 +1,5 @@
 import React from 'react'
-import Icon from './Icon'
+import { Icon } from 'native-base'
 
 interface IProps {
   status: string

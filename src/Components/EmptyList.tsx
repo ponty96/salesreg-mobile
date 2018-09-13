@@ -5,16 +5,14 @@ import { color } from '../Style/Color'
 interface Empty {
   Text: string
   verifyMainList?: string
-  style?: any
 }
-
 const emptyList = (prop: { type: Empty }) => {
   if (prop.type.verifyMainList === 'main') {
     return (
       <View style={styles.view}>
         <Text style={styles.normalText}>
-          Press the <Text style={styles.blueText}>blue</Text> round button to
-          add {prop.type.Text}
+          Press the <Text style={styles.blueText}>blue</Text> button to add{' '}
+          {prop.type.Text}
         </Text>
       </View>
     )
@@ -28,8 +26,8 @@ const emptyList = (prop: { type: Empty }) => {
     )
   } else {
     return (
-      <View style={[styles.view, prop.type.style]}>
-        <Text style={styles.normalText}>{prop.type.Text}</Text>
+      <View>
+        <Text>{prop.type.Text}</Text>
       </View>
     )
   }
@@ -43,17 +41,14 @@ const styles = StyleSheet.create({
     backgroundColor: color.grey,
     padding: 16,
     alignSelf: 'center',
-    marginVertical: 16,
+    marginTop: 16,
     borderRadius: 2
   },
   normalText: {
-    fontSize: 14,
-    fontFamily: 'Source Sans Pro',
-    color: color.principal
+    fontSize: 14
   },
   blueText: {
     color: color.button,
-    fontSize: 14,
-    fontFamily: 'Source Sans Pro'
+    fontSize: 14
   }
 })
