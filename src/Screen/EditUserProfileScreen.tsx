@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import SaveCancelButton from '../Container/SaveCancelButton'
 import InputAtom from '../Atom/InputAtom'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import FormImageAtom from '../Atom/FormImageAtom'
 import FormContainerAtom from '../Atom/FormContainerAtom'
 import FormAddressSection from '../Components/FormAddressSection'
@@ -79,9 +79,9 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Edit Profile"
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

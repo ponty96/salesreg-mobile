@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
 
 import UserProfile from '../Components/UserProfile'
-import CustomHeader from '../Components/CustomHeader'
 import Auth from '../services/auth'
 import humps from 'humps'
+import Header from '../Components/Header/DetailsScreenHeader'
 
 interface IProps {
   navigation: any
@@ -23,14 +23,10 @@ class BusinessProfileScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Business profile"
-          onBackPress={() => navigation.goBack()}
-          rightText="Edit"
-          showRight
-          firstRightIcon="pencil"
-          firstRightIconType="MaterialCommunityIcons"
-          onPressRightButton={() => navigation.navigate('EditBusinessProfile')}
+          onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() => navigation.navigate('EditBusinessProfile')}
         />
       )
     }

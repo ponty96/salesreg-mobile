@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import FormImageAtom from '../Atom/FormImageAtom'
 import InputAtom from '../Atom/InputAtom'
 import FormContainerAtom from '../Atom/FormContainerAtom'
@@ -50,9 +50,9 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
     const product = navigation.getParam('product', null)
     return {
       header: (
-        <CustomHeader
+        <Header
           title={product ? `Edit Product ${product.name}` : 'New Product'}
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

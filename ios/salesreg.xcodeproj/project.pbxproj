@@ -5,7 +5,6 @@
 	};
 	objectVersion = 46;
 	objects = {
-
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -58,6 +57,12 @@
 		E802E964EA14424386D059C1 /* SimpleLineIcons.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E5C37D6638E7432C805EC9E9 /* SimpleLineIcons.ttf */; };
 		E9D371A258384AE288F1A528 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2DC3B71F4156456EA29E2842 /* SourceSansPro-Regular.ttf */; };
 		EE1F14B5C76C445D890612AC /* FontAwesome5_Solid.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 4945599D96A44FD9931DC014 /* FontAwesome5_Solid.ttf */; };
+		FA4FC5FC9AD5467B8D7FB565 /* avenir-next-bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 52C852D5EF584E55A143C1B8 /* avenir-next-bold.ttf */; };
+		B1FBD0A1FA42420DA2D82731 /* AvenirNext-DemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 73846F25ECF54F74991B9A4D /* AvenirNext-DemiBold.ttf */; };
+		BBE2775C71654D7880310B82 /* AvenirNext-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 8163EF8AAD444013A514BDA5 /* AvenirNext-Medium.ttf */; };
+		8616F522A2B6451882F334C3 /* AvenirNext-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9DFA895E62224B599D70549B /* AvenirNext-Regular.ttf */; };
+		CF484F9E7BE647C5BF9CD821 /* OFL.txt in Resources */ = {isa = PBXBuildFile; fileRef = 4659E036AAFF4F9FBB0EFB52 /* OFL.txt */; };
+		47443087DAF2405AB9D8EA00 /* AvenirNext-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 9D4D58838F4F48F6B1B254C1 /* AvenirNext-Bold.ttf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -392,6 +397,12 @@
 		EB3F2CBA8642467EA9FD0EE1 /* Roboto_medium.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Roboto_medium.ttf; path = "../node_modules/native-base/Fonts/Roboto_medium.ttf"; sourceTree = "<group>"; };
 		EC9B25A79A9646F3817FDC43 /* Foundation.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Foundation.ttf; path = "../node_modules/native-base/Fonts/Foundation.ttf"; sourceTree = "<group>"; };
 		F1AAAD48B5C746FCBF12461F /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/native-base/Fonts/Feather.ttf"; sourceTree = "<group>"; };
+		52C852D5EF584E55A143C1B8 /* avenir-next-bold.ttf */ = {isa = PBXFileReference; name = "avenir-next-bold.ttf"; path = "../fonts/avenir-next-bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		73846F25ECF54F74991B9A4D /* AvenirNext-DemiBold.ttf */ = {isa = PBXFileReference; name = "AvenirNext-DemiBold.ttf"; path = "../fonts/AvenirNext-DemiBold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		8163EF8AAD444013A514BDA5 /* AvenirNext-Medium.ttf */ = {isa = PBXFileReference; name = "AvenirNext-Medium.ttf"; path = "../fonts/AvenirNext-Medium.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9DFA895E62224B599D70549B /* AvenirNext-Regular.ttf */ = {isa = PBXFileReference; name = "AvenirNext-Regular.ttf"; path = "../fonts/AvenirNext-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		4659E036AAFF4F9FBB0EFB52 /* OFL.txt */ = {isa = PBXFileReference; name = "OFL.txt"; path = "../node_modules/native-base/Fonts/OFL.txt"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		9D4D58838F4F48F6B1B254C1 /* AvenirNext-Bold.ttf */ = {isa = PBXFileReference; name = "AvenirNext-Bold.ttf"; path = "../fonts/AvenirNext-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -687,6 +698,12 @@
 				76570B366AEA448D89903717 /* FontAwesome5_Brands.ttf */,
 				9A76CE628BE34A04B0F40802 /* FontAwesome5_Regular.ttf */,
 				4945599D96A44FD9931DC014 /* FontAwesome5_Solid.ttf */,
+				52C852D5EF584E55A143C1B8 /* avenir-next-bold.ttf */,
+				73846F25ECF54F74991B9A4D /* AvenirNext-DemiBold.ttf */,
+				8163EF8AAD444013A514BDA5 /* AvenirNext-Medium.ttf */,
+				9DFA895E62224B599D70549B /* AvenirNext-Regular.ttf */,
+				4659E036AAFF4F9FBB0EFB52 /* OFL.txt */,
+				9D4D58838F4F48F6B1B254C1 /* AvenirNext-Bold.ttf */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -1176,6 +1193,12 @@
 				00E378E3C1FD42DFB09730B5 /* FontAwesome5_Brands.ttf in Resources */,
 				E1B25AC61E994E268AEFDFE0 /* FontAwesome5_Regular.ttf in Resources */,
 				EE1F14B5C76C445D890612AC /* FontAwesome5_Solid.ttf in Resources */,
+				FA4FC5FC9AD5467B8D7FB565 /* avenir-next-bold.ttf in Resources */,
+				B1FBD0A1FA42420DA2D82731 /* AvenirNext-DemiBold.ttf in Resources */,
+				BBE2775C71654D7880310B82 /* AvenirNext-Medium.ttf in Resources */,
+				8616F522A2B6451882F334C3 /* AvenirNext-Regular.ttf in Resources */,
+				CF484F9E7BE647C5BF9CD821 /* OFL.txt in Resources */,
+				47443087DAF2405AB9D8EA00 /* AvenirNext-Bold.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

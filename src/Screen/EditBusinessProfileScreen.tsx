@@ -3,7 +3,7 @@ import { View, StyleSheet, Text } from 'react-native'
 
 import SaveCancelButton from '../Container/SaveCancelButton'
 import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 
 import { CheckBox, Textarea } from 'native-base'
 import InputAtom from '../Atom/InputAtom'
@@ -59,9 +59,9 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Edit Business Profile"
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

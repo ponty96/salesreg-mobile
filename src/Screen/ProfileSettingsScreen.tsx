@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import SettingsList from '../Components/SettingsList'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import gql from 'graphql-tag'
 import Auth from '../services/auth'
 
@@ -19,9 +19,9 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Profile settings"
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

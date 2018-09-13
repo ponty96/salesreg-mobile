@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, ScrollView, Dimensions, Text } from 'react-native'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import FormContainerCopy from '../Components/FormContainerCopy'
 import InputAtom from '../Atom/InputAtom'
 import { color } from '../Style/Color'
@@ -26,9 +26,9 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Expenses"
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

@@ -26,6 +26,7 @@ project.xcworkspace
 ios/salesreg/main.jsbundle.meta
 ios/salesreg.app.dSYM.zip
 ios/assets/*
+ios/build/*
 
 # Android/IntelliJ
 #

@@ -130,7 +130,7 @@ const styles = StyleSheet.create({
   },
   blackFont: {
     fontSize: 20,
-    fontFamily: 'SourceSansPro-Bold',
+    fontFamily: 'Source Sans Pro',
     paddingVertical: 5
   },
   redFont: {

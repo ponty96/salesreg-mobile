@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import SaveCancelButton from '../Container/SaveCancelButton'
 import InputAtom from '../Atom/InputAtom'
 
@@ -42,9 +42,9 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     const service = navigation.getParam('service', null)
     return {
       header: (
-        <CustomHeader
+        <Header
           title={service ? `Edit Service ${service.name}` : 'New Service'}
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
     }

@@ -1,24 +1,24 @@
-import React, { PureComponent } from 'react';
-import UpsertContactForm from '../../Components/Contact/UpsertContactForm';
-import CustomHeader from '../../Components/CustomHeader';
+import React, { PureComponent } from 'react'
+import UpsertContactForm from '../../Components/Contact/UpsertContactForm'
+import Header from '../../Components/Header/BaseHeader'
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 export default class UpsertCustomerScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const customer = navigation.getParam('customer', null);
+    const customer = navigation.getParam('customer', null)
     return {
       header: (
-        <CustomHeader
+        <Header
           title={
             customer ? `Edit Customer ${customer.contactName}` : 'New Customer'
           }
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
-    };
-  };
+    }
+  }
   render() {
     return (
       <UpsertContactForm
@@ -27,6 +27,6 @@ export default class UpsertCustomerScreen extends PureComponent<IProps> {
         contactType="customer"
         navigation={this.props.navigation}
       />
-    );
+    )
   }
 }
