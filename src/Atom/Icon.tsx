@@ -1,5 +1,5 @@
 import React, { PureComponent } from 'react'
-import { Text } from 'react-native'
+import { Text, StyleSheet } from 'react-native'
 import EVILIcon from 'react-native-vector-icons/EvilIcons'
 import IONICon from 'react-native-vector-icons/Ionicons'
 import FAIcon from 'react-native-vector-icons/FontAwesome'
@@ -32,6 +32,12 @@ interface IProps {
   onPress?: any
   color?: string
 }
+
+const styles = StyleSheet.create({
+  defaultStyle: {
+    color: '#fff'
+  }
+})
 export default class Icon extends PureComponent<IProps> {
   /**
    * @return {component|null}
@@ -40,7 +46,7 @@ export default class Icon extends PureComponent<IProps> {
   getIconToRender = () => {
     let icon = null,
       { contentContainerStyle, onPress } = this.props,
-      newStyles = { color: this.props.color || '#fff', ...this.props.style }
+      newStyles = [styles.defaultStyle, this.props.style]
 
     switch (this.props.type) {
       case 'EvilIcons':

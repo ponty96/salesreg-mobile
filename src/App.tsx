@@ -1,5 +1,5 @@
 import React from 'react'
-import { StatusBar, SafeAreaView } from 'react-native'
+import { View, StatusBar } from 'react-native'
 import { Root } from 'native-base'
 import { ApolloProvider } from 'react-apollo'
 import client from './client'
@@ -29,14 +29,15 @@ export default class App extends React.Component {
   }
   render() {
     return (
-      <SafeAreaView style={{ flex: 1, backgroundColor: '#fff' }}>
+      // check if user is on IphoneX and use View
+      <View style={{ flex: 1, paddingTop: 0 }}>
         <ApolloProvider client={client}>
           <Root>
             <StatusBar barStyle="light-content" />
             <Routes client={client} />
           </Root>
         </ApolloProvider>
-      </SafeAreaView>
+      </View>
     )
   }
 }
