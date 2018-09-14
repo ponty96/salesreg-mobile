@@ -1,72 +1,35 @@
 import React, { PureComponent } from 'react'
-import { View, Text, ScrollView, StyleSheet } from 'react-native'
-import Icon from '../Atom/Icon'
+import { View, Text, StyleSheet } from 'react-native'
 
 import ButtonAtom from '../Atom/ButtonAtom'
-import AuthenticationHeader from '../Components/AuthenticationHeader'
-import { color } from '../Style/Color'
+import OnboardingContainer from '../Container/OnboardingContainer'
 
 interface IProps {
   navigation: any
 }
 
 class OnBoardingScreen extends PureComponent<IProps> {
-  navigate = (location: string) => {
-    this.props.navigation.navigate(location)
-  }
-
   render() {
-    const APP_DETAILS = [
-      'Manage all your produts',
-      'Process all your orders',
-      'Track all payments & outstandings',
-      'Manage all your business contacts'
-    ]
-
+    const { navigate } = this.props.navigation
     return (
-      <View style={styles.container}>
-        <AuthenticationHeader smallHeader={false} />
-        <ScrollView style={styles.bodyContainer}>
-          <View style={styles.boardingScreenFeatureText}>
-            {APP_DETAILS.map((details, i) => (
-              <View style={styles.appFunctionWrapper} key={i}>
-                <Icon name="check" style={styles.check} type="Feather" />
-                <Text
-                  style={[
-                    styles.appDetailsText,
-                    { fontFamily: 'SourceSansPro-Semibold' }
-                  ]}
-                >
-                  {details}
-                </Text>
-              </View>
-            ))}
-          </View>
-
+      <OnboardingContainer>
+        <View style={styles.container}>
           <ButtonAtom
-            btnText="TRY FOR FREE"
-            btnStyle={styles.signupButton}
-            funcValue={'Signup'}
-            onPress={this.navigate}
-            textStyle={styles.freeTrialText}
+            btnText="Get Started"
+            onPress={() => navigate('Signup')}
+            type="primary"
           />
-          <Text style={[styles.haveAccount, { fontFamily: 'Source Sans Pro' }]}>
-            Or you have an account?
-          </Text>
+          <Text style={styles.haveAccount}>Already have an account?</Text>
 
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
-            funcValue={'Login'}
-            onPress={this.navigate}
-            btnStyle={styles.loginButton}
-            textStyle={[
-              styles.loginText,
-              { fontFamily: 'SourceSansPro-Semibold' }
-            ]}
+            onPress={() => navigate('Login')}
+            type="secondary"
+            hideIcon={true}
           />
-        </ScrollView>
-      </View>
+        </View>
+      </OnboardingContainer>
     )
   }
 }
@@ -74,53 +37,17 @@ class OnBoardingScreen extends PureComponent<IProps> {
 export default OnBoardingScreen
 
 const styles = StyleSheet.create({
-  bodyContainer: {
-    backgroundColor: color.secondary
-  },
-  loginButton: {
-    marginTop: 0,
-    paddingHorizontal: 0,
-    marginBottom: 16
-  },
-  signupButton: {
-    alignSelf: 'stretch',
-    justifyContent: 'center',
-    height: 50,
-    marginTop: 32,
-    marginHorizontal: 32
-  },
   haveAccount: {
     marginTop: 32,
     textAlign: 'center',
-    color: color.principal,
-    fontSize: 14
-  },
-  appDetailsText: {
-    marginLeft: 16,
-    alignSelf: 'center',
+    color: '#fff',
     fontSize: 14,
-    color: color.black
-  },
-  check: {
-    color: color.warning
-  },
-  appFunctionWrapper: {
-    flexDirection: 'row',
-    marginVertical: 5
-  },
-  boardingScreenFeatureText: {
-    marginTop: 48,
-    marginBottom: 32,
-    marginHorizontal: 32
+    fontFamily: 'AvenirNext-DemiBold'
   },
   container: {
-    flex: 1
-  },
-  loginText: {
-    color: color.button,
-    fontSize: 16
-  },
-  freeTrialText: {
-    fontSize: 16
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    paddingBottom: 24
   }
 })
