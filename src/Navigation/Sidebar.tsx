@@ -48,7 +48,7 @@ const sideBarItemStyles = StyleSheet.create({
   category: {
     marginLeft: 22,
     backgroundColor: 'transparent',
-    color: '#000',
+    color: color.textColor,
     marginVertical: 6,
     fontSize: 16,
     fontFamily: 'AvenirNext-Medium'
@@ -282,7 +282,9 @@ const styles = StyleSheet.create({
   },
   sidebarContainer: {
     height: Dimensions.get('window').height - 16,
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    paddingTop: 20,
+    paddingBottom: 30
   },
   itemsContainer: {
     flex: 4

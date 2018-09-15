@@ -74,7 +74,7 @@ class ResetForm extends React.Component<IProps, IState> {
           btnText="SIGN UP"
           transparent={true}
           funcValue={'Signup'}
-          onPress={this.navigate}
+          onPress={() => console.log('')}
           textStyle={[styles.signup]}
           btnStyle={styles.signUpButton}
         />

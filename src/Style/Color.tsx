@@ -21,5 +21,6 @@ export const color = {
   secondary: '#FFFFFF',
   red: '#D00000',
   yellow: '#F8E71C',
-  orange: '#FBA518'
+  orange: '#FBA518',
+  textColor: '#444444'
 }
