@@ -37,7 +37,13 @@ class ButtonAtom extends React.Component<IProps, any> {
         ]}
         onPress={this.props.onPress}
       >
-        <Text style={[styles.text, styles[`${this.props.type}Text`]]}>
+        <Text
+          style={[
+            styles.text,
+            styles[`${this.props.type}Text`],
+            this.props.textStyle
+          ]}
+        >
           {this.props.btnText}
         </Text>
         {!this.props.hideIcon &&
