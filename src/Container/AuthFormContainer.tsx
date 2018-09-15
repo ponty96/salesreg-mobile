@@ -88,7 +88,8 @@ export default class AuthFormContainer extends React.PureComponent<IProps> {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    position: 'absolute'
+    position: 'absolute',
+    width: '100%'
   },
   pageTitle: {
     color: '#000',
