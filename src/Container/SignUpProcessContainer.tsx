@@ -10,6 +10,8 @@ interface IState {
 
 interface IProps {
   registerUser: () => void
+  updateValueChange: (key, value) => void
+  formData: any
 }
 export default class SignUpProcessContainer extends React.PureComponent<
   IProps,
@@ -32,15 +34,73 @@ export default class SignUpProcessContainer extends React.PureComponent<
       case 1:
         return (
           <FormStepperContainer
+            formData={this.props.formData}
             steps={[
               {
-                stepTitle: 'Tell us about yourself'
+                stepTitle: 'Tell us about yourself',
+                formFields: [
+                  {
+                    label: 'Whats your first name?',
+                    placeholder: 'E.g John',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    name: 'firstName'
+                  },
+                  {
+                    label: 'Whats your last name?',
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    name: 'lastName'
+                  },
+                  {
+                    label: 'Are you male or female?',
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'radio',
+                      options: ['male', 'female']
+                    },
+                    name: 'gender'
+                  }
+                ]
               },
               {
                 stepTitle: 'Welcome Ayo, how can customers contact you',
+                formFields: [
+                  {
+                    label: 'Whats your first name?',
+                    placeholder: 'E.g John',
+                    type: {
+                      type: 'country-picker'
+                    },
+                    name: 'country'
+                  },
+                  {
+                    label: 'Whats about your phone number?',
+                    type: {
+                      type: 'phone-input'
+                    },
+                    name: 'phone'
+                  },
+                  {
+                    label: 'Your email is also important',
+                    placeholder: 'E.g someone@example.com',
+                    type: {
+                      type: 'input',
+                      options: ['male', 'female'],
+                      keyboardType: 'email-address'
+                    },
+                    name: 'email'
+                  }
+                ],
                 buttonTitle: 'Done'
               }
             ]}
+            updateValueChange={this.props.updateValueChange}
             onCompleteForm={() => this.navigateToStep(2)}
           />
         )

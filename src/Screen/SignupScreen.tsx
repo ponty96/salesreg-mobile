@@ -69,6 +69,8 @@ class SignupScreen extends PureComponent<IProps, IState> {
       >
         {registerUser => (
           <SignUpProcessContainer
+            formData={this.state}
+            updateValueChange={this.updateState}
             registerUser={() =>
               registerUser({
                 variables: this.parseMutationVariables()
