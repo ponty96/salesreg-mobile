@@ -1,16 +1,10 @@
 import React, { PureComponent } from 'react'
-import { Text, View, StyleSheet, Alert } from 'react-native'
-
-import SignupForm from '../Components/SignupForm'
-import SecondSignUpForm from '../Components/SecondSignUpForm'
-import AuthenticationHeader from '../Components/AuthenticationHeader'
-import TransitionAtom from '../Atom/TransitionAtom'
-import { color } from '../Style/Color'
+import { Alert } from 'react-native'
 import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions'
-import AppSpinner from '../Components/Spinner'
-import { Container, Content, Form } from 'native-base'
+// import AppSpinner from '../Components/Spinner'
+import SignUpProcessContainer from '../Container/SignUpProcessContainer'
 
 interface IProps {
   navigation: any
@@ -69,72 +63,20 @@ class SignupScreen extends PureComponent<IProps, IState> {
   }
   render() {
     return (
-      <Container>
-        <AuthenticationHeader />
-        <Content>
-          <View style={styles.wrapper}>
-            <Text
-              style={[styles.signUpText, { fontFamily: 'Source Sans Pro' }]}
-            >
-              SIGN UP
-            </Text>
-            <TransitionAtom
-              firstScreen={this.state.currentForm == 0 ? true : false}
-            />
-            <Text
-              style={[
-                styles.personalInfoText,
-                { fontFamily: 'Source Sans Pro' }
-              ]}
-            >
-              {this.state.currentForm == 0
-                ? 'PERSONAL INFORMATION'
-                : 'BUSINESS INFORMATION'}
-            </Text>
-            <Mutation
-              mutation={RegisterCompanyMutationGQL}
-              onCompleted={this.onCompleted}
-            >
-              {(registerUser, { loading }) => (
-                <Form>
-                  <AppSpinner visible={loading} />
-                  {this.state.currentForm == 0 ? (
-                    <SignupForm
-                      email={this.state.email}
-                      password={this.state.password}
-                      passwordConfirmation={this.state.passwordConfirmation}
-                      name={this.state.name}
-                      gender={this.state.gender}
-                      onUpdateState={this.updateState}
-                      fieldErrors={this.state.fieldErrors}
-                      onNext={this.next}
-                      onBack={() => this.props.navigation.navigate('Login')}
-                      navigation={this.props.navigation}
-                    />
-                  ) : (
-                    <SecondSignUpForm
-                      onSubmit={() =>
-                        registerUser({
-                          variables: this.parseMutationVariables()
-                        })
-                      }
-                      onUpdateState={this.updateState}
-                      businessName={this.state.businessName}
-                      businessAddress={this.state.businessAddress}
-                      businessEmail={this.state.businessEmail}
-                      products={this.state.products}
-                      services={this.state.services}
-                      currency={this.state.currency}
-                      navigation={this.props.navigation}
-                      fieldErrors={this.state.fieldErrors}
-                    />
-                  )}
-                </Form>
-              )}
-            </Mutation>
-          </View>
-        </Content>
-      </Container>
+      <Mutation
+        mutation={RegisterCompanyMutationGQL}
+        onCompleted={this.onCompleted}
+      >
+        {registerUser => (
+          <SignUpProcessContainer
+            registerUser={() =>
+              registerUser({
+                variables: this.parseMutationVariables()
+              })
+            }
+          />
+        )}
+      </Mutation>
     )
   }
 
@@ -210,27 +152,3 @@ class SignupScreen extends PureComponent<IProps, IState> {
 }
 
 export default SignupScreen
-
-const styles = StyleSheet.create({
-  personalInfoText: {
-    marginTop: 10,
-    color: color.button,
-    textAlign: 'center',
-    fontSize: 16,
-    marginBottom: 5
-  },
-  wrapper: {
-    paddingHorizontal: 32
-  },
-  signUpText: {
-    color: color.button,
-    marginTop: 30,
-    marginBottom: 30,
-    alignSelf: 'center',
-    fontSize: 16
-  },
-  container: {
-    flex: 1,
-    backgroundColor: color.secondary
-  }
-})
