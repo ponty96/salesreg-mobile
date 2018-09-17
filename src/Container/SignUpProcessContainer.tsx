@@ -20,7 +20,9 @@ export default class SignUpProcessContainer extends React.PureComponent<
   state = {
     currentStep: 0
   }
-  render = () => this.renderComponentAtStep()
+  render() {
+    return this.renderComponentAtStep()
+  }
 
   navigateToStep = step => {
     this.setState({ currentStep: step })

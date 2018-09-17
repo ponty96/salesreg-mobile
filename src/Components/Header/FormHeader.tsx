@@ -25,28 +25,33 @@ export default class FormHeader extends React.PureComponent<IProps> {
       marginTop: 16
     }
   }
-  render = () => [
-    <View
-      style={this.progressIndicatorStyle()}
-      key="FormHeader--component-1"
-    />,
-    <View
-      style={[styles.header, this.props.showBottomBorder && styles.showBorder]}
-      key="FormHeader--component-2"
-    >
-      {/* blue progress indicator line above header*/}
-      <View style={styles.wrapper}>
-        <Left style={{ flexDirection: 'row', alignItems: 'center' }}>
-          <Icon
-            name="md-arrow-back"
-            onPress={this.props.onPressBackIcon}
-            style={styles.headerIcon}
-            type="Ionicons"
-          />
-        </Left>
+  render() {
+    return [
+      <View
+        style={this.progressIndicatorStyle()}
+        key="FormHeader--component-1"
+      />,
+      <View
+        style={[
+          styles.header,
+          this.props.showBottomBorder && styles.showBorder
+        ]}
+        key="FormHeader--component-2"
+      >
+        {/* blue progress indicator line above header*/}
+        <View style={styles.wrapper}>
+          <Left style={{ flexDirection: 'row', alignItems: 'center' }}>
+            <Icon
+              name="md-arrow-back"
+              onPress={this.props.onPressBackIcon}
+              style={styles.headerIcon}
+              type="Ionicons"
+            />
+          </Left>
+        </View>
       </View>
-    </View>
-  ]
+    ]
+  }
 }
 
 const styles = StyleSheet.create({

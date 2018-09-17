@@ -73,32 +73,34 @@ export default class FormStepperContainer extends React.PureComponent<
     currentStep: 1,
     showHeaderBorder: false
   }
-  render = () => (
-    <Container style={{ flex: 1 }}>
-      <FormHeader
-        onPressBackIcon={this.handleBackButtonPress}
-        currentStep={this.state.currentStep}
-        totalSteps={this.props.steps.length}
-        showBottomBorder={this.state.showHeaderBorder}
-      />
-      <Content contentContainerStyle={styles.container}>
-        <Text style={styles.headerText}>
-          {this.props.steps[this.state.currentStep - 1]['stepTitle']}
-        </Text>
-        <Form>{this.renderCurrentStepFormFields()}</Form>
-      </Content>
-
-      <View style={styles.footer}>
-        <ButtonAtom
-          btnText={`${this.props.steps[this.state.currentStep - 1][
-            'buttonTitle'
-          ] || 'Next'}`}
-          onPress={this.onCtaButtonPress}
-          type="secondary"
+  render() {
+    return (
+      <Container style={{ flex: 1 }}>
+        <FormHeader
+          onPressBackIcon={this.handleBackButtonPress}
+          currentStep={this.state.currentStep}
+          totalSteps={this.props.steps.length}
+          showBottomBorder={this.state.showHeaderBorder}
         />
-      </View>
-    </Container>
-  )
+        <Content contentContainerStyle={styles.container}>
+          <Text style={styles.headerText}>
+            {this.props.steps[this.state.currentStep - 1]['stepTitle']}
+          </Text>
+          <Form>{this.renderCurrentStepFormFields()}</Form>
+        </Content>
+
+        <View style={styles.footer}>
+          <ButtonAtom
+            btnText={`${this.props.steps[this.state.currentStep - 1][
+              'buttonTitle'
+            ] || 'Next'}`}
+            onPress={this.onCtaButtonPress}
+            type="secondary"
+          />
+        </View>
+      </Container>
+    )
+  }
 
   handleBackButtonPress = () => {
     const { currentStep } = this.state
