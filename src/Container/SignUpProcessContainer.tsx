@@ -2,6 +2,7 @@ import React from 'react'
 import FirstStep from '../Components/SignUp/FirstStep'
 import ThirdStep from '../Components/SignUp/ThirdStep'
 import LastStep from '../Components/SignUp/LastStep'
+import FormStepperContainer from '../Container/Form/StepperContainer'
 
 interface IState {
   currentStep: number
@@ -30,12 +31,27 @@ export default class SignUpProcessContainer extends React.PureComponent<
         return <FirstStep onCtaPress={() => this.navigateToStep(1)} />
       case 1:
         return (
-          <ThirdStep
-            onCtaPress={() => this.navigateToStep(2)}
-            firstName="Opeoluwa"
+          <FormStepperContainer
+            steps={[
+              {
+                stepTitle: 'Tell us about yourself'
+              },
+              {
+                stepTitle: 'Welcome Ayo, how can customers contact you',
+                buttonTitle: 'Done'
+              }
+            ]}
+            onCompleteForm={() => this.navigateToStep(2)}
           />
         )
       case 2:
+        return (
+          <ThirdStep
+            onCtaPress={() => this.navigateToStep(3)}
+            firstName="Opeoluwa"
+          />
+        )
+      case 3:
         return (
           <LastStep
             onCtaPress={() => this.props.registerUser()}
