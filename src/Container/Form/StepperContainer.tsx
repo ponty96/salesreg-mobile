@@ -51,6 +51,7 @@ interface FormField {
   validators?: any[]
   name: any
   extraData?: any
+  underneathText?: string
 }
 interface FormStep {
   stepTitle: string
@@ -59,7 +60,7 @@ interface FormStep {
 }
 interface IProps {
   steps: FormStep[]
-  onCompleteForm: (params: any) => void
+  onCompleteSteps: () => void
   updateValueChange: (key: string, value: any) => void
   onError?: (key: string, error: any) => void
   fieldErrors?: any
@@ -125,7 +126,8 @@ export default class FormStepperContainer extends React.PureComponent<
       label,
       placeholder,
       name,
-      extraData
+      extraData,
+      underneathText
     } = field
     switch (type) {
       case 'input':
@@ -139,6 +141,7 @@ export default class FormStepperContainer extends React.PureComponent<
             keyboardType={keyboardType || 'default'}
             secureTextEntry={secureTextEntry}
             getValue={val => this.props.updateValueChange(name, val)}
+            underneathText={underneathText}
           />
         )
       case 'radio':
@@ -164,6 +167,7 @@ export default class FormStepperContainer extends React.PureComponent<
       case 'phone-input':
         return (
           <PhoneInputAtom
+            key={`${type}-${index}`}
             label={label}
             defaultValue={this.props.formData[name]}
             getValue={val => this.props.updateValueChange(name, val)}
@@ -188,7 +192,7 @@ export default class FormStepperContainer extends React.PureComponent<
   onCtaButtonPress = () => {
     const { currentStep } = this.state
     if (currentStep == this.props.steps.length) {
-      // call compleleteform handler
+      this.props.onCompleteSteps()
     } else {
       this.setState({ currentStep: currentStep + 1 })
     }

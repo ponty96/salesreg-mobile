@@ -104,12 +104,37 @@ export default class SignUpProcessContainer extends React.PureComponent<
                     },
                     name: 'email'
                   }
-                ],
-                buttonTitle: 'Done'
+                ]
+              },
+              {
+                stepTitle: `Finally, lets make sure no one accesses your account without your permission`,
+                formFields: [
+                  {
+                    label: 'Enter a password',
+                    placeholder: 'Something only you know',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default',
+                      secureTextEntry: true
+                    },
+                    name: 'password',
+                    underneathText: 'Not less than 8 character long'
+                  },
+                  {
+                    label: 'Re-enter password just to be sure',
+                    placeholder: 'Same thing you entered above',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default',
+                      secureTextEntry: true
+                    },
+                    name: 'passwordConfirmation'
+                  }
+                ]
               }
             ]}
             updateValueChange={this.props.updateValueChange}
-            onCompleteForm={() => this.navigateToStep(2)}
+            onCompleteSteps={() => this.navigateToStep(2)}
           />
         )
       case 2:
