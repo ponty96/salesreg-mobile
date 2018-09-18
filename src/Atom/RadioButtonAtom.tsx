@@ -1,76 +1,71 @@
 import * as React from 'react'
-import { Item, Input, Label, Text } from 'native-base'
-import { View, StyleSheet, Platform } from 'react-native'
+import { Item, Label, Text } from 'native-base'
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import { color } from '../Style/Color'
 
 interface IProps {
   required?: boolean | false
-  label?: string
-  defaultValue?: string
-  multiline?: boolean
-  placeholder?: string
-  floatingLabel?: boolean | true
-  secureTextEntry?: boolean | false
+  label: string
+  defaultValue: string
+  options: any[]
   getValue?: (a: string | number) => void
-  contStyle?: object | any
-  inputStyle?: object
-  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string
   underneathStyle?: object
-  maxLength?: number
-  login?: boolean
   error?: any
 }
 
-interface IState {}
-
-class InputAtom extends React.Component<IProps, IState> {
-  static defaultProps: IProps = {
-    label: '',
-    required: false,
-    floatingLabel: true,
-    secureTextEntry: false,
-    keyboardType: 'default',
-    multiline: false,
-    contStyle: { marginLeft: 4 } || { marginLeft: 0 }
-  }
-
+const Radio = (props: any) => (
+  <TouchableWithoutFeedback onPress={props.onPress}>
+    <View style={styles.radio}>
+      <Text style={[styles.radioText]}>{props.option}</Text>
+      <View style={[styles.circle, props.isSelected && styles.selected]} />
+    </View>
+  </TouchableWithoutFeedback>
+)
+export default class RadioButtonAtom extends React.PureComponent<IProps> {
   render() {
     return (
       <View>
         <Item
           stackedLabel={true}
           style={[
-            this.props.contStyle,
             {
-              borderBottomColor: color.textBorderBottom,
               marginTop: 24,
-              height: 70
+              height: 70,
+              width: '100%',
+              marginLeft: 0,
+              borderBottomWidth: 0
             }
           ]}
         >
           <Label
             style={{
               color: color.textColor,
-              padding: 0,
-              fontSize: 14
+              padding: 0
             }}
           >
             {this.props.required && <Text style={styles.required}>*</Text>}
             <Text style={styles.labelText}>{this.props.label}</Text>
           </Label>
-          <Input
-            placeholder={this.props.placeholder}
-            multiline={this.props.multiline}
-            onChangeText={text => this.props.getValue(text)}
-            value={this.props.defaultValue}
-            secureTextEntry={this.props.secureTextEntry}
-            keyboardType={this.props.keyboardType}
-            style={[this.props.inputStyle, styles.inputText]}
-            underlineColorAndroid={'transparent'}
-            placeholderTextColor={color.inactive}
-            maxLength={this.props.maxLength}
-          />
+          <View style={{ width: '100%' }}>
+            {this.props.options.map((option, index: number) => [
+              <Radio
+                key={`radio-${index}`}
+                option={option}
+                onPress={() => this.props.getValue(option)}
+                isSelected={this.props.defaultValue == option}
+              />,
+              index + 1 < this.props.options.length && (
+                <View
+                  key={index + 1}
+                  style={{
+                    borderBottomColor: color.textBorderBottom,
+                    borderBottomWidth: 1
+                  }}
+                />
+              )
+            ])}
+          </View>
         </Item>
         {this.renderUnderNeathText()}
       </View>
@@ -99,8 +94,6 @@ class InputAtom extends React.Component<IProps, IState> {
   }
 }
 
-export default InputAtom
-
 const styles = StyleSheet.create({
   label: {
     padding: 3,
@@ -126,13 +119,27 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     fontFamily: 'AvenirNext-Regular'
   },
-  inputText: {
+  radio: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    width: '100%',
+    paddingVertical: 18
+  },
+  radioText: {
     fontFamily: 'AvenirNext-Regular',
     color: color.principal,
-    fontSize: 16,
-    paddingBottom: 4,
-    // marginTop: 6,
-    height: 60,
-    top: Platform.OS == 'ios' ? 6 : 6
+    fontSize: 16
+  },
+  circle: {
+    height: 24,
+    width: 24,
+    borderRadius: 14,
+    backgroundColor: color.textBorderBottom,
+    borderWidth: 2,
+    borderColor: color.textBorderBottom
+  },
+  selected: {
+    backgroundColor: color.green,
+    borderColor: color.green
   }
 })
