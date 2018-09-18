@@ -42,6 +42,7 @@ interface FieldType {
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
+  multiline?: boolean
 }
 interface FormField {
   label: string
@@ -121,7 +122,13 @@ export default class FormStepperContainer extends React.PureComponent<
 
   parseFormFields = (field: any, index: number) => {
     const {
-      type: { type, keyboardType, secureTextEntry = false, options = [] },
+      type: {
+        type,
+        keyboardType,
+        secureTextEntry = false,
+        options = [],
+        multiline = false
+      },
       label,
       placeholder,
       name,
@@ -141,6 +148,7 @@ export default class FormStepperContainer extends React.PureComponent<
             secureTextEntry={secureTextEntry}
             getValue={val => this.props.updateValueChange(name, val)}
             underneathText={underneathText}
+            multiline={multiline}
           />
         )
       case 'radio':

@@ -13,7 +13,6 @@ interface IProps {
   registerUser: () => void
   updateValueChange: (key, value) => void
   formData: any
-  firstName: string
 }
 export default class SignUpProcessContainer extends React.PureComponent<
   IProps,
@@ -73,29 +72,8 @@ export default class SignUpProcessContainer extends React.PureComponent<
                 ]
               },
               {
-                stepTitle: `Welcome ${
-                  this.props.firstName
-                }. How can customers contact you`,
+                stepTitle: `Finally, lets make sure no one accesses your account without your permission`,
                 formFields: [
-                  {
-                    label: 'What country are you in?',
-                    placeholder: 'Touch to choose',
-                    type: {
-                      type: 'picker',
-                      options: Countries
-                    },
-                    name: 'businessCountry'
-                  },
-                  {
-                    label: 'Whats about your phone number?',
-                    type: {
-                      type: 'phone-input'
-                    },
-                    name: 'phone',
-                    extraData: {
-                      countryCode: this.props.formData['country']
-                    }
-                  },
                   {
                     label: 'Your email is also important',
                     placeholder: 'E.g someone@example.com',
@@ -105,12 +83,7 @@ export default class SignUpProcessContainer extends React.PureComponent<
                       keyboardType: 'email-address'
                     },
                     name: 'email'
-                  }
-                ]
-              },
-              {
-                stepTitle: `Finally, lets make sure no one accesses your account without your permission`,
-                formFields: [
+                  },
                   {
                     label: 'Enter a password',
                     placeholder: 'Something only you know',
@@ -143,7 +116,7 @@ export default class SignUpProcessContainer extends React.PureComponent<
         return (
           <ThirdStep
             onCtaPress={() => this.navigateToStep(3)}
-            firstName="Opeoluwa"
+            firstName={this.props.formData['firstName']}
           />
         )
       case 3:
@@ -170,7 +143,8 @@ export default class SignUpProcessContainer extends React.PureComponent<
                     underneathText: `Your business description will be displayed in\nthe ABOUT section of your Webstore, so your \nsite visitors can appreciate what you do.`,
                     type: {
                       type: 'input',
-                      keyboardType: 'default'
+                      keyboardType: 'default',
+                      multiline: true
                     },
                     name: 'description'
                   }
@@ -199,8 +173,10 @@ export default class SignUpProcessContainer extends React.PureComponent<
                     }
                   },
                   {
-                    label: 'Your email is also important',
-                    placeholder: 'E.g someone@example.com',
+                    label: 'Your business email',
+                    placeholder: `E.g ${this.props.formData['firstName']}@${
+                      this.props.formData['businessName']
+                    }.com`,
                     type: {
                       type: 'input',
                       options: ['male', 'female'],
