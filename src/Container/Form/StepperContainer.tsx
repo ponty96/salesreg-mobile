@@ -35,14 +35,13 @@ import FormHeader from '../../Components/Header/FormHeader'
 import InputAtom from '../../Atom/InputAtom'
 import RadioButtonAtom from '../../Atom/RadioButtonAtom'
 import PickerAtom from '../../Atom/PickerAtom'
-import CountryPicker from '../../Atom/Form/CountryPicker'
 import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 
 interface FieldType {
-  type: 'input' | 'picker' | 'phone-input' | 'radio' | 'country-picker'
+  type: 'input' | 'picker' | 'phone-input' | 'radio'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
-  options?: string[]
+  options?: any[]
 }
 interface FormField {
   label: string
@@ -154,16 +153,6 @@ export default class FormStepperContainer extends React.PureComponent<
             options={options}
           />
         )
-      case 'country-picker':
-        return (
-          <CountryPicker
-            key={`${type}-${index}`}
-            countryCode={this.props.formData[name]}
-            placeholder={placeholder}
-            label={label}
-            handleSelection={val => this.props.updateValueChange(name, val)}
-          />
-        )
       case 'phone-input':
         return (
           <PhoneInputAtom
@@ -180,7 +169,7 @@ export default class FormStepperContainer extends React.PureComponent<
           <PickerAtom
             key={`${type}-${index}`}
             label={label}
-            list={[]}
+            list={options}
             selected={this.props.formData[name]}
             placeholder={placeholder}
             handleSelection={val => this.props.updateValueChange(name, val)}

@@ -3,6 +3,7 @@ import FirstStep from '../Components/SignUp/FirstStep'
 import ThirdStep from '../Components/SignUp/ThirdStep'
 import LastStep from '../Components/SignUp/LastStep'
 import FormStepperContainer from '../Container/Form/StepperContainer'
+import { Countries, Currencies } from '../utilities/data/picker-lists'
 
 interface IState {
   currentStep: number
@@ -80,9 +81,10 @@ export default class SignUpProcessContainer extends React.PureComponent<
                     label: 'What country are you in?',
                     placeholder: 'Touch to choose',
                     type: {
-                      type: 'country-picker'
+                      type: 'picker',
+                      options: Countries
                     },
-                    name: 'country'
+                    name: 'businessCountry'
                   },
                   {
                     label: 'Whats about your phone number?',
@@ -145,6 +147,89 @@ export default class SignUpProcessContainer extends React.PureComponent<
           />
         )
       case 3:
+        return (
+          <FormStepperContainer
+            formData={this.props.formData}
+            steps={[
+              {
+                stepTitle: 'Tell us about your business',
+                formFields: [
+                  {
+                    label: 'Whats your business name?',
+                    placeholder: 'E.g Lidstack',
+                    underneathText: `This name will appear on your webstore,\nheader, invoice, receipts, and notifications \nsent to your customers.`,
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    name: 'businessName'
+                  },
+                  {
+                    label: 'Any nice description of your business?',
+                    placeholder: 'E.g Write something nice',
+                    underneathText: `Your business description will be displayed in\nthe ABOUT section of your Webstore, so your \nsite visitors can appreciate what you do.`,
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    name: 'description'
+                  }
+                ]
+              },
+              {
+                stepTitle: `How can customers contact you`,
+                formFields: [
+                  {
+                    label: 'What country are you in?',
+                    placeholder: 'Touch to choose',
+                    type: {
+                      type: 'picker',
+                      options: Countries
+                    },
+                    name: 'businessCountry'
+                  },
+                  {
+                    label: 'Whats about your phone number?',
+                    type: {
+                      type: 'phone-input'
+                    },
+                    name: 'businessPhone',
+                    extraData: {
+                      countryCode: this.props.formData['businessCountry']
+                    }
+                  },
+                  {
+                    label: 'Your email is also important',
+                    placeholder: 'E.g someone@example.com',
+                    type: {
+                      type: 'input',
+                      options: ['male', 'female'],
+                      keyboardType: 'email-address'
+                    },
+                    name: 'businessEmail'
+                  }
+                ]
+              },
+              {
+                stepTitle: `Finally, lets make sure no one accesses your account without your permission`,
+                formFields: [
+                  {
+                    label: 'What currency do you transact in?',
+                    placeholder: 'Touch to choose',
+                    type: {
+                      type: 'picker',
+                      options: Currencies
+                    },
+                    name: 'currency'
+                  }
+                ]
+              }
+            ]}
+            updateValueChange={this.props.updateValueChange}
+            onCompleteSteps={() => this.navigateToStep(4)}
+          />
+        )
+      case 4:
         return (
           <LastStep
             onCtaPress={() => this.props.registerUser()}

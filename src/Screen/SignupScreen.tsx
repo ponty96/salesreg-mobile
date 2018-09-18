@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { Alert } from 'react-native'
 import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
 import { Mutation } from 'react-apollo'
-import { parseFieldErrors, validateRegStep1FormInputs } from '../Functions'
+import { parseFieldErrors } from '../Functions'
 // import AppSpinner from '../Components/Spinner'
 import SignUpProcessContainer from '../Container/SignUpProcessContainer'
 
@@ -11,7 +11,6 @@ interface IProps {
 }
 
 interface IState {
-  currentForm: number
   email: string
   password: string
   firstName: string
@@ -21,9 +20,10 @@ interface IState {
   businessName: string
   businessAddress: string
   businessEmail: string
-  products: boolean
-  services: boolean
+  businessPhone: string
+  businessCountry: string
   currency: string
+  description: string
   fieldErrors: any
 }
 
@@ -38,30 +38,16 @@ class SignupScreen extends PureComponent<IProps, IState> {
     businessName: '',
     businessAddress: '',
     businessEmail: '',
-    products: false,
-    services: false,
+    businessPhone: '',
+    businessCountry: '',
     currency: '',
-    fieldErrors: null,
-    currentForm: 0
-  }
-
-  next = () => {
-    const errors = validateRegStep1FormInputs(this.state)
-    console.log('ERORS ', errors)
-    if (errors && Object.keys(errors).length > 0) {
-      this.setState({ fieldErrors: errors })
-    } else {
-      this.setState({ currentForm: 1 })
-    }
+    description: '',
+    fieldErrors: null
   }
 
   updateState = (key: string, val: any) => {
     const formData = { ...this.state, [key]: val }
     this.setState({ ...formData })
-  }
-
-  handleSignUpForm = () => {
-    // this.setState({ currentForm: true });
   }
   render() {
     return (
@@ -93,8 +79,6 @@ class SignupScreen extends PureComponent<IProps, IState> {
       gender,
       businessName,
       businessEmail,
-      products,
-      services,
       currency,
       firstName,
       lastName
@@ -109,7 +93,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
       title: businessName,
       contactEmail: businessEmail,
       currency,
-      category: this.parseCategory(products, services),
+      category: 'PRODUCT_SERVICE',
       ...this.parseAddress()
     }
   }
@@ -125,18 +109,6 @@ class SignupScreen extends PureComponent<IProps, IState> {
       country: 'Nigeria'
     }
   }
-
-  parseCategory = (products, services) => {
-    if (products && services) {
-      return 'PRODUCT_SERVICE'
-    } else if (products) {
-      return 'PRODUCT'
-    } else if (services) {
-      return 'SERVICE'
-    }
-    return 'PRODUCT_SERVICE'
-  }
-
   onCompleted = async data => {
     console.log('SignupScreen', data)
     const {
