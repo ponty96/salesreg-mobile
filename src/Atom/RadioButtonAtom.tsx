@@ -31,7 +31,6 @@ export default class RadioButtonAtom extends React.PureComponent<IProps> {
           style={[
             {
               marginTop: 24,
-              height: 70,
               width: '100%',
               marginLeft: 0,
               borderBottomWidth: 0
