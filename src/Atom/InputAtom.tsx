@@ -20,6 +20,7 @@ interface IProps {
   maxLength?: number
   login?: boolean
   error?: any
+  inlineElement?: any
 }
 
 interface IState {}
@@ -45,7 +46,7 @@ class InputAtom extends React.Component<IProps, IState> {
             {
               borderBottomColor: color.textBorderBottom,
               marginTop: 24,
-              height: 70
+              height: 80
             }
           ]}
         >
@@ -59,18 +60,23 @@ class InputAtom extends React.Component<IProps, IState> {
             {this.props.required && <Text style={styles.required}>*</Text>}
             <Text style={styles.labelText}>{this.props.label}</Text>
           </Label>
-          <Input
-            placeholder={this.props.placeholder}
-            multiline={this.props.multiline}
-            onChangeText={text => this.props.getValue(text)}
-            value={this.props.defaultValue}
-            secureTextEntry={this.props.secureTextEntry}
-            keyboardType={this.props.keyboardType}
-            style={[this.props.inputStyle, styles.inputText]}
-            underlineColorAndroid={'transparent'}
-            placeholderTextColor={color.inactive}
-            maxLength={this.props.maxLength}
-          />
+          <View
+            style={{ flexDirection: 'row', width: '100%', marginBottom: 4 }}
+          >
+            {this.props.inlineElement}
+            <Input
+              placeholder={this.props.placeholder}
+              multiline={this.props.multiline}
+              onChangeText={text => this.props.getValue(text)}
+              value={this.props.defaultValue}
+              secureTextEntry={this.props.secureTextEntry}
+              keyboardType={this.props.keyboardType}
+              style={[this.props.inputStyle, styles.inputText]}
+              underlineColorAndroid={'transparent'}
+              placeholderTextColor={color.inactive}
+              maxLength={this.props.maxLength}
+            />
+          </View>
         </Item>
         {this.renderUnderNeathText()}
       </View>
@@ -108,7 +114,7 @@ const styles = StyleSheet.create({
     top: 0
   },
   labelText: {
-    fontFamily: 'AvenirNext-Medium',
+    fontFamily: 'AvenirNext-DemiBold',
     padding: 0,
     fontSize: 16,
     color: color.textColor
@@ -130,9 +136,8 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-Regular',
     color: color.principal,
     fontSize: 16,
-    paddingBottom: 4,
     // marginTop: 6,
-    height: 60,
+    height: 55,
     top: Platform.OS == 'ios' ? 6 : 6
   }
 })

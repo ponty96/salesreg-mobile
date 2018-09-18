@@ -147,14 +147,14 @@ const styles = StyleSheet.create({
     width: '100%',
     zIndex: 9999,
     marginTop: 24,
-    height: 65,
+    height: 72,
     marginLeft: 0,
     borderBottomWidth: 1,
     borderBottomColor: color.textBorderBottom,
     paddingBottom: 0
   },
   labelText: {
-    fontFamily: 'AvenirNext-Medium',
+    fontFamily: 'AvenirNext-DemiBold',
     padding: 0,
     fontSize: 16,
     color: color.textColor
@@ -169,7 +169,7 @@ const styles = StyleSheet.create({
     fontSize: 16,
     padding: 0,
     textAlign: 'left',
-    marginTop: 8
+    marginTop: 17
   },
   pickerItem: {
     padding: 32,

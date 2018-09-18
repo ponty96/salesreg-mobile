@@ -74,7 +74,7 @@ export default class SignUpProcessContainer extends React.PureComponent<
               {
                 stepTitle: `Welcome ${
                   this.props.firstName
-                }, how can customers contact you`,
+                }. How can customers contact you`,
                 formFields: [
                   {
                     label: 'What country are you in?',
@@ -89,7 +89,10 @@ export default class SignUpProcessContainer extends React.PureComponent<
                     type: {
                       type: 'phone-input'
                     },
-                    name: 'phone'
+                    name: 'phone',
+                    extraData: {
+                      countryCode: this.props.formData['country']
+                    }
                   },
                   {
                     label: 'Your email is also important',

@@ -1,5 +1,4 @@
 import React from 'react'
-import { View } from 'react-native'
 import PickerAtom from '../PickerAtom'
 import countries from '../../utilities/data/countries'
 
@@ -10,30 +9,19 @@ interface IProps {
   handleSelection: (value: any) => void
 }
 
-interface IState {
-  countryCode: string
-  callingCode: string
-}
-export default class CountryPicker extends React.PureComponent<IProps, IState> {
-  state = {
-    countryCode: '',
-    callingCode: ''
-  }
+export default class CountryPicker extends React.PureComponent<IProps> {
   render() {
     return (
-      <View>
-        <PickerAtom
-          selected={this.props.countryCode}
-          label={this.props.label}
-          required={true}
-          list={this.parseCountries()}
-          handleSelection={this.countrySelection}
-          placeholder={this.props.placeholder || 'What country are you in?'}
-        />
-      </View>
+      <PickerAtom
+        selected={this.props.countryCode}
+        label={this.props.label}
+        required={true}
+        list={this.parseCountries()}
+        handleSelection={this.props.handleSelection}
+        placeholder={this.props.placeholder || 'What country are you in?'}
+      />
     )
   }
-  b
 
   parseCountries = () => {
     return Object.keys(countries).map(key => {
@@ -45,8 +33,5 @@ export default class CountryPicker extends React.PureComponent<IProps, IState> {
         subLabel: `+ ${country.callingCode || ''}`
       }
     })
-  }
-  countrySelection = value => {
-    this.props.handleSelection(value)
   }
 }
