@@ -33,6 +33,7 @@ import { Container, Content, Form } from 'native-base'
 import ButtonAtom from '../../Atom/ButtonAtom'
 import FormHeader from '../../Components/Header/FormHeader'
 import InputAtom from '../../Atom/InputAtom'
+import RadioButtonAtom from '../../Atom/RadioButtonAtom'
 
 interface FieldType {
   type: 'input' | 'picker' | 'phone-input' | 'radio' | 'country-picker'
@@ -116,7 +117,7 @@ export default class FormStepperContainer extends React.PureComponent<
 
   parseFormFields = (field: any, index: number) => {
     const {
-      type: { type, keyboardType, secureTextEntry = false },
+      type: { type, keyboardType, secureTextEntry = false, options = [] },
       label,
       placeholder,
       name
@@ -133,6 +134,16 @@ export default class FormStepperContainer extends React.PureComponent<
             keyboardType={keyboardType || 'default'}
             secureTextEntry={secureTextEntry}
             getValue={val => this.props.updateValueChange(name, val)}
+          />
+        )
+      case 'radio':
+        return (
+          <RadioButtonAtom
+            key={`${type}-${index}`}
+            label={label}
+            defaultValue={this.props.formData[name]}
+            getValue={val => this.props.updateValueChange(name, val)}
+            options={options}
           />
         )
     }
@@ -157,7 +168,9 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     fontSize: 22,
     color: '#000',
-    fontFamily: 'AvenirNext-DemiBold'
+    fontFamily: 'AvenirNext-DemiBold',
+    marginBottom: 16,
+    marginTop: 16
   },
   footer: {
     width: '100%',
