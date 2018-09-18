@@ -12,6 +12,7 @@ interface IProps {
   registerUser: () => void
   updateValueChange: (key, value) => void
   formData: any
+  firstName: string
 }
 export default class SignUpProcessContainer extends React.PureComponent<
   IProps,
@@ -39,7 +40,7 @@ export default class SignUpProcessContainer extends React.PureComponent<
             formData={this.props.formData}
             steps={[
               {
-                stepTitle: 'Tell us about yourself',
+                stepTitle: 'Tell us a little about yourself',
                 formFields: [
                   {
                     label: 'Whats your first name?',
@@ -71,7 +72,9 @@ export default class SignUpProcessContainer extends React.PureComponent<
                 ]
               },
               {
-                stepTitle: 'Welcome Ayo, how can customers contact you',
+                stepTitle: `Welcome ${
+                  this.props.firstName
+                }, how can customers contact you`,
                 formFields: [
                   {
                     label: 'Whats your first name?',

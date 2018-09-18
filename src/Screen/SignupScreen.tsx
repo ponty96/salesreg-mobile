@@ -14,7 +14,8 @@ interface IState {
   currentForm: number
   email: string
   password: string
-  name: string
+  firstName: string
+  lastName: string
   passwordConfirmation: string
   gender: string
   businessName: string
@@ -29,7 +30,8 @@ interface IState {
 class SignupScreen extends PureComponent<IProps, IState> {
   state = {
     email: '',
-    name: '',
+    firstName: '',
+    lastName: '',
     password: '',
     passwordConfirmation: '',
     gender: '',
@@ -70,6 +72,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
         {registerUser => (
           <SignUpProcessContainer
             formData={this.state}
+            firstName={this.state.firstName}
             updateValueChange={this.updateState}
             registerUser={() =>
               registerUser({
@@ -86,18 +89,19 @@ class SignupScreen extends PureComponent<IProps, IState> {
     const {
       email,
       password,
-      name,
       passwordConfirmation,
       gender,
       businessName,
       businessEmail,
       products,
       services,
-      currency
+      currency,
+      firstName,
+      lastName
     } = this.state
     return {
-      firstName: name ? name.split(' ')[0] : '',
-      lastName: name ? name.split(' ')[1] : '',
+      firstName,
+      lastName,
       password,
       passwordConfirmation,
       email,
