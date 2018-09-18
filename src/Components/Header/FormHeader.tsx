@@ -9,28 +9,34 @@ export interface IProps {
   currentStep: number
   totalSteps: number
   showBottomBorder?: boolean
+  iconName?: string
+  body?: JSX.Element
+  showStepper?: boolean
 }
 
 export default class FormHeader extends React.PureComponent<IProps> {
   static defaultProps = {
-    currentStep: 0,
-    totalSteps: 1
+    currentStep: 1,
+    totalSteps: 1,
+    showStepper: true
   }
   progressIndicatorStyle = () => {
     const { currentStep, totalSteps } = this.props
     return {
       height: 5,
       backgroundColor: color.button,
-      width: `${(currentStep / totalSteps) * 100} %`,
-      marginTop: 16
+      width: `${(currentStep / totalSteps) * 100} %`
+      // marginTop: 16
     }
   }
   render() {
     return [
-      <View
-        style={this.progressIndicatorStyle()}
-        key="FormHeader--component-1"
-      />,
+      this.props.showStepper && (
+        <View
+          style={this.progressIndicatorStyle()}
+          key="FormHeader--component-1"
+        />
+      ),
       <View
         style={[
           styles.header,
@@ -42,7 +48,7 @@ export default class FormHeader extends React.PureComponent<IProps> {
         <View style={styles.wrapper}>
           <Left style={{ flexDirection: 'row', alignItems: 'center' }}>
             <Icon
-              name="md-arrow-back"
+              name={this.props.iconName || 'md-arrow-back'}
               onPress={this.props.onPressBackIcon}
               style={styles.headerIcon}
               type="Ionicons"

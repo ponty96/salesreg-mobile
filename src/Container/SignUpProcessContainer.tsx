@@ -77,8 +77,8 @@ export default class SignUpProcessContainer extends React.PureComponent<
                 }, how can customers contact you`,
                 formFields: [
                   {
-                    label: 'Whats your first name?',
-                    placeholder: 'E.g John',
+                    label: 'What country are you in?',
+                    placeholder: 'Touch to choose',
                     type: {
                       type: 'country-picker'
                     },

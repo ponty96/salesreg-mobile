@@ -34,6 +34,8 @@ import ButtonAtom from '../../Atom/ButtonAtom'
 import FormHeader from '../../Components/Header/FormHeader'
 import InputAtom from '../../Atom/InputAtom'
 import RadioButtonAtom from '../../Atom/RadioButtonAtom'
+import PickerAtom from '../../Atom/PickerAtom'
+import CountryPicker from '../../Atom/Form/CountryPicker'
 
 interface FieldType {
   type: 'input' | 'picker' | 'phone-input' | 'radio' | 'country-picker'
@@ -146,6 +148,27 @@ export default class FormStepperContainer extends React.PureComponent<
             options={options}
           />
         )
+      case 'country-picker':
+        return (
+          <CountryPicker
+            key={`${type}-${index}`}
+            countryCode={this.props.formData[name]}
+            placeholder={placeholder}
+            label={label}
+            handleSelection={val => this.props.updateValueChange(name, val)}
+          />
+        )
+      case 'picker':
+        return (
+          <PickerAtom
+            key={`${type}-${index}`}
+            label={label}
+            list={[]}
+            selected={this.props.formData[name]}
+            placeholder={placeholder}
+            handleSelection={val => this.props.updateValueChange(name, val)}
+          />
+        )
     }
   }
 
@@ -161,8 +184,7 @@ export default class FormStepperContainer extends React.PureComponent<
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 32,
-    height: '100%'
+    paddingHorizontal: 32
   },
   headerText: {
     alignSelf: 'flex-start',
