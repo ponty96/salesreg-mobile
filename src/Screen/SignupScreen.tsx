@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-import { Alert } from 'react-native'
 import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../Functions'
