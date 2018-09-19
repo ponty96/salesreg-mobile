@@ -36,9 +36,10 @@ import InputAtom from '../../Atom/InputAtom'
 import RadioButtonAtom from '../../Atom/RadioButtonAtom'
 import PickerAtom from '../../Atom/PickerAtom'
 import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
+import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
 
 interface FieldType {
-  type: 'input' | 'picker' | 'phone-input' | 'radio'
+  type: 'input' | 'picker' | 'phone-input' | 'radio' | 'image-upload'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
@@ -170,6 +171,15 @@ export default class FormStepperContainer extends React.PureComponent<
             getValue={val => this.props.updateValueChange(name, val)}
             placeholder={placeholder}
             countryCode={extraData['countryCode']}
+          />
+        )
+      case 'image-upload':
+        return (
+          <ImageUploadAtom
+            key={`${type}-${index}`}
+            underneathText={underneathText}
+            images={this.props.formData[name]}
+            handleImagesUpload={val => this.props.updateValueChange(name, val)}
           />
         )
       case 'picker':

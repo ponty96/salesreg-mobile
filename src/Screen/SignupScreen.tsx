@@ -18,12 +18,12 @@ interface IState {
   passwordConfirmation: string
   gender: string
   businessName: string
-  businessAddress: string
   businessEmail: string
   businessPhone: string
   businessCountry: string
   currency: string
   description: string
+  logo: string[]
   fieldErrors: any
 }
 
@@ -36,12 +36,12 @@ class SignupScreen extends PureComponent<IProps, IState> {
     passwordConfirmation: '',
     gender: '',
     businessName: '',
-    businessAddress: '',
     businessEmail: '',
     businessPhone: '',
     businessCountry: '',
     currency: '',
     description: '',
+    logo: [],
     fieldErrors: null
   }
 
@@ -55,10 +55,11 @@ class SignupScreen extends PureComponent<IProps, IState> {
         mutation={RegisterCompanyMutationGQL}
         onCompleted={this.onCompleted}
       >
-        {registerUser => (
+        {(registerUser, { data }) => (
           <SignUpProcessContainer
             formData={this.state}
             updateValueChange={this.updateState}
+            success={data ? data.registerCompany.success : false}
             registerUser={() =>
               registerUser({
                 variables: this.parseMutationVariables()
@@ -93,36 +94,19 @@ class SignupScreen extends PureComponent<IProps, IState> {
       contactEmail: businessEmail,
       currency,
       category: 'PRODUCT_SERVICE',
-      ...this.parseAddress()
+      street1: '***',
+      city: '***',
+      state: '**',
+      country: this.state.businessCountry
     }
   }
 
-  parseAddress = (): any => {
-    /**
-     * This is for now a dummy component that uses an address placeholder until we can add google maps address
-     */
-    return {
-      street1: '34 Oba Adesida Road',
-      city: 'Akure',
-      state: 'Ondo',
-      country: 'Nigeria'
-    }
-  }
   onCompleted = async data => {
     console.log('SignupScreen', data)
     const {
       registerCompany: { success, fieldErrors }
     } = data
-    if (success) {
-      Alert.alert(
-        'Registration Success',
-        'Verify your account via the link sent to your email',
-        [
-          { text: 'OK', onPress: () => this.props.navigation.navigate('Login') }
-        ],
-        { cancelable: false }
-      )
-    } else {
+    if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
   }

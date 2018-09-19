@@ -13,6 +13,7 @@ interface IProps {
   registerUser: () => void
   updateValueChange: (key, value) => void
   formData: any
+  success: boolean
 }
 export default class SignUpProcessContainer extends React.PureComponent<
   IProps,
@@ -151,6 +152,20 @@ export default class SignUpProcessContainer extends React.PureComponent<
                 ]
               },
               {
+                stepTitle: 'Now your logo(optional).\n1MB or less',
+                formFields: [
+                  {
+                    label: '',
+                    name: 'logo',
+                    type: {
+                      type: 'image-upload'
+                    },
+                    underneathText:
+                      'Your logo will appear on your webstore,\n invoice and receipts headers. If you have no \nlogo, your business name will only be used'
+                  }
+                ]
+              },
+              {
                 stepTitle: `How can customers contact you`,
                 formFields: [
                   {
@@ -198,20 +213,32 @@ export default class SignUpProcessContainer extends React.PureComponent<
                     },
                     name: 'currency'
                   }
-                ]
+                ],
+                buttonTitle: 'Sign Up'
               }
             ]}
             updateValueChange={this.props.updateValueChange}
-            onCompleteSteps={() => this.navigateToStep(4)}
+            onCompleteSteps={() => this.handleReg()}
           />
         )
       case 4:
         return (
           <LastStep
-            onCtaPress={() => this.props.registerUser()}
+            onCtaPress={() => this.navigateToDashboard()}
             businessName="MayAfriq"
           />
         )
     }
+  }
+
+  handleReg = async () => {
+    await this.props.registerUser()
+    if (this.props.success) {
+      this.navigateToStep(4)
+    }
+  }
+
+  navigateToDashboard = () => {
+    // authenticate user and navigate to dashboard
   }
 }
