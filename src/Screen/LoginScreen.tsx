@@ -109,8 +109,10 @@ class LoginScreen extends React.Component<IProps, IState> {
       await Auth.setRefreshToken(refreshToken)
       await Auth.setCurrentUser(user)
       await client.resetStore()
-      client.mutate({ mutation: AuthenticateClientGQL })
-      this.props.navigation.navigate('Home')
+      client.mutate({
+        mutation: AuthenticateClientGQL,
+        variables: { user: user }
+      })
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }

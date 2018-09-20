@@ -7,7 +7,7 @@ import { hasSubscription } from '@jumpn/utils-graphql'
 import absintheSocketLink from './absinthe-socket-link'
 import { setContext } from 'apollo-link-context'
 import Auth from '../services/auth'
-import authenticate from '../graphql/resolvers/auth'
+import { authenticate } from '../graphql/resolvers/auth'
 import { onError } from 'apollo-link-error'
 // import refreshOrLogout from '../services/refreshOrLogout';
 import { createUploadLink } from '@richeterre/apollo-upload-client'

@@ -1,13 +1,9 @@
 import React from 'react'
-// import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
-// import { Mutation } from 'react-apollo'
-// import { parseFieldErrors } from '../Functions'
-// import AppSpinner from '../Components/Spinner'
-// import SignUpProcessContainer from '../Container/SignUpProcessContainer'
 import ThirdStep from '../../Components/SignUp/ThirdStep'
 import LastStep from '../../Components/SignUp/LastStep'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries, Currencies } from '../../utilities/data/picker-lists'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any
@@ -22,6 +18,7 @@ interface IState {
   currency: string
   description: string
   logo: string[]
+  user: any
   fieldErrors: any
 }
 
@@ -31,6 +28,7 @@ export default class BusinessOnboardScreen extends React.PureComponent<
 > {
   state = {
     currentStep: 0,
+    user: null,
     businessName: '',
     businessEmail: '',
     businessPhone: '',
@@ -39,6 +37,13 @@ export default class BusinessOnboardScreen extends React.PureComponent<
     description: '',
     logo: [],
     fieldErrors: null
+  }
+
+  async componentWillMount() {
+    const user = JSON.parse(await Auth.getCurrentUser())
+    this.setState({
+      user: user
+    })
   }
 
   updateState = (key: string, val: any) => {
@@ -55,7 +60,7 @@ export default class BusinessOnboardScreen extends React.PureComponent<
   }
 
   renderComponentAtStep = (): JSX.Element => {
-    const firstName = this.props.navigation.getParam('firstName', '')
+    const { user } = this.state
     const { currentStep } = this.state
     switch (currentStep) {
       case 0:
@@ -63,7 +68,7 @@ export default class BusinessOnboardScreen extends React.PureComponent<
         return (
           <ThirdStep
             onCtaPress={() => this.navigateToStep(1)}
-            firstName={firstName}
+            firstName={user ? user.firstName : ''}
           />
         )
       case 1:

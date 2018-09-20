@@ -20,8 +20,12 @@ export default class App extends React.Component {
     const token = await Auth.getToken()
     const refreshToken = await Auth.getRefreshToken()
     if (token && refreshToken) {
+      const user = JSON.parse(await Auth.getCurrentUser())
       await client.resetStore()
-      client.mutate({ mutation: AuthenticateClientGQL })
+      client.mutate({
+        mutation: AuthenticateClientGQL,
+        variables: { user: user }
+      })
       this.setState({ loading: false })
     } else {
       this.setState({ loading: false })

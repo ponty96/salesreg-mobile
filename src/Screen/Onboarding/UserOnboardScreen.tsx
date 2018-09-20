@@ -1,14 +1,16 @@
 import React from 'react'
-// import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
-// import { Mutation } from 'react-apollo'
-// import { parseFieldErrors } from '../Functions'
-// import AppSpinner from '../Components/Spinner'
-// import SignUpProcessContainer from '../Container/SignUpProcessContainer'
+import { RegisterUserMutationGQL } from '../../graphql/mutations/authenticate'
+import { Mutation } from 'react-apollo'
+import { parseFieldErrors } from '../../Functions'
+import AppSpinner from '../../Components/Spinner'
 import FirstStep from '../../Components/SignUp/FirstStep'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
+import { AuthenticateClientGQL } from '../../graphql/client-mutations/authenticate'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any
+  screenProps: any
 }
 
 interface IState {
@@ -43,14 +45,36 @@ export default class UserOnboardScreen extends React.PureComponent<
   }
 
   render() {
-    return this.renderComponentAtStep()
+    return (
+      <Mutation
+        mutation={RegisterUserMutationGQL}
+        onCompleted={this.onCompleted}
+      >
+        {(registerUser, { loading }) => [
+          <AppSpinner visible={loading} />,
+          this.renderComponentAtStep(() =>
+            registerUser({
+              variables: this.parseMutationVariables()
+            })
+          )
+        ]}
+      </Mutation>
+    )
   }
 
   navigateToStep = step => {
     this.setState({ currentStep: step })
   }
 
-  renderComponentAtStep = (): JSX.Element => {
+  parseMutationVariables = () => {
+    let params = { ...this.state }
+    delete params.currentStep
+    delete params.fieldErrors
+    params.gender = params.gender.toUpperCase()
+    return { user: params }
+  }
+
+  renderComponentAtStep = (handleReg): JSX.Element => {
     const { currentStep } = this.state
     switch (currentStep) {
       case 0:
@@ -127,25 +151,41 @@ export default class UserOnboardScreen extends React.PureComponent<
                     },
                     name: 'passwordConfirmation'
                   }
-                ]
+                ],
+                buttonTitle: 'Register'
               }
             ]}
             updateValueChange={this.updateState}
-            onCompleteSteps={() => this.handleReg()}
+            onCompleteSteps={() => handleReg()}
             handleBackPress={() => this.navigateToStep(0)}
             fieldErrors={this.state.fieldErrors}
           />
         )
     }
   }
+  onCompleted = async res => {
+    console.log('UserOnboardScreen data', res)
+    const {
+      registerUser: { success, fieldErrors, data }
+    } = res
+    if (!success) {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
+    } else {
+      /// login here
+      const {
+        screenProps: { client }
+      } = this.props
+      const { accessToken, refreshToken, user } = data
+      await Auth.clearVault()
+      await Auth.setToken(accessToken)
+      await Auth.setRefreshToken(refreshToken)
+      await Auth.setCurrentUser(user)
+      await client.resetStore()
 
-  handleReg = async () => {
-    /***
-     * Register User here
-     * show successful sign up alert
-     * run behind the scenes login code [navigate user to business onboard screen]
-     *
-     */
-    this.props.navigation.navigate('BusinessOnboard')
+      client.mutate({
+        mutation: AuthenticateClientGQL,
+        variables: { user: user }
+      })
+    }
   }
 }

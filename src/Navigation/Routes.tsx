@@ -2,6 +2,7 @@ import React from 'react'
 import { Text, View } from 'react-native'
 import { DrawerNavigator, StackNavigator, TabNavigator } from 'react-navigation'
 import Header from '../Components/Header/BaseHeader'
+// import AppSpinner from '../Components/Spinner'
 
 // graphql
 import { Query } from 'react-apollo'
@@ -313,7 +314,15 @@ const AuthStack = StackNavigator(
     OnBoarding: LandingScreen,
     Login: LoginScreen,
     Reset: ResetScreen,
-    Signup: UserOnboardScreen,
+    Signup: UserOnboardScreen
+  },
+  {
+    headerMode: 'none'
+  }
+)
+
+const BusinessOnBoardStack = StackNavigator(
+  {
     BusinessOnboard: BusinessOnboardScreen
   },
   {
@@ -324,26 +333,29 @@ const AuthStack = StackNavigator(
 interface IProps {
   client: any
 }
+
 export default class Routes extends React.Component<IProps> {
-  public render() {
+  render() {
     const { client } = this.props
     return (
       <Query query={AuthenticateQueryGQL}>
         {({ loading, error, data }) => {
-          console.log('loading', loading)
-          console.log('error', error)
           console.log('data', data)
+          console.log('loading', loading)
           if (loading) {
-            return <Text>'Loading...'</Text>
+            return <Text>{`Loading data here`}</Text>
           }
           if (error) {
             return <Text>{`Error! ${error.message}`}</Text>
           }
-
           if (!data.authenticate) {
             return <AuthStack screenProps={{ client }} />
+          } else {
+            if (data.user && !data.user.company) {
+              return <BusinessOnBoardStack screenProps={{ client }} />
+            }
+            return <DrawerStack screenProps={{ client }} />
           }
-          return <DrawerStack screenProps={{ client }} />
         }}
       </Query>
     )
