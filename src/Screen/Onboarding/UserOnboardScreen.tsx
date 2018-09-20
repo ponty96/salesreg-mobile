@@ -164,7 +164,6 @@ export default class UserOnboardScreen extends React.PureComponent<
     }
   }
   onCompleted = async res => {
-    console.log('UserOnboardScreen data', res)
     const {
       registerUser: { success, fieldErrors, data }
     } = res

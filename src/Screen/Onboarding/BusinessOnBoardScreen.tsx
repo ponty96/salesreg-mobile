@@ -4,15 +4,21 @@ import LastStep from '../../Components/SignUp/LastStep'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries, Currencies } from '../../utilities/data/picker-lists'
 import Auth from '../../services/auth'
+import { AddUserCompanyMutationGQL } from '../../graphql/mutations/authenticate'
+import { Mutation } from 'react-apollo'
+import { parseFieldErrors } from '../../Functions'
+import AppSpinner from '../../Components/Spinner'
+import { AuthenticateClientGQL } from '../../graphql/client-mutations/authenticate'
 
 interface IProps {
   navigation: any
+  screenProps: any
 }
 
 interface IState {
   currentStep: number
-  businessName: string
-  businessEmail: string
+  title: string
+  contactEmail: string
   businessPhone: string
   businessCountry: string
   currency: string
@@ -29,8 +35,8 @@ export default class BusinessOnboardScreen extends React.PureComponent<
   state = {
     currentStep: 0,
     user: null,
-    businessName: '',
-    businessEmail: '',
+    title: '',
+    contactEmail: '',
     businessPhone: '',
     businessCountry: '',
     currency: '',
@@ -52,14 +58,24 @@ export default class BusinessOnboardScreen extends React.PureComponent<
   }
 
   render() {
-    return this.renderComponentAtStep()
+    return (
+      <Mutation
+        mutation={AddUserCompanyMutationGQL}
+        onCompleted={this.onCompleted}
+      >
+        {(addUserCompany, { loading }) => [
+          <AppSpinner visible={loading} />,
+          this.renderComponentAtStep(addUserCompany)
+        ]}
+      </Mutation>
+    )
   }
 
   navigateToStep = step => {
     this.setState({ currentStep: step })
   }
 
-  renderComponentAtStep = (): JSX.Element => {
+  renderComponentAtStep = (callbackFunc): JSX.Element => {
     const { user } = this.state
     const { currentStep } = this.state
     switch (currentStep) {
@@ -87,7 +103,7 @@ export default class BusinessOnboardScreen extends React.PureComponent<
                       type: 'input',
                       keyboardType: 'default'
                     },
-                    name: 'businessName'
+                    name: 'title'
                   },
                   {
                     label: 'Any nice description of your business?',
@@ -140,15 +156,15 @@ export default class BusinessOnboardScreen extends React.PureComponent<
                   },
                   {
                     label: 'Your business email',
-                    placeholder: `E.g ${this.state['firstName']}@${
-                      this.state['businessName']
+                    placeholder: `E.g ${user ? user.firstName : ''}@${
+                      this.state['title']
                     }.com`,
                     type: {
                       type: 'input',
                       options: ['male', 'female'],
                       keyboardType: 'email-address'
                     },
-                    name: 'businessEmail'
+                    name: 'contactEmail'
                   }
                 ]
               },
@@ -169,7 +185,11 @@ export default class BusinessOnboardScreen extends React.PureComponent<
               }
             ]}
             updateValueChange={this.updateState}
-            onCompleteSteps={() => this.handleReg()}
+            onCompleteSteps={() =>
+              callbackFunc({
+                variables: this.parseMutationVariables()
+              })
+            }
             handleBackPress={() => this.navigateToStep(0)}
             fieldErrors={this.state.fieldErrors}
           />
@@ -183,15 +203,48 @@ export default class BusinessOnboardScreen extends React.PureComponent<
         )
     }
   }
-
-  handleReg = async () => {
-    /***
-     * Register User here
-     * show successful sign up alert
-     * run behind the scenes login code [navigate user to business onboard screen]
-     *
-     */
+  parseMutationVariables = () => {
+    let params = { ...this.state }
+    delete params.currentStep
+    delete params.fieldErrors
+    params['phone'] = {
+      number: params.businessPhone
+    }
+    delete params.businessPhone
+    params['headOffice'] = {
+      street1: '**',
+      city: '**',
+      state: '**',
+      country: params.businessCountry
+    }
+    params.logo = this.state.logo.length > 0 ? this.state.logo[0] : null
+    delete params.businessCountry
+    params['category'] = 'PRODUCT_SERVICE'
+    delete params.user
+    return { company: params, userId: this.state.user.id }
+  }
+  onCompleted = async res => {
+    const {
+      addUserCompany: { success, fieldErrors, data }
+    } = res
+    if (!success) {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
+    } else {
+      const user = JSON.parse(await Auth.getCurrentUser())
+      await Auth.setCurrentUser({ ...user, company: data })
+      this.navigateToStep(3)
+    }
   }
 
-  navigateToDashboard = () => {}
+  navigateToDashboard = async () => {
+    const {
+      screenProps: { client }
+    } = this.props
+    const user = JSON.parse(await Auth.getCurrentUser())
+    await client.resetStore()
+    client.mutate({
+      mutation: AuthenticateClientGQL,
+      variables: { user: user }
+    })
+  }
 }

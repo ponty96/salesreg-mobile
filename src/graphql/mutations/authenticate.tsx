@@ -48,12 +48,8 @@ export const LoginUserMutationGQL = gql`
   }
 `
 export const RegisterUserMutationGQL = gql`
-  mutation registerUser(
-    $user: UserInput!
-  ) {
-    registerUser(
-      user: $user
-    ) {
+  mutation registerUser($user: UserInput!) {
+    registerUser(user: $user) {
       success
       fieldErrors {
         key
@@ -110,6 +106,22 @@ export const AddUserCompanyMutationGQL = gql`
         ... on Company {
           id
           title
+          contactEmail
+          about
+          category
+          currency
+          branches {
+            id
+            type
+            location {
+              id
+              city
+              country
+              state
+              street1
+              type
+            }
+          }
         }
       }
     }

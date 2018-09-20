@@ -138,7 +138,7 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
               subLabel={item.subLabel}
             />
           )}
-          keyExtractor={(item: any) => item.value}
+          keyExtractor={(item: any) => item.key}
         />
       </Modal>
     ]
