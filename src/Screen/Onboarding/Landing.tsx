@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-import ButtonAtom from '../Atom/ButtonAtom'
-import OnboardingContainer from '../Container/OnboardingContainer'
+import ButtonAtom from '../../Atom/ButtonAtom'
+import OnboardingContainer from '../../Container/OnboardingContainer'
 
 interface IProps {
   navigation: any
 }
 
-class OnBoardingScreen extends PureComponent<IProps> {
+class LandingScreen extends PureComponent<IProps> {
   render() {
     const { navigate } = this.props.navigation
     return (
@@ -34,7 +34,7 @@ class OnBoardingScreen extends PureComponent<IProps> {
   }
 }
 
-export default OnBoardingScreen
+export default LandingScreen
 
 const styles = StyleSheet.create({
   haveAccount: {

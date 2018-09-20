@@ -7,13 +7,13 @@ import { hasSubscription } from '@jumpn/utils-graphql'
 import absintheSocketLink from './absinthe-socket-link'
 import { setContext } from 'apollo-link-context'
 import Auth from '../services/auth'
-import authenticate from '../graphql/resolvers/auth'
+import { authenticate } from '../graphql/resolvers/auth'
 import { onError } from 'apollo-link-error'
 // import refreshOrLogout from '../services/refreshOrLogout';
 import { createUploadLink } from '@richeterre/apollo-upload-client'
 
 // const GRAPHQL_API_ENDPOINT = 'http://aa80f71b.ngrok.io/api'
-const GRAPHQL_API_ENDPOINT = 'http://localhost:4000/api'
+const GRAPHQL_API_ENDPOINT = 'http://localhost:5000/api'
 const cache = new InMemoryCache()
 
 const authLink = setContext(async (_: any, { headers }: any) => {

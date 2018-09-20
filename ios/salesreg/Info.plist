@@ -51,6 +51,10 @@
 			</dict>
 		</dict>
 	</dict>
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>We would like to access your photos to allow uploading of your documents to</string>
+	<key>NSCameraUsageDescription</key>
+	<string>We would like to access your Camera to take photos</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>SourceSansPro-Bold.ttf</string>

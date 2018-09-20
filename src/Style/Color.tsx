@@ -17,10 +17,11 @@ export const color = {
   modal: '#F6F6F6',
   check: '#27CBD3',
   grey: '#F6F6F6',
-  listBorderColor: '#F3F3F3',
+  listBorderColor: '#EEE',
   secondary: '#FFFFFF',
   red: '#D00000',
   yellow: '#F8E71C',
   orange: '#FBA518',
-  textColor: '#444444'
+  textColor: '#444444',
+  green: '#0F922B'
 }
