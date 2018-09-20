@@ -52,9 +52,10 @@ import UpsertExpenseScreen from '../Screen/UpsertExpenseScreen'
 
 // Authentication Screens
 import LoginScreen from '../Screen/LoginScreen'
-import SignupScreen from '../Screen/SignupScreen'
-import OnBoardingScreen from '../Screen/OnBoardingScreen'
+import LandingScreen from '../Screen/Onboarding/Landing'
 import ResetScreen from '../Screen/ResetScreen'
+import UserOnboardScreen from '../Screen/Onboarding/UserOnboardScreen'
+import BusinessOnboardScreen from '../Screen/Onboarding/BusinessOnboardScreen'
 
 // Employee Screens
 import EmployeesScreen from '../Screen/EmployeesScreen'
@@ -309,10 +310,11 @@ const DrawerStack = DrawerNavigator(
 
 const AuthStack = StackNavigator(
   {
-    OnBoarding: OnBoardingScreen,
+    OnBoarding: LandingScreen,
     Login: LoginScreen,
     Reset: ResetScreen,
-    Signup: SignupScreen
+    Signup: UserOnboardScreen,
+    BusinessOnboard: BusinessOnboardScreen
   },
   {
     headerMode: 'none'
