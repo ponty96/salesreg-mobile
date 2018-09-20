@@ -28,6 +28,8 @@ interface IProps {
   style?: any // delete later
   required?: boolean | false
   label?: string
+  underneathText?: string
+  error?: any
 }
 
 interface IState {
@@ -109,6 +111,7 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
         </Label>
         <Text style={styles.placeholderStyle}>{this.getPlaceholder()}</Text>
       </TouchableOpacity>,
+      this.renderUnderNeathText(),
       <Modal
         animationType="slide"
         transparent={false}
@@ -139,6 +142,25 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
         />
       </Modal>
     ]
+  }
+  renderUnderNeathText = () => {
+    if (this.props.error || this.props.underneathText) {
+      return (
+        <Text
+          style={[
+            styles.underneathText,
+            {
+              fontFamily: 'AvenirNext-Regular',
+              color: this.props.error ? 'red' : color.principal
+            }
+          ]}
+        >
+          {this.props.error || this.props.underneathText}
+        </Text>
+      )
+    } else {
+      return null
+    }
   }
 }
 
@@ -178,6 +200,16 @@ const styles = StyleSheet.create({
   },
   pickerItemLabel: {
     fontFamily: 'AvenirNext-Regular'
+  },
+  underneathText: {
+    marginLeft: 0,
+    color: color.textColor,
+    fontSize: 14,
+    marginBottom: 0,
+    marginTop: 2,
+    paddingLeft: 8,
+    fontFamily: 'AvenirNext-Regular',
+    paddingVertical: 12
   }
 })
 

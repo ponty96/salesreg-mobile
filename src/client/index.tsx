@@ -13,7 +13,7 @@ import { onError } from 'apollo-link-error'
 import { createUploadLink } from '@richeterre/apollo-upload-client'
 
 // const GRAPHQL_API_ENDPOINT = 'http://aa80f71b.ngrok.io/api'
-const GRAPHQL_API_ENDPOINT = 'http://localhost:4000/api'
+const GRAPHQL_API_ENDPOINT = 'http://localhost:5000/api'
 const cache = new InMemoryCache()
 
 const authLink = setContext(async (_: any, { headers }: any) => {

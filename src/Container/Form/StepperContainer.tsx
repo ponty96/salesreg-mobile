@@ -64,8 +64,9 @@ interface IProps {
   onCompleteSteps: () => void
   updateValueChange: (key: string, value: any) => void
   onError?: (key: string, error: any) => void
-  fieldErrors?: any
+  fieldErrors: any
   formData: any
+  handleBackPress: () => void
 }
 interface IState {
   currentStep: number
@@ -113,6 +114,8 @@ export default class FormStepperContainer extends React.PureComponent<
     const { currentStep } = this.state
     if (currentStep > 1) {
       this.setState({ currentStep: currentStep - 1 })
+    } else {
+      this.props.handleBackPress()
     }
   }
 
@@ -136,6 +139,7 @@ export default class FormStepperContainer extends React.PureComponent<
       extraData,
       underneathText
     } = field
+    const { formData, fieldErrors } = this.props
     switch (type) {
       case 'input':
       default:
@@ -144,12 +148,13 @@ export default class FormStepperContainer extends React.PureComponent<
             key={`${type}-${index}`}
             label={label}
             placeholder={placeholder}
-            defaultValue={this.props.formData[name]}
+            defaultValue={formData[name]}
             keyboardType={keyboardType || 'default'}
             secureTextEntry={secureTextEntry}
             getValue={val => this.props.updateValueChange(name, val)}
             underneathText={underneathText}
             multiline={multiline}
+            error={fieldErrors && fieldErrors[name]}
           />
         )
       case 'radio':
@@ -157,9 +162,10 @@ export default class FormStepperContainer extends React.PureComponent<
           <RadioButtonAtom
             key={`${type}-${index}`}
             label={label}
-            defaultValue={this.props.formData[name]}
+            defaultValue={formData[name]}
             getValue={val => this.props.updateValueChange(name, val)}
             options={options}
+            error={fieldErrors && fieldErrors[name]}
           />
         )
       case 'phone-input':
@@ -167,10 +173,11 @@ export default class FormStepperContainer extends React.PureComponent<
           <PhoneInputAtom
             key={`${type}-${index}`}
             label={label}
-            defaultValue={this.props.formData[name]}
+            defaultValue={formData[name]}
             getValue={val => this.props.updateValueChange(name, val)}
             placeholder={placeholder}
             countryCode={extraData['countryCode']}
+            error={fieldErrors && fieldErrors[name]}
           />
         )
       case 'image-upload':
@@ -178,8 +185,9 @@ export default class FormStepperContainer extends React.PureComponent<
           <ImageUploadAtom
             key={`${type}-${index}`}
             underneathText={underneathText}
-            images={this.props.formData[name]}
+            images={formData[name]}
             handleImagesUpload={val => this.props.updateValueChange(name, val)}
+            error={fieldErrors && fieldErrors[name]}
           />
         )
       case 'picker':
@@ -188,9 +196,10 @@ export default class FormStepperContainer extends React.PureComponent<
             key={`${type}-${index}`}
             label={label}
             list={options}
-            selected={this.props.formData[name]}
+            selected={formData[name]}
             placeholder={placeholder}
             handleSelection={val => this.props.updateValueChange(name, val)}
+            error={fieldErrors && fieldErrors[name]}
           />
         )
     }

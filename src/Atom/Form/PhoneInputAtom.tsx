@@ -9,6 +9,7 @@ interface IProps {
   label?: string
   getValue: (defaultValuee: string) => void
   defaultValue: any
+  error?: any
 }
 
 export default class PhoneInputAtom extends React.PureComponent<IProps> {
@@ -28,6 +29,7 @@ export default class PhoneInputAtom extends React.PureComponent<IProps> {
               </Text>
             </View>
           }
+          error={this.props.error}
         />
       </View>
     )

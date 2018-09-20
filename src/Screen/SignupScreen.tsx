@@ -59,6 +59,7 @@ class SignupScreen extends PureComponent<IProps, IState> {
             formData={this.state}
             updateValueChange={this.updateState}
             success={data ? data.registerCompany.success : false}
+            fieldErrors={this.state.fieldErrors}
             registerUser={() =>
               registerUser({
                 variables: this.parseMutationVariables()

@@ -14,6 +14,7 @@ interface IProps {
   updateValueChange: (key, value) => void
   formData: any
   success: boolean
+  fieldErrors: any
 }
 export default class SignUpProcessContainer extends React.PureComponent<
   IProps,
@@ -111,6 +112,8 @@ export default class SignUpProcessContainer extends React.PureComponent<
             ]}
             updateValueChange={this.props.updateValueChange}
             onCompleteSteps={() => this.navigateToStep(2)}
+            handleBackPress={() => this.navigateToStep(0)}
+            fieldErrors={this.props.fieldErrors}
           />
         )
       case 2:
@@ -219,6 +222,8 @@ export default class SignUpProcessContainer extends React.PureComponent<
             ]}
             updateValueChange={this.props.updateValueChange}
             onCompleteSteps={() => this.handleReg()}
+            handleBackPress={() => this.navigateToStep(2)}
+            fieldErrors={this.props.fieldErrors}
           />
         )
       case 4:
