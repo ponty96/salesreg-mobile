@@ -26,9 +26,9 @@ export default class ProductSalesOrderScreen extends Component<IProps, IState> {
   renderList = ({ item }: any): JSX.Element => {
     return (
       <SalesOrderList
-        firstTopLeftText={item.key}
-        bottomLeftText={item.name}
-        secondTopLeftText={item.time}
+        firstTopText={item.name}
+        bottomLeftFirstText={item.key}
+        bottomLeftSecondText={item.time}
         topRightText={item.num}
         bottomRightText={item.status}
         onPress={this.handleListPress}

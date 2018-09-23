@@ -29,6 +29,7 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
   }
   updateState = async () => {
     const user = JSON.parse(await Auth.getCurrentUser())
+    console.log('user', user)
     this.setState({
       business: user.company
     })
@@ -49,8 +50,9 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
     const { navigation } = this.props
     return (
       <SalesOrderListAtom
-        firstTopLeftText={item.title}
-        bottomLeftText={item.paidTo}
+        firstTopText={item.title}
+        bottomLeftFirstText={item.paidTo}
+        bottomLeftSecondText={item.date}
         topRightText={'\u20A6 ' + item.totalAmount}
         rightTopTextStyle={styles.amount}
         onPress={() =>
@@ -85,7 +87,12 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
                 renderItem={this.renderList}
                 ListEmptyComponent={
                   <EmptyList
-                    type={{ Text: 'expenses', verifyMainList: 'main' }}
+                    type={{
+                      Text:
+                        'Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the',
+                      verifyMainList: 'main',
+                      headerText: 'Great habit keeping records!'
+                    }}
                   />
                 }
                 sections={this.parseExpenses(data.companyExpenses)}
@@ -127,7 +134,7 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary
   },
   footerText: {
-    fontFamily: 'SourceSansPro-Semibold',
+    fontFamily: 'AvenirNext-Regular',
     fontSize: 16,
     textAlign: 'center'
   },

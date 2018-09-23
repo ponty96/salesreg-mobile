@@ -28,8 +28,8 @@ export default class ExpensesDetailsScreen extends Component<IProps> {
     return (
       <View style={styles.container}>
         <SalesOrderListAtom
-          firstTopLeftText={expense.title}
-          bottomLeftText={expense.date}
+          firstTopText={expense.title}
+          bottomLeftFirstText={expense.date}
           topRightText={'\u20A6 ' + `${expense.totalAmount}`}
           rightTopTextStyle={styles.headerAmountStyle}
           style={styles.listHeaderWrapper}
