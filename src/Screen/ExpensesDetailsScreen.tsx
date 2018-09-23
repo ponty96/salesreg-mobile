@@ -10,11 +10,10 @@ interface IProps {
 }
 export default class ExpensesDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const expense = navigation.getParam('expense', {})
     return {
       header: (
         <Header
-          title={expense.title}
+          title="Expense Details"
           onPressLeftIcon={() => navigation.goBack()}
           onPressRightIcon={() => Alert.alert('Edit pressed.')}
         />
@@ -35,7 +34,7 @@ export default class ExpensesDetailsScreen extends Component<IProps> {
           style={styles.listHeaderWrapper}
           rightStyle={styles.listHeaderRight}
         />
-        <ListItemAtom
+        {/* <ListItemAtom
           label="Paid to"
           value={expense.paidTo}
           labelStyle={styles.listLabel}
@@ -48,7 +47,7 @@ export default class ExpensesDetailsScreen extends Component<IProps> {
           labelStyle={styles.listLabel}
           rightTextStyle={styles.valueStyle}
           listItemStyle={styles.listWrapper}
-        />
+        /> */}
         <FlatList
           data={expenseItems}
           renderItem={({ item }: any) => (

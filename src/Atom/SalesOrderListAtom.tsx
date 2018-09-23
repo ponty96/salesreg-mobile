@@ -3,12 +3,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { color } from '../Style/Color'
 import { Left, Right } from 'native-base'
 
-interface IProps {
+export interface DataProps {
   firstTopText: string
   bottomLeftFirstText?: string
   bottomLeftSecondText?: string
   topRightText: string
   bottomRightText?: string
+}
+interface IProps extends DataProps {
   onPress?: () => void
   style?: object
   rightTopTextStyle?: object
