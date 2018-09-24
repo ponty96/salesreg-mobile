@@ -37,9 +37,10 @@ import RadioButtonAtom from '../../Atom/RadioButtonAtom'
 import PickerAtom from '../../Atom/PickerAtom'
 import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
+import DatePickerAtom from '../../Atom/DatePickerAtom'
 
 interface FieldType {
-  type: 'input' | 'picker' | 'phone-input' | 'radio' | 'image-upload'
+  type: 'input' | 'picker' | 'phone-input' | 'radio' | 'image-upload' | 'date'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
@@ -199,6 +200,17 @@ export default class FormStepperContainer extends React.PureComponent<
             selected={formData[name]}
             placeholder={placeholder}
             handleSelection={val => this.props.updateValueChange(name, val)}
+            error={fieldErrors && fieldErrors[name]}
+          />
+        )
+      case 'date':
+        return (
+          <DatePickerAtom
+            key={`${type}-${index}`}
+            label={label}
+            date={formData[name]}
+            placeholder={placeholder}
+            handleDateSelection={val => this.props.updateValueChange(name, val)}
             error={fieldErrors && fieldErrors[name]}
           />
         )
