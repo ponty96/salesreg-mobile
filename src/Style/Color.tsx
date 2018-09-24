@@ -23,5 +23,6 @@ export const color = {
   yellow: '#F8E71C',
   orange: '#FBA518',
   textColor: '#444444',
-  green: '#0F922B'
+  green: '#0F922B',
+  amountSummaryBg: '#36A5B1'
 }
