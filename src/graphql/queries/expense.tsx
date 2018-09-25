@@ -15,7 +15,6 @@ export const ListCompanyExpensesGQL = gql`
         firstName
         lastName
       }
-      paidTo
       paymentMethod
       title
       totalAmount
