@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Alert } from 'react-native'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../Components/Generic/Details'
+import moment from 'moment'
 
 interface IProps {
   navigation: any
@@ -25,12 +26,12 @@ export default class ExpensesDetailsScreen extends Component<IProps> {
     return [
       {
         itemTitle: 'Date',
-        itemValue: expense.date
+        itemValue: moment(expense.date).calendar()
       }
     ].concat(
       expenseItems.map(expenseItem => ({
         itemTitle: expenseItem.itemName,
-        itemValue: expenseItem.amount
+        itemValue: `\u20A6 ${expenseItem.amount}`
       }))
     )
   }

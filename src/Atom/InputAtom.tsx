@@ -42,12 +42,12 @@ class InputAtom extends React.Component<IProps, IState> {
         <Item
           stackedLabel={true}
           style={[
-            this.props.contStyle,
             {
               borderBottomColor: color.textBorderBottom,
               marginTop: 24,
               height: 80
-            }
+            },
+            this.props.contStyle
           ]}
         >
           <Label

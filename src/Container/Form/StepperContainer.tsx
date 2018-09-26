@@ -38,9 +38,17 @@ import PickerAtom from '../../Atom/PickerAtom'
 import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
 import DatePickerAtom from '../../Atom/DatePickerAtom'
+import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
 
 interface FieldType {
-  type: 'input' | 'picker' | 'phone-input' | 'radio' | 'image-upload' | 'date'
+  type:
+    | 'input'
+    | 'picker'
+    | 'phone-input'
+    | 'radio'
+    | 'image-upload'
+    | 'date'
+    | 'expense-items'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
@@ -105,12 +113,17 @@ export default class FormStepperContainer extends React.PureComponent<
             ] || 'Next'}`}
             onPress={this.onCtaButtonPress}
             type="secondary"
+            icon={this.getButtonIcon()}
           />
         </View>
       </Container>
     )
   }
-
+  getButtonIcon = () => {
+    if (this.state.currentStep == this.props.steps.length) {
+      return 'md-checkmark'
+    } else return null
+  }
   handleBackButtonPress = () => {
     const { currentStep } = this.state
     if (currentStep > 1) {
@@ -212,6 +225,16 @@ export default class FormStepperContainer extends React.PureComponent<
             placeholder={placeholder}
             handleDateSelection={val => this.props.updateValueChange(name, val)}
             error={fieldErrors && fieldErrors[name]}
+          />
+        )
+      case 'expense-items':
+        return (
+          <AddExpenseItemsList
+            key={`${type}-${index}`}
+            expenseItems={formData[name]}
+            onUpdateItems={(items: any) =>
+              this.props.updateValueChange(name, items)
+            }
           />
         )
     }

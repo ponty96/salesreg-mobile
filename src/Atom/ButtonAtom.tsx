@@ -33,7 +33,8 @@ class ButtonAtom extends React.Component<IProps, any> {
         style={[
           styles.button,
           styles[`${this.props.type}Btn`],
-          this.props.transparent && styles.transparent
+          this.props.transparent && styles.transparent,
+          this.props.btnStyle
         ]}
         onPress={this.props.onPress}
       >
@@ -46,14 +47,13 @@ class ButtonAtom extends React.Component<IProps, any> {
         >
           {this.props.btnText}
         </Text>
-        {!this.props.hideIcon &&
-          (this.props.icon || (
-            <Icon
-              name="ios-arrow-forward"
-              type="Ionicons"
-              style={[styles[`${this.props.type}Text`], styles.icon]}
-            />
-          ))}
+        {!this.props.hideIcon && (
+          <Icon
+            name={this.props.icon || 'ios-arrow-forward'}
+            type="Ionicons"
+            style={[styles[`${this.props.type}Text`], styles.icon]}
+          />
+        )}
       </Button>
     )
   }

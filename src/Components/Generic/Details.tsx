@@ -50,7 +50,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
           renderItem={({ item }: any) => (
             <ListItemAtom
               label={item.itemTitle}
-              value={'\u20A6 ' + item.itemValue}
+              value={item.itemValue}
               labelStyle={
                 item.isTotalAmount ? styles.whiteLabel : styles.listLabel
               }
