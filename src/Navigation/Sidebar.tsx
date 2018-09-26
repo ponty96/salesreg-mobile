@@ -158,10 +158,6 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Products & Services',
                   routeName: 'ViewBusiness'
-                },
-                {
-                  title: 'Employees',
-                  routeName: 'Employees'
                 }
               ]}
             />
@@ -206,10 +202,10 @@ export default class SideBar extends PureComponent<IProps, IState> {
                   title: 'Bank',
                   routeName: 'Bank'
                 },
-                {
-                  title: 'Income',
-                  routeName: 'Income'
-                },
+                // {
+                //   title: 'Income',
+                //   routeName: 'Income'
+                // },
                 {
                   title: 'Expenses',
                   routeName: 'Expenses'
@@ -217,11 +213,11 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Invoices',
                   routeName: 'Invoice'
-                },
-                {
-                  title: 'Receipts',
-                  routeName: 'Receipts'
                 }
+                // {
+                //   title: 'Receipts',
+                //   routeName: 'Receipts'
+                // }
               ]}
             />
             <SidebarItem
