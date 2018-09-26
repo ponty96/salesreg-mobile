@@ -37,7 +37,11 @@ const AddExpenseItem = (props: ExpenseItem) => (
       placeholder={`\u20A6 0.0`}
       defaultValue={`${props.amount}`}
       getValue={val =>
-        props.handleValueChange(props.index, 'amount', parseFloat(`${val}`))
+        props.handleValueChange(
+          props.index,
+          'amount',
+          parseFloat(`${val || 0}`).toFixed(2)
+        )
       }
       keyboardType="numeric"
     />

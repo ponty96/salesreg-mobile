@@ -20,6 +20,9 @@ interface IState {
   companyId: string
   paymentMethod: string
   fieldErrors: any
+  __typename?: any
+  company?: any
+  paidBy?: any
 }
 
 export default class UpsertExpenseScreen extends Component<IProps, IState> {
@@ -45,14 +48,29 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
 
   async componentDidMount() {
     const user = JSON.parse(await Auth.getCurrentUser())
-    this.setState({
-      paidById: user.id,
-      companyId: user.company.id
-    })
+    const expense = this.props.navigation.getParam('expense', null)
+    let state = {}
+    if (expense) {
+      console.log(
+        'paymemt method',
+        expense.paymentMethod
+          .split(' ')
+          .join('_')
+          .toUpperCase()
+      )
+      state = {
+        ...expense,
+        paymentMethod: expense.paymentMethod
+          .split(' ')
+          .join('_')
+          .toUpperCase()
+      }
+    }
+    state = { ...state, paidById: user.id, companyId: user.company.id }
+    this.setState(state)
   }
 
   render() {
-    console.log('expense state', this.state)
     return (
       <Mutation mutation={UpsertExpenseGQL} onCompleted={this.onCompleted}>
         {(upsertExpense, { loading }) => [
@@ -130,8 +148,23 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
     const expense = this.props.navigation.getParam('expense', {})
     let params = { ...this.state }
     params['totalAmount'] = parseFloat(params.totalAmount)
-    delete params.fieldErrors
+    params = this.clearParams(params)
+
     return { expense: params, expenseId: expense ? expense.id : null }
+  }
+  clearParams = params => {
+    delete params.fieldErrors
+    delete params['__typename']
+    delete params['company']
+    delete params['paidBy']
+    delete params['id']
+    params.expenseItems = params.expenseItems.map(expenseItem => {
+      let expense = { ...expenseItem }
+      delete expense.__typename
+      delete expense.id
+      return { ...expense, amount: parseFloat(expense.amount) }
+    })
+    return params
   }
   onCompleted = async res => {
     const {

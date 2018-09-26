@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import { Alert } from 'react-native'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../Components/Generic/Details'
 import moment from 'moment'
@@ -9,12 +8,15 @@ interface IProps {
 }
 export default class ExpensesDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
+    const expense = navigation.getParam('expense', {})
     return {
       header: (
         <Header
           title="Expense Details"
           onPressLeftIcon={() => navigation.goBack()}
-          onPressRightIcon={() => Alert.alert('Edit pressed.')}
+          onPressRightIcon={() =>
+            navigation.navigate('UpsertExpense', { expense })
+          }
         />
       )
     }
@@ -27,6 +29,10 @@ export default class ExpensesDetailsScreen extends Component<IProps> {
       {
         itemTitle: 'Date',
         itemValue: moment(expense.date).calendar()
+      },
+      {
+        itemTitle: 'Payment Method',
+        itemValue: expense.paymentMethod.toUpperCase()
       }
     ].concat(
       expenseItems.map(expenseItem => ({

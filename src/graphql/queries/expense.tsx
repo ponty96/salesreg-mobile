@@ -22,9 +22,6 @@ export const ListCompanyExpensesGQL = gql`
         id
         itemName
         amount
-        expense {
-          id
-        }
       }
     }
   }
