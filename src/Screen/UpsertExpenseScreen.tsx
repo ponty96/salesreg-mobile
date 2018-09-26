@@ -1,322 +1,179 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, ScrollView, Dimensions, Text } from 'react-native'
-import Header from '../Components/Header/BaseHeader'
-import FormContainerCopy from '../Components/FormContainerCopy'
-import InputAtom from '../Atom/InputAtom'
-import { color } from '../Style/Color'
-import { textStyles } from '../Style/TextStyles'
-import PickerAtom from '../Atom/PickerAtom'
-import SaveCancelButton from '../Container/SaveCancelButton'
-import WarningModal from '../Components/WarningModal'
+import FormStepperContainer from '../Container/Form/StepperContainer'
+import { UpsertExpenseGQL } from '../graphql/mutations/expense'
+import Auth from '../services/auth'
+import { Mutation } from 'react-apollo'
+import { parseFieldErrors } from '../Functions'
+import AppSpinner from '../Components/Spinner'
+import { PaymentMethod } from '../utilities/data/picker-lists'
 
 interface IProps {
   navigation: any
 }
 
 interface IState {
-  expense?: string
-  date?: string
-  totalAmount?: string
-  visible?: boolean
-  excessFormContainer?: any
-  payMethod?: string
+  title: string
+  totalAmount: any
+  date: string
+  expenseItems: any[]
+  paidById: string
+  companyId: string
+  paymentMethod: string
+  fieldErrors: any
+  __typename?: any
+  company?: any
+  paidBy?: any
 }
 
 export default class UpsertExpenseScreen extends Component<IProps, IState> {
-  static navigationOptions = ({ navigation }: any) => {
-    return {
-      header: (
-        <Header
-          title="Expenses"
-          onPressLeftIcon={() => navigation.goBack()}
-        />
-      )
-    }
+  static navigationOptions = {
+    header: null
   }
 
   state = {
-    expense: '',
+    title: '',
     date: '',
-    totalAmount: '',
-    visible: false,
-    paidBy: '',
-    excessFormContainer: [<View key={0} />],
-    payMethod: ''
+    totalAmount: null,
+    expenseItems: [],
+    paidById: '',
+    companyId: '',
+    paymentMethod: '',
+    fieldErrors: null
   }
 
-  updateState = (key: string, value: any) => {
-    this.setState({ [key]: value })
+  updateState = (key: string, val: any) => {
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
   }
 
-  handleOKPress = () => {
-    alert('OK button pressed.')
+  async componentDidMount() {
+    const user = JSON.parse(await Auth.getCurrentUser())
+    const expense = this.props.navigation.getParam('expense', null)
+    let state = {}
+    if (expense) {
+      console.log(
+        'paymemt method',
+        expense.paymentMethod
+          .split(' ')
+          .join('_')
+          .toUpperCase()
+      )
+      state = {
+        ...expense,
+        paymentMethod: expense.paymentMethod
+          .split(' ')
+          .join('_')
+          .toUpperCase()
+      }
+    }
+    state = { ...state, paidById: user.id, companyId: user.company.id }
+    this.setState(state)
   }
-
-  additionalElement: JSX.Element[] = []
-  index: number = 0
 
   render() {
-    const { navigation } = this.props
-    const { excessFormContainer } = this.state
-    const element = (index: number): JSX.Element => {
-      return (
-        <FormContainerCopy
-          containerStyle={styles.formContainer}
-          innerViewStyle={styles.formWrapper}
-          key={this.index}
-        >
-          <Text
-            style={styles.closeSign}
-            onPress={() => {
-              this.setState({
-                excessFormContainer: this.additionalElement
-              })
-              this.additionalElement.splice(index, 1, undefined)
-            }}
-          >
-            &times;
-          </Text>
-          <InputAtom
-            getValue={val => this.updateState('added', val)}
-            inputStyle={{ paddingBottom: 0 }}
-          />
-          <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
-            <Text
-              style={[
-                textStyles.normalText,
-                textStyles.blueText,
-                styles.leftLabel
-              ]}
-            >
-              Amount
-              {'(\u20A6)'}
-            </Text>
-            <View style={[styles.picker, styles.lastInputWrapper]}>
-              <InputAtom
-                getValue={val => this.updateState('amount', val)}
-                keyboardType="numeric"
-                contStyle={styles.bottomSpace}
-              />
-            </View>
-          </View>
-        </FormContainerCopy>
-      )
-    }
-
     return (
-      <View style={styles.container}>
-        <ScrollView>
-          <FormContainerCopy
-            containerStyle={styles.formContainer}
-            innerViewStyle={styles.formWrapper}
-          >
-            <InputAtom
-              label="*What do you call this expense"
-              placeholder="Shop renovation"
-              getValue={val => this.updateState('expense', val)}
-            />
-            <InputAtom
-              label="Date"
-              placeholder="06/23/2018"
-              getValue={val => this.updateState('date', val)}
-            />
-          </FormContainerCopy>
-          <FormContainerCopy
-            containerStyle={styles.formContainer}
-            innerViewStyle={styles.formWrapper}
-          >
-            <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
-              <Text
-                style={[
-                  textStyles.normalText,
-                  textStyles.blueText,
-                  styles.formLeftLabel,
-                  styles.totalAmountLabel
-                ]}
-              >
-                {'Total amount(\u20A6)'}
-              </Text>
-              <View style={[styles.picker, { borderBottomWidth: 0 }]}>
-                <InputAtom
-                  getValue={val => this.updateState('totalAmount', val)}
-                  keyboardType="numeric"
-                  inputStyle={{ marginTop: 0 }}
-                />
-              </View>
-            </View>
-          </FormContainerCopy>
-          <FormContainerCopy
-            containerStyle={styles.formContainer}
-            innerViewStyle={styles.formWrapper}
-          >
-            <View
-              style={[
-                styles.innerInputViewForTwo,
-                styles.itemWrapper,
-                styles.bottomSpace
-              ]}
-            >
-              <Text
-                style={[
-                  textStyles.normalText,
-                  textStyles.blueText,
-                  styles.formLeftLabel,
-                  styles.payingMethodText
-                ]}
-              >
-                Paying method
-              </Text>
-              <View style={styles.picker}>
-                <PickerAtom
-                  list={['Cash', 'Cheque', 'Direct transfer', 'POS']}
-                  placeholder="Cash"
-                  handleSelection={val => this.updateState('payMethod', val)}
-                  style={{ height: 30 }}
-                />
-              </View>
-            </View>
-            <InputAtom
-              getValue={val => this.updateState('paidTo', val)}
-              label="Paid to"
-              placeholder="Ayomide"
-              inputStyle={{ paddingBottom: 0 }}
-            />
-            <View style={[styles.innerInputViewForTwo, styles.itemWrapper]}>
-              <Text
-                style={[
-                  textStyles.normalText,
-                  textStyles.blueText,
-                  styles.formLeftLabel,
-                  styles.paidByLabel
-                ]}
-              >
-                Paid by
-              </Text>
-              <View style={[styles.picker, styles.paidByInput]}>
-                <InputAtom
-                  getValue={val => this.updateState('paidBy', val)}
-                  inputStyle={{ marginTop: 0 }}
-                />
-              </View>
-            </View>
-          </FormContainerCopy>
-          {excessFormContainer.map(item => {
-            return item
-          })}
-          <Text
-            style={[
-              textStyles.bigText,
-              textStyles.blueText,
-              textStyles.boldText,
-              styles.textToAdd
+      <Mutation mutation={UpsertExpenseGQL} onCompleted={this.onCompleted}>
+        {(upsertExpense, { loading }) => [
+          <AppSpinner visible={loading} />,
+          <FormStepperContainer
+            formData={this.state}
+            steps={[
+              {
+                stepTitle: 'Lets now describe your expense',
+                formFields: [
+                  {
+                    label: 'What should we call this expense?',
+                    placeholder: 'e.g Shop renovation',
+                    name: 'title',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    }
+                  },
+                  {
+                    label: 'When did you make this expense?',
+                    placeholder: 'e.g 06/23/2018',
+                    name: 'date',
+                    type: {
+                      type: 'date'
+                    }
+                  },
+                  {
+                    label: 'What did you spend in total?',
+                    placeholder: `\u20A6 0.0`,
+                    name: 'totalAmount',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'numeric'
+                    }
+                  },
+                  {
+                    label: 'How did you pay for this expense?',
+                    placeholder: 'Touch to choose',
+                    type: {
+                      type: 'picker',
+                      options: PaymentMethod
+                    },
+                    name: 'paymentMethod'
+                  }
+                ]
+              },
+              {
+                stepTitle: `Across what items did you spread this expense \n(optional)?`,
+                formFields: [
+                  {
+                    label: '',
+                    type: {
+                      type: 'expense-items'
+                    },
+                    name: 'expenseItems'
+                  }
+                ],
+                buttonTitle: 'Done'
+              }
             ]}
-            onPress={() => {
-              this.additionalElement.push(element(this.index))
-              this.setState({
-                excessFormContainer: this.additionalElement
-              })
-              this.index++
-            }}
-          >
-            + Add split
-          </Text>
-        </ScrollView>
-        <SaveCancelButton
-          positiveButtonName="DONE"
-          navigation={navigation}
-          createfunc={() => this.setState({ visible: true })}
-        />
-        <WarningModal
-          headerText="Something's not right!!"
-          bodyText={
-            'Your total split amount exceeds the total expenses by \u20A6 2000.00. ' +
-            'Split total split amountsmust be equal to the total expenses'
-          }
-          visible={this.state.visible}
-          onBackPress={() => this.setState({ visible: false })}
-          onPressTopButton={this.handleOKPress}
-          modalStyle={styles.modalContainer}
-          footerText="OK"
-        />
-      </View>
+            updateValueChange={this.updateState}
+            handleBackPress={() => this.props.navigation.goBack()}
+            fieldErrors={this.state.fieldErrors}
+            onCompleteSteps={() =>
+              upsertExpense({ variables: this.parseMutationVariables() })
+            }
+          />
+        ]}
+      </Mutation>
     )
   }
-}
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  innerInputViewForTwo: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    flexDirection: 'row',
-    alignItems: 'center'
-  },
-  itemWrapper: {
-    paddingLeft: 16,
-    marginRight: 16,
-    justifyContent: 'space-between'
-  },
-  baseAlign: {
-    alignItems: 'baseline'
-  },
-  formLeftLabel: {
-    width: '30%',
-    textAlign: 'right'
-  },
-  picker: {
-    borderBottomWidth: 0.5,
-    borderBottomColor: color.dropdown,
-    width: '70%',
-    marginLeft: 8,
-    marginTop: 16
-  },
-  payingMethodText: {
-    alignSelf: 'flex-end'
-  },
-  lastInputWrapper: {
-    borderBottomWidth: 0,
-    marginTop: 0,
-    width: '80%'
-  },
-  leftLabel: {
-    marginLeft: 6
-  },
-  textToAdd: {
-    marginLeft: 16,
-    marginBottom: 64,
-    marginTop: 16
-  },
-  bottomSpace: {
-    marginBottom: 10
-  },
-  formWrapper: {
-    marginTop: 0,
-    marginBottom: 0
-  },
-  modalContainer: {
-    top: 360
-  },
-  closeSign: {
-    textAlign: 'right',
-    fontSize: 30
-  },
-  formContainer: {
-    paddingVertical: -16
-  },
-  totalAmountLabel: {
-    marginTop: 32
-  },
-  paidByLabel: {
-    textAlign: 'left',
-    marginLeft: 8,
-    alignSelf: 'flex-end',
-    marginBottom: 16
-  },
-  paidByInput: {
-    borderBottomWidth: 0,
-    marginBottom: 8
+  parseMutationVariables = () => {
+    const expense = this.props.navigation.getParam('expense', {})
+    let params = { ...this.state }
+    params['totalAmount'] = parseFloat(params.totalAmount)
+    params = this.clearParams(params)
+
+    return { expense: params, expenseId: expense ? expense.id : null }
   }
-})
+  clearParams = params => {
+    delete params.fieldErrors
+    delete params['__typename']
+    delete params['company']
+    delete params['paidBy']
+    delete params['id']
+    params.expenseItems = params.expenseItems.map(expenseItem => {
+      let expense = { ...expenseItem }
+      delete expense.__typename
+      delete expense.id
+      return { ...expense, amount: parseFloat(expense.amount) }
+    })
+    return params
+  }
+  onCompleted = async res => {
+    const {
+      upsertExpense: { success, fieldErrors }
+    } = res
+    if (!success) {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
+    } else {
+      this.props.navigation.navigate('Expenses')
+    }
+  }
+}

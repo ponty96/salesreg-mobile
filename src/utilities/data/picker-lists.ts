@@ -19,3 +19,26 @@ export const Currencies = Object.keys(countries).map(key => {
     subLabel: country.currency || ''
   }
 })
+
+export const PaymentMethod = [
+  {
+    icon: 'url here',
+    mainLabel: 'CASH',
+    value: 'CASH'
+  },
+  {
+    icon: 'url here',
+    mainLabel: 'CHEQUE',
+    value: 'CHEQUE'
+  },
+  {
+    icon: 'url here',
+    mainLabel: 'DIRECT_TRANSFER',
+    value: 'DIRECT_TRANSFER'
+  },
+  {
+    icon: 'url here',
+    mainLabel: 'POS',
+    value: 'POS'
+  }
+]

@@ -3,12 +3,14 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { color } from '../Style/Color'
 import { Left, Right } from 'native-base'
 
-interface IProps {
-  firstTopLeftText: string
-  bottomLeftText?: string
-  secondTopLeftText?: string
+export interface DataProps {
+  firstTopText: string
+  bottomLeftFirstText?: string
+  bottomLeftSecondText?: string
   topRightText: string
   bottomRightText?: string
+}
+interface IProps extends DataProps {
   onPress?: () => void
   style?: object
   rightTopTextStyle?: object
@@ -51,15 +53,17 @@ const SalesOrderListAtom = (props: IProps) => {
       onPress={props.onPress}
     >
       <Left style={[styles.leftWrapper, props.leftStyle]}>
+        <Text style={[styles.serialNumber, styles.top]}>
+          {props.firstTopText}
+        </Text>
         <View style={styles.wrapperForTopLeft}>
-          <Text style={[styles.serialNumber, styles.top]}>
-            {props.firstTopLeftText}
+          <Text style={[styles.text, styles.bottom]}>
+            {props.bottomLeftFirstText}
           </Text>
-          <Text style={[styles.time, styles.top]}>
-            {props.secondTopLeftText}
+          <Text style={[styles.time, styles.bottom]}>
+            {props.bottomLeftSecondText}
           </Text>
         </View>
-        <Text style={[styles.text, styles.bottom]}>{props.bottomLeftText}</Text>
       </Left>
       <Right style={[styles.rightWrapper, props.rightStyle]}>
         <Text style={[styles.text, styles.top, props.rightTopTextStyle]}>
@@ -86,8 +90,9 @@ const styles = StyleSheet.create({
     marginVertical: 8
   },
   serialNumber: {
-    fontFamily: 'SourceSansPro-Semibold',
-    color: color.principal
+    fontFamily: 'AvenirNext-DemiBold',
+    color: color.principal,
+    fontSize: 16
   },
   wrapperForTopLeft: {
     flexDirection: 'row'
@@ -95,11 +100,13 @@ const styles = StyleSheet.create({
   time: {
     marginLeft: 16,
     color: color.principal,
-    fontFamily: 'Source Sans Pro'
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: 14
   },
   text: {
-    fontFamily: 'Source Sans Pro',
-    color: color.principal
+    fontFamily: 'AvenirNext-Regular',
+    color: color.principal,
+    fontSize: 14
   },
   bottom: {
     marginTop: 8,

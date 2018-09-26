@@ -15,7 +15,6 @@ export const ListCompanyExpensesGQL = gql`
         firstName
         lastName
       }
-      paidTo
       paymentMethod
       title
       totalAmount
@@ -23,9 +22,6 @@ export const ListCompanyExpensesGQL = gql`
         id
         itemName
         amount
-        expense {
-          id
-        }
       }
     }
   }

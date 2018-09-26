@@ -38,13 +38,13 @@ import UserProfileScreen from '../Screen/UserProfileScreen'
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 
 // SalesOrder Screens
-import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
-import ProductSalesOrderScreen from '../Screen/ProductSalesOrderScreen'
-import ProductSalesRecordScreen from '../Screen/ProductSalesRecordScreen'
-import SalesOrderStatusScreen from '../Screen/SalesOrderStatusScreen'
-import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
-import NewSalesOrderScreen from '../Screen/NewSalesOrderScreen'
-import ServiceSalesRecordScreen from '../Screen/ServiceSalesRecordScreen'
+// import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
+// import ProductSalesOrderScreen from '../Screen/ProductSalesOrderScreen'
+// import ProductSalesRecordScreen from '../Screen/ProductSalesRecordScreen'
+// import SalesOrderStatusScreen from '../Screen/SalesOrderStatusScreen'
+// import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
+// import NewSalesOrderScreen from '../Screen/NewSalesOrderScreen'
+// import ServiceSalesRecordScreen from '../Screen/ServiceSalesRecordScreen'
 
 // Expenses Screens
 import ExpensesScreen from '../Screen/ExpensesScreen'
@@ -128,56 +128,56 @@ const viewBothStack = TabNavigator(
   }
 )
 
-const salesOrderTab = TabNavigator(
-  {
-    Products: {
-      screen: ProductSalesOrderScreen
-    },
-    Services: {
-      screen: ServicesSalesOrderScreen
-    }
-  },
-  {
-    navigationOptions: ({ navigation }: any) => ({
-      tabBarIcon: ({ focused }: any) => {
-        const { routeName } = navigation.state
-        let tabColor
-        if (routeName === 'Products') {
-          tabColor = focused ? color.secondary : color.secondary
-        } else if (routeName === 'Services') {
-          tabColor = focused ? color.secondary : color.secondary
-        }
-        return (
-          <View style={{ alignItems: 'center' }}>
-            <Text style={{ color: tabColor, fontWeight: 'bold', fontSize: 20 }}>
-              {routeName}
-            </Text>
-          </View>
-        )
-      }
-    }),
-    tabBarOptions: {
-      activeTintColor: color.check,
-      inactiveTintColor: color.secondary,
-      showLabel: true,
-      style: {
-        backgroundColor: color.primary,
-        height: 60,
-        paddingVertical: 8
-      },
-      indicatorStyle: {
-        backgroundColor: color.check
-      },
-      upperCaseLabel: false,
-      labelStyle: {
-        fontSize: 14,
-        fontFamily: 'Source Sans Pro'
-      }
-    },
-    animationEnabled: false,
-    swipeEnabled: true
-  }
-)
+// const salesOrderTab = TabNavigator(
+//   {
+//     Products: {
+//       screen: ProductSalesOrderScreen
+//     },
+//     Services: {
+//       screen: ServicesSalesOrderScreen
+//     }
+//   },
+//   {
+//     navigationOptions: ({ navigation }: any) => ({
+//       tabBarIcon: ({ focused }: any) => {
+//         const { routeName } = navigation.state
+//         let tabColor
+//         if (routeName === 'Products') {
+//           tabColor = focused ? color.secondary : color.secondary
+//         } else if (routeName === 'Services') {
+//           tabColor = focused ? color.secondary : color.secondary
+//         }
+//         return (
+//           <View style={{ alignItems: 'center' }}>
+//             <Text style={{ color: tabColor, fontWeight: 'bold', fontSize: 20 }}>
+//               {routeName}
+//             </Text>
+//           </View>
+//         )
+//       }
+//     }),
+//     tabBarOptions: {
+//       activeTintColor: color.check,
+//       inactiveTintColor: color.secondary,
+//       showLabel: true,
+//       style: {
+//         backgroundColor: color.primary,
+//         height: 60,
+//         paddingVertical: 8
+//       },
+//       indicatorStyle: {
+//         backgroundColor: color.check
+//       },
+//       upperCaseLabel: false,
+//       labelStyle: {
+//         fontSize: 14,
+//         fontFamily: 'Source Sans Pro'
+//       }
+//     },
+//     animationEnabled: false,
+//     swipeEnabled: true
+//   }
+// )
 
 const businessStack = StackNavigator(
   {
@@ -192,9 +192,6 @@ const businessStack = StackNavigator(
     },
     Purchase: {
       screen: PurchaseScreen
-    },
-    ProductSalesRecord: {
-      screen: ProductSalesRecordScreen
     },
     Bank: {
       screen: BankScreen
@@ -240,10 +237,13 @@ const businessStack = StackNavigator(
     },
     EditServices: UpsertServiceScreen,
     ShowService: ServiceDetailsScreen,
-    SalesOrderStatus: SalesOrderStatusScreen,
-    SalesOrderDetails: SalesOrderDetailsScreen,
-    NewSalesOrder: NewSalesOrderScreen,
-    ServiceSalesRecord: ServiceSalesRecordScreen,
+    // ProductSalesRecord: {
+    //   screen: ProductSalesRecordScreen
+    // },
+    // SalesOrderStatus: SalesOrderStatusScreen,
+    // SalesOrderDetails: SalesOrderDetailsScreen,
+    // NewSalesOrder: NewSalesOrderScreen,
+    // ServiceSalesRecord: ServiceSalesRecordScreen,
     ExpensesDetails: ExpensesDetailsScreen,
     UpsertExpense: UpsertExpenseScreen,
     Customers: {
@@ -263,18 +263,18 @@ const businessStack = StackNavigator(
     },
     VendorDetails: {
       screen: VendorDetailScreen
-    },
-    salesOrderTab: {
-      screen: salesOrderTab,
-      navigationOptions: ({ navigation }: any) => ({
-        header: (
-          <Header
-            title="Sales order"
-            onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
-          />
-        )
-      })
     }
+    // salesOrderTab: {
+    //   screen: salesOrderTab,
+    //   navigationOptions: ({ navigation }: any) => ({
+    //     header: (
+    //       <Header
+    //         title="Sales order"
+    //         onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
+    //       />
+    //     )
+    //   })
+    // }
   },
   {
     initialRouteName: 'Home',

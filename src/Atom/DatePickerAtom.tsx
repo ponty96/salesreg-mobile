@@ -13,24 +13,8 @@ interface IProps {
   contStyle?: any
   label?: string
 }
-interface IState {
-  bottomColor: string
-  labelColor: string
-}
 
-export default class DatePickerAtom extends React.Component<IProps, IState> {
-  state = {
-    bottomColor: color.textBorderBottom,
-    labelColor: color.label
-  }
-
-  changeUnderline = (newColor: string): void => {
-    if (this.props.error) {
-      this.setState({ bottomColor: 'red', labelColor: 'red' })
-    } else {
-      this.setState({ labelColor: newColor })
-    }
-  }
+export default class DatePickerAtom extends React.Component<IProps> {
   render() {
     return (
       <View>
@@ -40,24 +24,20 @@ export default class DatePickerAtom extends React.Component<IProps, IState> {
             borderWidth: 0,
             marginLeft: 0,
             borderBottomWidth: 0,
-            marginBottom: 0
+            marginTop: 24,
+            height: 80
           }}
         >
           <Label
             style={{
-              color: this.state.labelColor,
+              color: color.textColor,
               padding: 0,
-              fontSize: 14,
-
-              top: 3,
               paddingTop: 0,
               paddingBottom: 0
             }}
           >
             {this.props.required && <Text style={styles.required}>*</Text>}
-            <Text style={[styles.labelText, { color: this.state.labelColor }]}>
-              {this.props.label}
-            </Text>
+            <Text style={styles.labelText}>{this.props.label}</Text>
           </Label>
           <DatePicker
             style={styles.datepickerCont}
@@ -66,7 +46,7 @@ export default class DatePickerAtom extends React.Component<IProps, IState> {
             placeholder={this.props.placeholder}
             format="YYYY-MM-DD"
             minDate="1800-01-01"
-            maxDate="2018-01-01"
+            maxDate={`${Date.now()}`}
             confirmBtnText="Save"
             cancelBtnText="Cancel"
             showIcon={false}
@@ -109,21 +89,27 @@ const styles = StyleSheet.create({
   },
   btnTextConfirm: {
     height: 20,
-    color: '#666'
+    color: color.textColor,
+    fontFamily: 'AvenirNext-DemiBold'
   },
   btnTextCancel: {
-    height: 20
+    height: 20,
+    color: color.inactive,
+    fontFamily: 'AvenirNext-DemiBold'
   },
   placeholderText: {
-    color: color.inactive
+    color: color.inactive,
+    fontFamily: 'AvenirNext-Regular'
   },
   dateText: {
-    color: color.principal
+    color: color.principal,
+    fontFamily: 'AvenirNext-Regular'
   },
   labelText: {
-    fontFamily: 'Source Sans Pro',
+    fontFamily: 'AvenirNext-DemiBold',
     padding: 0,
-    fontSize: 16
+    fontSize: 16,
+    color: color.textColor
   },
   required: {
     color: color.inactive,

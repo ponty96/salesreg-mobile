@@ -21,8 +21,8 @@ export default class ServiceSalesRecordScreen extends Component {
   renderList = ({ item }: any): JSX.Element => {
     return (
       <SalesOrderListAtom
-        firstTopLeftText={item.productName}
-        bottomLeftText={item.customerName}
+        firstTopText={item.customerName}
+        bottomLeftFirstText={item.productName}
         topRightText={item.number}
         bottomRightText={'\u20A6 ' + item.price}
         style={styles.listWrapper}
