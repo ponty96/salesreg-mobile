@@ -14,6 +14,7 @@ interface Item {
   itemTitle: string
   itemValue: string
   isTotalAmount?: boolean
+  itemQuantity?: string
 }
 interface IProps {
   title: string
@@ -51,6 +52,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
             <ListItemAtom
               label={item.itemTitle}
               value={item.itemValue}
+              quantity={item.itemQuantity}
               labelStyle={
                 item.isTotalAmount ? styles.whiteLabel : styles.listLabel
               }
@@ -111,7 +113,7 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   listLabel: {
-    color: color.button,
+    color: color.textColor,
     marginLeft: 2,
     fontFamily: 'AvenirNext-Regular'
   },

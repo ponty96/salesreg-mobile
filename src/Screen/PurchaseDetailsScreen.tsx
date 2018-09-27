@@ -1,0 +1,64 @@
+import React, { Component } from 'react'
+import Header from '../Components/Header/DetailsScreenHeader'
+import GenericDetailsComponent from '../Components/Generic/Details'
+import moment from 'moment'
+
+interface IProps {
+  navigation: any
+}
+export default class PurchaseDetailsScreen extends Component<IProps> {
+  static navigationOptions = ({ navigation }: any) => {
+    const purchase = navigation.getParam('purchase', {})
+    return {
+      header: (
+        <Header
+          title="Purchase Details"
+          onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() =>
+            navigation.navigate('UpsertPurchase', { purchase })
+          }
+        />
+      )
+    }
+  }
+
+  parseItems = () => {
+    const purchase = this.props.navigation.getParam('purchase', {})
+    const { items = [] } = purchase
+    return [
+      {
+        itemTitle: 'Date',
+        itemValue: moment(purchase.date).calendar()
+      },
+      {
+        itemTitle: 'Status',
+        itemValue: purchase.status
+      }
+    ].concat(
+      items
+        .map(item => ({
+          itemTitle: item.product.name,
+          itemValue: `\u20A6 ${item.unitPrice}`,
+          itemQuantity: item.quantity
+        }))
+        .concat([
+          {
+            itemTitle: 'Payment Method',
+            itemValue: purchase.paymentMethod.toUpperCase()
+          }
+        ])
+    )
+  }
+
+  render() {
+    const purchase = this.props.navigation.getParam('purchase', {})
+    return (
+      <GenericDetailsComponent
+        title={purchase.contact.contactName}
+        totalAmount={purchase.amount}
+        items={this.parseItems()}
+        shouldShowStatus={true}
+      />
+    )
+  }
+}

@@ -66,7 +66,7 @@ const SalesOrderListAtom = (props: IProps) => {
         </View>
       </Left>
       <Right style={[styles.rightWrapper, props.rightStyle]}>
-        <Text style={[styles.text, styles.top, props.rightTopTextStyle]}>
+        <Text style={[styles.text, styles.top, styles.price]}>
           {props.topRightText}
         </Text>
         <Text style={[styles.status, styles.bottom]}>
@@ -116,8 +116,8 @@ const styles = StyleSheet.create({
     marginTop: 8
   },
   status: {
-    color: color.selling,
-    fontFamily: 'Source Sans Pro'
+    // color: color.selling,
+    fontFamily: 'AvenirNext-Regular'
   },
   rightWrapper: {
     marginRight: 16
@@ -127,5 +127,8 @@ const styles = StyleSheet.create({
   },
   statusIndicator: {
     width: 5
+  },
+  price: {
+    color: color.selling
   }
 })
