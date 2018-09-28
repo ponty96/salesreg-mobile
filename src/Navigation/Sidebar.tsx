@@ -189,7 +189,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 },
                 {
                   title: 'Sales',
-                  routeName: 'salesOrderTab'
+                  routeName: 'Sales'
                 }
               ]}
             />

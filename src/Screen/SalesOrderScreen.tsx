@@ -1,20 +1,21 @@
 import * as React from 'react'
-import { Alert } from 'react-native'
+import { Alert, Text } from 'react-native'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
-import { ListCompanyPurchasesGQL } from '../graphql/queries/order'
+import { ListCompanySalesGQL } from '../graphql/queries/order'
 import moment from 'moment'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
 }
 
-export default class PurchaseScreen extends React.Component<IProps> {
+export default class SalesScreen extends React.Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
         <Header
-          title="Purchase Order"
+          title="Sales Order"
           onPressRightIcon={() => Alert.alert('Search button pressed.')}
           onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
         />
@@ -36,15 +37,15 @@ export default class PurchaseScreen extends React.Component<IProps> {
     return (
       <GenericListIndex
         navigation={this.props.navigation}
-        graphqlQuery={ListCompanyPurchasesGQL}
-        graphqlQueryResultKey="listCompanyPurchases"
+        graphqlQuery={ListCompanySalesGQL}
+        graphqlQueryResultKey="listCompanySales"
         parseItemData={this.parseData}
         onItemPress={item =>
-          this.props.navigation.navigate('PurchaseDetails', { purchase: item })
+          this.props.navigation.navigate('SalesDetails', { sales: item })
         }
-        emptyListText={`As your make your purchases, your product inventory will be instantly updated. All your purchase orders will also appear here for your convenient viewing and management. \n\nStart purchasing by touching the`}
-        headerText="Happy Buying!"
-        fabRouteName="UpsertPurchase"
+        emptyListText={`When you take orders, whether at your offline shop or your online store, they will all be listed here for you to view, track and manage. \n\nTo view your income and profit on your daily sales, tap the view [View daily sales link] above.\n\n Start selling by tapping the`}
+        headerText="All your orders will appear here"
+        fabRouteName="UpsertSales"
         fabIconName="database-minus"
         fabIconType="MaterialCommunityIcons"
       />

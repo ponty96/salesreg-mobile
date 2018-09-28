@@ -10,22 +10,33 @@ interface IProp {
   labelStyle?: object
   redText?: boolean
   greenText?: boolean
+  quantity?: string
 }
 
 const ListItemAtom = (props: IProp): JSX.Element => {
   return (
     <View style={[styles.wrapper, props.listItemStyle]}>
       <Text style={[styles.text, props.labelStyle]}>{props.label}</Text>
-      <Text
-        style={[
-          styles.text,
-          props.rightTextStyle,
-          props.redText ? { color: color.red } : undefined,
-          props.greenText ? { color: color.selling } : undefined
-        ]}
+      <View
+        style={{
+          justifyContent: 'flex-end',
+          alignItems: 'flex-end'
+        }}
       >
-        {props.value}
-      </Text>
+        {props.quantity && (
+          <Text style={{ color: color.textColor }}>{props.quantity}</Text>
+        )}
+        <Text
+          style={[
+            styles.text,
+            props.rightTextStyle,
+            props.redText ? { color: color.red } : undefined,
+            props.greenText ? { color: color.selling } : undefined
+          ]}
+        >
+          {props.value}
+        </Text>
+      </View>
     </View>
   )
 }

@@ -6,54 +6,56 @@ import moment from 'moment'
 interface IProps {
   navigation: any
 }
-export default class SalesOrderDetailsScreen extends Component<IProps> {
+export default class PurchaseDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const sales = navigation.getParam('sales', {})
+    const purchase = navigation.getParam('purchase', {})
     return {
       header: (
         <Header
-          title="Sales Order Details"
+          title="Purchase Details"
           onPressLeftIcon={() => navigation.goBack()}
-          onPressRightIcon={() => navigation.navigate('UpsertSales', { sales })}
+          onPressRightIcon={() =>
+            navigation.navigate('UpsertPurchase', { purchase })
+          }
         />
       )
     }
   }
 
   parseItems = () => {
-    const sales = this.props.navigation.getParam('sales', {})
-    const { items = [] } = sales
+    const purchase = this.props.navigation.getParam('purchase', {})
+    const { items = [] } = purchase
     return [
       {
         itemTitle: 'Date',
-        itemValue: moment(sales.date).calendar()
+        itemValue: moment(purchase.date).calendar()
       },
       {
         itemTitle: 'Status',
-        itemValue: sales.status
+        itemValue: purchase.status
       }
     ].concat(
       items
         .map(item => ({
-          itemTitle: item.product ? item.product.name : item.service.name,
+          itemTitle: item.product.name,
           itemValue: `\u20A6 ${item.unitPrice}`,
           itemQuantity: item.quantity
         }))
         .concat([
           {
             itemTitle: 'Payment Method',
-            itemValue: sales.paymentMethod.toUpperCase()
+            itemValue: purchase.paymentMethod.toUpperCase()
           }
         ])
     )
   }
 
   render() {
-    const sales = this.props.navigation.getParam('sales', {})
+    const purchase = this.props.navigation.getParam('purchase', {})
     return (
       <GenericDetailsComponent
-        title={sales.contact.contactName}
-        totalAmount={parseFloat(sales.amount).toFixed(2)}
+        title={purchase.contact.contactName}
+        totalAmount={parseFloat(purchase.amount).toFixed(2)}
         items={this.parseItems()}
         shouldShowStatus={true}
       />
