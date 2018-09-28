@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { color } from '../Style/Color'
-import { Left, Right } from 'native-base'
+import { Left, Right, Thumbnail } from 'native-base'
 
 export interface DataProps {
   firstTopText: string
@@ -9,6 +9,7 @@ export interface DataProps {
   bottomLeftSecondText?: string
   topRightText: string
   bottomRightText?: string
+  avatar?: string
 }
 interface IProps extends DataProps {
   onPress?: () => void
@@ -51,7 +52,11 @@ const SalesOrderListAtom = (props: IProps) => {
     <TouchableOpacity
       style={[styles.wrapper, props.style]}
       onPress={props.onPress}
+      key="SalesOrderListAtom-2"
     >
+      {props.avatar && (
+        <Thumbnail source={{ uri: props.avatar }} style={styles.avatar} />
+      )}
       <Left style={[styles.leftWrapper, props.leftStyle]}>
         <Text style={[styles.serialNumber, styles.top]}>
           {props.firstTopText}
@@ -81,6 +86,15 @@ const SalesOrderListAtom = (props: IProps) => {
 export default SalesOrderListAtom
 
 const styles = StyleSheet.create({
+  avatar: {
+    height: 55,
+    width: 55,
+    marginTop: 0,
+    paddingTop: 0,
+    borderRadius: 55 / 2,
+    margin: 0,
+    padding: 0
+  },
   wrapper: {
     borderBottomWidth: 1,
     borderBottomColor: color.listBorderColor,

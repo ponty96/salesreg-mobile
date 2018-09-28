@@ -28,10 +28,12 @@ interface IProps {
   variables?: any
   headerText: string
   emptyListText: string
-  fabRouteName: string
-  fabIconName: string
-  fabIconType: string
+  fabRouteName?: string
+  fabIconName?: string
+  fabIconType?: string
   subHeader?: SubHeaderProps
+  shouldRenderFooter?: boolean
+  showFab?: boolean
 }
 
 interface IState {
@@ -43,25 +45,26 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
     business: null
   }
   static defaultProps = {
-    subHeader: null
+    subHeader: null,
+    shouldRenderFooter: false,
+    showFab: true
   }
   componentDidMount() {
     this.updateState()
   }
   updateState = async () => {
     const user = JSON.parse(await Auth.getCurrentUser())
-    console.log('user', user)
     this.setState({
       business: user.company
     })
   }
 
-  renderList = ({ item }: any): JSX.Element[] => {
+  renderList = ({ item }: any): any => {
     const { parseItemData, onItemPress } = this.props
     const parsedItems = parseItemData(item)
-    return parsedItems.map((item: DataProps, index) => (
+    return parsedItems.map((data: DataProps, index) => (
       <SalesOrderListAtom
-        {...item}
+        {...data}
         onPress={() => onItemPress(item)}
         key={index}
       />
@@ -73,6 +76,36 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
       <View style={styles.footerWrapper}>
         <Text style={styles.footerText}>{moment(section.date).calendar()}</Text>
       </View>
+    )
+  }
+
+  renderSectionFooter = (section, sections): JSX.Element => {
+    if (this.props.shouldRenderFooter) {
+      const ordersWithinSectionRange = sections.find(
+        sec => sec.date == section.date
+      )
+      const totalSales = this.getSectionTotalSales(
+        ordersWithinSectionRange.data
+      )
+      return (
+        <View>
+          <View style={styles.footerPallete}>
+            <Text style={styles.footerPalleteText}>TOTAL SALES</Text>
+            <Text style={styles.footerPalleteText}>
+              {`\u20A6 ${totalSales}`}
+            </Text>
+          </View>
+          {/* TODO Calculate profit, considering service */}
+        </View>
+      )
+    } else return <View />
+  }
+
+  getSectionTotalSales = (sections): number => {
+    return sections.reduce(
+      (acc, currentSection) =>
+        parseFloat(acc) + parseFloat(currentSection.amount),
+      '0'
     )
   }
 
@@ -98,17 +131,16 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
         fetchPolicy={fetchPolicy || 'cache-and-network'}
       >
         {({ loading, data }) => {
+          const sections = data[graphqlQueryResultKey]
+            ? this.parseSections(data[graphqlQueryResultKey])
+            : []
           return (
             <View style={styles.container}>
               <AppSpinner visible={loading} />
               {subHeader && (
                 <SubHeaderAtom
                   image={require('../../../assets/Icons/subheader-icons/ordre-blue.png')}
-                  total={
-                    data[graphqlQueryResultKey]
-                      ? data[graphqlQueryResultKey].length
-                      : 0
-                  }
+                  total={sections.length}
                   screen={subHeader.screen}
                   rightLabel={subHeader.rightLabel}
                   onPressArrow={subHeader.onPress}
@@ -125,20 +157,21 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
                     }}
                   />
                 }
-                sections={
-                  data[graphqlQueryResultKey]
-                    ? this.parseSections(data[graphqlQueryResultKey])
-                    : []
-                }
+                sections={sections}
                 keyExtractor={(item, index) => item.id + index}
                 renderSectionHeader={this.renderSectionHeader}
+                renderSectionFooter={({ section }) =>
+                  this.renderSectionFooter(section, sections)
+                }
               />
-              <FabAtom
-                routeName={fabRouteName}
-                navigation={navigation}
-                name={fabIconName}
-                type={fabIconType}
-              />
+              {this.props.showFab && (
+                <FabAtom
+                  routeName={fabRouteName}
+                  navigation={navigation}
+                  name={fabIconName}
+                  type={fabIconType}
+                />
+              )}
             </View>
           )
         }}
@@ -185,5 +218,17 @@ const styles = StyleSheet.create({
   headerRight: {
     marginRight: 32,
     width: 30
+  },
+  footerPallete: {
+    backgroundColor: color.selling,
+    paddingVertical: 16,
+    paddingHorizontal: 32,
+    flexDirection: 'row',
+    justifyContent: 'space-between'
+  },
+  footerPalleteText: {
+    color: '#fff',
+    fontFamily: 'AvenirNext-DemiBold',
+    fontSize: 16
   }
 })
