@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { Alert } from 'react-native'
+import { Alert, Text } from 'react-native'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
 import { ListCompanySalesGQL } from '../graphql/queries/order'
 import moment from 'moment'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -42,8 +43,8 @@ export default class SalesScreen extends React.Component<IProps> {
         onItemPress={item =>
           this.props.navigation.navigate('SalesDetails', { sales: item })
         }
-        emptyListText={`As your make your saless, your product inventory will be instantly updated. All your sales orders will also appear here for your convenient viewing and management. \n\nStart purchasing by touching the`}
-        headerText="Happy Buying!"
+        emptyListText={`When you take orders, whether at your offline shop or your online store, they will all be listed here for you to view, track and manage. \n\nTo view your income and profit on your daily sales, tap the view [View daily sales link] above.\n\n Start selling by tapping the`}
+        headerText="All your orders will appear here"
         fabRouteName="UpsertSales"
         fabIconName="database-minus"
         fabIconType="MaterialCommunityIcons"
