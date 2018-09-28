@@ -29,7 +29,6 @@ export const ListCompanySalesGQL = gql`
   query listCompanySales($companyId: Uuid!) {
     listCompanySales(companyId: $companyId) {
       id
-      date: insertedAt
       contact {
         contactName
       }
@@ -49,6 +48,8 @@ export const ListCompanySalesGQL = gql`
           id
         }
       }
+
+      date: insertedAt
     }
   }
 `

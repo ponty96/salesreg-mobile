@@ -41,6 +41,10 @@ import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 import PurchaseScreen from '../Screen/PurchaseScreen'
 import PurchaseDetailsScreen from '../Screen/PurchaseDetailsScreen'
 
+//Sales Order screens
+import SalesOrderScreen from '../Screen/SalesOrderScreen'
+import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
+
 // Expenses Screens
 import ExpensesScreen from '../Screen/ExpensesScreen'
 import ExpensesDetailsScreen from '../Screen/ExpensesDetailsScreen'
@@ -133,9 +137,6 @@ const businessStack = StackNavigator(
     NewEmployee: {
       screen: EmployeeForm
     },
-    Purchase: {
-      screen: PurchaseScreen
-    },
     Bank: {
       screen: BankScreen
     },
@@ -144,9 +145,6 @@ const businessStack = StackNavigator(
     },
     Receipts: {
       screen: ReceiptsScreen
-    },
-    Expenses: {
-      screen: ExpensesScreen
     },
     Inventory: {
       screen: InventoryScreen
@@ -180,9 +178,21 @@ const businessStack = StackNavigator(
     },
     EditServices: UpsertServiceScreen,
     ShowService: ServiceDetailsScreen,
-    ExpensesDetails: ExpensesDetailsScreen,
-    PurchaseDetails: PurchaseDetailsScreen,
+
+    // Expenses
+    Expenses: ExpensesScreen,
     UpsertExpense: UpsertExpenseScreen,
+    ExpensesDetails: ExpensesDetailsScreen,
+
+    // Purchase
+    Purchase: PurchaseScreen,
+    PurchaseDetails: PurchaseDetailsScreen,
+
+    // Sales Order
+    SalesDetails: SalesOrderDetailsScreen,
+    Sales: SalesOrderScreen,
+
+    // Contact
     Customers: {
       screen: CustomerScreen
     },

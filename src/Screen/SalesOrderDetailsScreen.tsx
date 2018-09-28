@@ -1,237 +1,62 @@
-import * as React from 'react'
-import {
-  ScrollView,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View
-} from 'react-native'
-import { color } from '../Style/Color'
-import ListItemAtom from '../Atom/ListItemAtom'
-import ListItemWithStatusIndicator from '../Components/ListItemWithStatusIndicator'
-import ListItemWithTwoValues from '../Components/ListItemWithTwoValues'
-import ListItemWithImage from '../Components/ListItemWithImage'
-import WarningModal from '../Components/WarningModal'
+import React, { Component } from 'react'
 import Header from '../Components/Header/DetailsScreenHeader'
+import GenericDetailsComponent from '../Components/Generic/Details'
+import moment from 'moment'
 
 interface IProps {
   navigation: any
 }
-
-interface IState {
-  visible: boolean
-}
-
-export default class SalesOrderScreen extends React.Component<IProps, IState> {
-  state = {
-    visible: false
-  }
-
+export default class SalesOrderDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
+    const sales = navigation.getParam('sales', {})
     return {
       header: (
         <Header
-          title="Sales order details"
-          onPressRightIcon={() => alert('Edit pressed.')}
+          title="Sales Order Details"
           onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() => navigation.navigate('UpsertSales', { sales })}
         />
       )
     }
   }
 
-  handleCancelPress = () => {
-    this.setState({ visible: true })
-  }
-
-  handleContinuePress = () => {
-    alert('Continue button pressed.')
-  }
-
-  handleOKPress = () => {
-    alert('OK button pressed.')
-  }
-
-  handleDontCancelPress = () => {
-    this.props.navigation.navigate('SalesOrderStatus')
-    this.setState({ visible: false })
-  }
-
-  handleGotoStatusPress = () => {
-    this.props.navigation.navigate('SalesOrderStatus', { screen: 'service' })
-    this.setState({ visible: false })
-  }
-
-  renderBelowTotal = (): JSX.Element => {
-    return (
-      <View>
-        <ListItemAtom
-          label="Amount paid"
-          value={'\u20A6 ' + '5,350.00'}
-          labelStyle={styles.text}
-          rightTextStyle={[styles.text, { textAlign: 'right' }]}
-          listItemStyle={styles.header}
-          greenText
-        />
-        <ListItemAtom
-          label="Balance"
-          value={'\u20A6 ' + '6,000.00'}
-          labelStyle={styles.text}
-          rightTextStyle={[styles.text, { textAlign: 'right' }]}
-          listItemStyle={styles.header}
-          redText
-        />
-        <ListItemAtom
-          label="Balance due date"
-          value="02-21-2018"
-          labelStyle={styles.text}
-          rightTextStyle={[styles.text, { textAlign: 'right' }]}
-          listItemStyle={styles.header}
-          redText
-        />
-      </View>
+  parseItems = () => {
+    const sales = this.props.navigation.getParam('sales', {})
+    const { items = [] } = sales
+    return [
+      {
+        itemTitle: 'Date',
+        itemValue: moment(sales.date).calendar()
+      },
+      {
+        itemTitle: 'Status',
+        itemValue: sales.status
+      }
+    ].concat(
+      items
+        .map(item => ({
+          itemTitle: item.product ? item.product.name : item.service.name,
+          itemValue: `\u20A6 ${item.unitPrice}`,
+          itemQuantity: item.quantity
+        }))
+        .concat([
+          {
+            itemTitle: 'Payment Method',
+            itemValue: sales.paymentMethod.toUpperCase()
+          }
+        ])
     )
-  }
-
-  renderModal = () => {
-    const { getParam } = this.props.navigation
-
-    if (getParam('screen') === 'service')
-      return (
-        <WarningModal
-          headerText="Cancel order!"
-          bodyText="You cannot cancel a delivered order. Recall this order to be able to cancel."
-          firstButtonText="OK"
-          firstButtonTextColor={color.black}
-          secondButtonText="Go to status"
-          visible={this.state.visible}
-          onBackPress={() => this.setState({ visible: false })}
-          onPressTopButton={() => this.handleContinuePress()}
-          onPressBottomButton={() => this.handleDontCancelPress()}
-          footerText="Close"
-        />
-      )
-    else
-      return (
-        <WarningModal
-          headerText="Warning!"
-          bodyText="You cannot undo this action, do you still want to cancel this order ?"
-          firstButtonText="Continue"
-          firstButtonTextColor={color.red}
-          secondButtonText="Don't cancel"
-          visible={this.state.visible}
-          onBackPress={() => this.setState({ visible: false })}
-          onPressTopButton={this.handleContinuePress}
-          onPressBottomButton={this.handleDontCancelPress}
-          footerText="Close"
-        />
-      )
   }
 
   render() {
-    const DATA: Array<{}> = [
-      {
-        left: 'Item 1',
-        topRight: '4',
-        bottomRight: '1,500.00'
-      },
-      {
-        left: 'Item 2',
-        topRight: '2',
-        bottomRight: '850.00'
-      },
-      {
-        left: 'Item 3',
-        topRight: '36',
-        bottomRight: '9,000.00'
-      }
-    ]
-    const { navigation } = this.props
+    const sales = this.props.navigation.getParam('sales', {})
     return (
-      <ScrollView style={styles.container}>
-        <ListItemAtom
-          label="ORDER ID"
-          value="233232"
-          labelStyle={styles.boldLabel}
-          rightTextStyle={[styles.boldLabel]}
-          listItemStyle={styles.header}
-        />
-        <ListItemWithImage label="Bought from" bottomText="Chito" />
-        <ListItemAtom
-          label="Agent"
-          value="Ademola Dike"
-          labelStyle={styles.text}
-          rightTextStyle={[styles.text, { textAlign: 'right' }]}
-          listItemStyle={styles.header}
-        />
-        <ListItemWithStatusIndicator
-          label="Status"
-          labelStyle={styles.text}
-          value="Pending"
-          rightTextStyle={{ color: color.principal }}
-          statusColor={color.red}
-          listItemStyle={{ paddingLeft: 0 }}
-        />
-        <ListItemWithTwoValues data={DATA} />
-        <ListItemAtom
-          label="TOTAL"
-          value={'\u20A6 ' + '11,350.00'}
-          listItemStyle={styles.totalWrapper}
-        />
-        {navigation.getParam('screen') === 'service'
-          ? undefined
-          : this.renderBelowTotal()}
-        <TouchableOpacity
-          style={styles.buttonWrapper}
-          onPress={this.handleCancelPress}
-        >
-          <Text style={styles.buttonText}>Cancel Order</Text>
-        </TouchableOpacity>
-        {this.renderModal()}
-      </ScrollView>
+      <GenericDetailsComponent
+        title={sales.contact.contactName}
+        totalAmount={parseFloat(sales.amount).toFixed(2)}
+        items={this.parseItems()}
+        shouldShowStatus={true}
+      />
     )
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: color.secondary
-  },
-  text: {
-    fontFamily: 'Source Sans Pro',
-    fontSize: 14,
-    color: color.principal,
-    flex: 1
-  },
-  boldLabel: {
-    color: color.principal,
-    fontFamily: 'Source Sans Pro',
-    fontSize: 16
-  },
-  header: {
-    paddingRight: 32,
-    borderBottomColor: color.listBorderColor,
-    borderBottomWidth: 1
-  },
-  totalWrapper: {
-    borderBottomColor: color.listBorderColor,
-    borderBottomWidth: 1,
-    backgroundColor: color.selling,
-    paddingRight: 32
-  },
-  buttonWrapper: {
-    height: 64,
-    alignItems: 'center',
-    justifyContent: 'center',
-    borderWidth: 1,
-    marginVertical: 8,
-    width: '40%',
-    alignSelf: 'center',
-    borderColor: color.dropdown
-  },
-  buttonText: {
-    color: color.principal,
-    fontSize: 14,
-    fontFamily: 'Source Sans Pro'
-  }
-})
