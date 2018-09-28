@@ -11,7 +11,13 @@ import * as _ from 'lodash'
 import moment from 'moment'
 import { FetchPolicy } from 'apollo-client'
 import { DocumentNode } from 'graphql'
+import SubHeaderAtom from '../../Atom/SubHeaderAtom'
 
+interface SubHeaderProps {
+  screen: string
+  rightLabel: string
+  onPress: () => void
+}
 interface IProps {
   navigation: any
   graphqlQuery: DocumentNode
@@ -25,6 +31,7 @@ interface IProps {
   fabRouteName: string
   fabIconName: string
   fabIconType: string
+  subHeader?: SubHeaderProps
 }
 
 interface IState {
@@ -34,6 +41,9 @@ interface IState {
 export default class GenericListIndex extends React.Component<IProps, IState> {
   state = {
     business: null
+  }
+  static defaultProps = {
+    subHeader: null
   }
   componentDidMount() {
     this.updateState()
@@ -75,7 +85,8 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
       fetchPolicy,
       fabRouteName,
       fabIconName,
-      fabIconType
+      fabIconType,
+      subHeader
     } = this.props
     const { business } = this.state
     return (
@@ -88,6 +99,19 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
           return (
             <View style={styles.container}>
               <AppSpinner visible={loading} />
+              {subHeader && (
+                <SubHeaderAtom
+                  image={require('../../../assets/Icons/subheader-icons/ordre-blue.png')}
+                  total={
+                    data[graphqlQueryResultKey]
+                      ? data[graphqlQueryResultKey].length
+                      : 0
+                  }
+                  screen={subHeader.screen}
+                  rightLabel={subHeader.rightLabel}
+                  onPressArrow={subHeader.onPress}
+                />
+              )}
               <SectionList
                 renderItem={this.renderList}
                 ListEmptyComponent={

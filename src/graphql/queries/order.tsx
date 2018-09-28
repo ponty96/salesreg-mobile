@@ -49,7 +49,7 @@ export const ListCompanySalesGQL = gql`
         }
       }
 
-      date: insertedAt
+      date
     }
   }
 `

@@ -1,10 +1,9 @@
 import * as React from 'react'
-import { Alert, Text } from 'react-native'
+import { Alert } from 'react-native'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
 import { ListCompanySalesGQL } from '../graphql/queries/order'
 import moment from 'moment'
-import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -48,6 +47,11 @@ export default class SalesScreen extends React.Component<IProps> {
         fabRouteName="UpsertSales"
         fabIconName="database-minus"
         fabIconType="MaterialCommunityIcons"
+        subHeader={{
+          screen: 'order',
+          rightLabel: 'View Daily Sales',
+          onPress: () => this.props.navigation.navigate('SalesOrderDailySales')
+        }}
       />
     )
   }
