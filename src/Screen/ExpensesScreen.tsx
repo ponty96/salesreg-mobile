@@ -22,12 +22,14 @@ export default class ExpensesScreen extends React.Component<IProps> {
   }
 
   parseData = (item: any) => {
-    return {
-      firstTopText: item.title,
-      bottomLeftFirstText: item.date, //item.paidTo
-      bottomLeftSecondText: '', //item.date
-      topRightText: `\u20A6 ${item.totalAmount}`
-    }
+    return [
+      {
+        firstTopText: item.title,
+        bottomLeftFirstText: item.date, //item.paidTo
+        bottomLeftSecondText: '', //item.date
+        topRightText: `\u20A6 ${item.totalAmount}`
+      }
+    ]
   }
 
   render() {

@@ -23,13 +23,15 @@ export default class SalesScreen extends React.Component<IProps> {
   }
 
   parseData = (item: any) => {
-    return {
-      firstTopText: item.contact.contactName,
-      bottomLeftFirstText: 'PO003', //item.paidTo
-      bottomLeftSecondText: moment(item.date).calendar(), //item.date
-      topRightText: `\u20A6 ${parseFloat(item.amount).toFixed(2)}`,
-      bottomRightText: item.status
-    }
+    return [
+      {
+        firstTopText: item.contact.contactName,
+        bottomLeftFirstText: 'PO003', //item.paidTo
+        bottomLeftSecondText: moment(item.date).calendar(), //item.date
+        topRightText: `\u20A6 ${parseFloat(item.amount).toFixed(2)}`,
+        bottomRightText: item.status
+      }
+    ]
   }
 
   render() {

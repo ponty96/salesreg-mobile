@@ -23,7 +23,7 @@ interface IProps {
   graphqlQuery: DocumentNode
   fetchPolicy?: FetchPolicy
   graphqlQueryResultKey: string
-  parseItemData: (item: any) => DataProps
+  parseItemData: (item: any) => DataProps[]
   onItemPress: (item: any) => void
   variables?: any
   headerText: string
@@ -56,14 +56,16 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
     })
   }
 
-  renderList = ({ item }: any): JSX.Element => {
+  renderList = ({ item }: any): JSX.Element[] => {
     const { parseItemData, onItemPress } = this.props
-    return (
+    const parsedItems = parseItemData(item)
+    return parsedItems.map((item: DataProps, index) => (
       <SalesOrderListAtom
-        {...parseItemData(item)}
+        {...item}
         onPress={() => onItemPress(item)}
+        key={index}
       />
-    )
+    ))
   }
 
   renderSectionHeader = ({ section }: any): JSX.Element => {
