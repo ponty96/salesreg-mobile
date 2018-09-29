@@ -1,7 +1,5 @@
 import * as React from 'react'
-import { Header, Left, Right, Text } from 'native-base'
-import PickerAtom from './PickerAtom'
-import { StyleSheet, View, Image } from 'react-native'
+import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
 import { color } from '../Style/Color'
 import Icon from './Icon'
 
@@ -17,57 +15,28 @@ interface IProps {
 
 class SubHeaderAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
-    total: '80'
-  }
-
-  renderRightComponent = (screen: string) => {
-    screen = this.props.screen
-    if (screen === 'products and services')
-      return (
-        <View>
-          <Text style={styles.subHeaderFont}>{this.props.rightLabel}</Text>
-          <View style={styles.pickerWrapper}>
-            <PickerAtom
-              list={this.props.list}
-              style={styles.pickerStyle}
-              placeholder="Make a selection"
-            />
-          </View>
-        </View>
-      )
-    else return undefined
+    total: ''
   }
 
   render() {
     return (
-      <Header style={styles.subHeaderHeader}>
-        <Left style={styles.subHeaderLeftRow}>
-          <Image source={this.props.image} style={styles.productIcon} />
-          <Text style={styles.subHeaderPad}>{this.props.total}</Text>
-        </Left>
-
-        <Right style={styles.subHeaderRightRow}>
-          <Text style={styles.subHeaderFont}>{this.props.rightLabel}</Text>
-          {this.props.screen !== 'sales order' ? (
-            <View style={styles.pickerWrapper}>
-              <PickerAtom
-                list={this.props.list}
-                style={styles.pickerStyle}
-                placeholder="Make a selection"
-              />
-            </View>
-          ) : (
-            this.props.children || (
-              <Icon
-                name="chevron-small-right"
-                type="Entypo"
-                style={styles.rightIconLabel}
-                onPress={this.props.onPressArrow}
-              />
-            )
-          )}
-        </Right>
-      </Header>
+      <View style={styles.header}>
+        <View style={styles.row}>
+          <Icon name="md-cart" type="Ionicons" style={styles.cart} />
+          <Text style={styles.text}>{this.props.total}</Text>
+        </View>
+        <TouchableWithoutFeedback onPress={this.props.onPressArrow}>
+          <View style={styles.row}>
+            <Text style={styles.rightLabel}>{this.props.rightLabel}</Text>
+            <Icon
+              name="chevron-small-right"
+              type="Entypo"
+              onPress={this.props.onPressArrow}
+              style={styles.arrowIcon}
+            />
+          </View>
+        </TouchableWithoutFeedback>
+      </View>
     )
   }
 }
@@ -75,58 +44,36 @@ class SubHeaderAtom extends React.Component<IProps, any> {
 export default SubHeaderAtom
 
 const styles = StyleSheet.create({
-  subHeaderHeader: {
-    height: 45,
-    backgroundColor: '#fff'
-  },
-  subHeaderLeftRow: {
+  header: {
     flexDirection: 'row',
-    width: '40%',
-    marginLeft: 16
+    padding: 13,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: color.textBorderBottom,
+    marginBottom: 6
   },
-  subHeaderRightRow: {
-    flexDirection: 'row',
-    width: '60%'
+  text: {
+    fontSize: 14,
+    fontFamily: 'AvenirNext-Regular',
+    marginLeft: 8,
+    color: color.textColor
   },
-  subHeaderPad: {
-    paddingLeft: 8,
-    fontFamily: 'Source Sans Pro',
-    fontSize: 15,
-    color: color.principal,
-    marginTop: 2
+  row: {
+    flexDirection: 'row'
   },
-  subHeaderFont: {
-    fontSize: 15,
-    fontFamily: 'Source Sans Pro',
-    alignSelf: 'center',
-    marginBottom: 2,
-    color: color.principal
+  cart: {
+    fontSize: 20,
+    color: color.textColor,
+    marginRight: 6
   },
-  subHeaderIconColor: {
-    color: color.check,
-    marginLeft: 10
+  rightLabel: {
+    color: color.button,
+    fontSize: 14,
+    fontFamily: 'AvenirNext-Medium'
   },
-  pickerStyle: {
-    width: '100%',
-    height: 35,
-    paddingRight: 10,
-    alignSelf: 'flex-start'
-  },
-  pickerWrapper: {
-    borderWidth: 1,
-    width: 160,
-    borderColor: color.dropdown,
-    alignItems: 'flex-end',
-    marginLeft: 16
-  },
-  productIcon: {
-    height: 20,
-    width: 20
-  },
-  salesOrderSubHeaderRightText: {
-    fontFamily: 'Source Sans Pro'
-  },
-  rightIconLabel: {
+  arrowIcon: {
+    fontSize: 20,
     color: color.button
   }
 })

@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { color } from '../Style/Color'
-import { Left, Right } from 'native-base'
+import { Left, Right, Thumbnail } from 'native-base'
 
 export interface DataProps {
   firstTopText: string
@@ -9,6 +9,7 @@ export interface DataProps {
   bottomLeftSecondText?: string
   topRightText: string
   bottomRightText?: string
+  avatar?: string
 }
 interface IProps extends DataProps {
   onPress?: () => void
@@ -18,40 +19,67 @@ interface IProps extends DataProps {
   rightStyle?: object
 }
 
-const renderStatusIndicator = (bottomRightText: string): JSX.Element => {
-  let colour
+const renderStatusIndicator = (bottomRightText: string): any => {
+  let borderStyle: any = {
+    borderRightWidth: 3
+  }
   switch (bottomRightText) {
-    case 'Pending': {
-      colour = color.red
+    case 'pending': {
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.pendingBorderIndicator
+      }
       break
     }
-    case 'Delivered': {
-      colour = color.selling
+    case 'delivered': {
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.deliveredBorderIndicator
+      }
       break
     }
-    case 'Delivering': {
-      colour = color.active
+    case 'delivering': {
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.inDeliveryBorderIndicator
+      }
       break
     }
-    case 'Delivered | Recalled': {
-      colour = color.yellow
+    case 'delivered | recalled':
+    case 'recalled':
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.deliveredBorderIndicator
+      }
       break
-    }
-    case 'Pending delivery': {
-      colour = color.orange
+    case 'processed': {
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.processedBorderIndicator
+      }
       break
     }
     default:
+      borderStyle = {}
+      break
   }
-  return <View style={[styles.statusIndicator, { backgroundColor: colour }]} />
+  return borderStyle
 }
 
 const SalesOrderListAtom = (props: IProps) => {
   return (
     <TouchableOpacity
-      style={[styles.wrapper, props.style]}
+      style={[
+        styles.wrapper,
+        props.style,
+        renderStatusIndicator(props.bottomRightText)
+      ]}
       onPress={props.onPress}
+      key="SalesOrderListAtom-2"
     >
+      {props.avatar && (
+        <Thumbnail source={{ uri: props.avatar }} style={styles.avatar} />
+      )}
       <Left style={[styles.leftWrapper, props.leftStyle]}>
         <Text style={[styles.serialNumber, styles.top]}>
           {props.firstTopText}
@@ -73,7 +101,6 @@ const SalesOrderListAtom = (props: IProps) => {
           {props.bottomRightText}
         </Text>
       </Right>
-      {renderStatusIndicator(props.bottomRightText)}
     </TouchableOpacity>
   )
 }
@@ -81,6 +108,15 @@ const SalesOrderListAtom = (props: IProps) => {
 export default SalesOrderListAtom
 
 const styles = StyleSheet.create({
+  avatar: {
+    height: 55,
+    width: 55,
+    marginTop: 0,
+    paddingTop: 0,
+    borderRadius: 55 / 2,
+    margin: 0,
+    padding: 0
+  },
   wrapper: {
     borderBottomWidth: 1,
     borderBottomColor: color.listBorderColor,

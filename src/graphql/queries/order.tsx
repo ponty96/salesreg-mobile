@@ -41,7 +41,9 @@ export const ListCompanySalesGQL = gql`
         quantity
         product {
           name
+          featuredImage
           id
+          costPrice
         }
         service {
           name
@@ -49,7 +51,7 @@ export const ListCompanySalesGQL = gql`
         }
       }
 
-      date: insertedAt
+      date
     }
   }
 `
