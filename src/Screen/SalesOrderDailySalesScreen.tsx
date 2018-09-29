@@ -1,6 +1,5 @@
 import * as React from 'react'
-import { Alert } from 'react-native'
-import Header from '../Components/Header/BaseHeader'
+import Header from '../Components/Header/DetailsScreenHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
 import { ListCompanySalesGQL } from '../graphql/queries/order'
 
@@ -16,8 +15,8 @@ export default class SalesOrderDailySalesScreen extends React.Component<
       header: (
         <Header
           title="Daily Sales Record"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
+          onPressLeftIcon={() => navigation.goBack()}
+          hideRightMenu={true}
         />
       )
     }

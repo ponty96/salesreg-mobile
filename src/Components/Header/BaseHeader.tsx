@@ -61,7 +61,7 @@ export default class BaseHeader extends React.PureComponent<IProps> {
             />
           </Left>
           <Title style={styles.title}>{props.title}</Title>
-          {!this.props.hideRightMenu && (
+          {!this.props.hideRightMenu ? (
             <Right>
               <View style={[styles.rightWrapper, this.props.rightIconStyle]}>
                 <Icon
@@ -72,6 +72,8 @@ export default class BaseHeader extends React.PureComponent<IProps> {
                 />
               </View>
             </Right>
+          ) : (
+            <Right />
           )}
         </View>
         {this.props.showSearchBar && (
