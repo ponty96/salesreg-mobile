@@ -19,38 +19,61 @@ interface IProps extends DataProps {
   rightStyle?: object
 }
 
-const renderStatusIndicator = (bottomRightText: string): JSX.Element => {
-  let colour
+const renderStatusIndicator = (bottomRightText: string): any => {
+  let borderStyle: any = {
+    borderRightWidth: 3
+  }
   switch (bottomRightText) {
-    case 'Pending': {
-      colour = color.red
+    case 'pending': {
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.pendingBorderIndicator
+      }
       break
     }
-    case 'Delivered': {
-      colour = color.selling
+    case 'delivered': {
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.deliveredBorderIndicator
+      }
       break
     }
-    case 'Delivering': {
-      colour = color.active
+    case 'delivering': {
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.inDeliveryBorderIndicator
+      }
       break
     }
-    case 'Delivered | Recalled': {
-      colour = color.yellow
+    case 'delivered | recalled':
+    case 'recalled':
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.deliveredBorderIndicator
+      }
       break
-    }
-    case 'Pending delivery': {
-      colour = color.orange
+    case 'processed': {
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color.processedBorderIndicator
+      }
       break
     }
     default:
+      borderStyle = {}
+      break
   }
-  return <View style={[styles.statusIndicator, { backgroundColor: colour }]} />
+  return borderStyle
 }
 
 const SalesOrderListAtom = (props: IProps) => {
   return (
     <TouchableOpacity
-      style={[styles.wrapper, props.style]}
+      style={[
+        styles.wrapper,
+        props.style,
+        renderStatusIndicator(props.bottomRightText)
+      ]}
       onPress={props.onPress}
       key="SalesOrderListAtom-2"
     >
@@ -78,7 +101,6 @@ const SalesOrderListAtom = (props: IProps) => {
           {props.bottomRightText}
         </Text>
       </Right>
-      {renderStatusIndicator(props.bottomRightText)}
     </TouchableOpacity>
   )
 }
