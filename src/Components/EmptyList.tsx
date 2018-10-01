@@ -7,7 +7,7 @@ interface Empty {
   verifyMainList?: string
   style?: any
   headerText?: string
-  body?: JSX.Element
+  body?: any
 }
 
 const emptyList = (prop: { type: Empty }) => {

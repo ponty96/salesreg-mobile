@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
+import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { color } from '../Style/Color'
 import Icon from './Icon'
 
@@ -25,7 +25,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
           <Icon name="md-cart" type="Ionicons" style={styles.cart} />
           <Text style={styles.text}>{this.props.total}</Text>
         </View>
-        <TouchableWithoutFeedback onPress={this.props.onPressArrow}>
+        <TouchableOpacity onPress={this.props.onPressArrow}>
           <View style={styles.row}>
             <Text style={styles.rightLabel}>{this.props.rightLabel}</Text>
             <Icon
@@ -35,7 +35,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
               style={styles.arrowIcon}
             />
           </View>
-        </TouchableWithoutFeedback>
+        </TouchableOpacity>
       </View>
     )
   }

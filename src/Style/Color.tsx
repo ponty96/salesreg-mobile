@@ -32,7 +32,13 @@ export const color = {
   /// order status
   pendingBorderIndicator: basicColors.yellow,
   processedBorderIndicator: basicColors.orange,
-  inDeliveryBorderIndicator: basicColors.active,
+  deliveringBorderIndicator: basicColors.active,
   deliveredBorderIndicator: basicColors.green,
-  recalledBorderIndicator: basicColors.red
+  recalledBorderIndicator: basicColors.red,
+
+  pendingBgColor: '#F3F6D2',
+  processedBgColor: '#FFEFD6',
+  deliveringBgColor: '#D8F4FC',
+  deliveredBgColor: '#CAF1E7',
+  recalledBgColor: '#FFDFDF'
 }

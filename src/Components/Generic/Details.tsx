@@ -31,41 +31,16 @@ const renderStatusIndicator = (bottomRightText: string): any => {
     borderLeftWidth: 4
   }
   switch (bottomRightText) {
-    case 'pending': {
-      borderStyle = {
-        ...borderStyle,
-        borderLeftColor: color.pendingBorderIndicator
-      }
-      break
-    }
-    case 'delivered': {
-      borderStyle = {
-        ...borderStyle,
-        borderLeftColor: color.deliveredBorderIndicator
-      }
-      break
-    }
-    case 'delivering': {
-      borderStyle = {
-        ...borderStyle,
-        borderLeftColor: color.inDeliveryBorderIndicator
-      }
-      break
-    }
-    case 'delivered | recalled':
+    case 'pending':
+    case 'delivered':
+    case 'delivering':
     case 'recalled':
+    case 'processed':
       borderStyle = {
         ...borderStyle,
-        borderLeftColor: color.deliveredBorderIndicator
+        borderLeftColor: color[`${bottomRightText}BorderIndicator`]
       }
       break
-    case 'processed': {
-      borderStyle = {
-        ...borderStyle,
-        borderLeftColor: color.processedBorderIndicator
-      }
-      break
-    }
     default:
       borderStyle = {}
       break

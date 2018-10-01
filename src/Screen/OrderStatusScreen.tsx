@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View, Text } from 'react-native'
-// import SelectStatusAtom from '../Atom/SelectStatusAtom'
+import SelectStatusAtom from '../Atom/SelectStatusAtom'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/DetailsScreenHeader'
 import EmptyList from '../Components/EmptyList'
@@ -8,14 +8,20 @@ import Icon from '../Atom/Icon'
 import ButtonAtom from '../Atom/ButtonAtom'
 import { CheckBox } from 'native-base'
 import Preferences from '../services/preferences'
+import { ORDER_STATUSES } from '../utilities/data/statuses'
+import { capitalize } from '../Functions'
 
 interface IProps {
   navigation: any
   customer: any
 }
 
+interface OrderStatus {
+  label: string
+  value: string
+}
 interface IState {
-  orderStatus: string
+  orderStatus: OrderStatus
   showHint: boolean
   hideHintChecked: boolean
 }
@@ -101,8 +107,12 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     const showHint = props.navigation.getParam('showHint', true)
+    const status = props.navigation.getParam('status', 'pending')
     this.state = {
-      orderStatus: '',
+      orderStatus: {
+        value: status,
+        label: `${capitalize(status)}...`
+      },
       showHint: showHint,
       hideHintChecked: false
     }
@@ -134,21 +144,56 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
       )
     }
     return (
-      <View style={styles.container}>
-        {/* <SelectStatusAtom
-            title="Pending"
-            indicatorColor={{ backgroundColor: color.red }}
-            selected={this.state.pending}
-            onPress={() => this.handleRadioClick('pending')}
-          /> */}
+      <View
+        style={[
+          styles.container,
+          { backgroundColor: color[`${this.state.orderStatus.value}BgColor`] }
+        ]}
+      >
+        <Text style={styles.headerText}>{this.state.orderStatus.label}</Text>
+        {ORDER_STATUSES.map(orderStatus => (
+          <SelectStatusAtom
+            key={orderStatus.value}
+            title={orderStatus.label}
+            indicatorColor={{
+              backgroundColor: `${orderStatus.value}BorderIndicator`
+            }}
+            selected={this.state.orderStatus.value == orderStatus.value}
+            onPress={() =>
+              this.setState({
+                orderStatus: {
+                  ...orderStatus,
+                  label: `${orderStatus.label}...`
+                }
+              })
+            }
+            status={orderStatus.value}
+          />
+        ))}
+        <View style={styles.footer}>
+          <ButtonAtom
+            btnText={`Done`}
+            onPress={this.changeOrderStatus}
+            type="secondary"
+            icon="md-checkmark"
+          />
+        </View>
       </View>
     )
   }
+
+  changeOrderStatus = () => {}
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1
+  },
+  headerText: {
+    fontSize: 22,
+    fontFamily: 'AvenirNext-DemiBold',
+    paddingLeft: 16,
+    paddingVertical: 24
   },
   bottomSpace: {
     marginBottom: 16
@@ -177,7 +222,10 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     paddingHorizontal: 16,
-    paddingVertical: 16
+    paddingVertical: 16,
+    backgroundColor: '#fff',
+    position: 'absolute',
+    bottom: 0
   },
   checkBox: {
     marginRight: 8
