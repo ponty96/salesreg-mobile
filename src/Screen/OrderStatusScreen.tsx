@@ -8,7 +8,7 @@ import Icon from '../Atom/Icon'
 import ButtonAtom from '../Atom/ButtonAtom'
 import { CheckBox } from 'native-base'
 import Preferences from '../services/preferences'
-import { ORDER_STATUSES } from '../utilities/data/statuses'
+import { ORDER_STATUSES, orderStateMachine } from '../utilities/data/statuses'
 import { capitalize } from '../Functions'
 
 interface IProps {
@@ -104,6 +104,7 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
       )
     }
   }
+  orderStateMachine = null
   constructor(props: IProps) {
     super(props)
     const showHint = props.navigation.getParam('showHint', true)
@@ -116,6 +117,8 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
       showHint: showHint,
       hideHintChecked: false
     }
+
+    this.orderStateMachine = orderStateMachine(status)
   }
 
   continueToStatusChange = async () => {
@@ -159,21 +162,14 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
               backgroundColor: `${orderStatus.value}BorderIndicator`
             }}
             selected={this.state.orderStatus.value == orderStatus.value}
-            onPress={() =>
-              this.setState({
-                orderStatus: {
-                  ...orderStatus,
-                  label: `${orderStatus.label}...`
-                }
-              })
-            }
+            onPress={() => this.changeOrderStatus(orderStatus)}
             status={orderStatus.value}
           />
         ))}
         <View style={styles.footer}>
           <ButtonAtom
             btnText={`Done`}
-            onPress={this.changeOrderStatus}
+            onPress={this.submit}
             type="secondary"
             icon="md-checkmark"
           />
@@ -182,7 +178,25 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
     )
   }
 
-  changeOrderStatus = () => {}
+  changeOrderStatus = orderStatus => {
+    console.log('current state', this.orderStateMachine.state)
+    console.log('state machine', this.orderStateMachine.can(orderStatus.value))
+    console.log('order status', orderStatus)
+    console.log('possible transitions', this.orderStateMachine.transitions())
+    if (this.orderStateMachine.can(orderStatus.value)) {
+      this.orderStateMachine[orderStatus.value]()
+      this.setState({
+        orderStatus: {
+          ...orderStatus,
+          label: `${orderStatus.label}...`
+        }
+      })
+    } else {
+      /// state machine cannot transition, show user alert here
+    }
+  }
+
+  submit = () => {}
 }
 
 const styles = StyleSheet.create({
