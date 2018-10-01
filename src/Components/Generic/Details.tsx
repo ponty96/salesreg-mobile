@@ -26,6 +26,28 @@ interface IProps {
   onTrash?: () => void
 }
 
+const renderStatusIndicator = (bottomRightText: string): any => {
+  let borderStyle: any = {
+    borderLeftWidth: 4
+  }
+  switch (bottomRightText) {
+    case 'pending':
+    case 'delivered':
+    case 'delivering':
+    case 'recalled':
+    case 'processed':
+      borderStyle = {
+        ...borderStyle,
+        borderLeftColor: color[`${bottomRightText}BorderIndicator`]
+      }
+      break
+    default:
+      borderStyle = {}
+      break
+  }
+  return borderStyle
+}
+
 export default class GenericDetailsComponent extends Component<IProps> {
   getItems = () => {
     const { items, totalAmount } = this.props
@@ -37,6 +59,49 @@ export default class GenericDetailsComponent extends Component<IProps> {
       }
     ])
   }
+  renderItem = ({ item }: any) =>
+    item.itemTitle == 'Status' ? (
+      this.statusListItem(item)
+    ) : (
+      <ListItemAtom
+        label={item.itemTitle}
+        value={item.itemValue}
+        quantity={item.itemQuantity}
+        labelStyle={item.isTotalAmount ? styles.whiteLabel : styles.listLabel}
+        rightTextStyle={
+          item.isTotalAmount ? styles.whiteLabel : styles.greenText
+        }
+        listItemStyle={
+          item.isTotalAmount ? styles.totalAmountListItem : styles.listWrapper
+        }
+      />
+    )
+
+  statusListItem = item => {
+    return (
+      <TouchableOpacity onPress={this.props.onPressStatus}>
+        <ListItemAtom
+          label={item.itemTitle}
+          value={item.itemValue}
+          quantity={item.itemQuantity}
+          labelStyle={styles.listLabel}
+          rightTextStyle={styles.blueText}
+          listItemStyle={[
+            styles.listWrapper,
+            renderStatusIndicator(item.itemValue)
+          ]}
+          icon={
+            <Icon
+              name="chevron-small-right"
+              type="Entypo"
+              style={{ color: color.button, fontSize: 20, marginTop: 8 }}
+            />
+          }
+        />
+      </TouchableOpacity>
+    )
+  }
+
   render() {
     const { title, totalAmount } = this.props
     return (
@@ -48,27 +113,9 @@ export default class GenericDetailsComponent extends Component<IProps> {
         <FlatList
           data={this.getItems()}
           style={{ height: 310 }}
-          renderItem={({ item }: any) => (
-            <ListItemAtom
-              label={item.itemTitle}
-              value={item.itemValue}
-              quantity={item.itemQuantity}
-              labelStyle={
-                item.isTotalAmount ? styles.whiteLabel : styles.listLabel
-              }
-              rightTextStyle={
-                item.isTotalAmount ? styles.whiteLabel : styles.greenText
-              }
-              listItemStyle={
-                item.isTotalAmount
-                  ? styles.totalAmountListItem
-                  : styles.listWrapper
-              }
-            />
-          )}
+          renderItem={this.renderItem}
           keyExtractor={(item: any) => item.id}
         />
-
         <TouchableOpacity
           style={{
             flex: 1,
@@ -135,5 +182,9 @@ const styles = StyleSheet.create({
   whiteLabel: {
     color: '#fff',
     fontFamily: 'AvenirNext-DemiBold'
+  },
+  blueText: {
+    color: color.button,
+    fontFamily: 'AvenirNext-Regular'
   }
 })

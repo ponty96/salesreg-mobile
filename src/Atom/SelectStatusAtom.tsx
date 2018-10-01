@@ -1,7 +1,29 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-import { Radio } from 'native-base'
+import { Text, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import { color } from '../Style/Color'
+import RadioButton from '../Atom/SingeRadioButton'
+
+const renderStatusIndicator = (bottomRightText: string): any => {
+  let borderStyle: any = {
+    borderRightWidth: 6
+  }
+  switch (bottomRightText) {
+    case 'pending':
+    case 'delivered':
+    case 'delivering':
+    case 'recalled':
+    case 'processed':
+      borderStyle = {
+        ...borderStyle,
+        borderRightColor: color[`${bottomRightText}BorderIndicator`]
+      }
+      break
+    default:
+      borderStyle = {}
+      break
+  }
+  return borderStyle
+}
 
 interface IProps {
   title: string
@@ -9,50 +31,44 @@ interface IProps {
   selected: boolean
   styleWrapper?: object
   onPress?: any
+  status: string
 }
 
-const selectStatusAtom = (props: IProps): JSX.Element => {
+const SelectStatusAtom = (props: IProps): JSX.Element => {
   return (
-    <View style={[styles.wrapper, props.styleWrapper]}>
-      <Radio
-        selected={props.selected}
-        style={styles.radio}
-        onPress={props.onPress}
-        // color={color.inactive}
-        // selectedColor={color.selling}
-      />
-      <Text style={styles.text}>{props.title}</Text>
-      <View style={[styles.indicator, props.indicatorColor]} />
-    </View>
+    <TouchableWithoutFeedback onPress={props.onPress}>
+      <View style={[styles.wrapper, renderStatusIndicator(props.status)]}>
+        <RadioButton
+          animation={'bounceIn'}
+          isSelected={props.selected}
+          innerColor={color.green}
+          outerColor={color.green}
+          size={13}
+        />
+        <Text style={styles.text}>{props.title}</Text>
+      </View>
+    </TouchableWithoutFeedback>
   )
 }
 
-export default selectStatusAtom
+export default SelectStatusAtom
 
 const styles = StyleSheet.create({
   wrapper: {
+    borderBottomWidth: 1,
+    borderBottomColor: color.listBorderColor,
     flexDirection: 'row',
-    borderWidth: 1,
-    borderColor: color.listBorderColor,
-    marginBottom: 8,
-    backgroundColor: color.grey,
+    backgroundColor: color.secondary,
+    marginVertical: 8,
+    paddingVertical: 20,
+    borderRadius: 5,
     marginHorizontal: 16,
-    height: 64,
-    alignItems: 'center'
+    paddingLeft: 20
   },
   text: {
-    marginLeft: 16,
+    marginLeft: 10,
     color: color.principal,
-    fontFamily: 'Source Sans Pro',
-    fontSize: 14
-  },
-  indicator: {
-    width: 5,
-    position: 'absolute',
-    right: 0,
-    height: 64
-  },
-  radio: {
-    marginLeft: 16
+    fontFamily: 'AvenirNext-Medium',
+    fontSize: 16
   }
 })

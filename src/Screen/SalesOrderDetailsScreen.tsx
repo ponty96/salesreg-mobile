@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../Components/Generic/Details'
 import moment from 'moment'
+import Preferences from '../services/preferences'
 
 interface IProps {
   navigation: any
@@ -18,6 +19,17 @@ export default class SalesOrderDetailsScreen extends Component<IProps> {
         />
       )
     }
+  }
+
+  onStatusPress = async () => {
+    const sales = this.props.navigation.getParam('sales', {})
+    const hideHint = await Preferences.getOrderStatusHintPref()
+    this.props.navigation.navigate('OrderStatusChange', {
+      showHint: hideHint ? false : true,
+      contact: sales.contact,
+      type: 'sales',
+      status: sales.status
+    })
   }
 
   parseItems = () => {
@@ -56,6 +68,7 @@ export default class SalesOrderDetailsScreen extends Component<IProps> {
         totalAmount={parseFloat(sales.amount).toFixed(2)}
         items={this.parseItems()}
         shouldShowStatus={true}
+        onPressStatus={this.onStatusPress}
       />
     )
   }

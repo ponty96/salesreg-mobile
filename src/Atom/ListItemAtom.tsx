@@ -11,6 +11,7 @@ interface IProp {
   redText?: boolean
   greenText?: boolean
   quantity?: string
+  icon?: JSX.Element
 }
 
 const ListItemAtom = (props: IProp): JSX.Element => {
@@ -35,6 +36,7 @@ const ListItemAtom = (props: IProp): JSX.Element => {
           ]}
         >
           {props.value}
+          {props.icon}
         </Text>
       </View>
     </View>
@@ -56,6 +58,9 @@ const styles = StyleSheet.create({
   text: {
     fontSize: 14,
     fontFamily: 'SourceSansPro-Semibold',
-    color: color.secondary
+    color: color.secondary,
+    justifyContent: 'center',
+    textAlign: 'right',
+    alignItems: 'center'
   }
 })
