@@ -7,6 +7,8 @@ export const ListCompanyPurchasesGQL = gql`
       date
       contact {
         contactName
+        id
+        gender
       }
       date
       paymentMethod
@@ -31,6 +33,8 @@ export const ListCompanySalesGQL = gql`
       id
       contact {
         contactName
+        id
+        gender
       }
       paymentMethod
       status

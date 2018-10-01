@@ -37,6 +37,9 @@ import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 import UserProfileScreen from '../Screen/UserProfileScreen'
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 
+// Order
+import OrderStatusScreen from '../Screen/OrderStatusScreen'
+
 //Purchase Order screens
 import PurchaseScreen from '../Screen/PurchaseScreen'
 import PurchaseDetailsScreen from '../Screen/PurchaseDetailsScreen'
@@ -184,6 +187,9 @@ const businessStack = StackNavigator(
     Expenses: ExpensesScreen,
     UpsertExpense: UpsertExpenseScreen,
     ExpensesDetails: ExpensesDetailsScreen,
+
+    // Order
+    OrderStatusChange: OrderStatusScreen,
 
     // Purchase
     Purchase: PurchaseScreen,

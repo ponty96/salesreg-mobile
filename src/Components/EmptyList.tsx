@@ -3,10 +3,11 @@ import { StyleSheet, View, Text } from 'react-native'
 import { color } from '../Style/Color'
 
 interface Empty {
-  Text: string
+  Text?: string
   verifyMainList?: string
   style?: any
   headerText?: string
+  body?: JSX.Element
 }
 
 const emptyList = (prop: { type: Empty }) => {
@@ -30,8 +31,12 @@ const emptyList = (prop: { type: Empty }) => {
     )
   } else {
     return (
-      <View style={[styles.view, prop.type.style]}>
-        <Text style={styles.normalText}>{prop.type.Text}</Text>
+      <View style={styles.view}>
+        <Text style={styles.headerText}>{prop.type.headerText}</Text>
+        {prop.type.Text && (
+          <Text style={styles.normalText}>{prop.type.Text}</Text>
+        )}
+        {prop.type.body}
       </View>
     )
   }
