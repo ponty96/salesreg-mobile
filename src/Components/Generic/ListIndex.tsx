@@ -17,6 +17,7 @@ interface SubHeaderProps {
   screen: string
   rightLabel: string
   onPress: () => void
+  iconName?: string
 }
 interface IProps {
   navigation: any
@@ -34,6 +35,7 @@ interface IProps {
   subHeader?: SubHeaderProps
   shouldRenderFooter?: boolean
   showFab?: boolean
+  hideSeparator?: boolean
 }
 
 interface IState {
@@ -47,7 +49,8 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
   static defaultProps = {
     subHeader: null,
     shouldRenderFooter: false,
-    showFab: true
+    showFab: true,
+    hideSeparator: false
   }
   componentDidMount() {
     this.updateState()
@@ -72,7 +75,9 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
   }
 
   renderSectionHeader = ({ section }: any): JSX.Element => {
-    return (
+    return this.props.hideSeparator ? (
+      <View />
+    ) : (
       <View style={styles.footerWrapper}>
         <Text style={styles.footerText}>{moment(section.date).calendar()}</Text>
       </View>
@@ -139,11 +144,11 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
               <AppSpinner visible={loading} />
               {subHeader && (
                 <SubHeaderAtom
-                  image={require('../../../assets/Icons/subheader-icons/ordre-blue.png')}
                   total={sections.length}
                   screen={subHeader.screen}
                   rightLabel={subHeader.rightLabel}
                   onPressArrow={subHeader.onPress}
+                  iconName={subHeader.iconName}
                 />
               )}
               <SectionList

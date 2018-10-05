@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const CompanyContactGQL = gql`
   query companyContacts($companyId: Uuid!, $type: String!) {
@@ -31,6 +31,8 @@ export const CompanyContactGQL = gql`
         accountNumber
         id
       }
+
+      data: updatedAt
     }
   }
-`;
+`

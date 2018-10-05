@@ -11,31 +11,41 @@ interface IProps {
   screen?: string
   onPressArrow?: () => void
   children?: JSX.Element
+  iconName?: string
 }
 
 class SubHeaderAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
-    total: ''
+    total: '',
+    iconName: 'md-cart'
   }
 
   render() {
     return (
       <View style={styles.header}>
         <View style={styles.row}>
-          <Icon name="md-cart" type="Ionicons" style={styles.cart} />
+          <Icon
+            name={this.props.iconName}
+            type="Ionicons"
+            style={styles.cart}
+          />
           <Text style={styles.text}>{this.props.total}</Text>
         </View>
-        <TouchableOpacity onPress={this.props.onPressArrow}>
-          <View style={styles.row}>
-            <Text style={styles.rightLabel}>{this.props.rightLabel}</Text>
-            <Icon
-              name="chevron-small-right"
-              type="Entypo"
-              onPress={this.props.onPressArrow}
-              style={styles.arrowIcon}
-            />
-          </View>
-        </TouchableOpacity>
+        {this.props.rightLabel ? (
+          <TouchableOpacity onPress={this.props.onPressArrow}>
+            <View style={styles.row}>
+              <Text style={styles.rightLabel}>{this.props.rightLabel}</Text>
+              <Icon
+                name="chevron-small-right"
+                type="Entypo"
+                onPress={this.props.onPressArrow}
+                style={styles.arrowIcon}
+              />
+            </View>
+          </TouchableOpacity>
+        ) : (
+          <View />
+        )}
       </View>
     )
   }
