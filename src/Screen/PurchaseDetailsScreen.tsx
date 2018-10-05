@@ -30,7 +30,8 @@ export default class PurchaseDetailsScreen extends Component<IProps> {
       showHint: hideHint ? false : true,
       contact: purchase.contact,
       type: 'purchase',
-      status: purchase.status
+      status: purchase.status,
+      order: purchase
     })
   }
 

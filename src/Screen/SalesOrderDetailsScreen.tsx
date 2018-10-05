@@ -27,8 +27,9 @@ export default class SalesOrderDetailsScreen extends Component<IProps> {
     this.props.navigation.navigate('OrderStatusChange', {
       showHint: hideHint ? false : true,
       contact: sales.contact,
-      type: 'sales',
-      status: sales.status
+      type: 'sale',
+      status: sales.status,
+      order: sales
     })
   }
 

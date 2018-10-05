@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, Alert } from 'react-native'
 import SelectStatusAtom from '../Atom/SelectStatusAtom'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/DetailsScreenHeader'
@@ -8,8 +8,19 @@ import Icon from '../Atom/Icon'
 import ButtonAtom from '../Atom/ButtonAtom'
 import { CheckBox } from 'native-base'
 import Preferences from '../services/preferences'
-import { ORDER_STATUSES, orderStateMachine } from '../utilities/data/statuses'
+import { NavigationActions } from 'react-navigation'
+import {
+  ORDER_STATUSES,
+  orderStateMachine,
+  ORDER_STATUS_WARNING
+} from '../utilities/data/statuses'
 import { capitalize } from '../Functions'
+import {
+  UpdateSaleOrderStatusGQL,
+  UpdatePurchaseOrderStatusGQL
+} from '../graphql/mutations/order'
+import { Mutation } from 'react-apollo'
+import AppSpinner from '../Components/Spinner'
 
 interface IProps {
   navigation: any
@@ -133,6 +144,8 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
   }
 
   render(): JSX.Element {
+    const order = this.props.navigation.getParam('order', {})
+    const orderType = this.props.navigation.getParam('type', {})
     if (this.state.showHint) {
       const contact = this.props.navigation.getParam('contact', {})
       return (
@@ -147,42 +160,59 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
       )
     }
     return (
-      <View
-        style={[
-          styles.container,
-          { backgroundColor: color[`${this.state.orderStatus.value}BgColor`] }
-        ]}
+      <Mutation
+        mutation={
+          orderType == 'sale'
+            ? UpdateSaleOrderStatusGQL
+            : UpdatePurchaseOrderStatusGQL
+        }
+        onCompleted={this.onCompleted}
+        variables={{
+          id: order.id,
+          orderType: orderType,
+          status: this.state.orderStatus.value.toUpperCase()
+        }}
       >
-        <Text style={styles.headerText}>{this.state.orderStatus.label}</Text>
-        {ORDER_STATUSES.map(orderStatus => (
-          <SelectStatusAtom
-            key={orderStatus.value}
-            title={orderStatus.label}
-            indicatorColor={{
-              backgroundColor: `${orderStatus.value}BorderIndicator`
-            }}
-            selected={this.state.orderStatus.value == orderStatus.value}
-            onPress={() => this.changeOrderStatus(orderStatus)}
-            status={orderStatus.value}
-          />
-        ))}
-        <View style={styles.footer}>
-          <ButtonAtom
-            btnText={`Done`}
-            onPress={this.submit}
-            type="secondary"
-            icon="md-checkmark"
-          />
-        </View>
-      </View>
+        {(updateOrderStatus, { loading }) => [
+          <AppSpinner visible={loading} />,
+          <View
+            style={[
+              styles.container,
+              {
+                backgroundColor: color[`${this.state.orderStatus.value}BgColor`]
+              }
+            ]}
+          >
+            <Text style={styles.headerText}>
+              {this.state.orderStatus.label}
+            </Text>
+            {ORDER_STATUSES.map(orderStatus => (
+              <SelectStatusAtom
+                key={orderStatus.value}
+                title={orderStatus.label}
+                indicatorColor={{
+                  backgroundColor: `${orderStatus.value}BorderIndicator`
+                }}
+                selected={this.state.orderStatus.value == orderStatus.value}
+                onPress={() => this.changeOrderStatus(orderStatus)}
+                status={orderStatus.value}
+              />
+            ))}
+            <View style={styles.footer}>
+              <ButtonAtom
+                btnText={`Done`}
+                onPress={() => this.submit(updateOrderStatus)}
+                type="secondary"
+                icon="md-checkmark"
+              />
+            </View>
+          </View>
+        ]}
+      </Mutation>
     )
   }
 
   changeOrderStatus = orderStatus => {
-    console.log('current state', this.orderStateMachine.state)
-    console.log('state machine', this.orderStateMachine.can(orderStatus.value))
-    console.log('order status', orderStatus)
-    console.log('possible transitions', this.orderStateMachine.transitions())
     if (this.orderStateMachine.can(orderStatus.value)) {
       this.orderStateMachine[orderStatus.value]()
       this.setState({
@@ -196,7 +226,83 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
     }
   }
 
-  submit = () => {}
+  submit = cb => {
+    // show alert warning
+    // call callback
+    Alert.alert(
+      'Sure about this?',
+      ORDER_STATUS_WARNING[this.state.orderStatus.value],
+      [
+        {
+          text: 'Yes change status',
+          onPress: () => cb()
+        },
+        {
+          text: 'No, this was a mistake',
+          onPress: () => {
+            const status = this.props.navigation.getParam('status', 'pending')
+            this.setState({
+              orderStatus: {
+                value: status,
+                label: `${capitalize(status)}...`
+              }
+            })
+            console.log('set order state to state passed via navigation params')
+          },
+          style: 'cancel'
+        }
+      ],
+      {
+        cancelable: true
+      }
+    )
+  }
+
+  onCompleted = async res => {
+    const {
+      updateOrderStatus: { success, data }
+    } = res
+    console.log('res order status change', res)
+    if (!success) {
+      Alert.alert(
+        'Something went wrong!',
+        'Apologises but something went wrong, please try again',
+        [],
+        { cancelable: true }
+      )
+    } else {
+      const orderType = this.props.navigation.getParam('type', {})
+      let resetAction: any = null
+      if (orderType == 'purchase') {
+        resetAction = NavigationActions.reset({
+          index: 1,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Purchase' }),
+            NavigationActions.navigate({
+              routeName: 'PurchaseDetails',
+              params: {
+                purchase: data
+              }
+            })
+          ]
+        })
+      } else {
+        resetAction = NavigationActions.reset({
+          index: 1,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Sales' }),
+            NavigationActions.navigate({
+              routeName: 'SalesDetails',
+              params: {
+                sales: data
+              }
+            })
+          ]
+        })
+      }
+      this.props.navigation.dispatch(resetAction)
+    }
+  }
 }
 
 const styles = StyleSheet.create({
