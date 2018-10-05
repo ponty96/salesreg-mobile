@@ -8,6 +8,7 @@ import Icon from '../Atom/Icon'
 import ButtonAtom from '../Atom/ButtonAtom'
 import { CheckBox } from 'native-base'
 import Preferences from '../services/preferences'
+import { NavigationActions } from 'react-navigation'
 import {
   ORDER_STATUSES,
   orderStateMachine,
@@ -271,11 +272,35 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
       )
     } else {
       const orderType = this.props.navigation.getParam('type', {})
+      let resetAction: any = null
       if (orderType == 'purchase') {
-        this.props.navigation.navigate('PurchaseDetails', { purchase: data })
+        resetAction = NavigationActions.reset({
+          index: 1,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Purchase' }),
+            NavigationActions.navigate({
+              routeName: 'PurchaseDetails',
+              params: {
+                purchase: data
+              }
+            })
+          ]
+        })
       } else {
-        this.props.navigation.navigate('SalesDetails', { sales: data })
+        resetAction = NavigationActions.reset({
+          index: 1,
+          actions: [
+            NavigationActions.navigate({ routeName: 'Sales' }),
+            NavigationActions.navigate({
+              routeName: 'SalesDetails',
+              params: {
+                sales: data
+              }
+            })
+          ]
+        })
       }
+      this.props.navigation.dispatch(resetAction)
     }
   }
 }
