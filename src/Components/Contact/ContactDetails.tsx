@@ -1,10 +1,10 @@
-import React, { PureComponent } from 'react';
-import { View } from 'react-native';
-import ContactDetailsCardAtom from '../../Atom/Contact/ContactDetailsCardAtom';
-import { TabNavigator } from 'react-navigation';
-import ContactTabActivities from './ContactTabActivities';
-import ContactTabDetails from './ContactTabDetails';
-import { color } from '../../Style/Color';
+import React, { PureComponent } from 'react'
+import { View } from 'react-native'
+import ContactDetailsCardAtom from '../../Atom/Contact/ContactDetailsCardAtom'
+import { TabNavigator, TabBarTop } from 'react-navigation'
+import ContactTabActivities from './ContactTabActivities'
+import ContactTabDetails from './ContactTabDetails'
+import { color } from '../../Style/Color'
 
 const TAB = TabNavigator(
   {
@@ -16,19 +16,24 @@ const TAB = TabNavigator(
     }
   },
   {
+    tabBarComponent: TabBarTop,
+    tabBarPosition: 'top',
     tabBarOptions: {
-      activeTintColor: color.check,
-      inactiveTintColor: color.secondary,
+      activeTintColor: color.button,
+      inactiveTintColor: color.textColor,
       showLabel: true,
       style: {
-        backgroundColor: color.primary,
-        height: 48,
-        padding: 0,
-        margin: 0
+        backgroundColor: '#fff',
+        height: 'auto',
+        paddingVertical: 8
       },
-      labelStyle: { fontSize: 16, fontFamily: 'SourceSansPro-Semibold' },
+      labelStyle: {
+        fontSize: 16,
+        fontFamily: 'AvenirNext-Demibold',
+        color: color.textColor
+      },
       indicatorStyle: {
-        backgroundColor: color.check,
+        backgroundColor: color.button,
         marginTop: 20
       },
       upperCaseLabel: true
@@ -36,16 +41,16 @@ const TAB = TabNavigator(
     animationEnabled: false,
     swipeEnabled: true
   }
-);
+)
 
 interface IProps {
-  contact: any;
-  contactType: string;
+  contact: any
+  contactType: string
 }
 
 class ContactDetails extends PureComponent<IProps> {
   render() {
-    const contact = this.props.contact;
+    const contact = this.props.contact
     return (
       <View style={{ flex: 1 }}>
         <ContactDetailsCardAtom
@@ -63,8 +68,8 @@ class ContactDetails extends PureComponent<IProps> {
           }}
         />
       </View>
-    );
+    )
   }
 }
 
-export default ContactDetails;
+export default ContactDetails

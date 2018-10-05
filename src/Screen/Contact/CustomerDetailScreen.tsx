@@ -11,7 +11,7 @@ export default class UpsertCustomerScreen extends PureComponent<IProps> {
     return {
       header: (
         <Header
-          title="Customer"
+          title="Customer details"
           onPressLeftIcon={() => navigation.goBack()}
           onPressRightIcon={() =>
             navigation.navigate('UpsertCustomer', { customer })

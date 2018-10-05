@@ -144,7 +144,11 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
               <AppSpinner visible={loading} />
               {subHeader && (
                 <SubHeaderAtom
-                  total={sections.length}
+                  total={
+                    data[graphqlQueryResultKey]
+                      ? data[graphqlQueryResultKey].length
+                      : 0
+                  }
                   screen={subHeader.screen}
                   rightLabel={subHeader.rightLabel}
                   onPressArrow={subHeader.onPress}
