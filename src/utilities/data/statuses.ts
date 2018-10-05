@@ -26,3 +26,11 @@ export const orderStateMachine = (init: string) =>
     ],
     methods: {}
   })
+
+export const ORDER_STATUS_WARNING: any = {
+  pending: 'Change status to pending warning',
+  processed: 'Change status to processed warning',
+  delivering: 'Change status to delivering warning',
+  delivered: 'Change status to delivered warning',
+  recalled: 'Change status to recalled warning'
+}
