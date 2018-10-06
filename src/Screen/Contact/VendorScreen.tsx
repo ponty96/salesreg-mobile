@@ -1,93 +1,65 @@
-import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
-
-import FabAtom from '../../Atom/FabAtom'
-import ContactList from '../../Components/Contact/ContactList'
-import { color } from '../../Style/Color'
-import Header from '../../Components/Header/BaseHeader'
-
+import * as React from 'react'
 import { CompanyContactGQL } from '../../graphql/queries/contact'
-import { Query } from 'react-apollo'
-import AppSpinner from '../../Components/Spinner'
-import Auth from '../../services/auth'
+import Header from '../../Components/Header/BaseHeader'
+import GenericListIndex from '../../Components/Generic/ListIndex'
 
 interface IProps {
   navigation: any
 }
 
-interface IState {
-  companyId: string
-}
-
-class VendorScreen extends Component<IProps, IState> {
+export default class VendorScreen extends React.PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
         <Header
-          title="Vendor"
+          title="Customer"
           onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
         />
       )
     }
   }
 
-  state = {
-    companyId: ''
+  onPress = customer => {
+    this.props.navigation.navigate('CustomerDetails', { customer })
   }
 
-  onPress = vendor => {
-    this.props.navigation.navigate('VendorDetails', { vendor })
-  }
-
-  componentDidMount() {
-    this.updateState()
-  }
-  updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
-    this.setState({
-      companyId: user.company.id
-    })
+  parseData = (item: any) => {
+    return [
+      {
+        firstTopText: item.contactName,
+        bottomLeftFirstText: '', //item.paidTo
+        bottomLeftSecondText: '', //item.date
+        topRightText: `\u20A6 10,000`,
+        bottomRightText: `-100,000`,
+        avatar: item.image
+      }
+    ]
   }
 
   render() {
     return (
-      <Query
-        query={CompanyContactGQL}
-        variables={{ companyId: this.state.companyId, type: 'vendor' }}
-        fetchPolicy="cache-and-network"
-      >
-        {({ loading, data }) => (
-          <View style={styles.centerContainer}>
-            <AppSpinner visible={loading} />
-            <ContactList
-              items={data.companyContacts || []}
-              onPress={this.onPress}
-              screenType="vendor"
-            />
-            <FabAtom
-              routeName={'UpsertVendor'}
-              name={'md-person-add'}
-              navigation={this.props.navigation}
-            />
-          </View>
-        )}
-      </Query>
+      <GenericListIndex
+        navigation={this.props.navigation}
+        variables={{ type: 'vendor' }}
+        graphqlQuery={CompanyContactGQL}
+        graphqlQueryResultKey="companyContacts"
+        parseItemData={this.parseData}
+        onItemPress={this.onPress}
+        emptyListText={``}
+        headerText="All vendors will be listed here"
+        fabRouteName="UpsertVendor"
+        fabIconName="md-person-add"
+        fabIconType="Ionicons"
+        subHeader={{
+          screen: 'order',
+          rightLabel: '',
+          onPress: this.subHeaderPress,
+          iconName: 'md-person'
+        }}
+        hideSeparator={true}
+      />
     )
   }
+
+  subHeaderPress = () => {}
 }
-
-export default VendorScreen
-
-const styles = StyleSheet.create({
-  centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: color.secondary
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
-  }
-})
