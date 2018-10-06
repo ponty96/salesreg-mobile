@@ -12,6 +12,7 @@ import { AuthenticateQueryGQL } from '../graphql/queries/Authenticate'
 import UpsertCustomerScreen from '../Screen/Contact/UpsertCustomerScreen'
 import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
 import CustomerScreen from '../Screen/Contact/CustomerScreen'
+import CustomerPaymentActivity from '../Screen/Contact/CustomerPaymentActivity'
 
 // Vendor Screens
 import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen'
@@ -210,6 +211,7 @@ const businessStack = StackNavigator(
     CustomerDetails: {
       screen: CustomerDetailScreen
     },
+    CustomerPaymentActivity: CustomerPaymentActivity,
     Vendors: {
       screen: VendorScreen
     },

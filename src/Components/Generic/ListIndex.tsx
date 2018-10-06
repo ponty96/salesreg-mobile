@@ -52,7 +52,7 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
     showFab: true,
     hideSeparator: false
   }
-  componentDidMount() {
+  componentWillMount() {
     this.updateState()
   }
   updateState = async () => {

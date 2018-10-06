@@ -111,7 +111,7 @@ export default class ActivitiesList extends React.Component<IProps, any> {
         ListEmptyComponent={
           <EmptyList
             type={{
-              Text: this.props.screenText
+              headerText: this.props.screenText
             }}
           />
         }
