@@ -1,5 +1,5 @@
 const basicColors = {
-  green: '#0F922B',
+  green: '#189D7A',
   black: '#000000',
   yellow: '#F8E71C',
   orange: '#FBA518',
@@ -13,7 +13,7 @@ export const color = {
   primary: '#1F2E50',
   label: '#32559F',
   limit: '#D03302',
-  selling: '#0F922B',
+  selling: '#189D7A',
   menu: '#2C3A5A',
   warning: '#FF9630',
   principal: '#444444',
