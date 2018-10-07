@@ -25,12 +25,11 @@ export const CompanyContactGQL = gql`
       maritalStatus
       currency
       birthday
-      bank {
-        bankName
-        accountName
-        accountNumber
-        id
-      }
+
+      instagram
+      facebook
+      twitter
+      snapchat
 
       data: updatedAt
     }

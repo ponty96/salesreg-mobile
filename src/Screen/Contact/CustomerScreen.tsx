@@ -45,8 +45,8 @@ export default class CustomerScreen extends React.PureComponent<IProps> {
         graphqlQueryResultKey="companyContacts"
         parseItemData={this.parseData}
         onItemPress={this.onPress}
-        emptyListText={``}
-        headerText="All customers will be listed here"
+        emptyListText={`So close that you tell them what they need well before they realize it themselves. \n\nStart doing so by tapping`}
+        headerText="Get closer than ever to your customers"
         fabRouteName="UpsertCustomer"
         fabIconName="md-person-add"
         fabIconType="Ionicons"

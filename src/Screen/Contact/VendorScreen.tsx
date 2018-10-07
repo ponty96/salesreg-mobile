@@ -12,7 +12,7 @@ export default class VendorScreen extends React.PureComponent<IProps> {
     return {
       header: (
         <Header
-          title="Customer"
+          title="Vendor"
           onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
         />
       )

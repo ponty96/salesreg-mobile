@@ -54,30 +54,44 @@ class ContactDetails extends PureComponent<IProps> {
       {
         section: 'Address',
         value: contact.address
-          ? `${contact.address.street1} ${contact.address.city} ${
-              contact.address.state
-            } ${contact.address.country}`
-          : ''
+          ? {
+              street: contact.address.street1,
+              city: contact.address.city,
+              state: contact.address.state,
+              country: contact.address.country
+            }
+          : {}
       },
       { section: 'Currency', value: contact.currency },
       { section: 'Martial Status', value: contact.maritalStatus },
       { section: 'Birthday', value: contact.birthday },
-      { section: 'Likes', value: contact.likes && contact.likes.join(', ') },
+      {
+        section: 'Likes',
+        value: contact.likes ? Object.assign({}, contact.likes) : {}
+      },
       {
         section: 'Dis Likes',
-        value: contact.dislikes && contact.dislikes.join(', ')
+        value: contact.dislikes ? Object.assign({}, contact.dislikes) : {}
       },
       {
-        section: 'Bank Name',
-        value: contact.bank ? contact.bank.bankName : ''
+        section: 'Facebook',
+        value: contact.facebook || '',
+        icon: 'facebook'
       },
       {
-        section: 'Account Name',
-        value: contact.bank ? contact.bank.accountName : ''
+        section: 'Instagram',
+        value: contact.instagram || '',
+        icon: 'instagram'
       },
       {
-        section: 'Account Number',
-        value: contact.bank ? contact.bank.accountNumber : ''
+        section: 'Twitter',
+        value: contact.twitter || '',
+        icon: 'twitter'
+      },
+      {
+        section: 'Snapchat',
+        value: contact.snapchat || '',
+        icon: 'snapchat'
       }
     ]
   }
@@ -146,7 +160,13 @@ class ContactDetails extends PureComponent<IProps> {
         </View>
       )
     } else {
-      return <ProfileListAtom section={item.section} value={item.value} />
+      return (
+        <ProfileListAtom
+          section={item.section}
+          value={item.value}
+          iconName={item.icon}
+        />
+      )
     }
   }
 }
