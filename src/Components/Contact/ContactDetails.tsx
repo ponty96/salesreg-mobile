@@ -62,17 +62,17 @@ class ContactDetails extends PureComponent<IProps> {
             }
           : {}
       },
-      { section: 'Currency', value: contact.currency },
-      { section: 'Martial Status', value: contact.maritalStatus },
-      { section: 'Birthday', value: contact.birthday },
-      {
-        section: 'Likes',
-        value: contact.likes ? Object.assign({}, contact.likes) : {}
-      },
-      {
-        section: 'Dis Likes',
-        value: contact.dislikes ? Object.assign({}, contact.dislikes) : {}
-      },
+      // { section: 'Currency', value: contact.currency },
+      // { section: 'Martial Status', value: contact.maritalStatus },
+      { section: 'Birthday', value: contact.birthday || '' },
+      // {
+      //   section: 'Likes',
+      //   value: contact.likes ? Object.assign({}, contact.likes) : {}
+      // },
+      // {
+      //   section: 'Dis Likes',
+      //   value: contact.dislikes ? Object.assign({}, contact.dislikes) : {}
+      // },
       {
         section: 'Facebook',
         value: contact.facebook || '',
@@ -87,12 +87,12 @@ class ContactDetails extends PureComponent<IProps> {
         section: 'Twitter',
         value: contact.twitter || '',
         icon: 'twitter'
-      },
-      {
-        section: 'Snapchat',
-        value: contact.snapchat || '',
-        icon: 'snapchat'
       }
+      // {
+      //   section: 'Snapchat',
+      //   value: contact.snapchat || '',
+      //   icon: 'snapchat'
+      // }
     ]
   }
 
@@ -142,7 +142,9 @@ class ContactDetails extends PureComponent<IProps> {
         <View style={styles.pictureView}>
           <Image
             source={{
-              uri: contact.image
+              uri:
+                contact.image ||
+                'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
             }}
             style={{ width: '100%', height: 280 }}
           />
