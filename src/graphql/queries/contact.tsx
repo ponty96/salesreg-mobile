@@ -8,6 +8,7 @@ export const CompanyContactGQL = gql`
       email
       image
       type
+      gender
       address {
         state
         street1

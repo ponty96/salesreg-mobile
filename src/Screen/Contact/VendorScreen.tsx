@@ -31,7 +31,9 @@ export default class VendorScreen extends React.PureComponent<IProps> {
         bottomLeftSecondText: '', //item.date
         topRightText: `\u20A6 10,000`,
         bottomRightText: `-100,000`,
-        avatar: item.image
+        avatar:
+          item.image ||
+          'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
       }
     ]
   }

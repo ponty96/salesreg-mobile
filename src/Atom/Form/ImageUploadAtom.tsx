@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Image, Text, TouchableHighlight } from 'react-native'
+import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import Icon from '../Icon'
 import { color } from '../../Style/Color'
 import ImagePicker from 'react-native-image-crop-picker'
@@ -60,13 +60,13 @@ export default class ImageUploadAtom extends React.PureComponent<IProps> {
   render() {
     return (
       <View>
-        <TouchableHighlight
+        <TouchableOpacity
           style={styles.placeholderWrapper}
           onPress={this.handleImageUpload}
         >
           {this.renderMainImagePlaceholder()}
-        </TouchableHighlight>
-        <TouchableHighlight onPress={this.handleImageUpload}>
+        </TouchableOpacity>
+        <TouchableOpacity onPress={this.handleImageUpload}>
           <Text
             style={{
               color: color.button,
@@ -87,7 +87,7 @@ export default class ImageUploadAtom extends React.PureComponent<IProps> {
             />
             <Text>UPLOAD</Text>
           </Text>
-        </TouchableHighlight>
+        </TouchableOpacity>
         {this.renderUnderNeathText()}
       </View>
     )
@@ -116,6 +116,7 @@ export default class ImageUploadAtom extends React.PureComponent<IProps> {
   renderMainImagePlaceholder = (): JSX.Element => {
     let source = {}
     if (this.props.images.length > 0) {
+      source = { uri: this.props.images[0] }
     } else {
       source = require('../../../assets-v1/image-upload.png')
     }

@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     top: 0
   },
   labelText: {
-    fontFamily: 'AvenirNext-Medium',
+    fontFamily: 'AvenirNext-DemiBold',
     padding: 0,
     fontSize: 16,
     color: color.textColor

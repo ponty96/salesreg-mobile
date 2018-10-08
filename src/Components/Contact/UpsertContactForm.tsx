@@ -1,21 +1,11 @@
 import React, { Component } from 'react'
-import InputAtom from '../../Atom/InputAtom'
-import PickerAtom from '../../Atom/PickerAtom'
-// import ButtonAtom from '../../Atom/ButtonAtom';
-import FormImageAtom from '../../Atom/FormImageAtom'
-import { Textarea } from 'native-base'
-import { color } from '../../Style/Color'
-import FormContainerAtom from '../../Atom/FormContainerAtom'
-import SaveCancelButton from '../../Container/SaveCancelButton'
-import FormAddressSection from '../FormAddressSection'
-import FormErrorTextAtom from '../../Atom/FormErrorTextAtom'
-import DatePickerAtom from '../../Atom/DatePickerAtom'
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Spinner'
 import { UpsertContactGQL } from '../../graphql/mutations/contact'
 import Auth from '../../services/auth'
-import { parseFieldErrors, capitalize } from '../../Functions'
-import { Container, Content, Form } from 'native-base'
+import { parseFieldErrors } from '../../Functions'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
+import { Countries } from '../../utilities/data/picker-lists'
 
 interface IProps {
   navigation: any
@@ -24,53 +14,54 @@ interface IProps {
   contactType: string
 }
 
-// interface IState {}
+const genderToPossesivePronoun = gender => {
+  if (gender == 'male') return 'His'
+  return 'Her'
+}
 
-class UpsertContactForm extends Component<IProps/*, IState*/> {
+const genderToPronoun = gender => {
+  if (gender == 'male') return 'he'
+  return 'she'
+}
+
+class UpsertContactForm extends Component<IProps> /*, IState*/ {
   state = {
-    image: 'http://downloadicons.net/sites/default/files/user-icon-2197.png',
     contactName: '',
-    companyName: '',
-    number: '',
-    name: '',
     email: '',
-    fax: '',
-    bankName: '',
-    accountName: '',
-    accountNumber: '',
-    currency: '',
-    birthday: '',
-    maritalStatus: '',
-    marriageAnniversary: '',
-    likes: '',
-    dislikes: '',
+    gender: '',
+    // step 1
+    image: [],
+    // step 3
     street1: '',
     city: '',
     state: '',
     country: '',
-    fieldErrors: null,
+    // step 4
+    number: '',
+    instagram: '',
+    twitter: '',
+    facebook: '',
+    allowsMarketing: 'no',
+    // snapchat: '',
+    // last step
+    birthday: '',
+    // other required fields
     userId: '',
-    companyId: ''
+    companyId: '',
+    fieldErrors: null
   }
 
   componentDidMount() {
     const { contact } = this.props
     let details = {}
     if (contact) {
-      const {
-        address = {},
-        bank = {},
-        likes = [],
-        dislikes = [],
-        phone
-      } = contact
+      const { address = {}, phone } = contact
       details = {
         ...contact,
         ...address,
-        ...bank,
         ...phone,
-        likes: likes.join(', '),
-        dislikes: dislikes.join(', ')
+        gender: contact.gender ? contact.gender.toLowerCase() : '',
+        image: contact.image ? [contact.image] : []
       }
     }
     this.updateDetails(details)
@@ -89,202 +80,210 @@ class UpsertContactForm extends Component<IProps/*, IState*/> {
     this.setState({ [key]: value })
   }
 
-  getImage = (_pic: any) => undefined
-
-  // addFromContacts = () => {
-  //   console.log('Added From Contacts');
-  // };
-
   render() {
-    const { fieldErrors } = this.state
-    const labelSuffix = capitalize(this.props.contactType)
+    const firstName = this.state.contactName
+      ? this.state.contactName.split(' ')[0]
+      : ''
+    const parsedGender = genderToPossesivePronoun(this.state.gender)
+    console.log('contact state', this.state)
     return (
       <Mutation mutation={UpsertContactGQL} onCompleted={this.onCompleted}>
-        {(upsertContact, { loading }) => (
-          <Container>
-          <Content>
-            <Form>
-                <AppSpinner visible={loading} />
-                    <FormImageAtom
-                      form={'contact'}
-                      getValue={this.getImage}
-                      source={this.state.image}
-                    />
-                    <FormContainerAtom headerText={`${labelSuffix} ID`}>
-                      <InputAtom
-                        label={`${labelSuffix} Name`}
-                        getValue={val => this.updateState('contactName', val)}
-                        required
-                        placeholder="e.g Ayomide Aregbede"
-                        defaultValue={this.state.contactName}
-                        error={fieldErrors && fieldErrors['contactName']}
-                      />
-                      <InputAtom
-                        label={'Company Name'}
-                        placeholder="e.g Miji Jones"
-                        defaultValue={this.state.companyName}
-                        getValue={val => this.updateState('companyName', val)}
-                        error={fieldErrors && fieldErrors['companyName']}
-                      />
-                    </FormContainerAtom>
-                    <FormContainerAtom headerText={`${labelSuffix} contact`}>
-                      <InputAtom
-                        getValue={val => this.updateState('number', val)}
-                        keyboardType="numeric"
-                        key="number"
-                        label="Phone"
-                        required
-                        placeholder="e.g 0813443412"
-                        defaultValue={this.state.number}
-                        error={fieldErrors && fieldErrors['number']}
-                      />
-                      <InputAtom
-                        getValue={val => this.updateState('email', val)}
-                        keyboardType="email-address"
-                        key="email"
-                        label="Email Address"
-                        placeholder="e.g somebody@example.com"
-                        defaultValue={this.state.email}
-                        error={fieldErrors && fieldErrors['email']}
-                      />
-                    </FormContainerAtom>
-                    <FormContainerAtom headerText="Banking detail">
-                      <InputAtom
-                        label="Bank name"
-                        getValue={val => this.updateState('bankName', val)}
-                        placeholder="e.g Guarranty Trust Bank"
-                        defaultValue={this.state.bankName}
-                        error={fieldErrors && fieldErrors['bankName']}
-                      />
-                      <InputAtom
-                        label="Account name"
-                        getValue={val => this.updateState('accountName', val)}
-                        placeholder="e.g Ayomide Aregbede"
-                        defaultValue={this.state.accountName}
-                        error={fieldErrors && fieldErrors['accountName']}
-                      />
-                      <InputAtom
-                        label="Account number"
-                        getValue={val => this.updateState('accountNumber', val)}
-                        keyboardType="numeric"
-                        placeholder="03457806203"
-                        defaultValue={this.state.accountNumber}
-                        error={fieldErrors && fieldErrors['accountNumber']}
-                      />
-
-                      <PickerAtom
-                        list={['Naira (\u20A6)', 'US Dollar']}
-                        placeholder={`e.g Naira (\u20A6)`}
-                        selected={this.state.currency}
-                        handleSelection={val =>
-                          this.updateState('currency', val)
-                        }
-                        label="Currency"
-                      />
-                      {fieldErrors &&
-                        fieldErrors['currency'] && (
-                          <FormErrorTextAtom
-                            errorText={fieldErrors['currency']}
-                          />
-                        )}
-                    </FormContainerAtom>
-                    <FormAddressSection
-                      street1={this.state.street1}
-                      city={this.state.city}
-                      state={this.state.state}
-                      country={this.state.country}
-                      fieldErrors={fieldErrors}
-                      getValue={this.updateState}
-                    />
-                    <FormContainerAtom headerText="Other information">
-                      <DatePickerAtom
-                        placeholder=""
-                        date={this.state.birthday}
-                        handleDateSelection={val =>
-                          this.updateState('birthday', val)
-                        }
-                        label="Birthday"
-                        required={true}
-                        error={fieldErrors && fieldErrors['birthday']}
-                      />
-                      <PickerAtom
-                        list={['Single', 'Married']}
-                        placeholder="e.g Single"
-                        selected={this.state.maritalStatus.toUpperCase()}
-                        handleSelection={val =>
-                          this.updateState('maritalStatus', val)
-                        }
-                        label="Marital Status"
-                      />
-                      {fieldErrors &&
-                        fieldErrors['maritalStatus'] && (
-                          <FormErrorTextAtom
-                            errorText={fieldErrors['maritalStatus']}
-                          />
-                        )}
-                    </FormContainerAtom>
-                    <FormContainerAtom headerText="Likes">
-                      <Textarea
-                        rowSpan={5}
-                        placeholder="e.g hublot, movado, red, orange"
-                        placeholderTextColor={color.inactive}
-                        defaultValue={this.state.likes}
-                        onChangeText={val => this.updateState('likes', val)}
-                      />
-                      {fieldErrors &&
-                        fieldErrors['likes'] && (
-                          <FormErrorTextAtom errorText={fieldErrors['likes']} />
-                        )}
-                    </FormContainerAtom>
-                    <FormContainerAtom headerText="Dislikes">
-                      <Textarea
-                        rowSpan={5}
-                        placeholder="e.g hublot, movado, red, orange"
-                        placeholderTextColor={color.inactive}
-                        defaultValue={this.state.likes}
-                        onChangeText={val => this.updateState('dislikes', val)}
-                      />
-                      {fieldErrors &&
-                        fieldErrors['dislikes'] && (
-                          <FormErrorTextAtom
-                            errorText={fieldErrors['dislikes']}
-                          />
-                        )}
-                    </FormContainerAtom>
-            <SaveCancelButton
-              navigation={this.props.navigation}
-              createfunc={() =>
-                upsertContact({ variables: this.parseMutationVariables() })
+        {(upsertContact, { loading }) => [
+          <AppSpinner visible={loading} />,
+          <FormStepperContainer
+            formData={this.state}
+            updateValueChange={this.updateState}
+            handleBackPress={() => this.props.navigation.goBack()}
+            fieldErrors={this.state.fieldErrors}
+            steps={[
+              {
+                stepTitle: `Lets know this ${this.props.contactType}`,
+                formFields: [
+                  {
+                    label: 'Name?',
+                    placeholder: 'John Doe',
+                    name: 'contactName',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'Email?',
+                    placeholder: 'someone@address.com',
+                    name: 'email',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'email-address'
+                    }
+                  },
+                  {
+                    label: 'Gender?',
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'radio',
+                      options: ['male', 'female']
+                    },
+                    name: 'gender'
+                  }
+                ]
+              },
+              {
+                stepTitle: `Add ${firstName}'s photo(1MB \nor less)`,
+                formFields: [
+                  {
+                    label: '',
+                    name: 'image',
+                    type: {
+                      type: 'image-upload'
+                    },
+                    underneathText: ''
+                  }
+                ]
+              },
+              {
+                stepTitle: `${parsedGender} address?`,
+                formFields: [
+                  {
+                    label: 'Street',
+                    placeholder: '123 Street',
+                    name: 'street1',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'City',
+                    placeholder: 'City name',
+                    name: 'city',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'State',
+                    placeholder: 'State name',
+                    name: 'state',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'Country',
+                    placeholder: 'Touch to choose',
+                    type: {
+                      type: 'picker',
+                      options: Countries
+                    },
+                    name: 'country'
+                  }
+                ]
+              },
+              {
+                stepTitle: `How can you contact ${firstName}\n`,
+                stepHint: '(please scroll down)',
+                formFields: [
+                  {
+                    label: `${parsedGender} phone number?`,
+                    type: {
+                      type: 'phone-input'
+                    },
+                    name: 'number',
+                    extraData: {
+                      countryCode: this.state.country
+                    }
+                  },
+                  {
+                    label: 'Facebook',
+                    placeholder: 'e.g @username',
+                    type: {
+                      type: 'input'
+                    },
+                    name: 'facebook'
+                  },
+                  {
+                    label: 'Instagram',
+                    placeholder: 'e.g @username',
+                    type: {
+                      type: 'input'
+                    },
+                    name: 'instagram'
+                  },
+                  {
+                    label: 'Twitter',
+                    placeholder: 'e.g @username',
+                    type: {
+                      type: 'input'
+                    },
+                    name: 'twitter'
+                  },
+                  {
+                    label: `Does ${genderToPronoun(
+                      this.state.gender
+                    )} allow marketing?`,
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'radio',
+                      options: ['yes', 'no']
+                    },
+                    name: 'allowsMarketing'
+                  }
+                ]
+              },
+              {
+                stepTitle: 'Other personal details',
+                formFields: [
+                  {
+                    label: `What's ${firstName}'s birthday?`,
+                    placeholder: 'e.g 06/23/2018',
+                    name: 'birthday',
+                    type: {
+                      type: 'date'
+                    }
+                  }
+                ],
+                buttonTitle: 'Done'
               }
-              positiveButtonName="SAVE"
-            />
-            </Form>
-            </Content>
-            </Container>
-        )}
+            ]}
+            onCompleteSteps={() =>
+              upsertContact({ variables: this.parseMutationVariables() })
+            }
+          />
+        ]}
       </Mutation>
     )
   }
   parseMutationVariables = () => {
+    const { street1, state, city, country, number } = this.state
     const { contact = {} } = this.props
+    let params = { ...this.state }
+    delete params.street1
+    delete params.city
+    delete params.state
+    delete params.country
+    delete params.number
+    delete params.fieldErrors
+    delete params.image
+    delete params['__typename']
+    delete params['id']
+    delete params['data']
     return {
-      ...this.state,
-      contactId: contact ? contact.id : null,
-      bank: this.parseBankDetails(),
-      type: this.props.contactType
+      contact: {
+        ...params,
+        type: this.props.contactType,
+        gender: this.state.gender.toUpperCase(),
+        address: {
+          street1,
+          state,
+          city,
+          country
+        },
+        phone: {
+          number
+        },
+        image: this.state.image[0]
+      },
+      contactId: contact ? contact.id : null
     }
-  }
-
-  parseBankDetails = (): any => {
-    const { accountName, accountNumber, bankName } = this.state
-    if (accountName || accountNumber || bankName) {
-      return {
-        accountName,
-        accountNumber,
-        bankName
-      }
-    }
-    return null
   }
   onCompleted = async res => {
     const {
