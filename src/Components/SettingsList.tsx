@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { StyleSheet, View, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
-import { ListItem, Left, Right, Icon } from 'native-base'
+import { ListItem, Left, Right } from 'native-base'
+import Icon from '../Atom/Icon'
 
 interface Category {
   section: string
@@ -25,7 +26,7 @@ const settingsList = (prop: { categories: Category[]; navigate: any }) => {
           >
             <Left>
               <Text
-                style={[styles.sectionText, { fontFamily: 'SourceSansPro' }]}
+                style={[styles.sectionText, { fontFamily: 'Source Sans Pro' }]}
               >
                 {category.section}
               </Text>

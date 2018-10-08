@@ -1,0 +1,190 @@
+import React from 'react'
+import { RegisterUserMutationGQL } from '../../graphql/mutations/authenticate'
+import { Mutation } from 'react-apollo'
+import { parseFieldErrors } from '../../Functions'
+import AppSpinner from '../../Components/Spinner'
+import FirstStep from '../../Components/SignUp/FirstStep'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
+import { AuthenticateClientGQL } from '../../graphql/client-mutations/authenticate'
+import Auth from '../../services/auth'
+
+interface IProps {
+  navigation: any
+  screenProps: any
+}
+
+interface IState {
+  email: string
+  firstName: string
+  lastName: string
+  gender: string
+  password: string
+  passwordConfirmation: string
+  currentStep: number
+  fieldErrors: any
+}
+
+export default class UserOnboardScreen extends React.PureComponent<
+  IProps,
+  IState
+> {
+  state = {
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+    passwordConfirmation: '',
+    gender: '',
+    currentStep: 0,
+    fieldErrors: null
+  }
+
+  updateState = (key: string, val: any) => {
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
+  }
+
+  render() {
+    return (
+      <Mutation
+        mutation={RegisterUserMutationGQL}
+        onCompleted={this.onCompleted}
+      >
+        {(registerUser, { loading }) => [
+          <AppSpinner visible={loading} />,
+          this.renderComponentAtStep(() =>
+            registerUser({
+              variables: this.parseMutationVariables()
+            })
+          )
+        ]}
+      </Mutation>
+    )
+  }
+
+  navigateToStep = step => {
+    this.setState({ currentStep: step })
+  }
+
+  parseMutationVariables = () => {
+    let params = { ...this.state }
+    delete params.currentStep
+    delete params.fieldErrors
+    params.gender = params.gender.toUpperCase()
+    return { user: params }
+  }
+
+  renderComponentAtStep = (handleReg): JSX.Element => {
+    const { currentStep } = this.state
+    switch (currentStep) {
+      case 0:
+      default:
+        return <FirstStep onCtaPress={() => this.navigateToStep(1)} />
+      case 1:
+        return (
+          <FormStepperContainer
+            formData={this.state}
+            steps={[
+              {
+                stepTitle: 'Tell us a little about yourself',
+                formFields: [
+                  {
+                    label: 'Whats your first name?',
+                    placeholder: 'E.g John',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    name: 'firstName'
+                  },
+                  {
+                    label: 'Whats your last name?',
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    name: 'lastName'
+                  },
+                  {
+                    label: 'Are you male or female?',
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'radio',
+                      options: ['male', 'female']
+                    },
+                    name: 'gender'
+                  }
+                ]
+              },
+              {
+                stepTitle: `Finally, lets make sure no one accesses your account without your permission`,
+                formFields: [
+                  {
+                    label: 'Your email is also important',
+                    placeholder: 'E.g someone@example.com',
+                    type: {
+                      type: 'input',
+                      options: ['male', 'female'],
+                      keyboardType: 'email-address'
+                    },
+                    name: 'email'
+                  },
+                  {
+                    label: 'Enter a password',
+                    placeholder: 'Something only you know',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default',
+                      secureTextEntry: true
+                    },
+                    name: 'password',
+                    underneathText: 'Not less than 8 character long'
+                  },
+                  {
+                    label: 'Re-enter password just to be sure',
+                    placeholder: 'Same thing you entered above',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default',
+                      secureTextEntry: true
+                    },
+                    name: 'passwordConfirmation'
+                  }
+                ],
+                buttonTitle: 'Register'
+              }
+            ]}
+            updateValueChange={this.updateState}
+            onCompleteSteps={() => handleReg()}
+            handleBackPress={() => this.navigateToStep(0)}
+            fieldErrors={this.state.fieldErrors}
+          />
+        )
+    }
+  }
+  onCompleted = async res => {
+    const {
+      registerUser: { success, fieldErrors, data }
+    } = res
+    if (!success) {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
+    } else {
+      /// login here
+      const {
+        screenProps: { client }
+      } = this.props
+      const { accessToken, refreshToken, user } = data
+      await Auth.clearVault()
+      await Auth.setToken(accessToken)
+      await Auth.setRefreshToken(refreshToken)
+      await Auth.setCurrentUser(user)
+      await client.resetStore()
+
+      client.mutate({
+        mutation: AuthenticateClientGQL,
+        variables: { user: user }
+      })
+    }
+  }
+}

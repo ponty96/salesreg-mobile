@@ -1,18 +1,23 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Dimensions } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import { color } from '../Style/Color'
 
 interface Empty {
-  Text: string
+  Text?: string
   verifyMainList?: string
+  style?: any
+  headerText?: string
+  body?: any
 }
+
 const emptyList = (prop: { type: Empty }) => {
   if (prop.type.verifyMainList === 'main') {
     return (
       <View style={styles.view}>
+        <Text style={styles.headerText}>{prop.type.headerText}</Text>
         <Text style={styles.normalText}>
-          Press the <Text style={styles.blueText}>blue</Text> button to add{' '}
-          {prop.type.Text}
+          {prop.type.Text}{' '}
+          <Text style={styles.blueText}>blue round button</Text>
         </Text>
       </View>
     )
@@ -26,8 +31,12 @@ const emptyList = (prop: { type: Empty }) => {
     )
   } else {
     return (
-      <View>
-        <Text>{prop.type.Text}</Text>
+      <View style={styles.view}>
+        <Text style={styles.headerText}>{prop.type.headerText}</Text>
+        {prop.type.Text && (
+          <Text style={styles.normalText}>{prop.type.Text}</Text>
+        )}
+        {prop.type.body}
       </View>
     )
   }
@@ -37,18 +46,24 @@ export default emptyList
 
 const styles = StyleSheet.create({
   view: {
-    width: Dimensions.get('screen').width - 32,
-    backgroundColor: color.grey,
     padding: 16,
     alignSelf: 'center',
-    marginTop: 16,
+    marginVertical: 16,
     borderRadius: 2
   },
+  headerText: {
+    fontSize: 22,
+    fontFamily: 'AvenirNext-DemiBold',
+    marginBottom: 16
+  },
   normalText: {
-    fontSize: 14
+    fontSize: 18,
+    fontFamily: 'AvenirNext-Medium',
+    color: color.principal
   },
   blueText: {
     color: color.button,
-    fontSize: 14
+    fontSize: 18,
+    fontFamily: 'AvenirNext-Medium'
   }
 })

@@ -1,9 +1,8 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet } from 'react-native'
-
-import ProductDetails from '../Components/ProductDetails'
+import { View, StyleSheet, Text, ScrollView } from 'react-native'
+import { Thumbnail, ListItem, Left, Right } from 'native-base'
 import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/DetailsScreenHeader'
 
 interface IProps {
   navigation?: any
@@ -11,16 +10,15 @@ interface IProps {
 
 class ProductDetailsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
+    const product = navigation.getParam('product', {})
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Product"
-          onBackPress={() => navigation.goBack()}
-          showRight
-          rightText="Edit"
-          firstRightIcon="pencil"
-          onPressRightButton={() => navigation.navigate('NewProduct')}
-          firstRightIconType="MaterialCommunityIcons"
+          onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() =>
+            navigation.navigate('NewProduct', { product })
+          }
         />
       )
     }
@@ -28,9 +26,83 @@ class ProductDetailsScreen extends PureComponent<IProps> {
 
   render() {
     // do change the list to the appropriate molecule
+    const product = this.props.navigation.getParam('product', {})
     return (
       <View style={styles.centerContainer}>
-        <ProductDetails navigation={this.props.navigation} />
+        <View style={styles.ababa}>
+          <ScrollView>
+            <View>
+              <View style={styles.aboveAccordionContainerP}>
+                <View style={styles.aboveAccordionPictureViewP}>
+                  <Thumbnail
+                    source={{
+                      uri:
+                        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+                    }}
+                    style={styles.aboveAccordiondpP}
+                  />
+                  <Text style={styles.aboveAccordionPictureText}>
+                    {product.name}
+                  </Text>
+                </View>
+                <View style={styles.aboveAccordionMoneyView}>
+                  <View style={styles.viewMarginRight}>
+                    <Text style={styles.aboveAccordionGreyFont}>
+                      Stock quantity(in units)
+                    </Text>
+                    <Text style={styles.aboveAccordionBoldFont}>
+                      {product.number}
+                    </Text>
+                  </View>
+                  <View style={styles.viewMarginRight}>
+                    <Text style={styles.aboveAccordionGreyFont}>
+                      Total Units Sold
+                    </Text>
+                    <Text style={styles.aboveAccordionBoldFont}>{300}</Text>
+                  </View>
+                </View>
+              </View>
+              <View>
+                <ListItem style={styles.aboveAccordionWhiteList}>
+                  <Left>
+                    <Text style={styles.aboveAccordionBlackTextL}>
+                      Unit cost price
+                    </Text>
+                  </Left>
+                  <Right>
+                    <Text style={styles.aboveAccordionBlackTextR}>
+                      &#8358; {parseFloat(product.costPrice)}
+                    </Text>
+                  </Right>
+                </ListItem>
+                <ListItem style={styles.aboveAccordionWhiteList}>
+                  <Left>
+                    <Text style={styles.aboveAccordionBlackTextL}>
+                      Selling Price
+                    </Text>
+                  </Left>
+                  <Right>
+                    <Text style={styles.aboveAccordionGreenTextR}>
+                      &#8358; {parseFloat(product.sellingPrice)}
+                    </Text>
+                  </Right>
+                </ListItem>
+                <ListItem style={styles.aboveAccordionWhiteList}>
+                  <Left>
+                    <Text style={styles.aboveAccordionBlackTextL}>
+                      Minimum stock quantity
+                    </Text>
+                  </Left>
+                  <Right>
+                    <Text style={styles.aboveAccordionBlackTextR}>
+                      {product.minimumStockQuantity}
+                    </Text>
+                  </Right>
+                </ListItem>
+              </View>
+            </View>
+          </ScrollView>
+        </View>
       </View>
     )
   }
@@ -65,5 +137,107 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     justifyContent: 'flex-start',
     alignItems: 'center'
+  },
+  ababa: {
+    flex: 1,
+    backgroundColor: '#fff'
+  },
+  foota: {
+    height: 80,
+    padding: 16
+  },
+  btnP: {
+    alignSelf: 'flex-end'
+  },
+  txtP: {
+    color: '#fff',
+    fontSize: 16
+  },
+  aboveAccordionContainerP: {
+    flexDirection: 'row',
+    flex: 0,
+    borderTopWidth: 0.5,
+    borderBottomWidth: 0.5,
+    borderTopColor: '#f0f0f0',
+    borderBottomColor: '#c0c0c0'
+  },
+  aboveAccordionPictureViewP: {
+    flexDirection: 'column',
+    width: '50%',
+    height: 170,
+    alignItems: 'flex-start',
+    padding: 16,
+    justifyContent: 'center',
+    backgroundColor: '#fff'
+  },
+  aboveAccordiondpP: {
+    height: 60,
+    width: 60
+  },
+  aboveAccordionBoldFont: {
+    fontFamily: 'SourceSansPro-Semibold',
+    fontSize: 20,
+    textAlign: 'right'
+  },
+  aboveAccordionWhiteList: {
+    height: 65,
+    width: '100%',
+    backgroundColor: '#FFF',
+    paddingLeft: 0,
+    marginLeft: 0
+  },
+  aboveAccordionBlackTextL: {
+    fontSize: 16,
+    color: color.dropdown,
+    paddingLeft: 16,
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionBlackTextR: {
+    fontSize: 16,
+    color: '#000',
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionGreenTextR: {
+    fontSize: 16,
+    color: color.selling,
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionRedTextR: {
+    fontSize: 16,
+    color: 'red',
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionGreyText: {
+    fontSize: 16,
+    color: color.dropdown,
+    paddingLeft: 16,
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionGreyFont: {
+    fontSize: 17,
+    color: '#000',
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionRedText: {
+    fontSize: 16,
+    color: 'red',
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionPictureText: {
+    paddingTop: 10,
+    fontSize: 18,
+    fontWeight: '400',
+    color: color.menu,
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionMoneyView: {
+    width: '50%',
+    height: 170,
+    alignItems: 'flex-end',
+    justifyContent: 'center'
+    // backgroundColor: '#FFF',
+  },
+  viewMarginRight: {
+    marginRight: 16
   }
 })

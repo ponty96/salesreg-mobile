@@ -3,196 +3,132 @@ import { Form, CheckBox } from 'native-base'
 import { View, Text, StyleSheet } from 'react-native'
 import InputAtom from '../Atom/InputAtom'
 import ButtonAtom from '../Atom/ButtonAtom'
-import ImageAtom from '../Atom/ImageAtom'
 import { color } from '../Style/Color'
 import PickerAtom from '../Atom/PickerAtom'
+import FormErrorTextAtom from '../Atom/FormErrorTextAtom'
 
 interface IProps {
   navigation: any
-}
-
-interface IState {
-  image: string
+  onSubmit: () => void
+  onUpdateState?: (key: string, val: any) => void
   businessName: string
-  businessAddress: string
-  email: string
-  amount: string
+  businessAddress?: string
+  businessEmail: string
   products: boolean
   services: boolean
-  description: string
+  currency: string
+  fieldErrors: any
 }
 
+interface IState {}
+
 class SecondSigupForm extends PureComponent<IProps, IState> {
-  state = {
-    image:
-      'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png',
-    businessName: '',
-    businessAddress: '',
-    email: '',
-    amount: '',
-    products: false,
-    services: false,
-    description: ''
-  }
-
-  signup = () => {
-    console.log(
-      this.state.image,
-      this.state.businessName,
-      this.state.businessAddress,
-      this.state.email,
-      this.state.amount
-    )
-  }
-
-  getImage = (pic: any) => {
-    this.setState({ image: pic })
-  }
-
-  getName = (businessName: string) => {
-    this.setState({
-      businessName
-    })
-  }
-
-  getAddress = (businessAddress: string) => {
-    this.setState({
-      businessAddress
-    })
-  }
-
-  getEmail = (email: string) => {
-    this.setState({
-      email
-    })
-  }
-
-  updateAmount = (amount: string) => {
-    this.setState({
-      amount
-    })
-  }
-
-  navigate = (location: string) => {
-    this.props.navigation.navigate(location)
-  }
-
   flipCheckedState = (oldState: boolean, key: string) => {
-    if (key === 'products') this.setState({ products: !oldState })
-    else this.setState({ services: !oldState })
-  }
-
-  getDescription = (description: string) => {
-    this.setState({
-      description
-    })
+    if (key === 'products') this.props.onUpdateState('products', !oldState)
+    else this.props.onUpdateState('services', !oldState)
   }
 
   render() {
+    const { fieldErrors } = this.props
     return (
       <Form style={styles.resetFormContainer}>
-        <ImageAtom
-          getValue={this.getImage}
-          source={this.state.image}
-          placeholder=""
-          shop={true}
-        />
-
         <InputAtom
           label="Business name"
-          getValue={this.getName}
+          defaultValue={this.props.businessName}
+          getValue={name => this.props.onUpdateState('businessName', name)}
           contStyle={styles.marginlessInput}
           required={true}
+          error={fieldErrors && fieldErrors['title']}
+          placeholder="e.g MayAfriq"
         />
 
         <InputAtom
-          label="Business address"
-          getValue={this.getAddress}
-          contStyle={styles.marginlessInput}
-          required={true}
-        />
-
-        <InputAtom
-          label="Email"
-          getValue={this.getEmail}
+          label="Business Email"
+          defaultValue={this.props.businessEmail}
+          getValue={businessEmail =>
+            this.props.onUpdateState('businessEmail', businessEmail)
+          }
           keyboardType="email-address"
           contStyle={styles.marginlessInput}
           required={true}
+          error={fieldErrors && fieldErrors['contactEmail']}
+          placeholder="e.g info@mayafriq.com"
         />
 
-        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
+        <Text style={[styles.whatYouSell, { fontFamily: 'Source Sans Pro' }]}>
           *What are you selling?
         </Text>
         <View style={styles.checkBoxWrapper}>
           <CheckBox
-            checked={this.state.products}
+            checked={this.props.products}
             onPress={() => {
-              this.flipCheckedState(this.state.products, 'products')
+              this.flipCheckedState(this.props.products, 'products')
             }}
             color={color.inactive}
             style={styles.checkBox}
           />
-          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.checkBoxText, { fontFamily: 'Source Sans Pro' }]}>
             Products(Traders, manufacturers, producers)
           </Text>
         </View>
 
         <View style={styles.checkBoxWrapper}>
           <CheckBox
-            checked={this.state.services}
+            checked={this.props.services}
             onPress={() => {
-              this.flipCheckedState(this.state.services, 'services')
+              this.flipCheckedState(this.props.services, 'services')
             }}
             color={color.inactive}
             style={styles.checkBox}
           />
-          <Text style={[styles.checkBoxText, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.checkBoxText, { fontFamily: 'Source Sans Pro' }]}>
             Services(Service providers)
           </Text>
         </View>
-
-        <Text style={[styles.whatYouSell, { fontFamily: 'SourceSansPro' }]}>
-          Transaction currency
-        </Text>
         <View style={styles.pickerWrapper}>
-          <PickerAtom list={['Naira(\u20A6)']} placeholder={`Naira(\u20A6)`} />
+          <PickerAtom
+            list={['Naira(\u20A6)']}
+            placeholder={`e.g Naira(\u20A6)`}
+            label="Transaction Currency"
+            selected={this.props.currency}
+            handleSelection={currency =>
+              this.props.onUpdateState('currency', currency)
+            }
+          />
         </View>
 
-        <InputAtom
-          label="Give a description of your business"
-          getValue={this.getDescription}
-          contStyle={styles.marginlessInput}
-        />
-
+        {fieldErrors &&
+          fieldErrors['currency'] && (
+            <FormErrorTextAtom errorText={fieldErrors['currency']} />
+          )}
         <View style={styles.buttonsWrapper}>
           <ButtonAtom
             btnText="SIGN UP"
-            onPress={this.signup}
+            onPress={this.props.onSubmit}
             btnStyle={styles.longButton}
             textStyle={[
               styles.signUp,
-              { fontFamily: 'SourceSansPro_Semibold' }
+              { fontFamily: 'SourceSansPro-Semibold' }
             ]}
           />
-          <Text style={[styles.termsText, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.termsText, { fontFamily: 'Source Sans Pro' }]}>
             Signing up means you agree with our{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
+            <Text style={[styles.redTermText, { fontFamily: 'Source Sans Pro' }]}>
               Terms
             </Text>{' '}
             &{' '}
-            <Text style={[styles.redTermText, { fontFamily: 'SourceSansPro' }]}>
+            <Text style={[styles.redTermText, { fontFamily: 'Source Sans Pro' }]}>
               Privacy policy
             </Text>
           </Text>
-          <Text style={[styles.haveAccount, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.haveAccount, { fontFamily: 'Source Sans Pro' }]}>
             Or you have an account?
           </Text>
           <ButtonAtom
             btnText="LOGIN"
             transparent={true}
-            funcValue={'Login'}
-            onPress={this.navigate}
-            textStyle={[styles.login, { fontFamily: 'SourceSansPro_Semibold' }]}
+            onPress={() => this.props.navigation.navigate('Login')}
+            textStyle={[styles.login, { fontFamily: 'SourceSansPro-Semibold' }]}
             btnStyle={styles.loginButton}
           />
         </View>
@@ -234,10 +170,8 @@ const styles = StyleSheet.create({
     color: color.principal
   },
   pickerWrapper: {
-    borderBottomColor: color.inactive,
-    borderBottomWidth: 1,
+    marginTop: 28,
     width: '60%',
-    opacity: 0.5,
     marginBottom: 16
   },
   placeholderColor: {

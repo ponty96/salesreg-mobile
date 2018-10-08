@@ -1,77 +1,97 @@
-import * as React from 'react';
-import { Button } from 'native-base';
-import { Text, StyleSheet } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { Button } from 'native-base'
+import { Text, StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
+import Icon from '../Atom/Icon'
 
 interface IProps {
-  btnText?: string;
-  transparent?: boolean;
-  disabled?: boolean;
-  onPress?: any;
-  funcValue?: string;
-  btnStyle?: any;
-  textStyle?: any;
+  btnText?: string
+  transparent?: boolean
+  disabled?: boolean
+  onPress?: () => void
+  funcValue?: string
+  btnStyle?: any
+  textStyle?: any
+  type?: 'primary' | 'secondary'
+  hideIcon?: boolean
+  icon?: any
 }
 
 class ButtonAtom extends React.Component<IProps, any> {
   static defaultProps: IProps = {
     transparent: false,
-    disabled: false
-  };
+    disabled: false,
+    hideIcon: false
+  }
 
   render() {
     return (
       <Button
-        transparent={this.props.transparent ? this.props.transparent : false}
+        transparent={this.props.transparent}
         disabled={this.props.disabled}
         light={this.props.disabled}
         style={[
-          this.props.transparent ? styles.buttonTransparent : styles.buttonRed,
-          this.props.disabled && styles.buttonDisabled,
+          styles.button,
+          styles[`${this.props.type}Btn`],
+          this.props.transparent && styles.transparent,
           this.props.btnStyle
         ]}
         onPress={this.props.onPress}
       >
         <Text
           style={[
-            { fontFamily: 'SourceSansPro' },
-            this.props.transparent ? styles.textRed : styles.textTransparent,
+            styles.text,
+            styles[`${this.props.type}Text`],
             this.props.textStyle
           ]}
         >
           {this.props.btnText}
         </Text>
+        {!this.props.hideIcon && (
+          <Icon
+            name={this.props.icon || 'ios-arrow-forward'}
+            type="Ionicons"
+            style={[styles[`${this.props.type}Text`], styles.icon]}
+          />
+        )}
       </Button>
-    );
+    )
   }
 }
 
-export default ButtonAtom;
+export default ButtonAtom
 
 const styles = StyleSheet.create({
-  buttonTransparent: {
-    backgroundColor: color.secondary,
-    paddingHorizontal: 32,
-    alignSelf: 'center',
-    marginVertical: 8
+  button: {
+    height: 50,
+    borderRadius: 5,
+    padding: 16,
+    paddingHorizontal: 24,
+    justifyContent: 'center',
+    alignItems: 'center',
+    alignSelf: 'auto'
   },
-  buttonRed: {
-    backgroundColor: color.button,
-    paddingHorizontal: 32,
-    alignSelf: 'center',
-    marginVertical: 8,
-    borderRadius: 3
+  transparent: {
+    backgroundColor: 'transparent'
   },
-  buttonDisabled: {
-    backgroundColor: color.inactive,
-    paddingHorizontal: 32,
-    alignSelf: 'center',
-    marginVertical: 8
+  primaryBtn: {
+    backgroundColor: '#fff'
   },
-  textRed: {
-    color: color.primary
+  secondaryBtn: {
+    backgroundColor: color.button
   },
-  textTransparent: {
-    color: color.secondary
+  text: {
+    fontFamily: 'AvenirNext-DemiBold',
+    fontSize: 16,
+    marginRight: 10
+  },
+  primaryText: {
+    color: color.button
+  },
+  secondaryText: {
+    color: '#fff'
+  },
+  icon: {
+    fontSize: 28
   }
-});
+})

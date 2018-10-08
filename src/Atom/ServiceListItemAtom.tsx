@@ -25,12 +25,12 @@ class ServicesListItemAtom extends React.Component<IProps, {}> {
         style={[styles.listContainer, this.props.contStyle]}
       >
         <View style={styles.listTextCont}>
-          <Text style={[styles.nameText, { fontFamily: 'SourceSansPro' }]}>
+          <Text style={[styles.nameText, { fontFamily: 'Source Sans Pro' }]}>
             {this.props.name}
           </Text>
           <Text
             style={[
-              { fontFamily: 'SourceSansPro' },
+              { fontFamily: 'Source Sans Pro' },
               styles.amountText,
               this.props.textStyle
             ]}

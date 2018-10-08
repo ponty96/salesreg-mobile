@@ -1,44 +1,44 @@
-import React, { PureComponent } from 'react';
-import SettingsList from '../Components/SettingsList';
-import CustomHeader from '../Components/CustomHeader';
-import gql from 'graphql-tag';
-import Auth from '../services/auth';
+import React, { PureComponent } from 'react'
+import SettingsList from '../Components/SettingsList'
+import Header from '../Components/Header/BaseHeader'
+import gql from 'graphql-tag'
+import Auth from '../services/auth'
 
 interface IProps {
-  navigation: any;
-  screenProps: any;
+  navigation: any
+  screenProps: any
 }
 
 const LogoutClientGQL = gql`
   mutation logout {
     logout @client
   }
-`;
+`
 
 class ProfileSettingsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <CustomHeader
+        <Header
           title="Profile settings"
-          onBackPress={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.goBack()}
         />
       )
-    };
-  };
+    }
+  }
   handleLogOut = async () => {
     const {
       screenProps: { client }
-    } = this.props;
-    await Auth.clearVault();
-    await client.resetStore();
-    client.mutate({ mutation: LogoutClientGQL });
-    this.props.navigation.navigate('Login');
-  };
+    } = this.props
+    await Auth.clearVault()
+    await client.resetStore()
+    client.mutate({ mutation: LogoutClientGQL })
+    this.props.navigation.navigate('Login')
+  }
   render() {
     const {
       navigation: { navigate }
-    } = this.props;
+    } = this.props
     return (
       <SettingsList
         navigate={navigate}
@@ -61,7 +61,7 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
           }
         ]}
       />
-    );
+    )
   }
 }
-export default ProfileSettingsScreen;
+export default ProfileSettingsScreen

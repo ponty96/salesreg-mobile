@@ -1,8 +1,9 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const LoginUserMutationGQL = gql`
   mutation loginUser($email: String!, $password: String!) {
     loginUser(email: $email, password: $password) {
+      success
       fieldErrors {
         key
         message
@@ -26,6 +27,7 @@ export const LoginUserMutationGQL = gql`
               contactEmail
               about
               category
+              currency
               branches {
                 id
                 type
@@ -44,4 +46,84 @@ export const LoginUserMutationGQL = gql`
       }
     }
   }
-`;
+`
+export const RegisterUserMutationGQL = gql`
+  mutation registerUser($user: UserInput!) {
+    registerUser(user: $user) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Authorization {
+          message
+          accessToken
+          refreshToken
+          user {
+            id
+            email
+            firstName
+            lastName
+            dateOfBirth
+            gender
+            profilePicture
+            company {
+              id
+              title
+              contactEmail
+              about
+              category
+              currency
+              branches {
+                id
+                type
+                location {
+                  id
+                  city
+                  country
+                  state
+                  street1
+                  type
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+`
+export const AddUserCompanyMutationGQL = gql`
+  mutation addUserCompany($company: CompanyInput!, $userId: Uuid!) {
+    addUserCompany(company: $company, user: $userId) {
+      fieldErrors {
+        key
+        message
+      }
+      success
+      data {
+        ... on Company {
+          id
+          title
+          contactEmail
+          about
+          category
+          currency
+          branches {
+            id
+            type
+            location {
+              id
+              city
+              country
+              state
+              street1
+              type
+            }
+          }
+        }
+      }
+    }
+  }
+`
