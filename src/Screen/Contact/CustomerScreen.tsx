@@ -1,25 +1,13 @@
-import React, { Component } from 'react'
-import { View, StyleSheet } from 'react-native'
-
-import FabAtom from '../../Atom/FabAtom'
-import ContactList from '../../Components/Contact/ContactList'
-import { color } from '../../Style/Color'
-import Header from '../../Components/Header/BaseHeader'
-
+import * as React from 'react'
 import { CompanyContactGQL } from '../../graphql/queries/contact'
-import { Query } from 'react-apollo'
-import AppSpinner from '../../Components/Spinner'
-import Auth from '../../services/auth'
+import Header from '../../Components/Header/BaseHeader'
+import GenericListIndex from '../../Components/Generic/ListIndex'
 
 interface IProps {
   navigation: any
 }
 
-interface IState {
-  companyId: string
-}
-
-class CustomerScreen extends Component<IProps, IState> {
+export default class CustomerScreen extends React.PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -31,63 +19,49 @@ class CustomerScreen extends Component<IProps, IState> {
     }
   }
 
-  state = {
-    companyId: ''
-  }
-
   onPress = customer => {
     this.props.navigation.navigate('CustomerDetails', { customer })
   }
 
-  componentDidMount() {
-    this.updateState()
-  }
-  updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
-    this.setState({
-      companyId: user.company.id
-    })
+  parseData = (item: any) => {
+    return [
+      {
+        firstTopText: item.contactName,
+        bottomLeftFirstText: '', //item.paidTo
+        bottomLeftSecondText: '', //item.date
+        topRightText: `\u20A6 10,000`,
+        bottomRightText: `-100,000`,
+        avatar:
+          item.image ||
+          'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+      }
+    ]
   }
 
   render() {
     return (
-      <Query
-        query={CompanyContactGQL}
-        variables={{ companyId: this.state.companyId, type: 'customer' }}
-        fetchPolicy="cache-and-network"
-      >
-        {({ loading, data }) => (
-          <View style={styles.centerContainer}>
-            <AppSpinner visible={loading} />
-            <ContactList
-              items={data.companyContacts || []}
-              onPress={this.onPress}
-              screenType="customer"
-            />
-            <FabAtom
-              routeName={'UpsertCustomer'}
-              name={'md-person-add'}
-              navigation={this.props.navigation}
-            />
-          </View>
-        )}
-      </Query>
+      <GenericListIndex
+        navigation={this.props.navigation}
+        variables={{ type: 'customer' }}
+        graphqlQuery={CompanyContactGQL}
+        graphqlQueryResultKey="companyContacts"
+        parseItemData={this.parseData}
+        onItemPress={this.onPress}
+        emptyListText={`So close that you tell them what they need well before they realize it themselves. \n\nStart doing so by tapping`}
+        headerText="Get closer than ever to your customers"
+        fabRouteName="UpsertCustomer"
+        fabIconName="md-person-add"
+        fabIconType="Ionicons"
+        subHeader={{
+          screen: 'order',
+          rightLabel: '',
+          onPress: this.subHeaderPress,
+          iconName: 'md-person'
+        }}
+        hideSeparator={true}
+      />
     )
   }
+
+  subHeaderPress = () => {}
 }
-
-export default CustomerScreen
-
-const styles = StyleSheet.create({
-  centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: color.secondary
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
-  }
-})

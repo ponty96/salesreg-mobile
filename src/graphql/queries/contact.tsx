@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const CompanyContactGQL = gql`
   query companyContacts($companyId: Uuid!, $type: String!) {
@@ -8,6 +8,7 @@ export const CompanyContactGQL = gql`
       email
       image
       type
+      gender
       address {
         state
         street1
@@ -25,12 +26,13 @@ export const CompanyContactGQL = gql`
       maritalStatus
       currency
       birthday
-      bank {
-        bankName
-        accountName
-        accountNumber
-        id
-      }
+
+      instagram
+      facebook
+      twitter
+      snapchat
+
+      data: updatedAt
     }
   }
-`;
+`

@@ -30,6 +30,7 @@
 import React from 'react'
 import { Text, StyleSheet, View } from 'react-native'
 import { Container, Content, Form } from 'native-base'
+import { color } from '../../Style/Color'
 import ButtonAtom from '../../Atom/ButtonAtom'
 import FormHeader from '../../Components/Header/FormHeader'
 import InputAtom from '../../Atom/InputAtom'
@@ -67,6 +68,7 @@ interface FormStep {
   stepTitle: string
   formFields: FormField[]
   buttonTitle?: string
+  stepHint?: string
 }
 interface IProps {
   steps: FormStep[]
@@ -102,6 +104,9 @@ export default class FormStepperContainer extends React.PureComponent<
         <Content contentContainerStyle={styles.container}>
           <Text style={styles.headerText}>
             {this.props.steps[this.state.currentStep - 1]['stepTitle']}
+            <Text style={styles.stepHint}>
+              {this.props.steps[this.state.currentStep - 1]['stepHint']}
+            </Text>
           </Text>
           <Form>{this.renderCurrentStepFormFields()}</Form>
         </Content>
@@ -261,6 +266,11 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-DemiBold',
     marginBottom: 16,
     marginTop: 16
+  },
+  stepHint: {
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: 16,
+    color: color.textColor
   },
   footer: {
     width: '100%',
