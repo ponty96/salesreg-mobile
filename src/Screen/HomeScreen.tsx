@@ -1,51 +1,61 @@
-import * as React from 'react'
-import { View, StyleSheet, Text, Dimensions } from 'react-native'
-import { color } from '../Style/Color'
-import Header from '../Components/Header/BaseHeader'
-import Auth from '../services/auth'
+import * as React from 'react';
+import {
+  View,
+  StyleSheet,
+  TouchableOpacity,
+  Text,
+  Dimensions
+} from 'react-native';
+import { color } from '../Style/Color';
+import CustomHeader from '../Components/CustomHeader';
+import Auth from '../services/auth';
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  username: string
+  username: string;
 }
 
 export default class HomeScreen extends React.Component<IProps, IState> {
   state = {
     username: ''
-  }
+  };
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
-        <Header
+        <CustomHeader
           title="Home"
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
+          showMenu
+          onMenuPress={() => navigation.navigate('DrawerToggle')}
         />
       )
-    }
-  }
+    };
+  };
 
   componentWillMount() {
-    this.updateUserName()
+    this.updateUserName();
   }
 
   updateUserName = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = JSON.parse(await Auth.getCurrentUser());
     this.setState({
       username: user.firstName
-    })
-  }
+    });
+  };
 
   render() {
     return (
-      <View style={styles.container}>
+      <TouchableOpacity
+        style={styles.container}
+        onPress={() => this.props.navigation.navigate('ViewBusiness')}
+      >
         <View style={styles.homeBackground}>
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
-      </View>
-    )
+      </TouchableOpacity>
+    );
   }
 }
 
@@ -65,6 +75,6 @@ const styles = StyleSheet.create({
     fontSize: 30,
     padding: 20,
     textAlign: 'center',
-    fontFamily: 'SourceSansPro-Semibold'
+    fontFamily: 'SourceSansPro_Semibold'
   }
-})
+});

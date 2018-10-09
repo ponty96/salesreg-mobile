@@ -1,135 +1,49 @@
-import React, { PureComponent } from 'react'
+import React, { PureComponent } from 'react';
 import {
   ScrollView,
   View,
   Text,
   TouchableOpacity,
   StyleSheet,
-  Dimensions
-} from 'react-native'
-import { SafeAreaView } from 'react-navigation'
-import Icon from '../Atom/Icon'
-import { color } from '../Style/Color'
-import Auth from '../services/auth'
+  Dimensions,
+  Alert
+} from 'react-native';
+import { SafeAreaView } from 'react-navigation';
+import { Icon } from 'native-base';
+import { color } from '../Style/Color';
+import SideBarItemAtom from '../Atom/SideBarItemAtom';
+import Auth from '../services/auth';
 
 interface IProps {
-  navigation: any
-  onItemPress: any
-  items: any
+  navigation: any;
 }
 
 interface IState {
-  businessName: string
-  activeRoute: string
-}
-
-interface Category {
-  title: string
-  routeName: string
-}
-
-const sideBarItemStyles = StyleSheet.create({
-  listHeader: {
-    backgroundColor: 'transparent',
-    marginTop: 16,
-    marginBottom: 5
-  },
-  title: {
-    marginLeft: 25,
-    color: '#000',
-    marginVertical: 2,
-    fontSize: 18
-  },
-  categoryWrapper: {
-    borderRadius: 5,
-    marginHorizontal: 5,
-    paddingVertical: 6
-  },
-  category: {
-    marginLeft: 22,
-    backgroundColor: 'transparent',
-    color: color.textColor,
-    marginVertical: 6,
-    fontSize: 16,
-    fontFamily: 'AvenirNext-Medium'
-  },
-  activeCategoryWrapper: {
-    backgroundColor: color.button
-  },
-  activeCategory: {
-    color: '#fff'
-  }
-})
-
-const SidebarItem = (prop: {
-  title: string
-  categories: Category[]
-  navigate: any
-  activeRoute?: string | null
-}) => {
-  return (
-    <View>
-      <View style={sideBarItemStyles.listHeader}>
-        <Text
-          style={[
-            sideBarItemStyles.title,
-            { fontFamily: 'AvenirNext-DemiBold' }
-          ]}
-        >
-          {prop.title}
-        </Text>
-      </View>
-      {prop.categories.map((category: Category, key: number) => {
-        return (
-          <TouchableOpacity
-            style={[
-              sideBarItemStyles.categoryWrapper,
-              prop.activeRoute == category.routeName &&
-                sideBarItemStyles.activeCategoryWrapper
-            ]}
-            key={key}
-            onPress={() => prop.navigate(category.routeName)}
-          >
-            <Text
-              style={[
-                sideBarItemStyles.category,
-                prop.activeRoute == category.routeName &&
-                  sideBarItemStyles.activeCategory
-              ]}
-            >
-              {category.title}
-            </Text>
-          </TouchableOpacity>
-        )
-      })}
-    </View>
-  )
+  businessName: string;
 }
 
 export default class SideBar extends PureComponent<IProps, IState> {
-  handleNavigation = (location: string) => {
-    this.setState({ activeRoute: location })
-    this.props.navigation.navigate(location)
-  }
+  handleNavigation = (location: string, data: any = undefined) => {
+    this.props.navigation.navigate(location, { data });
+  };
   state = {
-    businessName: '',
-    activeRoute: ''
-  }
+    businessName: ''
+  };
 
   componentWillMount() {
-    this.updateBusinessName()
+    this.updateBusinessName();
   }
 
   updateBusinessName = async () => {
-    const user = await Auth.getCurrentUser()
+    const user = await Auth.getCurrentUser();
     this.setState({
       businessName: JSON.parse(user).company.title
-    })
-  }
+    });
+  };
   render() {
     const {
       navigation: { navigate }
-    } = this.props
+    } = this.props;
     return (
       <SafeAreaView
         style={styles.sidebarContainer}
@@ -141,15 +55,14 @@ export default class SideBar extends PureComponent<IProps, IState> {
               style={styles.header}
               onPress={() => navigate('DrawerToggle')}
             >
-              <Icon name="md-close" type="Ionicons" style={styles.cross} />
-              {/* <Text style={[styles.texts, { fontFamily: 'Source Sans Pro' }]}>
+              <Icon name="cross" type="Entypo" style={styles.cross} />
+              <Text style={[styles.texts, { fontFamily: 'SourceSansPro' }]}>
                 {this.state.businessName}
-              </Text> */}
+              </Text>
             </TouchableOpacity>
-            <SidebarItem
+            <SideBarItemAtom
               title="COMPANY"
-              navigate={this.handleNavigation}
-              activeRoute={this.state.activeRoute}
+              navigate={navigate}
               categories={[
                 {
                   title: 'Home',
@@ -158,30 +71,32 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Products & Services',
                   routeName: 'ViewBusiness'
+                },
+                {
+                  title: 'Employees',
+                  routeName: 'Employees'
                 }
               ]}
             />
 
-            <SidebarItem
+            <SideBarItemAtom
               title="CONTACT"
-              navigate={this.handleNavigation}
-              activeRoute={this.state.activeRoute}
+              navigate={navigate}
               categories={[
                 {
                   title: 'Customers',
-                  routeName: 'Customers'
+                  routeName: 'Customer'
                 },
                 {
                   title: 'Vendors',
-                  routeName: 'Vendors'
+                  routeName: 'Vendor'
                 }
               ]}
             />
 
-            <SidebarItem
+            <SideBarItemAtom
               title="ORDER"
-              navigate={this.handleNavigation}
-              activeRoute={this.state.activeRoute}
+              navigate={navigate}
               categories={[
                 {
                   title: 'Purchase',
@@ -193,19 +108,18 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 }
               ]}
             />
-            <SidebarItem
+            <SideBarItemAtom
               title="TRANSACTIONS"
-              navigate={this.handleNavigation}
-              activeRoute={this.state.activeRoute}
+              navigate={navigate}
               categories={[
                 {
                   title: 'Bank',
                   routeName: 'Bank'
                 },
-                // {
-                //   title: 'Income',
-                //   routeName: 'Income'
-                // },
+                {
+                  title: 'Income',
+                  routeName: 'Income'
+                },
                 {
                   title: 'Expenses',
                   routeName: 'Expenses'
@@ -213,17 +127,16 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Invoices',
                   routeName: 'Invoice'
+                },
+                {
+                  title: 'Receipts',
+                  routeName: 'Receipts'
                 }
-                // {
-                //   title: 'Receipts',
-                //   routeName: 'Receipts'
-                // }
               ]}
             />
-            <SidebarItem
+            <SideBarItemAtom
               title="HELP & SETTINGS"
-              navigate={this.handleNavigation}
-              activeRoute={this.state.activeRoute}
+              navigate={navigate}
               categories={[
                 {
                   title: 'Settings',
@@ -238,15 +151,16 @@ export default class SideBar extends PureComponent<IProps, IState> {
           </ScrollView>
         </View>
       </SafeAreaView>
-    )
+    );
   }
 }
+
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    marginLeft: 27,
-    alignItems: 'center'
-    // paddingVertical: 16
+    marginLeft: '3%',
+    alignItems: 'center',
+    paddingVertical: 16
   },
   texts: {
     color: color.modal,
@@ -263,8 +177,9 @@ const styles = StyleSheet.create({
     color: color.menu
   },
   cross: {
-    fontSize: 26,
-    color: '#000'
+    fontSize: 35,
+    // backgroundColor: 'transparent',
+    color: color.modal
   },
   logoutItem: {
     borderTopWidth: 1,
@@ -278,11 +193,9 @@ const styles = StyleSheet.create({
   },
   sidebarContainer: {
     height: Dimensions.get('window').height - 16,
-    backgroundColor: '#fff',
-    paddingTop: 20,
-    paddingBottom: 30
+    backgroundColor: color.primary
   },
   itemsContainer: {
     flex: 4
   }
-})
+});

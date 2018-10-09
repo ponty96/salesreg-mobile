@@ -1,4 +1,9 @@
 {
-  "displayName": "SalesReg",
-  "name": "salesreg"
+  "expo": {
+    "sdkVersion": "25.0.0",
+    "splash": {
+      "image": "./Assets/Images/splash.png",
+      "backgroundColor": "#FFF"
+    }
+  }
 }

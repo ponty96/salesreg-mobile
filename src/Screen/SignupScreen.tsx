@@ -1,115 +1,89 @@
-// import React, { PureComponent } from 'react'
-// import { RegisterCompanyMutationGQL } from '../graphql/mutations/authenticate'
-// import { Mutation } from 'react-apollo'
-// import { parseFieldErrors } from '../Functions'
-// // import AppSpinner from '../Components/Spinner'
-// import SignUpProcessContainer from '../Container/SignUpProcessContainer'
+import React, { PureComponent } from 'react'
+import {
+  Text,
+  View,
+  KeyboardAvoidingView,
+  ScrollView,
+  StyleSheet
+} from 'react-native'
 
-// interface IProps {
-//   navigation: any
-// }
+import SignupForm from '../Components/SignupForm'
+import AuthenticationHeader from '../Components/AuthenticationHeader'
+import TransitionAtom from '../Atom/TransitionAtom'
+import { color } from '../Style/Color'
+import Signup2Screen from './SecondSignUpScreen'
 
-// interface IState {
-//   email: string
-//   password: string
-//   firstName: string
-//   lastName: string
-//   passwordConfirmation: string
-//   gender: string
-//   businessName: string
-//   businessEmail: string
-//   businessPhone: string
-//   businessCountry: string
-//   currency: string
-//   description: string
-//   logo: string[]
-//   fieldErrors: any
-// }
+interface IProps {
+  navigation: any
+}
 
-// class SignupScreen extends PureComponent<IProps, IState> {
-//   state = {
-//     email: '',
-//     firstName: '',
-//     lastName: '',
-//     password: '',
-//     passwordConfirmation: '',
-//     gender: '',
-//     businessName: '',
-//     businessEmail: '',
-//     businessPhone: '',
-//     businessCountry: '',
-//     currency: '',
-//     description: '',
-//     logo: [],
-//     fieldErrors: null
-//   }
+interface IState {
+  showSecondScreen: boolean
+}
 
-//   updateState = (key: string, val: any) => {
-//     const formData = { ...this.state, [key]: val }
-//     this.setState({ ...formData })
-//   }
-//   render() {
-//     return (
-//       <Mutation
-//         mutation={RegisterCompanyMutationGQL}
-//         onCompleted={this.onCompleted}
-//       >
-//         {(registerUser, { data }) => (
-//           <SignUpProcessContainer
-//             formData={this.state}
-//             updateValueChange={this.updateState}
-//             success={data ? data.registerCompany.success : false}
-//             fieldErrors={this.state.fieldErrors}
-//             registerUser={() =>
-//               registerUser({
-//                 variables: this.parseMutationVariables()
-//               })
-//             }
-//           />
-//         )}
-//       </Mutation>
-//     )
-//   }
+class SignupScreen extends PureComponent<IProps, IState> {
+  state = {
+    showSecondScreen: false
+  }
+  onPress = () => {
+    this.setState({ showSecondScreen: true })
+  }
+  render() {
+    if (this.state.showSecondScreen) {
+      return <Signup2Screen navigation={this.props.navigation} />
+    }
+    return (
+      <View style={styles.container}>
+        <AuthenticationHeader />
+        <ScrollView>
+          <View style={styles.wrapper}>
+            <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
+              SIGN UP
+            </Text>
+            <TransitionAtom firstScreen={true} />
+            <Text
+              style={[styles.personalInfoText, { fontFamily: 'SourceSansPro' }]}
+            >
+              PERSONAL INFORMATION
+            </Text>
+            <KeyboardAvoidingView
+              behavior={'padding'}
+              keyboardVerticalOffset={95}
+            >
+              <SignupForm
+                navigation={this.props.navigation}
+                onPress={this.onPress}
+              />
+            </KeyboardAvoidingView>
+          </View>
+        </ScrollView>
+      </View>
+    )
+  }
+}
 
-//   parseMutationVariables = () => {
-//     const {
-//       email,
-//       password,
-//       passwordConfirmation,
-//       gender,
-//       businessName,
-//       businessEmail,
-//       currency,
-//       firstName,
-//       lastName
-//     } = this.state
-//     return {
-//       firstName,
-//       lastName,
-//       password,
-//       passwordConfirmation,
-//       email,
-//       gender,
-//       title: businessName,
-//       contactEmail: businessEmail,
-//       currency,
-//       category: 'PRODUCT_SERVICE',
-//       street1: '***',
-//       city: '***',
-//       state: '**',
-//       country: this.state.businessCountry
-//     }
-//   }
+export default SignupScreen
 
-//   onCompleted = async data => {
-//     console.log('SignupScreen', data)
-//     const {
-//       registerCompany: { success, fieldErrors }
-//     } = data
-//     if (!success) {
-//       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
-//     }
-//   }
-// }
-
-// export default SignupScreen
+const styles = StyleSheet.create({
+  personalInfoText: {
+    marginTop: 10,
+    color: color.button,
+    textAlign: 'center',
+    fontSize: 16,
+    marginBottom: 5
+  },
+  wrapper: {
+    paddingHorizontal: 32
+  },
+  signUpText: {
+    color: color.button,
+    marginTop: 30,
+    marginBottom: 30,
+    alignSelf: 'center',
+    fontSize: 16
+  },
+  container: {
+    flex: 1,
+    backgroundColor: color.secondary
+  }
+})

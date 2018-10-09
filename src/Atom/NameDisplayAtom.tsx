@@ -21,8 +21,7 @@ export default class NameDisplayAtom extends React.Component<IProps, any> {
             />
           ) : (
             <Text style={styles.innerText}>
-              {this.props.businessName &&
-                capitalizeFirstLetter(this.props.businessName)}
+              {capitalizeFirstLetter(this.props.businessName)}
             </Text>
           )}
         </View>
@@ -44,7 +43,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontWeight: '400',
     marginLeft: 20,
-    fontFamily: 'AvenirNext-Bold'
+    fontFamily: 'SourceSansPro_Bold'
   },
   nameDisplayImage: {
     height: 70,
@@ -61,7 +60,7 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   innerText: {
-    fontFamily: 'AvenirNext-Bold',
+    fontFamily: 'SourceSansPro_Bold',
     fontSize: 16
   }
 })

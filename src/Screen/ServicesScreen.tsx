@@ -5,88 +5,47 @@ import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
 import { color } from '../Style/Color'
 import SubHeaderAtom from '../Atom/SubHeaderAtom'
 import FabAtom from '../Atom/FabAtom'
-import { ListCompanyServicesGQL } from '../graphql/queries/product-service'
-import { Query } from 'react-apollo'
-import AppSpinner from '../Components/Spinner'
-import Auth from '../services/auth'
 
 interface IProps {
   navigation: any
 }
 
-interface IState {
-  business: any
-}
+class ServicesScreen extends PureComponent<IProps> {
+  SERVICES = [
+    { key: '1 million Braids', price: '3000' },
+    { key: 'Re-touching', price: '1000' },
+    { key: 'Steaming', price: '800' },
+    { key: 'DD', price: '400' }
+  ]
 
-class ServicesScreen extends PureComponent<IProps, IState> {
-  state = {
-    business: null
-  }
-
-  componentDidMount() {
-    this.updateState()
-  }
-  updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
-    this.setState({
-      business: user.company
-    })
-  }
-
-  handleTouch = service => {
-    this.props.navigation.navigate('ShowService', { service })
+  handleTouch = () => {
+    this.props.navigation.navigate('ShowService')
   }
 
   renderList = ({ item }: any) => {
     return (
       <ServiceListItemAtom
-        name={item.name}
+        name={item.key}
         amount={item.price}
-        onPress={() => this.handleTouch(item)}
+        onPress={() => this.handleTouch()}
       />
     )
   }
 
   render() {
-    const { business } = this.state
     return (
-      <Query
-        query={ListCompanyServicesGQL}
-        variables={{ companyId: `${business && business.id}` }}
-        fetchPolicy="cache-and-network"
-      >
-        {({ loading, data }) => {
-          return (
-            <View style={styles.container}>
-              <AppSpinner visible={loading} />
-              <SubHeaderAtom
-                list={[
-                  'Fastest selling',
-                  'Slowest selling',
-                  'Highest profit',
-                  'Lowest profit'
-                ]}
-                image={require('../../assets/Icons/subheader-icons/product-blue.png')}
-                total={
-                  data.listCompanyServices ? data.listCompanyServices.length : 0
-                }
-              />
-              <ScrollView>
-                <FlatList
-                  data={data.listCompanyServices}
-                  renderItem={this.renderList}
-                />
-              </ScrollView>
-              <FabAtom
-                routeName={'EditServices'}
-                name={'plus'}
-                type={'Entypo'}
-                navigation={this.props.navigation}
-              />
-            </View>
-          )
-        }}
-      </Query>
+      <View style={styles.container}>
+        <SubHeaderAtom list={['Lorem ipsum']} />
+        <ScrollView>
+          <FlatList data={this.SERVICES} renderItem={this.renderList} />
+        </ScrollView>
+        <FabAtom
+          routeName={'EditServices'}
+          name={'circle-with-plus'}
+          type={'Entypo'}
+          navigation={this.props.navigation}
+        />
+      </View>
     )
   }
 }

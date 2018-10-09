@@ -1,25 +1,14 @@
 import * as React from 'react'
-import { Fab } from 'native-base'
+import { Icon, Fab } from 'native-base'
 import { StyleSheet } from 'react-native'
-import { color } from '../Style/Color'
-import Icon from './Icon'
+import { color } from './../Style/Color'
 
-interface IProp {
-  routeName: string
-  name?: string
-  type?: any
-  navigation: any
-  params?: any
-  image?: any
-  goto?: { screen: string }
-}
-
-const FabAtom = (props: IProp) => (
+const fabAtom = (props: any) => (
   <Fab
     position="bottomRight"
     style={styles.fab}
     active={true}
-    onPress={() => props.navigation.navigate(props.routeName, props.goto)}
+    onPress={() => props.navigation.navigate(props.routeName, props.params)}
   >
     <Icon
       name={props.name}
@@ -29,11 +18,10 @@ const FabAtom = (props: IProp) => (
   </Fab>
 )
 
-export default FabAtom
+export default fabAtom
 
 const styles = StyleSheet.create({
   fab: {
-    backgroundColor: color.button,
-    zIndex: 1
+    backgroundColor: color.button
   }
 })

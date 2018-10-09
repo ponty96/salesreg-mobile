@@ -22,7 +22,7 @@ class ResetScreen extends PureComponent<IProps> {
         <AuthenticationHeader />
         <KeyboardAvoidingView behavior="padding" keyboardVerticalOffset={200}>
           <ScrollView style={styles.wrapper}>
-            <Text style={[styles.signUpText, { fontFamily: 'Source Sans Pro' }]}>
+            <Text style={[styles.signUpText, { fontFamily: 'SourceSansPro' }]}>
               RESET PASSWORD
             </Text>
             <ResetForm navigation={this.props.navigation} />

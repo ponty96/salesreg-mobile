@@ -1,96 +1,22 @@
 import React, { Component } from 'react'
-import { ListItem } from 'native-base'
-import { Text, StyleSheet, View } from 'react-native'
+import { ListItem, Left } from 'native-base'
+import { Text, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
-import Icon from '../Atom/Icon'
 
 interface IProps {
   section: string
-  value: any
-  iconName?: string
-  body?: string
+  value: string
 }
 
-interface IState {
-  bodyViewState: boolean
-}
-
-class ProfileListAtom extends Component<IProps, IState> {
-  state = {
-    bodyViewState: false
-  }
-  rightRightComponent = (value: any) => {
-    if (typeof value == 'string') {
-      return (
-        <View>
-          <Text style={styles.normalText}>{this.props.value}</Text>
-        </View>
-      )
-    } else if (typeof value == 'object') {
-      return (
-        <Icon
-          name={this.state.bodyViewState ? 'ios-arrow-up' : 'ios-arrow-down'}
-          type="Ionicons"
-          style={{
-            fontSize: 28,
-            color: color.textColor
-          }}
-        />
-      )
-    } else return <View />
-  }
-  renderBody = (value: any) => {
-    if (
-      typeof value == 'object' &&
-      value !== null &&
-      this.state.bodyViewState
-    ) {
-      return (
-        <View style={{ backgroundColor: '#fff' }}>
-          {Object.keys(value).map((key, index) => (
-            <View key={index} style={styles.row}>
-              {/* <Text style={styles.normalText}>{key}</Text> */}
-              <Text style={styles.normalText}>{value[key]}</Text>
-            </View>
-          ))}
-        </View>
-      )
-    } else {
-      return <View />
-    }
-  }
+class ProfileListAtom extends Component<IProps, any> {
   render() {
     return (
-      <View>
-        <ListItem
-          style={[styles.list, this.state.bodyViewState && styles.hideBorder]}
-          onPress={() =>
-            this.setState({ bodyViewState: !this.state.bodyViewState })
-          }
-        >
-          <View style={styles.left}>
-            {this.props.iconName && (
-              <View
-                style={{
-                  marginRight: 8
-                }}
-              >
-                <Icon
-                  type="MaterialCommunityIcons"
-                  name={this.props.iconName}
-                  style={{
-                    fontSize: 28,
-                    color: color.textColor
-                  }}
-                />
-              </View>
-            )}
-            <Text style={styles.label}>{this.props.section}</Text>
-          </View>
-          {this.rightRightComponent(this.props.value)}
-        </ListItem>
-        {this.renderBody(this.props.value)}
-      </View>
+      <ListItem style={styles.list}>
+        <Left style={styles.left}>
+          <Text style={styles.blueText}>{this.props.section}</Text>
+          <Text style={styles.normalText}>{this.props.value}</Text>
+        </Left>
+      </ListItem>
     )
   }
 }
@@ -103,39 +29,22 @@ const styles = StyleSheet.create({
     paddingLeft: 0,
     backgroundColor: '#FFF',
     minHeight: 55,
+    width: '100%',
     borderBottomWidth: 1,
-    borderBottomColor: color.list,
-    flex: 1,
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    alignItems: 'center'
+    borderBottomColor: color.list
   },
   left: {
-    marginLeft: 16,
-    flexDirection: 'row',
-    alignItems: 'center',
-    justifyContent: 'center'
-  },
-  right: {
-    marginRight: 16,
+    marginLeft: 32,
     flexDirection: 'column'
   },
-  label: {
+  blueText: {
+    color: color.button,
     fontSize: 14,
-    fontFamily: 'AvenirNext-DemiBold',
-    color: color.textColor
+    fontFamily: 'SourceSansPro',
+    paddingBottom: 5
   },
   normalText: {
     fontSize: 14,
-    fontFamily: 'AvenirNext-Medium',
-    color: color.textColor
-  },
-  row: {
-    flexDirection: 'row',
-    paddingLeft: 16,
-    marginBottom: 8
-  },
-  hideBorder: {
-    borderBottomWidth: 0
+    fontFamily: 'SourceSansPro'
   }
 })
