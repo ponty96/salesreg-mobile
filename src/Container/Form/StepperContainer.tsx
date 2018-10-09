@@ -28,7 +28,7 @@
  */
 
 import React from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View, BackHandler } from 'react-native'
 import { Container, Content, Form } from 'native-base'
 import { color } from '../../Style/Color'
 import ButtonAtom from '../../Atom/ButtonAtom'
@@ -141,6 +141,19 @@ export default class FormStepperContainer extends React.PureComponent<
   renderCurrentStepFormFields = () => {
     const currentStepForm = this.props.steps[this.state.currentStep - 1]
     return currentStepForm.formFields.map(this.parseFormFields)
+  }
+
+  componentDidMount() {
+    BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+  }
+
+  componentWillUnmount() {
+    BackHandler.removeEventListener('hardwareBackPress', this.handleBackPress)
+  }
+
+  handleBackPress = () => {
+    this.handleBackButtonPress() // works best when the goBack is async
+    return true
   }
 
   parseFormFields = (field: any, index: number) => {
