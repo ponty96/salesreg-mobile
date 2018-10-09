@@ -75,6 +75,7 @@ class LoginScreen extends React.Component<IProps, IState> {
               error={fieldErrors && fieldErrors.email}
               placeholder="e.g lagbaja@example.com"
               defaultValue={this.state.email}
+              keyboardType="email-address"
             />
 
             <InputAtom
