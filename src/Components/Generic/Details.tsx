@@ -6,7 +6,7 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
-import ListItemAtom from '../../Atom/ListItemAtom'
+import ListItemAtom from '../../Atom/ListItem/ListItemAtom'
 import { color } from '../../Style/Color'
 import Icon from '../../Atom/Icon'
 

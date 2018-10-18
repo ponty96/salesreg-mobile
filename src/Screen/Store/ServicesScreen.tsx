@@ -1,14 +1,14 @@
 import React, { PureComponent } from 'react'
 import { StyleSheet, View, ScrollView, FlatList } from 'react-native'
 
-import ServiceListItemAtom from '../Atom/ServiceListItemAtom'
-import { color } from '../Style/Color'
-import SubHeaderAtom from '../Atom/SubHeaderAtom'
-import FabAtom from '../Atom/FabAtom'
-import { ListCompanyServicesGQL } from '../graphql/queries/store'
+import ServiceListItemAtom from '../../Atom/ListItem/ServiceListItemAtom'
+import { color } from '../../Style/Color'
+import SubHeaderAtom from '../../Components/Header/SubHeaderAtom'
+import FabAtom from '../../Atom/FabAtom'
+import { ListCompanyServicesGQL } from '../../graphql/queries/store'
 import { Query } from 'react-apollo'
-import AppSpinner from '../Components/Spinner'
-import Auth from '../services/auth'
+import AppSpinner from '../../Components/Spinner'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any
@@ -66,7 +66,7 @@ class ServicesScreen extends PureComponent<IProps, IState> {
                   'Highest profit',
                   'Lowest profit'
                 ]}
-                image={require('../../assets/Icons/subheader-icons/product-blue.png')}
+                image={require('../../../../assets/Icons/subheader-icons/product-blue.png')}
                 total={
                   data.listCompanyServices ? data.listCompanyServices.length : 0
                 }

@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, Text, View } from 'react-native'
 import { Container, Content, Form } from 'native-base'
 import { color } from '../Style/Color'
-import ButtonAtom from '../Atom/ButtonAtom'
+import ButtonAtom from '../Atom/Form/ButtonAtom'
 
 interface IProps {
   navigate: any

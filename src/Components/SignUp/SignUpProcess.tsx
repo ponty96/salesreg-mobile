@@ -1,7 +1,7 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
 import OnboardingContainer from '../../Container/OnboardingContainer'
-import ButtonAtom from '../../Atom/ButtonAtom'
+import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import Icon from '../../Atom/Icon'
 import { color } from '../../Style/Color'
 

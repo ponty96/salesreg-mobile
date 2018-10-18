@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-import { color } from '../Style/Color'
-import Header from '../Components/Header/DetailsScreenHeader'
+import { color } from '../../Style/Color'
+import Header from '../../Components/Header/DetailsScreenHeader'
 
 interface IProps {
   navigation: any

@@ -6,7 +6,7 @@ import Auth from '../services/auth'
 import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import AuthFormContainer from '../Container/AuthFormContainer'
-import InputAtom from '../Atom/InputAtom'
+import InputAtom from '../Atom/Form/InputAtom'
 
 interface IProps {
   navigation: any

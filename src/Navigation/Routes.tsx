@@ -62,7 +62,6 @@ import UpsertExpenseScreen from '../Screen/UpsertExpenseScreen'
 // Authentication Screens
 import LoginScreen from '../Screen/LoginScreen'
 import LandingScreen from '../Screen/Onboarding/Landing'
-import ResetScreen from '../Screen/ResetScreen'
 import UserOnboardScreen from '../Screen/Onboarding/UserOnboardScreen'
 import BusinessOnboardScreen from '../Screen/Onboarding/BusinessOnboardScreen'
 
@@ -75,7 +74,6 @@ import HomeScreen from '../Screen/HomeScreen'
 
 // Other Component Screens
 import BankScreen from '../Screen/BankScreen'
-import InventoryScreen from '../Screen/InventoryScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
 
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
@@ -154,9 +152,6 @@ const businessStack = StackNavigator(
     },
     Receipts: {
       screen: ReceiptsScreen
-    },
-    Inventory: {
-      screen: InventoryScreen
     },
     Invoice: {
       screen: InvoicesScreen
@@ -263,7 +258,6 @@ const AuthStack = StackNavigator(
   {
     OnBoarding: LandingScreen,
     Login: LoginScreen,
-    Reset: ResetScreen,
     Signup: UserOnboardScreen
   },
   {

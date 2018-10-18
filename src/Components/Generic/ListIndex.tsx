@@ -2,7 +2,9 @@ import * as React from 'react'
 import { View, StyleSheet, SectionList, Text } from 'react-native'
 import FabAtom from '../../Atom/FabAtom'
 import EmptyList from '../../Components/EmptyList'
-import SalesOrderListAtom, { DataProps } from '../../Atom/SalesOrderListAtom'
+import SalesOrderListAtom, {
+  DataProps
+} from '../../Atom/ListItem/SalesOrderListAtom'
 import { color } from '../../Style/Color'
 import { Query } from 'react-apollo'
 import AppSpinner from '../../Components/Spinner'
@@ -11,7 +13,7 @@ import * as _ from 'lodash'
 import moment from 'moment'
 import { FetchPolicy } from 'apollo-client'
 import { DocumentNode } from 'graphql'
-import SubHeaderAtom from '../../Atom/SubHeaderAtom'
+import SubHeaderAtom from '../Header/SubHeaderAtom'
 
 interface SubHeaderProps {
   screen: string

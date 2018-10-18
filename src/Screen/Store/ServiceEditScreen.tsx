@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
 import { StyleSheet, View } from 'react-native'
-import Icon from '../Atom/Icon'
+import Icon from '../../Atom/Icon'
 
-import InputAtom from '../Atom/InputAtom'
-import { color } from '../Style/Color'
+import InputAtom from '../../Atom/Form/InputAtom'
+import { color } from '../../Style/Color'
 
 interface IProps {
   navigation: any

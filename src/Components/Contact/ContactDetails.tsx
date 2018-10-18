@@ -1,6 +1,6 @@
 import React, { PureComponent } from 'react'
 import { color } from '../../Style/Color'
-import ProfileListAtom from '../../Atom/ProfileListAtom'
+import ProfileListAtom from '../../Atom/ListItem/ExpandableListItemAtom'
 
 import {
   StyleSheet,

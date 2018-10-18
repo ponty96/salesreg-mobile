@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
-import ProfileListAtom from '../Atom/ProfileListAtom'
+import ProfileListAtom from '../Atom/ListItem/ExpandableListItemAtom'
 import NameDisplayAtom from '../Atom/NameDisplayAtom'
 
 interface IProps {
