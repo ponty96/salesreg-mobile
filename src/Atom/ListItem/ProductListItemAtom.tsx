@@ -1,23 +1,23 @@
-import * as React from 'react';
-import { ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base';
-import { StyleSheet } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { ListItem, Left, Body, Right, Text, Thumbnail } from 'native-base'
+import { StyleSheet } from 'react-native'
+import { color } from '../../Style/Color'
 
 interface IProps {
-  onPress?: () => void;
-  image: string;
-  name: string;
-  number: any;
-  status: string;
+  onPress?: () => void
+  image: string
+  name: string
+  number: any
+  status: string
 }
 
 class ProductListItemAtom extends React.Component<IProps, any> {
   render() {
     const defaultImg =
-      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7';
-    const avatar = this.props.image ? this.props.image : defaultImg;
-    const colored1 = this.props.status === 'debt' ? 'red' : color.button;
-    const colored2 = this.props.status === 'debt' ? 'red' : 'black';
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+    const avatar = this.props.image ? this.props.image : defaultImg
+    const colored1 = this.props.status === 'debt' ? 'red' : color.button
+    const colored2 = this.props.status === 'debt' ? 'red' : 'black'
     return (
       <ListItem style={styles.rowP} onPress={this.props.onPress}>
         <Left style={styles.leftView}>
@@ -34,11 +34,11 @@ class ProductListItemAtom extends React.Component<IProps, any> {
           </Text>
         </Right>
       </ListItem>
-    );
+    )
   }
 }
 
-export default ProductListItemAtom;
+export default ProductListItemAtom
 
 const styles = StyleSheet.create({
   rowP: {
@@ -91,4 +91,4 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-end',
     flex: 1
   }
-});
+})

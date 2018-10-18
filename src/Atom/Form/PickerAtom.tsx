@@ -9,8 +9,8 @@ import {
   FlatList,
   Image
 } from 'react-native'
-import { color } from '../Style/Color'
-import FormHeader from '../Components/Header/FormHeader'
+import { color } from '../../Style/Color'
+import FormHeader from '../../Components/Header/FormHeader'
 
 interface PickerData {
   icon?: any

@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
 import { ListItem } from 'native-base'
 import { Text, StyleSheet, View } from 'react-native'
-import { color } from '../Style/Color'
-import Icon from '../Atom/Icon'
+import { color } from '../../Style/Color'
+import Icon from '../Icon'
 
 interface IProps {
   section: string

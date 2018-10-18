@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
-import { color } from '../Style/Color'
+import { color } from '../../Style/Color'
 
 interface IProps {
   name: string

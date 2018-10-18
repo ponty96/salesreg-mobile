@@ -1,7 +1,7 @@
 import * as React from 'react'
 import DatePicker from 'react-native-datepicker'
 import { StyleSheet, View } from 'react-native'
-import { color } from '../Style/Color'
+import { color } from '../../Style/Color'
 import { Item, Label, Text } from 'native-base'
 
 interface IProps {

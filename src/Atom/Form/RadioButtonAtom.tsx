@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { Item, Label, Text } from 'native-base'
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
-import { color } from '../Style/Color'
+import { color } from '../../Style/Color'
 
 interface IProps {
   required?: boolean | false

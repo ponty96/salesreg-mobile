@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
-import { color } from '../Style/Color'
+import { color } from '../../Style/Color'
 import { Left, Right, Thumbnail } from 'native-base'
 
 export interface DataProps {

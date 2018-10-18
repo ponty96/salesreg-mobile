@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { ListItem, Left, Body, Thumbnail, Right } from 'native-base'
 import { StyleSheet, Text } from 'react-native'
-import { color } from '../Style/Color'
+import { color } from '../../Style/Color'
 
 interface IProps {
   items: {

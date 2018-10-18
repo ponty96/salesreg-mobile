@@ -1,6 +1,6 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { color } from '../Style/Color'
+import { color } from '../../Style/Color'
 
 interface IProp {
   label: string
