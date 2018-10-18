@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const ListCompanyProductsGQL = gql`
   query listCompanyProducts($companyId: Uuid!) {
@@ -18,7 +18,7 @@ export const ListCompanyProductsGQL = gql`
       }
     }
   }
-`;
+`
 
 export const ListCompanyServicesGQL = gql`
   query listCompanyServices($companyId: Uuid!) {
@@ -29,4 +29,4 @@ export const ListCompanyServicesGQL = gql`
       price
     }
   }
-`;
+`

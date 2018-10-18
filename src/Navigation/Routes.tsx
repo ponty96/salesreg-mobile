@@ -19,15 +19,19 @@ import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen'
 import VendorDetailScreen from '../Screen/Contact/VendorDetailScreen'
 import VendorScreen from '../Screen/Contact/VendorScreen'
 
+/***
+ *
+ * STORE SCREENS
+ */
 // Product Screens
-import UpsertProductScreen from '../Screen/UpsertProductScreen'
-import ProductDetailsScreen from '../Screen/ProductDetailsScreen'
-import ProductScreen from '../Screen/ProductScreen'
+import UpsertProductScreen from '../Screen/Store/UpsertProductScreen'
+import ProductDetailsScreen from '../Screen/Store/ProductDetailsScreen'
+import ProductScreen from '../Screen/Store/ProductScreen'
 
 // Service Screens
-import UpsertServiceScreen from '../Screen/UpsertServiceScreen'
-import ServiceDetailsScreen from '../Screen/ServiceDetailsScreen'
-import ServicesScreen from '../Screen/ServicesScreen'
+import UpsertServiceScreen from '../Screen/Store/UpsertServiceScreen'
+import ServiceDetailsScreen from '../Screen/Store/ServiceDetailsScreen'
+import ServicesScreen from '../Screen/Store/ServicesScreen'
 
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'

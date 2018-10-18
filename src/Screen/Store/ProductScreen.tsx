@@ -1,12 +1,12 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet } from 'react-native'
-import FabAtom from '../Atom/FabAtom'
-import ProductList from '../Components/ProductList'
-import { color } from '../Style/Color'
-import { ListCompanyProductsGQL } from '../graphql/queries/product-service'
+import FabAtom from '../../Atom/FabAtom'
+import ProductList from '../../Components/ProductList'
+import { color } from '../../Style/Color'
+import { ListCompanyProductsGQL } from '../../graphql/queries/store'
 import { Query } from 'react-apollo'
-import AppSpinner from '../Components/Spinner'
-import Auth from '../services/auth'
+import AppSpinner from '../../Components/Spinner'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any

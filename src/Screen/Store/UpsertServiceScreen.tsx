@@ -1,15 +1,15 @@
 import React, { Component } from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
-import { color } from '../Style/Color'
-import Header from '../Components/Header/BaseHeader'
-import SaveCancelButton from '../Container/SaveCancelButton'
-import InputAtom from '../Atom/InputAtom'
+import { color } from '../../Style/Color'
+import Header from '../../Components/Header/BaseHeader'
+import SaveCancelButton from '../../Container/SaveCancelButton'
+import InputAtom from '../../Atom/InputAtom'
 
 import { Mutation } from 'react-apollo'
-import { UpsertServiceGQL } from '../graphql/mutations/product-service'
-import AppSpinner from '../Components/Spinner'
-import Auth from '../services/auth'
-import { parseFieldErrors } from '../Functions'
+import { UpsertServiceGQL } from '../../graphql/mutations/product-service'
+import AppSpinner from '../../Components/Spinner'
+import Auth from '../../services/auth'
+import { parseFieldErrors } from '../../Functions'
 import { Container, Content, Form } from 'native-base'
 
 interface IProps {

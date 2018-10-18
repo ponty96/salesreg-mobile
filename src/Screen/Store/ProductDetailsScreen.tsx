@@ -1,8 +1,8 @@
 import React, { PureComponent } from 'react'
 import { View, StyleSheet, Text, ScrollView } from 'react-native'
 import { Thumbnail, ListItem, Left, Right } from 'native-base'
-import { color } from '../Style/Color'
-import Header from '../Components/Header/DetailsScreenHeader'
+import { color } from '../../Style/Color'
+import Header from '../../Components/Header/DetailsScreenHeader'
 
 interface IProps {
   navigation?: any
@@ -39,7 +39,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
                       uri:
                         'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
                     }}
-                    style={styles.aboveAccordiondpP}
+                    // style={styles.aboveAccordiondpP}
                   />
                   <Text style={styles.aboveAccordionPictureText}>
                     {product.name}
