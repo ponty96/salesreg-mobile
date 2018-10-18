@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
-import { ListItem } from 'native-base'
-import { Text, StyleSheet, View } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
 import Icon from '../Icon'
 
@@ -21,12 +20,8 @@ class ProfileListAtom extends Component<IProps, IState> {
   }
   rightRightComponent = (value: any) => {
     if (typeof value == 'string') {
-      return (
-        <View>
-          <Text style={styles.normalText}>{this.props.value}</Text>
-        </View>
-      )
-    } else if (typeof value == 'object') {
+      return <Text style={styles.normalText}>{this.props.value}</Text>
+    } else if (typeof value == 'object' && value !== null) {
       return (
         <Icon
           name={this.state.bodyViewState ? 'ios-arrow-up' : 'ios-arrow-down'}
@@ -47,10 +42,10 @@ class ProfileListAtom extends Component<IProps, IState> {
     ) {
       return (
         <View style={{ backgroundColor: '#fff' }}>
-          {Object.keys(value).map((key, index) => (
+          {value.map((val, index) => (
             <View key={index} style={styles.row}>
               {/* <Text style={styles.normalText}>{key}</Text> */}
-              <Text style={styles.normalText}>{value[key]}</Text>
+              <Text style={styles.normalText}>{val}</Text>
             </View>
           ))}
         </View>
@@ -61,13 +56,13 @@ class ProfileListAtom extends Component<IProps, IState> {
   }
   render() {
     return (
-      <View>
-        <ListItem
-          style={[styles.list, this.state.bodyViewState && styles.hideBorder]}
-          onPress={() =>
-            this.setState({ bodyViewState: !this.state.bodyViewState })
-          }
-        >
+      <TouchableOpacity
+        style={styles.column}
+        onPress={() =>
+          this.setState({ bodyViewState: !this.state.bodyViewState })
+        }
+      >
+        <View style={styles.labelSection}>
           <View style={styles.left}>
             {this.props.iconName && (
               <View
@@ -88,9 +83,9 @@ class ProfileListAtom extends Component<IProps, IState> {
             <Text style={styles.label}>{this.props.section}</Text>
           </View>
           {this.rightRightComponent(this.props.value)}
-        </ListItem>
+        </View>
         {this.renderBody(this.props.value)}
-      </View>
+      </TouchableOpacity>
     )
   }
 }
@@ -98,26 +93,33 @@ class ProfileListAtom extends Component<IProps, IState> {
 export default ProfileListAtom
 
 const styles = StyleSheet.create({
-  list: {
-    marginLeft: 0,
-    paddingLeft: 0,
-    backgroundColor: '#FFF',
-    minHeight: 55,
+  column: {
+    backgroundColor: '#fff',
+    flexDirection: 'column',
     borderBottomWidth: 1,
     borderBottomColor: color.list,
-    flex: 1,
+    // flex: 1,
+    marginLeft: 0,
+    paddingLeft: 0,
+    minHeight: 55
+  },
+  labelSection: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    alignItems: 'center'
+    paddingHorizontal: 16,
+    paddingVertical: 8,
+    borderColor: '#000'
+  },
+  showBorder: {
+    borderBottomWidth: 1,
+    borderBottomColor: color.list
   },
   left: {
-    marginLeft: 16,
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center'
   },
   right: {
-    marginRight: 16,
     flexDirection: 'column'
   },
   label: {

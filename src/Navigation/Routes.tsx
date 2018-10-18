@@ -33,6 +33,10 @@ import UpsertServiceScreen from '../Screen/Store/UpsertServiceScreen'
 import ServiceDetailsScreen from '../Screen/Store/ServiceDetailsScreen'
 import ServicesScreen from '../Screen/Store/ServicesScreen'
 
+// Category Screens
+import CategoriesScreen from '../Screen/Store/Category/CategoriesScreen'
+import CategoryDetailsScreen from '../Screen/Store/Category/CategoryDetailsScreen'
+
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
@@ -162,12 +166,6 @@ const businessStack = StackNavigator(
     ViewBusiness: {
       screen: viewBothStack
     },
-    NewProduct: {
-      screen: UpsertProductScreen
-    },
-    ProductDetails: {
-      screen: ProductDetailsScreen
-    },
     UserProfile: {
       screen: UserProfileScreen
     },
@@ -180,8 +178,18 @@ const businessStack = StackNavigator(
     EditBusinessProfile: {
       screen: EditBusinessProfileScreen
     },
+
+    // STORE ROUTES
+    NewProduct: {
+      screen: UpsertProductScreen
+    },
+    ProductDetails: {
+      screen: ProductDetailsScreen
+    },
     EditServices: UpsertServiceScreen,
     ShowService: ServiceDetailsScreen,
+    Categories: CategoriesScreen,
+    CategoryDetails: CategoryDetailsScreen,
 
     // Expenses
     Expenses: ExpensesScreen,

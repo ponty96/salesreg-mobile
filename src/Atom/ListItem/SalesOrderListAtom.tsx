@@ -41,46 +41,67 @@ const renderStatusIndicator = (bottomRightText: string): any => {
   return borderStyle
 }
 
-const SalesOrderListAtom = (props: IProps) => {
-  return (
-    <TouchableOpacity
-      style={[
-        styles.wrapper,
-        props.style,
-        renderStatusIndicator(props.bottomRightText)
-      ]}
-      onPress={props.onPress}
-      key="SalesOrderListAtom-2"
-    >
-      {props.avatar && (
-        <Thumbnail source={{ uri: props.avatar }} style={styles.avatar} />
-      )}
-      <Left style={[styles.leftWrapper, props.leftStyle]}>
-        <Text style={[styles.serialNumber, styles.top]}>
-          {props.firstTopText}
-        </Text>
-        <View style={styles.wrapperForTopLeft}>
-          <Text style={[styles.text, styles.bottom]}>
-            {props.bottomLeftFirstText}
+export default class SalesOrderListAtom extends React.PureComponent<IProps> {
+  render() {
+    return (
+      <TouchableOpacity
+        style={[
+          styles.wrapper,
+          this.props.style,
+          renderStatusIndicator(this.props.bottomRightText)
+        ]}
+        onPress={this.props.onPress}
+        key="SalesOrderListAtom-2"
+      >
+        {this.props.avatar && (
+          <Thumbnail
+            source={{ uri: this.props.avatar }}
+            style={styles.avatar}
+          />
+        )}
+        {this.renderLeftComponent()}
+        {this.renderRightComponent()}
+      </TouchableOpacity>
+    )
+  }
+  renderLeftComponent = (): any => {
+    if (
+      this.props.firstTopText ||
+      this.props.bottomLeftFirstText ||
+      this.props.bottomLeftSecondText
+    ) {
+      return (
+        <Left style={[styles.leftWrapper, this.props.leftStyle]}>
+          <Text style={[styles.serialNumber, styles.top]}>
+            {this.props.firstTopText}
           </Text>
-          <Text style={[styles.time, styles.bottom]}>
-            {props.bottomLeftSecondText}
+          <View style={styles.wrapperForTopLeft}>
+            <Text style={[styles.text, styles.bottom]}>
+              {this.props.bottomLeftFirstText}
+            </Text>
+            <Text style={[styles.time, styles.bottom]}>
+              {this.props.bottomLeftSecondText}
+            </Text>
+          </View>
+        </Left>
+      )
+    }
+  }
+  renderRightComponent = (): any => {
+    if (this.props.topRightText || this.props.bottomRightText) {
+      return (
+        <Right style={[styles.rightWrapper, this.props.rightStyle]}>
+          <Text style={[styles.text, styles.top, styles.price]}>
+            {this.props.topRightText}
           </Text>
-        </View>
-      </Left>
-      <Right style={[styles.rightWrapper, props.rightStyle]}>
-        <Text style={[styles.text, styles.top, styles.price]}>
-          {props.topRightText}
-        </Text>
-        <Text style={[styles.status, styles.bottom]}>
-          {props.bottomRightText}
-        </Text>
-      </Right>
-    </TouchableOpacity>
-  )
+          <Text style={[styles.status, styles.bottom]}>
+            {this.props.bottomRightText}
+          </Text>
+        </Right>
+      )
+    }
+  }
 }
-
-export default SalesOrderListAtom
 
 const styles = StyleSheet.create({
   avatar: {
@@ -98,7 +119,8 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     marginHorizontal: 8,
     backgroundColor: color.secondary,
-    marginVertical: 8
+    marginVertical: 8,
+    justifyContent: 'space-between'
   },
   serialNumber: {
     fontFamily: 'AvenirNext-DemiBold',

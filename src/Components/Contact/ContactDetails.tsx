@@ -54,25 +54,15 @@ class ContactDetails extends PureComponent<IProps> {
       {
         section: 'Address',
         value: contact.address
-          ? {
-              street: contact.address.street1,
-              city: contact.address.city,
-              state: contact.address.state,
-              country: contact.address.country
-            }
+          ? [
+              contact.address.street1,
+              contact.address.city,
+              contact.address.state,
+              contact.address.country
+            ]
           : {}
       },
-      // { section: 'Currency', value: contact.currency },
-      // { section: 'Martial Status', value: contact.maritalStatus },
       { section: 'Birthday', value: contact.birthday || '' },
-      // {
-      //   section: 'Likes',
-      //   value: contact.likes ? Object.assign({}, contact.likes) : {}
-      // },
-      // {
-      //   section: 'Dis Likes',
-      //   value: contact.dislikes ? Object.assign({}, contact.dislikes) : {}
-      // },
       {
         section: 'Facebook',
         value: contact.facebook || '',
@@ -88,11 +78,6 @@ class ContactDetails extends PureComponent<IProps> {
         value: contact.twitter || '',
         icon: 'twitter'
       }
-      // {
-      //   section: 'Snapchat',
-      //   value: contact.snapchat || '',
-      //   icon: 'snapchat'
-      // }
     ]
   }
 

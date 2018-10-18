@@ -24,8 +24,10 @@ const ListItemAtom = (props: IProp): JSX.Element => {
           alignItems: 'flex-end'
         }}
       >
-        {props.quantity && (
+        {props.quantity ? (
           <Text style={{ color: color.textColor }}>{props.quantity}</Text>
+        ) : (
+          <Text />
         )}
         <Text
           style={[

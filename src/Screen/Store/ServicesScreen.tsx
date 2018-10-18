@@ -66,7 +66,7 @@ class ServicesScreen extends PureComponent<IProps, IState> {
                   'Highest profit',
                   'Lowest profit'
                 ]}
-                image={require('../../../../assets/Icons/subheader-icons/product-blue.png')}
+                image={require('../../../assets/Icons/subheader-icons/product-blue.png')}
                 total={
                   data.listCompanyServices ? data.listCompanyServices.length : 0
                 }
