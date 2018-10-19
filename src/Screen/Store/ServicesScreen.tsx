@@ -44,7 +44,7 @@ export default class ServicesScreen extends React.Component<IProps> {
         graphqlQueryResultKey="listCompanyServices"
         parseItemData={this.parseData}
         onItemPress={item =>
-          this.props.navigation.navigate('ServicesDetails', { product: item })
+          this.props.navigation.navigate('ServicesDetails', { service: item })
         }
         emptyListText={`When you add products, they get listed here \nAdd products by tapping the`}
         headerText="Add products here to start making sales"
