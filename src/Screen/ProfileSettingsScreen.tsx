@@ -20,8 +20,8 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
     return {
       header: (
         <Header
-          title="Profile settings"
-          onPressLeftIcon={() => navigation.goBack()}
+          title="Settings"
+          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
         />
       )
     }
@@ -44,20 +44,27 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
         navigate={navigate}
         categories={[
           {
-            section: 'User Profile',
+            section: 'Your Profile',
             routeName: 'UserProfile',
-            showRightCaret: true
+            showRightCaret: true,
+            description: 'View and edit your Profile',
+            icon: 'md-person'
           },
           {
-            section: 'Business Profile',
+            section: 'Your Business Profile',
             routeName: 'BusinessProfile',
-            showRightCaret: true
+            showRightCaret: true,
+            description: "View and edit your business's information",
+            icon: 'business',
+            iconType: 'MaterialIcons'
           },
           {
             section: 'Log Out',
             routeName: 'Login',
             showRightCaret: false,
-            onPress: this.handleLogOut
+            onPress: this.handleLogOut,
+            description: '',
+            icon: 'md-power'
           }
         ]}
       />

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
-
-import UserProfile from '../Components/UserProfile'
 import Auth from '../services/auth'
-import humps from 'humps'
 import Header from '../Components/Header/DetailsScreenHeader'
+import GenericProfileDetails from '../Components/Generic/ProfileDetails'
 
 interface IProps {
   navigation: any
@@ -12,12 +10,14 @@ interface IProps {
 interface IState {
   list: any
   businessName: string
+  logo: string
 }
 
 class BusinessProfileScreen extends Component<IProps, IState> {
   state = {
-    list: {},
-    businessName: ''
+    list: [],
+    businessName: '',
+    logo: ''
   }
 
   static navigationOptions = ({ navigation }: any) => {
@@ -38,32 +38,63 @@ class BusinessProfileScreen extends Component<IProps, IState> {
 
   updateState = async () => {
     const user = JSON.parse(await Auth.getCurrentUser())
+    const location = this.parseLocation(user.company)
     this.setState({
-      list: {
-        Email: user.company.contactEmail || '',
-        Category: user.company.category
-          ? humps.pascalize(user.company.category)
-          : '',
-        Currency: user.company.currency || '',
-        Location: this.parseLocation(user.company),
-        Description: user.company.about || ''
-      },
-      businessName: user.company.title
+      list: [
+        {
+          section: 'Email',
+          value: user.company.contactEmail
+        },
+        {
+          section: 'Currency',
+          value: user.company.currency
+        },
+        {
+          section: 'Phone',
+          value: user.company.phone ? user.company.phone.number : ''
+        },
+        {
+          section: 'Address',
+          value: location
+            ? [
+                location.street1,
+                location.city,
+                location.state,
+                location.country
+              ]
+            : null
+        },
+        {
+          section: 'Bank',
+          value: user.company.bank
+            ? [
+                user.company.bank.accountName,
+                user.company.bank.accountNumber,
+                user.company.bank.bankName
+              ]
+            : null
+        },
+        {
+          section: 'About',
+          value: [user.company.about]
+        }
+      ],
+      businessName: user.company.title,
+      logo: user.company.logo
     })
   }
 
   parseLocation = ({ branches }) => {
-    const {
-      location: { city, state, street1, country }
-    } = branches.find(branch => branch.type == 'head_office')
-    return `${street1} ${city} ${state} ${country}`
+    const { location } = branches.find(branch => branch.type == 'head_office')
+    return location
   }
 
   render() {
     return (
-      <UserProfile
-        list={this.state.list}
-        businessName={this.state.businessName}
+      <GenericProfileDetails
+        headerText={this.state.businessName}
+        sections={this.state.list}
+        image={this.state.logo}
       />
     )
   }

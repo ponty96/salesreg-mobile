@@ -1,46 +1,45 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Dimensions } from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
-import { ListItem, Left, Right } from 'native-base'
 import Icon from '../Atom/Icon'
+import SalesOrderListAtom from '../Atom/ListItem/SalesOrderListAtom'
 
 interface Category {
   section: string
   routeName: string
   showRightCaret?: boolean | true
   onPress?: any | null
+  description?: string
+  icon?: string
+  iconType?: any
 }
 const SettingsList = (prop: { categories: Category[]; navigate: any }) => {
   return (
     <View style={styles.container}>
       {prop.categories.map((category: Category, key: number) => {
         return (
-          <ListItem
-            style={styles.section}
+          <SalesOrderListAtom
             key={key}
             onPress={() =>
               category.onPress
                 ? category.onPress()
                 : prop.navigate(category.routeName)
             }
-          >
-            <Left>
-              <Text
-                style={[styles.sectionText, { fontFamily: 'Source Sans Pro' }]}
-              >
-                {category.section}
-              </Text>
-            </Left>
-            {category.showRightCaret && (
-              <Right>
+            firstTopText={category.section}
+            bottomLeftFirstText={category.description}
+            icon={
+              <View style={{ marginTop: 16 }}>
                 <Icon
-                  name="keyboard-arrow-right"
-                  type="MaterialIcons"
-                  style={styles.icon}
+                  type={category.iconType || 'Ionicons'}
+                  name={category.icon}
+                  style={{
+                    fontSize: 28,
+                    color: color.textColor
+                  }}
                 />
-              </Right>
-            )}
-          </ListItem>
+              </View>
+            }
+          />
         )
       })}
     </View>

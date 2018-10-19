@@ -7,9 +7,10 @@ export interface DataProps {
   firstTopText: string
   bottomLeftFirstText?: string
   bottomLeftSecondText?: string
-  topRightText: string
+  topRightText?: string
   bottomRightText?: string
   avatar?: string
+  icon?: JSX.Element
 }
 interface IProps extends DataProps {
   onPress?: () => void
@@ -59,6 +60,7 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
             style={styles.avatar}
           />
         )}
+        {this.props.icon}
         {this.renderLeftComponent()}
         {this.renderRightComponent()}
       </TouchableOpacity>

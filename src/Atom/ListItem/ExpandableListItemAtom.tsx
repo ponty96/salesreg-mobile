@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
+import { Text, StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
 import { color } from '../../Style/Color'
 import Icon from '../Icon'
 
@@ -56,36 +56,37 @@ class ProfileListAtom extends Component<IProps, IState> {
   }
   render() {
     return (
-      <TouchableOpacity
-        style={styles.column}
+      <TouchableWithoutFeedback
         onPress={() =>
           this.setState({ bodyViewState: !this.state.bodyViewState })
         }
       >
-        <View style={styles.labelSection}>
-          <View style={styles.left}>
-            {this.props.iconName && (
-              <View
-                style={{
-                  marginRight: 8
-                }}
-              >
-                <Icon
-                  type="MaterialCommunityIcons"
-                  name={this.props.iconName}
+        <View style={styles.column}>
+          <View style={styles.labelSection}>
+            <View style={styles.left}>
+              {this.props.iconName && (
+                <View
                   style={{
-                    fontSize: 28,
-                    color: color.textColor
+                    marginRight: 8
                   }}
-                />
-              </View>
-            )}
-            <Text style={styles.label}>{this.props.section}</Text>
+                >
+                  <Icon
+                    type="MaterialCommunityIcons"
+                    name={this.props.iconName}
+                    style={{
+                      fontSize: 28,
+                      color: color.textColor
+                    }}
+                  />
+                </View>
+              )}
+              <Text style={styles.label}>{this.props.section}</Text>
+            </View>
+            {this.rightRightComponent(this.props.value)}
           </View>
-          {this.rightRightComponent(this.props.value)}
+          {this.renderBody(this.props.value)}
         </View>
-        {this.renderBody(this.props.value)}
-      </TouchableOpacity>
+      </TouchableWithoutFeedback>
     )
   }
 }

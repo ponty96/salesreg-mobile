@@ -1,16 +1,8 @@
 import React, { PureComponent } from 'react'
 import { color } from '../../Style/Color'
-import ProfileListAtom from '../../Atom/ListItem/ExpandableListItemAtom'
+import GenericProfileDetails from '../Generic/ProfileDetails'
 
-import {
-  StyleSheet,
-  TouchableOpacity,
-  View,
-  Linking,
-  FlatList,
-  Image,
-  Text
-} from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Linking, Text } from 'react-native'
 import Icon from '../../Atom/Icon'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 
@@ -60,7 +52,7 @@ class ContactDetails extends PureComponent<IProps> {
               contact.address.state,
               contact.address.country
             ]
-          : {}
+          : null
       },
       { section: 'Birthday', value: contact.birthday || '' },
       {
@@ -107,54 +99,13 @@ class ContactDetails extends PureComponent<IProps> {
           <Text style={styles.rightNavText}>Payment activities</Text>
         </TouchableOpacity>
       </View>,
-      <FlatList
-        data={[
-          { section: 'a', value: '' },
-          { section: 'b', value: '' },
-          ...this.getContactDetails()
-        ]}
-        renderItem={this.renderItem}
-        keyExtractor={item => item.section}
-        stickyHeaderIndices={[1]}
+      <GenericProfileDetails
+        sections={this.getContactDetails()}
+        image={this.props.contact.image}
+        headerText={this.props.contact.contactName}
+        headerSubText={`\u20A6 ${numberWithCommas(40000)}`}
       />
     ]
-  }
-
-  renderItem = ({ item, index }: any) => {
-    const contact = this.props.contact
-    if (index == 0) {
-      return (
-        <View style={styles.pictureView}>
-          <Image
-            source={{
-              uri:
-                contact.image ||
-                'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
-            }}
-            style={{ width: '100%', height: 280 }}
-          />
-        </View>
-      )
-    } else if (index == 1) {
-      return (
-        <View style={styles.textView}>
-          <Text style={styles.cusName}>
-            {contact.contactName ? contact.contactName.split(' ')[0] : ''}
-          </Text>
-          <Text style={styles.totalAmount}>
-            {'\u20A6'} {numberWithCommas(40000)}
-          </Text>
-        </View>
-      )
-    } else {
-      return (
-        <ProfileListAtom
-          section={item.section}
-          value={item.value}
-          iconName={item.icon}
-        />
-      )
-    }
   }
 }
 
@@ -184,29 +135,6 @@ const styles = StyleSheet.create({
     color: color.button,
     fontSize: 14,
     fontFamily: 'AvenirNext-Medium'
-  },
-  pictureView: {
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  textView: {
-    backgroundColor: color.selling,
-    alignItems: 'center',
-    justifyContent: 'center',
-    paddingVertical: 24
-  },
-  cusName: {
-    fontSize: 16,
-    fontFamily: 'AvenirNext-Regular',
-    color: '#fff',
-    padding: 0
-  },
-  totalAmount: {
-    fontSize: 24,
-    fontFamily: 'AvenirNext-Bold',
-    color: '#fff',
-    marginTop: 6,
-    padding: 0
   }
 })
 
