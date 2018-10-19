@@ -10,14 +10,14 @@ interface IProps {
 }
 export default class CategoryDetailsScreen extends React.PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const expense = navigation.getParam('category', {})
+    const category = navigation.getParam('category', {})
     return {
       header: (
         <Header
           title="Category Details"
           onPressLeftIcon={() => navigation.goBack()}
           onPressRightIcon={() =>
-            navigation.navigate('UpsertCategory', { expense })
+            navigation.navigate('UpsertCategory', { category })
           }
         />
       )

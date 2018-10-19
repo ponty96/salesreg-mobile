@@ -1,4 +1,4 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const UpsertProductGQL = gql`
   mutation UpsertProduct(
@@ -51,7 +51,7 @@ export const UpsertProductGQL = gql`
       }
     }
   }
-`;
+`
 
 export const UpsertServiceGQL = gql`
   mutation UpsertService(
@@ -86,4 +86,23 @@ export const UpsertServiceGQL = gql`
       }
     }
   }
-`;
+`
+
+export const UpsertCategoryGQL = gql`
+  mutation UpsertCategory($categoryId: Uuid, $category: CategoryInput!) {
+    upsertCategory(categoryId: $categoryId, category: $category) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Category {
+          id
+          title
+          description
+        }
+      }
+    }
+  }
+`
