@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet, Text, ScrollView } from 'react-native'
-import { Thumbnail, ListItem, Left, Right } from 'native-base'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
 import Header from '../../Components/Header/DetailsScreenHeader'
+import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
+import Icon from "../../Atom/Icon"
 
 interface IProps {
   navigation?: any
@@ -14,103 +15,67 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     return {
       header: (
         <Header
-          title="Product"
+          title="Product Details"
           onPressLeftIcon={() => navigation.goBack()}
           onPressRightIcon={() =>
-            navigation.navigate('NewProduct', { product })
+            navigation.navigate('UpsertProduct', { product })
           }
         />
       )
     }
   }
 
+  sections = (): any => {
+    const product = this.props.navigation.getParam('product', {})
+    return [
+      { section: 'Total Quantity Sold', value: '2344' },
+      { section: 'MSQ', value: product.minimumStockQuantity },
+      { section: 'Unit selling price', value: `\u20A6 ${product.sellingPrice}`,
+      { section: 'Categories', value: ['dummy category here'] },
+      { section: 'Tags', value: null }, // logic for showing tags here
+      { section: 'Images', value: null } // logic for rendering images here
+    ]
+  }
   render() {
     // do change the list to the appropriate molecule
     const product = this.props.navigation.getParam('product', {})
-    return (
-      <View style={styles.centerContainer}>
-        <View style={styles.ababa}>
-          <ScrollView>
-            <View>
-              <View style={styles.aboveAccordionContainerP}>
-                <View style={styles.aboveAccordionPictureViewP}>
-                  <Thumbnail
-                    source={{
-                      uri:
-                        'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
-                    }}
-                    // style={styles.aboveAccordiondpP}
-                  />
-                  <Text style={styles.aboveAccordionPictureText}>
-                    {product.name}
-                  </Text>
-                </View>
-                <View style={styles.aboveAccordionMoneyView}>
-                  <View style={styles.viewMarginRight}>
-                    <Text style={styles.aboveAccordionGreyFont}>
-                      Stock quantity(in units)
-                    </Text>
-                    <Text style={styles.aboveAccordionBoldFont}>
-                      {product.number}
-                    </Text>
-                  </View>
-                  <View style={styles.viewMarginRight}>
-                    <Text style={styles.aboveAccordionGreyFont}>
-                      Total Units Sold
-                    </Text>
-                    <Text style={styles.aboveAccordionBoldFont}>{300}</Text>
-                  </View>
-                </View>
-              </View>
-              <View>
-                <ListItem style={styles.aboveAccordionWhiteList}>
-                  <Left>
-                    <Text style={styles.aboveAccordionBlackTextL}>
-                      Unit cost price
-                    </Text>
-                  </Left>
-                  <Right>
-                    <Text style={styles.aboveAccordionBlackTextR}>
-                      &#8358; {parseFloat(product.costPrice)}
-                    </Text>
-                  </Right>
-                </ListItem>
-                <ListItem style={styles.aboveAccordionWhiteList}>
-                  <Left>
-                    <Text style={styles.aboveAccordionBlackTextL}>
-                      Selling Price
-                    </Text>
-                  </Left>
-                  <Right>
-                    <Text style={styles.aboveAccordionGreenTextR}>
-                      &#8358; {parseFloat(product.sellingPrice)}
-                    </Text>
-                  </Right>
-                </ListItem>
-                <ListItem style={styles.aboveAccordionWhiteList}>
-                  <Left>
-                    <Text style={styles.aboveAccordionBlackTextL}>
-                      Minimum stock quantity
-                    </Text>
-                  </Left>
-                  <Right>
-                    <Text style={styles.aboveAccordionBlackTextR}>
-                      {product.minimumStockQuantity}
-                    </Text>
-                  </Right>
-                </ListItem>
-              </View>
-            </View>
-          </ScrollView>
-        </View>
-      </View>
-    )
+    return [
+      <View style={styles.topHeader} key="dddd-334">
+        <View style={{ flexDirection: 'row' }} />
+        <TouchableOpacity style={{flexDirection: 'row', alignItems: "center"}}>
+          <Icon type="Ionicons" name="md-share" style={{fontSize: 27, color: color.textColor, marginRight: 8}}/>
+          <Text style={styles.rightNavText}>Share</Text>
+        </TouchableOpacity>
+      </View>,
+      <GenericProfileDetails
+        sections={this.sections()}
+        image={product.image} // change logic based on product having multiple images
+        headerText={product.name}
+        headerSubText={product.number}
+      />
+    ]
   }
 }
 
 export default ProductDetailsScreen
 
 const styles = StyleSheet.create({
+  topHeader: {
+    flexDirection: 'row',
+    position: 'absolute',
+    zIndex: 999,
+    backgroundColor: '#ffffffc7',
+    width: '100%',
+    paddingVertical: 8,
+    justifyContent: 'space-between',
+    paddingRight: 16
+  },
+  rightNavText: {
+    color: color.button,
+    fontSize: 16,
+    fontFamily: 'AvenirNext-Medium',
+    marginLeft: 8
+  },
   centerContainer: {
     flex: 1,
     justifyContent: 'center',

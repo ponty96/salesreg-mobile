@@ -1,75 +1,66 @@
-import React, { PureComponent } from 'react'
-import { View, StyleSheet } from 'react-native'
-import FabAtom from '../../Atom/FabAtom'
-import ProductList from '../../Components/ProductList'
-import { color } from '../../Style/Color'
+import * as React from 'react'
+import { Alert } from 'react-native'
+import Header from '../../Components/Header/BaseHeader'
+import GenericListIndex from '../../Components/Generic/ListIndex'
 import { ListCompanyProductsGQL } from '../../graphql/queries/store'
-import { Query } from 'react-apollo'
-import AppSpinner from '../../Components/Spinner'
-import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any
 }
 
-interface IState {
-  business: any
-}
-
-class ProductScreen extends PureComponent<IProps, IState> {
-  state = {
-    business: null
+export default class ProductScreen extends React.Component<IProps> {
+  static navigationOptions = ({ navigation }: any) => {
+    return {
+      header: (
+        <Header
+          title="Products"
+          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
+        />
+      )
+    }
   }
 
-  componentDidMount() {
-    this.updateState()
+  parseData = (item: any) => {
+    const { name, number, minimumStockQuantity, image, sellingPrice } = item
+    return [
+      {
+        firstTopText: name,
+        bottomLeftFirstText: '',
+        bottomLeftSecondText: '', //total amount in sales
+        topRightText: `\u20A6 ${sellingPrice}`,
+        bottomRightText: number,
+        avatar: image,
+        topLeftTextStyle: parseInt(minimumStockQuantity) >=
+          parseInt(number) && {
+          color: 'red'
+        }
+      }
+    ]
   }
-  updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
-    this.setState({
-      business: user.company
-    })
-  }
+
   render() {
-    const { business } = this.state
     return (
-      <Query
-        query={ListCompanyProductsGQL}
-        variables={{ companyId: `${business && business.id}` }}
-        fetchPolicy="cache-and-network"
-      >
-        {({ loading, data }) => {
-          return (
-            <View style={styles.container}>
-              <AppSpinner visible={loading} />
-              <ProductList
-                items={data.listCompanyProducts}
-                navigation={this.props.navigation}
-              />
-              <FabAtom
-                routeName={'NewProduct'}
-                name={'basket-fill'}
-                type={'MaterialCommunityIcons'}
-                navigation={this.props.navigation}
-              />
-            </View>
-          )
+      <GenericListIndex
+        navigation={this.props.navigation}
+        graphqlQuery={ListCompanyProductsGQL}
+        graphqlQueryResultKey="listCompanyProducts"
+        parseItemData={this.parseData}
+        onItemPress={item =>
+          this.props.navigation.navigate('ProductDetails', { product: item })
+        }
+        emptyListText={`When you add products, they get listed here \nAdd products by tapping the`}
+        headerText="Add products here to start making sales"
+        fabRouteName="UpsertProduct"
+        fabIconName="basket-fill"
+        fabIconType="MaterialCommunityIcons"
+        hideSeparator={true}
+        subHeader={{
+          screen: 'order',
+          rightLabel: 'Manage Variants',
+          onPress: () => this.props.navigation.navigate('ProductVariants')
         }}
-      </Query>
+      />
     )
   }
 }
-
-export default ProductScreen
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: color.secondary
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
-  }
-})

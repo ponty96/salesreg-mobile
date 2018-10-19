@@ -1,6 +1,6 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { DrawerNavigator, StackNavigator, TabNavigator } from 'react-navigation'
+import { Text } from 'react-native'
+import { DrawerNavigator, StackNavigator } from 'react-navigation'
 import Header from '../Components/Header/BaseHeader'
 // import AppSpinner from '../Components/Spinner'
 
@@ -87,57 +87,6 @@ import IncomeScreen from '../Screen/IncomeScreen'
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
 
-const viewBothStack = TabNavigator(
-  {
-    Products: {
-      screen: ProductScreen
-    },
-    Services: {
-      screen: ServicesScreen
-    }
-  },
-  {
-    navigationOptions: ({ navigation }: any) => ({
-      tabBarIcon: ({ focused }: any) => {
-        const { routeName } = navigation.state
-        let tabColor
-        if (routeName === 'Products') {
-          tabColor = focused ? color.secondary : color.secondary
-        } else if (routeName === 'Services') {
-          tabColor = focused ? color.secondary : color.secondary
-        }
-        return (
-          <View style={{ alignItems: 'center' }}>
-            <Text style={{ color: tabColor, fontWeight: 'bold', fontSize: 20 }}>
-              {routeName}
-            </Text>
-          </View>
-        )
-      }
-    }),
-    tabBarOptions: {
-      activeTintColor: color.secondary,
-      inactiveTintColor: color.secondary,
-      showLabel: true,
-      style: {
-        backgroundColor: color.primary,
-        height: 60,
-        paddingVertical: 8
-      },
-      indicatorStyle: {
-        backgroundColor: color.check
-      },
-      upperCaseLabel: false,
-      labelStyle: {
-        fontSize: 14,
-        fontFamily: 'Source Sans Pro'
-      }
-    },
-    animationEnabled: false,
-    swipeEnabled: true
-  }
-)
-
 const businessStack = StackNavigator(
   {
     Home: {
@@ -161,11 +110,10 @@ const businessStack = StackNavigator(
     Invoice: {
       screen: InvoicesScreen
     },
+
+    // Setting ROUTES
     ProfileSettings: {
       screen: ProfileSettingsScreen
-    },
-    ViewBusiness: {
-      screen: viewBothStack
     },
     UserProfile: {
       screen: UserProfileScreen
@@ -181,14 +129,20 @@ const businessStack = StackNavigator(
     },
 
     // STORE ROUTES
-    NewProduct: {
+    Products: {
+      screen: ProductScreen
+    },
+    Services: {
+      screen: ServicesScreen
+    },
+    UpsertProduct: {
       screen: UpsertProductScreen
     },
     ProductDetails: {
       screen: ProductDetailsScreen
     },
-    EditServices: UpsertServiceScreen,
-    ShowService: ServiceDetailsScreen,
+    UpsertService: UpsertServiceScreen,
+    ServicesDetails: ServiceDetailsScreen,
 
     Categories: CategoriesScreen,
     CategoryDetails: CategoryDetailsScreen,

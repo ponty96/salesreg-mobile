@@ -11,13 +11,15 @@ export interface DataProps {
   bottomRightText?: string
   avatar?: string
   icon?: JSX.Element
+  topLeftTextStyle?: any
 }
 interface IProps extends DataProps {
   onPress?: () => void
   style?: object
   rightTopTextStyle?: object
   leftStyle?: object
-  rightStyle?: object
+  rightTextStyle?: object
+  bottomRightTextStyle?: object
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
@@ -45,15 +47,7 @@ const renderStatusIndicator = (bottomRightText: string): any => {
 export default class SalesOrderListAtom extends React.PureComponent<IProps> {
   render() {
     return (
-      <TouchableOpacity
-        style={[
-          styles.wrapper,
-          this.props.style,
-          renderStatusIndicator(this.props.bottomRightText)
-        ]}
-        onPress={this.props.onPress}
-        key="SalesOrderListAtom-2"
-      >
+      <View style={styles.listItem}>
         {this.props.avatar && (
           <Thumbnail
             source={{ uri: this.props.avatar }}
@@ -61,68 +55,112 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
           />
         )}
         {this.props.icon}
-        {this.renderLeftComponent()}
-        {this.renderRightComponent()}
-      </TouchableOpacity>
+        <TouchableOpacity
+          style={[
+            styles.wrapper,
+            this.props.style,
+            renderStatusIndicator(this.props.bottomRightText)
+          ]}
+          onPress={this.props.onPress}
+          key="SalesOrderListAtom-2"
+        >
+          {this.renderLeftComponent()}
+          {this.renderRightComponent()}
+        </TouchableOpacity>
+      </View>
     )
   }
   renderLeftComponent = (): any => {
-    if (
-      this.props.firstTopText ||
-      this.props.bottomLeftFirstText ||
-      this.props.bottomLeftSecondText
-    ) {
+    const {
+      firstTopText,
+      bottomLeftFirstText,
+      bottomLeftSecondText
+    } = this.props
+    if (firstTopText || bottomLeftFirstText || bottomLeftSecondText) {
       return (
         <Left style={[styles.leftWrapper, this.props.leftStyle]}>
-          <Text style={[styles.serialNumber, styles.top]}>
-            {this.props.firstTopText}
+          <Text
+            style={[
+              styles.serialNumber,
+              styles.top,
+              this.props.topLeftTextStyle
+            ]}
+          >
+            {firstTopText}
           </Text>
-          <View style={styles.wrapperForTopLeft}>
-            <Text style={[styles.text, styles.bottom]}>
-              {this.props.bottomLeftFirstText}
-            </Text>
-            <Text style={[styles.time, styles.bottom]}>
-              {this.props.bottomLeftSecondText}
-            </Text>
-          </View>
+          {this.renderBottomTexts(bottomLeftFirstText, bottomLeftSecondText)}
         </Left>
       )
     }
   }
-  renderRightComponent = (): any => {
-    if (this.props.topRightText || this.props.bottomRightText) {
+  renderBottomTexts = (bottomLeftFirstText, bottomLeftSecondText): any => {
+    if (bottomLeftFirstText || bottomLeftSecondText) {
       return (
-        <Right style={[styles.rightWrapper, this.props.rightStyle]}>
-          <Text style={[styles.text, styles.top, styles.price]}>
-            {this.props.topRightText}
+        <View style={styles.wrapperForTopLeft}>
+          <Text style={[styles.text, styles.bottom]}>
+            {bottomLeftFirstText}
           </Text>
-          <Text style={[styles.status, styles.bottom]}>
-            {this.props.bottomRightText}
+          <Text style={[styles.time, styles.bottom]}>
+            {bottomLeftSecondText}
           </Text>
+        </View>
+      )
+    }
+  }
+  renderRightComponent = (): any => {
+    const { topRightText, bottomRightText } = this.props
+    if (topRightText || bottomRightText) {
+      return (
+        <Right style={styles.rightWrapper}>
+          {this.renderRightAlignedText(topRightText, [
+            styles.text,
+            styles.top,
+            styles.price,
+            this.props.rightTextStyle
+          ])}
+          {this.renderRightAlignedText(bottomRightText, [
+            styles.status,
+            styles.bottom,
+            this.props.bottomRightTextStyle
+          ])}
         </Right>
       )
+    }
+  }
+  renderRightAlignedText = (text, styles): any => {
+    if (text) {
+      return <Text style={styles}>{text}</Text>
     }
   }
 }
 
 const styles = StyleSheet.create({
+  listItem: {
+    flexDirection: 'row',
+    flex: 1,
+    marginHorizontal: 8,
+    alignItems: 'center'
+  },
   avatar: {
-    height: 55,
-    width: 55,
+    height: 50,
+    width: 50,
     marginTop: 0,
     paddingTop: 0,
-    borderRadius: 55 / 2,
+    borderRadius: 25,
     margin: 0,
-    padding: 0
+    padding: 0,
+    marginRight: 8
   },
   wrapper: {
     borderBottomWidth: 1,
     borderBottomColor: color.listBorderColor,
     flexDirection: 'row',
-    marginHorizontal: 8,
     backgroundColor: color.secondary,
     marginVertical: 8,
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
+    flex: 1,
+    paddingRight: 8,
+    minHeight: 55
   },
   serialNumber: {
     fontFamily: 'AvenirNext-DemiBold',
@@ -148,17 +186,17 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   top: {
-    marginTop: 8
+    // marginTop: 8
   },
   status: {
     // color: color.selling,
     fontFamily: 'AvenirNext-Regular'
   },
   rightWrapper: {
-    marginRight: 16
+    // marginRight: 16
   },
   leftWrapper: {
-    marginLeft: 16
+    // marginLeft: 8
   },
   statusIndicator: {
     width: 5

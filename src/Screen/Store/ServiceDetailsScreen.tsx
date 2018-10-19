@@ -1,80 +1,104 @@
-import React, { Component } from 'react'
-import { View, Text, StyleSheet } from 'react-native'
-
+import React, { PureComponent } from 'react'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
 import Header from '../../Components/Header/DetailsScreenHeader'
+import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
+import Icon from '../../Atom/Icon'
 
 interface IProps {
-  navigation: any
+  navigation?: any
 }
 
-const ListItem = ({ label, priceColor, amount }: any) => (
-  <View style={styles.listContainer}>
-    <Text style={styles.listText}>{label}</Text>
-    <Text style={[styles.listText, priceColor]}>{amount}</Text>
-  </View>
-)
-export default class ServiceScreen extends Component<IProps> {
+class ServiceDetailsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     const service = navigation.getParam('service', {})
     return {
       header: (
         <Header
-          title="Service"
-          onPressRightIcon={() =>
-            navigation.navigate('EditServices', { service })
-          }
+          title="Service Details"
           onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() =>
+            navigation.navigate('UpsertService', { service })
+          }
         />
       )
     }
   }
 
-  render() {
+  sections = (): any => {
     const service = this.props.navigation.getParam('service', {})
-    const price = '\u20A6 ' + service.price
-    return (
-      <View style={styles.container}>
-        <View style={styles.header}>
-          <Text
-            style={[
-              styles.headerText,
-              { fontFamily: 'SourceSansPro-Semibold' }
-            ]}
-          >
-            {service.name}
-          </Text>
-        </View>
-        <ListItem
-          amount={price}
-          label="Selling price"
-          priceColor={{ color: color.selling }}
-        />
-        <ListItem amount="100" label="Amount sold" />
-      </View>
-    )
+    return [
+      { section: 'Total Services Rendered', value: '2344' },
+      { section: 'Price', value: `\u20A6 ${service.price}` },
+      { section: 'Categories', value: ['dummy category here'] },
+      { section: 'Tags', value: null }, // logic for showing tags here
+      { section: 'Images', value: null } // logic for rendering images here
+    ]
+  }
+  render() {
+    // do change the list to the appropriate molecule
+    const service = this.props.navigation.getParam('service', {})
+    return [
+      <View style={styles.topHeader} key="dddd-334">
+        <View style={{ flexDirection: 'row' }} />
+        <TouchableOpacity
+          style={{ flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Icon
+            type="Ionicons"
+            name="md-share"
+            style={{ fontSize: 27, color: color.textColor, marginRight: 8 }}
+          />
+          <Text style={styles.rightNavText}>Share</Text>
+        </TouchableOpacity>
+      </View>,
+      <GenericProfileDetails
+        sections={this.sections()}
+        image={
+          service.image ||
+          'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+        } // change logic based on service having multiple images
+        headerText={service.name}
+      />
+    ]
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  header: {
-    borderBottomColor: color.dropdown,
-    borderBottomWidth: 1
-  },
-  headerText: {
-    marginVertical: 32,
-    fontSize: 14,
-    color: color.button,
+export default ServiceDetailsScreen
 
-    marginLeft: 32
+const styles = StyleSheet.create({
+  topHeader: {
+    flexDirection: 'row',
+    position: 'absolute',
+    zIndex: 999,
+    backgroundColor: '#ffffffc7',
+    width: '100%',
+    paddingVertical: 8,
+    justifyContent: 'space-between',
+    paddingRight: 16
+  },
+  rightNavText: {
+    color: color.button,
+    fontSize: 16,
+    fontFamily: 'AvenirNext-Medium',
+    marginLeft: 8
+  },
+  centerContainer: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: color.secondary
   },
   headerIcon: {
     color: color.secondary,
     padding: 16,
     fontSize: 28
+  },
+  headerText: {
+    color: color.secondary,
+    fontWeight: 'bold',
+    paddingRight: 16,
+    fontSize: 18
   },
   headerIconLogout: {
     color: color.secondary,
@@ -86,20 +110,106 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-start',
     alignItems: 'center'
   },
-  edit: {
-    fontFamily: 'Source Sans Pro',
-    marginRight: 32,
-    color: color.secondary
+  ababa: {
+    flex: 1,
+    backgroundColor: '#fff'
   },
-  listContainer: {
-    paddingVertical: 16,
-    borderBottomWidth: 1,
-    borderBottomColor: color.dropdown,
+  foota: {
+    height: 80,
+    padding: 16
+  },
+  btnP: {
+    alignSelf: 'flex-end'
+  },
+  txtP: {
+    color: '#fff',
+    fontSize: 16
+  },
+  aboveAccordionContainerP: {
     flexDirection: 'row',
-    justifyContent: 'space-between'
+    flex: 0,
+    borderTopWidth: 0.5,
+    borderBottomWidth: 0.5,
+    borderTopColor: '#f0f0f0',
+    borderBottomColor: '#c0c0c0'
   },
-  listText: {
-    fontFamily: 'Source Sans Pro',
-    marginHorizontal: 32
+  aboveAccordionPictureViewP: {
+    flexDirection: 'column',
+    width: '50%',
+    height: 170,
+    alignItems: 'flex-start',
+    padding: 16,
+    justifyContent: 'center',
+    backgroundColor: '#fff'
+  },
+  aboveAccordiondpP: {
+    height: 60,
+    width: 60
+  },
+  aboveAccordionBoldFont: {
+    fontFamily: 'SourceSansPro-Semibold',
+    fontSize: 20,
+    textAlign: 'right'
+  },
+  aboveAccordionWhiteList: {
+    height: 65,
+    width: '100%',
+    backgroundColor: '#FFF',
+    paddingLeft: 0,
+    marginLeft: 0
+  },
+  aboveAccordionBlackTextL: {
+    fontSize: 16,
+    color: color.dropdown,
+    paddingLeft: 16,
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionBlackTextR: {
+    fontSize: 16,
+    color: '#000',
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionGreenTextR: {
+    fontSize: 16,
+    color: color.selling,
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionRedTextR: {
+    fontSize: 16,
+    color: 'red',
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionGreyText: {
+    fontSize: 16,
+    color: color.dropdown,
+    paddingLeft: 16,
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionGreyFont: {
+    fontSize: 17,
+    color: '#000',
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionRedText: {
+    fontSize: 16,
+    color: 'red',
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionPictureText: {
+    paddingTop: 10,
+    fontSize: 18,
+    fontWeight: '400',
+    color: color.menu,
+    fontFamily: 'Source Sans Pro'
+  },
+  aboveAccordionMoneyView: {
+    width: '50%',
+    height: 170,
+    alignItems: 'flex-end',
+    justifyContent: 'center'
+    // backgroundColor: '#FFF',
+  },
+  viewMarginRight: {
+    marginRight: 16
   }
 })

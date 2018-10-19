@@ -164,8 +164,12 @@ export default class SideBar extends PureComponent<IProps, IState> {
               activeRoute={this.state.activeRoute}
               categories={[
                 {
-                  title: 'Products & Services',
-                  routeName: 'ViewBusiness'
+                  title: 'Products',
+                  routeName: 'Products'
+                },
+                {
+                  title: 'Services',
+                  routeName: 'Services'
                 },
                 {
                   title: 'Categories',

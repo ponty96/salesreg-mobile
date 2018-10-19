@@ -25,7 +25,7 @@ export default class ExpensesScreen extends React.Component<IProps> {
     return [
       {
         firstTopText: item.title,
-        bottomLeftFirstText: item.date, //item.paidTo
+        bottomLeftFirstText: '', //item.paidTo
         bottomLeftSecondText: '', //item.date
         topRightText: `\u20A6 ${item.totalAmount}`
       }
