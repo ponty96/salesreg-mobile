@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
-import ButtonAtom from '../../Atom/ButtonAtom'
+import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import OnboardingContainer from '../../Container/OnboardingContainer'
 
 interface IProps {

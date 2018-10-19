@@ -19,15 +19,24 @@ import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen'
 import VendorDetailScreen from '../Screen/Contact/VendorDetailScreen'
 import VendorScreen from '../Screen/Contact/VendorScreen'
 
+/***
+ *
+ * STORE SCREENS
+ */
 // Product Screens
-import UpsertProductScreen from '../Screen/UpsertProductScreen'
-import ProductDetailsScreen from '../Screen/ProductDetailsScreen'
-import ProductScreen from '../Screen/ProductScreen'
+import UpsertProductScreen from '../Screen/Store/UpsertProductScreen'
+import ProductDetailsScreen from '../Screen/Store/ProductDetailsScreen'
+import ProductScreen from '../Screen/Store/ProductScreen'
 
 // Service Screens
-import UpsertServiceScreen from '../Screen/UpsertServiceScreen'
-import ServiceDetailsScreen from '../Screen/ServiceDetailsScreen'
-import ServicesScreen from '../Screen/ServicesScreen'
+import UpsertServiceScreen from '../Screen/Store/UpsertServiceScreen'
+import ServiceDetailsScreen from '../Screen/Store/ServiceDetailsScreen'
+import ServicesScreen from '../Screen/Store/ServicesScreen'
+
+// Category Screens
+import CategoriesScreen from '../Screen/Store/Category/CategoriesScreen'
+import CategoryDetailsScreen from '../Screen/Store/Category/CategoryDetailsScreen'
+import UpsertCategoryScreen from "../Screen/Store/Category/UpsertCategoryScreen"
 
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
@@ -58,7 +67,6 @@ import UpsertExpenseScreen from '../Screen/UpsertExpenseScreen'
 // Authentication Screens
 import LoginScreen from '../Screen/LoginScreen'
 import LandingScreen from '../Screen/Onboarding/Landing'
-import ResetScreen from '../Screen/ResetScreen'
 import UserOnboardScreen from '../Screen/Onboarding/UserOnboardScreen'
 import BusinessOnboardScreen from '../Screen/Onboarding/BusinessOnboardScreen'
 
@@ -71,7 +79,6 @@ import HomeScreen from '../Screen/HomeScreen'
 
 // Other Component Screens
 import BankScreen from '../Screen/BankScreen'
-import InventoryScreen from '../Screen/InventoryScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
 
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
@@ -151,9 +158,6 @@ const businessStack = StackNavigator(
     Receipts: {
       screen: ReceiptsScreen
     },
-    Inventory: {
-      screen: InventoryScreen
-    },
     Invoice: {
       screen: InvoicesScreen
     },
@@ -162,12 +166,6 @@ const businessStack = StackNavigator(
     },
     ViewBusiness: {
       screen: viewBothStack
-    },
-    NewProduct: {
-      screen: UpsertProductScreen
-    },
-    ProductDetails: {
-      screen: ProductDetailsScreen
     },
     UserProfile: {
       screen: UserProfileScreen
@@ -181,8 +179,20 @@ const businessStack = StackNavigator(
     EditBusinessProfile: {
       screen: EditBusinessProfileScreen
     },
+
+    // STORE ROUTES
+    NewProduct: {
+      screen: UpsertProductScreen
+    },
+    ProductDetails: {
+      screen: ProductDetailsScreen
+    },
     EditServices: UpsertServiceScreen,
     ShowService: ServiceDetailsScreen,
+
+    Categories: CategoriesScreen,
+    CategoryDetails: CategoryDetailsScreen,
+    UpsertCategory: UpsertCategoryScreen
 
     // Expenses
     Expenses: ExpensesScreen,
@@ -259,7 +269,6 @@ const AuthStack = StackNavigator(
   {
     OnBoarding: LandingScreen,
     Login: LoginScreen,
-    Reset: ResetScreen,
     Signup: UserOnboardScreen
   },
   {

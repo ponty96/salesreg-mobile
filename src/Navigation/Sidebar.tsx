@@ -154,10 +154,22 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Home',
                   routeName: 'Home'
-                },
+                }
+              ]}
+            />
+
+            <SidebarItem
+              title="Store"
+              navigate={this.handleNavigation}
+              activeRoute={this.state.activeRoute}
+              categories={[
                 {
                   title: 'Products & Services',
                   routeName: 'ViewBusiness'
+                },
+                {
+                  title: 'Categories',
+                  routeName: 'Categories'
                 }
               ]}
             />

@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
 import { color } from '../Style/Color'
-import RadioButton from '../Atom/SingeRadioButton'
+import RadioButton from './Form/SingeRadioButton'
 
 const renderStatusIndicator = (bottomRightText: string): any => {
   let borderStyle: any = {

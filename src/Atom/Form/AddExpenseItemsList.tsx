@@ -1,7 +1,7 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
-import InputAtom from '../InputAtom'
-import ButtonAtom from '../ButtonAtom'
+import InputAtom from './InputAtom'
+import ButtonAtom from './ButtonAtom'
 import Icon from '../Icon'
 import { color } from '../../Style/Color'
 

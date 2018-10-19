@@ -10,7 +10,7 @@ interface Category {
   showRightCaret?: boolean | true
   onPress?: any | null
 }
-const settingsList = (prop: { categories: Category[]; navigate: any }) => {
+const SettingsList = (prop: { categories: Category[]; navigate: any }) => {
   return (
     <View style={styles.container}>
       {prop.categories.map((category: Category, key: number) => {
@@ -47,7 +47,7 @@ const settingsList = (prop: { categories: Category[]; navigate: any }) => {
   )
 }
 
-export default settingsList
+export default SettingsList
 
 const styles = StyleSheet.create({
   container: {

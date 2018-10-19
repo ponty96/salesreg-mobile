@@ -1,10 +1,10 @@
 import React, { PureComponent } from 'react'
 import { View } from 'react-native'
 import FormContainerAtom from '../Atom/FormContainerAtom'
-import InputAtom from '../Atom/InputAtom'
+import InputAtom from '../Atom/Form/InputAtom'
 import FormContainerWrappedAtom from '../Atom/FormContainerWrappedAtom'
-import PickerAtom from '../Atom/PickerAtom'
-import FormErrorTextAtom from '../Atom/FormErrorTextAtom'
+import PickerAtom from '../Atom/Form/PickerAtom'
+import FormErrorTextAtom from '../Atom/Form/FormErrorTextAtom'
 
 interface IProps {
   street1: string
