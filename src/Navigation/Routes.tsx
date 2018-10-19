@@ -1,6 +1,6 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { DrawerNavigator, StackNavigator, TabNavigator } from 'react-navigation'
+import { Text } from 'react-native'
+import { DrawerNavigator, StackNavigator } from 'react-navigation'
 import Header from '../Components/Header/BaseHeader'
 // import AppSpinner from '../Components/Spinner'
 
@@ -135,14 +135,14 @@ const businessStack = StackNavigator(
     Services: {
       screen: ServicesScreen
     },
-    NewProduct: {
+    UpsertProduct: {
       screen: UpsertProductScreen
     },
     ProductDetails: {
       screen: ProductDetailsScreen
     },
-    EditServices: UpsertServiceScreen,
-    ShowService: ServiceDetailsScreen,
+    UpsertService: UpsertServiceScreen,
+    ServicesDetails: ServiceDetailsScreen,
 
     Categories: CategoriesScreen,
     CategoryDetails: CategoryDetailsScreen,

@@ -11,13 +11,15 @@ export interface DataProps {
   bottomRightText?: string
   avatar?: string
   icon?: JSX.Element
+  topLeftTextStyle?: any
 }
 interface IProps extends DataProps {
   onPress?: () => void
   style?: object
   rightTopTextStyle?: object
   leftStyle?: object
-  rightStyle?: object
+  rightTextStyle?: object
+  bottomRightTextStyle?: object
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
@@ -77,7 +79,15 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
     if (firstTopText || bottomLeftFirstText || bottomLeftSecondText) {
       return (
         <Left style={[styles.leftWrapper, this.props.leftStyle]}>
-          <Text style={[styles.serialNumber, styles.top]}>{firstTopText}</Text>
+          <Text
+            style={[
+              styles.serialNumber,
+              styles.top,
+              this.props.topLeftTextStyle
+            ]}
+          >
+            {firstTopText}
+          </Text>
           {this.renderBottomTexts(bottomLeftFirstText, bottomLeftSecondText)}
         </Left>
       )
@@ -101,15 +111,17 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
     const { topRightText, bottomRightText } = this.props
     if (topRightText || bottomRightText) {
       return (
-        <Right style={[styles.rightWrapper, this.props.rightStyle]}>
+        <Right style={styles.rightWrapper}>
           {this.renderRightAlignedText(topRightText, [
             styles.text,
             styles.top,
-            styles.price
+            styles.price,
+            this.props.rightTextStyle
           ])}
           {this.renderRightAlignedText(bottomRightText, [
             styles.status,
-            styles.bottom
+            styles.bottom,
+            this.props.bottomRightTextStyle
           ])}
         </Right>
       )
