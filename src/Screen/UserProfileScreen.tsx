@@ -1,8 +1,7 @@
 import React, { Component } from 'react'
-
-import UserProfile from '../Components/UserProfile'
 import Header from '../Components/Header/DetailsScreenHeader'
 import Auth from '../services/auth'
+import GenericProfileDetails from '../Components/Generic/ProfileDetails'
 
 interface IProps {
   navigation: any
@@ -11,12 +10,14 @@ interface IProps {
 interface IState {
   list: any
   fullName: string
+  profilePicture: string
 }
 
 class UserProfileScreen extends Component<IProps, IState> {
   state = {
-    list: {},
-    fullName: ''
+    list: [],
+    fullName: '',
+    profilePicture: ''
   }
 
   static navigationOptions = ({ navigation }: any) => {
@@ -31,28 +32,44 @@ class UserProfileScreen extends Component<IProps, IState> {
     }
   }
 
-  componentDidMount() {
+  componentWillMount() {
     this.updateState()
   }
 
   updateState = async () => {
     const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
-      list: {
-        Gender: user.gender || '',
-        Phone: user.phone ? user.phone.number : '',
-        Email: user.email,
-        Address: user.location ? this.parseLocation(user.location) : ''
-      },
-      fullName: `${user.firstName} ${user.lastName}`
+      list: [
+        {
+          section: 'Email',
+          value: user.email
+        },
+        {
+          section: 'Gender',
+          value: user.gender
+        },
+        {
+          section: 'Phone',
+          value: user.phone ? user.phone.number : ''
+        },
+        {
+          section: 'Date of Birth',
+          value: user.dateOfBirth
+        }
+      ],
+      fullName: `${user.firstName} ${user.lastName}`,
+      profilePicture: user.profilePicture
     })
   }
 
-  parseLocation = ({ street1, city, state, country }) => {
-    return `${street1} ${city} ${state} ${country}`
-  }
   render() {
-    return <UserProfile list={this.state.list} name={this.state.fullName} />
+    return (
+      <GenericProfileDetails
+        headerText={this.state.fullName}
+        sections={this.state.list}
+        image={this.state.profilePicture}
+      />
+    )
   }
 }
 

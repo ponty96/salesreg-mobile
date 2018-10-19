@@ -52,7 +52,7 @@ class ContactDetails extends PureComponent<IProps> {
               contact.address.state,
               contact.address.country
             ]
-          : {}
+          : null
       },
       { section: 'Birthday', value: contact.birthday || '' },
       {
