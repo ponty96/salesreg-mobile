@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { StyleSheet, View, Dimensions } from 'react-native'
+import { StyleSheet, View, Dimensions, FlatList } from 'react-native'
 import { color } from '../Style/Color'
 import Icon from '../Atom/Icon'
 import SalesOrderListAtom from '../Atom/ListItem/SalesOrderListAtom'
@@ -13,22 +13,27 @@ interface Category {
   icon?: string
   iconType?: any
 }
-const SettingsList = (prop: { categories: Category[]; navigate: any }) => {
+const SettingsList = (props: { categories: Category[]; navigate: any }) => {
   return (
     <View style={styles.container}>
-      {prop.categories.map((category: Category, key: number) => {
-        return (
+      <FlatList
+        data={props.categories}
+        keyExtractor={item => item.section}
+        renderItem={({ item: category }: any) => (
           <SalesOrderListAtom
-            key={key}
             onPress={() =>
               category.onPress
                 ? category.onPress()
-                : prop.navigate(category.routeName)
+                : props.navigate(category.routeName)
             }
             firstTopText={category.section}
             bottomLeftFirstText={category.description}
             icon={
-              <View style={{ marginTop: 16 }}>
+              <View
+                style={{
+                  marginRight: 8
+                }}
+              >
                 <Icon
                   type={category.iconType || 'Ionicons'}
                   name={category.icon}
@@ -40,8 +45,8 @@ const SettingsList = (prop: { categories: Category[]; navigate: any }) => {
               </View>
             }
           />
-        )
-      })}
+        )}
+      />
     </View>
   )
 }
