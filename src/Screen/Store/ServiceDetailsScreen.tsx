@@ -30,7 +30,10 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
     return [
       { section: 'Total Services Rendered', value: '2344' },
       { section: 'Price', value: `\u20A6 ${service.price}` },
-      { section: 'Categories', value: ['dummy category here'] },
+      {
+        section: 'Categories',
+        value: service.categories.map(cat => cat.title)
+      },
       { section: 'Tags', value: null }, // logic for showing tags here
       { section: 'Images', value: null } // logic for rendering images here
     ]

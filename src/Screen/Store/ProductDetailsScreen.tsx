@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
 import Header from '../../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
-import Icon from "../../Atom/Icon"
+import Icon from '../../Atom/Icon'
 
 interface IProps {
   navigation?: any
@@ -30,8 +30,14 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     return [
       { section: 'Total Quantity Sold', value: '2344' },
       { section: 'MSQ', value: product.minimumStockQuantity },
-      { section: 'Unit selling price', value: `\u20A6 ${product.sellingPrice}`},
-      { section: 'Categories', value: ['dummy category here'] },
+      {
+        section: 'Unit selling price',
+        value: `\u20A6 ${product.sellingPrice}`
+      },
+      {
+        section: 'Categories',
+        value: product.categories.map(cat => cat.title)
+      },
       { section: 'Tags', value: null }, // logic for showing tags here
       { section: 'Images', value: null } // logic for rendering images here
     ]
@@ -42,8 +48,14 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     return [
       <View style={styles.topHeader} key="dddd-334">
         <View style={{ flexDirection: 'row' }} />
-        <TouchableOpacity style={{flexDirection: 'row', alignItems: "center"}}>
-          <Icon type="Ionicons" name="md-share" style={{fontSize: 27, color: color.textColor, marginRight: 8}}/>
+        <TouchableOpacity
+          style={{ flexDirection: 'row', alignItems: 'center' }}
+        >
+          <Icon
+            type="Ionicons"
+            name="md-share"
+            style={{ fontSize: 27, color: color.textColor, marginRight: 8 }}
+          />
           <Text style={styles.rightNavText}>Share</Text>
         </TouchableOpacity>
       </View>,

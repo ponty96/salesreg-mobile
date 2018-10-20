@@ -16,6 +16,10 @@ export const ListCompanyProductsGQL = gql`
         firstName
         lastName
       }
+      categories {
+        id
+        title
+      }
     }
   }
 `
@@ -27,6 +31,10 @@ export const ListCompanyServicesGQL = gql`
       id
       name
       price
+      categories {
+        id
+        title
+      }
     }
   }
 `
