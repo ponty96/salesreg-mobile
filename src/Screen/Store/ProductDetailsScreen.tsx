@@ -30,7 +30,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     return [
       { section: 'Total Quantity Sold', value: '2344' },
       { section: 'MSQ', value: product.minimumStockQuantity },
-      { section: 'Unit selling price', value: `\u20A6 ${product.sellingPrice}`,
+      { section: 'Unit selling price', value: `\u20A6 ${product.sellingPrice}`},
       { section: 'Categories', value: ['dummy category here'] },
       { section: 'Tags', value: null }, // logic for showing tags here
       { section: 'Images', value: null } // logic for rendering images here
