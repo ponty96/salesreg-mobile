@@ -28,6 +28,15 @@ export const LoginUserMutationGQL = gql`
               about
               category
               currency
+              logo
+              phone {
+                number
+              }
+              bank {
+                accountName
+                accountNumber
+                bankName
+              }
               branches {
                 id
                 type
@@ -75,6 +84,15 @@ export const RegisterUserMutationGQL = gql`
               about
               category
               currency
+              logo
+              phone {
+                number
+              }
+              bank {
+                accountName
+                accountNumber
+                bankName
+              }
               branches {
                 id
                 type
@@ -110,6 +128,15 @@ export const AddUserCompanyMutationGQL = gql`
           about
           category
           currency
+          logo
+          phone {
+            number
+          }
+          bank {
+            accountName
+            accountNumber
+            bankName
+          }
           branches {
             id
             type

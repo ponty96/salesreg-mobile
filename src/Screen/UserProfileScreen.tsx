@@ -32,7 +32,7 @@ class UserProfileScreen extends Component<IProps, IState> {
     }
   }
 
-  componentWillMount() {
+  componentDidMount() {
     this.updateState()
   }
 
@@ -48,10 +48,10 @@ class UserProfileScreen extends Component<IProps, IState> {
           section: 'Gender',
           value: user.gender
         },
-        {
-          section: 'Phone',
-          value: user.phone ? user.phone.number : ''
-        },
+        // {
+        //   section: 'Phone',
+        //   value: user.phone ? user.phone.number : ''
+        // },
         {
           section: 'Date of Birth',
           value: user.dateOfBirth

@@ -1,19 +1,11 @@
 import React, { Component } from 'react'
-import SaveCancelButton from '../Container/SaveCancelButton'
-import InputAtom from '../Atom/Form/InputAtom'
-import Header from '../Components/Header/BaseHeader'
-import FormImageAtom from '../Atom/FormImageAtom'
-import FormContainerAtom from '../Atom/FormContainerAtom'
-import FormAddressSection from '../Components/FormAddressSection'
-import DatePickerAtom from '../Atom/Form/DatePickerAtom'
 import { UpdateUserGQL } from '../graphql/mutations/user'
 import Auth from '../services/auth'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
-import PickerAtom from '../Atom/Form/PickerAtom'
-import FormErrorTextAtom from '../Atom/Form/FormErrorTextAtom'
-import { Container, Content, Form } from 'native-base'
+import FormStepperContainer from '../Container/Form/StepperContainer'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -23,13 +15,7 @@ interface IState {
   profilePicture: string
   firstName: string
   lastName: string
-  phoneType: string
-  phoneNumber: string
   dateOfBirth: string
-  street1: string
-  city: string
-  state: string
-  country: string
   gender: string
   fieldErrors: any
 }
@@ -39,13 +25,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
     profilePicture: '',
     firstName: '',
     lastName: '',
-    phoneType: '',
-    phoneNumber: '',
     dateOfBirth: '',
-    street1: '',
-    city: '',
-    state: '',
-    country: '',
     gender: '',
     fieldErrors: null
   }
@@ -54,6 +34,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
     this.updateDetails()
   }
   getImage = (_pic: any) => {}
+
   updateState = (key: string, value: any) => {
     const data = { ...this.state, [key]: value }
     this.setState(data)
@@ -62,119 +43,99 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   updateDetails = async () => {
     const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
-      ...user,
+      firstName: user.firstName,
+      lastName: user.lastName,
+      dateOfBirth: user.dateOfBirth,
       profilePicture: user.profilePicture || '',
-      phoneNumber: user.phone ? user.phone.number : '',
-      phoneType: user.phone ? user.phone.type : '',
-      ...this.parseLocationForForm(user.location)
+      gender: user.gender.toLowerCase()
     })
   }
 
-  parseLocationForForm = location => {
-    if (location) {
-      return location
-    } else return {}
-  }
-
-  static navigationOptions = ({ navigation }: any) => {
-    return {
-      header: (
-        <Header
-          title="Edit Profile"
-          onPressLeftIcon={() => navigation.goBack()}
-        />
-      )
-    }
+  static navigationOptions = {
+    header: null
   }
 
   render() {
-    const { fieldErrors } = this.state
     return (
       <Mutation mutation={UpdateUserGQL} onCompleted={this.onCompleted}>
-        {(updateUser, { loading }) => (
-          <Container>
-            <Content>
-              <Form>
-                <AppSpinner visible={loading} />
-                <FormImageAtom
-                  form="user"
-                  getValue={this.getImage}
-                  source={this.state.profilePicture}
-                />
-                <FormContainerAtom headerText={'Personal Information'}>
-                  <InputAtom
-                    label={'First Name'}
-                    required={true}
-                    defaultValue={this.state.firstName}
-                    getValue={val => this.updateState('firstName', val)}
-                    error={fieldErrors && fieldErrors['firstName']}
-                  />
-                  <InputAtom
-                    label={'Last Name'}
-                    required={true}
-                    defaultValue={this.state.lastName}
-                    getValue={val => this.updateState('lastName', val)}
-                    error={fieldErrors && fieldErrors['lastName']}
-                  />
-                  <PickerAtom
-                    list={['MALE', 'FEMALE']}
-                    placeholder="*Gender"
-                    selected={this.state.gender.toUpperCase()}
-                    handleSelection={val => this.updateState('gender', val)}
-                    required={true}
-                    label="Gender"
-                  />
-                  {fieldErrors &&
-                    fieldErrors['gender'] && (
-                      <FormErrorTextAtom errorText={fieldErrors['gender']} />
-                    )}
-                  <DatePickerAtom
-                    placeholder="Date Of Birth"
-                    date={this.state.dateOfBirth}
-                    handleDateSelection={val =>
-                      this.updateState('dateOfBirth', val)
+        {(updateUser, { loading }) => [
+          <AppSpinner visible={loading} />,
+          <FormStepperContainer
+            formData={this.state}
+            steps={[
+              {
+                stepTitle: 'Edit your profile details',
+                formFields: [
+                  {
+                    label: 'Whats your first name?',
+                    placeholder: 'E.g John',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    name: 'firstName'
+                  },
+                  {
+                    label: 'Whats your last name?',
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    name: 'lastName'
+                  },
+                  {
+                    label: 'Are you male or female?',
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'radio',
+                      options: ['male', 'female']
+                    },
+                    name: 'gender'
+                  },
+                  {
+                    label: `Date of Birth?`,
+                    placeholder: 'e.g 06/23/2018',
+                    name: 'dateOfBirth',
+                    type: {
+                      type: 'date'
                     }
-                    label="Date of Birth"
-                    required={true}
-                    error={fieldErrors && fieldErrors['dateOfBirth']}
-                  />
-                  <InputAtom
-                    label="Phone Number"
-                    required={true}
-                    defaultValue={this.state.phoneNumber}
-                    getValue={val => this.updateState('phoneNumber', val)}
-                    keyboardType="numeric"
-                    error={fieldErrors && fieldErrors['number']}
-                  />
-                </FormContainerAtom>
-                <FormAddressSection
-                  street1={this.state.street1}
-                  city={this.state.city}
-                  state={this.state.state}
-                  country={this.state.country}
-                  fieldErrors={fieldErrors}
-                  getValue={this.updateState}
-                />
-                <SaveCancelButton
-                  positiveButtonName="SAVE"
-                  navigation={this.props.navigation}
-                  createfunc={() =>
-                    updateUser({
-                      variables: this.parseMutationVariables()
-                    })
                   }
-                />
-              </Form>
-            </Content>
-          </Container>
-        )}
+                ]
+              },
+              {
+                stepTitle: `Your profile photo(1MB \nor less)`,
+                formFields: [
+                  {
+                    label: '',
+                    name: 'profilePicture',
+                    type: {
+                      type: 'image-upload'
+                    },
+                    underneathText: ''
+                  }
+                ],
+                buttonTitle: 'Update'
+              }
+            ]}
+            updateValueChange={this.updateState}
+            onCompleteSteps={() =>
+              updateUser({ variables: this.parseMutationVariables() })
+            }
+            handleBackPress={() => this.props.navigation.goBack()}
+            fieldErrors={this.state.fieldErrors}
+          />
+        ]}
       </Mutation>
     )
   }
   parseMutationVariables = () => {
-    let params = { ...this.state }
+    let params = {
+      ...this.state,
+      gender: this.state.gender ? this.state.gender.toUpperCase() : ''
+    }
     delete params.fieldErrors
-    return params
+    return { user: params }
   }
   onCompleted = async res => {
     console.log('res', res)
@@ -183,7 +144,16 @@ class EditUserProfileScreen extends Component<IProps, IState> {
     } = res
     if (success) {
       await Auth.setCurrentUser(data)
-      this.props.navigation.goBack()
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({ routeName: 'ProfileSettings' }),
+          NavigationActions.navigate({
+            routeName: 'UserProfile'
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
