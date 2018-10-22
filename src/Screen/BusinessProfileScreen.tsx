@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import Auth from '../services/auth'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../Components/Generic/ProfileDetails'
+import { Countries } from '../utilities/data/picker-lists'
 
 interface IProps {
   navigation: any
@@ -39,10 +40,11 @@ class BusinessProfileScreen extends Component<IProps, IState> {
   updateState = async () => {
     const user = JSON.parse(await Auth.getCurrentUser())
     const location = this.parseLocation(user.company)
+    const country = Countries.find(country => country.value == location.country)
     this.setState({
       list: [
         {
-          section: 'Email',
+          section: 'Business email',
           value: user.company.contactEmail
         },
         {
@@ -51,7 +53,9 @@ class BusinessProfileScreen extends Component<IProps, IState> {
         },
         {
           section: 'Phone',
-          value: user.company.phone ? user.company.phone.number : ''
+          value: user.company.phone
+            ? `${country.subLabel} ${user.company.phone.number}`
+            : ''
         },
         {
           section: 'Address',
@@ -60,17 +64,7 @@ class BusinessProfileScreen extends Component<IProps, IState> {
                 location.street1,
                 location.city,
                 location.state,
-                location.country
-              ]
-            : null
-        },
-        {
-          section: 'Bank',
-          value: user.company.bank
-            ? [
-                user.company.bank.accountName,
-                user.company.bank.accountNumber,
-                user.company.bank.bankName
+                country.mainLabel
               ]
             : null
         },

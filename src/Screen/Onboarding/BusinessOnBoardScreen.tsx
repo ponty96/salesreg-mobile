@@ -2,7 +2,11 @@ import React from 'react'
 import ThirdStep from '../../Components/SignUp/ThirdStep'
 import LastStep from '../../Components/SignUp/LastStep'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
-import { Countries, Currencies } from '../../utilities/data/picker-lists'
+import {
+  Countries,
+  Currencies,
+  geCurrencyFromCountry
+} from '../../utilities/data/picker-lists'
 import Auth from '../../services/auth'
 import { AddUserCompanyMutationGQL } from '../../graphql/mutations/authenticate'
 import { Mutation } from 'react-apollo'
@@ -53,7 +57,10 @@ export default class BusinessOnboardScreen extends React.PureComponent<
   }
 
   updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val }
+    let formData = { ...this.state, [key]: val }
+    if (key == 'businessCountry') {
+      formData = { ...formData, currency: geCurrencyFromCountry(val) }
+    }
     this.setState({ ...formData })
   }
 
@@ -169,7 +176,7 @@ export default class BusinessOnboardScreen extends React.PureComponent<
                 ]
               },
               {
-                stepTitle: `Finally, lets make sure no one accesses your account without your permission`,
+                stepTitle: `Finally, what about your transactions?`,
                 formFields: [
                   {
                     label: 'What currency do you transact in?',

@@ -1,34 +1,8 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const UpdateCompanyGQL = gql`
-  mutation updateCompany(
-    $companyId: Uuid!
-    $about: String
-    $category: Category!
-    $contactEmail: String!
-    $currency: String!
-    $title: String!
-    $street1: String!
-    $city: String!
-    $state: String!
-    $country: String!
-  ) {
-    updateCompany(
-      id: $companyId
-      company: {
-        about: $about
-        title: $title
-        category: $category
-        contactEmail: $contactEmail
-        currency: $currency
-        headOffice: {
-          street1: $street1
-          city: $city
-          state: $state
-          country: $country
-        }
-      }
-    ) {
+  mutation updateCompany($companyId: Uuid!, $company: CompanyInput!) {
+    updateCompany(id: $companyId, company: $company) {
       success
       fieldErrors {
         key
@@ -42,6 +16,9 @@ export const UpdateCompanyGQL = gql`
           about
           category
           currency
+          phone {
+            number
+          }
           branches {
             id
             type
@@ -58,4 +35,4 @@ export const UpdateCompanyGQL = gql`
       }
     }
   }
-`;
+`
