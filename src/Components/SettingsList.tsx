@@ -31,7 +31,7 @@ const SettingsList = (props: { categories: Category[]; navigate: any }) => {
             icon={
               <View
                 style={{
-                  marginRight: 8
+                  marginRight: 10
                 }}
               >
                 <Icon

@@ -26,6 +26,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
         renderItem={this.renderItem}
         keyExtractor={item => item.section}
         stickyHeaderIndices={[1]}
+        style={{ flex: 1, backgroundColor: '#fff' }}
       />
     )
   }
