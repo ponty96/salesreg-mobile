@@ -179,3 +179,8 @@ export const NG_Banks = [
     mainLabel: 'ZENITH Mobile'
   }
 ]
+
+export const getBankName = code => {
+  const bank = NG_Banks.find(bank => bank.value == code)
+  return bank.mainLabel
+}

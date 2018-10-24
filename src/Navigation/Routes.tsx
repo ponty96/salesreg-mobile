@@ -79,6 +79,9 @@ import HomeScreen from '../Screen/HomeScreen'
 
 // Other Component Screens
 import BankScreen from '../Screen/BankScreen'
+import BankDetailsScreen from '../Screen/BankDetailsScreen'
+import UpsertBankScreen from '../Screen/UpsertBankScreen'
+
 import InvoicesScreen from '../Screen/InvoicesScreen'
 
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
@@ -98,9 +101,13 @@ const businessStack = StackNavigator(
     NewEmployee: {
       screen: EmployeeForm
     },
-    Bank: {
+
+    // Transactions
+    Banks: {
       screen: BankScreen
     },
+    BankDetails: BankDetailsScreen,
+    UpsertBank: UpsertBankScreen,
     Income: {
       screen: IncomeScreen
     },

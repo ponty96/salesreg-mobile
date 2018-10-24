@@ -47,7 +47,7 @@ export default class ExpensesDetailsScreen extends Component<IProps> {
     return (
       <GenericDetailsComponent
         title={expense.title}
-        totalAmount={expense.totalAmount}
+        totalAmount={`\u20A6  ${expense.totalAmount}`}
         items={this.parseItems()}
       />
     )
