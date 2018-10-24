@@ -51,7 +51,7 @@ export default class CategoriesScreen extends React.Component<IProps> {
         emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
         headerText="Great habit keeping records!"
         fabRouteName="UpsertCategory"
-        fabIconName="database-minus"
+        fabIconName="apps"
         fabIconType="MaterialCommunityIcons"
         hideSeparator={true}
       />
