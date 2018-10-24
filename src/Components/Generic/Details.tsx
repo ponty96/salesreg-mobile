@@ -24,6 +24,7 @@ interface IProps {
   status?: string
   onPressStatus?: () => void
   onTrash?: () => void
+  hideTotal?: boolean
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
@@ -49,15 +50,22 @@ const renderStatusIndicator = (bottomRightText: string): any => {
 }
 
 export default class GenericDetailsComponent extends Component<IProps> {
+  static defaultProps = {
+    hideTotal: false
+  }
   getItems = () => {
     const { items, totalAmount } = this.props
-    return items.concat([
-      {
-        itemTitle: 'TOTAL',
-        itemValue: totalAmount,
-        isTotalAmount: true
-      }
-    ])
+    if (this.props.hideTotal) {
+      return items
+    } else {
+      return items.concat([
+        {
+          itemTitle: 'TOTAL',
+          itemValue: totalAmount,
+          isTotalAmount: true
+        }
+      ])
+    }
   }
   renderItem = ({ item }: any) =>
     item.itemTitle == 'Status' ? (
@@ -108,7 +116,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
       <View style={styles.container}>
         <View style={styles.detailsHeader}>
           <Text style={styles.title}>{title}</Text>
-          <Text style={styles.amount}>{`\u20A6 ${totalAmount}`}</Text>
+          <Text style={styles.amount}>{totalAmount}</Text>
         </View>
         <FlatList
           data={this.getItems()}
