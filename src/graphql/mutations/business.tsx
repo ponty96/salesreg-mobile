@@ -36,3 +36,23 @@ export const UpdateCompanyGQL = gql`
     }
   }
 `
+
+export const UpsertBankGQL = gql`
+  mutation upsertBank($bankId: Uuid, $bank: BankInput!) {
+    upsertBank(bankId: $bankId, bank: $bank) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Bank {
+          id
+          accountNumber
+          bankName
+          isPrimary
+        }
+      }
+    }
+  }
+`

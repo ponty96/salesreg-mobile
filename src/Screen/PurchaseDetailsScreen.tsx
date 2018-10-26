@@ -66,7 +66,7 @@ export default class PurchaseDetailsScreen extends Component<IProps> {
     return (
       <GenericDetailsComponent
         title={purchase.contact.contactName}
-        totalAmount={parseFloat(purchase.amount).toFixed(2)}
+        totalAmount={`\u20A6  ${parseFloat(purchase.amount).toFixed(2)}`}
         items={this.parseItems()}
         shouldShowStatus={true}
         onPressStatus={this.onStatusPress}
