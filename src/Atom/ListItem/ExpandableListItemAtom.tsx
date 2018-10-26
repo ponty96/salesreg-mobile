@@ -7,7 +7,7 @@ interface IProps {
   section: string
   value: any
   iconName?: string
-  body?: string
+  body?: any
 }
 
 interface IState {
@@ -21,7 +21,10 @@ class ProfileListAtom extends Component<IProps, IState> {
   rightRightComponent = (value: any) => {
     if (typeof value == 'string') {
       return <Text style={styles.normalText}>{this.props.value}</Text>
-    } else if (typeof value == 'object' && value !== null) {
+    } else if (
+      this.props.body ||
+      (typeof value == 'object' && value !== null)
+    ) {
       return (
         <Icon
           name={this.state.bodyViewState ? 'ios-arrow-up' : 'ios-arrow-down'}
@@ -34,7 +37,7 @@ class ProfileListAtom extends Component<IProps, IState> {
       )
     } else return <View />
   }
-  renderBody = (value: any) => {
+  renderBody = (value: any): JSX.Element => {
     if (
       typeof value == 'object' &&
       value !== null &&
@@ -50,6 +53,8 @@ class ProfileListAtom extends Component<IProps, IState> {
           ))}
         </View>
       )
+    } else if (this.props.body && this.state.bodyViewState) {
+      return <View style={{ backgroundColor: '#fff' }}>{this.props.body}</View>
     } else {
       return <View />
     }

@@ -58,6 +58,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
           section={item.section}
           value={item.value}
           iconName={item.icon}
+          body={item.body}
         />
       )
     }
