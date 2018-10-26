@@ -27,11 +27,13 @@ const styles = StyleSheet.create({
     fontSize: 18,
     fontFamily: 'AvenirNext-Medium',
     paddingBottom: 8,
-    color: '#fff'
+    color: '#fff',
+    textAlign: 'center'
   },
   amount: {
     fontSize: 22,
     fontFamily: 'AvenirNext-Bold',
-    color: '#fff'
+    color: '#fff',
+    textAlign: 'center'
   }
 })

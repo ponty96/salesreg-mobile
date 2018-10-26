@@ -4,10 +4,12 @@ import { GreenCanvas } from '../../../Atom/GreenCanvas'
 import { StyleSheet, View } from 'react-native'
 import { color } from '../../../Style/Color'
 import ExpandableListItemAtom from '../../../Atom/ListItem/ExpandableListItemAtom'
+import SubHeaderAtom from '../../../Components/Header/SubHeaderAtom'
 
 interface IProps {
   navigation: any
 }
+
 export default class CategoryDetailsScreen extends React.PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     const category = navigation.getParam('category', {})
@@ -24,11 +26,26 @@ export default class CategoryDetailsScreen extends React.PureComponent<IProps> {
     }
   }
 
+  getAssociatedItemsCount = () => {
+    const category = this.props.navigation.getParam('category', {})
+    const { products = [], services = [] } = category
+    return products.length + services.length
+  }
+
   render() {
     const category = this.props.navigation.getParam('category', {})
     return (
       <View style={styles.container}>
         <GreenCanvas title={category.title} />
+        <SubHeaderAtom
+          total={this.getAssociatedItemsCount()}
+          screen={'Category'}
+          rightLabel="View Associated Products & Services"
+          onPressArrow={() =>
+            this.props.navigation.navigate('CategoryAssociations', { category })
+          }
+          iconName="md-apps"
+        />
         <ExpandableListItemAtom section="Title" value={category.title} />
         <ExpandableListItemAtom
           section="Description"

@@ -1,14 +1,9 @@
 import React, { Component } from 'react'
-import {
-  View,
-  StyleSheet,
-  FlatList,
-  Text,
-  TouchableOpacity
-} from 'react-native'
+import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
 import ListItemAtom from '../../Atom/ListItem/ListItemAtom'
 import { color } from '../../Style/Color'
 import Icon from '../../Atom/Icon'
+import { GreenCanvas } from '../../Atom/GreenCanvas'
 
 interface Item {
   itemTitle: string
@@ -114,10 +109,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
     const { title, totalAmount } = this.props
     return (
       <View style={styles.container}>
-        <View style={styles.detailsHeader}>
-          <Text style={styles.title}>{title}</Text>
-          <Text style={styles.amount}>{totalAmount}</Text>
-        </View>
+        <GreenCanvas title={title} subText={`\u20A6 ${totalAmount}`} />
         <FlatList
           data={this.getItems()}
           style={{ height: 310 }}
@@ -149,23 +141,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: '#fff',
     flex: 1
-  },
-  detailsHeader: {
-    backgroundColor: color.amountSummaryBg,
-    paddingVertical: 32,
-    justifyContent: 'center',
-    alignItems: 'center'
-  },
-  title: {
-    fontSize: 18,
-    fontFamily: 'AvenirNext-Medium',
-    paddingBottom: 8,
-    color: '#fff'
-  },
-  amount: {
-    fontSize: 22,
-    fontFamily: 'AvenirNext-Bold',
-    color: '#fff'
   },
   listLabel: {
     color: color.textColor,

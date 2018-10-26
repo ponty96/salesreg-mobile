@@ -37,6 +37,7 @@ import ServicesScreen from '../Screen/Store/ServicesScreen'
 import CategoriesScreen from '../Screen/Store/Category/CategoriesScreen'
 import CategoryDetailsScreen from '../Screen/Store/Category/CategoryDetailsScreen'
 import UpsertCategoryScreen from '../Screen/Store/Category/UpsertCategoryScreen'
+import CategoryAssociationsScreen from '../Screen/Store/Category/CategoryAssociationsScreen'
 
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
@@ -154,6 +155,7 @@ const businessStack = StackNavigator(
     Categories: CategoriesScreen,
     CategoryDetails: CategoryDetailsScreen,
     UpsertCategory: UpsertCategoryScreen,
+    CategoryAssociations: CategoryAssociationsScreen,
 
     // Expenses
     Expenses: ExpensesScreen,

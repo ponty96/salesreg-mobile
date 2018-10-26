@@ -45,6 +45,19 @@ export const ListCompanyCategoriesGQL = gql`
       description
       id
       title
+
+      products {
+        name
+        featuredImage
+        id
+        sellingPrice
+      }
+
+      services {
+        name
+        id
+        price
+      }
     }
   }
 `
