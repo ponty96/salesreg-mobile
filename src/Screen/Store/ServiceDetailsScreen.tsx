@@ -4,6 +4,7 @@ import { color } from '../../Style/Color'
 import Header from '../../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
 import Icon from '../../Atom/Icon'
+import { Chip } from '../../Atom/Chip'
 
 interface IProps {
   navigation?: any
@@ -34,7 +35,17 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
         section: 'Categories',
         value: service.categories.map(cat => cat.title)
       },
-      { section: 'Tags', value: null }, // logic for showing tags here
+      // open tags screen, which shows list of products and services attached to the tag
+      {
+        section: 'Tags',
+        body: (
+          <View style={styles.tags}>
+            {service.tags.map(tag => (
+              <Chip text={tag.name} />
+            ))}
+          </View>
+        )
+      }, // logic for showing tags here
       { section: 'Images', value: null } // logic for rendering images here
     ]
   }
@@ -214,5 +225,10 @@ const styles = StyleSheet.create({
   },
   viewMarginRight: {
     marginRight: 16
+  },
+  tags: {
+    flexDirection: 'row',
+    flexWrap: 'wrap',
+    flex: 1
   }
 })

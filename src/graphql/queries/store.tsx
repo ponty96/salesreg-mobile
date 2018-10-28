@@ -20,6 +20,11 @@ export const ListCompanyProductsGQL = gql`
         id
         title
       }
+
+      tags {
+        name
+        id
+      }
     }
   }
 `
@@ -34,6 +39,11 @@ export const ListCompanyServicesGQL = gql`
       categories {
         id
         title
+      }
+
+      tags {
+        name
+        id
       }
     }
   }
