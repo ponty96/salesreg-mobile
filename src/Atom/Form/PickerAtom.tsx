@@ -11,6 +11,7 @@ import {
 } from 'react-native'
 import { color } from '../../Style/Color'
 import FormHeader from '../../Components/Header/FormHeader'
+// import * as JsSearch from "js-search";
 
 interface PickerData {
   icon?: any
