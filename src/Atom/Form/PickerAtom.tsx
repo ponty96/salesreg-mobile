@@ -11,7 +11,8 @@ import {
 } from 'react-native'
 import { color } from '../../Style/Color'
 import FormHeader from '../../Components/Header/FormHeader'
-// import * as JsSearch from "js-search";
+import * as JsSearch from 'js-search'
+import { SearchAtom } from '../SearchAtom'
 
 interface PickerData {
   icon?: any
@@ -31,10 +32,13 @@ interface IProps {
   label?: string
   underneathText?: string
   error?: any
+  onSearch?: (queryText: string) => void
 }
 
 interface IState {
   isOpen: boolean
+  queryText: string
+  list: any
 }
 
 interface PickerItem {
@@ -64,7 +68,17 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   constructor(props: any) {
     super(props)
     this.state = {
-      isOpen: false
+      isOpen: false,
+      queryText: '',
+      list: this.props.list || []
+    }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    if (this.props.list !== nextProps.list) {
+      this.setState({
+        list: nextProps.list
+      })
     }
   }
 
@@ -75,6 +89,23 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
 
   toggleOpenState = () => {
     this.setState({ isOpen: !this.state.isOpen })
+  }
+
+  onSearch = text => {
+    if (this.props.onSearch) {
+      this.setState({ queryText: text }, () => this.props.onSearch(text))
+    } else {
+      let items = this.props.list
+      if (text && text.length >= 3) {
+        let search = new JsSearch.Search('value')
+        search.addIndex('mainLabel')
+        search.addIndex('subLabel')
+        search.addIndex('value')
+        search.addDocuments(items)
+        items = search.search(text)
+      }
+      this.setState({ list: items, queryText: text })
+    }
   }
 
   getPlaceholder = () => {
@@ -127,8 +158,17 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
           totalSteps={1}
           showStepper={false}
         />
+        {this.props.list.length > 10 ? (
+          <SearchAtom
+            placeholder="Search"
+            queryText={this.state.queryText}
+            onSearch={this.onSearch}
+          />
+        ) : (
+          <View />
+        )}
         <FlatList
-          data={this.props.list}
+          data={this.state.list}
           renderItem={({ item }: any) => (
             <PickerItem
               onPress={this.handleChange}
