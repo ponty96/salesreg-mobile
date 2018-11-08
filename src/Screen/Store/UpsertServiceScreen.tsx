@@ -1,25 +1,23 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
-import { color } from '../../Style/Color'
-import Header from '../../Components/Header/BaseHeader'
-import SaveCancelButton from '../../Container/SaveCancelButton'
-import InputAtom from '../../Atom/Form/InputAtom'
-
 import { Mutation } from 'react-apollo'
 import { UpsertServiceGQL } from '../../graphql/mutations/store'
 import AppSpinner from '../../Components/Spinner'
 import Auth from '../../services/auth'
 import { parseFieldErrors } from '../../Functions'
-import { Container, Content, Form } from 'native-base'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
 
 interface IProps {
   navigation: any
+  screenProps: any
 }
 
 interface IState {
   name: string
   price: string
+  description: string
   userId: string
+  featuredImage: string
+  images: string[]
   companyId: string
   fieldErrors: any
 }
@@ -29,6 +27,9 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     name: '',
     price: '',
     userId: '',
+    description: '',
+    featuredImage: '',
+    images: [],
     companyId: '',
     fieldErrors: null
   }
@@ -38,16 +39,8 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     this.setState(state)
   }
 
-  static navigationOptions = ({ navigation }: any) => {
-    const service = navigation.getParam('service', null)
-    return {
-      header: (
-        <Header
-          title={service ? `Edit Service ${service.name}` : 'New Service'}
-          onPressLeftIcon={() => navigation.goBack()}
-        />
-      )
-    }
+  static navigationOptions = {
+    header: null
   }
 
   componentDidMount() {
@@ -70,45 +63,50 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     const { navigation } = this.props
     return (
       <Mutation mutation={UpsertServiceGQL} onCompleted={this.onCompleted}>
-        {(upsertService, { loading }) => (
-          <Container>
-            <Content>
-              <Form>
-                <AppSpinner visible={loading} />
-                <View style={{ flex: 1 }}>
-                  <View style={styles.inputView}>
-                    <InputAtom
-                      label="Service name"
-                      getValue={val => this.updateState('name', val)}
-                      contStyle={styles.inputWrapper}
-                      defaultValue={this.state.name}
-                      placeholder="e.g Human Hair dressing"
-                    />
-                  </View>
-                  <View style={styles.inputView}>
-                    <InputAtom
-                      label="Rate/charges"
-                      getValue={val => this.updateState('price', val)}
-                      contStyle={styles.inputWrapper}
-                      defaultValue={this.state.price}
-                      keyboardType="numeric"
-                      placeholder="e.g 5,000"
-                    />
-                  </View>
-                </View>
-                <SaveCancelButton
-                  navigation={navigation}
-                  positiveButtonName="SAVE"
-                  createfunc={() =>
-                    upsertService({
-                      variables: this.parseMutationVariables()
-                    })
+        {(upsertService, { loading }) => [
+          <AppSpinner visible={loading} />,
+          <FormStepperContainer
+            formData={this.state}
+            updateValueChange={this.updateState}
+            fieldErrors={this.state.fieldErrors}
+            handleBackPress={() => navigation.goBack()}
+            onCompleteSteps={() =>
+              upsertService({ variables: this.parseMutationVariables() })
+            }
+            steps={[
+              {
+                stepTitle: 'Tell us about this service',
+                formFields: [
+                  {
+                    label: 'Name',
+                    placeholder: 'e.g Ladies frontal makeup',
+                    name: 'name',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'Price',
+                    placeholder: 'e.g 5000',
+                    name: 'price',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'Description',
+                    placeholder: 'e.g Ladies frontal makeup',
+                    name: 'description',
+                    type: {
+                      type: 'input',
+                      multiline: true
+                    }
                   }
-                />
-              </Form>
-            </Content>
-          </Container>
-        )}
+                ]
+              }
+            ]}
+          />
+        ]}
       </Mutation>
     )
   }
@@ -136,30 +134,3 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     }
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: color.modal
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
-  },
-  inputView: {
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    backgroundColor: color.secondary,
-    alignContent: 'center',
-    padding: 3,
-    borderRadius: 3,
-    marginTop: 16
-  },
-  inputWrapper: {
-    // marginTop: 16,
-    // paddingBottom: 8,
-    // marginLeft: 8,
-    // marginRight: 8
-  }
-})
