@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Item, Input, Label, Text } from 'native-base'
 import { View, StyleSheet, Platform } from 'react-native'
 import { color } from '../../Style/Color'
+import { numberWithCommas } from '../../Functions/numberWithCommas'
 
 interface IProps {
   required?: boolean | false
@@ -11,6 +12,7 @@ interface IProps {
   placeholder?: string
   floatingLabel?: boolean | true
   secureTextEntry?: boolean | false
+  isMonetizable?: boolean | false
   getValue?: (a: string | number) => void
   contStyle?: object | any
   inputStyle?: object
@@ -68,7 +70,11 @@ class InputAtom extends React.Component<IProps, IState> {
               placeholder={this.props.placeholder}
               multiline={this.props.multiline}
               onChangeText={text => this.props.getValue(text)}
-              value={this.props.defaultValue}
+              value={
+                this.props.isMonetizable
+                  ? numberWithCommas(this.props.defaultValue)
+                  : this.props.defaultValue
+              }
               secureTextEntry={this.props.secureTextEntry}
               keyboardType={this.props.keyboardType}
               style={[this.props.inputStyle, styles.inputText]}
