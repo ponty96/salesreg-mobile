@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/BaseHeader'
 import Auth from '../services/auth'
-import InputAtom from '../Atom/Form/InputAtom'
 
 interface IProps {
   navigation: any
@@ -44,11 +43,6 @@ export default class HomeScreen extends React.Component<IProps, IState> {
       <View style={styles.container}>
         <View style={styles.homeBackground}>
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
-          <InputAtom
-            keyboardType="numeric"
-            defaultValue="10000"
-            isMonetizable
-          />
         </View>
       </View>
     )
