@@ -40,6 +40,7 @@ import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
+import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
 
 interface FieldType {
   type:
@@ -50,6 +51,7 @@ interface FieldType {
     | 'image-upload'
     | 'date'
     | 'expense-items'
+    | 'multi-picker'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
@@ -253,6 +255,18 @@ export default class FormStepperContainer extends React.PureComponent<
             onUpdateItems={(items: any) =>
               this.props.updateValueChange(name, items)
             }
+          />
+        )
+      case 'multi-picker':
+        return (
+          <MultiSelectPickerAtom
+            key={`${type}-${index}`}
+            label={label}
+            list={options}
+            selectedItems={formData[name]}
+            placeholder={placeholder}
+            handleSelection={val => this.props.updateValueChange(name, val)}
+            error={fieldErrors && fieldErrors[name]}
           />
         )
     }
