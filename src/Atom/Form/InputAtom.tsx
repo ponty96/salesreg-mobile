@@ -12,7 +12,6 @@ interface IProps {
   placeholder?: string
   floatingLabel?: boolean | true
   secureTextEntry?: boolean | false
-  isOfTypePhoneNumber?: boolean | false
   getValue?: (a: string | number) => void
   contStyle?: object | any
   inputStyle?: object
@@ -71,8 +70,7 @@ class InputAtom extends React.Component<IProps, IState> {
               multiline={this.props.multiline}
               onChangeText={text => this.props.getValue(text)}
               value={
-                this.props.keyboardType == 'numeric' &&
-                !this.props.isOfTypePhoneNumber
+                this.props.keyboardType == 'numeric'
                   ? numberWithCommas(this.props.defaultValue)
                   : this.props.defaultValue
               }
