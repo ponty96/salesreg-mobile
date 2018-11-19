@@ -1,12 +1,17 @@
 import React from 'react'
 import { Icon } from 'native-base'
-import { View, StyleSheet, TouchableHighlight } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  TouchableHighlight,
+  ImageBackground
+} from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
 
 interface IProps {}
 
 interface IState {
-  dataURI: string
+  image: any
 }
 
 export default class ImageUploadAtom extends React.PureComponent<
@@ -14,21 +19,36 @@ export default class ImageUploadAtom extends React.PureComponent<
   IState
 > {
   state = {
-    dataURI: ''
+    image: null
   }
 
   selectImage = () => {
     ImagePicker.openPicker({
       width: 300,
+      includeBase64: true,
       height: 400,
       cropping: true
-    }).then(image => {
+    }).then((image: any) => {
       console.log(image)
+      this.setState({
+        image
+      })
     })
   }
 
   renderImage = (): JSX.Element => {
-    return null
+    let {
+      image: { data, mime }
+    } = this.state
+
+    return (
+      <ImageBackground
+        style={styles.imageContainer}
+        source={{
+          uri: `data:${mime};base64,${data}`
+        }}
+      />
+    )
   }
 
   renderSelectImageContainer = (): JSX.Element => {
@@ -42,7 +62,9 @@ export default class ImageUploadAtom extends React.PureComponent<
   }
 
   render() {
-    return this.renderSelectImageContainer()
+    return this.state.image
+      ? this.renderImage()
+      : this.renderSelectImageContainer()
   }
 }
 
