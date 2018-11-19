@@ -5,6 +5,7 @@ import AppSpinner from '../../Components/Spinner'
 import Auth from '../../services/auth'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
+import { ListCompanyCategoriesGQL } from '../../graphql/queries/store'
 
 interface IProps {
   navigation: any
@@ -16,10 +17,13 @@ interface IState {
   price: string
   description: string
   userId: string
-  featuredImage: string
+  featuredImage: any
   images: string[]
   companyId: string
   fieldErrors: any
+  listOfCategories: any
+  categories: string[]
+  tags: string[]
 }
 
 export default class UpsertServiceScreen extends Component<IProps, IState> {
@@ -28,10 +32,15 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     price: '',
     userId: '',
     description: '',
-    featuredImage: '',
+    featuredImage: [
+      'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+    ],
     images: [],
     companyId: '',
-    fieldErrors: null
+    fieldErrors: null,
+    listOfCategories: [],
+    categories: [],
+    tags: []
   }
 
   updateState = (key: string, value: any) => {
@@ -59,13 +68,34 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     })
   }
 
+  async componentDidUpdate() {
+    if (this.state.companyId && this.state.listOfCategories.length <= 0) {
+      const {
+        screenProps: { client }
+      } = this.props
+      const {
+        data: { listCompanyCategories }
+      } = await client.query({
+        query: ListCompanyCategoriesGQL,
+        variables: { companyId: this.state.companyId }
+      })
+
+      const categories = listCompanyCategories.map(category => ({
+        mainLabel: category.title,
+        value: category.id
+      }))
+      this.setState({ listOfCategories: categories })
+    }
+  }
+
   render() {
     const { navigation } = this.props
     return (
       <Mutation mutation={UpsertServiceGQL} onCompleted={this.onCompleted}>
         {(upsertService, { loading }) => [
-          <AppSpinner visible={loading} />,
+          <AppSpinner visible={loading} key="upsertservice-#1" />,
           <FormStepperContainer
+            key="upsertservice-#2"
             formData={this.state}
             updateValueChange={this.updateState}
             fieldErrors={this.state.fieldErrors}
@@ -103,6 +133,58 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
                     }
                   }
                 ]
+              },
+              {
+                stepTitle: 'Categorize this service',
+                formFields: [
+                  {
+                    label: 'Categories',
+                    type: {
+                      type: 'multi-picker',
+                      options: this.state.listOfCategories
+                    },
+                    name: 'categories'
+                  }
+                ]
+              },
+              {
+                stepTitle: `Add tags to ${this.state.name}`,
+                stepHint:
+                  ' \nTags will enhance your filters and your customer abilities to find services within select tags',
+                formFields: [
+                  { label: 'Tags', type: { type: 'tag-input' }, name: 'tags' }
+                ]
+              },
+              {
+                stepTitle: `Lets add images for ${
+                  this.state.name
+                } starting from the landing images`,
+                stepHint: `The landing images is what your customers see displayed on catalogue page of webstore. This is the image of this service that your customers will first see when they explore your catalogue. Click + to add from your device storage`,
+                formFields: [
+                  {
+                    label: '',
+                    name: 'featuredImage',
+                    type: {
+                      type: 'image-upload'
+                    }
+                  }
+                ]
+              },
+              {
+                stepTitle: `Lets now add other images for ${this.state.name}`,
+                stepHint: `Images will be displayed on the details section of your webstore. Customers can view multiple images of ${
+                  this.state.name
+                }`,
+                formFields: [
+                  {
+                    label: '',
+                    name: 'images',
+                    type: {
+                      type: 'image-upload'
+                    }
+                  }
+                ],
+                buttonTitle: 'Done'
               }
             ]}
           />
@@ -113,12 +195,12 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
 
   parseMutationVariables = () => {
     const service = this.props.navigation.getParam('service', {})
-    const { name, price, userId, companyId } = this.state
+    let params = { ...this.state, featuredImage: this.state.featuredImage[0] }
+    delete params.listOfCategories
+    delete params.fieldErrors
+
     return {
-      name,
-      price,
-      userId,
-      companyId,
+      service: params,
       serviceId: service ? service.id : null
     }
   }

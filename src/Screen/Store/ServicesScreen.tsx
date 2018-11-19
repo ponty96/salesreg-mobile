@@ -46,8 +46,8 @@ export default class ServicesScreen extends React.Component<IProps> {
         onItemPress={item =>
           this.props.navigation.navigate('ServicesDetails', { service: item })
         }
-        emptyListText={`When you add products, they get listed here \nAdd products by tapping the`}
-        headerText="Add products here to start making sales"
+        emptyListText={`When you add services you offer, they get listed here \nAdd services by tapping the`}
+        headerText="Add services here to start making sales"
         fabRouteName="UpsertService"
         fabIconName="basket-fill"
         fabIconType="MaterialCommunityIcons"
