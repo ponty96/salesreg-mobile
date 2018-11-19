@@ -44,8 +44,8 @@ export default class HomeScreen extends React.Component<IProps, IState> {
       <View style={styles.container}>
         <View style={styles.homeBackground}>
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
-          <ImageUploadAtom />
         </View>
+        <ImageUploadAtom />
       </View>
     )
   }

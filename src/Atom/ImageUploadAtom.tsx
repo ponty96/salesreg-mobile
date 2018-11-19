@@ -1,20 +1,43 @@
 import React from 'react'
 import { Icon } from 'native-base'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableHighlight } from 'react-native'
+import ImagePicker from 'react-native-image-crop-picker'
 
 interface IProps {}
 
-interface IState {}
+interface IState {
+  dataURI: string
+}
 
 export default class ImageUploadAtom extends React.PureComponent<
   IProps,
   IState
 > {
+  state = {
+    dataURI: ''
+  }
+
+  selectImage = () => {
+    ImagePicker.openPicker({
+      width: 300,
+      height: 400,
+      cropping: true
+    }).then(image => {
+      console.log(image)
+    })
+  }
+
+  renderImage = (): JSX.Element => {
+    return null
+  }
+
   renderSelectImageContainer = (): JSX.Element => {
     return (
-      <View style={[styles.imageContainer, styles.selectImageContainer]}>
-        <Icon name="plus" type="Feather" style={styles.icon} />
-      </View>
+      <TouchableHighlight onPress={this.selectImage}>
+        <View style={[styles.imageContainer, styles.selectImageContainer]}>
+          <Icon name="plus" type="Feather" style={styles.icon} />
+        </View>
+      </TouchableHighlight>
     )
   }
 
