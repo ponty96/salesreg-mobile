@@ -68,7 +68,9 @@ class InputAtom extends React.Component<IProps, IState> {
             <Input
               placeholder={this.props.placeholder}
               multiline={this.props.multiline}
-              onChangeText={text => this.props.getValue(text)}
+              onChangeText={text =>
+                this.props.getValue(text.replace(/,/gi, ''))
+              }
               value={
                 this.props.keyboardType == 'numeric'
                   ? numberWithCommas(this.props.defaultValue)
