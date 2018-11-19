@@ -5,7 +5,6 @@ export const ListCompanyProductsGQL = gql`
     listCompanyProducts(companyId: $companyId) {
       id
       description
-      image: featuredImage
       costPrice
       sellingPrice
       minimumStockQuantity
@@ -40,7 +39,8 @@ export const ListCompanyServicesGQL = gql`
         id
         title
       }
-
+      featuredImage
+      images
       tags {
         name
         id
@@ -58,7 +58,6 @@ export const ListCompanyCategoriesGQL = gql`
 
       products {
         name
-        featuredImage
         id
         sellingPrice
       }

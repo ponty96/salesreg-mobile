@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native'
 import React from 'react'
-import { Left } from 'native-base'
+import { Left, Right } from 'native-base'
 import Icon from '../../Atom/Icon'
 import { color } from '../../Style/Color'
 
@@ -12,6 +12,8 @@ export interface IProps {
   iconName?: string
   body?: JSX.Element
   showStepper?: boolean
+  showTickIcon?: boolean
+  onPressTickIcon?: () => void
 }
 
 export default class FormHeader extends React.PureComponent<IProps> {
@@ -54,6 +56,24 @@ export default class FormHeader extends React.PureComponent<IProps> {
               type="Ionicons"
             />
           </Left>
+          {this.props.showTickIcon ? (
+            <Right
+              style={{
+                flexDirection: 'row',
+                alignItems: 'flex-end',
+                justifyContent: 'flex-end'
+              }}
+            >
+              <Icon
+                name="md-checkmark"
+                onPress={this.props.onPressTickIcon}
+                style={styles.tickIcon}
+                type="Ionicons"
+              />
+            </Right>
+          ) : (
+            <Right />
+          )}
         </View>
       </View>
     ]
@@ -80,5 +100,9 @@ const styles = StyleSheet.create({
   headerIcon: {
     fontSize: 26,
     color: '#000'
+  },
+  tickIcon: {
+    fontSize: 26,
+    color: color.button
   }
 })

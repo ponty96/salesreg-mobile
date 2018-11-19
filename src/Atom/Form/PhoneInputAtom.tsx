@@ -3,6 +3,7 @@ import { View, Text, StyleSheet } from 'react-native'
 import countries from '../../utilities/data/countries'
 import InputAtom from './InputAtom'
 import { color } from '../../Style/Color'
+
 interface IProps {
   countryCode: string
   placeholder: string

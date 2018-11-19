@@ -1,8 +1,9 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import { Left, Right, Title, Item, Input } from 'native-base'
+import { Left, Right, Title } from 'native-base'
 import Icon from '../../Atom/Icon'
 import { color } from '../../Style/Color'
+import { SearchAtom } from '../../Atom/SearchAtom'
 
 export interface IProps {
   title: string
@@ -76,15 +77,7 @@ export default class BaseHeader extends React.PureComponent<IProps> {
             <Right />
           )}
         </View>
-        {this.props.showSearchBar && (
-          <Item style={styles.searchItem}>
-            <Icon
-              name="ios-search"
-              style={{ color: '#000', fontSize: 24, padding: 0, marginTop: 0 }}
-            />
-            <Input placeholder="" />
-          </Item>
-        )}
+        {this.props.showSearchBar && <SearchAtom />}
       </View>
     )
   }
@@ -123,17 +116,5 @@ const styles = StyleSheet.create({
     width: 25,
     // left: 20,
     fontSize: 26
-  },
-  searchItem: {
-    backgroundColor: color.textBorderBottom,
-    borderWidth: 1,
-    borderColor: color.textBorderBottom,
-    borderRadius: 8,
-    paddingLeft: 12,
-    marginTop: 0,
-    top: 0,
-    height: 36,
-    justifyContent: 'center',
-    marginBottom: 8
   }
 })

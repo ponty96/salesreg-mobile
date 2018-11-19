@@ -21,6 +21,7 @@ interface IProps {
   login?: boolean
   error?: any
   inlineElement?: any
+  onSubmitEditing?: any
 }
 
 interface IState {}
@@ -75,6 +76,7 @@ class InputAtom extends React.Component<IProps, IState> {
               underlineColorAndroid={'transparent'}
               placeholderTextColor={color.inactive}
               maxLength={this.props.maxLength}
+              onSubmitEditing={this.props.onSubmitEditing}
             />
           </View>
         </Item>
