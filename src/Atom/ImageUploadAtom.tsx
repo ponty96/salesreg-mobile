@@ -3,7 +3,7 @@ import { Icon } from 'native-base'
 import {
   View,
   StyleSheet,
-  TouchableHighlight,
+  TouchableOpacity,
   ImageBackground,
   Text
 } from 'react-native'
@@ -81,14 +81,12 @@ export default class ImageUploadAtom extends React.PureComponent<
           uploadState: 1
         })
       })
-      .then(response => {
-        console.log(response)
+      .then(() => {
         this.setState({
           uploadState: 3
         })
       })
-      .catch(error => {
-        console.log(error)
+      .catch(() => {
         this.setState({
           uploadState: 2
         })
@@ -101,7 +99,7 @@ export default class ImageUploadAtom extends React.PureComponent<
 
   renderRetryContainer = (): JSX.Element => {
     return (
-      <TouchableHighlight onPress={this.uploadImage}>
+      <TouchableOpacity onPress={this.uploadImage}>
         <View style={styles.retryContainer}>
           <Icon
             name="file-upload"
@@ -110,13 +108,13 @@ export default class ImageUploadAtom extends React.PureComponent<
           />
           <Text style={styles.retryText}>Retry</Text>
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 
   renderLoadingContainer = (): JSX.Element => {
     return (
-      <TouchableHighlight onPress={this.cancelUpload}>
+      <TouchableOpacity onPress={this.cancelUpload}>
         <View>
           <Circle
             indeterminate={this.state.uploadProgress < 0.25 ? true : false}
@@ -131,7 +129,7 @@ export default class ImageUploadAtom extends React.PureComponent<
             style={[styles.whiteIcon, styles.stopDownloadIcon]}
           />
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 
@@ -169,7 +167,7 @@ export default class ImageUploadAtom extends React.PureComponent<
 
   renderSelectImageContainer = (): JSX.Element => {
     return (
-      <TouchableHighlight onPress={this.selectImage}>
+      <TouchableOpacity onPress={this.selectImage}>
         <View
           style={[
             styles.container,
@@ -179,7 +177,7 @@ export default class ImageUploadAtom extends React.PureComponent<
         >
           <Icon name="plus" type="Feather" style={styles.icon} />
         </View>
-      </TouchableHighlight>
+      </TouchableOpacity>
     )
   }
 

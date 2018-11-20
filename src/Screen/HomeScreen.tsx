@@ -53,7 +53,8 @@ export default class HomeScreen extends React.Component<IProps, IState> {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1
+    flex: 1,
+    backgroundColor: '#fff'
   },
   homeBackground: {
     backgroundColor: 'rgba(152,251,152, 0.2)', // #98FB98
