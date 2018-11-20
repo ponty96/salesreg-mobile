@@ -21,6 +21,7 @@ export const ListCompanyPurchasesGQL = gql`
         product {
           name
           id
+          featuredImage
         }
       }
     }
@@ -47,10 +48,12 @@ export const ListCompanySalesGQL = gql`
           name
           id
           costPrice
+          featuredImage
         }
         service {
           name
           id
+          featuredImage
         }
       }
 

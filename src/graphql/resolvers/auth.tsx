@@ -13,7 +13,6 @@ type Company {
   title: String
   contactEmail: String
   about: String
-  category: String
   currency: String
 }
 `

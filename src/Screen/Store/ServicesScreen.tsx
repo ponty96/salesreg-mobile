@@ -22,7 +22,7 @@ export default class ServicesScreen extends React.Component<IProps> {
   }
 
   parseData = (item: any) => {
-    const { name, price } = item
+    const { name, price, featuredImage } = item
     return [
       {
         firstTopText: name,
@@ -30,8 +30,7 @@ export default class ServicesScreen extends React.Component<IProps> {
         bottomLeftSecondText: '', //total amount in sales
         topRightText: `\u20A6 ${price}`,
         bottomRightText: '', // show total amount in sales
-        avatar:
-          'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7' // change to image in service
+        avatar: featuredImage // change to image in service
       }
     ]
   }

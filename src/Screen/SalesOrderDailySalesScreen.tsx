@@ -35,7 +35,7 @@ export default class SalesOrderDailySalesScreen extends React.Component<
        */
       avatar: item.product
         ? item.product.featuredImage
-        : 'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+        : item.service.featuredImage
     }))
   }
 

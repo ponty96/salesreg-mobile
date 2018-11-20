@@ -10,6 +10,8 @@ export const ListCompanyProductsGQL = gql`
       minimumStockQuantity
       number: stockQuantity
       name
+      featuredImage
+      images
       user {
         id
         firstName
@@ -60,12 +62,16 @@ export const ListCompanyCategoriesGQL = gql`
         name
         id
         sellingPrice
+        featuredImage
+        images
       }
 
       services {
         name
         id
         price
+        featuredImage
+        images
       }
     }
   }

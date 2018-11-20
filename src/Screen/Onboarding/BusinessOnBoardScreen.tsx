@@ -226,7 +226,6 @@ export default class BusinessOnboardScreen extends React.PureComponent<
     }
     params.logo = this.state.logo.length > 0 ? this.state.logo[0] : null
     delete params.businessCountry
-    params['category'] = 'PRODUCT_SERVICE'
     delete params.user
     return { company: params, userId: this.state.user.id }
   }
