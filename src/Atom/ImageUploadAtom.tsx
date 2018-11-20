@@ -149,12 +149,12 @@ export default class ImageUploadAtom extends React.PureComponent<
 
     return (
       <ImageBackground
-        style={styles.container}
+        style={[styles.container, this.props.style]}
         source={{
           uri: `data:${mime};base64,${data}`
         }}
       >
-        <View style={[styles.container, styles.imageOverlay]}>
+        <View style={[styles.container, styles.imageOverlay, this.props.style]}>
           {uploadState != 1 && (
             <Icon
               name="x"
@@ -176,7 +176,13 @@ export default class ImageUploadAtom extends React.PureComponent<
   renderSelectImageContainer = (): JSX.Element => {
     return (
       <TouchableHighlight onPress={this.selectImage}>
-        <View style={[styles.container, styles.selectImageContainer]}>
+        <View
+          style={[
+            styles.container,
+            styles.selectImageContainer,
+            this.props.style
+          ]}
+        >
           <Icon name="plus" type="Feather" style={styles.icon} />
         </View>
       </TouchableHighlight>
