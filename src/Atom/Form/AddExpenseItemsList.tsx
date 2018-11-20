@@ -36,13 +36,7 @@ const AddExpenseItem = (props: ExpenseItem) => (
       label={`Amount(\u20A6) allocated to this item`}
       placeholder={`\u20A6 0.0`}
       defaultValue={`${props.amount}`}
-      getValue={val =>
-        props.handleValueChange(
-          props.index,
-          'amount',
-          parseFloat(`${val || 0}`).toFixed(2)
-        )
-      }
+      getValue={val => props.handleValueChange(props.index, 'amount', val)}
       keyboardType="numeric"
     />
   </View>
