@@ -8,12 +8,13 @@ import SaveCancelButton from '../../Container/SaveCancelButton'
 import { Mutation } from 'react-apollo'
 import { UpsertProductGQL } from '../../graphql/mutations/store'
 import AppSpinner from '../../Components/Spinner'
-import Auth from '../../services/auth'
 import { parseFieldErrors } from '../../Functions'
 import { Container, Content, Form } from 'native-base'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
 }
 
 interface IState {
@@ -73,7 +74,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
   }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const { user } = this.props
     this.setState({
       userId: user.id,
       companyId: user.company.id
@@ -225,7 +226,13 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
   }
 }
 
-export default UpsertProductScreen
+const _UpsertProductScreen = props => (
+  <UserContext.Consumer>
+    {user => <UpsertProductScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _UpsertProductScreen
 
 const styles = StyleSheet.create({
   ababa: {

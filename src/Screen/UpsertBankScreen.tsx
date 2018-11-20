@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { UpsertBankGQL } from '../graphql/mutations/business'
-import Auth from '../services/auth'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import { NG_Banks } from '../utilities/data/picker-lists'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
 }
 
 interface IState {
@@ -19,7 +20,7 @@ interface IState {
   fieldErrors: any
 }
 
-export default class UpsertBankScreen extends Component<IProps, IState> {
+class UpsertBankScreen extends Component<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -38,7 +39,7 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const { user } = this.props
     const bank = this.props.navigation.getParam('bank', {})
     this.setState({
       ...bank,
@@ -124,3 +125,11 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
     }
   }
 }
+
+const _UpsertBankScreen = props => (
+  <UserContext.Consumer>
+    {user => <UpsertBankScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _UpsertBankScreen

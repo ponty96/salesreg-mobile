@@ -13,10 +13,12 @@ import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../Functions'
 import AppSpinner from '../../Components/Spinner'
 import { AuthenticateClientGQL } from '../../graphql/client-mutations/authenticate'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any
   screenProps: any
+  user: any
 }
 
 interface IState {
@@ -32,10 +34,7 @@ interface IState {
   fieldErrors: any
 }
 
-export default class BusinessOnboardScreen extends React.PureComponent<
-  IProps,
-  IState
-> {
+class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
   state = {
     currentStep: 0,
     user: null,
@@ -50,9 +49,8 @@ export default class BusinessOnboardScreen extends React.PureComponent<
   }
 
   async componentWillMount() {
-    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
-      user: user
+      user: this.props.user
     })
   }
 
@@ -230,6 +228,7 @@ export default class BusinessOnboardScreen extends React.PureComponent<
     delete params.user
     return { company: params, userId: this.state.user.id }
   }
+
   onCompleted = async res => {
     const {
       addUserCompany: { success, fieldErrors, data }
@@ -237,7 +236,7 @@ export default class BusinessOnboardScreen extends React.PureComponent<
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      const user = JSON.parse(await Auth.getCurrentUser())
+      const { user } = this.props
       await Auth.setCurrentUser({ ...user, company: data })
       this.navigateToStep(3)
     }
@@ -247,7 +246,7 @@ export default class BusinessOnboardScreen extends React.PureComponent<
     const {
       screenProps: { client }
     } = this.props
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const { user } = this.props
     await client.resetStore()
     client.mutate({
       mutation: AuthenticateClientGQL,
@@ -255,3 +254,11 @@ export default class BusinessOnboardScreen extends React.PureComponent<
     })
   }
 }
+
+const _BusinessOnboardScreen = props => (
+  <UserContext.Consumer>
+    {user => <BusinessOnboardScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _BusinessOnboardScreen

@@ -1,10 +1,11 @@
 import React, { Component } from 'react'
 import Header from '../Components/Header/DetailsScreenHeader'
-import Auth from '../services/auth'
 import GenericProfileDetails from '../Components/Generic/ProfileDetails'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
 }
 
 interface IState {
@@ -36,8 +37,8 @@ class UserProfileScreen extends Component<IProps, IState> {
     this.updateState()
   }
 
-  updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+  updateState = () => {
+    const { user } = this.props
     this.setState({
       list: [
         {
@@ -73,4 +74,10 @@ class UserProfileScreen extends Component<IProps, IState> {
   }
 }
 
-export default UserProfileScreen
+const _UserProfileScreen = props => (
+  <UserContext.Consumer>
+    {user => <UserProfileScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _UserProfileScreen

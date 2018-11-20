@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { UpsertExpenseGQL } from '../graphql/mutations/expense'
-import Auth from '../services/auth'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import { PaymentMethod } from '../utilities/data/picker-lists'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
 }
 
 interface IState {
@@ -25,7 +26,7 @@ interface IState {
   paidBy?: any
 }
 
-export default class UpsertExpenseScreen extends Component<IProps, IState> {
+class UpsertExpenseScreen extends Component<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -47,7 +48,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const { user } = this.props
     const expense = this.props.navigation.getParam('expense', null)
     let state = {}
     if (expense) {
@@ -177,3 +178,11 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
     }
   }
 }
+
+const _UpsertExpenseScreen = props => (
+  <UserContext.Consumer>
+    {user => <UpsertExpenseScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _UpsertExpenseScreen

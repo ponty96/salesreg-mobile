@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../../../Container/Form/StepperContainer'
 import { UpsertCategoryGQL } from '../../../graphql/mutations/store'
-import Auth from '../../../services/auth'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
+import { UserContext } from '../../../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
 }
 
 interface IState {
@@ -20,7 +21,7 @@ interface IState {
   userId?: any
 }
 
-export default class UpsertCategoryScreen extends Component<IProps, IState> {
+class UpsertCategoryScreen extends Component<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -39,7 +40,7 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const { user } = this.props
     const category = this.props.navigation.getParam('category', null)
     let state = {}
     if (category) {
@@ -116,3 +117,11 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
     }
   }
 }
+
+const _UpsertCategoryScreen = props => (
+  <UserContext.Consumer>
+    {user => <UpsertCategoryScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _UpsertCategoryScreen

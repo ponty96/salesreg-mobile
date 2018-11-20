@@ -2,14 +2,15 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Spinner'
 import { UpsertContactGQL } from '../../graphql/mutations/contact'
-import Auth from '../../services/auth'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries } from '../../utilities/data/picker-lists'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any
   contact: any
+  user: any
   successRoute: string
   contactType: string
 }
@@ -68,7 +69,8 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
   }
 
   updateDetails = async (details: any) => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    let { user } = this.props
+
     this.setState({
       userId: user.id,
       companyId: user.company.id,
@@ -297,4 +299,10 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
   }
 }
 
-export default UpsertContactForm
+const _UpsertContactForm = props => (
+  <UserContext.Consumer>
+    {user => <UpsertContactForm {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _UpsertContactForm

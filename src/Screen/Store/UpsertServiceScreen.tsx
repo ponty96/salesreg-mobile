@@ -8,12 +8,13 @@ import InputAtom from '../../Atom/Form/InputAtom'
 import { Mutation } from 'react-apollo'
 import { UpsertServiceGQL } from '../../graphql/mutations/store'
 import AppSpinner from '../../Components/Spinner'
-import Auth from '../../services/auth'
 import { parseFieldErrors } from '../../Functions'
 import { Container, Content, Form } from 'native-base'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
 }
 
 interface IState {
@@ -24,7 +25,7 @@ interface IState {
   fieldErrors: any
 }
 
-export default class UpsertServiceScreen extends Component<IProps, IState> {
+class UpsertServiceScreen extends Component<IProps, IState> {
   state = {
     name: '',
     price: '',
@@ -58,8 +59,8 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     this.updateDetails()
   }
 
-  updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+  updateDetails = () => {
+    const { user } = this.props
     this.setState({
       userId: user.id,
       companyId: user.company.id
@@ -136,6 +137,14 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     }
   }
 }
+
+const _UpsertServiceScreen = props => (
+  <UserContext.Consumer>
+    {user => <UpsertServiceScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _UpsertServiceScreen
 
 const styles = StyleSheet.create({
   container: {

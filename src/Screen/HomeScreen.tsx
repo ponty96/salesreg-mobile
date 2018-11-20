@@ -2,20 +2,22 @@ import * as React from 'react'
 import { View, StyleSheet, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/BaseHeader'
-import Auth from '../services/auth'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
 }
 
 interface IState {
   username: string
 }
 
-export default class HomeScreen extends React.Component<IProps, IState> {
+class HomeScreen extends React.Component<IProps, IState> {
   state = {
     username: ''
   }
+
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -32,7 +34,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
   }
 
   updateUserName = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const { user } = this.props
     this.setState({
       username: user.firstName
     })
@@ -48,6 +50,14 @@ export default class HomeScreen extends React.Component<IProps, IState> {
     )
   }
 }
+
+const _HomeScreen = props => (
+  <UserContext.Consumer>
+    {user => <HomeScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _HomeScreen
 
 const styles = StyleSheet.create({
   container: {

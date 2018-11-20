@@ -6,9 +6,11 @@ import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
 }
 
 interface IState {
@@ -41,7 +43,8 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const { user } = this.props
+
     this.setState({
       firstName: user.firstName,
       lastName: user.lastName,
@@ -160,4 +163,10 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   }
 }
 
-export default EditUserProfileScreen
+const _EditUserProfileScreen = props => (
+  <UserContext.Consumer>
+    {user => <EditUserProfileScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _EditUserProfileScreen
