@@ -7,10 +7,10 @@ export const UpsertProductGQL = gql`
     $costPrice: String!
     $description: String
     $featuredImage: String
-    $minimumStockQuantity: String!
+    $minimumSku: String!
     $name: String!
     $sellingPrice: String!
-    $stockQuantity: String!
+    $sku: String!
     $userId: Uuid!
   ) {
     upsertProduct(
@@ -19,10 +19,10 @@ export const UpsertProductGQL = gql`
         costPrice: $costPrice
         description: $description
         featuredImage: $featuredImage
-        minimumStockQuantity: $minimumStockQuantity
+        minimumSku: $minimumSku
         name: $name
         sellingPrice: $sellingPrice
-        stockQuantity: $stockQuantity
+        sku: $sku
         userId: $userId
       }
       productId: $productId
@@ -39,8 +39,8 @@ export const UpsertProductGQL = gql`
           image: featuredImage
           costPrice
           sellingPrice
-          minimumStockQuantity
-          number: stockQuantity
+          minimumSku
+          number: sku
           name
           user {
             id

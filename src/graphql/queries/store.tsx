@@ -7,8 +7,8 @@ export const ListCompanyProductsGQL = gql`
       description
       costPrice
       sellingPrice
-      minimumStockQuantity
-      number: stockQuantity
+      minimumSku
+      number: sku
       name
       featuredImage
       images

@@ -65,7 +65,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
         image: product.image
           ? product.image
           : 'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png',
-        minStock: product.minimumStockQuantity,
+        minStock: product.minimumSku,
         currentStock: product.number
       })
     }
@@ -132,7 +132,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                       underneathText="Quantity available in store as at now"
                       underneathStyle={styles.underneathStyle}
                       defaultValue={this.state.currentStock}
-                      error={fieldErrors && fieldErrors['stockQuantity']}
+                      error={fieldErrors && fieldErrors['sku']}
                       placeholder="e.g 30"
                     />
                   </View>
@@ -144,7 +144,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
                       underneathText="Minimum quantity required for re-stock"
                       underneathStyle={styles.underneathStyle}
                       defaultValue={this.state.minStock}
-                      error={fieldErrors && fieldErrors['minimumStockQuantity']}
+                      error={fieldErrors && fieldErrors['minimumSku']}
                       placeholder="e.g 10"
                     />
                   </View>
@@ -205,10 +205,10 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
       description: this.state.description,
       // featuredImage: this.state.image,
       featuredImage: '',
-      minimumStockQuantity: this.state.minStock,
+      minimumSku: this.state.minStock,
       name: this.state.name,
       sellingPrice: this.state.sellingPrice,
-      stockQuantity: this.state.currentStock,
+      sku: this.state.currentStock,
       userId: this.state.userId,
       productId: product ? product.id : null
     }
