@@ -40,6 +40,8 @@ import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
+import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
+import TagInput from '../../Atom/Form/TagInput'
 
 interface FieldType {
   type:
@@ -50,6 +52,8 @@ interface FieldType {
     | 'image-upload'
     | 'date'
     | 'expense-items'
+    | 'multi-picker'
+    | 'tag-input'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
@@ -104,9 +108,9 @@ export default class FormStepperContainer extends React.PureComponent<
         <Content contentContainerStyle={styles.container}>
           <Text style={styles.headerText}>
             {this.props.steps[this.state.currentStep - 1]['stepTitle']}
-            <Text style={styles.stepHint}>
-              {this.props.steps[this.state.currentStep - 1]['stepHint']}
-            </Text>
+          </Text>
+          <Text style={styles.stepHint}>
+            {this.props.steps[this.state.currentStep - 1]['stepHint']}
           </Text>
           <Form>{this.renderCurrentStepFormFields()}</Form>
         </Content>
@@ -255,6 +259,30 @@ export default class FormStepperContainer extends React.PureComponent<
             }
           />
         )
+      case 'multi-picker':
+        return (
+          <MultiSelectPickerAtom
+            key={`${type}-${index}`}
+            label={label}
+            list={options}
+            selectedItems={formData[name]}
+            placeholder={placeholder}
+            handleSelection={val => this.props.updateValueChange(name, val)}
+            error={fieldErrors && fieldErrors[name]}
+          />
+        )
+      case 'tag-input':
+        return (
+          <TagInput
+            key={`${type}-${index}`}
+            label={label}
+            tags={formData[name]}
+            handleValuesChange={tags =>
+              this.props.updateValueChange(name, tags)
+            }
+            error={fieldErrors && fieldErrors[name]}
+          />
+        )
     }
   }
 
@@ -277,13 +305,15 @@ const styles = StyleSheet.create({
     fontSize: 22,
     color: '#000',
     fontFamily: 'AvenirNext-DemiBold',
-    marginBottom: 16,
+    marginBottom: 0,
     marginTop: 16
   },
   stepHint: {
     fontFamily: 'AvenirNext-Regular',
     fontSize: 16,
-    color: color.textColor
+    color: color.textColor,
+    marginTop: 8,
+    marginBottom: 16
   },
   footer: {
     width: '100%',

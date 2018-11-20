@@ -22,7 +22,6 @@ export const UpdateUserGQL = gql`
             title
             contactEmail
             about
-            category
             currency
             logo
             phone {

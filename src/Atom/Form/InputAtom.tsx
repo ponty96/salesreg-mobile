@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Item, Input, Label, Text } from 'native-base'
 import { View, StyleSheet, Platform } from 'react-native'
 import { color } from '../../Style/Color'
+import { numberWithCommas } from '../../Functions/numberWithCommas'
 
 interface IProps {
   required?: boolean | false
@@ -21,6 +22,7 @@ interface IProps {
   login?: boolean
   error?: any
   inlineElement?: any
+  onSubmitEditing?: any
 }
 
 interface IState {}
@@ -67,14 +69,21 @@ class InputAtom extends React.Component<IProps, IState> {
             <Input
               placeholder={this.props.placeholder}
               multiline={this.props.multiline}
-              onChangeText={text => this.props.getValue(text)}
-              value={this.props.defaultValue}
+              onChangeText={text =>
+                this.props.getValue(text.replace(/,/gi, ''))
+              }
+              value={
+                this.props.keyboardType == 'numeric'
+                  ? numberWithCommas(this.props.defaultValue)
+                  : this.props.defaultValue
+              }
               secureTextEntry={this.props.secureTextEntry}
               keyboardType={this.props.keyboardType}
               style={[this.props.inputStyle, styles.inputText]}
               underlineColorAndroid={'transparent'}
               placeholderTextColor={color.inactive}
               maxLength={this.props.maxLength}
+              onSubmitEditing={this.props.onSubmitEditing}
             />
           </View>
         </Item>
