@@ -6,8 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
   TouchableOpacity,
-  FlatList,
-  Image
+  ScrollView
 } from 'react-native'
 import { color } from '../../Style/Color'
 import FormHeader from '../../Components/Header/FormHeader'
@@ -23,7 +22,7 @@ interface PickerData {
 interface IProps {
   list: PickerData[] | any
   placeholder?: string
-  selected?: string
+  selectedItems?: string[]
   handleSelection?: (value: any) => void
   width?: string // delete later
   pickerStyle?: any // delete later
@@ -39,6 +38,7 @@ interface IState {
   isOpen: boolean
   queryText: string
   list: any
+  selectedItems?: string[]
 }
 
 interface PickerItem {
@@ -53,9 +53,8 @@ const PickerItem = (props: PickerItem) => (
   <TouchableWithoutFeedback onPress={() => props.onPress(props.value)}>
     <View style={styles.pickerItem}>
       <View style={{ flexDirection: 'row' }}>
-        <Image
-          source={{ uri: props.icon }}
-          style={{ width: 30, height: 25, marginRight: 24 }}
+        <View
+          style={[styles.checkBox, props.isSelected && styles.isSelected]}
         />
         <Text style={styles.pickerItemLabel}>{props.label}</Text>
       </View>
@@ -70,7 +69,8 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
     this.state = {
       isOpen: false,
       queryText: '',
-      list: this.props.list || []
+      list: this.props.list || [],
+      selectedItems: []
     }
   }
 
@@ -80,15 +80,24 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
         list: nextProps.list
       })
     }
+    if (this.props.selectedItems !== nextProps.selectedItems) {
+      this.setState({
+        selectedItems: nextProps.selectedItems
+      })
+    }
   }
 
   handleChange = (value: string) => {
-    this.props.handleSelection(value)
-    this.toggleOpenState()
+    const selectedItems = [...this.state.selectedItems, value]
+    this.setState({
+      selectedItems
+    })
   }
 
   toggleOpenState = () => {
-    this.setState({ isOpen: !this.state.isOpen })
+    this.setState({ isOpen: !this.state.isOpen }, () => {
+      this.props.handleSelection(this.state.selectedItems)
+    })
   }
 
   onSearch = text => {
@@ -109,18 +118,11 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   }
 
   getPlaceholder = () => {
-    const { selected, placeholder, list } = this.props
-    if (!selected) {
-      return placeholder
-    } else if (list.length > 0) {
-      const item: any = list.find((item: any) => item.value == selected)
-      if (item) {
-        return item.mainLabel
-      } else {
-        return placeholder
-      }
+    const { selectedItems, placeholder } = this.props
+    if (selectedItems) {
+      return `${selectedItems.length} selected, touch to update`
     } else {
-      return 'Touch to choose'
+      return placeholder || 'Touch to add'
     }
   }
   render() {
@@ -157,6 +159,8 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
           currentStep={1}
           totalSteps={1}
           showStepper={false}
+          showTickIcon={true}
+          onPressTickIcon={this.toggleOpenState}
         />
         {this.props.list.length > 10 ? (
           <SearchAtom
@@ -167,22 +171,28 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
         ) : (
           <View />
         )}
-        <FlatList
-          data={this.state.list}
-          renderItem={({ item }: any) => (
+        <ScrollView>
+          {this.state.list.map((item: any, index: number) => (
             <PickerItem
               onPress={this.handleChange}
               icon={item.icon}
               label={item.mainLabel}
               value={item.value}
-              isSelected={this.props.selected == item.value}
+              isSelected={this.getSelected(item.value)}
               subLabel={item.subLabel}
+              key={`${item.value}-${index}`}
             />
-          )}
-          keyExtractor={(item: any) => item.key}
-        />
+          ))}
+        </ScrollView>
       </Modal>
     ]
+  }
+
+  getSelected = (val): boolean => {
+    const item = this.state.selectedItems.find(
+      selectedItem => selectedItem == val
+    )
+    return item ? true : false
   }
   renderUnderNeathText = () => {
     if (this.props.error || this.props.underneathText) {
@@ -235,7 +245,8 @@ const styles = StyleSheet.create({
     marginTop: 17
   },
   pickerItem: {
-    padding: 32,
+    paddingVertical: 20,
+    paddingHorizontal: 16,
     flexDirection: 'row',
     justifyContent: 'space-between'
   },
@@ -251,6 +262,19 @@ const styles = StyleSheet.create({
     paddingLeft: 8,
     fontFamily: 'AvenirNext-Regular',
     paddingVertical: 12
+  },
+  checkBox: {
+    height: 24,
+    width: 24,
+    borderRadius: 4,
+    backgroundColor: '#fff',
+    borderWidth: 2,
+    borderColor: color.textBorderBottom,
+    marginRight: 10
+  },
+  isSelected: {
+    backgroundColor: color.selling, // amountSummaryBg,
+    borderColor: color.selling
   }
 })
 

@@ -265,7 +265,13 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
       await Auth.setCurrentUser(updatedUser)
       this.props.navigation.navigate('BusinessProfile')
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
+      const parsedErrors = parseFieldErrors(fieldErrors)
+      this.setState({
+        fieldErrors: {
+          ...parsedErrors,
+          phoneNumber: parsedErrors.number || ''
+        }
+      })
     }
   }
 }

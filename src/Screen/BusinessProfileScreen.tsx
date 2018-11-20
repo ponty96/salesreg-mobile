@@ -65,7 +65,7 @@ class BusinessProfileScreen extends Component<IProps, IState> {
                 location.street1,
                 location.city,
                 location.state,
-                country.mainLabel
+                country ? country.mainLabel : ''
               ]
             : null
         },
