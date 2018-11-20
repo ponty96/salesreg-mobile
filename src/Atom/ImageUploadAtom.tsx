@@ -62,24 +62,18 @@ export default class ImageUploadAtom extends React.PureComponent<
 
   uploadImage = () => {
     let {
-      image: { path, mime }
+      image: { data }
     } = this.state
 
     this.task = RNFetchBlob.fetch(
       'POST',
-      'some_url',
+      'http://localhost:5000/api/image/upload',
       {
-        Authorization: 'Bearer',
-        'Content-Type': 'multipart/form-data'
+        'Content-Type': 'application/json'
       },
-      [
-        {
-          name: path.substring(path.lastIndexOf('/'), path.lastIndexOf('.')),
-          filename: path.substring(path.lastIndexOf('/')),
-          type: mime,
-          data: RNFetchBlob.wrap(path)
-        }
-      ]
+      JSON.stringify({
+        image_binary: data
+      })
     )
       .uploadProgress((written, total) => {
         this.setState({
