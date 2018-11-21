@@ -5,7 +5,7 @@ import ImagePicker from 'react-native-image-crop-picker'
 import ImageUploadAtom from './ImageUploadAtom'
 
 interface IProps {
-  onSuccess?: (key, response) => void
+  onImageSet?: (key, response) => void
 }
 
 interface IState {
@@ -63,7 +63,7 @@ export default class MultipleImageUploadAtom extends React.PureComponent<
           <ImageUploadAtom
             key={index}
             onRemoveImage={() => this.removeImage(index)}
-            onSuccess={response => this.props.onSuccess(index, response)}
+            onImageSet={response => this.props.onImageSet(index, response)}
             image={this.state.images[index]}
             style={styles.image}
             controlled={true}

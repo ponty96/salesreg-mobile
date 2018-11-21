@@ -47,7 +47,8 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
         <MultipleImageUploadAtom
-          onSuccess={response => {
+          onImageSet={(index, response) => {
+            console.log(index)
             console.log(response)
           }}
         />

@@ -11,13 +11,12 @@ import {
 } from 'react-native'
 import { RNS3 } from 'react-native-aws3'
 import ImagePicker from 'react-native-image-crop-picker'
-// import RNFetchBlob from 'rn-fetch-blob'
 import Circle from 'react-native-progress/Circle'
 import { color } from '../Style/Color'
 
 interface IProps {
   onRemoveImage?: () => void
-  onSuccess?: (response) => void
+  onImageSet?: (response) => void
   controlled?: boolean | false
   image?: any
   style?: any
@@ -91,7 +90,9 @@ export default class ImageUploadAtom extends React.PureComponent<
     const file = {
       uri: path,
       name:
-        Platform.OS == 'ios' ? filename : path.substring(path.lastIndexOf('/')),
+        Platform.OS == 'ios'
+          ? filename
+          : path.substring(path.lastIndexOf('/') + 1),
       type: mime
     }
 
@@ -109,7 +110,7 @@ export default class ImageUploadAtom extends React.PureComponent<
           },
           () => {
             if (response.status == 201)
-              this.props.onSuccess && this.props.onSuccess(response)
+              this.props.onImageSet && this.props.onImageSet(response)
           }
         )
       })
