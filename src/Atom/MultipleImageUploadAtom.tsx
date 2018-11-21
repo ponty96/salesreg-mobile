@@ -83,15 +83,13 @@ const styles = StyleSheet.create({
   selectImageContainer: {
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#eee',
-    width: 130,
-    height: 130
+    backgroundColor: '#eee'
   },
   image: {
-    marginTop: 10,
-    marginLeft: 10,
-    width: 130,
-    height: 130
+    marginTop: 5,
+    marginLeft: 5,
+    width: 110,
+    height: 110
   },
   icon: {
     fontSize: 50,

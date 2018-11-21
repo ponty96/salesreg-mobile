@@ -4,12 +4,14 @@ import {
   View,
   StyleSheet,
   TouchableOpacity,
+  Platform,
   ImageBackground,
   Dimensions,
   Text
 } from 'react-native'
+import { RNS3 } from 'react-native-aws3'
 import ImagePicker from 'react-native-image-crop-picker'
-import RNFetchBlob from 'rn-fetch-blob'
+// import RNFetchBlob from 'rn-fetch-blob'
 import Circle from 'react-native-progress/Circle'
 import { color } from '../Style/Color'
 
@@ -75,32 +77,38 @@ export default class ImageUploadAtom extends React.PureComponent<
 
   uploadImage = () => {
     let {
-      image: { sourceURL }
+      image: { path, mime, filename }
     } = this.state
 
-    this.task = RNFetchBlob.fetch(
-      'POST',
-      'http://localhost:5000/api/image/upload',
-      {
-        'Content-Type': 'application/json'
-      },
-      JSON.stringify({
-        image_binary: btoa(sourceURL)
-      })
-    )
-      .uploadProgress((written, total) => {
+    const options = {
+      bucket: 'refineryaudio',
+      region: 'us-west-1',
+      accessKey: 'AKIAJAVJKGLNOEYYHHSA',
+      secretKey: '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',
+      successActionStatus: 201
+    }
+
+    const file = {
+      uri: path,
+      name:
+        Platform.OS == 'ios' ? filename : path.substring(path.lastIndexOf('/')),
+      type: mime
+    }
+
+    this.task = RNS3.put(file, options)
+      .progress(e => {
         this.setState({
-          uploadProgress: total / written,
+          uploadProgress: e.percent,
           uploadState: 1
         })
       })
       .then(response => {
         this.setState(
           {
-            uploadState: response.data == 'null' ? 2 : 3
+            uploadState: response.status != 201 ? 2 : 3
           },
           () => {
-            if (response.data != 'null')
+            if (response.status == 201)
               this.props.onSuccess && this.props.onSuccess(response)
           }
         )
@@ -113,7 +121,10 @@ export default class ImageUploadAtom extends React.PureComponent<
   }
 
   cancelUpload = () => {
-    this.task.cancel()
+    this.task.abort()
+    this.setState({
+      uploadState: 2
+    })
   }
 
   renderRetryContainer = (): JSX.Element => {
@@ -137,7 +148,12 @@ export default class ImageUploadAtom extends React.PureComponent<
         <View>
           <Circle
             indeterminate={this.state.uploadProgress < 0.25 ? true : false}
-            borderColor="rgba(0, 0, 0, 0)"
+            borderColor={
+              this.state.uploadProgress < 0.25
+                ? color.button
+                : 'rgba(0, 0, 0, 0)'
+            }
+            thickness={5}
             color={color.button}
             size={60}
             borderWidth={5}

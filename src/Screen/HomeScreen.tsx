@@ -3,8 +3,8 @@ import { View, StyleSheet, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/BaseHeader'
 import Auth from '../services/auth'
-// import MultipleImageUploadAtom from '../Atom/MultipleImageUploadAtom'
-import ImageUploadAtom from '../Atom/ImageUploadAtom'
+import MultipleImageUploadAtom from '../Atom/MultipleImageUploadAtom'
+// import ImageUploadAtom from '../Atom/ImageUploadAtom'
 
 interface IProps {
   navigation: any
@@ -46,7 +46,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
         <View style={styles.homeBackground}>
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
-        <ImageUploadAtom
+        <MultipleImageUploadAtom
           onSuccess={response => {
             console.log(response)
           }}
