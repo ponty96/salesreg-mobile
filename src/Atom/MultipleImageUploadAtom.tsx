@@ -4,7 +4,9 @@ import { Icon } from 'native-base'
 import ImagePicker from 'react-native-image-crop-picker'
 import ImageUploadAtom from './ImageUploadAtom'
 
-interface IProps {}
+interface IProps {
+  onSuccess?: (key, response) => void
+}
 
 interface IState {
   images?: {}
@@ -47,7 +49,7 @@ export default class MultipleImageUploadAtom extends React.PureComponent<
   renderSelectImageContainer = (): JSX.Element => {
     return (
       <TouchableOpacity onPress={this.selectImage}>
-        <View style={styles.selectImageContainer}>
+        <View style={[styles.selectImageContainer, styles.image]}>
           <Icon name="plus" type="Feather" style={styles.icon} />
         </View>
       </TouchableOpacity>
@@ -61,6 +63,7 @@ export default class MultipleImageUploadAtom extends React.PureComponent<
           <ImageUploadAtom
             key={index}
             onRemoveImage={() => this.removeImage(index)}
+            onSuccess={response => this.props.onSuccess(index, response)}
             image={this.state.images[index]}
             style={styles.image}
             controlled={true}
@@ -81,17 +84,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#eee',
-    width: 100,
-    height: 100,
-    marginTop: 4,
-    marginLeft: 4
+    width: 130,
+    height: 130
   },
   image: {
-    marginTop: 4,
-    marginLeft: 4
+    marginTop: 10,
+    marginLeft: 10,
+    width: 130,
+    height: 130
   },
   icon: {
-    fontSize: 40,
+    fontSize: 50,
     color: '#BFBFBF'
   }
 })

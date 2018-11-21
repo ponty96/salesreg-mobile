@@ -5,6 +5,7 @@ import {
   StyleSheet,
   TouchableOpacity,
   ImageBackground,
+  Dimensions,
   Text
 } from 'react-native'
 import ImagePicker from 'react-native-image-crop-picker'
@@ -14,6 +15,7 @@ import { color } from '../Style/Color'
 
 interface IProps {
   onRemoveImage?: () => void
+  onSuccess?: (response) => void
   controlled?: boolean | false
   image?: any
   style?: any
@@ -73,7 +75,7 @@ export default class ImageUploadAtom extends React.PureComponent<
 
   uploadImage = () => {
     let {
-      image: { data }
+      image: { sourceURL }
     } = this.state
 
     this.task = RNFetchBlob.fetch(
@@ -83,7 +85,7 @@ export default class ImageUploadAtom extends React.PureComponent<
         'Content-Type': 'application/json'
       },
       JSON.stringify({
-        image_binary: data
+        image_binary: btoa(sourceURL)
       })
     )
       .uploadProgress((written, total) => {
@@ -92,10 +94,16 @@ export default class ImageUploadAtom extends React.PureComponent<
           uploadState: 1
         })
       })
-      .then(() => {
-        this.setState({
-          uploadState: 3
-        })
+      .then(response => {
+        this.setState(
+          {
+            uploadState: response.data == 'null' ? 2 : 3
+          },
+          () => {
+            if (response.data != 'null')
+              this.props.onSuccess && this.props.onSuccess(response)
+          }
+        )
       })
       .catch(() => {
         this.setState({
@@ -129,8 +137,9 @@ export default class ImageUploadAtom extends React.PureComponent<
         <View>
           <Circle
             indeterminate={this.state.uploadProgress < 0.25 ? true : false}
-            borderColor={color.secondary}
-            size={50}
+            borderColor="rgba(0, 0, 0, 0)"
+            color={color.button}
+            size={60}
             borderWidth={5}
             progress={this.state.uploadProgress}
           />
@@ -157,7 +166,7 @@ export default class ImageUploadAtom extends React.PureComponent<
           uri: `data:${mime};base64,${data}`
         }}
       >
-        <View style={[styles.container, styles.imageOverlay, this.props.style]}>
+        <View style={styles.imageOverlay}>
           {uploadState != 1 && (
             <Icon
               name="x"
@@ -205,8 +214,8 @@ export default class ImageUploadAtom extends React.PureComponent<
 
 const styles = StyleSheet.create({
   container: {
-    width: 120,
-    height: 120
+    width: Dimensions.get('window').width - 32,
+    height: Dimensions.get('window').width - 32
   },
   selectImageContainer: {
     justifyContent: 'center',
@@ -214,30 +223,35 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee'
   },
   icon: {
-    fontSize: 40,
+    fontSize: 50,
     color: '#BFBFBF'
   },
   whiteIcon: {
-    fontSize: 25,
+    fontSize: 30,
     color: '#fff'
   },
   removeIcon: {
     position: 'absolute',
     right: 5,
-    top: 5
+    top: 5,
+    fontWeight: 'bold'
   },
   stopDownloadIcon: {
     position: 'absolute',
-    marginTop: 12,
-    marginLeft: 12
+    marginTop: 14,
+    marginLeft: 14.5
   },
   retryText: {
     color: '#fff',
+    fontWeight: 'bold',
+    fontFamily: 'AvenirNext-Bold',
     marginLeft: 10,
     fontSize: 18
   },
   imageOverlay: {
-    backgroundColor: 'rgba(0,0,0,.1)',
+    backgroundColor: 'rgba(0,0,0,.2)',
+    width: '100%',
+    height: '100%',
     justifyContent: 'center',
     alignItems: 'center'
   },
