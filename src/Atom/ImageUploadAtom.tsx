@@ -13,7 +13,9 @@ import Circle from 'react-native-progress/Circle'
 import { color } from '../Style/Color'
 
 interface IProps {
-  onRemoveImage?: any
+  onRemoveImage?: () => void
+  controlled?: boolean | false
+  image?: any
   style?: any
 }
 
@@ -35,13 +37,22 @@ export default class ImageUploadAtom extends React.PureComponent<
   IProps,
   IState
 > {
-  state = {
-    image: null,
-    uploadProgress: 0,
-    uploadState: 0
+  constructor(props) {
+    super(props)
+    let { controlled, image } = props
+
+    this.state = {
+      image: controlled ? image : null,
+      uploadProgress: 0,
+      uploadState: controlled ? 1 : 0
+    }
   }
 
   task = null
+
+  componentDidMount() {
+    this.props.controlled && this.uploadImage()
+  }
 
   selectImage = () => {
     ImagePicker.openPicker({
@@ -226,7 +237,7 @@ const styles = StyleSheet.create({
     fontSize: 18
   },
   imageOverlay: {
-    backgroundColor: 'rgba(0,0,0,.5)',
+    backgroundColor: 'rgba(0,0,0,.1)',
     justifyContent: 'center',
     alignItems: 'center'
   },
