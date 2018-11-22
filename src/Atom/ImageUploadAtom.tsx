@@ -10,7 +10,6 @@ import {
   Text
 } from 'react-native'
 import { RNS3 } from 'react-native-aws3'
-import ImagePicker from 'react-native-image-crop-picker'
 import Circle from 'react-native-progress/Circle'
 import { color } from '../Style/Color'
 
@@ -57,23 +56,6 @@ export default class ImageUploadAtom extends React.PureComponent<
     this.props.controlled && this.uploadImage()
   }
 
-  selectImage = () => {
-    ImagePicker.openPicker({
-      width: 300,
-      includeBase64: true,
-      height: 400,
-      cropping: true
-    }).then((image: any) => {
-      this.setState(
-        {
-          image,
-          uploadState: 1
-        },
-        () => this.uploadImage()
-      )
-    })
-  }
-
   uploadImage = () => {
     let {
       image: { path, mime, filename }
@@ -87,12 +69,14 @@ export default class ImageUploadAtom extends React.PureComponent<
       successActionStatus: 201
     }
 
+    const name =
+      Platform.OS == 'ios'
+        ? filename
+        : path.substring(path.lastIndexOf('/') + 1)
+
     const file = {
       uri: path,
-      name:
-        Platform.OS == 'ios'
-          ? filename
-          : path.substring(path.lastIndexOf('/') + 1),
+      name: btoa(`${name}${Date.now()}`),
       type: mime
     }
 
@@ -202,30 +186,8 @@ export default class ImageUploadAtom extends React.PureComponent<
     )
   }
 
-  renderSelectImageContainer = (): JSX.Element => {
-    return (
-      <TouchableOpacity onPress={this.selectImage}>
-        <View
-          style={[
-            styles.container,
-            styles.selectImageContainer,
-            this.props.style
-          ]}
-        >
-          <Icon name="plus" type="Feather" style={styles.icon} />
-        </View>
-      </TouchableOpacity>
-    )
-  }
-
   render() {
-    let { image, uploadState } = this.state
-
-    if (uploadState == 0 && !image) {
-      return this.renderSelectImageContainer()
-    } else {
-      return this.renderImage()
-    }
+    return this.renderImage()
   }
 }
 

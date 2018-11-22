@@ -1,17 +1,26 @@
 import React from 'react'
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
-import Icon from '../Icon'
 import { color } from '../../Style/Color'
 import ImagePicker from 'react-native-image-crop-picker'
-import { ActionSheet } from 'native-base'
+import { ActionSheet, Thumbnail } from 'native-base'
+import ImageUploadHandler from './../ImageUploadAtom'
 
 interface IProps {
-  images: string[]
-  handleImagesUpload: (images: string[]) => void
+  image: string
+  handleImageUpload: (image: string) => void
   underneathText?: string
   error?: any
 }
-export default class ImageUploadAtom extends React.PureComponent<IProps> {
+interface IState {
+  imageToUpload: any
+}
+export default class ImageUploadAtom extends React.PureComponent<
+  IProps,
+  IState
+> {
+  state = {
+    imageToUpload: null
+  }
   handleImageUpload = () => {
     ActionSheet.show(
       {
@@ -34,38 +43,68 @@ export default class ImageUploadAtom extends React.PureComponent<IProps> {
 
   openGallery = () => {
     ImagePicker.openPicker({
-      width: 300,
-      height: 300,
+      width: 840,
+      height: 840,
       cropping: true,
-      multiple: true,
       mediaType: 'photo',
       includeBase64: true
-    }).then(images => {
-      console.log(images)
+    }).then(image => {
+      this.setState({ imageToUpload: image })
     })
   }
 
   openCamera = () => {
     ImagePicker.openCamera({
-      width: 300,
-      height: 300,
+      width: 840,
+      height: 840,
       cropping: true,
-      multiple: true,
       mediaType: 'photo',
       includeBase64: true
-    }).then(images => {
-      console.log('images', images)
+    }).then(image => {
+      this.setState({ imageToUpload: image })
     })
   }
-  render() {
-    return (
-      <View>
+
+  removeImage = () => {
+    this.setState({ imageToUpload: null }, () => {
+      this.props.handleImageUpload(null)
+    })
+  }
+
+  handleImageValueSet = image => {
+    const {
+      body: { postResponse }
+    } = image
+    this.props.handleImageUpload(postResponse.location)
+  }
+
+  renderSelectImagePlaceholder = (): JSX.Element => {
+    if (this.props.image) {
+      return this.renderDefaultImage()
+    } else {
+      return (
         <TouchableOpacity
           style={styles.placeholderWrapper}
           onPress={this.handleImageUpload}
         >
-          {this.renderMainImagePlaceholder()}
+          <Image
+            source={require('../../../assets-v1/image-upload.png')}
+            style={styles.imagePlaceholder}
+          />
         </TouchableOpacity>
+      )
+    }
+  }
+
+  renderDefaultImage = () => {
+    return (
+      <View>
+        <Thumbnail
+          source={{
+            uri: this.props.image
+          }}
+          style={{ width: 300, height: 300, borderRadius: 0 }}
+        />
         <TouchableOpacity onPress={this.handleImageUpload}>
           <Text
             style={{
@@ -76,18 +115,33 @@ export default class ImageUploadAtom extends React.PureComponent<IProps> {
               fontFamily: 'AvenirNext-Medium'
             }}
           >
-            <Icon
-              name="upload"
-              type="Entypo"
-              style={{
-                color: color.button,
-                fontSize: 22,
-                paddingHorizontal: 16
-              }}
-            />
-            <Text>UPLOAD</Text>
+            Change Photo
           </Text>
         </TouchableOpacity>
+      </View>
+    )
+  }
+
+  renderUploadImage = () => {
+    return (
+      <ImageUploadHandler
+        onRemoveImage={this.removeImage}
+        onImageSet={this.handleImageValueSet}
+        controlled={true}
+        image={this.state.imageToUpload}
+        style={{ width: 300, height: 300 }}
+      />
+    )
+  }
+  render() {
+    return (
+      <View>
+        {!this.state.imageToUpload ? (
+          this.renderSelectImagePlaceholder()
+        ) : (
+          <View />
+        )}
+        {this.state.imageToUpload ? this.renderUploadImage() : <View />}
         {this.renderUnderNeathText()}
       </View>
     )
@@ -111,17 +165,6 @@ export default class ImageUploadAtom extends React.PureComponent<IProps> {
     } else {
       return null
     }
-  }
-
-  renderMainImagePlaceholder = (): JSX.Element => {
-    let source = {}
-    if (this.props.images.length > 0) {
-      source = { uri: this.props.images[0] }
-    } else {
-      source = require('../../../assets-v1/image-upload.png')
-    }
-
-    return <Image source={source} style={styles.imagePlaceholder} />
   }
 }
 

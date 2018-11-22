@@ -221,8 +221,8 @@ export default class FormStepperContainer extends React.PureComponent<
           <ImageUploadAtom
             key={`${type}-${index}`}
             underneathText={underneathText}
-            images={formData[name]}
-            handleImagesUpload={val => this.props.updateValueChange(name, val)}
+            image={formData[name]}
+            handleImageUpload={val => this.props.updateValueChange(name, val)}
             error={fieldErrors && fieldErrors[name]}
           />
         )
