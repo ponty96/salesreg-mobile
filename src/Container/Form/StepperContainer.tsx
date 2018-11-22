@@ -53,6 +53,7 @@ interface FieldType {
     | 'image-upload'
     | 'date'
     | 'expense-items'
+    | 'sales-order-items'
     | 'multi-picker'
     | 'tag-input'
   keyboardType?: 'default' | 'numeric' | 'email-address'
@@ -260,7 +261,7 @@ export default class FormStepperContainer extends React.PureComponent<
             }
           />
         )
-      case 'sales-items':
+      case 'sales-order-items':
         return (
           <AddSalesOrderItemsList
             key={`${type}-${index}`}

@@ -1,6 +1,5 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
-import { Content } from 'native-base'
 import InputAtom from './InputAtom'
 import PickerAtom from './PickerAtom'
 import ButtonAtom from './ButtonAtom'
@@ -118,32 +117,30 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <Content>
-          {this.props.salesItems.map((item, index) => (
-            <AddSalesOrderItem
-              key={index}
-              index={index}
-              itemName={item.itemName}
-              productList={this.props.productList}
-              amount={item.amount}
-              quantity={item.quantity}
-              handleValueChange={this.handleValueChange}
-              onTrashItem={this.trashItem}
-            />
-          ))}
-          <View style={styles.buttonWrapper}>
-            <ButtonAtom
-              btnText="Another Item"
-              type="primary"
-              onPress={this.addAnotherItem}
-              icon="md-add"
-              btnStyle={{
-                borderWidth: 1.5,
-                borderColor: color.button
-              }}
-            />
-          </View>
-        </Content>
+        {this.props.salesItems.map((item, index) => (
+          <AddSalesOrderItem
+            key={index}
+            index={index}
+            itemName={item.itemName}
+            productList={this.props.productList}
+            amount={item.amount}
+            quantity={item.quantity}
+            handleValueChange={this.handleValueChange}
+            onTrashItem={this.trashItem}
+          />
+        ))}
+        <View style={styles.buttonWrapper}>
+          <ButtonAtom
+            btnText="Another Item"
+            type="primary"
+            onPress={this.addAnotherItem}
+            icon="md-add"
+            btnStyle={{
+              borderWidth: 1.5,
+              borderColor: color.button
+            }}
+          />
+        </View>
       </View>
     )
   }
