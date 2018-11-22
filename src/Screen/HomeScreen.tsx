@@ -17,6 +17,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
   state = {
     username: ''
   }
+
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (

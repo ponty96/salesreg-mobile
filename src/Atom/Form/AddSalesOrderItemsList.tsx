@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import InputAtom from './InputAtom'
 import PickerAtom from './PickerAtom'
 import ButtonAtom from './ButtonAtom'
@@ -32,14 +32,25 @@ const AddSalesOrderItem = props => (
         defaultValue={props.quantity}
         getValue={val => props.handleValueChange(props.index, 'quantity', val)}
         contStyle={styles.salesInput}
+        containerStyle={{ flex: 1 }}
       />
       <InputAtom
         label={`Price/each(\u20A6)`}
         placeholder="0.00"
         defaultValue={props.amount}
         getValue={val => props.handleValueChange(props.index, 'amount', val)}
-        contStyle={{ marginLeft: 20, marginTop: 0, width: '100%' }}
+        containerStyle={{ flex: 1 }}
+        contStyle={StyleSheet.flatten([
+          styles.salesInput,
+          { marginLeft: 10, marginRight: 0 }
+        ])}
       />
+    </View>
+    <View style={styles.salesInputRow}>
+      <Text style={styles.text}>{`Amt(\u20A6)`}</Text>
+      <View style={styles.totalAmtContainer}>
+        <Text style={[styles.text, { fontSize: 18 }]}>{0.0}</Text>
+      </View>
     </View>
   </View>
 )
@@ -87,6 +98,8 @@ const styles = StyleSheet.create({
   },
   salesInputRow: {
     flexDirection: 'row',
+    marginTop: 20,
+    alignItems: 'center',
     width: '100%'
   },
   buttonWrapper: {
@@ -97,7 +110,23 @@ const styles = StyleSheet.create({
     marginTop: 0
   },
   salesInput: {
+    marginLeft: 0,
     marginTop: 0,
-    width: '100%'
+    marginRight: 10
+  },
+  text: {
+    fontSize: 15,
+    color: color.textColor,
+    fontFamily: 'AvenirNext-DemiBold'
+  },
+  totalAmtContainer: {
+    borderRadius: 5,
+    backgroundColor: color.grey,
+    height: 60,
+    justifyContent: 'center',
+    alignItems: 'flex-end',
+    paddingRight: 20,
+    marginLeft: 30,
+    flex: 1
   }
 })

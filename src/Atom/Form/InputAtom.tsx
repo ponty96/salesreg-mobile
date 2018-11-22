@@ -14,6 +14,7 @@ interface IProps {
   secureTextEntry?: boolean | false
   getValue?: (a: string | number) => void
   contStyle?: object | any
+  containerStyle?: object
   inputStyle?: object
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   underneathText?: string
@@ -40,7 +41,7 @@ class InputAtom extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <View>
+      <View style={this.props.containerStyle}>
         <Item
           stackedLabel={true}
           style={[
