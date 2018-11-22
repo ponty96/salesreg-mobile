@@ -163,139 +163,147 @@ export default class FormStepperContainer extends React.PureComponent<
   }
 
   parseFormFields = (field: any, index: number) => {
-    const {
-      type: {
-        type,
-        keyboardType,
-        secureTextEntry = false,
-        options = [],
-        multiline = false
-      },
-      label,
-      placeholder,
-      name,
-      extraData,
-      underneathText
-    } = field
-    const { formData, fieldErrors } = this.props
-    switch (type) {
-      case 'input':
-      default:
-        return (
-          <InputAtom
-            key={`${type}-${index}`}
-            label={label}
-            placeholder={placeholder}
-            defaultValue={formData[name]}
-            keyboardType={keyboardType || 'default'}
-            secureTextEntry={secureTextEntry}
-            getValue={val => this.props.updateValueChange(name, val)}
-            underneathText={underneathText}
-            multiline={multiline}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'radio':
-        return (
-          <RadioButtonAtom
-            key={`${type}-${index}`}
-            label={label}
-            defaultValue={formData[name]}
-            getValue={val => this.props.updateValueChange(name, val)}
-            options={options}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'phone-input':
-        return (
-          <PhoneInputAtom
-            key={`${type}-${index}`}
-            label={label}
-            defaultValue={formData[name]}
-            getValue={val => this.props.updateValueChange(name, val)}
-            placeholder={placeholder}
-            countryCode={extraData['countryCode']}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'image-upload':
-        return (
-          <ImageUploadAtom
-            key={`${type}-${index}`}
-            underneathText={underneathText}
-            images={formData[name]}
-            handleImagesUpload={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'picker':
-        return (
-          <PickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            list={options}
-            selected={formData[name]}
-            placeholder={placeholder}
-            handleSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'date':
-        return (
-          <DatePickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            date={formData[name]}
-            placeholder={placeholder}
-            handleDateSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'expense-items':
-        return (
-          <AddExpenseItemsList
-            key={`${type}-${index}`}
-            expenseItems={formData[name]}
-            onUpdateItems={(items: any) =>
-              this.props.updateValueChange(name, items)
-            }
-          />
-        )
-      case 'sales-order-items':
-        return (
-          <AddSalesOrderItemsList
-            key={`${type}-${index}`}
-            salesItems={formData[name]}
-            onUpdateItems={(items: any) =>
-              this.props.updateValueChange(name, items)
-            }
-          />
-        )
-      case 'multi-picker':
-        return (
-          <MultiSelectPickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            list={options}
-            selectedItems={formData[name]}
-            placeholder={placeholder}
-            handleSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'tag-input':
-        return (
-          <TagInput
-            key={`${type}-${index}`}
-            label={label}
-            tags={formData[name]}
-            handleValuesChange={tags =>
-              this.props.updateValueChange(name, tags)
-            }
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
+    if (field) {
+      const {
+        type: {
+          type,
+          keyboardType,
+          secureTextEntry = false,
+          options = [],
+          multiline = false
+        },
+        label,
+        placeholder,
+        name,
+        extraData,
+        underneathText
+      } = field
+      const { formData, fieldErrors } = this.props
+      switch (type) {
+        case 'input':
+        default:
+          return (
+            <InputAtom
+              key={`${type}-${index}`}
+              label={label}
+              placeholder={placeholder}
+              defaultValue={formData[name]}
+              keyboardType={keyboardType || 'default'}
+              secureTextEntry={secureTextEntry}
+              getValue={val => this.props.updateValueChange(name, val)}
+              underneathText={underneathText}
+              multiline={multiline}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'radio':
+          return (
+            <RadioButtonAtom
+              key={`${type}-${index}`}
+              label={label}
+              defaultValue={formData[name]}
+              getValue={val => this.props.updateValueChange(name, val)}
+              options={options}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'phone-input':
+          return (
+            <PhoneInputAtom
+              key={`${type}-${index}`}
+              label={label}
+              defaultValue={formData[name]}
+              getValue={val => this.props.updateValueChange(name, val)}
+              placeholder={placeholder}
+              countryCode={extraData['countryCode']}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'image-upload':
+          return (
+            <ImageUploadAtom
+              key={`${type}-${index}`}
+              underneathText={underneathText}
+              images={formData[name]}
+              handleImagesUpload={val =>
+                this.props.updateValueChange(name, val)
+              }
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'picker':
+          return (
+            <PickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              list={options}
+              selected={formData[name]}
+              placeholder={placeholder}
+              handleSelection={val => this.props.updateValueChange(name, val)}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'date':
+          return (
+            <DatePickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              date={formData[name]}
+              placeholder={placeholder}
+              handleDateSelection={val =>
+                this.props.updateValueChange(name, val)
+              }
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'expense-items':
+          return (
+            <AddExpenseItemsList
+              key={`${type}-${index}`}
+              expenseItems={formData[name]}
+              onUpdateItems={(items: any) =>
+                this.props.updateValueChange(name, items)
+              }
+            />
+          )
+        case 'sales-order-items':
+          return (
+            <AddSalesOrderItemsList
+              key={`${type}-${index}`}
+              productList={options}
+              salesItems={formData[name]}
+              onUpdateItems={(items: any) =>
+                this.props.updateValueChange(name, items)
+              }
+            />
+          )
+        case 'multi-picker':
+          return (
+            <MultiSelectPickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              list={options}
+              selectedItems={formData[name]}
+              placeholder={placeholder}
+              handleSelection={val => this.props.updateValueChange(name, val)}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'tag-input':
+          return (
+            <TagInput
+              key={`${type}-${index}`}
+              label={label}
+              tags={formData[name]}
+              handleValuesChange={tags =>
+                this.props.updateValueChange(name, tags)
+              }
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+      }
     }
+    return null
   }
 
   onCtaButtonPress = () => {
