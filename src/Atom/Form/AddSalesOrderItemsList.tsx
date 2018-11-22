@@ -10,6 +10,7 @@ import { numberWithCommas } from '../../Functions/numberWithCommas'
 
 interface IProps {
   salesItems: any[]
+  productList?: any[]
   onUpdateItems: (items: any[]) => void
 }
 
@@ -17,6 +18,7 @@ interface SalesItem {
   itemName: string
   amount: string
   quantity: string
+  productList?: any[]
   index: number
   handleValueChange: (index: number, key: string, value: any) => void
   onTrashItem: (index: number) => void
@@ -32,8 +34,10 @@ const AddSalesOrderItem = (props: SalesItem) => (
     />
     <PickerAtom
       label={`Item ${props.index + 1}`}
-      placeholder="Touch to choose"
-      list={[{}]}
+      placeholder={
+        props.itemName.length > 0 ? props.itemName : 'Touch to choose'
+      }
+      list={props.productList}
       selected={props.itemName}
       handleSelection={val =>
         props.handleValueChange(props.index, 'itemName', val)
@@ -119,7 +123,8 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
             <AddSalesOrderItem
               key={index}
               index={index}
-              itemName={item}
+              itemName={item.itemName}
+              productList={this.props.productList}
               amount={item.amount}
               quantity={item.quantity}
               handleValueChange={this.handleValueChange}

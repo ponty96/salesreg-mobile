@@ -50,6 +50,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
         </View>
         <AddSalesOrderItemsList
           salesItems={this.state.salesItems}
+          productList={[{ mainLabel: 'Orange', value: 'orange' }]}
           onUpdateItems={item => this.setState({ salesItems: item })}
         />
       </View>
