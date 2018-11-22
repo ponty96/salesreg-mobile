@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
   totalAmtContainer: {
     borderRadius: 5,
     backgroundColor: color.grey,
-    height: 60,
+    height: 56,
     justifyContent: 'center',
     alignItems: 'flex-end',
     paddingRight: 20,
