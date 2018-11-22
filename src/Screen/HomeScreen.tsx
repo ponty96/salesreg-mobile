@@ -11,11 +11,13 @@ interface IProps {
 
 interface IState {
   username: string
+  salesItems: any[]
 }
 
 export default class HomeScreen extends React.Component<IProps, IState> {
   state = {
-    username: ''
+    username: '',
+    salesItems: []
   }
 
   static navigationOptions = ({ navigation }: any) => {
@@ -46,7 +48,10 @@ export default class HomeScreen extends React.Component<IProps, IState> {
         <View style={styles.homeBackground}>
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
-        <AddSalesOrderItemsList />
+        <AddSalesOrderItemsList
+          salesItems={this.state.salesItems}
+          onUpdateItems={item => this.setState({ salesItems: item })}
+        />
       </View>
     )
   }

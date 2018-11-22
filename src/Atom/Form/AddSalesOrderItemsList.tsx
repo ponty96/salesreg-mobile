@@ -1,14 +1,28 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
+import { Content } from 'native-base'
 import InputAtom from './InputAtom'
 import PickerAtom from './PickerAtom'
 import ButtonAtom from './ButtonAtom'
 import Icon from '../Icon'
 import { color } from '../../Style/Color'
+import { numberWithCommas } from '../../Functions/numberWithCommas'
 
-interface IProps {}
+interface IProps {
+  salesItems: any[]
+  onUpdateItems: (items: any[]) => void
+}
 
-const AddSalesOrderItem = props => (
+interface SalesItem {
+  itemName: string
+  amount: string
+  quantity: string
+  index: number
+  handleValueChange: (index: number, key: string, value: any) => void
+  onTrashItem: (index: number) => void
+}
+
+const AddSalesOrderItem = (props: SalesItem) => (
   <View style={styles.salesItemWrapper}>
     <Icon
       name="md-close"
@@ -49,7 +63,11 @@ const AddSalesOrderItem = props => (
     <View style={styles.salesInputRow}>
       <Text style={styles.text}>{`Amt(\u20A6)`}</Text>
       <View style={styles.totalAmtContainer}>
-        <Text style={[styles.text, { fontSize: 18 }]}>{0.0}</Text>
+        <Text style={[styles.text, { fontSize: 18 }]}>
+          {numberWithCommas(
+            (Number(props.amount) * Number(props.quantity)).toFixed(2)
+          ) || 0.0}
+        </Text>
       </View>
     </View>
   </View>
@@ -58,24 +76,69 @@ const AddSalesOrderItem = props => (
 export default class AddSalesOrderItemsList extends React.PureComponent<
   IProps
 > {
-  addAnotherItem = () => {}
+  handleValueChange = (index: number, key: string, value: any) => {
+    const { salesItems } = this.props
+    let items = []
+    if (salesItems.length == 1) {
+      items = [{ ...salesItems[0], [key]: value }]
+    } else {
+      items = [
+        ...salesItems.slice(0, index),
+        { ...salesItems[index], [key]: value },
+        ...salesItems.slice(index + 1)
+      ]
+    }
+    this.props.onUpdateItems(items)
+  }
+
+  addAnotherItem = () => {
+    const expenseItems = this.props.salesItems.concat([
+      {
+        amount: '',
+        itemName: '',
+        quantity: ''
+      }
+    ])
+    this.props.onUpdateItems(expenseItems)
+  }
+
+  trashItem = index => {
+    const { salesItems } = this.props
+    const items =
+      salesItems.length == 1
+        ? []
+        : [...salesItems.slice(0, index), ...salesItems.slice(index + 1)]
+    this.props.onUpdateItems(items)
+  }
 
   render() {
     return (
       <View style={{ flex: 1 }}>
-        <AddSalesOrderItem index={0} itemName="" />
-        <View style={styles.buttonWrapper}>
-          <ButtonAtom
-            btnText="Another Item"
-            type="primary"
-            onPress={this.addAnotherItem}
-            icon="md-add"
-            btnStyle={{
-              borderWidth: 1.5,
-              borderColor: color.button
-            }}
-          />
-        </View>
+        <Content>
+          {this.props.salesItems.map((item, index) => (
+            <AddSalesOrderItem
+              key={index}
+              index={index}
+              itemName={item}
+              amount={item.amount}
+              quantity={item.quantity}
+              handleValueChange={this.handleValueChange}
+              onTrashItem={this.trashItem}
+            />
+          ))}
+          <View style={styles.buttonWrapper}>
+            <ButtonAtom
+              btnText="Another Item"
+              type="primary"
+              onPress={this.addAnotherItem}
+              icon="md-add"
+              btnStyle={{
+                borderWidth: 1.5,
+                borderColor: color.button
+              }}
+            />
+          </View>
+        </Content>
       </View>
     )
   }
