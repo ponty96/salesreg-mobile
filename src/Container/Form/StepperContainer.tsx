@@ -40,6 +40,7 @@ import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
+import AddSalesOrderItemsList from '../../Atom/Form/AddSalesOrderItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
 import TagInput from '../../Atom/Form/TagInput'
 
@@ -254,6 +255,16 @@ export default class FormStepperContainer extends React.PureComponent<
           <AddExpenseItemsList
             key={`${type}-${index}`}
             expenseItems={formData[name]}
+            onUpdateItems={(items: any) =>
+              this.props.updateValueChange(name, items)
+            }
+          />
+        )
+      case 'sales-items':
+        return (
+          <AddSalesOrderItemsList
+            key={`${type}-${index}`}
+            salesItems={formData[name]}
             onUpdateItems={(items: any) =>
               this.props.updateValueChange(name, items)
             }
