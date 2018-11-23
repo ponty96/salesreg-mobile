@@ -22,9 +22,9 @@ export default class MultipleImageUploadAtom extends React.PureComponent<
 
   selectImage = () => {
     ImagePicker.openPicker({
-      width: 300,
+      width: 840,
+      height: 840,
       includeBase64: true,
-      height: 400,
       cropping: true
     }).then((image: any) => {
       this.setState({
