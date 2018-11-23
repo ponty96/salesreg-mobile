@@ -159,6 +159,8 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
               )}
               <SectionList
                 renderItem={this.renderList}
+                onEndReachedThreshold={0.99}
+                onEndReached={() => console.log(5)}
                 ListEmptyComponent={
                   <EmptyList
                     type={{
