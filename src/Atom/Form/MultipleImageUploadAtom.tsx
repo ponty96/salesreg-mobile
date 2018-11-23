@@ -7,7 +7,7 @@ import {
 } from 'react-native'
 import { Icon } from 'native-base'
 import ImagePicker from 'react-native-image-crop-picker'
-import ImageUploadAtom from './../ImageUploadAtom'
+import ImageUploadHandler from './../ImageUploadHandler'
 
 interface IProps {
   images?: string[]
@@ -170,7 +170,7 @@ export default class MultipleImageUploadAtom extends React.PureComponent<
       <View style={styles.container}>
         {this.renderPreviousAddedImages()}
         {Object.keys(this.state.images).map(index => (
-          <ImageUploadAtom
+          <ImageUploadHandler
             key={index}
             onRemoveImage={() => this.removeImage(index)}
             onImageSet={response => this.handleImageValueSet(index, response)}

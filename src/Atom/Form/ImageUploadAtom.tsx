@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
 import ImagePicker from 'react-native-image-crop-picker'
 import { ActionSheet, Thumbnail } from 'native-base'
-import ImageUploadHandler from './../ImageUploadAtom'
+import ImageUploadHandler from './../ImageUploadHandler'
 
 interface IProps {
   image: string

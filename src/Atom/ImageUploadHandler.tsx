@@ -35,7 +35,7 @@ interface IState {
   uploadState: number
 }
 
-export default class ImageUploadAtom extends React.PureComponent<
+export default class ImageUploadHandler extends React.PureComponent<
   IProps,
   IState
 > {
