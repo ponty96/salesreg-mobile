@@ -135,11 +135,11 @@ export default class ImageUploadAtom extends React.PureComponent<
             indeterminate={this.state.uploadProgress < 0.25 ? true : false}
             borderColor={
               this.state.uploadProgress < 0.25
-                ? color.button
+                ? color.green
                 : 'rgba(0, 0, 0, 0)'
             }
             thickness={5}
-            color={color.button}
+            color={color.green}
             size={60}
             borderWidth={5}
             progress={this.state.uploadProgress}

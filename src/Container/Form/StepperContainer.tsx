@@ -38,6 +38,7 @@ import RadioButtonAtom from '../../Atom/Form/RadioButtonAtom'
 import PickerAtom from '../../Atom/Form/PickerAtom'
 import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
+import MultipleImageUploadAtom from '../../Atom/Form/MultipleImageUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
@@ -224,6 +225,16 @@ export default class FormStepperContainer extends React.PureComponent<
             image={formData[name]}
             handleImageUpload={val => this.props.updateValueChange(name, val)}
             error={fieldErrors && fieldErrors[name]}
+          />
+        )
+      case 'multiple-image-upload':
+        return (
+          <MultipleImageUploadAtom
+            key={`${type}-${index}`}
+            images={formData[name]}
+            handleImagesUpload={arrayOfValues =>
+              this.props.updateValueChange(name, arrayOfValues)
+            }
           />
         )
       case 'picker':
