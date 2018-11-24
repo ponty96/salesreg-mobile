@@ -20,7 +20,7 @@ interface IState {
   fieldErrors: any
 }
 
-class EditUserProfileScreen extends Component<IProps, IState> {
+export default class EditUserProfileScreen extends Component<IProps, IState> {
   state = {
     profilePicture: '',
     firstName: '',
@@ -42,6 +42,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
 
   updateDetails = async () => {
     const user = JSON.parse(await Auth.getCurrentUser())
+
     this.setState({
       firstName: user.firstName,
       lastName: user.lastName,
@@ -159,5 +160,3 @@ class EditUserProfileScreen extends Component<IProps, IState> {
     }
   }
 }
-
-export default EditUserProfileScreen

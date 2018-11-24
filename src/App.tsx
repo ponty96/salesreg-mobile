@@ -7,15 +7,20 @@ import client from './client'
 import Routes from './Navigation/Routes'
 import Auth from './services/auth'
 import { AuthenticateClientGQL } from './graphql/client-mutations/authenticate'
+import { UserContext } from './context/UserContext'
 
 export default class App extends React.Component {
   state = {
-    loading: true
+    loading: true,
+    user: {},
+    resetUserContext: user => this.setState({ user: user || {} })
   }
+
   async componentDidMount() {
     this.authenticate()
     this.setState({ loading: true })
   }
+
   authenticate = async () => {
     const token = await Auth.getToken()
     const refreshToken = await Auth.getRefreshToken()
@@ -26,21 +31,25 @@ export default class App extends React.Component {
         mutation: AuthenticateClientGQL,
         variables: { user: user }
       })
-      this.setState({ loading: false })
+      this.setState({ loading: false, user })
     } else {
       this.setState({ loading: false })
     }
   }
+
   render() {
+    let { user, resetUserContext } = this.state
     return (
       // check if user is on IphoneX and use View
       <View style={{ flex: 1, paddingTop: 0 }}>
-        <ApolloProvider client={client}>
-          <Root>
-            <StatusBar barStyle="light-content" />
-            <Routes client={client} />
-          </Root>
-        </ApolloProvider>
+        <UserContext.Provider value={{ user, resetUserContext }}>
+          <ApolloProvider client={client}>
+            <Root>
+              <StatusBar barStyle="light-content" />
+              <Routes client={client} />
+            </Root>
+          </ApolloProvider>
+        </UserContext.Provider>
       </View>
     )
   }

@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { UpsertServiceGQL } from '../../graphql/mutations/store'
 import AppSpinner from '../../Components/Spinner'
-import Auth from '../../services/auth'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { ListCompanyCategoriesGQL } from '../../graphql/queries/store'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any
