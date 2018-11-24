@@ -301,7 +301,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
 
 const _UpsertContactForm = props => (
   <UserContext.Consumer>
-    {user => <UpsertContactForm {...props} user={user} />}
+    {({ user }) => <UpsertContactForm {...props} user={user} />}
   </UserContext.Consumer>
 )
 

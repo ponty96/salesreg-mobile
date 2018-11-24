@@ -12,7 +12,8 @@ import { UserContext } from './context/UserContext'
 export default class App extends React.Component {
   state = {
     loading: true,
-    user: {}
+    user: {},
+    resetUserContext: () => this.setState({ user: {} })
   }
 
   async componentDidMount() {
@@ -37,10 +38,11 @@ export default class App extends React.Component {
   }
 
   render() {
+    let { user, resetUserContext } = this.state
     return (
       // check if user is on IphoneX and use View
       <View style={{ flex: 1, paddingTop: 0 }}>
-        <UserContext.Provider value={this.state.user}>
+        <UserContext.Provider value={{ user, resetUserContext }}>
           <ApolloProvider client={client}>
             <Root>
               <StatusBar barStyle="light-content" />

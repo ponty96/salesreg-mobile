@@ -10,11 +10,9 @@ import AppSpinner from '../Components/Spinner'
 import { UpdateCompanyGQL } from '../graphql/mutations/business'
 import Auth from '../services/auth'
 import FormStepperContainer from '../Container/Form/StepperContainer'
-import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
-  user: any
 }
 
 interface IState {
@@ -32,7 +30,10 @@ interface IState {
   phoneNumber: string
 }
 
-class EditBusinessProfileScreen extends Component<IProps, IState> {
+export default class EditBusinessProfileScreen extends Component<
+  IProps,
+  IState
+> {
   state = {
     logo: [],
     about: '',
@@ -47,6 +48,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     phoneNumber: '',
     fieldErrors: null
   }
+
   static navigationOptions = {
     header: null
   }
@@ -63,7 +65,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
   }
 
   updateDetails = async () => {
-    const { user } = this.props
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       companyId: user.company.id,
       title: user.company.title,
@@ -260,7 +262,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
       updateCompany: { success, fieldErrors, data }
     } = res
     if (success) {
-      const { user } = this.props
+      const user = JSON.parse(await Auth.getCurrentUser())
       const updatedUser = { ...user, company: data }
       await Auth.setCurrentUser(updatedUser)
       this.props.navigation.navigate('BusinessProfile')
@@ -275,11 +277,3 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     }
   }
 }
-
-const _EditBusinessProfileScreen = props => (
-  <UserContext.Consumer>
-    {user => <EditBusinessProfileScreen {...props} user={user} />}
-  </UserContext.Consumer>
-)
-
-export default _EditBusinessProfileScreen

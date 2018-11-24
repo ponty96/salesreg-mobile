@@ -257,7 +257,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
 
 const _BusinessOnboardScreen = props => (
   <UserContext.Consumer>
-    {user => <BusinessOnboardScreen {...props} user={user} />}
+    {({ user }) => <BusinessOnboardScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
 

@@ -4,11 +4,10 @@ import { UpsertCategoryGQL } from '../../../graphql/mutations/store'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
-import { UserContext } from '../../../context/UserContext'
+import Auth from '../../../services/auth'
 
 interface IProps {
   navigation: any
-  user: any
 }
 
 interface IState {
@@ -21,7 +20,7 @@ interface IState {
   userId?: any
 }
 
-class UpsertCategoryScreen extends Component<IProps, IState> {
+export default class UpsertCategoryScreen extends Component<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -40,7 +39,7 @@ class UpsertCategoryScreen extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const { user } = this.props
+    const user = JSON.parse(await Auth.getCurrentUser())
     const category = this.props.navigation.getParam('category', null)
     let state = {}
     if (category) {
@@ -117,11 +116,3 @@ class UpsertCategoryScreen extends Component<IProps, IState> {
     }
   }
 }
-
-const _UpsertCategoryScreen = props => (
-  <UserContext.Consumer>
-    {user => <UpsertCategoryScreen {...props} user={user} />}
-  </UserContext.Consumer>
-)
-
-export default _UpsertCategoryScreen

@@ -5,11 +5,10 @@ import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import { PaymentMethod } from '../utilities/data/picker-lists'
-import { UserContext } from '../context/UserContext'
+import Auth from '../services/auth'
 
 interface IProps {
   navigation: any
-  user: any
 }
 
 interface IState {
@@ -26,7 +25,7 @@ interface IState {
   paidBy?: any
 }
 
-class UpsertExpenseScreen extends Component<IProps, IState> {
+export default class UpsertExpenseScreen extends Component<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -48,7 +47,7 @@ class UpsertExpenseScreen extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const { user } = this.props
+    const user = JSON.parse(await Auth.getCurrentUser())
     const expense = this.props.navigation.getParam('expense', null)
     let state = {}
     if (expense) {
@@ -178,11 +177,3 @@ class UpsertExpenseScreen extends Component<IProps, IState> {
     }
   }
 }
-
-const _UpsertExpenseScreen = props => (
-  <UserContext.Consumer>
-    {user => <UpsertExpenseScreen {...props} user={user} />}
-  </UserContext.Consumer>
-)
-
-export default _UpsertExpenseScreen

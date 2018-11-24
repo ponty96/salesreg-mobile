@@ -5,11 +5,10 @@ import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import { NG_Banks } from '../utilities/data/picker-lists'
-import { UserContext } from '../context/UserContext'
+import Auth from '../services/auth'
 
 interface IProps {
   navigation: any
-  user: any
 }
 
 interface IState {
@@ -20,7 +19,7 @@ interface IState {
   fieldErrors: any
 }
 
-class UpsertBankScreen extends Component<IProps, IState> {
+export default class UpsertBankScreen extends Component<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -39,7 +38,7 @@ class UpsertBankScreen extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const { user } = this.props
+    const user = JSON.parse(await Auth.getCurrentUser())
     const bank = this.props.navigation.getParam('bank', {})
     this.setState({
       ...bank,
@@ -125,11 +124,3 @@ class UpsertBankScreen extends Component<IProps, IState> {
     }
   }
 }
-
-const _UpsertBankScreen = props => (
-  <UserContext.Consumer>
-    {user => <UpsertBankScreen {...props} user={user} />}
-  </UserContext.Consumer>
-)
-
-export default _UpsertBankScreen

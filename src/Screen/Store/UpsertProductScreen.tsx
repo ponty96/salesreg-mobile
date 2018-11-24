@@ -10,11 +10,10 @@ import { UpsertProductGQL } from '../../graphql/mutations/store'
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
 import { Container, Content, Form } from 'native-base'
-import { UserContext } from '../../context/UserContext'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any
-  user: any
 }
 
 interface IState {
@@ -30,7 +29,7 @@ interface IState {
   fieldErrors: any
 }
 
-class UpsertProductScreen extends PureComponent<IProps, IState> {
+export default class UpsertProductScreen extends PureComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
@@ -74,7 +73,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
   }
 
   updateDetails = async () => {
-    const { user } = this.props
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       userId: user.id,
       companyId: user.company.id
@@ -225,14 +224,6 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
     }
   }
 }
-
-const _UpsertProductScreen = props => (
-  <UserContext.Consumer>
-    {user => <UpsertProductScreen {...props} user={user} />}
-  </UserContext.Consumer>
-)
-
-export default _UpsertProductScreen
 
 const styles = StyleSheet.create({
   ababa: {

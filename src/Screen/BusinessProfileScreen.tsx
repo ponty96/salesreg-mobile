@@ -2,11 +2,10 @@ import React, { Component } from 'react'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../Components/Generic/ProfileDetails'
 import { Countries } from '../utilities/data/picker-lists'
-import { UserContext } from '../context/UserContext'
+import Auth from '../services/auth'
 
 interface IProps {
   navigation: any
-  user: any
 }
 
 interface IState {
@@ -15,7 +14,7 @@ interface IState {
   logo: string
 }
 
-class BusinessProfileScreen extends Component<IProps, IState> {
+export default class BusinessProfileScreen extends Component<IProps, IState> {
   state = {
     list: [],
     businessName: '',
@@ -39,7 +38,7 @@ class BusinessProfileScreen extends Component<IProps, IState> {
   }
 
   updateState = async () => {
-    const { user } = this.props
+    const user = JSON.parse(await Auth.getCurrentUser())
     const location = this.parseLocation(user.company)
     const country = Countries.find(country => country.value == location.country)
     this.setState({
@@ -94,11 +93,3 @@ class BusinessProfileScreen extends Component<IProps, IState> {
     )
   }
 }
-
-const _BusinessProfileScreen = props => (
-  <UserContext.Consumer>
-    {user => <BusinessProfileScreen {...props} user={user} />}
-  </UserContext.Consumer>
-)
-
-export default _BusinessProfileScreen

@@ -210,7 +210,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
 
 const _GenericListIndex = props => (
   <UserContext.Consumer>
-    {user => <GenericListIndex {...props} user={user} />}
+    {({ user }) => <GenericListIndex {...props} user={user} />}
   </UserContext.Consumer>
 )
 

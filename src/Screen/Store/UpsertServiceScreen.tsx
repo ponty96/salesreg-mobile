@@ -5,12 +5,11 @@ import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { ListCompanyCategoriesGQL } from '../../graphql/queries/store'
-import { UserContext } from '../../context/UserContext'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any
   screenProps: any
-  user: any
 }
 
 interface IState {
@@ -27,7 +26,7 @@ interface IState {
   tags: string[]
 }
 
-class UpsertServiceScreen extends Component<IProps, IState> {
+export default class UpsertServiceScreen extends Component<IProps, IState> {
   state = {
     name: '',
     price: '',
@@ -61,8 +60,8 @@ class UpsertServiceScreen extends Component<IProps, IState> {
     this.updateDetails()
   }
 
-  updateDetails = () => {
-    const { user } = this.props
+  updateDetails = async () => {
+    const user = JSON.parse(await Auth.getCurrentUser())
     this.setState({
       userId: user.id,
       companyId: user.company.id
@@ -217,11 +216,3 @@ class UpsertServiceScreen extends Component<IProps, IState> {
     }
   }
 }
-
-const _UpsertServiceScreen = props => (
-  <UserContext.Consumer>
-    {user => <UpsertServiceScreen {...props} user={user} />}
-  </UserContext.Consumer>
-)
-
-export default _UpsertServiceScreen
