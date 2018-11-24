@@ -26,7 +26,6 @@ export const LoginUserMutationGQL = gql`
               title
               contactEmail
               about
-              category
               currency
               logo
               phone {
@@ -82,7 +81,6 @@ export const RegisterUserMutationGQL = gql`
               title
               contactEmail
               about
-              category
               currency
               logo
               phone {
@@ -126,7 +124,6 @@ export const AddUserCompanyMutationGQL = gql`
           title
           contactEmail
           about
-          category
           currency
           logo
           phone {

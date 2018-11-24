@@ -74,7 +74,7 @@ class InputAtom extends React.Component<IProps, IState> {
               }
               value={
                 this.props.keyboardType == 'numeric'
-                  ? numberWithCommas(this.props.defaultValue)
+                  ? numberWithCommas(this.props.defaultValue || '')
                   : this.props.defaultValue
               }
               secureTextEntry={this.props.secureTextEntry}

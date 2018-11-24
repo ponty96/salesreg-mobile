@@ -14,7 +14,6 @@ export const UpdateCompanyGQL = gql`
           title
           contactEmail
           about
-          category
           currency
           phone {
             number
