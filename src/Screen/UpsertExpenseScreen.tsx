@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { UpsertExpenseGQL } from '../graphql/mutations/expense'
-import Auth from '../services/auth'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import { PaymentMethod } from '../utilities/data/picker-lists'
+import Auth from '../services/auth'
 
 interface IProps {
   navigation: any

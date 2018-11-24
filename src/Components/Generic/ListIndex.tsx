@@ -8,12 +8,12 @@ import SalesOrderListAtom, {
 import { color } from '../../Style/Color'
 import { Query } from 'react-apollo'
 import AppSpinner from '../../Components/Spinner'
-import Auth from '../../services/auth'
 import * as _ from 'lodash'
 import moment from 'moment'
 import { FetchPolicy } from 'apollo-client'
 import { DocumentNode } from 'graphql'
 import SubHeaderAtom from '../Header/SubHeaderAtom'
+import { UserContext } from '../../context/UserContext'
 
 interface SubHeaderProps {
   screen: string
@@ -38,13 +38,14 @@ interface IProps {
   shouldRenderFooter?: boolean
   showFab?: boolean
   hideSeparator?: boolean
+  user: any
 }
 
 interface IState {
   business: any
 }
 
-export default class GenericListIndex extends React.Component<IProps, IState> {
+class GenericListIndex extends React.Component<IProps, IState> {
   state = {
     business: null
   }
@@ -57,8 +58,9 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
   componentWillMount() {
     this.updateState()
   }
+
   updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const { user } = this.props
     this.setState({
       business: user.company
     })
@@ -205,6 +207,14 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
     return sortedSection
   }
 }
+
+const _GenericListIndex = props => (
+  <UserContext.Consumer>
+    {({ user }) => <GenericListIndex {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _GenericListIndex
 
 const styles = StyleSheet.create({
   container: {
