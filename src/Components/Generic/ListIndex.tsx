@@ -42,12 +42,15 @@ interface IProps {
 
 interface IState {
   business: any
+  hasUserScrolled: boolean
 }
 
 export default class GenericListIndex extends React.Component<IProps, IState> {
   state = {
-    business: null
+    business: null,
+    hasUserScrolled: false
   }
+
   static defaultProps = {
     subHeader: null,
     shouldRenderFooter: false,
@@ -64,13 +67,13 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
     })
   }
 
-  renderList = ({ item }: any): any => {
+  renderList = ({ item: { node } }: any): any => {
     const { parseItemData, onItemPress } = this.props
-    const parsedItems = parseItemData(item)
+    const parsedItems = parseItemData(node)
     return parsedItems.map((data: DataProps, index) => (
       <SalesOrderListAtom
         {...data}
-        onPress={() => onItemPress(item)}
+        onPress={() => onItemPress(node)}
         key={index}
       />
     ))
@@ -111,9 +114,39 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
   getSectionTotalSales = (sections): number => {
     return sections.reduce(
       (acc, currentSection) =>
-        parseFloat(acc) + parseFloat(currentSection.amount),
+        parseFloat(acc) + parseFloat(currentSection.node.amount),
       '0'
     )
+  }
+
+  fetchMore = (fetchMore, after, hasNextPage): void => {
+    let { variables, graphqlQueryResultKey } = this.props,
+      { business } = this.state
+
+    if (!hasNextPage || !this.state.hasUserScrolled) {
+      return
+    }
+
+    fetchMore({
+      variables: {
+        companyId: `${business && business.id}`,
+        after,
+        first: 10,
+        ...variables
+      },
+      updateQuery: (prev, { fetchMoreResult }) => {
+        if (!fetchMoreResult) return prev
+        return Object.assign({}, prev, {
+          [graphqlQueryResultKey]: {
+            ...fetchMoreResult[graphqlQueryResultKey],
+            edges: [
+              ...prev[graphqlQueryResultKey].edges,
+              ...fetchMoreResult[graphqlQueryResultKey].edges
+            ]
+          }
+        })
+      }
+    })
   }
 
   render() {
@@ -134,21 +167,26 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
     return (
       <Query
         query={graphqlQuery}
-        variables={{ companyId: `${business && business.id}`, ...variables }}
-        fetchPolicy={fetchPolicy || 'cache-and-network'}
+        variables={{
+          companyId: `${business && business.id}`,
+          after: null,
+          first: 10,
+          ...variables
+        }}
+        fetchPolicy={fetchPolicy || 'cache-first'}
       >
-        {({ loading, data }) => {
+        {({ loading, data, fetchMore }) => {
           const sections = data[graphqlQueryResultKey]
             ? this.parseSections(data[graphqlQueryResultKey])
             : []
           return (
             <View style={styles.container}>
-              <AppSpinner visible={loading} />
+              <AppSpinner visible={!data[graphqlQueryResultKey] && loading} />
               {subHeader && (
                 <SubHeaderAtom
                   total={
                     data[graphqlQueryResultKey]
-                      ? data[graphqlQueryResultKey].length
+                      ? data[graphqlQueryResultKey].edges.length
                       : 0
                   }
                   screen={subHeader.screen}
@@ -160,7 +198,21 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
               <SectionList
                 renderItem={this.renderList}
                 onEndReachedThreshold={0.99}
-                onEndReached={() => console.log(5)}
+                onScroll={() => {
+                  !this.state.hasUserScrolled &&
+                    this.setState({ hasUserScrolled: true })
+                }}
+                onEndReached={() =>
+                  this.fetchMore(
+                    fetchMore,
+                    data[graphqlQueryResultKey]
+                      ? data[graphqlQueryResultKey].pageInfo.endCursor
+                      : null,
+                    data[graphqlQueryResultKey]
+                      ? data[graphqlQueryResultKey].pageInfo.hasNextPage
+                      : false
+                  )
+                }
                 ListEmptyComponent={
                   <EmptyList
                     type={{
@@ -171,7 +223,7 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
                   />
                 }
                 sections={sections}
-                keyExtractor={(item, index) => item.id + index}
+                keyExtractor={(item, index) => item.node.id + index}
                 renderSectionHeader={this.renderSectionHeader}
                 renderSectionFooter={({ section }) =>
                   this.renderSectionFooter(section, sections)
@@ -193,12 +245,14 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
   }
 
   parseSections = sections => {
-    const grouped = _.groupBy(sections, section => section.date) || {}
+    const grouped =
+      _.groupBy(sections.edges, section => section.node.date) || {}
 
     const sectionList = Object.keys(grouped).map(key => ({
       date: key,
       data: grouped[key]
     }))
+
     const sortedSection = sectionList.sort((sectionA, sectionB) => {
       const a = new Date(sectionA.date)
       const b = new Date(sectionB.date)

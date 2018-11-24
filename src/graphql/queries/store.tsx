@@ -1,30 +1,39 @@
 import gql from 'graphql-tag'
 
 export const ListCompanyProductsGQL = gql`
-  query listCompanyProducts($companyId: Uuid!) {
-    listCompanyProducts(companyId: $companyId) {
-      id
-      description
-      costPrice
-      sellingPrice
-      minimumStockQuantity
-      number: stockQuantity
-      name
-      featuredImage
-      images
-      user {
-        id
-        firstName
-        lastName
+  query listCompanyProducts($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyProducts(companyId: $companyId, after: $after, first: $first) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
       }
-      categories {
-        id
-        title
-      }
+      edges {
+        node {
+          id
+          description
+          costPrice
+          sellingPrice
+          minimumStockQuantity
+          number: stockQuantity
+          name
+          featuredImage
+          images
+          user {
+            id
+            firstName
+            lastName
+          }
+          categories {
+            id
+            title
+          }
 
-      tags {
-        name
-        id
+          tags {
+            name
+            id
+          }
+        }
       }
     }
   }
