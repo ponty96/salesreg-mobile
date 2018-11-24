@@ -18,6 +18,7 @@ import { UserContext } from '../../context/UserContext'
 interface IProps {
   navigation: any
   screenProps: any
+  resetUserContext: (user) => void
   user: any
 }
 
@@ -237,6 +238,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
     } else {
       const { user } = this.props
       await Auth.setCurrentUser({ ...user, company: data })
+      this.props.resetUserContext({ ...user, company: data })
       this.navigateToStep(3)
     }
   }
@@ -256,7 +258,13 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
 
 const _BusinessOnboardScreen = props => (
   <UserContext.Consumer>
-    {({ user }) => <BusinessOnboardScreen {...props} user={user} />}
+    {({ user, resetUserContext }) => (
+      <BusinessOnboardScreen
+        {...props}
+        user={user}
+        resetUserContext={resetUserContext}
+      />
+    )}
   </UserContext.Consumer>
 )
 
