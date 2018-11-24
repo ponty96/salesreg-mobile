@@ -1,5 +1,12 @@
 import * as React from 'react'
-import { View, StyleSheet, SectionList, Text } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  SectionList,
+  Text,
+  ActivityIndicator,
+  Platform
+} from 'react-native'
 import FabAtom from '../../Atom/FabAtom'
 import EmptyList from '../../Components/EmptyList'
 import SalesOrderListAtom, {
@@ -44,6 +51,15 @@ interface IState {
   business: any
   hasUserScrolled: boolean
 }
+
+const LoadMoreSpinner = () => (
+  <ActivityIndicator
+    style={styles.loadMore}
+    animating={true}
+    size={Platform.OS == 'android' ? 20 : 'small'}
+    color="#000"
+  />
+)
 
 export default class GenericListIndex extends React.Component<IProps, IState> {
   state = {
@@ -229,6 +245,7 @@ export default class GenericListIndex extends React.Component<IProps, IState> {
                   this.renderSectionFooter(section, sections)
                 }
               />
+              {data[graphqlQueryResultKey] && loading && <LoadMoreSpinner />}
               {this.props.showFab && (
                 <FabAtom
                   routeName={fabRouteName}
@@ -297,5 +314,9 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'AvenirNext-DemiBold',
     fontSize: 16
+  },
+  loadMore: {
+    alignSelf: 'center',
+    marginVertical: 10
   }
 })
