@@ -13,7 +13,7 @@ export default class App extends React.Component {
   state = {
     loading: true,
     user: {},
-    resetUserContext: () => this.setState({ user: {} })
+    resetUserContext: user => this.setState({ user: user || {} })
   }
 
   async componentDidMount() {
