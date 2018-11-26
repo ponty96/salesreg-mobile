@@ -3,6 +3,7 @@ import { View, StyleSheet, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/BaseHeader'
 import Auth from '../services/auth'
+import CachedImageAtom from '../Atom/CachedImageAtom'
 
 interface IProps {
   navigation: any
@@ -45,6 +46,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
         <View style={styles.homeBackground}>
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
+        <CachedImageAtom uri="https://refineryaudio.s3.amazonaws.com/SU1HXzAwMDMuSlBHMTU0MzIzNjcxNDAxMg%3D%3D" />
       </View>
     )
   }
