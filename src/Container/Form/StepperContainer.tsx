@@ -68,7 +68,7 @@ interface FormField {
   extraData?: any
   underneathText?: string
 }
-interface FormStep {
+export interface FormStep {
   stepTitle: string
   formFields: FormField[]
   buttonTitle?: string
@@ -82,6 +82,7 @@ interface IProps {
   fieldErrors: any
   formData: any
   handleBackPress: () => void
+  onTransition?: (from, to) => void
 }
 interface IState {
   currentStep: number
@@ -97,29 +98,29 @@ export default class FormStepperContainer extends React.PureComponent<
     showHeaderBorder: false
   }
   render() {
+    const steps = this.getSteps(this.props.steps)
     return (
       <Container style={{ flex: 1 }}>
         <FormHeader
           onPressBackIcon={this.handleBackButtonPress}
           currentStep={this.state.currentStep}
-          totalSteps={this.props.steps.length}
+          totalSteps={steps.length}
           showBottomBorder={this.state.showHeaderBorder}
         />
         <Content contentContainerStyle={styles.container}>
           <Text style={styles.headerText}>
-            {this.props.steps[this.state.currentStep - 1]['stepTitle']}
+            {steps[this.state.currentStep - 1]['stepTitle']}
           </Text>
           <Text style={styles.stepHint}>
-            {this.props.steps[this.state.currentStep - 1]['stepHint']}
+            {steps[this.state.currentStep - 1]['stepHint']}
           </Text>
           <Form>{this.renderCurrentStepFormFields()}</Form>
         </Content>
 
         <View style={styles.footer}>
           <ButtonAtom
-            btnText={`${this.props.steps[this.state.currentStep - 1][
-              'buttonTitle'
-            ] || 'Next'}`}
+            btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
+              'Next'}`}
             onPress={this.onCtaButtonPress}
             type="secondary"
             icon={this.getButtonIcon()}
@@ -128,22 +129,46 @@ export default class FormStepperContainer extends React.PureComponent<
       </Container>
     )
   }
+
+  getSteps = steps => {
+    return steps.filter(step => step)
+  }
   getButtonIcon = () => {
-    if (this.state.currentStep == this.props.steps.length) {
+    if (this.state.currentStep == this.getSteps(this.props.steps).length) {
       return 'md-checkmark'
     } else return null
   }
   handleBackButtonPress = () => {
     const { currentStep } = this.state
     if (currentStep > 1) {
-      this.setState({ currentStep: currentStep - 1 })
+      this.transition(currentStep, currentStep - 1)
     } else {
       this.props.handleBackPress()
     }
   }
 
+  onCtaButtonPress = async () => {
+    const { currentStep } = this.state
+    if (currentStep == this.getSteps(this.props.steps).length) {
+      this.props.onCompleteSteps()
+    } else {
+      this.transition(currentStep, currentStep + 1)
+    }
+  }
+
+  transition = async (from, to) => {
+    if (this.props.onTransition) {
+      await this.props.onTransition(from, to)
+      this.setState({ currentStep: to })
+    } else {
+      this.setState({ currentStep: to })
+    }
+  }
+
   renderCurrentStepFormFields = () => {
-    const currentStepForm = this.props.steps[this.state.currentStep - 1]
+    const currentStepForm = this.getSteps(this.props.steps)[
+      this.state.currentStep - 1
+    ]
     return currentStepForm.formFields.map(this.parseFormFields)
   }
 
@@ -161,6 +186,7 @@ export default class FormStepperContainer extends React.PureComponent<
   }
 
   parseFormFields = (field: any, index: number) => {
+    console.log('field', field)
     const {
       type: {
         type,
@@ -200,6 +226,7 @@ export default class FormStepperContainer extends React.PureComponent<
             label={label}
             defaultValue={formData[name]}
             getValue={val => this.props.updateValueChange(name, val)}
+            underneathText={underneathText}
             options={options}
             error={fieldErrors && fieldErrors[name]}
           />
@@ -283,15 +310,6 @@ export default class FormStepperContainer extends React.PureComponent<
             error={fieldErrors && fieldErrors[name]}
           />
         )
-    }
-  }
-
-  onCtaButtonPress = () => {
-    const { currentStep } = this.state
-    if (currentStep == this.props.steps.length) {
-      this.props.onCompleteSteps()
-    } else {
-      this.setState({ currentStep: currentStep + 1 })
     }
   }
 }

@@ -76,3 +76,17 @@ export const ListCompanyCategoriesGQL = gql`
     }
   }
 `
+
+export const ListCompanyProductGroupsGQL = gql`
+  query listCompanyProductGroups($companyId: Uuid!) {
+    listCompanyProductGroups(companyId: $companyId) {
+      title
+      id
+
+      options {
+        optionId: id
+        optionName: name
+      }
+    }
+  }
+`

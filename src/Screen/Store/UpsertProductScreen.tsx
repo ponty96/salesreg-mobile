@@ -1,74 +1,89 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet } from 'react-native'
-import Header from '../../Components/Header/BaseHeader'
-import FormImageAtom from '../../Atom/FormImageAtom'
-import InputAtom from '../../Atom/Form/InputAtom'
-import FormContainerAtom from '../../Atom/FormContainerAtom'
-import SaveCancelButton from '../../Container/SaveCancelButton'
-import { Mutation } from 'react-apollo'
-import { UpsertProductGQL } from '../../graphql/mutations/store'
-import AppSpinner from '../../Components/Spinner'
+
 import Auth from '../../services/auth'
-import { parseFieldErrors } from '../../Functions'
-import { Container, Content, Form } from 'native-base'
+import FormStepperContainer, {
+  FormStep
+} from '../../Container/Form/StepperContainer'
+import {
+  ListCompanyCategoriesGQL,
+  ListCompanyProductGroupsGQL
+} from '../../graphql/queries/store'
 
 interface IProps {
   navigation: any
+  screenProps: any
+}
+
+interface OptionValue {
+  optionId: string
+  name: string
+  optionName: string
 }
 
 interface IState {
-  image: any
-  name: string
-  currentStock: string
-  minStock: string
-  costPrice: string
+  isVariant: string
+  productGroupTitle: string
+  productGroupId: string
+  isNewProductVariant: string
+  sku: string
+  minimumSku: string
   sellingPrice: string
+  featuredImage: string
+  images: any[]
+  name: string
+  optionValues: OptionValue[]
   description: string
-  userId: string
+  listOfCategories: any
+  listOfProductGroups: any
+  categories: string[]
+  tags: string[]
   companyId: string
+  userId: string
+  currentFormState: string
   fieldErrors: any
+}
+
+const STATE_TYPES = {
+  NewProduct: 'New Product',
+  ExistingProduct: 'Existing Product',
+  ExistingPredefined: 'Existing with predefined variants',
+  ExistingNonPredefined: 'Existing without prefined variants',
+  NewProductVariant: 'New product with variant',
+  NewProductNonVariant: 'New product without variant'
 }
 
 class UpsertProductScreen extends PureComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
-      name: '',
-      image:
-        'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png',
-      currentStock: '',
-      minStock: '',
-      costPrice: '',
+      isVariant: '',
+      productGroupTitle: '',
+      isNewProductVariant: '',
+      productGroupId: '',
+      sku: '',
+      minimumSku: '',
       sellingPrice: '',
+      featuredImage: '',
+      images: [],
+      name: '',
+      optionValues: [],
       description: '',
-      companyId: '',
+      listOfCategories: [],
+      listOfProductGroups: [],
+      categories: [],
+      tags: [],
       userId: '',
+      companyId: '',
+      currentFormState: '',
       fieldErrors: null
     }
   }
-  static navigationOptions = ({ navigation }: any) => {
-    const product = navigation.getParam('product', null)
-    return {
-      header: (
-        <Header
-          title={product ? `Edit Product ${product.name}` : 'New Product'}
-          onPressLeftIcon={() => navigation.goBack()}
-        />
-      )
-    }
+
+  static navigationOptions = {
+    header: null
   }
+
   componentDidMount() {
-    const product = this.props.navigation.getParam('product', null)
-    if (product) {
-      this.setState({
-        ...product,
-        image: product.image
-          ? product.image
-          : 'https://irp-cdn.multiscreensite.com/649127fb/dms3rep/multi/mobile/ic1.png',
-        minStock: product.minimumSku,
-        currentStock: product.number
-      })
-    }
     this.updateDetails()
   }
 
@@ -80,165 +95,421 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
     })
   }
 
-  create = () => {
-    this.props.navigation.goBack()
-  }
+  async componentDidUpdate() {
+    if (this.state.companyId && this.state.listOfCategories.length <= 0) {
+      const {
+        screenProps: { client }
+      } = this.props
+      const {
+        data: { listCompanyCategories }
+      } = await client.query({
+        query: ListCompanyCategoriesGQL,
+        variables: { companyId: this.state.companyId }
+      })
 
-  getImage = (pic: any) => {
-    this.setState((prevState: any) => ({
-      image: {
-        ...prevState.image,
-        uri: pic
-      }
-    }))
+      const categories = listCompanyCategories.map(category => ({
+        mainLabel: category.title,
+        value: category.id
+      }))
+      this.setState({ listOfCategories: categories })
+    }
+
+    if (this.state.companyId && this.state.listOfProductGroups.length <= 0) {
+      const {
+        screenProps: { client }
+      } = this.props
+      const {
+        data: { listCompanyProductGroups }
+      } = await client.query({
+        query: ListCompanyProductGroupsGQL,
+        variables: { companyId: this.state.companyId }
+      })
+
+      const productGroups = listCompanyProductGroups.map(productGroup => ({
+        mainLabel: productGroup.title,
+        value: productGroup.id,
+        options: productGroup.options
+      }))
+      this.setState({ listOfProductGroups: productGroups })
+    }
   }
 
   updateState = (key: string, value: any) => {
-    const state = { ...this.state, [key]: value }
-    this.setState(state)
+    if (key == 'productGroupId') {
+      this.updateProductGroupId(value)
+    } else {
+      const state = { ...this.state, [key]: value }
+      this.setState(state)
+    }
   }
 
-  render() {
-    const { fieldErrors } = this.state
-    return (
-      <Mutation mutation={UpsertProductGQL} onCompleted={this.onCompleted}>
-        {(upsertProduct, { loading }) => (
-          <Container>
-            <Content>
-              <Form>
-                <AppSpinner visible={loading} />
-                <FormImageAtom
-                  form="product"
-                  getValue={this.getImage}
-                  source={this.state.image}
-                />
+  updateProductGroupId = id => {
+    const productGroup = this.state.listOfProductGroups.find(
+      productGrp => productGrp.value == id
+    )
+    const optionValues = productGroup.options.map(option => ({
+      ...option,
+      name: ''
+    }))
+    this.setState({
+      productGroupId: id,
+      optionValues,
+      productGroupTitle: productGroup.mainLabel
+    })
+  }
 
-                <FormContainerAtom headerText="Product Name">
-                  <InputAtom
-                    label="*Product name"
-                    defaultValue={this.state.name}
-                    getValue={val => this.updateState('name', val)}
-                    error={fieldErrors && fieldErrors['name']}
-                    underneathStyle={styles.underneathStyle}
-                    placeholder="e.g Hublot Geneve Brown Watch"
-                  />
-                </FormContainerAtom>
-                <FormContainerAtom headerText="Quantity">
-                  <View>
-                    <InputAtom
-                      label="*Current Stock Quantity"
-                      getValue={val => this.updateState('currentStock', val)}
-                      keyboardType="numeric"
-                      underneathText="Quantity available in store as at now"
-                      underneathStyle={styles.underneathStyle}
-                      defaultValue={this.state.currentStock}
-                      error={fieldErrors && fieldErrors['sku']}
-                      placeholder="e.g 30"
-                    />
-                  </View>
-                  <View>
-                    <InputAtom
-                      label="*Minimum Stock Quantity"
-                      getValue={val => this.updateState('minStock', val)}
-                      keyboardType="numeric"
-                      underneathText="Minimum quantity required for re-stock"
-                      underneathStyle={styles.underneathStyle}
-                      defaultValue={this.state.minStock}
-                      error={fieldErrors && fieldErrors['minimumSku']}
-                      placeholder="e.g 10"
-                    />
-                  </View>
-                </FormContainerAtom>
-                <FormContainerAtom headerText="Cost/Selling Price for each">
-                  <InputAtom
-                    label={`*Cost Price each \u20A6`}
-                    getValue={val => this.updateState('costPrice', val)}
-                    keyboardType="numeric"
-                    defaultValue={this.state.costPrice}
-                    error={fieldErrors && fieldErrors['costPrice']}
-                    underneathStyle={styles.underneathStyle}
-                    placeholder="e.g 10,000"
-                  />
-                  <InputAtom
-                    label={`*Selling Price each \u20A6`}
-                    getValue={val => this.updateState('sellingPrice', val)}
-                    keyboardType="numeric"
-                    defaultValue={this.state.sellingPrice}
-                    underneathStyle={styles.underneathStyle}
-                    error={fieldErrors && fieldErrors['sellingPrice']}
-                    placeholder="e.g 15,000"
-                  />
-                </FormContainerAtom>
-                <FormContainerAtom headerText="Description">
-                  <View>
-                    <InputAtom
-                      label="Product Description"
-                      getValue={val => this.updateState('description', val)}
-                      defaultValue={this.state.description}
-                      error={fieldErrors && fieldErrors['description']}
-                      underneathStyle={styles.underneathStyle}
-                    />
-                  </View>
-                </FormContainerAtom>
-                <SaveCancelButton
-                  navigation={this.props.navigation}
-                  createfunc={() =>
-                    upsertProduct({
-                      variables: this.parseMutationVariables()
-                    })
-                  }
-                  positiveButtonName="SAVE"
-                />
-              </Form>
-            </Content>
-          </Container>
-        )}
-      </Mutation>
+  updateOptionValues = () => {}
+
+  render() {
+    return (
+      <FormStepperContainer
+        formData={this.state}
+        updateValueChange={this.updateState}
+        fieldErrors={this.state.fieldErrors}
+        handleBackPress={() => this.props.navigation.goBack()}
+        onCompleteSteps={this.completeSteps}
+        steps={this.parseFormSteps()}
+        onTransition={this.onTransition}
+      />
     )
   }
 
-  parseMutationVariables = () => {
-    const product = this.props.navigation.getParam('product', {})
-    return {
-      companyId: this.state.companyId,
-      costPrice: this.state.costPrice,
-      description: this.state.description,
-      // featuredImage: this.state.image,
-      featuredImage: '',
-      minimumSku: this.state.minStock,
-      name: this.state.name,
-      sellingPrice: this.state.sellingPrice,
-      sku: this.state.currentStock,
-      userId: this.state.userId,
-      productId: product ? product.id : null
+  parseFormSteps = (): FormStep[] => {
+    const defaultSteps: FormStep[] = [
+      {
+        stepTitle: 'Is this a new product or variant of an existing product?',
+        formFields: [
+          {
+            label: 'New or Variant of existing?',
+            placeholder: '',
+            name: 'isVariant',
+            type: {
+              type: 'radio',
+              options: ['New Product', 'Variant of Existing product']
+            }
+          }
+        ]
+      },
+      this.getSecondStep(),
+      this.getThirdStep(),
+      this.getFourthStep(),
+      this.getFifthStep(),
+      this.getSixthStep(),
+      this.getSeventhStep(),
+      this.getEightStep(),
+      this.getNinthStep(),
+      this.getTenthStep()
+    ]
+
+    return defaultSteps
+  }
+
+  completeSteps = () => {}
+
+  getProductTitle = () => {
+    return this.state.productGroupTitle
+  }
+
+  onTransition = async (from, to) => {
+    // update state status based on transition
+    let currentState = this.state.currentFormState
+    if (from == 1 && to == 2) {
+      currentState =
+        this.state.isVariant == 'New Product'
+          ? STATE_TYPES.NewProduct
+          : STATE_TYPES.ExistingProduct
+    } else if (from == 2 && to == 3) {
+      if (currentState !== STATE_TYPES.NewProduct) {
+        currentState =
+          this.state.optionValues.length > 0
+            ? STATE_TYPES.ExistingPredefined
+            : STATE_TYPES.ExistingNonPredefined
+      }
+    } else if (from == 3 && to == 4 && currentState == STATE_TYPES.NewProduct) {
+      currentState =
+        this.state.isNewProductVariant == 'Yes'
+          ? STATE_TYPES.NewProductVariant
+          : STATE_TYPES.NewProductNonVariant
+    } else if (
+      from == 4 &&
+      to == 3 &&
+      currentState == STATE_TYPES.NewProductVariant
+    ) {
+      // clear option values and other details that have already been filled from step 3 forward
+      currentState = STATE_TYPES.NewProduct
+    } else if (
+      from == 4 &&
+      to == 3 &&
+      currentState == STATE_TYPES.NewProductNonVariant
+    ) {
+      // clear details that have already been filled from step 3 forward
+      currentState = STATE_TYPES.NewProduct
+    }
+
+    return this.setState({ currentFormState: currentState })
+  }
+
+  getSecondStep = (): FormStep => {
+    if (this.state.currentFormState !== STATE_TYPES.NewProduct) {
+      return {
+        stepTitle: 'Choose from list of existing products?',
+        formFields: [
+          {
+            label: 'Choose product',
+            placeholder: '',
+            name: 'productGroupId',
+            type: {
+              type: 'picker',
+              options: this.state.listOfProductGroups
+            }
+          }
+        ]
+      }
+    } else
+      return {
+        stepTitle: 'Name this product?',
+        formFields: [
+          {
+            label: 'Product name',
+            placeholder: 'e.g Leather Shoe',
+            name: 'productGroupTitle',
+            type: {
+              type: 'input'
+            }
+          }
+        ]
+      }
+  }
+
+  getThirdStep = (): FormStep | any => {
+    if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
+      return renderOptionValuesInputStep(
+        this.state.optionValues,
+        this.getProductTitle()
+      )
+    } else if (
+      this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
+    ) {
+      return renderSelectOptionsFormStep(this.getProductTitle())
+    } else {
+      return {
+        stepTitle: `Does ${this.getProductTitle()} comes in different versions like colors or sizes?`,
+        formFields: [
+          {
+            label: 'Yes or No',
+            name: 'isNewProductVariant',
+            type: {
+              type: 'radio',
+              options: ['Yes', 'No']
+            },
+            underneathText:
+              'Each version of a product is called a variant of that product. A cover shoe for instance, may come in different colors and sizes, each bag with a different color and/or size is a variant of the bag'
+          }
+        ]
+      }
     }
   }
-  onCompleted = async res => {
-    const {
-      upsertProduct: { success, fieldErrors }
-    } = res
-    if (success) {
-      this.props.navigation.navigate('Products')
-    } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
+
+  getFourthStep = (): FormStep | any => {
+    if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
+      return renderProductDescriptionStep(this.getProductTitle())
+    } else if (
+      this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
+    ) {
+      return renderOptionValuesInputStep(
+        this.state.optionValues,
+        this.getProductTitle()
+      )
+    } else if (
+      this.state.currentFormState == STATE_TYPES.NewProductVariant ||
+      this.state.currentFormState == STATE_TYPES.NewProduct
+    ) {
+      return renderSelectOptionsFormStep(this.getProductTitle())
+    } else if (
+      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
+    ) {
+      return renderProductDescriptionStep(this.getProductTitle())
+    }
+  }
+
+  getFifthStep = (): FormStep | any => {
+    if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
+      return renderCategoryStep(this.state.listOfCategories)
+    } else if (
+      this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
+    ) {
+      return renderProductDescriptionStep(this.getProductTitle())
+    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
+      return renderOptionValuesInputStep(
+        this.state.optionValues,
+        this.getProductTitle()
+      )
+    } else if (
+      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
+    ) {
+      return renderCategoryStep(this.state.listOfCategories)
+    }
+  }
+
+  getSixthStep = (): FormStep | any => {
+    if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
+      return renderTagStep(this.getProductTitle())
+    } else if (
+      this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
+    ) {
+      return renderCategoryStep(this.state.listOfCategories)
+    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
+      return renderProductDescriptionStep(this.getProductTitle())
+    } else if (
+      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
+    ) {
+      return renderTagStep(this.getProductTitle())
+    }
+  }
+
+  getSeventhStep = (): FormStep | any => {
+    if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
+      return renderFeaturedImageStep(this.getProductTitle())
+    } else if (
+      this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
+    ) {
+      return renderTagStep(this.getProductTitle())
+    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
+      return renderCategoryStep(this.state.listOfCategories)
+    } else if (
+      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
+    ) {
+      return renderFeaturedImageStep(this.getProductTitle())
+    }
+  }
+
+  getEightStep = (): FormStep | any => {
+    if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
+      return renderImagesStep(this.getProductTitle())
+    } else if (
+      this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
+    ) {
+      return renderFeaturedImageStep(this.getProductTitle())
+    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
+      return renderTagStep(this.getProductTitle())
+    } else if (
+      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
+    ) {
+      return renderImagesStep(this.getProductTitle())
+    }
+  }
+
+  getNinthStep = (): FormStep | any => {
+    if (this.state.currentFormState == STATE_TYPES.ExistingNonPredefined) {
+      return renderImagesStep(this.getProductTitle())
+    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
+      return renderFeaturedImageStep(this.getProductTitle())
+    }
+  }
+
+  getTenthStep = (): FormStep | any => {
+    if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
+      return renderImagesStep(this.getProductTitle())
     }
   }
 }
 
-export default UpsertProductScreen
-
-const styles = StyleSheet.create({
-  ababa: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  itemsContainer: {
-    flex: 4,
-    backgroundColor: '#F6F6F6'
-  },
-  underneathStyle: {
-    marginBottom: 0,
-    paddingBottom: 0,
-    paddingLeft: 8
-  }
+const renderSelectOptionsFormStep = (name): FormStep => ({
+  stepTitle: `Select the variant options for ${name}`,
+  stepHint: `Variant options are what makes one ${name} different from another ${name}. E.g. color, sizes`,
+  formFields: [
+    {
+      label: 'Select options',
+      type: {
+        type: 'multi-picker',
+        options: []
+      },
+      name: 'optionValues'
+    }
+  ]
 })
+
+const renderProductDescriptionStep = (name): FormStep => ({
+  stepTitle: `${name} details`,
+  formFields: [
+    {
+      label: 'Description',
+      type: {
+        type: 'input',
+        multiline: true
+      },
+      name: 'description'
+    },
+    {
+      label: 'How much do you sell each?',
+      type: {
+        type: 'input'
+      },
+      name: 'sellingPrice'
+    }
+  ]
+})
+
+const renderOptionValuesInputStep = (optionValues: OptionValue[], name) => ({
+  stepTitle: `Enter variant values for ${name}`,
+  formFields: optionValues.map(optionValue => ({
+    label: `${name} ${optionValue.optionName}`,
+    type: {
+      type: 'input',
+      keyboardType: 'default'
+    },
+    name: `option-${optionValue.optionId}`
+  }))
+})
+
+const renderCategoryStep = categories => ({
+  stepTitle: 'Categorize this product',
+  formFields: [
+    {
+      label: 'Categories',
+      type: {
+        type: 'multi-picker',
+        options: categories
+      },
+      name: 'categories'
+    }
+  ]
+})
+
+const renderTagStep = name => ({
+  stepTitle: `Add tags to ${name}`,
+  stepHint:
+    ' \nTags will enhance your filters and your customer abilities to find services within select tags',
+  formFields: [{ label: 'Tags', type: { type: 'tag-input' }, name: 'tags' }]
+})
+
+const renderFeaturedImageStep = name => ({
+  stepTitle: `Lets add images for ${name} starting from the landing images`,
+  stepHint: `The landing images is what your customers see displayed on catalogue page of webstore. This is the image of this service that your customers will first see when they explore your catalogue. Click + to add from your device storage`,
+  formFields: [
+    {
+      label: '',
+      name: 'featuredImage',
+      type: {
+        type: 'image-upload'
+      }
+    }
+  ]
+})
+
+const renderImagesStep = name => ({
+  stepTitle: `Lets now add other images for ${name}`,
+  stepHint: `Images will be displayed on the details section of your webstore. Customers can view multiple images of ${name}`,
+  formFields: [
+    {
+      label: '',
+      name: 'images',
+      type: {
+        type: 'image-upload'
+      }
+    }
+  ],
+  buttonTitle: 'Done'
+})
+
+export default UpsertProductScreen
