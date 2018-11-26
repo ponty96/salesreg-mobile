@@ -6,11 +6,12 @@ import { color } from '../Style/Color'
 interface IProps {
   uri: string
   style?: object
+  isBackgroundImage?: boolean | false
 }
 
 export default class CachedImageAtom extends React.PureComponent<IProps> {
   render() {
-    return (
+    return !this.props.isBackgroundImage ? (
       <CachedImage
         source={{ uri: this.props.uri }}
         style={[styles.container, this.props.style]}
@@ -22,6 +23,20 @@ export default class CachedImageAtom extends React.PureComponent<IProps> {
           />
         )}
       />
+    ) : (
+      <CachedImage
+        source={{ uri: this.props.uri }}
+        style={[styles.container, this.props.style]}
+        ttl={60 * 60 * 24 * 7}
+        loadingIndicator={() => (
+          <ActivityIndicator
+            color={color.black}
+            size={Platform.OS === 'android' ? 20 : 'small'}
+          />
+        )}
+      >
+        {this.props.children}
+      </CachedImage>
     )
   }
 }
