@@ -21,7 +21,7 @@ interface IState {
   previousAddedImages: string[]
 }
 
-export default class MultipleImageUploadAtom extends React.PureComponent<
+export default class MediaUploadHandlerAtom extends React.PureComponent<
   IProps,
   IState
 > {
