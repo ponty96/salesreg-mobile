@@ -31,7 +31,10 @@ interface IState {
   phoneNumber: string
 }
 
-class EditBusinessProfileScreen extends Component<IProps, IState> {
+export default class EditBusinessProfileScreen extends Component<
+  IProps,
+  IState
+> {
   state = {
     logo: '',
     about: '',
@@ -46,6 +49,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     phoneNumber: '',
     fieldErrors: null
   }
+
   static navigationOptions = {
     header: null
   }
@@ -282,5 +286,3 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     }
   }
 }
-
-export default EditBusinessProfileScreen

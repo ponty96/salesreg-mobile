@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import Header from '../Components/Header/DetailsScreenHeader'
-import Auth from '../services/auth'
 import GenericProfileDetails from '../Components/Generic/ProfileDetails'
+import Auth from '../services/auth'
 
 interface IProps {
   navigation: any
@@ -13,7 +13,7 @@ interface IState {
   profilePicture: string
 }
 
-class UserProfileScreen extends Component<IProps, IState> {
+export default class UserProfileScreen extends Component<IProps, IState> {
   state = {
     list: [],
     fullName: '',
@@ -72,5 +72,3 @@ class UserProfileScreen extends Component<IProps, IState> {
     )
   }
 }
-
-export default UserProfileScreen

@@ -8,9 +8,9 @@ import SaveCancelButton from '../../Container/SaveCancelButton'
 import { Mutation } from 'react-apollo'
 import { UpsertProductGQL } from '../../graphql/mutations/store'
 import AppSpinner from '../../Components/Spinner'
-import Auth from '../../services/auth'
 import { parseFieldErrors } from '../../Functions'
 import { Container, Content, Form } from 'native-base'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any
@@ -29,7 +29,7 @@ interface IState {
   fieldErrors: any
 }
 
-class UpsertProductScreen extends PureComponent<IProps, IState> {
+export default class UpsertProductScreen extends PureComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
@@ -224,8 +224,6 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
     }
   }
 }
-
-export default UpsertProductScreen
 
 const styles = StyleSheet.create({
   ababa: {

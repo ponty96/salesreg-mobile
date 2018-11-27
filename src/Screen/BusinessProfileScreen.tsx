@@ -1,8 +1,8 @@
 import React, { Component } from 'react'
-import Auth from '../services/auth'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../Components/Generic/ProfileDetails'
 import { Countries } from '../utilities/data/picker-lists'
+import Auth from '../services/auth'
 
 interface IProps {
   navigation: any
@@ -14,7 +14,7 @@ interface IState {
   logo: string
 }
 
-class BusinessProfileScreen extends Component<IProps, IState> {
+export default class BusinessProfileScreen extends Component<IProps, IState> {
   state = {
     list: [],
     businessName: '',
@@ -93,5 +93,3 @@ class BusinessProfileScreen extends Component<IProps, IState> {
     )
   }
 }
-
-export default BusinessProfileScreen
