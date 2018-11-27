@@ -17,7 +17,9 @@ interface IState {
 export default class HomeScreen extends React.Component<IProps, IState> {
   state = {
     username: '',
-    images: []
+    images: [
+      'https://refineryaudio.s3.amazonaws.com/SU1HXzAwMDMuSlBHMTU0MzIzNjcxNDAxMg%3D%3D'
+    ]
   }
 
   static navigationOptions = ({ navigation }: any) => {
@@ -49,6 +51,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
         <MediaUploadHandlerAtom
+          images={this.state.images}
           handleImagesUpload={images => console.log(images)}
         />
       </View>
