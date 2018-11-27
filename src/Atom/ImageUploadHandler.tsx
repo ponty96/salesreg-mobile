@@ -19,6 +19,7 @@ interface IProps {
   controlled?: boolean | false
   image?: any
   style?: any
+  type?: 'image' | 'video'
 }
 
 /**
@@ -60,7 +61,6 @@ export default class ImageUploadHandler extends React.PureComponent<
     let {
       image: { path, mime, filename }
     } = this.state
-
     const options = {
       bucket: 'refineryaudio',
       region: 'us-west-1',
@@ -68,7 +68,6 @@ export default class ImageUploadHandler extends React.PureComponent<
       secretKey: '/GaEt0UER8v/5n1m7eH18V8X7C7RCLJGwXarn2bC',
       successActionStatus: 201
     }
-
     const name =
       Platform.OS == 'ios'
         ? filename
@@ -76,7 +75,9 @@ export default class ImageUploadHandler extends React.PureComponent<
 
     const file = {
       uri: path,
-      name: btoa(`${name}${Date.now()}`),
+      name: `${btoa(`${name}${Date.now()}`)}|${mime
+        .split('/')[0]
+        .toLowerCase()}`,
       type: mime
     }
 
@@ -127,6 +128,16 @@ export default class ImageUploadHandler extends React.PureComponent<
     )
   }
 
+  renderUploadedContainer = (): JSX.Element => {
+    return (
+      <Icon
+        type="FontAwesome"
+        name={this.props.type == 'image' ? 'file-image-o' : 'video-camera'}
+        style={styles.whiteIcon}
+      />
+    )
+  }
+
   renderLoadingContainer = (): JSX.Element => {
     return (
       <TouchableOpacity onPress={this.cancelUpload}>
@@ -156,7 +167,7 @@ export default class ImageUploadHandler extends React.PureComponent<
 
   renderImage = (): JSX.Element => {
     let {
-      image: { data, mime },
+      image: { data, mime, path },
       uploadState
     } = this.state
 
@@ -164,7 +175,7 @@ export default class ImageUploadHandler extends React.PureComponent<
       <ImageBackground
         style={[styles.container, this.props.style]}
         source={{
-          uri: `data:${mime};base64,${data}`
+          uri: this.props.type == 'image' ? `data:${mime};base64,${data}` : path
         }}
       >
         <View style={styles.imageOverlay}>
@@ -180,7 +191,7 @@ export default class ImageUploadHandler extends React.PureComponent<
             ? this.renderLoadingContainer()
             : uploadState == 2
             ? this.renderRetryContainer()
-            : null}
+            : this.renderUploadedContainer()}
         </View>
       </ImageBackground>
     )

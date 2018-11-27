@@ -5,7 +5,7 @@ import {
   TouchableOpacity,
   ImageBackground
 } from 'react-native'
-import { Icon } from 'native-base'
+import { Icon, ActionSheet } from 'native-base'
 import ImagePicker from 'react-native-image-crop-picker'
 import ImageUploadHandler from './../ImageUploadHandler'
 
@@ -35,12 +35,62 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
     }
   }
 
-  selectImage = () => {
+  selectMediaFromStorage = () => {
+    ActionSheet.show(
+      {
+        options: ['Take Photo', 'Photo Library', 'Video Library', 'Cancel'],
+        cancelButtonIndex: 3,
+        title: 'Upload Media'
+      },
+      buttonIndex => {
+        switch (buttonIndex) {
+          case 0:
+            this.openCamera()
+            break
+          case 1:
+            this.openGallery()
+            break
+          case 2:
+            this.openVideo()
+            break
+          default:
+            break
+        }
+      }
+    )
+  }
+
+  openGallery = () => {
     ImagePicker.openPicker({
       width: 840,
       height: 840,
-      includeBase64: true,
-      cropping: true
+      cropping: true,
+      mediaType: 'photo',
+      includeBase64: true
+    }).then(image => {
+      this.setState({
+        images: { ...this.state.images, [Date.now()]: image }
+      })
+    })
+  }
+
+  openCamera = () => {
+    ImagePicker.openCamera({
+      width: 840,
+      height: 840,
+      cropping: true,
+      mediaType: 'photo',
+      includeBase64: true
+    }).then((image: any) => {
+      this.setState({
+        images: { ...this.state.images, [Date.now()]: image }
+      })
+    })
+  }
+
+  openVideo = () => {
+    ImagePicker.openPicker({
+      mediaType: 'video'
     }).then((image: any) => {
       this.setState({
         images: { ...this.state.images, [Date.now()]: image }
@@ -102,7 +152,7 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
 
   renderSelectImageContainer = (): JSX.Element => {
     return (
-      <TouchableOpacity onPress={this.selectImage}>
+      <TouchableOpacity onPress={this.selectMediaFromStorage}>
         <View style={[styles.selectImageContainer, styles.image]}>
           <Icon name="plus" type="Feather" style={styles.icon} />
         </View>
@@ -175,6 +225,7 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
             onRemoveImage={() => this.removeImage(index)}
             onImageSet={response => this.handleImageValueSet(index, response)}
             image={this.state.images[index]}
+            type={this.state.images[index].mime.split('/')[0].toLowerCase()}
             style={styles.image}
             controlled={true}
           />
