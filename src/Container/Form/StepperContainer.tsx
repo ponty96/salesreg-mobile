@@ -231,8 +231,8 @@ export default class FormStepperContainer extends React.PureComponent<
         return (
           <MediaUploadHandlerAtom
             key={`${type}-${index}`}
-            images={formData[name]}
-            handleImagesUpload={arrayOfValues =>
+            medias={formData[name]}
+            handleMediasUpload={arrayOfValues =>
               this.props.updateValueChange(name, arrayOfValues)
             }
           />

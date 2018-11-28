@@ -51,8 +51,8 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
         </View>
         <MediaUploadHandlerAtom
-          images={this.state.images}
-          handleImagesUpload={images => console.log(images)}
+          medias={this.state.images}
+          handleMediasUpload={media => console.log(media)}
         />
       </View>
     )

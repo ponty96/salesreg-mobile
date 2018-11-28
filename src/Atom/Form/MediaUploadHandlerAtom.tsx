@@ -7,15 +7,15 @@ import Lightbox from 'react-native-lightbox'
 import CachedImageAtom from '../CachedImageAtom'
 
 interface IProps {
-  images?: string[]
-  handleImagesUpload: (image: string[]) => void
+  medias?: string[]
+  handleMediasUpload: (image: string[]) => void
 }
 
 interface IState {
-  images?: {}
+  medias?: {}
   showCancelIconState?: {}
-  urlOfImagesUploaded?: {}
-  previousAddedImages: string[]
+  urlOfMediaUploaded?: {}
+  previousAddedMedia: string[]
 }
 
 export default class MediaUploadHandlerAtom extends React.PureComponent<
@@ -25,9 +25,9 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
   constructor(props) {
     super(props)
     this.state = {
-      images: {},
-      urlOfImagesUploaded: {},
-      previousAddedImages: props.images || [],
+      medias: {},
+      urlOfMediaUploaded: {},
+      previousAddedMedia: props.medias || [],
       showCancelIconState: {}
     }
   }
@@ -66,7 +66,7 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
       includeBase64: true
     }).then(image => {
       this.setState({
-        images: { ...this.state.images, [Date.now()]: image }
+        medias: { ...this.state.medias, [Date.now()]: image }
       })
     })
   }
@@ -80,7 +80,7 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
       includeBase64: true
     }).then((image: any) => {
       this.setState({
-        images: { ...this.state.images, [Date.now()]: image }
+        medias: { ...this.state.medias, [Date.now()]: image }
       })
     })
   }
@@ -90,33 +90,33 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
       mediaType: 'video'
     }).then((image: any) => {
       this.setState({
-        images: { ...this.state.images, [Date.now()]: image }
+        medias: { ...this.state.medias, [Date.now()]: image }
       })
     })
   }
 
   removeImage = index => {
     let newImgState = {},
-      { urlOfImagesUploaded } = this.state
+      { urlOfMediaUploaded } = this.state
 
-    Object.keys(this.state.images).forEach(key => {
+    Object.keys(this.state.medias).forEach(key => {
       if (index != key) {
-        newImgState[key] = this.state.images[key]
+        newImgState[key] = this.state.medias[key]
       }
     })
 
     this.setState(
       {
-        images: newImgState,
-        urlOfImagesUploaded: urlOfImagesUploaded[index]
-          ? { ...urlOfImagesUploaded, [index]: null }
-          : urlOfImagesUploaded
+        medias: newImgState,
+        urlOfMediaUploaded: urlOfMediaUploaded[index]
+          ? { ...urlOfMediaUploaded, [index]: null }
+          : urlOfMediaUploaded
       },
       () => {
-        this.props.handleImagesUpload(
-          this.state.previousAddedImages.concat(
-            Object.keys(this.state.urlOfImagesUploaded)
-              .map(i => this.state.urlOfImagesUploaded[i])
+        this.props.handleMediasUpload(
+          this.state.previousAddedMedia.concat(
+            Object.keys(this.state.urlOfMediaUploaded)
+              .map(i => this.state.urlOfMediaUploaded[i])
               .filter(val => val != null)
           )
         )
@@ -131,16 +131,16 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
 
     this.setState(
       {
-        urlOfImagesUploaded: {
-          ...this.state.urlOfImagesUploaded,
+        urlOfMediaUploaded: {
+          ...this.state.urlOfMediaUploaded,
           [index]: postResponse.location
         }
       },
       () =>
-        this.props.handleImagesUpload(
-          this.state.previousAddedImages.concat(
-            Object.keys(this.state.urlOfImagesUploaded)
-              .map(i => this.state.urlOfImagesUploaded[i])
+        this.props.handleMediasUpload(
+          this.state.previousAddedMedia.concat(
+            Object.keys(this.state.urlOfMediaUploaded)
+              .map(i => this.state.urlOfMediaUploaded[i])
               .filter(val => val != null)
           )
         )
@@ -157,15 +157,14 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
     )
   }
 
-  renderPreviousAddedImages = () => {
-    let { previousAddedImages, showCancelIconState } = this.state
-
-    return previousAddedImages.map((image, i) => (
+  renderPreviousImageMedia = (image, key): JSX.Element => {
+    let { showCancelIconState, previousAddedMedia } = this.state
+    return (
       <Lightbox
-        key={i}
+        key={key}
         onOpen={() =>
           this.setState({
-            showCancelIconState: { ...showCancelIconState, [i]: false }
+            showCancelIconState: { ...showCancelIconState, [key]: false }
           })
         }
         renderHeader={close => (
@@ -178,7 +177,7 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
         )}
         onClose={() =>
           this.setState({
-            showCancelIconState: { ...showCancelIconState, [i]: true }
+            showCancelIconState: { ...showCancelIconState, [key]: true }
           })
         }
         activeProps={{
@@ -186,22 +185,23 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
         }}
       >
         <CachedImageAtom isBackgroundImage style={styles.image} uri={image}>
-          {(showCancelIconState[i] || showCancelIconState[i] == undefined) && (
+          {(showCancelIconState[key] ||
+            showCancelIconState[key] == undefined) && (
             <Icon
               name="x"
               type="Feather"
               onPress={() =>
                 this.setState(
                   {
-                    previousAddedImages: previousAddedImages.filter(
+                    previousAddedMedia: previousAddedMedia.filter(
                       val => val != image
                     )
                   },
                   () =>
-                    this.props.handleImagesUpload(
-                      this.state.previousAddedImages.concat(
-                        Object.keys(this.state.urlOfImagesUploaded).map(
-                          i => this.state.urlOfImagesUploaded[i]
+                    this.props.handleMediasUpload(
+                      this.state.previousAddedMedia.concat(
+                        Object.keys(this.state.urlOfMediaUploaded).map(
+                          i => this.state.urlOfMediaUploaded[i]
                         )
                       )
                     )
@@ -212,20 +212,30 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
           )}
         </CachedImageAtom>
       </Lightbox>
-    ))
+    )
+  }
+
+  renderPreviousAddedMedia = () => {
+    let { previousAddedMedia } = this.state
+
+    return previousAddedMedia.map((media, i) =>
+      media.indexOf('image') != -1
+        ? this.renderPreviousImageMedia(media, i)
+        : null
+    )
   }
 
   render() {
     return (
       <View style={styles.container}>
-        {this.renderPreviousAddedImages()}
-        {Object.keys(this.state.images).map(index => (
+        {this.renderPreviousAddedMedia()}
+        {Object.keys(this.state.medias).map(index => (
           <ImageUploadHandler
             key={index}
             onRemoveImage={() => this.removeImage(index)}
             onImageSet={response => this.handleImageValueSet(index, response)}
-            image={this.state.images[index]}
-            type={this.state.images[index].mime.split('/')[0].toLowerCase()}
+            image={this.state.medias[index]}
+            type={this.state.medias[index].mime.split('/')[0].toLowerCase()}
             style={styles.image}
             controlled={true}
           />
