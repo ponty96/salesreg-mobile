@@ -13,7 +13,7 @@ interface IProps {
 
 interface IState {
   images?: {}
-  prevImagesLoadingState?: {}
+  showCancelIconState?: {}
   urlOfImagesUploaded?: {}
   previousAddedImages: string[]
 }
@@ -28,7 +28,7 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
       images: {},
       urlOfImagesUploaded: {},
       previousAddedImages: props.images || [],
-      prevImagesLoadingState: {}
+      showCancelIconState: {}
     }
   }
 
@@ -158,38 +158,58 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
   }
 
   renderPreviousAddedImages = () => {
-    let { previousAddedImages } = this.state
+    let { previousAddedImages, showCancelIconState } = this.state
 
     return previousAddedImages.map((image, i) => (
       <Lightbox
         key={i}
+        onOpen={() =>
+          this.setState({
+            showCancelIconState: { ...showCancelIconState, [i]: false }
+          })
+        }
+        renderHeader={close => (
+          <Icon
+            name="md-arrow-back"
+            type="Ionicons"
+            onPress={() => close()}
+            style={styles.backIcon}
+          />
+        )}
+        onClose={() =>
+          this.setState({
+            showCancelIconState: { ...showCancelIconState, [i]: true }
+          })
+        }
         activeProps={{
           style: { width: Dimensions.get('window').width, height: 300 }
         }}
       >
         <CachedImageAtom isBackgroundImage style={styles.image} uri={image}>
-          <Icon
-            name="x"
-            type="Feather"
-            onPress={() =>
-              this.setState(
-                {
-                  previousAddedImages: previousAddedImages.filter(
-                    val => val != image
-                  )
-                },
-                () =>
-                  this.props.handleImagesUpload(
-                    this.state.previousAddedImages.concat(
-                      Object.keys(this.state.urlOfImagesUploaded).map(
-                        i => this.state.urlOfImagesUploaded[i]
+          {(showCancelIconState[i] || showCancelIconState[i] == undefined) && (
+            <Icon
+              name="x"
+              type="Feather"
+              onPress={() =>
+                this.setState(
+                  {
+                    previousAddedImages: previousAddedImages.filter(
+                      val => val != image
+                    )
+                  },
+                  () =>
+                    this.props.handleImagesUpload(
+                      this.state.previousAddedImages.concat(
+                        Object.keys(this.state.urlOfImagesUploaded).map(
+                          i => this.state.urlOfImagesUploaded[i]
+                        )
                       )
                     )
-                  )
-              )
-            }
-            style={styles.removeIcon}
-          />
+                )
+              }
+              style={styles.removeIcon}
+            />
+          )}
         </CachedImageAtom>
       </Lightbox>
     ))
@@ -243,5 +263,10 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 30,
     color: '#fff'
+  },
+  backIcon: {
+    color: 'white',
+    fontSize: 26,
+    margin: 10
   }
 })
