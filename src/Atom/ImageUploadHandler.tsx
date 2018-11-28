@@ -77,7 +77,7 @@ export default class ImageUploadHandler extends React.PureComponent<
       uri: path,
       name: `${btoa(`${name}${Date.now()}`)}|${mime
         .split('/')[0]
-        .toLowerCase()}`,
+        .toLowerCase()}|.${mime.split('/')[1].toLowerCase()}`,
       type: mime
     }
 

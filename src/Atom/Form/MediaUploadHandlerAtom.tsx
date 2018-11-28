@@ -1,5 +1,13 @@
 import React from 'react'
-import { StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Linking,
+  TouchableWithoutFeedback,
+  TouchableOpacity,
+  ImageBackground,
+  Dimensions
+} from 'react-native'
 import { Icon, ActionSheet } from 'native-base'
 import ImagePicker from 'react-native-image-crop-picker'
 import ImageUploadHandler from './../ImageUploadHandler'
@@ -157,61 +165,73 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
     )
   }
 
-  renderPreviousImageMedia = (image, key): JSX.Element => {
-    let { showCancelIconState, previousAddedMedia } = this.state
+  renderPreviousVideoMedia = (image, key): JSX.Element => {
+    let { previousAddedMedia } = this.state
     return (
-      <Lightbox
+      <TouchableWithoutFeedback
         key={key}
-        onOpen={() =>
-          this.setState({
-            showCancelIconState: { ...showCancelIconState, [key]: false }
-          })
-        }
-        renderHeader={close => (
-          <Icon
-            name="md-arrow-back"
-            type="Ionicons"
-            onPress={() => close()}
-            style={styles.backIcon}
-          />
-        )}
-        onClose={() =>
-          this.setState({
-            showCancelIconState: { ...showCancelIconState, [key]: true }
-          })
-        }
-        activeProps={{
-          style: { width: Dimensions.get('window').width, height: 300 }
-        }}
+        onPress={() => Linking.openURL(image)}
       >
-        <CachedImageAtom isBackgroundImage style={styles.image} uri={image}>
-          {(showCancelIconState[key] ||
-            showCancelIconState[key] == undefined) && (
-            <Icon
-              name="x"
-              type="Feather"
-              onPress={() =>
-                this.setState(
-                  {
-                    previousAddedMedia: previousAddedMedia.filter(
-                      val => val != image
-                    )
-                  },
-                  () =>
-                    this.props.handleMediasUpload(
-                      this.state.previousAddedMedia.concat(
-                        Object.keys(this.state.urlOfMediaUploaded).map(
-                          i => this.state.urlOfMediaUploaded[i]
-                        )
+        <ImageBackground style={styles.image} source={{ uri: image }}>
+          <Icon
+            name="x"
+            type="Feather"
+            onPress={() =>
+              this.setState(
+                {
+                  previousAddedMedia: previousAddedMedia.filter(
+                    val => val != image
+                  )
+                },
+                () =>
+                  this.props.handleMediasUpload(
+                    this.state.previousAddedMedia.concat(
+                      Object.keys(this.state.urlOfMediaUploaded).map(
+                        i => this.state.urlOfMediaUploaded[i]
                       )
                     )
-                )
-              }
-              style={styles.removeIcon}
-            />
-          )}
+                  )
+              )
+            }
+            style={styles.removeIcon}
+          />
+        </ImageBackground>
+      </TouchableWithoutFeedback>
+    )
+  }
+
+  renderPreviousImageMedia = (image, key): JSX.Element => {
+    let { previousAddedMedia } = this.state
+    return (
+      <TouchableWithoutFeedback
+        key={key}
+        onPress={() => Linking.openURL(image)}
+      >
+        <CachedImageAtom isBackgroundImage style={styles.image} uri={image}>
+          <Icon
+            name="x"
+            type="Feather"
+            onPress={() =>
+              this.setState(
+                {
+                  previousAddedMedia: previousAddedMedia.filter(
+                    val => val != image
+                  )
+                },
+                () =>
+                  this.props.handleMediasUpload(
+                    this.state.previousAddedMedia.concat(
+                      Object.keys(this.state.urlOfMediaUploaded).map(
+                        i => this.state.urlOfMediaUploaded[i]
+                      )
+                    )
+                  )
+              )
+            }
+            style={styles.removeIcon}
+          />
         </CachedImageAtom>
-      </Lightbox>
+      </TouchableWithoutFeedback>
     )
   }
 
@@ -221,6 +241,8 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
     return previousAddedMedia.map((media, i) =>
       media.indexOf('image') != -1
         ? this.renderPreviousImageMedia(media, i)
+        : media.indexOf('video') != -1
+        ? this.renderPreviousVideoMedia(media, i)
         : null
     )
   }

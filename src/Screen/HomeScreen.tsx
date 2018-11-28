@@ -18,7 +18,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
   state = {
     username: '',
     images: [
-      'https://refineryaudio.s3.amazonaws.com/SU1HXzAwMDMuSlBHMTU0MzIzNjcxNDAxMg%3D%3D'
+      'https://refineryaudio.s3.amazonaws.com/VklELTIwMTgxMTI4LVdBMDAwNC5tcDQxNTQzNDE1MjQzOTcw%7Cvideo%7C.mp4'
     ]
   }
 
@@ -46,15 +46,17 @@ export default class HomeScreen extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.homeBackground}>
-          <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
+      <React.Fragment>
+        <View style={styles.container}>
+          <View style={styles.homeBackground}>
+            <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
+          </View>
+          <MediaUploadHandlerAtom
+            medias={this.state.images}
+            handleMediasUpload={images => console.log(images)}
+          />
         </View>
-        <MediaUploadHandlerAtom
-          medias={this.state.images}
-          handleMediasUpload={media => console.log(media)}
-        />
-      </View>
+      </React.Fragment>
     )
   }
 }
