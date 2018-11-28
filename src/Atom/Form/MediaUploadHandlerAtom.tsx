@@ -1,15 +1,10 @@
 import React from 'react'
-import {
-  StyleSheet,
-  View,
-  TouchableOpacity,
-  ImageBackground,
-  Dimensions
-} from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Dimensions } from 'react-native'
 import { Icon, ActionSheet } from 'native-base'
 import ImagePicker from 'react-native-image-crop-picker'
 import ImageUploadHandler from './../ImageUploadHandler'
 import Lightbox from 'react-native-lightbox'
+import CachedImageAtom from '../CachedImageAtom'
 
 interface IProps {
   images?: string[]
@@ -163,7 +158,7 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
   }
 
   renderPreviousAddedImages = () => {
-    let { previousAddedImages, prevImagesLoadingState } = this.state
+    let { previousAddedImages } = this.state
 
     return previousAddedImages.map((image, i) => (
       <Lightbox
@@ -172,54 +167,30 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
           style: { width: Dimensions.get('window').width, height: 300 }
         }}
       >
-        <ImageBackground
-          onLoadStart={() =>
-            this.setState({
-              prevImagesLoadingState: { ...prevImagesLoadingState, [i]: true }
-            })
-          }
-          onLoadEnd={() =>
-            this.setState({
-              prevImagesLoadingState: { ...prevImagesLoadingState, [i]: false }
-            })
-          }
-          style={styles.image}
-          source={{ uri: image }}
-          key={i}
-        >
-          {prevImagesLoadingState[i] && (
-            <View
-              style={[
-                styles.image,
-                { backgroundColor: '#eee', marginLeft: 0, marginTop: 0 }
-              ]}
-            />
-          )}
-          {!prevImagesLoadingState[i] && (
-            <Icon
-              name="x"
-              type="Feather"
-              onPress={() =>
-                this.setState(
-                  {
-                    previousAddedImages: previousAddedImages.filter(
-                      val => val != image
-                    )
-                  },
-                  () =>
-                    this.props.handleImagesUpload(
-                      this.state.previousAddedImages.concat(
-                        Object.keys(this.state.urlOfImagesUploaded).map(
-                          i => this.state.urlOfImagesUploaded[i]
-                        )
+        <CachedImageAtom isBackgroundImage style={styles.image} uri={image}>
+          <Icon
+            name="x"
+            type="Feather"
+            onPress={() =>
+              this.setState(
+                {
+                  previousAddedImages: previousAddedImages.filter(
+                    val => val != image
+                  )
+                },
+                () =>
+                  this.props.handleImagesUpload(
+                    this.state.previousAddedImages.concat(
+                      Object.keys(this.state.urlOfImagesUploaded).map(
+                        i => this.state.urlOfImagesUploaded[i]
                       )
                     )
-                )
-              }
-              style={styles.removeIcon}
-            />
-          )}
-        </ImageBackground>
+                  )
+              )
+            }
+            style={styles.removeIcon}
+          />
+        </CachedImageAtom>
       </Lightbox>
     ))
   }
