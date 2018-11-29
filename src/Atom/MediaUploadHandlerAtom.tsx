@@ -7,17 +7,20 @@ import {
   Platform,
   ImageBackground,
   Dimensions,
-  Text
+  Linking,
+  Text,
+  TouchableWithoutFeedback
 } from 'react-native'
 import { RNS3 } from 'react-native-aws3'
 import Circle from 'react-native-progress/Circle'
 import { color } from '../Style/Color'
+import RNThumbnail from 'react-native-thumbnail'
 
 interface IProps {
-  onRemoveImage?: () => void
-  onImageSet?: (response) => void
+  onRemoveMedia?: () => void
+  onMediaSet?: (response) => void
   controlled?: boolean | false
-  image?: any
+  media?: any
   style?: any
   type?: 'image' | 'video'
 }
@@ -31,71 +34,116 @@ interface IProps {
  * 3 - This indicates that the image has been uploaded successfully
  */
 interface IState {
-  image: any
+  media: any
+  filePath: string
   uploadProgress: number
   uploadState: number
 }
 
-export default class ImageUploadHandler extends React.PureComponent<
+export default class MediaUploadHandlerAtom extends React.PureComponent<
   IProps,
   IState
 > {
   constructor(props) {
     super(props)
-    let { controlled, image } = props
+    let { controlled, media } = props
 
     this.state = {
-      image: controlled ? image : null,
+      media: controlled ? media : null,
       uploadProgress: 0,
+      filePath: '',
       uploadState: controlled ? 1 : 0
     }
   }
 
-  task = null
+  task = []
 
   componentDidMount() {
-    this.props.controlled && this.uploadImage()
+    if (this.props.controlled) {
+      if (this.props.type == 'image') {
+        this.uploadImage()
+      } else {
+        this.uploadVideo()
+      }
+    }
   }
 
-  uploadImage = () => {
+  uploadVideo = async () => {
     let {
-      image: { path, mime, filename }
+      media: { path, mime, filename }
     } = this.state
-    const options = {
+
+    let { path: thumbnailPath } = await RNThumbnail.get(path)
+
+    const optionsThumbnail = {
+      keyPrefix: 'thumbnail/',
       bucket: 'refineryaudio',
       region: 'us-west-1',
       accessKey: 'AKIAJAVJKGLNOEYYHHSA',
       secretKey: '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',
       successActionStatus: 201
     }
-    const name =
-      Platform.OS == 'ios'
-        ? filename
-        : path.substring(path.lastIndexOf('/') + 1)
 
-    const file = {
-      uri: path,
-      name: `${btoa(`${name}${Date.now()}`)}|${mime
+    const optionsVideo = {
+      bucket: 'refineryaudio',
+      region: 'us-west-1',
+      accessKey: 'AKIAJAVJKGLNOEYYHHSA',
+      secretKey: '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',
+      successActionStatus: 201
+    }
+
+    const name =
+        Platform.OS == 'ios'
+          ? filename
+          : path.substring(path.lastIndexOf('/') + 1),
+      encodedName = `${btoa(`${name}${Date.now()}`)}|${mime
         .split('/')[0]
-        .toLowerCase()}|.${mime.split('/')[1].toLowerCase()}`,
+        .toLowerCase()}`
+
+    const videoFile = {
+      uri: path,
+      name: encodedName,
       type: mime
     }
 
-    this.task = RNS3.put(file, options)
-      .progress(e => {
-        this.setState({
-          uploadProgress: e.percent,
-          uploadState: 1
-        })
+    const thumbnailFile = {
+      uri: thumbnailPath,
+      name: encodedName,
+      type: 'image/jpeg'
+    }
+
+    let totalpath = [
+        { file: videoFile, options: optionsVideo },
+        { file: thumbnailFile, options: optionsThumbnail }
+      ],
+      requests = totalpath.map(fileInfo => {
+        let task = RNS3.put(fileInfo.file, fileInfo.options)
+          .progress(e => {
+            this.setState({
+              uploadProgress:
+                fileInfo.file.type.indexOf('image') != -1
+                  ? this.state.uploadProgress
+                  : e.percent,
+              uploadState: 1
+            })
+          })
+          .then(response => Promise.resolve(response))
+          .catch(err => Promise.reject(err))
+        this.task.push(task)
+        return task
       })
-      .then(response => {
+
+    Promise.all([...requests])
+      .then((response: any) => {
         this.setState(
           {
-            uploadState: response.status != 201 ? 2 : 3
+            uploadState: response[0].status != 201 ? 1 : 3,
+            filePath: response[0].status != 201 ? '' : response[0]
           },
           () => {
-            if (response.status == 201)
-              this.props.onImageSet && this.props.onImageSet(response)
+            if (response[0].status == 201) {
+              this.props.onMediaSet && this.props.onMediaSet(response[0])
+            }
           }
         )
       })
@@ -106,8 +154,57 @@ export default class ImageUploadHandler extends React.PureComponent<
       })
   }
 
+  uploadImage = () => {
+    let {
+      media: { path, mime, filename }
+    } = this.state
+    const options = {
+      bucket: 'refineryaudio',
+      region: 'us-west-1',
+      accessKey: 'AKIAJAVJKGLNOEYYHHSA',
+      secretKey: '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',
+      successActionStatus: 201
+    }
+
+    const name =
+      Platform.OS == 'ios'
+        ? filename
+        : path.substring(path.lastIndexOf('/') + 1)
+    const file = {
+      uri: path,
+      name: `${name}${Date.now()}|${mime.split('/')[0].toLowerCase()}`,
+      type: mime
+    }
+    let task = RNS3.put(file, options)
+      .progress(e => {
+        this.setState({
+          uploadProgress: e.percent,
+          uploadState: 1
+        })
+      })
+      .then(response => {
+        this.setState(
+          {
+            uploadState: response.status != 201 ? 2 : 3,
+            filePath: response.status != 201 ? '' : response
+          },
+          () => {
+            if (response.status == 201)
+              this.props.onMediaSet && this.props.onMediaSet(response)
+          }
+        )
+      })
+      .catch(() => {
+        this.setState({
+          uploadState: 2
+        })
+      })
+
+    this.task.push(task)
+  }
+
   cancelUpload = () => {
-    this.task.abort()
+    this.task.forEach(task => task.abort())
     this.setState({
       uploadState: 2
     })
@@ -115,7 +212,11 @@ export default class ImageUploadHandler extends React.PureComponent<
 
   renderRetryContainer = (): JSX.Element => {
     return (
-      <TouchableOpacity onPress={this.uploadImage}>
+      <TouchableOpacity
+        onPress={() =>
+          this.props.type == 'image' ? this.uploadImage() : this.uploadVideo()
+        }
+      >
         <View style={styles.retryContainer}>
           <Icon
             name="file-upload"
@@ -167,7 +268,7 @@ export default class ImageUploadHandler extends React.PureComponent<
 
   renderImage = (): JSX.Element => {
     let {
-      image: { data, mime, path },
+      media: { data, mime, path },
       uploadState
     } = this.state
 
@@ -178,21 +279,25 @@ export default class ImageUploadHandler extends React.PureComponent<
           uri: this.props.type == 'image' ? `data:${mime};base64,${data}` : path
         }}
       >
-        <View style={styles.imageOverlay}>
-          {uploadState != 1 && (
-            <Icon
-              name="x"
-              type="Feather"
-              onPress={this.props.onRemoveImage}
-              style={[styles.whiteIcon, styles.removeIcon]}
-            />
-          )}
-          {uploadState == 1
-            ? this.renderLoadingContainer()
-            : uploadState == 2
-            ? this.renderRetryContainer()
-            : this.renderUploadedContainer()}
-        </View>
+        <TouchableWithoutFeedback
+          onPress={() => Linking.openURL(this.state.filePath)}
+        >
+          <View style={styles.mediaOverlay}>
+            {uploadState != 1 && (
+              <Icon
+                name="x"
+                type="Feather"
+                onPress={this.props.onRemoveMedia}
+                style={[styles.whiteIcon, styles.removeIcon]}
+              />
+            )}
+            {uploadState == 1
+              ? this.renderLoadingContainer()
+              : uploadState == 2
+              ? this.renderRetryContainer()
+              : this.renderUploadedContainer()}
+          </View>
+        </TouchableWithoutFeedback>
       </ImageBackground>
     )
   }
@@ -206,11 +311,6 @@ const styles = StyleSheet.create({
   container: {
     width: Dimensions.get('window').width - 32,
     height: Dimensions.get('window').width - 32
-  },
-  selectImageContainer: {
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: '#eee'
   },
   icon: {
     fontSize: 50,
@@ -238,7 +338,7 @@ const styles = StyleSheet.create({
     marginLeft: 10,
     fontSize: 18
   },
-  imageOverlay: {
+  mediaOverlay: {
     backgroundColor: 'rgba(0,0,0,.2)',
     width: '100%',
     height: '100%',

@@ -3,7 +3,7 @@ import { View, StyleSheet, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/BaseHeader'
 import Auth from '../services/auth'
-import MediaUploadHandlerAtom from '../Atom/Form/MediaUploadHandlerAtom'
+import MediaUploadAtom from '../Atom/Form/MediaUploadAtom'
 
 interface IProps {
   navigation: any
@@ -11,15 +11,11 @@ interface IProps {
 
 interface IState {
   username: string
-  images: any[]
 }
 
 export default class HomeScreen extends React.Component<IProps, IState> {
   state = {
-    username: '',
-    images: [
-      'https://refineryaudio.s3.amazonaws.com/VklELTIwMTgxMTI4LVdBMDAwNC5tcDQxNTQzNDE1MjQzOTcw%7Cvideo%7C.mp4'
-    ]
+    username: ''
   }
 
   static navigationOptions = ({ navigation }: any) => {
@@ -51,10 +47,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           <View style={styles.homeBackground}>
             <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
           </View>
-          <MediaUploadHandlerAtom
-            medias={this.state.images}
-            handleMediasUpload={images => console.log(images)}
-          />
+          <MediaUploadAtom handleMediasUpload={media => console.log(media)} />
         </View>
       </React.Fragment>
     )

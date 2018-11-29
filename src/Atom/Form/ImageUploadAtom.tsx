@@ -3,7 +3,7 @@ import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
 import ImagePicker from 'react-native-image-crop-picker'
 import { ActionSheet, Thumbnail } from 'native-base'
-import ImageUploadHandler from './../ImageUploadHandler'
+import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
 
 interface IProps {
   image: string
@@ -124,11 +124,11 @@ export default class ImageUploadAtom extends React.PureComponent<
 
   renderUploadImage = () => {
     return (
-      <ImageUploadHandler
-        onRemoveImage={this.removeImage}
-        onImageSet={this.handleImageValueSet}
+      <MediaUploadHandlerAtom
+        onRemoveMedia={this.removeImage}
+        onMediaSet={this.handleImageValueSet}
         controlled={true}
-        image={this.state.imageToUpload}
+        media={this.state.imageToUpload}
         style={{ width: 300, height: 300 }}
       />
     )

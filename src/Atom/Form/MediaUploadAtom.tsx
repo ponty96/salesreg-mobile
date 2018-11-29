@@ -4,14 +4,11 @@ import {
   View,
   Linking,
   TouchableWithoutFeedback,
-  TouchableOpacity,
-  ImageBackground,
-  Dimensions
+  TouchableOpacity
 } from 'react-native'
 import { Icon, ActionSheet } from 'native-base'
 import ImagePicker from 'react-native-image-crop-picker'
-import ImageUploadHandler from './../ImageUploadHandler'
-import Lightbox from 'react-native-lightbox'
+import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
 import CachedImageAtom from '../CachedImageAtom'
 
 interface IProps {
@@ -26,7 +23,7 @@ interface IState {
   previousAddedMedia: string[]
 }
 
-export default class MediaUploadHandlerAtom extends React.PureComponent<
+export default class MediaUploadAtom extends React.PureComponent<
   IProps,
   IState
 > {
@@ -155,6 +152,35 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
     )
   }
 
+  transformPath = mediaURL => {
+    let url = /video$/.test(mediaURL)
+    if (!url) {
+      return mediaURL
+    } else {
+      let baseURL = 'https://refineryaudio.s3.amazonaws.com/',
+        fileName = mediaURL.substring(mediaURL.lastIndexOf('/') + 1)
+      return `${baseURL}thumbnail%2F${fileName}`
+    }
+  }
+
+  removeMedia = (media: string) => {
+    let { previousAddedMedia } = this.state
+
+    this.setState(
+      {
+        previousAddedMedia: previousAddedMedia.filter(val => val != media)
+      },
+      () =>
+        this.props.handleMediasUpload(
+          this.state.previousAddedMedia.concat(
+            Object.keys(this.state.urlOfMediaUploaded).map(
+              i => this.state.urlOfMediaUploaded[i]
+            )
+          )
+        )
+    )
+  }
+
   renderSelectImageContainer = (): JSX.Element => {
     return (
       <TouchableOpacity onPress={this.selectMediaFromStorage}>
@@ -165,86 +191,39 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
     )
   }
 
-  renderPreviousVideoMedia = (image, key): JSX.Element => {
-    let { previousAddedMedia } = this.state
-    return (
-      <TouchableWithoutFeedback
-        key={key}
-        onPress={() => Linking.openURL(image)}
-      >
-        <ImageBackground style={styles.image} source={{ uri: image }}>
-          <Icon
-            name="x"
-            type="Feather"
-            onPress={() =>
-              this.setState(
-                {
-                  previousAddedMedia: previousAddedMedia.filter(
-                    val => val != image
-                  )
-                },
-                () =>
-                  this.props.handleMediasUpload(
-                    this.state.previousAddedMedia.concat(
-                      Object.keys(this.state.urlOfMediaUploaded).map(
-                        i => this.state.urlOfMediaUploaded[i]
-                      )
-                    )
-                  )
-              )
-            }
-            style={styles.removeIcon}
-          />
-        </ImageBackground>
-      </TouchableWithoutFeedback>
-    )
-  }
-
-  renderPreviousImageMedia = (image, key): JSX.Element => {
-    let { previousAddedMedia } = this.state
-    return (
-      <TouchableWithoutFeedback
-        key={key}
-        onPress={() => Linking.openURL(image)}
-      >
-        <CachedImageAtom isBackgroundImage style={styles.image} uri={image}>
-          <Icon
-            name="x"
-            type="Feather"
-            onPress={() =>
-              this.setState(
-                {
-                  previousAddedMedia: previousAddedMedia.filter(
-                    val => val != image
-                  )
-                },
-                () =>
-                  this.props.handleMediasUpload(
-                    this.state.previousAddedMedia.concat(
-                      Object.keys(this.state.urlOfMediaUploaded).map(
-                        i => this.state.urlOfMediaUploaded[i]
-                      )
-                    )
-                  )
-              )
-            }
-            style={styles.removeIcon}
-          />
-        </CachedImageAtom>
-      </TouchableWithoutFeedback>
-    )
-  }
-
   renderPreviousAddedMedia = () => {
     let { previousAddedMedia } = this.state
 
-    return previousAddedMedia.map((media, i) =>
-      media.indexOf('image') != -1
-        ? this.renderPreviousImageMedia(media, i)
-        : media.indexOf('video') != -1
-        ? this.renderPreviousVideoMedia(media, i)
-        : null
-    )
+    return previousAddedMedia.map((media, i) => {
+      let isVideo = /video$/.test(media)
+      return (
+        <View key={i}>
+          <CachedImageAtom
+            style={StyleSheet.flatten([styles.image, styles.cachedImageStyle])}
+            uri={this.transformPath(media)}
+          >
+            <Icon
+              name="x"
+              type="Feather"
+              onPress={() => this.removeMedia(media)}
+              style={styles.removeIcon}
+            />
+            <Icon
+              type="FontAwesome"
+              name={!isVideo ? 'file-image-o' : 'video-camera'}
+              style={styles.fileTypeIcon}
+            />
+          </CachedImageAtom>
+          <TouchableWithoutFeedback
+            onPress={() => {
+              Linking.openURL(media)
+            }}
+          >
+            <View style={styles.clickableDisplayOverlay} />
+          </TouchableWithoutFeedback>
+        </View>
+      )
+    })
   }
 
   render() {
@@ -252,11 +231,11 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
       <View style={styles.container}>
         {this.renderPreviousAddedMedia()}
         {Object.keys(this.state.medias).map(index => (
-          <ImageUploadHandler
+          <MediaUploadHandlerAtom
             key={index}
-            onRemoveImage={() => this.removeImage(index)}
-            onImageSet={response => this.handleImageValueSet(index, response)}
-            image={this.state.medias[index]}
+            onRemoveMedia={() => this.removeImage(index)}
+            onMediaSet={response => this.handleImageValueSet(index, response)}
+            media={this.state.medias[index]}
             type={this.state.medias[index].mime.split('/')[0].toLowerCase()}
             style={styles.image}
             controlled={true}
@@ -284,13 +263,17 @@ const styles = StyleSheet.create({
     width: 110,
     height: 110
   },
+  fileTypeIcon: {
+    fontSize: 30,
+    color: '#fff'
+  },
   icon: {
     fontSize: 50,
     color: '#BFBFBF'
   },
   removeIcon: {
     position: 'absolute',
-    right: 5,
+    right: 0,
     top: 5,
     fontWeight: 'bold',
     fontSize: 30,
@@ -300,5 +283,16 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 26,
     margin: 10
+  },
+  clickableDisplayOverlay: {
+    position: 'absolute',
+    top: 35,
+    left: 5,
+    width: 110,
+    height: 80
+  },
+  cachedImageStyle: {
+    justifyContent: 'center',
+    alignItems: 'center'
   }
 })

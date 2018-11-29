@@ -38,7 +38,7 @@ import RadioButtonAtom from '../../Atom/Form/RadioButtonAtom'
 import PickerAtom from '../../Atom/Form/PickerAtom'
 import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
-import MediaUploadHandlerAtom from '../../Atom/Form/MediaUploadHandlerAtom'
+import MediaUploadAtom from '../../Atom/Form/MediaUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
@@ -229,7 +229,7 @@ export default class FormStepperContainer extends React.PureComponent<
         )
       case 'media-upload':
         return (
-          <MediaUploadHandlerAtom
+          <MediaUploadAtom
             key={`${type}-${index}`}
             medias={formData[name]}
             handleMediasUpload={arrayOfValues =>
