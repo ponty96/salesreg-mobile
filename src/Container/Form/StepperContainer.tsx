@@ -227,7 +227,7 @@ export default class FormStepperContainer extends React.PureComponent<
             error={fieldErrors && fieldErrors[name]}
           />
         )
-      case 'media-upload':
+      case 'multi-media-upload':
         return (
           <MediaUploadAtom
             key={`${type}-${index}`}
