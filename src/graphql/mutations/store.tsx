@@ -1,32 +1,8 @@
 import gql from 'graphql-tag'
 
-export const UpsertProductGQL = gql`
-  mutation UpsertProduct(
-    $productId: Uuid
-    $companyId: Uuid!
-    $costPrice: String!
-    $description: String
-    $featuredImage: String
-    $minimumSku: String!
-    $name: String!
-    $sellingPrice: String!
-    $sku: String!
-    $userId: Uuid!
-  ) {
-    upsertProduct(
-      product: {
-        companyId: $companyId
-        costPrice: $costPrice
-        description: $description
-        featuredImage: $featuredImage
-        minimumSku: $minimumSku
-        name: $name
-        sellingPrice: $sellingPrice
-        sku: $sku
-        userId: $userId
-      }
-      productId: $productId
-    ) {
+export const CreateProductGQL = gql`
+  mutation CreateProduct($params: ProductGroupInput!) {
+    createProduct(params: $params) {
       fieldErrors {
         key
         message
@@ -36,16 +12,26 @@ export const UpsertProductGQL = gql`
         ... on Product {
           id
           description
-          image: featuredImage
           costPrice
           sellingPrice
           minimumSku
           number: sku
           name
+          featuredImage
+          images
           user {
             id
             firstName
             lastName
+          }
+          categories {
+            id
+            title
+          }
+
+          tags {
+            name
+            id
           }
         }
       }

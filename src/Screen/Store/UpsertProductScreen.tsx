@@ -1,13 +1,19 @@
 import React, { PureComponent } from 'react'
 
+import { Mutation } from 'react-apollo'
+import AppSpinner from '../../Components/Spinner'
+import { parseFieldErrors } from '../../Functions'
 import Auth from '../../services/auth'
 import FormStepperContainer, {
   FormStep
 } from '../../Container/Form/StepperContainer'
 import {
-  ListCompanyCategoriesGQL,
-  ListCompanyProductGroupsGQL
+  SearchOptionsByNameGQL,
+  SearchProductGroupsByTitleGQL,
+  SearchCategoriesByTitleGQL,
+  ListCompanyProductsGQL
 } from '../../graphql/queries/store'
+import { CreateProductGQL } from '../../graphql/mutations/store'
 
 interface IProps {
   navigation: any
@@ -23,23 +29,22 @@ interface OptionValue {
 interface IState {
   isVariant: string
   productGroupTitle: string
-  productGroupId: string
+  productGroup: any
   isNewProductVariant: string
-  sku: string
-  minimumSku: string
-  sellingPrice: string
+  sku: string | number
+  minimumSku: string | number
+  sellingPrice: string | number
   featuredImage: string
   images: any[]
   name: string
   optionValues: OptionValue[]
   description: string
-  listOfCategories: any
-  listOfProductGroups: any
-  categories: string[]
-  tags: string[]
+  categories: any[]
+  tags: any[]
   companyId: string
   userId: string
   currentFormState: string
+  productId?: string
   fieldErrors: any
 }
 
@@ -59,21 +64,21 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
       isVariant: '',
       productGroupTitle: '',
       isNewProductVariant: '',
-      productGroupId: '',
-      sku: '',
-      minimumSku: '',
+      productGroup: null,
+      sku: 0,
+      minimumSku: 0,
       sellingPrice: '',
-      featuredImage: '',
+      featuredImage:
+        'https://cdn2.jomashop.com/media/catalog/product/cache/1/watermark/490x490/0a1186946c551c1cc1f1a1120b7bd9a0/h/u/hublot-big-bang-mens-watch-301.px.130.rx.174.jpg',
       images: [],
       name: '',
       optionValues: [],
       description: '',
-      listOfCategories: [],
-      listOfProductGroups: [],
       categories: [],
       tags: [],
       userId: '',
       companyId: '',
+      productId: null,
       currentFormState: '',
       fieldErrors: null
     }
@@ -95,82 +100,93 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
     })
   }
 
-  async componentDidUpdate() {
-    if (this.state.companyId && this.state.listOfCategories.length <= 0) {
-      const {
-        screenProps: { client }
-      } = this.props
-      const {
-        data: { listCompanyCategories }
-      } = await client.query({
-        query: ListCompanyCategoriesGQL,
-        variables: { companyId: this.state.companyId }
-      })
-
-      const categories = listCompanyCategories.map(category => ({
-        mainLabel: category.title,
-        value: category.id
-      }))
-      this.setState({ listOfCategories: categories })
-    }
-
-    if (this.state.companyId && this.state.listOfProductGroups.length <= 0) {
-      const {
-        screenProps: { client }
-      } = this.props
-      const {
-        data: { listCompanyProductGroups }
-      } = await client.query({
-        query: ListCompanyProductGroupsGQL,
-        variables: { companyId: this.state.companyId }
-      })
-
-      const productGroups = listCompanyProductGroups.map(productGroup => ({
-        mainLabel: productGroup.title,
-        value: productGroup.id,
-        options: productGroup.options
-      }))
-      this.setState({ listOfProductGroups: productGroups })
-    }
-  }
-
   updateState = (key: string, value: any) => {
-    if (key == 'productGroupId') {
-      this.updateProductGroupId(value)
+    if (key == 'productGroup') {
+      this.updateProductGroup(value)
+    } else if (key.indexOf('option-') == 0) {
+      this.updateOptionValues(key, value)
     } else {
       const state = { ...this.state, [key]: value }
       this.setState(state)
     }
   }
 
-  updateProductGroupId = id => {
-    const productGroup = this.state.listOfProductGroups.find(
-      productGrp => productGrp.value == id
-    )
+  updateProductGroup = productGroup => {
     const optionValues = productGroup.options.map(option => ({
       ...option,
       name: ''
     }))
+    const productParams = this.getProductParams(productGroup)
     this.setState({
-      productGroupId: id,
+      productGroup: productGroup,
       optionValues,
-      productGroupTitle: productGroup.mainLabel
+      productGroupTitle: productGroup.title,
+      ...productParams
     })
   }
 
-  updateOptionValues = () => {}
+  getProductParams = productGroup => {
+    if (productGroup.products.length == 1) {
+      const product = productGroup.products[0]
+      return {
+        productId: product.id,
+        ...product,
+        tags: product.tags.map(tag => tag.name)
+      }
+    } else {
+      return {}
+    }
+  }
+
+  updateOptionValues = (key, val) => {
+    const optionId = key.substr(7)
+    const optionValues = this.state.optionValues.map(optionValue => {
+      if (optionValue.optionId == optionId) {
+        return {
+          ...optionValue,
+          name: val
+        }
+      }
+      return optionValue
+    })
+    this.setState({ optionValues })
+  }
 
   render() {
     return (
-      <FormStepperContainer
-        formData={this.state}
-        updateValueChange={this.updateState}
-        fieldErrors={this.state.fieldErrors}
-        handleBackPress={() => this.props.navigation.goBack()}
-        onCompleteSteps={this.completeSteps}
-        steps={this.parseFormSteps()}
-        onTransition={this.onTransition}
-      />
+      <Mutation
+        mutation={CreateProductGQL}
+        onCompleted={this.onCompleted}
+        refetchQueries={[
+          {
+            query: ListCompanyProductsGQL,
+            variables: {
+              companyId: this.state.companyId,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+      >
+        {(createProduct, { loading }) => [
+          [
+            <AppSpinner visible={loading} key="createProduct-1345" />,
+            <FormStepperContainer
+              formData={this.state}
+              updateValueChange={this.updateState}
+              fieldErrors={this.state.fieldErrors}
+              handleBackPress={() => this.props.navigation.goBack()}
+              onCompleteSteps={() => {
+                createProduct({ variables: this.parseMutationVariables() })
+              }}
+              steps={this.parseFormSteps()}
+              onTransition={this.onTransition}
+              key="createProduct-1996"
+            />
+          ]
+        ]}
+      </Mutation>
     )
   }
 
@@ -205,10 +221,6 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
   }
 
   completeSteps = () => {}
-
-  getProductTitle = () => {
-    return this.state.productGroupTitle
-  }
 
   onTransition = async (from, to) => {
     // update state status based on transition
@@ -257,10 +269,11 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
           {
             label: 'Choose product',
             placeholder: '',
-            name: 'productGroupId',
+            name: 'productGroup',
             type: {
-              type: 'picker',
-              options: this.state.listOfProductGroups
+              type: 'search-picker',
+              searchQuery: SearchProductGroupsByTitleGQL,
+              searchQueryResponseKey: 'searchProductGroupsByTitle'
             }
           }
         ]
@@ -285,15 +298,15 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
       return renderOptionValuesInputStep(
         this.state.optionValues,
-        this.getProductTitle()
+        this.state.productGroupTitle
       )
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderSelectOptionsFormStep(this.getProductTitle())
+      return renderSelectOptionsFormStep(this.getProductName())
     } else {
       return {
-        stepTitle: `Does ${this.getProductTitle()} comes in different versions like colors or sizes?`,
+        stepTitle: `Does ${this.getProductName()} comes in different versions like colors or sizes?`,
         formFields: [
           {
             label: 'Yes or No',
@@ -312,104 +325,164 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
 
   getFourthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderProductDescriptionStep(this.getProductTitle())
+      return renderProductDescriptionStep(this.getProductName())
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
       return renderOptionValuesInputStep(
         this.state.optionValues,
-        this.getProductTitle()
+        this.state.productGroupTitle
       )
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductVariant ||
       this.state.currentFormState == STATE_TYPES.NewProduct
     ) {
-      return renderSelectOptionsFormStep(this.getProductTitle())
+      return renderSelectOptionsFormStep(this.getProductName())
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
-      return renderProductDescriptionStep(this.getProductTitle())
+      return renderProductDescriptionStep(this.getProductName())
     }
   }
 
   getFifthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderCategoryStep(this.state.listOfCategories)
+      return renderCategoryStep()
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderProductDescriptionStep(this.getProductTitle())
+      return renderProductDescriptionStep(this.getProductName())
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
       return renderOptionValuesInputStep(
         this.state.optionValues,
-        this.getProductTitle()
+        this.state.productGroupTitle
       )
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
-      return renderCategoryStep(this.state.listOfCategories)
+      return renderCategoryStep()
     }
   }
 
   getSixthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderTagStep(this.getProductTitle())
+      return renderTagStep(this.getProductName())
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderCategoryStep(this.state.listOfCategories)
+      return renderCategoryStep()
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderProductDescriptionStep(this.getProductTitle())
+      return renderProductDescriptionStep(this.getProductName())
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
-      return renderTagStep(this.getProductTitle())
+      return renderTagStep(this.getProductName())
     }
   }
 
   getSeventhStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderFeaturedImageStep(this.getProductTitle())
+      return renderFeaturedImageStep(this.getProductName())
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderTagStep(this.getProductTitle())
+      return renderTagStep(this.getProductName())
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderCategoryStep(this.state.listOfCategories)
+      return renderCategoryStep()
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
-      return renderFeaturedImageStep(this.getProductTitle())
+      return renderFeaturedImageStep(this.getProductName())
     }
   }
 
   getEightStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderImagesStep(this.getProductTitle())
+      return renderImagesStep(this.getProductName())
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderFeaturedImageStep(this.getProductTitle())
+      return renderFeaturedImageStep(this.getProductName())
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderTagStep(this.getProductTitle())
+      return renderTagStep(this.getProductName())
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
-      return renderImagesStep(this.getProductTitle())
+      return renderImagesStep(this.getProductName())
     }
   }
 
   getNinthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingNonPredefined) {
-      return renderImagesStep(this.getProductTitle())
+      return renderImagesStep(this.getProductName())
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderFeaturedImageStep(this.getProductTitle())
+      return renderFeaturedImageStep(this.getProductName())
     }
   }
 
   getTenthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderImagesStep(this.getProductTitle())
+      return renderImagesStep(this.getProductName())
+    }
+  }
+
+  parseMutationVariables = () => {
+    let productParams: any = {
+      categories: this.state.categories.map(cat => cat.id),
+      tags: this.state.tags,
+      images: this.state.images,
+      featuredImage: this.state.featuredImage,
+      name: this.getProductName(),
+      description: this.state.description,
+      minimumSku: this.state.minimumSku,
+      sku: this.state.sku,
+      sellingPrice: this.state.sellingPrice,
+      companyId: this.state.companyId,
+      optionValues: this.parseOptionValuesForMutation(),
+      userId: this.state.userId
+    }
+    let params: any = {
+      companyId: this.state.companyId,
+      productGroupTitle: this.state.productGroupTitle
+    }
+
+    if (this.state.productGroup) {
+      params = { ...params, productGroupId: this.state.productGroup.id }
+    }
+    if (this.state.productId) {
+      productParams = { ...productParams, id: this.state.productId }
+    }
+    return {
+      params: { ...params, product: productParams }
+    }
+  }
+
+  getProductName = () => {
+    if (this.state.optionValues.length > 0) {
+      return `${this.state.productGroupTitle} (${this.state.optionValues.map(
+        optionValue => optionValue.name
+      )})`
+    } else return this.state.productGroupTitle
+  }
+
+  parseOptionValuesForMutation = () => {
+    return this.state.optionValues.map(optionValue => {
+      return {
+        optionId: optionValue.optionId,
+        name: optionValue.name,
+        companyId: this.state.companyId
+      }
+    })
+  }
+
+  onCompleted = async res => {
+    const {
+      createProduct: { success, fieldErrors }
+    } = res
+    if (success) {
+      this.props.navigation.navigate('Products')
+    } else {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
   }
 }
@@ -421,8 +494,9 @@ const renderSelectOptionsFormStep = (name): FormStep => ({
     {
       label: 'Select options',
       type: {
-        type: 'multi-picker',
-        options: []
+        type: 'search-multi-picker',
+        searchQuery: SearchOptionsByNameGQL,
+        searchQueryResponseKey: 'searchOptionsByName'
       },
       name: 'optionValues'
     }
@@ -433,19 +507,37 @@ const renderProductDescriptionStep = (name): FormStep => ({
   stepTitle: `${name} details`,
   formFields: [
     {
+      label: 'How much do you sell each?',
+      type: {
+        type: 'input',
+        keyboardType: 'numeric'
+      },
+      name: 'sellingPrice'
+    },
+    {
+      label: 'What is the current quantity in Stock',
+      type: {
+        type: 'input',
+        multiline: true
+      },
+      name: 'sku'
+    },
+    {
+      label: 'What is the minimum stock quantity',
+      type: {
+        type: 'input',
+        multiline: true
+      },
+      name: 'minimumSku',
+      underneathText: `The minimum stock quantity(MSQ) is the quantity of ${name} below which you have to restock.`
+    },
+    {
       label: 'Description',
       type: {
         type: 'input',
         multiline: true
       },
       name: 'description'
-    },
-    {
-      label: 'How much do you sell each?',
-      type: {
-        type: 'input'
-      },
-      name: 'sellingPrice'
     }
   ]
 })
@@ -458,18 +550,20 @@ const renderOptionValuesInputStep = (optionValues: OptionValue[], name) => ({
       type: 'input',
       keyboardType: 'default'
     },
-    name: `option-${optionValue.optionId}`
+    name: `option-${optionValue.optionId}`,
+    value: optionValue.name
   }))
 })
 
-const renderCategoryStep = categories => ({
+const renderCategoryStep = () => ({
   stepTitle: 'Categorize this product',
   formFields: [
     {
       label: 'Categories',
       type: {
-        type: 'multi-picker',
-        options: categories
+        type: 'search-multi-picker',
+        searchQuery: SearchCategoriesByTitleGQL,
+        searchQueryResponseKey: 'searchCategoriesByTitle'
       },
       name: 'categories'
     }

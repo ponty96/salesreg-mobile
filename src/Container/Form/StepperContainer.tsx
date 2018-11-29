@@ -42,6 +42,8 @@ import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
 import TagInput from '../../Atom/Form/TagInput'
+import AsyncPickerAtom from '../../Atom/Form/AsyncPickerAtom'
+import { DocumentNode } from 'graphql'
 
 interface FieldType {
   type:
@@ -54,10 +56,14 @@ interface FieldType {
     | 'expense-items'
     | 'multi-picker'
     | 'tag-input'
+    | 'search-picker'
+    | 'search-multi-picker'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
   multiline?: boolean
+  searchQuery?: DocumentNode
+  searchQueryResponseKey?: string
 }
 interface FormField {
   label: string
@@ -67,6 +73,7 @@ interface FormField {
   name: any
   extraData?: any
   underneathText?: string
+  value?: any
 }
 export interface FormStep {
   stepTitle: string
@@ -186,20 +193,22 @@ export default class FormStepperContainer extends React.PureComponent<
   }
 
   parseFormFields = (field: any, index: number) => {
-    console.log('field', field)
     const {
       type: {
         type,
         keyboardType,
         secureTextEntry = false,
         options = [],
-        multiline = false
+        multiline = false,
+        searchQuery,
+        searchQueryResponseKey
       },
       label,
       placeholder,
       name,
       extraData,
-      underneathText
+      underneathText,
+      value = ''
     } = field
     const { formData, fieldErrors } = this.props
     switch (type) {
@@ -210,7 +219,7 @@ export default class FormStepperContainer extends React.PureComponent<
             key={`${type}-${index}`}
             label={label}
             placeholder={placeholder}
-            defaultValue={formData[name]}
+            defaultValue={formData[name] || value}
             keyboardType={keyboardType || 'default'}
             secureTextEntry={secureTextEntry}
             getValue={val => this.props.updateValueChange(name, val)}
@@ -308,6 +317,21 @@ export default class FormStepperContainer extends React.PureComponent<
               this.props.updateValueChange(name, tags)
             }
             error={fieldErrors && fieldErrors[name]}
+          />
+        )
+      case 'search-picker':
+      case 'search-multi-picker':
+        return (
+          <AsyncPickerAtom
+            key={`${type}-${index}`}
+            label={label}
+            selected={formData[name]}
+            placeholder={placeholder}
+            handleSelection={val => this.props.updateValueChange(name, val)}
+            error={fieldErrors && fieldErrors[name]}
+            graphqlQuery={searchQuery}
+            graphqlQueryResultKey={searchQueryResponseKey}
+            type={type == 'search-multi-picker' ? 'multi' : 'single'}
           />
         )
     }
