@@ -88,7 +88,15 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   }
 
   handleChange = (value: string) => {
-    const selectedItems = [...this.state.selectedItems, value]
+    let selectedItems = []
+    const valueAlreadySelected = this.state.selectedItems.find(
+      item => item == value
+    )
+    if (valueAlreadySelected) {
+      selectedItems = this.state.selectedItems.filter(item => item != value)
+    } else {
+      selectedItems = [...this.state.selectedItems, value]
+    }
     this.setState({
       selectedItems
     })
