@@ -62,7 +62,7 @@ const STATE_TYPES = {
   NewProductNonVariant: 'New product without variant'
 }
 
-class UpsertProductScreen extends PureComponent<IProps, IState> {
+class CreateProductScreen extends PureComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
@@ -500,4 +500,4 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
   }
 }
 
-export default UpsertProductScreen
+export default CreateProductScreen
