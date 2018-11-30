@@ -7,13 +7,18 @@ import Auth from '../../services/auth'
 import FormStepperContainer, {
   FormStep
 } from '../../Container/Form/StepperContainer'
-import {
-  SearchOptionsByNameGQL,
-  SearchProductGroupsByTitleGQL,
-  SearchCategoriesByTitleGQL,
-  ListCompanyProductsGQL
-} from '../../graphql/queries/store'
+import { ListCompanyProductsGQL } from '../../graphql/queries/store'
 import { CreateProductGQL } from '../../graphql/mutations/store'
+import {
+  renderCategoryStep,
+  renderFeaturedImageStep,
+  renderOptionValuesInputStep,
+  renderImagesStep,
+  renderProductDescriptionStep,
+  renderSelectProductGroupFormStep,
+  renderSelectOptionsFormStep,
+  renderTagStep
+} from './utilities/productCreateSteps'
 
 interface IProps {
   navigation: any
@@ -126,7 +131,7 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
   }
 
   getProductParams = productGroup => {
-    if (productGroup.products.length == 1) {
+    if (productGroup.options.length == 0) {
       const product = productGroup.products[0]
       return {
         productId: product.id,
@@ -226,10 +231,13 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
     // update state status based on transition
     let currentState = this.state.currentFormState
     if (from == 1 && to == 2) {
+      let oldState = currentState
       currentState =
         this.state.isVariant == 'New Product'
           ? STATE_TYPES.NewProduct
           : STATE_TYPES.ExistingProduct
+
+      this.updateStateAfterTransition(oldState, currentState)
     } else if (from == 2 && to == 3) {
       if (currentState !== STATE_TYPES.NewProduct) {
         currentState =
@@ -238,46 +246,51 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
             : STATE_TYPES.ExistingNonPredefined
       }
     } else if (from == 3 && to == 4 && currentState == STATE_TYPES.NewProduct) {
+      let oldState = currentState
       currentState =
         this.state.isNewProductVariant == 'Yes'
           ? STATE_TYPES.NewProductVariant
           : STATE_TYPES.NewProductNonVariant
+      this.updateStateAfterTransition(oldState, currentState)
     } else if (
       from == 4 &&
       to == 3 &&
       currentState == STATE_TYPES.NewProductVariant
     ) {
-      // clear option values and other details that have already been filled from step 3 forward
       currentState = STATE_TYPES.NewProduct
     } else if (
       from == 4 &&
       to == 3 &&
       currentState == STATE_TYPES.NewProductNonVariant
     ) {
-      // clear details that have already been filled from step 3 forward
       currentState = STATE_TYPES.NewProduct
     }
 
     return this.setState({ currentFormState: currentState })
   }
 
+  updateStateAfterTransition = (currentState, newState) => {
+    if (
+      currentState == STATE_TYPES.NewProduct &&
+      newState == STATE_TYPES.NewProductNonVariant
+    ) {
+      this.setState({ optionValues: [] })
+    } else if (
+      newState !== currentState &&
+      (newState == STATE_TYPES.NewProduct ||
+        newState == STATE_TYPES.ExistingProduct)
+    ) {
+      this.setState({
+        productGroup: null,
+        productGroupTitle: '',
+        optionValues: []
+      })
+    }
+  }
+
   getSecondStep = (): FormStep => {
     if (this.state.currentFormState !== STATE_TYPES.NewProduct) {
-      return {
-        stepTitle: 'Choose from list of existing products?',
-        formFields: [
-          {
-            label: 'Choose product',
-            placeholder: '',
-            name: 'productGroup',
-            type: {
-              type: 'search-picker',
-              searchQuery: SearchProductGroupsByTitleGQL,
-              searchQueryResponseKey: 'searchProductGroupsByTitle'
-            }
-          }
-        ]
-      }
+      return renderSelectProductGroupFormStep()
     } else
       return {
         stepTitle: 'Name this product?',
@@ -486,124 +499,5 @@ class UpsertProductScreen extends PureComponent<IProps, IState> {
     }
   }
 }
-
-const renderSelectOptionsFormStep = (name): FormStep => ({
-  stepTitle: `Select the variant options for ${name}`,
-  stepHint: `Variant options are what makes one ${name} different from another ${name}. E.g. color, sizes`,
-  formFields: [
-    {
-      label: 'Select options',
-      type: {
-        type: 'search-multi-picker',
-        searchQuery: SearchOptionsByNameGQL,
-        searchQueryResponseKey: 'searchOptionsByName'
-      },
-      name: 'optionValues'
-    }
-  ]
-})
-
-const renderProductDescriptionStep = (name): FormStep => ({
-  stepTitle: `${name} details`,
-  formFields: [
-    {
-      label: 'How much do you sell each?',
-      type: {
-        type: 'input',
-        keyboardType: 'numeric'
-      },
-      name: 'sellingPrice'
-    },
-    {
-      label: 'What is the current quantity in Stock',
-      type: {
-        type: 'input',
-        multiline: true
-      },
-      name: 'sku'
-    },
-    {
-      label: 'What is the minimum stock quantity',
-      type: {
-        type: 'input',
-        multiline: true
-      },
-      name: 'minimumSku',
-      underneathText: `The minimum stock quantity(MSQ) is the quantity of ${name} below which you have to restock.`
-    },
-    {
-      label: 'Description',
-      type: {
-        type: 'input',
-        multiline: true
-      },
-      name: 'description'
-    }
-  ]
-})
-
-const renderOptionValuesInputStep = (optionValues: OptionValue[], name) => ({
-  stepTitle: `Enter variant values for ${name}`,
-  formFields: optionValues.map(optionValue => ({
-    label: `${name} ${optionValue.optionName}`,
-    type: {
-      type: 'input',
-      keyboardType: 'default'
-    },
-    name: `option-${optionValue.optionId}`,
-    value: optionValue.name
-  }))
-})
-
-const renderCategoryStep = () => ({
-  stepTitle: 'Categorize this product',
-  formFields: [
-    {
-      label: 'Categories',
-      type: {
-        type: 'search-multi-picker',
-        searchQuery: SearchCategoriesByTitleGQL,
-        searchQueryResponseKey: 'searchCategoriesByTitle'
-      },
-      name: 'categories'
-    }
-  ]
-})
-
-const renderTagStep = name => ({
-  stepTitle: `Add tags to ${name}`,
-  stepHint:
-    ' \nTags will enhance your filters and your customer abilities to find services within select tags',
-  formFields: [{ label: 'Tags', type: { type: 'tag-input' }, name: 'tags' }]
-})
-
-const renderFeaturedImageStep = name => ({
-  stepTitle: `Lets add images for ${name} starting from the landing images`,
-  stepHint: `The landing images is what your customers see displayed on catalogue page of webstore. This is the image of this service that your customers will first see when they explore your catalogue. Click + to add from your device storage`,
-  formFields: [
-    {
-      label: '',
-      name: 'featuredImage',
-      type: {
-        type: 'image-upload'
-      }
-    }
-  ]
-})
-
-const renderImagesStep = name => ({
-  stepTitle: `Lets now add other images for ${name}`,
-  stepHint: `Images will be displayed on the details section of your webstore. Customers can view multiple images of ${name}`,
-  formFields: [
-    {
-      label: '',
-      name: 'images',
-      type: {
-        type: 'image-upload'
-      }
-    }
-  ],
-  buttonTitle: 'Done'
-})
 
 export default UpsertProductScreen
