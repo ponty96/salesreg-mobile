@@ -179,7 +179,6 @@ export const SearchProductsAndServicesByName = gql`
       price
       sku
       type
-      costPrice
     }
   }
 `

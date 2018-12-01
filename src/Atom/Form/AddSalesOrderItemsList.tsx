@@ -10,15 +10,12 @@ import { numberWithCommas } from '../../Functions/numberWithCommas'
 
 interface IProps {
   salesItems: any[]
-  productList?: any[]
   onUpdateItems: (items: any[]) => void
 }
 
 interface SalesItem {
-  itemName: string
-  amount: string
+  item: { id: string; name: string; price: string; sku: any; type: string }
   quantity: string
-  productList?: any[]
   index: number
   handleValueChange: (index: number, key: string, value: any) => void
   onTrashItem: (index: number) => void
@@ -38,12 +35,11 @@ const AddSalesOrderItem = (props: SalesItem) => (
       label={`Item ${props.index + 1}`}
       type="single"
       placeholder={
-        props.itemName.length > 0 ? props.itemName : 'Touch to choose'
+        props.item.name.length > 0 ? props.item.name : 'Touch to choose'
       }
-      selected={props.itemName}
+      selected={{ id: props.item.id }}
       handleSelection={val => {
-        console.log('The value is ', val)
-        //        props.handleValueChange(props.index, 'itemName', val)
+        props.handleValueChange(props.index, 'selectedItem', val)
       }}
     />
     <View style={styles.salesInputRow}>
@@ -57,8 +53,9 @@ const AddSalesOrderItem = (props: SalesItem) => (
       />
       <InputAtom
         label={`Price/each(\u20A6)`}
+        editable={false}
         placeholder="0.00"
-        defaultValue={props.amount}
+        defaultValue={numberWithCommas(props.item.price)}
         getValue={val => props.handleValueChange(props.index, 'amount', val)}
         containerStyle={{ flex: 1 }}
         contStyle={StyleSheet.flatten([
@@ -72,7 +69,7 @@ const AddSalesOrderItem = (props: SalesItem) => (
       <View style={styles.totalAmtContainer}>
         <Text style={[styles.text, { fontSize: 18 }]}>
           {numberWithCommas(
-            (Number(props.amount) * Number(props.quantity)).toFixed(2)
+            (Number(props.item.price) * Number(props.quantity)).toFixed(2)
           ) || 0.0}
         </Text>
       </View>
@@ -101,8 +98,7 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
   addAnotherItem = () => {
     const expenseItems = this.props.salesItems.concat([
       {
-        amount: '',
-        itemName: '',
+        selectedItem: { id: '', name: '', price: '0.00', sku: '', type: '' },
         quantity: ''
       }
     ])
@@ -125,9 +121,7 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
           <AddSalesOrderItem
             key={index}
             index={index}
-            itemName={item.itemName}
-            productList={this.props.productList}
-            amount={item.amount}
+            item={item.selectedItem}
             quantity={item.quantity}
             handleValueChange={this.handleValueChange}
             onTrashItem={this.trashItem}

@@ -259,7 +259,6 @@ export default class FormStepperContainer extends React.PureComponent<
           return (
             <AddSalesOrderItemsList
               key={`${type}-${index}`}
-              productList={options}
               salesItems={formData[name]}
               onUpdateItems={(items: any) =>
                 this.props.updateValueChange(name, items)

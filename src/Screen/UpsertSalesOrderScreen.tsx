@@ -21,7 +21,12 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
   }
 
   state = {
-    salesItems: [{ itemName: '', amount: '', quantity: '' }],
+    salesItems: [
+      {
+        selectedItem: { id: '', name: '', price: '0.00', sku: '', type: '' },
+        quantity: ''
+      }
+    ],
     fieldErrors: null,
     isCustomerInContacts: null,
     customerName: ''
@@ -52,8 +57,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
               {
                 label: '',
                 type: {
-                  type: 'sales-order-items',
-                  options: [{ mainLabel: 'Orange', value: 'orange' }]
+                  type: 'sales-order-items'
                 },
                 name: 'salesItems'
               }

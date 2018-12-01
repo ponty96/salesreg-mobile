@@ -10,6 +10,7 @@ interface IProps {
   defaultValue?: string
   multiline?: boolean
   placeholder?: string
+  editable?: boolean
   floatingLabel?: boolean | true
   secureTextEntry?: boolean | false
   getValue?: (a: string | number) => void
@@ -35,6 +36,7 @@ class InputAtom extends React.Component<IProps, IState> {
     floatingLabel: true,
     secureTextEntry: false,
     keyboardType: 'default',
+    editable: true,
     multiline: false,
     contStyle: { marginLeft: 4 } || { marginLeft: 0 }
   }
@@ -69,6 +71,7 @@ class InputAtom extends React.Component<IProps, IState> {
             {this.props.inlineElement}
             <Input
               placeholder={this.props.placeholder}
+              editable={this.props.editable}
               multiline={this.props.multiline}
               onChangeText={text =>
                 this.props.getValue(text.replace(/,/gi, ''))
