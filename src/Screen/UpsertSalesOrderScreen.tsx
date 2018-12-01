@@ -8,6 +8,7 @@ interface IProps {
 interface IState {
   salesItems: any[]
   fieldErrors: any
+  paymentMethod: string
   customerName: string
   isCustomerInContacts: any
 }
@@ -29,6 +30,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     ],
     fieldErrors: null,
     isCustomerInContacts: null,
+    paymentMethod: '',
     customerName: ''
   }
 
@@ -101,6 +103,20 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                     placeholder: 'Touch to select customer'
                   }
                 : null
+            ],
+            buttonTitle: 'Done'
+          },
+          {
+            stepTitle: 'Payment Method',
+            formFields: [
+              {
+                label: 'How is this customer paying?',
+                type: {
+                  type: 'radio',
+                  options: ['Card', 'Cash']
+                },
+                name: 'paymentMethod'
+              }
             ],
             buttonTitle: 'Done'
           }
