@@ -22,13 +22,13 @@ export default class ProductScreen extends React.Component<IProps> {
   }
 
   parseData = (item: any) => {
-    const { name, number, minimumSku, featuredImage, sellingPrice } = item
+    const { name, number, minimumSku, featuredImage, price } = item
     return [
       {
         firstTopText: name,
         bottomLeftFirstText: '',
         bottomLeftSecondText: '', //total amount in sales
-        topRightText: `\u20A6 ${sellingPrice}`,
+        topRightText: `\u20A6 ${price}`,
         bottomRightText: number,
         avatar: featuredImage,
         topLeftTextStyle: parseInt(minimumSku) >= parseInt(number) && {
