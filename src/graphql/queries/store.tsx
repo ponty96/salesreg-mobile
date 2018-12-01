@@ -1,78 +1,172 @@
 import gql from 'graphql-tag'
 
 export const ListCompanyProductsGQL = gql`
-  query listCompanyProducts($companyId: Uuid!) {
-    listCompanyProducts(companyId: $companyId) {
-      id
-      description
-      costPrice
-      sellingPrice
-      minimumStockQuantity
-      number: stockQuantity
-      name
-      featuredImage
-      images
-      user {
-        id
-        firstName
-        lastName
+  query listCompanyProducts($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyProducts(companyId: $companyId, after: $after, first: $first) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
       }
-      categories {
-        id
-        title
-      }
+      edges {
+        node {
+          id
+          description
+          costPrice
+          sellingPrice
+          minimumSku
+          number: sku
+          name
+          featuredImage
+          images
+          user {
+            id
+            firstName
+            lastName
+          }
+          categories {
+            id
+            title
+          }
 
-      tags {
-        name
-        id
+          tags {
+            name
+            id
+          }
+        }
       }
     }
   }
 `
 
 export const ListCompanyServicesGQL = gql`
-  query listCompanyServices($companyId: Uuid!) {
-    listCompanyServices(companyId: $companyId) {
-      description
-      id
-      name
-      price
-      categories {
-        id
-        title
+  query listCompanyServices($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyServices(companyId: $companyId, after: $after, first: $first) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
       }
-      featuredImage
-      images
-      tags {
-        name
-        id
+      edges {
+        node {
+          description
+          id
+          name
+          price
+          categories {
+            id
+            title
+          }
+          featuredImage
+          images
+          tags {
+            name
+            id
+          }
+        }
       }
     }
   }
 `
 
 export const ListCompanyCategoriesGQL = gql`
-  query listCompanyCategories($companyId: Uuid!) {
-    listCompanyCategories(companyId: $companyId) {
-      description
-      id
+  query listCompanyCategories($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyCategories(companyId: $companyId, after: $after, first: $first) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          description
+          id
+          title
+
+          products {
+            name
+            id
+            sellingPrice
+            featuredImage
+            images
+          }
+
+          services {
+            name
+            id
+            price
+            featuredImage
+            images
+          }
+        }
+      }
+    }
+  }
+`
+
+export const ListCompanyProductGroupsGQL = gql`
+  query listCompanyProductGroups($companyId: Uuid!) {
+    listCompanyProductGroups(companyId: $companyId) {
       title
+      id
+
+      options {
+        optionId: id
+        optionName: name
+      }
+    }
+  }
+`
+
+export const SearchProductGroupsByTitleGQL = gql`
+  query searchProductGroupsByTitle($companyId: Uuid!, $queryText: String!) {
+    searchProductGroupsByTitle(companyId: $companyId, query: $queryText) {
+      title
+      id
+
+      options {
+        optionId: id
+        optionName: name
+      }
 
       products {
-        name
         id
+        description
         sellingPrice
-        featuredImage
-        images
-      }
-
-      services {
+        minimumSku
+        sku
         name
-        id
-        price
         featuredImage
         images
+        categories {
+          id
+          title
+        }
+        tags {
+          name
+          id
+        }
       }
+    }
+  }
+`
+
+export const SearchCategoriesByTitleGQL = gql`
+  query searchCategoriesByTitle($companyId: Uuid!, $queryText: String!) {
+    searchCategoriesByTitle(companyId: $companyId, query: $queryText) {
+      title
+      id
+    }
+  }
+`
+
+export const SearchOptionsByNameGQL = gql`
+  query searchOptionsByName($companyId: Uuid!, $queryText: String!) {
+    searchOptionsByName(companyId: $companyId, query: $queryText) {
+      optionId: id
+      optionName: name
+      title: name
+      id
     }
   }
 `

@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../../../Container/Form/StepperContainer'
 import { UpsertCategoryGQL } from '../../../graphql/mutations/store'
-import Auth from '../../../services/auth'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
+import Auth from '../../../services/auth'
 
 interface IProps {
   navigation: any

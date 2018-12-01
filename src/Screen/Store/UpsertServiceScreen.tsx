@@ -2,10 +2,10 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { UpsertServiceGQL } from '../../graphql/mutations/store'
 import AppSpinner from '../../Components/Spinner'
-import Auth from '../../services/auth'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { ListCompanyCategoriesGQL } from '../../graphql/queries/store'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any
@@ -14,7 +14,7 @@ interface IProps {
 
 interface IState {
   name: string
-  price: string
+  price: any
   description: string
   userId: string
   featuredImage: any
@@ -29,7 +29,7 @@ interface IState {
 export default class UpsertServiceScreen extends Component<IProps, IState> {
   state = {
     name: '',
-    price: '',
+    price: 0,
     userId: '',
     description: '',
     featuredImage: [
@@ -120,7 +120,8 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
                     placeholder: 'e.g 5000',
                     name: 'price',
                     type: {
-                      type: 'input'
+                      type: 'input',
+                      keyboardType: 'numeric'
                     }
                   },
                   {

@@ -1,27 +1,36 @@
 import gql from 'graphql-tag'
 
 export const ListCompanyPurchasesGQL = gql`
-  query listCompanyPurchases($companyId: Uuid!) {
-    listCompanyPurchases(companyId: $companyId) {
-      id
-      date
-      contact {
-        contactName
-        id
-        gender
+  query listCompanyPurchases($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyPurchases(companyId: $companyId, after: $after, first: $first) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
       }
-      date
-      paymentMethod
-      status
-      amount
-      items {
-        id
-        unitPrice
-        quantity
-        product {
-          name
+      edges {
+        node {
           id
-          featuredImage
+          date
+          contact {
+            contactName
+            id
+            gender
+          }
+          date
+          paymentMethod
+          status
+          amount
+          items {
+            id
+            unitPrice
+            quantity
+            product {
+              name
+              id
+              featuredImage
+            }
+          }
         }
       }
     }
@@ -29,35 +38,43 @@ export const ListCompanyPurchasesGQL = gql`
 `
 
 export const ListCompanySalesGQL = gql`
-  query listCompanySales($companyId: Uuid!) {
-    listCompanySales(companyId: $companyId) {
-      id
-      contact {
-        contactName
-        id
-        gender
+  query listCompanySales($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanySales(companyId: $companyId, after: $after, first: $first) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
       }
-      paymentMethod
-      status
-      amount
-      items {
-        id
-        unitPrice
-        quantity
-        product {
-          name
+      edges {
+        node {
           id
-          costPrice
-          featuredImage
-        }
-        service {
-          name
-          id
-          featuredImage
+          contact {
+            contactName
+            id
+            gender
+          }
+          paymentMethod
+          status
+          amount
+          items {
+            id
+            unitPrice
+            quantity
+            product {
+              name
+              id
+              costPrice
+              featuredImage
+            }
+            service {
+              name
+              id
+              featuredImage
+            }
+          }
+          date
         }
       }
-
-      date
     }
   }
 `

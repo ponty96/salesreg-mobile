@@ -7,6 +7,7 @@ import FirstStep from '../../Components/SignUp/FirstStep'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { AuthenticateClientGQL } from '../../graphql/client-mutations/authenticate'
 import Auth from '../../services/auth'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any
@@ -46,19 +47,23 @@ export default class UserOnboardScreen extends React.PureComponent<
 
   render() {
     return (
-      <Mutation
-        mutation={RegisterUserMutationGQL}
-        onCompleted={this.onCompleted}
-      >
-        {(registerUser, { loading }) => [
-          <AppSpinner visible={loading} />,
-          this.renderComponentAtStep(() =>
-            registerUser({
-              variables: this.parseMutationVariables()
-            })
-          )
-        ]}
-      </Mutation>
+      <UserContext.Consumer>
+        {({ resetUserContext }) => (
+          <Mutation
+            mutation={RegisterUserMutationGQL}
+            onCompleted={res => this.onCompleted(res, resetUserContext)}
+          >
+            {(registerUser, { loading }) => [
+              <AppSpinner visible={loading} />,
+              this.renderComponentAtStep(() =>
+                registerUser({
+                  variables: this.parseMutationVariables()
+                })
+              )
+            ]}
+          </Mutation>
+        )}
+      </UserContext.Consumer>
     )
   }
 
@@ -163,7 +168,7 @@ export default class UserOnboardScreen extends React.PureComponent<
         )
     }
   }
-  onCompleted = async res => {
+  onCompleted = async (res, resetUserContext) => {
     const {
       registerUser: { success, fieldErrors, data }
     } = res
@@ -179,6 +184,7 @@ export default class UserOnboardScreen extends React.PureComponent<
       await Auth.setToken(accessToken)
       await Auth.setRefreshToken(refreshToken)
       await Auth.setCurrentUser(user)
+      resetUserContext(user)
       await client.resetStore()
 
       client.mutate({

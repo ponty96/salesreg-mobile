@@ -14,7 +14,7 @@ import FormHeader from '../../Components/Header/FormHeader'
 import * as JsSearch from 'js-search'
 import { SearchAtom } from '../SearchAtom'
 
-interface PickerData {
+export interface PickerData {
   icon?: any
   mainLabel: string
   subLabel?: string
@@ -113,7 +113,9 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
     if (!selected) {
       return placeholder
     } else if (list.length > 0) {
-      const item: any = list.find((item: any) => item.value == selected)
+      const item: any = list.find((item: any) => {
+        return item.value == selected
+      })
       if (item) {
         return item.mainLabel
       } else {

@@ -112,11 +112,11 @@ const styles = StyleSheet.create({
   underneathText: {
     marginLeft: 0,
     color: color.textColor,
-    fontSize: 12,
+    fontSize: 14,
     marginBottom: 0,
     marginTop: 2,
-    paddingLeft: 8,
-    fontFamily: 'AvenirNext-Regular'
+    fontFamily: 'AvenirNext-Regular',
+    paddingVertical: 12
   },
   radio: {
     flexDirection: 'row',

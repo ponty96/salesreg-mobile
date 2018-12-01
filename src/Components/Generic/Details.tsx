@@ -109,7 +109,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
     const { title, totalAmount } = this.props
     return (
       <View style={styles.container}>
-        <GreenCanvas title={title} subText={`\u20A6 ${totalAmount}`} />
+        <GreenCanvas title={title} subText={totalAmount} />
         <FlatList
           data={this.getItems()}
           style={{ height: 310 }}
