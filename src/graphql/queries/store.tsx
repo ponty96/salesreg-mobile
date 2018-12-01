@@ -177,7 +177,8 @@ export const SearchProductsAndServicesByName = gql`
       id
       name
       price
-      stockQuantity
+      sku
+      type
       costPrice
     }
   }
