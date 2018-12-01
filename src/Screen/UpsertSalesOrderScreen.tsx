@@ -11,6 +11,9 @@ interface IState {
   paymentMethod: string
   customerName: string
   isCustomerInContacts: any
+  discount: string
+  amountPayable: string
+  tax: string
 }
 
 export default class UpsertSalesOrderScreen extends React.PureComponent<
@@ -31,7 +34,10 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     fieldErrors: null,
     isCustomerInContacts: null,
     paymentMethod: '',
-    customerName: ''
+    amountPayable: '0.00',
+    discount: '0',
+    customerName: '',
+    tax: ''
   }
 
   updateState = (key: string, val: any) => {
@@ -103,8 +109,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                     placeholder: 'Touch to select customer'
                   }
                 : null
-            ],
-            buttonTitle: 'Done'
+            ]
           },
           {
             stepTitle: 'Payment Method',
@@ -116,6 +121,40 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                   options: ['Card', 'Cash']
                 },
                 name: 'paymentMethod'
+              }
+            ]
+          },
+          {
+            stepTitle: 'Lets sort out the payment for this order',
+            formFields: [
+              {
+                label: 'How much(N) was actually paid?',
+                type: {
+                  type: 'input',
+                  keyboardType: 'numeric'
+                },
+                placeholder: '0.00',
+                name: 'amountPayable'
+              },
+              {
+                label: 'Are you giving discounts?',
+                type: {
+                  type: 'input',
+                  keyboardType: 'numeric'
+                },
+                placeholder: '0',
+                name: 'discount',
+                underneathText: 'Ignore if there are no discounts.'
+              },
+              {
+                label: 'Tax on this payment(%)',
+                type: {
+                  type: 'input',
+                  keyboardType: 'numeric'
+                },
+                placeholder: '0.00',
+                name: 'tax',
+                underneathText: 'Ignore if there are no taxes on this payment'
               }
             ],
             buttonTitle: 'Done'
