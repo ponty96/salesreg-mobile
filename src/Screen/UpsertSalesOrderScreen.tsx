@@ -121,20 +121,6 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                   options: ['Card', 'Cash']
                 },
                 name: 'paymentMethod'
-              }
-            ]
-          },
-          {
-            stepTitle: 'Lets sort out the payment for this order',
-            formFields: [
-              {
-                label: 'How much(N) was actually paid?',
-                type: {
-                  type: 'input',
-                  keyboardType: 'numeric'
-                },
-                placeholder: '0.00',
-                name: 'amountPayable'
               },
               {
                 label: 'Are you giving discounts?',
@@ -155,6 +141,20 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                 placeholder: '0.00',
                 name: 'tax',
                 underneathText: 'Ignore if there are no taxes on this payment'
+              }
+            ]
+          },
+          {
+            stepTitle: 'Lets sort out the payment for this order',
+            formFields: [
+              {
+                label: 'How much(N) was actually paid?',
+                type: {
+                  type: 'input',
+                  keyboardType: 'numeric'
+                },
+                placeholder: '0.00',
+                name: 'amountPayable'
               }
             ],
             buttonTitle: 'Done'
