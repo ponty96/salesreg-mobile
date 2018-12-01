@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import InputAtom from './InputAtom'
-import PickerAtom from './PickerAtom'
+import AsyncPickerAtom from './AsyncPickerAtom'
 import ButtonAtom from './ButtonAtom'
 import Icon from '../Icon'
+import { SearchProductsAndServicesByName } from '../../graphql/queries/store'
 import { color } from '../../Style/Color'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 
@@ -31,16 +32,19 @@ const AddSalesOrderItem = (props: SalesItem) => (
       style={styles.closeIcon}
       onPress={() => props.onTrashItem(props.index)}
     />
-    <PickerAtom
+    <AsyncPickerAtom
+      graphqlQuery={SearchProductsAndServicesByName}
+      graphqlQueryResultKey="searchProductsAndServicesByName"
       label={`Item ${props.index + 1}`}
+      type="single"
       placeholder={
         props.itemName.length > 0 ? props.itemName : 'Touch to choose'
       }
-      list={props.productList}
       selected={props.itemName}
-      handleSelection={val =>
-        props.handleValueChange(props.index, 'itemName', val)
-      }
+      handleSelection={val => {
+        console.log('The value is ', val)
+        //        props.handleValueChange(props.index, 'itemName', val)
+      }}
     />
     <View style={styles.salesInputRow}>
       <InputAtom
