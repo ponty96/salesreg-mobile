@@ -14,6 +14,7 @@ interface IState {
   discount: string
   amountPayable: string
   tax: string
+  total: number
 }
 
 export default class UpsertSalesOrderScreen extends React.PureComponent<
@@ -37,12 +38,24 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     amountPayable: '0.00',
     discount: '0',
     customerName: '',
-    tax: ''
+    tax: '',
+    total: 0
   }
 
   updateState = (key: string, val: any) => {
     const formData = { ...this.state, [key]: val }
-    this.setState({ ...formData })
+    let total = 0
+
+    if (key == 'salesItems') {
+      this.state.salesItems.forEach(item => {
+        total += Number(item.selectedItem.price) * Number(item.quantity)
+      })
+    }
+
+    this.setState({
+      ...formData,
+      total: key == 'salesItems' ? total : this.state.total
+    })
   }
 
   onCompleted = async res => {
@@ -147,15 +160,23 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
           {
             stepTitle: 'Lets sort out the payment for this order',
             formFields: [
-              {
-                label: 'How much(N) was actually paid?',
-                type: {
-                  type: 'input',
-                  keyboardType: 'numeric'
-                },
-                placeholder: '0.00',
-                name: 'amountPayable'
-              }
+              this.state.paymentMethod.toLowerCase() == 'card'
+                ? {
+                    label: '',
+                    type: {
+                      type: 'card-payment'
+                    },
+                    name: 'total'
+                  }
+                : {
+                    label: 'How much(N) was actually paid?',
+                    type: {
+                      type: 'input',
+                      keyboardType: 'numeric'
+                    },
+                    placeholder: '0.00',
+                    name: 'amountPayable'
+                  }
             ],
             buttonTitle: 'Done'
           }
