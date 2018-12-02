@@ -14,8 +14,8 @@ export const ListCompanyProductsGQL = gql`
           description
           costPrice
           sellingPrice
-          minimumStockQuantity
-          number: stockQuantity
+          minimumSku
+          number: sku
           name
           featuredImage
           images
@@ -100,6 +100,73 @@ export const ListCompanyCategoriesGQL = gql`
           }
         }
       }
+    }
+  }
+`
+
+export const ListCompanyProductGroupsGQL = gql`
+  query listCompanyProductGroups($companyId: Uuid!) {
+    listCompanyProductGroups(companyId: $companyId) {
+      title
+      id
+
+      options {
+        optionId: id
+        optionName: name
+      }
+    }
+  }
+`
+
+export const SearchProductGroupsByTitleGQL = gql`
+  query searchProductGroupsByTitle($companyId: Uuid!, $queryText: String!) {
+    searchProductGroupsByTitle(companyId: $companyId, query: $queryText) {
+      title
+      id
+
+      options {
+        optionId: id
+        optionName: name
+      }
+
+      products {
+        id
+        description
+        sellingPrice
+        minimumSku
+        sku
+        name
+        featuredImage
+        images
+        categories {
+          id
+          title
+        }
+        tags {
+          name
+          id
+        }
+      }
+    }
+  }
+`
+
+export const SearchCategoriesByTitleGQL = gql`
+  query searchCategoriesByTitle($companyId: Uuid!, $queryText: String!) {
+    searchCategoriesByTitle(companyId: $companyId, query: $queryText) {
+      title
+      id
+    }
+  }
+`
+
+export const SearchOptionsByNameGQL = gql`
+  query searchOptionsByName($companyId: Uuid!, $queryText: String!) {
+    searchOptionsByName(companyId: $companyId, query: $queryText) {
+      optionId: id
+      optionName: name
+      title: name
+      id
     }
   }
 `

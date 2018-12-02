@@ -30,7 +30,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     const product = this.props.navigation.getParam('product', {})
     return [
       { section: 'Total Quantity Sold', value: '2344' },
-      { section: 'MSQ', value: product.minimumStockQuantity },
+      { section: 'MSQ', value: product.minimumSku },
       {
         section: 'Unit selling price',
         value: `\u20A6 ${product.sellingPrice}`

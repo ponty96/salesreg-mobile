@@ -43,6 +43,8 @@ import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
 import TagInput from '../../Atom/Form/TagInput'
+import AsyncPickerAtom from '../../Atom/Form/AsyncPickerAtom'
+import { DocumentNode } from 'graphql'
 
 interface FieldType {
   type:
@@ -55,10 +57,14 @@ interface FieldType {
     | 'expense-items'
     | 'multi-picker'
     | 'tag-input'
+    | 'search-picker'
+    | 'search-multi-picker'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
   multiline?: boolean
+  searchQuery?: DocumentNode
+  searchQueryResponseKey?: string
 }
 interface FormField {
   label: string
@@ -68,8 +74,9 @@ interface FormField {
   name: any
   extraData?: any
   underneathText?: string
+  value?: any
 }
-interface FormStep {
+export interface FormStep {
   stepTitle: string
   formFields: FormField[]
   buttonTitle?: string
@@ -83,6 +90,7 @@ interface IProps {
   fieldErrors: any
   formData: any
   handleBackPress: () => void
+  onTransition?: (from, to) => void
 }
 interface IState {
   currentStep: number
@@ -98,29 +106,29 @@ export default class FormStepperContainer extends React.PureComponent<
     showHeaderBorder: false
   }
   render() {
+    const steps = this.getSteps(this.props.steps)
     return (
       <Container style={{ flex: 1 }}>
         <FormHeader
           onPressBackIcon={this.handleBackButtonPress}
           currentStep={this.state.currentStep}
-          totalSteps={this.props.steps.length}
+          totalSteps={steps.length}
           showBottomBorder={this.state.showHeaderBorder}
         />
         <Content contentContainerStyle={styles.container}>
           <Text style={styles.headerText}>
-            {this.props.steps[this.state.currentStep - 1]['stepTitle']}
+            {steps[this.state.currentStep - 1]['stepTitle']}
           </Text>
           <Text style={styles.stepHint}>
-            {this.props.steps[this.state.currentStep - 1]['stepHint']}
+            {steps[this.state.currentStep - 1]['stepHint']}
           </Text>
           <Form>{this.renderCurrentStepFormFields()}</Form>
         </Content>
 
         <View style={styles.footer}>
           <ButtonAtom
-            btnText={`${this.props.steps[this.state.currentStep - 1][
-              'buttonTitle'
-            ] || 'Next'}`}
+            btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
+              'Next'}`}
             onPress={this.onCtaButtonPress}
             type="secondary"
             icon={this.getButtonIcon()}
@@ -129,22 +137,46 @@ export default class FormStepperContainer extends React.PureComponent<
       </Container>
     )
   }
+
+  getSteps = steps => {
+    return steps.filter(step => step)
+  }
   getButtonIcon = () => {
-    if (this.state.currentStep == this.props.steps.length) {
+    if (this.state.currentStep == this.getSteps(this.props.steps).length) {
       return 'md-checkmark'
     } else return null
   }
   handleBackButtonPress = () => {
     const { currentStep } = this.state
     if (currentStep > 1) {
-      this.setState({ currentStep: currentStep - 1 })
+      this.transition(currentStep, currentStep - 1)
     } else {
       this.props.handleBackPress()
     }
   }
 
+  onCtaButtonPress = async () => {
+    const { currentStep } = this.state
+    if (currentStep == this.getSteps(this.props.steps).length) {
+      this.props.onCompleteSteps()
+    } else {
+      this.transition(currentStep, currentStep + 1)
+    }
+  }
+
+  transition = async (from, to) => {
+    if (this.props.onTransition) {
+      await this.props.onTransition(from, to)
+      this.setState({ currentStep: to })
+    } else {
+      this.setState({ currentStep: to })
+    }
+  }
+
   renderCurrentStepFormFields = () => {
-    const currentStepForm = this.props.steps[this.state.currentStep - 1]
+    const currentStepForm = this.getSteps(this.props.steps)[
+      this.state.currentStep - 1
+    ]
     return currentStepForm.formFields.map(this.parseFormFields)
   }
 
@@ -168,13 +200,16 @@ export default class FormStepperContainer extends React.PureComponent<
         keyboardType,
         secureTextEntry = false,
         options = [],
-        multiline = false
+        multiline = false,
+        searchQuery,
+        searchQueryResponseKey
       },
       label,
       placeholder,
       name,
       extraData,
-      underneathText
+      underneathText,
+      value = ''
     } = field
     const { formData, fieldErrors } = this.props
     switch (type) {
@@ -185,7 +220,7 @@ export default class FormStepperContainer extends React.PureComponent<
             key={`${type}-${index}`}
             label={label}
             placeholder={placeholder}
-            defaultValue={formData[name]}
+            defaultValue={formData[name] || value}
             keyboardType={keyboardType || 'default'}
             secureTextEntry={secureTextEntry}
             getValue={val => this.props.updateValueChange(name, val)}
@@ -201,6 +236,7 @@ export default class FormStepperContainer extends React.PureComponent<
             label={label}
             defaultValue={formData[name]}
             getValue={val => this.props.updateValueChange(name, val)}
+            underneathText={underneathText}
             options={options}
             error={fieldErrors && fieldErrors[name]}
           />
@@ -294,15 +330,21 @@ export default class FormStepperContainer extends React.PureComponent<
             error={fieldErrors && fieldErrors[name]}
           />
         )
-    }
-  }
-
-  onCtaButtonPress = () => {
-    const { currentStep } = this.state
-    if (currentStep == this.props.steps.length) {
-      this.props.onCompleteSteps()
-    } else {
-      this.setState({ currentStep: currentStep + 1 })
+      case 'search-picker':
+      case 'search-multi-picker':
+        return (
+          <AsyncPickerAtom
+            key={`${type}-${index}`}
+            label={label}
+            selected={formData[name]}
+            placeholder={placeholder}
+            handleSelection={val => this.props.updateValueChange(name, val)}
+            error={fieldErrors && fieldErrors[name]}
+            graphqlQuery={searchQuery}
+            graphqlQueryResultKey={searchQueryResponseKey}
+            type={type == 'search-multi-picker' ? 'multi' : 'single'}
+          />
+        )
     }
   }
 }

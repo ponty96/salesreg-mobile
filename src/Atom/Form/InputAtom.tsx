@@ -138,7 +138,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 0,
     marginTop: 2,
-    paddingLeft: 8,
     fontFamily: 'AvenirNext-Regular',
     paddingVertical: 12
   },
