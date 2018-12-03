@@ -258,8 +258,8 @@ const styles = StyleSheet.create({
     backgroundColor: '#eee'
   },
   image: {
-    marginTop: 5,
-    marginLeft: 5,
+    marginTop: 8,
+    marginLeft: 8,
     width: 110,
     height: 110
   },
@@ -293,6 +293,8 @@ const styles = StyleSheet.create({
   },
   cachedImageStyle: {
     justifyContent: 'center',
-    alignItems: 'center'
+    alignItems: 'center',
+    marginLeft: 4,
+    marginTop: 4
   }
 })

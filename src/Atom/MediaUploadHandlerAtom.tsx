@@ -214,7 +214,15 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
     return (
       <TouchableOpacity
         onPress={() =>
-          this.props.type == 'image' ? this.uploadImage() : this.uploadVideo()
+          this.setState(
+            {
+              uploadState: 1
+            },
+            () =>
+              this.props.type == 'image'
+                ? this.uploadImage()
+                : this.uploadVideo()
+          )
         }
       >
         <View style={styles.retryContainer}>

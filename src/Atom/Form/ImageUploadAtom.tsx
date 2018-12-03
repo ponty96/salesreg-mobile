@@ -2,8 +2,9 @@ import React from 'react'
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
 import ImagePicker from 'react-native-image-crop-picker'
-import { ActionSheet, Thumbnail } from 'native-base'
+import { ActionSheet } from 'native-base'
 import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
+import CachedImageAtom from '../CachedImageAtom'
 
 interface IProps {
   image: string
@@ -99,10 +100,8 @@ export default class ImageUploadAtom extends React.PureComponent<
   renderDefaultImage = () => {
     return (
       <View>
-        <Thumbnail
-          source={{
-            uri: this.props.image
-          }}
+        <CachedImageAtom
+          uri={this.props.image}
           style={{ width: 300, height: 300, borderRadius: 0 }}
         />
         <TouchableOpacity onPress={this.handleImageUpload}>
