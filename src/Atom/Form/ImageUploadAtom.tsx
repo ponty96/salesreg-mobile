@@ -130,6 +130,7 @@ export default class ImageUploadAtom extends React.PureComponent<
         controlled={true}
         media={this.state.imageToUpload}
         style={{ width: 300, height: 300 }}
+        type="image"
       />
     )
   }
