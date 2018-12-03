@@ -13,7 +13,7 @@ export const CreateProductGQL = gql`
           id
           description
           costPrice
-          sellingPrice
+          price
           minimumSku
           number: sku
           name

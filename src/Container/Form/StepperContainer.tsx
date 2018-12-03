@@ -59,6 +59,7 @@ interface FieldType {
     | 'tag-input'
     | 'search-picker'
     | 'search-multi-picker'
+    | 'multi-media-upload'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]

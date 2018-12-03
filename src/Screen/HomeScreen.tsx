@@ -3,7 +3,6 @@ import { View, StyleSheet, Text, Dimensions } from 'react-native'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/BaseHeader'
 import Auth from '../services/auth'
-import MediaUploadAtom from '../Atom/Form/MediaUploadAtom'
 
 interface IProps {
   navigation: any
@@ -47,7 +46,6 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           <View style={styles.homeBackground}>
             <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
           </View>
-          <MediaUploadAtom handleMediasUpload={media => console.log(media)} />
         </View>
       </React.Fragment>
     )

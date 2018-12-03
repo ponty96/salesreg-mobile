@@ -13,7 +13,7 @@ export const ListCompanyProductsGQL = gql`
           id
           description
           costPrice
-          sellingPrice
+          price
           minimumSku
           number: sku
           name
@@ -86,7 +86,7 @@ export const ListCompanyCategoriesGQL = gql`
           products {
             name
             id
-            sellingPrice
+            price
             featuredImage
             images
           }
@@ -132,7 +132,7 @@ export const SearchProductGroupsByTitleGQL = gql`
       products {
         id
         description
-        sellingPrice
+        price
         minimumSku
         sku
         name
