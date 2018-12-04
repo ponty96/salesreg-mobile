@@ -1,19 +1,30 @@
 import React from 'react'
-import { StyleSheet, Platform, ActivityIndicator } from 'react-native'
+import {
+  StyleSheet,
+  Platform,
+  ActivityIndicator,
+  ImageBackground,
+  Image
+} from 'react-native'
 import { CachedImage } from 'react-native-cached-image'
 import { color } from '../Style/Color'
 
 interface IProps {
   uri: string
   style?: object
-  isBackgroundImage?: boolean | false
 }
 
 export default class CachedImageAtom extends React.PureComponent<IProps> {
   render() {
-    return !this.props.isBackgroundImage ? (
+    return !this.props.children ? (
       <CachedImage
         source={{ uri: this.props.uri }}
+        renderImage={() => (
+          <Image
+            source={{ uri: this.props.uri }}
+            style={[styles.container, this.props.style]}
+          />
+        )}
         style={[styles.container, this.props.style]}
         ttl={60 * 60 * 24 * 7}
         loadingIndicator={() => (
@@ -25,6 +36,14 @@ export default class CachedImageAtom extends React.PureComponent<IProps> {
       />
     ) : (
       <CachedImage
+        renderImage={() => (
+          <ImageBackground
+            source={{ uri: this.props.uri }}
+            style={[styles.container, this.props.style]}
+          >
+            {this.props.children}
+          </ImageBackground>
+        )}
         source={{ uri: this.props.uri }}
         style={[styles.container, this.props.style]}
         ttl={60 * 60 * 24 * 7}

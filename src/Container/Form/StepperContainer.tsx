@@ -38,6 +38,7 @@ import RadioButtonAtom from '../../Atom/Form/RadioButtonAtom'
 import PickerAtom from '../../Atom/Form/PickerAtom'
 import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
+import MediaUploadAtom from '../../Atom/Form/MediaUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
@@ -58,6 +59,7 @@ interface FieldType {
     | 'tag-input'
     | 'search-picker'
     | 'search-multi-picker'
+    | 'multi-media-upload'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
@@ -257,9 +259,19 @@ export default class FormStepperContainer extends React.PureComponent<
           <ImageUploadAtom
             key={`${type}-${index}`}
             underneathText={underneathText}
-            images={formData[name]}
-            handleImagesUpload={val => this.props.updateValueChange(name, val)}
+            image={formData[name]}
+            handleImageUpload={val => this.props.updateValueChange(name, val)}
             error={fieldErrors && fieldErrors[name]}
+          />
+        )
+      case 'multi-media-upload':
+        return (
+          <MediaUploadAtom
+            key={`${type}-${index}`}
+            medias={formData[name]}
+            handleMediasUpload={arrayOfValues =>
+              this.props.updateValueChange(name, arrayOfValues)
+            }
           />
         )
       case 'picker':

@@ -30,7 +30,7 @@ interface IState {
   businessCountry: string
   currency: string
   description: string
-  logo: string[]
+  logo: string
   user: any
   fieldErrors: any
 }
@@ -45,7 +45,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
     businessCountry: '',
     currency: '',
     description: '',
-    logo: [],
+    logo: '',
     fieldErrors: null
   }
 
@@ -223,7 +223,6 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
       state: '**',
       country: params.businessCountry
     }
-    params.logo = this.state.logo.length > 0 ? this.state.logo[0] : null
     delete params.businessCountry
     delete params.user
     return { company: params, userId: this.state.user.id }
