@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../../../Container/Form/StepperContainer'
-import { UpsertCategoryGQL } from '../../../graphql/mutations/store'
+import { UpsertOptionGQL } from '../../../graphql/mutations/store'
+import { ListCompanyOptionsGQL } from '../../../graphql/queries/store'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
@@ -11,24 +12,20 @@ interface IProps {
 }
 
 interface IState {
-  title: string
-  description: string
+  name: string
   companyId: string
   fieldErrors: any
   __typename?: any
   company?: any
-  userId?: any
 }
 
-export default class UpsertCategoryScreen extends Component<IProps, IState> {
+export default class UpsertOptionScreen extends Component<IProps, IState> {
   static navigationOptions = {
     header: null
   }
 
   state = {
-    title: '',
-    description: '',
-    userId: '',
+    name: '',
     companyId: '',
     fieldErrors: null
   }
@@ -40,45 +37,48 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
 
   async componentDidMount() {
     const user = JSON.parse(await Auth.getCurrentUser())
-    const category = this.props.navigation.getParam('category', null)
+    const option = this.props.navigation.getParam('option', null)
     let state = {}
-    if (category) {
-      state = category
+    if (option) {
+      state = option
     }
-    state = { ...state, userId: user.id, companyId: user.company.id }
+    state = { ...state, companyId: user.company.id }
     this.setState(state)
   }
 
   render() {
     return (
-      <Mutation mutation={UpsertCategoryGQL} onCompleted={this.onCompleted}>
-        {(upsertCategory, { loading }) => [
+      <Mutation
+        mutation={UpsertOptionGQL}
+        onCompleted={this.onCompleted}
+        refetchQueries={[
+          {
+            query: ListCompanyOptionsGQL,
+            variables: {
+              companyId: this.state.companyId,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+      >
+        {(upsertOption, { loading }) => [
           <AppSpinner visible={loading} />,
           <FormStepperContainer
             formData={this.state}
             steps={[
               {
-                stepTitle: 'Lets now describe your category',
+                stepTitle: 'Lets now describe your option',
                 formFields: [
                   {
-                    label: 'What should we call this category?',
-                    placeholder: 'e.g Sport wears',
-                    name: 'title',
+                    label: 'What should we call this option?',
+                    placeholder: 'e.g Color',
+                    name: 'name',
                     type: {
                       type: 'input',
                       keyboardType: 'default'
                     }
-                  },
-                  {
-                    label: 'Describe this category',
-                    placeholder:
-                      'e.g Sport wears for keeping your body in healthy and in shape',
-                    name: 'description',
-                    type: {
-                      type: 'input' // TODO add textarea type
-                    },
-                    underneathText:
-                      'Categories with description, tend to help customers understand and engage more with the products / services within this category'
                   }
                 ],
                 buttonTitle: 'Done'
@@ -88,7 +88,7 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
             handleBackPress={() => this.props.navigation.goBack()}
             fieldErrors={this.state.fieldErrors}
             onCompleteSteps={() =>
-              upsertCategory({ variables: this.parseMutationVariables() })
+              upsertOption({ variables: this.parseMutationVariables() })
             }
           />
         ]}
@@ -97,22 +97,22 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
   }
 
   parseMutationVariables = () => {
-    const category = this.props.navigation.getParam('category', {})
+    const option = this.props.navigation.getParam('option', {})
     let params = { ...this.state }
     delete params.fieldErrors
     delete params['__typename']
     delete params['id']
 
-    return { category: params, categoryId: category ? category.id : null }
+    return { option: params, optionId: option ? option.id : null }
   }
   onCompleted = async res => {
     const {
-      upsertCategory: { success, fieldErrors }
+      upsertOption: { success, fieldErrors }
     } = res
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.navigation.navigate('Categories')
+      this.props.navigation.navigate('Options')
     }
   }
 }

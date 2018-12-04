@@ -76,3 +76,21 @@ export const UpsertCategoryGQL = gql`
     }
   }
 `
+
+export const UpsertOptionGQL = gql`
+  mutation UpsertOption($optionId: Uuid, $option: OptionInput!) {
+    upsertOption(optionId: $optionId, option: $option) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Option {
+          id
+          name
+        }
+      }
+    }
+  }
+`

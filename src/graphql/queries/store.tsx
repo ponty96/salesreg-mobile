@@ -104,6 +104,24 @@ export const ListCompanyCategoriesGQL = gql`
   }
 `
 
+export const ListCompanyOptionsGQL = gql`
+  query listCompanyOptions($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyOptions(companyId: $companyId, after: $after, first: $first) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          id
+          name
+        }
+      }
+    }
+  }
+`
+
 export const ListCompanyProductGroupsGQL = gql`
   query listCompanyProductGroups($companyId: Uuid!) {
     listCompanyProductGroups(companyId: $companyId) {
