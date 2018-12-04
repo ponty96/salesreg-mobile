@@ -96,6 +96,8 @@ interface IProps {
 interface IState {
   currentStep: number
   showHeaderBorder?: boolean
+  multipleMediaUploadInstanceKey: number
+  singleMediaUploadInstanceKey: number
 }
 
 export default class FormStepperContainer extends React.PureComponent<
@@ -104,8 +106,11 @@ export default class FormStepperContainer extends React.PureComponent<
 > {
   state = {
     currentStep: 1,
-    showHeaderBorder: false
+    showHeaderBorder: false,
+    multipleMediaUploadInstanceKey: Date.now(),
+    singleMediaUploadInstanceKey: Date.now()
   }
+
   render() {
     const steps = this.getSteps(this.props.steps)
     return (
@@ -268,6 +273,7 @@ export default class FormStepperContainer extends React.PureComponent<
         return (
           <MediaUploadAtom
             key={`${type}-${index}`}
+            reduxMediaUploadClass={this.state.multipleMediaUploadInstanceKey}
             medias={formData[name]}
             handleMediasUpload={arrayOfValues =>
               this.props.updateValueChange(name, arrayOfValues)

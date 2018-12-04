@@ -13,13 +13,13 @@ import CachedImageAtom from '../CachedImageAtom'
 
 interface IProps {
   medias?: string[]
+  reduxMediaUploadClass: string | number
   handleMediasUpload: (image: string[]) => void
 }
 
 interface IState {
-  medias?: {}
-  showCancelIconState?: {}
-  urlOfMediaUploaded?: {}
+  media?: object
+  urlOfMediaUploaded?: object
   previousAddedMedia: string[]
 }
 
@@ -30,10 +30,9 @@ export default class MediaUploadAtom extends React.PureComponent<
   constructor(props) {
     super(props)
     this.state = {
-      medias: {},
+      media: {},
       urlOfMediaUploaded: {},
-      previousAddedMedia: props.medias || [],
-      showCancelIconState: {}
+      previousAddedMedia: props.medias || []
     }
   }
 
@@ -69,9 +68,9 @@ export default class MediaUploadAtom extends React.PureComponent<
       cropping: true,
       mediaType: 'photo',
       includeBase64: true
-    }).then(image => {
+    }).then(media => {
       this.setState({
-        medias: { ...this.state.medias, [Date.now()]: image }
+        media
       })
     })
   }
@@ -83,9 +82,9 @@ export default class MediaUploadAtom extends React.PureComponent<
       cropping: true,
       mediaType: 'photo',
       includeBase64: true
-    }).then((image: any) => {
+    }).then((media: any) => {
       this.setState({
-        medias: { ...this.state.medias, [Date.now()]: image }
+        media
       })
     })
   }
@@ -93,62 +92,27 @@ export default class MediaUploadAtom extends React.PureComponent<
   openVideo = () => {
     ImagePicker.openPicker({
       mediaType: 'video'
-    }).then((image: any) => {
+    }).then((media: any) => {
       this.setState({
-        medias: { ...this.state.medias, [Date.now()]: image }
+        media
       })
     })
   }
 
-  removeImage = index => {
-    let newImgState = {},
-      { urlOfMediaUploaded } = this.state
-
-    Object.keys(this.state.medias).forEach(key => {
-      if (index != key) {
-        newImgState[key] = this.state.medias[key]
-      }
-    })
-
+  handleImageValueSet = urlOfMediaUploaded => {
     this.setState(
       {
-        medias: newImgState,
-        urlOfMediaUploaded: urlOfMediaUploaded[index]
-          ? { ...urlOfMediaUploaded, [index]: null }
-          : urlOfMediaUploaded
+        urlOfMediaUploaded
       },
       () => {
         this.props.handleMediasUpload(
           this.state.previousAddedMedia.concat(
-            Object.keys(this.state.urlOfMediaUploaded)
-              .map(i => this.state.urlOfMediaUploaded[i])
+            Object.keys(urlOfMediaUploaded)
+              .map(i => urlOfMediaUploaded[i])
               .filter(val => val != null)
           )
         )
       }
-    )
-  }
-
-  handleImageValueSet = (index, image) => {
-    const {
-      body: { postResponse }
-    } = image
-
-    this.setState(
-      {
-        urlOfMediaUploaded: {
-          ...this.state.urlOfMediaUploaded,
-          [index]: postResponse.location
-        }
-      },
-      () =>
-        this.props.handleMediasUpload(
-          this.state.previousAddedMedia.concat(
-            Object.keys(this.state.urlOfMediaUploaded)
-              .map(i => this.state.urlOfMediaUploaded[i])
-              .filter(val => val != null)
-          )
-        )
     )
   }
 
@@ -173,9 +137,9 @@ export default class MediaUploadAtom extends React.PureComponent<
       () =>
         this.props.handleMediasUpload(
           this.state.previousAddedMedia.concat(
-            Object.keys(this.state.urlOfMediaUploaded).map(
-              i => this.state.urlOfMediaUploaded[i]
-            )
+            Object.keys(this.state.urlOfMediaUploaded)
+              .map(i => this.state.urlOfMediaUploaded[i])
+              .filter(val => val != null)
           )
         )
     )
@@ -230,17 +194,12 @@ export default class MediaUploadAtom extends React.PureComponent<
     return (
       <View style={styles.container}>
         {this.renderPreviousAddedMedia()}
-        {Object.keys(this.state.medias).map(index => (
-          <MediaUploadHandlerAtom
-            key={index}
-            onRemoveMedia={() => this.removeImage(index)}
-            onMediaSet={response => this.handleImageValueSet(index, response)}
-            media={this.state.medias[index]}
-            type={this.state.medias[index].mime.split('/')[0].toLowerCase()}
-            style={styles.image}
-            controlled={true}
-          />
-        ))}
+        <MediaUploadHandlerAtom
+          onMediaSet={response => this.handleImageValueSet(response)}
+          media={this.state.media}
+          reduxMediaUploadClass={this.props.reduxMediaUploadClass}
+          style={styles.image}
+        />
         {this.renderSelectImageContainer()}
       </View>
     )
