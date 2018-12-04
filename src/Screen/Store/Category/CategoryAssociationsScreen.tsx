@@ -36,7 +36,7 @@ export default class CategoryAssociationsScreen extends React.Component<
       bottomLeftFirstText: '',
       bottomLeftSecondText: '',
       topRightText: product.quantity,
-      bottomRightText: `\u20A6 ${parseFloat(product.sellingPrice).toFixed(2)}`,
+      bottomRightText: `\u20A6 ${parseFloat(product.price).toFixed(2)}`,
       /***
        * TODO Add featuredImage to services on the API
        */

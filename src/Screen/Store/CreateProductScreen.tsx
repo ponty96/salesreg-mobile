@@ -38,7 +38,7 @@ interface IState {
   isNewProductVariant: string
   sku: string | number
   minimumSku: string | number
-  sellingPrice: string | number
+  price: string | number
   featuredImage: string
   images: any[]
   name: string
@@ -72,7 +72,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       productGroup: null,
       sku: 0,
       minimumSku: 0,
-      sellingPrice: '',
+      price: '',
       featuredImage:
         'https://cdn2.jomashop.com/media/catalog/product/cache/1/watermark/490x490/0a1186946c551c1cc1f1a1120b7bd9a0/h/u/hublot-big-bang-mens-watch-301.px.130.rx.174.jpg',
       images: [],
@@ -449,7 +449,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       description: this.state.description,
       minimumSku: this.state.minimumSku,
       sku: this.state.sku,
-      sellingPrice: this.state.sellingPrice,
+      price: this.state.price,
       companyId: this.state.companyId,
       optionValues: this.parseOptionValuesForMutation(),
       userId: this.state.userId

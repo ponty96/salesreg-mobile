@@ -52,7 +52,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
         type: 'input',
         keyboardType: 'numeric'
       },
-      name: 'sellingPrice'
+      name: 'price'
     },
     {
       label: 'What is the current quantity in Stock',
