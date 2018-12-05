@@ -3,11 +3,10 @@ import S3Upload from '../../Functions/S3Upload'
 
 const manageUpload = (payload, mediaId, dispatch) => {
   let s3Upload =
-      payload.uploadType == 'single'
+      payload.mediaType == 'image'
         ? new S3Upload(payload.file, payload.options, mediaId)
         : new S3Upload(null, null, mediaId, payload.files),
-    uploadFn =
-      payload.uploadType == 'single' ? 'singleUpload' : 'multipleUpload'
+    uploadFn = payload.mediaType == 'image' ? 'singleUpload' : 'multipleUpload'
   dispatch({
     type: Types.SET_MEDIA_CANCEL_INSTANCE,
     payload: {
@@ -50,6 +49,7 @@ const manageUpload = (payload, mediaId, dispatch) => {
         payload: {
           mediaId,
           uploadClass: payload.key,
+          uploadType: payload.uploadType,
           location: response.body.postResponse.location
         }
       })
@@ -79,11 +79,11 @@ export const uploadMedia = payload => dispatch => {
     payload: {
       mediaId,
       uploadClass: payload.key,
+      uploadType: payload.uploadType,
       retry: payload.retry,
-      file:
-        payload.uploadType == 'single' ? payload.file : payload.files[0].file,
+      file: payload.mediaType == 'image' ? payload.file : payload.files[0].file,
       options:
-        payload.uploadType == 'single'
+        payload.mediaType == 'image'
           ? payload.options
           : payload.files[0].options,
       mediaState: 'loading',
@@ -109,5 +109,12 @@ export const removeUrlFromUploadedMedia = payload => ({
     uploadClass: payload.key,
     deleteKey: payload.deleteKey,
     deleteUsing: payload.deleteUsing
+  }
+})
+
+export const resetMediaStore = payload => ({
+  type: Types.RESET_MEDIA_STORE,
+  payload: {
+    uploadClass: payload.key
   }
 })

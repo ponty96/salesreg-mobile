@@ -11,6 +11,7 @@ export const mediaUploads = (state = {}, action) => {
         file,
         options,
         mediaState,
+        uploadType,
         progress,
         response,
         cancelInstance
@@ -22,10 +23,13 @@ export const mediaUploads = (state = {}, action) => {
           let _prevState = state[uploadClass] || []
           return {
             ...state,
-            [uploadClass]: [
-              ..._prevState,
-              { mediaId, file, options, state: mediaState, progress }
-            ]
+            [uploadClass]:
+              uploadType == 'single'
+                ? [{ mediaId, file, options, state: mediaState, progress }]
+                : [
+                    ..._prevState,
+                    { mediaId, file, options, state: mediaState, progress }
+                  ]
           }
         } else {
           let newState = state[uploadClass].map(media => {
@@ -99,7 +103,11 @@ export const mediaUploads = (state = {}, action) => {
             [uploadClass]: _deletedNewState
           }
         }
-
+      case Types.RESET_MEDIA_STORE:
+        return {
+          ...state,
+          [uploadClass]: []
+        }
       default:
         return state
     }
@@ -111,7 +119,7 @@ export const urlOfMediaUploaded = (state = {}, action) => {
   if (action.payload) {
     let {
       type,
-      payload: { mediaId, location, uploadClass }
+      payload: { mediaId, location, uploadClass, uploadType }
     } = action
 
     let _prevState = state[uploadClass] || {}
@@ -119,7 +127,10 @@ export const urlOfMediaUploaded = (state = {}, action) => {
       case Types.SET_URL_OF_MEDIA_UPLOADED:
         return {
           ...state,
-          [uploadClass]: { ..._prevState, [mediaId]: location }
+          [uploadClass]:
+            uploadType == 'single'
+              ? { [mediaId]: location }
+              : { ..._prevState, [mediaId]: location }
         }
       case Types.REMOVE_URL_OF_MEDIA_UPLOADED:
         if (action.payload.deleteUsing == 'mediaId') {
@@ -142,7 +153,11 @@ export const urlOfMediaUploaded = (state = {}, action) => {
             [uploadClass]: newState
           }
         }
-
+      case Types.RESET_MEDIA_STORE:
+        return {
+          ...state,
+          [uploadClass]: {}
+        }
       default:
         state
     }

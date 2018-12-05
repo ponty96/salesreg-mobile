@@ -17,6 +17,7 @@ import RNThumbnail from 'react-native-thumbnail'
 import {
   uploadMedia,
   deleteMedia,
+  resetMediaStore,
   removeUrlFromUploadedMedia
 } from '../store/actions/cron'
 import { connect } from 'react-redux'
@@ -24,32 +25,43 @@ import { connect } from 'react-redux'
 interface IProps {
   onMediaSet?: (response) => void
   reduxMediaUploadClass: string | number
-  uploadSingleMedia: (
+  uploadImage: (
     file: object,
     options: object,
     retry?: boolean,
     mediaId?: number
   ) => void
-  uploadMultipleMedia: (files: any, retry?: boolean, mediaId?: number) => void
+  uploadVideo: (files: any, retry?: boolean, mediaId?: number) => void
   removeUrlFromUploadedMedia: (deleteKey: string, deleteUsing: string) => void
   deleteMedia: (deleteKey, deleteUsing) => void
+  resetStore: () => void
   urlOfMediaUploaded: object
   mediasToExclude?: any
   media?: any
+  forceReset?: boolean
   storeMedias: any
   style?: any
-  uploadType?: 'single' | 'multiple'
+  hideRemoveButton?: boolean
+  uploadType: 'single' | 'multiple'
+  mediaType?: 'image' | 'video'
 }
 
 interface IState {
   mediasToExclude: any
+  shouldComponentDisplay: boolean
 }
 
 class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
   constructor(props) {
     super(props)
     this.state = {
-      mediasToExclude: this.props.mediasToExclude || []
+      mediasToExclude: this.props.mediasToExclude || [],
+      shouldComponentDisplay: this.props.forceReset ? false : true
+    }
+    //@Todo check if the the forceReset props is passed and then reset the store
+    //also set display to false so that there would not be screen glitches
+    if (this.props.forceReset) {
+      this.props.resetStore()
     }
   }
 
@@ -60,7 +72,11 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
     )
     this.props.deleteMedia(this.state.mediasToExclude, 'upload_url')
 
-    if (this.props.media && Object.keys(this.props.media).length > 0) {
+    if (
+      this.props.media &&
+      Object.keys(this.props.media).length > 0 &&
+      this.props.uploadType == 'single'
+    ) {
       let {
         media: { mime }
       } = this.props
@@ -147,7 +163,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
       { file: thumbnailFile, options: optionsThumbnail }
     ]
 
-    this.props.uploadMultipleMedia(totalpath, retry, mediaId)
+    this.props.uploadVideo(totalpath, retry, mediaId)
   }
 
   uploadImage = (retry?: boolean, mediaId?: number) => {
@@ -174,7 +190,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
       mime: mime
     }
 
-    this.props.uploadSingleMedia(file, options, retry, mediaId)
+    this.props.uploadImage(file, options, retry, mediaId)
   }
 
   renderRetryContainer = (type, mediaId): JSX.Element => {
@@ -264,8 +280,8 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
               <TouchableWithoutFeedback
                 onPress={() => Linking.openURL(location)}
               >
-                <View style={styles.mediaOverlay}>
-                  {state != 'loading' && (
+                <View style={[styles.mediaOverlay]}>
+                  {state != 'loading' && !this.props.hideRemoveButton && (
                     <Icon
                       name="x"
                       type="Feather"
@@ -294,29 +310,31 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
   }
 
   render() {
-    return this.renderImage()
+    return this.state.shouldComponentDisplay ? this.renderImage() : null
   }
 }
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    uploadSingleMedia: (file, options, retry, mediaId) =>
+    uploadImage: (file, options, retry, mediaId) =>
       dispatch(
         uploadMedia({
           key: ownProps.reduxMediaUploadClass,
           file,
           options,
-          uploadType: 'single',
+          uploadType: ownProps.uploadType,
+          mediaType: 'image',
           retry,
           mediaId
         })
       ),
-    uploadMultipleMedia: (files, retry, mediaId) =>
+    uploadVideo: (files, retry, mediaId) =>
       dispatch(
         uploadMedia({
           key: ownProps.reduxMediaUploadClass,
           files,
-          uploadType: 'multiple',
+          uploadType: ownProps.uploadType,
+          mediaType: 'video',
           retry,
           mediaId
         })
@@ -335,6 +353,12 @@ function mapDispatchToProps(dispatch, ownProps) {
           key: ownProps.reduxMediaUploadClass,
           deleteUsing,
           deleteKey
+        })
+      ),
+    resetStore: () =>
+      dispatch(
+        resetMediaStore({
+          key: ownProps.reduxMediaUploadClass
         })
       )
   }

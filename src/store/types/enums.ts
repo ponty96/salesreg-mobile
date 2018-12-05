@@ -6,7 +6,8 @@ enum Types {
   BACKGROUND_UPLOAD_ERROR = '@media/background_media/BACKGROUND_UPLOAD_ERROR',
   DELETE_MEDIA = '@media/background_media/DELETE_MEDIA',
   SET_URL_OF_MEDIA_UPLOADED = '@media/background_media/SET_URL_OF_MEDIA_UPLOADED',
-  REMOVE_URL_OF_MEDIA_UPLOADED = '@media/background_media/REMOVE_URL_OF_MEDIA_UPLOADED'
+  REMOVE_URL_OF_MEDIA_UPLOADED = '@media/background_media/REMOVE_URL_OF_MEDIA_UPLOADED',
+  RESET_MEDIA_STORE = '@media/background_media/RESET_MEDIA_STORE'
 }
 
 export default Types

@@ -199,6 +199,7 @@ export default class MediaUploadAtom extends React.PureComponent<
         <MediaUploadHandlerAtom
           onMediaSet={response => this.handleImageValueSet(response)}
           media={this.state.media}
+          uploadType="multiple"
           mediasToExclude={this.state.previousAddedMedia}
           reduxMediaUploadClass={this.props.reduxMediaUploadClass}
           style={styles.image}

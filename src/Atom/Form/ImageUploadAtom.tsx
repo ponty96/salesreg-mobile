@@ -23,7 +23,20 @@ interface IState {
 class ImageUploadAtom extends React.PureComponent<IProps, IState> {
   state = {
     imageToUpload: null,
+    isInProcessing:
+      this.props.storeMedias[0] && this.props.storeMedias[0].state,
     prevImageUploaded: this.props.image
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.storeMedias != this.props.storeMedias &&
+      this.props.storeMedias.length == 0
+    ) {
+      this.setState({
+        imageToUpload: null
+      })
+    }
   }
 
   handleImageUpload = () => {
@@ -54,7 +67,7 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
       mediaType: 'photo',
       includeBase64: true
     }).then(image => {
-      this.setState({ imageToUpload: image })
+      this.setState({ prevImageUploaded: null, imageToUpload: image })
     })
   }
 
@@ -66,16 +79,7 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
       mediaType: 'photo',
       includeBase64: true
     }).then(image => {
-      this.setState({ imageToUpload: image })
-    })
-  }
-
-  removeImage = () => {
-    //@Todo, force a reset of store in the media upload atom here
-    //using state
-
-    this.setState({ imageToUpload: null, prevImageUploaded: null }, () => {
-      this.props.handleImageUpload(null)
+      this.setState({ prevImageUploaded: null, imageToUpload: image })
     })
   }
 
@@ -129,25 +133,41 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
 
   renderUploadImage = () => {
     return (
-      <MediaUploadHandlerAtom
-        onMediaSet={this.handleImageValueSet}
-        reduxMediaUploadClass={this.props.reduxMediaUploadClass}
-        media={this.state.imageToUpload}
-        style={{ width: 300, height: 300 }}
-        uploadType="single"
-      />
+      <View>
+        <MediaUploadHandlerAtom
+          onMediaSet={this.handleImageValueSet}
+          reduxMediaUploadClass={this.props.reduxMediaUploadClass}
+          media={this.state.imageToUpload}
+          should
+          hideRemoveButton
+          style={{ width: 300, height: 300 }}
+          uploadType="single"
+        />
+        <TouchableOpacity onPress={this.handleImageUpload}>
+          <Text
+            style={{
+              color: color.button,
+              alignSelf: 'center',
+              marginVertical: 20,
+              fontSize: 18,
+              fontFamily: 'AvenirNext-Medium'
+            }}
+          >
+            Change Photo
+          </Text>
+        </TouchableOpacity>
+      </View>
     )
   }
 
   render() {
     return (
       <View>
-        {this.state.prevImageUploaded
-          ? this.renderDefaultImage
-          : this.props.storeMedias.length > 0
+        {this.state.prevImageUploaded && this.state.isInProcessing == undefined
+          ? this.renderDefaultImage()
+          : this.props.storeMedias.length > 0 || this.state.imageToUpload
           ? this.renderUploadImage()
           : this.renderSelectImagePlaceholder()}
-        {this.renderUnderNeathText()}
       </View>
     )
   }
