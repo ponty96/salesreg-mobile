@@ -115,9 +115,13 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
 
   uploadVideo = async (retry?: boolean, mediaId?: number, file?: any) => {
     let { media } = this.props,
-      path = (media && media.path) || file.uri,
-      mime = (media && media.mime) || file.mime,
-      filename = (media && media.filename) || file.filename
+      path = !retry ? media && media.path : file.uri,
+      mime = !retry ? media && media.mime : file.mime,
+      filename = !retry
+        ? media && Platform.OS == 'android'
+          ? media.path.substring(media.path.lastIndexOf('/') + 1)
+          : media.filename
+        : file.filename
 
     let { path: thumbnailPath } = await RNThumbnail.get(path)
 
@@ -142,9 +146,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
         Platform.OS == 'ios'
           ? filename
           : path.substring(path.lastIndexOf('/') + 1),
-      encodedName = `${btoa(`${name}${Date.now()}`)}|${mime
-        .split('/')[0]
-        .toLowerCase()}`
+      encodedName = `${name}${Date.now()}|${mime.split('/')[0].toLowerCase()}`
 
     const videoFile = {
       uri: path,
@@ -171,10 +173,14 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
 
   uploadImage = (retry?: boolean, mediaId?: number, optFile?: any) => {
     let { media } = this.props,
-      path = (media && media.path) || optFile.uri,
-      mime = (media && media.mime) || optFile.mime,
-      filename = (media && media.filename) || optFile.filename,
-      data = (media && media.data) || optFile.data
+      path = !retry ? media && media.path : optFile.uri,
+      mime = !retry ? media && media.mime : optFile.mime,
+      filename = !retry
+        ? media && Platform.OS == 'android'
+          ? media.path.substring(media.path.lastIndexOf('/') + 1)
+          : media.filename
+        : optFile.filename,
+      data = !retry ? media && media.data : optFile.data
 
     const options = {
       bucket: 'refineryaudio',
