@@ -113,10 +113,11 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
     }
   }
 
-  uploadVideo = async (retry?: boolean, mediaId?: number) => {
-    let {
-      media: { path, mime, filename }
-    } = this.props
+  uploadVideo = async (retry?: boolean, mediaId?: number, file?: any) => {
+    let { media } = this.props,
+      path = (media && media.path) || file.uri,
+      mime = (media && media.mime) || file.mime,
+      filename = (media && media.filename) || file.filename
 
     let { path: thumbnailPath } = await RNThumbnail.get(path)
 
@@ -148,6 +149,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
     const videoFile = {
       uri: path,
       name: encodedName,
+      filename: filename,
       type: mime,
       mime: mime
     }
@@ -167,10 +169,13 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
     this.props.uploadVideo(totalpath, retry, mediaId)
   }
 
-  uploadImage = (retry?: boolean, mediaId?: number) => {
-    let {
-      media: { path, mime, filename, data }
-    } = this.props
+  uploadImage = (retry?: boolean, mediaId?: number, optFile?: any) => {
+    let { media } = this.props,
+      path = (media && media.path) || optFile.uri,
+      mime = (media && media.mime) || optFile.mime,
+      filename = (media && media.filename) || optFile.filename,
+      data = (media && media.data) || optFile.data
+
     const options = {
       bucket: 'refineryaudio',
       region: 'us-west-1',
@@ -188,19 +193,20 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
       uri: path,
       name: `${name}${Date.now()}|${mime.split('/')[0].toLowerCase()}`,
       type: mime,
-      mime: mime
+      mime: mime,
+      filename: filename
     }
 
     this.props.uploadImage(file, options, retry, mediaId)
   }
 
-  renderRetryContainer = (type, mediaId): JSX.Element => {
+  renderRetryContainer = (type, mediaId, file): JSX.Element => {
     return (
       <TouchableOpacity
         onPress={() =>
           type == 'image'
-            ? this.uploadImage(true, mediaId)
-            : this.uploadVideo(true, mediaId)
+            ? this.uploadImage(true, mediaId, file)
+            : this.uploadVideo(true, mediaId, file)
         }
       >
         <View style={styles.retryContainer}>
@@ -260,7 +266,8 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
             progress,
             cancelFn,
             state,
-            response
+            response,
+            file
           } = media
           let type = mime.split('/')[0].toLowerCase(),
             location =
@@ -299,7 +306,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
                   {state == 'loading'
                     ? this.renderLoadingContainer(progress, cancelFn)
                     : state == 'error'
-                    ? this.renderRetryContainer(type, mediaId)
+                    ? this.renderRetryContainer(type, mediaId, file)
                     : this.renderUploadedContainer(type)}
                 </View>
               </TouchableWithoutFeedback>
