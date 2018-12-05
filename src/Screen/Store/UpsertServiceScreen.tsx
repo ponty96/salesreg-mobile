@@ -11,6 +11,7 @@ import {
   renderFeaturedImageStep,
   renderMediaStep
 } from './utilities/productCreateSteps'
+import { ListCompanyServicesGQL } from '../../graphql/queries/store'
 
 interface IProps {
   navigation: any
@@ -28,6 +29,8 @@ interface IState {
   fieldErrors: any
   categories: string[]
   tags: string[]
+  isTopRatedByMerchant: any
+  isFeatured: any
 }
 
 export default class UpsertServiceScreen extends Component<IProps, IState> {
@@ -36,12 +39,15 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     price: 0,
     userId: '',
     description: '',
-    featuredImage: '',
+    featuredImage:
+      'https://irp-cdn.multiscreensite.com/861e0da0/dms3rep/multi/makeup-artist.jpg',
     images: [],
     companyId: '',
     fieldErrors: null,
     categories: [],
-    tags: []
+    tags: [],
+    isTopRatedByMerchant: null,
+    isFeatured: null
   }
 
   updateState = (key: string, value: any) => {
@@ -56,7 +62,13 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
   componentDidMount() {
     const service = this.props.navigation.getParam('service', null)
     if (service) {
-      this.setState({ ...service })
+      this.setState({
+        ...service,
+        tags: service.tags.map(tag => tag.name),
+        isTopRatedByMerchant:
+          service.isTopRatedByMerchant == false ? 'no' : 'yes',
+        isFeatured: service.isFeatured == false ? 'no' : 'yes'
+      })
     }
     this.updateDetails()
   }
@@ -72,7 +84,21 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
   render() {
     const { navigation } = this.props
     return (
-      <Mutation mutation={UpsertServiceGQL} onCompleted={this.onCompleted}>
+      <Mutation
+        mutation={UpsertServiceGQL}
+        onCompleted={this.onCompleted}
+        refetchQueries={[
+          {
+            query: ListCompanyServicesGQL,
+            variables: {
+              companyId: this.state.companyId,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+      >
         {(upsertService, { loading }) => [
           <AppSpinner visible={loading} key="upsertservice-#1" />,
           <FormStepperContainer
@@ -129,8 +155,16 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
 
   parseMutationVariables = () => {
     const service = this.props.navigation.getParam('service', {})
-    let params = { ...this.state }
+    let params = {
+      ...this.state,
+      isTopRatedByMerchant:
+        this.state.isTopRatedByMerchant == 'no' ? false : true,
+      isFeatured: this.state.isFeatured == 'no' ? false : true,
+      categories: this.state.categories.map(cat => cat.id)
+    }
     delete params.fieldErrors
+    delete params['__typename']
+    delete params['id']
 
     return {
       service: params,

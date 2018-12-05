@@ -19,6 +19,8 @@ export const ListCompanyProductsGQL = gql`
           name
           featuredImage
           images
+          isFeatured
+          isTopRatedByMerchant
           user {
             id
             firstName
@@ -57,6 +59,8 @@ export const ListCompanyServicesGQL = gql`
             id
             title
           }
+          isFeatured
+          isTopRatedByMerchant
           featuredImage
           images
           tags {
@@ -82,22 +86,6 @@ export const ListCompanyCategoriesGQL = gql`
           description
           id
           title
-
-          products {
-            name
-            id
-            price
-            featuredImage
-            images
-          }
-
-          services {
-            name
-            id
-            price
-            featuredImage
-            images
-          }
         }
       }
     }
@@ -156,6 +144,8 @@ export const SearchProductGroupsByTitleGQL = gql`
         name
         featuredImage
         images
+        isFeatured
+        isTopRatedByMerchant
         categories {
           id
           title

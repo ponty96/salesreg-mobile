@@ -46,6 +46,8 @@ interface IState {
   description: string
   categories: any[]
   tags: any[]
+  isTopRatedByMerchant: any
+  isFeatured: any
   companyId: string
   userId: string
   currentFormState: string
@@ -80,6 +82,8 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       optionValues: [],
       description: '',
       categories: [],
+      isTopRatedByMerchant: null,
+      isFeatured: null,
       tags: [],
       userId: '',
       companyId: '',
@@ -136,7 +140,10 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       return {
         productId: product.id,
         ...product,
-        tags: product.tags.map(tag => tag.name)
+        tags: product.tags.map(tag => tag.name),
+        isTopRatedByMerchant:
+          product.isTopRatedByMerchant == false ? 'no' : 'yes',
+        isFeatured: product.isFeatured == false ? 'no' : 'yes'
       }
     } else {
       return {}
@@ -452,7 +459,10 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       price: this.state.price,
       companyId: this.state.companyId,
       optionValues: this.parseOptionValuesForMutation(),
-      userId: this.state.userId
+      userId: this.state.userId,
+      isTopRatedByMerchant:
+        this.state.isTopRatedByMerchant == 'no' ? false : true,
+      isFeatured: this.state.isFeatured == 'no' ? false : true
     }
     let params: any = {
       companyId: this.state.companyId,
