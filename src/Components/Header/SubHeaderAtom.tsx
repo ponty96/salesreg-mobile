@@ -70,7 +70,8 @@ const styles = StyleSheet.create({
     color: color.textColor
   },
   row: {
-    flexDirection: 'row'
+    flexDirection: 'row',
+    alignItems: 'center'
   },
   cart: {
     fontSize: 20,
@@ -83,7 +84,7 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-Medium'
   },
   arrowIcon: {
-    fontSize: 20,
+    fontSize: 28,
     color: color.button
   }
 })

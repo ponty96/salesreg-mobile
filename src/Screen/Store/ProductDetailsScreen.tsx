@@ -28,12 +28,16 @@ class ProductDetailsScreen extends PureComponent<IProps> {
 
   sections = (): any => {
     const product = this.props.navigation.getParam('product', {})
+    console.log('product', product)
     return [
+      ...this.parseOptionValues(product),
+      ...this.showVariantOptionStep(product),
       { section: 'Total Quantity Sold', value: '2344' },
       { section: 'MSQ', value: product.minimumSku },
       {
         section: 'Unit selling price',
-        value: `\u20A6 ${product.price}`
+        value: `\u20A6 ${product.price}`,
+        type: 'currency'
       },
       {
         section: 'Categories',
@@ -53,6 +57,27 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       { section: 'Images', value: null } // logic for rendering images here
     ]
   }
+
+  parseOptionValues = ({ optionValues = [] }) => {
+    return optionValues.map(optionValue => ({
+      section: optionValue.option.name,
+      value: optionValue.name
+    }))
+  }
+  showVariantOptionStep = ({ optionValues = [] }) => {
+    if (optionValues.length > 0) {
+      return [
+        {
+          section: `${optionValues.length} Variant options`,
+          value: 'Edit',
+          type: 'button',
+          onPress: this.onPressEditVariantOptions
+        }
+      ]
+    } else return []
+  }
+
+  onPressEditVariantOptions = () => {}
   render() {
     // do change the list to the appropriate molecule
     const product = this.props.navigation.getParam('product', {})
@@ -72,7 +97,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       </View>,
       <GenericProfileDetails
         sections={this.sections()}
-        image={product.image} // change logic based on product having multiple images
+        image={product.featuredImage} // change logic based on product having multiple images
         headerText={product.name}
         headerSubText={product.number}
       />

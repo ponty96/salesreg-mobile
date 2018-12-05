@@ -68,10 +68,7 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
       </View>,
       <GenericProfileDetails
         sections={this.sections()}
-        image={
-          service.image ||
-          'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
-        } // change logic based on service having multiple images
+        image={service.featuredImage} // change logic based on service having multiple images
         headerText={service.name}
       />
     ]
