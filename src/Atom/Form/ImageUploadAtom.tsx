@@ -138,7 +138,6 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
           onMediaSet={this.handleImageValueSet}
           reduxMediaUploadClass={this.props.reduxMediaUploadClass}
           media={this.state.imageToUpload}
-          should
           hideRemoveButton
           style={{ width: 300, height: 300 }}
           uploadType="single"
