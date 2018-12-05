@@ -104,11 +104,14 @@ export default class FormStepperContainer extends React.PureComponent<
   IProps,
   IState
 > {
-  state = {
-    currentStep: 1,
-    showHeaderBorder: false,
-    multipleMediaUploadInstanceKey: Date.now(),
-    singleMediaUploadInstanceKey: Date.now()
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentStep: 1,
+      showHeaderBorder: false,
+      multipleMediaUploadInstanceKey: Date.now(),
+      singleMediaUploadInstanceKey: 0
+    }
   }
 
   render() {
@@ -187,6 +190,9 @@ export default class FormStepperContainer extends React.PureComponent<
   }
 
   componentDidMount() {
+    this.setState({
+      singleMediaUploadInstanceKey: Date.now()
+    })
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
   }
 
@@ -262,6 +268,7 @@ export default class FormStepperContainer extends React.PureComponent<
       case 'image-upload':
         return (
           <ImageUploadAtom
+            reduxMediaUploadClass={this.state.singleMediaUploadInstanceKey}
             key={`${type}-${index}`}
             underneathText={underneathText}
             image={formData[name]}

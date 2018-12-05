@@ -6,10 +6,14 @@ function S3Upload(file, options, mediaId, arrayOfFiles?: any) {
   this.mediaId = mediaId
   this.arrayOfFiles = arrayOfFiles
   this.task = []
+  this.cancel = this.cancel.bind(this)
 }
 
 S3Upload.prototype.cancel = function() {
-  this.task.forEach(task => task.abort())
+  this.task.forEach(function(task) {
+    task.abort()
+  })
+  this.errorCallback()
 }
 
 S3Upload.prototype.singleUpload = function(
@@ -17,6 +21,14 @@ S3Upload.prototype.singleUpload = function(
   successCallback,
   errorCallback
 ) {
+  //set the errorCallback to this so that it can be called within S3 abort call
+  this.setErrorCallback(function() {
+    errorCallback(this.mediaId, {
+      file: this.file,
+      options: this.options
+    })
+  })
+
   let task = RNS3.put(this.file, this.options)
     .progress(e => {
       progressCallback(e.percent, this.mediaId, {
@@ -45,6 +57,10 @@ S3Upload.prototype.singleUpload = function(
   this.task.push(task)
 }
 
+S3Upload.prototype.setErrorCallback = function(callback) {
+  this.errorCallback = callback
+}
+
 S3Upload.prototype.multipleUpload = function(
   progressCallback,
   successCallback,
@@ -70,6 +86,14 @@ S3Upload.prototype.multipleUpload = function(
       .catch(err => Promise.reject(err))
     this.task.push(task)
     return task
+  })
+
+  //set the errorCallback to this so that it can be called within S3 abort call
+  this.setErrorCallback(function() {
+    errorCallback(this.mediaId, {
+      file: this.arrayOfFiles[0].file,
+      options: this.arrayOfFiles[0].options
+    })
   })
 
   Promise.all([...requests])

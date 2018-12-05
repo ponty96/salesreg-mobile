@@ -98,7 +98,8 @@ export const deleteMedia = payload => ({
   type: Types.DELETE_MEDIA,
   payload: {
     uploadClass: payload.key,
-    mediaId: payload.mediaId
+    deleteKey: payload.deleteKey,
+    deleteUsing: payload.deleteUsing
   }
 })
 
@@ -106,13 +107,7 @@ export const removeUrlFromUploadedMedia = payload => ({
   type: Types.REMOVE_URL_OF_MEDIA_UPLOADED,
   payload: {
     uploadClass: payload.key,
-    mediaId: payload.mediaId
-  }
-})
-
-export const resetUploadedUrlStore = payload => ({
-  type: Types.RESET_MEDIA_UPLOADED_STORE,
-  payload: {
-    uploadClass: payload.key
+    deleteKey: payload.deleteKey,
+    deleteUsing: payload.deleteUsing
   }
 })

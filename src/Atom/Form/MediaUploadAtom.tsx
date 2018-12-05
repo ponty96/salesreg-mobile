@@ -166,17 +166,19 @@ export default class MediaUploadAtom extends React.PureComponent<
             style={StyleSheet.flatten([styles.image, styles.cachedImageStyle])}
             uri={this.transformPath(media)}
           >
-            <Icon
-              name="x"
-              type="Feather"
-              onPress={() => this.removeMedia(media)}
-              style={styles.removeIcon}
-            />
-            <Icon
-              type="FontAwesome"
-              name={!isVideo ? 'file-image-o' : 'video-camera'}
-              style={styles.fileTypeIcon}
-            />
+            <View style={styles.mediaOverlay}>
+              <Icon
+                name="x"
+                type="Feather"
+                onPress={() => this.removeMedia(media)}
+                style={styles.removeIcon}
+              />
+              <Icon
+                type="FontAwesome"
+                name={!isVideo ? 'file-image-o' : 'video-camera'}
+                style={styles.fileTypeIcon}
+              />
+            </View>
           </CachedImageAtom>
           <TouchableWithoutFeedback
             onPress={() => {
@@ -197,6 +199,7 @@ export default class MediaUploadAtom extends React.PureComponent<
         <MediaUploadHandlerAtom
           onMediaSet={response => this.handleImageValueSet(response)}
           media={this.state.media}
+          mediasToExclude={this.state.previousAddedMedia}
           reduxMediaUploadClass={this.props.reduxMediaUploadClass}
           style={styles.image}
         />
@@ -215,6 +218,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#eee'
+  },
+  mediaOverlay: {
+    backgroundColor: 'rgba(0,0,0,.2)',
+    width: '100%',
+    marginLeft: 4,
+    marginTop: 4,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   image: {
     marginTop: 8,

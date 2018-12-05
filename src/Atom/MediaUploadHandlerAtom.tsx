@@ -17,7 +17,6 @@ import RNThumbnail from 'react-native-thumbnail'
 import {
   uploadMedia,
   deleteMedia,
-  resetUploadedUrlStore,
   removeUrlFromUploadedMedia
 } from '../store/actions/cron'
 import { connect } from 'react-redux'
@@ -25,22 +24,53 @@ import { connect } from 'react-redux'
 interface IProps {
   onMediaSet?: (response) => void
   reduxMediaUploadClass: string | number
-  uploadSingleMedia: (file: object, options: object) => void
-  uploadMultipleMedia: (files: any) => void
-  removeUrlFromUploadedMedia: (mediaId: string) => void
-  resetUrlOfMediaUploadedStore?: () => void
-  deleteMedia: (mediaId) => void
+  uploadSingleMedia: (
+    file: object,
+    options: object,
+    retry?: boolean,
+    mediaId?: number
+  ) => void
+  uploadMultipleMedia: (files: any, retry?: boolean, mediaId?: number) => void
+  removeUrlFromUploadedMedia: (deleteKey: string, deleteUsing: string) => void
+  deleteMedia: (deleteKey, deleteUsing) => void
   urlOfMediaUploaded: object
+  mediasToExclude?: any
   media?: any
   storeMedias: any
   style?: any
+  uploadType?: 'single' | 'multiple'
 }
 
-interface IState {}
+interface IState {
+  mediasToExclude: any
+}
 
 class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
   constructor(props) {
     super(props)
+    this.state = {
+      mediasToExclude: this.props.mediasToExclude || []
+    }
+  }
+
+  componentDidMount() {
+    this.props.removeUrlFromUploadedMedia(
+      this.state.mediasToExclude,
+      'upload_url'
+    )
+    this.props.deleteMedia(this.state.mediasToExclude, 'upload_url')
+
+    if (this.props.media && Object.keys(this.props.media).length > 0) {
+      let {
+        media: { mime }
+      } = this.props
+      let type = mime.split('/')[0].toLowerCase()
+      if (type == 'image') {
+        this.uploadImage()
+      } else {
+        this.uploadVideo()
+      }
+    }
   }
 
   componentDidUpdate(prevProps) {
@@ -50,7 +80,6 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
       let {
         media: { mime }
       } = this.props
-
       let type = mime.split('/')[0].toLowerCase()
       if (type == 'image') {
         this.uploadImage()
@@ -67,11 +96,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
     }
   }
 
-  componentWillUnmount() {
-    // this.props.resetUrlOfMediaUploadedStore()
-  }
-
-  uploadVideo = async () => {
+  uploadVideo = async (retry?: boolean, mediaId?: number) => {
     let {
       media: { path, mime, filename }
     } = this.props
@@ -122,10 +147,10 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
       { file: thumbnailFile, options: optionsThumbnail }
     ]
 
-    this.props.uploadMultipleMedia(totalpath)
+    this.props.uploadMultipleMedia(totalpath, retry, mediaId)
   }
 
-  uploadImage = () => {
+  uploadImage = (retry?: boolean, mediaId?: number) => {
     let {
       media: { path, mime, filename, data }
     } = this.props
@@ -149,19 +174,16 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
       mime: mime
     }
 
-    this.props.uploadSingleMedia(file, options)
+    this.props.uploadSingleMedia(file, options, retry, mediaId)
   }
 
-  renderRetryContainer = (type): JSX.Element => {
+  renderRetryContainer = (type, mediaId): JSX.Element => {
     return (
       <TouchableOpacity
         onPress={() =>
-          this.setState(
-            {
-              uploadState: 1
-            },
-            () => (type == 'image' ? this.uploadImage() : this.uploadVideo())
-          )
+          type == 'image'
+            ? this.uploadImage(true, mediaId)
+            : this.uploadVideo(true, mediaId)
         }
       >
         <View style={styles.retryContainer}>
@@ -223,9 +245,15 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
             state,
             response
           } = media
-          let type = mime.split('/')[0].toLowerCase()
+          let type = mime.split('/')[0].toLowerCase(),
+            location =
+              (response &&
+                response.body &&
+                response.body.postResponse &&
+                response.body.postResponse.location) ||
+              ''
 
-          return (
+          return this.state.mediasToExclude.indexOf(location) == -1 ? (
             <ImageBackground
               key={mediaId}
               style={[styles.container, this.props.style]}
@@ -234,9 +262,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
               }}
             >
               <TouchableWithoutFeedback
-                onPress={() =>
-                  Linking.openURL(response.body.postResponse.location || '')
-                }
+                onPress={() => Linking.openURL(location)}
               >
                 <View style={styles.mediaOverlay}>
                   {state != 'loading' && (
@@ -244,8 +270,11 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
                       name="x"
                       type="Feather"
                       onPress={() => {
-                        this.props.deleteMedia(mediaId)
-                        this.props.removeUrlFromUploadedMedia(mediaId)
+                        this.props.deleteMedia(mediaId, 'mediaId')
+                        this.props.removeUrlFromUploadedMedia(
+                          mediaId,
+                          'mediaId'
+                        )
                       }}
                       style={[styles.whiteIcon, styles.removeIcon]}
                     />
@@ -253,12 +282,12 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
                   {state == 'loading'
                     ? this.renderLoadingContainer(progress, cancelFn)
                     : state == 'error'
-                    ? this.renderRetryContainer(type)
+                    ? this.renderRetryContainer(type, mediaId)
                     : this.renderUploadedContainer(type)}
                 </View>
               </TouchableWithoutFeedback>
             </ImageBackground>
-          )
+          ) : null
         })}
       </React.Fragment>
     )
@@ -271,36 +300,41 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
 
 function mapDispatchToProps(dispatch, ownProps) {
   return {
-    uploadSingleMedia: (file, options) =>
+    uploadSingleMedia: (file, options, retry, mediaId) =>
       dispatch(
         uploadMedia({
           key: ownProps.reduxMediaUploadClass,
           file,
           options,
-          uploadType: 'single'
+          uploadType: 'single',
+          retry,
+          mediaId
         })
       ),
-    uploadMultipleMedia: files =>
+    uploadMultipleMedia: (files, retry, mediaId) =>
       dispatch(
         uploadMedia({
           key: ownProps.reduxMediaUploadClass,
           files,
-          uploadType: 'multiple'
-        })
-      ),
-    deleteMedia: mediaId =>
-      dispatch(deleteMedia({ key: ownProps.reduxMediaUploadClass, mediaId })),
-    removeUrlFromUploadedMedia: mediaId =>
-      dispatch(
-        removeUrlFromUploadedMedia({
-          key: ownProps.reduxMediaUploadClass,
+          uploadType: 'multiple',
+          retry,
           mediaId
         })
       ),
-    resetUrlOfMediaUploadedStore: () =>
+    deleteMedia: (deleteKey, deleteUsing) =>
       dispatch(
-        resetUploadedUrlStore({
-          key: ownProps.reduxMediaUploadClass
+        deleteMedia({
+          key: ownProps.reduxMediaUploadClass,
+          deleteKey,
+          deleteUsing
+        })
+      ),
+    removeUrlFromUploadedMedia: (deleteKey, deleteUsing) =>
+      dispatch(
+        removeUrlFromUploadedMedia({
+          key: ownProps.reduxMediaUploadClass,
+          deleteUsing,
+          deleteKey
         })
       )
   }

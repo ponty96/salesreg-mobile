@@ -30,7 +30,7 @@ export const mediaUploads = (state = {}, action) => {
         } else {
           let newState = state[uploadClass].map(media => {
             if (media.mediaId == mediaId) {
-              return { mediaId, file, options, state: mediaState }
+              return { mediaId, file, options, state: mediaState, progress }
             }
             return media
           })
@@ -72,13 +72,34 @@ export const mediaUploads = (state = {}, action) => {
           [uploadClass]: newState
         }
       case Types.DELETE_MEDIA:
-        let _deletedNewState = state[uploadClass].filter(
-          media => media.mediaId != mediaId
-        )
-        return {
-          ...state,
-          [uploadClass]: _deletedNewState
+        if (action.payload.deleteUsing == 'mediaId') {
+          let _deletedNewState = state[uploadClass].filter(
+            media => media.mediaId != action.payload.deleteKey
+          )
+          return {
+            ...state,
+            [uploadClass]: _deletedNewState
+          }
+        } else if (
+          action.payload.deleteUsing != 'mediaId' &&
+          state[uploadClass]
+        ) {
+          let _deletedNewState = state[uploadClass].filter(media => {
+            let { response } = media,
+              _location =
+                (response &&
+                  response.body &&
+                  response.body.postResponse &&
+                  response.body.postResponse.location) ||
+                ''
+            return action.payload.deleteKey.indexOf(_location) == -1
+          })
+          return {
+            ...state,
+            [uploadClass]: _deletedNewState
+          }
         }
+
       default:
         return state
     }
@@ -101,9 +122,27 @@ export const urlOfMediaUploaded = (state = {}, action) => {
           [uploadClass]: { ..._prevState, [mediaId]: location }
         }
       case Types.REMOVE_URL_OF_MEDIA_UPLOADED:
-        return { ...state, [uploadClass]: { ..._prevState, [mediaId]: null } }
-      case Types.RESET_MEDIA_UPLOADED_STORE:
-        return { ...state, [uploadClass]: {} }
+        if (action.payload.deleteUsing == 'mediaId') {
+          return {
+            ...state,
+            [uploadClass]: { ..._prevState, [action.payload.deleteKey]: null }
+          }
+        } else if (
+          action.payload.deleteUsing != 'mediaId' &&
+          state[uploadClass]
+        ) {
+          let newState = Object.keys(_prevState).reduce((acc, value) => {
+            if (action.payload.deleteKey.indexOf(_prevState[value]) == -1) {
+              acc[value] = _prevState[value]
+            }
+            return acc
+          }, {})
+          return {
+            ...state,
+            [uploadClass]: newState
+          }
+        }
+
       default:
         state
     }
