@@ -58,7 +58,8 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
       mediasToExclude: this.props.mediasToExclude || [],
       shouldComponentDisplay: this.props.forceReset ? false : true
     }
-    //@Todo check if the the forceReset props is passed and then reset the store
+
+    //Todo check if the the forceReset props is passed and then reset the store
     //also set display to false so that there would not be screen glitches
     if (this.props.forceReset) {
       this.props.resetStore()
@@ -278,7 +279,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
               }}
             >
               <TouchableWithoutFeedback
-                onPress={() => Linking.openURL(location)}
+                onPress={() => (location ? Linking.openURL(location) : null)}
               >
                 <View style={[styles.mediaOverlay]}>
                   {state != 'loading' && !this.props.hideRemoveButton && (

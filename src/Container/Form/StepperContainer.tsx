@@ -97,7 +97,7 @@ interface IState {
   currentStep: number
   showHeaderBorder?: boolean
   multipleMediaUploadInstanceKey: number
-  singleMediaUploadInstanceKey: number
+  singleMediaUploadInstanceKey?: number
 }
 
 export default class FormStepperContainer extends React.PureComponent<
@@ -109,8 +109,7 @@ export default class FormStepperContainer extends React.PureComponent<
     this.state = {
       currentStep: 1,
       showHeaderBorder: false,
-      multipleMediaUploadInstanceKey: Date.now(),
-      singleMediaUploadInstanceKey: 0
+      multipleMediaUploadInstanceKey: Date.now()
     }
   }
 
