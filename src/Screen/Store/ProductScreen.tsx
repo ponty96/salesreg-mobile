@@ -55,9 +55,7 @@ export default class ProductScreen extends React.Component<IProps> {
         fabIconType="MaterialCommunityIcons"
         hideSeparator={true}
         subHeader={{
-          screen: 'order',
-          rightLabel: 'Manage Variants',
-          onPress: () => this.props.navigation.navigate('ProductVariants')
+          screen: 'order'
         }}
       />
     )
