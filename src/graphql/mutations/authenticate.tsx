@@ -31,11 +31,6 @@ export const LoginUserMutationGQL = gql`
               phone {
                 number
               }
-              bank {
-                accountName
-                accountNumber
-                bankName
-              }
               branches {
                 id
                 type
@@ -86,11 +81,6 @@ export const RegisterUserMutationGQL = gql`
               phone {
                 number
               }
-              bank {
-                accountName
-                accountNumber
-                bankName
-              }
               branches {
                 id
                 type
@@ -128,11 +118,6 @@ export const AddUserCompanyMutationGQL = gql`
           logo
           phone {
             number
-          }
-          bank {
-            accountName
-            accountNumber
-            bankName
           }
           branches {
             id
