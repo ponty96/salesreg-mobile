@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 import { capitalizeFirstLetter } from '../Functions/capitalizeFirstLetter'
+import CachedImageAtom from './CachedImageAtom'
 
 interface IProps {
   businessName: string
@@ -15,8 +16,8 @@ export default class NameDisplayAtom extends React.Component<IProps, any> {
       <View style={[styles.nameDisplayWrapper, this.props.style]}>
         <View style={styles.nameDisplayLetterDisplay}>
           {this.props.image ? (
-            <Image
-              source={{ uri: this.props.image }}
+            <CachedImageAtom
+              uri={this.props.image}
               style={styles.nameDisplayImage}
             />
           ) : (

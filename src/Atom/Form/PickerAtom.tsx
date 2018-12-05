@@ -6,13 +6,13 @@ import {
   TouchableWithoutFeedback,
   View,
   TouchableOpacity,
-  FlatList,
-  Image
+  FlatList
 } from 'react-native'
 import { color } from '../../Style/Color'
 import FormHeader from '../../Components/Header/FormHeader'
 import * as JsSearch from 'js-search'
 import { SearchAtom } from '../SearchAtom'
+import CachedImageAtom from '../CachedImageAtom'
 
 export interface PickerData {
   icon?: any
@@ -53,8 +53,8 @@ const PickerItem = (props: PickerItem) => (
   <TouchableWithoutFeedback onPress={() => props.onPress(props.value)}>
     <View style={styles.pickerItem}>
       <View style={{ flexDirection: 'row' }}>
-        <Image
-          source={{ uri: props.icon }}
+        <CachedImageAtom
+          uri={props.icon}
           style={{ width: 30, height: 25, marginRight: 24 }}
         />
         <Text style={styles.pickerItemLabel}>{props.label}</Text>

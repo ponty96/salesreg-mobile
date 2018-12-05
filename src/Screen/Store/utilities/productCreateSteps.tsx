@@ -52,7 +52,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
         type: 'input',
         keyboardType: 'numeric'
       },
-      name: 'sellingPrice'
+      name: 'price'
     },
     {
       label: 'What is the current quantity in Stock',
@@ -98,8 +98,8 @@ export const renderOptionValuesInputStep = (
   }))
 })
 
-export const renderCategoryStep = () => ({
-  stepTitle: 'Categorize this product',
+export const renderCategoryStep = (type): FormStep => ({
+  stepTitle: `Categorize this ${type}`,
   formFields: [
     {
       label: 'Categories',
@@ -113,16 +113,15 @@ export const renderCategoryStep = () => ({
   ]
 })
 
-export const renderTagStep = name => ({
+export const renderTagStep = (name, type): FormStep => ({
   stepTitle: `Add tags to ${name}`,
-  stepHint:
-    ' \nTags will enhance your filters and your customer abilities to find services within select tags',
+  stepHint: ` \nTags will enhance your filters and your customer abilities to find ${type}s within select tags`,
   formFields: [{ label: 'Tags', type: { type: 'tag-input' }, name: 'tags' }]
 })
 
-export const renderFeaturedImageStep = name => ({
+export const renderFeaturedImageStep = (name): FormStep => ({
   stepTitle: `Lets add images for ${name} starting from the landing images`,
-  stepHint: `The landing images is what your customers see displayed on catalogue page of webstore. This is the image of this service that your customers will first see when they explore your catalogue. Click + to add from your device storage`,
+  stepHint: `The landing images is what your customers see displayed on catalogue page of webstore. This is the image of this item that your customers will first see when they explore your catalogue. Click + to add from your device storage`,
   formFields: [
     {
       label: '',
@@ -134,15 +133,15 @@ export const renderFeaturedImageStep = name => ({
   ]
 })
 
-export const renderImagesStep = name => ({
-  stepTitle: `Lets now add other images for ${name}`,
-  stepHint: `Images will be displayed on the details section of your webstore. Customers can view multiple images of ${name}`,
+export const renderMediaStep = (name): FormStep => ({
+  stepTitle: `Lets now add other media(videos or images) for ${name}`,
+  stepHint: `Media will be displayed on the details section of your webstore. Customers can view multiple media of ${name}`,
   formFields: [
     {
       label: '',
       name: 'images',
       type: {
-        type: 'image-upload'
+        type: 'multi-media-upload'
       }
     }
   ],

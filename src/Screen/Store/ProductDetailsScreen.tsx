@@ -33,7 +33,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       { section: 'MSQ', value: product.minimumSku },
       {
         section: 'Unit selling price',
-        value: `\u20A6 ${product.sellingPrice}`
+        value: `\u20A6 ${product.price}`
       },
       {
         section: 'Categories',

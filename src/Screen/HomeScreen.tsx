@@ -41,11 +41,13 @@ export default class HomeScreen extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.homeBackground}>
-          <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
+      <React.Fragment>
+        <View style={styles.container}>
+          <View style={styles.homeBackground}>
+            <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
+          </View>
         </View>
-      </View>
+      </React.Fragment>
     )
   }
 }

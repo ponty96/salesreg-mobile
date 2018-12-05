@@ -50,6 +50,10 @@ subprojects {
                 compileSdkVersion = 27
                 targetSdkVersion = 27
                 supportLibVersion = "27.0.2"
+                compileOptions {
+                    sourceCompatibility 1.8
+                    targetCompatibility 1.8
+                }
             }
         }
     }

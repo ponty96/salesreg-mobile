@@ -38,6 +38,7 @@ import RadioButtonAtom from '../../Atom/Form/RadioButtonAtom'
 import PickerAtom from '../../Atom/Form/PickerAtom'
 import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
+import MediaUploadAtom from '../../Atom/Form/MediaUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
@@ -58,6 +59,7 @@ interface FieldType {
     | 'tag-input'
     | 'search-picker'
     | 'search-multi-picker'
+    | 'multi-media-upload'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
@@ -94,16 +96,23 @@ interface IProps {
 interface IState {
   currentStep: number
   showHeaderBorder?: boolean
+  multipleMediaUploadInstanceKey: number
+  singleMediaUploadInstanceKey?: number
 }
 
 export default class FormStepperContainer extends React.PureComponent<
   IProps,
   IState
 > {
-  state = {
-    currentStep: 1,
-    showHeaderBorder: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentStep: 1,
+      showHeaderBorder: false,
+      multipleMediaUploadInstanceKey: Date.now()
+    }
   }
+
   render() {
     const steps = this.getSteps(this.props.steps)
     return (
@@ -180,6 +189,9 @@ export default class FormStepperContainer extends React.PureComponent<
   }
 
   componentDidMount() {
+    this.setState({
+      singleMediaUploadInstanceKey: Date.now()
+    })
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
   }
 
@@ -255,11 +267,23 @@ export default class FormStepperContainer extends React.PureComponent<
       case 'image-upload':
         return (
           <ImageUploadAtom
+            reduxMediaUploadClass={this.state.singleMediaUploadInstanceKey}
             key={`${type}-${index}`}
             underneathText={underneathText}
-            images={formData[name]}
-            handleImagesUpload={val => this.props.updateValueChange(name, val)}
+            image={formData[name]}
+            handleImageUpload={val => this.props.updateValueChange(name, val)}
             error={fieldErrors && fieldErrors[name]}
+          />
+        )
+      case 'multi-media-upload':
+        return (
+          <MediaUploadAtom
+            key={`${type}-${index}`}
+            reduxMediaUploadClass={this.state.multipleMediaUploadInstanceKey}
+            medias={formData[name]}
+            handleMediasUpload={arrayOfValues =>
+              this.props.updateValueChange(name, arrayOfValues)
+            }
           />
         )
       case 'picker':

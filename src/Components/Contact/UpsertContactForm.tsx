@@ -31,7 +31,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     email: '',
     gender: '',
     // step 1
-    image: [],
+    image: '',
     // step 3
     street1: '',
     city: '',
@@ -62,7 +62,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
         ...address,
         ...phone,
         gender: contact.gender ? contact.gender.toLowerCase() : '',
-        image: contact.image ? [contact.image] : []
+        image: contact.image ? contact.image : ''
       }
     }
     this.updateDetails(details)
@@ -264,7 +264,6 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     delete params.country
     delete params.number
     delete params.fieldErrors
-    delete params.image
     delete params['__typename']
     delete params['id']
     delete params['data']
@@ -281,8 +280,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
         },
         phone: {
           number
-        },
-        image: this.state.image[0]
+        }
       },
       contactId: contact ? contact.id : null
     }

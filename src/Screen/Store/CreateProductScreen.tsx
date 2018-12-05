@@ -13,7 +13,7 @@ import {
   renderCategoryStep,
   renderFeaturedImageStep,
   renderOptionValuesInputStep,
-  renderImagesStep,
+  renderMediaStep,
   renderProductDescriptionStep,
   renderSelectProductGroupFormStep,
   renderSelectOptionsFormStep,
@@ -38,7 +38,7 @@ interface IState {
   isNewProductVariant: string
   sku: string | number
   minimumSku: string | number
-  sellingPrice: string | number
+  price: string | number
   featuredImage: string
   images: any[]
   name: string
@@ -72,7 +72,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       productGroup: null,
       sku: 0,
       minimumSku: 0,
-      sellingPrice: '',
+      price: '',
       featuredImage:
         'https://cdn2.jomashop.com/media/catalog/product/cache/1/watermark/490x490/0a1186946c551c1cc1f1a1120b7bd9a0/h/u/hublot-big-bang-mens-watch-301.px.130.rx.174.jpg',
       images: [],
@@ -360,7 +360,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
 
   getFifthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderCategoryStep()
+      return renderCategoryStep('product')
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
@@ -373,23 +373,23 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
-      return renderCategoryStep()
+      return renderCategoryStep('product')
     }
   }
 
   getSixthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderTagStep(this.getProductName())
+      return renderTagStep(this.getProductName(), 'product')
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderCategoryStep()
+      return renderCategoryStep('product')
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
       return renderProductDescriptionStep(this.getProductName())
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
-      return renderTagStep(this.getProductName())
+      return renderTagStep(this.getProductName(), 'product')
     }
   }
 
@@ -399,9 +399,9 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderTagStep(this.getProductName())
+      return renderTagStep(this.getProductName(), 'product')
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderCategoryStep()
+      return renderCategoryStep('product')
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
@@ -411,23 +411,23 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
 
   getEightStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderImagesStep(this.getProductName())
+      return renderMediaStep(this.getProductName())
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
       return renderFeaturedImageStep(this.getProductName())
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderTagStep(this.getProductName())
+      return renderTagStep(this.getProductName(), 'product')
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
-      return renderImagesStep(this.getProductName())
+      return renderMediaStep(this.getProductName())
     }
   }
 
   getNinthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingNonPredefined) {
-      return renderImagesStep(this.getProductName())
+      return renderMediaStep(this.getProductName())
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
       return renderFeaturedImageStep(this.getProductName())
     }
@@ -435,7 +435,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
 
   getTenthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderImagesStep(this.getProductName())
+      return renderMediaStep(this.getProductName())
     }
   }
 
@@ -449,7 +449,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       description: this.state.description,
       minimumSku: this.state.minimumSku,
       sku: this.state.sku,
-      sellingPrice: this.state.sellingPrice,
+      price: this.state.price,
       companyId: this.state.companyId,
       optionValues: this.parseOptionValuesForMutation(),
       userId: this.state.userId
