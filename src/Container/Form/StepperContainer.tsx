@@ -316,7 +316,13 @@ export default class FormStepperContainer extends React.PureComponent<
           )
         case 'card-payment':
           return (
-            <CardPaymentAtom key={`${type}-${index}`} amount={formData[name]} />
+            <CardPaymentAtom
+              handleCardSelection={(cardDetails: any) =>
+                this.props.updateValueChange(name, cardDetails)
+              }
+              key={`${type}-${index}`}
+              amount={formData[name]}
+            />
           )
         case 'multi-picker':
           return (

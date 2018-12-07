@@ -5,6 +5,7 @@ import { color } from '../../Style/Color'
 
 interface IProps {
   amount: number | string
+  handleCardSelection: (card) => void
 }
 
 interface IState {
@@ -29,7 +30,7 @@ export default class CardPaymentAtom extends React.PureComponent<
           cardFontFamily="AvenirNext-Regular"
           labelStyle={{ fontFamily: 'AvenirNext-Regular' }}
           inputStyle={{ fontFamily: 'AvenirNext-Regular' }}
-          onChange={cardInfo => this.setState({ cardInfo })}
+          onChange={cardInfo => this.props.handleCardSelection(cardInfo)}
           addtionalInputsProps={{
             pin: {
               default: '',

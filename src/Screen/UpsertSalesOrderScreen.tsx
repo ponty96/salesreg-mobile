@@ -1,5 +1,6 @@
 import React from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
+import RNPaystack from 'react-native-paystack'
 
 interface IProps {
   navigation: any
@@ -15,6 +16,7 @@ interface IState {
   amountPayable: string
   tax: string
   total: number
+  cardDetails: any
 }
 
 export default class UpsertSalesOrderScreen extends React.PureComponent<
@@ -39,7 +41,8 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     discount: '0',
     customerName: '',
     tax: '',
-    total: 0
+    total: 0,
+    cardDetails: null
   }
 
   updateState = (key: string, val: any) => {
@@ -60,6 +63,35 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
 
   onCompleted = async res => {
     console.log(res)
+  }
+
+  chargeCard = () => {
+    let { cardDetails } = this.state,
+      _cardDetails = cardDetails || {},
+      { valid } = _cardDetails
+
+    if (valid) {
+      let {
+        values: { number, expiry, cvc }
+      } = _cardDetails
+
+      RNPaystack.chargeCard({
+        cardNumber: number.replace(/\s/gi, ''),
+        expiryMonth: expiry.split('/')[0],
+        expiryYear: expiry.split('/')[1],
+        cvc,
+        email: 'daveanifowoshe@gmail.com',
+        amountInKobo: 150000
+      })
+        .then(() => {
+          alert('done')
+        })
+        .catch(error => {
+          alert(error.message)
+        })
+    } else {
+      alert('Card details entered is invalid')
+    }
   }
 
   render() {
@@ -166,7 +198,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                     type: {
                       type: 'card-payment'
                     },
-                    name: 'total'
+                    name: 'cardDetails'
                   }
                 : {
                     label: 'How much(N) was actually paid?',
@@ -181,7 +213,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
             buttonTitle: 'Done'
           }
         ]}
-        onCompleteSteps={() => null}
+        onCompleteSteps={() => this.chargeCard()}
       />
     )
   }
