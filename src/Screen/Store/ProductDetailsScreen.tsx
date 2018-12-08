@@ -19,7 +19,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           title="Product Details"
           onPressLeftIcon={() => navigation.goBack()}
           onPressRightIcon={() =>
-            navigation.navigate('UpsertProduct', { product })
+            navigation.navigate('UpdateProduct', { product })
           }
         />
       )
@@ -28,7 +28,6 @@ class ProductDetailsScreen extends PureComponent<IProps> {
 
   sections = (): any => {
     const product = this.props.navigation.getParam('product', {})
-    console.log('product', product)
     return [
       ...this.parseOptionValues(product),
       ...this.showVariantOptionStep(product),

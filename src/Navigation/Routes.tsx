@@ -27,6 +27,7 @@ import VendorScreen from '../Screen/Contact/VendorScreen'
 import CreateProductScreen from '../Screen/Store/CreateProductScreen'
 import ProductDetailsScreen from '../Screen/Store/ProductDetailsScreen'
 import ProductScreen from '../Screen/Store/ProductScreen'
+import UpdateProductScreen from '../Screen/Store/UpdateProductScreen'
 
 // Service Screens
 import UpsertServiceScreen from '../Screen/Store/UpsertServiceScreen'
@@ -146,9 +147,10 @@ const businessStack = StackNavigator(
     Services: {
       screen: ServicesScreen
     },
-    UpsertProduct: {
+    CreateProduct: {
       screen: CreateProductScreen
     },
+    UpdateProduct: UpdateProductScreen,
     ProductDetails: {
       screen: ProductDetailsScreen
     },

@@ -41,6 +41,7 @@ export const ListCompanyProductsGQL = gql`
             name
             option {
               name
+              id
             }
           }
         }
