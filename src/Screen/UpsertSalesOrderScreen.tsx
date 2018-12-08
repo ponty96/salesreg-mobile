@@ -77,8 +77,6 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       } = _cardDetails
       let { email } = JSON.parse(await Auth.getCurrentUser())
 
-
-
       RNPaystack.chargeCard({
         cardNumber: number.replace(/\s/gi, ''),
         expiryMonth: expiry.split('/')[0],
