@@ -1,6 +1,7 @@
 import React from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import RNPaystack from 'react-native-paystack'
+import Auth from '../services/auth'
 
 interface IProps {
   navigation: any
@@ -65,7 +66,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     console.log(res)
   }
 
-  chargeCard = () => {
+  chargeCard = async () => {
     let { cardDetails } = this.state,
       _cardDetails = cardDetails || {},
       { valid } = _cardDetails
@@ -74,13 +75,16 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       let {
         values: { number, expiry, cvc }
       } = _cardDetails
+      let { email } = JSON.parse(await Auth.getCurrentUser())
+
+
 
       RNPaystack.chargeCard({
         cardNumber: number.replace(/\s/gi, ''),
         expiryMonth: expiry.split('/')[0],
         expiryYear: expiry.split('/')[1],
         cvc,
-        email: 'daveanifowoshe@gmail.com',
+        email,
         amountInKobo: 150000
       })
         .then(() => {
