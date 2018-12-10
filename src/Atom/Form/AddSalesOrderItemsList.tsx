@@ -8,14 +8,22 @@ import { SearchProductsAndServicesByName } from '../../graphql/queries/store'
 import { color } from '../../Style/Color'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 
+interface ISalesInput {
+  productId?: string
+  quantity: string
+  name?: string
+  type?: string
+  serviceId?: string
+  unitPrice: string
+}
+
 interface IProps {
-  salesItems: any[]
-  onUpdateItems: (items: any[]) => void
+  salesItems: ISalesInput[]
+  onUpdateItems: (items: ISalesInput[]) => void
 }
 
 interface SalesItem {
-  item: { id: string; name: string; price: string; sku: any; type: string }
-  quantity: string
+  item: ISalesInput
   index: number
   handleValueChange: (index: number, key: string, value: any) => void
   onTrashItem: (index: number) => void
@@ -37,16 +45,21 @@ const AddSalesOrderItem = (props: SalesItem) => (
       placeholder={
         props.item.name.length > 0 ? props.item.name : 'Touch to choose'
       }
-      selected={{ id: props.item.id }}
+      selected={{
+        id:
+          props.item.type == 'product'
+            ? props.item.productId
+            : props.item.serviceId
+      }}
       handleSelection={val => {
-        props.handleValueChange(props.index, 'selectedItem', val)
+        props.handleValueChange(props.index, 'item', val)
       }}
     />
     <View style={styles.salesInputRow}>
       <InputAtom
         label="Quantity"
         placeholder="0"
-        defaultValue={props.quantity}
+        defaultValue={props.item.quantity}
         getValue={val => props.handleValueChange(props.index, 'quantity', val)}
         contStyle={styles.salesInput}
         containerStyle={{ flex: 1 }}
@@ -55,8 +68,8 @@ const AddSalesOrderItem = (props: SalesItem) => (
         label={`Price/each(\u20A6)`}
         editable={false}
         placeholder="0.00"
-        defaultValue={numberWithCommas(props.item.price)}
-        getValue={val => props.handleValueChange(props.index, 'amount', val)}
+        defaultValue={numberWithCommas(props.item.unitPrice)}
+        getValue={val => props.handleValueChange(props.index, 'unitPrice', val)}
         containerStyle={{ flex: 1 }}
         contStyle={StyleSheet.flatten([
           styles.salesInput,
@@ -69,7 +82,9 @@ const AddSalesOrderItem = (props: SalesItem) => (
       <View style={styles.totalAmtContainer}>
         <Text style={[styles.text, { fontSize: 18 }]}>
           {numberWithCommas(
-            (Number(props.item.price) * Number(props.quantity)).toFixed(2)
+            (
+              Number(props.item.unitPrice) * Number(props.item.quantity)
+            ).toFixed(2)
           ) || 0.0}
         </Text>
       </View>
@@ -83,22 +98,35 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
   handleValueChange = (index: number, key: string, value: any) => {
     const { salesItems } = this.props
     let items = []
-    if (salesItems.length == 1) {
-      items = [{ ...salesItems[0], [key]: value }]
-    } else {
-      items = [
-        ...salesItems.slice(0, index),
-        { ...salesItems[index], [key]: value },
-        ...salesItems.slice(index + 1)
-      ]
-    }
+
+    let _item =
+      key == 'item'
+        ? {
+            name: value.name,
+            productId: value.type == 'Product' ? value.id : null,
+            serviceId: value.type == 'Service' ? value.id : null,
+            type: value.type.toLowerCase(),
+            unitPrice: value.price
+          }
+        : { [key]: value }
+
+    items = [
+      ...salesItems.slice(0, index),
+      { ...salesItems[index], ..._item },
+      ...salesItems.slice(index + 1)
+    ]
+
     this.props.onUpdateItems(items)
   }
 
   addAnotherItem = () => {
     const expenseItems = this.props.salesItems.concat([
       {
-        selectedItem: { id: '', name: '', price: '0.00', sku: '', type: '' },
+        productId: null,
+        serviceId: null,
+        name: '',
+        unitPrice: '0.00',
+        type: '',
         quantity: ''
       }
     ])
@@ -121,8 +149,7 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
           <AddSalesOrderItem
             key={index}
             index={index}
-            item={item.selectedItem}
-            quantity={item.quantity}
+            item={item}
             handleValueChange={this.handleValueChange}
             onTrashItem={this.trashItem}
           />

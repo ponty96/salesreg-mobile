@@ -81,3 +81,19 @@ export const UpdatePurchaseOrderStatusGQL = gql`
     }
   }
 `
+export const UpsertSaleOrder = gql`
+  mutation upsertSaleOrder($sale: SaleInput!, $saleId: Uuid) {
+    upsertSaleOrder(sale: $sale, saleId: $saleId) {
+      fieldErrors {
+        key
+        message
+      }
+      success
+      data {
+        ... on Sale {
+          id
+        }
+      }
+    }
+  }
+`
