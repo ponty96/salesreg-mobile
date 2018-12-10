@@ -1,6 +1,7 @@
 import * as React from 'react'
-import { Image, Text, View, StyleSheet } from 'react-native'
+import { Text, View, StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
+import CachedImageAtom from './CachedImageAtom'
 
 interface IProps {
   image: string
@@ -12,8 +13,8 @@ export default class ImageDisplayAtom extends React.Component<IProps, any> {
     return (
       <View style={styles.smallImageDisplayContainer}>
         <View style={styles.smallImageDisplayImageWrapper}>
-          <Image
-            source={{ uri: this.props.image }}
+          <CachedImageAtom
+            uri={this.props.image}
             style={styles.smallImageDisplayImage}
           />
         </View>

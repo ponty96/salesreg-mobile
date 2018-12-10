@@ -10,6 +10,7 @@ import AppSpinner from '../Components/Spinner'
 import { UpdateCompanyGQL } from '../graphql/mutations/business'
 import Auth from '../services/auth'
 import FormStepperContainer from '../Container/Form/StepperContainer'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -35,7 +36,7 @@ export default class EditBusinessProfileScreen extends Component<
   IState
 > {
   state = {
-    logo: [],
+    logo: '',
     about: '',
     title: '',
     contactEmail: '',
@@ -236,7 +237,6 @@ export default class EditBusinessProfileScreen extends Component<
 
     delete params.phoneNumber
     params['headOffice'] = this.parseAddress(params)
-    params['logo'] = this.state.logo.length > 0 ? this.state.logo[0] : null
     delete params.companyId
     delete params['company']
 
@@ -265,7 +265,16 @@ export default class EditBusinessProfileScreen extends Component<
       const user = JSON.parse(await Auth.getCurrentUser())
       const updatedUser = { ...user, company: data }
       await Auth.setCurrentUser(updatedUser)
-      this.props.navigation.navigate('BusinessProfile')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({ routeName: 'ProfileSettings' }),
+          NavigationActions.navigate({
+            routeName: 'BusinessProfile'
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     } else {
       const parsedErrors = parseFieldErrors(fieldErrors)
       this.setState({

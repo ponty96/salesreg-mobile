@@ -6,12 +6,11 @@ import { color } from '../Style/Color'
 interface IProps {
   uri: string
   style?: object
-  isBackgroundImage?: boolean | false
 }
 
 export default class CachedImageAtom extends React.PureComponent<IProps> {
   render() {
-    return !this.props.isBackgroundImage ? (
+    return !this.props.children ? (
       <CachedImage
         source={{ uri: this.props.uri }}
         style={[styles.container, this.props.style]}

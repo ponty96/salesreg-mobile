@@ -1,17 +1,44 @@
 import React from 'react'
 import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
-import Icon from '../Icon'
 import { color } from '../../Style/Color'
 import ImagePicker from 'react-native-image-crop-picker'
 import { ActionSheet } from 'native-base'
+import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
+import CachedImageAtom from '../CachedImageAtom'
+import { connect } from 'react-redux'
 
 interface IProps {
-  images: string[]
-  handleImagesUpload: (images: string[]) => void
+  image: string
+  handleImageUpload: (image: string) => void
   underneathText?: string
   error?: any
+  storeMedias?: any
+  reduxMediaUploadClass: string | number
 }
-export default class ImageUploadAtom extends React.PureComponent<IProps> {
+interface IState {
+  imageToUpload: any
+  prevImageUploaded: string
+}
+
+class ImageUploadAtom extends React.PureComponent<IProps, IState> {
+  state = {
+    imageToUpload: null,
+    isInProcessing:
+      this.props.storeMedias[0] && this.props.storeMedias[0].state,
+    prevImageUploaded: this.props.image
+  }
+
+  componentDidUpdate(prevProps) {
+    if (
+      prevProps.storeMedias != this.props.storeMedias &&
+      this.props.storeMedias.length == 0
+    ) {
+      this.setState({
+        imageToUpload: null
+      })
+    }
+  }
+
   handleImageUpload = () => {
     ActionSheet.show(
       {
@@ -34,38 +61,59 @@ export default class ImageUploadAtom extends React.PureComponent<IProps> {
 
   openGallery = () => {
     ImagePicker.openPicker({
-      width: 300,
-      height: 300,
+      width: 840,
+      height: 840,
       cropping: true,
-      multiple: true,
       mediaType: 'photo',
       includeBase64: true
-    }).then(images => {
-      console.log(images)
+    }).then(image => {
+      this.setState({ prevImageUploaded: null, imageToUpload: image })
     })
   }
 
   openCamera = () => {
     ImagePicker.openCamera({
-      width: 300,
-      height: 300,
+      width: 840,
+      height: 840,
       cropping: true,
-      multiple: true,
       mediaType: 'photo',
       includeBase64: true
-    }).then(images => {
-      console.log('images', images)
+    }).then(image => {
+      this.setState({ prevImageUploaded: null, imageToUpload: image })
     })
   }
-  render() {
+
+  handleImageValueSet = image => {
+    let url = image[Object.keys(image)[0]]
+    this.props.handleImageUpload(url)
+    if (!url) {
+      this.setState({
+        imageToUpload: url
+      })
+    }
+  }
+
+  renderSelectImagePlaceholder = (): JSX.Element => {
+    return (
+      <TouchableOpacity
+        style={styles.placeholderWrapper}
+        onPress={this.handleImageUpload}
+      >
+        <Image
+          source={require('../../../assets-v1/image-upload.png')}
+          style={styles.imagePlaceholder}
+        />
+      </TouchableOpacity>
+    )
+  }
+
+  renderDefaultImage = () => {
     return (
       <View>
-        <TouchableOpacity
-          style={styles.placeholderWrapper}
-          onPress={this.handleImageUpload}
-        >
-          {this.renderMainImagePlaceholder()}
-        </TouchableOpacity>
+        <CachedImageAtom
+          uri={this.props.image}
+          style={{ width: 300, height: 300, borderRadius: 0 }}
+        />
         <TouchableOpacity onPress={this.handleImageUpload}>
           <Text
             style={{
@@ -76,19 +124,49 @@ export default class ImageUploadAtom extends React.PureComponent<IProps> {
               fontFamily: 'AvenirNext-Medium'
             }}
           >
-            <Icon
-              name="upload"
-              type="Entypo"
-              style={{
-                color: color.button,
-                fontSize: 22,
-                paddingHorizontal: 16
-              }}
-            />
-            <Text>UPLOAD</Text>
+            Change Photo
           </Text>
         </TouchableOpacity>
-        {this.renderUnderNeathText()}
+      </View>
+    )
+  }
+
+  renderUploadImage = () => {
+    return (
+      <View>
+        <MediaUploadHandlerAtom
+          onMediaSet={this.handleImageValueSet}
+          reduxMediaUploadClass={this.props.reduxMediaUploadClass}
+          media={this.state.imageToUpload}
+          hideRemoveButton
+          style={{ width: 300, height: 300 }}
+          uploadType="single"
+        />
+        <TouchableOpacity onPress={this.handleImageUpload}>
+          <Text
+            style={{
+              color: color.button,
+              alignSelf: 'center',
+              marginVertical: 20,
+              fontSize: 18,
+              fontFamily: 'AvenirNext-Medium'
+            }}
+          >
+            Change Photo
+          </Text>
+        </TouchableOpacity>
+      </View>
+    )
+  }
+
+  render() {
+    return (
+      <View>
+        {this.state.prevImageUploaded && this.state.isInProcessing == undefined
+          ? this.renderDefaultImage()
+          : this.props.storeMedias.length > 0 || this.state.imageToUpload
+          ? this.renderUploadImage()
+          : this.renderSelectImagePlaceholder()}
       </View>
     )
   }
@@ -112,18 +190,15 @@ export default class ImageUploadAtom extends React.PureComponent<IProps> {
       return null
     }
   }
+}
 
-  renderMainImagePlaceholder = (): JSX.Element => {
-    let source = {}
-    if (this.props.images.length > 0) {
-      source = { uri: this.props.images[0] }
-    } else {
-      source = require('../../../assets-v1/image-upload.png')
-    }
-
-    return <Image source={source} style={styles.imagePlaceholder} />
+function mapStateToProps(state, ownProps) {
+  return {
+    storeMedias: state.mediaUploads[ownProps.reduxMediaUploadClass] || []
   }
 }
+
+export default connect(mapStateToProps)(ImageUploadAtom)
 
 const styles = StyleSheet.create({
   placeholderWrapper: {
