@@ -4,7 +4,7 @@ import { UpsertServiceGQL } from '../../graphql/mutations/store'
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
-import Auth from '../../services/auth'
+
 import {
   renderCategoryStep,
   renderTagStep,
@@ -12,10 +12,12 @@ import {
   renderMediaStep
 } from './utilities/productCreateSteps'
 import { ListCompanyServicesGQL } from '../../graphql/queries/store'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any
   screenProps: any
+  user: any
 }
 
 interface IState {
@@ -33,7 +35,7 @@ interface IState {
   isFeatured: any
 }
 
-export default class UpsertServiceScreen extends Component<IProps, IState> {
+class UpsertServiceScreen extends Component<IProps, IState> {
   state = {
     name: '',
     price: 0,
@@ -61,24 +63,18 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
 
   componentDidMount() {
     const service = this.props.navigation.getParam('service', null)
+    const { user } = this.props
     if (service) {
       this.setState({
         ...service,
         tags: service.tags.map(tag => tag.name),
         isTopRatedByMerchant:
           service.isTopRatedByMerchant == false ? 'no' : 'yes',
-        isFeatured: service.isFeatured == false ? 'no' : 'yes'
+        isFeatured: service.isFeatured == false ? 'no' : 'yes',
+        userId: user.id,
+        companyId: user.company.id
       })
     }
-    this.updateDetails()
-  }
-
-  updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
-    this.setState({
-      userId: user.id,
-      companyId: user.company.id
-    })
   }
 
   render() {
@@ -183,3 +179,11 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     }
   }
 }
+
+const _UpsertServiceScreen = props => (
+  <UserContext.Consumer>
+    {({ user }) => <UpsertServiceScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _UpsertServiceScreen

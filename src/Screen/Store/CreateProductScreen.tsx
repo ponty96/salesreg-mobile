@@ -3,7 +3,6 @@ import React, { PureComponent } from 'react'
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
-import Auth from '../../services/auth'
 import FormStepperContainer, {
   FormStep
 } from '../../Container/Form/StepperContainer'
@@ -19,10 +18,12 @@ import {
   renderSelectOptionsFormStep,
   renderTagStep
 } from './utilities/productCreateSteps'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any
   screenProps: any
+  user: any
 }
 
 interface OptionValue {
@@ -102,7 +103,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
   }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const { user } = this.props
     this.setState({
       userId: user.id,
       companyId: user.company.id
@@ -510,4 +511,10 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
   }
 }
 
-export default CreateProductScreen
+const _CreateProductScreen = props => (
+  <UserContext.Consumer>
+    {({ user }) => <CreateProductScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _CreateProductScreen
