@@ -22,21 +22,15 @@ interface ISalesInput {
   unitPrice: String
 }
 
-interface ICustomerDetails {
-  companyId: string
-  contactName: String
-  email: string
-  type: string
-  userId: string
-}
-
 interface IState {
   items: ISalesInput[]
   fieldErrors: any
   paymentMethod: string
   date: string
   loading: boolean
-  contact: ICustomerDetails | object
+  existingContact: { id?: string }
+  contactName: string
+  email: string
   isCustomerInContacts: any
   discount: string
   amountPaid: string
@@ -72,8 +66,10 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     amountPaid: '0.00',
     date: new Date().toString(),
     discount: '0',
-    contact: {},
+    existingContact: { id: '' },
     tax: '',
+    contactName: '',
+    email: '',
     loading: false,
     salesOrderId: '',
     hasSalesOrderBeenCreated: false,
@@ -97,8 +93,9 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
   updateState = (key: string, val: any) => {
     const formData = {
       ...this.state,
-      [key]: key != 'contact' ? val : { ...val, ...this.state.user }
+      [key]: val
     }
+
     let total = 0
 
     if (key == 'items') {
@@ -152,7 +149,6 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       } = _cardDetails
       let { email } = JSON.parse(await Auth.getCurrentUser())
 
-      console.log('tHE SALES ORDER iD IS ', this.state.salesOrderId)
       this.setState({ loading: true })
       RNPaystack.chargeCard({
         cardNumber: number.replace(/\s/gi, ''),
@@ -173,17 +169,20 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
           this.setState({ loading: false })
         })
     } else {
-      alert('Card details entered is invalid')
+      console.log('Card details entered is invalid')
     }
   }
 
   parseMutationVariables = () => {
-    let _contact = null
+    let contact = {}
 
-    if (Object.keys(this.state.contact).length > 0) {
-      _contact = { ...this.state.contact }
-      delete _contact.id
-      delete _contact.__typename
+    if (this.state.isCustomerInContacts == 'No') {
+      contact = {
+        ...this.state.user,
+        contactName: this.state.contactName,
+        email: this.state.email,
+        type: 'customer'
+      }
     }
 
     let items = this.state.items.map(item => {
@@ -205,19 +204,27 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       saleId = _saleId || null,
       _params = {
         ...this.state,
-        contact: _contact || this.state.contact,
+        contact,
         items,
         paymentMethod: this.state.paymentMethod.toUpperCase(),
         ...this.state.user
       }
 
+    if (_params.isCustomerInContacts != 'No') {
+      _params['contactId'] = _params.existingContact.id
+      delete _params.contact
+    }
+
     delete _params.cardDetails
     delete _params.fieldErrors
+    delete _params.existingContact
     delete _params.isCustomerInContacts
     delete _params.user
     delete _params.salesOrderId
     delete _params.hasSalesOrderBeenCreated
     delete _params.loading
+    delete _params.email
+    delete _params.contactName
 
     return saleId
       ? {
@@ -259,9 +266,11 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
               handleBackPress={() => this.props.navigation.goBack()}
               fieldErrors={this.state.fieldErrors}
               onCompleteSteps={() =>
-               !hasSalesOrderBeenCreated ? upsertSales({
-                  variables: this.parseMutationVariables()
-                }) : this.chargeCard()
+                !hasSalesOrderBeenCreated
+                  ? upsertSales({
+                      variables: this.parseMutationVariables()
+                    })
+                  : this.chargeCard()
               }
               steps={[
                 {
@@ -287,16 +296,25 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                       },
                       name: 'isCustomerInContacts'
                     },
+                    isCustomerInContacts == 'No' && {
+                      label: 'Customer name?',
+                      type: {
+                        type: 'input'
+                      },
+                      placeholder: "Enter customer's name",
+                      name: 'contactName',
+                      underneathText:
+                        'This customer will be added to your contacts. You can edit this contact through details.'
+                    },
                     isCustomerInContacts == 'No'
                       ? {
-                          label: 'Customer name?',
+                          label: 'Customer Email?',
                           type: {
-                            type: 'input'
+                            type: 'input',
+                            keyboardType: 'email-address'
                           },
-                          placeholder: "Enter customer's name",
-                          name: 'contact',
-                          underneathText:
-                            'This customer will be added to your contacts. You can edit this contact through details.'
+                          placeholder: "Enter customer's email",
+                          name: 'email'
                         }
                       : isCustomerInContacts == 'Yes'
                       ? {
@@ -306,10 +324,15 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                             searchQuery: CompanyCustomersGQL,
                             searchQueryResponseKey: 'companyCustomers'
                           },
-                          name: 'contact',
+                          name: 'existingContact',
                           placeholder: 'Touch to select customer'
                         }
-                      : null,
+                      : null
+                  ]
+                },
+                {
+                  stepTitle: 'Payment Method',
+                  formFields: [
                     {
                       label: 'How is this customer paying?',
                       type: {
@@ -317,12 +340,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                         options: ['Card', 'Cash']
                       },
                       name: 'paymentMethod'
-                    }
-                  ]
-                },
-                {
-                  stepTitle: 'Payment Method',
-                  formFields: [
+                    },
                     {
                       label: 'How much(N) was actually paid?',
                       type: {
