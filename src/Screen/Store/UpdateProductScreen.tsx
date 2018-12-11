@@ -76,10 +76,6 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
     }
   }
 
-  static navigationOptions = {
-    header: null
-  }
-
   componentDidMount() {
     this.updateDetails()
   }
@@ -292,5 +288,9 @@ const _UpdateProductScreen = props => (
     {({ user }) => <UpdateProductScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
+
+_UpdateProductScreen.navigationOptions = {
+  header: null
+}
 
 export default _UpdateProductScreen

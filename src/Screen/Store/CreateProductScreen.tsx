@@ -94,10 +94,6 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     }
   }
 
-  static navigationOptions = {
-    header: null
-  }
-
   componentDidMount() {
     this.updateDetails()
   }
@@ -516,5 +512,9 @@ const _CreateProductScreen = props => (
     {({ user }) => <CreateProductScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
+
+_CreateProductScreen.navigationOptions = {
+  header: null
+}
 
 export default _CreateProductScreen

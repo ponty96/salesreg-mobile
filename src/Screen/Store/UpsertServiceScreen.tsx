@@ -57,10 +57,6 @@ class UpsertServiceScreen extends Component<IProps, IState> {
     this.setState(state)
   }
 
-  static navigationOptions = {
-    header: null
-  }
-
   componentDidMount() {
     const service = this.props.navigation.getParam('service', null)
     const { user } = this.props
@@ -186,4 +182,7 @@ const _UpsertServiceScreen = props => (
   </UserContext.Consumer>
 )
 
+_UpsertServiceScreen.navigationOptions = {
+  header: null
+}
 export default _UpsertServiceScreen
