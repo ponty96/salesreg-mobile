@@ -100,6 +100,7 @@ interface IProps {
 interface IState {
   currentStep: number
   showHeaderBorder?: boolean
+  stepValidity: any
   multipleMediaUploadInstanceKey: number
   singleMediaUploadInstanceKey?: number
 }
@@ -112,6 +113,7 @@ export default class FormStepperContainer extends React.PureComponent<
     super(props)
     this.state = {
       currentStep: 1,
+      stepValidity: {},
       showHeaderBorder: false,
       multipleMediaUploadInstanceKey: Date.now()
     }
@@ -141,7 +143,9 @@ export default class FormStepperContainer extends React.PureComponent<
           <ButtonAtom
             btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
               'Next'}`}
-            onPress={this.onCtaButtonPress}
+            onPress={
+              this.getValidity() ? this.onCtaButtonPress : () => alert('error')
+            }
             type="secondary"
             icon={this.getButtonIcon()}
           />
@@ -185,6 +189,47 @@ export default class FormStepperContainer extends React.PureComponent<
     }
   }
 
+  getValidity = () => {
+    let { currentStep, stepValidity } = this.state,
+      isStepValid = true
+    if (stepValidity[currentStep]) {
+      Object.keys(stepValidity[currentStep]).forEach(key => {
+        if (!stepValidity[currentStep][key]) {
+          isStepValid = false
+        }
+      })
+    }
+    return isStepValid
+  }
+
+  updateStepValidity = () => {
+    const currentStepForm = this.getSteps(this.props.steps)[
+      this.state.currentStep - 1
+    ]
+
+    let stepValidity = {},
+      { formData } = this.props,
+      { currentStep } = this.state
+
+    currentStepForm.formFields.forEach(field => {
+      if (
+        field &&
+        field.validators &&
+        field.validators.indexOf('required') != -1
+      ) {
+        formData[field.name].length == 0
+          ? (stepValidity[field.name] = false)
+          : (stepValidity[field.name] = true)
+      }
+    })
+    this.setState({
+      stepValidity: {
+        ...this.state.stepValidity,
+        [currentStep]: stepValidity
+      }
+    })
+  }
+
   renderCurrentStepFormFields = () => {
     const currentStepForm = this.getSteps(this.props.steps)[
       this.state.currentStep - 1
@@ -192,11 +237,30 @@ export default class FormStepperContainer extends React.PureComponent<
     return currentStepForm.formFields.map(this.parseFormFields)
   }
 
+  filterFormFields = fields => fields.filter(field => field)
+
   componentDidMount() {
     this.setState({
       singleMediaUploadInstanceKey: Date.now()
     })
+    this.updateStepValidity()
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let { currentStep } = this.state
+
+    if (
+      currentStep != prevState.currentStep ||
+      this.filterFormFields(
+        this.getSteps(this.props.steps)[currentStep - 1].formFields
+      ).length !=
+        this.filterFormFields(
+          this.getSteps(prevProps.steps)[currentStep - 1].formFields
+        ).length
+    ) {
+      this.updateStepValidity()
+    }
   }
 
   componentWillUnmount() {
@@ -260,6 +324,7 @@ export default class FormStepperContainer extends React.PureComponent<
         case 'sales-order-items':
           return (
             <AddSalesOrderItemsList
+              error={fieldErrors && fieldErrors[name]}
               key={`${type}-${index}`}
               salesItems={formData[name]}
               onUpdateItems={(items: any) =>
@@ -294,6 +359,7 @@ export default class FormStepperContainer extends React.PureComponent<
           return (
             <MediaUploadAtom
               key={`${type}-${index}`}
+              error={fieldErrors && fieldErrors[name]}
               reduxMediaUploadClass={this.state.multipleMediaUploadInstanceKey}
               medias={formData[name]}
               handleMediasUpload={arrayOfValues =>
@@ -330,6 +396,7 @@ export default class FormStepperContainer extends React.PureComponent<
           return (
             <AddExpenseItemsList
               key={`${type}-${index}`}
+              error={fieldErrors && fieldErrors[name]}
               expenseItems={formData[name]}
               onUpdateItems={(items: any) =>
                 this.props.updateValueChange(name, items)
@@ -342,6 +409,7 @@ export default class FormStepperContainer extends React.PureComponent<
               handleCardSelection={(cardDetails: any) =>
                 this.props.updateValueChange(name, cardDetails)
               }
+              error={fieldErrors && fieldErrors[name]}
               key={`${type}-${index}`}
               amount={formData[name]}
             />

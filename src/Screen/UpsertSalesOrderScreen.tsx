@@ -312,6 +312,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                     isCustomerInContacts == 'No'
                       ? {
                           label: 'Customer Email?',
+                          validators: ['required'],
                           type: {
                             type: 'input',
                             keyboardType: 'email-address'
