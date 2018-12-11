@@ -170,3 +170,15 @@ export const SearchOptionsByNameGQL = gql`
     }
   }
 `
+
+export const SearchProductsAndServicesByName = gql`
+  query searchProductsAndServicesByName($queryText: String!) {
+    searchProductsAndServicesByName(query: $queryText) {
+      id
+      name
+      price
+      sku
+      type
+    }
+  }
+`

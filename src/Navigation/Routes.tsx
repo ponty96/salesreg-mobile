@@ -59,6 +59,7 @@ import PurchaseDetailsScreen from '../Screen/PurchaseDetailsScreen'
 import SalesOrderScreen from '../Screen/SalesOrderScreen'
 import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
 import SalesOrderDailySalesScreen from '../Screen/SalesOrderDailySalesScreen'
+import UpsertSalesOrderScreen from '../Screen/UpsertSalesOrderScreen'
 
 // Expenses Screens
 import ExpensesScreen from '../Screen/ExpensesScreen'
@@ -173,6 +174,7 @@ const businessStack = StackNavigator(
     SalesDetails: SalesOrderDetailsScreen,
     Sales: SalesOrderScreen,
     SalesOrderDailySales: SalesOrderDailySalesScreen,
+    UpsertSales: UpsertSalesOrderScreen,
 
     // Contact
     Customers: {

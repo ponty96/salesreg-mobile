@@ -55,3 +55,12 @@ export const CompanyContactGQL = gql`
     }
   }
 `
+
+export const CompanyCustomersGQL = gql`
+  query companyCustomers($queryText: String!, $companyId: Uuid!) {
+    companyCustomers(name: $queryText, companyId: $companyId) {
+      id
+      contactName
+    }
+  }
+`

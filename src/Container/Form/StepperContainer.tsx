@@ -41,6 +41,8 @@ import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
 import MediaUploadAtom from '../../Atom/Form/MediaUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
+import CardPaymentAtom from '../../Atom/Form/CardPaymentAtom'
+import AddSalesOrderItemsList from '../../Atom/Form/AddSalesOrderItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
 import TagInput from '../../Atom/Form/TagInput'
 import AsyncPickerAtom from '../../Atom/Form/AsyncPickerAtom'
@@ -55,10 +57,12 @@ interface FieldType {
     | 'image-upload'
     | 'date'
     | 'expense-items'
+    | 'sales-order-items'
     | 'multi-picker'
     | 'tag-input'
     | 'search-picker'
     | 'search-multi-picker'
+    | 'card-payment'
     | 'multi-media-upload'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
@@ -205,160 +209,185 @@ export default class FormStepperContainer extends React.PureComponent<
   }
 
   parseFormFields = (field: any, index: number) => {
-    const {
-      type: {
-        type,
-        keyboardType,
-        secureTextEntry = false,
-        options = [],
-        multiline = false,
-        searchQuery,
-        searchQueryResponseKey
-      },
-      label,
-      placeholder,
-      name,
-      extraData,
-      underneathText,
-      value = ''
-    } = field
-    const { formData, fieldErrors } = this.props
-    switch (type) {
-      case 'input':
-      default:
-        return (
-          <InputAtom
-            key={`${type}-${index}`}
-            label={label}
-            placeholder={placeholder}
-            defaultValue={formData[name] || value}
-            keyboardType={keyboardType || 'default'}
-            secureTextEntry={secureTextEntry}
-            getValue={val => this.props.updateValueChange(name, val)}
-            underneathText={underneathText}
-            multiline={multiline}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'radio':
-        return (
-          <RadioButtonAtom
-            key={`${type}-${index}`}
-            label={label}
-            defaultValue={formData[name]}
-            getValue={val => this.props.updateValueChange(name, val)}
-            underneathText={underneathText}
-            options={options}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'phone-input':
-        return (
-          <PhoneInputAtom
-            key={`${type}-${index}`}
-            label={label}
-            defaultValue={formData[name]}
-            getValue={val => this.props.updateValueChange(name, val)}
-            placeholder={placeholder}
-            countryCode={extraData['countryCode']}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'image-upload':
-        return (
-          <ImageUploadAtom
-            reduxMediaUploadClass={this.state.singleMediaUploadInstanceKey}
-            key={`${type}-${index}`}
-            underneathText={underneathText}
-            image={formData[name]}
-            handleImageUpload={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'multi-media-upload':
-        return (
-          <MediaUploadAtom
-            key={`${type}-${index}`}
-            reduxMediaUploadClass={this.state.multipleMediaUploadInstanceKey}
-            medias={formData[name]}
-            handleMediasUpload={arrayOfValues =>
-              this.props.updateValueChange(name, arrayOfValues)
-            }
-          />
-        )
-      case 'picker':
-        return (
-          <PickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            list={options}
-            selected={formData[name]}
-            placeholder={placeholder}
-            handleSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'date':
-        return (
-          <DatePickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            date={formData[name]}
-            placeholder={placeholder}
-            handleDateSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'expense-items':
-        return (
-          <AddExpenseItemsList
-            key={`${type}-${index}`}
-            expenseItems={formData[name]}
-            onUpdateItems={(items: any) =>
-              this.props.updateValueChange(name, items)
-            }
-          />
-        )
-      case 'multi-picker':
-        return (
-          <MultiSelectPickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            list={options}
-            selectedItems={formData[name]}
-            placeholder={placeholder}
-            handleSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'tag-input':
-        return (
-          <TagInput
-            key={`${type}-${index}`}
-            label={label}
-            tags={formData[name]}
-            handleValuesChange={tags =>
-              this.props.updateValueChange(name, tags)
-            }
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'search-picker':
-      case 'search-multi-picker':
-        return (
-          <AsyncPickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            selected={formData[name]}
-            placeholder={placeholder}
-            handleSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-            graphqlQuery={searchQuery}
-            graphqlQueryResultKey={searchQueryResponseKey}
-            type={type == 'search-multi-picker' ? 'multi' : 'single'}
-          />
-        )
+    if (field) {
+      const {
+        type: {
+          type,
+          keyboardType,
+          secureTextEntry = false,
+          options = [],
+          multiline = false,
+          searchQuery,
+          searchQueryResponseKey
+        },
+        label,
+        placeholder,
+        name,
+        extraData,
+        underneathText,
+        value = ''
+      } = field
+      const { formData, fieldErrors } = this.props
+      switch (type) {
+        case 'input':
+        default:
+          return (
+            <InputAtom
+              key={`${type}-${index}`}
+              label={label}
+              placeholder={placeholder}
+              defaultValue={formData[name] || value}
+              keyboardType={keyboardType || 'default'}
+              secureTextEntry={secureTextEntry}
+              getValue={val => this.props.updateValueChange(name, val)}
+              underneathText={underneathText}
+              multiline={multiline}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'radio':
+          return (
+            <RadioButtonAtom
+              key={`${type}-${index}`}
+              label={label}
+              defaultValue={formData[name]}
+              getValue={val => this.props.updateValueChange(name, val)}
+              underneathText={underneathText}
+              options={options}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'sales-order-items':
+          return (
+            <AddSalesOrderItemsList
+              key={`${type}-${index}`}
+              salesItems={formData[name]}
+              onUpdateItems={(items: any) =>
+                this.props.updateValueChange(name, items)
+              }
+            />
+          )
+        case 'phone-input':
+          return (
+            <PhoneInputAtom
+              key={`${type}-${index}`}
+              label={label}
+              defaultValue={formData[name]}
+              getValue={val => this.props.updateValueChange(name, val)}
+              placeholder={placeholder}
+              countryCode={extraData['countryCode']}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'image-upload':
+          return (
+            <ImageUploadAtom
+              reduxMediaUploadClass={this.state.singleMediaUploadInstanceKey}
+              key={`${type}-${index}`}
+              underneathText={underneathText}
+              image={formData[name]}
+              handleImageUpload={val => this.props.updateValueChange(name, val)}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'multi-media-upload':
+          return (
+            <MediaUploadAtom
+              key={`${type}-${index}`}
+              reduxMediaUploadClass={this.state.multipleMediaUploadInstanceKey}
+              medias={formData[name]}
+              handleMediasUpload={arrayOfValues =>
+                this.props.updateValueChange(name, arrayOfValues)
+              }
+            />
+          )
+        case 'picker':
+          return (
+            <PickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              list={options}
+              selected={formData[name]}
+              placeholder={placeholder}
+              handleSelection={val => this.props.updateValueChange(name, val)}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'date':
+          return (
+            <DatePickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              date={formData[name]}
+              placeholder={placeholder}
+              handleDateSelection={val =>
+                this.props.updateValueChange(name, val)
+              }
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'expense-items':
+          return (
+            <AddExpenseItemsList
+              key={`${type}-${index}`}
+              expenseItems={formData[name]}
+              onUpdateItems={(items: any) =>
+                this.props.updateValueChange(name, items)
+              }
+            />
+          )
+        case 'card-payment':
+          return (
+            <CardPaymentAtom
+              handleCardSelection={(cardDetails: any) =>
+                this.props.updateValueChange(name, cardDetails)
+              }
+              key={`${type}-${index}`}
+              amount={formData[name]}
+            />
+          )
+        case 'multi-picker':
+          return (
+            <MultiSelectPickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              list={options}
+              selectedItems={formData[name]}
+              placeholder={placeholder}
+              handleSelection={val => this.props.updateValueChange(name, val)}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'tag-input':
+          return (
+            <TagInput
+              key={`${type}-${index}`}
+              label={label}
+              tags={formData[name]}
+              handleValuesChange={tags =>
+                this.props.updateValueChange(name, tags)
+              }
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'search-picker':
+        case 'search-multi-picker':
+          return (
+            <AsyncPickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              selected={formData[name]}
+              placeholder={placeholder}
+              handleSelection={val => this.props.updateValueChange(name, val)}
+              error={fieldErrors && fieldErrors[name]}
+              graphqlQuery={searchQuery}
+              graphqlQueryResultKey={searchQueryResponseKey}
+              type={type == 'search-multi-picker' ? 'multi' : 'single'}
+            />
+          )
+      }
     }
+    return null
   }
 }
 

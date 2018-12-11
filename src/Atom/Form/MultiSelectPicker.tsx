@@ -170,15 +170,11 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
           showTickIcon={true}
           onPressTickIcon={this.toggleOpenState}
         />
-        {this.props.list.length > 10 ? (
-          <SearchAtom
-            placeholder="Search"
-            queryText={this.state.queryText}
-            onSearch={this.onSearch}
-          />
-        ) : (
-          <View />
-        )}
+        <SearchAtom
+          placeholder="Search"
+          queryText={this.state.queryText}
+          onSearch={this.onSearch}
+        />
         <ScrollView>
           {this.state.list.map((item: any, index: number) => (
             <PickerItem

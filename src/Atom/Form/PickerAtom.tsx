@@ -160,15 +160,11 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
           totalSteps={1}
           showStepper={false}
         />
-        {this.props.list.length > 10 ? (
-          <SearchAtom
-            placeholder="Search"
-            queryText={this.state.queryText}
-            onSearch={this.onSearch}
-          />
-        ) : (
-          <View />
-        )}
+        <SearchAtom
+          placeholder="Search"
+          queryText={this.state.queryText}
+          onSearch={this.onSearch}
+        />
         <FlatList
           data={this.state.list}
           renderItem={({ item }: any) => (
