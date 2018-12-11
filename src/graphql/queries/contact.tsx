@@ -61,6 +61,7 @@ export const CompanyCustomersGQL = gql`
     companyCustomers(name: $queryText, companyId: $companyId) {
       id
       contactName
+      email
     }
   }
 `

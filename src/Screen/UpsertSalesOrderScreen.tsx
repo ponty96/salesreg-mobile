@@ -28,7 +28,7 @@ interface IState {
   paymentMethod: string
   date: string
   loading: boolean
-  existingContact: { id?: string }
+  existingContact: { id?: string; contactName?: string; email?: string }
   contactName: string
   email: string
   isCustomerInContacts: any
@@ -66,7 +66,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     amountPaid: '0.00',
     date: new Date().toString(),
     discount: '0',
-    existingContact: { id: '' },
+    existingContact: { id: '', contactName: '', email: '' },
     tax: '',
     contactName: '',
     email: '',
@@ -122,6 +122,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
 
     if (success) {
       let { id } = data
+
       this.setState(
         {
           salesOrderId: id,
@@ -147,7 +148,6 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       let {
         values: { number, expiry, cvc }
       } = _cardDetails
-      let { email } = JSON.parse(await Auth.getCurrentUser())
 
       this.setState({ loading: true })
       RNPaystack.chargeCard({
@@ -155,7 +155,10 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
         expiryMonth: expiry.split('/')[0],
         expiryYear: expiry.split('/')[1],
         cvc,
-        email,
+        email:
+          this.state.isCustomerInContacts != 'No'
+            ? this.state.existingContact.email
+            : this.state.email,
         amountInKobo: Number(amountPaid) * 100,
         reference: `${this.state.salesOrderId}_${Date.now()}`
       })
