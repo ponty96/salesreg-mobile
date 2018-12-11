@@ -19,6 +19,7 @@ interface ISalesInput {
 
 interface IProps {
   salesItems: ISalesInput[]
+  error: string
   onUpdateItems: (items: ISalesInput[]) => void
 }
 
@@ -142,9 +143,16 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
     this.props.onUpdateItems(items)
   }
 
+  renderErrorText = () => {
+    return this.props.error ? (
+      <Text style={styles.errorText}>{this.props.error}</Text>
+    ) : null
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
+        {this.renderErrorText()}
         {this.props.salesItems.map((item, index) => (
           <AddSalesOrderItem
             key={index}
@@ -180,6 +188,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 8,
     paddingTop: 8
+  },
+  errorText: {
+    marginLeft: 0,
+    fontSize: 14,
+    marginBottom: 2,
+    marginTop: 0,
+    fontFamily: 'AvenirNext-Regular',
+    color: 'red',
+    paddingVertical: 12
   },
   closeIcon: {
     color: color.textColor,
