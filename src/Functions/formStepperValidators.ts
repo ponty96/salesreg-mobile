@@ -34,60 +34,35 @@ export const validateField = (
 
   validators.forEach(validator => {
     let _value = typeof value == 'string' ? value.trim() : value
+
     if (validator == 'required') {
-      if (typeof _value == 'string') {
-        _value.length == 0
-          ? ((isValid = false), (error = 'This field is required'))
-          : (isValid = true)
-      } else if (typeof _value == 'object') {
-        _value && _value.id && _value.id.length > 0
-          ? (isValid = true)
-          : ((isValid = false), (error = 'This field is required'))
-      }
+      let required = isRequired(_value)
+      isValid = required.fieldValid
+      error = required.errorMessage
     }
+
     if (validator == 'email') {
-      if (!/^[^\s@]+@[^\s@.]+\.[^\s@]+$/.test(_value)) {
-        isValid = false
-        error = 'Wrong email address supplied, enter the correct email'
-      } else {
-        isValid = true
-      }
+      let emailValidation = validateEmail(_value)
+      isValid = emailValidation.fieldValid
+      error = emailValidation.errorMessage
     }
+
     if (validator == 'phone') {
-      if (!/\+?[0-9]{11,}$/.test(_value)) {
-        isValid = false
-        error = 'The phone input field is wrong'
-      } else {
-        isValid = true
-      }
+      let phoneValidation = validatePhone(_value)
+      isValid = phoneValidation.fieldValid
+      error = phoneValidation.errorMessage
     }
+
     if (validator == 'credit-card') {
-      if (_value) {
-        let { valid } = _value
-        if (!valid) {
-          isValid = false
-          error = 'The credit card info is not correct'
-        } else {
-          isValid = true
-        }
-      }
+      let creditCardValidation = validateCreditCard(_value)
+      isValid = creditCardValidation.fieldValid
+      error = creditCardValidation.errorMessage
     }
+
     if (validator == 'sales-order') {
-      if (_value.length > 0) {
-        isValid = true
-        _value.forEach(val => {
-          if (val.name.trim().length == 0 || Number(val.quantity) == 0) {
-            isValid = false
-            error =
-              'The name or quantity in one of the sales order cannot be empty'
-          } else {
-            isValid = true
-          }
-        })
-      } else {
-        isValid = false
-        error = 'The sales order cannot be empty'
-      }
+      let salesOrderValiation = validateSalesOrder(_value)
+      isValid = salesOrderValiation.fieldValid
+      error = salesOrderValiation.errorMessage
     }
   })
 
@@ -98,4 +73,77 @@ export const validateField = (
     validity: { ...preValidityState, [name]: isValid },
     error: !error ? params : { ...params, [name]: error }
   }
+}
+
+function isRequired(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+
+  if (typeof _value == 'string') {
+    _value.length == 0
+      ? ((fieldValid = false), (errorMessage = 'This field is required'))
+      : (fieldValid = true)
+  } else if (typeof _value == 'object') {
+    _value && _value.id && _value.id.length > 0
+      ? (fieldValid = true)
+      : ((fieldValid = false), (errorMessage = 'This field is required'))
+  }
+
+  return { fieldValid, errorMessage }
+}
+
+function validateEmail(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+  if (!/^[^\s@]+@[^\s@.]+\.[^\s@]+$/.test(_value)) {
+    fieldValid = false
+    errorMessage = 'Wrong email address supplied, enter the correct email'
+  }
+  return { fieldValid, errorMessage }
+}
+
+function validatePhone(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+  if (!/\+?[0-9]{11,}$/.test(_value)) {
+    fieldValid = false
+    errorMessage = 'The phone input field is wrong'
+  }
+  return { fieldValid, errorMessage }
+}
+
+function validateCreditCard(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+  if (_value) {
+    let { valid } = _value
+    if (!valid) {
+      fieldValid = false
+      errorMessage = 'The credit card info is not correct'
+    }
+  }
+  return { fieldValid, errorMessage }
+}
+
+function validateSalesOrder(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+
+  if (_value.length > 0) {
+    fieldValid = true
+    _value.forEach(val => {
+      if (val.name.trim().length == 0 || Number(val.quantity) == 0) {
+        fieldValid = false
+        errorMessage =
+          'The name or quantity in one of the sales order cannot be empty'
+      } else {
+        fieldValid = true
+      }
+    })
+  } else {
+    fieldValid = false
+    errorMessage = 'The sales order cannot be empty'
+  }
+
+  return { fieldValid, errorMessage }
 }
