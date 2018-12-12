@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { UpsertServiceGQL } from '../../graphql/mutations/store'
+import { ListCompanyServicesGQL } from '../../graphql/queries/store'
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
@@ -72,7 +73,21 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
   render() {
     const { navigation } = this.props
     return (
-      <Mutation mutation={UpsertServiceGQL} onCompleted={this.onCompleted}>
+      <Mutation
+        mutation={UpsertServiceGQL}
+        onCompleted={this.onCompleted}
+        refetchQueries={[
+          {
+            query: ListCompanyServicesGQL,
+            variables: {
+              companyId: this.state.companyId,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+      >
         {(upsertService, { loading }) => [
           <AppSpinner visible={loading} key="upsertservice-#1" />,
           <FormStepperContainer
@@ -92,6 +107,7 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
                     label: 'Name',
                     placeholder: 'e.g Ladies frontal makeup',
                     name: 'name',
+                    validators: ['required'],
                     type: {
                       type: 'input'
                     }
@@ -100,6 +116,7 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
                     label: 'Price',
                     placeholder: 'e.g 5000',
                     name: 'price',
+                    validators: ['required'],
                     type: {
                       type: 'input',
                       keyboardType: 'numeric'

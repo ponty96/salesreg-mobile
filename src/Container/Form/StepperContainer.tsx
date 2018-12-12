@@ -76,7 +76,13 @@ interface FieldType {
   searchQueryResponseKey?: string
 }
 
-type validatorTypes = 'required' | 'email' | 'phone' | 'sales-order'
+type validatorTypes =
+  | 'required'
+  | 'email'
+  | 'phone'
+  | 'sales-order'
+  | 'password'
+  | 'expense-item'
 
 interface FormField {
   label: string

@@ -34,18 +34,8 @@ export const PaymentMethod = [
   },
   {
     icon: 'url here',
-    mainLabel: 'CHEQUE',
-    value: 'CHEQUE'
-  },
-  {
-    icon: 'url here',
-    mainLabel: 'DIRECT_TRANSFER',
-    value: 'DIRECT_TRANSFER'
-  },
-  {
-    icon: 'url here',
-    mainLabel: 'POS',
-    value: 'POS'
+    mainLabel: 'CARD',
+    value: 'CARD'
   }
 ]
 

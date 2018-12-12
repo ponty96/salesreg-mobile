@@ -64,6 +64,18 @@ export const validateField = (
       isValid = salesOrderValiation.fieldValid
       error = salesOrderValiation.errorMessage
     }
+
+    if (validator == 'expense-item') {
+      let expenseValiation = validateExpenseItem(_value)
+      isValid = expenseValiation.fieldValid
+      error = expenseValiation.errorMessage
+    }
+
+    if (validator == 'password') {
+      let passwordValiation = validatePassword(_value)
+      isValid = passwordValiation.fieldValid
+      error = passwordValiation.errorMessage
+    }
   })
 
   let params = { ...prevErrorState }
@@ -87,6 +99,20 @@ function isRequired(_value) {
     _value && _value.id && _value.id.length > 0
       ? (fieldValid = true)
       : ((fieldValid = false), (errorMessage = 'This field is required'))
+  } else if (typeof _value == 'number' && _value == 0) {
+    fieldValid = false
+    errorMessage = 'Field cannot be 0'
+  }
+
+  return { fieldValid, errorMessage }
+}
+
+function validatePassword(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+  if (_value.length < 8) {
+    fieldValid = false
+    errorMessage = 'The password cannot be less than 8 characters'
   }
 
   return { fieldValid, errorMessage }
@@ -105,7 +131,7 @@ function validateEmail(_value) {
 function validatePhone(_value) {
   let fieldValid = true,
     errorMessage = ''
-  if (!/\+?[0-9]{11,}$/.test(_value)) {
+  if (!/\+?[0-9]{10,}$/.test(_value)) {
     fieldValid = false
     errorMessage = 'The phone input field is wrong'
   }
@@ -122,6 +148,29 @@ function validateCreditCard(_value) {
       errorMessage = 'The credit card info is not correct'
     }
   }
+  return { fieldValid, errorMessage }
+}
+
+function validateExpenseItem(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+
+  if (_value.length > 0) {
+    fieldValid = true
+    _value.forEach(val => {
+      if (val.itemName.trim().length == 0) {
+        fieldValid = false
+        errorMessage =
+          'The name or quantity in one of the sales order cannot be empty'
+      } else {
+        fieldValid = true
+      }
+    })
+  } else {
+    fieldValid = false
+    errorMessage = 'The sales order cannot be empty'
+  }
+
   return { fieldValid, errorMessage }
 }
 

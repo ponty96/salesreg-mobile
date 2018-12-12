@@ -109,6 +109,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                       type: 'input',
                       keyboardType: 'default'
                     },
+                    validators: ['required'],
                     name: 'title'
                   },
                   {
@@ -148,6 +149,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                       type: 'picker',
                       options: Countries
                     },
+                    validators: ['required'],
                     name: 'businessCountry'
                   },
                   {
@@ -155,6 +157,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                     type: {
                       type: 'phone-input'
                     },
+                    validators: ['required', 'phone'],
                     name: 'businessPhone',
                     extraData: {
                       countryCode: this.state['businessCountry']
@@ -170,6 +173,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                       options: ['male', 'female'],
                       keyboardType: 'email-address'
                     },
+                    validators: ['required', 'email'],
                     name: 'contactEmail'
                   }
                 ]

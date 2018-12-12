@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { UpsertExpenseGQL } from '../graphql/mutations/expense'
+import { ListCompanyExpensesGQL } from '../graphql/queries/expense'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
@@ -72,7 +73,21 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
 
   render() {
     return (
-      <Mutation mutation={UpsertExpenseGQL} onCompleted={this.onCompleted}>
+      <Mutation
+        mutation={UpsertExpenseGQL}
+        refetchQueries={[
+          {
+            query: ListCompanyExpensesGQL,
+            variables: {
+              companyId: this.state.companyId,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+        onCompleted={this.onCompleted}
+      >
         {(upsertExpense, { loading }) => [
           <AppSpinner visible={loading} />,
           <FormStepperContainer
@@ -84,6 +99,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
                   {
                     label: 'What should we call this expense?',
                     placeholder: 'e.g Shop renovation',
+                    validators: ['required'],
                     name: 'title',
                     type: {
                       type: 'input',
@@ -93,6 +109,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
                   {
                     label: 'When did you make this expense?',
                     placeholder: 'e.g 06/23/2018',
+                    validators: ['required'],
                     name: 'date',
                     type: {
                       type: 'date'
@@ -102,6 +119,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
                     label: 'What did you spend in total?',
                     placeholder: `\u20A6 0.0`,
                     name: 'totalAmount',
+                    validators: ['required'],
                     type: {
                       type: 'input',
                       keyboardType: 'numeric'
@@ -110,6 +128,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
                   {
                     label: 'How did you pay for this expense?',
                     placeholder: 'Touch to choose',
+                    validators: ['required'],
                     type: {
                       type: 'picker',
                       options: PaymentMethod
@@ -126,6 +145,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
                     type: {
                       type: 'expense-items'
                     },
+                    validators: ['expense-item'],
                     name: 'expenseItems'
                   }
                 ],
