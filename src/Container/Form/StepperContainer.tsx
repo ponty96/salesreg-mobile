@@ -109,6 +109,7 @@ interface IState {
   showHeaderBorder?: boolean
   stepValidity: any
   fieldErrors: object
+  isReadyToSubmitForm: boolean
   multipleMediaUploadInstanceKey: number
   singleMediaUploadInstanceKey?: number
 }
@@ -122,6 +123,7 @@ export default class FormStepperContainer extends React.PureComponent<
     this.state = {
       currentStep: 1,
       fieldErrors: {},
+      isReadyToSubmitForm: false,
       stepValidity: {},
       showHeaderBorder: false,
       multipleMediaUploadInstanceKey: Date.now()
@@ -152,21 +154,20 @@ export default class FormStepperContainer extends React.PureComponent<
           <ButtonAtom
             btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
               'Next'}`}
-            onPress={() =>
-              this.updateStepValidity(() =>
-                this.getValidity()
-                  ? this.onCtaButtonPress()
-                  : this.props.updateValueChange(
-                      'fieldErrors',
-                      this.state.fieldErrors
-                    )
-              )
-            }
+            onPress={this.handleButtonPress}
             type="secondary"
             icon={this.getButtonIcon()}
           />
         </View>
       </Container>
+    )
+  }
+
+  handleButtonPress = () => {
+    this.updateStepValidity(() =>
+      this.getValidity()
+        ? this.onCtaButtonPress()
+        : this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
     )
   }
 
@@ -192,6 +193,7 @@ export default class FormStepperContainer extends React.PureComponent<
   onCtaButtonPress = async () => {
     const { currentStep } = this.state
     if (currentStep == this.getSteps(this.props.steps).length) {
+      this.setState({ isReadyToSubmitForm: true })
       this.props.onCompleteSteps()
     } else {
       this.transition(currentStep, currentStep + 1)
@@ -300,6 +302,38 @@ export default class FormStepperContainer extends React.PureComponent<
         ).length
     ) {
       this.updateStepValidity()
+    }
+
+    this.handleServerFieldErrors(prevProps)
+  }
+
+  handleServerFieldErrors = prevProps => {
+    let { fieldErrors, steps } = this.props,
+      { isReadyToSubmitForm } = this.state
+
+    if (
+      isReadyToSubmitForm &&
+      fieldErrors != prevProps.fieldErrors &&
+      Object.keys(fieldErrors).length > 0
+    ) {
+      let fields = Object.keys(fieldErrors),
+        currentStep = undefined
+
+      for (let len = 0; len < steps.length; len++) {
+        steps[len].formFields.forEach(formField => {
+          if (fields.indexOf(formField.name) != -1) {
+            currentStep = len
+          }
+        })
+        if (currentStep) break
+      }
+
+      this.setState(
+        {
+          isReadyToSubmitForm: false
+        },
+        () => this.transition(currentStep, currentStep + 1)
+      )
     }
   }
 

@@ -9,7 +9,8 @@ export const validateStep = (currentStepForm, formData, prevErrorState) => {
         field.name,
         formData[field.name],
         stepValidity,
-        errors
+        errors,
+        true
       )
 
       stepValidity = validity
@@ -25,7 +26,8 @@ export const validateField = (
   name,
   value,
   preValidityState,
-  prevErrorState
+  prevErrorState,
+  persistPreviousErrors?: boolean
 ) => {
   let isValid = true,
     error = ''
@@ -90,7 +92,7 @@ export const validateField = (
   })
 
   let params = { ...prevErrorState }
-  if (error.length == 0) delete params[name]
+  if (error.length == 0 && !persistPreviousErrors) delete params[name]
 
   return {
     validity: { ...preValidityState, [name]: isValid },
