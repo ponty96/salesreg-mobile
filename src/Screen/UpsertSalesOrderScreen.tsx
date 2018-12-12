@@ -281,6 +281,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                   formFields: [
                     {
                       label: '',
+                      validators: ['sales-order'],
                       type: {
                         type: 'sales-order-items'
                       },
@@ -293,6 +294,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                   formFields: [
                     {
                       label: 'Is this customer in your contacts?',
+                      validators: ['required'],
                       type: {
                         type: 'radio',
                         options: ['No', 'Yes']
@@ -301,6 +303,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                     },
                     isCustomerInContacts == 'No' && {
                       label: 'Customer name?',
+                      validators: ['required'],
                       type: {
                         type: 'input'
                       },
@@ -312,7 +315,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                     isCustomerInContacts == 'No'
                       ? {
                           label: 'Customer Email?',
-                          validators: ['required'],
+                          validators: ['required', 'email'],
                           type: {
                             type: 'input',
                             keyboardType: 'email-address'
@@ -323,6 +326,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                       : isCustomerInContacts == 'Yes'
                       ? {
                           label: 'Customer',
+                          validators: ['required'],
                           type: {
                             type: 'search-picker',
                             searchQuery: CompanyCustomersGQL,
@@ -339,6 +343,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                   formFields: [
                     {
                       label: 'How is this customer paying?',
+                      validators: ['required'],
                       type: {
                         type: 'radio',
                         options: ['Card', 'Cash']
@@ -347,6 +352,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                     },
                     {
                       label: 'How much(N) was actually paid?',
+                      validators: ['required'],
                       type: {
                         type: 'input',
                         keyboardType: 'numeric'
