@@ -75,11 +75,14 @@ interface FieldType {
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
 }
+
+type validatorTypes = 'required' | 'email' | 'phone' | "sales-order"
+
 interface FormField {
   label: string
   placeholder?: string
   type: FieldType
-  validators?: any[]
+  validators?: validatorTypes[]
   name: any
   extraData?: any
   underneathText?: string
@@ -383,7 +386,10 @@ export default class FormStepperContainer extends React.PureComponent<
               key={`${type}-${index}`}
               label={label}
               defaultValue={formData[name]}
-              getValue={val => this.props.updateValueChange(name, val)}
+              getValue={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
               placeholder={placeholder}
               countryCode={extraData['countryCode']}
               error={fieldErrors && fieldErrors[name]}
@@ -396,7 +402,10 @@ export default class FormStepperContainer extends React.PureComponent<
               key={`${type}-${index}`}
               underneathText={underneathText}
               image={formData[name]}
-              handleImageUpload={val => this.props.updateValueChange(name, val)}
+              handleImageUpload={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
               error={fieldErrors && fieldErrors[name]}
             />
           )
@@ -434,9 +443,10 @@ export default class FormStepperContainer extends React.PureComponent<
               label={label}
               date={formData[name]}
               placeholder={placeholder}
-              handleDateSelection={val =>
+              handleDateSelection={val => {
+                this.checkValidityOnValueChange(val, name, validators)
                 this.props.updateValueChange(name, val)
-              }
+              }}
               error={fieldErrors && fieldErrors[name]}
             />
           )
@@ -495,7 +505,7 @@ export default class FormStepperContainer extends React.PureComponent<
               label={label}
               selected={formData[name]}
               placeholder={placeholder}
-              handleSelection={val =>  {
+              handleSelection={val => {
                 this.checkValidityOnValueChange(val, name, validators)
                 this.props.updateValueChange(name, val)
               }}
