@@ -102,7 +102,7 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
   getProductName = ({ productGroup }, optionValues) => {
     if (this.state.optionValues.length > 0) {
       return `${productGroup.title} (${optionValues.map(
-        optionValue => optionValue.name
+        optionValue => optionValue.name || '?'
       )})`
     } else return productGroup.title
   }

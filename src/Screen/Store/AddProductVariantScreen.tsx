@@ -315,7 +315,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
   getProductName = () => {
     if (this.state.optionValues.length > 0) {
       return `${this.state.productGroupTitle} (${this.state.optionValues.map(
-        optionValue => optionValue.name
+        optionValue => optionValue.name || '?'
       )})`
     } else return this.state.productGroupTitle
   }
