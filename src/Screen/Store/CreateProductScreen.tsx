@@ -65,6 +65,22 @@ const STATE_TYPES = {
   NewProductNonVariant: 'New product without variant'
 }
 
+const DEFAULT_PRODUCT_PARAMS = {
+  sku: 0,
+  minimumSku: 0,
+  price: '',
+  featuredImage:
+    'https://cdn2.jomashop.com/media/catalog/product/cache/1/watermark/490x490/0a1186946c551c1cc1f1a1120b7bd9a0/h/u/hublot-big-bang-mens-watch-301.px.130.rx.174.jpg',
+  images: [],
+  name: '',
+  optionValues: [],
+  description: '',
+  categories: [],
+  isTopRatedByMerchant: null,
+  isFeatured: null,
+  tags: []
+}
+
 class CreateProductScreen extends PureComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props)
@@ -73,19 +89,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       productGroupTitle: '',
       isNewProductVariant: '',
       productGroup: null,
-      sku: 0,
-      minimumSku: 0,
-      price: '',
-      featuredImage:
-        'https://cdn2.jomashop.com/media/catalog/product/cache/1/watermark/490x490/0a1186946c551c1cc1f1a1120b7bd9a0/h/u/hublot-big-bang-mens-watch-301.px.130.rx.174.jpg',
-      images: [],
-      name: '',
-      optionValues: [],
-      description: '',
-      categories: [],
-      isTopRatedByMerchant: null,
-      isFeatured: null,
-      tags: [],
+      ...DEFAULT_PRODUCT_PARAMS,
       userId: '',
       companyId: '',
       productId: null,
@@ -125,9 +129,9 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     const productParams = this.getProductParams(productGroup)
     this.setState({
       productGroup: productGroup,
-      optionValues,
       productGroupTitle: productGroup.title,
-      ...productParams
+      ...productParams,
+      optionValues
     })
   }
 
@@ -143,7 +147,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
         isFeatured: product.isFeatured == false ? 'no' : 'yes'
       }
     } else {
-      return {}
+      return DEFAULT_PRODUCT_PARAMS
     }
   }
 
