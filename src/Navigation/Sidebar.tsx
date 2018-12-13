@@ -225,11 +225,11 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Expenses',
                   routeName: 'Expenses'
-                },
-                {
-                  title: 'Invoices',
-                  routeName: 'Invoice'
                 }
+                // {
+                //   title: 'Invoices',
+                //   routeName: 'Invoice'
+                // }
                 // {
                 //   title: 'Receipts',
                 //   routeName: 'Receipts'

@@ -85,6 +85,7 @@ import BankDetailsScreen from '../Screen/BankDetailsScreen'
 import UpsertBankScreen from '../Screen/UpsertBankScreen'
 
 import InvoicesScreen from '../Screen/InvoicesScreen'
+import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
 
 import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import IncomeScreen from '../Screen/IncomeScreen'
@@ -118,6 +119,9 @@ const businessStack = StackNavigator(
     },
     Invoice: {
       screen: InvoicesScreen
+    },
+    UpsertInvoice: {
+      screen: UpsertInvoiceScreen
     },
 
     // Setting ROUTES

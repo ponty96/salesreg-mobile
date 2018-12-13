@@ -21,6 +21,7 @@ interface IProps {
   onPressStatus?: () => void
   onTrash?: () => void
   hideTotal?: boolean
+  fabRouteParams?: any
   showFab?: boolean
   fabRouteName?: string
   navigation?: any
@@ -152,6 +153,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
           <FabAtom
             routeName={fabRouteName}
             navigation={navigation}
+            goto={this.props.fabRouteParams || {}}
             name={fabIconName}
             type={fabIconType}
           />
