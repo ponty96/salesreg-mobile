@@ -5,9 +5,13 @@ import Header from '../../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
 import Icon from '../../Atom/Icon'
 import { Chip } from '../../Atom/Chip'
+import { DeleteServiceGQL } from '../../graphql/mutations/store'
+import { ListCompanyServicesGQL } from '../../graphql/queries/store'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation?: any
+  user?: any
 }
 
 class ServiceDetailsScreen extends PureComponent<IProps> {
@@ -68,6 +72,21 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
       </View>,
       <GenericProfileDetails
         sections={this.sections()}
+        enableDelete={true}
+        graphqlDeleteMutation={DeleteServiceGQL}
+        graphqlDeleteMutationResultKey="deleteService"
+        graphqlDeleteVariables={{ serviceId: service.id }}
+        graphqlRefetchQueries={[
+          {
+            query: ListCompanyServicesGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        onSuccessfulDeletion={() => this.props.navigation.navigate('Services')}
         image={
           service.image ||
           'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
@@ -78,7 +97,15 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
   }
 }
 
-export default ServiceDetailsScreen
+const _ServiceDetailsScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <ServiceDetailsScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+ServiceDetailsScreen.navigationOptions = _ServiceDetailsScreen.navigationOptions
+
+export default _ServiceDetailsScreen
 
 const styles = StyleSheet.create({
   topHeader: {

@@ -5,6 +5,9 @@ import { color } from '../../Style/Color'
 import Icon from '../../Atom/Icon'
 import { GreenCanvas } from '../../Atom/GreenCanvas'
 import FabAtom from '../../Atom/FabAtom'
+import { DocumentNode } from 'graphql'
+import { Mutation } from 'react-apollo'
+import AppSpinner from '../Spinner'
 
 interface Item {
   itemTitle: string
@@ -27,6 +30,11 @@ interface IProps {
   navigation?: any
   fabIconName?: string
   fabIconType?: string
+  graphqlDeleteMutation?: DocumentNode
+  graphqlRefetchQuery?: any[]
+  graphqlDeleteVariable?: {}
+  graphqlDeleteMutationResultKey?: string
+  enableDelete?: boolean
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
@@ -54,7 +62,8 @@ const renderStatusIndicator = (bottomRightText: string): any => {
 export default class GenericDetailsComponent extends Component<IProps> {
   static defaultProps = {
     hideTotal: false,
-    showFab: false
+    showFab: false,
+    enableDelete: true
   }
 
   getItems = () => {
@@ -114,7 +123,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
     )
   }
 
-  render() {
+  renderDetailsUI = (deleteFn?: (variables: any) => void) => {
     const {
       title,
       totalAmount,
@@ -133,22 +142,26 @@ export default class GenericDetailsComponent extends Component<IProps> {
           renderItem={this.renderItem}
           keyExtractor={(item: any) => item.id}
         />
-        <TouchableOpacity
-          style={{
-            flex: 1,
-            backgroundColor: 'transparent',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%'
-          }}
-          onPress={this.props.onTrash}
-        >
-          <Icon
-            type="EvilIcons"
-            name="trash"
-            style={{ color: color.textBorderBottom, fontSize: 60 }}
-          />
-        </TouchableOpacity>
+        {this.props.enableDelete && (
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              backgroundColor: 'transparent',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100%'
+            }}
+            onPress={() =>
+              deleteFn({ variables: this.props.graphqlDeleteVariable })
+            }
+          >
+            <Icon
+              type="EvilIcons"
+              name="trash"
+              style={{ color: color.textBorderBottom, fontSize: 60 }}
+            />
+          </TouchableOpacity>
+        )}
         {this.props.showFab && (
           <FabAtom
             routeName={fabRouteName}
@@ -160,6 +173,43 @@ export default class GenericDetailsComponent extends Component<IProps> {
         )}
       </View>
     )
+  }
+
+  onDeleteCompleted = async res => {
+    const {
+      [this.props.graphqlDeleteMutationResultKey]: { success, fieldErrors }
+    } = res
+    if (!success) {
+      console.log('some field errorrs mehn ', fieldErrors)
+    } else {
+      console.log('This was successful ', success)
+    }
+  }
+
+  render() {
+    let {
+      enableDelete,
+      graphqlDeleteMutation,
+      graphqlRefetchQuery
+    } = this.props
+    if (enableDelete) {
+      return (
+        <Mutation
+          mutation={graphqlDeleteMutation}
+          onCompleted={this.onDeleteCompleted}
+          refetchQueries={graphqlRefetchQuery || []}
+          awaitRefetchQueries={true}
+        >
+          {(deleteDetails, { loading }) => (
+            <React.Fragment>
+              <AppSpinner visible={loading} />
+              {this.renderDetailsUI(deleteDetails)}
+            </React.Fragment>
+          )}
+        </Mutation>
+      )
+    }
+    return this.renderDetailsUI()
   }
 }
 
