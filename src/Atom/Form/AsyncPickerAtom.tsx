@@ -82,7 +82,6 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
   }
 
   getList = (responseList): PickerData[] => {
-    console.log('resp ', responseList)
     return responseList.map(item => ({
       mainLabel: item.title || item.name || item.contactName,
       value: item.id

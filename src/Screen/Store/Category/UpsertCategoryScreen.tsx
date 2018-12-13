@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../../../Container/Form/StepperContainer'
 import { UpsertCategoryGQL } from '../../../graphql/mutations/store'
+import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
@@ -51,7 +52,21 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
 
   render() {
     return (
-      <Mutation mutation={UpsertCategoryGQL} onCompleted={this.onCompleted}>
+      <Mutation
+        mutation={UpsertCategoryGQL}
+        onCompleted={this.onCompleted}
+        refetchQueries={[
+          {
+            query: ListCompanyCategoriesGQL,
+            variables: {
+              companyId: this.state.companyId,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+      >
         {(upsertCategory, { loading }) => [
           <AppSpinner visible={loading} />,
           <FormStepperContainer
@@ -64,6 +79,7 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
                     label: 'What should we call this category?',
                     placeholder: 'e.g Sport wears',
                     name: 'title',
+                    validators: ['required'],
                     type: {
                       type: 'input',
                       keyboardType: 'default'

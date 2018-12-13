@@ -74,6 +74,7 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
                       type: 'input',
                       keyboardType: 'default'
                     },
+                    validators: ['required'],
                     name: 'firstName'
                   },
                   {
@@ -83,6 +84,7 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
                       type: 'input',
                       keyboardType: 'default'
                     },
+                    validators: ['required'],
                     name: 'lastName'
                   },
                   {
@@ -92,11 +94,13 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
                       type: 'radio',
                       options: ['male', 'female']
                     },
+                    validators: ['required'],
                     name: 'gender'
                   },
                   {
                     label: `Date of Birth?`,
                     placeholder: 'e.g 06/23/2018',
+                    validators: ['required'],
                     name: 'dateOfBirth',
                     type: {
                       type: 'date'

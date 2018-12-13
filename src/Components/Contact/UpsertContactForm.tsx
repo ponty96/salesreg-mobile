@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Spinner'
 import { UpsertContactGQL } from '../../graphql/mutations/contact'
+import { CompanyContactGQL } from '../../graphql/queries/contact'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries } from '../../utilities/data/picker-lists'
@@ -89,7 +90,22 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     const parsedGender = genderToPossesivePronoun(this.state.gender)
     console.log('contact state', this.state)
     return (
-      <Mutation mutation={UpsertContactGQL} onCompleted={this.onCompleted}>
+      <Mutation
+        mutation={UpsertContactGQL}
+        refetchQueries={[
+          {
+            query: CompanyContactGQL,
+            variables: {
+              companyId: this.state.companyId,
+              type: this.props.contactType,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+        onCompleted={this.onCompleted}
+      >
         {(upsertContact, { loading }) => [
           <AppSpinner visible={loading} />,
           <FormStepperContainer
@@ -104,6 +120,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                   {
                     label: 'Name?',
                     placeholder: 'John Doe',
+                    validators: ['required'],
                     name: 'contactName',
                     type: {
                       type: 'input'
@@ -113,6 +130,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     label: 'Email?',
                     placeholder: 'someone@address.com',
                     name: 'email',
+                    validators: ['required', 'email'],
                     type: {
                       type: 'input',
                       keyboardType: 'email-address'
@@ -121,6 +139,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                   {
                     label: 'Gender?',
                     placeholder: 'E.g Doe',
+                    validators: ['required'],
                     type: {
                       type: 'radio',
                       options: ['male', 'female']
@@ -148,6 +167,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                   {
                     label: 'Street',
                     placeholder: '123 Street',
+                    validators: ['required'],
                     name: 'street1',
                     type: {
                       type: 'input'
@@ -155,6 +175,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                   },
                   {
                     label: 'City',
+                    validators: ['required'],
                     placeholder: 'City name',
                     name: 'city',
                     type: {
@@ -164,6 +185,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                   {
                     label: 'State',
                     placeholder: 'State name',
+                    validators: ['required'],
                     name: 'state',
                     type: {
                       type: 'input'
@@ -171,6 +193,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                   },
                   {
                     label: 'Country',
+                    validators: ['required'],
                     placeholder: 'Touch to choose',
                     type: {
                       type: 'picker',
@@ -189,6 +212,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     type: {
                       type: 'phone-input'
                     },
+                    validators: ['required', 'phone'],
                     name: 'number',
                     extraData: {
                       countryCode: this.state.country
@@ -267,6 +291,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     delete params['__typename']
     delete params['id']
     delete params['data']
+
     return {
       contact: {
         ...params,

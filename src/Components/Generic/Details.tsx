@@ -4,6 +4,7 @@ import ListItemAtom from '../../Atom/ListItem/ListItemAtom'
 import { color } from '../../Style/Color'
 import Icon from '../../Atom/Icon'
 import { GreenCanvas } from '../../Atom/GreenCanvas'
+import FabAtom from '../../Atom/FabAtom'
 
 interface Item {
   itemTitle: string
@@ -20,6 +21,11 @@ interface IProps {
   onPressStatus?: () => void
   onTrash?: () => void
   hideTotal?: boolean
+  showFab?: boolean
+  fabRouteName?: string
+  navigation?: any
+  fabIconName?: string
+  fabIconType?: string
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
@@ -46,8 +52,10 @@ const renderStatusIndicator = (bottomRightText: string): any => {
 
 export default class GenericDetailsComponent extends Component<IProps> {
   static defaultProps = {
-    hideTotal: false
+    hideTotal: false,
+    showFab: false
   }
+
   getItems = () => {
     const { items, totalAmount } = this.props
     if (this.props.hideTotal) {
@@ -106,7 +114,15 @@ export default class GenericDetailsComponent extends Component<IProps> {
   }
 
   render() {
-    const { title, totalAmount } = this.props
+    const {
+      title,
+      totalAmount,
+      fabRouteName,
+      navigation,
+      fabIconName,
+      fabIconType
+    } = this.props
+
     return (
       <View style={styles.container}>
         <GreenCanvas title={title} subText={totalAmount} />
@@ -132,6 +148,14 @@ export default class GenericDetailsComponent extends Component<IProps> {
             style={{ color: color.textBorderBottom, fontSize: 60 }}
           />
         </TouchableOpacity>
+        {this.props.showFab && (
+          <FabAtom
+            routeName={fabRouteName}
+            navigation={navigation}
+            name={fabIconName}
+            type={fabIconType}
+          />
+        )}
       </View>
     )
   }

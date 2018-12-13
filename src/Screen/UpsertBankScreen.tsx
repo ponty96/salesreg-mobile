@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { UpsertBankGQL } from '../graphql/mutations/business'
+import { ListCompanyBanksGQL } from '../graphql/queries/business'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
@@ -49,7 +50,21 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
 
   render() {
     return (
-      <Mutation mutation={UpsertBankGQL} onCompleted={this.onCompleted}>
+      <Mutation
+        mutation={UpsertBankGQL}
+        refetchQueries={[
+          {
+            query: ListCompanyBanksGQL,
+            variables: {
+              companyId: this.state.companyId,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+        onCompleted={this.onCompleted}
+      >
         {(upsertBank, { loading }) => [
           <AppSpinner visible={loading} key="33443&&&" />,
           <FormStepperContainer
@@ -67,6 +82,7 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
                       type: 'picker',
                       options: NG_Banks
                     },
+                    validators: ['required'],
                     name: 'bankName'
                   },
                   {
@@ -75,6 +91,7 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
                     type: {
                       type: 'input'
                     },
+                    validators: ['required'],
                     name: 'accountNumber'
                   },
                   {

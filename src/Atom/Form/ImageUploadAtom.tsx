@@ -161,13 +161,17 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
 
   render() {
     return (
-      <View>
-        {this.state.prevImageUploaded && this.state.isInProcessing == undefined
-          ? this.renderDefaultImage()
-          : this.props.storeMedias.length > 0 || this.state.imageToUpload
-          ? this.renderUploadImage()
-          : this.renderSelectImagePlaceholder()}
-      </View>
+      <React.Fragment>
+        <View>
+          {this.state.prevImageUploaded &&
+          this.state.isInProcessing == undefined
+            ? this.renderDefaultImage()
+            : this.props.storeMedias.length > 0 || this.state.imageToUpload
+            ? this.renderUploadImage()
+            : this.renderSelectImagePlaceholder()}
+        </View>
+        {this.renderUnderNeathText()}
+      </React.Fragment>
     )
   }
 

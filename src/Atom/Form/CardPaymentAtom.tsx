@@ -5,6 +5,7 @@ import { color } from '../../Style/Color'
 
 interface IProps {
   amount: number | string
+  error?: string
   handleCardSelection: (card) => void
 }
 
@@ -20,9 +21,16 @@ export default class CardPaymentAtom extends React.PureComponent<
     cardInfo: {}
   }
 
+  renderErrorText = () => {
+    return this.props.error ? (
+      <Text style={styles.errorText}>{this.props.error}</Text>
+    ) : null
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
+        {this.renderErrorText()}
         <Text style={styles.shareText}>Share the payment link</Text>
         <Text style={styles.orText}>OR</Text>
         <CreditCardInput
@@ -54,6 +62,15 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-Medium',
     textDecorationLine: 'underline',
     textAlign: 'center'
+  },
+  errorText: {
+    marginLeft: 0,
+    fontSize: 14,
+    marginBottom: 2,
+    marginTop: 0,
+    fontFamily: 'AvenirNext-Regular',
+    color: 'red',
+    paddingVertical: 12
   },
   orText: {
     color: color.textColor,

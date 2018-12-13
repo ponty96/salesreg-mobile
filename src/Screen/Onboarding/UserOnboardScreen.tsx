@@ -100,6 +100,7 @@ export default class UserOnboardScreen extends React.PureComponent<
                       type: 'input',
                       keyboardType: 'default'
                     },
+                    validators: ['required'],
                     name: 'firstName'
                   },
                   {
@@ -109,6 +110,7 @@ export default class UserOnboardScreen extends React.PureComponent<
                       type: 'input',
                       keyboardType: 'default'
                     },
+                    validators: ['required'],
                     name: 'lastName'
                   },
                   {
@@ -118,6 +120,7 @@ export default class UserOnboardScreen extends React.PureComponent<
                       type: 'radio',
                       options: ['male', 'female']
                     },
+                    validators: ['required'],
                     name: 'gender'
                   }
                 ]
@@ -133,6 +136,7 @@ export default class UserOnboardScreen extends React.PureComponent<
                       options: ['male', 'female'],
                       keyboardType: 'email-address'
                     },
+                    validators: ['required', 'email'],
                     name: 'email'
                   },
                   {
@@ -143,6 +147,7 @@ export default class UserOnboardScreen extends React.PureComponent<
                       keyboardType: 'default',
                       secureTextEntry: true
                     },
+                    validators: ['required', 'password'],
                     name: 'password',
                     underneathText: 'Not less than 8 character long'
                   },
@@ -154,6 +159,7 @@ export default class UserOnboardScreen extends React.PureComponent<
                       keyboardType: 'default',
                       secureTextEntry: true
                     },
+                    validators: ['required', 'password'],
                     name: 'passwordConfirmation'
                   }
                 ],

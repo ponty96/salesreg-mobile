@@ -47,6 +47,10 @@ import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
 import TagInput from '../../Atom/Form/TagInput'
 import AsyncPickerAtom from '../../Atom/Form/AsyncPickerAtom'
 import { DocumentNode } from 'graphql'
+import {
+  validateStep,
+  validateField
+} from '../../Functions/formStepperValidators'
 
 interface FieldType {
   type:
@@ -71,11 +75,20 @@ interface FieldType {
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
 }
+
+type validatorTypes =
+  | 'required'
+  | 'email'
+  | 'phone'
+  | 'sales-order'
+  | 'password'
+  | 'expense-item'
+
 interface FormField {
   label: string
   placeholder?: string
   type: FieldType
-  validators?: any[]
+  validators?: validatorTypes[]
   name: any
   extraData?: any
   underneathText?: string
@@ -100,6 +113,9 @@ interface IProps {
 interface IState {
   currentStep: number
   showHeaderBorder?: boolean
+  stepValidity: any
+  fieldErrors: object
+  isReadyToSubmitForm: boolean
   multipleMediaUploadInstanceKey: number
   singleMediaUploadInstanceKey?: number
 }
@@ -112,6 +128,9 @@ export default class FormStepperContainer extends React.PureComponent<
     super(props)
     this.state = {
       currentStep: 1,
+      fieldErrors: {},
+      isReadyToSubmitForm: false,
+      stepValidity: {},
       showHeaderBorder: false,
       multipleMediaUploadInstanceKey: Date.now()
     }
@@ -141,7 +160,7 @@ export default class FormStepperContainer extends React.PureComponent<
           <ButtonAtom
             btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
               'Next'}`}
-            onPress={this.onCtaButtonPress}
+            onPress={this.handleButtonPress}
             type="secondary"
             icon={this.getButtonIcon()}
           />
@@ -150,14 +169,24 @@ export default class FormStepperContainer extends React.PureComponent<
     )
   }
 
+  handleButtonPress = () => {
+    this.updateStepValidity(() =>
+      this.getValidity()
+        ? this.onCtaButtonPress()
+        : this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
+    )
+  }
+
   getSteps = steps => {
     return steps.filter(step => step)
   }
+
   getButtonIcon = () => {
     if (this.state.currentStep == this.getSteps(this.props.steps).length) {
       return 'md-checkmark'
     } else return null
   }
+
   handleBackButtonPress = () => {
     const { currentStep } = this.state
     if (currentStep > 1) {
@@ -170,6 +199,7 @@ export default class FormStepperContainer extends React.PureComponent<
   onCtaButtonPress = async () => {
     const { currentStep } = this.state
     if (currentStep == this.getSteps(this.props.steps).length) {
+      this.setState({ isReadyToSubmitForm: true })
       this.props.onCompleteSteps()
     } else {
       this.transition(currentStep, currentStep + 1)
@@ -185,6 +215,69 @@ export default class FormStepperContainer extends React.PureComponent<
     }
   }
 
+  getValidity = () => {
+    let { currentStep, stepValidity } = this.state,
+      isStepValid = true
+    if (stepValidity[currentStep]) {
+      Object.keys(stepValidity[currentStep]).forEach(key => {
+        if (!stepValidity[currentStep][key]) {
+          isStepValid = false
+        }
+      })
+    }
+    return isStepValid
+  }
+
+  checkValidityOnValueChange = (value, name, validators) => {
+    if (validators && validators.length > 0) {
+      let { currentStep } = this.state
+
+      let { validity, error } = validateField(
+        validators,
+        name,
+        value,
+        this.state.stepValidity[currentStep],
+        this.props.fieldErrors
+      )
+
+      this.setState(
+        {
+          stepValidity: {
+            ...this.state.stepValidity,
+            [currentStep]: validity
+          }
+        },
+        () => {
+          this.props.updateValueChange('fieldErrors', error)
+        }
+      )
+    }
+  }
+
+  updateStepValidity = (callback?: () => void) => {
+    const currentStepForm = this.getSteps(this.props.steps)[
+      this.state.currentStep - 1
+    ]
+
+    let { currentStep } = this.state,
+      { stepValidity, errors } = validateStep(
+        currentStepForm,
+        this.props.formData,
+        this.props.fieldErrors
+      )
+
+    this.setState(
+      {
+        stepValidity: {
+          ...this.state.stepValidity,
+          [currentStep]: stepValidity
+        },
+        fieldErrors: errors
+      },
+      () => callback && callback()
+    )
+  }
+
   renderCurrentStepFormFields = () => {
     const currentStepForm = this.getSteps(this.props.steps)[
       this.state.currentStep - 1
@@ -192,11 +285,62 @@ export default class FormStepperContainer extends React.PureComponent<
     return currentStepForm.formFields.map(this.parseFormFields)
   }
 
+  filterFormFields = fields => fields.filter(field => field)
+
   componentDidMount() {
     this.setState({
       singleMediaUploadInstanceKey: Date.now()
     })
+    this.updateStepValidity()
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let { currentStep } = this.state
+
+    if (
+      currentStep != prevState.currentStep ||
+      this.filterFormFields(
+        this.getSteps(this.props.steps)[currentStep - 1].formFields
+      ).length !=
+        this.filterFormFields(
+          this.getSteps(prevProps.steps)[currentStep - 1].formFields
+        ).length
+    ) {
+      this.updateStepValidity()
+    }
+
+    this.handleServerFieldErrors(prevProps)
+  }
+
+  handleServerFieldErrors = prevProps => {
+    let { fieldErrors, steps } = this.props,
+      { isReadyToSubmitForm } = this.state
+
+    if (
+      isReadyToSubmitForm &&
+      fieldErrors != prevProps.fieldErrors &&
+      Object.keys(fieldErrors).length > 0
+    ) {
+      let fields = Object.keys(fieldErrors),
+        currentStep = undefined
+
+      for (let len = 0; len < steps.length; len++) {
+        steps[len].formFields.forEach(formField => {
+          if (fields.indexOf(formField.name) != -1) {
+            currentStep = len
+          }
+        })
+        if (currentStep) break
+      }
+
+      this.setState(
+        {
+          isReadyToSubmitForm: false
+        },
+        () => this.transition(currentStep, currentStep + 1)
+      )
+    }
   }
 
   componentWillUnmount() {
@@ -220,6 +364,7 @@ export default class FormStepperContainer extends React.PureComponent<
           searchQuery,
           searchQueryResponseKey
         },
+        validators,
         label,
         placeholder,
         name,
@@ -239,7 +384,10 @@ export default class FormStepperContainer extends React.PureComponent<
               defaultValue={formData[name] || value}
               keyboardType={keyboardType || 'default'}
               secureTextEntry={secureTextEntry}
-              getValue={val => this.props.updateValueChange(name, val)}
+              getValue={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
               underneathText={underneathText}
               multiline={multiline}
               error={fieldErrors && fieldErrors[name]}
@@ -251,7 +399,10 @@ export default class FormStepperContainer extends React.PureComponent<
               key={`${type}-${index}`}
               label={label}
               defaultValue={formData[name]}
-              getValue={val => this.props.updateValueChange(name, val)}
+              getValue={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
               underneathText={underneathText}
               options={options}
               error={fieldErrors && fieldErrors[name]}
@@ -260,11 +411,13 @@ export default class FormStepperContainer extends React.PureComponent<
         case 'sales-order-items':
           return (
             <AddSalesOrderItemsList
+              error={fieldErrors && fieldErrors[name]}
               key={`${type}-${index}`}
               salesItems={formData[name]}
-              onUpdateItems={(items: any) =>
+              onUpdateItems={(items: any) => {
+                this.checkValidityOnValueChange(items, name, validators)
                 this.props.updateValueChange(name, items)
-              }
+              }}
             />
           )
         case 'phone-input':
@@ -273,7 +426,10 @@ export default class FormStepperContainer extends React.PureComponent<
               key={`${type}-${index}`}
               label={label}
               defaultValue={formData[name]}
-              getValue={val => this.props.updateValueChange(name, val)}
+              getValue={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
               placeholder={placeholder}
               countryCode={extraData['countryCode']}
               error={fieldErrors && fieldErrors[name]}
@@ -286,7 +442,10 @@ export default class FormStepperContainer extends React.PureComponent<
               key={`${type}-${index}`}
               underneathText={underneathText}
               image={formData[name]}
-              handleImageUpload={val => this.props.updateValueChange(name, val)}
+              handleImageUpload={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
               error={fieldErrors && fieldErrors[name]}
             />
           )
@@ -294,6 +453,7 @@ export default class FormStepperContainer extends React.PureComponent<
           return (
             <MediaUploadAtom
               key={`${type}-${index}`}
+              error={fieldErrors && fieldErrors[name]}
               reduxMediaUploadClass={this.state.multipleMediaUploadInstanceKey}
               medias={formData[name]}
               handleMediasUpload={arrayOfValues =>
@@ -309,7 +469,10 @@ export default class FormStepperContainer extends React.PureComponent<
               list={options}
               selected={formData[name]}
               placeholder={placeholder}
-              handleSelection={val => this.props.updateValueChange(name, val)}
+              handleSelection={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
               error={fieldErrors && fieldErrors[name]}
             />
           )
@@ -320,9 +483,10 @@ export default class FormStepperContainer extends React.PureComponent<
               label={label}
               date={formData[name]}
               placeholder={placeholder}
-              handleDateSelection={val =>
+              handleDateSelection={val => {
+                this.checkValidityOnValueChange(val, name, validators)
                 this.props.updateValueChange(name, val)
-              }
+              }}
               error={fieldErrors && fieldErrors[name]}
             />
           )
@@ -330,10 +494,12 @@ export default class FormStepperContainer extends React.PureComponent<
           return (
             <AddExpenseItemsList
               key={`${type}-${index}`}
+              error={fieldErrors && fieldErrors[name]}
               expenseItems={formData[name]}
-              onUpdateItems={(items: any) =>
+              onUpdateItems={(items: any) => {
+                this.checkValidityOnValueChange(items, name, validators)
                 this.props.updateValueChange(name, items)
-              }
+              }}
             />
           )
         case 'card-payment':
@@ -342,6 +508,7 @@ export default class FormStepperContainer extends React.PureComponent<
               handleCardSelection={(cardDetails: any) =>
                 this.props.updateValueChange(name, cardDetails)
               }
+              error={fieldErrors && fieldErrors[name]}
               key={`${type}-${index}`}
               amount={formData[name]}
             />
@@ -378,7 +545,10 @@ export default class FormStepperContainer extends React.PureComponent<
               label={label}
               selected={formData[name]}
               placeholder={placeholder}
-              handleSelection={val => this.props.updateValueChange(name, val)}
+              handleSelection={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
               error={fieldErrors && fieldErrors[name]}
               graphqlQuery={searchQuery}
               graphqlQueryResultKey={searchQueryResponseKey}

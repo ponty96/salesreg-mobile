@@ -3,6 +3,7 @@ import {
   StyleSheet,
   View,
   Linking,
+  Text,
   TouchableWithoutFeedback,
   TouchableOpacity
 } from 'react-native'
@@ -13,6 +14,7 @@ import CachedImageAtom from '../CachedImageAtom'
 
 interface IProps {
   medias?: string[]
+  error?: string
   reduxMediaUploadClass: string | number
   handleMediasUpload: (image: string[]) => void
 }
@@ -192,20 +194,29 @@ export default class MediaUploadAtom extends React.PureComponent<
     })
   }
 
+  renderErrorText = () => {
+    return this.props.error ? (
+      <Text style={styles.errorText}>{this.props.error}</Text>
+    ) : null
+  }
+
   render() {
     return (
-      <View style={styles.container}>
-        {this.renderPreviousAddedMedia()}
-        <MediaUploadHandlerAtom
-          onMediaSet={response => this.handleImageValueSet(response)}
-          media={this.state.media}
-          uploadType="multiple"
-          mediasToExclude={this.state.previousAddedMedia}
-          reduxMediaUploadClass={this.props.reduxMediaUploadClass}
-          style={styles.image}
-        />
-        {this.renderSelectImageContainer()}
-      </View>
+      <React.Fragment>
+        {this.renderErrorText()}
+        <View style={styles.container}>
+          {this.renderPreviousAddedMedia()}
+          <MediaUploadHandlerAtom
+            onMediaSet={response => this.handleImageValueSet(response)}
+            media={this.state.media}
+            uploadType="multiple"
+            mediasToExclude={this.state.previousAddedMedia}
+            reduxMediaUploadClass={this.props.reduxMediaUploadClass}
+            style={styles.image}
+          />
+          {this.renderSelectImageContainer()}
+        </View>
+      </React.Fragment>
     )
   }
 }
@@ -219,6 +230,16 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: '#eee'
+  },
+  errorText: {
+    marginLeft: 0,
+    color: 'red',
+    fontSize: 14,
+    marginBottom: 0,
+    marginTop: 0,
+    paddingLeft: 8,
+    fontFamily: 'AvenirNext-Regular',
+    paddingVertical: 0
   },
   mediaOverlay: {
     backgroundColor: 'rgba(0,0,0,.2)',
