@@ -82,4 +82,6 @@ const _BankDetailsScreen: any = props => (
   </UserContext.Consumer>
 )
 
+_BankDetailsScreen.navigationOptions = BankDetailsScreen.navigationOptions
+
 export default _BankDetailsScreen

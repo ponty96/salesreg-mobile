@@ -79,4 +79,7 @@ const _ExpensesDetailsScreen: any = props => (
   </UserContext.Consumer>
 )
 
+_ExpensesDetailsScreen.navigationOptions =
+  ExpensesDetailsScreen.navigationOptions
+
 export default _ExpensesDetailsScreen

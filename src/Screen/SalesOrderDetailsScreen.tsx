@@ -106,4 +106,7 @@ const _SalesOrderDetailsScreen: any = props => (
   </UserContext.Consumer>
 )
 
+_SalesOrderDetailsScreen.navigationOptions =
+  SalesOrderDetailsScreen.navigationOptions
+
 export default _SalesOrderDetailsScreen
