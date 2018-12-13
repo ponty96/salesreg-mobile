@@ -80,6 +80,11 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     const product = this.props.navigation.getParam('product', {})
     this.props.navigation.navigate('UpdateProductGroupOptions', { product })
   }
+  onPressAddProductVariant = () => {
+    const product = this.props.navigation.getParam('product', {})
+    this.props.navigation.navigate('AddProductVariant', { product })
+  }
+
   render() {
     const product = this.props.navigation.getParam('product', {})
     return [
@@ -96,6 +101,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
         </TouchableOpacity>
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
+          onPress={this.onPressAddProductVariant}
         >
           <Text style={styles.rightNavText}>Add variants</Text>
           <Icon
