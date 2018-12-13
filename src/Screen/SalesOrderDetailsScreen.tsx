@@ -69,6 +69,11 @@ export default class SalesOrderDetailsScreen extends Component<IProps> {
         totalAmount={parseFloat(sales.amount).toFixed(2)}
         items={this.parseItems()}
         shouldShowStatus={true}
+        showFab={true}
+        fabRouteName="Invoice"
+        navigation={this.props.navigation}
+        fabIconName="receipt"
+        fabIconType="MaterialIcons"
         onPressStatus={this.onStatusPress}
       />
     )
