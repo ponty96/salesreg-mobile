@@ -182,10 +182,6 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Customers',
                   routeName: 'Customers'
-                },
-                {
-                  title: 'Vendors',
-                  routeName: 'Vendors'
                 }
               ]}
             />
@@ -195,10 +191,6 @@ export default class SideBar extends PureComponent<IProps, IState> {
               navigate={this.handleNavigation}
               activeRoute={this.state.activeRoute}
               categories={[
-                {
-                  title: 'Purchase',
-                  routeName: 'Purchase'
-                },
                 {
                   title: 'Sales',
                   routeName: 'Sales'
@@ -221,15 +213,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Expenses',
                   routeName: 'Expenses'
-                },
-                {
-                  title: 'Invoices',
-                  routeName: 'Invoice'
                 }
-                // {
-                //   title: 'Receipts',
-                //   routeName: 'Receipts'
-                // }
               ]}
             />
             <SidebarItem

@@ -14,11 +14,6 @@ import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
 import CustomerScreen from '../Screen/Contact/CustomerScreen'
 import CustomerPaymentActivity from '../Screen/Contact/CustomerPaymentActivity'
 
-// Vendor Screens
-import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen'
-import VendorDetailScreen from '../Screen/Contact/VendorDetailScreen'
-import VendorScreen from '../Screen/Contact/VendorScreen'
-
 /***
  *
  * STORE SCREENS
@@ -57,10 +52,6 @@ import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 // Order
 import OrderStatusScreen from '../Screen/OrderStatusScreen'
 
-//Purchase Order screens
-import PurchaseScreen from '../Screen/PurchaseScreen'
-import PurchaseDetailsScreen from '../Screen/PurchaseDetailsScreen'
-
 //Sales Order screens
 import SalesOrderScreen from '../Screen/SalesOrderScreen'
 import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
@@ -91,7 +82,6 @@ import UpsertBankScreen from '../Screen/UpsertBankScreen'
 
 import InvoicesScreen from '../Screen/InvoicesScreen'
 
-import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import IncomeScreen from '../Screen/IncomeScreen'
 
 import { color } from '../Style/Color'
@@ -117,9 +107,6 @@ const businessStack = StackNavigator(
     UpsertBank: UpsertBankScreen,
     Income: {
       screen: IncomeScreen
-    },
-    Receipts: {
-      screen: ReceiptsScreen
     },
     Invoice: {
       screen: InvoicesScreen
@@ -177,10 +164,6 @@ const businessStack = StackNavigator(
     // Order
     OrderStatusChange: OrderStatusScreen,
 
-    // Purchase
-    Purchase: PurchaseScreen,
-    PurchaseDetails: PurchaseDetailsScreen,
-
     // Sales Order
     SalesDetails: SalesOrderDetailsScreen,
     Sales: SalesOrderScreen,
@@ -196,16 +179,7 @@ const businessStack = StackNavigator(
     CustomerDetails: {
       screen: CustomerDetailScreen
     },
-    CustomerPaymentActivity: CustomerPaymentActivity,
-    Vendors: {
-      screen: VendorScreen
-    },
-    UpsertVendor: {
-      screen: UpsertVendorScreen
-    },
-    VendorDetails: {
-      screen: VendorDetailScreen
-    }
+    CustomerPaymentActivity: CustomerPaymentActivity
   },
   {
     initialRouteName: 'Home',
