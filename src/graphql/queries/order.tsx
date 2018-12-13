@@ -56,6 +56,9 @@ export const ListCompanySalesGQL = gql`
           paymentMethod
           status
           amount
+          invoice {
+            dueDate
+          }
           items {
             id
             unitPrice

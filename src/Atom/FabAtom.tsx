@@ -11,7 +11,7 @@ interface IProp {
   navigation: any
   params?: any
   image?: any
-  goto?: { screen: string }
+  goto?: { screen: string } | any
 }
 
 const FabAtom = (props: IProp) => (

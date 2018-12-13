@@ -71,6 +71,7 @@ export default class SalesOrderDetailsScreen extends Component<IProps> {
         shouldShowStatus={true}
         showFab={true}
         fabRouteName="Invoice"
+        fabRouteParams={{ sales }}
         navigation={this.props.navigation}
         fabIconName="receipt"
         fabIconType="MaterialIcons"

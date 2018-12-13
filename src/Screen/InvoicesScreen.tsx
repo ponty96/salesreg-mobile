@@ -4,6 +4,8 @@ import { Content } from 'native-base'
 import Header from '../Components/Header/DetailsScreenHeader'
 import ListItemAtom from '../Atom/ListItem/ListItemAtom'
 import { color } from '../Style/Color'
+import moment from 'moment'
+import { numberWithCommas } from '../Functions/numberWithCommas'
 
 interface IProps {
   navigation: any
@@ -29,40 +31,58 @@ export default class InvoicesScreen extends React.Component<IProps> {
   }
 
   render() {
+    let {
+      navigation: {
+        state: {
+          params: {
+            sales: {
+              amount,
+              total = 100000,
+              invoice: { dueDate },
+              date
+            },
+            sales
+          }
+        }
+      }
+    } = this.props
+
+    console.log(sales)
+
     return (
       <View style={styles.container}>
         <Content>
           <ListItemAtom
             label="Issued date"
-            value="04/11/2018"
+            value={moment(date).format('DD/MM/YYYY')}
             labelStyle={styles.listLabel}
             rightTextStyle={[styles.greenText, { color: color.black }]}
             listItemStyle={styles.listWrapper}
           />
           <ListItemAtom
             label="Date due"
-            value="04/12/2018"
+            value={moment(dueDate).format('DD/MM/YYYY')}
             labelStyle={styles.listLabel}
             rightTextStyle={[styles.greenText, { color: color.black }]}
             listItemStyle={styles.listWrapper}
           />
           <ListItemAtom
             label="TOTAL"
-            value="N 27,350.00"
+            value={`N ${numberWithCommas(total)}`}
             labelStyle={styles.whiteLabel}
             rightTextStyle={[styles.whiteLabel]}
             listItemStyle={styles.totalAmountListItem}
           />
           <ListItemAtom
             label="AMOUNT PAID"
-            value="N 6,000"
+            value={`N ${numberWithCommas(amount || 3000)}`}
             labelStyle={styles.listLabel}
             rightTextStyle={styles.greenText}
             listItemStyle={styles.listWrapper}
           />
           <ListItemAtom
             label="Balance due"
-            value="N 21,000.00"
+            value={`N ${numberWithCommas(total - 3000)}`}
             labelStyle={styles.listLabel}
             rightTextStyle={[styles.greenText, { color: color.red }]}
             listItemStyle={styles.listWrapper}
