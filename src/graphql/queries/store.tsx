@@ -44,6 +44,17 @@ export const ListCompanyProductsGQL = gql`
               id
             }
           }
+
+          productGroup {
+            id
+            title
+            options {
+              optionId: id
+              optionName: name
+              title: name
+              id
+            }
+          }
         }
       }
     }

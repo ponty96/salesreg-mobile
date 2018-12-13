@@ -25,7 +25,6 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       )
     }
   }
-
   sections = (): any => {
     const product = this.props.navigation.getParam('product', {})
     return [
@@ -63,11 +62,12 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       value: optionValue.name
     }))
   }
-  showVariantOptionStep = ({ optionValues = [] }) => {
-    if (optionValues.length > 0) {
+
+  showVariantOptionStep = ({ productGroup: { options = [] } }) => {
+    if (options.length > 0) {
       return [
         {
-          section: `${optionValues.length} Variant options`,
+          section: `${options.length} Variant options`,
           value: 'Edit',
           type: 'button',
           onPress: this.onPressEditVariantOptions
@@ -76,12 +76,14 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     } else return []
   }
 
-  onPressEditVariantOptions = () => {}
+  onPressEditVariantOptions = () => {
+    const product = this.props.navigation.getParam('product', {})
+    this.props.navigation.navigate('UpdateProductGroupOptions', { product })
+  }
   render() {
-    // do change the list to the appropriate molecule
     const product = this.props.navigation.getParam('product', {})
     return [
-      <View style={styles.topHeader} key="dddd-334">
+      <View style={styles.topHeader} key="product-details-334">
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
         >
@@ -108,6 +110,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
         image={product.featuredImage} // change logic based on product having multiple images
         headerText={product.name}
         headerSubText={product.number}
+        key="product-details-335"
       />
     ]
   }

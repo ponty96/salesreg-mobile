@@ -133,3 +133,18 @@ export const UpsertOptionGQL = gql`
     }
   }
 `
+
+export const UpdateProductGroupOptionsGQL = gql`
+  mutation UpdateProductGroupOptions(
+    $productGroupId: Uuid!
+    $options: [Uuid]!
+  ) {
+    updateProductGroupOptions(id: $productGroupId, options: $options) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
