@@ -284,7 +284,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
       tags: this.state.tags,
       images: this.state.images,
       featuredImage: this.state.featuredImage,
-      name: this.getProductName(),
+      name: '',
       description: this.state.description,
       minimumSku: this.state.minimumSku,
       sku: this.state.sku,

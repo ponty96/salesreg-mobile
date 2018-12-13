@@ -83,6 +83,8 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
   updateDetails = async () => {
     const { user } = this.props
     const product = this.props.navigation.getParam('product', null)
+    const optionValues = this.parseOptionValuesForForm(product)
+
     this.setState({
       userId: user.id,
       companyId: user.company.id,
@@ -92,8 +94,17 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
         product.isTopRatedByMerchant == false ? 'no' : 'yes',
       isFeatured: product.isFeatured == false ? 'no' : 'yes',
       sku: product.number,
-      optionValues: this.parseOptionValuesForForm(product)
+      optionValues: optionValues,
+      name: this.getProductName(product, optionValues)
     })
+  }
+
+  getProductName = ({ productGroup }, optionValues) => {
+    if (this.state.optionValues.length > 0) {
+      return `${productGroup.title} (${optionValues.map(
+        optionValue => optionValue.name
+      )})`
+    } else return productGroup.title
   }
 
   updateState = (key: string, value: any) => {
@@ -166,19 +177,6 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
 
   parseFormSteps = (): FormStep[] => {
     return [
-      {
-        stepTitle: 'Name this product?',
-        formFields: [
-          {
-            label: 'Product name',
-            placeholder: 'e.g Leather Shoe',
-            name: 'name',
-            type: {
-              type: 'input'
-            }
-          }
-        ]
-      },
       this.getSecondStep(),
       this.getThirdStep(),
       this.getFourthStep(),
@@ -243,7 +241,7 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
       tags: this.state.tags,
       images: this.state.images,
       featuredImage: this.state.featuredImage,
-      name: this.state.name,
+      name: '',
       description: this.state.description,
       minimumSku: this.state.minimumSku,
       sku: this.state.sku,

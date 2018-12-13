@@ -324,10 +324,12 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderSelectOptionsFormStep(this.getProductName())
+      return renderSelectOptionsFormStep(this.state.productGroupTitle)
     } else {
       return {
-        stepTitle: `Does ${this.getProductName()} comes in different versions like colors or sizes?`,
+        stepTitle: `Does ${
+          this.state.productGroupTitle
+        } comes in different versions like colors or sizes?`,
         formFields: [
           {
             label: 'Yes or No',
@@ -358,7 +360,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       this.state.currentFormState == STATE_TYPES.NewProductVariant ||
       this.state.currentFormState == STATE_TYPES.NewProduct
     ) {
-      return renderSelectOptionsFormStep(this.getProductName())
+      return renderSelectOptionsFormStep(this.state.productGroupTitle)
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
@@ -453,7 +455,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       tags: this.state.tags,
       images: this.state.images,
       featuredImage: this.state.featuredImage,
-      name: this.getProductName(),
+      name: '',
       description: this.state.description,
       minimumSku: this.state.minimumSku,
       sku: this.state.sku,
