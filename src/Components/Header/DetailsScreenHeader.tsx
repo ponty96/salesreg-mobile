@@ -4,7 +4,6 @@ import BaseHeader, { IProps } from './BaseHeader'
 
 const Header = (props: IProps) => (
   <BaseHeader
-    {...props}
     leftIconTitle="md-arrow-back"
     leftIconType="Ionicons"
     title={props.title}
@@ -13,6 +12,7 @@ const Header = (props: IProps) => (
     }}
     rightIconTitle="pencil"
     rightIconType="MaterialCommunityIcons"
+    {...props}
   />
 )
 

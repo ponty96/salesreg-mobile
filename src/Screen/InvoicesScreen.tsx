@@ -1,14 +1,27 @@
 import * as React from 'react'
 import { View, Button, StyleSheet } from 'react-native'
+import Header from '../Components/Header/DetailsScreenHeader'
 
 interface IProps {
   navigation: any
 }
 
 export default class InvoicesScreen extends React.Component<IProps> {
-  static navigationOptions = () => {
+  static navigationOptions = ({ navigation }: any) => {
     return {
-      title: 'Invoices Screen'
+      header: (
+        <Header
+          title="Invoice"
+          rightIconType="MaterialCommunityIcons"
+          rightIconTitle="credit-card-multiple"
+          rightText="Pay"
+          rightIconStyle={{
+            transform: [{ rotate: '0deg' }]
+          }}
+          onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() => null}
+        />
+      )
     }
   }
 

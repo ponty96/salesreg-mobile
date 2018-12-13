@@ -1,4 +1,4 @@
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, Text } from 'react-native'
 import React from 'react'
 import { Left, Right, Title } from 'native-base'
 import Icon from '../../Atom/Icon'
@@ -36,6 +36,7 @@ export interface IProps {
   onPressLeftIcon?: () => void
   onPressRightIcon?: () => void
   rightIconStyle?: any
+  rightText?: string
   hideRightMenu?: boolean
   showSearchBar?: boolean
 }
@@ -48,6 +49,7 @@ export default class BaseHeader extends React.PureComponent<IProps> {
     rightIconType: 'Entypo',
     hideRightMenu: false
   }
+
   render() {
     const props = this.props
     return (
@@ -71,6 +73,9 @@ export default class BaseHeader extends React.PureComponent<IProps> {
                   style={styles.searchIcon}
                   type={this.props.rightIconType}
                 />
+                {this.props.rightText && (
+                  <Text style={styles.rightText}>{this.props.rightText}</Text>
+                )}
               </View>
             </Right>
           ) : (
@@ -107,9 +112,15 @@ const styles = StyleSheet.create({
     fontSize: 18,
     color: '#000'
   },
+  rightText: {
+    fontFamily: 'AvenirNext-DemiBold',
+    fontSize: 17,
+    marginLeft: 8
+  },
   rightWrapper: {
     flexDirection: 'row',
-    marginRight: 0
+    marginRight: 0,
+    alignItems: 'center'
   },
   searchIcon: {
     color: '#000',
