@@ -281,7 +281,7 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
   }
 }
 
-const _UpdateProductScreen = props => (
+const _UpdateProductScreen: any = props => (
   <UserContext.Consumer>
     {({ user }) => <UpdateProductScreen {...props} user={user} />}
   </UserContext.Consumer>

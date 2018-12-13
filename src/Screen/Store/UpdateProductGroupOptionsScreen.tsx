@@ -129,7 +129,7 @@ class UpdateProductGroupOptionsScreen extends PureComponent<IProps, IState> {
   }
 }
 
-const _UpdateProductGroupOptionsScreen = props => (
+const _UpdateProductGroupOptionsScreen: any = props => (
   <UserContext.Consumer>
     {({ user }) => <UpdateProductGroupOptionsScreen {...props} user={user} />}
   </UserContext.Consumer>

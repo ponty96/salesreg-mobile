@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
@@ -342,7 +341,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
   }
 }
 
-const _AddProductVariantScreen = props => (
+const _AddProductVariantScreen: any = props => (
   <UserContext.Consumer>
     {({ user }) => <AddProductVariantScreen {...props} user={user} />}
   </UserContext.Consumer>

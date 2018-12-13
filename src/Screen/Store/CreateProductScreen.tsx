@@ -513,7 +513,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
   }
 }
 
-const _CreateProductScreen = props => (
+const _CreateProductScreen: any = props => (
   <UserContext.Consumer>
     {({ user }) => <CreateProductScreen {...props} user={user} />}
   </UserContext.Consumer>

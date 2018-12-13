@@ -176,7 +176,7 @@ class UpsertServiceScreen extends Component<IProps, IState> {
   }
 }
 
-const _UpsertServiceScreen = props => (
+const _UpsertServiceScreen: any = props => (
   <UserContext.Consumer>
     {({ user }) => <UpsertServiceScreen {...props} user={user} />}
   </UserContext.Consumer>
