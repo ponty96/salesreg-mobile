@@ -72,10 +72,10 @@ export const UpsertServiceGQL = gql`
 
 export const DeleteServiceGQL = gql`
   mutation deleteService($serviceId: Uuid!) {
-    deleteService(serviceId: $serviceId){
-      success 
+    deleteService(serviceId: $serviceId) {
+      success
       fieldErrors {
-        key 
+        key
         message
       }
     }
@@ -96,6 +96,18 @@ export const UpsertCategoryGQL = gql`
           title
           description
         }
+      }
+    }
+  }
+`
+
+export const DeleteCategoryGQL = gql`
+  mutation DeleteCategory($categoryId: Uuid!) {
+    deleteCategory(categoryId: $categoryId) {
+      success
+      fieldErrors {
+        key
+        message
       }
     }
   }

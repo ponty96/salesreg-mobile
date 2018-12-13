@@ -56,3 +56,15 @@ export const UpsertBankGQL = gql`
     }
   }
 `
+
+export const DeleteBankGQL = gql`
+  mutation deleteBank($bankId: Uuid!) {
+    deleteBank(bankId: $bankId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`

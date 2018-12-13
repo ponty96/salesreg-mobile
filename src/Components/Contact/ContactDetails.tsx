@@ -5,9 +5,13 @@ import GenericProfileDetails from '../Generic/ProfileDetails'
 import { StyleSheet, TouchableOpacity, View, Linking, Text } from 'react-native'
 import Icon from '../../Atom/Icon'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
+import { DeleteContact } from '../../graphql/mutations/contact'
+import { CompanyContactGQL } from '../../graphql/queries/contact'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   contact: any
+  user?: any
   contactType: string
   navigation: any
 }
@@ -24,6 +28,7 @@ class ContactDetails extends PureComponent<IProps> {
       }
     })
   }
+
   sendEmail = () => {
     const { contact } = this.props
     const url = `mailto://${contact.email}&subject=Hello${contact.contactName}`
@@ -103,11 +108,39 @@ class ContactDetails extends PureComponent<IProps> {
         sections={this.getContactDetails()}
         image={this.props.contact.image}
         headerText={this.props.contact.contactName}
+        enableDelete={true}
+        graphqlDeleteMutation={DeleteContact}
+        graphqlDeleteMutationResultKey="deleteContact"
+        graphqlDeleteVariables={{ contactId: contact.id }}
+        graphqlRefetchQueries={[
+          {
+            query: CompanyContactGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              type: this.props.contactType,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        onSuccessfulDeletion={() =>
+          this.props.navigation.navigate(
+            this.props.contactType == 'customer' ? 'Customers' : 'Vendors'
+          )
+        }
         headerSubText={`\u20A6 ${numberWithCommas(40000)}`}
       />
     ]
   }
 }
+
+const _ContactDetails: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <ContactDetails {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _ContactDetails
 
 const styles = StyleSheet.create({
   callAndEmail: {
@@ -137,5 +170,3 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-Medium'
   }
 })
-
-export default ContactDetails

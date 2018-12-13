@@ -3,11 +3,16 @@ import Header from '../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../Components/Generic/Details'
 import moment from 'moment'
 import Preferences from '../services/preferences'
+import { DeleteSalesOrderGQL } from '../graphql/mutations/order'
+import { ListCompanySalesGQL } from '../graphql/queries/order'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user?: any
 }
-export default class SalesOrderDetailsScreen extends Component<IProps> {
+
+class SalesOrderDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     const sales = navigation.getParam('sales', {})
     return {
@@ -76,7 +81,29 @@ export default class SalesOrderDetailsScreen extends Component<IProps> {
         fabIconName="receipt"
         fabIconType="MaterialIcons"
         onPressStatus={this.onStatusPress}
+        graphqlDeleteMutation={DeleteSalesOrderGQL}
+        graphqlDeleteMutationResultKey="deleteSaleOrder"
+        graphqlDeleteVariables={{ saleId: sales.id }}
+        graphqlRefetchQueries={[
+          {
+            query: ListCompanySalesGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        onSuccessfulDeletion={() => this.props.navigation.navigate('Sales')}
       />
     )
   }
 }
+
+const _SalesOrderDetailsScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <SalesOrderDetailsScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+export default _SalesOrderDetailsScreen

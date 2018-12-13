@@ -41,6 +41,18 @@ export const UpdateSaleOrderStatusGQL = gql`
   }
 `
 
+export const DeleteSalesOrderGQL = gql`
+  mutation deleteSaleOrder($saleId: Uuid!) {
+    deleteSaleOrder(saleId: $saleId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
 export const UpdatePurchaseOrderStatusGQL = gql`
   mutation updateOrderStatus(
     $id: Uuid!

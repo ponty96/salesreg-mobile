@@ -5,6 +5,7 @@ import {
   StyleSheet,
   View,
   FlatList,
+  Alert,
   Text,
   TouchableOpacity
 } from 'react-native'
@@ -43,7 +44,16 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
       } = res
 
     if (!success) {
-      console.log('The fieldErrors are ', fieldErrors)
+      setTimeout(
+        () =>
+          Alert.alert(
+            'Error',
+            fieldErrors[0].message,
+            [{ text: 'Ok', onPress: () => null }],
+            { cancelable: false }
+          ),
+        100
+      )
     } else {
       console.log('Yeah this is good ', success)
       this.props.onSuccessfulDeletion()

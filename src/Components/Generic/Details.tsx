@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Alert,
+  TouchableOpacity
+} from 'react-native'
 import ListItemAtom from '../../Atom/ListItem/ListItemAtom'
 import { color } from '../../Style/Color'
 import Icon from '../../Atom/Icon'
@@ -15,6 +21,7 @@ interface Item {
   isTotalAmount?: boolean
   itemQuantity?: string
 }
+
 interface IProps {
   title: string
   totalAmount: string
@@ -31,10 +38,11 @@ interface IProps {
   fabIconName?: string
   fabIconType?: string
   graphqlDeleteMutation?: DocumentNode
-  graphqlRefetchQuery?: any[]
-  graphqlDeleteVariable?: {}
+  graphqlRefetchQueries?: any[]
+  graphqlDeleteVariables?: {}
   graphqlDeleteMutationResultKey?: string
   enableDelete?: boolean
+  onSuccessfulDeletion?: () => void
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
@@ -152,7 +160,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
               height: '100%'
             }}
             onPress={() =>
-              deleteFn({ variables: this.props.graphqlDeleteVariable })
+              deleteFn({ variables: this.props.graphqlDeleteVariables })
             }
           >
             <Icon
@@ -180,9 +188,19 @@ export default class GenericDetailsComponent extends Component<IProps> {
       [this.props.graphqlDeleteMutationResultKey]: { success, fieldErrors }
     } = res
     if (!success) {
-      console.log('some field errorrs mehn ', fieldErrors)
+      setTimeout(
+        () =>
+          Alert.alert(
+            'Error',
+            fieldErrors[0].message,
+            [{ text: 'Ok', onPress: () => null }],
+            { cancelable: false }
+          ),
+        100
+      )
     } else {
       console.log('This was successful ', success)
+      this.props.onSuccessfulDeletion()
     }
   }
 
@@ -190,14 +208,14 @@ export default class GenericDetailsComponent extends Component<IProps> {
     let {
       enableDelete,
       graphqlDeleteMutation,
-      graphqlRefetchQuery
+      graphqlRefetchQueries
     } = this.props
     if (enableDelete) {
       return (
         <Mutation
           mutation={graphqlDeleteMutation}
           onCompleted={this.onDeleteCompleted}
-          refetchQueries={graphqlRefetchQuery || []}
+          refetchQueries={graphqlRefetchQueries || []}
           awaitRefetchQueries={true}
         >
           {(deleteDetails, { loading }) => (
