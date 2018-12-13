@@ -1,4 +1,4 @@
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import { Left, Right, Title } from 'native-base'
 import Icon from '../../Atom/Icon'
@@ -66,17 +66,18 @@ export default class BaseHeader extends React.PureComponent<IProps> {
           <Title style={styles.title}>{props.title}</Title>
           {!this.props.hideRightMenu ? (
             <Right>
-              <View style={[styles.rightWrapper, this.props.rightIconStyle]}>
-                <Icon
-                  name={this.props.rightIconTitle}
-                  onPress={this.props.onPressRightIcon}
-                  style={styles.searchIcon}
-                  type={this.props.rightIconType}
-                />
-                {this.props.rightText && (
-                  <Text style={styles.rightText}>{this.props.rightText}</Text>
-                )}
-              </View>
+              <TouchableWithoutFeedback onPress={this.props.onPressRightIcon}>
+                <View style={[styles.rightWrapper, this.props.rightIconStyle]}>
+                  <Icon
+                    name={this.props.rightIconTitle}
+                    style={styles.searchIcon}
+                    type={this.props.rightIconType}
+                  />
+                  {this.props.rightText && (
+                    <Text style={styles.rightText}>{this.props.rightText}</Text>
+                  )}
+                </View>
+              </TouchableWithoutFeedback>
             </Right>
           ) : (
             <Right />

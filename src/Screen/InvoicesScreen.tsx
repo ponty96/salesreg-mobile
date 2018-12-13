@@ -12,21 +12,9 @@ interface IProps {
 }
 
 export default class InvoicesScreen extends React.Component<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Invoice"
-          rightIconType="MaterialCommunityIcons"
-          rightIconTitle="credit-card-multiple"
-          rightText="Pay"
-          rightIconStyle={{
-            transform: [{ rotate: '0deg' }]
-          }}
-          onPressLeftIcon={() => navigation.goBack()}
-          onPressRightIcon={() => null}
-        />
-      )
+      header: null
     }
   }
 
@@ -37,7 +25,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
           params: {
             sales: {
               amount,
-              total = 100000,
+              amountPaid = 100000,
               invoice: { dueDate },
               date
             },
@@ -47,48 +35,61 @@ export default class InvoicesScreen extends React.Component<IProps> {
       }
     } = this.props
 
-    console.log(sales)
-
     return (
-      <View style={styles.container}>
-        <Content>
-          <ListItemAtom
-            label="Issued date"
-            value={moment(date).format('DD/MM/YYYY')}
-            labelStyle={styles.listLabel}
-            rightTextStyle={[styles.greenText, { color: color.black }]}
-            listItemStyle={styles.listWrapper}
-          />
-          <ListItemAtom
-            label="Date due"
-            value={moment(dueDate).format('DD/MM/YYYY')}
-            labelStyle={styles.listLabel}
-            rightTextStyle={[styles.greenText, { color: color.black }]}
-            listItemStyle={styles.listWrapper}
-          />
-          <ListItemAtom
-            label="TOTAL"
-            value={`N ${numberWithCommas(total)}`}
-            labelStyle={styles.whiteLabel}
-            rightTextStyle={[styles.whiteLabel]}
-            listItemStyle={styles.totalAmountListItem}
-          />
-          <ListItemAtom
-            label="AMOUNT PAID"
-            value={`N ${numberWithCommas(amount || 3000)}`}
-            labelStyle={styles.listLabel}
-            rightTextStyle={styles.greenText}
-            listItemStyle={styles.listWrapper}
-          />
-          <ListItemAtom
-            label="Balance due"
-            value={`N ${numberWithCommas(total - 3000)}`}
-            labelStyle={styles.listLabel}
-            rightTextStyle={[styles.greenText, { color: color.red }]}
-            listItemStyle={styles.listWrapper}
-          />
-        </Content>
-      </View>
+      <React.Fragment>
+        <Header
+          title="Invoice"
+          rightIconType="MaterialCommunityIcons"
+          rightIconTitle="credit-card-multiple"
+          rightText="Pay"
+          rightIconStyle={{
+            transform: [{ rotate: '0deg' }]
+          }}
+          onPressLeftIcon={() => this.props.navigation.goBack()}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('UpsertInvoice', { sales })
+          }
+        />
+        <View style={styles.container}>
+          <Content>
+            <ListItemAtom
+              label="Issued date"
+              value={moment(date).format('DD/MM/YYYY')}
+              labelStyle={styles.listLabel}
+              rightTextStyle={[styles.greenText, { color: color.black }]}
+              listItemStyle={styles.listWrapper}
+            />
+            <ListItemAtom
+              label="Date due"
+              value={moment(dueDate).format('DD/MM/YYYY')}
+              labelStyle={styles.listLabel}
+              rightTextStyle={[styles.greenText, { color: color.black }]}
+              listItemStyle={styles.listWrapper}
+            />
+            <ListItemAtom
+              label="TOTAL"
+              value={`N ${numberWithCommas(amount)}`}
+              labelStyle={styles.whiteLabel}
+              rightTextStyle={[styles.whiteLabel]}
+              listItemStyle={styles.totalAmountListItem}
+            />
+            <ListItemAtom
+              label="AMOUNT PAID"
+              value={`N ${numberWithCommas(amountPaid || 3000)}`}
+              labelStyle={styles.listLabel}
+              rightTextStyle={styles.greenText}
+              listItemStyle={styles.listWrapper}
+            />
+            <ListItemAtom
+              label="Balance due"
+              value={`N ${numberWithCommas(amount - amountPaid)}`}
+              labelStyle={styles.listLabel}
+              rightTextStyle={[styles.greenText, { color: color.red }]}
+              listItemStyle={styles.listWrapper}
+            />
+          </Content>
+        </View>
+      </React.Fragment>
     )
   }
 }
