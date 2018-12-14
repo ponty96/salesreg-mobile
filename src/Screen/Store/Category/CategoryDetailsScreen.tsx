@@ -135,6 +135,9 @@ const _CategoryDetailsScreen: any = props => (
   </UserContext.Consumer>
 )
 
+_CategoryDetailsScreen.navigationOptions =
+  CategoryDetailsScreen.navigationOptions
+
 export default _CategoryDetailsScreen
 
 const styles = StyleSheet.create({

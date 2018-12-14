@@ -103,7 +103,7 @@ const _ServiceDetailsScreen: any = props => (
   </UserContext.Consumer>
 )
 
-ServiceDetailsScreen.navigationOptions = _ServiceDetailsScreen.navigationOptions
+_ServiceDetailsScreen.navigationOptions = ServiceDetailsScreen.navigationOptions
 
 export default _ServiceDetailsScreen
 
