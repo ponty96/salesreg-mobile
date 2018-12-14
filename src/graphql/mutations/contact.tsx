@@ -45,3 +45,14 @@ export const UpsertContactGQL = gql`
     }
   }
 `
+export const DeleteContact = gql`
+  mutation deleteContact($contactId: Uuid!) {
+    deleteContact(contactId: $contactId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`

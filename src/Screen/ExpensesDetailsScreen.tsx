@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../Components/Generic/Details'
 import moment from 'moment'
+import { DeleteExpenseGQL } from '../graphql/mutations/expense'
+import { ListCompanyExpensesGQL } from '../graphql/queries/expense'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user?: any
 }
-export default class ExpensesDetailsScreen extends Component<IProps> {
+
+class ExpensesDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     const expense = navigation.getParam('expense', {})
     return {
@@ -49,7 +54,32 @@ export default class ExpensesDetailsScreen extends Component<IProps> {
         title={expense.title}
         totalAmount={expense.totalAmount}
         items={this.parseItems()}
+        graphqlDeleteMutation={DeleteExpenseGQL}
+        graphqlDeleteMutationResultKey="deleteExpense"
+        graphqlDeleteVariables={{ expenseId: expense.id }}
+        graphqlRefetchQueries={[
+          {
+            query: ListCompanyExpensesGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        onSuccessfulDeletion={() => this.props.navigation.navigate('Expenses')}
       />
     )
   }
 }
+
+const _ExpensesDetailsScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <ExpensesDetailsScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+_ExpensesDetailsScreen.navigationOptions =
+  ExpensesDetailsScreen.navigationOptions
+
+export default _ExpensesDetailsScreen

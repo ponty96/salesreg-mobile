@@ -2,11 +2,16 @@ import React, { Component } from 'react'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../Components/Generic/Details'
 import { getBankName } from '../utilities/data/picker-lists'
+import { DeleteBankGQL } from '../graphql/mutations/business'
+import { ListCompanyBanksGQL } from '../graphql/queries/business'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user?: any
 }
-export default class BankDetailsScreen extends Component<IProps> {
+
+class BankDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     const bank = navigation.getParam('bank', {})
     return {
@@ -52,7 +57,31 @@ export default class BankDetailsScreen extends Component<IProps> {
         totalAmount={bank.accountNumber}
         items={this.parseItems()}
         hideTotal={true}
+        graphqlDeleteMutation={DeleteBankGQL}
+        graphqlDeleteMutationResultKey="deleteBank"
+        graphqlDeleteVariables={{ bankId: bank.id }}
+        graphqlRefetchQueries={[
+          {
+            query: ListCompanyBanksGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        onSuccessfulDeletion={() => this.props.navigation.navigate('Banks')}
       />
     )
   }
 }
+
+const _BankDetailsScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <BankDetailsScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+_BankDetailsScreen.navigationOptions = BankDetailsScreen.navigationOptions
+
+export default _BankDetailsScreen

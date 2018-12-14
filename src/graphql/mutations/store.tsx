@@ -90,6 +90,18 @@ export const RestockProducts = gql`
   }
 `
 
+export const DeleteProductGQL = gql`
+  mutation deleteProduct($productId: Uuid!) {
+    deleteProduct(productId: $productId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
 export const UpsertServiceGQL = gql`
   mutation UpsertService($serviceId: Uuid, $service: ServiceInput!) {
     upsertService(service: $service, serviceId: $serviceId) {
@@ -104,6 +116,18 @@ export const UpsertServiceGQL = gql`
           name
           price
         }
+      }
+    }
+  }
+`
+
+export const DeleteServiceGQL = gql`
+  mutation deleteService($serviceId: Uuid!) {
+    deleteService(serviceId: $serviceId) {
+      success
+      fieldErrors {
+        key
+        message
       }
     }
   }
@@ -152,6 +176,18 @@ export const UpdateProductGroupOptionsGQL = gql`
     $options: [Uuid]!
   ) {
     updateProductGroupOptions(id: $productGroupId, options: $options) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
+export const DeleteCategoryGQL = gql`
+  mutation DeleteCategory($categoryId: Uuid!) {
+    deleteCategory(categoryId: $categoryId) {
       success
       fieldErrors {
         key

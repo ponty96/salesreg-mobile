@@ -1,8 +1,18 @@
 import React, { PureComponent } from 'react'
 import { color } from '../../Style/Color'
 import ProfileListAtom from '../../Atom/ListItem/ExpandableListItemAtom'
-import { StyleSheet, View, FlatList, Text } from 'react-native'
-import { Thumbnail } from 'native-base'
+import {
+  StyleSheet,
+  View,
+  FlatList,
+  Alert,
+  Text,
+  TouchableOpacity
+} from 'react-native'
+import { Thumbnail, Icon } from 'native-base'
+import { Mutation } from 'react-apollo'
+import { DocumentNode } from 'graphql'
+import AppSpinner from '../../Components/Spinner'
 
 interface Section {
   section: string
@@ -10,28 +20,111 @@ interface Section {
   type?: any
   onPress?: () => void
 }
+
 interface IProps {
   sections?: Section[]
   headerText: string
   headerSubText?: string
   image?: string
+  enableDelete?: boolean
+  graphqlDeleteMutation?: DocumentNode
+  graphqlDeleteMutationResultKey?: string
+  graphqlDeleteVariables?: object
+  graphqlRefetchQueries?: any[]
+  onSuccessfulDeletion?: () => void
 }
 
 export default class GenericProfileDetails extends PureComponent<IProps> {
-  render() {
+  static defaultProps = {
+    enableDelete: false
+  }
+
+  onDeleteCompleted = async res => {
+    const { graphqlDeleteMutationResultKey } = this.props,
+      {
+        [graphqlDeleteMutationResultKey]: { success, fieldErrors }
+      } = res
+
+    if (!success) {
+      setTimeout(
+        () =>
+          Alert.alert(
+            'Error',
+            fieldErrors[0].message,
+            [{ text: 'Ok', onPress: () => null }],
+            { cancelable: false }
+          ),
+        100
+      )
+    } else {
+      console.log('Yeah this is good ', success)
+      this.props.onSuccessfulDeletion()
+    }
+  }
+
+  renderProfileDetailsUI = (deleteFn?: ({ variables: any }) => void) => {
     return (
-      <FlatList
-        data={[
-          { section: 'a', value: '' },
-          { section: 'b', value: '' },
-          ...this.props.sections
-        ]}
-        renderItem={this.renderItem}
-        keyExtractor={item => item.section}
-        stickyHeaderIndices={[1]}
-        style={{ flex: 1, backgroundColor: '#fff' }}
-      />
+      <React.Fragment>
+        <FlatList
+          data={[
+            { section: 'a', value: '' },
+            { section: 'b', value: '' },
+            ...this.props.sections
+          ]}
+          renderItem={this.renderItem}
+          keyExtractor={item => item.section}
+          stickyHeaderIndices={[1]}
+          style={{ flex: 1, backgroundColor: '#fff' }}
+        />
+        {this.props.enableDelete && (
+          <TouchableOpacity
+            style={{
+              backgroundColor: 'transparent',
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+            onPress={() =>
+              deleteFn({ variables: this.props.graphqlDeleteVariables })
+            }
+          >
+            <Icon
+              type="EvilIcons"
+              name="trash"
+              style={{ color: color.textBorderBottom, fontSize: 60 }}
+            />
+          </TouchableOpacity>
+        )}
+      </React.Fragment>
     )
+  }
+
+  render() {
+    let {
+      enableDelete,
+      graphqlDeleteMutation,
+      graphqlRefetchQueries
+    } = this.props
+
+    if (enableDelete) {
+      return (
+        <Mutation
+          mutation={graphqlDeleteMutation}
+          refetchQueries={graphqlRefetchQueries || []}
+          awaitRefetchQueries={true}
+          onCompleted={this.onDeleteCompleted}
+        >
+          {(deleteDetails, { loading }) => {
+            return (
+              <React.Fragment>
+                <AppSpinner visible={loading} />
+                {this.renderProfileDetailsUI(deleteDetails)}
+              </React.Fragment>
+            )
+          }}
+        </Mutation>
+      )
+    }
+    return this.renderProfileDetailsUI()
   }
 
   renderItem = ({ item, index }: any) => {

@@ -5,9 +5,13 @@ import Header from '../../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
 import Icon from '../../Atom/Icon'
 import { Chip } from '../../Atom/Chip'
+import { DeleteProductGQL } from '../../graphql/mutations/store'
+import { ListCompanyProductsGQL } from '../../graphql/queries/store'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation?: any
+  user?: any
 }
 
 class ProductDetailsScreen extends PureComponent<IProps> {
@@ -117,6 +121,21 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       <GenericProfileDetails
         sections={this.sections()}
         image={product.featuredImage} // change logic based on product having multiple images
+        enableDelete={true}
+        graphqlDeleteMutation={DeleteProductGQL}
+        graphqlDeleteMutationResultKey="deleteProduct"
+        graphqlDeleteVariables={{ productId: product.id }}
+        graphqlRefetchQueries={[
+          {
+            query: ListCompanyProductsGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        onSuccessfulDeletion={() => this.props.navigation.navigate('Products')}
         headerText={product.name}
         headerSubText={product.number}
         key="product-details-335"
@@ -125,7 +144,15 @@ class ProductDetailsScreen extends PureComponent<IProps> {
   }
 }
 
-export default ProductDetailsScreen
+const _ProductDetailsScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <ProductDetailsScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+_ProductDetailsScreen.navigationOptions = ProductDetailsScreen.navigationOptions
+
+export default _ProductDetailsScreen
 
 const styles = StyleSheet.create({
   topHeader: {
