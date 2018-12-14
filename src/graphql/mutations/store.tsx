@@ -39,6 +39,57 @@ export const CreateProductGQL = gql`
   }
 `
 
+export const UpdateProductGQL = gql`
+  mutation UpdateProduct($params: ProductInput!, $id: Uuid!) {
+    updateProduct(product: $params, productId: $id) {
+      fieldErrors {
+        key
+        message
+      }
+      success
+      data {
+        ... on Product {
+          id
+          description
+          costPrice
+          price
+          minimumSku
+          number: sku
+          name
+          featuredImage
+          images
+          user {
+            id
+            firstName
+            lastName
+          }
+          categories {
+            id
+            title
+          }
+
+          tags {
+            name
+            id
+          }
+        }
+      }
+    }
+  }
+`
+
+export const RestockProducts = gql`
+  mutation restockProducts($items: [RestockItemInput]) {
+    restockProducts(items: $items) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
 export const DeleteProductGQL = gql`
   mutation deleteProduct($productId: Uuid!) {
     deleteProduct(productId: $productId) {
@@ -96,6 +147,39 @@ export const UpsertCategoryGQL = gql`
           title
           description
         }
+      }
+    }
+  }
+`
+
+export const UpsertOptionGQL = gql`
+  mutation UpsertOption($optionId: Uuid, $option: OptionInput!) {
+    upsertOption(optionId: $optionId, option: $option) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Option {
+          id
+          name
+        }
+      }
+    }
+  }
+`
+
+export const UpdateProductGroupOptionsGQL = gql`
+  mutation UpdateProductGroupOptions(
+    $productGroupId: Uuid!
+    $options: [Uuid]!
+  ) {
+    updateProductGroupOptions(id: $productGroupId, options: $options) {
+      success
+      fieldErrors {
+        key
+        message
       }
     }
   }

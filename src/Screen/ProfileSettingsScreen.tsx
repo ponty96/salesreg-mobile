@@ -64,6 +64,23 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
                 iconType: 'MaterialIcons'
               },
               {
+                section: 'Manage Categories',
+                routeName: 'Categories',
+                showRightCaret: true,
+                description: 'Manage your store categories',
+                icon: 'apps',
+                iconType: 'MaterialCommunityIcons'
+              },
+              {
+                section: 'Manage Variant Options',
+                routeName: 'Options',
+                showRightCaret: true,
+                description:
+                  'Manage your item variant options like size, color e.tc.',
+                icon: 'package-variant',
+                iconType: 'MaterialCommunityIcons'
+              },
+              {
                 section: 'Log Out',
                 routeName: 'Login',
                 showRightCaret: false,

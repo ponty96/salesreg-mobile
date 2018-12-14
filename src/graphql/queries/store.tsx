@@ -19,6 +19,10 @@ export const ListCompanyProductsGQL = gql`
           name
           featuredImage
           images
+          isFeatured
+          isTopRatedByMerchant
+          totalQuantitySold
+
           user {
             id
             firstName
@@ -32,6 +36,26 @@ export const ListCompanyProductsGQL = gql`
           tags {
             name
             id
+          }
+
+          optionValues {
+            id
+            name
+            option {
+              name
+              id
+            }
+          }
+
+          productGroup {
+            id
+            title
+            options {
+              optionId: id
+              optionName: name
+              title: name
+              id
+            }
           }
         }
       }
@@ -57,6 +81,9 @@ export const ListCompanyServicesGQL = gql`
             id
             title
           }
+          totalTimesOrdered
+          isFeatured
+          isTopRatedByMerchant
           featuredImage
           images
           tags {
@@ -82,41 +109,43 @@ export const ListCompanyCategoriesGQL = gql`
           description
           id
           title
-
-          products {
-            name
-            id
-            price
-            featuredImage
-            images
-          }
-
-          services {
-            name
-            id
-            price
-            featuredImage
-            images
-          }
         }
       }
     }
   }
 `
 
-export const ListCompanyProductGroupsGQL = gql`
-  query listCompanyProductGroups($companyId: Uuid!) {
-    listCompanyProductGroups(companyId: $companyId) {
-      title
-      id
-
-      options {
-        optionId: id
-        optionName: name
+export const ListCompanyOptionsGQL = gql`
+  query listCompanyOptions($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyOptions(companyId: $companyId, after: $after, first: $first) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          id
+          name
+        }
       }
     }
   }
 `
+
+// export const ListCompanyProductGroupsGQL = gql`
+//   query listCompanyProductGroups($companyId: Uuid!) {
+//     listCompanyProductGroups(companyId: $companyId) {
+//       title
+//       id
+
+//       options {
+//         optionId: id
+//         optionName: name
+//       }
+//     }
+//   }
+// `
 
 export const SearchProductGroupsByTitleGQL = gql`
   query searchProductGroupsByTitle($companyId: Uuid!, $queryText: String!) {
@@ -138,6 +167,8 @@ export const SearchProductGroupsByTitleGQL = gql`
         name
         featuredImage
         images
+        isFeatured
+        isTopRatedByMerchant
         categories {
           id
           title

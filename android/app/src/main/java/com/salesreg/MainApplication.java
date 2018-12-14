@@ -3,6 +3,7 @@ package com.salesreg;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
 import com.arttitude360.reactnative.rnpaystack.RNPaystackPackage;
 import me.hauvo.thumbnail.RNThumbnailPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -28,6 +29,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactVideoPackage(),
             new RNPaystackPackage(),
             new RNThumbnailPackage(),
             new RNFetchBlobPackage(),

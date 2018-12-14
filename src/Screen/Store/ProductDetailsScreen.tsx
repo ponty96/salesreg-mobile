@@ -23,21 +23,26 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           title="Product Details"
           onPressLeftIcon={() => navigation.goBack()}
           onPressRightIcon={() =>
-            navigation.navigate('UpsertProduct', { product })
+            navigation.navigate('UpdateProduct', { product })
           }
         />
       )
     }
   }
-
   sections = (): any => {
     const product = this.props.navigation.getParam('product', {})
     return [
-      { section: 'Total Quantity Sold', value: '2344' },
+      ...this.parseOptionValues(product),
+      ...this.showVariantOptionStep(product),
+      {
+        section: 'Total Quantities Sold',
+        value: `${product.totalQuantitySold || 0}`
+      },
       { section: 'MSQ', value: product.minimumSku },
       {
         section: 'Unit selling price',
-        value: `\u20A6 ${product.price}`
+        value: `\u20A6 ${product.price}`,
+        type: 'currency'
       },
       {
         section: 'Categories',
@@ -58,13 +63,39 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     ]
   }
 
+  parseOptionValues = ({ optionValues = [] }) => {
+    return optionValues.map(optionValue => ({
+      section: optionValue.option.name,
+      value: optionValue.name
+    }))
+  }
+
+  showVariantOptionStep = ({ productGroup: { options = [] } }) => {
+    if (options.length > 0) {
+      return [
+        {
+          section: `${options.length} Variant options`,
+          value: 'Edit',
+          type: 'button',
+          onPress: this.onPressEditVariantOptions
+        }
+      ]
+    } else return []
+  }
+
+  onPressEditVariantOptions = () => {
+    const product = this.props.navigation.getParam('product', {})
+    this.props.navigation.navigate('UpdateProductGroupOptions', { product })
+  }
+  onPressAddProductVariant = () => {
+    const product = this.props.navigation.getParam('product', {})
+    this.props.navigation.navigate('AddProductVariant', { product })
+  }
+
   render() {
-    console.log('The company is ', this.props.user)
-    // do change the list to the appropriate molecule
     const product = this.props.navigation.getParam('product', {})
     return [
-      <View style={styles.topHeader} key="dddd-334">
-        <View style={{ flexDirection: 'row' }} />
+      <View style={styles.topHeader} key="product-details-334">
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
         >
@@ -75,9 +106,21 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           />
           <Text style={styles.rightNavText}>Share</Text>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={{ flexDirection: 'row', alignItems: 'center' }}
+          onPress={this.onPressAddProductVariant}
+        >
+          <Text style={styles.rightNavText}>Add variants</Text>
+          <Icon
+            name="chevron-small-right"
+            type="Entypo"
+            style={styles.headerIcon}
+          />
+        </TouchableOpacity>
       </View>,
       <GenericProfileDetails
         sections={this.sections()}
+        image={product.featuredImage} // change logic based on product having multiple images
         enableDelete={true}
         graphqlDeleteMutation={DeleteProductGQL}
         graphqlDeleteMutationResultKey="deleteProduct"
@@ -93,9 +136,9 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           }
         ]}
         onSuccessfulDeletion={() => this.props.navigation.navigate('Products')}
-        image={product.image} // change logic based on product having multiple images
         headerText={product.name}
         headerSubText={product.number}
+        key="product-details-335"
       />
     ]
   }
@@ -120,7 +163,9 @@ const styles = StyleSheet.create({
     width: '100%',
     paddingVertical: 8,
     justifyContent: 'space-between',
-    paddingRight: 16
+    paddingHorizontal: 16,
+    borderBottomWidth: 1,
+    borderBottomColor: color.list
   },
   rightNavText: {
     color: color.button,
@@ -128,134 +173,10 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-Medium',
     marginLeft: 8
   },
-  centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: color.secondary
-  },
   headerIcon: {
-    color: color.secondary,
+    color: color.button,
     padding: 16,
     fontSize: 28
-  },
-  headerText: {
-    color: color.secondary,
-    fontWeight: 'bold',
-    paddingRight: 16,
-    fontSize: 18
-  },
-  headerIconLogout: {
-    color: color.secondary,
-    padding: 8,
-    fontSize: 28
-  },
-  headerItem: {
-    flexDirection: 'row',
-    justifyContent: 'flex-start',
-    alignItems: 'center'
-  },
-  ababa: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  foota: {
-    height: 80,
-    padding: 16
-  },
-  btnP: {
-    alignSelf: 'flex-end'
-  },
-  txtP: {
-    color: '#fff',
-    fontSize: 16
-  },
-  aboveAccordionContainerP: {
-    flexDirection: 'row',
-    flex: 0,
-    borderTopWidth: 0.5,
-    borderBottomWidth: 0.5,
-    borderTopColor: '#f0f0f0',
-    borderBottomColor: '#c0c0c0'
-  },
-  aboveAccordionPictureViewP: {
-    flexDirection: 'column',
-    width: '50%',
-    height: 170,
-    alignItems: 'flex-start',
-    padding: 16,
-    justifyContent: 'center',
-    backgroundColor: '#fff'
-  },
-  aboveAccordiondpP: {
-    height: 60,
-    width: 60
-  },
-  aboveAccordionBoldFont: {
-    fontFamily: 'SourceSansPro-Semibold',
-    fontSize: 20,
-    textAlign: 'right'
-  },
-  aboveAccordionWhiteList: {
-    height: 65,
-    width: '100%',
-    backgroundColor: '#FFF',
-    paddingLeft: 0,
-    marginLeft: 0
-  },
-  aboveAccordionBlackTextL: {
-    fontSize: 16,
-    color: color.dropdown,
-    paddingLeft: 16,
-    fontFamily: 'Source Sans Pro'
-  },
-  aboveAccordionBlackTextR: {
-    fontSize: 16,
-    color: '#000',
-    fontFamily: 'Source Sans Pro'
-  },
-  aboveAccordionGreenTextR: {
-    fontSize: 16,
-    color: color.selling,
-    fontFamily: 'Source Sans Pro'
-  },
-  aboveAccordionRedTextR: {
-    fontSize: 16,
-    color: 'red',
-    fontFamily: 'Source Sans Pro'
-  },
-  aboveAccordionGreyText: {
-    fontSize: 16,
-    color: color.dropdown,
-    paddingLeft: 16,
-    fontFamily: 'Source Sans Pro'
-  },
-  aboveAccordionGreyFont: {
-    fontSize: 17,
-    color: '#000',
-    fontFamily: 'Source Sans Pro'
-  },
-  aboveAccordionRedText: {
-    fontSize: 16,
-    color: 'red',
-    fontFamily: 'Source Sans Pro'
-  },
-  aboveAccordionPictureText: {
-    paddingTop: 10,
-    fontSize: 18,
-    fontWeight: '400',
-    color: color.menu,
-    fontFamily: 'Source Sans Pro'
-  },
-  aboveAccordionMoneyView: {
-    width: '50%',
-    height: 170,
-    alignItems: 'flex-end',
-    justifyContent: 'center'
-    // backgroundColor: '#FFF',
-  },
-  viewMarginRight: {
-    marginRight: 16
   },
   tags: {
     flexDirection: 'row',

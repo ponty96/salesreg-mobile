@@ -1,5 +1,4 @@
 import React, { PureComponent } from 'react'
-
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
@@ -14,7 +13,6 @@ import {
   renderOptionValuesInputStep,
   renderMediaStep,
   renderProductDescriptionStep,
-  renderSelectProductGroupFormStep,
   renderSelectOptionsFormStep,
   renderTagStep
 } from './utilities/productCreateSteps'
@@ -33,10 +31,8 @@ interface OptionValue {
 }
 
 interface IState {
-  isVariant: string
   productGroupTitle: string
   productGroup: any
-  isNewProductVariant: string
   sku: string | number
   minimumSku: string | number
   price: string | number
@@ -81,13 +77,11 @@ const DEFAULT_PRODUCT_PARAMS = {
   tags: []
 }
 
-class CreateProductScreen extends PureComponent<IProps, IState> {
+class AddProductVariantScreen extends PureComponent<IProps, IState> {
   constructor(props: IProps) {
     super(props)
     this.state = {
-      isVariant: '',
       productGroupTitle: '',
-      isNewProductVariant: '',
       productGroup: null,
       ...DEFAULT_PRODUCT_PARAMS,
       userId: '',
@@ -98,22 +92,32 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     }
   }
 
-  componentDidMount() {
-    this.updateDetails()
-  }
+  componentWillMount() {
+    const product = this.props.navigation.getParam('product')
+    const { productGroup } = product
 
-  updateDetails = async () => {
-    const { user } = this.props
+    const optionValues = productGroup.options.map(option => ({
+      ...option,
+      name: ''
+    }))
+
+    const productParams = this.getProductParams(productGroup, product)
     this.setState({
-      userId: user.id,
-      companyId: user.company.id
+      ...productParams,
+      productGroup: productGroup,
+      productGroupTitle: productGroup.title,
+      optionValues,
+      currentFormState:
+        productGroup.options.length == 0
+          ? STATE_TYPES.ExistingNonPredefined
+          : STATE_TYPES.ExistingPredefined,
+      userId: this.props.user.id,
+      companyId: this.props.user.company.id
     })
   }
 
   updateState = (key: string, value: any) => {
-    if (key == 'productGroup') {
-      this.updateProductGroup(value)
-    } else if (key.indexOf('option-') == 0) {
+    if (key.indexOf('option-') == 0) {
       this.updateOptionValues(key, value)
     } else {
       const state = { ...this.state, [key]: value }
@@ -121,30 +125,16 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     }
   }
 
-  updateProductGroup = productGroup => {
-    const optionValues = productGroup.options.map(option => ({
-      ...option,
-      name: ''
-    }))
-    const productParams = this.getProductParams(productGroup)
-    this.setState({
-      productGroup: productGroup,
-      productGroupTitle: productGroup.title,
-      ...productParams,
-      optionValues
-    })
-  }
-
-  getProductParams = productGroup => {
+  getProductParams = (productGroup, product) => {
     if (productGroup.options.length == 0) {
-      const product = productGroup.products[0]
       return {
         productId: product.id,
         ...product,
         tags: product.tags.map(tag => tag.name),
         isTopRatedByMerchant:
           product.isTopRatedByMerchant == false ? 'no' : 'yes',
-        isFeatured: product.isFeatured == false ? 'no' : 'yes'
+        isFeatured: product.isFeatured == false ? 'no' : 'yes',
+        sku: product.number
       }
     } else {
       return DEFAULT_PRODUCT_PARAMS
@@ -194,7 +184,6 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
                 createProduct({ variables: this.parseMutationVariables() })
               }}
               steps={this.parseFormSteps()}
-              onTransition={this.onTransition}
               key="createProduct-1996"
             />
           ]
@@ -205,116 +194,15 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
 
   parseFormSteps = (): FormStep[] => {
     const defaultSteps: FormStep[] = [
-      {
-        stepTitle: 'Is this a new product or variant of an existing product?',
-        formFields: [
-          {
-            label: 'New or Variant of existing?',
-            placeholder: '',
-            validators: ['required'],
-            name: 'isVariant',
-            type: {
-              type: 'radio',
-              options: ['New Product', 'Variant of Existing product']
-            }
-          }
-        ]
-      },
-      this.getSecondStep(),
       this.getThirdStep(),
       this.getFourthStep(),
       this.getFifthStep(),
       this.getSixthStep(),
       this.getSeventhStep(),
       this.getEightStep(),
-      this.getNinthStep(),
-      this.getTenthStep()
+      this.getNinthStep()
     ]
-
     return defaultSteps
-  }
-
-  completeSteps = () => {}
-
-  onTransition = async (from, to) => {
-    // update state status based on transition
-    let currentState = this.state.currentFormState
-    if (from == 1 && to == 2) {
-      let oldState = currentState
-      currentState =
-        this.state.isVariant == 'New Product'
-          ? STATE_TYPES.NewProduct
-          : STATE_TYPES.ExistingProduct
-
-      this.updateStateAfterTransition(oldState, currentState)
-    } else if (from == 2 && to == 3) {
-      if (currentState !== STATE_TYPES.NewProduct) {
-        currentState =
-          this.state.optionValues.length > 0
-            ? STATE_TYPES.ExistingPredefined
-            : STATE_TYPES.ExistingNonPredefined
-      }
-    } else if (from == 3 && to == 4 && currentState == STATE_TYPES.NewProduct) {
-      let oldState = currentState
-      currentState =
-        this.state.isNewProductVariant == 'Yes'
-          ? STATE_TYPES.NewProductVariant
-          : STATE_TYPES.NewProductNonVariant
-      this.updateStateAfterTransition(oldState, currentState)
-    } else if (
-      from == 4 &&
-      to == 3 &&
-      currentState == STATE_TYPES.NewProductVariant
-    ) {
-      currentState = STATE_TYPES.NewProduct
-    } else if (
-      from == 4 &&
-      to == 3 &&
-      currentState == STATE_TYPES.NewProductNonVariant
-    ) {
-      currentState = STATE_TYPES.NewProduct
-    }
-
-    return this.setState({ currentFormState: currentState })
-  }
-
-  updateStateAfterTransition = (currentState, newState) => {
-    if (
-      currentState == STATE_TYPES.NewProduct &&
-      newState == STATE_TYPES.NewProductNonVariant
-    ) {
-      this.setState({ optionValues: [] })
-    } else if (
-      newState !== currentState &&
-      (newState == STATE_TYPES.NewProduct ||
-        newState == STATE_TYPES.ExistingProduct)
-    ) {
-      this.setState({
-        productGroup: null,
-        productGroupTitle: '',
-        optionValues: []
-      })
-    }
-  }
-
-  getSecondStep = (): FormStep => {
-    if (this.state.currentFormState !== STATE_TYPES.NewProduct) {
-      return renderSelectProductGroupFormStep()
-    } else
-      return {
-        stepTitle: 'Name this product?',
-        formFields: [
-          {
-            label: 'Product name',
-            placeholder: 'e.g Leather Shoe',
-            validators: ['required'],
-            name: 'productGroupTitle',
-            type: {
-              type: 'input'
-            }
-          }
-        ]
-      }
   }
 
   getThirdStep = (): FormStep | any => {
@@ -326,26 +214,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderSelectOptionsFormStep(this.state.productGroupTitle)
-    } else {
-      return {
-        stepTitle: `Does ${
-          this.state.productGroupTitle
-        } comes in different versions like colors or sizes?`,
-        formFields: [
-          {
-            label: 'Yes or No',
-            name: 'isNewProductVariant',
-            validators: ['required'],
-            type: {
-              type: 'radio',
-              options: ['Yes', 'No']
-            },
-            underneathText:
-              'Each version of a product is called a variant of that product. A cover shoe for instance, may come in different colors and sizes, each bag with a different color and/or size is a variant of the bag'
-          }
-        ]
-      }
+      return renderSelectOptionsFormStep(this.getProductName())
     }
   }
 
@@ -359,15 +228,6 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
         this.state.optionValues,
         this.state.productGroupTitle
       )
-    } else if (
-      this.state.currentFormState == STATE_TYPES.NewProductVariant ||
-      this.state.currentFormState == STATE_TYPES.NewProduct
-    ) {
-      return renderSelectOptionsFormStep(this.state.productGroupTitle)
-    } else if (
-      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
-    ) {
-      return renderProductDescriptionStep(this.getProductName())
     }
   }
 
@@ -378,15 +238,6 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
       return renderProductDescriptionStep(this.getProductName())
-    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderOptionValuesInputStep(
-        this.state.optionValues,
-        this.state.productGroupTitle
-      )
-    } else if (
-      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
-    ) {
-      return renderCategoryStep('product')
     }
   }
 
@@ -397,12 +248,6 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
       return renderCategoryStep('product')
-    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderProductDescriptionStep(this.getProductName())
-    } else if (
-      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
-    ) {
-      return renderTagStep(this.getProductName(), 'product')
     }
   }
 
@@ -413,12 +258,6 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
       return renderTagStep(this.getProductName(), 'product')
-    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderCategoryStep('product')
-    } else if (
-      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
-    ) {
-      return renderFeaturedImageStep(this.getProductName())
     }
   }
 
@@ -429,25 +268,11 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
       return renderFeaturedImageStep(this.getProductName())
-    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderTagStep(this.getProductName(), 'product')
-    } else if (
-      this.state.currentFormState == STATE_TYPES.NewProductNonVariant
-    ) {
-      return renderMediaStep(this.getProductName())
     }
   }
 
   getNinthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingNonPredefined) {
-      return renderMediaStep(this.getProductName())
-    } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderFeaturedImageStep(this.getProductName())
-    }
-  }
-
-  getTenthStep = (): FormStep | any => {
-    if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
       return renderMediaStep(this.getProductName())
     }
   }
@@ -516,14 +341,14 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
   }
 }
 
-const _CreateProductScreen: any = props => (
+const _AddProductVariantScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => <CreateProductScreen {...props} user={user} />}
+    {({ user }) => <AddProductVariantScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
 
-_CreateProductScreen.navigationOptions = {
+_AddProductVariantScreen.navigationOptions = {
   header: null
 }
 
-export default _CreateProductScreen
+export default _AddProductVariantScreen

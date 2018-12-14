@@ -14,11 +14,6 @@ import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
 import CustomerScreen from '../Screen/Contact/CustomerScreen'
 import CustomerPaymentActivity from '../Screen/Contact/CustomerPaymentActivity'
 
-// Vendor Screens
-import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen'
-import VendorDetailScreen from '../Screen/Contact/VendorDetailScreen'
-import VendorScreen from '../Screen/Contact/VendorScreen'
-
 /***
  *
  * STORE SCREENS
@@ -27,6 +22,10 @@ import VendorScreen from '../Screen/Contact/VendorScreen'
 import CreateProductScreen from '../Screen/Store/CreateProductScreen'
 import ProductDetailsScreen from '../Screen/Store/ProductDetailsScreen'
 import ProductScreen from '../Screen/Store/ProductScreen'
+import UpdateProductScreen from '../Screen/Store/UpdateProductScreen'
+import UpdateProductGroupOptionsScreen from '../Screen/Store/UpdateProductGroupOptionsScreen'
+import AddProductVariantScreen from '../Screen/Store/AddProductVariantScreen'
+import UpsertProductRestockScreen from '../Screen/Store/UpsertProductRestockScreen'
 
 // Service Screens
 import UpsertServiceScreen from '../Screen/Store/UpsertServiceScreen'
@@ -34,10 +33,13 @@ import ServiceDetailsScreen from '../Screen/Store/ServiceDetailsScreen'
 import ServicesScreen from '../Screen/Store/ServicesScreen'
 
 // Category Screens
-import CategoriesScreen from '../Screen/Store/Category/CategoriesScreen'
-import CategoryDetailsScreen from '../Screen/Store/Category/CategoryDetailsScreen'
-import UpsertCategoryScreen from '../Screen/Store/Category/UpsertCategoryScreen'
-import CategoryAssociationsScreen from '../Screen/Store/Category/CategoryAssociationsScreen'
+import CategoriesScreen from '../Screen/Settings/Category/CategoriesScreen'
+import UpsertCategoryScreen from '../Screen/Settings/Category/UpsertCategoryScreen'
+// import CategoryAssociationsScreen from '../Screen/Settings/Category/CategoryAssociationsScreen'
+
+// Options Screens
+import OptionsScreen from '../Screen/Settings/Option/OptionsScreen'
+import UpsertOptionScreen from '../Screen/Settings/Option/UpsertOptionScreen'
 
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
@@ -50,10 +52,6 @@ import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 
 // Order
 import OrderStatusScreen from '../Screen/OrderStatusScreen'
-
-//Purchase Order screens
-import PurchaseScreen from '../Screen/PurchaseScreen'
-import PurchaseDetailsScreen from '../Screen/PurchaseDetailsScreen'
 
 //Sales Order screens
 import SalesOrderScreen from '../Screen/SalesOrderScreen'
@@ -87,7 +85,6 @@ import UpsertBankScreen from '../Screen/UpsertBankScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
 import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
 
-import ReceiptsScreen from '../Screen/ReceiptsScreen'
 import IncomeScreen from '../Screen/IncomeScreen'
 
 import { color } from '../Style/Color'
@@ -113,9 +110,6 @@ const businessStack = StackNavigator(
     UpsertBank: UpsertBankScreen,
     Income: {
       screen: IncomeScreen
-    },
-    Receipts: {
-      screen: ReceiptsScreen
     },
     Invoice: {
       screen: InvoicesScreen
@@ -148,9 +142,13 @@ const businessStack = StackNavigator(
     Services: {
       screen: ServicesScreen
     },
-    UpsertProduct: {
+    CreateProduct: {
       screen: CreateProductScreen
     },
+    UpdateProduct: UpdateProductScreen,
+    UpsertProductRestock: UpsertProductRestockScreen,
+    UpdateProductGroupOptions: UpdateProductGroupOptionsScreen,
+    AddProductVariant: AddProductVariantScreen,
     ProductDetails: {
       screen: ProductDetailsScreen
     },
@@ -158,9 +156,12 @@ const businessStack = StackNavigator(
     ServicesDetails: ServiceDetailsScreen,
 
     Categories: CategoriesScreen,
-    CategoryDetails: CategoryDetailsScreen,
     UpsertCategory: UpsertCategoryScreen,
-    CategoryAssociations: CategoryAssociationsScreen,
+    // CategoryAssociations: CategoryAssociationsScreen,
+
+    // Options
+    Options: OptionsScreen,
+    UpsertOption: UpsertOptionScreen,
 
     // Expenses
     Expenses: ExpensesScreen,
@@ -169,10 +170,6 @@ const businessStack = StackNavigator(
 
     // Order
     OrderStatusChange: OrderStatusScreen,
-
-    // Purchase
-    Purchase: PurchaseScreen,
-    PurchaseDetails: PurchaseDetailsScreen,
 
     // Sales Order
     SalesDetails: SalesOrderDetailsScreen,
@@ -190,16 +187,7 @@ const businessStack = StackNavigator(
     CustomerDetails: {
       screen: CustomerDetailScreen
     },
-    CustomerPaymentActivity: CustomerPaymentActivity,
-    Vendors: {
-      screen: VendorScreen
-    },
-    UpsertVendor: {
-      screen: UpsertVendorScreen
-    },
-    VendorDetails: {
-      screen: VendorDetailScreen
-    }
+    CustomerPaymentActivity: CustomerPaymentActivity
   },
   {
     initialRouteName: 'Home',

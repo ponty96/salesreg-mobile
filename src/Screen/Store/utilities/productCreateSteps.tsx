@@ -22,7 +22,8 @@ export const renderSelectProductGroupFormStep = (): FormStep => ({
         type: 'search-picker',
         searchQuery: SearchProductGroupsByTitleGQL,
         searchQueryResponseKey: 'searchProductGroupsByTitle'
-      }
+      },
+      validators: ['required']
     }
   ]
 })
@@ -86,13 +87,20 @@ export const renderProductDescriptionStep = (name): FormStep => ({
   ]
 })
 
+const getProductName = name => {
+  let label = name.substr(0, 27)
+  if (name.length >= 27) {
+    label = `${label}...`
+  }
+  return label
+}
 export const renderOptionValuesInputStep = (
   optionValues: OptionValue[],
   name
 ) => ({
   stepTitle: `Enter variant values for ${name}`,
   formFields: optionValues.map(optionValue => ({
-    label: `${name} ${optionValue.optionName}`,
+    label: `${getProductName(name)} ${optionValue.optionName}`,
     type: {
       type: 'input',
       keyboardType: 'default'
@@ -114,6 +122,24 @@ export const renderCategoryStep = (type): FormStep => ({
         searchQueryResponseKey: 'searchCategoriesByTitle'
       },
       name: 'categories'
+    },
+    {
+      label: `Is this a featured ${type}?`,
+      type: {
+        type: 'radio',
+        options: ['yes', 'no']
+      },
+      name: 'isFeatured',
+      underneathText: `Featured ${type}s are displayed on your webstores home page`
+    },
+    {
+      label: `Is this a top rated ${type}?`,
+      type: {
+        type: 'radio',
+        options: ['yes', 'no']
+      },
+      name: 'isTopRatedByMerchant',
+      underneathText: `Lorem Ipsum`
     }
   ]
 })

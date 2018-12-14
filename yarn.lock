@@ -656,8 +656,8 @@
   resolved "https://registry.yarnpkg.com/@types/node/-/node-8.10.38.tgz#e05c201a668492e534b48102aca0294898f449f6"
 
 "@types/prop-types@*", "@types/prop-types@^15.5.2":
-  version "15.5.7"
-  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.7.tgz#c6f1e0d0109ff358b132d98b7b4025c7a7b707c5"
+  version "15.5.8"
+  resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.5.8.tgz#8ae4e0ea205fe95c3901a5a1df7f66495e3a56ce"
 
 "@types/react-dom@^16.0.5":
   version "16.0.11"
@@ -686,8 +686,8 @@
     "@types/react-native" "*"
 
 "@types/react-native@*":
-  version "0.57.15"
-  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.15.tgz#80ddae98249ea0625b13b6d20a96582b67511a29"
+  version "0.57.18"
+  resolved "https://registry.yarnpkg.com/@types/react-native/-/react-native-0.57.18.tgz#f9c18fc59a3d038ed1f9414b84a8d9ba7078fc45"
   dependencies:
     "@types/prop-types" "*"
     "@types/react" "*"
@@ -719,8 +719,8 @@
     "@types/react" "*"
 
 "@types/react@*", "@types/react@^16.3.14":
-  version "16.7.13"
-  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.13.tgz#d2369ae78377356d42fb54275d30218e84f2247a"
+  version "16.7.17"
+  resolved "https://registry.yarnpkg.com/@types/react/-/react-16.7.17.tgz#3242e796a1ffbba4f49eae5915a67f4c079504e9"
   dependencies:
     "@types/prop-types" "*"
     csstype "^2.2.0"
@@ -910,35 +910,35 @@ apollo-client@^2.3.5:
     "@types/async" "2.0.50"
 
 apollo-link-context@^1.0.8:
-  version "1.0.10"
-  resolved "https://registry.yarnpkg.com/apollo-link-context/-/apollo-link-context-1.0.10.tgz#c20b0b32c6e4e08c0d3967174f9c2a897c8431fe"
+  version "1.0.11"
+  resolved "https://registry.yarnpkg.com/apollo-link-context/-/apollo-link-context-1.0.11.tgz#b0ba1918a7e32cf0e40004781ec267568caa2e47"
   dependencies:
-    apollo-link "^1.2.4"
+    apollo-link "^1.2.5"
 
 apollo-link-dedup@^1.0.0:
-  version "1.0.11"
-  resolved "https://registry.yarnpkg.com/apollo-link-dedup/-/apollo-link-dedup-1.0.11.tgz#6f34ea748d2834850329ad03111ef18445232b05"
+  version "1.0.12"
+  resolved "https://registry.yarnpkg.com/apollo-link-dedup/-/apollo-link-dedup-1.0.12.tgz#b17d775b97f24878794cbec5a4ecef13cf45fd33"
   dependencies:
-    apollo-link "^1.2.4"
+    apollo-link "^1.2.5"
 
 apollo-link-error@^1.1.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/apollo-link-error/-/apollo-link-error-1.1.2.tgz#d068fdf99892e6fc65cfe0390db8528d182f9481"
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/apollo-link-error/-/apollo-link-error-1.1.3.tgz#05563c682caced2665974fe03c572e34cb3184ed"
   dependencies:
-    apollo-link "^1.2.4"
+    apollo-link "^1.2.5"
 
-apollo-link-http-common@^0.2.3, apollo-link-http-common@^0.2.6:
-  version "0.2.6"
-  resolved "https://registry.yarnpkg.com/apollo-link-http-common/-/apollo-link-http-common-0.2.6.tgz#47b9012500599fe343e2e87378026384b4fc8c1f"
+apollo-link-http-common@^0.2.3, apollo-link-http-common@^0.2.7:
+  version "0.2.7"
+  resolved "https://registry.yarnpkg.com/apollo-link-http-common/-/apollo-link-http-common-0.2.7.tgz#cd8718f7db2178fb80600014fe9f14c4a8394985"
   dependencies:
-    apollo-link "^1.2.4"
+    apollo-link "^1.2.5"
 
 apollo-link-http@^1.5.4:
-  version "1.5.7"
-  resolved "https://registry.yarnpkg.com/apollo-link-http/-/apollo-link-http-1.5.7.tgz#098615c427a910ec8c5817476bbabe68c586b339"
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/apollo-link-http/-/apollo-link-http-1.5.8.tgz#1be551338ca00db4082114221b409e0470fcc7e6"
   dependencies:
-    apollo-link "^1.2.4"
-    apollo-link-http-common "^0.2.6"
+    apollo-link "^1.2.5"
+    apollo-link-http-common "^0.2.7"
 
 apollo-link-state@^0.4.1:
   version "0.4.2"
@@ -954,12 +954,12 @@ apollo-link@1.0.0:
     apollo-utilities "^0.2.0-beta.0"
     zen-observable "^0.6.0"
 
-apollo-link@^1.0.0, apollo-link@^1.2.4:
-  version "1.2.4"
-  resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.4.tgz#ab4d21d2e428db848e88b5e8f4adc717b19c954b"
+apollo-link@^1.0.0, apollo-link@^1.2.5:
+  version "1.2.5"
+  resolved "https://registry.yarnpkg.com/apollo-link/-/apollo-link-1.2.5.tgz#f54932d6b8f1412a35e088bc199a116bce3f1f16"
   dependencies:
     apollo-utilities "^1.0.0"
-    zen-observable-ts "^0.8.11"
+    zen-observable-ts "^0.8.12"
 
 apollo-utilities@1.0.26, apollo-utilities@^1.0.0, apollo-utilities@^1.0.26, apollo-utilities@^1.0.8:
   version "1.0.26"
@@ -3419,7 +3419,7 @@ ip@^1.1.4:
 
 is-accessor-descriptor@^0.1.6:
   version "0.1.6"
-  resolved "https://registry.yarnpkg.com/is-accessor-descriptor/-/is-accessor-descriptor-0.1.6.tgz#a9e12cb3ae8d876727eeef3843f8a0897b5c98d6"
+  resolved "http://registry.npmjs.org/is-accessor-descriptor/-/is-accessor-descriptor-0.1.6.tgz#a9e12cb3ae8d876727eeef3843f8a0897b5c98d6"
   dependencies:
     kind-of "^3.0.2"
 
@@ -3465,7 +3465,7 @@ is-ci@^1.0.10:
 
 is-data-descriptor@^0.1.4:
   version "0.1.4"
-  resolved "https://registry.yarnpkg.com/is-data-descriptor/-/is-data-descriptor-0.1.4.tgz#0b5ee648388e2c860282e793f1856fec3f301b56"
+  resolved "http://registry.npmjs.org/is-data-descriptor/-/is-data-descriptor-0.1.4.tgz#0b5ee648388e2c860282e793f1856fec3f301b56"
   dependencies:
     kind-of "^3.0.2"
 
@@ -4186,6 +4186,10 @@ jsprim@^1.2.2:
     json-schema "0.2.3"
     verror "1.10.0"
 
+keymirror@0.1.1:
+  version "0.1.1"
+  resolved "https://registry.yarnpkg.com/keymirror/-/keymirror-0.1.1.tgz#918889ea13f8d0a42e7c557250eee713adc95c35"
+
 kind-of@^1.1.0:
   version "1.1.0"
   resolved "http://registry.npmjs.org/kind-of/-/kind-of-1.1.0.tgz#140a3d2d41a36d2efcfa9377b62c24f8495a5c44"
@@ -4713,8 +4717,8 @@ mock-async-storage@^1.0.3:
     deepmerge "^1.3.1"
 
 moment@^2.22.0, moment@^2.22.2:
-  version "2.22.2"
-  resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
+  version "2.23.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.23.0.tgz#759ea491ac97d54bac5ad776996e2a58cc1bc225"
 
 morgan@^1.9.0:
   version "1.9.1"
@@ -5351,8 +5355,8 @@ pseudomap@^1.0.2:
   resolved "https://registry.yarnpkg.com/pseudomap/-/pseudomap-1.0.2.tgz#f052a28da70e618917ef0a8ac34c1ae5a68286b3"
 
 psl@^1.1.24, psl@^1.1.28:
-  version "1.1.29"
-  resolved "https://registry.yarnpkg.com/psl/-/psl-1.1.29.tgz#60f580d360170bb722a797cc704411e6da850c67"
+  version "1.1.31"
+  resolved "https://registry.yarnpkg.com/psl/-/psl-1.1.31.tgz#e9aa86d0101b5b105cbe93ac6b784cd547276184"
 
 punycode@^1.4.1:
   version "1.4.1"
@@ -5659,6 +5663,14 @@ react-native-vector-icons@^5.0.0:
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
+
+react-native-video@^4.0.1:
+  version "4.2.0"
+  resolved "https://registry.yarnpkg.com/react-native-video/-/react-native-video-4.2.0.tgz#75d30a593498e2618ba05ef13ee8eb8de69561d4"
+  dependencies:
+    keymirror "0.1.1"
+    prop-types "^15.5.10"
+    shaka-player "2.4.4"
 
 react-native@0.56.0:
   version "0.56.0"
@@ -6234,6 +6246,10 @@ setimmediate@^1.0.5:
 setprototypeof@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/setprototypeof/-/setprototypeof-1.1.0.tgz#d0bd85536887b6fe7c0d818cb962d9d91c54e656"
+
+shaka-player@2.4.4:
+  version "2.4.4"
+  resolved "https://registry.yarnpkg.com/shaka-player/-/shaka-player-2.4.4.tgz#bade8ff6b9a4bb649899d10cd4ffd05781dd79ab"
 
 shebang-command@^1.2.0:
   version "1.2.0"
@@ -7265,9 +7281,9 @@ yauzl@2.4.1:
   dependencies:
     fd-slicer "~1.0.1"
 
-zen-observable-ts@^0.8.11:
-  version "0.8.11"
-  resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.11.tgz#d54a27cd17dc4b4bb6bd008e5c096af7fcb068a9"
+zen-observable-ts@^0.8.12:
+  version "0.8.12"
+  resolved "https://registry.yarnpkg.com/zen-observable-ts/-/zen-observable-ts-0.8.12.tgz#38810d98645285c074775ab26b69992cc847c830"
   dependencies:
     zen-observable "^0.8.0"
 

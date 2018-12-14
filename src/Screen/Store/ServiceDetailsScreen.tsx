@@ -33,7 +33,10 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
   sections = (): any => {
     const service = this.props.navigation.getParam('service', {})
     return [
-      { section: 'Total Services Rendered', value: '2344' },
+      {
+        section: 'Total Services Rendered',
+        value: `${service.totalTimesOrdered || 0}`
+      },
       { section: 'Price', value: `\u20A6 ${service.price}` },
       {
         section: 'Categories',
@@ -87,10 +90,7 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
           }
         ]}
         onSuccessfulDeletion={() => this.props.navigation.navigate('Services')}
-        image={
-          service.image ||
-          'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
-        } // change logic based on service having multiple images
+        image={service.featuredImage}
         headerText={service.name}
       />
     ]

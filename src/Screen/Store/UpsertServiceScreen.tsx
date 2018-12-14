@@ -5,17 +5,18 @@ import { ListCompanyServicesGQL } from '../../graphql/queries/store'
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
-import Auth from '../../services/auth'
 import {
   renderCategoryStep,
   renderTagStep,
   renderFeaturedImageStep,
   renderMediaStep
 } from './utilities/productCreateSteps'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any
   screenProps: any
+  user: any
 }
 
 interface IState {
@@ -29,9 +30,11 @@ interface IState {
   fieldErrors: any
   categories: string[]
   tags: string[]
+  isTopRatedByMerchant: any
+  isFeatured: any
 }
 
-export default class UpsertServiceScreen extends Component<IProps, IState> {
+class UpsertServiceScreen extends Component<IProps, IState> {
   state = {
     name: '',
     price: 0,
@@ -42,7 +45,9 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     companyId: '',
     fieldErrors: null,
     categories: [],
-    tags: []
+    tags: [],
+    isTopRatedByMerchant: null,
+    isFeatured: null
   }
 
   updateState = (key: string, value: any) => {
@@ -50,24 +55,20 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     this.setState(state)
   }
 
-  static navigationOptions = {
-    header: null
-  }
-
   componentDidMount() {
     const service = this.props.navigation.getParam('service', null)
+    const { user } = this.props
     if (service) {
-      this.setState({ ...service })
+      this.setState({
+        ...service,
+        tags: service.tags.map(tag => tag.name),
+        isTopRatedByMerchant:
+          service.isTopRatedByMerchant == false ? 'no' : 'yes',
+        isFeatured: service.isFeatured == false ? 'no' : 'yes',
+        userId: user.id,
+        companyId: user.company.id
+      })
     }
-    this.updateDetails()
-  }
-
-  updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
-    this.setState({
-      userId: user.id,
-      companyId: user.company.id
-    })
   }
 
   render() {
@@ -146,8 +147,16 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
 
   parseMutationVariables = () => {
     const service = this.props.navigation.getParam('service', {})
-    let params = { ...this.state }
+    let params = {
+      ...this.state,
+      isTopRatedByMerchant:
+        this.state.isTopRatedByMerchant == 'no' ? false : true,
+      isFeatured: this.state.isFeatured == 'no' ? false : true,
+      categories: this.state.categories.map(cat => cat.id)
+    }
     delete params.fieldErrors
+    delete params['__typename']
+    delete params['id']
 
     return {
       service: params,
@@ -166,3 +175,14 @@ export default class UpsertServiceScreen extends Component<IProps, IState> {
     }
   }
 }
+
+const _UpsertServiceScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <UpsertServiceScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+_UpsertServiceScreen.navigationOptions = {
+  header: null
+}
+export default _UpsertServiceScreen

@@ -1,5 +1,11 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableWithoutFeedback } from 'react-native'
+import {
+  Text,
+  StyleSheet,
+  View,
+  TouchableWithoutFeedback,
+  TouchableOpacity
+} from 'react-native'
 import { color } from '../../Style/Color'
 import Icon from '../Icon'
 
@@ -8,6 +14,8 @@ interface IProps {
   value: any
   iconName?: string
   body?: any
+  type?: any
+  onPress?: () => void
 }
 
 interface IState {
@@ -19,7 +27,23 @@ class ProfileListAtom extends Component<IProps, IState> {
     bodyViewState: false
   }
   rightRightComponent = (value: any) => {
-    if (typeof value == 'string') {
+    if (this.props.type == 'currency') {
+      return <Text style={styles.priceText}>{this.props.value}</Text>
+    } else if (this.props.type == 'button') {
+      return (
+        <TouchableOpacity onPress={this.props.onPress}>
+          <View style={styles.buttonRow}>
+            <Text style={styles.rightLabel}>{this.props.value}</Text>
+            <Icon
+              name="chevron-small-right"
+              type="Entypo"
+              onPress={this.props.onPress}
+              style={styles.arrowIcon}
+            />
+          </View>
+        </TouchableOpacity>
+      )
+    } else if (typeof value == 'string') {
       return <Text style={styles.normalText}>{this.props.value}</Text>
     } else if (
       this.props.body ||
@@ -145,5 +169,23 @@ const styles = StyleSheet.create({
   },
   hideBorder: {
     borderBottomWidth: 0
+  },
+  priceText: {
+    fontSize: 14,
+    fontFamily: 'AvenirNext-Medium',
+    color: color.selling
+  },
+  buttonRow: {
+    flexDirection: 'row',
+    alignItems: 'center'
+  },
+  rightLabel: {
+    color: color.button,
+    fontSize: 14,
+    fontFamily: 'AvenirNext-Medium'
+  },
+  arrowIcon: {
+    fontSize: 28,
+    color: color.button
   }
 })

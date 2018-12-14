@@ -103,6 +103,10 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   }
 
   toggleOpenState = () => {
+    this.setState({ isOpen: !this.state.isOpen })
+  }
+
+  closePicker = () => {
     this.setState({ isOpen: !this.state.isOpen }, () => {
       this.props.handleSelection(this.state.selectedItems)
     })
@@ -158,17 +162,17 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
         animationType="slide"
         transparent={false}
         visible={this.state.isOpen}
-        onRequestClose={this.toggleOpenState}
+        onRequestClose={this.closePicker}
         key="133433445566446"
       >
         <FormHeader
-          onPressBackIcon={this.toggleOpenState}
+          onPressBackIcon={this.closePicker}
           iconName="md-close"
           currentStep={1}
           totalSteps={1}
           showStepper={false}
           showTickIcon={true}
-          onPressTickIcon={this.toggleOpenState}
+          onPressTickIcon={this.closePicker}
         />
         <SearchAtom
           placeholder="Search"

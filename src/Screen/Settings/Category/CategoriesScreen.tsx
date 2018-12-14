@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Alert } from 'react-native'
-import Header from '../../../Components/Header/BaseHeader'
+import Header from '../../../Components/Header/DetailsScreenHeader'
 import GenericListIndex from '../../../Components/Generic/ListIndex'
 import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
 
@@ -15,7 +15,8 @@ export default class CategoriesScreen extends React.Component<IProps> {
         <Header
           title="Categories"
           onPressRightIcon={() => Alert.alert('Search button pressed.')}
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
+          onPressLeftIcon={() => navigation.goBack()}
+          hideRightMenu={true}
         />
       )
     }
@@ -46,7 +47,7 @@ export default class CategoriesScreen extends React.Component<IProps> {
         graphqlQueryResultKey="listCompanyCategories"
         parseItemData={this.parseData}
         onItemPress={item =>
-          this.props.navigation.navigate('CategoryDetails', { category: item })
+          this.props.navigation.navigate('UpsertCategory', { category: item })
         }
         emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
         headerText="Great habit keeping records!"

@@ -17,6 +17,8 @@ import AppSpinner from '../../Components/Spinner'
 interface Section {
   section: string
   value?: any
+  type?: any
+  onPress?: () => void
 }
 
 interface IProps {
@@ -131,9 +133,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
         <View style={styles.pictureView}>
           <Thumbnail
             source={{
-              uri:
-                this.props.image ||
-                'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+              uri: this.props.image
             }}
             style={{ width: '100%', height: 280, borderRadius: 0 }}
           />
@@ -153,6 +153,8 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
           value={item.value}
           iconName={item.icon}
           body={item.body}
+          type={item.type}
+          onPress={item.onPress}
         />
       )
     }
