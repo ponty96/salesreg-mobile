@@ -1,16 +1,23 @@
 import React from 'react'
 import Header from '../../../Components/Header/DetailsScreenHeader'
 import { GreenCanvas } from '../../../Atom/GreenCanvas'
-import { StyleSheet, View } from 'react-native'
+import { StyleSheet, View, TouchableOpacity, Alert } from 'react-native'
 import { color } from '../../../Style/Color'
 import ExpandableListItemAtom from '../../../Atom/ListItem/ExpandableListItemAtom'
 import SubHeaderAtom from '../../../Components/Header/SubHeaderAtom'
+import { Icon } from 'native-base'
+import { Mutation } from 'react-apollo'
+import { DeleteCategoryGQL } from '../../../graphql/mutations/store'
+import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
+import { UserContext } from '../../../context/UserContext'
+import AppSpinner from '../../../Components/Spinner'
 
 interface IProps {
   navigation: any
+  user?: any
 }
 
-export default class CategoryDetailsScreen extends React.PureComponent<IProps> {
+class CategoryDetailsScreen extends React.PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     const category = navigation.getParam('category', {})
     return {
@@ -32,29 +39,106 @@ export default class CategoryDetailsScreen extends React.PureComponent<IProps> {
     return products.length + services.length
   }
 
+  onDeleteCompleted = async res => {
+    const {
+      deleteCategory: { success, fieldErrors }
+    } = res
+    if (!success) {
+      setTimeout(
+        () =>
+          Alert.alert(
+            'Error',
+            fieldErrors[0].message,
+            [{ text: 'Ok', onPress: () => null }],
+            { cancelable: false }
+          ),
+        100
+      )
+    } else {
+      this.props.navigation.navigate('Categories')
+    }
+  }
+
   render() {
     const category = this.props.navigation.getParam('category', {})
     return (
-      <View style={styles.container}>
-        <GreenCanvas title={category.title} />
-        <SubHeaderAtom
-          total={this.getAssociatedItemsCount()}
-          screen={'Category'}
-          rightLabel="View Associated Products & Services"
-          onPressArrow={() =>
-            this.props.navigation.navigate('CategoryAssociations', { category })
+      <Mutation
+        mutation={DeleteCategoryGQL}
+        onCompleted={this.onDeleteCompleted}
+        refetchQueries={[
+          {
+            query: ListCompanyCategoriesGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              after: null,
+              first: 10
+            }
           }
-          iconName="md-apps"
-        />
-        <ExpandableListItemAtom section="Title" value={category.title} />
-        <ExpandableListItemAtom
-          section="Description"
-          value={category.description ? [category.description] : null}
-        />
-      </View>
+        ]}
+        awaitRefetchQueries={true}
+      >
+        {(deleteCategory, { loading }) => {
+          return (
+            <React.Fragment>
+              <AppSpinner visible={loading} />
+              <View style={styles.container}>
+                <GreenCanvas title={category.title} />
+                <SubHeaderAtom
+                  total={this.getAssociatedItemsCount()}
+                  screen={'Category'}
+                  rightLabel="View Associated Products & Services"
+                  onPressArrow={() =>
+                    this.props.navigation.navigate('CategoryAssociations', {
+                      category
+                    })
+                  }
+                  iconName="md-apps"
+                />
+                <ExpandableListItemAtom
+                  section="Title"
+                  value={category.title}
+                />
+                <ExpandableListItemAtom
+                  section="Description"
+                  value={category.description ? [category.description] : null}
+                />
+                <TouchableOpacity
+                  style={{
+                    flex: 1,
+                    backgroundColor: 'transparent',
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '100%'
+                  }}
+                  onPress={() =>
+                    deleteCategory({ variables: { categoryId: category.id } })
+                  }
+                >
+                  <Icon
+                    type="EvilIcons"
+                    name="trash"
+                    style={{ color: color.textBorderBottom, fontSize: 60 }}
+                  />
+                </TouchableOpacity>
+              </View>
+            </React.Fragment>
+          )
+        }}
+      </Mutation>
     )
   }
 }
+
+const _CategoryDetailsScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <CategoryDetailsScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+_CategoryDetailsScreen.navigationOptions =
+  CategoryDetailsScreen.navigationOptions
+
+export default _CategoryDetailsScreen
 
 const styles = StyleSheet.create({
   container: {

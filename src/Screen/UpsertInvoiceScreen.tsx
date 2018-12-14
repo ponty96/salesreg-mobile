@@ -113,7 +113,11 @@ export default class UpsertInvoiceScreen extends React.PureComponent<
           handleBackPress={() => this.props.navigation.goBack()}
           formData={this.state}
           updateValueChange={this.updateState}
-          onCompleteSteps={this.chargeCard}
+          onCompleteSteps={() =>
+            this.state.paymentMethod.toLowerCase() != 'cash'
+              ? this.chargeCard()
+              : () => null
+          }
           steps={[
             {
               stepTitle: 'Payment Method',

@@ -1,10 +1,19 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, FlatList, TouchableOpacity } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  FlatList,
+  Alert,
+  TouchableOpacity
+} from 'react-native'
 import ListItemAtom from '../../Atom/ListItem/ListItemAtom'
 import { color } from '../../Style/Color'
 import Icon from '../../Atom/Icon'
 import { GreenCanvas } from '../../Atom/GreenCanvas'
 import FabAtom from '../../Atom/FabAtom'
+import { DocumentNode } from 'graphql'
+import { Mutation } from 'react-apollo'
+import AppSpinner from '../Spinner'
 
 interface Item {
   itemTitle: string
@@ -12,6 +21,7 @@ interface Item {
   isTotalAmount?: boolean
   itemQuantity?: string
 }
+
 interface IProps {
   title: string
   totalAmount: string
@@ -27,6 +37,12 @@ interface IProps {
   navigation?: any
   fabIconName?: string
   fabIconType?: string
+  graphqlDeleteMutation?: DocumentNode
+  graphqlRefetchQueries?: any[]
+  graphqlDeleteVariables?: {}
+  graphqlDeleteMutationResultKey?: string
+  enableDelete?: boolean
+  onSuccessfulDeletion?: () => void
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
@@ -54,7 +70,8 @@ const renderStatusIndicator = (bottomRightText: string): any => {
 export default class GenericDetailsComponent extends Component<IProps> {
   static defaultProps = {
     hideTotal: false,
-    showFab: false
+    showFab: false,
+    enableDelete: true
   }
 
   getItems = () => {
@@ -114,7 +131,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
     )
   }
 
-  render() {
+  renderDetailsUI = (deleteFn?: (variables: any) => void) => {
     const {
       title,
       totalAmount,
@@ -133,22 +150,26 @@ export default class GenericDetailsComponent extends Component<IProps> {
           renderItem={this.renderItem}
           keyExtractor={(item: any) => item.id}
         />
-        <TouchableOpacity
-          style={{
-            flex: 1,
-            backgroundColor: 'transparent',
-            justifyContent: 'center',
-            alignItems: 'center',
-            height: '100%'
-          }}
-          onPress={this.props.onTrash}
-        >
-          <Icon
-            type="EvilIcons"
-            name="trash"
-            style={{ color: color.textBorderBottom, fontSize: 60 }}
-          />
-        </TouchableOpacity>
+        {this.props.enableDelete && (
+          <TouchableOpacity
+            style={{
+              flex: 1,
+              backgroundColor: 'transparent',
+              justifyContent: 'center',
+              alignItems: 'center',
+              height: '100%'
+            }}
+            onPress={() =>
+              deleteFn({ variables: this.props.graphqlDeleteVariables })
+            }
+          >
+            <Icon
+              type="EvilIcons"
+              name="trash"
+              style={{ color: color.textBorderBottom, fontSize: 60 }}
+            />
+          </TouchableOpacity>
+        )}
         {this.props.showFab && (
           <FabAtom
             routeName={fabRouteName}
@@ -160,6 +181,53 @@ export default class GenericDetailsComponent extends Component<IProps> {
         )}
       </View>
     )
+  }
+
+  onDeleteCompleted = async res => {
+    const {
+      [this.props.graphqlDeleteMutationResultKey]: { success, fieldErrors }
+    } = res
+    if (!success) {
+      setTimeout(
+        () =>
+          Alert.alert(
+            'Error',
+            fieldErrors[0].message,
+            [{ text: 'Ok', onPress: () => null }],
+            { cancelable: false }
+          ),
+        100
+      )
+    } else {
+      console.log('This was successful ', success)
+      this.props.onSuccessfulDeletion()
+    }
+  }
+
+  render() {
+    let {
+      enableDelete,
+      graphqlDeleteMutation,
+      graphqlRefetchQueries
+    } = this.props
+    if (enableDelete) {
+      return (
+        <Mutation
+          mutation={graphqlDeleteMutation}
+          onCompleted={this.onDeleteCompleted}
+          refetchQueries={graphqlRefetchQueries || []}
+          awaitRefetchQueries={true}
+        >
+          {(deleteDetails, { loading }) => (
+            <React.Fragment>
+              <AppSpinner visible={loading} />
+              {this.renderDetailsUI(deleteDetails)}
+            </React.Fragment>
+          )}
+        </Mutation>
+      )
+    }
+    return this.renderDetailsUI()
   }
 }
 

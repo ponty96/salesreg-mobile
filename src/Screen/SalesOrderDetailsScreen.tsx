@@ -1,13 +1,19 @@
 import React, { Component } from 'react'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { Icon } from 'native-base'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../Components/Generic/Details'
 import moment from 'moment'
 import Preferences from '../services/preferences'
+import { UserContext } from '../context/UserContext'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
+  user?: any
 }
-export default class SalesOrderDetailsScreen extends Component<IProps> {
+
+class SalesOrderDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
     const sales = navigation.getParam('sales', {})
     return {
@@ -64,19 +70,65 @@ export default class SalesOrderDetailsScreen extends Component<IProps> {
   render() {
     const sales = this.props.navigation.getParam('sales', {})
     return (
-      <GenericDetailsComponent
-        title={sales.contact.contactName}
-        totalAmount={parseFloat(sales.amount).toFixed(2)}
-        items={this.parseItems()}
-        shouldShowStatus={true}
-        showFab={true}
-        fabRouteName="Invoice"
-        fabRouteParams={{ sales }}
-        navigation={this.props.navigation}
-        fabIconName="receipt"
-        fabIconType="MaterialIcons"
-        onPressStatus={this.onStatusPress}
-      />
+      <View style={styles.container}>
+        <GenericDetailsComponent
+          title={sales.contact.contactName}
+          totalAmount={parseFloat(sales.amount).toFixed(2)}
+          items={this.parseItems()}
+          shouldShowStatus={true}
+          onPressStatus={this.onStatusPress}
+          enableDelete={false}
+        />
+        <TouchableOpacity
+          onPress={() => this.props.navigation.navigate('Invoice', { sales })}
+        >
+          <View style={styles.invoicebuttomContainer}>
+            <Text style={styles.invoiceText}>Invoice</Text>
+            <Icon
+              name="ios-arrow-forward"
+              type="Ionicons"
+              style={styles.invoiceIcon}
+            />
+          </View>
+        </TouchableOpacity>
+      </View>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'space-between'
+  },
+  invoicebuttomContainer: {
+    flexDirection: 'row',
+    justifyContent: 'flex-end',
+    alignItems: 'center',
+    height: 70,
+    paddingRight: 24,
+    borderTopWidth: StyleSheet.hairlineWidth,
+    borderTopColor: '#bdbdbd',
+    backgroundColor: '#fff'
+  },
+  invoiceText: {
+    fontSize: 16,
+    color: color.button,
+    marginRight: 10
+  },
+  invoiceIcon: {
+    fontSize: 35,
+    color: color.button
+  }
+})
+
+const _SalesOrderDetailsScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <SalesOrderDetailsScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+_SalesOrderDetailsScreen.navigationOptions =
+  SalesOrderDetailsScreen.navigationOptions
+
+export default _SalesOrderDetailsScreen

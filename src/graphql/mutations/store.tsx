@@ -39,6 +39,18 @@ export const CreateProductGQL = gql`
   }
 `
 
+export const DeleteProductGQL = gql`
+  mutation deleteProduct($productId: Uuid!) {
+    deleteProduct(productId: $productId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
 export const UpsertServiceGQL = gql`
   mutation UpsertService($serviceId: Uuid, $service: ServiceInput!) {
     upsertService(service: $service, serviceId: $serviceId) {
@@ -58,6 +70,18 @@ export const UpsertServiceGQL = gql`
   }
 `
 
+export const DeleteServiceGQL = gql`
+  mutation deleteService($serviceId: Uuid!) {
+    deleteService(serviceId: $serviceId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
 export const UpsertCategoryGQL = gql`
   mutation UpsertCategory($categoryId: Uuid, $category: CategoryInput!) {
     upsertCategory(categoryId: $categoryId, category: $category) {
@@ -72,6 +96,18 @@ export const UpsertCategoryGQL = gql`
           title
           description
         }
+      }
+    }
+  }
+`
+
+export const DeleteCategoryGQL = gql`
+  mutation DeleteCategory($categoryId: Uuid!) {
+    deleteCategory(categoryId: $categoryId) {
+      success
+      fieldErrors {
+        key
+        message
       }
     }
   }

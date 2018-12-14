@@ -38,3 +38,15 @@ export const UpsertExpenseGQL = gql`
     }
   }
 `
+
+export const DeleteExpenseGQL = gql`
+  mutation deleteExpense($expenseId: Uuid!) {
+    deleteExpense(expenseId: $expenseId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
