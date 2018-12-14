@@ -21,6 +21,8 @@ export const ListCompanyProductsGQL = gql`
           images
           isFeatured
           isTopRatedByMerchant
+          totalQuantitySold
+
           user {
             id
             firstName
@@ -79,6 +81,7 @@ export const ListCompanyServicesGQL = gql`
             id
             title
           }
+          totalTimesOrdered
           isFeatured
           isTopRatedByMerchant
           featuredImage

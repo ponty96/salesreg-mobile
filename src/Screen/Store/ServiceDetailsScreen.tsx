@@ -29,7 +29,10 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
   sections = (): any => {
     const service = this.props.navigation.getParam('service', {})
     return [
-      { section: 'Total Services Rendered', value: '2344' },
+      {
+        section: 'Total Services Rendered',
+        value: `${service.totalTimesOrdered || 0}`
+      },
       { section: 'Price', value: `\u20A6 ${service.price}` },
       {
         section: 'Categories',

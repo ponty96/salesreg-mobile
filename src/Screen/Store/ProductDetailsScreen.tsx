@@ -30,7 +30,10 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     return [
       ...this.parseOptionValues(product),
       ...this.showVariantOptionStep(product),
-      { section: 'Total Quantity Sold', value: '2344' },
+      {
+        section: 'Total Quantities Sold',
+        value: `${product.totalQuantitySold || 0}`
+      },
       { section: 'MSQ', value: product.minimumSku },
       {
         section: 'Unit selling price',
