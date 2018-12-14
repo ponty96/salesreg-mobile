@@ -44,6 +44,7 @@ import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
 import CardPaymentAtom from '../../Atom/Form/CardPaymentAtom'
 import AddSalesOrderItemsList from '../../Atom/Form/AddSalesOrderItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
+import ProductListAtom from '../../Atom/Form/ProductListAtom'
 import TagInput from '../../Atom/Form/TagInput'
 import AsyncPickerAtom from '../../Atom/Form/AsyncPickerAtom'
 import { DocumentNode } from 'graphql'
@@ -51,6 +52,7 @@ import {
   validateStep,
   validateField
 } from '../../Functions/formStepperValidators'
+import AddRestockItemsList from '../../Atom/Form/AddRestockItems'
 
 interface FieldType {
   type:
@@ -67,6 +69,8 @@ interface FieldType {
     | 'search-picker'
     | 'search-multi-picker'
     | 'card-payment'
+    | 'restock-items'
+    | 'product-list'
     | 'multi-media-upload'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
@@ -523,6 +527,19 @@ export default class FormStepperContainer extends React.PureComponent<
               placeholder={placeholder}
               handleSelection={val => this.props.updateValueChange(name, val)}
               error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'product-list':
+          return <ProductListAtom list={formData[name]} />
+        case 'restock-items':
+          return (
+            <AddRestockItemsList
+              products={formData[name]}
+              error={fieldErrors && fieldErrors[name]}
+              onUpdateItems={items => {
+                this.checkValidityOnValueChange(items, name, validators)
+                this.props.updateValueChange(name, items)
+              }}
             />
           )
         case 'tag-input':

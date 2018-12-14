@@ -25,6 +25,7 @@ import ProductScreen from '../Screen/Store/ProductScreen'
 import UpdateProductScreen from '../Screen/Store/UpdateProductScreen'
 import UpdateProductGroupOptionsScreen from '../Screen/Store/UpdateProductGroupOptionsScreen'
 import AddProductVariantScreen from '../Screen/Store/AddProductVariantScreen'
+import UpsertProductRestockScreen from '../Screen/Store/UpsertProductRestockScreen'
 
 // Service Screens
 import UpsertServiceScreen from '../Screen/Store/UpsertServiceScreen'
@@ -145,6 +146,7 @@ const businessStack = StackNavigator(
       screen: CreateProductScreen
     },
     UpdateProduct: UpdateProductScreen,
+    UpsertProductRestock: UpsertProductRestockScreen,
     UpdateProductGroupOptions: UpdateProductGroupOptionsScreen,
     AddProductVariant: AddProductVariantScreen,
     ProductDetails: {

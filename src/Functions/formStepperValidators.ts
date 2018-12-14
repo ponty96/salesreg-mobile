@@ -184,7 +184,7 @@ function validateSalesOrder(_value) {
       if (val.name.trim().length == 0 || Number(val.quantity) == 0) {
         fieldValid = false
         errorMessage =
-          'The name or quantity in one of the sales order cannot be empty'
+          'The name or quantity in one of the items cannot be empty'
       } else {
         fieldValid = true
       }
