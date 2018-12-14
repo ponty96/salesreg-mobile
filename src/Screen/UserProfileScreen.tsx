@@ -58,7 +58,7 @@ export default class UserProfileScreen extends Component<IProps, IState> {
         }
       ],
       fullName: `${user.firstName} ${user.lastName}`,
-      profilePicture: user.profilePicture
+      profilePicture: user.profilePicture || ''
     })
   }
 
