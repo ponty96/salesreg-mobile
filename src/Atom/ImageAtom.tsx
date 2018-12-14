@@ -1,7 +1,8 @@
 import * as React from 'react'
-import { Image, View, Text, TouchableOpacity } from 'react-native'
+import { View, Text, TouchableOpacity } from 'react-native'
 import { StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
+import CachedImageAtom from './CachedImageAtom'
 
 interface IProps {
   source: string
@@ -28,8 +29,8 @@ class ImageAtom extends React.Component<IProps, any> {
           style={styles.selfAlign}
         >
           <View style={styles.imgContainer}>
-            <Image
-              source={{ uri: this.state.image.uri || this.props.source }}
+            <CachedImageAtom
+              uri={this.state.image.uri || this.props.source}
               style={styles.image}
             />
           </View>

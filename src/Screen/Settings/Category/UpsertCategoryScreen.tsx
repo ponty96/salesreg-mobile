@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import FormStepperContainer from '../../../Container/Form/StepperContainer'
 import { UpsertCategoryGQL } from '../../../graphql/mutations/store'
+import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
 import Auth from '../../../services/auth'
-import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
 
 interface IProps {
   navigation: any
@@ -79,6 +79,7 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
                     label: 'What should we call this category?',
                     placeholder: 'e.g Sport wears',
                     name: 'title',
+                    validators: ['required'],
                     type: {
                       type: 'input',
                       keyboardType: 'default'

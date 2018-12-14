@@ -101,6 +101,7 @@ export default class EditBusinessProfileScreen extends Component<
                   {
                     label: 'Whats your business name?',
                     placeholder: 'E.g Lidstack',
+                    validators: ['required'],
                     underneathText: `This name will appear on your webstore,\nheader, invoice, receipts, and notifications \nsent to your customers.`,
                     type: {
                       type: 'input',
@@ -130,6 +131,7 @@ export default class EditBusinessProfileScreen extends Component<
                     type: {
                       type: 'input'
                     },
+                    validators: ['required'],
                     name: 'street1'
                   },
                   {
@@ -138,6 +140,7 @@ export default class EditBusinessProfileScreen extends Component<
                     type: {
                       type: 'input'
                     },
+                    validators: ['required'],
                     name: 'city'
                   },
                   {
@@ -146,6 +149,7 @@ export default class EditBusinessProfileScreen extends Component<
                     type: {
                       type: 'input'
                     },
+                    validators: ['required'],
                     name: 'state'
                   },
                   {
@@ -155,6 +159,7 @@ export default class EditBusinessProfileScreen extends Component<
                       type: 'picker',
                       options: Countries
                     },
+                    validators: ['required'],
                     name: 'country'
                   }
                 ]
@@ -168,6 +173,7 @@ export default class EditBusinessProfileScreen extends Component<
                       type: 'phone-input'
                     },
                     name: 'phoneNumber',
+                    validators: ['required', 'phone'],
                     extraData: {
                       countryCode: this.state['country']
                     }
@@ -179,6 +185,7 @@ export default class EditBusinessProfileScreen extends Component<
                       type: 'input',
                       keyboardType: 'email-address'
                     },
+                    validators: ['required', 'email'],
                     name: 'contactEmail'
                   }
                 ]

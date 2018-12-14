@@ -41,10 +41,16 @@ import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
 import MediaUploadAtom from '../../Atom/Form/MediaUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
+import CardPaymentAtom from '../../Atom/Form/CardPaymentAtom'
+import AddSalesOrderItemsList from '../../Atom/Form/AddSalesOrderItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
 import TagInput from '../../Atom/Form/TagInput'
 import AsyncPickerAtom from '../../Atom/Form/AsyncPickerAtom'
 import { DocumentNode } from 'graphql'
+import {
+  validateStep,
+  validateField
+} from '../../Functions/formStepperValidators'
 
 interface FieldType {
   type:
@@ -55,10 +61,12 @@ interface FieldType {
     | 'image-upload'
     | 'date'
     | 'expense-items'
+    | 'sales-order-items'
     | 'multi-picker'
     | 'tag-input'
     | 'search-picker'
     | 'search-multi-picker'
+    | 'card-payment'
     | 'multi-media-upload'
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
@@ -67,11 +75,20 @@ interface FieldType {
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
 }
+
+type validatorTypes =
+  | 'required'
+  | 'email'
+  | 'phone'
+  | 'sales-order'
+  | 'password'
+  | 'expense-item'
+
 interface FormField {
   label: string
   placeholder?: string
   type: FieldType
-  validators?: any[]
+  validators?: validatorTypes[]
   name: any
   extraData?: any
   underneathText?: string
@@ -96,16 +113,29 @@ interface IProps {
 interface IState {
   currentStep: number
   showHeaderBorder?: boolean
+  stepValidity: any
+  fieldErrors: object
+  isReadyToSubmitForm: boolean
+  multipleMediaUploadInstanceKey: number
+  singleMediaUploadInstanceKey?: number
 }
 
 export default class FormStepperContainer extends React.PureComponent<
   IProps,
   IState
 > {
-  state = {
-    currentStep: 1,
-    showHeaderBorder: false
+  constructor(props) {
+    super(props)
+    this.state = {
+      currentStep: 1,
+      fieldErrors: {},
+      isReadyToSubmitForm: false,
+      stepValidity: {},
+      showHeaderBorder: false,
+      multipleMediaUploadInstanceKey: Date.now()
+    }
   }
+
   render() {
     const steps = this.getSteps(this.props.steps)
     return (
@@ -130,7 +160,7 @@ export default class FormStepperContainer extends React.PureComponent<
           <ButtonAtom
             btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
               'Next'}`}
-            onPress={this.onCtaButtonPress}
+            onPress={this.handleButtonPress}
             type="secondary"
             icon={this.getButtonIcon()}
           />
@@ -139,14 +169,24 @@ export default class FormStepperContainer extends React.PureComponent<
     )
   }
 
+  handleButtonPress = () => {
+    this.updateStepValidity(() =>
+      this.getValidity()
+        ? this.onCtaButtonPress()
+        : this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
+    )
+  }
+
   getSteps = steps => {
     return steps.filter(step => step)
   }
+
   getButtonIcon = () => {
     if (this.state.currentStep == this.getSteps(this.props.steps).length) {
       return 'md-checkmark'
     } else return null
   }
+
   handleBackButtonPress = () => {
     const { currentStep } = this.state
     if (currentStep > 1) {
@@ -159,6 +199,7 @@ export default class FormStepperContainer extends React.PureComponent<
   onCtaButtonPress = async () => {
     const { currentStep } = this.state
     if (currentStep == this.getSteps(this.props.steps).length) {
+      this.setState({ isReadyToSubmitForm: true })
       this.props.onCompleteSteps()
     } else {
       this.transition(currentStep, currentStep + 1)
@@ -174,6 +215,69 @@ export default class FormStepperContainer extends React.PureComponent<
     }
   }
 
+  getValidity = () => {
+    let { currentStep, stepValidity } = this.state,
+      isStepValid = true
+    if (stepValidity[currentStep]) {
+      Object.keys(stepValidity[currentStep]).forEach(key => {
+        if (!stepValidity[currentStep][key]) {
+          isStepValid = false
+        }
+      })
+    }
+    return isStepValid
+  }
+
+  checkValidityOnValueChange = (value, name, validators) => {
+    if (validators && validators.length > 0) {
+      let { currentStep } = this.state
+
+      let { validity, error } = validateField(
+        validators,
+        name,
+        value,
+        this.state.stepValidity[currentStep],
+        this.props.fieldErrors
+      )
+
+      this.setState(
+        {
+          stepValidity: {
+            ...this.state.stepValidity,
+            [currentStep]: validity
+          }
+        },
+        () => {
+          this.props.updateValueChange('fieldErrors', error)
+        }
+      )
+    }
+  }
+
+  updateStepValidity = (callback?: () => void) => {
+    const currentStepForm = this.getSteps(this.props.steps)[
+      this.state.currentStep - 1
+    ]
+
+    let { currentStep } = this.state,
+      { stepValidity, errors } = validateStep(
+        currentStepForm,
+        this.props.formData,
+        this.props.fieldErrors
+      )
+
+    this.setState(
+      {
+        stepValidity: {
+          ...this.state.stepValidity,
+          [currentStep]: stepValidity
+        },
+        fieldErrors: errors
+      },
+      () => callback && callback()
+    )
+  }
+
   renderCurrentStepFormFields = () => {
     const currentStepForm = this.getSteps(this.props.steps)[
       this.state.currentStep - 1
@@ -181,8 +285,62 @@ export default class FormStepperContainer extends React.PureComponent<
     return currentStepForm.formFields.map(this.parseFormFields)
   }
 
+  filterFormFields = fields => fields.filter(field => field)
+
   componentDidMount() {
+    this.setState({
+      singleMediaUploadInstanceKey: Date.now()
+    })
+    this.updateStepValidity()
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
+  }
+
+  componentDidUpdate(prevProps, prevState) {
+    let { currentStep } = this.state
+
+    if (
+      currentStep != prevState.currentStep ||
+      this.filterFormFields(
+        this.getSteps(this.props.steps)[currentStep - 1].formFields
+      ).length !=
+        this.filterFormFields(
+          this.getSteps(prevProps.steps)[currentStep - 1].formFields
+        ).length
+    ) {
+      this.updateStepValidity()
+    }
+
+    this.handleServerFieldErrors(prevProps)
+  }
+
+  handleServerFieldErrors = prevProps => {
+    let { fieldErrors, steps } = this.props,
+      { isReadyToSubmitForm } = this.state
+
+    if (
+      isReadyToSubmitForm &&
+      fieldErrors != prevProps.fieldErrors &&
+      Object.keys(fieldErrors).length > 0
+    ) {
+      let fields = Object.keys(fieldErrors),
+        currentStep = undefined
+
+      for (let len = 0; len < steps.length; len++) {
+        steps[len].formFields.forEach(formField => {
+          if (fields.indexOf(formField.name) != -1) {
+            currentStep = len
+          }
+        })
+        if (currentStep) break
+      }
+
+      this.setState(
+        {
+          isReadyToSubmitForm: false
+        },
+        () => this.transition(currentStep, currentStep + 1)
+      )
+    }
   }
 
   componentWillUnmount() {
@@ -195,158 +353,211 @@ export default class FormStepperContainer extends React.PureComponent<
   }
 
   parseFormFields = (field: any, index: number) => {
-    const {
-      type: {
-        type,
-        keyboardType,
-        secureTextEntry = false,
-        options = [],
-        multiline = false,
-        searchQuery,
-        searchQueryResponseKey
-      },
-      label,
-      placeholder,
-      name,
-      extraData,
-      underneathText,
-      value = ''
-    } = field
-    const { formData, fieldErrors } = this.props
-    switch (type) {
-      case 'input':
-      default:
-        return (
-          <InputAtom
-            key={`${type}-${index}`}
-            label={label}
-            placeholder={placeholder}
-            defaultValue={formData[name] || value}
-            keyboardType={keyboardType || 'default'}
-            secureTextEntry={secureTextEntry}
-            getValue={val => this.props.updateValueChange(name, val)}
-            underneathText={underneathText}
-            multiline={multiline}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'radio':
-        return (
-          <RadioButtonAtom
-            key={`${type}-${index}`}
-            label={label}
-            defaultValue={formData[name]}
-            getValue={val => this.props.updateValueChange(name, val)}
-            underneathText={underneathText}
-            options={options}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'phone-input':
-        return (
-          <PhoneInputAtom
-            key={`${type}-${index}`}
-            label={label}
-            defaultValue={formData[name]}
-            getValue={val => this.props.updateValueChange(name, val)}
-            placeholder={placeholder}
-            countryCode={extraData['countryCode']}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'image-upload':
-        return (
-          <ImageUploadAtom
-            key={`${type}-${index}`}
-            underneathText={underneathText}
-            image={formData[name]}
-            handleImageUpload={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'multi-media-upload':
-        return (
-          <MediaUploadAtom
-            key={`${type}-${index}`}
-            medias={formData[name]}
-            handleMediasUpload={arrayOfValues =>
-              this.props.updateValueChange(name, arrayOfValues)
-            }
-          />
-        )
-      case 'picker':
-        return (
-          <PickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            list={options}
-            selected={formData[name]}
-            placeholder={placeholder}
-            handleSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'date':
-        return (
-          <DatePickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            date={formData[name]}
-            placeholder={placeholder}
-            handleDateSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'expense-items':
-        return (
-          <AddExpenseItemsList
-            key={`${type}-${index}`}
-            expenseItems={formData[name]}
-            onUpdateItems={(items: any) =>
-              this.props.updateValueChange(name, items)
-            }
-          />
-        )
-      case 'multi-picker':
-        return (
-          <MultiSelectPickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            list={options}
-            selectedItems={formData[name]}
-            placeholder={placeholder}
-            handleSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'tag-input':
-        return (
-          <TagInput
-            key={`${type}-${index}`}
-            label={label}
-            tags={formData[name]}
-            handleValuesChange={tags =>
-              this.props.updateValueChange(name, tags)
-            }
-            error={fieldErrors && fieldErrors[name]}
-          />
-        )
-      case 'search-picker':
-      case 'search-multi-picker':
-        return (
-          <AsyncPickerAtom
-            key={`${type}-${index}`}
-            label={label}
-            selected={formData[name]}
-            placeholder={placeholder}
-            handleSelection={val => this.props.updateValueChange(name, val)}
-            error={fieldErrors && fieldErrors[name]}
-            graphqlQuery={searchQuery}
-            graphqlQueryResultKey={searchQueryResponseKey}
-            type={type == 'search-multi-picker' ? 'multi' : 'single'}
-          />
-        )
+    if (field) {
+      const {
+        type: {
+          type,
+          keyboardType,
+          secureTextEntry = false,
+          options = [],
+          multiline = false,
+          searchQuery,
+          searchQueryResponseKey
+        },
+        validators,
+        label,
+        placeholder,
+        name,
+        extraData,
+        underneathText,
+        value = ''
+      } = field
+      const { formData, fieldErrors } = this.props
+      switch (type) {
+        case 'input':
+        default:
+          return (
+            <InputAtom
+              key={`${type}-${index}`}
+              label={label}
+              placeholder={placeholder}
+              defaultValue={formData[name] || value}
+              keyboardType={keyboardType || 'default'}
+              secureTextEntry={secureTextEntry}
+              getValue={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
+              underneathText={underneathText}
+              multiline={multiline}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'radio':
+          return (
+            <RadioButtonAtom
+              key={`${type}-${index}`}
+              label={label}
+              defaultValue={formData[name]}
+              getValue={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
+              underneathText={underneathText}
+              options={options}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'sales-order-items':
+          return (
+            <AddSalesOrderItemsList
+              error={fieldErrors && fieldErrors[name]}
+              key={`${type}-${index}`}
+              salesItems={formData[name]}
+              onUpdateItems={(items: any) => {
+                this.checkValidityOnValueChange(items, name, validators)
+                this.props.updateValueChange(name, items)
+              }}
+            />
+          )
+        case 'phone-input':
+          return (
+            <PhoneInputAtom
+              key={`${type}-${index}`}
+              label={label}
+              defaultValue={formData[name]}
+              getValue={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
+              placeholder={placeholder}
+              countryCode={extraData['countryCode']}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'image-upload':
+          return (
+            <ImageUploadAtom
+              reduxMediaUploadClass={this.state.singleMediaUploadInstanceKey}
+              key={`${type}-${index}`}
+              underneathText={underneathText}
+              image={formData[name]}
+              handleImageUpload={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'multi-media-upload':
+          return (
+            <MediaUploadAtom
+              key={`${type}-${index}`}
+              error={fieldErrors && fieldErrors[name]}
+              reduxMediaUploadClass={this.state.multipleMediaUploadInstanceKey}
+              medias={formData[name]}
+              handleMediasUpload={arrayOfValues =>
+                this.props.updateValueChange(name, arrayOfValues)
+              }
+            />
+          )
+        case 'picker':
+          return (
+            <PickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              list={options}
+              selected={formData[name]}
+              placeholder={placeholder}
+              handleSelection={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'date':
+          return (
+            <DatePickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              date={formData[name]}
+              placeholder={placeholder}
+              handleDateSelection={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'expense-items':
+          return (
+            <AddExpenseItemsList
+              key={`${type}-${index}`}
+              error={fieldErrors && fieldErrors[name]}
+              expenseItems={formData[name]}
+              onUpdateItems={(items: any) => {
+                this.checkValidityOnValueChange(items, name, validators)
+                this.props.updateValueChange(name, items)
+              }}
+            />
+          )
+        case 'card-payment':
+          return (
+            <CardPaymentAtom
+              handleCardSelection={(cardDetails: any) =>
+                this.props.updateValueChange(name, cardDetails)
+              }
+              error={fieldErrors && fieldErrors[name]}
+              key={`${type}-${index}`}
+              amount={formData[name]}
+            />
+          )
+        case 'multi-picker':
+          return (
+            <MultiSelectPickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              list={options}
+              selectedItems={formData[name]}
+              placeholder={placeholder}
+              handleSelection={val => this.props.updateValueChange(name, val)}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'tag-input':
+          return (
+            <TagInput
+              key={`${type}-${index}`}
+              label={label}
+              tags={formData[name]}
+              handleValuesChange={tags =>
+                this.props.updateValueChange(name, tags)
+              }
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
+        case 'search-picker':
+        case 'search-multi-picker':
+          return (
+            <AsyncPickerAtom
+              key={`${type}-${index}`}
+              label={label}
+              selected={formData[name]}
+              placeholder={placeholder}
+              handleSelection={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
+              error={fieldErrors && fieldErrors[name]}
+              graphqlQuery={searchQuery}
+              graphqlQueryResultKey={searchQueryResponseKey}
+              type={type == 'search-multi-picker' ? 'multi' : 'single'}
+            />
+          )
+      }
     }
+    return null
   }
 }
 

@@ -52,10 +52,15 @@ export const ListCompanySalesGQL = gql`
             contactName
             id
             gender
+            email
           }
           paymentMethod
           status
           amount
+          amountPaid
+          invoice {
+            dueDate
+          }
           items {
             id
             unitPrice

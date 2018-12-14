@@ -56,6 +56,7 @@ import OrderStatusScreen from '../Screen/OrderStatusScreen'
 import SalesOrderScreen from '../Screen/SalesOrderScreen'
 import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
 import SalesOrderDailySalesScreen from '../Screen/SalesOrderDailySalesScreen'
+import UpsertSalesOrderScreen from '../Screen/UpsertSalesOrderScreen'
 
 // Expenses Screens
 import ExpensesScreen from '../Screen/ExpensesScreen'
@@ -81,6 +82,7 @@ import BankDetailsScreen from '../Screen/BankDetailsScreen'
 import UpsertBankScreen from '../Screen/UpsertBankScreen'
 
 import InvoicesScreen from '../Screen/InvoicesScreen'
+import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
 
 import IncomeScreen from '../Screen/IncomeScreen'
 
@@ -110,6 +112,9 @@ const businessStack = StackNavigator(
     },
     Invoice: {
       screen: InvoicesScreen
+    },
+    UpsertInvoice: {
+      screen: UpsertInvoiceScreen
     },
 
     // Setting ROUTES
@@ -168,6 +173,7 @@ const businessStack = StackNavigator(
     SalesDetails: SalesOrderDetailsScreen,
     Sales: SalesOrderScreen,
     SalesOrderDailySales: SalesOrderDailySalesScreen,
+    UpsertSales: UpsertSalesOrderScreen,
 
     // Contact
     Customers: {

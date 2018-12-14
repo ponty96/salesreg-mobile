@@ -22,7 +22,8 @@ export const renderSelectProductGroupFormStep = (): FormStep => ({
         type: 'search-picker',
         searchQuery: SearchProductGroupsByTitleGQL,
         searchQueryResponseKey: 'searchProductGroupsByTitle'
-      }
+      },
+      validators: ['required']
     }
   ]
 })
@@ -38,6 +39,7 @@ export const renderSelectOptionsFormStep = (name): FormStep => ({
         searchQuery: SearchOptionsByNameGQL,
         searchQueryResponseKey: 'searchOptionsByName'
       },
+      validators: ['required'],
       name: 'optionValues'
     }
   ]
@@ -52,6 +54,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
         type: 'input',
         keyboardType: 'numeric'
       },
+      validators: ['required'],
       name: 'price'
     },
     {
@@ -60,6 +63,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
         type: 'input',
         multiline: true
       },
+      validators: ['required'],
       name: 'sku'
     },
     {
@@ -68,6 +72,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
         type: 'input',
         multiline: true
       },
+      validators: ['required'],
       name: 'minimumSku',
       underneathText: `The minimum stock quantity(MSQ) is the quantity of ${name} below which you have to restock.`
     },
@@ -100,6 +105,7 @@ export const renderOptionValuesInputStep = (
       type: 'input',
       keyboardType: 'default'
     },
+    validators: ['required'],
     name: `option-${optionValue.optionId}`,
     value: optionValue.name
   }))
@@ -150,6 +156,7 @@ export const renderFeaturedImageStep = (name): FormStep => ({
   formFields: [
     {
       label: '',
+      validators: ['required'],
       name: 'featuredImage',
       type: {
         type: 'image-upload'

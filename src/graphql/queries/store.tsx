@@ -130,19 +130,19 @@ export const ListCompanyOptionsGQL = gql`
   }
 `
 
-export const ListCompanyProductGroupsGQL = gql`
-  query listCompanyProductGroups($companyId: Uuid!) {
-    listCompanyProductGroups(companyId: $companyId) {
-      title
-      id
+// export const ListCompanyProductGroupsGQL = gql`
+//   query listCompanyProductGroups($companyId: Uuid!) {
+//     listCompanyProductGroups(companyId: $companyId) {
+//       title
+//       id
 
-      options {
-        optionId: id
-        optionName: name
-      }
-    }
-  }
-`
+//       options {
+//         optionId: id
+//         optionName: name
+//       }
+//     }
+//   }
+// `
 
 export const SearchProductGroupsByTitleGQL = gql`
   query searchProductGroupsByTitle($companyId: Uuid!, $queryText: String!) {
@@ -195,6 +195,18 @@ export const SearchOptionsByNameGQL = gql`
       optionName: name
       title: name
       id
+    }
+  }
+`
+
+export const SearchProductsAndServicesByName = gql`
+  query searchProductsAndServicesByName($queryText: String!) {
+    searchProductsAndServicesByName(query: $queryText) {
+      id
+      name
+      price
+      sku
+      type
     }
   }
 `

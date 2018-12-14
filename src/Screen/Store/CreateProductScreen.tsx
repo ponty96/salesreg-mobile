@@ -211,6 +211,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
           {
             label: 'New or Variant of existing?',
             placeholder: '',
+            validators: ['required'],
             name: 'isVariant',
             type: {
               type: 'radio',
@@ -306,6 +307,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
           {
             label: 'Product name',
             placeholder: 'e.g Leather Shoe',
+            validators: ['required'],
             name: 'productGroupTitle',
             type: {
               type: 'input'
@@ -334,6 +336,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
           {
             label: 'Yes or No',
             name: 'isNewProductVariant',
+            validators: ['required'],
             type: {
               type: 'radio',
               options: ['Yes', 'No']

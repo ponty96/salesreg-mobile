@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Text } from 'react-native'
 import InputAtom from './InputAtom'
 import ButtonAtom from './ButtonAtom'
 import Icon from '../Icon'
@@ -12,8 +12,10 @@ interface ExpenseItem {
   handleValueChange: (index: number, key: string, value: any) => void
   onTrashItem: (index: number) => void
 }
+
 interface IProps {
   expenseItems: any[]
+  error?: string
   onUpdateItems: (items: any[]) => void
 }
 
@@ -57,6 +59,7 @@ export default class AddExpenseItemsList extends React.Component<IProps> {
     }
     this.props.onUpdateItems(items)
   }
+
   addAnotherItem = () => {
     const expenseItems = this.props.expenseItems.concat([
       {
@@ -66,6 +69,7 @@ export default class AddExpenseItemsList extends React.Component<IProps> {
     ])
     this.props.onUpdateItems(expenseItems)
   }
+
   trashItem = index => {
     const { expenseItems } = this.props
     const items =
@@ -74,9 +78,17 @@ export default class AddExpenseItemsList extends React.Component<IProps> {
         : [...expenseItems.slice(0, index), ...expenseItems.slice(index + 1)]
     this.props.onUpdateItems(items)
   }
+
+  renderErrorText = () => {
+    return this.props.error ? (
+      <Text style={styles.errorText}>{this.props.error}</Text>
+    ) : null
+  }
+
   render() {
     return (
       <View style={{ flex: 1 }}>
+        {this.renderErrorText()}
         {this.props.expenseItems.map((item, index) => (
           <AddExpenseItem
             key={index}
@@ -113,6 +125,15 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     marginBottom: 8,
     paddingTop: 8
+  },
+  errorText: {
+    marginLeft: 0,
+    fontSize: 14,
+    marginBottom: 2,
+    marginTop: 0,
+    fontFamily: 'AvenirNext-Regular',
+    color: 'red',
+    paddingVertical: 12
   },
   closeIcon: {
     color: color.textColor,

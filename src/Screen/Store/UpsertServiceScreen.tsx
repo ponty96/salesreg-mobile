@@ -1,17 +1,16 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
 import { UpsertServiceGQL } from '../../graphql/mutations/store'
+import { ListCompanyServicesGQL } from '../../graphql/queries/store'
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
-
 import {
   renderCategoryStep,
   renderTagStep,
   renderFeaturedImageStep,
   renderMediaStep
 } from './utilities/productCreateSteps'
-import { ListCompanyServicesGQL } from '../../graphql/queries/store'
 import { UserContext } from '../../context/UserContext'
 
 interface IProps {
@@ -41,8 +40,7 @@ class UpsertServiceScreen extends Component<IProps, IState> {
     price: 0,
     userId: '',
     description: '',
-    featuredImage:
-      'https://irp-cdn.multiscreensite.com/861e0da0/dms3rep/multi/makeup-artist.jpg',
+    featuredImage: '',
     images: [],
     companyId: '',
     fieldErrors: null,
@@ -110,6 +108,7 @@ class UpsertServiceScreen extends Component<IProps, IState> {
                     label: 'Name',
                     placeholder: 'e.g Ladies frontal makeup',
                     name: 'name',
+                    validators: ['required'],
                     type: {
                       type: 'input'
                     }
@@ -118,6 +117,7 @@ class UpsertServiceScreen extends Component<IProps, IState> {
                     label: 'Price',
                     placeholder: 'e.g 5000',
                     name: 'price',
+                    validators: ['required'],
                     type: {
                       type: 'input',
                       keyboardType: 'numeric'

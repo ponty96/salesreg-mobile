@@ -6,13 +6,13 @@ import {
   TouchableWithoutFeedback,
   View,
   TouchableOpacity,
-  FlatList,
-  Image
+  FlatList
 } from 'react-native'
 import { color } from '../../Style/Color'
 import FormHeader from '../../Components/Header/FormHeader'
 import * as JsSearch from 'js-search'
 import { SearchAtom } from '../SearchAtom'
+import CachedImageAtom from '../CachedImageAtom'
 
 export interface PickerData {
   icon?: any
@@ -53,8 +53,8 @@ const PickerItem = (props: PickerItem) => (
   <TouchableWithoutFeedback onPress={() => props.onPress(props.value)}>
     <View style={styles.pickerItem}>
       <View style={{ flexDirection: 'row' }}>
-        <Image
-          source={{ uri: props.icon }}
+        <CachedImageAtom
+          uri={props.icon}
           style={{ width: 30, height: 25, marginRight: 24 }}
         />
         <Text style={styles.pickerItemLabel}>{props.label}</Text>
@@ -126,61 +126,63 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
     }
   }
   render() {
-    return [
-      <TouchableOpacity
-        onPress={() => this.toggleOpenState()}
-        key="1334334"
-        style={styles.picker}
-      >
-        <Label
-          style={{
-            color: color.textColor,
-            padding: 0
-          }}
+    return (
+      <React.Fragment>
+        <TouchableOpacity
+          onPress={() => this.toggleOpenState()}
+          key="1334334"
+          style={styles.picker}
         >
-          <Text style={styles.labelText}>
-            {this.props.required && <Text style={styles.required}>*</Text>}
-            {this.props.label}
-          </Text>
-        </Label>
-        <Text style={styles.placeholderStyle}>{this.getPlaceholder()}</Text>
-      </TouchableOpacity>,
-      this.renderUnderNeathText(),
-      <Modal
-        animationType="slide"
-        transparent={false}
-        visible={this.state.isOpen}
-        onRequestClose={this.toggleOpenState}
-        key="133433445566446"
-      >
-        <FormHeader
-          onPressBackIcon={this.toggleOpenState}
-          iconName="md-close"
-          currentStep={1}
-          totalSteps={1}
-          showStepper={false}
-        />
-        <SearchAtom
-          placeholder="Search"
-          queryText={this.state.queryText}
-          onSearch={this.onSearch}
-        />
-        <FlatList
-          data={this.state.list}
-          renderItem={({ item }: any) => (
-            <PickerItem
-              onPress={this.handleChange}
-              icon={item.icon}
-              label={item.mainLabel}
-              value={item.value}
-              isSelected={this.props.selected == item.value}
-              subLabel={item.subLabel}
-            />
-          )}
-          keyExtractor={(item: any) => item.key}
-        />
-      </Modal>
-    ]
+          <Label
+            style={{
+              color: color.textColor,
+              padding: 0
+            }}
+          >
+            <Text style={styles.labelText}>
+              {this.props.required && <Text style={styles.required}>*</Text>}
+              {this.props.label}
+            </Text>
+          </Label>
+          <Text style={styles.placeholderStyle}>{this.getPlaceholder()}</Text>
+        </TouchableOpacity>
+        {this.renderUnderNeathText()}
+        <Modal
+          animationType="slide"
+          transparent={false}
+          visible={this.state.isOpen}
+          onRequestClose={this.toggleOpenState}
+          key="133433445566446"
+        >
+          <FormHeader
+            onPressBackIcon={this.toggleOpenState}
+            iconName="md-close"
+            currentStep={1}
+            totalSteps={1}
+            showStepper={false}
+          />
+          <SearchAtom
+            placeholder="Search"
+            queryText={this.state.queryText}
+            onSearch={this.onSearch}
+          />
+          <FlatList
+            data={this.state.list}
+            renderItem={({ item }: any) => (
+              <PickerItem
+                onPress={this.handleChange}
+                icon={item.icon}
+                label={item.mainLabel}
+                value={item.value}
+                isSelected={this.props.selected == item.value}
+                subLabel={item.subLabel}
+              />
+            )}
+            keyExtractor={(item: any) => item.key}
+          />
+        </Modal>
+      </React.Fragment>
+    )
   }
   renderUnderNeathText = () => {
     if (this.props.error || this.props.underneathText) {

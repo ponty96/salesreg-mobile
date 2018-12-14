@@ -11,56 +11,78 @@ import {
   Text,
   TouchableWithoutFeedback
 } from 'react-native'
-import { RNS3 } from 'react-native-aws3'
 import Circle from 'react-native-progress/Circle'
 import { color } from '../Style/Color'
 import RNThumbnail from 'react-native-thumbnail'
+import {
+  uploadMedia,
+  deleteMedia,
+  resetMediaStore,
+  removeUrlFromUploadedMedia
+} from '../store/actions/cron'
+import { connect } from 'react-redux'
 
 interface IProps {
-  onRemoveMedia?: () => void
   onMediaSet?: (response) => void
-  controlled?: boolean | false
+  reduxMediaUploadClass: string | number
+  uploadImage: (
+    file: object,
+    options: object,
+    retry?: boolean,
+    mediaId?: number
+  ) => void
+  uploadVideo: (files: any, retry?: boolean, mediaId?: number) => void
+  removeUrlFromUploadedMedia: (deleteKey: string, deleteUsing: string) => void
+  deleteMedia: (deleteKey, deleteUsing) => void
+  resetStore: () => void
+  urlOfMediaUploaded: object
+  mediasToExclude?: any
   media?: any
+  forceReset?: boolean
+  storeMedias: any
   style?: any
-  type?: 'image' | 'video'
+  hideRemoveButton?: boolean
+  uploadType: 'single' | 'multiple'
+  mediaType?: 'image' | 'video'
 }
 
-/**
- * uploadState can exist in 4 different state
- *
- * 0 - This is for the initial state of the upload container
- * 1 - This state indicates that the image is uploading
- * 2 - This indicates that upload has failed and it should show a retry button
- * 3 - This indicates that the image has been uploaded successfully
- */
 interface IState {
-  media: any
-  filePath: string
-  uploadProgress: number
-  uploadState: number
+  mediasToExclude: any
+  shouldComponentDisplay: boolean
 }
 
-export default class MediaUploadHandlerAtom extends React.PureComponent<
-  IProps,
-  IState
-> {
+class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
   constructor(props) {
     super(props)
-    let { controlled, media } = props
-
     this.state = {
-      media: controlled ? media : null,
-      uploadProgress: 0,
-      filePath: '',
-      uploadState: controlled ? 1 : 0
+      mediasToExclude: this.props.mediasToExclude || [],
+      shouldComponentDisplay: this.props.forceReset ? false : true
+    }
+
+    //Todo check if the the forceReset props is passed and then reset the store
+    //also set display to false so that there would not be screen glitches
+    if (this.props.forceReset) {
+      this.props.resetStore()
     }
   }
 
-  task = []
-
   componentDidMount() {
-    if (this.props.controlled) {
-      if (this.props.type == 'image') {
+    this.props.removeUrlFromUploadedMedia(
+      this.state.mediasToExclude,
+      'upload_url'
+    )
+    this.props.deleteMedia(this.state.mediasToExclude, 'upload_url')
+
+    if (
+      this.props.media &&
+      Object.keys(this.props.media).length > 0 &&
+      this.props.uploadType == 'single'
+    ) {
+      let {
+        media: { mime }
+      } = this.props
+      let type = mime.split('/')[0].toLowerCase()
+      if (type == 'image') {
         this.uploadImage()
       } else {
         this.uploadVideo()
@@ -68,10 +90,38 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
     }
   }
 
-  uploadVideo = async () => {
-    let {
-      media: { path, mime, filename }
-    } = this.state
+  componentDidUpdate(prevProps) {
+    let { urlOfMediaUploaded } = this.props
+
+    if (this.props.media != prevProps.media) {
+      let {
+        media: { mime }
+      } = this.props
+      let type = mime.split('/')[0].toLowerCase()
+      if (type == 'image') {
+        this.uploadImage()
+      } else {
+        this.uploadVideo()
+      }
+    }
+
+    if (
+      urlOfMediaUploaded != prevProps.urlOfMediaUploaded &&
+      Object.keys(urlOfMediaUploaded).length > 0
+    ) {
+      this.props.onMediaSet(urlOfMediaUploaded)
+    }
+  }
+
+  uploadVideo = async (retry?: boolean, mediaId?: number, file?: any) => {
+    let { media } = this.props,
+      path = !retry ? media && media.path : file.uri,
+      mime = !retry ? media && media.mime : file.mime,
+      filename = !retry
+        ? media && Platform.OS == 'android'
+          ? media.path.substring(media.path.lastIndexOf('/') + 1)
+          : media.filename
+        : file.filename
 
     let { path: thumbnailPath } = await RNThumbnail.get(path)
 
@@ -96,68 +146,42 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
         Platform.OS == 'ios'
           ? filename
           : path.substring(path.lastIndexOf('/') + 1),
-      encodedName = `${btoa(`${name}${Date.now()}`)}|${mime
-        .split('/')[0]
-        .toLowerCase()}`
+      encodedName = `${name}${Date.now()}|${mime.split('/')[0].toLowerCase()}`
 
     const videoFile = {
       uri: path,
       name: encodedName,
-      type: mime
+      filename: filename,
+      type: mime,
+      mime: mime
     }
 
     const thumbnailFile = {
       uri: thumbnailPath,
       name: encodedName,
-      type: 'image/jpeg'
+      type: 'image/jpeg',
+      mime: 'image/jpeg'
     }
 
     let totalpath = [
-        { file: videoFile, options: optionsVideo },
-        { file: thumbnailFile, options: optionsThumbnail }
-      ],
-      requests = totalpath.map(fileInfo => {
-        let task = RNS3.put(fileInfo.file, fileInfo.options)
-          .progress(e => {
-            this.setState({
-              uploadProgress:
-                fileInfo.file.type.indexOf('image') != -1
-                  ? this.state.uploadProgress
-                  : e.percent,
-              uploadState: 1
-            })
-          })
-          .then(response => Promise.resolve(response))
-          .catch(err => Promise.reject(err))
-        this.task.push(task)
-        return task
-      })
+      { file: videoFile, options: optionsVideo },
+      { file: thumbnailFile, options: optionsThumbnail }
+    ]
 
-    Promise.all([...requests])
-      .then((response: any) => {
-        this.setState(
-          {
-            uploadState: response[0].status != 201 ? 1 : 3,
-            filePath: response[0].status != 201 ? '' : response[0]
-          },
-          () => {
-            if (response[0].status == 201) {
-              this.props.onMediaSet && this.props.onMediaSet(response[0])
-            }
-          }
-        )
-      })
-      .catch(() => {
-        this.setState({
-          uploadState: 2
-        })
-      })
+    this.props.uploadVideo(totalpath, retry, mediaId)
   }
 
-  uploadImage = () => {
-    let {
-      media: { path, mime, filename }
-    } = this.state
+  uploadImage = (retry?: boolean, mediaId?: number, optFile?: any) => {
+    let { media } = this.props,
+      path = !retry ? media && media.path : optFile.uri,
+      mime = !retry ? media && media.mime : optFile.mime,
+      filename = !retry
+        ? media && Platform.OS == 'android'
+          ? media.path.substring(media.path.lastIndexOf('/') + 1)
+          : media.filename
+        : optFile.filename,
+      data = !retry ? media && media.data : optFile.data
+
     const options = {
       bucket: 'refineryaudio',
       region: 'us-west-1',
@@ -171,50 +195,24 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
         ? filename
         : path.substring(path.lastIndexOf('/') + 1)
     const file = {
+      data,
       uri: path,
       name: `${name}${Date.now()}|${mime.split('/')[0].toLowerCase()}`,
-      type: mime
+      type: mime,
+      mime: mime,
+      filename: filename
     }
-    let task = RNS3.put(file, options)
-      .progress(e => {
-        this.setState({
-          uploadProgress: e.percent,
-          uploadState: 1
-        })
-      })
-      .then(response => {
-        this.setState(
-          {
-            uploadState: response.status != 201 ? 2 : 3,
-            filePath: response.status != 201 ? '' : response
-          },
-          () => {
-            if (response.status == 201)
-              this.props.onMediaSet && this.props.onMediaSet(response)
-          }
-        )
-      })
-      .catch(() => {
-        this.setState({
-          uploadState: 2
-        })
-      })
 
-    this.task.push(task)
+    this.props.uploadImage(file, options, retry, mediaId)
   }
 
-  cancelUpload = () => {
-    this.task.forEach(task => task.abort())
-    this.setState({
-      uploadState: 2
-    })
-  }
-
-  renderRetryContainer = (): JSX.Element => {
+  renderRetryContainer = (type, mediaId, file): JSX.Element => {
     return (
       <TouchableOpacity
         onPress={() =>
-          this.props.type == 'image' ? this.uploadImage() : this.uploadVideo()
+          type == 'image'
+            ? this.uploadImage(true, mediaId, file)
+            : this.uploadVideo(true, mediaId, file)
         }
       >
         <View style={styles.retryContainer}>
@@ -229,32 +227,28 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
     )
   }
 
-  renderUploadedContainer = (): JSX.Element => {
+  renderUploadedContainer = (type): JSX.Element => {
     return (
       <Icon
         type="FontAwesome"
-        name={this.props.type == 'image' ? 'file-image-o' : 'video-camera'}
+        name={type == 'image' ? 'file-image-o' : 'video-camera'}
         style={styles.whiteIcon}
       />
     )
   }
 
-  renderLoadingContainer = (): JSX.Element => {
+  renderLoadingContainer = (progress, cancelFn): JSX.Element => {
     return (
-      <TouchableOpacity onPress={this.cancelUpload}>
+      <TouchableOpacity onPress={cancelFn}>
         <View>
           <Circle
-            indeterminate={this.state.uploadProgress < 0.25 ? true : false}
-            borderColor={
-              this.state.uploadProgress < 0.25
-                ? color.green
-                : 'rgba(0, 0, 0, 0)'
-            }
+            indeterminate={progress < 0.25 ? true : false}
+            borderColor={progress < 0.25 ? color.green : 'rgba(0, 0, 0, 0)'}
             thickness={5}
             color={color.green}
             size={60}
             borderWidth={5}
-            progress={this.state.uploadProgress}
+            progress={progress}
           />
           <Icon
             name="x"
@@ -267,45 +261,135 @@ export default class MediaUploadHandlerAtom extends React.PureComponent<
   }
 
   renderImage = (): JSX.Element => {
-    let {
-      media: { data, mime, path },
-      uploadState
-    } = this.state
+    let { storeMedias } = this.props
 
     return (
-      <ImageBackground
-        style={[styles.container, this.props.style]}
-        source={{
-          uri: this.props.type == 'image' ? `data:${mime};base64,${data}` : path
-        }}
-      >
-        <TouchableWithoutFeedback
-          onPress={() => Linking.openURL(this.state.filePath)}
-        >
-          <View style={styles.mediaOverlay}>
-            {uploadState != 1 && (
-              <Icon
-                name="x"
-                type="Feather"
-                onPress={this.props.onRemoveMedia}
-                style={[styles.whiteIcon, styles.removeIcon]}
-              />
-            )}
-            {uploadState == 1
-              ? this.renderLoadingContainer()
-              : uploadState == 2
-              ? this.renderRetryContainer()
-              : this.renderUploadedContainer()}
-          </View>
-        </TouchableWithoutFeedback>
-      </ImageBackground>
+      <React.Fragment>
+        {storeMedias.map(media => {
+          let {
+            file: { mime, data, uri },
+            mediaId,
+            progress,
+            cancelFn,
+            state,
+            response,
+            file
+          } = media
+          let type = mime.split('/')[0].toLowerCase(),
+            location =
+              (response &&
+                response.body &&
+                response.body.postResponse &&
+                response.body.postResponse.location) ||
+              ''
+
+          return this.state.mediasToExclude.indexOf(location) == -1 ? (
+            <ImageBackground
+              key={mediaId}
+              style={[styles.container, this.props.style]}
+              source={{
+                uri: type == 'image' ? `data:${mime};base64,${data}` : uri
+              }}
+            >
+              <TouchableWithoutFeedback
+                onPress={() => (location ? Linking.openURL(location) : null)}
+              >
+                <View style={[styles.mediaOverlay]}>
+                  {state != 'loading' && !this.props.hideRemoveButton && (
+                    <Icon
+                      name="x"
+                      type="Feather"
+                      onPress={() => {
+                        this.props.deleteMedia(mediaId, 'mediaId')
+                        this.props.removeUrlFromUploadedMedia(
+                          mediaId,
+                          'mediaId'
+                        )
+                      }}
+                      style={[styles.whiteIcon, styles.removeIcon]}
+                    />
+                  )}
+                  {state == 'loading'
+                    ? this.renderLoadingContainer(progress, cancelFn)
+                    : state == 'error'
+                    ? this.renderRetryContainer(type, mediaId, file)
+                    : this.renderUploadedContainer(type)}
+                </View>
+              </TouchableWithoutFeedback>
+            </ImageBackground>
+          ) : null
+        })}
+      </React.Fragment>
     )
   }
 
   render() {
-    return this.renderImage()
+    return this.state.shouldComponentDisplay ? this.renderImage() : null
   }
 }
+
+function mapDispatchToProps(dispatch, ownProps) {
+  return {
+    uploadImage: (file, options, retry, mediaId) =>
+      dispatch(
+        uploadMedia({
+          key: ownProps.reduxMediaUploadClass,
+          file,
+          options,
+          uploadType: ownProps.uploadType,
+          mediaType: 'image',
+          retry,
+          mediaId
+        })
+      ),
+    uploadVideo: (files, retry, mediaId) =>
+      dispatch(
+        uploadMedia({
+          key: ownProps.reduxMediaUploadClass,
+          files,
+          uploadType: ownProps.uploadType,
+          mediaType: 'video',
+          retry,
+          mediaId
+        })
+      ),
+    deleteMedia: (deleteKey, deleteUsing) =>
+      dispatch(
+        deleteMedia({
+          key: ownProps.reduxMediaUploadClass,
+          deleteKey,
+          deleteUsing
+        })
+      ),
+    removeUrlFromUploadedMedia: (deleteKey, deleteUsing) =>
+      dispatch(
+        removeUrlFromUploadedMedia({
+          key: ownProps.reduxMediaUploadClass,
+          deleteUsing,
+          deleteKey
+        })
+      ),
+    resetStore: () =>
+      dispatch(
+        resetMediaStore({
+          key: ownProps.reduxMediaUploadClass
+        })
+      )
+  }
+}
+
+function mapStateToProps(state, ownProps) {
+  return {
+    storeMedias: state.mediaUploads[ownProps.reduxMediaUploadClass] || [],
+    urlOfMediaUploaded:
+      state.urlOfMediaUploaded[ownProps.reduxMediaUploadClass] || {}
+  }
+}
+
+export default connect(
+  mapStateToProps,
+  mapDispatchToProps
+)(MediaUploadHandlerAtom)
 
 const styles = StyleSheet.create({
   container: {

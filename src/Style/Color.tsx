@@ -19,6 +19,7 @@ export const color = {
   principal: '#444444',
   textBorderBottom: '#E0E0E0',
   button: '#3668D3',
+  link: '#3668D3',
   dropdown: '#D0D0D0',
   list: '#F3F3F3',
   subHeader: '#DDDDDD',
