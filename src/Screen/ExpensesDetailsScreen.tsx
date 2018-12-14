@@ -56,7 +56,7 @@ class ExpensesDetailsScreen extends Component<IProps> {
         items={this.parseItems()}
         graphqlDeleteMutation={DeleteExpenseGQL}
         graphqlDeleteMutationResultKey="deleteExpense"
-        graphqlDeleteVariables={{ bankId: expense.id }}
+        graphqlDeleteVariables={{ expenseId: expense.id }}
         graphqlRefetchQueries={[
           {
             query: ListCompanyExpensesGQL,
@@ -67,7 +67,7 @@ class ExpensesDetailsScreen extends Component<IProps> {
             }
           }
         ]}
-        onSuccessfulDeletion={() => this.props.navigation.navigate('Banks')}
+        onSuccessfulDeletion={() => this.props.navigation.navigate('Expenses')}
       />
     )
   }
