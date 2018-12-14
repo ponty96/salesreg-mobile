@@ -78,6 +78,18 @@ export const UpdateProductGQL = gql`
   }
 `
 
+export const RestockProducts = gql`
+  mutation restockProducts($items: [RestockItemInput]) {
+    restockProducts(items: $items) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
 export const UpsertServiceGQL = gql`
   mutation UpsertService($serviceId: Uuid, $service: ServiceInput!) {
     upsertService(service: $service, serviceId: $serviceId) {
