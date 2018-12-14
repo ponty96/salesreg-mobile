@@ -28,9 +28,10 @@
  */
 
 import React from 'react'
-import { Text, StyleSheet, View, BackHandler } from 'react-native'
+import { Text, StyleSheet, View, BackHandler, Alert } from 'react-native'
 import { Container, Content, Form } from 'native-base'
 import { color } from '../../Style/Color'
+import { connect } from 'react-redux'
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import FormHeader from '../../Components/Header/FormHeader'
 import InputAtom from '../../Atom/Form/InputAtom'
@@ -108,6 +109,7 @@ interface IProps {
   fieldErrors: any
   formData: any
   handleBackPress: () => void
+  mediasFromStore: () => void
   onTransition?: (from, to) => void
 }
 interface IState {
@@ -120,10 +122,7 @@ interface IState {
   singleMediaUploadInstanceKey?: number
 }
 
-export default class FormStepperContainer extends React.PureComponent<
-  IProps,
-  IState
-> {
+class FormStepperContainer extends React.PureComponent<IProps, IState> {
   constructor(props) {
     super(props)
     this.state = {
@@ -169,12 +168,52 @@ export default class FormStepperContainer extends React.PureComponent<
     )
   }
 
+  checkImageUploadingState = () => {
+    let { mediasFromStore, steps } = this.props,
+      {
+        multipleMediaUploadInstanceKey,
+        singleMediaUploadInstanceKey,
+        currentStep
+      } = this.state
+
+    if (
+      mediasFromStore[multipleMediaUploadInstanceKey] ||
+      mediasFromStore[singleMediaUploadInstanceKey] && currentStep == steps.length
+    ) {
+      let multipleUploads = mediasFromStore[multipleMediaUploadInstanceKey],
+        singleUploads = mediasFromStore[singleMediaUploadInstanceKey],
+        _multipleUploads = multipleUploads || [],
+        _singleUploads = singleUploads || [],
+        merger = _singleUploads.concat(_multipleUploads)
+
+      let shouldSubmit = true
+      merger.forEach(media => {
+        if (media.state != 'success') {
+          shouldSubmit = false
+        }
+      })
+      return shouldSubmit
+    }
+    return true
+  }
+
   handleButtonPress = () => {
-    this.updateStepValidity(() =>
-      this.getValidity()
-        ? this.onCtaButtonPress()
-        : this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
-    )
+    let imageValidity = this.checkImageUploadingState()
+
+    if (!imageValidity) {
+      Alert.alert(
+        'Error',
+        'One or more images failed or are still loading, please cancel or wait to proceed with submission',
+        [{ text: 'Ok', onPress: () => null }],
+        { cancelable: false }
+      )
+    } else {
+      this.updateStepValidity(() =>
+        this.getValidity() && imageValidity
+          ? this.onCtaButtonPress()
+          : this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
+      )
+    }
   }
 
   getSteps = steps => {
@@ -560,6 +599,14 @@ export default class FormStepperContainer extends React.PureComponent<
     return null
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    mediasFromStore: state.mediaUploads
+  }
+}
+
+export default connect(mapStateToProps)(FormStepperContainer)
 
 const styles = StyleSheet.create({
   container: {
