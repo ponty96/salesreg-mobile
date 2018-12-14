@@ -25,7 +25,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
           params: {
             sales: {
               amount,
-              amountPaid = 100000,
+              amountPaid,
               invoice: { dueDate },
               date
             },
@@ -75,7 +75,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
             />
             <ListItemAtom
               label="AMOUNT PAID"
-              value={`N ${numberWithCommas(amountPaid || 3000)}`}
+              value={`N ${numberWithCommas(amountPaid)}`}
               labelStyle={styles.listLabel}
               rightTextStyle={styles.greenText}
               listItemStyle={styles.listWrapper}
