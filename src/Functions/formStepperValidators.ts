@@ -96,9 +96,16 @@ function isRequired(_value) {
       ? ((fieldValid = false), (errorMessage = 'This field is required'))
       : (fieldValid = true)
   } else if (typeof _value == 'object') {
-    _value && _value.id && _value.id.length > 0
-      ? (fieldValid = true)
-      : ((fieldValid = false), (errorMessage = 'This field is required'))
+    if (_value && 'id' in _value) {
+      _value.id.length > 0
+        ? (fieldValid = true)
+        : ((fieldValid = false), (errorMessage = 'This field is required'))
+    } else if (_value && Object.keys(_value).length > 0) {
+      fieldValid = true
+    } else {
+      fieldValid = false
+      errorMessage = 'This field is required'
+    }
   } else if (typeof _value == 'number' && _value == 0) {
     fieldValid = false
     errorMessage = 'Field cannot be 0'
