@@ -29,6 +29,7 @@ interface IState {
   businessPhone: string
   businessCountry: string
   currency: string
+  slug: string
   description: string
   logo: string
   user: any
@@ -44,6 +45,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
     businessPhone: '',
     businessCountry: '',
     currency: '',
+    slug: '',
     description: '',
     logo: '',
     fieldErrors: null
@@ -111,6 +113,17 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                     },
                     validators: ['required'],
                     name: 'title'
+                  },
+                  {
+                    label: 'Slug?',
+                    placeholder: 'E.g StacknBit',
+                    underneathText: `This is your business nick name`,
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    validators: ['required'],
+                    name: 'slug'
                   },
                   {
                     label: 'Any nice description of your business?',
@@ -208,7 +221,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
         return (
           <LastStep
             onCtaPress={() => this.navigateToDashboard()}
-            businessName="MayAfriq"
+            businessName={this.state.title}
           />
         )
     }
