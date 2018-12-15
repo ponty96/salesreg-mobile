@@ -87,7 +87,9 @@ class UpdateProductGroupOptionsScreen extends PureComponent<IProps, IState> {
                   }`,
                   stepHint: `Variant options are what makes one ${
                     this.state.name
-                  } different from another ${name}. E.g. color, sizes`,
+                  } different from another ${
+                    this.state.name
+                  }. E.g. color, sizes`,
                   formFields: [
                     {
                       label: 'Select options',

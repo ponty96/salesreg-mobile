@@ -44,6 +44,7 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
       <GenericListIndex
         navigation={this.props.navigation}
         graphqlQuery={ListCompanyInvoicesGQL}
+        hideSeparator={true}
         graphqlQueryResultKey="listCompanyInvoices"
         parseItemData={this.parseData}
         onItemPress={item =>
