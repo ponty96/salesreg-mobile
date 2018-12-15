@@ -13,12 +13,9 @@ interface IProps {
 }
 
 interface IProducts {
-  productId?: string
+  id?: string
   quantity: String
   name?: string
-  type?: string
-  serviceId?: String
-  unitPrice: String
 }
 
 interface IState {
@@ -30,12 +27,9 @@ class UpsertProductRestockScreen extends React.PureComponent<IProps, IState> {
   state = {
     items: [
       {
-        productId: null,
         quantity: '',
         name: '',
-        type: '',
-        serviceId: null,
-        unitPrice: '0.00'
+        id: ''
       }
     ],
     fieldErrors: null
@@ -70,9 +64,6 @@ class UpsertProductRestockScreen extends React.PureComponent<IProps, IState> {
         let newItems = { ...item }
 
         delete newItems.name
-        delete newItems.type
-        delete newItems.serviceId
-        delete newItems.unitPrice
 
         return newItems
       })

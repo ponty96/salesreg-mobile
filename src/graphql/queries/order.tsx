@@ -59,6 +59,7 @@ export const ListCompanySalesGQL = gql`
           amount
           amountPaid
           invoice {
+            id
             dueDate
           }
           items {
