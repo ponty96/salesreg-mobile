@@ -139,7 +139,9 @@ android {
 }
 
 dependencies {
-    compile project(':react-native-video')
+    compile project(':appcenter-analytics')
+    compile project(':appcenter-crashes')
+    compile project(':appcenter')
     compile project(':react-native-paystack')
     compile project(':react-native-thumbnail')
     compile project(':react-native-fetch-blob')
