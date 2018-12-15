@@ -21,7 +21,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
   renderHeader = (amount, amountPaid, sales) => {
     return amount - amountPaid != 0 ? (
       <Header
-        title="Invoice"
+        title="Invoice Details"
         rightIconType="MaterialCommunityIcons"
         rightIconTitle="credit-card-multiple"
         rightText="Pay"
@@ -35,7 +35,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
       />
     ) : (
       <Header
-        title="Invoice"
+        title="Invoice Details"
         hideRightMenu
         onPressLeftIcon={() => this.props.navigation.goBack()}
       />
@@ -50,6 +50,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
             sales: {
               amount,
               amountPaid,
+              items,
               invoice: { dueDate },
               date
             },
@@ -78,6 +79,17 @@ export default class InvoicesScreen extends React.Component<IProps> {
               rightTextStyle={[styles.greenText, { color: color.black }]}
               listItemStyle={styles.listWrapper}
             />
+            {items.map((item, i) => (
+              <ListItemAtom
+                key={i}
+                label={item.product ? item.product.name : item.service.name}
+                value={`\u20A6 ${item.unitPrice}`}
+                quantity={item.quantity}
+                labelStyle={styles.listLabel}
+                rightTextStyle={styles.greenText}
+                listItemStyle={styles.listWrapper}
+              />
+            ))}
             <ListItemAtom
               label="TOTAL"
               value={`N ${numberWithCommas(amount)}`}
