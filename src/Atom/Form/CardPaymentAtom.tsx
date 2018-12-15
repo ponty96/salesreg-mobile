@@ -31,8 +31,6 @@ export default class CardPaymentAtom extends React.PureComponent<
     return (
       <View style={{ flex: 1 }}>
         {this.renderErrorText()}
-        <Text style={styles.shareText}>Share the payment link</Text>
-        <Text style={styles.orText}>OR</Text>
         <CreditCardInput
           autoFocus={true}
           cardFontFamily="AvenirNext-Regular"

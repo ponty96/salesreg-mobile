@@ -63,6 +63,15 @@ export const ListCompanyProductsGQL = gql`
   }
 `
 
+export const SearchProductsByName = gql`
+  query searchProductsByName($companyId: Uuid!, $queryText: String!) {
+    searchProductsByName(companyId: $companyId, query: $queryText) {
+      id
+      name
+    }
+  }
+`
+
 export const ListCompanyServicesGQL = gql`
   query listCompanyServices($companyId: Uuid!, $after: String, $first: Int) {
     listCompanyServices(companyId: $companyId, after: $after, first: $first) {

@@ -3,9 +3,15 @@ import FormStepperContainer from '../Container/Form/StepperContainer'
 import RNPaystack from 'react-native-paystack'
 import AppSpinner from '../Components/Spinner'
 import Auth from '../services/auth'
+import { CreateRecipt } from '../graphql/mutations/order'
+import { Mutation } from 'react-apollo'
+import { ListCompanySalesGQL } from '../graphql/queries/order'
+import { UserContext } from '../context/UserContext'
+import { parseFieldErrors } from '../Functions'
 
 interface IProps {
   navigation: any
+  user?: any
 }
 
 interface IState {
@@ -17,10 +23,7 @@ interface IState {
   amountPaid: string
 }
 
-export default class UpsertInvoiceScreen extends React.PureComponent<
-  IProps,
-  IState
-> {
+class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -104,65 +107,128 @@ export default class UpsertInvoiceScreen extends React.PureComponent<
     }
   }
 
+  onCompleted = async res => {
+    const {
+      createReceipt: { success, fieldErrors }
+    } = res
+    if (!success) {
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
+    } else {
+      this.props.navigation.navigate('Sales')
+    }
+  }
+
   render() {
-    return (
-      <React.Fragment>
-        <AppSpinner visible={this.state.loading} />
-        <FormStepperContainer
-          fieldErrors={this.state.fieldErrors}
-          handleBackPress={() => this.props.navigation.goBack()}
-          formData={this.state}
-          updateValueChange={this.updateState}
-          onCompleteSteps={() =>
-            this.state.paymentMethod.toLowerCase() != 'cash'
-              ? this.chargeCard()
-              : () => null
-          }
-          steps={[
-            {
-              stepTitle: 'Payment Method',
-              formFields: [
-                {
-                  label: 'How is this customer paying?',
-                  validators: ['required'],
-                  type: {
-                    type: 'radio',
-                    options: ['Card', 'Cash']
-                  },
-                  name: 'paymentMethod'
-                },
-                {
-                  label: 'How much(N) was actually paid?',
-                  validators: ['required'],
-                  type: {
-                    type: 'input',
-                    keyboardType: 'numeric'
-                  },
-                  placeholder: '0.00',
-                  name: 'amountPaid'
-                }
-              ],
-              buttonTitle:
-                this.state.paymentMethod.toLowerCase() != 'cash'
-                  ? 'Next'
-                  : 'Done'
-            },
-            this.state.paymentMethod.toLowerCase() == 'card' && {
-              stepTitle: 'Lets sort out the payment for this order',
-              formFields: [
-                {
-                  label: '',
-                  type: {
-                    type: 'card-payment'
-                  },
-                  name: 'cardDetails'
-                }
-              ],
-              buttonTitle: 'Done'
+    let {
+      navigation: {
+        state: {
+          params: {
+            sales: {
+              invoice: { id }
             }
-          ]}
-        />
-      </React.Fragment>
+          }
+        }
+      }
+    } = this.props
+
+    console.log(
+      'The paymenth method is ',
+      this.state.paymentMethod.toLowerCase()
+    )
+
+    return (
+      <Mutation
+        mutation={CreateRecipt}
+        refetchQueries={[
+          {
+            query: ListCompanySalesGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+        onCompleted={this.onCompleted}
+      >
+        {(makePayment, { loading }) => {
+          return (
+            <React.Fragment>
+              <AppSpinner visible={this.state.loading || loading} />
+              <FormStepperContainer
+                fieldErrors={this.state.fieldErrors}
+                handleBackPress={() => this.props.navigation.goBack()}
+                formData={this.state}
+                updateValueChange={this.updateState}
+                onCompleteSteps={() =>
+                  this.state.paymentMethod.toLowerCase() != 'cash'
+                    ? this.chargeCard()
+                    : makePayment({
+                        variables: {
+                          invoiceId: id,
+                          amountPaid: this.state.amountPaid
+                        }
+                      })
+                }
+                steps={[
+                  {
+                    stepTitle: 'Payment Method',
+                    formFields: [
+                      {
+                        label: 'How is this customer paying?',
+                        validators: ['required'],
+                        type: {
+                          type: 'radio',
+                          options: ['Card', 'Cash']
+                        },
+                        name: 'paymentMethod'
+                      },
+                      {
+                        label: 'How much(N) was actually paid?',
+                        validators: ['required'],
+                        type: {
+                          type: 'input',
+                          keyboardType: 'numeric'
+                        },
+                        placeholder: '0.00',
+                        name: 'amountPaid'
+                      }
+                    ],
+                    buttonTitle:
+                      this.state.paymentMethod.toLowerCase() != 'cash'
+                        ? 'Next'
+                        : 'Done'
+                  },
+                  this.state.paymentMethod.toLowerCase() == 'card' && {
+                    stepTitle: 'Lets sort out the payment for this order',
+                    formFields: [
+                      {
+                        label: '',
+                        type: {
+                          type: 'card-payment'
+                        },
+                        name: 'cardDetails'
+                      }
+                    ],
+                    buttonTitle: 'Done'
+                  }
+                ]}
+              />
+            </React.Fragment>
+          )
+        }}
+      </Mutation>
     )
   }
 }
+
+const _UpsertInvoiceScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <UpsertInvoiceScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+_UpsertInvoiceScreen.navigationOptions = UpsertInvoiceScreen.navigationOptions
+
+export default _UpsertInvoiceScreen

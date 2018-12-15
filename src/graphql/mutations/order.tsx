@@ -97,3 +97,15 @@ export const UpsertSaleOrder = gql`
     }
   }
 `
+
+export const CreateRecipt = gql`
+  mutation createReceipt($invoiceId: Uuid!, $amountPaid: String!) {
+    createReceipt(invoiceId: $invoiceId, amountPaid: $amountPaid) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`

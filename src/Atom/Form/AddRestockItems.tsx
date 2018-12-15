@@ -5,15 +5,12 @@ import ButtonAtom from './ButtonAtom'
 import Icon from '../Icon'
 import { color } from '../../Style/Color'
 import AsyncPickerAtom from './AsyncPickerAtom'
-import { SearchProductsAndServicesByName } from '../../graphql/queries/store'
+import { SearchProductsByName } from '../../graphql/queries/store'
 
 interface IRestockInput {
-  productId?: string
+  id?: string
   name?: string
-  type?: string
-  serviceId?: string
   quantity?: string
-  unitPrice: string
 }
 
 interface IProps {
@@ -43,17 +40,14 @@ const AddRestockItems = (props: RestockItem) => (
       }
       type="single"
       selected={{
-        id:
-          props.item.type == 'product'
-            ? props.item.productId
-            : props.item.serviceId
+        id: props.item.id
       }}
       handleSelection={val => {
         props.handleValueChange(props.index, 'item', val)
       }}
       label={`Item ${props.index + 1}`}
-      graphqlQuery={SearchProductsAndServicesByName}
-      graphqlQueryResultKey="searchProductsAndServicesByName"
+      graphqlQuery={SearchProductsByName}
+      graphqlQueryResultKey="searchProductsByName"
     />
     <View style={{ flexDirection: 'row' }}>
       <InputAtom
@@ -76,10 +70,7 @@ export default class AddRestockItemsList extends React.PureComponent<IProps> {
       key == 'item'
         ? {
             name: value.name,
-            productId: value.type == 'Product' ? value.id : null,
-            serviceId: value.type == 'Service' ? value.id : null,
-            type: value.type.toLowerCase(),
-            unitPrice: value.price
+            id: value.id
           }
         : { [key]: value }
 
@@ -95,11 +86,8 @@ export default class AddRestockItemsList extends React.PureComponent<IProps> {
   addAnotherItem = () => {
     const restockItems = this.props.products.concat([
       {
-        productId: null,
-        serviceId: null,
-        name: '',
-        unitPrice: '0.00',
-        type: ''
+        id: '',
+        name: ''
       }
     ])
     this.props.onUpdateItems(restockItems)
