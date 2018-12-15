@@ -44,6 +44,7 @@ interface IProps {
   subHeader?: SubHeaderProps
   shouldRenderFooter?: boolean
   showFab?: boolean
+  showFabFn?: (val?: any) => void
   hideSeparator?: boolean
   user: any
 }
@@ -72,6 +73,9 @@ class GenericListIndex extends React.Component<IProps, IState> {
     subHeader: null,
     shouldRenderFooter: false,
     showFab: true,
+    showFabFn: function() {
+      return true
+    },
     hideSeparator: false
   }
   componentWillMount() {
@@ -248,7 +252,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
                 }
               />
               {data[graphqlQueryResultKey] && loading && <LoadMoreSpinner />}
-              {this.props.showFab && (
+              {this.props.showFab && this.props.showFabFn(sections) && (
                 <FabAtom
                   routeName={fabRouteName}
                   navigation={navigation}

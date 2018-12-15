@@ -43,6 +43,7 @@ export default class BanksScreen extends React.Component<IProps> {
         onItemPress={item =>
           this.props.navigation.navigate('BankDetails', { bank: item })
         }
+        showFabFn={sections => (sections.length == 0 ? true : false)}
         emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
         headerText="Great habit keeping records!"
         fabRouteName="UpsertBank"
