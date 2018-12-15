@@ -41,6 +41,7 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
         fetchPolicy="cache-and-network"
       >
         {({ loading, data }) => {
+          console.log('Data is ', data)
           const responseList = data[graphqlQueryResultKey] || []
           return (
             <View>

@@ -250,9 +250,27 @@ interface IProps {
   client: any
 }
 
-export default class Routes extends React.Component<IProps> {
+interface IState {
+  display: boolean
+}
+
+export default class Routes extends React.Component<IProps, IState> {
+  state = {
+    display: false
+  }
+
+  componentDidMount() {
+    /**
+     * We would be simulating a very small timeout
+     * This is needed to prevent glitches in the screen when the user opens the app at first
+     */
+    setTimeout(() => this.setState({ display: true }), 500)
+  }
+
   render() {
-    const { client } = this.props
+    const { client } = this.props,
+      { display } = this.state
+
     return (
       <Query query={AuthenticateQueryGQL}>
         {({ loading, error, data }) => {
@@ -264,13 +282,16 @@ export default class Routes extends React.Component<IProps> {
           if (error) {
             return <Text>{`Error! ${error.message}`}</Text>
           }
-          if (!data.authenticate) {
+          if (!data.authenticate && display) {
+            console.log('Oya ', loading)
             return <AuthStack screenProps={{ client }} />
           } else {
-            if (data.user && !data.user.company) {
+            if (data.user && !data.user.company && display) {
               return <BusinessOnBoardStack screenProps={{ client }} />
+            } else if (display) {
+              return <DrawerStack screenProps={{ client }} />
             }
-            return <DrawerStack screenProps={{ client }} />
+            return null
           }
         }}
       </Query>
