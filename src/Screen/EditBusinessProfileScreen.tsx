@@ -26,6 +26,7 @@ interface IState {
   companyId: string
   street1: string
   city: string
+  slug: string
   state: string
   country: string
   phoneNumber: string
@@ -44,6 +45,7 @@ export default class EditBusinessProfileScreen extends Component<
     street1: '',
     city: '',
     state: '',
+    slug: '',
     country: '',
     companyId: '',
     phoneNumber: '',
@@ -72,6 +74,7 @@ export default class EditBusinessProfileScreen extends Component<
       title: user.company.title,
       contactEmail: user.company.contactEmail,
       about: user.company.about,
+      slug: user.company.slug,
       currency: user.company.currency,
       ...this.parseAddressForForm(user.company),
       phoneNumber: user.company.phone ? user.company.phone.number : ''
@@ -108,6 +111,17 @@ export default class EditBusinessProfileScreen extends Component<
                       keyboardType: 'default'
                     },
                     name: 'title'
+                  },
+                  {
+                    label: 'Slug?',
+                    placeholder: 'E.g StacknBit',
+                    underneathText: `This is your business nick name`,
+                    type: {
+                      type: 'input',
+                      keyboardType: 'default'
+                    },
+                    validators: ['required'],
+                    name: 'slug'
                   },
                   {
                     label: 'Any nice description of your business?',

@@ -12,6 +12,7 @@ export const UpdateCompanyGQL = gql`
         ... on Company {
           id
           title
+          slug
           contactEmail
           about
           currency

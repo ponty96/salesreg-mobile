@@ -23,6 +23,7 @@ export const UpdateUserGQL = gql`
             contactEmail
             about
             currency
+            slug
             logo
             phone {
               number

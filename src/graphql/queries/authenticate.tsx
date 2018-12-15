@@ -8,6 +8,7 @@ export const AuthenticateQueryGQL = gql`
       lastName
       company {
         contactEmail
+        slug
         id
       }
     }

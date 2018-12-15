@@ -48,6 +48,10 @@ export default class BusinessProfileScreen extends Component<IProps, IState> {
           value: user.company.contactEmail
         },
         {
+          section: 'Slug',
+          value: user.company.slug
+        },
+        {
           section: 'Currency',
           value: user.company.currency
         },
@@ -74,7 +78,7 @@ export default class BusinessProfileScreen extends Component<IProps, IState> {
         }
       ],
       businessName: user.company.title,
-      logo: user.company.logo
+      logo: user.company.logo || ''
     })
   }
 

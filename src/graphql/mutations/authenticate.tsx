@@ -27,6 +27,7 @@ export const LoginUserMutationGQL = gql`
               contactEmail
               about
               currency
+              slug
               logo
               phone {
                 number
@@ -74,6 +75,7 @@ export const RegisterUserMutationGQL = gql`
             company {
               id
               title
+              slug
               contactEmail
               about
               currency
@@ -112,6 +114,7 @@ export const AddUserCompanyMutationGQL = gql`
         ... on Company {
           id
           title
+          slug
           contactEmail
           about
           currency
