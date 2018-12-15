@@ -60,6 +60,7 @@ export const ListCompanySalesGQL = gql`
           amountPaid
           invoice {
             id
+            refId
             dueDate
           }
           items {
@@ -79,6 +80,52 @@ export const ListCompanySalesGQL = gql`
             }
           }
           date
+        }
+      }
+    }
+  }
+`
+
+export const ListCompanyInvoicesGQL = gql`
+  query listCompanyInvoices($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyInvoices(companyId: $companyId, after: $after, first: $first) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          id
+          amount
+          refId
+          amountPaid
+          user {
+            lastName
+            firstName
+          }
+          dueDate
+          sale {
+            amount
+            amountPaid
+            date
+            items {
+              id
+              unitPrice
+              quantity
+              product {
+                name
+                id
+                costPrice
+                featuredImage
+              }
+              service {
+                name
+                id
+                featuredImage
+              }
+            }
+          }
         }
       }
     }

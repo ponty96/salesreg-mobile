@@ -38,11 +38,11 @@ class UpsertServiceScreen extends Component<IProps, IState> {
   state = {
     name: '',
     price: 0,
-    userId: '',
+    userId: this.props.user.id,
     description: '',
     featuredImage: '',
     images: [],
-    companyId: '',
+    companyId: this.props.user.company.id,
     fieldErrors: null,
     categories: [],
     tags: [],
@@ -58,6 +58,7 @@ class UpsertServiceScreen extends Component<IProps, IState> {
   componentDidMount() {
     const service = this.props.navigation.getParam('service', null)
     const { user } = this.props
+
     if (service) {
       this.setState({
         ...service,
@@ -73,6 +74,7 @@ class UpsertServiceScreen extends Component<IProps, IState> {
 
   render() {
     const { navigation } = this.props
+
     return (
       <Mutation
         mutation={UpsertServiceGQL}

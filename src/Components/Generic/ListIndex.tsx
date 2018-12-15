@@ -239,7 +239,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   <EmptyList
                     type={{
                       Text: emptyListText,
-                      verifyMainList: 'main',
+                      verifyMainList: this.props.showFab ? 'main' : '',
                       headerText: headerText
                     }}
                   />

@@ -212,8 +212,11 @@ export const SearchOptionsByNameGQL = gql`
 `
 
 export const SearchProductsAndServicesByName = gql`
-  query searchProductsAndServicesByName($queryText: String!) {
-    searchProductsAndServicesByName(query: $queryText) {
+  query searchProductsAndServicesByName(
+    $queryText: String!
+    $companyId: Uuid!
+  ) {
+    searchProductsAndServicesByName(companyId: $companyId, query: $queryText) {
       id
       name
       price
