@@ -18,6 +18,30 @@ export default class InvoicesScreen extends React.Component<IProps> {
     }
   }
 
+  renderHeader = (amount, amountPaid, sales) => {
+    return amount - amountPaid != 0 ? (
+      <Header
+        title="Invoice"
+        rightIconType="MaterialCommunityIcons"
+        rightIconTitle="credit-card-multiple"
+        rightText="Pay"
+        rightIconStyle={{
+          transform: [{ rotate: '0deg' }]
+        }}
+        onPressLeftIcon={() => this.props.navigation.goBack()}
+        onPressRightIcon={() =>
+          this.props.navigation.navigate('UpsertInvoice', { sales })
+        }
+      />
+    ) : (
+      <Header
+        title="Invoice"
+        hideRightMenu
+        onPressLeftIcon={() => this.props.navigation.goBack()}
+      />
+    )
+  }
+
   render() {
     let {
       navigation: {
@@ -37,19 +61,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
 
     return (
       <React.Fragment>
-        <Header
-          title="Invoice"
-          rightIconType="MaterialCommunityIcons"
-          rightIconTitle="credit-card-multiple"
-          rightText="Pay"
-          rightIconStyle={{
-            transform: [{ rotate: '0deg' }]
-          }}
-          onPressLeftIcon={() => this.props.navigation.goBack()}
-          onPressRightIcon={() =>
-            this.props.navigation.navigate('UpsertInvoice', { sales })
-          }
-        />
+        {this.renderHeader(amount, amountPaid, sales)}
         <View style={styles.container}>
           <Content>
             <ListItemAtom
