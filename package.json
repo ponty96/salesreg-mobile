@@ -33,6 +33,7 @@
   },
   "scripts": {
     "tsc": "tsc -p tsconfig.json",
+    "postinstall": "npm run build",
     "clean": "rimraf build",
     "build": "npm run clean && npm run tsc --",
     "start": "node node_modules/react-native/local-cli/cli.js start",
