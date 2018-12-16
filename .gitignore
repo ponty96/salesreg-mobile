@@ -39,7 +39,7 @@ android/app/build/
 android/.gradle
 # dependencies
 /node_modules
-/build
+# /build
 
 # misc
 .env.local
