@@ -2,6 +2,22 @@
 # platform :ios, '9.0'
 
 target 'salesreg' do
+  rn_path = '../node_modules/react-native'
+  pod 'yoga', path: "#{rn_path}/ReactCommon/yoga/yoga.podspec"
+  pod 'React', path: rn_path, subspecs: [
+    'Core',
+    'RCTActionSheet',
+    'RCTAnimation',
+    'RCTGeolocation',
+    'RCTImage',
+    'RCTLinkingIOS',
+    'RCTNetwork',
+    'RCTSettings',
+    'RCTText',
+    'RCTVibration',
+    'RCTWebSocket'
+  ]
+  
   pod 'AppCenter/Analytics', '~> 1.11.0'
   pod 'AppCenter/Crashes', '~> 1.11.0'
   pod 'AppCenterReactNativeShared', '~> 1.10.0'
@@ -10,6 +26,8 @@ target 'salesreg' do
 
   # Pods for salesreg
   pod 'Paystack'
+  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
+  pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 
 
   platform :ios, '9.0'
@@ -18,6 +36,14 @@ target 'salesreg' do
     # Pods for testing
   end
 
+end
+
+post_install do |installer|
+  installer.pods_project.targets.each do |target|
+    if target.name == "React"
+      target.remove_from_project
+    end
+  end
 end
 
 target 'salesreg-tvOS' do
