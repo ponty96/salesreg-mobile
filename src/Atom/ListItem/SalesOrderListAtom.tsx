@@ -78,6 +78,8 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
       return (
         <Left style={[styles.leftWrapper, this.props.leftStyle]}>
           <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
             style={[
               styles.serialNumber,
               styles.top,
