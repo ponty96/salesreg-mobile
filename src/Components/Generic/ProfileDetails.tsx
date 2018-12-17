@@ -133,7 +133,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
         <View style={styles.pictureView}>
           <Thumbnail
             source={{
-              uri: this.props.image
+              uri: this.props.image || ''
             }}
             style={{ width: '100%', height: 280, borderRadius: 0 }}
           />
