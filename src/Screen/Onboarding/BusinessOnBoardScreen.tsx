@@ -44,7 +44,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
     contactEmail: '',
     businessPhone: '',
     businessCountry: '',
-    currency: '',
+    currency: 'NGN',
     slug: '',
     description: '',
     logo: '',
@@ -199,6 +199,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                     placeholder: 'Touch to choose',
                     type: {
                       type: 'picker',
+                      disabled: true,
                       options: Currencies
                     },
                     name: 'currency'

@@ -41,7 +41,7 @@ export default class EditBusinessProfileScreen extends Component<
     about: '',
     title: '',
     contactEmail: '',
-    currency: '',
+    currency: 'NGN',
     street1: '',
     city: '',
     state: '',
@@ -226,6 +226,7 @@ export default class EditBusinessProfileScreen extends Component<
                     placeholder: 'Touch to choose',
                     type: {
                       type: 'picker',
+                      disabled: true,
                       options: Currencies
                     },
                     name: 'currency'

@@ -29,6 +29,7 @@ interface IProps {
   pickerStyle?: any // delete later
   style?: any // delete later
   required?: boolean | false
+  disabled?: false
   label?: string
   underneathText?: string
   error?: any
@@ -129,7 +130,7 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
     return (
       <React.Fragment>
         <TouchableOpacity
-          onPress={() => this.toggleOpenState()}
+          onPress={() => (!this.props.disabled ? this.toggleOpenState() : null)}
           key="1334334"
           style={styles.picker}
         >

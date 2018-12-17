@@ -76,6 +76,7 @@ interface FieldType {
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
+  disabled?: boolean
   multiline?: boolean
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
@@ -182,7 +183,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
 
     if (
       mediasFromStore[multipleMediaUploadInstanceKey] ||
-      mediasFromStore[singleMediaUploadInstanceKey] && currentStep == steps.length
+      (mediasFromStore[singleMediaUploadInstanceKey] &&
+        currentStep == steps.length)
     ) {
       let multipleUploads = mediasFromStore[multipleMediaUploadInstanceKey],
         singleUploads = mediasFromStore[singleMediaUploadInstanceKey],
@@ -400,6 +402,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
       const {
         type: {
           type,
+          disabled,
           keyboardType,
           secureTextEntry = false,
           options = [],
@@ -509,6 +512,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
             <PickerAtom
               key={`${type}-${index}`}
               label={label}
+              disabled={disabled}
               list={options}
               selected={formData[name]}
               placeholder={placeholder}
