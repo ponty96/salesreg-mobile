@@ -173,6 +173,7 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
           showStepper={false}
           showTickIcon={true}
           onPressTickIcon={this.closePicker}
+          headerText={this.props.label}
         />
         <SearchAtom
           placeholder="Search"

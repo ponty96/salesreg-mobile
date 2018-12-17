@@ -1,6 +1,6 @@
 import { View, StyleSheet } from 'react-native'
 import React from 'react'
-import { Left, Right } from 'native-base'
+import { Left, Right, Title } from 'native-base'
 import Icon from '../../Atom/Icon'
 import { color } from '../../Style/Color'
 
@@ -14,6 +14,7 @@ export interface IProps {
   showStepper?: boolean
   showTickIcon?: boolean
   onPressTickIcon?: () => void
+  headerText?: string
 }
 
 export default class FormHeader extends React.PureComponent<IProps> {
@@ -56,6 +57,10 @@ export default class FormHeader extends React.PureComponent<IProps> {
               type="Ionicons"
             />
           </Left>
+
+          {this.props.headerText && (
+            <Title style={styles.title}>{this.props.headerText}</Title>
+          )}
           {this.props.showTickIcon ? (
             <Right
               style={{
@@ -104,5 +109,10 @@ const styles = StyleSheet.create({
   tickIcon: {
     fontSize: 26,
     color: color.button
+  },
+  title: {
+    fontFamily: 'AvenirNext-DemiBold',
+    fontSize: 18,
+    color: '#000'
   }
 })

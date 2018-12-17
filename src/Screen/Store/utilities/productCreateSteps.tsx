@@ -121,7 +121,8 @@ export const renderCategoryStep = (type): FormStep => ({
         searchQuery: SearchCategoriesByTitleGQL,
         searchQueryResponseKey: 'searchCategoriesByTitle'
       },
-      name: 'categories'
+      name: 'categories',
+      placeholder: 'Search Categories'
     },
     {
       label: `Is this a featured ${type}?`,
@@ -131,15 +132,6 @@ export const renderCategoryStep = (type): FormStep => ({
       },
       name: 'isFeatured',
       underneathText: `Featured ${type}s are displayed on your webstores home page`
-    },
-    {
-      label: `Is this a top rated ${type}?`,
-      type: {
-        type: 'radio',
-        options: ['yes', 'no']
-      },
-      name: 'isTopRatedByMerchant',
-      underneathText: `Lorem Ipsum`
     }
   ]
 })
