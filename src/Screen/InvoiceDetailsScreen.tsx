@@ -19,7 +19,23 @@ export default class InvoicesScreen extends React.Component<IProps> {
     }
   }
 
-  onPressEditInvoice = () => {}
+  onPressEditInvoice = () => {
+    let {
+      navigation: {
+        state: {
+          params: {
+            sales: {
+              invoice: { id, dueDate }
+            }
+          }
+        }
+      }
+    } = this.props
+
+    this.props.navigation.navigate('UpdateInvoiceDueDate', {
+      invoice: { id, dueDate }
+    })
+  }
 
   renderHeader = (amount, amountPaid, sales) => {
     return amount - amountPaid != 0 ? (
