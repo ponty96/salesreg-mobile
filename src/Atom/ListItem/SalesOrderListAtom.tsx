@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   listItem: {
     flexDirection: 'row',
     flex: 1,
-    marginHorizontal: 8,
+    marginHorizontal: 16,
     alignItems: 'center'
   },
   avatar: {
