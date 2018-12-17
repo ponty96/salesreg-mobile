@@ -17,6 +17,10 @@ target 'salesreg' do
     'RCTVibration',
     'RCTWebSocket'
   ]
+
+  pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
+  pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
+  pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/GLog.podspec'
   
   pod 'AppCenter/Analytics', '~> 1.11.0'
   pod 'AppCenter/Crashes', '~> 1.11.0'
