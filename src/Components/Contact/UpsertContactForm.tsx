@@ -43,7 +43,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     instagram: '',
     twitter: '',
     facebook: '',
-    allowsMarketing: 'no',
+    allowsMarketing: 'No',
     // snapchat: '',
     // last step
     birthday: '',
@@ -249,7 +249,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     placeholder: 'E.g Doe',
                     type: {
                       type: 'radio',
-                      options: ['yes', 'no']
+                      options: ['Yes', 'No']
                     },
                     name: 'allowsMarketing'
                   }
