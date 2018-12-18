@@ -145,7 +145,7 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16,
     paddingBottom: 16,
     borderRadius: 5,
-    marginBottom: 8,
+    marginTop: 24,
     paddingTop: 8
   },
   closeIcon: {

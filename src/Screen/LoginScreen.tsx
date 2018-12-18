@@ -34,15 +34,44 @@ class LoginScreen extends React.Component<IProps, IState> {
   }
 
   getEmail = (email: any) => {
+    let emailTest = /^[^\s@]+@[^\s@.]+\.[^\s@]+$/.test(email.trim())
     this.setState({
-      email
+      email,
+      fieldErrors: {
+        ...this.state.fieldErrors,
+        email: !emailTest ? 'Pleae enter a valid email address' : ''
+      }
     })
   }
 
   getPassword = (pass: any) => {
     this.setState({
-      password: pass
+      password: pass,
+      fieldErrors: {
+        ...this.state.fieldErrors,
+        password: pass.trim().length == 0 ? 'Password cannot be empty' : ''
+      }
     })
+  }
+
+  validateLogin = loginUser => {
+    let emailTest = /^[^\s@]+@[^\s@.]+\.[^\s@]+$/.test(this.state.email.trim())
+    if (emailTest && this.state.password.trim().length > 0) {
+      loginUser({
+        variables: {
+          email: this.state.email,
+          password: this.state.password
+        }
+      })
+    } else if (!emailTest) {
+      this.setState({
+        fieldErrors: { email: 'Invalid email format' }
+      })
+    } else if (this.state.password.trim().length == 0) {
+      this.setState({
+        fieldErrors: { password: 'Password cannot be empty' }
+      })
+    }
   }
 
   render() {
@@ -59,14 +88,7 @@ class LoginScreen extends React.Component<IProps, IState> {
                 pageTitle="Login to your account"
                 actionButtonText="Login"
                 showActionButtonIcon={true}
-                onPressActionButton={() =>
-                  loginUser({
-                    variables: {
-                      email: this.state.email,
-                      password: this.state.password
-                    }
-                  })
-                }
+                onPressActionButton={() => this.validateLogin(loginUser)}
                 alternativeLinkText="Forgot Password"
                 alternativeLinkRoute="ForgotPassword"
                 footerText="No account yet?"

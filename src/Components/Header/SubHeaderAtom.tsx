@@ -7,7 +7,7 @@ interface IProps {
   total?: any
   list?: any[]
   image?: any
-  rightLabel?: string
+  rightLabel?: string | any
   screen?: string
   onPressArrow?: () => void
   children?: JSX.Element

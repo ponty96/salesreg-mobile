@@ -10,7 +10,8 @@ export const validateStep = (currentStepForm, formData, prevErrorState) => {
         formData[field.name],
         stepValidity,
         errors,
-        true
+        true,
+        field.passwordFieldValue
       )
 
       stepValidity = validity
@@ -27,7 +28,8 @@ export const validateField = (
   value,
   preValidityState,
   prevErrorState,
-  persistPreviousErrors?: boolean
+  persistPreviousErrors?: boolean,
+  passwordFieldValue?: any
 ) => {
   let isValid = true,
     error = ''
@@ -75,6 +77,15 @@ export const validateField = (
       let passwordValiation = validatePassword(_value)
       isValid = passwordValiation.fieldValid
       error = passwordValiation.errorMessage
+    }
+
+    if (validator == 'confirm-password') {
+      let passwordConfirmValidation = validateConfirmPassword(
+        _value,
+        passwordFieldValue
+      )
+      isValid = passwordConfirmValidation.fieldValid
+      error = passwordConfirmValidation.errorMessage
     }
   })
 
@@ -125,6 +136,17 @@ function validatePassword(_value) {
   return { fieldValid, errorMessage }
 }
 
+function validateConfirmPassword(_value, passwordFieldValue) {
+  let fieldValid = true,
+    errorMessage = ''
+  if (_value.trim() !== passwordFieldValue.trim()) {
+    fieldValid = false
+    errorMessage = 'The passwords do not match'
+  }
+
+  return { fieldValid, errorMessage }
+}
+
 function validateEmail(_value) {
   let fieldValid = true,
     errorMessage = ''
@@ -168,14 +190,14 @@ function validateExpenseItem(_value) {
       if (val.itemName.trim().length == 0) {
         fieldValid = false
         errorMessage =
-          'The name or quantity in one of the sales order cannot be empty'
+          'The name or quantity in one of the items cannot be empty'
       } else {
         fieldValid = true
       }
     })
   } else {
     fieldValid = false
-    errorMessage = 'The sales order cannot be empty'
+    errorMessage = 'The items list cannot be empty'
   }
 
   return { fieldValid, errorMessage }
