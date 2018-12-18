@@ -155,7 +155,8 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     label: '',
                     name: 'image',
                     type: {
-                      type: 'image-upload'
+                      type: 'image-upload',
+                      uploadCategory: "profile-photo"
                     },
                     underneathText: ''
                   }

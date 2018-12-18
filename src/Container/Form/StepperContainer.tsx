@@ -77,6 +77,7 @@ interface FieldType {
   secureTextEntry?: boolean
   options?: any[]
   disabled?: boolean
+  uploadCategory?: 'profile-photo' | 'others'
   multiline?: boolean
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
@@ -405,6 +406,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         type: {
           type,
           disabled,
+          uploadCategory,
           keyboardType,
           secureTextEntry = false,
           options = [],
@@ -488,6 +490,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
             <ImageUploadAtom
               reduxMediaUploadClass={this.state.singleMediaUploadInstanceKey}
               key={`${type}-${index}`}
+              uploadCategory={uploadCategory}
               underneathText={underneathText}
               image={formData[name]}
               handleImageUpload={val => {

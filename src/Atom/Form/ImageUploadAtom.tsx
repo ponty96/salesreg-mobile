@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
 import { color } from '../../Style/Color'
 import ImagePicker from 'react-native-image-crop-picker'
 import { ActionSheet, Icon } from 'native-base'
@@ -12,6 +12,7 @@ interface IProps {
   handleImageUpload: (image: string) => void
   underneathText?: string
   error?: any
+  uploadCategory?: 'profile-photo' | 'others'
   storeMedias?: any
   reduxMediaUploadClass: string | number
 }
@@ -98,11 +99,18 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
       <TouchableOpacity onPress={this.handleImageUpload}>
         <View>
           <View style={styles.placeholderWrapper}>
-            <Icon
-              type="Ionicons"
-              name="ios-person"
-              style={{ fontSize: 250, color: '#616161' }}
-            />
+            {this.props.uploadCategory == 'profile-photo' ? (
+              <Icon
+                type="Ionicons"
+                name="ios-person"
+                style={{ fontSize: 250, color: '#616161' }}
+              />
+            ) : (
+              <Image
+                source={require('../../../assets-v1/image-upload.png')}
+                style={styles.imagePlaceholder}
+              />
+            )}
           </View>
           <Text
             style={{
@@ -228,10 +236,7 @@ const styles = StyleSheet.create({
   },
   imagePlaceholder: {
     width: 250,
-    height: 250,
-    backgroundColor: '#eee',
-    alignItems: 'center',
-    justifyContent: 'center'
+    height: 250
   },
   underneathText: {
     marginLeft: 0,

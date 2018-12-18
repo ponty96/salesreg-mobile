@@ -115,7 +115,8 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
                     label: '',
                     name: 'profilePicture',
                     type: {
-                      type: 'image-upload'
+                      type: 'image-upload',
+                      uploadCategory: 'profile-photo'
                     },
                     underneathText: ''
                   }
