@@ -10,7 +10,8 @@ export const validateStep = (currentStepForm, formData, prevErrorState) => {
         formData[field.name],
         stepValidity,
         errors,
-        true
+        true,
+        field.passwordFieldValue
       )
 
       stepValidity = validity
@@ -27,7 +28,8 @@ export const validateField = (
   value,
   preValidityState,
   prevErrorState,
-  persistPreviousErrors?: boolean
+  persistPreviousErrors?: boolean,
+  passwordFieldValue?: any
 ) => {
   let isValid = true,
     error = ''
@@ -76,6 +78,15 @@ export const validateField = (
       isValid = passwordValiation.fieldValid
       error = passwordValiation.errorMessage
     }
+
+    if (validator == 'confirm-password') {
+      let passwordConfirmValidation = validateConfirmPassword(
+        _value,
+        passwordFieldValue
+      )
+      isValid = passwordConfirmValidation.fieldValid
+      error = passwordConfirmValidation.errorMessage
+    }
   })
 
   let params = { ...prevErrorState }
@@ -120,6 +131,17 @@ function validatePassword(_value) {
   if (_value.length < 8) {
     fieldValid = false
     errorMessage = 'The password cannot be less than 8 characters'
+  }
+
+  return { fieldValid, errorMessage }
+}
+
+function validateConfirmPassword(_value, passwordFieldValue) {
+  let fieldValid = true,
+    errorMessage = ''
+  if (_value.trim() !== passwordFieldValue.trim()) {
+    fieldValid = false
+    errorMessage = 'The passwords do not match'
   }
 
   return { fieldValid, errorMessage }

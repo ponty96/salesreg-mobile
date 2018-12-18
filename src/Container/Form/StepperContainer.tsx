@@ -88,6 +88,7 @@ type validatorTypes =
   | 'email'
   | 'phone'
   | 'sales-order'
+  | 'confirm-password'
   | 'password'
   | 'expense-item'
 
@@ -97,6 +98,7 @@ interface FormField {
   type: FieldType
   validators?: validatorTypes[]
   name: any
+  passwordFieldValue?: string
   extraData?: any
   underneathText?: string
   value?: any
@@ -276,7 +278,12 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     return isStepValid
   }
 
-  checkValidityOnValueChange = (value, name, validators) => {
+  checkValidityOnValueChange = (
+    value,
+    name,
+    validators,
+    passwordFieldValue?: any
+  ) => {
     if (validators && validators.length > 0) {
       let { currentStep } = this.state
 
@@ -285,7 +292,9 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         name,
         value,
         this.state.stepValidity[currentStep],
-        this.props.fieldErrors
+        this.props.fieldErrors,
+        false,
+        passwordFieldValue
       )
 
       this.setState(
@@ -418,6 +427,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         label,
         placeholder,
         name,
+        passwordFieldValue,
         extraData,
         underneathText,
         value = ''
@@ -435,7 +445,12 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
               keyboardType={keyboardType || 'default'}
               secureTextEntry={secureTextEntry}
               getValue={val => {
-                this.checkValidityOnValueChange(val, name, validators)
+                this.checkValidityOnValueChange(
+                  val,
+                  name,
+                  validators,
+                  passwordFieldValue
+                )
                 this.props.updateValueChange(name, val)
               }}
               underneathText={underneathText}

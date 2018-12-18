@@ -159,7 +159,8 @@ export default class UserOnboardScreen extends React.PureComponent<
                       keyboardType: 'default',
                       secureTextEntry: true
                     },
-                    validators: ['required', 'password'],
+                    validators: ['required', 'password', 'confirm-password'],
+                    passwordFieldValue: this.state.password,
                     name: 'passwordConfirmation'
                   }
                 ],
