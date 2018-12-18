@@ -18,7 +18,7 @@ export default class ProductListAtom extends React.PureComponent<IProps> {
     return (
       <React.Fragment>
         <Text style={styles.titleText}>
-          Click back arrow to edit, or just click finish to finish.
+          Click back arrow to edit, or just click done to finish.
         </Text>
         {this.props.list.map((listItem, i) => {
           return (

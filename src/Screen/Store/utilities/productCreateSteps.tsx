@@ -74,7 +74,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
       },
       validators: ['required'],
       name: 'minimumSku',
-      underneathText: `The minimum stock quantity(MSQ) is the quantity of ${name} below which you have to restock.`
+      underneathText: `The minimum stock quantity(MSQ) is the quantity of ${name} below which you have to restock. On your inventory list, ${name} will be coloured in red when the stock quantity reaches MSQ.`
     },
     {
       label: 'Description',
@@ -82,7 +82,9 @@ export const renderProductDescriptionStep = (name): FormStep => ({
         type: 'input',
         multiline: true
       },
-      name: 'description'
+      name: 'description',
+      underneathText:
+        'This description will be used on your webstore to give your customers a quick overview of the variant of this product'
     }
   ]
 })
@@ -127,17 +129,17 @@ export const renderCategoryStep = (type): FormStep => ({
       label: `Is this a featured ${type}?`,
       type: {
         type: 'radio',
-        options: ['yes', 'no']
+        options: ['Yes', 'No']
       },
       name: 'isFeatured',
-      underneathText: `Featured ${type}s are displayed on your webstores home page`
+      underneathText: `Featured ${type}s are displayed on the homepage of your webstore.`
     }
   ]
 })
 
 export const renderTagStep = (name, type): FormStep => ({
   stepTitle: `Add tags to ${name}`,
-  stepHint: ` \nTags will enhance your filters and your customer abilities to find ${type}s within select tags`,
+  stepHint: ` \nTags will enhance your customers's abilities to find this ${type} on social media under selected hashtags`,
   formFields: [{ label: 'Tags', type: { type: 'tag-input' }, name: 'tags' }]
 })
 
