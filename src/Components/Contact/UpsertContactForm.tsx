@@ -17,12 +17,12 @@ interface IProps {
 }
 
 const genderToPossesivePronoun = gender => {
-  if (gender == 'male') return 'His'
+  if (gender == 'Male') return 'His'
   return 'Her'
 }
 
 const genderToPronoun = gender => {
-  if (gender == 'male') return 'he'
+  if (gender == 'Female') return 'he'
   return 'she'
 }
 
@@ -142,7 +142,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     validators: ['required'],
                     type: {
                       type: 'radio',
-                      options: ['male', 'female']
+                      options: ['Male', 'Female']
                     },
                     name: 'gender'
                   }

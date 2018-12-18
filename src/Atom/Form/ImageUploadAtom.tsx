@@ -1,8 +1,8 @@
 import React from 'react'
-import { View, StyleSheet, Image, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
 import ImagePicker from 'react-native-image-crop-picker'
-import { ActionSheet } from 'native-base'
+import { ActionSheet, Icon } from 'native-base'
 import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
 import CachedImageAtom from '../CachedImageAtom'
 import { connect } from 'react-redux'
@@ -95,14 +95,27 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
 
   renderSelectImagePlaceholder = (): JSX.Element => {
     return (
-      <TouchableOpacity
-        style={styles.placeholderWrapper}
-        onPress={this.handleImageUpload}
-      >
-        <Image
-          source={require('../../../assets-v1/image-upload.png')}
-          style={styles.imagePlaceholder}
-        />
+      <TouchableOpacity onPress={this.handleImageUpload}>
+        <View>
+          <View style={styles.placeholderWrapper}>
+            <Icon
+              type="Ionicons"
+              name="ios-person"
+              style={{ fontSize: 250, color: '#616161' }}
+            />
+          </View>
+          <Text
+            style={{
+              color: color.button,
+              alignSelf: 'center',
+              marginVertical: 20,
+              fontSize: 18,
+              fontFamily: 'AvenirNext-Medium'
+            }}
+          >
+            Upload Photo
+          </Text>
+        </View>
       </TouchableOpacity>
     )
   }
@@ -215,7 +228,10 @@ const styles = StyleSheet.create({
   },
   imagePlaceholder: {
     width: 250,
-    height: 250
+    height: 250,
+    backgroundColor: '#eee',
+    alignItems: 'center',
+    justifyContent: 'center'
   },
   underneathText: {
     marginLeft: 0,
