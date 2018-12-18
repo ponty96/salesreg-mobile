@@ -104,7 +104,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                 stepTitle: 'Tell us about your business',
                 formFields: [
                   {
-                    label: 'Whats your business name?',
+                    label: 'What is your official business name?',
                     placeholder: 'E.g Lidstack',
                     underneathText: `This name will appear on your webstore,\nheader, invoice, receipts, and notifications \nsent to your customers.`,
                     type: {
@@ -115,7 +115,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                     name: 'title'
                   },
                   {
-                    label: 'Slug?',
+                    label: 'How should customers call you?',
                     placeholder: 'E.g StacknBit',
                     underneathText: `This is your business nick name`,
                     type: {
@@ -153,7 +153,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                 ]
               },
               {
-                stepTitle: `How can customers contact you`,
+                stepTitle: `How can customers contact you?`,
                 formFields: [
                   {
                     label: 'What country are you in?',

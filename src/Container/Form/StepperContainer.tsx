@@ -154,9 +154,11 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           <Text style={styles.headerText}>
             {steps[this.state.currentStep - 1]['stepTitle']}
           </Text>
-          <Text style={styles.stepHint}>
-            {steps[this.state.currentStep - 1]['stepHint']}
-          </Text>
+          {steps[this.state.currentStep - 1]['stepHint'] && (
+            <Text style={styles.stepHint}>
+              {steps[this.state.currentStep - 1]['stepHint']}
+            </Text>
+          )}
           <Form>{this.renderCurrentStepFormFields()}</Form>
         </Content>
 

@@ -129,7 +129,7 @@ export default class UserOnboardScreen extends React.PureComponent<
                 stepTitle: `Finally, lets make sure no one accesses your account without your permission`,
                 formFields: [
                   {
-                    label: 'Your email is also important',
+                    label: 'Your email please',
                     placeholder: 'E.g someone@example.com',
                     type: {
                       type: 'input',
