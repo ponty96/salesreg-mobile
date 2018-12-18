@@ -24,8 +24,8 @@ import { UserContext } from '../../context/UserContext'
 
 interface SubHeaderProps {
   screen: string
-  rightLabel: string
-  onPress: () => void
+  rightLabel: string | any
+  onPress: (sections?: any) => void
   iconName?: string
 }
 interface IProps {
@@ -212,8 +212,12 @@ class GenericListIndex extends React.Component<IProps, IState> {
                       : 0
                   }
                   screen={subHeader.screen}
-                  rightLabel={subHeader.rightLabel}
-                  onPressArrow={subHeader.onPress}
+                  rightLabel={
+                    typeof subHeader.rightLabel == 'function'
+                      ? subHeader.rightLabel(sections)
+                      : subHeader.rightLabel
+                  }
+                  onPressArrow={() => subHeader.onPress(sections)}
                   iconName={subHeader.iconName}
                 />
               )}

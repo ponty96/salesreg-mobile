@@ -190,14 +190,14 @@ function validateExpenseItem(_value) {
       if (val.itemName.trim().length == 0) {
         fieldValid = false
         errorMessage =
-          'The name or quantity in one of the sales order cannot be empty'
+          'The name or quantity in one of the items cannot be empty'
       } else {
         fieldValid = true
       }
     })
   } else {
     fieldValid = false
-    errorMessage = 'The sales order cannot be empty'
+    errorMessage = 'The items list cannot be empty'
   }
 
   return { fieldValid, errorMessage }

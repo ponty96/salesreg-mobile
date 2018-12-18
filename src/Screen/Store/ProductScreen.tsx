@@ -55,8 +55,11 @@ export default class ProductScreen extends React.Component<IProps> {
         fabIconType="MaterialCommunityIcons"
         hideSeparator={true}
         subHeader={{
-          rightLabel: '+Re-stock',
-          onPress: () => this.props.navigation.navigate('UpsertProductRestock')
+          rightLabel: sections => (sections.length > 0 ? '+Re-stock' : ''),
+          onPress: sections =>
+            sections.length > 0
+              ? this.props.navigation.navigate('UpsertProductRestock')
+              : null
         }}
       />
     )
