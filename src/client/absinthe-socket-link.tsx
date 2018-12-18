@@ -3,5 +3,5 @@ import { createAbsintheSocketLink } from '@absinthe/socket-apollo-link'
 import { Socket as PhoenixSocket } from 'phoenix'
 
 export default createAbsintheSocketLink(
-  AbsintheSocket.create(new PhoenixSocket('ws://localhost:5000/socket'))
+  AbsintheSocket.create(new PhoenixSocket('ws://salesreg.herokuapp.com/socket'))
 )
