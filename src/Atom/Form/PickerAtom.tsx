@@ -3,8 +3,10 @@ import { Label, Text, Icon } from 'native-base'
 import {
   Modal,
   StyleSheet,
+  Platform,
   TouchableWithoutFeedback,
   View,
+  ActivityIndicator,
   TouchableOpacity,
   FlatList
 } from 'react-native'
@@ -20,6 +22,7 @@ export interface PickerData {
   subLabel?: string
   value: string
 }
+
 interface IProps {
   list: PickerData[] | any
   placeholder?: string
@@ -31,8 +34,11 @@ interface IProps {
   required?: boolean | false
   disabled?: false
   label?: string
+  onHandleOpen?: () => void
+  onHandleClose?: () => void
   underneathText?: string
   error?: any
+  loading?: boolean
   onSearch?: (queryText: string) => void
 }
 
@@ -50,6 +56,7 @@ interface PickerItem {
   isSelected: boolean
   subLabel?: string
 }
+
 const PickerItem = (props: PickerItem) => (
   <TouchableWithoutFeedback onPress={() => props.onPress(props.value)}>
     <View style={styles.pickerItem}>
@@ -89,6 +96,7 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   }
 
   toggleOpenState = () => {
+    this.state.isOpen ? this.props.onHandleClose() : this.props.onHandleOpen()
     this.setState({ isOpen: !this.state.isOpen })
   }
 
@@ -163,33 +171,51 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
           onRequestClose={this.toggleOpenState}
           key="133433445566446"
         >
-          <FormHeader
-            onPressBackIcon={this.toggleOpenState}
-            iconName="md-close"
-            currentStep={1}
-            totalSteps={1}
-            showStepper={false}
-            headerText={this.props.label}
-          />
-          <SearchAtom
-            placeholder="Search"
-            queryText={this.state.queryText}
-            onSearch={this.onSearch}
-          />
-          <FlatList
-            data={this.state.list}
-            renderItem={({ item }: any) => (
-              <PickerItem
-                onPress={this.handleChange}
-                icon={item.icon}
-                label={item.mainLabel}
-                value={item.value}
-                isSelected={this.props.selected == item.value}
-                subLabel={item.subLabel}
+          {!this.props.loading ? (
+            <React.Fragment>
+              <FormHeader
+                onPressBackIcon={this.toggleOpenState}
+                iconName="md-close"
+                currentStep={1}
+                totalSteps={1}
+                showStepper={false}
+                headerText={this.props.label}
               />
-            )}
-            keyExtractor={(item: any) => item.key}
-          />
+              <SearchAtom
+                placeholder="Search"
+                queryText={this.state.queryText}
+                onSearch={this.onSearch}
+              />
+              <FlatList
+                data={this.state.list}
+                renderItem={({ item }: any) => (
+                  <PickerItem
+                    onPress={this.handleChange}
+                    icon={item.icon}
+                    label={item.mainLabel}
+                    value={item.value}
+                    isSelected={this.props.selected == item.value}
+                    subLabel={item.subLabel}
+                  />
+                )}
+                keyExtractor={(item: any) => item.key}
+              />
+            </React.Fragment>
+          ) : (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                flex: 1,
+                justifyContent: 'center'
+              }}
+            >
+              <ActivityIndicator
+                color={color.black}
+                size={Platform.OS === 'android' ? 30 : 'large'}
+              />
+            </View>
+          )}
         </Modal>
       </React.Fragment>
     )
