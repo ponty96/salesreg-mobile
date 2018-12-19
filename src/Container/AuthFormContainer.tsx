@@ -13,8 +13,8 @@ interface IProps {
   onPressActionButton: () => void
   showActionButtonIcon: boolean | false
 
-  alternativeLinkText: string
-  alternativeLinkRoute: string
+  alternativeLinkText?: string
+  alternativeLinkRoute?: string
 
   footerText: string
   footerButtonText: string
@@ -57,16 +57,18 @@ export default class AuthFormContainer extends React.PureComponent<IProps> {
                 type="secondary"
               />
               <View style={{ height: 20 }} />
-              <ButtonAtom
-                btnText={this.props.alternativeLinkText.toUpperCase()}
-                onPress={() =>
-                  this.props.navigate(this.props.alternativeLinkRoute)
-                }
-                type="primary"
-                transparent={true}
-                hideIcon={true}
-                textStyle={{ fontFamily: 'AvenirNext-Medium' }}
-              />
+              {this.props.alternativeLinkText && (
+                <ButtonAtom
+                  btnText={this.props.alternativeLinkText.toUpperCase()}
+                  onPress={() =>
+                    this.props.navigate(this.props.alternativeLinkRoute)
+                  }
+                  type="primary"
+                  transparent={true}
+                  hideIcon={true}
+                  textStyle={{ fontFamily: 'AvenirNext-Medium' }}
+                />
+              )}
             </View>
             <View style={styles.footer}>
               <Text style={styles.footerText}>{this.props.footerText}</Text>
