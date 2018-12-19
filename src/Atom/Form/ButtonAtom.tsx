@@ -12,6 +12,7 @@ interface IProps {
   funcValue?: string
   btnStyle?: any
   textStyle?: any
+  faded?: boolean
   type?: 'primary' | 'secondary'
   hideIcon?: boolean
   icon?: any
@@ -25,6 +26,7 @@ class ButtonAtom extends React.Component<IProps, any> {
   }
 
   render() {
+    console.log('yaga ', this.props.faded)
     return (
       <Button
         transparent={this.props.transparent}
@@ -34,7 +36,8 @@ class ButtonAtom extends React.Component<IProps, any> {
           styles.button,
           styles[`${this.props.type}Btn`],
           this.props.transparent && styles.transparent,
-          this.props.btnStyle
+          this.props.btnStyle,
+          this.props.faded && styles.faded
         ]}
         onPress={this.props.onPress}
       >
@@ -73,6 +76,9 @@ const styles = StyleSheet.create({
   },
   transparent: {
     backgroundColor: 'transparent'
+  },
+  faded: {
+    backgroundColor: '#bbdefb'
   },
   primaryBtn: {
     backgroundColor: '#fff'
