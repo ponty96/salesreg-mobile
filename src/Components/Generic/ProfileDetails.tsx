@@ -33,11 +33,13 @@ interface IProps {
   graphqlDeleteVariables?: object
   graphqlRefetchQueries?: any[]
   onSuccessfulDeletion?: () => void
+  imageCategory?: string
 }
 
 export default class GenericProfileDetails extends PureComponent<IProps> {
   static defaultProps = {
-    enableDelete: false
+    enableDelete: false,
+    imageCategory: 'profile'
   }
 
   onDeleteCompleted = async res => {
@@ -128,15 +130,28 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
     return this.renderProfileDetailsUI()
   }
 
+  renderImagePlaceholder = () => {
+    if (this.props.image) {
+      return (
+        <CachedImageAtom
+          uri={this.props.image}
+          style={{ width: '100%', height: 280, borderRadius: 0 }}
+        />
+      )
+    } else if (this.props.imageCategory == 'profile') {
+      return (
+        <Icon
+          type="Ionicons"
+          name="ios-person"
+          style={{ fontSize: 250, color: '#616161' }}
+        />
+      )
+    } else return <View style={styles.paddedTextView} />
+  }
   renderItem = ({ item, index }: any) => {
     if (index == 0) {
       return (
-        <View style={styles.pictureView}>
-          <CachedImageAtom
-            uri={this.props.image || ''}
-            style={{ width: '100%', height: 280, borderRadius: 0 }}
-          />
-        </View>
+        <View style={styles.pictureView}>{this.renderImagePlaceholder()}</View>
       )
     } else if (index == 1) {
       return (
@@ -170,6 +185,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'center',
     paddingVertical: 24
+  },
+  paddedTextView: {
+    marginTop: 50
   },
   headerText: {
     fontSize: 16,
