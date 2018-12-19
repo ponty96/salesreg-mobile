@@ -237,7 +237,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 0,
     marginTop: 0,
-    paddingLeft: 8,
+    paddingLeft: 3,
     fontFamily: 'AvenirNext-Regular',
     paddingVertical: 0
   },

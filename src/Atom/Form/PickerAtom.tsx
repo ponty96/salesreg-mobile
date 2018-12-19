@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Label, Text } from 'native-base'
+import { Label, Text, Icon } from 'native-base'
 import {
   Modal,
   StyleSheet,
@@ -126,6 +126,7 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
       return 'Touch to choose'
     }
   }
+
   render() {
     return (
       <React.Fragment>
@@ -145,7 +146,14 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
               {this.props.label}
             </Text>
           </Label>
-          <Text style={styles.placeholderStyle}>{this.getPlaceholder()}</Text>
+          <View style={styles.caretContainer}>
+            <Text style={styles.placeholderStyle}>{this.getPlaceholder()}</Text>
+            <Icon
+              name="arrow-down"
+              type="SimpleLineIcons"
+              style={styles.dropDown}
+            />
+          </View>
         </TouchableOpacity>
         {this.renderUnderNeathText()}
         <Modal
@@ -214,9 +222,20 @@ const styles = StyleSheet.create({
     marginTop: 24,
     height: 72,
     marginLeft: 0,
+    justifyContent: 'space-between',
     borderBottomWidth: 1,
     borderBottomColor: color.textBorderBottom,
     paddingBottom: 0
+  },
+  caretContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'flex-end',
+    marginBottom: 8
+  },
+  dropDown: {
+    color: color.black,
+    fontSize: 13
   },
   labelText: {
     fontFamily: 'AvenirNext-DemiBold',
@@ -250,7 +269,7 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 0,
     marginTop: 2,
-    paddingLeft: 8,
+    paddingLeft: 3,
     fontFamily: 'AvenirNext-Regular',
     paddingVertical: 12
   }

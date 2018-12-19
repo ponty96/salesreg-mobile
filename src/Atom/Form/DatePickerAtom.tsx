@@ -2,7 +2,7 @@ import * as React from 'react'
 import DatePicker from 'react-native-datepicker'
 import { StyleSheet, View } from 'react-native'
 import { color } from '../../Style/Color'
-import { Item, Label, Text } from 'native-base'
+import { Item, Label, Text, Icon } from 'native-base'
 
 interface IProps {
   error: string
@@ -68,6 +68,11 @@ export default class DatePickerAtom extends React.Component<IProps> {
             }}
           />
         </Item>
+        <Icon
+          name="arrow-down"
+          type="SimpleLineIcons"
+          style={styles.dropDown}
+        />
         {this.renderError()}
       </View>
     )
@@ -84,6 +89,13 @@ const styles = StyleSheet.create({
   },
   datepickerBodyNoMargin: {
     marginVertical: 0
+  },
+  dropDown: {
+    color: color.black,
+    fontSize: 13,
+    position: 'absolute',
+    right: 3,
+    top: 62
   },
   underneathText: {
     marginLeft: 0,
