@@ -161,6 +161,7 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
             currentStep={1}
             totalSteps={1}
             showStepper={false}
+            headerText={this.props.label}
           />
           <SearchAtom
             placeholder="Search"

@@ -123,7 +123,8 @@ export const renderCategoryStep = (type): FormStep => ({
         searchQuery: SearchCategoriesByTitleGQL,
         searchQueryResponseKey: 'searchCategoriesByTitle'
       },
-      name: 'categories'
+      name: 'categories',
+      placeholder: 'Search Categories'
     },
     {
       label: `Is this a featured ${type}?`,
