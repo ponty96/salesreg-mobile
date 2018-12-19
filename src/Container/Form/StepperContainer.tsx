@@ -219,11 +219,13 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         { cancelable: false }
       )
     } else {
-      this.updateStepValidity(() =>
-        this.getValidity() && imageValidity
-          ? this.onCtaButtonPress()
-          : this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
-      )
+      this.updateStepValidity(() => {
+        if (this.getValidity() && imageValidity) {
+          this.onCtaButtonPress()
+        } else {
+          this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
+        }
+      })
     }
   }
 

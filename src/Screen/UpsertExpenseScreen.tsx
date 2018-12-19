@@ -178,12 +178,15 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
     delete params['company']
     delete params['paidBy']
     delete params['id']
-    params.expenseItems = params.expenseItems.map(expenseItem => {
-      let expense = { ...expenseItem }
-      delete expense.__typename
-      delete expense.id
-      return { ...expense, amount: parseFloat(expense.amount) }
-    })
+    delete params.expenseItems
+    if(this.state.expenseItems){
+      params.expenseItems = params.expenseItems.map(expenseItem => {
+        let expense = { ...expenseItem }
+        delete expense.__typename
+        delete expense.id
+        return { ...expense, amount: parseFloat(expense.amount) }
+      })
+    }
     return params
   }
   onCompleted = async res => {
