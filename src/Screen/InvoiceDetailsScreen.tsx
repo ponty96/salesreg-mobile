@@ -6,6 +6,7 @@ import ListItemAtom from '../Atom/ListItem/ListItemAtom'
 import { color } from '../Style/Color'
 import moment from 'moment'
 import { numberWithCommas } from '../Functions/numberWithCommas'
+import ProfileListAtom from '../Atom/ListItem/ExpandableListItemAtom'
 
 interface IProps {
   navigation: any
@@ -16,6 +17,24 @@ export default class InvoicesScreen extends React.Component<IProps> {
     return {
       header: null
     }
+  }
+
+  onPressEditInvoice = () => {
+    let {
+      navigation: {
+        state: {
+          params: {
+            sales: {
+              invoice: { id, dueDate }
+            }
+          }
+        }
+      }
+    } = this.props
+
+    this.props.navigation.navigate('UpdateInvoiceDueDate', {
+      invoice: { id, dueDate }
+    })
   }
 
   renderHeader = (amount, amountPaid, sales) => {
@@ -72,12 +91,11 @@ export default class InvoicesScreen extends React.Component<IProps> {
               rightTextStyle={[styles.greenText, { color: color.black }]}
               listItemStyle={styles.listWrapper}
             />
-            <ListItemAtom
-              label="Date due"
-              value={moment(dueDate).format('DD/MM/YYYY')}
-              labelStyle={styles.listLabel}
-              rightTextStyle={[styles.greenText, { color: color.black }]}
-              listItemStyle={styles.listWrapper}
+            <ProfileListAtom
+              section={`Date due: ${moment(dueDate).format('DD/MM/YYYY')}`}
+              value="Edit"
+              type="button"
+              onPress={this.onPressEditInvoice}
             />
             {items.map((item, i) => (
               <ListItemAtom
@@ -126,7 +144,7 @@ const styles = StyleSheet.create({
   listLabel: {
     color: color.textColor,
     marginLeft: 2,
-    fontFamily: 'AvenirNext-Regular'
+    fontFamily: 'AvenirNext-DemiBold'
   },
   listWrapper: {
     borderBottomColor: color.listBorderColor,

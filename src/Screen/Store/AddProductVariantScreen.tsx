@@ -133,7 +133,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
         tags: product.tags.map(tag => tag.name),
         isTopRatedByMerchant:
           product.isTopRatedByMerchant == false ? 'no' : 'yes',
-        isFeatured: product.isFeatured == false ? 'no' : 'yes',
+        isFeatured: product.isFeatured == false ? 'No' : 'Yes',
         sku: product.number
       }
     } else {
@@ -293,7 +293,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
       userId: this.state.userId,
       isTopRatedByMerchant:
         this.state.isTopRatedByMerchant == 'no' ? false : true,
-      isFeatured: this.state.isFeatured == 'no' ? false : true
+      isFeatured: this.state.isFeatured == 'No' ? false : true
     }
     let params: any = {
       companyId: this.state.companyId,

@@ -44,7 +44,7 @@ export default class SalesScreen extends React.Component<IProps> {
         onItemPress={item =>
           this.props.navigation.navigate('SalesDetails', { sales: item })
         }
-        emptyListText={`When you take orders, whether at your offline shop or your online store, they will all be listed here for you to view, track and manage. \n\nTo view your income and profit on your daily sales, tap the view [View daily sales link] above.\n\n Start selling by tapping the`}
+        emptyListText={`When you take orders, whether at your offline shop or your online store, they will all be listed here for you to view, track and manage. \n\nTo view your income and profit on your daily sales, tap the view [View daily sales link] above.\n\nStart selling by tapping the`}
         headerText="All your orders will appear here"
         fabRouteName="UpsertSales"
         fabIconName="database-minus"

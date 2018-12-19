@@ -90,8 +90,37 @@ export const UpsertSaleOrder = gql`
       }
       success
       data {
-        ... on Sale {
+        ... on Invoice {
           id
+          amount
+          refId
+          amountPaid
+          user {
+            lastName
+            firstName
+          }
+          dueDate
+          sale {
+            amount
+            amountPaid
+            date
+            items {
+              id
+              unitPrice
+              quantity
+              product {
+                name
+                id
+                costPrice
+                featuredImage
+              }
+              service {
+                name
+                id
+                featuredImage
+              }
+            }
+          }
         }
       }
     }
@@ -105,6 +134,52 @@ export const CreateRecipt = gql`
       fieldErrors {
         key
         message
+      }
+    }
+  }
+`
+
+export const UpdateInvoice = gql`
+  mutation updateInvoice($invoiceId: Uuid!, $invoice: InvoiceInput!) {
+    updateInvoice(invoiceId: $invoiceId, invoice: $invoice) {
+      fieldErrors {
+        key
+        message
+      }
+      success
+      data {
+        ... on Invoice {
+          id
+          amount
+          refId
+          amountPaid
+          user {
+            lastName
+            firstName
+          }
+          dueDate
+          sale {
+            amount
+            amountPaid
+            date
+            items {
+              id
+              unitPrice
+              quantity
+              product {
+                name
+                id
+                costPrice
+                featuredImage
+              }
+              service {
+                name
+                id
+                featuredImage
+              }
+            }
+          }
+        }
       }
     }
   }

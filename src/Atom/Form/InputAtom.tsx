@@ -137,7 +137,7 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   underneathText: {
-    marginLeft: 0,
+    marginLeft: 3,
     color: color.textColor,
     fontSize: 14,
     marginBottom: 0,

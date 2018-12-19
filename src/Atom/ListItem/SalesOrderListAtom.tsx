@@ -1,7 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
-import { Left, Right, Thumbnail } from 'native-base'
+import { Left, Right } from 'native-base'
+import CachedImageAtom from '../CachedImageAtom'
 
 export interface DataProps {
   firstTopText: string
@@ -49,10 +50,7 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
     return (
       <View style={styles.listItem}>
         {this.props.avatar && (
-          <Thumbnail
-            source={{ uri: this.props.avatar }}
-            style={styles.avatar}
-          />
+          <CachedImageAtom uri={this.props.avatar} style={styles.avatar} />
         )}
         {this.props.icon}
         <TouchableOpacity
@@ -80,6 +78,8 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
       return (
         <Left style={[styles.leftWrapper, this.props.leftStyle]}>
           <Text
+            numberOfLines={1}
+            ellipsizeMode="tail"
             style={[
               styles.serialNumber,
               styles.top,
@@ -138,7 +138,7 @@ const styles = StyleSheet.create({
   listItem: {
     flexDirection: 'row',
     flex: 1,
-    marginHorizontal: 8,
+    marginHorizontal: 16,
     alignItems: 'center'
   },
   avatar: {

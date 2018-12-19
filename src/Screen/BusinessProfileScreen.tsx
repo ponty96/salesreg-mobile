@@ -48,7 +48,7 @@ export default class BusinessProfileScreen extends Component<IProps, IState> {
           value: user.company.contactEmail
         },
         {
-          section: 'Slug',
+          section: 'Business email',
           value: user.company.slug
         },
         {

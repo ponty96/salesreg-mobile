@@ -14,7 +14,13 @@ export const SearchAtom = (props: SearchProps) => (
   <Item style={styles.searchItem}>
     <Icon
       name="ios-search"
-      style={{ color: '#000', fontSize: 24, padding: 0, marginTop: 0 }}
+      style={{
+        color: '#000',
+        fontSize: 24,
+        padding: 0,
+        marginRight: 10,
+        marginTop: 5
+      }}
     />
     <Input
       placeholder={props.placeholder || ''}
@@ -36,6 +42,7 @@ const styles = StyleSheet.create({
     top: 0,
     height: 36,
     justifyContent: 'center',
+    alignItems: 'center',
     marginBottom: 8
   }
 })

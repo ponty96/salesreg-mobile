@@ -136,7 +136,7 @@ const styles = StyleSheet.create({
   labelSection: {
     flexDirection: 'row',
     justifyContent: 'space-between',
-    paddingHorizontal: 16,
+    paddingHorizontal: 24,
     paddingTop: 16,
     borderColor: '#000'
   },

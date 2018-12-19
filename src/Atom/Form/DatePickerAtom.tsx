@@ -15,6 +15,13 @@ interface IProps {
 }
 
 export default class DatePickerAtom extends React.Component<IProps> {
+  renderError = () => {
+    if (this.props.error) {
+      return <Text style={styles.underneathText}>{this.props.error}</Text>
+    }
+    return null
+  }
+
   render() {
     return (
       <View>
@@ -61,6 +68,7 @@ export default class DatePickerAtom extends React.Component<IProps> {
             }}
           />
         </Item>
+        {this.renderError()}
       </View>
     )
   }
@@ -76,6 +84,15 @@ const styles = StyleSheet.create({
   },
   datepickerBodyNoMargin: {
     marginVertical: 0
+  },
+  underneathText: {
+    marginLeft: 0,
+    color: color.red,
+    fontSize: 14,
+    marginBottom: 0,
+    marginTop: 2,
+    fontFamily: 'AvenirNext-Regular',
+    paddingVertical: 12
   },
   datepickerInput: {
     flexDirection: 'row',

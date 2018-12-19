@@ -9,10 +9,11 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
-import { Thumbnail, Icon } from 'native-base'
+import { Icon } from 'native-base'
 import { Mutation } from 'react-apollo'
 import { DocumentNode } from 'graphql'
 import AppSpinner from '../../Components/Spinner'
+import CachedImageAtom from '../../Atom/CachedImageAtom'
 
 interface Section {
   section: string
@@ -131,10 +132,8 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
     if (index == 0) {
       return (
         <View style={styles.pictureView}>
-          <Thumbnail
-            source={{
-              uri: this.props.image
-            }}
+          <CachedImageAtom
+            uri={this.props.image || ''}
             style={{ width: '100%', height: 280, borderRadius: 0 }}
           />
         </View>

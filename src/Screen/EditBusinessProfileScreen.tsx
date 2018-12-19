@@ -41,7 +41,7 @@ export default class EditBusinessProfileScreen extends Component<
     about: '',
     title: '',
     contactEmail: '',
-    currency: '',
+    currency: 'NGN',
     street1: '',
     city: '',
     state: '',
@@ -102,7 +102,7 @@ export default class EditBusinessProfileScreen extends Component<
                 stepTitle: 'Tell us about your business',
                 formFields: [
                   {
-                    label: 'Whats your business name?',
+                    label: 'What is your official business name?',
                     placeholder: 'E.g Lidstack',
                     validators: ['required'],
                     underneathText: `This name will appear on your webstore,\nheader, invoice, receipts, and notifications \nsent to your customers.`,
@@ -113,7 +113,7 @@ export default class EditBusinessProfileScreen extends Component<
                     name: 'title'
                   },
                   {
-                    label: 'Slug?',
+                    label: 'How should customers call you?',
                     placeholder: 'E.g StacknBit',
                     underneathText: `This is your business nick name`,
                     type: {
@@ -226,6 +226,7 @@ export default class EditBusinessProfileScreen extends Component<
                     placeholder: 'Touch to choose',
                     type: {
                       type: 'picker',
+                      disabled: true,
                       options: Currencies
                     },
                     name: 'currency'

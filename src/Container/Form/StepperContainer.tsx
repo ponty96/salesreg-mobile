@@ -76,6 +76,8 @@ interface FieldType {
   keyboardType?: 'default' | 'numeric' | 'email-address'
   secureTextEntry?: boolean
   options?: any[]
+  disabled?: boolean
+  uploadCategory?: 'profile-photo' | 'others'
   multiline?: boolean
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
@@ -86,6 +88,7 @@ type validatorTypes =
   | 'email'
   | 'phone'
   | 'sales-order'
+  | 'confirm-password'
   | 'password'
   | 'expense-item'
 
@@ -95,6 +98,7 @@ interface FormField {
   type: FieldType
   validators?: validatorTypes[]
   name: any
+  passwordFieldValue?: string
   extraData?: any
   underneathText?: string
   value?: any
@@ -153,9 +157,11 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           <Text style={styles.headerText}>
             {steps[this.state.currentStep - 1]['stepTitle']}
           </Text>
-          <Text style={styles.stepHint}>
-            {steps[this.state.currentStep - 1]['stepHint']}
-          </Text>
+          {steps[this.state.currentStep - 1]['stepHint'] && (
+            <Text style={styles.stepHint}>
+              {steps[this.state.currentStep - 1]['stepHint']}
+            </Text>
+          )}
           <Form>{this.renderCurrentStepFormFields()}</Form>
         </Content>
 
@@ -182,7 +188,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
 
     if (
       mediasFromStore[multipleMediaUploadInstanceKey] ||
-      mediasFromStore[singleMediaUploadInstanceKey] && currentStep == steps.length
+      (mediasFromStore[singleMediaUploadInstanceKey] &&
+        currentStep == steps.length)
     ) {
       let multipleUploads = mediasFromStore[multipleMediaUploadInstanceKey],
         singleUploads = mediasFromStore[singleMediaUploadInstanceKey],
@@ -271,7 +278,12 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     return isStepValid
   }
 
-  checkValidityOnValueChange = (value, name, validators) => {
+  checkValidityOnValueChange = (
+    value,
+    name,
+    validators,
+    passwordFieldValue?: any
+  ) => {
     if (validators && validators.length > 0) {
       let { currentStep } = this.state
 
@@ -280,7 +292,9 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         name,
         value,
         this.state.stepValidity[currentStep],
-        this.props.fieldErrors
+        this.props.fieldErrors,
+        false,
+        passwordFieldValue
       )
 
       this.setState(
@@ -400,6 +414,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
       const {
         type: {
           type,
+          disabled,
+          uploadCategory,
           keyboardType,
           secureTextEntry = false,
           options = [],
@@ -411,6 +427,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         label,
         placeholder,
         name,
+        passwordFieldValue,
         extraData,
         underneathText,
         value = ''
@@ -428,7 +445,12 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
               keyboardType={keyboardType || 'default'}
               secureTextEntry={secureTextEntry}
               getValue={val => {
-                this.checkValidityOnValueChange(val, name, validators)
+                this.checkValidityOnValueChange(
+                  val,
+                  name,
+                  validators,
+                  passwordFieldValue
+                )
                 this.props.updateValueChange(name, val)
               }}
               underneathText={underneathText}
@@ -483,6 +505,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
             <ImageUploadAtom
               reduxMediaUploadClass={this.state.singleMediaUploadInstanceKey}
               key={`${type}-${index}`}
+              uploadCategory={uploadCategory}
               underneathText={underneathText}
               image={formData[name]}
               handleImageUpload={val => {
@@ -509,6 +532,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
             <PickerAtom
               key={`${type}-${index}`}
               label={label}
+              disabled={disabled}
               list={options}
               selected={formData[name]}
               placeholder={placeholder}

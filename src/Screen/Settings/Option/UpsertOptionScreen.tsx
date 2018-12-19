@@ -69,7 +69,7 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
             formData={this.state}
             steps={[
               {
-                stepTitle: 'Lets now describe your option',
+                stepTitle: "Let's have your option",
                 formFields: [
                   {
                     label: 'What should we call this option?',

@@ -1,15 +1,16 @@
-import * as React from 'react';
-import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
-import { StyleSheet } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { ListItem, Text, Left, Body, Right } from 'native-base'
+import { StyleSheet } from 'react-native'
+import { color } from '../Style/Color'
+import CachedImageAtom from './CachedImageAtom'
 
 interface IProps {
-  latestAmount: string;
-  realStyle: string;
-  onPress: () => void;
-  image: string;
-  contactName: string;
-  amount: any;
+  latestAmount: string
+  realStyle: string
+  onPress: () => void
+  image: string
+  contactName: string
+  amount: any
 }
 
 class ContactItemAtom extends React.Component<IProps, any> {
@@ -17,7 +18,7 @@ class ContactItemAtom extends React.Component<IProps, any> {
     return (
       <ListItem style={styles.row} onPress={this.props.onPress}>
         <Left style={styles.view1}>
-          <Thumbnail source={{ uri: this.props.image }} style={styles.dp} />
+          <CachedImageAtom uri={this.props.image} style={styles.dp} />
         </Left>
         <Body style={styles.view2}>
           <Text style={styles.rowText1}>{this.props.contactName}</Text>
@@ -31,11 +32,11 @@ class ContactItemAtom extends React.Component<IProps, any> {
           </Text>
         </Right>
       </ListItem>
-    );
+    )
   }
 }
 
-export default ContactItemAtom;
+export default ContactItemAtom
 
 const styles = StyleSheet.create({
   row: {
@@ -108,4 +109,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'rgba(218,11,11,59)'
   }
-});
+})

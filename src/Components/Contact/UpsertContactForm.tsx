@@ -17,12 +17,12 @@ interface IProps {
 }
 
 const genderToPossesivePronoun = gender => {
-  if (gender == 'male') return 'His'
+  if (gender == 'Male') return 'His'
   return 'Her'
 }
 
 const genderToPronoun = gender => {
-  if (gender == 'male') return 'he'
+  if (gender == 'Female') return 'he'
   return 'she'
 }
 
@@ -43,7 +43,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     instagram: '',
     twitter: '',
     facebook: '',
-    allowsMarketing: 'no',
+    allowsMarketing: 'No',
     // snapchat: '',
     // last step
     birthday: '',
@@ -142,7 +142,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     validators: ['required'],
                     type: {
                       type: 'radio',
-                      options: ['male', 'female']
+                      options: ['Male', 'Female']
                     },
                     name: 'gender'
                   }
@@ -155,7 +155,8 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     label: '',
                     name: 'image',
                     type: {
-                      type: 'image-upload'
+                      type: 'image-upload',
+                      uploadCategory: "profile-photo"
                     },
                     underneathText: ''
                   }
@@ -249,7 +250,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     placeholder: 'E.g Doe',
                     type: {
                       type: 'radio',
-                      options: ['yes', 'no']
+                      options: ['Yes', 'No']
                     },
                     name: 'allowsMarketing'
                   }

@@ -1,9 +1,10 @@
 import * as React from 'react'
-import { ListItem, Text, Thumbnail, View, Left, Body, Right } from 'native-base'
+import { ListItem, Text, View, Left, Body, Right } from 'native-base'
 import { StyleSheet } from 'react-native'
 import { color } from '../Style/Color'
 import { capitalizeFirstLetter } from '../Functions/capitalizeFirstLetter'
 import GoldRatings from './GoldRatingsAtom'
+import CachedImageAtom from './CachedImageAtom'
 
 interface IProps {
   items?: {
@@ -30,7 +31,7 @@ class EmployeeListAtom extends React.Component<IProps, any> {
         </View>
       )
     } else {
-      return <Thumbnail source={{ uri: avatar }} style={styles.dp} />
+      return <CachedImageAtom uri={avatar} style={styles.dp} />
     }
   }
   render() {

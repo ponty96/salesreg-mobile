@@ -73,7 +73,7 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
             steps={[
               {
                 stepTitle: `What about your transactions?`,
-                stepHint: `\nThis is required for us to disburse money to your account \nwhen customers makes purchases`,
+                stepHint: `\nThis is required for us to disburse money to your account when customers makes purchases`,
                 formFields: [
                   {
                     label: 'What corporate bank do you use?',
