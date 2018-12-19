@@ -96,7 +96,12 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   }
 
   toggleOpenState = () => {
-    this.state.isOpen ? this.props.onHandleClose() : this.props.onHandleOpen()
+    if (this.state.isOpen && this.props.onHandleClose) {
+      this.props.onHandleClose()
+    } else if (!this.state.isOpen && this.props.onHandleOpen) {
+      this.props.onHandleOpen()
+    }
+
     this.setState({ isOpen: !this.state.isOpen })
   }
 

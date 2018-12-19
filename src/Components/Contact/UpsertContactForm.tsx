@@ -46,7 +46,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     allowsMarketing: 'No',
     // snapchat: '',
     // last step
-    birthday: '',
+    birthday: new Date('1 January 1990'),
     // other required fields
     userId: '',
     companyId: '',
@@ -156,7 +156,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     name: 'image',
                     type: {
                       type: 'image-upload',
-                      uploadCategory: "profile-photo"
+                      uploadCategory: 'profile-photo'
                     },
                     underneathText: ''
                   }
