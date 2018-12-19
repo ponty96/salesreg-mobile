@@ -144,6 +144,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
   }
 
   render() {
+    console.log('The validity is ', this.getValidity())
     const steps = this.getSteps(this.props.steps)
     return (
       <Container style={{ flex: 1 }}>
@@ -170,6 +171,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
             btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
               'Next'}`}
             onPress={this.handleButtonPress}
+            faded={!this.getValidity() ? true : false}
             type="secondary"
             icon={this.getButtonIcon()}
           />
@@ -219,11 +221,19 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         { cancelable: false }
       )
     } else {
-      this.updateStepValidity(() =>
-        this.getValidity() && imageValidity
-          ? this.onCtaButtonPress()
-          : this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
-      )
+      this.updateStepValidity(() => {
+        if (this.getValidity() && imageValidity) {
+          this.onCtaButtonPress()
+        } else {
+          Alert.alert(
+            'Error Occurred',
+            'You have one or more invalid fields, please recheck your entries.',
+            [{ text: 'Ok', onPress: () => null }],
+            { cancelable: false }
+          )
+          this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
+        }
+      })
     }
   }
 
@@ -266,7 +276,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
   }
 
   getValidity = () => {
-    let { currentStep, stepValidity } = this.state,
+    let imageValidity = this.checkImageUploadingState(),
+      { currentStep, stepValidity } = this.state,
       isStepValid = true
     if (stepValidity[currentStep]) {
       Object.keys(stepValidity[currentStep]).forEach(key => {
@@ -275,7 +286,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         }
       })
     }
-    return isStepValid
+    return imageValidity && isStepValid
   }
 
   checkValidityOnValueChange = (
