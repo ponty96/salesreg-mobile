@@ -43,7 +43,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
     title: '',
     contactEmail: '',
     businessPhone: '',
-    businessCountry: '',
+    businessCountry: 'NG',
     currency: 'NGN',
     slug: '',
     description: '',

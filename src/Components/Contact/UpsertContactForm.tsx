@@ -37,7 +37,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     street1: '',
     city: '',
     state: '',
-    country: '',
+    country: 'NG',
     // step 4
     number: '',
     instagram: '',
@@ -156,7 +156,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     name: 'image',
                     type: {
                       type: 'image-upload',
-                      uploadCategory: "profile-photo"
+                      uploadCategory: 'profile-photo'
                     },
                     underneathText: ''
                   }
