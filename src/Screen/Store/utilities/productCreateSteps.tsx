@@ -140,7 +140,7 @@ export const renderCategoryStep = (type): FormStep => ({
 
 export const renderTagStep = (name, type): FormStep => ({
   stepTitle: `Add tags to ${name}`,
-  stepHint: ` \nTags will enhance your customers's abilities to find this ${type} on social media under selected hashtags`,
+  stepHint: ` \nTags will enhance your customers's abilities to find this ${type} on social media under selected hashtags. \nTap enter to add tags`,
   formFields: [{ label: 'Tags', type: { type: 'tag-input' }, name: 'tags' }]
 })
 
