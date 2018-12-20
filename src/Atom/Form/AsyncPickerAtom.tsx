@@ -50,6 +50,7 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
       >
         {({ loading, data }) => {
           const responseList = (data && data[graphqlQueryResultKey]) || []
+
           return (
             <View>
               {this.props.type == 'multi' ? (
@@ -74,7 +75,6 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
                     this.handleSelection(itemId, responseList)
                   }
                   onHandleOpen={() => this.setState({ skip: false })}
-                  onHandleClose={() => this.setState({ skip: true })}
                   selected={this.getSelected()}
                 />
               )}

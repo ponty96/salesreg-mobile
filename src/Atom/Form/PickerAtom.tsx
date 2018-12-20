@@ -42,7 +42,6 @@ interface IProps {
   disabled?: false
   label?: string
   onHandleOpen?: () => void
-  onHandleClose?: () => void
   underneathText?: string
   error?: any
   loading?: boolean
@@ -104,9 +103,7 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   }
 
   toggleOpenState = () => {
-    if (this.state.isOpen && this.props.onHandleClose) {
-      this.props.onHandleClose()
-    } else if (!this.state.isOpen && this.props.onHandleOpen) {
+    if (!this.state.isOpen && this.props.onHandleOpen) {
       this.props.onHandleOpen()
     }
 
@@ -131,13 +128,16 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   }
 
   getPlaceholder = () => {
-    const { selected, placeholder, list } = this.props
+    const { selected, placeholder } = this.props,
+      { list } = this.state
+
     if (!selected) {
       return placeholder
     } else if (list.length > 0) {
       const item: any = list.find((item: any) => {
         return item.value == selected
       })
+
       if (item) {
         return item.mainLabel
       } else {
