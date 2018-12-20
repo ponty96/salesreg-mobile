@@ -103,7 +103,6 @@ class ContactDetails extends PureComponent<IProps> {
         >
           <Text style={styles.rightNavText}>Payment activities</Text>
         </TouchableOpacity> */}
-        <View />
       </View>,
       <GenericProfileDetails
         sections={this.getContactDetails()}
