@@ -46,7 +46,7 @@ interface IProps {
   subHeader?: SubHeaderProps
   shouldRenderFooter?: boolean
   showFab?: boolean
-  showFabFn?: (val?: any) => void
+  showFabFn?: (val?: any) => any
   hideSeparator?: boolean
   user: any
 }
@@ -259,13 +259,15 @@ class GenericListIndex extends React.Component<IProps, IState> {
                 }
               />
               {data[graphqlQueryResultKey] && loading && <LoadMoreSpinner />}
-              {this.props.showFab && this.props.showFabFn(sections) && (
+              {this.props.showFab && this.props.showFabFn(sections) ? (
                 <FabAtom
                   routeName={fabRouteName}
                   navigation={navigation}
                   name={fabIconName}
                   type={fabIconType}
                 />
+              ) : (
+                <View />
               )}
             </View>
           )
@@ -276,7 +278,9 @@ class GenericListIndex extends React.Component<IProps, IState> {
 
   parseSections = sections => {
     const grouped =
-      _.groupBy(sections.edges, section => section.node.date) || {}
+      _.groupBy(sections.edges, section =>
+        moment(section.node.date).format('L')
+      ) || {}
 
     const sectionList = Object.keys(grouped).map(key => ({
       date: key,

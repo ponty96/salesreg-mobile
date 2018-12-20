@@ -9,11 +9,7 @@ import ButtonAtom from '../Atom/Form/ButtonAtom'
 import { CheckBox, ActionSheet } from 'native-base'
 import Preferences from '../services/preferences'
 import { NavigationActions } from 'react-navigation'
-import {
-  ORDER_STATUSES,
-  orderStateMachine,
-  ORDER_STATUS_WARNING
-} from '../utilities/data/statuses'
+import { ORDER_STATUSES, orderStateMachine } from '../utilities/data/statuses'
 import { capitalize } from '../Functions'
 import {
   UpdateSaleOrderStatusGQL,
