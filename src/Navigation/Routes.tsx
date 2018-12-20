@@ -1,5 +1,6 @@
 import React from 'react'
 import { Text } from 'react-native'
+import SplashScreen from 'react-native-splash-screen'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
 import Header from '../Components/Header/BaseHeader'
 // import AppSpinner from '../Components/Spinner'
@@ -268,7 +269,13 @@ export default class Routes extends React.Component<IProps, IState> {
      * We would be simulating a very small timeout
      * This is needed to prevent glitches in the screen when the user opens the app at first
      */
-    setTimeout(() => this.setState({ display: true }), 500)
+    setTimeout(
+      () =>
+        this.setState({ display: true }, () => {
+          SplashScreen.hide()
+        }),
+      500
+    )
   }
 
   render() {
