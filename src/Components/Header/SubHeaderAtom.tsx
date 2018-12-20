@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
-import Icon from '../../Atom/Icon'
+import { Icon } from 'native-base'
 
 interface IProps {
   total?: any
@@ -12,6 +12,7 @@ interface IProps {
   onPressArrow?: () => void
   children?: JSX.Element
   iconName?: string
+  iconType?: any
 }
 
 class SubHeaderAtom extends React.Component<IProps, any> {
@@ -26,7 +27,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
         <View style={styles.row}>
           <Icon
             name={this.props.iconName}
-            type="Ionicons"
+            type={this.props.iconType || 'Ionicons'}
             style={styles.cart}
           />
           <Text style={styles.text}>{this.props.total}</Text>

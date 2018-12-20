@@ -27,7 +27,9 @@ interface SubHeaderProps {
   rightLabel: string | any
   onPress: (sections?: any) => void
   iconName?: string
+  iconType?: string
 }
+
 interface IProps {
   navigation: any
   graphqlQuery: DocumentNode
@@ -217,6 +219,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
                       ? subHeader.rightLabel(sections)
                       : subHeader.rightLabel
                   }
+                  iconType={subHeader.iconType}
                   onPressArrow={() => subHeader.onPress(sections)}
                   iconName={subHeader.iconName}
                 />
