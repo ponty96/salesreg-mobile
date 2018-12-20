@@ -48,7 +48,7 @@ export default class DatePickerAtom extends React.Component<IProps> {
           </Label>
           <DatePicker
             style={styles.datepickerCont}
-            date={this.props.date}
+            date={this.props.date || new Date('1 January 1990')}
             mode="date"
             placeholder={this.props.placeholder}
             format="YYYY-MM-DD"
