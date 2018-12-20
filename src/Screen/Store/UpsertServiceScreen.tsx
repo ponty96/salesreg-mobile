@@ -136,7 +136,7 @@ class UpsertServiceScreen extends Component<IProps, IState> {
                   }
                 ]
               },
-              renderCategoryStep('service'),
+              renderCategoryStep('service', this.props.navigation),
               renderTagStep(this.state.name, 'service'),
               renderFeaturedImageStep(this.state.name),
               renderMediaStep(this.state.name)
@@ -160,7 +160,6 @@ class UpsertServiceScreen extends Component<IProps, IState> {
     delete params['__typename']
     delete params['id']
     delete params['totalTimesOrdered']
-
 
     return {
       service: params,

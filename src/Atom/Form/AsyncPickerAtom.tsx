@@ -19,6 +19,11 @@ interface IProps {
   error?: any
   user?: any
   type?: 'multi' | any
+  emptySection?: {
+    emptyText: string
+    actionButtonLabel?: string
+    actionButtonOnPress?: () => void
+  }
 }
 
 interface IState {
@@ -60,6 +65,7 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
                   {...this.props}
                   list={this.getList(responseList)}
                   onSearch={text => this.setState({ queryText: text })}
+                  emptySection={this.props.emptySection}
                   handleSelection={itemId =>
                     this.handleSelection(itemId, responseList)
                   }

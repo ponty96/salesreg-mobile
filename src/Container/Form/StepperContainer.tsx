@@ -81,6 +81,11 @@ interface FieldType {
   multiline?: boolean
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
+  emptySection?: {
+    emptyText: string
+    actionButtonLabel?: string
+    actionButtonOnPress?: () => void
+  }
 }
 
 type validatorTypes =
@@ -432,7 +437,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           options = [],
           multiline = false,
           searchQuery,
-          searchQueryResponseKey
+          searchQueryResponseKey,
+          emptySection
         },
         validators,
         label,
@@ -633,6 +639,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           return (
             <AsyncPickerAtom
               key={`${type}-${index}`}
+              emptySection={emptySection}
               label={label}
               selected={formData[name]}
               placeholder={placeholder}

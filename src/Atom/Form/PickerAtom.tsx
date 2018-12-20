@@ -13,6 +13,7 @@ import FormHeader from '../../Components/Header/FormHeader'
 import * as JsSearch from 'js-search'
 import { SearchAtom } from '../SearchAtom'
 import CachedImageAtom from '../CachedImageAtom'
+import ButtonAtom from './ButtonAtom'
 
 export interface PickerData {
   icon?: any
@@ -20,6 +21,13 @@ export interface PickerData {
   subLabel?: string
   value: string
 }
+
+interface IEmptySection {
+  emptyText: string
+  actionButtonLabel?: string
+  actionButtonOnPress?: () => void
+}
+
 interface IProps {
   list: PickerData[] | any
   placeholder?: string
@@ -34,6 +42,7 @@ interface IProps {
   underneathText?: string
   error?: any
   onSearch?: (queryText: string) => void
+  emptySection?: IEmptySection
 }
 
 interface IState {
@@ -127,6 +136,31 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
     }
   }
 
+  renderEmptyView = () => {
+    return this.props.emptySection ? (
+      <View style={styles.emptyView}>
+        <Text style={styles.emptyText}>
+          {this.props.emptySection.emptyText}
+        </Text>
+        {this.props.emptySection.actionButtonLabel && (
+          <ButtonAtom
+            btnText={this.props.emptySection.actionButtonLabel}
+            onPress={() => {
+              this.setState(
+                {
+                  isOpen: false
+                },
+                () => this.props.emptySection.actionButtonOnPress()
+              )
+            }}
+            type="secondary"
+            btnStyle={{ marginTop: 10 }}
+          />
+        )}
+      </View>
+    ) : null
+  }
+
   render() {
     return (
       <React.Fragment>
@@ -176,20 +210,24 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
             queryText={this.state.queryText}
             onSearch={this.onSearch}
           />
-          <FlatList
-            data={this.state.list}
-            renderItem={({ item }: any) => (
-              <PickerItem
-                onPress={this.handleChange}
-                icon={item.icon}
-                label={item.mainLabel}
-                value={item.value}
-                isSelected={this.props.selected == item.value}
-                subLabel={item.subLabel}
-              />
-            )}
-            keyExtractor={(item: any) => item.key}
-          />
+          {this.state.list.length > 0 ? (
+            <FlatList
+              data={this.state.list}
+              renderItem={({ item }: any) => (
+                <PickerItem
+                  onPress={this.handleChange}
+                  icon={item.icon}
+                  label={item.mainLabel}
+                  value={item.value}
+                  isSelected={this.props.selected == item.value}
+                  subLabel={item.subLabel}
+                />
+              )}
+              keyExtractor={(item: any) => item.key}
+            />
+          ) : (
+            this.renderEmptyView()
+          )}
         </Modal>
       </React.Fragment>
     )
@@ -272,6 +310,18 @@ const styles = StyleSheet.create({
     paddingLeft: 3,
     fontFamily: 'AvenirNext-Regular',
     paddingVertical: 12
+  },
+  emptyView: {
+    flex: 1,
+    backgroundColor: '#fff',
+    alignItems: 'center',
+    paddingHorizontal: 50,
+    justifyContent: 'center'
+  },
+  emptyText: {
+    fontSize: 20,
+    textAlign: 'center',
+    fontFamily: 'AvenirNext-Medium'
   }
 })
 
