@@ -26,7 +26,7 @@ export default class SalesScreen extends React.Component<IProps> {
     return [
       {
         firstTopText: item.contact.contactName,
-        bottomLeftFirstText: 'PO003', //item.paidTo
+        bottomLeftFirstText: `S ${item.refId}`, //item.paidTo
         bottomLeftSecondText: moment(item.date).calendar(), //item.date
         topRightText: `\u20A6 ${parseFloat(item.amount).toFixed(2)}`,
         bottomRightText: item.status

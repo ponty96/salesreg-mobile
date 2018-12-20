@@ -5,6 +5,7 @@ import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import { UserContext } from '../context/UserContext'
 import { UpdateInvoice } from '../graphql/mutations/order'
+import moment from 'moment'
 
 interface IProps {
   user?: any
@@ -22,7 +23,9 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
   }
 
   state = {
-    dueDate: this.props.navigation.state.params.invoice.dueDate,
+    dueDate: moment(this.props.navigation.state.params.invoice.dueDate).format(
+      'YYYY-MM-DD'
+    ),
     fieldErrors: null
   }
 
@@ -63,6 +66,12 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
   }
 
   render() {
+    console.log(
+      'moment(this.props.navigation.state.params.invoice.dueDate)',
+      moment(this.props.navigation.state.params.invoice.dueDate).format(
+        'YYYY-MM-DD'
+      )
+    )
     return (
       <Mutation mutation={UpdateInvoice} onCompleted={this.onCompleted}>
         {(updateInvoice, { loading }) => {
@@ -82,8 +91,7 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
                     stepTitle: "Let's set a new invoice due date",
                     formFields: [
                       {
-                        label:
-                          'What date do you want to extend the invoice to?',
+                        label: 'When do you want to extend the invoice to?',
                         name: 'dueDate',
                         placeholder: 'e.g 06/23/2018',
                         validators: ['required'],

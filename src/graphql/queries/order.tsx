@@ -48,6 +48,7 @@ export const ListCompanySalesGQL = gql`
       edges {
         node {
           id
+          refId
           contact {
             contactName
             id
