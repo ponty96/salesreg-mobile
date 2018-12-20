@@ -37,6 +37,7 @@ interface IProps {
   underneathText?: string
   error?: any
   onSearch?: (queryText: string) => void
+  onHandleOpen?: () => void
   emptySection?: {
     emptyText: string
     actionButtonLabel?: string
@@ -114,6 +115,10 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   }
 
   toggleOpenState = () => {
+    if (!this.state.isOpen && this.props.onHandleOpen) {
+      this.props.onHandleOpen()
+    }
+
     this.setState({ isOpen: !this.state.isOpen })
   }
 
@@ -209,56 +214,54 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
         onRequestClose={this.closePicker}
         key="133433445566446"
       >
-        {!this.props.loading ? (
-          this.state.list.length > 0 ? (
-            <React.Fragment>
-              <FormHeader
-                onPressBackIcon={this.closePicker}
-                iconName="md-close"
-                currentStep={1}
-                totalSteps={1}
-                showStepper={false}
-                showTickIcon={true}
-                onPressTickIcon={this.closePicker}
-                headerText={this.props.label}
+        <React.Fragment>
+          <FormHeader
+            onPressBackIcon={this.closePicker}
+            iconName="md-close"
+            currentStep={1}
+            totalSteps={1}
+            showStepper={false}
+            showTickIcon={true}
+            onPressTickIcon={this.closePicker}
+            headerText={this.props.label}
+          />
+          <SearchAtom
+            placeholder="Search"
+            queryText={this.state.queryText}
+            onSearch={this.onSearch}
+          />
+          {!this.props.loading && this.state.list.length > 0 ? (
+            <ScrollView>
+              {this.state.list.map((item: any, index: number) => (
+                <PickerItem
+                  onPress={this.handleChange}
+                  icon={item.icon}
+                  label={item.mainLabel}
+                  value={item.value}
+                  isSelected={this.getSelected(item.value)}
+                  subLabel={item.subLabel}
+                  key={`${item.value}-${index}`}
+                />
+              ))}
+            </ScrollView>
+          ) : this.props.loading ? (
+            <View
+              style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                flex: 1,
+                justifyContent: 'center'
+              }}
+            >
+              <ActivityIndicator
+                color={color.black}
+                size={Platform.OS === 'android' ? 30 : 'large'}
               />
-              <SearchAtom
-                placeholder="Search"
-                queryText={this.state.queryText}
-                onSearch={this.onSearch}
-              />
-              <ScrollView>
-                {this.state.list.map((item: any, index: number) => (
-                  <PickerItem
-                    onPress={this.handleChange}
-                    icon={item.icon}
-                    label={item.mainLabel}
-                    value={item.value}
-                    isSelected={this.getSelected(item.value)}
-                    subLabel={item.subLabel}
-                    key={`${item.value}-${index}`}
-                  />
-                ))}
-              </ScrollView>
-            </React.Fragment>
+            </View>
           ) : (
             this.renderEmptyView()
-          )
-        ) : (
-          <View
-            style={{
-              flexDirection: 'row',
-              alignItems: 'center',
-              flex: 1,
-              justifyContent: 'center'
-            }}
-          >
-            <ActivityIndicator
-              color={color.black}
-              size={Platform.OS === 'android' ? 30 : 'large'}
-            />
-          </View>
-        )}
+          )}
+        </React.Fragment>
       </Modal>
     ]
   }

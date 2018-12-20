@@ -209,55 +209,53 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
           onRequestClose={this.toggleOpenState}
           key="133433445566446"
         >
-          {!this.props.loading ? (
-            this.state.list.length > 0 ? (
-              <React.Fragment>
-                <FormHeader
-                  onPressBackIcon={this.toggleOpenState}
-                  iconName="md-close"
-                  currentStep={1}
-                  totalSteps={1}
-                  showStepper={false}
-                  headerText={this.props.label}
+          <React.Fragment>
+            <FormHeader
+              onPressBackIcon={this.toggleOpenState}
+              iconName="md-close"
+              currentStep={1}
+              totalSteps={1}
+              showStepper={false}
+              headerText={this.props.label}
+            />
+            <SearchAtom
+              placeholder="Search"
+              queryText={this.state.queryText}
+              onSearch={this.onSearch}
+            />
+            {!this.props.loading && this.state.list.length > 0 ? (
+              <FlatList
+                data={this.state.list}
+                renderItem={({ item }: any) => (
+                  <PickerItem
+                    onPress={this.handleChange}
+                    icon={item.icon}
+                    label={item.mainLabel}
+                    value={item.value}
+                    isSelected={this.props.selected == item.value}
+                    subLabel={item.subLabel}
+                  />
+                )}
+                keyExtractor={(item: any) => item.key}
+              />
+            ) : this.props.loading ? (
+              <View
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'center',
+                  flex: 1,
+                  justifyContent: 'center'
+                }}
+              >
+                <ActivityIndicator
+                  color={color.black}
+                  size={Platform.OS === 'android' ? 30 : 'large'}
                 />
-                <SearchAtom
-                  placeholder="Search"
-                  queryText={this.state.queryText}
-                  onSearch={this.onSearch}
-                />
-                <FlatList
-                  data={this.state.list}
-                  renderItem={({ item }: any) => (
-                    <PickerItem
-                      onPress={this.handleChange}
-                      icon={item.icon}
-                      label={item.mainLabel}
-                      value={item.value}
-                      isSelected={this.props.selected == item.value}
-                      subLabel={item.subLabel}
-                    />
-                  )}
-                  keyExtractor={(item: any) => item.key}
-                />
-              </React.Fragment>
+              </View>
             ) : (
               this.renderEmptyView()
-            )
-          ) : (
-            <View
-              style={{
-                flexDirection: 'row',
-                alignItems: 'center',
-                flex: 1,
-                justifyContent: 'center'
-              }}
-            >
-              <ActivityIndicator
-                color={color.black}
-                size={Platform.OS === 'android' ? 30 : 'large'}
-              />
-            </View>
-          )}
+            )}
+          </React.Fragment>
         </Modal>
       </React.Fragment>
     )

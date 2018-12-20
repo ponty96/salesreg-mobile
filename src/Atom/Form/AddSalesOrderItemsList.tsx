@@ -55,6 +55,10 @@ const AddSalesOrderItem = (props: SalesItem) => (
       handleSelection={val => {
         props.handleValueChange(props.index, 'item', val)
       }}
+      emptySection={{
+        emptyText:
+          'At least one product/service needs to be created to make a sales order'
+      }}
     />
     <View style={styles.salesInputRow}>
       <InputAtom

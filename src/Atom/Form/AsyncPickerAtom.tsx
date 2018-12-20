@@ -60,6 +60,7 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
                   list={this.getList(responseList)}
                   onSearch={text => this.setState({ queryText: text })}
                   selectedItems={this.getSelected()}
+                  onHandleOpen={() => this.setState({ skip: false })}
                   handleSelection={itemIds =>
                     this.handleSelection(itemIds, responseList)
                   }
