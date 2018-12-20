@@ -2,7 +2,7 @@ import React, { PureComponent } from 'react'
 import { color } from '../../Style/Color'
 import GenericProfileDetails from '../Generic/ProfileDetails'
 
-import { StyleSheet, TouchableOpacity, View, Linking, Text } from 'react-native'
+import { StyleSheet, TouchableOpacity, View, Linking } from 'react-native'
 import Icon from '../../Atom/Icon'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 import { DeleteContact } from '../../graphql/mutations/contact'
@@ -94,7 +94,7 @@ class ContactDetails extends PureComponent<IProps> {
             </View>
           </TouchableOpacity>
         </View>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           onPress={() =>
             this.props.navigation.navigate('CustomerPaymentActivity', {
               contact: contact
@@ -102,7 +102,8 @@ class ContactDetails extends PureComponent<IProps> {
           }
         >
           <Text style={styles.rightNavText}>Payment activities</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <View />
       </View>,
       <GenericProfileDetails
         sections={this.getContactDetails()}
@@ -128,7 +129,9 @@ class ContactDetails extends PureComponent<IProps> {
             this.props.contactType == 'customer' ? 'Customers' : 'Vendors'
           )
         }
-        headerSubText={`\u20A6 ${numberWithCommas(40000)}`}
+        headerSubText={`\u20A6 ${numberWithCommas(
+          this.props.contact.totalAmountPaid
+        )}`}
       />
     ]
   }

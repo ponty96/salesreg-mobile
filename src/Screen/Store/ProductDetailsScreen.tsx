@@ -106,7 +106,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           />
           <Text style={styles.rightNavText}>Share</Text>
         </TouchableOpacity>
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
           onPress={this.onPressAddProductVariant}
         >
@@ -116,7 +116,8 @@ class ProductDetailsScreen extends PureComponent<IProps> {
             type="Entypo"
             style={styles.headerIcon}
           />
-        </TouchableOpacity>
+        </TouchableOpacity> */}
+        <View />
       </View>,
       <GenericProfileDetails
         sections={this.sections()}
