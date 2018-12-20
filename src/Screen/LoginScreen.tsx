@@ -89,8 +89,6 @@ class LoginScreen extends React.Component<IProps, IState> {
                 actionButtonText="Login"
                 showActionButtonIcon={true}
                 onPressActionButton={() => this.validateLogin(loginUser)}
-                alternativeLinkText="Forgot Password"
-                alternativeLinkRoute="ForgotPassword"
                 footerText="No account yet?"
                 footerButtonText="Sign up instead"
                 footerButtonRoute="Signup"
