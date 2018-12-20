@@ -61,7 +61,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
       label: 'What is the current quantity in Stock',
       type: {
         type: 'input',
-        multiline: true
+        keyboardType: 'numeric'
       },
       validators: ['required'],
       name: 'sku'
@@ -70,7 +70,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
       label: 'What is the minimum stock quantity',
       type: {
         type: 'input',
-        multiline: true
+        keyboardType: 'numeric'
       },
       validators: ['required'],
       name: 'minimumSku',

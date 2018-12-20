@@ -74,7 +74,12 @@ class InputAtom extends React.Component<IProps, IState> {
               editable={this.props.editable}
               multiline={this.props.multiline}
               onChangeText={text =>
-                this.props.getValue(text.replace(/,/gi, ''))
+                this.props.getValue(
+                  this.props.keyboardType == 'phone-pad' ||
+                    this.props.keyboardType == 'numeric'
+                    ? text.replace(/,/gi, '')
+                    : text
+                )
               }
               value={
                 this.props.keyboardType == 'numeric'
