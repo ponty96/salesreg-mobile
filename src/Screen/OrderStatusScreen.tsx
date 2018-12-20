@@ -6,7 +6,7 @@ import Header from '../Components/Header/DetailsScreenHeader'
 import EmptyList from '../Components/EmptyList'
 import Icon from '../Atom/Icon'
 import ButtonAtom from '../Atom/Form/ButtonAtom'
-import { CheckBox } from 'native-base'
+import { CheckBox, ActionSheet } from 'native-base'
 import Preferences from '../services/preferences'
 import { NavigationActions } from 'react-navigation'
 import {
@@ -21,6 +21,10 @@ import {
 } from '../graphql/mutations/order'
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Components/Spinner'
+
+var BUTTONS = ['No', 'Yes, Change', 'Cancel']
+var DESTRUCTIVE_INDEX = 1
+var CANCEL_INDEX = 2
 
 interface IProps {
   navigation: any
@@ -144,7 +148,6 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
   }
 
   render(): JSX.Element {
-    const order = this.props.navigation.getParam('order', {})
     const orderType = this.props.navigation.getParam('type', {})
     if (this.state.showHint) {
       const contact = this.props.navigation.getParam('contact', {})
@@ -167,11 +170,6 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
             : UpdatePurchaseOrderStatusGQL
         }
         onCompleted={this.onCompleted}
-        variables={{
-          id: order.id,
-          orderType: orderType,
-          status: this.state.orderStatus.value.toUpperCase()
-        }}
       >
         {(updateOrderStatus, { loading }) => [
           <AppSpinner visible={loading} />,
@@ -194,33 +192,42 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
                   backgroundColor: `${orderStatus.value}BorderIndicator`
                 }}
                 selected={this.state.orderStatus.value == orderStatus.value}
-                onPress={() => this.changeOrderStatus(orderStatus)}
+                onPress={() =>
+                  this.changeOrderStatus(orderStatus, updateOrderStatus)
+                }
                 status={orderStatus.value}
               />
             ))}
-            <View style={styles.footer}>
-              <ButtonAtom
-                btnText={`Done`}
-                onPress={() => this.submit(updateOrderStatus)}
-                type="secondary"
-                icon="md-checkmark"
-              />
-            </View>
           </View>
         ]}
       </Mutation>
     )
   }
 
-  changeOrderStatus = orderStatus => {
+  changeOrderStatus = (orderStatus, updateOrderStatusMutation) => {
     if (this.orderStateMachine.can(orderStatus.value)) {
       this.orderStateMachine[orderStatus.value]()
-      this.setState({
-        orderStatus: {
-          ...orderStatus,
-          label: `${orderStatus.label}...`
+      this.setState(
+        {
+          orderStatus: {
+            ...orderStatus,
+            label: `${orderStatus.label}...`
+          }
+        },
+        () => {
+          const order = this.props.navigation.getParam('order', {})
+          const orderType = this.props.navigation.getParam('type', {})
+          this.submit(() =>
+            updateOrderStatusMutation({
+              variables: {
+                id: order.id,
+                orderType: orderType,
+                status: orderStatus.value.toUpperCase()
+              }
+            })
+          )
         }
-      })
+      )
     } else {
       /// state machine cannot transition, show user alert here
     }
@@ -229,32 +236,17 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
   submit = cb => {
     // show alert warning
     // call callback
-    Alert.alert(
-      'Sure about this?',
-      ORDER_STATUS_WARNING[this.state.orderStatus.value],
-      [
-        {
-          text: 'Yes change status',
-          onPress: () => cb()
-        },
-        {
-          text: 'No, this was a mistake',
-          onPress: () => {
-            const status = this.props.navigation.getParam('status', 'pending')
-            this.orderStateMachine.reset(status)
-            this.setState({
-              orderStatus: {
-                value: status,
-                label: `${capitalize(status)}...`
-              }
-            })
-            console.log('set order state to state passed via navigation params')
-          },
-          style: 'cancel'
-        }
-      ],
+    ActionSheet.show(
       {
-        cancelable: true
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        destructiveButtonIndex: DESTRUCTIVE_INDEX,
+        title: 'Change order status?'
+      },
+      buttonIndex => {
+        if (buttonIndex == 1) {
+          cb()
+        }
       }
     )
   }
@@ -263,7 +255,6 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
     const {
       updateOrderStatus: { success, data }
     } = res
-    console.log('res order status change', res)
     if (!success) {
       Alert.alert(
         'Something went wrong!',
