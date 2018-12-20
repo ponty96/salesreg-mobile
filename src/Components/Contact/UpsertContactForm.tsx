@@ -37,7 +37,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     street1: '',
     city: '',
     state: '',
-    country: '',
+    country: 'NG',
     // step 4
     number: '',
     instagram: '',

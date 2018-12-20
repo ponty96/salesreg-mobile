@@ -139,6 +139,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
         headerText={product.name}
         headerSubText={product.number}
         key="product-details-335"
+        imageCategory="item"
       />
     ]
   }
