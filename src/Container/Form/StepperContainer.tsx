@@ -81,6 +81,11 @@ interface FieldType {
   multiline?: boolean
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
+  emptySection?: {
+    emptyText: string
+    actionButtonLabel?: string
+    actionButtonOnPress?: () => void
+  }
 }
 
 type validatorTypes =
@@ -144,7 +149,6 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
   }
 
   render() {
-    console.log('The validity is ', this.getValidity())
     const steps = this.getSteps(this.props.steps)
     return (
       <Container style={{ flex: 1 }}>
@@ -286,6 +290,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         }
       })
     }
+
     return imageValidity && isStepValid
   }
 
@@ -359,7 +364,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     this.setState({
       singleMediaUploadInstanceKey: Date.now()
     })
-    this.updateStepValidity()
+    setTimeout(() => this.updateStepValidity(), 500)
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
   }
 
@@ -432,7 +437,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           options = [],
           multiline = false,
           searchQuery,
-          searchQueryResponseKey
+          searchQueryResponseKey,
+          emptySection
         },
         validators,
         label,
@@ -633,6 +639,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           return (
             <AsyncPickerAtom
               key={`${type}-${index}`}
+              emptySection={emptySection}
               label={label}
               selected={formData[name]}
               placeholder={placeholder}

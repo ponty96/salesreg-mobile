@@ -89,7 +89,8 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
                     label: 'What is your bank account number?',
                     placeholder: 'Your bank issued account number',
                     type: {
-                      type: 'input'
+                      type: 'input',
+                      keyboardType: 'phone-pad'
                     },
                     validators: ['required'],
                     name: 'accountNumber'
