@@ -47,10 +47,12 @@ export default class SalesScreen extends React.Component<IProps> {
         emptyListText={`When you take orders, whether at your offline shop or your online store, they will all be listed here for you to view, track and manage. \n\nTo view your income and profit on your daily sales, tap the [View daily sales link] above.\n\nStart selling by tapping the`}
         headerText="All your orders will appear here"
         fabRouteName="UpsertSales"
-        fabIconName="database-minus"
-        fabIconType="MaterialCommunityIcons"
+        fabIconName="cart-plus"
+        fabIconType="FontAwesome"
         subHeader={{
           screen: 'order',
+          iconType: 'FontAwesome',
+          iconName: 'shopping-cart',
           rightLabel: 'View Daily Sales',
           onPress: () => this.props.navigation.navigate('SalesOrderDailySales')
         }}
