@@ -96,6 +96,13 @@ class UpdateProductGroupOptionsScreen extends PureComponent<IProps, IState> {
                       type: {
                         type: 'search-multi-picker',
                         searchQuery: SearchOptionsByNameGQL,
+                        emptySection: {
+                          emptyText:
+                            'You currently do not have any options, please create a new variant option',
+                          actionButtonLabel: 'Create Options',
+                          actionButtonOnPress: () =>
+                            this.props.navigation.navigate('UpsertOption')
+                        },
                         searchQueryResponseKey: 'searchOptionsByName'
                       },
                       name: 'options'

@@ -21,14 +21,18 @@ export const renderSelectProductGroupFormStep = (): FormStep => ({
       type: {
         type: 'search-picker',
         searchQuery: SearchProductGroupsByTitleGQL,
-        searchQueryResponseKey: 'searchProductGroupsByTitle'
+        searchQueryResponseKey: 'searchProductGroupsByTitle',
+        emptySection: {
+          emptyText:
+            'You currently do not have any existing products, please create a new product'
+        }
       },
       validators: ['required']
     }
   ]
 })
 
-export const renderSelectOptionsFormStep = (name): FormStep => ({
+export const renderSelectOptionsFormStep = (name, navigation): FormStep => ({
   stepTitle: `Select the variant options for ${name}`,
   stepHint: `Variant options are what makes one ${name} different from another ${name}. E.g. color, sizes`,
   formFields: [
@@ -36,6 +40,12 @@ export const renderSelectOptionsFormStep = (name): FormStep => ({
       label: 'Select options',
       type: {
         type: 'search-multi-picker',
+        emptySection: {
+          emptyText:
+            'You currently do not have any options, please create a new variant option',
+          actionButtonLabel: 'Create Options',
+          actionButtonOnPress: () => navigation.navigate('UpsertOption')
+        },
         searchQuery: SearchOptionsByNameGQL,
         searchQueryResponseKey: 'searchOptionsByName'
       },
@@ -61,7 +71,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
       label: 'What is the current quantity in Stock',
       type: {
         type: 'input',
-        multiline: true
+        keyboardType: 'numeric'
       },
       validators: ['required'],
       name: 'sku'
@@ -70,7 +80,7 @@ export const renderProductDescriptionStep = (name): FormStep => ({
       label: 'What is the minimum stock quantity',
       type: {
         type: 'input',
-        multiline: true
+        keyboardType: 'numeric'
       },
       validators: ['required'],
       name: 'minimumSku',
@@ -113,17 +123,24 @@ export const renderOptionValuesInputStep = (
   }))
 })
 
-export const renderCategoryStep = (type): FormStep => ({
+export const renderCategoryStep = (type, navigation): FormStep => ({
   stepTitle: `Categorize this ${type}`,
   formFields: [
     {
       label: 'Categories',
       type: {
         type: 'search-multi-picker',
+        emptySection: {
+          emptyText:
+            'You currently do not have any categories, please create a new category',
+          actionButtonLabel: 'Create Category',
+          actionButtonOnPress: () => navigation.navigate('UpsertCategory')
+        },
         searchQuery: SearchCategoriesByTitleGQL,
         searchQueryResponseKey: 'searchCategoriesByTitle'
       },
-      name: 'categories'
+      name: 'categories',
+      placeholder: 'Search Categories'
     },
     {
       label: `Is this a featured ${type}?`,
@@ -139,7 +156,7 @@ export const renderCategoryStep = (type): FormStep => ({
 
 export const renderTagStep = (name, type): FormStep => ({
   stepTitle: `Add tags to ${name}`,
-  stepHint: ` \nTags will enhance your customers's abilities to find this ${type} on social media under selected hashtags`,
+  stepHint: ` \nTags will enhance your customers's abilities to find this ${type} on social media under selected hashtags. \nTap enter to add tags`,
   formFields: [{ label: 'Tags', type: { type: 'tag-input' }, name: 'tags' }]
 })
 

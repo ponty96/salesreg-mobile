@@ -81,6 +81,11 @@ interface FieldType {
   multiline?: boolean
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
+  emptySection?: {
+    emptyText: string
+    actionButtonLabel?: string
+    actionButtonOnPress?: () => void
+  }
 }
 
 type validatorTypes =
@@ -170,6 +175,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
             btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
               'Next'}`}
             onPress={this.handleButtonPress}
+            faded={!this.getValidity() ? true : false}
             type="secondary"
             icon={this.getButtonIcon()}
           />
@@ -223,6 +229,12 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         if (this.getValidity() && imageValidity) {
           this.onCtaButtonPress()
         } else {
+          Alert.alert(
+            'Error Occurred',
+            'You have one or more invalid fields, please recheck your entries.',
+            [{ text: 'Ok', onPress: () => null }],
+            { cancelable: false }
+          )
           this.props.updateValueChange('fieldErrors', this.state.fieldErrors)
         }
       })
@@ -268,7 +280,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
   }
 
   getValidity = () => {
-    let { currentStep, stepValidity } = this.state,
+    let imageValidity = this.checkImageUploadingState(),
+      { currentStep, stepValidity } = this.state,
       isStepValid = true
     if (stepValidity[currentStep]) {
       Object.keys(stepValidity[currentStep]).forEach(key => {
@@ -277,7 +290,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         }
       })
     }
-    return isStepValid
+
+    return imageValidity && isStepValid
   }
 
   checkValidityOnValueChange = (
@@ -350,7 +364,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     this.setState({
       singleMediaUploadInstanceKey: Date.now()
     })
-    this.updateStepValidity()
+    setTimeout(() => this.updateStepValidity(), 500)
     BackHandler.addEventListener('hardwareBackPress', this.handleBackPress)
   }
 
@@ -423,7 +437,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           options = [],
           multiline = false,
           searchQuery,
-          searchQueryResponseKey
+          searchQueryResponseKey,
+          emptySection
         },
         validators,
         label,
@@ -624,6 +639,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           return (
             <AsyncPickerAtom
               key={`${type}-${index}`}
+              emptySection={emptySection}
               label={label}
               selected={formData[name]}
               placeholder={placeholder}

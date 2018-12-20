@@ -15,7 +15,7 @@ interface IState {
   profilePicture: string
   firstName: string
   lastName: string
-  dateOfBirth: string
+  dateOfBirth: string | Date
   gender: string
   fieldErrors: any
 }
@@ -25,7 +25,7 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
     profilePicture: '',
     firstName: '',
     lastName: '',
-    dateOfBirth: '',
+    dateOfBirth: new Date('1 January 1990'),
     gender: '',
     fieldErrors: null
   }
@@ -33,6 +33,7 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
   componentWillMount() {
     this.updateDetails()
   }
+
   getImage = (_pic: any) => {}
 
   updateState = (key: string, value: any) => {

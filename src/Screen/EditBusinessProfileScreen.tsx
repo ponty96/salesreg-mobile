@@ -46,7 +46,7 @@ export default class EditBusinessProfileScreen extends Component<
     city: '',
     state: '',
     slug: '',
-    country: '',
+    country: 'NG',
     companyId: '',
     phoneNumber: '',
     fieldErrors: null
