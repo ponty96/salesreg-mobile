@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Alert } from 'react-native'
+import { StyleSheet, View, Text, Alert, TouchableOpacity } from 'react-native'
 import SelectStatusAtom from '../Atom/SelectStatusAtom'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/DetailsScreenHeader'
@@ -84,14 +84,14 @@ const OrderStatusHint = (props: IOrderStatusProps) => {
           body: <HintBody firstName={firstName} />
         }}
       />
-      <View style={styles.row}>
+      <TouchableOpacity style={styles.row} onPress={props.hideHintCheck}>
         <CheckBox
           checked={props.hideHintChecked}
           style={styles.checkBox}
           onPress={props.hideHintCheck}
         />
         <Text style={styles.dismissText}>Do not show this message again</Text>
-      </View>
+      </TouchableOpacity>
       <View style={styles.footer}>
         <ButtonAtom
           btnText={`Continue to status`}
@@ -241,6 +241,7 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
           text: 'No, this was a mistake',
           onPress: () => {
             const status = this.props.navigation.getParam('status', 'pending')
+            this.orderStateMachine.reset(status)
             this.setState({
               orderStatus: {
                 value: status,
@@ -335,7 +336,8 @@ const styles = StyleSheet.create({
   },
   row: {
     flexDirection: 'row',
-    alignItems: 'center'
+    alignItems: 'center',
+    padding: 4
   },
   footer: {
     width: '100%',

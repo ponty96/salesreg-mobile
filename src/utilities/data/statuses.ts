@@ -10,8 +10,9 @@ export const ORDER_STATUSES = [
     value: 'processed'
   },
   { label: 'Delivering', value: 'delivering' },
-  { label: 'Delivered', value: 'delivered' },
-  { label: 'Recalled', value: 'recalled' }
+  { label: 'Delivered', value: 'delivered' }
+
+  // { label: 'Recalled', value: 'recalled' }
 ]
 
 export const orderStateMachine = (init: string) =>
@@ -22,7 +23,14 @@ export const orderStateMachine = (init: string) =>
       { name: 'delivering', from: 'processed', to: 'delivering' },
       { name: 'delivered', from: 'delivering', to: 'delivered' },
       { name: 'recalled', from: 'delivered', to: 'recalled' },
-      { name: 'pending', from: 'recalled', to: 'pending' }
+      {
+        name: 'reset',
+        from: '*',
+        to: function(n) {
+          return n
+        }
+      }
+      // { name: 'pending', from: 'recalled', to: 'pending' }
     ],
     methods: {}
   })
