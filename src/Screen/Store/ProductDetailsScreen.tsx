@@ -96,7 +96,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     const product = this.props.navigation.getParam('product', {})
     return [
       <View style={styles.topHeader} key="product-details-334">
-        <TouchableOpacity
+        {/* <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
         >
           <Icon
@@ -105,7 +105,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
             style={{ fontSize: 27, color: color.textColor, marginRight: 8 }}
           />
           <Text style={styles.rightNavText}>Share</Text>
-        </TouchableOpacity>
+        </TouchableOpacity> */}
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
           onPress={this.onPressAddProductVariant}
@@ -163,7 +163,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffffc7',
     width: '100%',
     paddingVertical: 8,
-    justifyContent: 'space-between',
+    justifyContent: 'flex-end',
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: color.list
