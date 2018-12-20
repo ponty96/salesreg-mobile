@@ -42,7 +42,8 @@
     "devtools": "react-devtools",
     "start:ios": "npm run build && concurrently -r 'react-native run-ios --simulator=\"iPhone 6\"'",
     "start:android": "npm run build && concurrently -r 'react-native run-android'",
-    "start:iosx": "npm run build && react-native run-ios --simulator='iPhone X'"
+    "start:iosx": "npm run build && react-native run-ios --simulator='iPhone X'",
+    "build:ios": "npm run build && react-native bundle --entry-file='build/index.js' --bundle-output='./ios/salesreg/main.jsbundle' --dev=false --platform='ios' --assets-dest='./ios'"
   },
   "packagerOpts": {
     "assetExts": [
