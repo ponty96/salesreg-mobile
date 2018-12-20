@@ -24,7 +24,7 @@ interface IProps {
   login?: boolean
   error?: any
   inlineElement?: any
-  onSubmitEditing?: any
+  onSubmitEditing?: () => void
 }
 
 interface IState {}
@@ -38,8 +38,11 @@ class InputAtom extends React.Component<IProps, IState> {
     keyboardType: 'default',
     editable: true,
     multiline: false,
-    contStyle: { marginLeft: 4 } || { marginLeft: 0 }
+    contStyle: { marginLeft: 4 } || { marginLeft: 0 },
+    onSubmitEditing: null
   }
+
+  inputRef = null
 
   render() {
     return (
@@ -87,7 +90,14 @@ class InputAtom extends React.Component<IProps, IState> {
               underlineColorAndroid={'transparent'}
               placeholderTextColor={color.inactive}
               maxLength={this.props.maxLength}
-              onSubmitEditing={this.props.onSubmitEditing}
+              ref={input => (this.inputRef = input)}
+              onSubmitEditing={() => {
+                this.props.onSubmitEditing()
+                setTimeout(() => {
+                  this.inputRef._root.focus()
+                }, 450)
+              }}
+              autoFocus={this.props.onSubmitEditing ? true : false}
             />
           </View>
         </Item>
