@@ -9,11 +9,14 @@ import {
   Text,
   TouchableOpacity
 } from 'react-native'
-import { Icon } from 'native-base'
+import { Icon, ActionSheet } from 'native-base'
 import { Mutation } from 'react-apollo'
 import { DocumentNode } from 'graphql'
 import AppSpinner from '../../Components/Spinner'
 import CachedImageAtom from '../../Atom/CachedImageAtom'
+var BUTTONS = ['No', 'Yes, delete', 'Cancel']
+var DESTRUCTIVE_INDEX = 1
+var CANCEL_INDEX = 2
 
 interface Section {
   section: string
@@ -87,7 +90,9 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
               alignItems: 'center'
             }}
             onPress={() =>
-              deleteFn({ variables: this.props.graphqlDeleteVariables })
+              this.handleDelete(() =>
+                deleteFn({ variables: this.props.graphqlDeleteVariables })
+              )
             }
           >
             <Icon
@@ -98,6 +103,22 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
           </TouchableOpacity>
         )}
       </React.Fragment>
+    )
+  }
+
+  handleDelete = cb => {
+    ActionSheet.show(
+      {
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        destructiveButtonIndex: DESTRUCTIVE_INDEX,
+        title: 'Delete?'
+      },
+      buttonIndex => {
+        if (buttonIndex == 1) {
+          cb()
+        }
+      }
     )
   }
 
