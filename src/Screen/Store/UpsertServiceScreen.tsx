@@ -159,6 +159,8 @@ class UpsertServiceScreen extends Component<IProps, IState> {
     delete params.fieldErrors
     delete params['__typename']
     delete params['id']
+    delete params['totalTimesOrdered']
+
 
     return {
       service: params,
