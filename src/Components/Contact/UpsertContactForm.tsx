@@ -22,8 +22,8 @@ const genderToPossesivePronoun = gender => {
 }
 
 const genderToPronoun = gender => {
-  if (gender == 'Female') return 'he'
-  return 'she'
+  if (gender == 'Female') return 'she'
+  return 'he'
 }
 
 class UpsertContactForm extends Component<IProps> /*, IState*/ {
@@ -156,7 +156,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     name: 'image',
                     type: {
                       type: 'image-upload',
-                      uploadCategory: "profile-photo"
+                      uploadCategory: 'profile-photo'
                     },
                     underneathText: ''
                   }
