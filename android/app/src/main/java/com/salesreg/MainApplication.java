@@ -3,6 +3,7 @@ package com.salesreg;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import me.hauvo.thumbnail.RNThumbnailPackage;
 import com.arttitude360.reactnative.rnpaystack.RNPaystackPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
@@ -30,6 +31,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new SplashScreenReactPackage(),
             new RNThumbnailPackage(),
             new RNPaystackPackage(),
             new PickerPackage(),
