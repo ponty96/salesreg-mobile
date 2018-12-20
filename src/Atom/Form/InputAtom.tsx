@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Item, Input, Label, Text } from 'native-base'
+import { Item, Input, Label, Text, Textarea } from 'native-base'
 import { View, StyleSheet, Platform } from 'react-native'
 import { color } from '../../Style/Color'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
@@ -44,58 +44,81 @@ class InputAtom extends React.Component<IProps, IState> {
   render() {
     return (
       <View style={this.props.containerStyle}>
-        <Item
-          stackedLabel={true}
-          style={[
-            {
-              borderBottomColor: color.textBorderBottom,
-              marginTop: 24,
-              height: 80
-            },
-            this.props.contStyle
-          ]}
-        >
-          <Label
-            style={{
-              color: color.textColor,
-              padding: 0,
-              fontSize: 14
-            }}
+        {!this.props.multiline ? (
+          <Item
+            stackedLabel={true}
+            style={[
+              {
+                borderBottomColor: color.textBorderBottom,
+                marginTop: 24,
+                height: 80
+              },
+              this.props.contStyle
+            ]}
           >
-            {this.props.required && <Text style={styles.required}>*</Text>}
-            <Text style={styles.labelText}>{this.props.label}</Text>
-          </Label>
-          <View
-            style={{ flexDirection: 'row', width: '100%', marginBottom: 4 }}
-          >
-            {this.props.inlineElement}
-            <Input
+            <Label
+              style={{
+                color: color.textColor,
+                padding: 0,
+                fontSize: 14
+              }}
+            >
+              {this.props.required && <Text style={styles.required}>*</Text>}
+              <Text style={styles.labelText}>{this.props.label}</Text>
+            </Label>
+            <View
+              style={{ flexDirection: 'row', width: '100%', marginBottom: 4 }}
+            >
+              {this.props.inlineElement}
+              <Input
+                placeholder={this.props.placeholder}
+                editable={this.props.editable}
+                multiline={this.props.multiline}
+                onChangeText={text =>
+                  this.props.getValue(
+                    this.props.keyboardType == 'phone-pad' ||
+                      this.props.keyboardType == 'numeric'
+                      ? text.replace(/,/gi, '')
+                      : text
+                  )
+                }
+                value={
+                  this.props.keyboardType == 'numeric'
+                    ? numberWithCommas(this.props.defaultValue || '')
+                    : this.props.defaultValue
+                }
+                secureTextEntry={this.props.secureTextEntry}
+                keyboardType={this.props.keyboardType}
+                style={[this.props.inputStyle, styles.inputText]}
+                underlineColorAndroid={'transparent'}
+                placeholderTextColor={color.inactive}
+                maxLength={this.props.maxLength}
+                onSubmitEditing={this.props.onSubmitEditing}
+              />
+            </View>
+          </Item>
+        ) : (
+          <React.Fragment>
+            <Label
+              style={{
+                color: color.textColor,
+                padding: 0,
+                marginTop: 24,
+                fontSize: 14
+              }}
+            >
+              {this.props.required && <Text style={styles.required}>*</Text>}
+              <Text style={styles.labelText}>{this.props.label}</Text>
+            </Label>
+            <Textarea
+              rowSpan={5}
+              style={[this.props.inputStyle, styles.multilineText]}
               placeholder={this.props.placeholder}
-              editable={this.props.editable}
-              multiline={this.props.multiline}
-              onChangeText={text =>
-                this.props.getValue(
-                  this.props.keyboardType == 'phone-pad' ||
-                    this.props.keyboardType == 'numeric'
-                    ? text.replace(/,/gi, '')
-                    : text
-                )
-              }
-              value={
-                this.props.keyboardType == 'numeric'
-                  ? numberWithCommas(this.props.defaultValue || '')
-                  : this.props.defaultValue
-              }
-              secureTextEntry={this.props.secureTextEntry}
-              keyboardType={this.props.keyboardType}
-              style={[this.props.inputStyle, styles.inputText]}
-              underlineColorAndroid={'transparent'}
               placeholderTextColor={color.inactive}
-              maxLength={this.props.maxLength}
-              onSubmitEditing={this.props.onSubmitEditing}
+              editable={this.props.editable}
             />
-          </View>
-        </Item>
+          </React.Fragment>
+        )}
         {this.renderUnderNeathText()}
       </View>
     )
@@ -156,6 +179,14 @@ const styles = StyleSheet.create({
     fontSize: 16,
     // marginTop: 6,
     height: 55,
+    top: Platform.OS == 'ios' ? 6 : 6
+  },
+  multilineText: {
+    fontFamily: 'AvenirNext-Regular',
+    color: color.principal,
+    fontSize: 16,
+    borderWidth: 1,
+    borderColor: '#E0E0E0',
     top: Platform.OS == 'ios' ? 6 : 6
   }
 })
