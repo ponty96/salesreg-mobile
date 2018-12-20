@@ -1,9 +1,9 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { color } from '../../Style/Color'
 import Header from '../../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
-import Icon from '../../Atom/Icon'
+// import Icon from '../../Atom/Icon'
 import { Chip } from '../../Atom/Chip'
 import { DeleteServiceGQL } from '../../graphql/mutations/store'
 import { ListCompanyServicesGQL } from '../../graphql/queries/store'
@@ -60,19 +60,19 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
     // do change the list to the appropriate molecule
     const service = this.props.navigation.getParam('service', {})
     return [
-      <View style={styles.topHeader} key="dddd-334">
-        <View style={{ flexDirection: 'row' }} />
-        <TouchableOpacity
-          style={{ flexDirection: 'row', alignItems: 'center' }}
-        >
-          <Icon
-            type="Ionicons"
-            name="md-share"
-            style={{ fontSize: 27, color: color.textColor, marginRight: 8 }}
-          />
-          <Text style={styles.rightNavText}>Share</Text>
-        </TouchableOpacity>
-      </View>,
+      // <View style={styles.topHeader} key="dddd-334">
+      //   <View style={{ flexDirection: 'row' }} />
+      //   <TouchableOpacity
+      //     style={{ flexDirection: 'row', alignItems: 'center' }}
+      //   >
+      //     <Icon
+      //       type="Ionicons"
+      //       name="md-share"
+      //       style={{ fontSize: 27, color: color.textColor, marginRight: 8 }}
+      //     />
+      //     <Text style={styles.rightNavText}>Share</Text>
+      //   </TouchableOpacity>
+      // </View>,
       <GenericProfileDetails
         sections={this.sections()}
         enableDelete={true}

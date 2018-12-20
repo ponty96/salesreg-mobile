@@ -48,6 +48,8 @@ export const CompanyContactGQL = gql`
           facebook
           twitter
           snapchat
+          totalDebt
+          totalAmountPaid
 
           data: updatedAt
         }
