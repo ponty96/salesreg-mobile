@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, TouchableWithoutFeedback, View } from 'react-native'
+import { Text, StyleSheet, TouchableOpacity, View } from 'react-native'
 import { color } from '../Style/Color'
 import RadioButton from './Form/SingeRadioButton'
 
@@ -36,7 +36,7 @@ interface IProps {
 
 const SelectStatusAtom = (props: IProps): JSX.Element => {
   return (
-    <TouchableWithoutFeedback onPress={props.onPress}>
+    <TouchableOpacity onPress={props.onPress}>
       <View style={[styles.wrapper, renderStatusIndicator(props.status)]}>
         <RadioButton
           animation={'bounceIn'}
@@ -44,10 +44,11 @@ const SelectStatusAtom = (props: IProps): JSX.Element => {
           innerColor={color.green}
           outerColor={color.green}
           size={13}
+          onPress={props.onPress}
         />
         <Text style={styles.text}>{props.title}</Text>
       </View>
-    </TouchableWithoutFeedback>
+    </TouchableOpacity>
   )
 }
 
