@@ -87,7 +87,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
             style={{
               backgroundColor: 'transparent',
               justifyContent: 'center',
-              alignItems: 'center'
+              alignItems: 'flex-end'
             }}
             onPress={() =>
               this.handleDelete(() =>
