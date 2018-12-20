@@ -128,7 +128,9 @@ class ContactDetails extends PureComponent<IProps> {
             this.props.contactType == 'customer' ? 'Customers' : 'Vendors'
           )
         }
-        headerSubText={`\u20A6 ${numberWithCommas(40000)}`}
+        headerSubText={`\u20A6 ${numberWithCommas(
+          this.props.contact.totalAmountPaid
+        )}`}
       />
     ]
   }

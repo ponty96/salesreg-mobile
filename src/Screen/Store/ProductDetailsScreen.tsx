@@ -117,6 +117,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
             style={styles.headerIcon}
           />
         </TouchableOpacity>
+        <View />
       </View>,
       <GenericProfileDetails
         sections={this.sections()}
