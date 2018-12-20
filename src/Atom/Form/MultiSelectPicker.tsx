@@ -5,6 +5,8 @@ import {
   StyleSheet,
   TouchableWithoutFeedback,
   View,
+  ActivityIndicator,
+  Platform,
   TouchableOpacity,
   ScrollView
 } from 'react-native'
@@ -20,6 +22,7 @@ interface PickerData {
   subLabel?: string
   value: string
 }
+
 interface IProps {
   list: PickerData[] | any
   placeholder?: string
@@ -30,6 +33,7 @@ interface IProps {
   style?: any // delete later
   required?: boolean | false
   label?: string
+  loading?: boolean
   underneathText?: string
   error?: any
   onSearch?: (queryText: string) => void
@@ -55,6 +59,7 @@ interface PickerItem {
   isSelected: boolean
   subLabel?: string
 }
+
 const PickerItem = (props: PickerItem) => (
   <TouchableWithoutFeedback onPress={() => props.onPress(props.value)}>
     <View style={styles.pickerItem}>
@@ -204,37 +209,55 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
         onRequestClose={this.closePicker}
         key="133433445566446"
       >
-        <FormHeader
-          onPressBackIcon={this.closePicker}
-          iconName="md-close"
-          currentStep={1}
-          totalSteps={1}
-          showStepper={false}
-          showTickIcon={true}
-          onPressTickIcon={this.closePicker}
-          headerText={this.props.label}
-        />
-        <SearchAtom
-          placeholder="Search"
-          queryText={this.state.queryText}
-          onSearch={this.onSearch}
-        />
-        {this.state.list.length > 0 ? (
-          <ScrollView>
-            {this.state.list.map((item: any, index: number) => (
-              <PickerItem
-                onPress={this.handleChange}
-                icon={item.icon}
-                label={item.mainLabel}
-                value={item.value}
-                isSelected={this.getSelected(item.value)}
-                subLabel={item.subLabel}
-                key={`${item.value}-${index}`}
+        {!this.props.loading ? (
+          this.state.list.length > 0 ? (
+            <React.Fragment>
+              <FormHeader
+                onPressBackIcon={this.closePicker}
+                iconName="md-close"
+                currentStep={1}
+                totalSteps={1}
+                showStepper={false}
+                showTickIcon={true}
+                onPressTickIcon={this.closePicker}
+                headerText={this.props.label}
               />
-            ))}
-          </ScrollView>
+              <SearchAtom
+                placeholder="Search"
+                queryText={this.state.queryText}
+                onSearch={this.onSearch}
+              />
+              <ScrollView>
+                {this.state.list.map((item: any, index: number) => (
+                  <PickerItem
+                    onPress={this.handleChange}
+                    icon={item.icon}
+                    label={item.mainLabel}
+                    value={item.value}
+                    isSelected={this.getSelected(item.value)}
+                    subLabel={item.subLabel}
+                    key={`${item.value}-${index}`}
+                  />
+                ))}
+              </ScrollView>
+            </React.Fragment>
+          ) : (
+            this.renderEmptyView()
+          )
         ) : (
-          this.renderEmptyView()
+          <View
+            style={{
+              flexDirection: 'row',
+              alignItems: 'center',
+              flex: 1,
+              justifyContent: 'center'
+            }}
+          >
+            <ActivityIndicator
+              color={color.black}
+              size={Platform.OS === 'android' ? 30 : 'large'}
+            />
+          </View>
         )}
       </Modal>
     ]

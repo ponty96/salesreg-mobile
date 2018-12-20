@@ -1,6 +1,5 @@
 import * as React from 'react'
 import { Query } from 'react-apollo'
-import AppSpinner from '../../Components/Spinner'
 import { DocumentNode } from 'graphql'
 import { UserContext } from '../../context/UserContext'
 import PickerAtom, { PickerData } from '../Form/PickerAtom'
@@ -28,12 +27,15 @@ interface IProps {
 
 interface IState {
   queryText: string
+  skip: boolean
 }
 
 class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
   state = {
-    queryText: ''
+    queryText: '',
+    skip: true
   }
+
   render() {
     const { graphqlQuery, user, graphqlQueryResultKey } = this.props
     return (
@@ -44,15 +46,16 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
         }}
         query={graphqlQuery}
         fetchPolicy="cache-and-network"
+        skip={this.state.skip}
       >
         {({ loading, data }) => {
-          const responseList = data[graphqlQueryResultKey] || []
+          const responseList = (data && data[graphqlQueryResultKey]) || []
           return (
             <View>
-              <AppSpinner visible={loading} />
               {this.props.type == 'multi' ? (
                 <MultiSelectPickerAtom
                   {...this.props}
+                  loading={loading}
                   list={this.getList(responseList)}
                   onSearch={text => this.setState({ queryText: text })}
                   selectedItems={this.getSelected()}
@@ -63,12 +66,15 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
               ) : (
                 <PickerAtom
                   {...this.props}
+                  loading={loading}
                   list={this.getList(responseList)}
                   onSearch={text => this.setState({ queryText: text })}
                   emptySection={this.props.emptySection}
                   handleSelection={itemId =>
                     this.handleSelection(itemId, responseList)
                   }
+                  onHandleOpen={() => this.setState({ skip: false })}
+                  onHandleClose={() => this.setState({ skip: true })}
                   selected={this.getSelected()}
                 />
               )}
