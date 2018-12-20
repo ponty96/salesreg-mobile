@@ -195,9 +195,6 @@ function validateExpenseItem(_value) {
         fieldValid = true
       }
     })
-  } else {
-    fieldValid = false
-    errorMessage = 'The items list cannot be empty'
   }
 
   return { fieldValid, errorMessage }
@@ -220,7 +217,7 @@ function validateSalesOrder(_value) {
     })
   } else {
     fieldValid = false
-    errorMessage = 'The sales order cannot be empty'
+    errorMessage = 'The items list cannot be empty'
   }
 
   return { fieldValid, errorMessage }

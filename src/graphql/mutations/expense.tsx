@@ -1,7 +1,7 @@
 import gql from 'graphql-tag'
 
 export const UpsertExpenseGQL = gql`
-  mutation upsertExpense($expense: ExpenseInput!, $expenseId: Uuid) {
+  mutation upsertExpense($expense: ExpenseInput, $expenseId: Uuid) {
     upsertExpense(expense: $expense, expenseId: $expenseId) {
       success
       fieldErrors {
