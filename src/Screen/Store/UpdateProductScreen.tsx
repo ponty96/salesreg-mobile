@@ -201,13 +201,13 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
     if (this.state.optionValues.length > 0) {
       return renderProductDescriptionStep(this.state.name)
     } else {
-      return renderCategoryStep('product')
+      return renderCategoryStep('product', this.props.navigation)
     }
   }
 
   getFourthStep = (): FormStep | any => {
     if (this.state.optionValues.length > 0) {
-      return renderCategoryStep('product')
+      return renderCategoryStep('product', this.props.navigation)
     } else {
       return renderTagStep(this.state.name, 'product')
     }

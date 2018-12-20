@@ -92,6 +92,7 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
         onSuccessfulDeletion={() => this.props.navigation.navigate('Services')}
         image={service.featuredImage}
         headerText={service.name}
+        imageCategory="item"
       />
     ]
   }

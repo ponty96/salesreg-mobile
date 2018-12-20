@@ -330,6 +330,13 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                           type: {
                             type: 'search-picker',
                             searchQuery: CompanyCustomersGQL,
+                            emptySection: {
+                              emptyText:
+                                'You currently do not have any customers, please create a new customer',
+                              actionButtonLabel: 'Create Customer',
+                              actionButtonOnPress: () =>
+                                this.props.navigation.navigate('UpsertCustomer')
+                            },
                             searchQueryResponseKey: 'companyCustomers'
                           },
                           name: 'existingContact',

@@ -15,13 +15,12 @@ interface IProps {
 
 class SalesOrderDetailsScreen extends Component<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const sales = navigation.getParam('sales', {})
     return {
       header: (
         <Header
           title="Sales Order Details"
           onPressLeftIcon={() => navigation.goBack()}
-          onPressRightIcon={() => navigation.navigate('UpsertSales', { sales })}
+          hideRightMenu={true}
         />
       )
     }
