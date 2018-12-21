@@ -16,6 +16,7 @@ interface IProps {
   storeMedias?: any
   reduxMediaUploadClass: string | number
 }
+
 interface IState {
   imageToUpload: any
   prevImageUploaded: string
