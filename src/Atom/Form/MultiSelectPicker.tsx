@@ -3,7 +3,6 @@ import { Label, Text, Icon } from 'native-base'
 import {
   Modal,
   StyleSheet,
-  TouchableWithoutFeedback,
   View,
   ActivityIndicator,
   Platform,
@@ -62,7 +61,7 @@ interface PickerItem {
 }
 
 const PickerItem = (props: PickerItem) => (
-  <TouchableWithoutFeedback onPress={() => props.onPress(props.value)}>
+  <TouchableOpacity onPress={() => props.onPress(props.value)}>
     <View style={styles.pickerItem}>
       <View style={{ flexDirection: 'row' }}>
         <View
@@ -72,7 +71,7 @@ const PickerItem = (props: PickerItem) => (
       </View>
       <Text style={styles.pickerItemLabel}>{props.subLabel}</Text>
     </View>
-  </TouchableWithoutFeedback>
+  </TouchableOpacity>
 )
 
 class PickerAtom extends React.PureComponent<IProps, IState> {

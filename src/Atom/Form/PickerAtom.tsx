@@ -4,7 +4,6 @@ import {
   Modal,
   StyleSheet,
   Platform,
-  TouchableWithoutFeedback,
   View,
   ActivityIndicator,
   TouchableOpacity,
@@ -65,7 +64,7 @@ interface PickerItem {
 }
 
 const PickerItem = (props: PickerItem) => (
-  <TouchableWithoutFeedback onPress={() => props.onPress(props.value)}>
+  <TouchableOpacity onPress={() => props.onPress(props.value)}>
     <View style={styles.pickerItem}>
       <View style={{ flexDirection: 'row' }}>
         <CachedImageAtom
@@ -76,7 +75,7 @@ const PickerItem = (props: PickerItem) => (
       </View>
       <Text style={styles.pickerItemLabel}>{props.subLabel}</Text>
     </View>
-  </TouchableWithoutFeedback>
+  </TouchableOpacity>
 )
 
 class PickerAtom extends React.PureComponent<IProps, IState> {
@@ -228,8 +227,8 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
                 data={this.state.list}
                 renderItem={({ item }: any) => (
                   <PickerItem
-                    onPress={this.handleChange}
                     icon={item.icon}
+                    onPress={this.handleChange}
                     label={item.mainLabel}
                     value={item.value}
                     isSelected={this.props.selected == item.value}
