@@ -57,11 +57,12 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     const { contact } = this.props
     let details = {}
     if (contact) {
-      const { address = {}, phone } = contact
+      const { address = {}, phone, birthday } = contact
       details = {
         ...contact,
         ...address,
         ...phone,
+        birthday: birthday || new Date('1 January 1990'),
         gender: contact.gender
           ? `${contact.gender[0].toUpperCase()}${contact.gender
               .toLowerCase()

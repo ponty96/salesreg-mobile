@@ -47,7 +47,7 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
     this.setState({
       firstName: user.firstName,
       lastName: user.lastName,
-      dateOfBirth: user.dateOfBirth,
+      dateOfBirth: user.dateOfBirth || new Date('1 January 1990'),
       profilePicture: user.profilePicture || '',
       gender: user.gender.toLowerCase()
     })
