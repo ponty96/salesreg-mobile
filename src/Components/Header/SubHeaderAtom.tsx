@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
-import { Icon } from 'native-base'
+import Icon from '../../Atom/Icon'
 
 interface IProps {
   total?: any

@@ -53,7 +53,8 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
                 routeName: 'UserProfile',
                 showRightCaret: true,
                 description: 'View and edit your Profile',
-                icon: 'md-person'
+                icon: 'person',
+                iconType: 'MaterialIcons'
               },
               {
                 section: 'Your Business Profile',
@@ -86,7 +87,8 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
                 showRightCaret: false,
                 onPress: () => this.handleLogOut(resetUserContext),
                 description: '',
-                icon: 'md-power'
+                iconType: 'MaterialIcons',
+                icon: 'power-settings-new'
               }
             ]}
           />
