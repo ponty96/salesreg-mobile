@@ -1,5 +1,12 @@
 import React from 'react'
-import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  Image,
+  Alert
+} from 'react-native'
 import { color } from '../../Style/Color'
 import ImagePicker from 'react-native-image-crop-picker'
 import { ActionSheet, Icon } from 'native-base'
@@ -68,8 +75,18 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
       cropping: true,
       mediaType: 'photo',
       includeBase64: true
-    }).then(image => {
-      this.setState({ prevImageUploaded: null, imageToUpload: image })
+    }).then((image: any) => {
+      let { size } = image
+      if (size / 1000000 > 1) {
+        Alert.alert(
+          'Image too large',
+          'The image is too large, please select an image of size 1MB or less',
+          [{ text: 'Ok', onPress: () => null }],
+          { cancelable: false }
+        )
+      } else {
+        this.setState({ prevImageUploaded: null, imageToUpload: image })
+      }
     })
   }
 
@@ -80,8 +97,18 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
       cropping: true,
       mediaType: 'photo',
       includeBase64: true
-    }).then(image => {
-      this.setState({ prevImageUploaded: null, imageToUpload: image })
+    }).then((image: any) => {
+      let { size } = image
+      if (size / 1000000 > 1) {
+        Alert.alert(
+          'Image too large',
+          'The image is too large, please take a photo of size 1MB or less',
+          [{ text: 'Ok', onPress: () => null }],
+          { cancelable: false }
+        )
+      } else {
+        this.setState({ prevImageUploaded: null, imageToUpload: image })
+      }
     })
   }
 

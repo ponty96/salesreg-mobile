@@ -4,6 +4,7 @@ import {
   View,
   Linking,
   Text,
+  Alert,
   TouchableWithoutFeedback,
   TouchableOpacity
 } from 'react-native'
@@ -70,10 +71,20 @@ export default class MediaUploadAtom extends React.PureComponent<
       cropping: true,
       mediaType: 'photo',
       includeBase64: true
-    }).then(media => {
-      this.setState({
-        media
-      })
+    }).then((media: any) => {
+      let { size } = media
+      if (size / 1000000 > 1) {
+        Alert.alert(
+          'Image too large',
+          'The image is too large, please select an image of size 1MB or less',
+          [{ text: 'Ok', onPress: () => null }],
+          { cancelable: false }
+        )
+      } else {
+        this.setState({
+          media
+        })
+      }
     })
   }
 
@@ -85,9 +96,19 @@ export default class MediaUploadAtom extends React.PureComponent<
       mediaType: 'photo',
       includeBase64: true
     }).then((media: any) => {
-      this.setState({
-        media
-      })
+      let { size } = media
+      if (size / 1000000 > 1) {
+        Alert.alert(
+          'Image too large',
+          'The image is too large, please take a photo of size 1MB or less',
+          [{ text: 'Ok', onPress: () => null }],
+          { cancelable: false }
+        )
+      } else {
+        this.setState({
+          media
+        })
+      }
     })
   }
 
