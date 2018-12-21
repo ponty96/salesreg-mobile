@@ -28,8 +28,15 @@
  */
 
 import React from 'react'
-import { Text, StyleSheet, View, BackHandler, Alert } from 'react-native'
-import { Container, Content, Form } from 'native-base'
+import {
+  Text,
+  StyleSheet,
+  View,
+  BackHandler,
+  Alert,
+  ScrollView
+} from 'react-native'
+import { Container, Form } from 'native-base'
 import { color } from '../../Style/Color'
 import { connect } from 'react-redux'
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
@@ -130,6 +137,7 @@ interface IState {
   showHeaderBorder?: boolean
   stepValidity: any
   fieldErrors: object
+  hasEndFormEndBeenReached: boolean
   isReadyToSubmitForm: boolean
   multipleMediaUploadInstanceKey: number
   singleMediaUploadInstanceKey?: number
@@ -144,12 +152,31 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
       isReadyToSubmitForm: false,
       stepValidity: {},
       showHeaderBorder: false,
+      hasEndFormEndBeenReached: false,
       multipleMediaUploadInstanceKey: Date.now()
     }
   }
 
+  handleScroll = ({
+    nativeEvent: { layoutMeasurement, contentOffset, contentSize }
+  }) => {
+    const paddingToBottom = 20,
+      isEnding =
+        layoutMeasurement.height + contentOffset.y >=
+        contentSize.height - paddingToBottom
+
+    this.setState({
+      hasEndFormEndBeenReached: isEnding
+    })
+  }
+
   render() {
-    const steps = this.getSteps(this.props.steps)
+    const steps = this.getSteps(this.props.steps),
+      btnViewStyle = {
+        elevation: this.state.hasEndFormEndBeenReached ? 0 : 7,
+        shadowOpacity: this.state.hasEndFormEndBeenReached ? 0 : 1.0
+      }
+
     return (
       <Container style={{ flex: 1 }}>
         <FormHeader
@@ -158,7 +185,11 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           totalSteps={steps.length}
           showBottomBorder={this.state.showHeaderBorder}
         />
-        <Content contentContainerStyle={styles.container}>
+        <ScrollView
+          onScroll={this.handleScroll}
+          scrollEventThrottle={400}
+          contentContainerStyle={styles.container}
+        >
           <Text style={styles.headerText}>
             {steps[this.state.currentStep - 1]['stepTitle']}
           </Text>
@@ -168,9 +199,9 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
             </Text>
           )}
           <Form>{this.renderCurrentStepFormFields()}</Form>
-        </Content>
+        </ScrollView>
 
-        <View style={styles.footer}>
+        <View style={[styles.footer, btnViewStyle]}>
           <ButtonAtom
             btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
               'Next'}`}
@@ -669,7 +700,8 @@ export default connect(mapStateToProps)(FormStepperContainer)
 
 const styles = StyleSheet.create({
   container: {
-    paddingHorizontal: 32
+    paddingHorizontal: 32,
+    paddingBottom: 30
   },
   headerText: {
     alignSelf: 'flex-start',
@@ -691,6 +723,15 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     paddingHorizontal: 16,
-    paddingVertical: 16
+    paddingVertical: 16,
+    elevation: 7,
+    shadowColor: '#e0e0e0',
+    shadowOffset: {
+      width: 0,
+      height: 3
+    },
+    shadowRadius: 5,
+    shadowOpacity: 1.0,
+    backgroundColor: '#fff'
   }
 })

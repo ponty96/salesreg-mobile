@@ -62,7 +62,11 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
         ...contact,
         ...address,
         ...phone,
-        gender: contact.gender ? contact.gender.toLowerCase() : '',
+        gender: contact.gender
+          ? `${contact.gender[0].toUpperCase()}${contact.gender
+              .toLowerCase()
+              .substring(1)}`
+          : '',
         image: contact.image ? contact.image : ''
       }
     }
@@ -291,6 +295,8 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     delete params.fieldErrors
     delete params['__typename']
     delete params['id']
+    delete params['totalAmountPaid']
+    delete params['totalDebt']
     delete params['data']
 
     return {
