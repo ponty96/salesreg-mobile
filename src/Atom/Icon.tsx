@@ -19,6 +19,7 @@ interface IProps {
     | 'EvilIcons'
     | 'Feather'
     | 'FontAwesome'
+    | 'FontAwesome5'
     | 'Foundation'
     | 'Ionicons'
     | 'MaterialCommunityIcons'
@@ -78,6 +79,13 @@ export default class Icon extends PureComponent<IProps> {
         )
         break
       case 'FontAwesome':
+        icon = (
+          <Text style={contentContainerStyle || {}} onPress={onPress || null}>
+            <FAIcon style={newStyles} name={this.props.name} />
+          </Text>
+        )
+        break
+      case 'FontAwesome5':
         icon = (
           <Text style={contentContainerStyle || {}} onPress={onPress || null}>
             <FAIcon style={newStyles} name={this.props.name} />
