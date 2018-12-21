@@ -172,6 +172,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
 
     return { expense: params, expenseId: expense ? expense.id : null }
   }
+
   clearParams = params => {
     delete params.fieldErrors
     delete params['__typename']
@@ -179,14 +180,18 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
     delete params['paidBy']
     delete params['id']
     delete params.expenseItems
-    if(this.state.expenseItems){
-      params.expenseItems = params.expenseItems.map(expenseItem => {
+    if (this.state.expenseItems) {
+      params.expenseItems = this.state.expenseItems.map(expenseItem => {
         let expense = { ...expenseItem }
         delete expense.__typename
         delete expense.id
-        return { ...expense, amount: parseFloat(expense.amount) }
+        return {
+          ...expense,
+          amount: parseFloat(expense.amount).toFixed(2)
+        }
       })
     }
+
     return params
   }
   onCompleted = async res => {
