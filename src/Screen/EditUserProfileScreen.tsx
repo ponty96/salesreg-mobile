@@ -110,7 +110,7 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
                 ]
               },
               {
-                stepTitle: `Your profile photo(1MB \nor less)`,
+                stepTitle: `Your profile photo(3MB \nor less)`,
                 formFields: [
                   {
                     label: '',

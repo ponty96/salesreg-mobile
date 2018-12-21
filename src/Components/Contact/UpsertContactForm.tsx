@@ -154,7 +154,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                 ]
               },
               {
-                stepTitle: `Add ${firstName}'s photo(1MB \nor less)`,
+                stepTitle: `Add ${firstName}'s photo(3MB \nor less)`,
                 formFields: [
                   {
                     label: '',

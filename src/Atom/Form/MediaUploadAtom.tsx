@@ -73,10 +73,10 @@ export default class MediaUploadAtom extends React.PureComponent<
       includeBase64: true
     }).then((media: any) => {
       let { size } = media
-      if (size / 1000000 > 1) {
+      if (size / 1000000 > 3) {
         Alert.alert(
           'Image too large',
-          'The image is too large, please select an image of size 1MB or less',
+          'The image is too large, please select an image of size 3MB or less',
           [{ text: 'Ok', onPress: () => null }],
           { cancelable: false }
         )
@@ -97,10 +97,10 @@ export default class MediaUploadAtom extends React.PureComponent<
       includeBase64: true
     }).then((media: any) => {
       let { size } = media
-      if (size / 1000000 > 1) {
+      if (size / 1000000 > 3) {
         Alert.alert(
           'Image too large',
-          'The image is too large, please take a photo of size 1MB or less',
+          'The image is too large, please take a photo of size 3MB or less',
           [{ text: 'Ok', onPress: () => null }],
           { cancelable: false }
         )
