@@ -1,4 +1,4 @@
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
 import { Left, Right, Title } from 'native-base'
 import Icon from '../../Atom/Icon'
@@ -49,33 +49,37 @@ export default class FormHeader extends React.PureComponent<IProps> {
       >
         {/* blue progress indicator line above header*/}
         <View style={styles.wrapper}>
-          <Left style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Icon
-              name={this.props.iconName || 'md-arrow-back'}
-              onPress={this.props.onPressBackIcon}
-              style={styles.headerIcon}
-              type="Ionicons"
-            />
-          </Left>
+          <TouchableWithoutFeedback onPress={this.props.onPressBackIcon}>
+            <Left
+              style={{ flexDirection: 'row', width: 20, alignItems: 'center' }}
+            >
+              <Icon
+                name={this.props.iconName || 'md-arrow-back'}
+                style={styles.headerIcon}
+                type="Ionicons"
+              />
+            </Left>
+          </TouchableWithoutFeedback>
 
           {this.props.headerText && (
             <Title style={styles.title}>{this.props.headerText}</Title>
           )}
           {this.props.showTickIcon ? (
-            <Right
-              style={{
-                flexDirection: 'row',
-                alignItems: 'flex-end',
-                justifyContent: 'flex-end'
-              }}
-            >
-              <Icon
-                name="md-checkmark"
-                onPress={this.props.onPressTickIcon}
-                style={styles.tickIcon}
-                type="Ionicons"
-              />
-            </Right>
+            <TouchableWithoutFeedback onPress={this.props.onPressTickIcon}>
+              <Right
+                style={{
+                  flexDirection: 'row',
+                  alignItems: 'flex-end',
+                  justifyContent: 'flex-end'
+                }}
+              >
+                <Icon
+                  name="md-checkmark"
+                  style={styles.tickIcon}
+                  type="Ionicons"
+                />
+              </Right>
+            </TouchableWithoutFeedback>
           ) : (
             <Right />
           )}

@@ -55,14 +55,21 @@ export default class BaseHeader extends React.PureComponent<IProps> {
     return (
       <View style={styles.header}>
         <View style={styles.wrapper}>
-          <Left style={{ flexDirection: 'row', alignItems: 'center' }}>
-            <Icon
-              name={this.props.leftIconTitle}
-              onPress={this.props.onPressLeftIcon}
-              style={styles.headerIcon}
-              type={this.props.leftIconType}
-            />
-          </Left>
+          <TouchableWithoutFeedback onPress={this.props.onPressLeftIcon}>
+            <Left
+              style={{
+                flexDirection: 'row',
+                width: 20,
+                alignItems: 'center'
+              }}
+            >
+              <Icon
+                name={this.props.leftIconTitle}
+                style={styles.headerIcon}
+                type={this.props.leftIconType}
+              />
+            </Left>
+          </TouchableWithoutFeedback>
           <Title style={styles.title}>{props.title}</Title>
           {!this.props.hideRightMenu ? (
             <Right>
