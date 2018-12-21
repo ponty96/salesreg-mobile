@@ -101,6 +101,7 @@ const styles = StyleSheet.create({
   checkBoxWrapper: {
     marginVertical: 22,
     flexDirection: 'row',
+    justifyContent: 'flex-start',
     paddingHorizontal: 0
   },
   checkBox: {
@@ -112,7 +113,6 @@ const styles = StyleSheet.create({
     marginLeft: 0,
     flexWrap: 'wrap',
     marginRight: 16,
-    marginTop: 16,
     justifyContent: 'center',
     alignItems: 'center'
   },
@@ -122,6 +122,7 @@ const styles = StyleSheet.create({
   checkItemText: {
     color: '#fff',
     fontSize: 24,
+    marginTop: -3,
     fontFamily: 'AvenirNext-Bold',
     flexWrap: 'wrap',
     textAlign: 'left',
