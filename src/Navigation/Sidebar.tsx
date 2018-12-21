@@ -25,6 +25,8 @@ interface IState {
 
 interface Category {
   title: string
+  iconName?: string
+  iconType?: any
   routeName: string
 }
 
@@ -43,10 +45,11 @@ const sideBarItemStyles = StyleSheet.create({
   categoryWrapper: {
     borderRadius: 5,
     marginHorizontal: 5,
+    paddingLeft: 22,
     paddingVertical: 6
   },
   category: {
-    marginLeft: 22,
+    marginLeft: 10,
     backgroundColor: 'transparent',
     color: color.textColor,
     marginVertical: 6,
@@ -90,15 +93,26 @@ const SidebarItem = (prop: {
             key={key}
             onPress={() => prop.navigate(category.routeName)}
           >
-            <Text
-              style={[
-                sideBarItemStyles.category,
-                prop.activeRoute == category.routeName &&
-                  sideBarItemStyles.activeCategory
-              ]}
-            >
-              {category.title}
-            </Text>
+            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+              <Icon
+                name={category.iconName}
+                type={category.iconType}
+                style={[
+                  { fontSize: 20, color: color.textColor },
+                  prop.activeRoute == category.routeName &&
+                    sideBarItemStyles.activeCategory
+                ]}
+              />
+              <Text
+                style={[
+                  sideBarItemStyles.category,
+                  prop.activeRoute == category.routeName &&
+                    sideBarItemStyles.activeCategory
+                ]}
+              >
+                {category.title}
+              </Text>
+            </View>
           </TouchableOpacity>
         )
       })}
@@ -153,6 +167,8 @@ export default class SideBar extends PureComponent<IProps, IState> {
               categories={[
                 {
                   title: 'Home',
+                  iconName: 'home',
+                  iconType: 'MaterialIcons',
                   routeName: 'Home'
                 }
               ]}
@@ -165,11 +181,15 @@ export default class SideBar extends PureComponent<IProps, IState> {
               categories={[
                 {
                   title: 'Products',
-                  routeName: 'Products'
+                  routeName: 'Products',
+                  iconName: 'md-cart',
+                  iconType: 'Ionicons'
                 },
                 {
                   title: 'Services',
-                  routeName: 'Services'
+                  routeName: 'Services',
+                  iconName: 'basket-fill',
+                  iconType: 'MaterialCommunityIcons'
                 }
               ]}
             />
@@ -181,7 +201,9 @@ export default class SideBar extends PureComponent<IProps, IState> {
               categories={[
                 {
                   title: 'Customers',
-                  routeName: 'Customers'
+                  routeName: 'Customers',
+                  iconName: 'user',
+                  iconType: 'FontAwesome5'
                 }
               ]}
             />
@@ -193,11 +215,15 @@ export default class SideBar extends PureComponent<IProps, IState> {
               categories={[
                 {
                   title: 'Sales',
-                  routeName: 'Sales'
+                  routeName: 'Sales',
+                  iconName: 'shopping-cart',
+                  iconType: 'FontAwesome'
                 },
                 {
                   title: 'Invoices',
-                  routeName: 'Invoices'
+                  routeName: 'Invoices',
+                  iconName: 'receipt',
+                  iconType: 'MaterialCommunityIcons'
                 }
               ]}
             />
@@ -208,7 +234,9 @@ export default class SideBar extends PureComponent<IProps, IState> {
               categories={[
                 {
                   title: 'Banks',
-                  routeName: 'Banks'
+                  routeName: 'Banks',
+                  iconName: 'bank',
+                  iconType: 'MaterialCommunityIcons'
                 },
                 // {
                 //   title: 'Income',
@@ -216,7 +244,9 @@ export default class SideBar extends PureComponent<IProps, IState> {
                 // },
                 {
                   title: 'Expenses',
-                  routeName: 'Expenses'
+                  routeName: 'Expenses',
+                  iconName: 'database-minus',
+                  iconType: 'MaterialCommunityIcons'
                 }
               ]}
             />
@@ -227,11 +257,15 @@ export default class SideBar extends PureComponent<IProps, IState> {
               categories={[
                 {
                   title: 'Settings',
-                  routeName: 'ProfileSettings'
+                  routeName: 'ProfileSettings',
+                  iconType: 'MaterialIcons',
+                  iconName: 'settings'
                 },
                 {
                   title: 'Help & Feedback',
-                  routeName: 'Help'
+                  routeName: 'Help',
+                  iconType: 'MaterialIcons',
+                  iconName: 'help'
                 }
               ]}
             />
