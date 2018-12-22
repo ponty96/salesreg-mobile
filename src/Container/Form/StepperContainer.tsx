@@ -659,6 +659,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
               key={`${type}-${index}`}
               label={label}
               tags={formData[name]}
+              underneathText={underneathText}
               handleValuesChange={tags =>
                 this.props.updateValueChange(name, tags)
               }
