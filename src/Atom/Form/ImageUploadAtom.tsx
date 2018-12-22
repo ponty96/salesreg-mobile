@@ -59,8 +59,10 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
         switch (buttonIndex) {
           case 0:
             this.openCamera()
+            break
           case 1:
             this.openGallery()
+            break
           default:
             break
         }
