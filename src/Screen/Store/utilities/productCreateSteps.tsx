@@ -156,8 +156,15 @@ export const renderCategoryStep = (type, navigation): FormStep => ({
 
 export const renderTagStep = (name, type): FormStep => ({
   stepTitle: `Add tags to ${name}`,
-  stepHint: ` \nTags will enhance your customers's abilities to find this ${type} on social media under selected hashtags. \nTap enter to add tags`,
-  formFields: [{ label: 'Tags', type: { type: 'tag-input' }, name: 'tags' }]
+  stepHint: ` \nTags will enhance your customers's abilities to find this ${type} on social media under selected hashtags.`,
+  formFields: [
+    {
+      label: 'Tags',
+      type: { type: 'tag-input' },
+      name: 'tags',
+      underneathText: 'Tap enter to add tags'
+    }
+  ]
 })
 
 export const renderFeaturedImageStep = (name): FormStep => ({

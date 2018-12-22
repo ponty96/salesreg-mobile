@@ -6,6 +6,7 @@ import {
   Alert,
   TouchableOpacity
 } from 'react-native'
+import { ActionSheet } from 'native-base'
 import ListItemAtom from '../../Atom/ListItem/ListItemAtom'
 import { color } from '../../Style/Color'
 import Icon from '../../Atom/Icon'
@@ -14,6 +15,9 @@ import FabAtom from '../../Atom/FabAtom'
 import { DocumentNode } from 'graphql'
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Spinner'
+var BUTTONS = ['No', 'Yes, delete', 'Cancel']
+var DESTRUCTIVE_INDEX = 1
+var CANCEL_INDEX = 2
 
 interface Item {
   itemTitle: string
@@ -153,20 +157,20 @@ export default class GenericDetailsComponent extends Component<IProps> {
         {this.props.enableDelete && (
           <TouchableOpacity
             style={{
-              flex: 1,
-              backgroundColor: 'transparent',
+              backgroundColor: color.trashContainer,
               justifyContent: 'center',
-              alignItems: 'center',
-              height: '100%'
+              alignItems: 'flex-end'
             }}
             onPress={() =>
-              deleteFn({ variables: this.props.graphqlDeleteVariables })
+              this.handleDelete(() =>
+                deleteFn({ variables: this.props.graphqlDeleteVariables })
+              )
             }
           >
             <Icon
               type="EvilIcons"
               name="trash"
-              style={{ color: color.textBorderBottom, fontSize: 60 }}
+              style={{ color: color.trashIcon, fontSize: 60 }}
             />
           </TouchableOpacity>
         )}
@@ -180,6 +184,22 @@ export default class GenericDetailsComponent extends Component<IProps> {
           />
         )}
       </View>
+    )
+  }
+
+  handleDelete = cb => {
+    ActionSheet.show(
+      {
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        destructiveButtonIndex: DESTRUCTIVE_INDEX,
+        title: 'Delete?'
+      },
+      buttonIndex => {
+        if (buttonIndex == 1) {
+          cb()
+        }
+      }
     )
   }
 

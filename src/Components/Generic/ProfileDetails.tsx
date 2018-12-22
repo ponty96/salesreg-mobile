@@ -85,7 +85,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
         {this.props.enableDelete && (
           <TouchableOpacity
             style={{
-              backgroundColor: 'transparent',
+              backgroundColor: color.trashContainer,
               justifyContent: 'center',
               alignItems: 'flex-end'
             }}
@@ -98,7 +98,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
             <Icon
               type="EvilIcons"
               name="trash"
-              style={{ color: color.textBorderBottom, fontSize: 60 }}
+              style={{ color: color.trashIcon, fontSize: 60 }}
             />
           </TouchableOpacity>
         )}

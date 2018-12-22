@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
 import { color } from '../../Style/Color'
 import GenericProfileDetails from '../Generic/ProfileDetails'
+import moment from 'moment'
 
 import { StyleSheet, TouchableOpacity, View, Linking } from 'react-native'
 import Icon from '../../Atom/Icon'
@@ -59,7 +60,10 @@ class ContactDetails extends PureComponent<IProps> {
             ]
           : null
       },
-      { section: 'Birthday', value: contact.birthday || '' },
+      {
+        section: 'Birthday',
+        value: moment(contact.birthday).format('YYYY-MM-DD') || ''
+      },
       {
         section: 'Facebook',
         value: contact.facebook || '',
