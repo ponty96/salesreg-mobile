@@ -21,6 +21,8 @@ export const color = {
   button: '#3668D3',
   link: '#3668D3',
   dropdown: '#D0D0D0',
+  trashContainer: '#eee',
+  trashIcon: '#616161',
   list: '#F3F3F3',
   subHeader: '#DDDDDD',
   modal: '#F6F6F6',
