@@ -1,5 +1,12 @@
 import React, { PureComponent } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  TouchableWithoutFeedback,
+  Linking
+} from 'react-native'
 import { color } from '../../Style/Color'
 import Header from '../../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
@@ -8,6 +15,7 @@ import { Chip } from '../../Atom/Chip'
 import { DeleteProductGQL } from '../../graphql/mutations/store'
 import { ListCompanyProductsGQL } from '../../graphql/queries/store'
 import { UserContext } from '../../context/UserContext'
+import CachedImageAtom from '../../Atom/CachedImageAtom'
 
 interface IProps {
   navigation?: any
@@ -29,6 +37,18 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       )
     }
   }
+
+  transformPath = mediaURL => {
+    let url = /video$/.test(mediaURL)
+    if (!url) {
+      return mediaURL
+    } else {
+      let baseURL = 'https://refineryaudio.s3.amazonaws.com/',
+        fileName = mediaURL.substring(mediaURL.lastIndexOf('/') + 1)
+      return `${baseURL}thumbnail%2F${fileName}`
+    }
+  }
+
   sections = (): any => {
     const product = this.props.navigation.getParam('product', {})
     return [
@@ -54,14 +74,51 @@ class ProductDetailsScreen extends PureComponent<IProps> {
         section: 'Tags',
         body: (
           <View style={styles.tags}>
-            {product.tags.map(tag => (
-              <Chip text={tag.name} />
+            {product.tags.map((tag, i) => (
+              <Chip key={i} text={tag.name} />
             ))}
           </View>
         ),
         hideBody: product.tags.length > 0 ? false : true
       }, // logic for showing tags here
-      { section: 'Images', value: null } // logic for rendering images here
+      {
+        section: 'Images',
+        body: (
+          <View style={styles.imageContainer}>
+            {product.images &&
+              product.images.map((media, i) => {
+                let isVideo = /video$/.test(media)
+                return (
+                  <View key={i}>
+                    <CachedImageAtom
+                      style={StyleSheet.flatten([
+                        styles.image,
+                        styles.cachedImageStyle
+                      ])}
+                      uri={this.transformPath(media)}
+                    >
+                      <View style={styles.mediaOverlay}>
+                        <Icon
+                          type="FontAwesome"
+                          name={!isVideo ? 'file-image-o' : 'video-camera'}
+                          style={styles.fileTypeIcon}
+                        />
+                      </View>
+                    </CachedImageAtom>
+                    <TouchableWithoutFeedback
+                      onPress={() => {
+                        Linking.openURL(media)
+                      }}
+                    >
+                      <View style={styles.clickableDisplayOverlay} />
+                    </TouchableWithoutFeedback>
+                  </View>
+                )
+              })}
+          </View>
+        ),
+        hideBody: product.images && product.images.length > 0 ? false : true
+      }
     ]
   }
 
@@ -171,6 +228,35 @@ const styles = StyleSheet.create({
     borderBottomWidth: 1,
     borderBottomColor: color.list
   },
+  imageContainer: {
+    flexDirection: 'row',
+    flexWrap: 'wrap'
+  },
+  image: {
+    marginTop: 12,
+    marginLeft: 12,
+    width: 110,
+    height: 110
+  },
+  cachedImageStyle: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    marginLeft: 6,
+    marginTop: 6
+  },
+  mediaOverlay: {
+    backgroundColor: 'rgba(0,0,0,.2)',
+    width: '100%',
+    marginLeft: 4,
+    marginTop: 4,
+    height: '100%',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  fileTypeIcon: {
+    fontSize: 30,
+    color: '#fff'
+  },
   rightNavText: {
     color: color.button,
     fontSize: 16,
@@ -181,6 +267,13 @@ const styles = StyleSheet.create({
     color: color.button,
     padding: 16,
     fontSize: 28
+  },
+  clickableDisplayOverlay: {
+    position: 'absolute',
+    top: 35,
+    left: 7,
+    width: 110,
+    height: 80
   },
   tags: {
     flexDirection: 'row',
