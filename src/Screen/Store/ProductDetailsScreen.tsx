@@ -46,7 +46,8 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       },
       {
         section: 'Categories',
-        value: product.categories.map(cat => cat.title)
+        value: product.categories.map(cat => cat.title),
+        hideBody: product.categories.length > 0 ? false : true
       },
       // open tags screen, which shows list of products and services attached to the tag
       {
@@ -57,7 +58,8 @@ class ProductDetailsScreen extends PureComponent<IProps> {
               <Chip text={tag.name} />
             ))}
           </View>
-        )
+        ),
+        hideBody: product.tags.length > 0 ? false : true
       }, // logic for showing tags here
       { section: 'Images', value: null } // logic for rendering images here
     ]

@@ -186,6 +186,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
         <ProfileListAtom
           section={item.section}
           value={item.value}
+          hideBody={item.hideBody}
           iconName={item.icon}
           body={item.body}
           type={item.type}

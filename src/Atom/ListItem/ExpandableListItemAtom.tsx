@@ -15,6 +15,7 @@ interface IProps {
   iconName?: string
   body?: any
   type?: any
+  hideBody?: boolean
   onPress?: () => void
 }
 
@@ -49,7 +50,7 @@ class ProfileListAtom extends Component<IProps, IState> {
       this.props.body ||
       (typeof value == 'object' && value !== null)
     ) {
-      return (
+      return !this.props.hideBody ? (
         <Icon
           name={this.state.bodyViewState ? 'ios-arrow-up' : 'ios-arrow-down'}
           type="Ionicons"
@@ -58,6 +59,8 @@ class ProfileListAtom extends Component<IProps, IState> {
             color: color.textColor
           }}
         />
+      ) : (
+        <Text style={styles.notProvidedText}>None Provided</Text>
       )
     } else return <View />
   }
@@ -174,6 +177,11 @@ const styles = StyleSheet.create({
     fontSize: 14,
     fontFamily: 'AvenirNext-Medium',
     color: color.selling
+  },
+  notProvidedText: {
+    fontSize: 14,
+    color: color.textColor,
+    fontFamily: 'AvenirNext-DemiBold'
   },
   buttonRow: {
     flexDirection: 'row',
