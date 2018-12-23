@@ -66,20 +66,20 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       },
       {
         section: 'Categories',
-        value: product.categories.map(cat => cat.title),
-        hideBody: product.categories.length > 0 ? false : true
+        value: product.categories && product.categories.map(cat => cat.title),
+        hideBody:
+          product.categories && product.categories.length > 0 ? false : true
       },
       // open tags screen, which shows list of products and services attached to the tag
       {
         section: 'Tags',
         body: (
           <View style={styles.tags}>
-            {product.tags.map((tag, i) => (
-              <Chip key={i} text={tag.name} />
-            ))}
+            {product.tags &&
+              product.tags.map((tag, i) => <Chip key={i} text={tag.name} />)}
           </View>
         ),
-        hideBody: product.tags.length > 0 ? false : true
+        hideBody: product.tags && product.tags.length > 0 ? false : true
       }, // logic for showing tags here
       {
         section: 'Images',
