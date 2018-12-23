@@ -18,9 +18,13 @@ const cache = new InMemoryCache()
 
 const authLink = setContext(async (_: any, { headers }: any) => {
   const token = await Auth.getToken()
+  const user: any = JSON.parse(await Auth.getCurrentUser())
+
   return {
     headers: {
       ...headers,
+      userId: user ? user.id : '',
+      companyId: user ? user.company.id : '',
       authorization: token ? `${token}` : ''
     }
   }

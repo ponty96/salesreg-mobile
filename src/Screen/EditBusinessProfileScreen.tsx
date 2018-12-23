@@ -205,7 +205,7 @@ export default class EditBusinessProfileScreen extends Component<
                 ]
               },
               {
-                stepTitle: 'Now your logo(optional).\n1MB or less',
+                stepTitle: 'Now your logo(optional).\n3MB or less',
                 formFields: [
                   {
                     label: '',
