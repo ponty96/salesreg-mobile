@@ -167,7 +167,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
   parseMutationVariables = () => {
     const expense = this.props.navigation.getParam('expense', {})
     let params = { ...this.state }
-    params['totalAmount'] = parseFloat(params.totalAmount)
+    params['totalAmount'] = parseFloat(params.totalAmount).toFixed(2)
     params = this.clearParams(params)
 
     return { expense: params, expenseId: expense ? expense.id : null }
