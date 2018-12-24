@@ -53,7 +53,7 @@ export default class DatePickerAtom extends React.Component<IProps> {
             placeholder={this.props.placeholder}
             format="YYYY-MM-DD"
             minDate="1800-01-01"
-            maxDate={`${Date.now()}`}
+            maxDate={new Date()}
             confirmBtnText="Save"
             cancelBtnText="Cancel"
             showIcon={false}
