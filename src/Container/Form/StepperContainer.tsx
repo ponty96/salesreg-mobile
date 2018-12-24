@@ -127,6 +127,7 @@ interface IProps {
   updateValueChange: (key: string, value: any) => void
   onError?: (key: string, error: any) => void
   fieldErrors: any
+  handleNonFormErrors?: (e) => void
   formData: any
   handleBackPress: () => void
   mediasFromStore: () => void
@@ -176,6 +177,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         elevation: this.state.hasEndFormEndBeenReached ? 0 : 7,
         shadowOpacity: this.state.hasEndFormEndBeenReached ? 0 : 1.0
       }
+
+    console.log('The steps is ', this.state.currentStep)
 
     return (
       <Container style={{ flex: 1 }}>
@@ -417,7 +420,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     this.handleServerFieldErrors(prevProps)
   }
 
-  handleServerFieldErrors = prevProps => {
+  handleServerFieldErrors = async prevProps => {
     let { fieldErrors, steps } = this.props,
       { isReadyToSubmitForm } = this.state
 
@@ -438,12 +441,31 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         if (currentStep) break
       }
 
-      this.setState(
-        {
-          isReadyToSubmitForm: false
-        },
-        () => this.transition(currentStep, currentStep + 1)
-      )
+      if (currentStep) {
+        this.setState(
+          {
+            isReadyToSubmitForm: false
+          },
+          () => this.transition(currentStep, currentStep + 1)
+        )
+      } else {
+        setTimeout(() => {
+          Alert.alert(
+            'Error occurred',
+            fieldErrors[Object.keys(fieldErrors)[0]],
+            [
+              {
+                text: 'Ok',
+                onPress: () => {
+                  this.props.handleNonFormErrors &&
+                    this.props.handleNonFormErrors(fieldErrors)
+                }
+              }
+            ],
+            { cancelable: false }
+          )
+        }, 500)
+      }
     }
   }
 
