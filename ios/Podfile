@@ -37,6 +37,10 @@ target 'salesreg' do
   platform :ios, '9.0'
   pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
+  pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
+
+  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
+
   target 'salesregTests' do
     inherit! :search_paths
     # Pods for testing

@@ -13,6 +13,7 @@ import Auth from './services/auth'
 import { AuthenticateClientGQL } from './graphql/client-mutations/authenticate'
 import { UserContext } from './context/UserContext'
 import { appReducers } from './store/reducers'
+import setupSentry from './Functions/sentry'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
 
@@ -34,6 +35,7 @@ export default class App extends React.Component {
     if (token && refreshToken) {
       const user = JSON.parse(await Auth.getCurrentUser())
       await client.resetStore()
+      setupSentry(user)
       client.mutate({
         mutation: AuthenticateClientGQL,
         variables: { user: user }
