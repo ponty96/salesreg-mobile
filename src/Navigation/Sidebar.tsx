@@ -49,7 +49,7 @@ const sideBarItemStyles = StyleSheet.create({
     paddingVertical: 6
   },
   category: {
-    marginLeft: 10,
+    marginLeft: 30,
     backgroundColor: 'transparent',
     color: color.textColor,
     marginVertical: 6,
@@ -175,7 +175,7 @@ export default class SideBar extends PureComponent<IProps, IState> {
             />
 
             <SidebarItem
-              title="Store"
+              title="STORE"
               navigate={this.handleNavigation}
               activeRoute={this.state.activeRoute}
               categories={[
