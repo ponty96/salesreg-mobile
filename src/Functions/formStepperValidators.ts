@@ -7,7 +7,7 @@ export const validateStep = (currentStepForm, formData, prevErrorState) => {
       let { validity, error } = validateField(
         field.validators,
         field.name,
-        formData[field.name],
+        formData[field.name] || field.value,
         stepValidity,
         errors,
         true,
@@ -120,6 +120,9 @@ function isRequired(_value) {
   } else if (typeof _value == 'number' && _value == 0) {
     fieldValid = false
     errorMessage = 'Field cannot be 0'
+  } else if (typeof _value == 'undefined') {
+    fieldValid = false
+    errorMessage = 'Field not set'
   }
 
   return { fieldValid, errorMessage }

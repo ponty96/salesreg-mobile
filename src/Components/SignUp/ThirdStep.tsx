@@ -20,7 +20,7 @@ export default class ThirdStep extends React.PureComponent<IProps> {
             isVisible: true
           },
           {
-            text: 'Nows lets bring in your business',
+            text: `Nows let's bring in your business`,
             isChecked: false,
             isVisible: true
           }
