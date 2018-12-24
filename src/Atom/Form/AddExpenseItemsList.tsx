@@ -101,7 +101,9 @@ export default class AddExpenseItemsList extends React.Component<IProps> {
         ))}
         <View style={styles.buttonWrapper}>
           <ButtonAtom
-            btnText="Another Item"
+            btnText={
+              this.props.expenseItems.length == 0 ? 'Add Item' : 'Another Item'
+            }
             type="primary"
             onPress={this.addAnotherItem}
             icon="md-add"

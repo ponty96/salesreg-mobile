@@ -61,11 +61,13 @@ class UpsertProductRestockScreen extends React.PureComponent<IProps, IState> {
   parseMutationVariables = () => {
     let { items } = this.state,
       params = items.map(item => {
-        let newItems = { ...item }
+        let newItems = { ...item },
+          id = newItems.id
 
         delete newItems.name
+        delete newItems.id
 
-        return newItems
+        return { ...newItems, productId: id }
       })
 
     return {

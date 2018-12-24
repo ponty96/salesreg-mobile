@@ -7,7 +7,7 @@ export const validateStep = (currentStepForm, formData, prevErrorState) => {
       let { validity, error } = validateField(
         field.validators,
         field.name,
-        formData[field.name],
+        formData[field.name] || field.value,
         stepValidity,
         errors,
         true,
@@ -120,6 +120,9 @@ function isRequired(_value) {
   } else if (typeof _value == 'number' && _value == 0) {
     fieldValid = false
     errorMessage = 'Field cannot be 0'
+  } else if (typeof _value == 'undefined') {
+    fieldValid = false
+    errorMessage = 'Field not set'
   }
 
   return { fieldValid, errorMessage }
@@ -128,7 +131,10 @@ function isRequired(_value) {
 function validatePassword(_value) {
   let fieldValid = true,
     errorMessage = ''
-  if (_value.length < 8) {
+  if (_value && _value.length < 8) {
+    fieldValid = false
+    errorMessage = 'The password cannot be less than 8 characters'
+  } else if (!_value) {
     fieldValid = false
     errorMessage = 'The password cannot be less than 8 characters'
   }
@@ -139,7 +145,14 @@ function validatePassword(_value) {
 function validateConfirmPassword(_value, passwordFieldValue) {
   let fieldValid = true,
     errorMessage = ''
-  if (_value.trim() !== passwordFieldValue.trim()) {
+  if (
+    _value &&
+    passwordFieldValue &&
+    _value.trim() !== passwordFieldValue.trim()
+  ) {
+    fieldValid = false
+    errorMessage = 'The passwords do not match'
+  } else if (!_value) {
     fieldValid = false
     errorMessage = 'The passwords do not match'
   }
