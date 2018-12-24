@@ -43,7 +43,7 @@ const link = split(
 
 const errorLink = onError(({ graphQLErrors, networkError }: any) => {
   if (graphQLErrors) {
-    if (graphQLErrors[0].message === 'Not authenticated') {
+    if (graphQLErrors[0] && graphQLErrors[0].message === 'Not authenticated') {
       // refreshOrLogout();
     }
     graphQLErrors.map(({ message, locations, path }: any) =>

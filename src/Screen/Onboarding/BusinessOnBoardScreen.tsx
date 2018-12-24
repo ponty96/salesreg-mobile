@@ -99,6 +99,10 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
         return (
           <FormStepperContainer
             formData={this.state}
+            handleNonFormErrors={() => {
+              Auth.clearVault()
+              this.props.navigation.navigate('OnBoarding')
+            }}
             steps={[
               {
                 stepTitle: 'Tell us about your business',
