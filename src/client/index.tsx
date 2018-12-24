@@ -24,7 +24,7 @@ const authLink = setContext(async (_: any, { headers }: any) => {
     headers: {
       ...headers,
       userId: user ? user.id : '',
-      companyId: user ? user.company.id : '',
+      companyId: user && user.company ? user.company.id : '',
       authorization: token ? `${token}` : ''
     }
   }
