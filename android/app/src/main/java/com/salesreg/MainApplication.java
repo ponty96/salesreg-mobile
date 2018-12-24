@@ -3,6 +3,8 @@ package com.salesreg;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.learnium.RNDeviceInfo.RNDeviceInfo;
+import io.sentry.RNSentryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import me.hauvo.thumbnail.RNThumbnailPackage;
 import com.arttitude360.reactnative.rnpaystack.RNPaystackPackage;
@@ -31,6 +33,8 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNDeviceInfo(),
+            new RNSentryPackage(),
             new SplashScreenReactPackage(),
             new RNThumbnailPackage(),
             new RNPaystackPackage(),
