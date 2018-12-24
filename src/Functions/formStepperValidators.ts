@@ -131,7 +131,10 @@ function isRequired(_value) {
 function validatePassword(_value) {
   let fieldValid = true,
     errorMessage = ''
-  if (_value.length < 8) {
+  if (_value && _value.length < 8) {
+    fieldValid = false
+    errorMessage = 'The password cannot be less than 8 characters'
+  } else if (!_value) {
     fieldValid = false
     errorMessage = 'The password cannot be less than 8 characters'
   }
@@ -142,7 +145,14 @@ function validatePassword(_value) {
 function validateConfirmPassword(_value, passwordFieldValue) {
   let fieldValid = true,
     errorMessage = ''
-  if (_value.trim() !== passwordFieldValue.trim()) {
+  if (
+    _value &&
+    passwordFieldValue &&
+    _value.trim() !== passwordFieldValue.trim()
+  ) {
+    fieldValid = false
+    errorMessage = 'The passwords do not match'
+  } else if (!_value) {
     fieldValid = false
     errorMessage = 'The passwords do not match'
   }
