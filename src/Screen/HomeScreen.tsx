@@ -1,43 +1,43 @@
-import * as React from 'react'
-import { View, StyleSheet, Text, Dimensions } from 'react-native'
-import { color } from '../Style/Color'
-import Header from '../Components/Header/BaseHeader'
-import Auth from '../services/auth'
+import * as React from "react";
+import { View, StyleSheet, Text, Dimensions } from "react-native";
+import { color } from "../Style/Color";
+import Header from "../Components/Header/BaseHeader";
+import Auth from "../services/auth";
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  username: string
+  username: string;
 }
 
 export default class HomeScreen extends React.Component<IProps, IState> {
   state = {
-    username: ''
-  }
+    username: ""
+  };
 
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
         <Header
           title="Home"
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
+          onPressLeftIcon={() => navigation.navigate("DrawerToggle")}
         />
       )
-    }
-  }
+    };
+  };
 
   componentWillMount() {
-    this.updateUserName()
+    this.updateUserName();
   }
 
   updateUserName = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = JSON.parse(await Auth.getCurrentUser());
     this.setState({
       username: user.firstName
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -48,20 +48,20 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           </View>
         </View>
       </React.Fragment>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingHorizontal: 16
   },
   homeBackground: {
-    backgroundColor: 'rgba(152,251,152, 0.2)', // #98FB98
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
+    backgroundColor: "rgba(152,251,152, 0.2)", // #98FB98
+    width: Dimensions.get("screen").width - 32,
+    alignSelf: "center",
     marginTop: 16,
     borderRadius: 3
   },
@@ -69,7 +69,7 @@ const styles = StyleSheet.create({
     color: color.selling,
     fontSize: 30,
     padding: 20,
-    textAlign: 'center',
-    fontFamily: 'SourceSansPro-Semibold'
+    textAlign: "center",
+    fontFamily: "SourceSansPro-Semibold"
   }
-})
+});

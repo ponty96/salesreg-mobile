@@ -1,20 +1,20 @@
-import React, { PureComponent } from 'react'
-import SettingsList from '../Components/SettingsList'
-import Header from '../Components/Header/BaseHeader'
-import gql from 'graphql-tag'
-import Auth from '../services/auth'
-import { UserContext } from '../context/UserContext'
+import React, { PureComponent } from "react";
+import SettingsList from "../Components/SettingsList";
+import Header from "../Components/Header/BaseHeader";
+import gql from "graphql-tag";
+import Auth from "../services/auth";
+import { UserContext } from "../context/UserContext";
 
 interface IProps {
-  navigation: any
-  screenProps: any
+  navigation: any;
+  screenProps: any;
 }
 
 const LogoutClientGQL = gql`
   mutation logout {
     logout @client
   }
-`
+`;
 
 class ProfileSettingsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
@@ -22,25 +22,25 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
       header: (
         <Header
           title="Settings"
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
+          onPressLeftIcon={() => navigation.navigate("DrawerToggle")}
         />
       )
-    }
-  }
+    };
+  };
   handleLogOut = async resetUserContext => {
     const {
       screenProps: { client }
-    } = this.props
-    await Auth.clearVault()
-    await client.resetStore()
-    client.mutate({ mutation: LogoutClientGQL })
-    resetUserContext()
-    this.props.navigation.navigate('Login')
-  }
+    } = this.props;
+    await Auth.clearVault();
+    await client.resetStore();
+    client.mutate({ mutation: LogoutClientGQL });
+    resetUserContext();
+    this.props.navigation.navigate("Login");
+  };
   render() {
     const {
       navigation: { navigate }
-    } = this.props
+    } = this.props;
 
     return (
       <UserContext.Consumer>
@@ -49,52 +49,52 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
             navigate={navigate}
             categories={[
               {
-                section: 'Your Profile',
-                routeName: 'UserProfile',
+                section: "Your Profile",
+                routeName: "UserProfile",
                 showRightCaret: true,
-                description: 'View and edit your Profile',
-                icon: 'person',
-                iconType: 'MaterialIcons'
+                description: "View and edit your Profile",
+                icon: "person",
+                iconType: "MaterialIcons"
               },
               {
-                section: 'Your Business Profile',
-                routeName: 'BusinessProfile',
+                section: "Your Business Profile",
+                routeName: "BusinessProfile",
                 showRightCaret: true,
                 description: "View and edit your business's information",
-                icon: 'business',
-                iconType: 'MaterialIcons'
+                icon: "business",
+                iconType: "MaterialIcons"
               },
               {
-                section: 'Manage Categories',
-                routeName: 'Categories',
+                section: "Manage Categories",
+                routeName: "Categories",
                 showRightCaret: true,
-                description: 'Manage your store categories',
-                icon: 'apps',
-                iconType: 'MaterialCommunityIcons'
+                description: "Manage your store categories",
+                icon: "apps",
+                iconType: "MaterialCommunityIcons"
               },
               {
-                section: 'Manage Variant Options',
-                routeName: 'Options',
+                section: "Manage Variant Options",
+                routeName: "Options",
                 showRightCaret: true,
                 description:
-                  'Manage your item variant options like size, color e.tc.',
-                icon: 'package-variant',
-                iconType: 'MaterialCommunityIcons'
+                  "Manage your item variant options like size, color e.tc.",
+                icon: "package-variant",
+                iconType: "MaterialCommunityIcons"
               },
               {
-                section: 'Log Out',
-                routeName: 'Login',
+                section: "Log Out",
+                routeName: "Login",
                 showRightCaret: false,
                 onPress: () => this.handleLogOut(resetUserContext),
-                description: '',
-                iconType: 'MaterialIcons',
-                icon: 'power-settings-new'
+                description: "",
+                iconType: "MaterialIcons",
+                icon: "power-settings-new"
               }
             ]}
           />
         )}
       </UserContext.Consumer>
-    )
+    );
   }
 }
-export default ProfileSettingsScreen
+export default ProfileSettingsScreen;
