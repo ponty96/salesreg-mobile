@@ -36,6 +36,7 @@ import ServicesScreen from '../Screen/Store/ServicesScreen'
 // Category Screens
 import CategoriesScreen from '../Screen/Settings/Category/CategoriesScreen'
 import UpsertCategoryScreen from '../Screen/Settings/Category/UpsertCategoryScreen'
+import CategoryDetailsScreen from '../Screen/Settings/Category/CategoryDetailsScreen';
 // import CategoryAssociationsScreen from '../Screen/Settings/Category/CategoryAssociationsScreen'
 
 // Options Screens
@@ -54,7 +55,7 @@ import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 // Order
 import OrderStatusScreen from '../Screen/OrderStatusScreen'
 
-//Sales Order screens
+// Sales Order screens
 import SalesOrderScreen from '../Screen/SalesOrderScreen'
 import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
 import SalesOrderDailySalesScreen from '../Screen/SalesOrderDailySalesScreen'
@@ -92,6 +93,7 @@ import IncomeScreen from '../Screen/IncomeScreen'
 
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
+
 
 const businessStack = StackNavigator(
   {
@@ -165,6 +167,7 @@ const businessStack = StackNavigator(
     ServicesDetails: ServiceDetailsScreen,
 
     Categories: CategoriesScreen,
+    CategoryDetails: CategoryDetailsScreen,
     UpsertCategory: UpsertCategoryScreen,
     // CategoryAssociations: CategoryAssociationsScreen,
 
