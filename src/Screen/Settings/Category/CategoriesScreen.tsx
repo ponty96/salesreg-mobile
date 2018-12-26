@@ -1,8 +1,12 @@
 import * as React from 'react'
 import { Alert } from 'react-native'
+import { ActionSheet } from 'native-base'
 import Header from '../../../Components/Header/DetailsScreenHeader'
 import GenericListIndex from '../../../Components/Generic/ListIndex'
 import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
+var BUTTONS = ['No', 'Yes, delete', 'Cancel']
+var DESTRUCTIVE_INDEX = 1
+var CANCEL_INDEX = 2
 
 interface IProps {
   navigation: any
@@ -28,9 +32,25 @@ export default class CategoriesScreen extends React.Component<IProps> {
         firstTopText: item.title,
         bottomLeftFirstText: item.description
           ? `${item.description.substr(0, 40)}...`
-          : '', //item.paidTo
-        bottomLeftSecondText: '', //item.date
-        topRightText: `` // this should be the number of products and services within this category
+          : '', // item.paidTo
+        bottomLeftSecondText: '', // item.date
+        topRightText: ``, // this should be the number of products and services within this category
+        showTrash: true,
+        onPressTrash: () => {
+          ActionSheet.show(
+            {
+              options: BUTTONS,
+              cancelButtonIndex: CANCEL_INDEX,
+              destructiveButtonIndex: DESTRUCTIVE_INDEX,
+              title: 'Delete?'
+            },
+            buttonIndex => {
+              if (buttonIndex == 1) {
+                alert('oya ooo')
+              }
+            }
+          )
+        }
       }
     ]
   }
