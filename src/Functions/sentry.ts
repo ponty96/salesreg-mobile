@@ -20,7 +20,7 @@ const addBuildContext = user => {
   })
 
   Sentry.setTagsContext({
-    environment: 'staging'
+    environment: 'development'
   })
 
   Sentry.setUserContext({
