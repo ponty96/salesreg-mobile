@@ -1,9 +1,13 @@
 import * as React from 'react'
 import { Alert } from 'react-native'
+import { Mutation } from 'react-apollo'
 import { ActionSheet } from 'native-base'
 import Header from '../../../Components/Header/DetailsScreenHeader'
 import GenericListIndex from '../../../Components/Generic/ListIndex'
+import AppSpinner from '../../../Components/Spinner'
 import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
+import { DeleteCategoryGQL } from '../../../graphql/mutations/store'
+
 var BUTTONS = ['No', 'Yes, delete', 'Cancel']
 var DESTRUCTIVE_INDEX = 1
 var CANCEL_INDEX = 2
@@ -26,7 +30,7 @@ export default class CategoriesScreen extends React.Component<IProps> {
     }
   }
 
-  parseData = (item: any) => {
+  parseData = (item: any, deleteCategory: (obj: any) => void) => {
     return [
       {
         firstTopText: item.title,
@@ -46,7 +50,7 @@ export default class CategoriesScreen extends React.Component<IProps> {
             },
             buttonIndex => {
               if (buttonIndex == 1) {
-                alert('oya ooo')
+                deleteCategory({ variables: { categoryId: item.id } })
               }
             }
           )
@@ -55,27 +59,56 @@ export default class CategoriesScreen extends React.Component<IProps> {
     ]
   }
 
+  onCompleted = async res => {
+    let {
+      deleteCategory: { success, fieldErrors }
+    } = res
+
+    if (!success) {
+      setTimeout(
+        () =>
+          Alert.alert(
+            'Error',
+            fieldErrors[0].message,
+            [{ text: 'Ok', onPress: () => null }],
+            { cancelable: false }
+          ),
+        100
+      )
+    }
+  }
+
   render() {
-    /**
-     * TODO
-     * Change empty list text
-     */
     return (
-      <GenericListIndex
-        navigation={this.props.navigation}
-        graphqlQuery={ListCompanyCategoriesGQL}
-        graphqlQueryResultKey="listCompanyCategories"
-        parseItemData={this.parseData}
-        onItemPress={item =>
-          this.props.navigation.navigate('UpsertCategory', { category: item })
-        }
-        emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
-        headerText="Great habit keeping records!"
-        fabRouteName="UpsertCategory"
-        fabIconName="apps"
-        fabIconType="MaterialCommunityIcons"
-        hideSeparator={true}
-      />
+      <Mutation
+        mutation={DeleteCategoryGQL}
+        refetchQueries={ListCompanyCategoriesGQL}
+        awaitRefetchQueries={true}
+        onCompleted={this.onCompleted}
+      >
+        {(deleteCategory, { loading }) => (
+          <React.Fragment>
+            <AppSpinner visible={loading} />
+            <GenericListIndex
+              navigation={this.props.navigation}
+              graphqlQuery={ListCompanyCategoriesGQL}
+              graphqlQueryResultKey="listCompanyCategories"
+              parseItemData={item => this.parseData(item, deleteCategory)}
+              onItemPress={item =>
+                this.props.navigation.navigate('UpsertCategory', {
+                  category: item
+                })
+              }
+              emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
+              headerText="Great habit keeping records!"
+              fabRouteName="UpsertCategory"
+              fabIconName="apps"
+              fabIconType="MaterialCommunityIcons"
+              hideSeparator={true}
+            />
+          </React.Fragment>
+        )}
+      </Mutation>
     )
   }
 }

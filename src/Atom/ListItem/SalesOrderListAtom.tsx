@@ -60,6 +60,7 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
           style={[
             styles.wrapper,
             this.props.style,
+            this.props.showTrash && { alignItems: 'center' },
             renderStatusIndicator(this.props.bottomRightText)
           ]}
           onPress={this.props.onPress}
