@@ -196,3 +196,15 @@ export const DeleteCategoryGQL = gql`
     }
   }
 `
+
+export const DeleteOptionGQL = gql`
+  mutation DeleteOption($optionId: Uuid!) {
+    deleteOption(optionId: $optionId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
