@@ -5,6 +5,7 @@
 	};
 	objectVersion = 46;
 	objects = {
+
 /* Begin PBXBuildFile section */
 		00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302AC1ABCB8CE00DB3ED1 /* libRCTActionSheet.a */; };
 		00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 00C302BA1ABCB90400DB3ED1 /* libRCTGeolocation.a */; };
@@ -16,6 +17,7 @@
 		018C2B613BF54FBF92224749 /* SourceSansPro-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 5B3DA8EE1B124339BD4A725D /* SourceSansPro-Regular.ttf */; };
 		03350DBDCD1A490EB82D3D65 /* FontAwesome.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 2F0402D3C2BA46B384D09AE0 /* FontAwesome.ttf */; };
 		0A158BE121C700BB0090711D /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A158BDE21C700B00090711D /* libART.a */; };
+		0A178AB421D351EA00B1BCCD /* libRNSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A178AB121D351CF00B1BCCD /* libRNSentry.a */; };
 		0A2A336921CBD44800DA8688 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2A336821CBD3D000DA8688 /* libSplashScreen.a */; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		12368AC49533E0E52745AC74 /* libPods-salesreg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3546D28B578B70A968FF07FE /* libPods-salesreg.a */; };
@@ -64,10 +66,10 @@
 		C9D1490080FA44F788E64D5E /* Feather.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 65F625B09B3E45BB889F97DF /* Feather.ttf */; };
 		EA1A5B7B872D44E2A9B2D3BE /* Zocial.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6A48117C227249A698D76922 /* Zocial.ttf */; };
 		F336C5013D3447D5B137A0AB /* AvenirNext-DemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 158E45AD80E04D3CA9BEC221 /* AvenirNext-DemiBold.ttf */; };
+		F483CA5255614BFBAB6EDBA6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 494F92D7816F4EE38D28A48F /* libz.tbd */; };
 		FAB1713F02CB4DD79FB950DC /* SourceSansPro-Semibold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E9F0D8DD36F247C89662BB61 /* SourceSansPro-Semibold.ttf */; };
 		FAE7060E7B96D350714AE799 /* libPods-salesregTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0CB83E3C0D5C577A1B3E86C8 /* libPods-salesregTests.a */; };
 		FDEF452E607646DF83EEB17C /* Entypo.ttf in Resources */ = {isa = PBXBuildFile; fileRef = E0B9E541B15842E69D87A767 /* Entypo.ttf */; };
-		F483CA5255614BFBAB6EDBA6 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 494F92D7816F4EE38D28A48F /* libz.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -161,6 +163,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = 323A12871E5F266B004975B8;
 			remoteInfo = "ART-tvOS";
+		};
+		0A178AB021D351CF00B1BCCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A178AAA21D351CE00B1BCCD /* RNSentry.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 134814201AA4EA6300B7C361;
+			remoteInfo = RNSentry;
+		};
+		0A178AB221D351CF00B1BCCD /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0A178AAA21D351CE00B1BCCD /* RNSentry.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 274692C321B4414400BF91A8;
+			remoteInfo = "RNSentry-tvOS";
 		};
 		0A2A336721CBD3D000DA8688 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -414,6 +430,7 @@
 		00E356F21AD99517003FC87E /* salesregTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = salesregTests.m; sourceTree = "<group>"; };
 		06ACD47829384E31A9ABC79E /* libAppCenterReactNative.a */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = archive.ar; path = libAppCenterReactNative.a; sourceTree = "<group>"; };
 		0A158BD821C700B00090711D /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
+		0A178AAA21D351CE00B1BCCD /* RNSentry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSentry.xcodeproj; path = "../node_modules/react-native-sentry/ios/RNSentry.xcodeproj"; sourceTree = "<group>"; };
 		0A2A336321CBD3D000DA8688 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
 		0CB83E3C0D5C577A1B3E86C8 /* libPods-salesregTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-salesregTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
@@ -443,6 +460,7 @@
 		3C6736F6616B7A611F51BB65 /* Pods-salesreg-tvOSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-salesreg-tvOSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-salesreg-tvOSTests/Pods-salesreg-tvOSTests.debug.xcconfig"; sourceTree = "<group>"; };
 		408FAB4364CC4F819001AE4C /* AppCenterReactNativeAnalytics.xcodeproj */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "wrapper.pb-project"; name = AppCenterReactNativeAnalytics.xcodeproj; path = "../node_modules/appcenter-analytics/ios/AppCenterReactNativeAnalytics.xcodeproj"; sourceTree = "<group>"; };
 		43E342B75E7650FAA7F8153C /* Pods-salesregTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-salesregTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-salesregTests/Pods-salesregTests.debug.xcconfig"; sourceTree = "<group>"; };
+		494F92D7816F4EE38D28A48F /* libz.tbd */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		5065B496BC6F280E8EAA80FD /* Pods-salesreg-tvOS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-salesreg-tvOS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-salesreg-tvOS/Pods-salesreg-tvOS.debug.xcconfig"; sourceTree = "<group>"; };
 		5B3DA8EE1B124339BD4A725D /* SourceSansPro-Regular.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Regular.ttf"; path = "../fonts/SourceSansPro-Regular.ttf"; sourceTree = "<group>"; };
 		5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTAnimation.xcodeproj; path = "../node_modules/react-native/Libraries/NativeAnimation/RCTAnimation.xcodeproj"; sourceTree = "<group>"; };
@@ -486,7 +504,6 @@
 		E9F0D8DD36F247C89662BB61 /* SourceSansPro-Semibold.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "SourceSansPro-Semibold.ttf"; path = "../fonts/SourceSansPro-Semibold.ttf"; sourceTree = "<group>"; };
 		FE6FE73BDB64A75288293840 /* libPods-salesreg-tvOSTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-salesreg-tvOSTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF7E6F7D13944BC387B3AD76 /* MaterialIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf"; sourceTree = "<group>"; };
-		494F92D7816F4EE38D28A48F /* libz.tbd */ = {isa = PBXFileReference; name = "libz.tbd"; path = "usr/lib/libz.tbd"; sourceTree = SDKROOT; fileEncoding = undefined; lastKnownFileType = sourcecode.text-based-dylib-definition; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -506,6 +523,7 @@
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				0A2A336921CBD44800DA8688 /* libSplashScreen.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
+				0A178AB421D351EA00B1BCCD /* libRNSentry.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
 				00C302E51ABCBA2D00DB3ED1 /* libRCTActionSheet.a in Frameworks */,
 				00C302E71ABCBA2D00DB3ED1 /* libRCTGeolocation.a in Frameworks */,
@@ -672,6 +690,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0A178AAB21D351CE00B1BCCD /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0A178AB121D351CF00B1BCCD /* libRNSentry.a */,
+				0A178AB321D351CF00B1BCCD /* libRNSentry-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		0A2A336421CBD3D000DA8688 /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -811,6 +838,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				0A178AAA21D351CE00B1BCCD /* RNSentry.xcodeproj */,
 				0A2A336321CBD3D000DA8688 /* SplashScreen.xcodeproj */,
 				0A158BD821C700B00090711D /* ART.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
@@ -893,14 +921,6 @@
 				2D16E6721FA4F8DC00B85C8A /* libRCTBlob-tvOS.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		0AA5580887BE4CFB80853E67 /* Frameworks */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = Frameworks;
-			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1100,6 +1120,10 @@
 					ProjectRef = B8DB998F5C2943F1910950FB /* RNPaystack.xcodeproj */;
 				},
 				{
+					ProductGroup = 0A178AAB21D351CE00B1BCCD /* Products */;
+					ProjectRef = 0A178AAA21D351CE00B1BCCD /* RNSentry.xcodeproj */;
+				},
+				{
 					ProductGroup = 0A158BC121C6FFEE0090711D /* Products */;
 					ProjectRef = 90EEEC932CD84D24BCC0EDF0 /* RNThumbnail.xcodeproj */;
 				},
@@ -1201,6 +1225,20 @@
 			fileType = archive.ar;
 			path = "libART-tvOS.a";
 			remoteRef = 0A158BDF21C700B00090711D /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0A178AB121D351CF00B1BCCD /* libRNSentry.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRNSentry.a;
+			remoteRef = 0A178AB021D351CF00B1BCCD /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0A178AB321D351CF00B1BCCD /* libRNSentry-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libRNSentry-tvOS.a";
+			remoteRef = 0A178AB221D351CF00B1BCCD /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		0A2A336821CBD3D000DA8688 /* libSplashScreen.a */ = {
@@ -1796,6 +1834,21 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		B190AF4643D8430C91ADA4DD /* Upload Debug Symbols to Sentry */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Upload Debug Symbols to Sentry";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "
+";
+		};
 		E4176BA38F4F60BDD5D3C9E9 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -1833,20 +1886,6 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-salesreg-tvOS/Pods-salesreg-tvOS-resources.sh\"\n";
 			showEnvVarsInLog = 0;
-		};
-		B190AF4643D8430C91ADA4DD /* Upload Debug Symbols to Sentry */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			name = "Upload Debug Symbols to Sentry";
-			inputPaths = (
-			);
-			outputPaths = (
-			);
-			shellPath = /bin/sh;
-			shellScript = "export SENTRY_PROPERTIES=sentry.properties\n../node_modules/@sentry/cli/bin/sentry-cli upload-dsym";
 		};
 /* End PBXShellScriptBuildPhase section */
 
