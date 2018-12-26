@@ -30,7 +30,19 @@ export default class CategoriesScreen extends React.Component<IProps> {
           ? `${item.description.substr(0, 40)}...`
           : "", // item.paidTo
         bottomLeftSecondText: "", // item.date
-        topRightText: `` // this should be the number of products and services within this category
+        topRightText: ``, // this should be the number of products and services within this category
+        showTrash: true,
+        onPressTrash: () =>
+          Alert.alert(
+            "Sure to delete?",
+            "Are you sure you want to delete " +
+              item.title +
+              " from categories?",
+            [
+              { text: "Cancel"},
+              { text: "OK", onPress: () => alert("Baba pressed OK.") }
+            ]
+          )
       }
     ];
   };
@@ -47,7 +59,7 @@ export default class CategoriesScreen extends React.Component<IProps> {
         graphqlQueryResultKey="listCompanyCategories"
         parseItemData={this.parseData}
         onItemPress={item =>
-          this.props.navigation.navigate("CategoryDetails", { category: item })
+          this.props.navigation.navigate("UpsertCategory", { category: item })
         }
         emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
         headerText="Great habit keeping records!"

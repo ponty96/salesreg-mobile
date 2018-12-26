@@ -1,99 +1,97 @@
-import React from 'react'
-import { Text } from 'react-native'
-import SplashScreen from 'react-native-splash-screen'
-import { DrawerNavigator, StackNavigator } from 'react-navigation'
-import Header from '../Components/Header/BaseHeader'
+import React from "react";
+import { Text } from "react-native";
+import SplashScreen from "react-native-splash-screen";
+import { DrawerNavigator, StackNavigator } from "react-navigation";
+import Header from "../Components/Header/BaseHeader";
 // import AppSpinner from '../Components/Spinner'
 
 // graphql
-import { Query } from 'react-apollo'
-import { AuthenticateQueryGQL } from '../graphql/queries/Authenticate'
+import { Query } from "react-apollo";
+import { AuthenticateQueryGQL } from "../graphql/queries/Authenticate";
 
 // Customer Screens
-import UpsertCustomerScreen from '../Screen/Contact/UpsertCustomerScreen'
-import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
-import CustomerScreen from '../Screen/Contact/CustomerScreen'
-import CustomerPaymentActivity from '../Screen/Contact/CustomerPaymentActivity'
+import UpsertCustomerScreen from "../Screen/Contact/UpsertCustomerScreen";
+import CustomerDetailScreen from "../Screen/Contact/CustomerDetailScreen";
+import CustomerScreen from "../Screen/Contact/CustomerScreen";
+import CustomerPaymentActivity from "../Screen/Contact/CustomerPaymentActivity";
 
 /***
  *
  * STORE SCREENS
  */
 // Product Screens
-import CreateProductScreen from '../Screen/Store/CreateProductScreen'
-import ProductDetailsScreen from '../Screen/Store/ProductDetailsScreen'
-import ProductScreen from '../Screen/Store/ProductScreen'
-import UpdateProductScreen from '../Screen/Store/UpdateProductScreen'
-import UpdateProductGroupOptionsScreen from '../Screen/Store/UpdateProductGroupOptionsScreen'
-import AddProductVariantScreen from '../Screen/Store/AddProductVariantScreen'
-import UpsertProductRestockScreen from '../Screen/Store/UpsertProductRestockScreen'
+import CreateProductScreen from "../Screen/Store/CreateProductScreen";
+import ProductDetailsScreen from "../Screen/Store/ProductDetailsScreen";
+import ProductScreen from "../Screen/Store/ProductScreen";
+import UpdateProductScreen from "../Screen/Store/UpdateProductScreen";
+import UpdateProductGroupOptionsScreen from "../Screen/Store/UpdateProductGroupOptionsScreen";
+import AddProductVariantScreen from "../Screen/Store/AddProductVariantScreen";
+import UpsertProductRestockScreen from "../Screen/Store/UpsertProductRestockScreen";
 
 // Service Screens
-import UpsertServiceScreen from '../Screen/Store/UpsertServiceScreen'
-import ServiceDetailsScreen from '../Screen/Store/ServiceDetailsScreen'
-import ServicesScreen from '../Screen/Store/ServicesScreen'
+import UpsertServiceScreen from "../Screen/Store/UpsertServiceScreen";
+import ServiceDetailsScreen from "../Screen/Store/ServiceDetailsScreen";
+import ServicesScreen from "../Screen/Store/ServicesScreen";
 
 // Category Screens
-import CategoriesScreen from '../Screen/Settings/Category/CategoriesScreen'
-import UpsertCategoryScreen from '../Screen/Settings/Category/UpsertCategoryScreen'
-import CategoryDetailsScreen from '../Screen/Settings/Category/CategoryDetailsScreen';
+import CategoriesScreen from "../Screen/Settings/Category/CategoriesScreen";
+import UpsertCategoryScreen from "../Screen/Settings/Category/UpsertCategoryScreen";
 // import CategoryAssociationsScreen from '../Screen/Settings/Category/CategoryAssociationsScreen'
 
 // Options Screens
-import OptionsScreen from '../Screen/Settings/Option/OptionsScreen'
-import UpsertOptionScreen from '../Screen/Settings/Option/UpsertOptionScreen'
+import OptionsScreen from "../Screen/Settings/Option/OptionsScreen";
+import UpsertOptionScreen from "../Screen/Settings/Option/UpsertOptionScreen";
 
 // Business Screens
-import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
-import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
+import BusinessProfileScreen from "../Screen/BusinessProfileScreen";
+import EditBusinessProfileScreen from "../Screen/EditBusinessProfileScreen";
 
 // User Profile Screens
-import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
-import UserProfileScreen from '../Screen/UserProfileScreen'
-import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
+import EditUserProfileScreen from "../Screen/EditUserProfileScreen";
+import UserProfileScreen from "../Screen/UserProfileScreen";
+import ProfileSettingsScreen from "../Screen/ProfileSettingsScreen";
 
 // Order
-import OrderStatusScreen from '../Screen/OrderStatusScreen'
+import OrderStatusScreen from "../Screen/OrderStatusScreen";
 
 // Sales Order screens
-import SalesOrderScreen from '../Screen/SalesOrderScreen'
-import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
-import SalesOrderDailySalesScreen from '../Screen/SalesOrderDailySalesScreen'
-import UpsertSalesOrderScreen from '../Screen/UpsertSalesOrderScreen'
+import SalesOrderScreen from "../Screen/SalesOrderScreen";
+import SalesOrderDetailsScreen from "../Screen/SalesOrderDetailsScreen";
+import SalesOrderDailySalesScreen from "../Screen/SalesOrderDailySalesScreen";
+import UpsertSalesOrderScreen from "../Screen/UpsertSalesOrderScreen";
 
 // Expenses Screens
-import ExpensesScreen from '../Screen/ExpensesScreen'
-import ExpensesDetailsScreen from '../Screen/ExpensesDetailsScreen'
-import UpsertExpenseScreen from '../Screen/UpsertExpenseScreen'
+import ExpensesScreen from "../Screen/ExpensesScreen";
+import ExpensesDetailsScreen from "../Screen/ExpensesDetailsScreen";
+import UpsertExpenseScreen from "../Screen/UpsertExpenseScreen";
 
 // Authentication Screens
-import LoginScreen from '../Screen/LoginScreen'
-import LandingScreen from '../Screen/Onboarding/Landing'
-import UserOnboardScreen from '../Screen/Onboarding/UserOnboardScreen'
-import BusinessOnboardScreen from '../Screen/Onboarding/BusinessOnboardScreen'
+import LoginScreen from "../Screen/LoginScreen";
+import LandingScreen from "../Screen/Onboarding/Landing";
+import UserOnboardScreen from "../Screen/Onboarding/UserOnboardScreen";
+import BusinessOnboardScreen from "../Screen/Onboarding/BusinessOnboardScreen";
 
 // Employee Screens
-import EmployeesScreen from '../Screen/EmployeesScreen'
-import EmployeeForm from '../Components/EmployeeForm'
+import EmployeesScreen from "../Screen/EmployeesScreen";
+import EmployeeForm from "../Components/EmployeeForm";
 
 // Dashboard Screens
-import HomeScreen from '../Screen/HomeScreen'
+import HomeScreen from "../Screen/HomeScreen";
 
 // Other Component Screens
-import BankScreen from '../Screen/BankScreen'
-import BankDetailsScreen from '../Screen/BankDetailsScreen'
-import UpsertBankScreen from '../Screen/UpsertBankScreen'
+import BankScreen from "../Screen/BankScreen";
+import BankDetailsScreen from "../Screen/BankDetailsScreen";
+import UpsertBankScreen from "../Screen/UpsertBankScreen";
 
-import InvoiceDetailsScreen from '../Screen/InvoiceDetailsScreen'
-import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
-import InvoicesScreen from '../Screen/InvoicesScreen'
-import UpdateInvoiceDueDate from '../Screen/UpdateInvoiceDueDate'
+import InvoiceDetailsScreen from "../Screen/InvoiceDetailsScreen";
+import UpsertInvoiceScreen from "../Screen/UpsertInvoiceScreen";
+import InvoicesScreen from "../Screen/InvoicesScreen";
+import UpdateInvoiceDueDate from "../Screen/UpdateInvoiceDueDate";
 
-import IncomeScreen from '../Screen/IncomeScreen'
+import IncomeScreen from "../Screen/IncomeScreen";
 
-import { color } from '../Style/Color'
-import Sidebar from './Sidebar'
-
+import { color } from "../Style/Color";
+import Sidebar from "./Sidebar";
 
 const businessStack = StackNavigator(
   {
@@ -167,7 +165,6 @@ const businessStack = StackNavigator(
     ServicesDetails: ServiceDetailsScreen,
 
     Categories: CategoriesScreen,
-    CategoryDetails: CategoryDetailsScreen,
     UpsertCategory: UpsertCategoryScreen,
     // CategoryAssociations: CategoryAssociationsScreen,
 
@@ -199,32 +196,32 @@ const businessStack = StackNavigator(
     CustomerDetails: {
       screen: CustomerDetailScreen
     },
-    CustomerPaymentActivity: CustomerPaymentActivity
+    CustomerPaymentActivity
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: "Home",
     navigationOptions: ({ navigation }: any) => ({
       header: (
         <Header
           title="Products & Services"
           // tslint:disable-next-line:jsx-no-lambda
           onPressLeftIcon={() => {
-            navigation.navigate('DrawerToggle')
+            navigation.navigate("DrawerToggle");
           }}
           // tslint:disable-next-line:jsx-no-lambda
-          onPressRightIcon={() => console.log('Search icon pressed.')}
+          onPressRightIcon={() => console.log("Search icon pressed.")}
         />
       )
     })
   }
-)
+);
 
 const DrawerStack = DrawerNavigator(
   {
     ViewBusiness: businessStack
   },
   {
-    initialRouteName: 'ViewBusiness',
+    initialRouteName: "ViewBusiness",
     contentComponent: (props: any) => <Sidebar {...props} />,
     contentOptions: {
       activeTintColor: color.secondary,
@@ -232,7 +229,7 @@ const DrawerStack = DrawerNavigator(
       inactiveTintColor: color.primary
     }
   }
-)
+);
 
 const AuthStack = StackNavigator(
   {
@@ -241,31 +238,31 @@ const AuthStack = StackNavigator(
     Signup: UserOnboardScreen
   },
   {
-    headerMode: 'none'
+    headerMode: "none"
   }
-)
+);
 
 const BusinessOnBoardStack = StackNavigator(
   {
     BusinessOnboard: BusinessOnboardScreen
   },
   {
-    headerMode: 'none'
+    headerMode: "none"
   }
-)
+);
 
 interface IProps {
-  client: any
+  client: any;
 }
 
 interface IState {
-  display: boolean
+  display: boolean;
 }
 
 export default class Routes extends React.Component<IProps, IState> {
   state = {
     display: false
-  }
+  };
 
   componentDidMount() {
     /**
@@ -275,40 +272,40 @@ export default class Routes extends React.Component<IProps, IState> {
     setTimeout(
       () =>
         this.setState({ display: true }, () => {
-          SplashScreen.hide()
+          SplashScreen.hide();
         }),
       500
-    )
+    );
   }
 
   render() {
     const { client } = this.props,
-      { display } = this.state
+      { display } = this.state;
 
     return (
       <Query query={AuthenticateQueryGQL}>
         {({ loading, error, data }) => {
-          console.log('data', data)
-          console.log('loading', loading)
+          console.log("data", data);
+          console.log("loading", loading);
           if (loading) {
-            return <Text>{`Loading data here`}</Text>
+            return <Text>{`Loading data here`}</Text>;
           }
           if (error) {
-            return <Text>{`Error! ${error.message}`}</Text>
+            return <Text>{`Error! ${error.message}`}</Text>;
           }
           if (!data.authenticate && display) {
-            console.log('Oya ', loading)
-            return <AuthStack screenProps={{ client }} />
+            console.log("Oya ", loading);
+            return <AuthStack screenProps={{ client }} />;
           } else {
             if (data.user && !data.user.company && display) {
-              return <BusinessOnBoardStack screenProps={{ client }} />
+              return <BusinessOnBoardStack screenProps={{ client }} />;
             } else if (display) {
-              return <DrawerStack screenProps={{ client }} />
+              return <DrawerStack screenProps={{ client }} />;
             }
-            return null
+            return null;
           }
         }}
       </Query>
-    )
+    );
   }
 }
