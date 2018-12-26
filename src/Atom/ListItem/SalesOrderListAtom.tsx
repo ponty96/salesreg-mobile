@@ -1,52 +1,52 @@
-import React from "react";
-import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
-import { color } from "../../Style/Color";
-import { Left, Right } from "native-base";
-import CachedImageAtom from "../CachedImageAtom";
-import Icon from "../Icon";
+import React from 'react'
+import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { color } from '../../Style/Color'
+import { Left, Right } from 'native-base'
+import CachedImageAtom from '../CachedImageAtom'
+import Icon from '../Icon'
 
 export interface DataProps {
-  firstTopText: string;
-  bottomLeftFirstText?: string;
-  bottomLeftSecondText?: string;
-  topRightText?: string;
-  bottomRightText?: string;
-  avatar?: string;
-  icon?: JSX.Element;
-  topLeftTextStyle?: any;
+  firstTopText: string
+  bottomLeftFirstText?: string
+  bottomLeftSecondText?: string
+  topRightText?: string
+  bottomRightText?: string
+  avatar?: string
+  icon?: JSX.Element
+  topLeftTextStyle?: any
 }
 interface IProps extends DataProps {
-  onPress?: () => void;
-  style?: object;
-  rightTopTextStyle?: object;
-  leftStyle?: object;
-  rightTextStyle?: object;
-  bottomRightTextStyle?: object;
-  showTrash?: boolean;
-  onPressTrash?: () => void;
+  onPress?: () => void
+  style?: object
+  rightTopTextStyle?: object
+  leftStyle?: object
+  rightTextStyle?: object
+  bottomRightTextStyle?: object
+  showTrash?: boolean
+  onPressTrash?: () => void
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
   let borderStyle: any = {
     borderRightWidth: 3
-  };
+  }
   switch (bottomRightText) {
-    case "pending":
-    case "delivered":
-    case "delivering":
-    case "recalled":
-    case "processed":
+    case 'pending':
+    case 'delivered':
+    case 'delivering':
+    case 'recalled':
+    case 'processed':
       borderStyle = {
         ...borderStyle,
         borderRightColor: color[`${bottomRightText}BorderIndicator`]
-      };
-      break;
+      }
+      break
     default:
-      borderStyle = {};
-      break;
+      borderStyle = {}
+      break
   }
-  return borderStyle;
-};
+  return borderStyle
+}
 
 export default class SalesOrderListAtom extends React.PureComponent<IProps> {
   render() {
@@ -66,25 +66,31 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
           key="SalesOrderListAtom-2"
         >
           {this.renderLeftComponent()}
-          {this.renderRightComponent()}
+          {this.props.showTrash ? (
+            <Icon
+              type="EvilIcons"
+              name="trash"
+              style={{
+                color: color.trashIcon,
+                fontSize: 40,
+                alignSelf: 'center'
+              }}
+              onPress={this.props.onPressTrash}
+            />
+          ) : (
+            this.renderRightComponent()
+          )}
         </TouchableOpacity>
-        {this.props.showTrash && (
-          <Icon
-            type="EvilIcons"
-            name="trash"
-            style={{ color: color.trashIcon, fontSize: 40 }}
-            onPress={this.props.onPressTrash}
-          />
-        )}
+        {}
       </View>
-    );
+    )
   }
   renderLeftComponent = (): any => {
     const {
       firstTopText,
       bottomLeftFirstText,
       bottomLeftSecondText
-    } = this.props;
+    } = this.props
     if (firstTopText || bottomLeftFirstText || bottomLeftSecondText) {
       return (
         <Left style={[styles.leftWrapper, this.props.leftStyle]}>
@@ -101,9 +107,9 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
           </Text>
           {this.renderBottomTexts(bottomLeftFirstText, bottomLeftSecondText)}
         </Left>
-      );
+      )
     }
-  };
+  }
   renderBottomTexts = (bottomLeftFirstText, bottomLeftSecondText): any => {
     if (bottomLeftFirstText || bottomLeftSecondText) {
       return (
@@ -115,11 +121,11 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
             {bottomLeftSecondText}
           </Text>
         </View>
-      );
+      )
     }
-  };
+  }
   renderRightComponent = (): any => {
-    const { topRightText, bottomRightText } = this.props;
+    const { topRightText, bottomRightText } = this.props
     if (topRightText || bottomRightText) {
       return (
         <Right style={styles.rightWrapper}>
@@ -135,22 +141,22 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
             this.props.bottomRightTextStyle
           ])}
         </Right>
-      );
+      )
     }
-  };
+  }
   renderRightAlignedText = (text, styles): any => {
     if (text) {
-      return <Text style={styles}>{text}</Text>;
+      return <Text style={styles}>{text}</Text>
     }
-  };
+  }
 }
 
 const styles = StyleSheet.create({
   listItem: {
-    flexDirection: "row",
+    flexDirection: 'row',
     flex: 1,
     marginHorizontal: 16,
-    alignItems: "center"
+    alignItems: 'center'
   },
   avatar: {
     height: 50,
@@ -165,30 +171,30 @@ const styles = StyleSheet.create({
   wrapper: {
     borderBottomWidth: 1,
     borderBottomColor: color.listBorderColor,
-    flexDirection: "row",
+    flexDirection: 'row',
     backgroundColor: color.secondary,
     marginVertical: 8,
-    justifyContent: "space-between",
+    justifyContent: 'space-between',
     flex: 1,
     paddingRight: 8,
     minHeight: 55
   },
   serialNumber: {
-    fontFamily: "AvenirNext-DemiBold",
+    fontFamily: 'AvenirNext-DemiBold',
     color: color.principal,
     fontSize: 16
   },
   wrapperForTopLeft: {
-    flexDirection: "row"
+    flexDirection: 'row'
   },
   time: {
     marginLeft: 16,
     color: color.principal,
-    fontFamily: "AvenirNext-Regular",
+    fontFamily: 'AvenirNext-Regular',
     fontSize: 14
   },
   text: {
-    fontFamily: "AvenirNext-Regular",
+    fontFamily: 'AvenirNext-Regular',
     color: color.principal,
     fontSize: 14
   },
@@ -201,7 +207,7 @@ const styles = StyleSheet.create({
   },
   status: {
     // color: color.selling,
-    fontFamily: "AvenirNext-Regular"
+    fontFamily: 'AvenirNext-Regular'
   },
   rightWrapper: {
     // marginRight: 16
@@ -219,4 +225,4 @@ const styles = StyleSheet.create({
     fontSize: 30,
     color: color.red
   }
-});
+})
