@@ -263,13 +263,16 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   )
                 }
                 ListEmptyComponent={
-                  <EmptyList
-                    type={{
-                      Text: emptyListText,
-                      verifyMainList: this.props.showFab ? 'main' : '',
-                      headerText: headerText
-                    }}
-                  />
+                  sections.length == 0 &&
+                  !loading && (
+                    <EmptyList
+                      type={{
+                        Text: emptyListText,
+                        verifyMainList: this.props.showFab ? 'main' : '',
+                        headerText: headerText
+                      }}
+                    />
+                  )
                 }
                 sections={sections}
                 keyExtractor={(item, index) => item.node.id + index}
