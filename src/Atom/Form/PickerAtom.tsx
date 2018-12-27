@@ -14,7 +14,6 @@ import FormHeader from '../../Components/Header/FormHeader'
 import * as JsSearch from 'js-search'
 import { SearchAtom } from '../SearchAtom'
 import CachedImageAtom from '../CachedImageAtom'
-import ButtonAtom from './ButtonAtom'
 
 export interface PickerData {
   icon?: any
@@ -25,8 +24,6 @@ export interface PickerData {
 
 interface IEmptySection {
   emptyText: string
-  actionButtonLabel?: string
-  actionButtonOnPress?: () => void
 }
 
 interface IProps {
@@ -153,21 +150,6 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
         <Text style={styles.emptyText}>
           {this.props.emptySection.emptyText}
         </Text>
-        {this.props.emptySection.actionButtonLabel && (
-          <ButtonAtom
-            btnText={this.props.emptySection.actionButtonLabel}
-            onPress={() => {
-              this.setState(
-                {
-                  isOpen: false
-                },
-                () => this.props.emptySection.actionButtonOnPress()
-              )
-            }}
-            type="secondary"
-            btnStyle={{ marginTop: 10 }}
-          />
-        )}
       </View>
     ) : null
   }

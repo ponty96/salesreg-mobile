@@ -136,7 +136,7 @@ class UpsertServiceScreen extends Component<IProps, IState> {
                   }
                 ]
               },
-              renderCategoryStep('service', this.props.navigation),
+              renderCategoryStep('service'),
               renderTagStep(this.state.name, 'service'),
               renderFeaturedImageStep(this.state.name),
               renderMediaStep(this.state.name)

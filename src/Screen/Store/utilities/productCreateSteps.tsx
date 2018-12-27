@@ -32,7 +32,7 @@ export const renderSelectProductGroupFormStep = (): FormStep => ({
   ]
 })
 
-export const renderSelectOptionsFormStep = (name, navigation): FormStep => ({
+export const renderSelectOptionsFormStep = (name): FormStep => ({
   stepTitle: `Select the variant options for ${name}`,
   stepHint: `Variant options are what makes one ${name} different from another ${name}. E.g. color, sizes`,
   formFields: [
@@ -41,10 +41,7 @@ export const renderSelectOptionsFormStep = (name, navigation): FormStep => ({
       type: {
         type: 'search-multi-picker',
         emptySection: {
-          emptyText:
-            'You currently do not have any options, please create a new variant option',
-          actionButtonLabel: 'Create Options',
-          actionButtonOnPress: () => navigation.navigate('UpsertOption')
+          emptyText: `If you do not find the options you want, you may skip this field for now, and complete this form, then go to menu, and select settings > variant options to create new options, then complete this field by editing this product's details.`
         },
         searchQuery: SearchOptionsByNameGQL,
         searchQueryResponseKey: 'searchOptionsByName'
@@ -123,7 +120,7 @@ export const renderOptionValuesInputStep = (
   }))
 })
 
-export const renderCategoryStep = (type, navigation): FormStep => ({
+export const renderCategoryStep = (type): FormStep => ({
   stepTitle: `Categorize this ${type}`,
   formFields: [
     {
@@ -132,9 +129,7 @@ export const renderCategoryStep = (type, navigation): FormStep => ({
         type: 'search-multi-picker',
         emptySection: {
           emptyText:
-            'You currently do not have any categories, please create a new category',
-          actionButtonLabel: 'Create Category',
-          actionButtonOnPress: () => navigation.navigate('UpsertCategory')
+            "If you do not find the categories you want, you may skip this field for now, and complete this form, then go to menu, and select settings > categories to create new categories, then complete this field by editing this product's details."
         },
         searchQuery: SearchCategoriesByTitleGQL,
         searchQueryResponseKey: 'searchCategoriesByTitle'

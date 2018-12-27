@@ -20,8 +20,6 @@ interface IProps {
   type?: 'multi' | any
   emptySection?: {
     emptyText: string
-    actionButtonLabel?: string
-    actionButtonOnPress?: () => void
   }
 }
 

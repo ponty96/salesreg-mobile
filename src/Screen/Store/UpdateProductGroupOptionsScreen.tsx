@@ -98,10 +98,7 @@ class UpdateProductGroupOptionsScreen extends PureComponent<IProps, IState> {
                         searchQuery: SearchOptionsByNameGQL,
                         emptySection: {
                           emptyText:
-                            'You currently do not have any options, please create a new variant option',
-                          actionButtonLabel: 'Create Options',
-                          actionButtonOnPress: () =>
-                            this.props.navigation.navigate('UpsertOption')
+                            'You currently do not have any options, please create a new variant option'
                         },
                         searchQueryResponseKey: 'searchOptionsByName'
                       },
