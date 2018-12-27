@@ -162,7 +162,7 @@ const styles = StyleSheet.create({
   },
   normalText: {
     fontSize: 14,
-    fontFamily: 'AvenirNext-Medium',
+    fontFamily: 'AvenirNext-Regular',
     color: color.textColor
   },
   row: {
@@ -175,13 +175,13 @@ const styles = StyleSheet.create({
   },
   priceText: {
     fontSize: 14,
-    fontFamily: 'AvenirNext-Medium',
+    fontFamily: 'AvenirNext-Regular',
     color: color.selling
   },
   notProvidedText: {
     fontSize: 14,
     color: color.textColor,
-    fontFamily: 'AvenirNext-DemiBold'
+    fontFamily: 'AvenirNext-Regular'
   },
   buttonRow: {
     flexDirection: 'row',
@@ -190,7 +190,7 @@ const styles = StyleSheet.create({
   rightLabel: {
     color: color.button,
     fontSize: 14,
-    fontFamily: 'AvenirNext-Medium'
+    fontFamily: 'AvenirNext-Regular'
   },
   arrowIcon: {
     fontSize: 28,

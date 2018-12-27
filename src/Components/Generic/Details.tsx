@@ -102,7 +102,12 @@ export default class GenericDetailsComponent extends Component<IProps> {
         quantity={item.itemQuantity}
         labelStyle={item.isTotalAmount ? styles.whiteLabel : styles.listLabel}
         rightTextStyle={
-          item.isTotalAmount ? styles.whiteLabel : styles.greenText
+          item.isTotalAmount
+            ? styles.whiteLabel
+            : StyleSheet.flatten([
+                styles.greenText,
+                { fontFamily: 'AvenirNext-Regular' }
+              ])
         }
         listItemStyle={
           item.isTotalAmount ? styles.totalAmountListItem : styles.listWrapper
@@ -259,7 +264,7 @@ const styles = StyleSheet.create({
   listLabel: {
     color: color.textColor,
     marginLeft: 2,
-    fontFamily: 'AvenirNext-Regular'
+    fontFamily: 'AvenirNext-DemiBold'
   },
   listWrapper: {
     borderBottomColor: color.listBorderColor,
