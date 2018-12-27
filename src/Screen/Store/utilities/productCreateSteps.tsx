@@ -133,7 +133,6 @@ export const renderCategoryStep = (type, navigation): FormStep => ({
         emptySection: {
           emptyText:
             "If you do not find the categories you want, you may skip this field for now, and complete this form, then go to menu, and select settings > categories to create new categories, then complete this field by editing this product's details.",
-          //   actionButtonLabel: 'Create Category',
           actionButtonOnPress: () => navigation.navigate("UpsertCategory")
         },
         searchQuery: SearchCategoriesByTitleGQL,
