@@ -39,9 +39,11 @@ interface IProps {
   onItemPress: (item: any) => void
   variables?: any
   headerText: string
+  forceUpdateID?: number
   emptyListText: string
   fabRouteName?: string
   fabIconName?: string
+  sectionHeaderContainerStyle?: object
   fabIconType?: string
   subHeader?: SubHeaderProps
   shouldRenderFooter?: boolean
@@ -80,6 +82,18 @@ class GenericListIndex extends React.Component<IProps, IState> {
     },
     hideSeparator: false
   }
+
+  refetchQuery = () => null
+
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.forceUpdateID &&
+      prevProps.forceUpdateID != this.props.forceUpdateID
+    ) {
+      this.refetchQuery()
+    }
+  }
+
   componentWillMount() {
     this.updateState()
   }
@@ -107,7 +121,12 @@ class GenericListIndex extends React.Component<IProps, IState> {
     return this.props.hideSeparator ? (
       <View />
     ) : (
-      <View style={styles.footerWrapper}>
+      <View
+        style={StyleSheet.flatten([
+          styles.footerWrapper,
+          this.props.sectionHeaderContainerStyle
+        ])}
+      >
         <Text style={styles.footerText}>{moment(section.date).calendar()}</Text>
       </View>
     )
@@ -199,7 +218,8 @@ class GenericListIndex extends React.Component<IProps, IState> {
         }}
         fetchPolicy={fetchPolicy || 'cache-first'}
       >
-        {({ loading, data, fetchMore }) => {
+        {({ loading, data, fetchMore, refetch }) => {
+          this.refetchQuery = refetch
           const sections = data[graphqlQueryResultKey]
             ? this.parseSections(data[graphqlQueryResultKey])
             : []
@@ -243,13 +263,16 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   )
                 }
                 ListEmptyComponent={
-                  <EmptyList
-                    type={{
-                      Text: emptyListText,
-                      verifyMainList: this.props.showFab ? 'main' : '',
-                      headerText: headerText
-                    }}
-                  />
+                  sections.length == 0 &&
+                  !loading && (
+                    <EmptyList
+                      type={{
+                        Text: emptyListText,
+                        verifyMainList: this.props.showFab ? 'main' : '',
+                        headerText: headerText
+                      }}
+                    />
+                  )
                 }
                 sections={sections}
                 keyExtractor={(item, index) => item.node.id + index}

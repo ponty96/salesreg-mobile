@@ -36,6 +36,7 @@ interface IProps {
   onTrash?: () => void
   hideTotal?: boolean
   fabRouteParams?: any
+  hideNairaSymbolInGreenCanvas?: boolean
   showFab?: boolean
   fabRouteName?: string
   navigation?: any
@@ -102,7 +103,12 @@ export default class GenericDetailsComponent extends Component<IProps> {
         quantity={item.itemQuantity}
         labelStyle={item.isTotalAmount ? styles.whiteLabel : styles.listLabel}
         rightTextStyle={
-          item.isTotalAmount ? styles.whiteLabel : styles.greenText
+          item.isTotalAmount
+            ? styles.whiteLabel
+            : StyleSheet.flatten([
+                styles.greenText,
+                { fontFamily: 'AvenirNext-Regular' }
+              ])
         }
         listItemStyle={
           item.isTotalAmount ? styles.totalAmountListItem : styles.listWrapper
@@ -147,7 +153,11 @@ export default class GenericDetailsComponent extends Component<IProps> {
 
     return (
       <View style={styles.container}>
-        <GreenCanvas title={title} subText={totalAmount} />
+        <GreenCanvas
+          hideNairaSymbolInGreenCanvas={this.props.hideNairaSymbolInGreenCanvas}
+          title={title}
+          subText={totalAmount}
+        />
         <FlatList
           data={this.getItems()}
           style={{ height: 310 }}
@@ -259,7 +269,7 @@ const styles = StyleSheet.create({
   listLabel: {
     color: color.textColor,
     marginLeft: 2,
-    fontFamily: 'AvenirNext-Regular'
+    fontFamily: 'AvenirNext-DemiBold'
   },
   listWrapper: {
     borderBottomColor: color.listBorderColor,

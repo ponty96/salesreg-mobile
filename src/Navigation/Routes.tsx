@@ -36,7 +36,6 @@ import ServicesScreen from '../Screen/Store/ServicesScreen'
 // Category Screens
 import CategoriesScreen from '../Screen/Settings/Category/CategoriesScreen'
 import UpsertCategoryScreen from '../Screen/Settings/Category/UpsertCategoryScreen'
-// import CategoryAssociationsScreen from '../Screen/Settings/Category/CategoryAssociationsScreen'
 
 // Options Screens
 import OptionsScreen from '../Screen/Settings/Option/OptionsScreen'
@@ -54,7 +53,7 @@ import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
 // Order
 import OrderStatusScreen from '../Screen/OrderStatusScreen'
 
-//Sales Order screens
+// Sales Order screens
 import SalesOrderScreen from '../Screen/SalesOrderScreen'
 import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
 import SalesOrderDailySalesScreen from '../Screen/SalesOrderDailySalesScreen'
@@ -166,7 +165,6 @@ const businessStack = StackNavigator(
 
     Categories: CategoriesScreen,
     UpsertCategory: UpsertCategoryScreen,
-    // CategoryAssociations: CategoryAssociationsScreen,
 
     // Options
     Options: OptionsScreen,
@@ -196,7 +194,7 @@ const businessStack = StackNavigator(
     CustomerDetails: {
       screen: CustomerDetailScreen
     },
-    CustomerPaymentActivity: CustomerPaymentActivity
+    CustomerPaymentActivity
   },
   {
     initialRouteName: 'Home',

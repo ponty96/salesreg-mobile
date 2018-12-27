@@ -90,37 +90,8 @@ export const UpsertSaleOrder = gql`
       }
       success
       data {
-        ... on Invoice {
+        ... on Sale {
           id
-          amount
-          refId
-          amountPaid
-          user {
-            lastName
-            firstName
-          }
-          dueDate
-          sale {
-            amount
-            amountPaid
-            date
-            items {
-              id
-              unitPrice
-              quantity
-              product {
-                name
-                id
-                costPrice
-                featuredImage
-              }
-              service {
-                name
-                id
-                featuredImage
-              }
-            }
-          }
         }
       }
     }

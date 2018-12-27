@@ -325,10 +325,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderSelectOptionsFormStep(
-        this.state.productGroupTitle,
-        this.props.navigation
-      )
+      return renderSelectOptionsFormStep(this.state.productGroupTitle)
     } else {
       return {
         stepTitle: `Does ${
@@ -365,10 +362,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       this.state.currentFormState == STATE_TYPES.NewProductVariant ||
       this.state.currentFormState == STATE_TYPES.NewProduct
     ) {
-      return renderSelectOptionsFormStep(
-        this.state.productGroupTitle,
-        this.props.navigation
-      )
+      return renderSelectOptionsFormStep(this.state.productGroupTitle)
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
@@ -378,7 +372,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
 
   getFifthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderCategoryStep('product', this.props.navigation)
+      return renderCategoryStep('product')
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
@@ -391,7 +385,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {
-      return renderCategoryStep('product', this.props.navigation)
+      return renderCategoryStep('product')
     }
   }
 
@@ -401,7 +395,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderCategoryStep('product', this.props.navigation)
+      return renderCategoryStep('product')
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
       return renderProductDescriptionStep(this.getProductName())
     } else if (
@@ -419,7 +413,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
     ) {
       return renderTagStep(this.getProductName(), 'product')
     } else if (this.state.currentFormState == STATE_TYPES.NewProductVariant) {
-      return renderCategoryStep('product', this.props.navigation)
+      return renderCategoryStep('product')
     } else if (
       this.state.currentFormState == STATE_TYPES.NewProductNonVariant
     ) {

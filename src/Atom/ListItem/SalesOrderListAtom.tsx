@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
 import { Left, Right } from 'native-base'
 import CachedImageAtom from '../CachedImageAtom'
+import Icon from '../Icon'
 
 export interface DataProps {
   firstTopText: string
@@ -21,6 +22,8 @@ interface IProps extends DataProps {
   leftStyle?: object
   rightTextStyle?: object
   bottomRightTextStyle?: object
+  showTrash?: boolean
+  onPressTrash?: () => void
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
@@ -57,14 +60,29 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
           style={[
             styles.wrapper,
             this.props.style,
+            this.props.showTrash && { alignItems: 'center' },
             renderStatusIndicator(this.props.bottomRightText)
           ]}
           onPress={this.props.onPress}
           key="SalesOrderListAtom-2"
         >
           {this.renderLeftComponent()}
-          {this.renderRightComponent()}
+          {this.props.showTrash ? (
+            <Icon
+              type="EvilIcons"
+              name="trash"
+              style={{
+                color: color.trashIcon,
+                fontSize: 40,
+                alignSelf: 'center'
+              }}
+              onPress={this.props.onPressTrash}
+            />
+          ) : (
+            this.renderRightComponent()
+          )}
         </TouchableOpacity>
+        {}
       </View>
     )
   }
@@ -203,5 +221,9 @@ const styles = StyleSheet.create({
   },
   price: {
     color: color.selling
+  },
+  closeIcon: {
+    fontSize: 30,
+    color: color.red
   }
 })

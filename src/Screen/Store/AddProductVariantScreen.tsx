@@ -214,10 +214,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderSelectOptionsFormStep(
-        this.getProductName(),
-        this.props.navigation
-      )
+      return renderSelectOptionsFormStep(this.getProductName())
     }
   }
 
@@ -236,7 +233,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
 
   getFifthStep = (): FormStep | any => {
     if (this.state.currentFormState == STATE_TYPES.ExistingPredefined) {
-      return renderCategoryStep('product', this.props.navigation)
+      return renderCategoryStep('product')
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
@@ -250,7 +247,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
     } else if (
       this.state.currentFormState == STATE_TYPES.ExistingNonPredefined
     ) {
-      return renderCategoryStep('product', this.props.navigation)
+      return renderCategoryStep('product')
     }
   }
 

@@ -44,6 +44,7 @@ export default class SalesOrderDailySalesScreen extends React.Component<
       <GenericListIndex
         navigation={this.props.navigation}
         graphqlQuery={ListCompanySalesGQL}
+        sectionHeaderContainerStyle={{ marginTop: 8 }}
         graphqlQueryResultKey="listCompanySales"
         parseItemData={this.parseData}
         onItemPress={item =>
