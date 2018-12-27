@@ -16,7 +16,11 @@ interface IProps {
   navigation: any
 }
 
-export default class OptionsScreen extends React.Component<IProps> {
+interface IState {
+  forceUpdateId: number
+}
+
+export default class OptionsScreen extends React.Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -28,6 +32,10 @@ export default class OptionsScreen extends React.Component<IProps> {
         />
       )
     }
+  }
+
+  state = {
+    forceUpdateId: Date.now()
   }
 
   parseData = (item: any, deleteOption: (obj: any) => void) => {
@@ -72,6 +80,10 @@ export default class OptionsScreen extends React.Component<IProps> {
           ),
         100
       )
+    } else {
+      this.setState({
+        forceUpdateId: Date.now()
+      })
     }
   }
 
@@ -87,6 +99,7 @@ export default class OptionsScreen extends React.Component<IProps> {
           <React.Fragment>
             <AppSpinner visible={loading} />
             <GenericListIndex
+              forceUpdateID={this.state.forceUpdateId}
               navigation={this.props.navigation}
               graphqlQuery={ListCompanyOptionsGQL}
               graphqlQueryResultKey="listCompanyOptions"

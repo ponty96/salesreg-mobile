@@ -16,7 +16,11 @@ interface IProps {
   navigation: any
 }
 
-export default class CategoriesScreen extends React.Component<IProps> {
+interface IState {
+  forceUpdateId: number
+}
+
+export default class CategoriesScreen extends React.Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -28,6 +32,10 @@ export default class CategoriesScreen extends React.Component<IProps> {
         />
       )
     }
+  }
+
+  state = {
+    forceUpdateId: Date.now()
   }
 
   parseData = (item: any, deleteCategory: (obj: any) => void) => {
@@ -75,6 +83,10 @@ export default class CategoriesScreen extends React.Component<IProps> {
           ),
         100
       )
+    } else {
+      this.setState({
+        forceUpdateId: Date.now()
+      })
     }
   }
 
@@ -86,28 +98,31 @@ export default class CategoriesScreen extends React.Component<IProps> {
         awaitRefetchQueries={true}
         onCompleted={this.onCompleted}
       >
-        {(deleteCategory, { loading }) => (
-          <React.Fragment>
-            <AppSpinner visible={loading} />
-            <GenericListIndex
-              navigation={this.props.navigation}
-              graphqlQuery={ListCompanyCategoriesGQL}
-              graphqlQueryResultKey="listCompanyCategories"
-              parseItemData={item => this.parseData(item, deleteCategory)}
-              onItemPress={item =>
-                this.props.navigation.navigate('UpsertCategory', {
-                  category: item
-                })
-              }
-              emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
-              headerText="Great habit keeping records!"
-              fabRouteName="UpsertCategory"
-              fabIconName="apps"
-              fabIconType="MaterialCommunityIcons"
-              hideSeparator={true}
-            />
-          </React.Fragment>
-        )}
+        {(deleteCategory, { loading }) => {
+          return (
+            <React.Fragment>
+              <AppSpinner visible={loading} />
+              <GenericListIndex
+                forceUpdateID={this.state.forceUpdateId}
+                navigation={this.props.navigation}
+                graphqlQuery={ListCompanyCategoriesGQL}
+                graphqlQueryResultKey="listCompanyCategories"
+                parseItemData={item => this.parseData(item, deleteCategory)}
+                onItemPress={item =>
+                  this.props.navigation.navigate('UpsertCategory', {
+                    category: item
+                  })
+                }
+                emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
+                headerText="Great habit keeping records!"
+                fabRouteName="UpsertCategory"
+                fabIconName="apps"
+                fabIconType="MaterialCommunityIcons"
+                hideSeparator={true}
+              />
+            </React.Fragment>
+          )
+        }}
       </Mutation>
     )
   }
