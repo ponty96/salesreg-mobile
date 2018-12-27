@@ -43,6 +43,7 @@ interface IProps {
   emptyListText: string
   fabRouteName?: string
   fabIconName?: string
+  sectionHeaderContainerStyle?: object
   fabIconType?: string
   subHeader?: SubHeaderProps
   shouldRenderFooter?: boolean
@@ -120,7 +121,12 @@ class GenericListIndex extends React.Component<IProps, IState> {
     return this.props.hideSeparator ? (
       <View />
     ) : (
-      <View style={styles.footerWrapper}>
+      <View
+        style={StyleSheet.flatten([
+          styles.footerWrapper,
+          this.props.sectionHeaderContainerStyle
+        ])}
+      >
         <Text style={styles.footerText}>{moment(section.date).calendar()}</Text>
       </View>
     )
