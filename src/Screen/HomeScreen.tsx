@@ -57,8 +57,8 @@ export default class HomeScreen extends React.Component<IProps, IState> {
             <View style={styles.section}>
               <View style={styles.dot} />
               <Text style={[styles.text, { marginTop: -4 }]}>
-                Scroll down to the find the settings menu where you can edit
-                your profile
+                Scroll down to find the settings menu where you can edit your
+                profile
               </Text>
             </View>
             <View style={styles.section}>
