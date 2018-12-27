@@ -90,8 +90,6 @@ interface FieldType {
   searchQueryResponseKey?: string
   emptySection?: {
     emptyText: string
-    actionButtonLabel?: string
-    actionButtonOnPress?: () => void
   }
 }
 

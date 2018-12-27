@@ -332,10 +332,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                             searchQuery: CompanyCustomersGQL,
                             emptySection: {
                               emptyText:
-                                'You currently do not have any customers, please create a new customer',
-                              actionButtonLabel: 'Create Customer',
-                              actionButtonOnPress: () =>
-                                this.props.navigation.navigate('UpsertCustomer')
+                                'You currently do not have any customers. \n To create a new customer, open the side navigation drawer > customers. Afterwards, you can come back here to create your sales order'
                             },
                             searchQueryResponseKey: 'companyCustomers'
                           },
