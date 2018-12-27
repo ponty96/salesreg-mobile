@@ -36,6 +36,7 @@ interface IProps {
   onTrash?: () => void
   hideTotal?: boolean
   fabRouteParams?: any
+  hideNairaSymbolInGreenCanvas?: boolean
   showFab?: boolean
   fabRouteName?: string
   navigation?: any
@@ -152,7 +153,11 @@ export default class GenericDetailsComponent extends Component<IProps> {
 
     return (
       <View style={styles.container}>
-        <GreenCanvas title={title} subText={totalAmount} />
+        <GreenCanvas
+          hideNairaSymbolInGreenCanvas={this.props.hideNairaSymbolInGreenCanvas}
+          title={title}
+          subText={totalAmount}
+        />
         <FlatList
           data={this.getItems()}
           style={{ height: 310 }}

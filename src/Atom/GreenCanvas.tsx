@@ -5,13 +5,18 @@ import { color } from '../Style/Color'
 interface CanvasProps {
   title: string
   subText?: string
+  hideNairaSymbolInGreenCanvas?: boolean
 }
 
 export const GreenCanvas = (props: CanvasProps) => (
   <View style={styles.detailsHeader}>
     <Text style={styles.title}>{props.title}</Text>
     {props.subText && (
-      <Text style={styles.amount}>{`\u20A6 ${props.subText}`}</Text>
+      <Text style={styles.amount}>
+        {props.hideNairaSymbolInGreenCanvas
+          ? props.subText
+          : `\u20A6 ${props.subText}`}
+      </Text>
     )}
   </View>
 )

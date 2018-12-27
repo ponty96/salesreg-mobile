@@ -55,6 +55,7 @@ class BankDetailsScreen extends Component<IProps> {
       <GenericDetailsComponent
         title={getBankName(bank.bankName)}
         totalAmount={bank.accountNumber}
+        hideNairaSymbolInGreenCanvas={true}
         items={this.parseItems()}
         hideTotal={true}
         graphqlDeleteMutation={DeleteBankGQL}
