@@ -65,7 +65,7 @@ const errorLink = onError(({ graphQLErrors, networkError }: any) => {
   if (networkError) console.log(`[Network error]: ${networkError}`)
 })
 
-const timeoutLink = new ApolloLinkTimeout(30000)
+const timeoutLink = new ApolloLinkTimeout(15000)
 
 const client = new ApolloClient({
   link: timeoutLink.concat(

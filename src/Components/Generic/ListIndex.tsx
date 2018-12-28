@@ -208,9 +208,11 @@ class GenericListIndex extends React.Component<IProps, IState> {
       subHeader
     } = this.props
     const { business } = this.state
+
     return (
       <Query
         query={graphqlQuery}
+        notifyOnNetworkStatusChange={true}
         variables={{
           companyId: `${business && business.id}`,
           after: null,
@@ -219,18 +221,24 @@ class GenericListIndex extends React.Component<IProps, IState> {
         }}
         fetchPolicy={fetchPolicy || 'cache-first'}
       >
-        {({ loading, data, error, fetchMore, refetch }) => {
+        {({ loading, data, error, networkStatus, fetchMore, refetch }) => {
           this.refetchQuery = refetch
-          const sections = data[graphqlQueryResultKey]
-            ? this.parseSections(data[graphqlQueryResultKey])
-            : []
+          const sections =
+            Object.keys(data || {}).length > 0 && data[graphqlQueryResultKey]
+              ? this.parseSections(data[graphqlQueryResultKey])
+              : []
+
           return (
             <View style={styles.container}>
-              <AppSpinner visible={!data[graphqlQueryResultKey] && loading} />
+              <AppSpinner
+                visible={
+                  Object.keys(data || {}).length == 0 && !error && loading
+                }
+              />
               {subHeader && (
                 <SubHeaderAtom
                   total={
-                    data[graphqlQueryResultKey]
+                    data && data[graphqlQueryResultKey]
                       ? data[graphqlQueryResultKey].edges.length
                       : 0
                   }
@@ -248,8 +256,12 @@ class GenericListIndex extends React.Component<IProps, IState> {
               <SectionList
                 renderItem={this.renderList}
                 onRefresh={refetch}
+                contentContainerStyle={error ? { flex: 1 } : {}}
                 refreshing={
-                  (!!error || !!data[graphqlQueryResultKey]) && loading
+                  (error ||
+                    (Object.keys(data || {}).length > 0 &&
+                      data[graphqlQueryResultKey])) &&
+                  networkStatus == 4
                 }
                 onEndReachedThreshold={0.99}
                 onScroll={() => {
@@ -268,11 +280,11 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   )
                 }
                 ListEmptyComponent={
-                  error ? (
+                  error && Object.keys(data || {}).length == 0 ? (
                     <ErrorViewAtom onRefresh={refetch} />
                   ) : (
-                    sections.length == 0 &&
-                    !loading && (
+                    ((sections.length == 0 && !loading) ||
+                      (data && data[graphqlQueryResultKey] && loading)) && (
                       <EmptyList
                         type={{
                           Text: emptyListText,
@@ -290,7 +302,9 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   this.renderSectionFooter(section, sections)
                 }
               />
-              {data[graphqlQueryResultKey] && loading && <LoadMoreSpinner />}
+              {sections.length > 0 &&
+                data[graphqlQueryResultKey] &&
+                networkStatus == 3 && <LoadMoreSpinner />}
               {this.props.showFab && this.props.showFabFn(sections) ? (
                 <FabAtom
                   routeName={fabRouteName}

@@ -34,7 +34,6 @@ export default class App extends React.Component {
     const refreshToken = await Auth.getRefreshToken()
     if (token && refreshToken) {
       const user = JSON.parse(await Auth.getCurrentUser())
-      await client.resetStore()
       setupSentry(user)
       client.mutate({
         mutation: AuthenticateClientGQL,

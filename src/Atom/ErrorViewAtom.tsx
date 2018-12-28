@@ -30,7 +30,7 @@ const ErrorViewAtom = (props: IProps) =>
       <Icon name="alert-circle" type="Feather" style={styles.icon} />
       <Text style={styles.text}>
         {props.preferredErrorMessage ||
-          `Error occurred while connecting, tap or pull down to refresh`}
+          `Error occurred while connecting, pull down to refresh`}
       </Text>
     </View>
   )
