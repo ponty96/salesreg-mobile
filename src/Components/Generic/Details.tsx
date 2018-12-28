@@ -15,9 +15,9 @@ import FabAtom from '../../Atom/FabAtom'
 import { DocumentNode } from 'graphql'
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Spinner'
-var BUTTONS = ['No', 'Yes, delete', 'Cancel']
-var DESTRUCTIVE_INDEX = 1
-var CANCEL_INDEX = 2
+var BUTTONS = ['Yes, delete', 'Cancel']
+var DESTRUCTIVE_INDEX = 0
+var CANCEL_INDEX = 1
 
 interface Item {
   itemTitle: string
@@ -206,7 +206,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
         title: 'Delete?'
       },
       buttonIndex => {
-        if (buttonIndex == 1) {
+        if (buttonIndex == 0) {
           cb()
         }
       }

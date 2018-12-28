@@ -18,9 +18,9 @@ import {
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Components/Spinner'
 
-var BUTTONS = ['No', 'Yes, Change', 'Cancel']
-var DESTRUCTIVE_INDEX = 1
-var CANCEL_INDEX = 2
+var BUTTONS = ['Yes, Change', 'Cancel']
+var DESTRUCTIVE_INDEX = 0
+var CANCEL_INDEX = 1
 
 interface IProps {
   navigation: any
@@ -240,7 +240,7 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
         title: 'Change order status?'
       },
       buttonIndex => {
-        if (buttonIndex == 1) {
+        if (buttonIndex == 0) {
           cb()
         }
       }

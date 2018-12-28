@@ -8,7 +8,7 @@ import { ListCompanyOptionsGQL } from '../../../graphql/queries/store'
 import { DeleteOptionGQL } from '../../../graphql/mutations/store'
 import AppSpinner from '../../../Components/Spinner'
 
-var BUTTONS = ['No', 'Yes, delete', 'Cancel']
+var BUTTONS = ['Yes, delete', 'Cancel']
 var DESTRUCTIVE_INDEX = 1
 var CANCEL_INDEX = 2
 
@@ -54,7 +54,7 @@ export default class OptionsScreen extends React.Component<IProps, IState> {
               title: 'Delete?'
             },
             buttonIndex => {
-              if (buttonIndex == 1) {
+              if (buttonIndex == 0) {
                 deleteOption({ variables: { optionId: item.id } })
               }
             }

@@ -8,9 +8,9 @@ import AppSpinner from '../../../Components/Spinner'
 import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
 import { DeleteCategoryGQL } from '../../../graphql/mutations/store'
 
-var BUTTONS = ['No', 'Yes, delete', 'Cancel']
-var DESTRUCTIVE_INDEX = 1
-var CANCEL_INDEX = 2
+var BUTTONS = ['Yes, delete', 'Cancel']
+var DESTRUCTIVE_INDEX = 0
+var CANCEL_INDEX = 1
 
 interface IProps {
   navigation: any
@@ -57,7 +57,7 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
               title: 'Delete?'
             },
             buttonIndex => {
-              if (buttonIndex == 1) {
+              if (buttonIndex == 0) {
                 deleteCategory({ variables: { categoryId: item.id } })
               }
             }
