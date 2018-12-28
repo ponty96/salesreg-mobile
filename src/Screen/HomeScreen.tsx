@@ -110,7 +110,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     padding: 20,
     textAlign: "center",
-    fontFamily: "AvenirNext-Bold"
+    fontFamily: "SourceSansPro-Bold"
   },
   text: {
     fontFamily: "AvenirNext-Regular",

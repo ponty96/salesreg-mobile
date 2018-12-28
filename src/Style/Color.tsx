@@ -30,6 +30,7 @@ export const color = {
   listBorderColor: '#EEE',
   secondary: '#FFFFFF',
   textColor: '#444444',
+  errorIcon: '#8594a3',
   amountSummaryBg: '#36A5B1',
 
   /// order status
