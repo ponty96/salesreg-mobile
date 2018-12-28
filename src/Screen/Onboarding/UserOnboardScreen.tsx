@@ -94,7 +94,7 @@ export default class UserOnboardScreen extends React.PureComponent<
                 stepTitle: 'Tell us a little about yourself',
                 formFields: [
                   {
-                    label: 'Whats your first name?',
+                    label: "What's your first name?",
                     placeholder: 'E.g John',
                     type: {
                       type: 'input',
@@ -104,7 +104,7 @@ export default class UserOnboardScreen extends React.PureComponent<
                     name: 'firstName'
                   },
                   {
-                    label: 'Whats your last name?',
+                    label: "What's your last name?",
                     placeholder: 'E.g Doe',
                     type: {
                       type: 'input',
