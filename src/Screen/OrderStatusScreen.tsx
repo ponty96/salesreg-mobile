@@ -3,8 +3,6 @@ import { StyleSheet, View, Text, Alert, TouchableOpacity } from 'react-native'
 import SelectStatusAtom from '../Atom/SelectStatusAtom'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/DetailsScreenHeader'
-import EmptyList from '../Components/EmptyList'
-import Icon from '../Atom/Icon'
 import ButtonAtom from '../Atom/Form/ButtonAtom'
 import { CheckBox, ActionSheet } from 'native-base'
 import Preferences from '../services/preferences'
@@ -17,6 +15,7 @@ import {
 } from '../graphql/mutations/order'
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Components/Spinner'
+import { Content } from 'native-base'
 
 var BUTTONS = ['Yes, Change', 'Cancel']
 var DESTRUCTIVE_INDEX = 0
@@ -51,20 +50,6 @@ const parseGender = gender => {
   return 'her'
 }
 
-const Row = ({ text }) => (
-  <View style={styles.row}>
-    <Icon type="Entypo" name="dot-single" style={styles.dotIcon} />
-    <Text style={styles.hintText}>{text}</Text>
-  </View>
-)
-const HintBody = ({ firstName }) => (
-  <View>
-    <Row text="Indicate the status of this order by touching the circles on each status" />
-    <Row text="Press the blue Done button when you are finished" />
-    <Row text={`${firstName} order will be sent to her`} />
-    <Row text="You can always update the status in the order details page" />
-  </View>
-)
 const OrderStatusHint = (props: IOrderStatusProps) => {
   const firstName = props.contactName.split(' ')[0]
   return (
@@ -76,22 +61,47 @@ const OrderStatusHint = (props: IOrderStatusProps) => {
         backgroundColor: '#fff'
       }}
     >
-      <EmptyList
-        type={{
-          headerText: `Keep ${firstName}'s mind at rest concerning ${parseGender(
+      <Content>
+        <Text style={[styles.boldText, { marginVertical: 20 }]}>
+          {`Keep ${firstName}'s mind at rest concerning ${parseGender(
             props.gender
-          )} order.`,
-          body: <HintBody firstName={firstName} />
-        }}
-      />
-      <TouchableOpacity style={styles.row} onPress={props.hideHintCheck}>
-        <CheckBox
-          checked={props.hideHintChecked}
-          style={styles.checkBox}
-          onPress={props.hideHintCheck}
-        />
-        <Text style={styles.dismissText}>Do not show this message again</Text>
-      </TouchableOpacity>
+          )} order.`.trim()}
+        </Text>
+        <View style={styles.section}>
+          <View style={styles.dot} />
+          <Text style={[styles.text, { marginTop: -4 }]}>
+            Indicate the status of this order by touching the circles on each
+            status
+          </Text>
+        </View>
+        <View style={styles.section}>
+          <View style={styles.dot} />
+          <Text style={[styles.text, { marginTop: -4 }]}>
+            Press the blue Done button when you are finished
+          </Text>
+        </View>
+        <View style={styles.section}>
+          <View style={styles.dot} />
+          <Text style={[styles.text, { marginTop: -4 }]}>
+            {`${firstName} order will be sent to her`}
+          </Text>
+        </View>
+        <View style={styles.section}>
+          <View style={styles.dot} />
+          <Text style={[styles.text, { marginTop: -4 }]}>
+            You can always update the status in the order details page
+          </Text>
+        </View>
+
+        <TouchableOpacity style={styles.row} onPress={props.hideHintCheck}>
+          <CheckBox
+            checked={props.hideHintChecked}
+            style={styles.checkBox}
+            onPress={props.hideHintCheck}
+          />
+          <Text style={styles.dismissText}>Don't show this message again</Text>
+        </TouchableOpacity>
+      </Content>
       <View style={styles.footer}>
         <ButtonAtom
           btnText={`Continue to status`}
@@ -324,7 +334,20 @@ const styles = StyleSheet.create({
   row: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 4
+    padding: 4,
+    marginTop: 25
+  },
+  checkBox: {
+    marginRight: 8,
+    borderRadius: 0,
+    width: 22,
+    height: 22
+  },
+  dismissText: {
+    fontFamily: 'AvenirNext-Medium',
+    fontSize: 16,
+    color: color.textColor,
+    marginLeft: 16
   },
   footer: {
     width: '100%',
@@ -336,13 +359,36 @@ const styles = StyleSheet.create({
     position: 'absolute',
     bottom: 0
   },
-  checkBox: {
-    marginRight: 8
-  },
-  dismissText: {
-    fontFamily: 'AvenirNext-Medium',
-    fontSize: 14,
+
+  /** Borrowed style */
+  boldText: {
+    fontSize: 22,
+    fontFamily: 'AvenirNext-DemiBold',
+    marginBottom: 16,
+    textAlign: 'justify',
+    marginRight: 30,
     color: color.textColor,
-    marginLeft: 8
+    padding: 16
+  },
+  text: {
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: 17,
+    textAlign: 'justify',
+    marginRight: 30,
+    color: color.textColor
+  },
+  dot: {
+    width: 8,
+    height: 8,
+    borderRadius: 4,
+    marginRight: 15,
+    backgroundColor: color.textColor
+  },
+  section: {
+    flexDirection: 'row',
+    marginBottom: 30,
+    marginRight: 30,
+    alignItems: 'flex-start',
+    paddingLeft: 16
   }
 })
