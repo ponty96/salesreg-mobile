@@ -1,5 +1,6 @@
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import { AsyncStorage } from 'react-native'
 import { ApolloLink, split } from 'apollo-link'
 import { withClientState } from 'apollo-link-state'
 // import { createHttpLink } from 'apollo-link-http';
@@ -12,10 +13,17 @@ import { authenticate } from '../graphql/resolvers/auth'
 import { onError } from 'apollo-link-error'
 // import refreshOrLogout from '../services/refreshOrLogout';
 import { createUploadLink } from '@richeterre/apollo-upload-client'
+import { CachePersistor } from 'apollo-cache-persist'
 
 // const GRAPHQL_API_ENDPOINT = 'http://16e11967.ngrok.iom /api'
 const GRAPHQL_API_ENDPOINT = 'http://localhost:5000/api'
 const cache = new InMemoryCache()
+
+const persistor = new CachePersistor({
+  cache,
+  storage: AsyncStorage,
+  debug: true
+})
 
 const authLink = setContext(async (_: any, { headers }: any) => {
   const token = await Auth.getToken()
@@ -71,3 +79,4 @@ const writeDefaults = async () => stateLink.writeDefaults
 client.onResetStore(writeDefaults)
 
 export default client
+export { persistor }

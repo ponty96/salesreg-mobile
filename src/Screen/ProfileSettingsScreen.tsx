@@ -4,6 +4,7 @@ import Header from '../Components/Header/BaseHeader'
 import gql from 'graphql-tag'
 import Auth from '../services/auth'
 import { UserContext } from '../context/UserContext'
+import { persistor } from '../client'
 
 interface IProps {
   navigation: any
@@ -33,6 +34,7 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
     } = this.props
     await Auth.clearVault()
     await client.resetStore()
+    await persistor.purge()
     client.mutate({ mutation: LogoutClientGQL })
     resetUserContext()
     this.props.navigation.navigate('Login')
