@@ -132,6 +132,8 @@ class InputAtom extends React.Component<IProps, IState> {
               editable={this.props.editable}
               placeholder={this.props.placeholder}
               placeholderTextColor={color.inactive}
+              onChangeText={text => this.props.getValue(text)}
+              value={this.props.defaultValue}
             />
           </React.Fragment>
         )}

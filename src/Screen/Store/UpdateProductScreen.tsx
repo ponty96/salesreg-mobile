@@ -91,8 +91,8 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
       ...product,
       tags: product.tags.map(tag => tag.name),
       isTopRatedByMerchant:
-        product.isTopRatedByMerchant == false ? 'no' : 'yes',
-      isFeatured: product.isFeatured == false ? 'no' : 'yes',
+        product.isTopRatedByMerchant == false ? 'No' : 'Yes',
+      isFeatured: product.isFeatured == false ? 'No' : 'Yes',
       sku: product.number,
       optionValues: optionValues,
       name: this.getProductName(product, optionValues)
@@ -250,8 +250,8 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
       optionValues: this.parseOptionValuesForMutation(),
       userId: this.state.userId,
       isTopRatedByMerchant:
-        this.state.isTopRatedByMerchant == 'no' ? false : true,
-      isFeatured: this.state.isFeatured == 'no' ? false : true
+        this.state.isTopRatedByMerchant.toLowerCase() == 'no' ? false : true,
+      isFeatured: this.state.isFeatured.toLowerCase() == 'no' ? false : true
     }
     return {
       params: productParams,

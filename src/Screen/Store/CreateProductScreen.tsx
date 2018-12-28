@@ -466,8 +466,8 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       optionValues: this.parseOptionValuesForMutation(),
       userId: this.state.userId,
       isTopRatedByMerchant:
-        this.state.isTopRatedByMerchant == 'no' ? false : true,
-      isFeatured: this.state.isFeatured == 'no' ? false : true
+        this.state.isTopRatedByMerchant.toLowerCase() == 'no' ? false : true,
+      isFeatured: this.state.isFeatured.toLowerCase() == 'no' ? false : true
     }
     let params: any = {
       companyId: this.state.companyId,
