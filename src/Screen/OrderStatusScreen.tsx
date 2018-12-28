@@ -365,7 +365,7 @@ const styles = StyleSheet.create({
     fontSize: 22,
     fontFamily: 'AvenirNext-DemiBold',
     marginBottom: 16,
-    textAlign: 'justify',
+    // textAlign: 'justify',
     marginRight: 30,
     color: color.textColor,
     padding: 16
