@@ -71,7 +71,7 @@ class ProfileListAtom extends Component<IProps, IState> {
       this.state.bodyViewState
     ) {
       return (
-        <View style={{ backgroundColor: '#fff' }}>
+        <View style={{ backgroundColor: '#fff', paddingHorizontal: 10 }}>
           {value.map((val, index) => (
             <View key={index} style={styles.row}>
               {/* <Text style={styles.normalText}>{key}</Text> */}
@@ -81,7 +81,11 @@ class ProfileListAtom extends Component<IProps, IState> {
         </View>
       )
     } else if (this.props.body && this.state.bodyViewState) {
-      return <View style={{ backgroundColor: '#fff' }}>{this.props.body}</View>
+      return (
+        <View style={{ backgroundColor: '#fff', paddingHorizontal: 10 }}>
+          {this.props.body}
+        </View>
+      )
     } else {
       return <View />
     }
