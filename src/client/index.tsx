@@ -5,6 +5,7 @@ import { withClientState } from 'apollo-link-state'
 // import { createHttpLink } from 'apollo-link-http';
 import { hasSubscription } from '@jumpn/utils-graphql'
 import absintheSocketLink from './absinthe-socket-link'
+import ApolloLinkTimeout from 'apollo-link-timeout'
 import { setContext } from 'apollo-link-context'
 import Auth from '../services/auth'
 import { authenticate } from '../graphql/resolvers/auth'
@@ -56,8 +57,12 @@ const errorLink = onError(({ graphQLErrors, networkError }: any) => {
   if (networkError) console.log(`[Network error]: ${networkError}`)
 })
 
+const timeoutLink = new ApolloLinkTimeout(30000)
+
 const client = new ApolloClient({
-  link: ApolloLink.from([stateLink, errorLink, authLink, link]),
+  link: timeoutLink.concat(
+    ApolloLink.from([stateLink, errorLink, authLink, link])
+  ),
   cache
 })
 

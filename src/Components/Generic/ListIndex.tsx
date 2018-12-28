@@ -21,6 +21,7 @@ import { FetchPolicy } from 'apollo-client'
 import { DocumentNode } from 'graphql'
 import SubHeaderAtom from '../Header/SubHeaderAtom'
 import { UserContext } from '../../context/UserContext'
+import ErrorViewAtom from '../../Atom/ErrorViewAtom'
 
 interface SubHeaderProps {
   screen: string
@@ -218,7 +219,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
         }}
         fetchPolicy={fetchPolicy || 'cache-first'}
       >
-        {({ loading, data, fetchMore, refetch }) => {
+        {({ loading, data, error, fetchMore, refetch }) => {
           this.refetchQuery = refetch
           const sections = data[graphqlQueryResultKey]
             ? this.parseSections(data[graphqlQueryResultKey])
@@ -246,6 +247,10 @@ class GenericListIndex extends React.Component<IProps, IState> {
               )}
               <SectionList
                 renderItem={this.renderList}
+                onRefresh={refetch}
+                refreshing={
+                  (!!error || !!data[graphqlQueryResultKey]) && loading
+                }
                 onEndReachedThreshold={0.99}
                 onScroll={() => {
                   !this.state.hasUserScrolled &&
@@ -263,15 +268,19 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   )
                 }
                 ListEmptyComponent={
-                  sections.length == 0 &&
-                  !loading && (
-                    <EmptyList
-                      type={{
-                        Text: emptyListText,
-                        verifyMainList: this.props.showFab ? 'main' : '',
-                        headerText: headerText
-                      }}
-                    />
+                  error ? (
+                    <ErrorViewAtom onRefresh={refetch} />
+                  ) : (
+                    sections.length == 0 &&
+                    !loading && (
+                      <EmptyList
+                        type={{
+                          Text: emptyListText,
+                          verifyMainList: this.props.showFab ? 'main' : '',
+                          headerText: headerText
+                        }}
+                      />
+                    )
                   )
                 }
                 sections={sections}
