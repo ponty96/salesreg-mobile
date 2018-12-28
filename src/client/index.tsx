@@ -16,7 +16,7 @@ import { createUploadLink } from '@richeterre/apollo-upload-client'
 import { CachePersistor } from 'apollo-cache-persist'
 
 // const GRAPHQL_API_ENDPOINT = 'http://16e11967.ngrok.iom /api'
-const GRAPHQL_API_ENDPOINT = 'http://localhost:5000/api'
+const GRAPHQL_API_ENDPOINT = 'https://salesreg.herokuapp.com/api'
 const cache = new InMemoryCache()
 
 const persistor = new CachePersistor({

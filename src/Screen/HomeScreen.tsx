@@ -1,44 +1,44 @@
-import * as React from 'react'
-import { View, StyleSheet, Text, Dimensions } from 'react-native'
-import { color } from '../Style/Color'
-import Header from '../Components/Header/BaseHeader'
-import Auth from '../services/auth'
-import { Content } from 'native-base'
+import * as React from "react";
+import { View, StyleSheet, Text, Dimensions } from "react-native";
+import { color } from "../Style/Color";
+import Header from "../Components/Header/BaseHeader";
+import Auth from "../services/auth";
+import { Content } from "native-base";
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  username: string
+  username: string;
 }
 
 export default class HomeScreen extends React.Component<IProps, IState> {
   state = {
-    username: ''
-  }
+    username: ""
+  };
 
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
         <Header
           title="Home"
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
+          onPressLeftIcon={() => navigation.navigate("DrawerToggle")}
         />
       )
-    }
-  }
+    };
+  };
 
   componentWillMount() {
-    this.updateUserName()
+    this.updateUserName();
   }
 
   updateUserName = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = JSON.parse(await Auth.getCurrentUser());
     this.setState({
       username: user.firstName
-    })
-  }
+    });
+  };
 
   render() {
     return (
@@ -51,7 +51,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
               </Text>
             </View>
             <Text style={[styles.text, { marginVertical: 20 }]}>
-              Tap he menu icon on the top right hand corner of the screen to
+              Tap the menu icon on the top right hand corner of the screen to
               find all the menu options you will be needing:
             </Text>
             <View style={styles.section}>
@@ -88,20 +88,20 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           </Content>
         </View>
       </React.Fragment>
-    )
+    );
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: '#fff',
+    backgroundColor: "#fff",
     paddingHorizontal: 16
   },
   homeBackground: {
-    backgroundColor: 'rgba(152,251,152, 0.2)', // #98FB98
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
+    backgroundColor: "rgba(152,251,152, 0.2)", // #98FB98
+    width: Dimensions.get("screen").width - 32,
+    alignSelf: "center",
     marginTop: 16,
     borderRadius: 3
   },
@@ -109,13 +109,13 @@ const styles = StyleSheet.create({
     color: color.selling,
     fontSize: 30,
     padding: 20,
-    textAlign: 'center',
-    fontFamily: 'AvenirNext-Bold'
+    textAlign: "center",
+    fontFamily: "SourceSansPro-Bold"
   },
   text: {
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: "AvenirNext-Regular",
     fontSize: 17,
-    textAlign: 'justify',
+    textAlign: "justify",
     marginRight: 30,
     color: color.textColor
   },
@@ -127,9 +127,9 @@ const styles = StyleSheet.create({
     backgroundColor: color.textColor
   },
   section: {
-    flexDirection: 'row',
+    flexDirection: "row",
     marginBottom: 30,
     marginRight: 30,
-    alignItems: 'flex-start'
+    alignItems: "flex-start"
   }
-})
+});
