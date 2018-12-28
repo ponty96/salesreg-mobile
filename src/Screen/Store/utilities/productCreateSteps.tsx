@@ -164,7 +164,7 @@ export const renderTagStep = (name, type): FormStep => ({
 
 export const renderFeaturedImageStep = (name): FormStep => ({
   stepTitle: `Lets add images for ${name} starting from the landing images`,
-  stepHint: `The landing images is what your customers see displayed on catalogue page of webstore. This is the image of this item that your customers will first see when they explore your catalogue. Click + to add from your device storage`,
+  stepHint: `The landing images is what your customers see displayed on catalogue page of webstore. This is the image of this item that your customers will first see when they explore your catalogue.`,
   formFields: [
     {
       label: '',
