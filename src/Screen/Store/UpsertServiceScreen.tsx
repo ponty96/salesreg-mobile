@@ -12,6 +12,7 @@ import {
   renderMediaStep
 } from './utilities/productCreateSteps'
 import { UserContext } from '../../context/UserContext'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -169,10 +170,22 @@ class UpsertServiceScreen extends Component<IProps, IState> {
 
   onCompleted = async res => {
     const {
-      upsertService: { success, fieldErrors }
+      upsertService: { success, fieldErrors, data }
     } = res
     if (success) {
-      this.props.navigation.navigate('Services')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Services'
+          }),
+          NavigationActions.navigate({
+            routeName: 'ServicesDetails',
+            params: { service: data }
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }

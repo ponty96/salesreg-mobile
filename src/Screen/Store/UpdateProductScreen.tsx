@@ -18,6 +18,7 @@ import {
 } from './utilities/productCreateSteps'
 
 import { UserContext } from '../../context/UserContext'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -271,10 +272,22 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
 
   onCompleted = async res => {
     const {
-      updateProduct: { success, fieldErrors }
+      updateProduct: { success, fieldErrors, data }
     } = res
     if (success) {
-      this.props.navigation.navigate('Products')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Products'
+          }),
+          NavigationActions.navigate({
+            routeName: 'ProductDetails',
+            params: { product: data }
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }

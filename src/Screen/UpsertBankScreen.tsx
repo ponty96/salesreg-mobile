@@ -7,6 +7,7 @@ import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import { NG_Banks } from '../utilities/data/picker-lists'
 import Auth from '../services/auth'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -133,12 +134,24 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
   }
   onCompleted = async res => {
     const {
-      upsertBank: { success, fieldErrors }
+      upsertBank: { success, fieldErrors, data }
     } = res
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.navigation.navigate('Banks')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Banks'
+          }),
+          NavigationActions.navigate({
+            routeName: 'BankDetails',
+            params: { bank: data }
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     }
   }
 }
