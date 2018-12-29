@@ -38,9 +38,9 @@ const sideBarItemStyles = StyleSheet.create({
   },
   title: {
     marginLeft: 25,
-    color: '#000',
+    color: '#999',
     marginVertical: 2,
-    fontSize: 18
+    fontSize: 11
   },
   categoryWrapper: {
     borderRadius: 5,
@@ -76,7 +76,7 @@ const SidebarItem = (prop: {
         <Text
           style={[
             sideBarItemStyles.title,
-            { fontFamily: 'AvenirNext-DemiBold' }
+            { fontFamily: 'AvenirNext-Regular' }
           ]}
         >
           {prop.title}
@@ -94,15 +94,17 @@ const SidebarItem = (prop: {
             onPress={() => prop.navigate(category.routeName)}
           >
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <Icon
-                name={category.iconName}
-                type={category.iconType}
-                style={[
-                  { fontSize: 20, color: color.textColor },
-                  prop.activeRoute == category.routeName &&
-                    sideBarItemStyles.activeCategory
-                ]}
-              />
+              <View style={{ width: 35 }}>
+                <Icon
+                  name={category.iconName}
+                  type={category.iconType}
+                  style={[
+                    { fontSize: 20, color: color.textColor },
+                    prop.activeRoute == category.routeName &&
+                      sideBarItemStyles.activeCategory
+                  ]}
+                />
+              </View>
               <Text
                 style={[
                   sideBarItemStyles.category,
