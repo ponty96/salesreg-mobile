@@ -16,6 +16,7 @@ export default class ProductScreen extends React.Component<IProps> {
           title="Products"
           onPressRightIcon={() => Alert.alert('Search button pressed.')}
           onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
+          showSearchBar
         />
       )
     }
