@@ -10,16 +10,18 @@ interface IProps {
   navigation: any
 }
 
-export default class InvoiceScreen extends React.PureComponent<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+interface IState {
+  queryText: string
+}
+
+export default class InvoiceScreen extends React.PureComponent<IProps, IState> {
+  state = {
+    queryText: ''
+  }
+
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Invoices"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
-        />
-      )
+      header: null
     }
   }
 
@@ -41,21 +43,34 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
 
   render() {
     return (
-      <GenericListIndex
-        navigation={this.props.navigation}
-        graphqlQuery={ListCompanyInvoicesGQL}
-        hideSeparator={true}
-        graphqlQueryResultKey="listCompanyInvoices"
-        parseItemData={this.parseData}
-        onItemPress={item =>
-          this.props.navigation.navigate('InvoiceDetails', {
-            sales: { ...item.sale, invoice: { ...item } }
-          })
-        }
-        emptyListText={`No invoice created yet for your company, please make a sale to see an invoice reflect here.`}
-        headerText="Empty Invoice List!"
-        showFab={false}
-      />
+      <React.Fragment>
+        <Header
+          title="Invoices"
+          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
+          showSearchBar
+          searchBar={{
+            placeholder: 'Search for an invoice',
+            onSearch: queryText => this.setState({ queryText })
+          }}
+        />
+        <GenericListIndex
+          navigation={this.props.navigation}
+          queryText={this.state.queryText}
+          graphqlQuery={ListCompanyInvoicesGQL}
+          hideSeparator={true}
+          graphqlQueryResultKey="listCompanyInvoices"
+          parseItemData={this.parseData}
+          onItemPress={item =>
+            this.props.navigation.navigate('InvoiceDetails', {
+              sales: { ...item.sale, invoice: { ...item } }
+            })
+          }
+          emptyListText={`No invoice created yet for your company, please make a sale to see an invoice reflect here.`}
+          headerText="Empty Invoice List!"
+          showFab={false}
+        />
+      </React.Fragment>
     )
   }
 }

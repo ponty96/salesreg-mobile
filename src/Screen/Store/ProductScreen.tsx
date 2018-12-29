@@ -8,17 +8,18 @@ interface IProps {
   navigation: any
 }
 
-export default class ProductScreen extends React.Component<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+interface IState {
+  queryText: string
+}
+
+export default class ProductScreen extends React.Component<IProps, IState> {
+  state = {
+    queryText: ''
+  }
+
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Products"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
-          showSearchBar
-        />
-      )
+      header: null
     }
   }
 
@@ -41,28 +42,41 @@ export default class ProductScreen extends React.Component<IProps> {
 
   render() {
     return (
-      <GenericListIndex
-        navigation={this.props.navigation}
-        graphqlQuery={ListCompanyProductsGQL}
-        graphqlQueryResultKey="listCompanyProducts"
-        parseItemData={this.parseData}
-        onItemPress={item =>
-          this.props.navigation.navigate('ProductDetails', { product: item })
-        }
-        emptyListText={`When you add products, they get listed here \nAdd products by tapping the`}
-        headerText="Add products here to start making sales"
-        fabRouteName="CreateProduct"
-        fabIconName="basket-fill"
-        fabIconType="MaterialCommunityIcons"
-        hideSeparator={true}
-        subHeader={{
-          rightLabel: sections => (sections.length > 0 ? '+Re-stock' : ''),
-          onPress: sections =>
-            sections.length > 0
-              ? this.props.navigation.navigate('UpsertProductRestock')
-              : null
-        }}
-      />
+      <React.Fragment>
+        <Header
+          title="Products"
+          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
+          showSearchBar
+          searchBar={{
+            placeholder: 'Search for a product',
+            onSearch: queryText => this.setState({ queryText })
+          }}
+        />
+        <GenericListIndex
+          navigation={this.props.navigation}
+          queryText={this.state.queryText}
+          graphqlQuery={ListCompanyProductsGQL}
+          graphqlQueryResultKey="listCompanyProducts"
+          parseItemData={this.parseData}
+          onItemPress={item =>
+            this.props.navigation.navigate('ProductDetails', { product: item })
+          }
+          emptyListText={`When you add products, they get listed here \nAdd products by tapping the`}
+          headerText="Add products here to start making sales"
+          fabRouteName="CreateProduct"
+          fabIconName="basket-fill"
+          fabIconType="MaterialCommunityIcons"
+          hideSeparator={true}
+          subHeader={{
+            rightLabel: sections => (sections.length > 0 ? '+Re-stock' : ''),
+            onPress: sections =>
+              sections.length > 0
+                ? this.props.navigation.navigate('UpsertProductRestock')
+                : null
+          }}
+        />
+      </React.Fragment>
     )
   }
 }
