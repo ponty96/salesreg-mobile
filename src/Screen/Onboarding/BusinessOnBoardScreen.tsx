@@ -170,7 +170,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                     name: 'businessCountry'
                   },
                   {
-                    label: 'Whats about your phone number?',
+                    label: 'What about your phone number?',
                     type: {
                       type: 'phone-input'
                     },

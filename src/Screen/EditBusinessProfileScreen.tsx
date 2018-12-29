@@ -137,7 +137,7 @@ export default class EditBusinessProfileScreen extends Component<
                 ]
               },
               {
-                stepTitle: `Whats your business address?`,
+                stepTitle: `What's your business address?`,
                 formFields: [
                   {
                     label: 'What street is your business located at?',
@@ -182,7 +182,7 @@ export default class EditBusinessProfileScreen extends Component<
                 stepTitle: 'How can customers contact you?',
                 formFields: [
                   {
-                    label: 'Whats about your phone number?',
+                    label: 'What about your phone number?',
                     type: {
                       type: 'phone-input'
                     },

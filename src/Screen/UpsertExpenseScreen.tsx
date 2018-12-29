@@ -1,74 +1,74 @@
-import React, { Component } from 'react'
-import FormStepperContainer from '../Container/Form/StepperContainer'
-import { UpsertExpenseGQL } from '../graphql/mutations/expense'
-import { ListCompanyExpensesGQL } from '../graphql/queries/expense'
-import { Mutation } from 'react-apollo'
-import { parseFieldErrors } from '../Functions'
-import AppSpinner from '../Components/Spinner'
-import { PaymentMethod } from '../utilities/data/picker-lists'
-import Auth from '../services/auth'
+import React, { Component } from "react";
+import FormStepperContainer from "../Container/Form/StepperContainer";
+import { UpsertExpenseGQL } from "../graphql/mutations/expense";
+import { ListCompanyExpensesGQL } from "../graphql/queries/expense";
+import { Mutation } from "react-apollo";
+import { parseFieldErrors } from "../Functions";
+import AppSpinner from "../Components/Spinner";
+import { PaymentMethod } from "../utilities/data/picker-lists";
+import Auth from "../services/auth";
 
 interface IProps {
-  navigation: any
+  navigation: any;
 }
 
 interface IState {
-  title: string
-  totalAmount: any
-  date: string
-  expenseItems: any[]
-  paidById: string
-  companyId: string
-  paymentMethod: string
-  fieldErrors: any
-  __typename?: any
-  company?: any
-  paidBy?: any
+  title: string;
+  totalAmount: any;
+  date: string;
+  expenseItems: any[];
+  paidById: string;
+  companyId: string;
+  paymentMethod: string;
+  fieldErrors: any;
+  __typename?: any;
+  company?: any;
+  paidBy?: any;
 }
 
 export default class UpsertExpenseScreen extends Component<IProps, IState> {
   static navigationOptions = {
     header: null
-  }
+  };
 
   state = {
-    title: '',
-    date: '',
+    title: "",
+    date: "",
     totalAmount: null,
     expenseItems: [],
-    paidById: '',
-    companyId: '',
-    paymentMethod: '',
+    paidById: "",
+    companyId: "",
+    paymentMethod: "",
     fieldErrors: null
-  }
+  };
 
   updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val }
-    this.setState({ ...formData })
-  }
+    const formData = { ...this.state, [key]: val };
+    this.setState({ ...formData });
+  };
 
   async componentDidMount() {
-    const user = JSON.parse(await Auth.getCurrentUser())
-    const expense = this.props.navigation.getParam('expense', null)
-    let state = {}
+    const user = JSON.parse(await Auth.getCurrentUser());
+    const expense = this.props.navigation.getParam("expense", null);
+    let state = {};
     if (expense) {
       console.log(
-        'paymemt method',
+        "paymemt method",
         expense.paymentMethod
-          .split(' ')
-          .join('_')
+          .split(" ")
+          .join("_")
           .toUpperCase()
-      )
+      );
       state = {
         ...expense,
         paymentMethod: expense.paymentMethod
-          .split(' ')
-          .join('_')
+          .split(" ")
+          .join("_")
           .toUpperCase()
-      }
+      };
     }
-    state = { ...state, paidById: user.id, companyId: user.company.id }
-    this.setState(state)
+    state = { ...state, paidById: user.id, companyId: user.company.id };
+    this.setState(state);
   }
 
   render() {
@@ -94,46 +94,46 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
             formData={this.state}
             steps={[
               {
-                stepTitle: 'Lets now describe your expense',
+                stepTitle: "Let's now describe your expense",
                 formFields: [
                   {
-                    label: 'What should we call this expense?',
-                    placeholder: 'e.g Shop renovation',
-                    validators: ['required'],
-                    name: 'title',
+                    label: "What should we call this expense?",
+                    placeholder: "e.g Shop renovation",
+                    validators: ["required"],
+                    name: "title",
                     type: {
-                      type: 'input',
-                      keyboardType: 'default'
+                      type: "input",
+                      keyboardType: "default"
                     }
                   },
                   {
-                    label: 'When did you make this expense?',
-                    placeholder: 'e.g 06/23/2018',
-                    validators: ['required'],
-                    name: 'date',
+                    label: "When did you make this expense?",
+                    placeholder: "e.g 06/23/2018",
+                    validators: ["required"],
+                    name: "date",
                     type: {
-                      type: 'date'
+                      type: "date"
                     }
                   },
                   {
-                    label: 'What did you spend in total?',
+                    label: "What did you spend in total?",
                     placeholder: `\u20A6 0.0`,
-                    name: 'totalAmount',
-                    validators: ['required'],
+                    name: "totalAmount",
+                    validators: ["required"],
                     type: {
-                      type: 'input',
-                      keyboardType: 'numeric'
+                      type: "input",
+                      keyboardType: "numeric"
                     }
                   },
                   {
-                    label: 'How did you pay for this expense?',
-                    placeholder: 'Touch to choose',
-                    validators: ['required'],
+                    label: "How did you pay for this expense?",
+                    placeholder: "Touch to choose",
+                    validators: ["required"],
                     type: {
-                      type: 'picker',
+                      type: "picker",
                       options: PaymentMethod
                     },
-                    name: 'paymentMethod'
+                    name: "paymentMethod"
                   }
                 ]
               },
@@ -141,15 +141,15 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
                 stepTitle: `Across what items did you spread this expense \n(optional)?`,
                 formFields: [
                   {
-                    label: '',
+                    label: "",
                     type: {
-                      type: 'expense-items'
+                      type: "expense-items"
                     },
-                    validators: ['expense-item'],
-                    name: 'expenseItems'
+                    validators: ["expense-item"],
+                    name: "expenseItems"
                   }
                 ],
-                buttonTitle: 'Done'
+                buttonTitle: "Done"
               }
             ]}
             updateValueChange={this.updateState}
@@ -161,47 +161,47 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
           />
         ]}
       </Mutation>
-    )
+    );
   }
 
   parseMutationVariables = () => {
-    const expense = this.props.navigation.getParam('expense', {})
-    let params = { ...this.state }
-    params['totalAmount'] = parseFloat(params.totalAmount).toFixed(2)
-    params = this.clearParams(params)
+    const expense = this.props.navigation.getParam("expense", {});
+    let params = { ...this.state };
+    params["totalAmount"] = parseFloat(params.totalAmount).toFixed(2);
+    params = this.clearParams(params);
 
-    return { expense: params, expenseId: expense ? expense.id : null }
-  }
+    return { expense: params, expenseId: expense ? expense.id : null };
+  };
 
   clearParams = params => {
-    delete params.fieldErrors
-    delete params['__typename']
-    delete params['company']
-    delete params['paidBy']
-    delete params['id']
-    delete params.expenseItems
+    delete params.fieldErrors;
+    delete params["__typename"];
+    delete params["company"];
+    delete params["paidBy"];
+    delete params["id"];
+    delete params.expenseItems;
     if (this.state.expenseItems) {
       params.expenseItems = this.state.expenseItems.map(expenseItem => {
-        let expense = { ...expenseItem }
-        delete expense.__typename
-        delete expense.id
+        const expense = { ...expenseItem };
+        delete expense.__typename;
+        delete expense.id;
         return {
           ...expense,
           amount: parseFloat(expense.amount).toFixed(2)
-        }
-      })
+        };
+      });
     }
 
-    return params
-  }
+    return params;
+  };
   onCompleted = async res => {
     const {
       upsertExpense: { success, fieldErrors }
-    } = res
+    } = res;
     if (!success) {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
     } else {
-      this.props.navigation.navigate('Expenses')
+      this.props.navigation.navigate("Expenses");
     }
-  }
+  };
 }

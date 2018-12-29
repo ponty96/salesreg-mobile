@@ -163,8 +163,8 @@ export const renderTagStep = (name, type): FormStep => ({
 })
 
 export const renderFeaturedImageStep = (name): FormStep => ({
-  stepTitle: `Lets add images for ${name} starting from the landing images`,
-  stepHint: `The landing images is what your customers see displayed on catalogue page of webstore. This is the image of this item that your customers will first see when they explore your catalogue.`,
+  stepTitle: `Let's add images for ${name} starting from the landing images`,
+  stepHint: `The landing images are what your customers see displayed on catalogue page of webstore. This is the image of this item that your customers will first see when they explore your catalogue.`,
   formFields: [
     {
       label: '',
@@ -178,7 +178,7 @@ export const renderFeaturedImageStep = (name): FormStep => ({
 })
 
 export const renderMediaStep = (name): FormStep => ({
-  stepTitle: `Lets now add other media(videos or images) for ${name}`,
+  stepTitle: `Let's now add other media(videos or images) for ${name}`,
   stepHint: `Media will be displayed on the details section of your webstore. Customers can view multiple media of ${name}`,
   formFields: [
     {

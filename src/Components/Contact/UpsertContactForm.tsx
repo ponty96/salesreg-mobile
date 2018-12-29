@@ -120,7 +120,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
             fieldErrors={this.state.fieldErrors}
             steps={[
               {
-                stepTitle: `Lets know this ${this.props.contactType}`,
+                stepTitle: `Let's know this ${this.props.contactType}`,
                 formFields: [
                   {
                     label: 'Name?',

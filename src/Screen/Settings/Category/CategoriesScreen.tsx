@@ -8,9 +8,9 @@ import AppSpinner from '../../../Components/Spinner'
 import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
 import { DeleteCategoryGQL } from '../../../graphql/mutations/store'
 
-var BUTTONS = ['Yes, delete', 'Cancel']
-var DESTRUCTIVE_INDEX = 0
-var CANCEL_INDEX = 1
+let BUTTONS = ['Yes, delete', 'Cancel']
+let DESTRUCTIVE_INDEX = 0
+let CANCEL_INDEX = 1
 
 interface IProps {
   navigation: any
@@ -68,7 +68,7 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
   }
 
   onCompleted = async res => {
-    let {
+    const {
       deleteCategory: { success, fieldErrors }
     } = res
 
@@ -113,7 +113,7 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
                     category: item
                   })
                 }
-                emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
+                emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLet's proceed by tapping the`}
                 headerText="Great habit keeping records!"
                 fabRouteName="UpsertCategory"
                 fabIconName="apps"

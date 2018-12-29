@@ -8,9 +8,9 @@ import { ListCompanyOptionsGQL } from '../../../graphql/queries/store'
 import { DeleteOptionGQL } from '../../../graphql/mutations/store'
 import AppSpinner from '../../../Components/Spinner'
 
-var BUTTONS = ['Yes, delete', 'Cancel']
-var DESTRUCTIVE_INDEX = 1
-var CANCEL_INDEX = 2
+let BUTTONS = ['Yes, delete', 'Cancel']
+let DESTRUCTIVE_INDEX = 1
+let CANCEL_INDEX = 2
 
 interface IProps {
   navigation: any
@@ -42,7 +42,7 @@ export default class OptionsScreen extends React.Component<IProps, IState> {
     return [
       {
         firstTopText: item.name,
-        bottomLeftSecondText: '', //item.date
+        bottomLeftSecondText: '', // item.date
         topRightText: ``, // this should be the number of products and services within this option
         showTrash: true,
         onPressTrash: () => {
@@ -65,7 +65,7 @@ export default class OptionsScreen extends React.Component<IProps, IState> {
   }
 
   onCompleted = async res => {
-    let {
+    const {
       deleteOption: { success, fieldErrors }
     } = res
 
@@ -107,7 +107,7 @@ export default class OptionsScreen extends React.Component<IProps, IState> {
               onItemPress={item =>
                 this.props.navigation.navigate('UpsertOption', { option: item })
               }
-              emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
+              emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLet's proceed by tapping the`}
               headerText="Great habit keeping records!"
               fabRouteName="UpsertOption"
               fabIconName="package-variant"
