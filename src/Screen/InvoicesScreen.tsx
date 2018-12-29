@@ -10,15 +10,7 @@ interface IProps {
   navigation: any
 }
 
-interface IState {
-  queryText: string
-}
-
-export default class InvoiceScreen extends React.PureComponent<IProps, IState> {
-  state = {
-    queryText: ''
-  }
-
+export default class InvoiceScreen extends React.PureComponent<IProps> {
   static navigationOptions = () => {
     return {
       header: null
@@ -48,15 +40,9 @@ export default class InvoiceScreen extends React.PureComponent<IProps, IState> {
           title="Invoices"
           onPressRightIcon={() => Alert.alert('Search button pressed.')}
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
-          showSearchBar
-          searchBar={{
-            placeholder: 'Search for an invoice',
-            onSearch: queryText => this.setState({ queryText })
-          }}
         />
         <GenericListIndex
           navigation={this.props.navigation}
-          queryText={this.state.queryText}
           graphqlQuery={ListCompanyInvoicesGQL}
           hideSeparator={true}
           graphqlQueryResultKey="listCompanyInvoices"

@@ -9,15 +9,7 @@ interface IProps {
   navigation: any
 }
 
-interface IState {
-  queryText: string
-}
-
-export default class SalesScreen extends React.Component<IProps, IState> {
-  state = {
-    queryText: ''
-  }
-
+export default class SalesScreen extends React.Component<IProps> {
   static navigationOptions = () => {
     return {
       header: null
@@ -43,15 +35,9 @@ export default class SalesScreen extends React.Component<IProps, IState> {
           title="Sales Order"
           onPressRightIcon={() => Alert.alert('Search button pressed.')}
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
-          showSearchBar
-          searchBar={{
-            placeholder: 'Search for a sale',
-            onSearch: queryText => this.setState({ queryText })
-          }}
         />
         <GenericListIndex
           navigation={this.props.navigation}
-          queryText={this.state.queryText}
           graphqlQuery={ListCompanySalesGQL}
           graphqlQueryResultKey="listCompanySales"
           parseItemData={this.parseData}

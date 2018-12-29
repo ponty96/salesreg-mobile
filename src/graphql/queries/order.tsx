@@ -38,18 +38,8 @@ export const ListCompanyPurchasesGQL = gql`
 `
 
 export const ListCompanySalesGQL = gql`
-  query listCompanySales(
-    $companyId: Uuid!
-    $after: String
-    $first: Int
-    $queryText: String!
-  ) {
-    listCompanySales(
-      companyId: $companyId
-      after: $after
-      first: $first
-      query: $queryText
-    ) {
+  query listCompanySales($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanySales(companyId: $companyId, after: $after, first: $first) {
       pageInfo {
         endCursor
         hasNextPage
@@ -98,18 +88,8 @@ export const ListCompanySalesGQL = gql`
 `
 
 export const ListCompanyInvoicesGQL = gql`
-  query listCompanyInvoices(
-    $companyId: Uuid!
-    $after: String
-    $first: Int
-    $queryText: String!
-  ) {
-    listCompanyInvoices(
-      companyId: $companyId
-      after: $after
-      first: $first
-      query: $queryText
-    ) {
+  query listCompanyInvoices($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyInvoices(companyId: $companyId, after: $after, first: $first) {
       pageInfo {
         endCursor
         hasNextPage
