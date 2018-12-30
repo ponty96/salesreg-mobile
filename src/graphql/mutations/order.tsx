@@ -20,6 +20,11 @@ export const UpdateSaleOrderStatusGQL = gql`
           paymentMethod
           status
           amount
+          amountPaid
+          invoice {
+            id
+            dueDate
+          }
           items {
             id
             unitPrice
