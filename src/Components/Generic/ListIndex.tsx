@@ -52,6 +52,7 @@ interface IProps {
   showFabFn?: (val?: any) => any
   hideSeparator?: boolean
   user: any
+  queryText?: string
 }
 
 interface IState {
@@ -84,7 +85,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
     hideSeparator: false
   }
 
-  refetchQuery = () => null
+  refetchQuery = (obj?: any) => obj
 
   componentDidUpdate(prevProps) {
     if (
@@ -92,6 +93,19 @@ class GenericListIndex extends React.Component<IProps, IState> {
       prevProps.forceUpdateID != this.props.forceUpdateID
     ) {
       this.refetchQuery()
+    }
+
+    if (this.props.queryText && this.props.queryText != prevProps.queryText) {
+      let { business } = this.state
+      this.refetchQuery({
+        variables: {
+          queryText: this.props.queryText,
+          companyId: `${business && business.id}`,
+          after: null,
+          first: 10,
+          ...this.props.variables
+        }
+      })
     }
   }
 
@@ -214,6 +228,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
         query={graphqlQuery}
         notifyOnNetworkStatusChange={true}
         variables={{
+          queryText: this.props.queryText,
           companyId: `${business && business.id}`,
           after: null,
           first: 10,

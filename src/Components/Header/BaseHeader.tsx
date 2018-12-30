@@ -39,6 +39,11 @@ export interface IProps {
   rightText?: string
   hideRightMenu?: boolean
   showSearchBar?: boolean
+  searchBar?: {
+    queryText?: string
+    placeholder: string
+    onSearch: (text) => void
+  }
 }
 
 export default class BaseHeader extends React.PureComponent<IProps> {
@@ -90,7 +95,7 @@ export default class BaseHeader extends React.PureComponent<IProps> {
             <Right />
           )}
         </View>
-        {this.props.showSearchBar && <SearchAtom />}
+        {this.props.showSearchBar && <SearchAtom {...this.props.searchBar} />}
       </View>
     )
   }

@@ -1,8 +1,18 @@
 import gql from 'graphql-tag'
 
 export const ListCompanyExpensesGQL = gql`
-  query companyExpenses($companyId: Uuid!, $after: String, $first: Int) {
-    companyExpenses(companyId: $companyId, after: $after, first: $first) {
+  query companyExpenses(
+    $companyId: Uuid!
+    $after: String
+    $first: Int
+    $queryText: String!
+  ) {
+    companyExpenses(
+      companyId: $companyId
+      after: $after
+      first: $first
+      query: $queryText
+    ) {
       pageInfo {
         endCursor
         hasNextPage
