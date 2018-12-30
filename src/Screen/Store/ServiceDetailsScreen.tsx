@@ -147,6 +147,7 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
             {
               query: ListCompanyServicesGQL,
               variables: {
+                queryText: '',
                 companyId: this.props.user.company.id,
                 first: 10,
                 after: null

@@ -120,6 +120,7 @@ class ContactDetails extends PureComponent<IProps> {
           {
             query: CompanyContactGQL,
             variables: {
+              queryText: '',
               companyId: this.props.user.company.id,
               type: this.props.contactType,
               first: 10,

@@ -126,8 +126,18 @@ export const ListCompanyServicesGQL = gql`
 `
 
 export const ListCompanyCategoriesGQL = gql`
-  query listCompanyCategories($companyId: Uuid!, $after: String, $first: Int) {
-    listCompanyCategories(companyId: $companyId, after: $after, first: $first) {
+  query listCompanyCategories(
+    $companyId: Uuid!
+    $after: String
+    $first: Int
+    $queryText: String!
+  ) {
+    listCompanyCategories(
+      companyId: $companyId
+      after: $after
+      first: $first
+      query: $queryText
+    ) {
       pageInfo {
         endCursor
         hasNextPage
@@ -145,8 +155,18 @@ export const ListCompanyCategoriesGQL = gql`
 `
 
 export const ListCompanyOptionsGQL = gql`
-  query listCompanyOptions($companyId: Uuid!, $after: String, $first: Int) {
-    listCompanyOptions(companyId: $companyId, after: $after, first: $first) {
+  query listCompanyOptions(
+    $companyId: Uuid!
+    $after: String
+    $first: Int
+    $queryText: String!
+  ) {
+    listCompanyOptions(
+      companyId: $companyId
+      after: $after
+      first: $first
+      query: $queryText
+    ) {
       pageInfo {
         endCursor
         hasNextPage

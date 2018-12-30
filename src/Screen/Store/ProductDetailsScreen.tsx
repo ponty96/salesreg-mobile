@@ -195,6 +195,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           {
             query: ListCompanyProductsGQL,
             variables: {
+              queryText: '',
               companyId: this.props.user.company.id,
               first: 10,
               after: null

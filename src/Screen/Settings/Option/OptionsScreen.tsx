@@ -18,24 +18,19 @@ interface IProps {
 
 interface IState {
   forceUpdateId: number
+  queryText: string
 }
 
 export default class OptionsScreen extends React.Component<IProps, IState> {
-  static navigationOptions = ({ navigation }: any) => {
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Product Variant Options"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
-          onPressLeftIcon={() => navigation.goBack()}
-          hideRightMenu={true}
-        />
-      )
+      header: null
     }
   }
 
   state = {
-    forceUpdateId: Date.now()
+    forceUpdateId: Date.now(),
+    queryText: ''
   }
 
   parseData = (item: any, deleteOption: (obj: any) => void) => {
@@ -89,34 +84,50 @@ export default class OptionsScreen extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <Mutation
-        mutation={DeleteOptionGQL}
-        refetchQueries={ListCompanyOptionsGQL}
-        awaitRefetchQueries={true}
-        onCompleted={this.onCompleted}
-      >
-        {(deleteOption, { loading }) => (
-          <React.Fragment>
-            <AppSpinner visible={loading} />
-            <GenericListIndex
-              forceUpdateID={this.state.forceUpdateId}
-              navigation={this.props.navigation}
-              graphqlQuery={ListCompanyOptionsGQL}
-              graphqlQueryResultKey="listCompanyOptions"
-              parseItemData={item => this.parseData(item, deleteOption)}
-              onItemPress={item =>
-                this.props.navigation.navigate('UpsertOption', { option: item })
-              }
-              emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLet's proceed by tapping the`}
-              headerText="Great habit keeping records!"
-              fabRouteName="UpsertOption"
-              fabIconName="package-variant"
-              fabIconType="MaterialCommunityIcons"
-              hideSeparator={true}
-            />
-          </React.Fragment>
-        )}
-      </Mutation>
+      <React.Fragment>
+        <Header
+          title="Product Variant Options"
+          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressLeftIcon={() => this.props.navigation.goBack()}
+          hideRightMenu={true}
+          showSearchBar
+          searchBar={{
+            placeholder: 'Search for a variant option',
+            onSearch: queryText => this.setState({ queryText })
+          }}
+        />
+        <Mutation
+          mutation={DeleteOptionGQL}
+          refetchQueries={ListCompanyOptionsGQL}
+          awaitRefetchQueries={true}
+          onCompleted={this.onCompleted}
+        >
+          {(deleteOption, { loading }) => (
+            <React.Fragment>
+              <AppSpinner visible={loading} />
+              <GenericListIndex
+                forceUpdateID={this.state.forceUpdateId}
+                navigation={this.props.navigation}
+                graphqlQuery={ListCompanyOptionsGQL}
+                queryText={this.state.queryText}
+                graphqlQueryResultKey="listCompanyOptions"
+                parseItemData={item => this.parseData(item, deleteOption)}
+                onItemPress={item =>
+                  this.props.navigation.navigate('UpsertOption', {
+                    option: item
+                  })
+                }
+                emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLet's proceed by tapping the`}
+                headerText="Great habit keeping records!"
+                fabRouteName="UpsertOption"
+                fabIconName="package-variant"
+                fabIconType="MaterialCommunityIcons"
+                hideSeparator={true}
+              />
+            </React.Fragment>
+          )}
+        </Mutation>
+      </React.Fragment>
     )
   }
 }
