@@ -38,6 +38,8 @@ export const UpsertContactGQL = gql`
           facebook
           twitter
           snapchat
+          totalDebt
+          totalAmountPaid
 
           data: updatedAt
         }

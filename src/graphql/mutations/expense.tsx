@@ -29,9 +29,6 @@ export const UpsertExpenseGQL = gql`
             id
             itemName
             amount
-            expense {
-              id
-            }
           }
         }
       }

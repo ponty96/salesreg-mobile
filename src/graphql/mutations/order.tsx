@@ -10,12 +10,13 @@ export const UpdateSaleOrderStatusGQL = gql`
       success
       data {
         ... on Sale {
-          date
           id
+          refId
           contact {
             contactName
             id
             gender
+            email
           }
           paymentMethod
           status
@@ -23,6 +24,7 @@ export const UpdateSaleOrderStatusGQL = gql`
           amountPaid
           invoice {
             id
+            refId
             dueDate
           }
           items {
@@ -31,15 +33,17 @@ export const UpdateSaleOrderStatusGQL = gql`
             quantity
             product {
               name
-              featuredImage
               id
               costPrice
+              featuredImage
             }
             service {
               name
               id
+              featuredImage
             }
           }
+          date
         }
       }
     }
@@ -97,6 +101,39 @@ export const UpsertSaleOrder = gql`
       data {
         ... on Sale {
           id
+          refId
+          contact {
+            contactName
+            id
+            gender
+            email
+          }
+          paymentMethod
+          status
+          amount
+          amountPaid
+          invoice {
+            id
+            refId
+            dueDate
+          }
+          items {
+            id
+            unitPrice
+            quantity
+            product {
+              name
+              id
+              costPrice
+              featuredImage
+            }
+            service {
+              name
+              id
+              featuredImage
+            }
+          }
+          date
         }
       }
     }

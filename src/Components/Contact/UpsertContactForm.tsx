@@ -3,10 +3,11 @@ import { Mutation } from 'react-apollo'
 import AppSpinner from '../Spinner'
 import { UpsertContactGQL } from '../../graphql/mutations/contact'
 import { CompanyContactGQL } from '../../graphql/queries/contact'
-import { parseFieldErrors } from '../../Functions'
+import { parseFieldErrors, capitalize } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries } from '../../utilities/data/picker-lists'
 import { UserContext } from '../../context/UserContext'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -320,10 +321,23 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
   }
   onCompleted = async res => {
     const {
-      upsertContact: { success, fieldErrors }
+      upsertContact: { success, fieldErrors, data }
     } = res
     if (success) {
       this.props.navigation.navigate(this.props.successRoute)
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: this.props.successRoute
+          }),
+          NavigationActions.navigate({
+            routeName: `${capitalize(this.props.contactType)}Details`,
+            params: { [`${this.props.contactType}`]: data }
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
