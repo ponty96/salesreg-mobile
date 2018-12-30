@@ -102,6 +102,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
           {
             query: CompanyContactGQL,
             variables: {
+              queryText: '',
               companyId: this.state.companyId,
               type: this.props.contactType,
               first: 10,

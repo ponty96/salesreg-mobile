@@ -55,6 +55,7 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
           {
             query: ListCompanyOptionsGQL,
             variables: {
+              queryText: '',
               companyId: this.state.companyId,
               first: 10,
               after: null
