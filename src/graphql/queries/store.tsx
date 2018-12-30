@@ -1,8 +1,18 @@
 import gql from 'graphql-tag'
 
 export const ListCompanyProductsGQL = gql`
-  query listCompanyProducts($companyId: Uuid!, $after: String, $first: Int) {
-    listCompanyProducts(companyId: $companyId, after: $after, first: $first) {
+  query listCompanyProducts(
+    $companyId: Uuid!
+    $after: String
+    $first: Int
+    $queryText: String!
+  ) {
+    listCompanyProducts(
+      companyId: $companyId
+      after: $after
+      first: $first
+      query: $queryText
+    ) {
       pageInfo {
         endCursor
         hasNextPage
@@ -73,8 +83,18 @@ export const SearchProductsByName = gql`
 `
 
 export const ListCompanyServicesGQL = gql`
-  query listCompanyServices($companyId: Uuid!, $after: String, $first: Int) {
-    listCompanyServices(companyId: $companyId, after: $after, first: $first) {
+  query listCompanyServices(
+    $companyId: Uuid!
+    $after: String
+    $first: Int
+    $queryText: String!
+  ) {
+    listCompanyServices(
+      companyId: $companyId
+      after: $after
+      first: $first
+      query: $queryText
+    ) {
       pageInfo {
         endCursor
         hasNextPage

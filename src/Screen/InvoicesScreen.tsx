@@ -11,15 +11,9 @@ interface IProps {
 }
 
 export default class InvoiceScreen extends React.PureComponent<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Invoices"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
-        />
-      )
+      header: null
     }
   }
 
@@ -41,21 +35,28 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
 
   render() {
     return (
-      <GenericListIndex
-        navigation={this.props.navigation}
-        graphqlQuery={ListCompanyInvoicesGQL}
-        hideSeparator={true}
-        graphqlQueryResultKey="listCompanyInvoices"
-        parseItemData={this.parseData}
-        onItemPress={item =>
-          this.props.navigation.navigate('InvoiceDetails', {
-            sales: { ...item.sale, invoice: { ...item } }
-          })
-        }
-        emptyListText={`No invoice created yet for your company, please make a sale to see an invoice reflect here.`}
-        headerText="Empty Invoice List!"
-        showFab={false}
-      />
+      <React.Fragment>
+        <Header
+          title="Invoices"
+          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
+        />
+        <GenericListIndex
+          navigation={this.props.navigation}
+          graphqlQuery={ListCompanyInvoicesGQL}
+          hideSeparator={true}
+          graphqlQueryResultKey="listCompanyInvoices"
+          parseItemData={this.parseData}
+          onItemPress={item =>
+            this.props.navigation.navigate('InvoiceDetails', {
+              sales: { ...item.sale, invoice: { ...item } }
+            })
+          }
+          emptyListText={`No invoice created yet for your company, please make a sale to see an invoice reflect here.`}
+          headerText="Empty Invoice List!"
+          showFab={false}
+        />
+      </React.Fragment>
     )
   }
 }

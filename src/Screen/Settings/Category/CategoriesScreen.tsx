@@ -1,23 +1,23 @@
-import * as React from "react";
-import { Alert } from "react-native";
-import { Mutation } from "react-apollo";
-import { ActionSheet } from "native-base";
-import Header from "../../../Components/Header/DetailsScreenHeader";
-import GenericListIndex from "../../../Components/Generic/ListIndex";
-import AppSpinner from "../../../Components/Spinner";
-import { ListCompanyCategoriesGQL } from "../../../graphql/queries/store";
-import { DeleteCategoryGQL } from "../../../graphql/mutations/store";
+import * as React from 'react'
+import { Alert } from 'react-native'
+import { Mutation } from 'react-apollo'
+import { ActionSheet } from 'native-base'
+import Header from '../../../Components/Header/DetailsScreenHeader'
+import GenericListIndex from '../../../Components/Generic/ListIndex'
+import AppSpinner from '../../../Components/Spinner'
+import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
+import { DeleteCategoryGQL } from '../../../graphql/mutations/store'
 
-let BUTTONS = ["No", "Yes, delete", "Cancel"];
-let DESTRUCTIVE_INDEX = 1;
-let CANCEL_INDEX = 2;
+let BUTTONS = ['Yes, delete', 'Cancel']
+let DESTRUCTIVE_INDEX = 0
+let CANCEL_INDEX = 1
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  forceUpdateId: number;
+  forceUpdateId: number
 }
 
 export default class CategoriesScreen extends React.Component<IProps, IState> {
@@ -26,17 +26,17 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
       header: (
         <Header
           title="Categories"
-          onPressRightIcon={() => Alert.alert("Search button pressed.")}
+          onPressRightIcon={() => Alert.alert('Search button pressed.')}
           onPressLeftIcon={() => navigation.goBack()}
           hideRightMenu={true}
         />
       )
-    };
-  };
+    }
+  }
 
   state = {
     forceUpdateId: Date.now()
-  };
+  }
 
   parseData = (item: any, deleteCategory: (obj: any) => void) => {
     return [
@@ -44,8 +44,8 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
         firstTopText: item.title,
         bottomLeftFirstText: item.description
           ? `${item.description.substr(0, 40)}...`
-          : "", // item.paidTo
-        bottomLeftSecondText: "", // item.date
+          : '', // item.paidTo
+        bottomLeftSecondText: '', // item.date
         topRightText: ``, // this should be the number of products and services within this category
         showTrash: true,
         onPressTrash: () => {
@@ -54,41 +54,41 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
               options: BUTTONS,
               cancelButtonIndex: CANCEL_INDEX,
               destructiveButtonIndex: DESTRUCTIVE_INDEX,
-              title: "Delete?"
+              title: 'Delete?'
             },
             buttonIndex => {
-              if (buttonIndex == 1) {
-                deleteCategory({ variables: { categoryId: item.id } });
+              if (buttonIndex == 0) {
+                deleteCategory({ variables: { categoryId: item.id } })
               }
             }
-          );
+          )
         }
       }
-    ];
-  };
+    ]
+  }
 
   onCompleted = async res => {
     const {
       deleteCategory: { success, fieldErrors }
-    } = res;
+    } = res
 
     if (!success) {
       setTimeout(
         () =>
           Alert.alert(
-            "Error",
+            'Error',
             fieldErrors[0].message,
-            [{ text: "Ok", onPress: () => null }],
+            [{ text: 'Ok', onPress: () => null }],
             { cancelable: false }
           ),
         100
-      );
+      )
     } else {
       this.setState({
         forceUpdateId: Date.now()
-      });
+      })
     }
-  };
+  }
 
   render() {
     return (
@@ -109,7 +109,7 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
                 graphqlQueryResultKey="listCompanyCategories"
                 parseItemData={item => this.parseData(item, deleteCategory)}
                 onItemPress={item =>
-                  this.props.navigation.navigate("UpsertCategory", {
+                  this.props.navigation.navigate('UpsertCategory', {
                     category: item
                   })
                 }
@@ -121,9 +121,9 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
                 hideSeparator={true}
               />
             </React.Fragment>
-          );
+          )
         }}
       </Mutation>
-    );
+    )
   }
 }

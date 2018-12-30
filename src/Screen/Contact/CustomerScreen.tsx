@@ -7,15 +7,21 @@ interface IProps {
   navigation: any
 }
 
-export default class CustomerScreen extends React.PureComponent<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+interface IState {
+  queryText: string
+}
+
+export default class CustomerScreen extends React.PureComponent<
+  IProps,
+  IState
+> {
+  state = {
+    queryText: ''
+  }
+
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Customer"
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
-        />
-      )
+      header: null
     }
   }
 
@@ -40,27 +46,39 @@ export default class CustomerScreen extends React.PureComponent<IProps> {
 
   render() {
     return (
-      <GenericListIndex
-        navigation={this.props.navigation}
-        variables={{ type: 'customer' }}
-        graphqlQuery={CompanyContactGQL}
-        graphqlQueryResultKey="companyContacts"
-        parseItemData={this.parseData}
-        onItemPress={this.onPress}
-        emptyListText={`So close that you tell them what they need well before they realize it themselves. \n\nStart doing so by tapping`}
-        headerText="Get closer than ever to your customers"
-        fabRouteName="UpsertCustomer"
-        fabIconName="user-plus"
-        fabIconType="FontAwesome5"
-        subHeader={{
-          screen: 'order',
-          rightLabel: '',
-          onPress: this.subHeaderPress,
-          iconName: 'user',
-          iconType: 'FontAwesome5'
-        }}
-        hideSeparator={true}
-      />
+      <React.Fragment>
+        <Header
+          title="Customer"
+          onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
+          showSearchBar
+          searchBar={{
+            placeholder: 'Search for a customer',
+            onSearch: queryText => this.setState({ queryText })
+          }}
+        />
+        <GenericListIndex
+          navigation={this.props.navigation}
+          queryText={this.state.queryText}
+          variables={{ type: 'customer' }}
+          graphqlQuery={CompanyContactGQL}
+          graphqlQueryResultKey="companyContacts"
+          parseItemData={this.parseData}
+          onItemPress={this.onPress}
+          emptyListText={`So close that you tell them what they need well before they realize it themselves. \n\nStart doing so by tapping`}
+          headerText="Get closer than ever to your customers"
+          fabRouteName="UpsertCustomer"
+          fabIconName="user-plus"
+          fabIconType="FontAwesome5"
+          subHeader={{
+            screen: 'order',
+            rightLabel: '',
+            onPress: this.subHeaderPress,
+            iconName: 'user',
+            iconType: 'FontAwesome5'
+          }}
+          hideSeparator={true}
+        />
+      </React.Fragment>
     )
   }
 

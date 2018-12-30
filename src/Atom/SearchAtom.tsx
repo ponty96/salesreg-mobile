@@ -4,31 +4,45 @@ import { Item, Input } from 'native-base'
 import Icon from './Icon'
 import { color } from '../Style/Color'
 
-interface SearchProps {
+interface IProps {
   queryText?: string
   onSearch?: (queryText: string) => void
   placeholder?: string
 }
 
-export const SearchAtom = (props: SearchProps) => (
-  <Item style={styles.searchItem}>
-    <Icon
-      name="ios-search"
-      style={{
-        color: '#000',
-        fontSize: 24,
-        padding: 0,
-        marginRight: 10,
-        marginTop: 5
-      }}
-    />
-    <Input
-      placeholder={props.placeholder || ''}
-      onChangeText={props.onSearch}
-      value={props.queryText}
-    />
-  </Item>
-)
+interface IState {
+  value: string
+}
+
+export class SearchAtom extends React.PureComponent<IProps, IState> {
+  state = {
+    value: this.props.queryText || ''
+  }
+
+  render() {
+    return (
+      <Item style={styles.searchItem}>
+        <Icon
+          name="ios-search"
+          style={{
+            color: '#000',
+            fontSize: 24,
+            padding: 0,
+            marginRight: 10,
+            marginTop: 5
+          }}
+        />
+        <Input
+          placeholder={this.props.placeholder || ''}
+          returnKeyType="search"
+          onChangeText={value => this.setState({ value })}
+          onSubmitEditing={() => this.props.onSearch(this.state.value)}
+          value={this.state.value}
+        />
+      </Item>
+    )
+  }
+}
 
 const styles = StyleSheet.create({
   searchItem: {
@@ -37,6 +51,7 @@ const styles = StyleSheet.create({
     borderColor: color.textBorderBottom,
     borderRadius: 8,
     marginHorizontal: 12,
+    marginRight: 0,
     paddingLeft: 12,
     marginTop: 0,
     top: 0,
