@@ -87,7 +87,10 @@ class SalesOrderDetailsScreen extends Component<IProps> {
         />
         <TouchableOpacity
           onPress={() =>
-            this.props.navigation.navigate('InvoiceDetails', { sales })
+            this.props.navigation.navigate('InvoiceDetails', {
+              sales,
+              from: 'Sales'
+            })
           }
         >
           <View style={styles.invoicebuttomContainer}>

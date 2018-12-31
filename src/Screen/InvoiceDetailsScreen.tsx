@@ -26,18 +26,20 @@ export default class InvoicesScreen extends React.Component<IProps> {
           params: {
             sales: {
               invoice: { id, dueDate }
-            }
+            },
+            from
           }
         }
       }
     } = this.props
 
     this.props.navigation.navigate('UpdateInvoiceDueDate', {
-      invoice: { id, dueDate }
+      invoice: { id, dueDate },
+      from
     })
   }
 
-  renderHeader = (amount, amountPaid, sales) => {
+  renderHeader = (amount, amountPaid, sales, from) => {
     return amount - amountPaid != 0 ? (
       <Header
         title="Invoice Details"
@@ -49,7 +51,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
         }}
         onPressLeftIcon={() => this.props.navigation.goBack()}
         onPressRightIcon={() =>
-          this.props.navigation.navigate('UpsertInvoice', { sales })
+          this.props.navigation.navigate('UpsertInvoice', { sales, from })
         }
       />
     ) : (
@@ -74,7 +76,8 @@ export default class InvoicesScreen extends React.Component<IProps> {
                 invoice: { dueDate },
                 date
               },
-              sales
+              sales,
+              from
             }
           }
         }
@@ -85,7 +88,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
 
     return (
       <React.Fragment>
-        {this.renderHeader(amount, amountPaid, sales)}
+        {this.renderHeader(amount, amountPaid, sales, from)}
         <View style={styles.container}>
           <Content>
             <ListItemAtom

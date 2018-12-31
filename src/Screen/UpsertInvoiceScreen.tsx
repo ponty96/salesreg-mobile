@@ -5,9 +5,13 @@ import AppSpinner from '../Components/Spinner'
 import Auth from '../services/auth'
 import { CreateRecipt } from '../graphql/mutations/order'
 import { Mutation } from 'react-apollo'
-import { ListCompanySalesGQL } from '../graphql/queries/order'
+import {
+  ListCompanySalesGQL,
+  ListCompanyInvoicesGQL
+} from '../graphql/queries/order'
 import { UserContext } from '../context/UserContext'
 import { parseFieldErrors } from '../Functions'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -95,7 +99,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
       })
         .then(() => {
           this.setState({ loading: false })
-          this.props.navigation.navigate('Sales')
+          this.navigateUser()
         })
         .catch(error => {
           // @Todo: handle error better
@@ -107,6 +111,35 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
     }
   }
 
+  navigateUser = () => {
+    const {
+      navigation: {
+        state: {
+          params: { sales, from }
+        }
+      }
+    } = this.props
+
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: from
+        }),
+        NavigationActions.navigate({
+          routeName: 'InvoiceDetails',
+          params: {
+            sales: {
+              ...sales,
+              amountPaid: sales.amountPaid + Number(this.state.amountPaid)
+            }
+          }
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+  }
+
   onCompleted = async res => {
     const {
       createReceipt: { success, fieldErrors }
@@ -114,7 +147,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.navigation.navigate('Sales')
+      this.navigateUser()
     }
   }
 
@@ -131,17 +164,20 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
       }
     } = this.props
 
-    console.log(
-      'The paymenth method is ',
-      this.state.paymentMethod.toLowerCase()
-    )
-
     return (
       <Mutation
         mutation={CreateRecipt}
         refetchQueries={[
           {
             query: ListCompanySalesGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          },
+          {
+            query: ListCompanyInvoicesGQL,
             variables: {
               companyId: this.props.user.company.id,
               first: 10,
