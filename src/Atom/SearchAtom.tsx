@@ -12,16 +12,23 @@ interface IProps {
 
 interface IState {
   value: string
+  isFocused: boolean
 }
 
 export class SearchAtom extends React.PureComponent<IProps, IState> {
   state = {
-    value: this.props.queryText || ''
+    value: this.props.queryText || '',
+    isFocused: false
   }
 
   render() {
     return (
-      <Item style={styles.searchItem}>
+      <Item
+        style={[
+          styles.searchItem,
+          this.state.isFocused ? { backgroundColor: color.searchBoxActive } : {}
+        ]}
+      >
         <Icon
           name="ios-search"
           style={{
@@ -33,6 +40,8 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
           }}
         />
         <Input
+          onFocus={() => this.setState({ isFocused: true })}
+          onBlur={() => this.setState({ isFocused: false })}
           placeholder={this.props.placeholder || ''}
           returnKeyType="search"
           onChangeText={value => this.setState({ value })}
@@ -46,9 +55,8 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
 
 const styles = StyleSheet.create({
   searchItem: {
-    backgroundColor: color.textBorderBottom,
-    borderWidth: 1,
-    borderColor: color.textBorderBottom,
+    backgroundColor: color.searchBoxPassive,
+    borderWidth: 0,
     borderRadius: 8,
     marginHorizontal: 12,
     marginRight: 0,
