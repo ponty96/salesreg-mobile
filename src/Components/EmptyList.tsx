@@ -47,7 +47,6 @@ export default emptyList
 const styles = StyleSheet.create({
   view: {
     padding: 16,
-    alignSelf: 'center',
     marginVertical: 16,
     borderRadius: 2
   },
