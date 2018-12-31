@@ -6,6 +6,11 @@ import AppSpinner from '../Components/Spinner'
 import { UserContext } from '../context/UserContext'
 import { UpdateInvoice } from '../graphql/mutations/order'
 import moment from 'moment'
+import {
+  ListCompanySalesGQL,
+  ListCompanyInvoicesGQL
+} from '../graphql/queries/order'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   user?: any
@@ -34,6 +39,36 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
     this.setState({ ...formData })
   }
 
+  navigateUser = data => {
+    const {
+      navigation: {
+        state: {
+          params: { from }
+        }
+      }
+    } = this.props
+
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: from
+        }),
+        NavigationActions.navigate({
+          routeName: 'InvoiceDetails',
+          params: {
+            sales: {
+              ...data.sale,
+              invoice: { ...data }
+            },
+            from
+          }
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+  }
+
   parseMutationVariables = () => {
     let {
       navigation: {
@@ -59,15 +94,35 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.navigation.navigate('InvoiceDetails', {
-        sales: { ...data.sale, invoice: { ...data } }
-      })
+      this.navigateUser(data)
     }
   }
 
   render() {
     return (
-      <Mutation mutation={UpdateInvoice} onCompleted={this.onCompleted}>
+      <Mutation
+        mutation={UpdateInvoice}
+        refetchQueries={[
+          {
+            query: ListCompanySalesGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          },
+          {
+            query: ListCompanyInvoicesGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+        onCompleted={this.onCompleted}
+      >
         {(updateInvoice, { loading }) => {
           return (
             <React.Fragment>

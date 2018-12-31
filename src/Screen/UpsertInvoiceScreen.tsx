@@ -132,7 +132,8 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
             sales: {
               ...sales,
               amountPaid: sales.amountPaid + Number(this.state.amountPaid)
-            }
+            },
+            from
           }
         })
       ]

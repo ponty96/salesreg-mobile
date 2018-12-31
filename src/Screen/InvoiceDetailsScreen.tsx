@@ -40,7 +40,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
   }
 
   renderHeader = (amount, amountPaid, sales, from) => {
-    return amount - amountPaid != 0 ? (
+    return Number(amount) - amountPaid != 0 ? (
       <Header
         title="Invoice Details"
         rightIconType="MaterialCommunityIcons"
@@ -88,7 +88,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
 
     return (
       <React.Fragment>
-        {this.renderHeader(amount, amountPaid, sales, from)}
+        {this.renderHeader(total, amountPaid, sales, from)}
         <View style={styles.container}>
           <Content>
             <ListItemAtom
@@ -100,8 +100,10 @@ export default class InvoicesScreen extends React.Component<IProps> {
             />
             <ProfileListAtom
               section={`Date due: ${moment(dueDate).format('DD/MM/YYYY')}`}
-              value="Edit"
-              type="button"
+              value={
+                Number(total) - amountPaid > 0 ? 'Edit' : 'Payment Completed'
+              }
+              type={Number(total) - amountPaid > 0 ? 'button' : ''}
               onPress={this.onPressEditInvoice}
             />
             {items.map((item, i) => (

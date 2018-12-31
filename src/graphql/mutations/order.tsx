@@ -175,6 +175,8 @@ export const UpdateInvoice = gql`
           dueDate
           sale {
             amount
+            id
+            discount
             amountPaid
             date
             items {
