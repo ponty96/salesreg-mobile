@@ -17,12 +17,16 @@ export default class SalesScreen extends React.Component<IProps> {
   }
 
   parseData = (item: any) => {
+    let total = parseFloat(
+      (Number(item.amount) - Number(item.discount)).toString()
+    ).toFixed(2)
+
     return [
       {
         firstTopText: item.contact.contactName,
         bottomLeftFirstText: `S ${item.refId}`, //item.paidTo
         bottomLeftSecondText: moment(item.date).calendar(), //item.date
-        topRightText: `\u20A6 ${parseFloat(item.amount).toFixed(2)}`,
+        topRightText: `\u20A6 ${total}`,
         bottomRightText: item.status
       }
     ]

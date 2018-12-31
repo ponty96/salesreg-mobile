@@ -8,6 +8,7 @@ import { UpsertSaleOrder } from '../graphql/mutations/order'
 import { ListCompanySalesGQL } from '../graphql/queries/order'
 import { CompanyCustomersGQL } from '../graphql/queries/contact'
 import { parseFieldErrors } from '../Functions'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -32,6 +33,7 @@ interface IState {
   contactName: string
   email: string
   isCustomerInContacts: any
+  data: any
   discount: string
   amountPaid: string
   salesOrderId: string
@@ -70,6 +72,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     tax: '',
     contactName: '',
     email: '',
+    data: {},
     loading: false,
     salesOrderId: '',
     hasSalesOrderBeenCreated: false,
@@ -115,6 +118,22 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     })
   }
 
+  navigateUser = () => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Sales'
+        }),
+        NavigationActions.navigate({
+          routeName: 'SalesDetails',
+          params: { sales: this.state.data }
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+  }
+
   onCompleted = async res => {
     const {
       upsertSaleOrder: { success, fieldErrors, data }
@@ -126,11 +145,12 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       this.setState(
         {
           salesOrderId: id,
+          data,
           hasSalesOrderBeenCreated: true
         },
         () => {
           this.state.paymentMethod.toLowerCase() == 'cash'
-            ? this.props.navigation.navigate('Sales')
+            ? this.navigateUser()
             : this.chargeCard()
         }
       )
@@ -164,7 +184,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       })
         .then(() => {
           this.setState({ loading: false })
-          this.props.navigation.navigate('Sales')
+          this.navigateUser()
         })
         .catch(error => {
           // @Todo: handle error better
@@ -227,6 +247,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     delete _params.hasSalesOrderBeenCreated
     delete _params.loading
     delete _params.email
+    delete _params.data
     delete _params.contactName
 
     return saleId

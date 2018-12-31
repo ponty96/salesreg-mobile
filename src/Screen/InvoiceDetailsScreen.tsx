@@ -63,21 +63,25 @@ export default class InvoicesScreen extends React.Component<IProps> {
 
   render() {
     let {
-      navigation: {
-        state: {
-          params: {
-            sales: {
-              amount,
-              amountPaid,
-              items,
-              invoice: { dueDate },
-              date
-            },
-            sales
+        navigation: {
+          state: {
+            params: {
+              sales: {
+                amount,
+                amountPaid,
+                items,
+                discount,
+                invoice: { dueDate },
+                date
+              },
+              sales
+            }
           }
         }
-      }
-    } = this.props
+      } = this.props,
+      total = parseFloat(
+        (Number(amount) - Number(discount)).toString()
+      ).toFixed(2)
 
     return (
       <React.Fragment>
@@ -110,7 +114,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
             ))}
             <ListItemAtom
               label="TOTAL"
-              value={`N ${numberWithCommas(amount)}`}
+              value={`N ${numberWithCommas(total)}`}
               labelStyle={styles.whiteLabel}
               rightTextStyle={[styles.whiteLabel]}
               listItemStyle={styles.totalAmountListItem}
@@ -124,7 +128,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
             />
             <ListItemAtom
               label="Balance due"
-              value={`N ${numberWithCommas(amount - amountPaid)}`}
+              value={`N ${numberWithCommas(Number(total) - amountPaid)}`}
               labelStyle={styles.listLabel}
               rightTextStyle={[styles.greenText, { color: color.red }]}
               listItemStyle={styles.listWrapper}
