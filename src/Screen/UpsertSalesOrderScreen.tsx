@@ -5,7 +5,10 @@ import AppSpinner from '../Components/Spinner'
 import RNPaystack from 'react-native-paystack'
 import Auth from '../services/auth'
 import { UpsertSaleOrder } from '../graphql/mutations/order'
-import { ListCompanySalesGQL } from '../graphql/queries/order'
+import {
+  ListCompanySalesGQL,
+  ListCompanyInvoicesGQL
+} from '../graphql/queries/order'
 import { CompanyCustomersGQL } from '../graphql/queries/contact'
 import { parseFieldErrors } from '../Functions'
 import { NavigationActions } from 'react-navigation'
@@ -271,6 +274,14 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
         refetchQueries={[
           {
             query: ListCompanySalesGQL,
+            variables: {
+              companyId,
+              first: 10,
+              after: null
+            }
+          },
+          {
+            query: ListCompanyInvoicesGQL,
             variables: {
               companyId,
               first: 10,

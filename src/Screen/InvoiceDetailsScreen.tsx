@@ -113,6 +113,13 @@ export default class InvoicesScreen extends React.Component<IProps> {
               />
             ))}
             <ListItemAtom
+              label="Discount"
+              value={`\u20A6 ${discount}`}
+              labelStyle={styles.listLabel}
+              rightTextStyle={[styles.greenText, { color: color.black }]}
+              listItemStyle={styles.listWrapper}
+            />
+            <ListItemAtom
               label="TOTAL"
               value={`N ${numberWithCommas(total)}`}
               labelStyle={styles.whiteLabel}

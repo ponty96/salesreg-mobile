@@ -271,7 +271,17 @@ class GenericListIndex extends React.Component<IProps, IState> {
               )}
               <SectionList
                 renderItem={this.renderList}
-                onRefresh={refetch}
+                onRefresh={() =>
+                  refetch({
+                    variables: {
+                      queryText: this.props.queryText,
+                      companyId: `${business && business.id}`,
+                      after: null,
+                      first: 5,
+                      ...this.props.variables
+                    }
+                  })
+                }
                 contentContainerStyle={error ? { flex: 1 } : {}}
                 refreshing={
                   (error ||

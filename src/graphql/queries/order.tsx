@@ -110,7 +110,9 @@ export const ListCompanyInvoicesGQL = gql`
           sale {
             amount
             id
+            discount
             contact {
+              id
               email
             }
             amountPaid
