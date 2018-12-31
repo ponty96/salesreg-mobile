@@ -109,6 +109,10 @@ export const ListCompanyInvoicesGQL = gql`
           dueDate
           sale {
             amount
+            id
+            contact {
+              email
+            }
             amountPaid
             date
             items {

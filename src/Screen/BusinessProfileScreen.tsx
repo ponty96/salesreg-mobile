@@ -58,7 +58,7 @@ export default class BusinessProfileScreen extends Component<IProps, IState> {
         {
           section: 'Phone',
           value: user.company.phone
-            ? `${country.subLabel} ${user.company.phone.number}`
+            ? `${country ? country.subLabel : ''} ${user.company.phone.number}`
             : ''
         },
         {

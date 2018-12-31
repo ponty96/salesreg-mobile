@@ -12,6 +12,7 @@ export const UpsertContactGQL = gql`
         ... on Contact {
           id
           contactName
+          allowsMarketing
           email
           image
           type

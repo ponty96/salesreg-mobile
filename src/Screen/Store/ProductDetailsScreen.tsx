@@ -289,7 +289,7 @@ const styles = StyleSheet.create({
   },
   descriptionText: {
     textAlign: 'justify',
-    marginHorizontal: 24,
+    marginHorizontal: 14,
     paddingBottom: 10,
     fontFamily: 'AvenirNext-Regular',
     color: color.textColor

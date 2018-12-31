@@ -24,6 +24,7 @@ export const CompanyContactGQL = gql`
         node {
           id
           contactName
+          allowsMarketing
           email
           image
           type

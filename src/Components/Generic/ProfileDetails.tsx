@@ -69,6 +69,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
   }
 
   renderProfileDetailsUI = (deleteFn?: ({ variables: any }) => void) => {
+    console.log('oGBENI THIS IS ', this.props.sections)
     return (
       <React.Fragment>
         <FlatList

@@ -75,9 +75,10 @@ export default class EditBusinessProfileScreen extends Component<
       contactEmail: user.company.contactEmail,
       about: user.company.about,
       slug: user.company.slug,
-      currency: user.company.currency,
+      currency: 'NGN',
       ...this.parseAddressForForm(user.company),
-      phoneNumber: user.company.phone ? user.company.phone.number : ''
+      phoneNumber: user.company.phone ? user.company.phone.number : '',
+      country: 'NG'
     })
   }
 

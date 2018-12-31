@@ -12,6 +12,7 @@ export const UpdateSaleOrderStatusGQL = gql`
         ... on Sale {
           id
           refId
+          discount
           contact {
             contactName
             id
