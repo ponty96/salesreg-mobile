@@ -63,13 +63,11 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
         100
       )
     } else {
-      console.log('Yeah this is good ', success)
       this.props.onSuccessfulDeletion()
     }
   }
 
   renderProfileDetailsUI = (deleteFn?: ({ variables: any }) => void) => {
-    console.log('oGBENI THIS IS ', this.props.sections)
     return (
       <React.Fragment>
         <FlatList

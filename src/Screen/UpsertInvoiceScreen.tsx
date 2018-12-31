@@ -62,8 +62,6 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
   }
 
   chargeCard = async () => {
-    console.log('I dey here jare')
-    console.log('The email is ', this.props.navigation.state.params.sales)
     const {
         navigation: {
           state: {
@@ -71,8 +69,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
               sales: {
                 id,
                 contact: { email }
-              },
-              
+              }
             }
           }
         }
