@@ -49,6 +49,7 @@ export const ListCompanySalesGQL = gql`
         node {
           id
           refId
+          discount
           contact {
             contactName
             id
