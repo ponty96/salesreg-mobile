@@ -6,6 +6,7 @@ import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
 import Auth from '../../../services/auth'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -129,7 +130,18 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.navigation.navigate('Categories')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'ProfileSettings'
+          }),
+          NavigationActions.navigate({
+            routeName: 'Categories'
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     }
   }
 }

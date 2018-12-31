@@ -6,6 +6,7 @@ import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
 import Auth from '../../../services/auth'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -113,7 +114,18 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.navigation.navigate('Options')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'ProfileSettings'
+          }),
+          NavigationActions.navigate({
+            routeName: 'Options'
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     }
   }
 }
