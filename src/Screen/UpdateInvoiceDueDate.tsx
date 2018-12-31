@@ -146,6 +146,7 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
                         validators: ['required'],
                         type: {
                           type: 'date',
+                          minDate: new Date(),
                           maxDate: new Date('1 January 2030')
                         }
                       }
