@@ -164,6 +164,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
           {
             query: ListCompanyProductsGQL,
             variables: {
+              queryText: '',
               companyId: this.state.companyId,
               first: 10,
               after: null

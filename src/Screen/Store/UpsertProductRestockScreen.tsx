@@ -83,6 +83,7 @@ class UpsertProductRestockScreen extends React.PureComponent<IProps, IState> {
           {
             query: ListCompanyProductsGQL,
             variables: {
+              queryText: '',
               companyId: this.props.user.company.id,
               first: 10,
               after: null

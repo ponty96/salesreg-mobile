@@ -39,6 +39,7 @@ export default class BusinessProfileScreen extends Component<IProps, IState> {
 
   updateState = async () => {
     const user = JSON.parse(await Auth.getCurrentUser())
+    console.log('The user is ', user)
     const location = this.parseLocation(user.company)
     const country = Countries.find(country => country.value == location.country)
     this.setState({
@@ -58,7 +59,7 @@ export default class BusinessProfileScreen extends Component<IProps, IState> {
         {
           section: 'Phone',
           value: user.company.phone
-            ? `${country.subLabel} ${user.company.phone.number}`
+            ? `${country ? country.subLabel : ''} ${user.company.phone.number}`
             : ''
         },
         {
@@ -74,7 +75,8 @@ export default class BusinessProfileScreen extends Component<IProps, IState> {
         },
         {
           section: 'About',
-          value: [user.company.about]
+          value: [user.company.about],
+          hideBody: !user.company.about ? true : false
         }
       ],
       businessName: user.company.title,

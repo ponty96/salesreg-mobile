@@ -5,9 +5,13 @@ import AppSpinner from '../Components/Spinner'
 import RNPaystack from 'react-native-paystack'
 import Auth from '../services/auth'
 import { UpsertSaleOrder } from '../graphql/mutations/order'
-import { ListCompanySalesGQL } from '../graphql/queries/order'
+import {
+  ListCompanySalesGQL,
+  ListCompanyInvoicesGQL
+} from '../graphql/queries/order'
 import { CompanyCustomersGQL } from '../graphql/queries/contact'
 import { parseFieldErrors } from '../Functions'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -32,6 +36,7 @@ interface IState {
   contactName: string
   email: string
   isCustomerInContacts: any
+  data: any
   discount: string
   amountPaid: string
   salesOrderId: string
@@ -70,6 +75,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     tax: '',
     contactName: '',
     email: '',
+    data: {},
     loading: false,
     salesOrderId: '',
     hasSalesOrderBeenCreated: false,
@@ -78,7 +84,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
   }
 
   async componentDidMount() {
-    let {
+    const {
       company: { id: companyId },
       id: userId
     } = JSON.parse(await Auth.getCurrentUser())
@@ -115,22 +121,39 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     })
   }
 
+  navigateUser = () => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Sales'
+        }),
+        NavigationActions.navigate({
+          routeName: 'SalesDetails',
+          params: { sales: this.state.data }
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+  }
+
   onCompleted = async res => {
     const {
       upsertSaleOrder: { success, fieldErrors, data }
     } = res
 
     if (success) {
-      let { id } = data
+      const { id } = data
 
       this.setState(
         {
           salesOrderId: id,
+          data,
           hasSalesOrderBeenCreated: true
         },
         () => {
           this.state.paymentMethod.toLowerCase() == 'cash'
-            ? this.props.navigation.navigate('Sales')
+            ? this.navigateUser()
             : this.chargeCard()
         }
       )
@@ -140,12 +163,12 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
   }
 
   chargeCard = async () => {
-    let { cardDetails, amountPaid } = this.state,
+    const { cardDetails, amountPaid } = this.state,
       _cardDetails = cardDetails || {},
       { valid } = _cardDetails
 
     if (valid) {
-      let {
+      const {
         values: { number, expiry, cvc }
       } = _cardDetails
 
@@ -164,10 +187,10 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       })
         .then(() => {
           this.setState({ loading: false })
-          this.props.navigation.navigate('Sales')
+          this.navigateUser()
         })
         .catch(error => {
-          //@Todo: handle error better
+          // @Todo: handle error better
           console.log(error.message)
           this.setState({ loading: false })
         })
@@ -188,8 +211,8 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       }
     }
 
-    let items = this.state.items.map(item => {
-      let param = { ...item }
+    const items = this.state.items.map(item => {
+      const param = { ...item }
       delete param.type
       delete param.name
 
@@ -198,7 +221,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
       return param
     })
 
-    let {
+    const {
         navigation: {
           state: { params }
         }
@@ -227,6 +250,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     delete _params.hasSalesOrderBeenCreated
     delete _params.loading
     delete _params.email
+    delete _params.data
     delete _params.contactName
 
     return saleId
@@ -238,7 +262,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
   }
 
   render() {
-    let {
+    const {
       isCustomerInContacts,
       user: { companyId },
       hasSalesOrderBeenCreated
@@ -251,7 +275,15 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
           {
             query: ListCompanySalesGQL,
             variables: {
-              companyId: companyId,
+              companyId,
+              first: 10,
+              after: null
+            }
+          },
+          {
+            query: ListCompanyInvoicesGQL,
+            variables: {
+              companyId,
               first: 10,
               after: null
             }
@@ -277,7 +309,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
               }
               steps={[
                 {
-                  stepTitle: 'Lets have the items that are being ordered',
+                  stepTitle: "Let's have the items that are being ordered",
                   formFields: [
                     {
                       label: '',
@@ -372,7 +404,8 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                       },
                       placeholder: '0',
                       name: 'discount',
-                      underneathText: 'Ignore if there are no discounts.'
+                      underneathText:
+                        'Discounts should be based on the amount given not the percentage. Ignore if there are no discounts.'
                     },
                     {
                       label: 'Tax on this payment(%)',
@@ -392,7 +425,7 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
                       : 'Done'
                 },
                 this.state.paymentMethod.toLowerCase() == 'card' && {
-                  stepTitle: 'Lets sort out the payment for this order',
+                  stepTitle: "Let's sort out the payment for this order",
                   formFields: [
                     {
                       label: '',

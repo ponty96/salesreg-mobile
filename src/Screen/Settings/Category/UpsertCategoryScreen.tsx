@@ -6,6 +6,7 @@ import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
 import Auth from '../../../services/auth'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -59,6 +60,7 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
           {
             query: ListCompanyCategoriesGQL,
             variables: {
+              queryText: '',
               companyId: this.state.companyId,
               first: 10,
               after: null
@@ -73,7 +75,7 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
             formData={this.state}
             steps={[
               {
-                stepTitle: 'Lets now describe your category',
+                stepTitle: "Let's now describe your category",
                 formFields: [
                   {
                     label: 'What should we call this category?',
@@ -114,7 +116,7 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
 
   parseMutationVariables = () => {
     const category = this.props.navigation.getParam('category', {})
-    let params = { ...this.state }
+    const params = { ...this.state }
     delete params.fieldErrors
     delete params['__typename']
     delete params['id']
@@ -128,7 +130,18 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.navigation.navigate('Categories')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'ProfileSettings'
+          }),
+          NavigationActions.navigate({
+            routeName: 'Categories'
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     }
   }
 }

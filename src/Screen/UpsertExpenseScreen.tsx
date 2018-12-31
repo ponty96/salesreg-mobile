@@ -7,6 +7,7 @@ import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import { PaymentMethod } from '../utilities/data/picker-lists'
 import Auth from '../services/auth'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -79,6 +80,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
           {
             query: ListCompanyExpensesGQL,
             variables: {
+              queryText: '',
               companyId: this.state.companyId,
               first: 10,
               after: null
@@ -94,7 +96,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
             formData={this.state}
             steps={[
               {
-                stepTitle: 'Lets now describe your expense',
+                stepTitle: "Let's now describe your expense",
                 formFields: [
                   {
                     label: 'What should we call this expense?',
@@ -182,7 +184,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
     delete params.expenseItems
     if (this.state.expenseItems) {
       params.expenseItems = this.state.expenseItems.map(expenseItem => {
-        let expense = { ...expenseItem }
+        const expense = { ...expenseItem }
         delete expense.__typename
         delete expense.id
         return {
@@ -196,12 +198,24 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
   }
   onCompleted = async res => {
     const {
-      upsertExpense: { success, fieldErrors }
+      upsertExpense: { success, fieldErrors, data }
     } = res
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.navigation.navigate('Expenses')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Expenses'
+          }),
+          NavigationActions.navigate({
+            routeName: 'ExpensesDetails',
+            params: { expense: data }
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     }
   }
 }

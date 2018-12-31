@@ -42,52 +42,48 @@ export default class HomeScreen extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <React.Fragment>
+      <Content>
         <View style={styles.container}>
-          <Content>
-            <View style={styles.homeBackground}>
-              <Text style={styles.homeText}>
-                Welcome {this.state.username}!
-              </Text>
-            </View>
-            <Text style={[styles.text, { marginVertical: 20 }]}>
-              Tap he menu icon on the top right hand corner of the screen to
-              find all the menu options you will be needing:
+          <View style={styles.homeBackground}>
+            <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
+          </View>
+          <Text style={[styles.text, { marginVertical: 20 }]}>
+            Tap the menu icon on the top right hand corner of the screen to find
+            all the menu options you will be needing:
+          </Text>
+          <View style={styles.section}>
+            <View style={styles.dot} />
+            <Text style={[styles.text, { marginTop: -4 }]}>
+              Scroll down to find the settings menu where you can edit your
+              profile
             </Text>
-            <View style={styles.section}>
-              <View style={styles.dot} />
-              <Text style={[styles.text, { marginTop: -4 }]}>
-                Scroll down to find the settings menu where you can edit your
-                profile
-              </Text>
-            </View>
-            <View style={styles.section}>
-              <View style={styles.dot} />
-              <Text style={[styles.text, { marginTop: -4 }]}>
-                Use the products and services menu to manage your inventory
-              </Text>
-            </View>
-            <View style={styles.section}>
-              <View style={styles.dot} />
-              <Text style={[styles.text, { marginTop: -4 }]}>
-                Manage your customers' activities in the customer menu.
-              </Text>
-            </View>
-            <View style={styles.section}>
-              <View style={styles.dot} />
-              <Text style={[styles.text, { marginTop: -4 }]}>
-                Process your sales using the sales and the invoice menu
-              </Text>
-            </View>
-            <View style={styles.section}>
-              <View style={styles.dot} />
-              <Text style={[styles.text, { marginTop: -4 }]}>
-                Expense and banking menus help with your finance
-              </Text>
-            </View>
-          </Content>
+          </View>
+          <View style={styles.section}>
+            <View style={styles.dot} />
+            <Text style={[styles.text, { marginTop: -4 }]}>
+              Use the products and services menu to manage your inventory
+            </Text>
+          </View>
+          <View style={styles.section}>
+            <View style={styles.dot} />
+            <Text style={[styles.text, { marginTop: -4 }]}>
+              Manage your customers' activities in the customer menu.
+            </Text>
+          </View>
+          <View style={styles.section}>
+            <View style={styles.dot} />
+            <Text style={[styles.text, { marginTop: -4 }]}>
+              Process your sales using the sales and the invoice menu
+            </Text>
+          </View>
+          <View style={styles.section}>
+            <View style={styles.dot} />
+            <Text style={[styles.text, { marginTop: -4 }]}>
+              Expense and banking menus help with your finance
+            </Text>
+          </View>
         </View>
-      </React.Fragment>
+      </Content>
     )
   }
 }
@@ -110,7 +106,7 @@ const styles = StyleSheet.create({
     fontSize: 30,
     padding: 20,
     textAlign: 'center',
-    fontFamily: 'AvenirNext-Bold'
+    fontFamily: 'SourceSansPro-Bold'
   },
   text: {
     fontFamily: 'AvenirNext-Regular',

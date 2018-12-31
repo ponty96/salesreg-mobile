@@ -49,6 +49,7 @@ export const UpsertBankGQL = gql`
       data {
         ... on Bank {
           id
+          date: updatedAt
           accountNumber
           bankName
           isPrimary

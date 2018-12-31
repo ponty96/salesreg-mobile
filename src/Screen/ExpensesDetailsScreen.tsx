@@ -61,6 +61,7 @@ class ExpensesDetailsScreen extends Component<IProps> {
           {
             query: ListCompanyExpensesGQL,
             variables: {
+              queryText: '',
               companyId: this.props.user.company.id,
               first: 10,
               after: null

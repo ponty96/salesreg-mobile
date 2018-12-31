@@ -19,6 +19,10 @@ export const CreateProductGQL = gql`
           name
           featuredImage
           images
+          isFeatured
+          isTopRatedByMerchant
+          totalQuantitySold
+
           user {
             id
             firstName
@@ -32,6 +36,26 @@ export const CreateProductGQL = gql`
           tags {
             name
             id
+          }
+
+          optionValues {
+            id
+            name
+            option {
+              name
+              id
+            }
+          }
+
+          productGroup {
+            id
+            title
+            options {
+              optionId: id
+              optionName: name
+              title: name
+              id
+            }
           }
         }
       }
@@ -58,6 +82,10 @@ export const UpdateProductGQL = gql`
           name
           featuredImage
           images
+          isFeatured
+          isTopRatedByMerchant
+          totalQuantitySold
+
           user {
             id
             firstName
@@ -71,6 +99,26 @@ export const UpdateProductGQL = gql`
           tags {
             name
             id
+          }
+
+          optionValues {
+            id
+            name
+            option {
+              name
+              id
+            }
+          }
+
+          productGroup {
+            id
+            title
+            options {
+              optionId: id
+              optionName: name
+              title: name
+              id
+            }
           }
         }
       }
@@ -112,9 +160,23 @@ export const UpsertServiceGQL = gql`
       }
       data {
         ... on Service {
+          description
           id
           name
           price
+          categories {
+            id
+            title
+          }
+          totalTimesOrdered
+          isFeatured
+          isTopRatedByMerchant
+          featuredImage
+          images
+          tags {
+            name
+            id
+          }
         }
       }
     }

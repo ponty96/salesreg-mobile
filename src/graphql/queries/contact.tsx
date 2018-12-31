@@ -6,12 +6,14 @@ export const CompanyContactGQL = gql`
     $type: String!
     $after: String
     $first: Int
+    $queryText: String!
   ) {
     companyContacts(
       companyId: $companyId
       type: $type
       after: $after
       first: $first
+      query: $queryText
     ) {
       pageInfo {
         endCursor
@@ -22,6 +24,7 @@ export const CompanyContactGQL = gql`
         node {
           id
           contactName
+          allowsMarketing
           email
           image
           type

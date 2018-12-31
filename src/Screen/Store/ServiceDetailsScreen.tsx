@@ -3,7 +3,8 @@ import {
   View,
   StyleSheet,
   TouchableWithoutFeedback,
-  Linking
+  Linking,
+  Text
 } from 'react-native'
 import { color } from '../../Style/Color'
 import Header from '../../Components/Header/DetailsScreenHeader'
@@ -109,6 +110,12 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
           </View>
         ),
         hideBody: service.images && service.images.length > 0 ? false : true
+      },
+      {
+        section: 'Description',
+        body: <Text style={styles.descriptionText}>{service.description}</Text>,
+        hideBody:
+          service.description && service.description.length > 0 ? false : true
       }
     ]
   }
@@ -140,6 +147,7 @@ class ServiceDetailsScreen extends PureComponent<IProps> {
             {
               query: ListCompanyServicesGQL,
               variables: {
+                queryText: '',
                 companyId: this.props.user.company.id,
                 first: 10,
                 after: null
@@ -354,5 +362,12 @@ const styles = StyleSheet.create({
   fileTypeIcon: {
     fontSize: 30,
     color: '#fff'
+  },
+  descriptionText: {
+    textAlign: 'justify',
+    marginHorizontal: 14,
+    paddingBottom: 10,
+    fontFamily: 'AvenirNext-Regular',
+    color: color.textColor
   }
 })

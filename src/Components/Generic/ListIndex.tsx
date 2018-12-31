@@ -21,6 +21,7 @@ import { FetchPolicy } from 'apollo-client'
 import { DocumentNode } from 'graphql'
 import SubHeaderAtom from '../Header/SubHeaderAtom'
 import { UserContext } from '../../context/UserContext'
+import ErrorViewAtom from '../../Atom/ErrorViewAtom'
 
 interface SubHeaderProps {
   screen: string
@@ -51,6 +52,7 @@ interface IProps {
   showFabFn?: (val?: any) => any
   hideSeparator?: boolean
   user: any
+  queryText?: string
 }
 
 interface IState {
@@ -83,7 +85,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
     hideSeparator: false
   }
 
-  refetchQuery = () => null
+  refetchQuery = (obj?: any) => obj
 
   componentDidUpdate(prevProps) {
     if (
@@ -91,6 +93,19 @@ class GenericListIndex extends React.Component<IProps, IState> {
       prevProps.forceUpdateID != this.props.forceUpdateID
     ) {
       this.refetchQuery()
+    }
+
+    if (this.props.queryText && this.props.queryText != prevProps.queryText) {
+      let { business } = this.state
+      this.refetchQuery({
+        variables: {
+          queryText: this.props.queryText,
+          companyId: `${business && business.id}`,
+          after: null,
+          first: 10,
+          ...this.props.variables
+        }
+      })
     }
   }
 
@@ -204,13 +219,17 @@ class GenericListIndex extends React.Component<IProps, IState> {
       fabRouteName,
       fabIconName,
       fabIconType,
-      subHeader
+      subHeader,
+      queryText
     } = this.props
     const { business } = this.state
+
     return (
       <Query
         query={graphqlQuery}
+        notifyOnNetworkStatusChange={true}
         variables={{
+          queryText: this.props.queryText,
           companyId: `${business && business.id}`,
           after: null,
           first: 10,
@@ -218,18 +237,24 @@ class GenericListIndex extends React.Component<IProps, IState> {
         }}
         fetchPolicy={fetchPolicy || 'cache-first'}
       >
-        {({ loading, data, fetchMore, refetch }) => {
+        {({ loading, data, error, networkStatus, fetchMore, refetch }) => {
           this.refetchQuery = refetch
-          const sections = data[graphqlQueryResultKey]
-            ? this.parseSections(data[graphqlQueryResultKey])
-            : []
+          const sections =
+            Object.keys(data || {}).length > 0 && data[graphqlQueryResultKey]
+              ? this.parseSections(data[graphqlQueryResultKey])
+              : []
+
           return (
             <View style={styles.container}>
-              <AppSpinner visible={!data[graphqlQueryResultKey] && loading} />
+              <AppSpinner
+                visible={
+                  Object.keys(data || {}).length == 0 && !error && loading
+                }
+              />
               {subHeader && (
                 <SubHeaderAtom
                   total={
-                    data[graphqlQueryResultKey]
+                    data && data[graphqlQueryResultKey]
                       ? data[graphqlQueryResultKey].edges.length
                       : 0
                   }
@@ -246,6 +271,24 @@ class GenericListIndex extends React.Component<IProps, IState> {
               )}
               <SectionList
                 renderItem={this.renderList}
+                onRefresh={() =>
+                  refetch({
+                    variables: {
+                      queryText: this.props.queryText,
+                      companyId: `${business && business.id}`,
+                      after: null,
+                      first: 5,
+                      ...this.props.variables
+                    }
+                  })
+                }
+                contentContainerStyle={error ? { flex: 1 } : {}}
+                refreshing={
+                  (error ||
+                    (Object.keys(data || {}).length > 0 &&
+                      data[graphqlQueryResultKey])) &&
+                  networkStatus == 4
+                }
                 onEndReachedThreshold={0.99}
                 onScroll={() => {
                   !this.state.hasUserScrolled &&
@@ -263,15 +306,31 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   )
                 }
                 ListEmptyComponent={
-                  sections.length == 0 &&
-                  !loading && (
-                    <EmptyList
-                      type={{
-                        Text: emptyListText,
-                        verifyMainList: this.props.showFab ? 'main' : '',
-                        headerText: headerText
-                      }}
-                    />
+                  error && Object.keys(data || {}).length == 0 ? (
+                    <ErrorViewAtom onRefresh={refetch} />
+                  ) : (
+                    ((sections.length == 0 && !loading) ||
+                      (data && data[graphqlQueryResultKey] && loading)) && (
+                      <EmptyList
+                        type={{
+                          Text:
+                            queryText && queryText.length > 0
+                              ? `No search results found for "${queryText}"`
+                              : emptyListText,
+                          verifyMainList:
+                            (this.props.showFab && !queryText) ||
+                            (this.props.showFab &&
+                              queryText &&
+                              queryText.length == 0)
+                              ? 'main'
+                              : '',
+                          headerText:
+                            queryText && queryText.length > 0
+                              ? `"${queryText}" not found`
+                              : headerText
+                        }}
+                      />
+                    )
                   )
                 }
                 sections={sections}
@@ -281,7 +340,9 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   this.renderSectionFooter(section, sections)
                 }
               />
-              {data[graphqlQueryResultKey] && loading && <LoadMoreSpinner />}
+              {sections.length > 0 &&
+                data[graphqlQueryResultKey] &&
+                networkStatus == 3 && <LoadMoreSpinner />}
               {this.props.showFab && this.props.showFabFn(sections) ? (
                 <FabAtom
                   routeName={fabRouteName}

@@ -5,9 +5,13 @@ import AppSpinner from '../Components/Spinner'
 import Auth from '../services/auth'
 import { CreateRecipt } from '../graphql/mutations/order'
 import { Mutation } from 'react-apollo'
-import { ListCompanySalesGQL } from '../graphql/queries/order'
+import {
+  ListCompanySalesGQL,
+  ListCompanyInvoicesGQL
+} from '../graphql/queries/order'
 import { UserContext } from '../context/UserContext'
 import { parseFieldErrors } from '../Functions'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -38,7 +42,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
   }
 
   async componentDidMount() {
-    let {
+    const {
       company: { id: companyId },
       id: userId
     } = JSON.parse(await Auth.getCurrentUser())
@@ -62,7 +66,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
   }
 
   chargeCard = async () => {
-    let {
+    const {
         navigation: {
           state: {
             params: {
@@ -79,7 +83,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
       { valid } = _cardDetails
 
     if (valid) {
-      let {
+      const {
         values: { number, expiry, cvc }
       } = _cardDetails
 
@@ -95,16 +99,46 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
       })
         .then(() => {
           this.setState({ loading: false })
-          this.props.navigation.navigate('Sales')
+          this.navigateUser()
         })
         .catch(error => {
-          //@Todo: handle error better
+          // @Todo: handle error better
           console.log(error.message)
           this.setState({ loading: false })
         })
     } else {
       console.log('Card details entered is invalid')
     }
+  }
+
+  navigateUser = () => {
+    const {
+      navigation: {
+        state: {
+          params: { sales, from }
+        }
+      }
+    } = this.props
+
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: from
+        }),
+        NavigationActions.navigate({
+          routeName: 'InvoiceDetails',
+          params: {
+            sales: {
+              ...sales,
+              amountPaid: sales.amountPaid + Number(this.state.amountPaid)
+            },
+            from
+          }
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
   }
 
   onCompleted = async res => {
@@ -114,12 +148,12 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.navigation.navigate('Sales')
+      this.navigateUser()
     }
   }
 
   render() {
-    let {
+    const {
       navigation: {
         state: {
           params: {
@@ -131,17 +165,20 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
       }
     } = this.props
 
-    console.log(
-      'The paymenth method is ',
-      this.state.paymentMethod.toLowerCase()
-    )
-
     return (
       <Mutation
         mutation={CreateRecipt}
         refetchQueries={[
           {
             query: ListCompanySalesGQL,
+            variables: {
+              companyId: this.props.user.company.id,
+              first: 10,
+              after: null
+            }
+          },
+          {
+            query: ListCompanyInvoicesGQL,
             variables: {
               companyId: this.props.user.company.id,
               first: 10,
@@ -201,7 +238,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
                         : 'Done'
                   },
                   this.state.paymentMethod.toLowerCase() == 'card' && {
-                    stepTitle: 'Lets sort out the payment for this order',
+                    stepTitle: "Let's sort out the payment for this order",
                     formFields: [
                       {
                         label: '',

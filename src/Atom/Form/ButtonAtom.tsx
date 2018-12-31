@@ -26,7 +26,6 @@ class ButtonAtom extends React.Component<IProps, any> {
   }
 
   render() {
-    console.log('yaga ', this.props.faded)
     return (
       <Button
         transparent={this.props.transparent}

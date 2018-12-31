@@ -12,6 +12,7 @@ export const UpsertContactGQL = gql`
         ... on Contact {
           id
           contactName
+          allowsMarketing
           email
           image
           type
@@ -38,6 +39,8 @@ export const UpsertContactGQL = gql`
           facebook
           twitter
           snapchat
+          totalDebt
+          totalAmountPaid
 
           data: updatedAt
         }

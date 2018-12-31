@@ -16,6 +16,8 @@ export const color = {
   selling: '#189D7A',
   menu: '#2C3A5A',
   warning: '#FF9630',
+  searchBoxActive: '#f6f6f6',
+  searchBoxPassive: '#eee',
   principal: '#444444',
   textBorderBottom: '#E0E0E0',
   button: '#3668D3',
@@ -30,6 +32,7 @@ export const color = {
   listBorderColor: '#EEE',
   secondary: '#FFFFFF',
   textColor: '#444444',
+  errorIcon: '#8594a3',
   amountSummaryBg: '#36A5B1',
 
   /// order status

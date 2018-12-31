@@ -75,9 +75,10 @@ export default class EditBusinessProfileScreen extends Component<
       contactEmail: user.company.contactEmail,
       about: user.company.about,
       slug: user.company.slug,
-      currency: user.company.currency,
+      currency: 'NGN',
       ...this.parseAddressForForm(user.company),
-      phoneNumber: user.company.phone ? user.company.phone.number : ''
+      phoneNumber: user.company.phone ? user.company.phone.number : '',
+      country: 'NG'
     })
   }
 
@@ -137,7 +138,7 @@ export default class EditBusinessProfileScreen extends Component<
                 ]
               },
               {
-                stepTitle: `Whats your business address?`,
+                stepTitle: `What's your business address?`,
                 formFields: [
                   {
                     label: 'What street is your business located at?',
@@ -182,7 +183,7 @@ export default class EditBusinessProfileScreen extends Component<
                 stepTitle: 'How can customers contact you?',
                 formFields: [
                   {
-                    label: 'Whats about your phone number?',
+                    label: 'What about your phone number?',
                     type: {
                       type: 'phone-input'
                     },

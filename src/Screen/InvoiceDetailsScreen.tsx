@@ -26,19 +26,21 @@ export default class InvoicesScreen extends React.Component<IProps> {
           params: {
             sales: {
               invoice: { id, dueDate }
-            }
+            },
+            from
           }
         }
       }
     } = this.props
 
     this.props.navigation.navigate('UpdateInvoiceDueDate', {
-      invoice: { id, dueDate }
+      invoice: { id, dueDate },
+      from
     })
   }
 
-  renderHeader = (amount, amountPaid, sales) => {
-    return amount - amountPaid != 0 ? (
+  renderHeader = (amount, amountPaid, sales, from) => {
+    return Number(amount) - amountPaid != 0 ? (
       <Header
         title="Invoice Details"
         rightIconType="MaterialCommunityIcons"
@@ -49,7 +51,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
         }}
         onPressLeftIcon={() => this.props.navigation.goBack()}
         onPressRightIcon={() =>
-          this.props.navigation.navigate('UpsertInvoice', { sales })
+          this.props.navigation.navigate('UpsertInvoice', { sales, from })
         }
       />
     ) : (
@@ -63,25 +65,30 @@ export default class InvoicesScreen extends React.Component<IProps> {
 
   render() {
     let {
-      navigation: {
-        state: {
-          params: {
-            sales: {
-              amount,
-              amountPaid,
-              items,
-              invoice: { dueDate },
-              date
-            },
-            sales
+        navigation: {
+          state: {
+            params: {
+              sales: {
+                amount,
+                amountPaid,
+                items,
+                discount,
+                invoice: { dueDate },
+                date
+              },
+              sales,
+              from
+            }
           }
         }
-      }
-    } = this.props
+      } = this.props,
+      total = parseFloat(
+        (Number(amount) - Number(discount)).toString()
+      ).toFixed(2)
 
     return (
       <React.Fragment>
-        {this.renderHeader(amount, amountPaid, sales)}
+        {this.renderHeader(total, amountPaid, sales, from)}
         <View style={styles.container}>
           <Content>
             <ListItemAtom
@@ -93,8 +100,10 @@ export default class InvoicesScreen extends React.Component<IProps> {
             />
             <ProfileListAtom
               section={`Date due: ${moment(dueDate).format('DD/MM/YYYY')}`}
-              value="Edit"
-              type="button"
+              value={
+                Number(total) - amountPaid > 0 ? 'Edit' : 'Payment Completed'
+              }
+              type={Number(total) - amountPaid > 0 ? 'button' : ''}
               onPress={this.onPressEditInvoice}
             />
             {items.map((item, i) => (
@@ -109,8 +118,15 @@ export default class InvoicesScreen extends React.Component<IProps> {
               />
             ))}
             <ListItemAtom
+              label="Discount"
+              value={`\u20A6 ${discount}`}
+              labelStyle={styles.listLabel}
+              rightTextStyle={[styles.greenText, { color: color.black }]}
+              listItemStyle={styles.listWrapper}
+            />
+            <ListItemAtom
               label="TOTAL"
-              value={`N ${numberWithCommas(amount)}`}
+              value={`N ${numberWithCommas(total)}`}
               labelStyle={styles.whiteLabel}
               rightTextStyle={[styles.whiteLabel]}
               listItemStyle={styles.totalAmountListItem}
@@ -124,7 +140,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
             />
             <ListItemAtom
               label="Balance due"
-              value={`N ${numberWithCommas(amount - amountPaid)}`}
+              value={`N ${numberWithCommas(Number(total) - amountPaid)}`}
               labelStyle={styles.listLabel}
               rightTextStyle={[styles.greenText, { color: color.red }]}
               listItemStyle={styles.listWrapper}

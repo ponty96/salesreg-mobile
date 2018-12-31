@@ -19,6 +19,7 @@ import {
   renderTagStep
 } from './utilities/productCreateSteps'
 import { UserContext } from '../../context/UserContext'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -466,8 +467,8 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       optionValues: this.parseOptionValuesForMutation(),
       userId: this.state.userId,
       isTopRatedByMerchant:
-        this.state.isTopRatedByMerchant == 'no' ? false : true,
-      isFeatured: this.state.isFeatured == 'no' ? false : true
+        this.state.isTopRatedByMerchant.toLowerCase() == 'no' ? false : true,
+      isFeatured: this.state.isFeatured.toLowerCase() == 'no' ? false : true
     }
     let params: any = {
       companyId: this.state.companyId,
@@ -505,10 +506,22 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
 
   onCompleted = async res => {
     const {
-      createProduct: { success, fieldErrors }
+      createProduct: { success, fieldErrors, data }
     } = res
     if (success) {
-      this.props.navigation.navigate('Products')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Products'
+          }),
+          NavigationActions.navigate({
+            routeName: 'ProductDetails',
+            params: { product: data }
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }

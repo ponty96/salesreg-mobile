@@ -14,9 +14,9 @@ import { Mutation } from 'react-apollo'
 import { DocumentNode } from 'graphql'
 import AppSpinner from '../../Components/Spinner'
 import CachedImageAtom from '../../Atom/CachedImageAtom'
-var BUTTONS = ['No', 'Yes, delete', 'Cancel']
-var DESTRUCTIVE_INDEX = 1
-var CANCEL_INDEX = 2
+var BUTTONS = ['Yes, delete', 'Cancel']
+var DESTRUCTIVE_INDEX = 0
+var CANCEL_INDEX = 1
 
 interface Section {
   section: string
@@ -63,7 +63,6 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
         100
       )
     } else {
-      console.log('Yeah this is good ', success)
       this.props.onSuccessfulDeletion()
     }
   }
@@ -115,7 +114,7 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
         title: 'Delete?'
       },
       buttonIndex => {
-        if (buttonIndex == 1) {
+        if (buttonIndex == 0) {
           cb()
         }
       }

@@ -12,6 +12,7 @@ import {
   renderMediaStep
 } from './utilities/productCreateSteps'
 import { UserContext } from '../../context/UserContext'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -64,8 +65,8 @@ class UpsertServiceScreen extends Component<IProps, IState> {
         ...service,
         tags: service.tags.map(tag => tag.name),
         isTopRatedByMerchant:
-          service.isTopRatedByMerchant == false ? 'no' : 'yes',
-        isFeatured: service.isFeatured == false ? 'no' : 'yes',
+          service.isTopRatedByMerchant == false ? 'No' : 'Yes',
+        isFeatured: service.isFeatured == false ? 'No' : 'Yes',
         userId: user.id,
         companyId: user.company.id
       })
@@ -83,6 +84,7 @@ class UpsertServiceScreen extends Component<IProps, IState> {
           {
             query: ListCompanyServicesGQL,
             variables: {
+              queryText: '',
               companyId: this.state.companyId,
               first: 10,
               after: null
@@ -152,8 +154,8 @@ class UpsertServiceScreen extends Component<IProps, IState> {
     let params = {
       ...this.state,
       isTopRatedByMerchant:
-        this.state.isTopRatedByMerchant == 'no' ? false : true,
-      isFeatured: this.state.isFeatured == 'no' ? false : true,
+        this.state.isTopRatedByMerchant == 'No' ? false : true,
+      isFeatured: this.state.isFeatured == 'No' ? false : true,
       categories: this.state.categories.map(cat => cat.id)
     }
     delete params.fieldErrors
@@ -169,10 +171,22 @@ class UpsertServiceScreen extends Component<IProps, IState> {
 
   onCompleted = async res => {
     const {
-      upsertService: { success, fieldErrors }
+      upsertService: { success, fieldErrors, data }
     } = res
     if (success) {
-      this.props.navigation.navigate('Services')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Services'
+          }),
+          NavigationActions.navigate({
+            routeName: 'ServicesDetails',
+            params: { service: data }
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }

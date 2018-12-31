@@ -8,16 +8,18 @@ interface IProps {
   navigation: any
 }
 
-export default class ExpensesScreen extends React.Component<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+interface IState {
+  queryText: string
+}
+
+export default class ExpensesScreen extends React.Component<IProps, IState> {
+  state = {
+    queryText: ''
+  }
+
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Expenses"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
-        />
-      )
+      header: null
     }
   }
 
@@ -25,8 +27,8 @@ export default class ExpensesScreen extends React.Component<IProps> {
     return [
       {
         firstTopText: item.title,
-        bottomLeftFirstText: '', //item.paidTo
-        bottomLeftSecondText: '', //item.date
+        bottomLeftFirstText: '', // item.paidTo
+        bottomLeftSecondText: '', // item.date
         topRightText: `\u20A6 ${item.totalAmount}`
       }
     ]
@@ -34,20 +36,33 @@ export default class ExpensesScreen extends React.Component<IProps> {
 
   render() {
     return (
-      <GenericListIndex
-        navigation={this.props.navigation}
-        graphqlQuery={ListCompanyExpensesGQL}
-        graphqlQueryResultKey="companyExpenses"
-        parseItemData={this.parseData}
-        onItemPress={item =>
-          this.props.navigation.navigate('ExpensesDetails', { expense: item })
-        }
-        emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLets proceed by tapping the`}
-        headerText="Great habit keeping records!"
-        fabRouteName="UpsertExpense"
-        fabIconName="database-minus"
-        fabIconType="MaterialCommunityIcons"
-      />
+      <React.Fragment>
+        <Header
+          title="Expenses"
+          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
+          showSearchBar
+          searchBar={{
+            placeholder: 'Search for an expense',
+            onSearch: queryText => this.setState({ queryText })
+          }}
+        />
+        <GenericListIndex
+          navigation={this.props.navigation}
+          queryText={this.state.queryText}
+          graphqlQuery={ListCompanyExpensesGQL}
+          graphqlQueryResultKey="companyExpenses"
+          parseItemData={this.parseData}
+          onItemPress={item =>
+            this.props.navigation.navigate('ExpensesDetails', { expense: item })
+          }
+          emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLet's proceed by tapping the`}
+          headerText="Great habit keeping records!"
+          fabRouteName="UpsertExpense"
+          fabIconName="database-minus"
+          fabIconType="MaterialCommunityIcons"
+        />
+      </React.Fragment>
     )
   }
 }

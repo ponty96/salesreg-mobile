@@ -1,20 +1,29 @@
 import { ApolloClient } from 'apollo-client'
 import { InMemoryCache } from 'apollo-cache-inmemory'
+import { AsyncStorage } from 'react-native'
 import { ApolloLink, split } from 'apollo-link'
 import { withClientState } from 'apollo-link-state'
 // import { createHttpLink } from 'apollo-link-http';
 import { hasSubscription } from '@jumpn/utils-graphql'
 import absintheSocketLink from './absinthe-socket-link'
+import ApolloLinkTimeout from 'apollo-link-timeout'
 import { setContext } from 'apollo-link-context'
 import Auth from '../services/auth'
 import { authenticate } from '../graphql/resolvers/auth'
 import { onError } from 'apollo-link-error'
 // import refreshOrLogout from '../services/refreshOrLogout';
 import { createUploadLink } from '@richeterre/apollo-upload-client'
+import { CachePersistor } from 'apollo-cache-persist'
 
 // const GRAPHQL_API_ENDPOINT = 'http://16e11967.ngrok.iom /api'
 const GRAPHQL_API_ENDPOINT = 'https://salesreg.herokuapp.com/api'
 const cache = new InMemoryCache()
+
+const persistor = new CachePersistor({
+  cache,
+  storage: AsyncStorage,
+  debug: true
+})
 
 const authLink = setContext(async (_: any, { headers }: any) => {
   const token = await Auth.getToken()
@@ -56,8 +65,12 @@ const errorLink = onError(({ graphQLErrors, networkError }: any) => {
   if (networkError) console.log(`[Network error]: ${networkError}`)
 })
 
+const timeoutLink = new ApolloLinkTimeout(15000)
+
 const client = new ApolloClient({
-  link: ApolloLink.from([stateLink, errorLink, authLink, link]),
+  link: timeoutLink.concat(
+    ApolloLink.from([stateLink, errorLink, authLink, link])
+  ),
   cache
 })
 
@@ -66,3 +79,4 @@ const writeDefaults = async () => stateLink.writeDefaults
 client.onResetStore(writeDefaults)
 
 export default client
+export { persistor }

@@ -8,16 +8,18 @@ interface IProps {
   navigation: any
 }
 
-export default class ServicesScreen extends React.Component<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+interface IState {
+  queryText: string
+}
+
+export default class ServicesScreen extends React.Component<IProps, IState> {
+  state = {
+    queryText: ''
+  }
+
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Services"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
-          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
-        />
-      )
+      header: null
     }
   }
 
@@ -37,21 +39,34 @@ export default class ServicesScreen extends React.Component<IProps> {
 
   render() {
     return (
-      <GenericListIndex
-        navigation={this.props.navigation}
-        graphqlQuery={ListCompanyServicesGQL}
-        graphqlQueryResultKey="listCompanyServices"
-        parseItemData={this.parseData}
-        onItemPress={item =>
-          this.props.navigation.navigate('ServicesDetails', { service: item })
-        }
-        emptyListText={`When you add services you offer, they get listed here \n\nAdd services by tapping the`}
-        headerText="Add services here to start making sales"
-        fabRouteName="UpsertService"
-        fabIconName="basket-fill"
-        fabIconType="MaterialCommunityIcons"
-        hideSeparator={true}
-      />
+      <React.Fragment>
+        <Header
+          title="Services"
+          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
+          showSearchBar
+          searchBar={{
+            placeholder: 'Search for a service',
+            onSearch: queryText => this.setState({ queryText })
+          }}
+        />
+        <GenericListIndex
+          navigation={this.props.navigation}
+          graphqlQuery={ListCompanyServicesGQL}
+          queryText={this.state.queryText}
+          graphqlQueryResultKey="listCompanyServices"
+          parseItemData={this.parseData}
+          onItemPress={item =>
+            this.props.navigation.navigate('ServicesDetails', { service: item })
+          }
+          emptyListText={`When you add services you offer, they get listed here \n\nAdd services by tapping the`}
+          headerText="Add services here to start making sales"
+          fabRouteName="UpsertService"
+          fabIconName="basket-fill"
+          fabIconType="MaterialCommunityIcons"
+          hideSeparator={true}
+        />
+      </React.Fragment>
     )
   }
 }

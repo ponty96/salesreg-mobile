@@ -118,6 +118,12 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           </View>
         ),
         hideBody: product.images && product.images.length > 0 ? false : true
+      },
+      {
+        section: 'Description',
+        body: <Text style={styles.descriptionText}>{product.description}</Text>,
+        hideBody:
+          product.description && product.description.length > 0 ? false : true
       }
     ]
   }
@@ -189,6 +195,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           {
             query: ListCompanyProductsGQL,
             variables: {
+              queryText: '',
               companyId: this.props.user.company.id,
               first: 10,
               after: null
@@ -279,5 +286,12 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     flexWrap: 'wrap',
     flex: 1
+  },
+  descriptionText: {
+    textAlign: 'justify',
+    marginHorizontal: 14,
+    paddingBottom: 10,
+    fontFamily: 'AvenirNext-Regular',
+    color: color.textColor
   }
 })
