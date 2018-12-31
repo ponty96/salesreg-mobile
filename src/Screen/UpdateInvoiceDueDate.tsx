@@ -66,12 +66,6 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
   }
 
   render() {
-    console.log(
-      'moment(this.props.navigation.state.params.invoice.dueDate)',
-      moment(this.props.navigation.state.params.invoice.dueDate).format(
-        'YYYY-MM-DD'
-      )
-    )
     return (
       <Mutation mutation={UpdateInvoice} onCompleted={this.onCompleted}>
         {(updateInvoice, { loading }) => {
@@ -96,7 +90,8 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
                         placeholder: 'e.g 06/23/2018',
                         validators: ['required'],
                         type: {
-                          type: 'date'
+                          type: 'date',
+                          maxDate: new Date('1 January 2030')
                         }
                       }
                     ],
