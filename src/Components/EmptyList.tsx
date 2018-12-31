@@ -32,9 +32,13 @@ const emptyList = (prop: { type: Empty }) => {
   } else {
     return (
       <View style={styles.view}>
-        <Text style={styles.headerText}>{prop.type.headerText}</Text>
+        <Text style={[styles.headerText, { textAlign: 'center' }]}>
+          {prop.type.headerText}
+        </Text>
         {prop.type.Text && (
-          <Text style={styles.normalText}>{prop.type.Text}</Text>
+          <Text style={[styles.normalText, { textAlign: 'center' }]}>
+            {prop.type.Text}
+          </Text>
         )}
         {prop.type.body}
       </View>
