@@ -49,7 +49,8 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
           parseItemData={this.parseData}
           onItemPress={item =>
             this.props.navigation.navigate('InvoiceDetails', {
-              sales: { ...item.sale, invoice: { ...item } }
+              sales: { ...item.sale, invoice: { ...item } },
+              from: 'Invoices'
             })
           }
           emptyListText={`No invoice created yet for your company, please make a sale to see an invoice reflect here.`}

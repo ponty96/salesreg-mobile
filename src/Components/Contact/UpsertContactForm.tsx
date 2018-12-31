@@ -94,7 +94,6 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
       ? this.state.contactName.split(' ')[0]
       : ''
     const parsedGender = genderToPossesivePronoun(this.state.gender)
-    console.log('contact state', this.state)
     return (
       <Mutation
         mutation={UpsertContactGQL}
@@ -102,6 +101,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
           {
             query: CompanyContactGQL,
             variables: {
+              queryText: '',
               companyId: this.state.companyId,
               type: this.props.contactType,
               first: 10,

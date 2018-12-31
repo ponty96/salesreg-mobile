@@ -219,7 +219,8 @@ class GenericListIndex extends React.Component<IProps, IState> {
       fabRouteName,
       fabIconName,
       fabIconType,
-      subHeader
+      subHeader,
+      queryText
     } = this.props
     const { business } = this.state
 
@@ -270,7 +271,17 @@ class GenericListIndex extends React.Component<IProps, IState> {
               )}
               <SectionList
                 renderItem={this.renderList}
-                onRefresh={refetch}
+                onRefresh={() =>
+                  refetch({
+                    variables: {
+                      queryText: this.props.queryText,
+                      companyId: `${business && business.id}`,
+                      after: null,
+                      first: 5,
+                      ...this.props.variables
+                    }
+                  })
+                }
                 contentContainerStyle={error ? { flex: 1 } : {}}
                 refreshing={
                   (error ||
@@ -302,9 +313,21 @@ class GenericListIndex extends React.Component<IProps, IState> {
                       (data && data[graphqlQueryResultKey] && loading)) && (
                       <EmptyList
                         type={{
-                          Text: emptyListText,
-                          verifyMainList: this.props.showFab ? 'main' : '',
-                          headerText: headerText
+                          Text:
+                            queryText && queryText.length > 0
+                              ? `No search results found for "${queryText}"`
+                              : emptyListText,
+                          verifyMainList:
+                            (this.props.showFab && !queryText) ||
+                            (this.props.showFab &&
+                              queryText &&
+                              queryText.length == 0)
+                              ? 'main'
+                              : '',
+                          headerText:
+                            queryText && queryText.length > 0
+                              ? `"${queryText}" not found`
+                              : headerText
                         }}
                       />
                     )

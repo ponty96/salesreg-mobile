@@ -84,6 +84,8 @@ interface FieldType {
   secureTextEntry?: boolean
   options?: any[]
   disabled?: boolean
+  maxDate?: Date | string
+  minDate ?: Date | string
   uploadCategory?: 'profile-photo' | 'others'
   multiline?: boolean
   searchQuery?: DocumentNode
@@ -484,6 +486,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           disabled,
           uploadCategory,
           keyboardType,
+          maxDate,
+          minDate,
           secureTextEntry = false,
           options = [],
           multiline = false,
@@ -617,6 +621,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
               key={`${type}-${index}`}
               label={label}
               date={formData[name]}
+              maxDate={maxDate}
+              minDate={minDate}
               placeholder={placeholder}
               handleDateSelection={val => {
                 this.checkValidityOnValueChange(val, name, validators)

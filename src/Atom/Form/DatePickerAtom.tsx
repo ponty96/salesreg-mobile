@@ -12,9 +12,16 @@ interface IProps {
   required?: boolean | false
   contStyle?: any
   label?: string
+  maxDate?: Date | string
+  minDate?: Date | string
 }
 
 export default class DatePickerAtom extends React.Component<IProps> {
+  static defaultProps = {
+    maxDate: new Date(),
+    minDate: '1800-01-01'
+  }
+
   renderError = () => {
     if (this.props.error) {
       return <Text style={styles.underneathText}>{this.props.error}</Text>
@@ -52,8 +59,8 @@ export default class DatePickerAtom extends React.Component<IProps> {
             mode="date"
             placeholder={this.props.placeholder}
             format="YYYY-MM-DD"
-            minDate="1800-01-01"
-            maxDate={new Date()}
+            minDate={this.props.minDate}
+            maxDate={this.props.maxDate}
             confirmBtnText="Save"
             cancelBtnText="Cancel"
             showIcon={false}

@@ -41,6 +41,7 @@ class SalesOrderDetailsScreen extends Component<IProps> {
   parseItems = () => {
     const sales = this.props.navigation.getParam('sales', {})
     const { items = [] } = sales
+
     return [
       {
         itemTitle: 'Date',
@@ -59,6 +60,10 @@ class SalesOrderDetailsScreen extends Component<IProps> {
         }))
         .concat([
           {
+            itemTitle: 'Discount',
+            itemValue: `\u20A6 ${sales.discount}`
+          },
+          {
             itemTitle: 'Payment Method',
             itemValue: sales.paymentMethod.toUpperCase()
           }
@@ -72,7 +77,9 @@ class SalesOrderDetailsScreen extends Component<IProps> {
       <View style={styles.container}>
         <GenericDetailsComponent
           title={sales.contact.contactName}
-          totalAmount={parseFloat(sales.amount).toFixed(2)}
+          totalAmount={parseFloat(
+            (Number(sales.amount) - Number(sales.discount)).toString()
+          ).toFixed(2)}
           items={this.parseItems()}
           shouldShowStatus={true}
           onPressStatus={this.onStatusPress}
@@ -80,7 +87,10 @@ class SalesOrderDetailsScreen extends Component<IProps> {
         />
         <TouchableOpacity
           onPress={() =>
-            this.props.navigation.navigate('InvoiceDetails', { sales })
+            this.props.navigation.navigate('InvoiceDetails', {
+              sales,
+              from: 'Sales'
+            })
           }
         >
           <View style={styles.invoicebuttomContainer}>

@@ -12,6 +12,7 @@ export const UpdateSaleOrderStatusGQL = gql`
         ... on Sale {
           id
           refId
+          discount
           contact {
             contactName
             id
@@ -102,6 +103,7 @@ export const UpsertSaleOrder = gql`
         ... on Sale {
           id
           refId
+          discount
           contact {
             contactName
             id
@@ -173,6 +175,8 @@ export const UpdateInvoice = gql`
           dueDate
           sale {
             amount
+            id
+            discount
             amountPaid
             date
             items {

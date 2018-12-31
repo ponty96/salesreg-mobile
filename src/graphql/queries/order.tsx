@@ -49,6 +49,7 @@ export const ListCompanySalesGQL = gql`
         node {
           id
           refId
+          discount
           contact {
             contactName
             id
@@ -108,6 +109,12 @@ export const ListCompanyInvoicesGQL = gql`
           dueDate
           sale {
             amount
+            id
+            discount
+            contact {
+              id
+              email
+            }
             amountPaid
             date
             items {

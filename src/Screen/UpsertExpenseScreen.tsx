@@ -80,6 +80,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
           {
             query: ListCompanyExpensesGQL,
             variables: {
+              queryText: '',
               companyId: this.state.companyId,
               first: 10,
               after: null
