@@ -143,8 +143,8 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
         ...product,
         tags: product.tags.map(tag => tag.name),
         isTopRatedByMerchant:
-          product.isTopRatedByMerchant == false ? 'no' : 'yes',
-        isFeatured: product.isFeatured == false ? 'no' : 'yes'
+          product.isTopRatedByMerchant == false ? 'No' : 'Yes',
+        isFeatured: product.isFeatured == false ? 'No' : 'Yes'
       }
     } else {
       return DEFAULT_PRODUCT_PARAMS
@@ -174,6 +174,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
           {
             query: ListCompanyProductsGQL,
             variables: {
+              queryText: '',
               companyId: this.state.companyId,
               first: 10,
               after: null
@@ -467,8 +468,17 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       optionValues: this.parseOptionValuesForMutation(),
       userId: this.state.userId,
       isTopRatedByMerchant:
-        this.state.isTopRatedByMerchant.toLowerCase() == 'no' ? false : true,
-      isFeatured: this.state.isFeatured.toLowerCase() == 'no' ? false : true
+        (this.state.isTopRatedByMerchant &&
+          this.state.isTopRatedByMerchant.toLowerCase() == 'no') ||
+        !this.state.isTopRatedByMerchant
+          ? false
+          : true,
+      isFeatured:
+        (this.state.isFeatured &&
+          this.state.isFeatured.toLowerCase() == 'no') ||
+        !this.state.isFeatured
+          ? false
+          : true
     }
     let params: any = {
       companyId: this.state.companyId,

@@ -98,7 +98,7 @@ class InputAtom extends React.Component<IProps, IState> {
                 maxLength={this.props.maxLength}
                 ref={input => (this.inputRef = input)}
                 onSubmitEditing={() => {
-                  this.props.onSubmitEditing()
+                  this.props.onSubmitEditing && this.props.onSubmitEditing()
                   setTimeout(() => {
                     this.inputRef._root.focus()
                   }, 450)
@@ -124,7 +124,7 @@ class InputAtom extends React.Component<IProps, IState> {
               style={[this.props.inputStyle, styles.multilineText]}
               ref={input => (this.inputRef = input)}
               onSubmitEditing={() => {
-                this.props.onSubmitEditing()
+                this.props.onSubmitEditing && this.props.onSubmitEditing()
                 setTimeout(() => {
                   this.inputRef._root.focus()
                 }, 450)

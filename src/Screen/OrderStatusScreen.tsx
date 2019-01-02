@@ -93,7 +93,7 @@ const OrderStatusHint = (props: IOrderStatusProps) => {
           </Text>
         </View>
 
-        <TouchableOpacity style={styles.row} onPress={props.hideHintCheck}>
+        <TouchableOpacity style={[styles.row]} onPress={props.hideHintCheck}>
           <CheckBox
             checked={props.hideHintChecked}
             style={styles.checkBox}
@@ -354,7 +354,8 @@ const styles = StyleSheet.create({
     alignItems: 'flex-end',
     justifyContent: 'flex-end',
     paddingHorizontal: 16,
-    paddingVertical: 16,
+    marginTop: 20,
+    paddingBottom: 16,
     backgroundColor: '#fff',
     position: 'absolute',
     bottom: 0
