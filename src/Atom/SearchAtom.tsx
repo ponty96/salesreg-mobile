@@ -47,6 +47,7 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
           onChangeText={value => this.setState({ value })}
           onSubmitEditing={() => this.props.onSearch(this.state.value)}
           value={this.state.value}
+          style={{ textAlign: 'center' }}
         />
       </Item>
     )
@@ -57,6 +58,7 @@ const styles = StyleSheet.create({
   searchItem: {
     backgroundColor: color.searchBoxPassive,
     borderWidth: 0,
+    borderBottomWidth: 0,
     borderRadius: 8,
     marginHorizontal: 12,
     marginRight: 0,
