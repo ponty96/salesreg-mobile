@@ -53,6 +53,7 @@ export default class CustomerScreen extends React.PureComponent<
           showSearchBar
           searchBar={{
             placeholder: 'Search for a customer',
+            queryText: this.state.queryText,
             onSearch: queryText => this.setState({ queryText })
           }}
         />

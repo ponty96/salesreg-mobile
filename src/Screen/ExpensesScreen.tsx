@@ -44,6 +44,7 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
           showSearchBar
           searchBar={{
             placeholder: 'Search for an expense',
+            queryText: this.state.queryText,
             onSearch: queryText => this.setState({ queryText })
           }}
         />

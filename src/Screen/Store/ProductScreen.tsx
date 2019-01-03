@@ -50,7 +50,10 @@ export default class ProductScreen extends React.Component<IProps, IState> {
           showSearchBar
           searchBar={{
             placeholder: 'Search for a product',
-            onSearch: queryText => this.setState({ queryText })
+            queryText: this.state.queryText,
+            onSearch: queryText => {
+              this.setState({ queryText })
+            }
           }}
         />
         <GenericListIndex

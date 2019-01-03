@@ -11,13 +11,11 @@ interface IProps {
 }
 
 interface IState {
-  value: string
   isFocused: boolean
 }
 
 export class SearchAtom extends React.PureComponent<IProps, IState> {
   state = {
-    value: this.props.queryText || '',
     isFocused: false
   }
 
@@ -44,9 +42,9 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
           onBlur={() => this.setState({ isFocused: false })}
           placeholder={this.props.placeholder || ''}
           returnKeyType="search"
-          onChangeText={value => this.setState({ value })}
-          onSubmitEditing={() => this.props.onSearch(this.state.value)}
-          value={this.state.value}
+          onChangeText={value => this.props.onSearch(value)}
+          onSubmitEditing={() => this.props.onSearch(this.props.queryText)}
+          value={this.props.queryText}
           style={{ textAlign: 'center' }}
         />
       </Item>

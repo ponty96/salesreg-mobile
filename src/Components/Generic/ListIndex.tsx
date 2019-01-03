@@ -57,6 +57,7 @@ interface IProps {
 
 interface IState {
   business: any
+  queryText: String
   hasUserScrolled: boolean
 }
 
@@ -72,6 +73,7 @@ const LoadMoreSpinner = () => (
 class GenericListIndex extends React.Component<IProps, IState> {
   state = {
     business: null,
+    queryText: this.props.queryText,
     hasUserScrolled: false
   }
 
@@ -85,7 +87,8 @@ class GenericListIndex extends React.Component<IProps, IState> {
     hideSeparator: false
   }
 
-  refetchQuery = (obj?: any) => obj
+  private refetchQuery = (obj?: any) => obj
+  private timerRef: any
 
   componentDidUpdate(prevProps) {
     if (
@@ -96,15 +99,16 @@ class GenericListIndex extends React.Component<IProps, IState> {
     }
 
     if (this.props.queryText && this.props.queryText != prevProps.queryText) {
-      let { business } = this.state
-      this.refetchQuery({
-        variables: {
-          queryText: this.props.queryText,
-          companyId: `${business && business.id}`,
-          after: null,
-          first: 10,
-          ...this.props.variables
-        }
+      this.timerRef && this.timerRef.unsubscribe()
+      this.setState({
+        queryText: this.props.queryText.trim()
+      })
+    } else if (
+      this.props.queryText.trim().length == 0 &&
+      this.props.queryText != prevProps.queryText
+    ) {
+      this.setState({
+        queryText: this.props.queryText.trim()
       })
     }
   }
@@ -229,11 +233,16 @@ class GenericListIndex extends React.Component<IProps, IState> {
         query={graphqlQuery}
         notifyOnNetworkStatusChange={true}
         variables={{
-          queryText: this.props.queryText,
+          queryText: this.state.queryText,
           companyId: `${business && business.id}`,
           after: null,
           first: 10,
           ...variables
+        }}
+        context={{
+          timeoutRef: (timerRef: any) => {
+            this.timerRef = timerRef
+          }
         }}
         fetchPolicy={fetchPolicy || 'cache-first'}
       >

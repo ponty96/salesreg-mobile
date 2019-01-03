@@ -93,6 +93,7 @@ export default class OptionsScreen extends React.Component<IProps, IState> {
           showSearchBar
           searchBar={{
             placeholder: 'Search for a variant option',
+            queryText: this.state.queryText,
             onSearch: queryText => this.setState({ queryText })
           }}
         />

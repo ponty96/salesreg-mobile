@@ -85,7 +85,7 @@ interface FieldType {
   options?: any[]
   disabled?: boolean
   maxDate?: Date | string
-  minDate ?: Date | string
+  minDate?: Date | string
   uploadCategory?: 'profile-photo' | 'others'
   multiline?: boolean
   searchQuery?: DocumentNode
@@ -449,6 +449,9 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           () => this.transition(currentStep, currentStep + 1)
         )
       } else {
+        this.setState({
+          isReadyToSubmitForm: false
+        })
         setTimeout(() => {
           Alert.alert(
             'Error occurred',
