@@ -18,13 +18,15 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
   }
 
   parseData = (item: any) => {
-    let amountOwed = item.amount - item.amountPaid
+    let total = parseFloat(
+      (Number(item.amount) - Number(item.sale.discount || 0)).toString()
+    ).toFixed(2)
+    let amountOwed = Number(total) - item.amountPaid
 
     return [
       {
         firstTopText: item.refId,
-        bottomLeftFirstText: `${item.user.lastName || ''} ${item.user
-          .firstName || ''}`,
+        bottomLeftFirstText: `${item.sale.contact.contactName}`,
         bottomLeftSecondText: '',
         rightTextStyle: { color: amountOwed > 0 ? color.red : color.green },
         topRightText: `\u20A6 ${amountOwed}`,

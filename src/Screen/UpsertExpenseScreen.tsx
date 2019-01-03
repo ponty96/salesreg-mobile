@@ -182,6 +182,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
     delete params['paidBy']
     delete params['id']
     delete params.expenseItems
+
     if (this.state.expenseItems) {
       params.expenseItems = this.state.expenseItems.map(expenseItem => {
         const expense = { ...expenseItem }

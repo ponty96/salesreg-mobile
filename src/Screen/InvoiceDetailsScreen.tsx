@@ -40,7 +40,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
   }
 
   renderHeader = (amount, amountPaid, sales, from) => {
-    return Number(amount) - amountPaid != 0 ? (
+    return Number(amount) - amountPaid > 0 ? (
       <Header
         title="Invoice Details"
         rightIconType="MaterialCommunityIcons"

@@ -252,8 +252,17 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
       optionValues: this.parseOptionValuesForMutation(),
       userId: this.state.userId,
       isTopRatedByMerchant:
-        this.state.isTopRatedByMerchant.toLowerCase() == 'no' ? false : true,
-      isFeatured: this.state.isFeatured.toLowerCase() == 'no' ? false : true
+        (this.state.isTopRatedByMerchant &&
+          this.state.isTopRatedByMerchant.toLowerCase() == 'no') ||
+        !this.state.isTopRatedByMerchant
+          ? false
+          : true,
+      isFeatured:
+        (this.state.isFeatured &&
+          this.state.isFeatured.toLowerCase() == 'no') ||
+        !this.state.isFeatured
+          ? false
+          : true
     }
     return {
       params: productParams,
