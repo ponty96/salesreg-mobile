@@ -67,7 +67,6 @@
     "apollo-link-error": "^1.1.0",
     "apollo-link-http": "^1.5.4",
     "apollo-link-state": "^0.4.1",
-    "apollo-link-timeout": "^1.1.10",
     "appcenter": "^1.10.0",
     "appcenter-analytics": "^1.10.0",
     "appcenter-crashes": "^1.10.0",
