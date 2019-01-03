@@ -96,6 +96,7 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
           showSearchBar
           searchBar={{
             placeholder: 'Search for a category',
+            queryText: this.state.queryText,
             onSearch: queryText => this.setState({ queryText })
           }}
         />

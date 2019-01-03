@@ -47,6 +47,7 @@ export default class ServicesScreen extends React.Component<IProps, IState> {
           showSearchBar
           searchBar={{
             placeholder: 'Search for a service',
+            queryText: this.state.queryText,
             onSearch: queryText => this.setState({ queryText })
           }}
         />
