@@ -6,7 +6,7 @@ import { withClientState } from 'apollo-link-state'
 // import { createHttpLink } from 'apollo-link-http';
 import { hasSubscription } from '@jumpn/utils-graphql'
 import absintheSocketLink from './absinthe-socket-link'
-import ApolloLinkTimeout from 'apollo-link-timeout'
+import ApolloLinkTimeout from '../Functions/timeoutLink'
 import { setContext } from 'apollo-link-context'
 import Auth from '../services/auth'
 import { authenticate } from '../graphql/resolvers/auth'
