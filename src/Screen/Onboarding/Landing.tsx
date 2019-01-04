@@ -18,6 +18,7 @@ class LandingScreen extends PureComponent<IProps> {
           horizontal
           showsHorizontalScrollIndicator={false}
           pagingEnabled
+          onMomentumScrollEnd = {() => alert('Sure')}
         >
           <Image
             source={require("../../../assets-v1/images/onboardingScreen/ecommerce.png")}
