@@ -74,6 +74,7 @@ class UpdateProductGroupOptionsScreen extends PureComponent<IProps, IState> {
             />,
             <FormStepperContainer
               formData={this.state}
+              formAction="update"
               updateValueChange={this.updateState}
               fieldErrors={this.state.fieldErrors}
               handleBackPress={() => this.props.navigation.goBack()}

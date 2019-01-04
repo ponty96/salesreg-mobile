@@ -50,6 +50,8 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
   }
 
   render() {
+    const option = this.props.navigation.getParam('option', null)
+
     return (
       <Mutation
         mutation={UpsertOptionGQL}
@@ -71,6 +73,7 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
           <AppSpinner visible={loading} />,
           <FormStepperContainer
             formData={this.state}
+            formAction={option && 'update'}
             steps={[
               {
                 stepTitle: "Let's have your option",
@@ -89,7 +92,7 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
                     name: 'isVisual',
                     type: {
                       type: 'radio',
-                      options: ['yes', 'no']
+                      options: ['Yes', 'No']
                     },
                     validators: ['required']
                   }

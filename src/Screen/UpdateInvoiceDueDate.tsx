@@ -129,6 +129,7 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
               <AppSpinner visible={loading} />
               <FormStepperContainer
                 updateValueChange={this.updateState}
+                formAction="update"
                 handleBackPress={() => this.props.navigation.goBack()}
                 formData={this.state}
                 fieldErrors={this.state.fieldErrors}

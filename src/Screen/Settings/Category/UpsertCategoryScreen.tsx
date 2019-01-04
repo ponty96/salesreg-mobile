@@ -52,6 +52,8 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
   }
 
   render() {
+    const category = this.props.navigation.getParam('category', null)
+
     return (
       <Mutation
         mutation={UpsertCategoryGQL}
@@ -73,6 +75,7 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
           <AppSpinner visible={loading} />,
           <FormStepperContainer
             formData={this.state}
+            formAction={category && 'update'}
             steps={[
               {
                 stepTitle: "Let's now describe your category",
