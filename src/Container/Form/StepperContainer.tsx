@@ -117,6 +117,7 @@ export interface FormStep {
 }
 interface IProps {
   steps: FormStep[]
+  formAction: 'create' | 'update'
   onCompleteSteps: () => void
   updateValueChange: (key: string, value: any) => void
   onError?: (key: string, error: any) => void
@@ -178,6 +179,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           onPressBackIcon={this.handleBackButtonPress}
           currentStep={this.state.currentStep}
           totalSteps={steps.length}
+          onPressTickIcon={() => this.handleButtonPress(true)}
+          showTickIcon={this.props.formAction == 'update' ? true : false}
           showBottomBorder={this.state.showHeaderBorder}
         />
 
@@ -198,10 +201,16 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         </KeyboardAwareScrollView>
 
         <View style={[styles.footer, btnViewStyle]}>
+          <Text
+            onPress={() => this.props.handleBackPress()}
+            style={styles.cancelText}
+          >
+            Cancel
+          </Text>
           <ButtonAtom
             btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
               'Next'}`}
-            onPress={this.handleButtonPress}
+            onPress={() => this.handleButtonPress(false)}
             faded={!this.getValidity() ? true : false}
             type="secondary"
             icon={this.getButtonIcon()}
@@ -241,7 +250,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     return true
   }
 
-  handleButtonPress = () => {
+  handleButtonPress = (quickSave?: boolean) => {
     let imageValidity = this.checkImageUploadingState()
 
     if (!imageValidity) {
@@ -254,7 +263,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     } else {
       this.updateStepValidity(() => {
         if (this.getValidity() && imageValidity) {
-          this.onCtaButtonPress()
+          this.onCtaButtonPress(quickSave)
         } else {
           Alert.alert(
             'Error Occurred',
@@ -287,13 +296,19 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     }
   }
 
-  onCtaButtonPress = async () => {
+  onCtaButtonPress = async (quickSave?: boolean) => {
     const { currentStep } = this.state
-    if (currentStep == this.getSteps(this.props.steps).length) {
+
+    if (quickSave) {
       this.setState({ isReadyToSubmitForm: true })
       this.props.onCompleteSteps()
     } else {
-      this.transition(currentStep, currentStep + 1)
+      if (currentStep == this.getSteps(this.props.steps).length) {
+        this.setState({ isReadyToSubmitForm: true })
+        this.props.onCompleteSteps()
+      } else {
+        this.transition(currentStep, currentStep + 1)
+      }
     }
   }
 
@@ -743,8 +758,9 @@ const styles = StyleSheet.create({
   },
   footer: {
     width: '100%',
-    alignItems: 'flex-end',
-    justifyContent: 'flex-end',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
     paddingVertical: 16,
     elevation: 7,
@@ -756,5 +772,10 @@ const styles = StyleSheet.create({
     shadowRadius: 5,
     shadowOpacity: 1.0,
     backgroundColor: '#fff'
+  },
+  cancelText: {
+    fontFamily: 'AvenirNext-DemiBold',
+    fontSize: 16,
+    color: color.button
   }
 })

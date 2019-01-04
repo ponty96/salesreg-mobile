@@ -97,6 +97,7 @@ export default class EditBusinessProfileScreen extends Component<
           <AppSpinner visible={loading} key="3344-ar%^&" />,
           <FormStepperContainer
             key="&&*44-ar%^&"
+            formAction="update"
             formData={this.state}
             steps={[
               {

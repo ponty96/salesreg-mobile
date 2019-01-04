@@ -94,6 +94,8 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
       ? this.state.contactName.split(' ')[0]
       : ''
     const parsedGender = genderToPossesivePronoun(this.state.gender)
+    const contact = this.props.contact || {}
+
     return (
       <Mutation
         mutation={UpsertContactGQL}
@@ -115,6 +117,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
         {(upsertContact, { loading }) => [
           <AppSpinner visible={loading} />,
           <FormStepperContainer
+            formAction={Object.keys(contact).length > 0 && 'update'}
             formData={this.state}
             updateValueChange={this.updateState}
             handleBackPress={() => this.props.navigation.goBack()}

@@ -162,6 +162,7 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
             <AppSpinner visible={loading} key="updateProduct-1345" />,
             <FormStepperContainer
               formData={this.state}
+              formAction="update"
               updateValueChange={this.updateState}
               fieldErrors={this.state.fieldErrors}
               handleBackPress={() => this.props.navigation.goBack()}

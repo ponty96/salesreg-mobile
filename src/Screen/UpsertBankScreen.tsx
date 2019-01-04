@@ -50,6 +50,9 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
   }
 
   render() {
+    const bank = this.props.navigation.getParam('bank', {}),
+      _bank = bank || {}
+
     return (
       <Mutation
         mutation={UpsertBankGQL}
@@ -71,6 +74,7 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
           <FormStepperContainer
             key="***43345"
             formData={this.state}
+            formAction={Object.keys(_bank).length > 0 && 'update'}
             steps={[
               {
                 stepTitle: `What about your transactions?`,

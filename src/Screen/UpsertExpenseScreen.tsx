@@ -73,6 +73,8 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
   }
 
   render() {
+    const expense = this.props.navigation.getParam('expense', null)
+
     return (
       <Mutation
         mutation={UpsertExpenseGQL}
@@ -94,6 +96,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
           <AppSpinner visible={loading} />,
           <FormStepperContainer
             formData={this.state}
+            formAction={expense && 'update'}
             steps={[
               {
                 stepTitle: "Let's now describe your expense",
