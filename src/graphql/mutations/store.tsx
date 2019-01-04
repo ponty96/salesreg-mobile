@@ -198,6 +198,18 @@ export const UpdateProductGroupOptionsGQL = gql`
         key
         message
       }
+      data {
+        ... on ProductGroup {
+          id
+          title
+          options {
+            optionId: id
+            optionName: name
+            title: name
+            id
+          }
+        }
+      }
     }
   }
 `
