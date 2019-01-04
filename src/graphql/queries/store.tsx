@@ -123,6 +123,7 @@ export const ListCompanyOptionsGQL = gql`
       edges {
         node {
           id
+          isVisual
           name
         }
       }

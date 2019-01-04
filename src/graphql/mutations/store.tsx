@@ -180,6 +180,7 @@ export const UpsertOptionGQL = gql`
       data {
         ... on Option {
           id
+          isVisual
           name
         }
       }
