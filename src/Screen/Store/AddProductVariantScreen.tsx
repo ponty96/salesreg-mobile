@@ -17,6 +17,7 @@ import {
   renderTagStep
 } from './utilities/productCreateSteps'
 import { UserContext } from '../../context/UserContext'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -65,8 +66,7 @@ const DEFAULT_PRODUCT_PARAMS = {
   sku: 0,
   minimumSku: 0,
   price: '',
-  featuredImage:
-    'https://cdn2.jomashop.com/media/catalog/product/cache/1/watermark/490x490/0a1186946c551c1cc1f1a1120b7bd9a0/h/u/hublot-big-bang-mens-watch-301.px.130.rx.174.jpg',
+  featuredImage: '',
   images: [],
   name: '',
   optionValues: [],
@@ -332,10 +332,22 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
 
   onCompleted = async res => {
     const {
-      createProduct: { success, fieldErrors }
+      createProduct: { success, fieldErrors, data }
     } = res
     if (success) {
-      this.props.navigation.navigate('Products')
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: 'Products'
+          }),
+          NavigationActions.navigate({
+            routeName: 'ProductDetails',
+            params: { product: data }
+          })
+        ]
+      })
+      this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }

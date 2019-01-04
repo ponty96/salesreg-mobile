@@ -38,11 +38,6 @@ export const UpdateSaleOrderStatusGQL = gql`
               costPrice
               featuredImage
             }
-            service {
-              name
-              id
-              featuredImage
-            }
           }
           date
         }
@@ -80,10 +75,6 @@ export const UpdatePurchaseOrderStatusGQL = gql`
               featuredImage
               id
               costPrice
-            }
-            service {
-              name
-              id
             }
           }
         }
@@ -127,11 +118,6 @@ export const UpsertSaleOrder = gql`
               name
               id
               costPrice
-              featuredImage
-            }
-            service {
-              name
-              id
               featuredImage
             }
           }
@@ -187,11 +173,6 @@ export const UpdateInvoice = gql`
                 name
                 id
                 costPrice
-                featuredImage
-              }
-              service {
-                name
-                id
                 featuredImage
               }
             }

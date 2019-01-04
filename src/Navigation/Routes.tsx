@@ -28,11 +28,6 @@ import UpdateProductGroupOptionsScreen from '../Screen/Store/UpdateProductGroupO
 import AddProductVariantScreen from '../Screen/Store/AddProductVariantScreen'
 import UpsertProductRestockScreen from '../Screen/Store/UpsertProductRestockScreen'
 
-// Service Screens
-import UpsertServiceScreen from '../Screen/Store/UpsertServiceScreen'
-import ServiceDetailsScreen from '../Screen/Store/ServiceDetailsScreen'
-import ServicesScreen from '../Screen/Store/ServicesScreen'
-
 // Category Screens
 import CategoriesScreen from '../Screen/Settings/Category/CategoriesScreen'
 import UpsertCategoryScreen from '../Screen/Settings/Category/UpsertCategoryScreen'
@@ -147,9 +142,6 @@ const businessStack = StackNavigator(
     Products: {
       screen: ProductScreen
     },
-    Services: {
-      screen: ServicesScreen
-    },
     CreateProduct: {
       screen: CreateProductScreen
     },
@@ -160,8 +152,6 @@ const businessStack = StackNavigator(
     ProductDetails: {
       screen: ProductDetailsScreen
     },
-    UpsertService: UpsertServiceScreen,
-    ServicesDetails: ServiceDetailsScreen,
 
     Categories: CategoriesScreen,
     UpsertCategory: UpsertCategoryScreen,
@@ -201,7 +191,7 @@ const businessStack = StackNavigator(
     navigationOptions: ({ navigation }: any) => ({
       header: (
         <Header
-          title="Products & Services"
+          title="Products"
           // tslint:disable-next-line:jsx-no-lambda
           onPressLeftIcon={() => {
             navigation.navigate('DrawerToggle')

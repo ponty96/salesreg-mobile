@@ -8,6 +8,7 @@ interface IProps {
   queryText?: string
   onSearch?: (queryText: string) => void
   placeholder?: string
+  containerStyle?: object
 }
 
 interface IState {
@@ -15,6 +16,10 @@ interface IState {
 }
 
 export class SearchAtom extends React.PureComponent<IProps, IState> {
+  static defaultProps = {
+    containerStyle: {}
+  }
+
   state = {
     isFocused: false
   }
@@ -24,6 +29,7 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
       <Item
         style={[
           styles.searchItem,
+          this.props.containerStyle,
           this.state.isFocused ? { backgroundColor: color.searchBoxActive } : {}
         ]}
       >
@@ -45,7 +51,7 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
           onChangeText={value => this.props.onSearch(value)}
           onSubmitEditing={() => this.props.onSearch(this.props.queryText)}
           value={this.props.queryText}
-          style={{ textAlign: 'center' }}
+          style={styles.inputText}
         />
       </Item>
     )
@@ -67,5 +73,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8
+  },
+  inputText: {
+    textAlign: 'center',
+    marginTop: -3,
+    fontFamily: 'AvenirNext-Regular'
   }
 })

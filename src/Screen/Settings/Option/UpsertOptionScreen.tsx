@@ -16,6 +16,7 @@ interface IState {
   name: string
   companyId: string
   fieldErrors: any
+  isVisual: string
   __typename?: any
   company?: any
 }
@@ -27,6 +28,7 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
 
   state = {
     name: '',
+    isVisual: '',
     companyId: '',
     fieldErrors: null
   }
@@ -81,6 +83,15 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
                       type: 'input',
                       keyboardType: 'default'
                     }
+                  },
+                  {
+                    label: `Should ${this.state.name || 'it'} be visual?`,
+                    name: 'isVisual',
+                    type: {
+                      type: 'radio',
+                      options: ['yes', 'no']
+                    },
+                    validators: ['required']
                   }
                 ],
                 buttonTitle: 'Done'
