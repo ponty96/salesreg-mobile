@@ -109,6 +109,7 @@
     "redux": "^4.0.1",
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.3.0",
+    "rn-viewpager": "^1.2.9",
     "tslint-config-prettier": "^1.12.0",
     "tslint-react-recommended": "^1.0.15"
   },
