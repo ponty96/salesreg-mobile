@@ -73,58 +73,6 @@ export const ListCompanyProductsGQL = gql`
   }
 `
 
-export const SearchProductsByName = gql`
-  query searchProductsByName($companyId: Uuid!, $queryText: String!) {
-    searchProductsByName(companyId: $companyId, query: $queryText) {
-      id
-      name
-    }
-  }
-`
-
-export const ListCompanyServicesGQL = gql`
-  query listCompanyServices(
-    $companyId: Uuid!
-    $after: String
-    $first: Int
-    $queryText: String!
-  ) {
-    listCompanyServices(
-      companyId: $companyId
-      after: $after
-      first: $first
-      query: $queryText
-    ) {
-      pageInfo {
-        endCursor
-        hasNextPage
-        hasPreviousPage
-      }
-      edges {
-        node {
-          description
-          id
-          name
-          price
-          categories {
-            id
-            title
-          }
-          totalTimesOrdered
-          isFeatured
-          isTopRatedByMerchant
-          featuredImage
-          images
-          tags {
-            name
-            id
-          }
-        }
-      }
-    }
-  }
-`
-
 export const ListCompanyCategoriesGQL = gql`
   query listCompanyCategories(
     $companyId: Uuid!
@@ -251,17 +199,13 @@ export const SearchOptionsByNameGQL = gql`
   }
 `
 
-export const SearchProductsAndServicesByName = gql`
-  query searchProductsAndServicesByName(
-    $queryText: String!
-    $companyId: Uuid!
-  ) {
-    searchProductsAndServicesByName(companyId: $companyId, query: $queryText) {
+export const SearchProductsByName = gql`
+  query searchProductsByName($queryText: String!, $companyId: Uuid!) {
+    searchProductsByName(companyId: $companyId, query: $queryText) {
       id
       name
       price
       sku
-      type
     }
   }
 `

@@ -4,7 +4,7 @@ import InputAtom from './InputAtom'
 import AsyncPickerAtom from './AsyncPickerAtom'
 import ButtonAtom from './ButtonAtom'
 import Icon from '../Icon'
-import { SearchProductsAndServicesByName } from '../../graphql/queries/store'
+import { SearchProductsByName } from '../../graphql/queries/store'
 import { color } from '../../Style/Color'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 
@@ -12,8 +12,6 @@ interface ISalesInput {
   productId?: string
   quantity: string
   name?: string
-  type?: string
-  serviceId?: string
   unitPrice: string
 }
 
@@ -39,18 +37,15 @@ const AddSalesOrderItem = (props: SalesItem) => (
       onPress={() => props.onTrashItem(props.index)}
     />
     <AsyncPickerAtom
-      graphqlQuery={SearchProductsAndServicesByName}
-      graphqlQueryResultKey="searchProductsAndServicesByName"
+      graphqlQuery={SearchProductsByName}
+      graphqlQueryResultKey="searchProductsByName"
       label={`Item ${props.index + 1}`}
       type="single"
       placeholder={
         props.item.name.length > 0 ? props.item.name : 'Touch to choose'
       }
       selected={{
-        id:
-          props.item.type == 'product'
-            ? props.item.productId
-            : props.item.serviceId
+        id: props.item.productId
       }}
       handleSelection={val => {
         props.handleValueChange(props.index, 'item', val)
@@ -108,9 +103,7 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
       key == 'item'
         ? {
             name: value.name,
-            productId: value.type == 'Product' ? value.id : null,
-            serviceId: value.type == 'Service' ? value.id : null,
-            type: value.type.toLowerCase(),
+            productId: value.id,
             unitPrice: value.price
           }
         : { [key]: value }
@@ -128,10 +121,8 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
     const expenseItems = this.props.salesItems.concat([
       {
         productId: null,
-        serviceId: null,
         name: '',
         unitPrice: '0.00',
-        type: '',
         quantity: ''
       }
     ])

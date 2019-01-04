@@ -253,6 +253,8 @@ class GenericListIndex extends React.Component<IProps, IState> {
               ? this.parseSections(data[graphqlQueryResultKey])
               : []
 
+          console.log('An error ', error)
+
           return (
             <View style={styles.container}>
               <AppSpinner

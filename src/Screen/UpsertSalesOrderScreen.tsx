@@ -21,8 +21,6 @@ interface ISalesInput {
   productId?: string
   quantity: String
   name?: string
-  type?: string
-  serviceId?: String
   unitPrice: String
 }
 
@@ -60,8 +58,6 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
         productId: null,
         quantity: '',
         name: '',
-        type: '',
-        serviceId: null,
         unitPrice: '0.00'
       }
     ],
@@ -213,11 +209,9 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
 
     const items = this.state.items.map(item => {
       const param = { ...item }
-      delete param.type
       delete param.name
 
       if (!param.productId) delete param.productId
-      if (!param.serviceId) delete param.serviceId
       return param
     })
 
