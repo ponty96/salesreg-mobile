@@ -61,7 +61,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
           <View style={styles.section}>
             <View style={styles.dot} />
             <Text style={[styles.text, { marginTop: -4 }]}>
-              Use the products and services menu to manage your inventory
+              Use the products menu to manage your inventory
             </Text>
           </View>
           <View style={styles.section}>
