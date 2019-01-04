@@ -2,7 +2,8 @@ import React, { PureComponent } from 'react'
 import { View, Text, StyleSheet } from 'react-native'
 
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
-import OnboardingContainer from '../../Container/OnboardingContainer'
+import { color } from '../../Style/Color';
+// import OnboardingContainer from '../../Container/OnboardingContainer'
 
 interface IProps {
   navigation: any
@@ -12,7 +13,7 @@ class LandingScreen extends PureComponent<IProps> {
   render() {
     const { navigate } = this.props.navigation
     return (
-      <OnboardingContainer>
+    //   <OnboardingContainer>
         <View style={styles.container}>
           <ButtonAtom
             btnText="Get Started"
@@ -29,7 +30,7 @@ class LandingScreen extends PureComponent<IProps> {
             hideIcon={true}
           />
         </View>
-      </OnboardingContainer>
+    //   </OnboardingContainer>
     )
   }
 }
@@ -48,6 +49,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center',
     justifyContent: 'flex-end',
-    paddingBottom: 24
+    paddingBottom: 24,
+    backgroundColor: color.button
   }
 })
