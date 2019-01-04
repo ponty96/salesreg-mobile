@@ -28,14 +28,7 @@
  */
 
 import React from 'react'
-import {
-  Text,
-  StyleSheet,
-  View,
-  BackHandler,
-  Alert,
-  ScrollView
-} from 'react-native'
+import { Text, StyleSheet, View, BackHandler, Alert } from 'react-native'
 import { Container, Form } from 'native-base'
 import { color } from '../../Style/Color'
 import { connect } from 'react-redux'
@@ -61,6 +54,7 @@ import {
   validateField
 } from '../../Functions/formStepperValidators'
 import AddRestockItemsList from '../../Atom/Form/AddRestockItems'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 
 interface FieldType {
   type:
@@ -178,8 +172,6 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         shadowOpacity: this.state.hasEndFormEndBeenReached ? 0 : 1.0
       }
 
-    console.log('The steps is ', this.state.currentStep)
-
     return (
       <Container style={{ flex: 1 }}>
         <FormHeader
@@ -188,7 +180,8 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           totalSteps={steps.length}
           showBottomBorder={this.state.showHeaderBorder}
         />
-        <ScrollView
+
+        <KeyboardAwareScrollView
           onScroll={this.handleScroll}
           scrollEventThrottle={400}
           contentContainerStyle={styles.container}
@@ -202,7 +195,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
             </Text>
           )}
           <Form>{this.renderCurrentStepFormFields()}</Form>
-        </ScrollView>
+        </KeyboardAwareScrollView>
 
         <View style={[styles.footer, btnViewStyle]}>
           <ButtonAtom

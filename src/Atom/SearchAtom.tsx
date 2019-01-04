@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native'
+import { StyleSheet, Platform } from 'react-native'
 import React from 'react'
 import { Item, Input } from 'native-base'
 import Icon from './Icon'
@@ -51,7 +51,10 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
           onChangeText={value => this.props.onSearch(value)}
           onSubmitEditing={() => this.props.onSearch(this.props.queryText)}
           value={this.props.queryText}
-          style={styles.inputText}
+          style={[
+            styles.inputText,
+            { marginTop: Platform.OS == 'android' ? 0 : -3 }
+          ]}
         />
       </Item>
     )
@@ -75,8 +78,6 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   inputText: {
-    textAlign: 'center',
-    marginTop: -3,
     fontFamily: 'AvenirNext-Regular'
   }
 })
