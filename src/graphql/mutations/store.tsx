@@ -150,51 +150,6 @@ export const DeleteProductGQL = gql`
   }
 `
 
-export const UpsertServiceGQL = gql`
-  mutation UpsertService($serviceId: Uuid, $service: ServiceInput!) {
-    upsertService(service: $service, serviceId: $serviceId) {
-      success
-      fieldErrors {
-        key
-        message
-      }
-      data {
-        ... on Service {
-          description
-          id
-          name
-          price
-          categories {
-            id
-            title
-          }
-          totalTimesOrdered
-          isFeatured
-          isTopRatedByMerchant
-          featuredImage
-          images
-          tags {
-            name
-            id
-          }
-        }
-      }
-    }
-  }
-`
-
-export const DeleteServiceGQL = gql`
-  mutation deleteService($serviceId: Uuid!) {
-    deleteService(serviceId: $serviceId) {
-      success
-      fieldErrors {
-        key
-        message
-      }
-    }
-  }
-`
-
 export const UpsertCategoryGQL = gql`
   mutation UpsertCategory($categoryId: Uuid, $category: CategoryInput!) {
     upsertCategory(categoryId: $categoryId, category: $category) {
@@ -225,6 +180,7 @@ export const UpsertOptionGQL = gql`
       data {
         ... on Option {
           id
+          isVisual
           name
         }
       }
@@ -242,6 +198,18 @@ export const UpdateProductGroupOptionsGQL = gql`
       fieldErrors {
         key
         message
+      }
+      data {
+        ... on ProductGroup {
+          id
+          title
+          options {
+            optionId: id
+            optionName: name
+            title: name
+            id
+          }
+        }
       }
     }
   }

@@ -75,11 +75,6 @@ export const ListCompanySalesGQL = gql`
               costPrice
               featuredImage
             }
-            service {
-              name
-              id
-              featuredImage
-            }
           }
           date
         }
@@ -126,11 +121,6 @@ export const ListCompanyInvoicesGQL = gql`
                 name
                 id
                 costPrice
-                featuredImage
-              }
-              service {
-                name
-                id
                 featuredImage
               }
             }

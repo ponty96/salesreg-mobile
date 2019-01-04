@@ -104,6 +104,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
         queryText: this.props.queryText.trim()
       })
     } else if (
+      typeof this.props.queryText == 'string' &&
       this.props.queryText.trim().length == 0 &&
       this.props.queryText != prevProps.queryText
     ) {
@@ -283,7 +284,9 @@ class GenericListIndex extends React.Component<IProps, IState> {
                 onRefresh={() =>
                   refetch({
                     variables: {
-                      queryText: this.props.queryText,
+                      queryText: this.props.queryText
+                        ? this.props.queryText.trim()
+                        : '',
                       companyId: `${business && business.id}`,
                       after: null,
                       first: 5,
@@ -291,7 +294,15 @@ class GenericListIndex extends React.Component<IProps, IState> {
                     }
                   })
                 }
-                contentContainerStyle={error ? { flex: 1 } : {}}
+                contentContainerStyle={
+                  error
+                    ? {
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }
+                    : {}
+                }
                 refreshing={
                   (error ||
                     (Object.keys(data || {}).length > 0 &&
@@ -323,18 +334,18 @@ class GenericListIndex extends React.Component<IProps, IState> {
                       <EmptyList
                         type={{
                           Text:
-                            queryText && queryText.length > 0
+                            queryText && queryText.trim().length > 0
                               ? `No search results found for "${queryText}"`
                               : emptyListText,
                           verifyMainList:
                             (this.props.showFab && !queryText) ||
                             (this.props.showFab &&
                               queryText &&
-                              queryText.length == 0)
+                              queryText.trim().length == 0)
                               ? 'main'
                               : '',
                           headerText:
-                            queryText && queryText.length > 0
+                            queryText && queryText.trim().length > 0
                               ? `"${queryText}" not found`
                               : headerText
                         }}

@@ -8,6 +8,7 @@ import { ListCompanyProductsGQL } from '../../graphql/queries/store'
 import { UpdateProductGroupOptionsGQL } from '../../graphql/mutations/store'
 import { UserContext } from '../../context/UserContext'
 import { SearchOptionsByNameGQL } from '../../graphql/queries/store'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -124,12 +125,50 @@ class UpdateProductGroupOptionsScreen extends PureComponent<IProps, IState> {
     }
   }
 
+  handleNavigation = products => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Products'
+        }),
+        NavigationActions.navigate({
+          routeName: `ProductDetails`,
+          params: products
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+  }
+
   onCompleted = async res => {
     const {
-      updateProductGroupOptions: { success, fieldErrors }
+      updateProductGroupOptions: { success, fieldErrors, data }
     } = res
+    const product = this.props.navigation.getParam('product')
+
+    let optObj = product.optionValues.reduce((acc, v) => {
+      acc[v.option.name.toLowerCase()] = v.name
+      return acc
+    }, {})
+
     if (success) {
-      this.props.navigation.navigate('Products')
+      let _product = {
+        ...product,
+        optionValues: this.state.options.map(opt => ({
+          name:
+            opt.optionName.toLowerCase() in optObj
+              ? optObj[opt.optionName.toLowerCase()]
+              : null,
+          id: opt.id,
+          option: {
+            id: opt.id,
+            name: opt.optionName
+          }
+        })),
+        productGroup: data
+      }
+      this.handleNavigation({ product: _product })
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }

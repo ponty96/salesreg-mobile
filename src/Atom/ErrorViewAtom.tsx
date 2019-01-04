@@ -21,7 +21,7 @@ const ErrorViewAtom = (props: IProps) =>
         <Icon name="alert-circle" type="Feather" style={styles.icon} />
         <Text style={styles.text}>
           {props.preferredErrorMessage ||
-            `Error occurred while connecting, tap or pull down to refresh`}
+            `Error occurred while connecting, pull down to refresh`}
         </Text>
       </View>
     </TouchableOpacity>
@@ -48,7 +48,8 @@ const styles = StyleSheet.create({
   text: {
     color: color.textColor,
     textAlign: 'center',
-    marginTop: 20
+    marginTop: 20,
+    fontFamily: 'AvenirNext-Medium'
   },
   icon: {
     fontSize: 90,

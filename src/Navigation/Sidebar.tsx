@@ -186,12 +186,6 @@ export default class SideBar extends PureComponent<IProps, IState> {
                   routeName: 'Products',
                   iconName: 'md-cart',
                   iconType: 'Ionicons'
-                },
-                {
-                  title: 'Services',
-                  routeName: 'Services',
-                  iconName: 'basket-fill',
-                  iconType: 'MaterialCommunityIcons'
                 }
               ]}
             />
