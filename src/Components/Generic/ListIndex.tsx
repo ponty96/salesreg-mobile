@@ -104,7 +104,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
         queryText: this.props.queryText.trim()
       })
     } else if (
-      typeof this.props.queryText == "string" &&
+      typeof this.props.queryText == 'string' &&
       this.props.queryText.trim().length == 0 &&
       this.props.queryText != prevProps.queryText
     ) {
@@ -294,7 +294,15 @@ class GenericListIndex extends React.Component<IProps, IState> {
                     }
                   })
                 }
-                contentContainerStyle={error ? { flex: 1 } : {}}
+                contentContainerStyle={
+                  error
+                    ? {
+                        flex: 1,
+                        alignItems: 'center',
+                        justifyContent: 'center'
+                      }
+                    : {}
+                }
                 refreshing={
                   (error ||
                     (Object.keys(data || {}).length > 0 &&
