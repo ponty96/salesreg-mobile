@@ -203,6 +203,7 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
               placeholder="Search"
               queryText={this.state.queryText}
               onSearch={this.onSearch}
+              containerStyle={{ marginRight: 16 }}
             />
             {!this.props.loading && this.state.list.length > 0 ? (
               <FlatList

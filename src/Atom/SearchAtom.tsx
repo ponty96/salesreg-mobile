@@ -8,6 +8,7 @@ interface IProps {
   queryText?: string
   onSearch?: (queryText: string) => void
   placeholder?: string
+  containerStyle?: object
 }
 
 interface IState {
@@ -15,6 +16,10 @@ interface IState {
 }
 
 export class SearchAtom extends React.PureComponent<IProps, IState> {
+  static defaultProps = {
+    containerStyle: {}
+  }
+
   state = {
     isFocused: false
   }
@@ -24,6 +29,7 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
       <Item
         style={[
           styles.searchItem,
+          this.props.containerStyle,
           this.state.isFocused ? { backgroundColor: color.searchBoxActive } : {}
         ]}
       >
