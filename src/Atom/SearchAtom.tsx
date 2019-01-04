@@ -45,7 +45,7 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
           onChangeText={value => this.props.onSearch(value)}
           onSubmitEditing={() => this.props.onSearch(this.props.queryText)}
           value={this.props.queryText}
-          style={{ textAlign: 'center' }}
+          style={styles.inputText}
         />
       </Item>
     )
@@ -67,5 +67,10 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8
+  },
+  inputText: {
+    textAlign: 'center',
+    marginTop: -3,
+    fontFamily: 'AvenirNext-Regular'
   }
 })

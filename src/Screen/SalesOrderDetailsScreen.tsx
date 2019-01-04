@@ -96,8 +96,8 @@ class SalesOrderDetailsScreen extends Component<IProps> {
           <View style={styles.invoicebuttomContainer}>
             <Text style={styles.invoiceText}>Invoice</Text>
             <Icon
-              name="ios-arrow-forward"
-              type="Ionicons"
+              name="chevron-small-right"
+              type="Entypo"
               style={styles.invoiceIcon}
             />
           </View>
@@ -125,7 +125,7 @@ const styles = StyleSheet.create({
   invoiceText: {
     fontSize: 16,
     color: color.button,
-    marginRight: 10
+    fontFamily: 'AvenirNext-Regular'
   },
   invoiceIcon: {
     fontSize: 35,
