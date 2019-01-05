@@ -11,6 +11,9 @@ interface IProps {
 interface IState {
   messageTitle: string;
   messageBody: string;
+  isFirstImage?: boolean;
+  isSecondImage?: boolean;
+  isThirdImage?: boolean;
 }
 
 class LandingScreen extends PureComponent<IProps, IState> {
@@ -27,7 +30,10 @@ class LandingScreen extends PureComponent<IProps, IState> {
     );
     this.setState({
       messageTitle: screenMessage.title,
-      messageBody: screenMessage.body
+      messageBody: screenMessage.body,
+      isFirstImage: screenMessage.isFirstImage,
+      isSecondImage: screenMessage.isSecondImage,
+      isThirdImage: screenMessage.isThirdImage
     });
   };
 
@@ -39,7 +45,8 @@ class LandingScreen extends PureComponent<IProps, IState> {
         message = {
           title: "You now have your own \nE-commerce website",
           body:
-            "Let customers view your products, make \npurchase and pay easily from anywhere"
+            "Let customers view your products, make \npurchase and pay easily from anywhere",
+          isFirstImage: true
         };
         break;
 
@@ -47,7 +54,8 @@ class LandingScreen extends PureComponent<IProps, IState> {
         message = {
           title: "Package delivery \nto your customers",
           body:
-            "Get items picked up and delivered to your \ncustomers, and get paid on delivery"
+            "Get items picked up and delivered to your \ncustomers, and get paid on delivery",
+          isSecondImage: true
         };
         break;
 
@@ -55,7 +63,8 @@ class LandingScreen extends PureComponent<IProps, IState> {
         message = {
           title: "Let customers always find \nwhat they need",
           body:
-            "Keep your stocks up to date. Get restock \nreminders before they run out on you"
+            "Keep your stocks up to date. Get restock \nreminders before they run out on you",
+          isThirdImage: true
         };
     }
     return message;
@@ -63,7 +72,10 @@ class LandingScreen extends PureComponent<IProps, IState> {
 
   state = {
     messageTitle: "",
-    messageBody: ""
+    messageBody: "",
+    isFirstImage: false,
+    isSecondImage: false,
+    isThirdImage: false
   };
 
   render() {
@@ -94,10 +106,29 @@ class LandingScreen extends PureComponent<IProps, IState> {
           //   style={{ borderWidth: 1, borderColor: "white" }}
         />
 
+        <View style={styles.indicatorsWrapper}>
+          <View
+            style={[
+              styles.indicator,
+              this.state.isFirstImage && { backgroundColor: color.secondary }
+            ]}
+          />
+          <View
+            style={[
+              styles.indicator,
+              this.state.isSecondImage && { backgroundColor: color.secondary }
+            ]}
+          />
+          <View
+            style={[
+              styles.indicator,
+              this.state.isThirdImage && { backgroundColor: color.secondary }
+            ]}
+          />
+        </View>
         <Text style={[styles.haveAccount, styles.messageTitle]}>
           {messageTitle}
         </Text>
-
         <Text style={[styles.haveAccount, styles.messageBody]}>
           {messageBody}
         </Text>
@@ -107,9 +138,7 @@ class LandingScreen extends PureComponent<IProps, IState> {
           onPress={() => navigate("Signup")}
           type="primary"
         />
-
         <Text style={styles.haveAccount}>Already have an account?</Text>
-
         <ButtonAtom
           btnText="LOGIN"
           transparent={true}
@@ -147,5 +176,16 @@ const styles = StyleSheet.create({
   messageBody: {
     marginTop: 0,
     marginBottom: 36
+  },
+  indicator: {
+    height: 8,
+    width: 16,
+    borderColor: color.active,
+    borderRadius: 5,
+    borderWidth: 1,
+    marginRight: 8
+  },
+  indicatorsWrapper: {
+    flexDirection: "row"
   }
 });
