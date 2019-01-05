@@ -3,20 +3,14 @@ import { View, Text, StyleSheet, FlatList, Image } from "react-native";
 
 import ButtonAtom from "../../Atom/Form/ButtonAtom";
 import { color } from "../../Style/Color";
-// import OnboardingContainer from '../../Container/OnboardingContainer'
 
 interface IProps {
   navigation: any;
 }
 
 interface IState {
-  screen: {
-    id: number;
-    message: {
-      title: string;
-      body: string;
-    };
-  };
+  messageTitle: string;
+  messageBody: string;
 }
 
 class LandingScreen extends PureComponent<IProps, IState> {
@@ -26,20 +20,55 @@ class LandingScreen extends PureComponent<IProps, IState> {
     require("../../../assets-v1/images/onboardingScreen/restock.png")
   ];
   viewabilityConfig = { viewAreaCoveragePercentThreshold: 50 };
-  state = {
-    screen: {
-      id: 0,
-      message: {
-        title: "You now have your own \nE-commerce website",
-        body:
-          "Let customers view your products, make \npurchase and pay easily from anywhere"
-      }
+
+  imageDidChange = info => {
+    const screenMessage: any = this.getScreenMessage(
+      info.viewableItems[0].index
+    );
+    this.setState({
+      messageTitle: screenMessage.title,
+      messageBody: screenMessage.body
+    });
+  };
+
+  getScreenMessage = screenIndex => {
+    let message = {};
+
+    switch (screenIndex) {
+      case 0:
+        message = {
+          title: "You now have your own \nE-commerce website",
+          body:
+            "Let customers view your products, make \npurchase and pay easily from anywhere"
+        };
+        break;
+
+      case 1:
+        message = {
+          title: "Package delivery \nto your customers",
+          body:
+            "Get items picked up and delivered to your \ncustomers, and get paid on delivery"
+        };
+        break;
+
+      case 2:
+        message = {
+          title: "Let customers always find \nwhat they need",
+          body:
+            "Keep your stocks up to date. Get restock \nreminders before they run out on you"
+        };
     }
+    return message;
+  };
+
+  state = {
+    messageTitle: "",
+    messageBody: ""
   };
 
   render() {
     const { navigate } = this.props.navigation;
-    // const {screen} = this.state
+    const { messageTitle, messageBody } = this.state;
 
     return (
       <View style={styles.container}>
@@ -60,16 +89,17 @@ class LandingScreen extends PureComponent<IProps, IState> {
             />
           )}
           keyExtractor={index => String(index)}
-          //   onViewableItemsChanged={info => alert(JSON.stringify(info))}
+          onViewableItemsChanged={this.imageDidChange}
           viewabilityConfig={this.viewabilityConfig}
           //   style={{ borderWidth: 1, borderColor: "white" }}
         />
 
         <Text style={[styles.haveAccount, styles.messageTitle]}>
-          {this.state.screen.message.title}
+          {messageTitle}
         </Text>
+
         <Text style={[styles.haveAccount, styles.messageBody]}>
-          {this.state.screen.message.body}
+          {messageBody}
         </Text>
 
         <ButtonAtom
