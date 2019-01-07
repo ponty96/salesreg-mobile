@@ -78,8 +78,7 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
                 section: 'Manage Variant Options',
                 routeName: 'Options',
                 showRightCaret: true,
-                description:
-                  'Manage your item variant options like size, color e.tc.',
+                description: 'Manage variant options e.g size, color',
                 icon: 'package-variant',
                 iconType: 'MaterialCommunityIcons'
               },
