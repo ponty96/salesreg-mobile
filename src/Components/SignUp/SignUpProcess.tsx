@@ -44,7 +44,7 @@ export default class SignUpProcess extends React.PureComponent<IProps> {
       <OnboardingContainer>
         <View style={styles.container}>
           <Image
-            source={require('../../../assets-v1/icons/small-logo.png')}
+            source={require('../../../assets-v1/icons/logo.png')}
             style={styles.logo}
           />
           <Text style={styles.header}>{this.props.header}</Text>
@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
     paddingVertical: 32
   },
   logo: {
-    alignSelf: 'flex-start',
+    alignSelf: 'flex-end',
     width: 60,
     height: 60,
     marginLeft: -4
