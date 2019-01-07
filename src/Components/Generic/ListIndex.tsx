@@ -422,6 +422,7 @@ const styles = StyleSheet.create({
   footerWrapper: {
     backgroundColor: color.grey,
     marginHorizontal: 10,
+    borderRadius: 5,
     paddingVertical: 6
   },
   amount: {
