@@ -1,5 +1,12 @@
 import React, { PureComponent } from "react";
-import { View, Text, StyleSheet, FlatList, Image } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  FlatList,
+  Image,
+  ImageSourcePropType
+} from "react-native";
 
 import ButtonAtom from "../../Atom/Form/ButtonAtom";
 import { color } from "../../Style/Color";
@@ -17,14 +24,14 @@ interface IState {
 }
 
 class LandingScreen extends PureComponent<IProps, IState> {
-  LANDING_SCREEN_IMAGES = [
+  LANDING_SCREEN_IMAGES: ImageSourcePropType[] = [
     require("../../../assets-v1/images/onboardingScreen/ecommerce.png"),
     require("../../../assets-v1/images/onboardingScreen/delivery.png"),
     require("../../../assets-v1/images/onboardingScreen/restock.png")
   ];
-  viewabilityConfig = { viewAreaCoveragePercentThreshold: 50 };
+  viewabilityConfig: object = { viewAreaCoveragePercentThreshold: 50 };
 
-  imageDidChange = info => {
+  imageDidChange = (info: any): void => {
     const screenMessage: any = this.getScreenMessage(
       info.viewableItems[0].index
     );
@@ -37,7 +44,7 @@ class LandingScreen extends PureComponent<IProps, IState> {
     });
   };
 
-  getScreenMessage = screenIndex => {
+  getScreenMessage = (screenIndex: number): object => {
     let message = {};
 
     switch (screenIndex) {
@@ -70,7 +77,7 @@ class LandingScreen extends PureComponent<IProps, IState> {
     return message;
   };
 
-  state = {
+  state: IState = {
     messageTitle: "",
     messageBody: "",
     isFirstImage: false,
@@ -92,37 +99,32 @@ class LandingScreen extends PureComponent<IProps, IState> {
           renderItem={({ item }) => (
             <Image
               source={item}
-              style={{
-                marginBottom: 8,
-                height: null,
-                flex: 1,
-                borderRadius: 8
-              }}
+              resizeMode="cover"
+              style={{ height: undefined }}
             />
           )}
           keyExtractor={index => String(index)}
           onViewableItemsChanged={this.imageDidChange}
           viewabilityConfig={this.viewabilityConfig}
-          //   style={{ borderWidth: 1, borderColor: "white" }}
         />
 
         <View style={styles.indicatorsWrapper}>
           <View
             style={[
               styles.indicator,
-              this.state.isFirstImage && { backgroundColor: color.secondary }
+              this.state.isFirstImage && styles.activeIndicator
             ]}
           />
           <View
             style={[
               styles.indicator,
-              this.state.isSecondImage && { backgroundColor: color.secondary }
+              this.state.isSecondImage && styles.activeIndicator
             ]}
           />
           <View
             style={[
               styles.indicator,
-              this.state.isThirdImage && { backgroundColor: color.secondary }
+              this.state.isThirdImage && styles.activeIndicator
             ]}
           />
         </View>
@@ -171,7 +173,8 @@ const styles = StyleSheet.create({
   },
   messageTitle: {
     fontSize: 18,
-    marginBottom: 8
+    marginBottom: 8,
+    marginTop: 16
   },
   messageBody: {
     marginTop: 0,
@@ -186,6 +189,11 @@ const styles = StyleSheet.create({
     marginRight: 8
   },
   indicatorsWrapper: {
-    flexDirection: "row"
+    flexDirection: "row",
+    marginTop: 16
+  },
+  activeIndicator: {
+    backgroundColor: color.secondary,
+    borderColor: "transparent"
   }
 });
