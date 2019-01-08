@@ -3,6 +3,7 @@ package com.salesreg;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.entria.views.RNViewOverflowPackage;
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import io.sentry.RNSentryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -33,6 +34,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new RNViewOverflowPackage(),
             new RNDeviceInfo(),
             new RNSentryPackage(),
             new SplashScreenReactPackage(),

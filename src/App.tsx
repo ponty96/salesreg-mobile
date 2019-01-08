@@ -16,6 +16,7 @@ import { appReducers } from './store/reducers'
 import setupSentry from './Functions/sentry'
 import NotificationAtom from './Atom/NotificationAtom'
 import { NotificationContext } from './context/NotificationContext'
+import ViewOverflow from 'react-native-view-overflow'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
 
@@ -33,6 +34,7 @@ export default class App extends React.Component {
       setNotificationBanner: ({ title, subtitle, style, timeout }) =>
         this.setState({
           notification: {
+            ...this.state.notification,
             title,
             subtitle,
             trigger: Date.now(),
@@ -68,21 +70,23 @@ export default class App extends React.Component {
     let { user, resetUserContext } = this.state
     return (
       // check if user is on IphoneX and use View
-      <NotificationContext.Provider value={this.state.notification}>
-        <NotificationAtom />
-        <View style={{ flex: 1, paddingTop: 0 }}>
-          <Provider store={store}>
-            <UserContext.Provider value={{ user, resetUserContext }}>
-              <ApolloProvider client={client}>
-                <Root>
-                  <StatusBar barStyle="light-content" />
-                  <Routes client={client} />
-                </Root>
-              </ApolloProvider>
-            </UserContext.Provider>
-          </Provider>
-        </View>
-      </NotificationContext.Provider>
+      <ViewOverflow style={{ flex: 1 }}>
+        <NotificationContext.Provider value={this.state.notification}>
+          <NotificationAtom />
+          <View style={{ paddingTop: 0, flex: 1 }}>
+            <Provider store={store}>
+              <UserContext.Provider value={{ user, resetUserContext }}>
+                <ApolloProvider client={client}>
+                  <Root>
+                    <StatusBar barStyle="light-content" />
+                    <Routes client={client} />
+                  </Root>
+                </ApolloProvider>
+              </UserContext.Provider>
+            </Provider>
+          </View>
+        </NotificationContext.Provider>
+      </ViewOverflow>
     )
   }
 }
