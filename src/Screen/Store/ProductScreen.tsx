@@ -68,7 +68,7 @@ export default class ProductScreen extends React.Component<IProps, IState> {
           emptyListText={`When you add products, they get listed here \nAdd products by tapping the`}
           headerText="Add products here to start making sales"
           fabRouteName="CreateProduct"
-          fabIconName="basket-fill"
+          fabIconName="package-variant"
           fabIconType="MaterialCommunityIcons"
           hideSeparator={true}
           subHeader={{
