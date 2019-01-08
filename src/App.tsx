@@ -30,12 +30,7 @@ export default class App extends React.Component {
       subtitle: '',
       trigger: Date.now(),
       timeout: 5000,
-      setNotificationBanner: (
-        title: string,
-        subtitle?: string,
-        style?: string,
-        timeout?: number
-      ) =>
+      setNotificationBanner: ({ title, subtitle, style, timeout }) =>
         this.setState({
           notification: {
             title,

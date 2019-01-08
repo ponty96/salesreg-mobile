@@ -22,6 +22,7 @@ interface IProps {
     | 'FontAwesome5'
     | 'Foundation'
     | 'Ionicons'
+    | 'AntDesign'
     | 'MaterialCommunityIcons'
     | 'MaterialIcons'
     | 'Octicons'
@@ -51,6 +52,13 @@ export default class Icon extends PureComponent<IProps> {
 
     switch (this.props.type) {
       case 'EvilIcons':
+        icon = (
+          <Text style={contentContainerStyle || {}} onPress={onPress || null}>
+            <EVILIcon style={newStyles} name={this.props.name} />
+          </Text>
+        )
+        break
+      case 'AntDesign':
         icon = (
           <Text style={contentContainerStyle || {}} onPress={onPress || null}>
             <EVILIcon style={newStyles} name={this.props.name} />

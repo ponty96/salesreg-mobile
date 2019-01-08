@@ -4,8 +4,10 @@ import {
   Easing,
   PanResponder,
   Dimensions,
+  StatusBar,
   StyleSheet,
   View,
+  Platform,
   Text
 } from 'react-native'
 import { NotificationContext } from '../context/NotificationContext'
@@ -33,6 +35,26 @@ interface IProperties {
 interface IProps extends IProperties {
   setNotificationBanner?: (IProperties) => void
 }
+
+const AppStatusBar = ({ backgroundColor, ...props }) =>
+  Platform.OS == 'ios' ? (
+    <View
+      style={[
+        styles.statusBar,
+        { backgroundColor: backgroundColor || '#00b0cf' }
+      ]}
+    >
+      <StatusBar barStyle={props.barStyle || 'light-content'} />
+    </View>
+  ) : (
+    <StatusBar
+      backgroundColor={backgroundColor || '#00b0cf'}
+      barStyle={props.barStyle || 'light-content'}
+      {...props}
+    />
+  )
+
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight
 
 class NotificationAtom extends React.PureComponent<IProps, IState> {
   constructor(props) {
@@ -260,40 +282,42 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
       currentVisibleProperties: { title, subtitle, style }
     } = this.state
     return (
-      <Animated.View
-        style={[
-          styles.container,
-          {
-            transform: [
-              { translateY: this.state.translateY },
-              { translateX: this.state.translateX }
-            ],
-            backgroundColor: this.getColor()
-          }
-        ]}
-        {...this.panResponder.panHandlers}
-      >
-        <View style={{ flexDirection: 'row' }}>
-          {style == 'success' && (
+      <React.Fragment>
+        <Animated.View
+          style={[
+            styles.container,
+            {
+              transform: [
+                { translateY: this.state.translateY },
+                { translateX: this.state.translateX }
+              ],
+              backgroundColor: this.getColor()
+            }
+          ]}
+          {...this.panResponder.panHandlers}
+        >
+          <View style={{ flexDirection: 'row' }}>
+            {style == 'success' && (
+              <Icon
+                style={[styles.successIcon, styles.icon]}
+                name="check-circle"
+                type="Feather"
+              />
+            )}
+            <View style={{ marginLeft: 20, justifyContent: 'space-between' }}>
+              <Text style={styles.title}>{title}</Text>
+              <Text style={styles.subtitle}>{subtitle}</Text>
+            </View>
+          </View>
+          {style == 'error' && (
             <Icon
               style={[styles.successIcon, styles.icon]}
-              name="check-circle"
+              name="alert-circle"
               type="Feather"
             />
           )}
-          <View style={{ marginLeft: 15, justifyContent: 'space-between' }}>
-            <Text style={styles.title}>{title}</Text>
-            <Text style={styles.subtitle}>{subtitle}</Text>
-          </View>
-        </View>
-        {style == 'error' && (
-          <Icon
-            style={[styles.successIcon, styles.icon]}
-            name="alert-circle"
-            type="Feather"
-          />
-        )}
-      </Animated.View>
+        </Animated.View>
+      </React.Fragment>
     )
   }
 }
@@ -334,5 +358,10 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'AvenirNext-Regular',
     fontSize: 14
+  },
+  statusBar: {
+    height: STATUSBAR_HEIGHT,
+    marginTop: -20,
+    zIndex: 2000
   }
 })

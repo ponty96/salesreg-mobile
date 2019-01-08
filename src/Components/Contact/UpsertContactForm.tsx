@@ -8,6 +8,7 @@ import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries } from '../../utilities/data/picker-lists'
 import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../../context/NotificationContext'
 
 interface IProps {
   navigation: any
@@ -15,6 +16,7 @@ interface IProps {
   user: any
   successRoute: string
   contactType: string
+  setNotificationBanner: (obj: any) => void
 }
 
 const genderToPossesivePronoun = gender => {
@@ -340,6 +342,10 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
           })
         ]
       })
+      this.props.setNotificationBanner({
+        title: `New contact created`,
+        subtitle: `Created customer ${this.state.contactName}`
+      })
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -349,7 +355,17 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
 
 const _UpsertContactForm = props => (
   <UserContext.Consumer>
-    {({ user }) => <UpsertContactForm {...props} user={user} />}
+    {({ user }) => (
+      <NotificationContext.Consumer>
+        {({ setNotificationBanner }) => (
+          <UpsertContactForm
+            {...props}
+            user={user}
+            setNotificationBanner={setNotificationBanner}
+          />
+        )}
+      </NotificationContext.Consumer>
+    )}
   </UserContext.Consumer>
 )
 
