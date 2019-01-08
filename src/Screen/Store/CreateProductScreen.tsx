@@ -214,6 +214,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
             placeholder: '',
             validators: ['required'],
             name: 'isVariant',
+            underneathText: "If this item is another version of a product that already exists in your inventory, e.g if it is another color or size of a product you already have, then it is a variant of an existing product.",
             type: {
               type: 'radio',
               options: ['New Product', 'Variant of Existing product']
