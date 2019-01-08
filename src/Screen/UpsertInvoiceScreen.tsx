@@ -12,10 +12,13 @@ import {
 import { UserContext } from '../context/UserContext'
 import { parseFieldErrors } from '../Functions'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../context/NotificationContext'
+import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
   user?: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -138,6 +141,9 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
         })
       ]
     })
+    this.props.setNotificationBanner(
+      configureNotificationBanner('MakeInvoicePayment', this.state.amountPaid)
+    )
     this.props.navigation.dispatch(resetAction)
   }
 
@@ -262,7 +268,17 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
 
 const _UpsertInvoiceScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => <UpsertInvoiceScreen {...props} user={user} />}
+    {({ user }) => (
+      <NotificationContext.Consumer>
+        {({ setNotificationBanner }) => (
+          <UpsertInvoiceScreen
+            {...props}
+            user={user}
+            setNotificationBanner={setNotificationBanner}
+          />
+        )}
+      </NotificationContext.Consumer>
+    )}
   </UserContext.Consumer>
 )
 

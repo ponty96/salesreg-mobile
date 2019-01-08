@@ -16,10 +16,13 @@ import { DeleteProductGQL } from '../../graphql/mutations/store'
 import { ListCompanyProductsGQL } from '../../graphql/queries/store'
 import { UserContext } from '../../context/UserContext'
 import CachedImageAtom from '../../Atom/CachedImageAtom'
+import { NotificationContext } from '../../context/NotificationContext'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation?: any
   user?: any
+  setNotificationBanner: (obj: any) => void
 }
 
 class ProductDetailsScreen extends PureComponent<IProps> {
@@ -202,7 +205,12 @@ class ProductDetailsScreen extends PureComponent<IProps> {
             }
           }
         ]}
-        onSuccessfulDeletion={() => this.props.navigation.navigate('Products')}
+        onSuccessfulDeletion={() => {
+          this.props.setNotificationBanner(
+            configureNotificationBanner('DeleteProduct', product)
+          )
+          this.props.navigation.navigate('Products')
+        }}
         headerText={product.name}
         headerSubText={product.number}
         key="product-details-335"
@@ -214,7 +222,17 @@ class ProductDetailsScreen extends PureComponent<IProps> {
 
 const _ProductDetailsScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => <ProductDetailsScreen {...props} user={user} />}
+    {({ user }) => (
+      <NotificationContext.Consumer>
+        {({ setNotificationBanner }) => (
+          <ProductDetailsScreen
+            {...props}
+            user={user}
+            setNotificationBanner={setNotificationBanner}
+          />
+        )}
+      </NotificationContext.Consumer>
+    )}
   </UserContext.Consumer>
 )
 

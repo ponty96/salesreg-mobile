@@ -7,9 +7,12 @@ import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
 import Auth from '../../../services/auth'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../../../context/NotificationContext'
+import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -22,11 +25,7 @@ interface IState {
   userId?: any
 }
 
-export default class UpsertCategoryScreen extends Component<IProps, IState> {
-  static navigationOptions = {
-    header: null
-  }
-
+class UpsertCategoryScreen extends Component<IProps, IState> {
   state = {
     title: '',
     description: '',
@@ -127,6 +126,7 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
     return { category: params, categoryId: category ? category.id : null }
   }
   onCompleted = async res => {
+    const category = this.props.navigation.getParam('category', null)
     const {
       upsertCategory: { success, fieldErrors }
     } = res
@@ -144,7 +144,30 @@ export default class UpsertCategoryScreen extends Component<IProps, IState> {
           })
         ]
       })
+      this.props.setNotificationBanner(
+        configureNotificationBanner(
+          category ? 'UpdateCategory' : 'CreateCategory',
+          this.state
+        )
+      )
       this.props.navigation.dispatch(resetAction)
     }
   }
 }
+
+const _UpsertCategoryScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <UpsertCategoryScreen
+        {...props}
+        setNotificationBanner={setNotificationBanner}
+      />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_UpsertCategoryScreen.navigationOptions = {
+  header: null
+}
+
+export default _UpsertCategoryScreen

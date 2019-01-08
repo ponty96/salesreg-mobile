@@ -18,10 +18,13 @@ import {
 } from './utilities/productCreateSteps'
 import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../../context/NotificationContext'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
   screenProps: any
+  setNotificationBanner: (obj: any) => void
   user: any
 }
 
@@ -347,6 +350,9 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
           })
         ]
       })
+      this.props.setNotificationBanner(
+        configureNotificationBanner('AddProductVariant', this.state)
+      )
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -356,7 +362,17 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
 
 const _AddProductVariantScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => <AddProductVariantScreen {...props} user={user} />}
+    {({ user }) => (
+      <NotificationContext.Consumer>
+        {({ setNotificationBanner }) => (
+          <AddProductVariantScreen
+            {...props}
+            user={user}
+            setNotificationBanner={setNotificationBanner}
+          />
+        )}
+      </NotificationContext.Consumer>
+    )}
   </UserContext.Consumer>
 )
 

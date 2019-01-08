@@ -8,9 +8,12 @@ import AppSpinner from '../Components/Spinner'
 import { NG_Banks } from '../utilities/data/picker-lists'
 import Auth from '../services/auth'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../context/NotificationContext'
+import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -21,11 +24,7 @@ interface IState {
   fieldErrors: any
 }
 
-export default class UpsertBankScreen extends Component<IProps, IState> {
-  static navigationOptions = {
-    header: null
-  }
-
+class UpsertBankScreen extends Component<IProps, IState> {
   state = {
     accountNumber: '',
     bankName: '',
@@ -140,6 +139,8 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
     const {
       upsertBank: { success, fieldErrors, data }
     } = res
+    const bank = this.props.navigation.getParam('bank', {})
+
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
@@ -155,7 +156,32 @@ export default class UpsertBankScreen extends Component<IProps, IState> {
           })
         ]
       })
+      this.props.setNotificationBanner(
+        configureNotificationBanner(
+          Object.keys(bank).length == 0
+            ? 'CreateBankAccount'
+            : 'UpdateBankAccount',
+          this.state
+        )
+      )
       this.props.navigation.dispatch(resetAction)
     }
   }
 }
+
+const _UpsertBankScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <UpsertBankScreen
+        {...props}
+        setNotificationBanner={setNotificationBanner}
+      />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_UpsertBankScreen.navigationOptions = {
+  header: null
+}
+
+export default _UpsertBankScreen

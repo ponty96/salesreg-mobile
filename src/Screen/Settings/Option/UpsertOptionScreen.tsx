@@ -7,9 +7,12 @@ import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
 import Auth from '../../../services/auth'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../../../context/NotificationContext'
+import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -21,11 +24,7 @@ interface IState {
   company?: any
 }
 
-export default class UpsertOptionScreen extends Component<IProps, IState> {
-  static navigationOptions = {
-    header: null
-  }
-
+class UpsertOptionScreen extends Component<IProps, IState> {
   state = {
     name: '',
     isVisual: '',
@@ -125,6 +124,7 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
     const {
       upsertOption: { success, fieldErrors }
     } = res
+    const option = this.props.navigation.getParam('option', null)
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
@@ -139,7 +139,30 @@ export default class UpsertOptionScreen extends Component<IProps, IState> {
           })
         ]
       })
+      this.props.setNotificationBanner(
+        configureNotificationBanner(
+          option ? 'UpdateOption' : 'CreateOption',
+          this.state
+        )
+      )
       this.props.navigation.dispatch(resetAction)
     }
   }
 }
+
+const _UpsertOptionScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <UpsertOptionScreen
+        {...props}
+        setNotificationBanner={setNotificationBanner}
+      />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_UpsertOptionScreen.navigationOptions = {
+  header: null
+}
+
+export default _UpsertOptionScreen

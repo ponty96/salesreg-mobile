@@ -9,11 +9,14 @@ import { numberWithCommas } from '../../Functions/numberWithCommas'
 import { DeleteContact } from '../../graphql/mutations/contact'
 import { CompanyContactGQL } from '../../graphql/queries/contact'
 import { UserContext } from '../../context/UserContext'
+import { NotificationContext } from '../../context/NotificationContext'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   contact: any
   user?: any
   contactType: string
+  setNotificationBanner: (obj: any) => void
   navigation: any
 }
 
@@ -128,11 +131,14 @@ class ContactDetails extends PureComponent<IProps> {
             }
           }
         ]}
-        onSuccessfulDeletion={() =>
+        onSuccessfulDeletion={() => {
+          this.props.setNotificationBanner(
+            configureNotificationBanner('DeleteContact', contact)
+          )
           this.props.navigation.navigate(
             this.props.contactType == 'customer' ? 'Customers' : 'Vendors'
           )
-        }
+        }}
         headerSubText={`\u20A6 ${numberWithCommas(
           this.props.contact.totalAmountPaid
         )}`}
@@ -143,7 +149,17 @@ class ContactDetails extends PureComponent<IProps> {
 
 const _ContactDetails: any = props => (
   <UserContext.Consumer>
-    {({ user }) => <ContactDetails {...props} user={user} />}
+    {({ user }) => (
+      <NotificationContext.Consumer>
+        {({ setNotificationBanner }) => (
+          <ContactDetails
+            {...props}
+            user={user}
+            setNotificationBanner={setNotificationBanner}
+          />
+        )}
+      </NotificationContext.Consumer>
+    )}
   </UserContext.Consumer>
 )
 

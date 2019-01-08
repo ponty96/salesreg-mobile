@@ -9,11 +9,14 @@ import { UpdateProductGroupOptionsGQL } from '../../graphql/mutations/store'
 import { UserContext } from '../../context/UserContext'
 import { SearchOptionsByNameGQL } from '../../graphql/queries/store'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../../context/NotificationContext'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
   screenProps: any
   user: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -139,6 +142,9 @@ class UpdateProductGroupOptionsScreen extends PureComponent<IProps, IState> {
         })
       ]
     })
+    this.props.setNotificationBanner(
+      configureNotificationBanner('UpdateProductGroupOptions', this.state)
+    )
     this.props.navigation.dispatch(resetAction)
   }
 
@@ -178,7 +184,17 @@ class UpdateProductGroupOptionsScreen extends PureComponent<IProps, IState> {
 
 const _UpdateProductGroupOptionsScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => <UpdateProductGroupOptionsScreen {...props} user={user} />}
+    {({ user }) => (
+      <NotificationContext.Consumer>
+        {({ setNotificationBanner }) => (
+          <UpdateProductGroupOptionsScreen
+            {...props}
+            user={user}
+            setNotificationBanner={setNotificationBanner}
+          />
+        )}
+      </NotificationContext.Consumer>
+    )}
   </UserContext.Consumer>
 )
 

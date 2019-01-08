@@ -70,7 +70,7 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
   private successColor: string = '#41CC78'
   private warningColor: string = '#FCA83A'
   private basicInfoColor: string = '429AD8'
-  private timeout: number = 5000
+  private timeout: number = 8000
   private timer: any
 
   componentDidUpdate(prevProps) {
@@ -297,7 +297,7 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
           ]}
           {...this.panResponder.panHandlers}
         >
-          <View style={{ flexDirection: 'row' }}>
+          <View style={{ flexDirection: 'row', marginRight: 30 }}>
             {style == 'success' && (
               <Icon
                 style={[styles.successIcon, styles.icon]}

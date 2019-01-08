@@ -17,7 +17,15 @@ type ITypes =
   | 'DeleteAccount'
   | 'CreateExpense'
   | 'UpdateExpense'
-  | 'DeleteExpense' | "UpdateProfile"
+  | 'DeleteExpense'
+  | 'UpdateProfile'
+  | 'UpdateBusinessProfile'
+  | 'CreateCategory'
+  | 'UpdateCategory'
+  | 'DeleteCategory'
+  | 'CreateOption'
+  | 'UpdateOption'
+  | 'DeleteOption'
 
 const configureNotificationBanner = (type: ITypes, params?: any): object => {
   switch (type) {
@@ -39,12 +47,12 @@ const configureNotificationBanner = (type: ITypes, params?: any): object => {
     case 'AddProductVariant':
       return {
         title: 'Product Variant Added',
-        subtitle: `A new variant was just added to ${params.name.trim()}`
+        subtitle: `A new variant was just added to ${params.productGroupTitle.trim()}`
       }
     case 'CreateProduct':
       return {
         title: 'Product Created',
-        subtitle: `${params.name.trim()} was added to your product list`
+        subtitle: `${params.productGroupTitle.trim()} was added to your product list`
       }
     case 'UpdateProductGroupOptions':
       return {
@@ -53,8 +61,8 @@ const configureNotificationBanner = (type: ITypes, params?: any): object => {
       }
     case 'UpdateProduct':
       return {
-        title: 'Groups Options Updated',
-        subtitle: `Group options added to ${params.name.trim()}`
+        title: 'Product Updated',
+        subtitle: `${params.name.trim()} was updated successfully`
       }
     case 'UpsertProductRestock':
       return {
@@ -86,22 +94,24 @@ const configureNotificationBanner = (type: ITypes, params?: any): object => {
     case 'MakeInvoicePayment':
       return {
         title: 'Payment Made',
-        subtitle: `A sum of ${params} was just paid`
+        subtitle: `A sum of \u20A6${params} was just paid`
       }
     case 'CreateBankAccount':
       return {
         title: 'Bank Account Created',
-        subtitle: `An account has been created for ${params.bankName}`
+        subtitle: `Account with number ${params.accountNumber} has been created`
       }
     case 'UpdateBankAccount':
       return {
         title: 'Bank Account Updated',
-        subtitle: `${params.bankName} has been updated`
+        subtitle: `Account with number ${params.accountNumber} has been updated`
       }
     case 'DeleteAccount':
       return {
         title: 'Bank Account Deleted',
-        subtitle: `${params.bankName} has been unlinked from account`
+        subtitle: `Account with number ${
+          params.accountNumber
+        } has been unlinked from account`
       }
     case 'CreateExpense':
       return {
@@ -116,12 +126,47 @@ const configureNotificationBanner = (type: ITypes, params?: any): object => {
     case 'DeleteExpense':
       return {
         title: `Expense Deleted`,
-        subtitle: `${params.title} was just updated`
+        subtitle: `${params.title} has been removed from expenses`
       }
-      case "UpdateProfile":
+    case 'UpdateProfile':
       return {
-        title: "Profile Updated",
-        subtitle: "Your profile has been updated"
+        title: 'Profile Updated',
+        subtitle: 'Your profile has been updated'
+      }
+    case 'UpdateBusinessProfile':
+      return {
+        title: 'Business Profile Updated',
+        subtitle: 'Your business profile has been updated'
+      }
+    case 'CreateCategory':
+      return {
+        title: 'Category Created',
+        subtitle: `${params.title} added to categories`
+      }
+    case 'UpdateCategory':
+      return {
+        title: 'Category Updated',
+        subtitle: `${params.title} was updated`
+      }
+    case 'DeleteCategory':
+      return {
+        title: 'Category Removed',
+        subtitle: `${params} was removed from categories`
+      }
+    case 'CreateOption':
+      return {
+        title: 'Option Created',
+        subtitle: `${params.name} added to options`
+      }
+    case 'UpdateOption':
+      return {
+        title: 'Option Updated',
+        subtitle: `${params.name} was updated`
+      }
+    case 'DeleteOption':
+      return {
+        title: 'Option Deleted',
+        subtitle: `${params} was removed from options`
       }
   }
 }
