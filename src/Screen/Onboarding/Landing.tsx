@@ -1,93 +1,94 @@
-import React, { PureComponent } from "react";
+import React, { PureComponent } from 'react'
 import {
   View,
   Text,
   StyleSheet,
   FlatList,
   Image,
-  ImageSourcePropType
-} from "react-native";
+  ImageSourcePropType,
+  Dimensions
+} from 'react-native'
 
-import ButtonAtom from "../../Atom/Form/ButtonAtom";
-import { color } from "../../Style/Color";
+import ButtonAtom from '../../Atom/Form/ButtonAtom'
+import { color } from '../../Style/Color'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  messageTitle: string;
-  messageBody: string;
-  isFirstImage?: boolean;
-  isSecondImage?: boolean;
-  isThirdImage?: boolean;
+  messageTitle: string
+  messageBody: string
+  isFirstImage?: boolean
+  isSecondImage?: boolean
+  isThirdImage?: boolean
 }
 
 class LandingScreen extends PureComponent<IProps, IState> {
   LANDING_SCREEN_IMAGES: ImageSourcePropType[] = [
-    require("../../../assets-v1/images/onboardingScreen/ecommerce.png"),
-    require("../../../assets-v1/images/onboardingScreen/delivery.png"),
-    require("../../../assets-v1/images/onboardingScreen/restock.png")
-  ];
-  viewabilityConfig: object = { viewAreaCoveragePercentThreshold: 50 };
+    require('../../../assets-v1/images/onboardingScreen/ecommerce.png'),
+    require('../../../assets-v1/images/onboardingScreen/delivery.png'),
+    require('../../../assets-v1/images/onboardingScreen/restock.png')
+  ]
+  viewabilityConfig: object = { viewAreaCoveragePercentThreshold: 50 }
 
   imageDidChange = (info: any): void => {
     const screenMessage: any = this.getScreenMessage(
       info.viewableItems[0].index
-    );
+    )
     this.setState({
       messageTitle: screenMessage.title,
       messageBody: screenMessage.body,
       isFirstImage: screenMessage.isFirstImage,
       isSecondImage: screenMessage.isSecondImage,
       isThirdImage: screenMessage.isThirdImage
-    });
-  };
+    })
+  }
 
   getScreenMessage = (screenIndex: number): object => {
-    let message = {};
+    let message = {}
 
     switch (screenIndex) {
       case 0:
         message = {
-          title: "You now have your own \nE-commerce website",
+          title: 'You now have your own \nE-commerce website',
           body:
-            "Let customers view your products, make \npurchase and pay easily from anywhere",
+            'Let customers view your products, make \npurchase and pay easily from anywhere',
           isFirstImage: true
-        };
-        break;
+        }
+        break
 
       case 1:
         message = {
-          title: "Package delivery \nto your customers",
+          title: 'Package delivery \nto your customers',
           body:
-            "Get items picked up and delivered to your \ncustomers, and get paid on delivery",
+            'Get items picked up and delivered to your \ncustomers, and get paid on delivery',
           isSecondImage: true
-        };
-        break;
+        }
+        break
 
       case 2:
         message = {
-          title: "Let customers always find \nwhat they need",
+          title: 'Let customers always find \nwhat they need',
           body:
-            "Keep your stocks up to date. Get restock \nreminders before they run out on you",
+            'Keep your stocks up to date. Get restock \nreminders before they run out on you',
           isThirdImage: true
-        };
+        }
     }
-    return message;
-  };
+    return message
+  }
 
   state: IState = {
-    messageTitle: "",
-    messageBody: "",
+    messageTitle: '',
+    messageBody: '',
     isFirstImage: false,
     isSecondImage: false,
     isThirdImage: false
-  };
+  }
 
   render() {
-    const { navigate } = this.props.navigation;
-    const { messageTitle, messageBody } = this.state;
+    const { navigate } = this.props.navigation
+    const { messageTitle, messageBody } = this.state
 
     return (
       <View style={styles.container}>
@@ -96,12 +97,23 @@ class LandingScreen extends PureComponent<IProps, IState> {
           showsHorizontalScrollIndicator={false}
           pagingEnabled
           data={this.LANDING_SCREEN_IMAGES}
-          renderItem={({ item }) => (
-            <Image
-              source={item}
-              resizeMode="cover"
-              style={{ height: undefined }}
-            />
+          renderItem={({ item, index }) => (
+            <View
+              style={{
+                flex: 1,
+                width: index != 2 ? Dimensions.get('window').width : undefined,
+                marginRight: index != 2 ? -10 : 0
+              }}
+            >
+              <Image
+                source={item}
+                resizeMode="cover"
+                style={{
+                  height: undefined,
+                  flex: 1
+                }}
+              />
+            </View>
           )}
           keyExtractor={index => String(index)}
           onViewableItemsChanged={this.imageDidChange}
@@ -137,36 +149,36 @@ class LandingScreen extends PureComponent<IProps, IState> {
 
         <ButtonAtom
           btnText="Get Started"
-          onPress={() => navigate("Signup")}
+          onPress={() => navigate('Signup')}
           type="primary"
         />
         <Text style={styles.haveAccount}>Already have an account?</Text>
         <ButtonAtom
           btnText="LOGIN"
           transparent={true}
-          onPress={() => navigate("Login")}
+          onPress={() => navigate('Login')}
           type="secondary"
           hideIcon={true}
         />
       </View>
-    );
+    )
   }
 }
 
-export default LandingScreen;
+export default LandingScreen
 
 const styles = StyleSheet.create({
   haveAccount: {
     marginTop: 32,
-    textAlign: "center",
-    color: "#fff",
+    textAlign: 'center',
+    color: '#fff',
     fontSize: 14,
-    fontFamily: "AvenirNext-DemiBold"
+    fontFamily: 'AvenirNext-DemiBold'
   },
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "flex-end",
+    alignItems: 'center',
+    justifyContent: 'flex-end',
     paddingBottom: 24,
     backgroundColor: color.button,
     paddingTop: 8
@@ -189,11 +201,11 @@ const styles = StyleSheet.create({
     marginRight: 8
   },
   indicatorsWrapper: {
-    flexDirection: "row",
+    flexDirection: 'row',
     marginTop: 16
   },
   activeIndicator: {
     backgroundColor: color.secondary,
-    borderColor: "transparent"
+    borderColor: 'transparent'
   }
-});
+})
