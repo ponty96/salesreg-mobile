@@ -37,24 +37,16 @@ interface IProps extends IProperties {
 }
 
 const AppStatusBar = ({ backgroundColor, ...props }) =>
-  Platform.OS == 'ios' ? (
+  Platform.OS == 'ios' && (
     <View
       style={[
         styles.statusBar,
         { backgroundColor: backgroundColor || '#00b0cf' }
       ]}
     >
-      <StatusBar barStyle={props.barStyle || 'light-content'} />
+      <StatusBar hidden barStyle={props.barStyle || 'light-content'} />
     </View>
-  ) : (
-    <StatusBar
-      backgroundColor={backgroundColor || '#00b0cf'}
-      barStyle={props.barStyle || 'light-content'}
-      {...props}
-    />
   )
-
-const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight
 
 class NotificationAtom extends React.PureComponent<IProps, IState> {
   constructor(props) {
@@ -86,8 +78,14 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
 
     if (trigger && prevProps.trigger != trigger) {
       clearTimeout(this.timer)
-      this.state.visible ? this.show(true) : this.show()
+      this.state.visible
+        ? setTimeout(() => this.show(true), 500)
+        : setTimeout(() => this.show(), 500)
     }
+  }
+
+  componentWillUnmount() {
+    clearTimeout(this.timer)
   }
 
   show = (hidingAnimation?: boolean) => {
@@ -183,6 +181,7 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
       })
     ]).start(animation => {
       if (animation.finished) {
+        clearTimeout(this.timer)
         this.setState({
           visible: false
         })
@@ -212,6 +211,7 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
       })
     ]).start(animation => {
       if (animation.finished) {
+        clearTimeout(this.timer)
         this.setState({
           visible: false
         })
@@ -283,6 +283,7 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
     } = this.state
     return (
       <React.Fragment>
+        <AppStatusBar backgroundColor={this.getColor()} />
         <Animated.View
           style={[
             styles.container,
@@ -300,11 +301,16 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
             {style == 'success' && (
               <Icon
                 style={[styles.successIcon, styles.icon]}
-                name="check-circle"
-                type="Feather"
+                name="ios-checkmark-circle"
+                type="Ionicons"
               />
             )}
-            <View style={{ marginLeft: 20, justifyContent: 'space-between' }}>
+            <View
+              style={{
+                marginLeft: style == 'error' ? 0 : 10,
+                alignSelf: 'center'
+              }}
+            >
               <Text style={styles.title}>{title}</Text>
               <Text style={styles.subtitle}>{subtitle}</Text>
             </View>
@@ -312,8 +318,8 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
           {style == 'error' && (
             <Icon
               style={[styles.successIcon, styles.icon]}
-              name="alert-circle"
-              type="Feather"
+              name="ios-alert"
+              type="Ionicons"
             />
           )}
         </Animated.View>
@@ -335,8 +341,9 @@ const styles = StyleSheet.create({
     backgroundColor: 'green',
     position: 'absolute',
     top: 0,
-    zIndex: 1000000,
+    zIndex: 1900000,
     left: 0,
+    paddingHorizontal: 10,
     height: 75,
     flexDirection: 'row',
     justifyContent: 'space-between',
@@ -344,7 +351,7 @@ const styles = StyleSheet.create({
     width: '100%'
   },
   icon: {
-    fontSize: 40
+    fontSize: 50
   },
   successIcon: {
     color: '#fff'
@@ -356,11 +363,11 @@ const styles = StyleSheet.create({
   },
   subtitle: {
     color: '#fff',
-    fontFamily: 'AvenirNext-Regular',
+    fontFamily: 'AvenirNext-DemiBold',
     fontSize: 14
   },
   statusBar: {
-    height: STATUSBAR_HEIGHT,
+    height: 20,
     marginTop: -20,
     zIndex: 2000
   }
