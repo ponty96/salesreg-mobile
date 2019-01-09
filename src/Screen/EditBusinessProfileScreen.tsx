@@ -11,9 +11,12 @@ import { UpdateCompanyGQL } from '../graphql/mutations/business'
 import Auth from '../services/auth'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../context/NotificationContext'
+import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -32,10 +35,7 @@ interface IState {
   phoneNumber: string
 }
 
-export default class EditBusinessProfileScreen extends Component<
-  IProps,
-  IState
-> {
+class EditBusinessProfileScreen extends Component<IProps, IState> {
   state = {
     logo: '',
     about: '',
@@ -50,10 +50,6 @@ export default class EditBusinessProfileScreen extends Component<
     companyId: '',
     phoneNumber: '',
     fieldErrors: null
-  }
-
-  static navigationOptions = {
-    header: null
   }
 
   componentDidMount() {
@@ -97,6 +93,7 @@ export default class EditBusinessProfileScreen extends Component<
           <AppSpinner visible={loading} key="3344-ar%^&" />,
           <FormStepperContainer
             key="&&*44-ar%^&"
+            formAction="update"
             formData={this.state}
             steps={[
               {
@@ -297,6 +294,9 @@ export default class EditBusinessProfileScreen extends Component<
           })
         ]
       })
+      this.props.setNotificationBanner(
+        configureNotificationBanner('UpdateBusinessProfile')
+      )
       this.props.navigation.dispatch(resetAction)
     } else {
       const parsedErrors = parseFieldErrors(fieldErrors)
@@ -309,3 +309,20 @@ export default class EditBusinessProfileScreen extends Component<
     }
   }
 }
+
+const _EditBusinessProfileScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <EditBusinessProfileScreen
+        {...props}
+        setNotificationBanner={setNotificationBanner}
+      />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_EditBusinessProfileScreen.navigationOptions = {
+  header: null
+}
+
+export default _EditBusinessProfileScreen

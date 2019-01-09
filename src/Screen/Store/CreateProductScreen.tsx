@@ -20,11 +20,14 @@ import {
 } from './utilities/productCreateSteps'
 import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../../context/NotificationContext'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
   screenProps: any
   user: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface OptionValue {
@@ -214,6 +217,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
             placeholder: '',
             validators: ['required'],
             name: 'isVariant',
+            underneathText: "If this item is another version of a product that already exists in your inventory, e.g if it is another color or size of a product you already have, then it is a variant of an existing product.",
             type: {
               type: 'radio',
               options: ['New Product', 'Variant of Existing product']
@@ -531,6 +535,9 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
           })
         ]
       })
+      this.props.setNotificationBanner(
+        configureNotificationBanner('CreateProduct', this.state)
+      )
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -540,7 +547,17 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
 
 const _CreateProductScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => <CreateProductScreen {...props} user={user} />}
+    {({ user }) => (
+      <NotificationContext.Consumer>
+        {({ setNotificationBanner }) => (
+          <CreateProductScreen
+            {...props}
+            user={user}
+            setNotificationBanner={setNotificationBanner}
+          />
+        )}
+      </NotificationContext.Consumer>
+    )}
   </UserContext.Consumer>
 )
 

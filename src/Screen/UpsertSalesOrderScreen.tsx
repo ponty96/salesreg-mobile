@@ -12,9 +12,12 @@ import {
 import { CompanyCustomersGQL } from '../graphql/queries/contact'
 import { parseFieldErrors } from '../Functions'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../context/NotificationContext'
+import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface ISalesInput {
@@ -44,14 +47,7 @@ interface IState {
   user: { userId?: string; companyId?: string }
 }
 
-export default class UpsertSalesOrderScreen extends React.PureComponent<
-  IProps,
-  IState
-> {
-  static navigationOptions = {
-    header: null
-  }
-
+class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
   state = {
     items: [
       {
@@ -130,6 +126,9 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
         })
       ]
     })
+    this.props.setNotificationBanner(
+      configureNotificationBanner('UpsertSalesOrder')
+    )
     this.props.navigation.dispatch(resetAction)
   }
 
@@ -439,3 +438,20 @@ export default class UpsertSalesOrderScreen extends React.PureComponent<
     )
   }
 }
+
+const _UpsertSalesOrderScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <UpsertSalesOrderScreen
+        {...props}
+        setNotificationBanner={setNotificationBanner}
+      />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_UpsertSalesOrderScreen.navigationOptions = {
+  header: null
+}
+
+export default _UpsertSalesOrderScreen

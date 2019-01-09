@@ -8,9 +8,12 @@ import AppSpinner from '../Components/Spinner'
 import { PaymentMethod } from '../utilities/data/picker-lists'
 import Auth from '../services/auth'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../context/NotificationContext'
+import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -27,11 +30,7 @@ interface IState {
   paidBy?: any
 }
 
-export default class UpsertExpenseScreen extends Component<IProps, IState> {
-  static navigationOptions = {
-    header: null
-  }
-
+class UpsertExpenseScreen extends Component<IProps, IState> {
   state = {
     title: '',
     date: '',
@@ -73,6 +72,8 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
   }
 
   render() {
+    const expense = this.props.navigation.getParam('expense', null)
+
     return (
       <Mutation
         mutation={UpsertExpenseGQL}
@@ -94,6 +95,7 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
           <AppSpinner visible={loading} />,
           <FormStepperContainer
             formData={this.state}
+            formAction={expense && 'update'}
             steps={[
               {
                 stepTitle: "Let's now describe your expense",
@@ -197,10 +199,12 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
 
     return params
   }
+
   onCompleted = async res => {
     const {
       upsertExpense: { success, fieldErrors, data }
     } = res
+    const expense = this.props.navigation.getParam('expense', null)
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
@@ -216,7 +220,31 @@ export default class UpsertExpenseScreen extends Component<IProps, IState> {
           })
         ]
       })
+
+      this.props.setNotificationBanner(
+        configureNotificationBanner(
+          expense ? 'UpdateExpense' : 'CreateExpense',
+          this.state
+        )
+      )
       this.props.navigation.dispatch(resetAction)
     }
   }
 }
+
+const _UpsertExpenseScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <UpsertExpenseScreen
+        {...props}
+        setNotificationBanner={setNotificationBanner}
+      />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_UpsertExpenseScreen.navigationOptions = {
+  header: null
+}
+
+export default _UpsertExpenseScreen

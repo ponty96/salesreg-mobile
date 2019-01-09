@@ -8,6 +8,11 @@
         android:width="80dp"
         android:height="80dp"
         android:drawable="@mipmap/icon"
-        android:gravity="center" />
+        android:gravity="center">
+
+        <bitmap
+            android:src="@mipmap/icon"
+            android:gravity="center"/>
+    </item>
 
 </layer-list>

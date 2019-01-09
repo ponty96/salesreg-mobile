@@ -1175,6 +1175,10 @@ acorn@^6.0.1:
   version "6.0.4"
   resolved "https://registry.yarnpkg.com/acorn/-/acorn-6.0.4.tgz#77377e7353b72ec5104550aa2d2097a2fd40b754"
 
+add@^2.0.6:
+  version "2.0.6"
+  resolved "https://registry.yarnpkg.com/add/-/add-2.0.6.tgz#248f0a9f6e5a528ef2295dbeec30532130ae2235"
+
 agent-base@^4.1.0:
   version "4.2.1"
   resolved "https://registry.yarnpkg.com/agent-base/-/agent-base-4.2.1.tgz#d89e5999f797875674c07d87f260fc41e83e8ca9"
@@ -6286,7 +6290,7 @@ react-native-image-crop-picker@^0.21.3:
   version "0.21.3"
   resolved "https://registry.yarnpkg.com/react-native-image-crop-picker/-/react-native-image-crop-picker-0.21.3.tgz#04457a3f2a888949f51be4a670dcf2520b9994f8"
 
-react-native-iphone-x-helper@^1.0.1:
+react-native-iphone-x-helper@^1.0.1, react-native-iphone-x-helper@^1.0.3:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-native-iphone-x-helper/-/react-native-iphone-x-helper-1.2.0.tgz#9f8a376eb00bc712115abff4420318a0063fa796"
 
@@ -6296,6 +6300,13 @@ react-native-keyboard-aware-scroll-view@0.5.0:
   dependencies:
     prop-types "^15.6.0"
     react-native-iphone-x-helper "^1.0.1"
+
+react-native-keyboard-aware-scroll-view@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/react-native-keyboard-aware-scroll-view/-/react-native-keyboard-aware-scroll-view-0.8.0.tgz#00bcaa38c91323913bb7a733059ad2bc4875f88c"
+  dependencies:
+    prop-types "^15.6.2"
+    react-native-iphone-x-helper "^1.0.3"
 
 react-native-lightbox@^0.8.0:
   version "0.8.0"
@@ -6376,6 +6387,10 @@ react-native-vector-icons@4.6.0, react-native-vector-icons@^4.5.0:
     lodash "^4.0.0"
     prop-types "^15.5.10"
     yargs "^8.0.2"
+
+react-native-view-overflow@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/react-native-view-overflow/-/react-native-view-overflow-0.0.4.tgz#36b2c00fbe7f270a0a92548eeb9ee147d2a4c3ae"
 
 react-native@0.57.3:
   version "0.57.3"
@@ -8062,6 +8077,10 @@ yargs@^9.0.0:
     which-module "^2.0.0"
     y18n "^3.2.1"
     yargs-parser "^7.0.0"
+
+yarn@^1.12.3:
+  version "1.12.3"
+  resolved "https://registry.yarnpkg.com/yarn/-/yarn-1.12.3.tgz#fb4599bf1f8da01552bcc7e1571dfd4e53788203"
 
 yauzl@2.4.1:
   version "2.4.1"

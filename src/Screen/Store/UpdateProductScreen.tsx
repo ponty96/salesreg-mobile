@@ -19,11 +19,14 @@ import {
 
 import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../../context/NotificationContext'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
   screenProps: any
   user: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface OptionValue {
@@ -162,6 +165,7 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
             <AppSpinner visible={loading} key="updateProduct-1345" />,
             <FormStepperContainer
               formData={this.state}
+              formAction="update"
               updateValueChange={this.updateState}
               fieldErrors={this.state.fieldErrors}
               handleBackPress={() => this.props.navigation.goBack()}
@@ -297,6 +301,9 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
           })
         ]
       })
+      this.props.setNotificationBanner(
+        configureNotificationBanner('UpdateProduct', this.state)
+      )
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -306,7 +313,17 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
 
 const _UpdateProductScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => <UpdateProductScreen {...props} user={user} />}
+    {({ user }) => (
+      <NotificationContext.Consumer>
+        {({ setNotificationBanner }) => (
+          <UpdateProductScreen
+            {...props}
+            user={user}
+            setNotificationBanner={setNotificationBanner}
+          />
+        )}
+      </NotificationContext.Consumer>
+    )}
   </UserContext.Consumer>
 )
 

@@ -139,6 +139,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-view-overflow')
     compile project(':react-native-device-info')
     compile project(':react-native-sentry')
     compile project(':react-native-splash-screen')
