@@ -37,7 +37,7 @@ interface IProps {
   onSearch?: (queryText: string) => void
   onHandleOpen?: () => void
   emptySection?: {
-    emptyText: string
+    emptyText: string | any
   }
 }
 
@@ -351,7 +351,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingHorizontal: 50,
+    paddingHorizontal: 12,
     justifyContent: 'center'
   },
   emptyText: {

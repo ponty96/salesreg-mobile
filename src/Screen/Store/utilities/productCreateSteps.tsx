@@ -1,9 +1,12 @@
+import React from 'react'
 import {
   SearchOptionsByNameGQL,
   SearchProductGroupsByTitleGQL,
   SearchCategoriesByTitleGQL
 } from '../../../graphql/queries/store'
 import { FormStep } from '../../../Container/Form/StepperContainer'
+import { Text } from 'react-native'
+import { color } from '../../../Style/Color'
 
 interface OptionValue {
   optionId: string
@@ -41,7 +44,17 @@ export const renderSelectOptionsFormStep = (name): FormStep => ({
       type: {
         type: 'search-multi-picker',
         emptySection: {
-          emptyText: `If you do not find the options you want, you may skip this field for now, and complete this form, then go to menu, and select settings > variant options to create new options, then complete this field by editing this product's details.`
+          emptyText: (
+            <Text>
+              If you do not find the options you want, you may skip this field
+              for now, and complete this form, then go to menu, and select{' '}
+              <Text style={{ color: color.button }}>
+                "settings > variant options"
+              </Text>{' '}
+              to create new options, then complete this field by editing this
+              product's details.
+            </Text>
+          )
         },
         searchQuery: SearchOptionsByNameGQL,
         searchQueryResponseKey: 'searchOptionsByName'
@@ -128,8 +141,17 @@ export const renderCategoryStep = (type): FormStep => ({
       type: {
         type: 'search-multi-picker',
         emptySection: {
-          emptyText:
-            "If you do not find the categories you want, you may skip this field for now, and complete this form, then go to menu, and select settings > categories to create new categories, then complete this field by editing this product's details."
+          emptyText: (
+            <Text>
+              If you do not find the categories you want, you may skip this
+              field for now, and complete this form, then go to menu, and select{' '}
+              <Text style={{ color: color.button }}>
+                "settings > categories"
+              </Text>{' '}
+              to create new categories, then complete this field by editing this
+              product's details.
+            </Text>
+          )
         },
         searchQuery: SearchCategoriesByTitleGQL,
         searchQueryResponseKey: 'searchCategoriesByTitle'

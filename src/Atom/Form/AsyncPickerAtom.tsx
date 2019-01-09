@@ -19,7 +19,7 @@ interface IProps {
   user?: any
   type?: 'multi' | any
   emptySection?: {
-    emptyText: string
+    emptyText: string | any
   }
 }
 
