@@ -10,6 +10,7 @@ import {
 
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import { color } from '../../Style/Color'
+import ViewOverflow from 'react-native-view-overflow'
 
 interface IProps {
   navigation: any
@@ -97,7 +98,7 @@ class LandingScreen extends PureComponent<IProps, IState> {
           pagingEnabled
           data={this.LANDING_SCREEN_IMAGES}
           renderItem={({ item, index }) => (
-            <View
+            <ViewOverflow
               style={{
                 flex: 1,
                 width: undefined,
@@ -114,7 +115,7 @@ class LandingScreen extends PureComponent<IProps, IState> {
                   borderRadius: 5
                 }}
               />
-            </View>
+            </ViewOverflow>
           )}
           keyExtractor={index => String(index)}
           onViewableItemsChanged={this.imageDidChange}
