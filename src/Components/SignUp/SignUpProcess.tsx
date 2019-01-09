@@ -4,6 +4,7 @@ import OnboardingContainer from '../../Container/OnboardingContainer'
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import Icon from '../../Atom/Icon'
 import { color } from '../../Style/Color'
+import ViewOverflow from 'react-native-view-overflow'
 
 interface CheckedItemProps {
   isChecked?: boolean | false
@@ -43,10 +44,15 @@ export default class SignUpProcess extends React.PureComponent<IProps> {
     return (
       <OnboardingContainer>
         <View style={styles.container}>
-          <Image
-            source={require('../../../assets-v1/icons/logo.png')}
-            style={styles.logo}
-          />
+          <ViewOverflow
+            style={{ height: 41, width: 55, alignSelf: 'flex-end' }}
+          >
+            <Image
+              source={require('../../../assets-v1/icons/logo.png')}
+              style={styles.logo}
+              resizeMode="stretch"
+            />
+          </ViewOverflow>
           <Text style={styles.header}>{this.props.header}</Text>
           <Text style={styles.description}>{this.props.description}</Text>
           {this.props.checkedItems.map((checkItem: CheckedItemProps, index) => (
@@ -79,10 +85,9 @@ const styles = StyleSheet.create({
     paddingVertical: 32
   },
   logo: {
-    alignSelf: 'flex-end',
-    width: 60,
-    height: 60,
-    marginLeft: -4
+    flex: 1,
+    width: undefined,
+    height: undefined
   },
   header: {
     alignSelf: 'flex-start',
