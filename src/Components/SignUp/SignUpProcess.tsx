@@ -47,7 +47,11 @@ export default class SignUpProcess extends React.PureComponent<IProps> {
       <OnboardingContainer>
         <View style={styles.container}>
           <ViewOverflow
-            style={{ height: 41, width: 55, alignSelf: 'flex-end' }}
+            style={{
+              height: 41,
+              width: 55,
+              alignSelf: 'flex-end'
+            }}
           >
             <Image
               source={require('../../../assets-v1/icons/logo.png')}
@@ -115,7 +119,7 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-Medium',
     fontSize: 18,
     color: '#fff',
-    marginBottom: 32
+    marginBottom: 15
   },
   checkBoxWrapper: {
     marginVertical: 22,
