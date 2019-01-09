@@ -1,28 +1,28 @@
-import React from "react";
-import { RegisterUserMutationGQL } from "../../graphql/mutations/authenticate";
-import { Mutation } from "react-apollo";
-import { parseFieldErrors } from "../../Functions";
-import AppSpinner from "../../Components/Spinner";
-import FirstStep from "../../Components/SignUp/FirstStep";
-import FormStepperContainer from "../../Container/Form/StepperContainer";
-import { AuthenticateClientGQL } from "../../graphql/client-mutations/authenticate";
-import Auth from "../../services/auth";
-import { UserContext } from "../../context/UserContext";
+import React from 'react'
+import { RegisterUserMutationGQL } from '../../graphql/mutations/authenticate'
+import { Mutation } from 'react-apollo'
+import { parseFieldErrors } from '../../Functions'
+import AppSpinner from '../../Components/Spinner'
+import FirstStep from '../../Components/SignUp/FirstStep'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
+import { AuthenticateClientGQL } from '../../graphql/client-mutations/authenticate'
+import Auth from '../../services/auth'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
-  navigation: any;
-  screenProps: any;
+  navigation: any
+  screenProps: any
 }
 
 interface IState {
-  email: string;
-  firstName: string;
-  lastName: string;
-  gender: string;
-  password: string;
-  passwordConfirmation: string;
-  currentStep: number;
-  fieldErrors: any;
+  email: string
+  firstName: string
+  lastName: string
+  gender: string
+  password: string
+  passwordConfirmation: string
+  currentStep: number
+  fieldErrors: any
 }
 
 export default class UserOnboardScreen extends React.PureComponent<
@@ -30,20 +30,20 @@ export default class UserOnboardScreen extends React.PureComponent<
   IState
 > {
   state = {
-    email: "",
-    firstName: "",
-    lastName: "",
-    password: "",
-    passwordConfirmation: "",
-    gender: "",
+    email: '',
+    firstName: '',
+    lastName: '',
+    password: '',
+    passwordConfirmation: '',
+    gender: '',
     currentStep: 0,
     fieldErrors: null
-  };
+  }
 
   updateState = (key: string, val: any) => {
-    const formData = { ...this.state, [key]: val };
-    this.setState({ ...formData });
-  };
+    const formData = { ...this.state, [key]: val }
+    this.setState({ ...formData })
+  }
 
   render() {
     return (
@@ -64,64 +64,69 @@ export default class UserOnboardScreen extends React.PureComponent<
           </Mutation>
         )}
       </UserContext.Consumer>
-    );
+    )
   }
 
   navigateToStep = step => {
-    this.setState({ currentStep: step });
-  };
+    this.setState({ currentStep: step })
+  }
 
   parseMutationVariables = () => {
-    const params = { ...this.state };
-    delete params.currentStep;
-    delete params.fieldErrors;
-    params.gender = params.gender.toUpperCase();
-    return { user: params };
-  };
+    const params = { ...this.state }
+    delete params.currentStep
+    delete params.fieldErrors
+    params.gender = params.gender.toUpperCase()
+    return { user: params }
+  }
 
   renderComponentAtStep = (handleReg): JSX.Element => {
-    const { currentStep } = this.state;
+    const { currentStep } = this.state
     switch (currentStep) {
       case 0:
       default:
-        return <FirstStep onCtaPress={() => this.navigateToStep(1)} />;
+        return (
+          <FirstStep
+            onLoginPress={() => this.props.navigation.navigate('Login')}
+            onCtaPress={() => this.navigateToStep(1)}
+          />
+        )
       case 1:
         return (
           <FormStepperContainer
             formData={this.state}
             steps={[
               {
-                stepTitle: "Tell us a little about yourself",
+                stepTitle: 'Tell us a little about yourself',
                 formFields: [
                   {
                     label: "What's your first name?",
-                    placeholder: "E.g John",
+                    placeholder: 'E.g John',
                     type: {
-                      type: "input",
-                      keyboardType: "default"
+                      type: 'input',
+                      keyboardType: 'default'
                     },
-                    validators: ["required"],
-                    name: "firstName"
+                    validators: ['required'],
+                    name: 'firstName'
                   },
                   {
                     label: "What's your last name?",
-                    placeholder: "E.g Doe",
+                    placeholder: 'E.g Doe',
                     type: {
-                      type: "input",
-                      keyboardType: "default"
+                      type: 'input',
+                      keyboardType: 'default'
                     },
-                    validators: ["required"],
-                    name: "lastName"
+                    validators: ['required'],
+                    name: 'lastName'
                   },
                   {
-                    label: "Are you male or female?",
-                    placeholder: "E.g Doe",
+                    label: 'Are you male or female?',
+                    placeholder: 'E.g Doe',
                     type: {
-                      type: "radio",
-                      options: ["male", "female"]
+                      type: 'radio',
+                      options: ['male', 'female']
                     },
-                    validators: ["required"],
-                    name: "gender"
+                    validators: ['required'],
+                    name: 'gender'
                   }
                 ]
               },
@@ -129,42 +134,42 @@ export default class UserOnboardScreen extends React.PureComponent<
                 stepTitle: `Finally, let's make sure no one accesses your account without your permission`,
                 formFields: [
                   {
-                    label: "Your email please",
-                    placeholder: "E.g someone@example.com",
+                    label: 'Your email please',
+                    placeholder: 'E.g someone@example.com',
                     type: {
-                      type: "input",
-                      options: ["male", "female"],
-                      keyboardType: "email-address"
+                      type: 'input',
+                      options: ['male', 'female'],
+                      keyboardType: 'email-address'
                     },
-                    validators: ["required", "email"],
-                    name: "email"
+                    validators: ['required', 'email'],
+                    name: 'email'
                   },
                   {
-                    label: "Enter a password",
-                    placeholder: "Something only you know",
+                    label: 'Enter a password',
+                    placeholder: 'Something only you know',
                     type: {
-                      type: "input",
-                      keyboardType: "default",
+                      type: 'input',
+                      keyboardType: 'default',
                       secureTextEntry: true
                     },
-                    validators: ["required", "password"],
-                    name: "password",
-                    underneathText: "Not less than 8 character long"
+                    validators: ['required', 'password'],
+                    name: 'password',
+                    underneathText: 'Not less than 8 character long'
                   },
                   {
-                    label: "Re-enter password just to be sure",
-                    placeholder: "Same thing you entered above",
+                    label: 'Re-enter password just to be sure',
+                    placeholder: 'Same thing you entered above',
                     type: {
-                      type: "input",
-                      keyboardType: "default",
+                      type: 'input',
+                      keyboardType: 'default',
                       secureTextEntry: true
                     },
-                    validators: ["required", "password", "confirm-password"],
+                    validators: ['required', 'password', 'confirm-password'],
                     passwordFieldValue: this.state.password,
-                    name: "passwordConfirmation"
+                    name: 'passwordConfirmation'
                   }
                 ],
-                buttonTitle: "Register"
+                buttonTitle: 'Register'
               }
             ]}
             updateValueChange={this.updateState}
@@ -172,32 +177,32 @@ export default class UserOnboardScreen extends React.PureComponent<
             handleBackPress={() => this.navigateToStep(0)}
             fieldErrors={this.state.fieldErrors}
           />
-        );
+        )
     }
-  };
+  }
   onCompleted = async (res, resetUserContext) => {
     const {
       registerUser: { success, fieldErrors, data }
-    } = res;
+    } = res
     if (!success) {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
       /// login here
       const {
         screenProps: { client }
-      } = this.props;
-      const { accessToken, refreshToken, user } = data;
-      await Auth.clearVault();
-      await Auth.setToken(accessToken);
-      await Auth.setRefreshToken(refreshToken);
-      await Auth.setCurrentUser(user);
-      resetUserContext(user);
-      await client.resetStore();
+      } = this.props
+      const { accessToken, refreshToken, user } = data
+      await Auth.clearVault()
+      await Auth.setToken(accessToken)
+      await Auth.setRefreshToken(refreshToken)
+      await Auth.setCurrentUser(user)
+      resetUserContext(user)
+      await client.resetStore()
 
       client.mutate({
         mutation: AuthenticateClientGQL,
         variables: { user }
-      });
+      })
     }
-  };
+  }
 }

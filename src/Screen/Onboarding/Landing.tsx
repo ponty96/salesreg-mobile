@@ -5,7 +5,8 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  ImageSourcePropType
+  ImageSourcePropType,
+  Dimensions
 } from 'react-native'
 
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
@@ -17,32 +18,80 @@ interface IProps {
 }
 
 interface IState {
-  messageTitle: string
-  messageBody: string
   isFirstImage?: boolean
   isSecondImage?: boolean
   isThirdImage?: boolean
+  currentFocusedElement: any
 }
 
 class LandingScreen extends PureComponent<IProps, IState> {
-  LANDING_SCREEN_IMAGES: ImageSourcePropType[] = [
+  private textScrollView: any
+  private imageScrollview: any
+
+  private LANDING_SCREEN_IMAGES: ImageSourcePropType[] = [
     require('../../../assets-v1/images/onboardingScreen/ecommerce.png'),
     require('../../../assets-v1/images/onboardingScreen/delivery.png'),
     require('../../../assets-v1/images/onboardingScreen/restock.png')
   ]
-  viewabilityConfig: object = { viewAreaCoveragePercentThreshold: 50 }
 
-  imageDidChange = (info: any): void => {
-    const screenMessage: any = this.getScreenMessage(
-      info.viewableItems[0].index
-    )
-    this.setState({
-      messageTitle: screenMessage.title,
-      messageBody: screenMessage.body,
-      isFirstImage: screenMessage.isFirstImage,
-      isSecondImage: screenMessage.isSecondImage,
-      isThirdImage: screenMessage.isThirdImage
-    })
+  private viewabilityConfig: object = { viewAreaCoveragePercentThreshold: 50 }
+
+  private LANDING_SCREEN_TEXT = [
+    {
+      title: 'You now have your own \nE-commerce website',
+      body:
+        'Let customers view your products, make \npurchase and pay easily from anywhere'
+    },
+    {
+      title: 'Package delivery \nto your customers',
+      body:
+        'Get items picked up and delivered to your \ncustomers, and get paid on delivery'
+    },
+    {
+      title: 'Let customers always find \nwhat they need',
+      body:
+        'Keep your stocks up to date. Get restock \nreminders before they run out on you'
+    }
+  ]
+
+  viewabilityImageChanged = (info: any): void => {
+    if (this.state.currentFocusedElement == 'image') {
+      const screenMessage: any = this.getScreenMessage(
+        info.viewableItems[0].index
+      )
+
+      this.textScrollView.scrollToIndex({
+        animated: true,
+        index: info.viewableItems[0].index
+      })
+
+      this.setState({
+        isFirstImage: screenMessage.isFirstImage,
+        isSecondImage: screenMessage.isSecondImage,
+        isThirdImage: screenMessage.isThirdImage
+      })
+    }
+  }
+
+  viewabilityTextChanged = (info: any): void => {
+    if (this.state.currentFocusedElement == 'text') {
+      const index = info.viewableItems[0].index
+
+      const screenMessage: any = this.getScreenMessage(index)
+
+      this.imageScrollview.scrollToIndex({
+        animated: true,
+        index: info.viewableItems[0].index,
+        viewPosition: 1,
+        viewOffset: index == 0 || index == 2 ? 0 : -70
+      })
+
+      this.setState({
+        isFirstImage: screenMessage.isFirstImage,
+        isSecondImage: screenMessage.isSecondImage,
+        isThirdImage: screenMessage.isThirdImage
+      })
+    }
   }
 
   getScreenMessage = (screenIndex: number): object => {
@@ -51,27 +100,16 @@ class LandingScreen extends PureComponent<IProps, IState> {
     switch (screenIndex) {
       case 0:
         message = {
-          title: 'You now have your own \nE-commerce website',
-          body:
-            'Let customers view your products, make \npurchase and pay easily from anywhere',
           isFirstImage: true
         }
         break
-
       case 1:
         message = {
-          title: 'Package delivery \nto your customers',
-          body:
-            'Get items picked up and delivered to your \ncustomers, and get paid on delivery',
           isSecondImage: true
         }
         break
-
       case 2:
         message = {
-          title: 'Let customers always find \nwhat they need',
-          body:
-            'Keep your stocks up to date. Get restock \nreminders before they run out on you',
           isThirdImage: true
         }
     }
@@ -79,16 +117,14 @@ class LandingScreen extends PureComponent<IProps, IState> {
   }
 
   state: IState = {
-    messageTitle: '',
-    messageBody: '',
-    isFirstImage: false,
+    isFirstImage: true,
     isSecondImage: false,
-    isThirdImage: false
+    isThirdImage: false,
+    currentFocusedElement: null
   }
 
   render() {
     const { navigate } = this.props.navigation
-    const { messageTitle, messageBody } = this.state
 
     return (
       <View style={styles.container}>
@@ -96,6 +132,8 @@ class LandingScreen extends PureComponent<IProps, IState> {
           horizontal
           showsHorizontalScrollIndicator={false}
           pagingEnabled
+          style={{ height: 250 }}
+          ref={ref => (this.imageScrollview = ref)}
           data={this.LANDING_SCREEN_IMAGES}
           renderItem={({ item, index }) => (
             <ViewOverflow
@@ -103,22 +141,25 @@ class LandingScreen extends PureComponent<IProps, IState> {
                 flex: 1,
                 width: undefined,
                 marginTop: 40,
-                marginRight: index != 2 ? 15 : 0
+                marginLeft: index == 0 ? -7 : 0,
+                marginRight: index != 2 ? 15 : -7
               }}
             >
               <Image
                 source={item}
                 resizeMode="cover"
                 style={{
-                  height: undefined,
                   flex: 1,
                   borderRadius: 5
                 }}
               />
             </ViewOverflow>
           )}
+          onScrollBeginDrag={() =>
+            this.setState({ currentFocusedElement: 'image' })
+          }
           keyExtractor={index => String(index)}
-          onViewableItemsChanged={this.imageDidChange}
+          onViewableItemsChanged={this.viewabilityImageChanged}
           viewabilityConfig={this.viewabilityConfig}
         />
 
@@ -142,12 +183,31 @@ class LandingScreen extends PureComponent<IProps, IState> {
             ]}
           />
         </View>
-        <Text style={[styles.haveAccount, styles.messageTitle]}>
-          {messageTitle}
-        </Text>
-        <Text style={[styles.haveAccount, styles.messageBody]}>
-          {messageBody}
-        </Text>
+        <FlatList
+          horizontal
+          showsHorizontalScrollIndicator={false}
+          pagingEnabled
+          ref={ref => (this.textScrollView = ref)}
+          data={this.LANDING_SCREEN_TEXT}
+          onScrollBeginDrag={() =>
+            this.setState({ currentFocusedElement: 'text' })
+          }
+          renderItem={({ item }) => (
+            <View style={{ width: Dimensions.get('window').width }}>
+              <Text style={[styles.haveAccount, styles.messageTitle]}>
+                {item.title}
+              </Text>
+              <Text style={[styles.haveAccount, styles.messageBody]}>
+                {item.body}
+              </Text>
+            </View>
+          )}
+          keyExtractor={(item, index) => {
+            item
+            return String(index)
+          }}
+          onViewableItemsChanged={this.viewabilityTextChanged}
+        />
 
         <ButtonAtom
           btnText="Get Started"

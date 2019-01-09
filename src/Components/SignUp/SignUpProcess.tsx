@@ -4,6 +4,7 @@ import OnboardingContainer from '../../Container/OnboardingContainer'
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import Icon from '../../Atom/Icon'
 import { color } from '../../Style/Color'
+import ViewOverflow from 'react-native-view-overflow'
 
 interface CheckedItemProps {
   isChecked?: boolean | false
@@ -13,9 +14,11 @@ interface CheckedItemProps {
 interface IProps {
   checkedItems: CheckedItemProps[]
   header: string
+  showLogin?: boolean
   description: string
   ctaButtonText: string
   ctaButtonPress: any
+  onLoginPress?: () => void
 }
 
 const CheckBox = (props: { isChecked: boolean }): JSX.Element =>
@@ -43,10 +46,19 @@ export default class SignUpProcess extends React.PureComponent<IProps> {
     return (
       <OnboardingContainer>
         <View style={styles.container}>
-          <Image
-            source={require('../../../assets-v1/icons/logo.png')}
-            style={styles.logo}
-          />
+          <ViewOverflow
+            style={{
+              height: 41,
+              width: 55,
+              alignSelf: 'flex-end'
+            }}
+          >
+            <Image
+              source={require('../../../assets-v1/icons/logo.png')}
+              style={styles.logo}
+              resizeMode="stretch"
+            />
+          </ViewOverflow>
           <Text style={styles.header}>{this.props.header}</Text>
           <Text style={styles.description}>{this.props.description}</Text>
           {this.props.checkedItems.map((checkItem: CheckedItemProps, index) => (
@@ -64,6 +76,18 @@ export default class SignUpProcess extends React.PureComponent<IProps> {
               type="primary"
             />
           </View>
+          {this.props.showLogin && (
+            <React.Fragment>
+              <Text style={styles.haveAccount}>Already have an account?</Text>
+              <ButtonAtom
+                btnText="LOGIN"
+                transparent={true}
+                onPress={() => this.props.onLoginPress()}
+                type="secondary"
+                hideIcon={true}
+              />
+            </React.Fragment>
+          )}
         </View>
       </OnboardingContainer>
     )
@@ -79,10 +103,9 @@ const styles = StyleSheet.create({
     paddingVertical: 32
   },
   logo: {
-    alignSelf: 'flex-end',
-    width: 60,
-    height: 60,
-    marginLeft: -4
+    flex: 1,
+    width: undefined,
+    height: undefined
   },
   header: {
     alignSelf: 'flex-start',
@@ -96,7 +119,7 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-Medium',
     fontSize: 18,
     color: '#fff',
-    marginBottom: 32
+    marginBottom: 15
   },
   checkBoxWrapper: {
     marginVertical: 22,
@@ -132,5 +155,12 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     marginTop: 54,
     alignItems: 'center'
+  },
+  haveAccount: {
+    marginTop: 32,
+    textAlign: 'center',
+    color: '#fff',
+    fontSize: 14,
+    fontFamily: 'AvenirNext-DemiBold'
   }
 })
