@@ -5,8 +5,7 @@ import {
   StyleSheet,
   FlatList,
   Image,
-  ImageSourcePropType,
-  Dimensions
+  ImageSourcePropType
 } from 'react-native'
 
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
@@ -101,8 +100,9 @@ class LandingScreen extends PureComponent<IProps, IState> {
             <View
               style={{
                 flex: 1,
-                width: index != 2 ? Dimensions.get('window').width : undefined,
-                marginRight: index != 2 ? -10 : 0
+                width: undefined,
+                marginTop: 40,
+                marginRight: index != 2 ? 15 : 0
               }}
             >
               <Image
@@ -110,7 +110,8 @@ class LandingScreen extends PureComponent<IProps, IState> {
                 resizeMode="cover"
                 style={{
                   height: undefined,
-                  flex: 1
+                  flex: 1,
+                  borderRadius: 5
                 }}
               />
             </View>
