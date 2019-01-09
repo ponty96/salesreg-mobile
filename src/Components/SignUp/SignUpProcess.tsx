@@ -14,9 +14,11 @@ interface CheckedItemProps {
 interface IProps {
   checkedItems: CheckedItemProps[]
   header: string
+  showLogin?: boolean
   description: string
   ctaButtonText: string
   ctaButtonPress: any
+  onLoginPress?: () => void
 }
 
 const CheckBox = (props: { isChecked: boolean }): JSX.Element =>
@@ -70,6 +72,18 @@ export default class SignUpProcess extends React.PureComponent<IProps> {
               type="primary"
             />
           </View>
+          {this.props.showLogin && (
+            <React.Fragment>
+              <Text style={styles.haveAccount}>Already have an account?</Text>
+              <ButtonAtom
+                btnText="LOGIN"
+                transparent={true}
+                onPress={() => this.props.onLoginPress()}
+                type="secondary"
+                hideIcon={true}
+              />
+            </React.Fragment>
+          )}
         </View>
       </OnboardingContainer>
     )
@@ -137,5 +151,12 @@ const styles = StyleSheet.create({
   buttonWrapper: {
     marginTop: 54,
     alignItems: 'center'
+  },
+  haveAccount: {
+    marginTop: 32,
+    textAlign: 'center',
+    color: '#fff',
+    fontSize: 14,
+    fontFamily: 'AvenirNext-DemiBold'
   }
 })
