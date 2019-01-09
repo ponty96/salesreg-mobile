@@ -78,6 +78,7 @@ const styles = StyleSheet.create({
     marginBottom: 8
   },
   inputText: {
-    fontFamily: 'AvenirNext-Regular'
+    fontFamily: 'AvenirNext-Regular',
+    textAlign: 'center'
   }
 })

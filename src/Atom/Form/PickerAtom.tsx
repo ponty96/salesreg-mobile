@@ -23,7 +23,7 @@ export interface PickerData {
 }
 
 interface IEmptySection {
-  emptyText: string
+  emptyText: string | any
 }
 
 interface IProps {
@@ -325,7 +325,7 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: '#fff',
     alignItems: 'center',
-    paddingHorizontal: 50,
+    paddingHorizontal: 16,
     justifyContent: 'center'
   },
   emptyText: {

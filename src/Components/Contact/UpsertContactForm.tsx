@@ -8,6 +8,8 @@ import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries } from '../../utilities/data/picker-lists'
 import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../../context/NotificationContext'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
@@ -15,6 +17,7 @@ interface IProps {
   user: any
   successRoute: string
   contactType: string
+  setNotificationBanner: (obj: any) => void
 }
 
 const genderToPossesivePronoun = gender => {
@@ -327,7 +330,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
       upsertContact: { success, fieldErrors, data }
     } = res
     if (success) {
-      this.props.navigation.navigate(this.props.successRoute)
+      const { contact } = this.props
       const resetAction = NavigationActions.reset({
         index: 1,
         actions: [
@@ -340,6 +343,12 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
           })
         ]
       })
+
+      this.props.setNotificationBanner(
+        Object.keys(contact).length == 0
+          ? configureNotificationBanner('AddContact', this.state)
+          : configureNotificationBanner('UpdateContact', this.state)
+      )
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -349,7 +358,17 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
 
 const _UpsertContactForm = props => (
   <UserContext.Consumer>
-    {({ user }) => <UpsertContactForm {...props} user={user} />}
+    {({ user }) => (
+      <NotificationContext.Consumer>
+        {({ setNotificationBanner }) => (
+          <UpsertContactForm
+            {...props}
+            user={user}
+            setNotificationBanner={setNotificationBanner}
+          />
+        )}
+      </NotificationContext.Consumer>
+    )}
   </UserContext.Consumer>
 )
 

@@ -7,6 +7,8 @@ import GenericListIndex from '../../../Components/Generic/ListIndex'
 import { ListCompanyOptionsGQL } from '../../../graphql/queries/store'
 import { DeleteOptionGQL } from '../../../graphql/mutations/store'
 import AppSpinner from '../../../Components/Spinner'
+import { NotificationContext } from '../../../context/NotificationContext'
+import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 
 let BUTTONS = ['Yes, delete', 'Cancel']
 let DESTRUCTIVE_INDEX = 1
@@ -14,23 +16,20 @@ let CANCEL_INDEX = 2
 
 interface IProps {
   navigation: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
   forceUpdateId: number
   queryText: string
+  optionNameToDelete: string
 }
 
-export default class OptionsScreen extends React.Component<IProps, IState> {
-  static navigationOptions = () => {
-    return {
-      header: null
-    }
-  }
-
+class OptionsScreen extends React.Component<IProps, IState> {
   state = {
     forceUpdateId: Date.now(),
-    queryText: ''
+    queryText: '',
+    optionNameToDelete: ''
   }
 
   parseData = (item: any, deleteOption: (obj: any) => void) => {
@@ -50,7 +49,14 @@ export default class OptionsScreen extends React.Component<IProps, IState> {
             },
             buttonIndex => {
               if (buttonIndex == 0) {
-                deleteOption({ variables: { optionId: item.id } })
+                this.setState(
+                  {
+                    optionNameToDelete: item.name
+                  },
+                  () => {
+                    deleteOption({ variables: { optionId: item.id } })
+                  }
+                )
               }
             }
           )
@@ -76,6 +82,12 @@ export default class OptionsScreen extends React.Component<IProps, IState> {
         100
       )
     } else {
+      this.props.setNotificationBanner(
+        configureNotificationBanner(
+          'DeleteOption',
+          this.state.optionNameToDelete
+        )
+      )
       this.setState({
         forceUpdateId: Date.now()
       })
@@ -132,3 +144,17 @@ export default class OptionsScreen extends React.Component<IProps, IState> {
     )
   }
 }
+
+const _OptionsScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <OptionsScreen {...props} setNotificationBanner={setNotificationBanner} />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_OptionsScreen.navigationOptions = {
+  header: null
+}
+
+export default _OptionsScreen

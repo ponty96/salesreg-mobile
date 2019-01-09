@@ -7,6 +7,8 @@ import GenericListIndex from '../../../Components/Generic/ListIndex'
 import AppSpinner from '../../../Components/Spinner'
 import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
 import { DeleteCategoryGQL } from '../../../graphql/mutations/store'
+import { NotificationContext } from '../../../context/NotificationContext'
+import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 
 let BUTTONS = ['Yes, delete', 'Cancel']
 let DESTRUCTIVE_INDEX = 0
@@ -14,23 +16,20 @@ let CANCEL_INDEX = 1
 
 interface IProps {
   navigation: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
   forceUpdateId: number
   queryText: string
+  categoryNameToDelete: string
 }
 
-export default class CategoriesScreen extends React.Component<IProps, IState> {
-  static navigationOptions = () => {
-    return {
-      header: null
-    }
-  }
-
+class CategoriesScreen extends React.Component<IProps, IState> {
   state = {
     forceUpdateId: Date.now(),
-    queryText: ''
+    queryText: '',
+    categoryNameToDelete: ''
   }
 
   parseData = (item: any, deleteCategory: (obj: any) => void) => {
@@ -53,7 +52,14 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
             },
             buttonIndex => {
               if (buttonIndex == 0) {
-                deleteCategory({ variables: { categoryId: item.id } })
+                this.setState(
+                  {
+                    categoryNameToDelete: item.title
+                  },
+                  () => {
+                    deleteCategory({ variables: { categoryId: item.id } })
+                  }
+                )
               }
             }
           )
@@ -79,6 +85,12 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
         100
       )
     } else {
+      this.props.setNotificationBanner(
+        configureNotificationBanner(
+          'DeleteCategory',
+          this.state.categoryNameToDelete
+        )
+      )
       this.setState({
         forceUpdateId: Date.now()
       })
@@ -137,3 +149,20 @@ export default class CategoriesScreen extends React.Component<IProps, IState> {
     )
   }
 }
+
+const _CategoriesScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <CategoriesScreen
+        {...props}
+        setNotificationBanner={setNotificationBanner}
+      />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_CategoriesScreen.navigationOptions = {
+  header: null
+}
+
+export default _CategoriesScreen

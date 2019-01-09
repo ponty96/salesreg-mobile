@@ -16,6 +16,8 @@ import {
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Components/Spinner'
 import { Content } from 'native-base'
+import { NotificationContext } from '../context/NotificationContext'
+import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 var BUTTONS = ['Yes, Change', 'Cancel']
 var DESTRUCTIVE_INDEX = 0
@@ -24,6 +26,7 @@ var CANCEL_INDEX = 1
 interface IProps {
   navigation: any
   customer: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface OrderStatus {
@@ -113,7 +116,7 @@ const OrderStatusHint = (props: IOrderStatusProps) => {
   )
 }
 
-export default class OrderStatusScreen extends Component<IProps, IState> {
+class OrderStatusScreen extends Component<IProps, IState> {
   static navigationOptions = ({ navigation }: any) => {
     return {
       header: (
@@ -261,6 +264,8 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
     const {
       updateOrderStatus: { success, data }
     } = res
+    const contact = this.props.navigation.getParam('contact', {})
+
     if (!success) {
       Alert.alert(
         'Something went wrong!',
@@ -298,10 +303,28 @@ export default class OrderStatusScreen extends Component<IProps, IState> {
           ]
         })
       }
+      this.props.setNotificationBanner(
+        configureNotificationBanner('UpdateOrderStatus', contact)
+      )
       this.props.navigation.dispatch(resetAction)
     }
   }
 }
+
+const _OrderStatusScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <OrderStatusScreen
+        {...props}
+        setNotificationBanner={setNotificationBanner}
+      />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_OrderStatusScreen.navigationOptions = OrderStatusScreen.navigationOptions
+
+export default _OrderStatusScreen
 
 const styles = StyleSheet.create({
   container: {

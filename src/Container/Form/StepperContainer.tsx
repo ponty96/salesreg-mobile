@@ -85,7 +85,7 @@ interface FieldType {
   searchQuery?: DocumentNode
   searchQueryResponseKey?: string
   emptySection?: {
-    emptyText: string
+    emptyText: string | any
   }
 }
 

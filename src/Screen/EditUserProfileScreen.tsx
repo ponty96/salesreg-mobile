@@ -6,9 +6,12 @@ import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
+import { NotificationContext } from '../context/NotificationContext'
+import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any
+  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -20,7 +23,7 @@ interface IState {
   fieldErrors: any
 }
 
-export default class EditUserProfileScreen extends Component<IProps, IState> {
+class EditUserProfileScreen extends Component<IProps, IState> {
   state = {
     profilePicture: '',
     firstName: '',
@@ -51,10 +54,6 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
       profilePicture: user.profilePicture || '',
       gender: user.gender.toLowerCase()
     })
-  }
-
-  static navigationOptions = {
-    header: null
   }
 
   render() {
@@ -137,6 +136,7 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
       </Mutation>
     )
   }
+
   parseMutationVariables = () => {
     const params = {
       ...this.state,
@@ -145,8 +145,8 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
     delete params.fieldErrors
     return { user: params }
   }
+
   onCompleted = async res => {
-    console.log('res', res)
     const {
       updateUser: { success, fieldErrors, data }
     } = res
@@ -161,9 +161,29 @@ export default class EditUserProfileScreen extends Component<IProps, IState> {
           })
         ]
       })
+      this.props.setNotificationBanner(
+        configureNotificationBanner('UpdateProfile')
+      )
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
   }
 }
+
+const _EditUserProfileScreen: any = props => (
+  <NotificationContext.Consumer>
+    {({ setNotificationBanner }) => (
+      <EditUserProfileScreen
+        {...props}
+        setNotificationBanner={setNotificationBanner}
+      />
+    )}
+  </NotificationContext.Consumer>
+)
+
+_EditUserProfileScreen.navigationOptions = {
+  header: null
+}
+
+export default _EditUserProfileScreen
