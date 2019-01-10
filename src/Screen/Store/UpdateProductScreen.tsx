@@ -62,8 +62,7 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
       sku: 0,
       minimumSku: 0,
       price: '',
-      featuredImage:
-        'https://cdn2.jomashop.com/media/catalog/product/cache/1/watermark/490x490/0a1186946c551c1cc1f1a1120b7bd9a0/h/u/hublot-big-bang-mens-watch-301.px.130.rx.174.jpg',
+      featuredImage: '',
       images: [],
       name: '',
       optionValues: [],
