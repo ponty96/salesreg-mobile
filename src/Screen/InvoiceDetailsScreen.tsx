@@ -51,7 +51,11 @@ export default class InvoicesScreen extends React.Component<IProps> {
         }}
         onPressLeftIcon={() => this.props.navigation.goBack()}
         onPressRightIcon={() =>
-          this.props.navigation.navigate('UpsertInvoice', { sales, from })
+          this.props.navigation.navigate('UpsertInvoice', {
+            sales,
+            amountPayable: Number(amount) - amountPaid,
+            from
+          })
         }
       />
     ) : (

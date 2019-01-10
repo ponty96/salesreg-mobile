@@ -1,4 +1,5 @@
 import React from 'react'
+import { Alert } from 'react-native'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import RNPaystack from 'react-native-paystack'
 import AppSpinner from '../Components/Spinner'
@@ -105,7 +106,6 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
           this.navigateUser()
         })
         .catch(error => {
-          // @Todo: handle error better
           console.log(error.message)
           this.setState({ loading: false })
         })
@@ -158,19 +158,41 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
     }
   }
 
-  render() {
-    const {
-      navigation: {
-        state: {
-          params: {
-            sales: {
-              invoice: { id }
+  checkInvoiceValidity = (makePayment: (obj: any) => void) => {
+    let amountPayable = this.props.navigation.getParam('amountPayable', null),
+      { amountPaid } = this.state,
+      {
+        navigation: {
+          state: {
+            params: {
+              sales: {
+                invoice: { id }
+              }
             }
           }
         }
-      }
-    } = this.props
+      } = this.props
 
+    if (Number(amountPaid) > amountPayable) {
+      Alert.alert(
+        'Cannot make payment',
+        `You are paying too much than the actual amount payable for the sales order. Maximum amount payable is \u20A6${amountPayable}`,
+        [{ text: 'Ok', onPress: () => null }],
+        { cancelable: false }
+      )
+    } else {
+      this.state.paymentMethod.toLowerCase() != 'cash'
+        ? this.chargeCard()
+        : makePayment({
+            variables: {
+              invoiceId: id,
+              amountPaid: this.state.amountPaid
+            }
+          })
+    }
+  }
+
+  render() {
     return (
       <Mutation
         mutation={CreateRecipt}
@@ -204,16 +226,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
                 handleBackPress={() => this.props.navigation.goBack()}
                 formData={this.state}
                 updateValueChange={this.updateState}
-                onCompleteSteps={() =>
-                  this.state.paymentMethod.toLowerCase() != 'cash'
-                    ? this.chargeCard()
-                    : makePayment({
-                        variables: {
-                          invoiceId: id,
-                          amountPaid: this.state.amountPaid
-                        }
-                      })
-                }
+                onCompleteSteps={() => this.checkInvoiceValidity(makePayment)}
                 steps={[
                   {
                     stepTitle: 'Payment Method',
