@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { Item, Input, Label, Text, Textarea } from 'native-base'
-import { View, StyleSheet, Platform } from 'react-native'
+import { View, StyleSheet, Platform, Keyboard } from 'react-native'
 import { color } from '../../Style/Color'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 
@@ -43,6 +43,18 @@ class InputAtom extends React.Component<IProps, IState> {
   }
 
   inputRef = null
+
+  //@ts-ignore
+  handleOnSubmitEditing = (e?: any, keyboardType?: 'input' | 'textarea') => {
+    if (this.props.onSubmitEditing) {
+      this.props.onSubmitEditing()
+      setTimeout(() => {
+        this.inputRef._root.focus()
+      }, 450)
+    } else {
+      keyboardType != 'textarea' && Keyboard.dismiss()
+    }
+  }
 
   render() {
     return (
@@ -97,12 +109,7 @@ class InputAtom extends React.Component<IProps, IState> {
                 placeholderTextColor={color.inactive}
                 maxLength={this.props.maxLength}
                 ref={input => (this.inputRef = input)}
-                onSubmitEditing={() => {
-                  this.props.onSubmitEditing && this.props.onSubmitEditing()
-                  setTimeout(() => {
-                    this.inputRef._root.focus()
-                  }, 450)
-                }}
+                onSubmitEditing={this.handleOnSubmitEditing}
               />
             </View>
           </Item>
@@ -123,12 +130,7 @@ class InputAtom extends React.Component<IProps, IState> {
               rowSpan={5}
               style={[this.props.inputStyle, styles.multilineText]}
               ref={input => (this.inputRef = input)}
-              onSubmitEditing={() => {
-                this.props.onSubmitEditing && this.props.onSubmitEditing()
-                setTimeout(() => {
-                  this.inputRef._root.focus()
-                }, 450)
-              }}
+              onSubmitEditing={e => this.handleOnSubmitEditing(e, 'textarea')}
               editable={this.props.editable}
               placeholder={this.props.placeholder}
               placeholderTextColor={color.inactive}
