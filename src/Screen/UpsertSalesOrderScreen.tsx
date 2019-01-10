@@ -14,6 +14,7 @@ import { parseFieldErrors } from '../Functions'
 import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../context/NotificationContext'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { Alert } from 'react-native'
 
 interface IProps {
   navigation: any
@@ -185,7 +186,6 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
           this.navigateUser()
         })
         .catch(error => {
-          // @Todo: handle error better
           console.log(error.message)
           this.setState({ loading: false })
         })
@@ -254,11 +254,42 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       : { sale: _params }
   }
 
+  checkSalesOrderValidity = upsertSales => {
+    let { items, amountPaid, discount, hasSalesOrderBeenCreated } = this.state,
+      totalAmount = 0
+    items.forEach(sales => {
+      totalAmount += Number(sales.quantity) * Number(sales.unitPrice)
+    })
+    let _amountPayable = totalAmount - Number(discount),
+      amountPayable = _amountPayable || totalAmount
+
+    if (Number(amountPaid) > amountPayable) {
+      Alert.alert(
+        'Cannot make payment',
+        `You are paying too much than the actual amount payable for the sales order. Maximum amount payable is \u20A6${amountPayable}. Please review your order`,
+        [{ text: 'Ok', onPress: () => null }],
+        { cancelable: false }
+      )
+    } else if (!Number(discount) || Number(discount) > amountPayable) {
+      Alert.alert(
+        'Cannot make payment',
+        `The discount cannot be more than the actual payable amount which is \u20A6${amountPayable}`,
+        [{ text: 'Ok', onPress: () => null }],
+        { cancelable: false }
+      )
+    } else {
+      !hasSalesOrderBeenCreated
+        ? upsertSales({
+            variables: this.parseMutationVariables()
+          })
+        : this.chargeCard()
+    }
+  }
+
   render() {
     const {
       isCustomerInContacts,
-      user: { companyId },
-      hasSalesOrderBeenCreated
+      user: { companyId }
     } = this.state
 
     return (
@@ -293,13 +324,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
               updateValueChange={this.updateState}
               handleBackPress={() => this.props.navigation.goBack()}
               fieldErrors={this.state.fieldErrors}
-              onCompleteSteps={() =>
-                !hasSalesOrderBeenCreated
-                  ? upsertSales({
-                      variables: this.parseMutationVariables()
-                    })
-                  : this.chargeCard()
-              }
+              onCompleteSteps={() => this.checkSalesOrderValidity(upsertSales)}
               steps={[
                 {
                   stepTitle: "Let's have the items that are being ordered",
