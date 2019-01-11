@@ -76,8 +76,14 @@ project.ext.react = [
     entryFile: "build/index.js"
 ]
 
+project.ext.envConfigFiles = [
+    debug: ".env.development",
+    release: ".env.staging"
+]
+
 apply from: "../../node_modules/react-native/react.gradle"
 apply from: "../../node_modules/react-native-sentry/sentry.gradle"
+apply from: project(':react-native-config').projectDir.getPath() + "/dotenv.gradle"
 
 /**
  * Set this to true to create two separate APKs instead of one:
@@ -139,6 +145,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-config')
     compile project(':react-native-view-overflow')
     compile project(':react-native-device-info')
     compile project(':react-native-sentry')

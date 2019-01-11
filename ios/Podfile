@@ -41,6 +41,8 @@ target 'salesreg' do
 
   pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
 
+  pod 'react-native-config', :path => '../node_modules/react-native-config'
+
   target 'salesregTests' do
     inherit! :search_paths
     # Pods for testing

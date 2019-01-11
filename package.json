@@ -89,6 +89,7 @@
     "react-native-cached-image": "^1.4.3",
     "react-native-collapsible": "^0.11.2",
     "react-native-collapsible-header": "^0.0.14",
+    "react-native-config": "^0.11.7",
     "react-native-credit-card-input": "^0.4.1",
     "react-native-datepicker": "^1.6.0",
     "react-native-device-info": "^0.24.3",
