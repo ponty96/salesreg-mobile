@@ -18,6 +18,7 @@ import { UserContext } from '../../context/UserContext'
 import CachedImageAtom from '../../Atom/CachedImageAtom'
 import { NotificationContext } from '../../context/NotificationContext'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import Config from 'react-native-config'
 
 interface IProps {
   navigation?: any
@@ -46,9 +47,13 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     if (!url) {
       return mediaURL
     } else {
-      let baseURL = 'https://refineryaudio.s3.amazonaws.com/',
+      let baseURL = Config.S3_BASE_URL,
         fileName = mediaURL.substring(mediaURL.lastIndexOf('/') + 1)
-      return `${baseURL}thumbnail%2F${fileName}`
+
+      let _url = `${baseURL}thumbnail%2F${fileName}`,
+        _baseURL = _url.replace(/video%2F/gi, '')
+
+      return _baseURL
     }
   }
 

@@ -3,6 +3,7 @@ import App from './App'
 import { YellowBox } from 'react-native'
 import RNPaystack from 'react-native-paystack'
 import { persistor } from './client'
+import Config from 'react-native-config'
 
 YellowBox.ignoreWarnings([
   'Warning: isMounted(...) is deprecated',
@@ -14,7 +15,7 @@ YellowBox.ignoreWarnings([
 persistor.restore()
 
 RNPaystack.init({
-  publicKey: 'pk_test_1367835f58c5ed8899339866baae45a3343999e9'
+  publicKey: Config.PAYSTACK_PUBLIC_KEY
 })
 
 AppRegistry.registerComponent('salesreg', () => App)

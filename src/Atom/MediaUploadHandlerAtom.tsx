@@ -21,6 +21,7 @@ import {
   removeUrlFromUploadedMedia
 } from '../store/actions/cron'
 import { connect } from 'react-redux'
+import Config from 'react-native-config'
 
 interface IProps {
   onMediaSet?: (response) => void
@@ -126,20 +127,21 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
     let { path: thumbnailPath } = await RNThumbnail.get(path)
 
     const optionsThumbnail = {
-      keyPrefix: 'thumbnail/',
-      bucket: 'refineryaudio',
-      region: 'us-west-1',
-      accessKey: 'AKIAJAVJKGLNOEYYHHSA',
-      secretKey: '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',
-      successActionStatus: 201
+      keyPrefix: Config.S3_THUMBNAIL_KEY_PREFIX,
+      bucket: Config.S3_BUCKET,
+      region: Config.S3_REGION,
+      accessKey: Config.S3_ACCESS_KEY,
+      secretKey: Config.S3_SECRET_KEY,
+      successActionStatus: Config.S3_SUCCESS_ACTION_STATUS
     }
 
     const optionsVideo = {
-      bucket: 'refineryaudio',
-      region: 'us-west-1',
-      accessKey: 'AKIAJAVJKGLNOEYYHHSA',
-      secretKey: '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',
-      successActionStatus: 201
+      keyPrefix: Config.S3_VIDEO_KEY_PREFIX,
+      bucket: Config.S3_BUCKET,
+      region: Config.S3_REGION,
+      accessKey: Config.S3_ACCESS_KEY,
+      secretKey: Config.S3_SECRET_KEY,
+      successActionStatus: Config.S3_SUCCESS_ACTION_STATUS
     }
 
     const name =
@@ -183,11 +185,12 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
       data = !retry ? media && media.data : optFile.data
 
     const options = {
-      bucket: 'refineryaudio',
-      region: 'us-west-1',
-      accessKey: 'AKIAJAVJKGLNOEYYHHSA',
-      secretKey: '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',
-      successActionStatus: 201
+      keyPrefix: Config.S3_IMAGE_KEY_PREFIX,
+      bucket: Config.S3_BUCKET,
+      region: Config.S3_REGION,
+      accessKey: Config.S3_ACCESS_KEY,
+      secretKey: Config.S3_SECRET_KEY,
+      successActionStatus: Config.S3_SUCCESS_ACTION_STATUS
     }
 
     const name =
