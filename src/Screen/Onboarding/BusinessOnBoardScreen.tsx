@@ -84,7 +84,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
   }
 
   renderComponentAtStep = (callbackFunc): JSX.Element => {
-    const { user } = this.state
+    const { user, slug } = this.state
     const { currentStep } = this.state
     switch (currentStep) {
       case 0:
@@ -183,7 +183,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                   {
                     label: 'Your business email',
                     placeholder: `E.g ${user ? user.firstName : ''}@${
-                      this.state['title']
+                      slug.length > 0 ? slug.replace(/\s/g, '') : 'myDomain'
                     }.com`,
                     type: {
                       type: 'input',
