@@ -152,7 +152,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                       type: 'image-upload'
                     },
                     underneathText:
-                      'Your logo will appear on your webstore,\n invoice and receipts headers. If you have no \nlogo, your business name will only be used'
+                      'Your logo will appear on your webstore,\n invoice and receipts headers. If you have no \nlogo, your business name only, be used.'
                   }
                 ]
               },
