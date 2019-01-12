@@ -111,17 +111,6 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                     name: 'title'
                   },
                   {
-                    label: 'How should customers call you?',
-                    placeholder: 'E.g StacknBit',
-                    underneathText: `This is your business nick name`,
-                    type: {
-                      type: 'input',
-                      keyboardType: 'default'
-                    },
-                    validators: ['required'],
-                    name: 'slug'
-                  },
-                  {
                     label: 'Any nice description of your business?',
                     placeholder: 'E.g Write something nice',
                     underneathText: `Your business description will be displayed in\nthe ABOUT section of your Webstore, so your \nsite visitors can appreciate what you do.`,
