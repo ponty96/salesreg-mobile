@@ -14,6 +14,7 @@ import { onError } from 'apollo-link-error'
 // import refreshOrLogout from '../services/refreshOrLogout';
 import { createUploadLink } from '@richeterre/apollo-upload-client'
 import { CachePersistor } from 'apollo-cache-persist'
+import ObservableStore from '../Functions/ObservableStore'
 
 // const GRAPHQL_API_ENDPOINT = 'http://16e11967.ngrok.iom /api'
 const GRAPHQL_API_ENDPOINT = 'http://localhost:5000/api'
@@ -65,7 +66,8 @@ const errorLink = onError(({ graphQLErrors, networkError }: any) => {
   if (networkError) console.log(`[Network error]: ${networkError}`)
 })
 
-const timeoutLink = new ApolloLinkTimeout(30000)
+const observableStore = new ObservableStore()
+const timeoutLink = new ApolloLinkTimeout(30000, observableStore)
 
 const client = new ApolloClient({
   link: timeoutLink.concat(
@@ -79,4 +81,4 @@ const writeDefaults = async () => stateLink.writeDefaults
 client.onResetStore(writeDefaults)
 
 export default client
-export { persistor }
+export { persistor, observableStore }

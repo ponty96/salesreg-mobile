@@ -12,6 +12,7 @@ import {
 } from 'react-native'
 import { NotificationContext } from '../context/NotificationContext'
 import Icon from './Icon'
+import { observableStore } from '../client'
 
 interface IState {
   translateY: any
@@ -25,9 +26,9 @@ interface IState {
 }
 
 interface IProperties {
-  style?: 'success' | 'warning' | 'error' | 'basic-info'
-  title: string
-  trigger: number
+  style?: 'success' | 'warning' | 'error' | 'basic-info' | string
+  title?: string
+  trigger?: number
   subtitle?: string
   timeout?: number
 }
@@ -328,9 +329,49 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
   }
 }
 
+class ClassObservableWrapper extends React.PureComponent<IProps> {
+  private unsubscribeStore: () => void
+
+  constructor(props) {
+    super(props)
+    this.state = {
+      style: 'error',
+      subtitle: 'Please check your network connection',
+      title: 'Network Timed Out',
+      trigger: Date.now()
+    }
+
+    this.unsubscribeStore = observableStore.listen(() => {
+      let state = observableStore.getState()
+      if ('timeout' in state) {
+        this.setState({
+          ...this.state,
+          trigger: state.timeout.id
+        })
+      }
+    })
+  }
+
+  componentDidUpdate(prevProps) {
+    if (prevProps != this.props) {
+      this.setState({
+        ...this.props
+      })
+    }
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeStore()
+  }
+
+  render() {
+    return <NotificationAtom {...this.state} />
+  }
+}
+
 const _NotificationAtom = props => (
   <NotificationContext.Consumer>
-    {config => <NotificationAtom {...props} {...config} />}
+    {config => <ClassObservableWrapper {...props} {...config} />}
   </NotificationContext.Consumer>
 )
 
