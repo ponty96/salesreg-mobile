@@ -50,10 +50,12 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       let baseURL = Config.S3_BASE_URL,
         fileName = mediaURL.substring(mediaURL.lastIndexOf('/') + 1)
 
-      let _url = `${baseURL}thumbnail%2F${fileName}`,
-        _baseURL = _url.replace(/video%2F/gi, '')
+      let _url = `${baseURL}${fileName.replace(
+        new RegExp(`${Config.S3_VIDEO_KEY_PREFIX.split('/')[2]}%2F`, 'gi'),
+        `${Config.S3_THUMBNAIL_KEY_PREFIX.split('/')[2]}%2F`
+      )}`
 
-      return _baseURL
+      return _url
     }
   }
 

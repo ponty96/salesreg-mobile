@@ -78,7 +78,7 @@ project.ext.react = [
 
 project.ext.envConfigFiles = [
     debug: ".env.development",
-    release: ".env.staging"
+    release: ".env.development"
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"

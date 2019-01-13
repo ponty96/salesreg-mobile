@@ -182,7 +182,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                   },
                   {
                     label: 'Your business email',
-                    placeholder: `E.g ${user ? user.firstName : ''}@${
+                    placeholder: `E.g ${user ? user.firstName.trim() : ''}@${
                       this.state['title']
                     }.com`,
                     type: {
