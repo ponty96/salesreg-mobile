@@ -14,7 +14,8 @@ import { parseFieldErrors } from '../Functions'
 import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../context/NotificationContext'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
-import { Alert } from 'react-native'
+import { Alert, Text } from 'react-native'
+import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
@@ -381,8 +382,17 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
                             type: 'search-picker',
                             searchQuery: CompanyCustomersGQL,
                             emptySection: {
-                              emptyText:
-                                'You currently do not have any customers. \n To create a new customer, open the side navigation drawer > customers. Afterwards, you can come back here to create your sales order'
+                              emptyText: (
+                                <Text>
+                                  You currently do not have any customers.{' '}
+                                  {'\n'} To create a new customer,{' '}
+                                  <Text style={{ color: color.button }}>
+                                    go back > Select No for the ("Is this
+                                    customer in your contacts?") question > Fill
+                                    the appropriate fields
+                                  </Text>
+                                </Text>
+                              )
                             },
                             searchQueryResponseKey: 'companyCustomers'
                           },
@@ -424,17 +434,6 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
                       name: 'discount',
                       underneathText:
                         'Discounts should be based on the amount given not the percentage. Ignore if there are no discounts.'
-                    },
-                    {
-                      label: 'Tax on this payment(%)',
-                      type: {
-                        type: 'input',
-                        keyboardType: 'numeric'
-                      },
-                      placeholder: '0.00',
-                      name: 'tax',
-                      underneathText:
-                        'Ignore if there are no taxes on this payment'
                     }
                   ],
                   buttonTitle:
