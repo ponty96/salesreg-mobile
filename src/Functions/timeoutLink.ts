@@ -66,6 +66,9 @@ export default class TimeoutLink extends ApolloLink {
         }
       )
 
+      let ctxRef = operation.getContext().timeoutRef,
+        onTimeOutCallback = operation.getContext().onTimeOut
+
       // if timeout expires before observable completes, abort call, unsubscribe, and return error
       timer = setTimeout(() => {
         if (controller) {
@@ -78,10 +81,10 @@ export default class TimeoutLink extends ApolloLink {
             id: Date.now(),
             messgae: 'A timeout error occurred'
           })
+
+        onTimeOutCallback && onTimeOutCallback()
         subscription.unsubscribe()
       }, ctxTimeout || this.timeout)
-
-      let ctxRef = operation.getContext().timeoutRef
 
       if (ctxRef) {
         ctxRef({
