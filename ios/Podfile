@@ -35,13 +35,8 @@ target 'salesreg' do
 
 
   platform :ios, '9.0'
-  pod 'react-native-splash-screen', :path => '../node_modules/react-native-splash-screen'
 
-  pod 'SentryReactNative', :path => '../node_modules/react-native-sentry'
-
-  pod 'RNDeviceInfo', :path => '../node_modules/react-native-device-info'
-
-  pod 'react-native-config', :path => '../node_modules/react-native-config'
+  pod 'Firebase/Core'
 
   target 'salesregTests' do
     inherit! :search_paths
@@ -57,6 +52,22 @@ post_install do |installer|
     end
 
     if target.name == "yoga"
+      target.remove_from_project
+    end
+
+    if target.name == "react-native-config"
+      target.remove_from_project
+    end
+
+    if target.name == "react-native-sentry"
+      target.remove_from_project
+    end
+
+    if target.name == "react-native-splash-screen"
+      target.remove_from_project
+    end
+
+    if target.name == "react-native-device-info"
       target.remove_from_project
     end
   end

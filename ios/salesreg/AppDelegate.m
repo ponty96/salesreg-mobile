@@ -14,6 +14,7 @@
 #import <React/RCTRootView.h>
 #import <React/RNSentry.h> 
 #import "RNSplashScreen.h"
+#import <Firebase.h>
 
 @implementation AppDelegate
 
@@ -21,6 +22,7 @@
 {
   NSURL *jsCodeLocation;
 
+  [FIRApp configure];
   // [AppCenterReactNativeCrashes registerWithAutomaticProcessing];  // Initialize AppCenter crashes
 
   // [AppCenterReactNativeAnalytics registerWithInitiallyEnabled:true];  // Initialize AppCenter analytics
