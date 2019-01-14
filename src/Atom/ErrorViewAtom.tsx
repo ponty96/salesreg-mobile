@@ -1,11 +1,5 @@
 import React from 'react'
-import {
-  Platform,
-  View,
-  TouchableOpacity,
-  Text,
-  StyleSheet
-} from 'react-native'
+import { View, Text, StyleSheet } from 'react-native'
 import Icon from './Icon'
 import { color } from '../Style/Color'
 
@@ -14,26 +8,15 @@ interface IProps {
   preferredErrorMessage?: string
 }
 
-const ErrorViewAtom = (props: IProps) =>
-  Platform.OS == 'android' ? (
-    <TouchableOpacity onPress={props.onRefresh}>
-      <View style={styles.container}>
-        <Icon name="alert-circle" type="Feather" style={styles.icon} />
-        <Text style={styles.text}>
-          {props.preferredErrorMessage ||
-            `Error occurred while connecting, pull down to refresh`}
-        </Text>
-      </View>
-    </TouchableOpacity>
-  ) : (
-    <View style={styles.container}>
-      <Icon name="alert-circle" type="Feather" style={styles.icon} />
-      <Text style={styles.text}>
-        {props.preferredErrorMessage ||
-          `Error occurred while connecting, pull down to refresh`}
-      </Text>
-    </View>
-  )
+const ErrorViewAtom = (props: IProps) => (
+  <View style={styles.container}>
+    <Icon name="alert-circle" type="Feather" style={styles.icon} />
+    <Text style={styles.text}>
+      {props.preferredErrorMessage ||
+        `Error occurred while connecting, pull down to refresh`}
+    </Text>
+  </View>
+)
 
 export default ErrorViewAtom
 
