@@ -7,6 +7,7 @@ import { ListCompanyExpensesGQL } from '../graphql/queries/expense'
 import { UserContext } from '../context/UserContext'
 import { NotificationContext } from '../context/NotificationContext'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -50,6 +51,21 @@ class ExpensesDetailsScreen extends Component<IProps> {
     )
   }
 
+  resetNavigationStack = () => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Home'
+        }),
+        NavigationActions.navigate({
+          routeName: 'Expenses'
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+  }
+
   render() {
     const expense = this.props.navigation.getParam('expense', {})
     return (
@@ -75,7 +91,7 @@ class ExpensesDetailsScreen extends Component<IProps> {
           this.props.setNotificationBanner(
             configureNotificationBanner('DeleteExpense', expense)
           )
-          this.props.navigation.navigate('Expenses')
+          this.resetNavigationStack()
         }}
       />
     )

@@ -11,6 +11,7 @@ import { CompanyContactGQL } from '../../graphql/queries/contact'
 import { UserContext } from '../../context/UserContext'
 import { NotificationContext } from '../../context/NotificationContext'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   contact: any
@@ -85,6 +86,23 @@ class ContactDetails extends PureComponent<IProps> {
     ]
   }
 
+  resetNavigationStack = () => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Home'
+        }),
+        NavigationActions.navigate({
+          routeName:
+            this.props.contactType == 'customer' ? 'Customers' : 'Vendors'
+        })
+      ]
+    })
+
+    this.props.navigation.dispatch(resetAction)
+  }
+
   render() {
     const contact = this.props.contact
     return [
@@ -135,9 +153,7 @@ class ContactDetails extends PureComponent<IProps> {
           this.props.setNotificationBanner(
             configureNotificationBanner('DeleteContact', contact)
           )
-          this.props.navigation.navigate(
-            this.props.contactType == 'customer' ? 'Customers' : 'Vendors'
-          )
+          this.resetNavigationStack()
         }}
         headerSubText={`\u20A6 ${numberWithCommas(
           this.props.contact.totalAmountPaid

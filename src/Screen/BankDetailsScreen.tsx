@@ -7,6 +7,7 @@ import { ListCompanyBanksGQL } from '../graphql/queries/business'
 import { UserContext } from '../context/UserContext'
 import { NotificationContext } from '../context/NotificationContext'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation: any
@@ -52,6 +53,21 @@ class BankDetailsScreen extends Component<IProps> {
     }
   }
 
+  resetNavigationStack = () => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Home'
+        }),
+        NavigationActions.navigate({
+          routeName: 'Banks'
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+  }
+
   render() {
     const bank = this.props.navigation.getParam('bank', {})
     return (
@@ -78,7 +94,7 @@ class BankDetailsScreen extends Component<IProps> {
           this.props.setNotificationBanner(
             configureNotificationBanner('DeleteAccount', bank)
           )
-          this.props.navigation.navigate('Banks')
+          this.resetNavigationStack()
         }}
       />
     )

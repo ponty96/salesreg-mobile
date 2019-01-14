@@ -18,6 +18,7 @@ import { UserContext } from '../../context/UserContext'
 import CachedImageAtom from '../../Atom/CachedImageAtom'
 import { NotificationContext } from '../../context/NotificationContext'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { NavigationActions } from 'react-navigation'
 
 interface IProps {
   navigation?: any
@@ -160,6 +161,21 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     this.props.navigation.navigate('AddProductVariant', { product })
   }
 
+  resetNavigationStack = () => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Home'
+        }),
+        NavigationActions.navigate({
+          routeName: 'Products'
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+  }
+
   render() {
     const product = this.props.navigation.getParam('product', {})
     return [
@@ -209,7 +225,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           this.props.setNotificationBanner(
             configureNotificationBanner('DeleteProduct', product)
           )
-          this.props.navigation.navigate('Products')
+          this.resetNavigationStack()
         }}
         headerText={product.name}
         headerSubText={product.number}
