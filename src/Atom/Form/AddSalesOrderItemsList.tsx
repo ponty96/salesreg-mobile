@@ -52,7 +52,7 @@ const AddSalesOrderItem = (props: SalesItem) => (
       }}
       emptySection={{
         emptyText:
-          'At least one product/service needs to be created to make a sales order'
+          'At least one product needs to be created to make a sales order'
       }}
     />
     <View style={styles.salesInputRow}>

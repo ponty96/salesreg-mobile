@@ -55,6 +55,7 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
         {this.props.avatar && (
           <CachedImageAtom uri={this.props.avatar} style={styles.avatar} />
         )}
+
         {this.props.icon}
         <TouchableOpacity
           style={[
@@ -64,7 +65,6 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
             renderStatusIndicator(this.props.bottomRightText)
           ]}
           onPress={this.props.onPress}
-          key="SalesOrderListAtom-2"
         >
           {this.renderLeftComponent()}
           {this.props.showTrash ? (
@@ -82,10 +82,10 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
             this.renderRightComponent()
           )}
         </TouchableOpacity>
-        {}
       </View>
     )
   }
+
   renderLeftComponent = (): any => {
     const {
       firstTopText,

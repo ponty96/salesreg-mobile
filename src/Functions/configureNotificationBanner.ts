@@ -72,7 +72,13 @@ const configureNotificationBanner = (type: ITypes, params?: any): object => {
     case 'DeleteProduct':
       return {
         title: 'Product Deleted',
-        subtitle: `A variant of ${params.name.trim()} was removed`
+        subtitle: `${
+          params.productGroup &&
+          params.productGroup.options &&
+          params.productGroup.options.length > 1
+            ? 'A variant of '
+            : ''
+        }${params.name.trim()} was removed`
       }
     case 'UpsertSalesOrder':
       return {

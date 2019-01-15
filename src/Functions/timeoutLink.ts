@@ -8,9 +8,11 @@ const DEFAULT_TIMEOUT: number = 15000
  */
 export default class TimeoutLink extends ApolloLink {
   private timeout: number
+  private observableStore: any
 
-  constructor(timeout: number) {
+  constructor(timeout: number, observableStore) {
     super()
+    this.observableStore = observableStore
     this.timeout = timeout || DEFAULT_TIMEOUT
   }
 
@@ -64,6 +66,9 @@ export default class TimeoutLink extends ApolloLink {
         }
       )
 
+      let ctxRef = operation.getContext().timeoutRef,
+        onTimeOutCallback = operation.getContext().onTimeOut
+
       // if timeout expires before observable completes, abort call, unsubscribe, and return error
       timer = setTimeout(() => {
         if (controller) {
@@ -71,10 +76,15 @@ export default class TimeoutLink extends ApolloLink {
         }
 
         observer.error(new Error('Timeout exceeded'))
+        operationType == 'mutation' &&
+          this.observableStore.dispatch('timeout', {
+            id: Date.now(),
+            messgae: 'A timeout error occurred'
+          })
+
+        onTimeOutCallback && onTimeOutCallback()
         subscription.unsubscribe()
       }, ctxTimeout || this.timeout)
-
-      let ctxRef = operation.getContext().timeoutRef
 
       if (ctxRef) {
         ctxRef({

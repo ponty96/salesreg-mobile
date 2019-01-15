@@ -22,6 +22,7 @@ import { DocumentNode } from 'graphql'
 import SubHeaderAtom from '../Header/SubHeaderAtom'
 import { UserContext } from '../../context/UserContext'
 import ErrorViewAtom from '../../Atom/ErrorViewAtom'
+import { observableStore } from '../../client'
 
 interface SubHeaderProps {
   screen: string
@@ -58,6 +59,7 @@ interface IProps {
 interface IState {
   business: any
   queryText: String
+  layoutHeight: number
   hasUserScrolled: boolean
 }
 
@@ -74,7 +76,8 @@ class GenericListIndex extends React.Component<IProps, IState> {
   state = {
     business: null,
     queryText: this.props.queryText,
-    hasUserScrolled: false
+    hasUserScrolled: false,
+    layoutHeight: 0
   }
 
   static defaultProps = {
@@ -89,6 +92,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
 
   private refetchQuery = (obj?: any) => obj
   private timerRef: any
+  private networkStatus: number
 
   componentDidUpdate(prevProps) {
     if (
@@ -243,12 +247,25 @@ class GenericListIndex extends React.Component<IProps, IState> {
         context={{
           timeoutRef: (timerRef: any) => {
             this.timerRef = timerRef
+          },
+          onTimeOut: () => {
+            if (
+              this.networkStatus == 4 ||
+              this.networkStatus == 8 ||
+              this.networkStatus == 2
+            ) {
+              observableStore.dispatch('timeout', {
+                id: Date.now(),
+                messgae: 'A timeout error occurred'
+              })
+            }
           }
         }}
         fetchPolicy={fetchPolicy || 'cache-first'}
       >
         {({ loading, data, error, networkStatus, fetchMore, refetch }) => {
           this.refetchQuery = refetch
+          this.networkStatus = networkStatus
           const sections =
             Object.keys(data || {}).length > 0 && data[graphqlQueryResultKey]
               ? this.parseSections(data[graphqlQueryResultKey])
@@ -258,7 +275,11 @@ class GenericListIndex extends React.Component<IProps, IState> {
             <View style={styles.container}>
               <AppSpinner
                 visible={
-                  Object.keys(data || {}).length == 0 && !error && loading
+                  Object.keys(data || {}).length == 0 &&
+                  (networkStatus != 2 &&
+                    networkStatus != 4 &&
+                    networkStatus != 8) &&
+                  loading
                 }
               />
               {subHeader && (
@@ -295,7 +316,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   })
                 }
                 contentContainerStyle={
-                  error
+                  error && Object.keys(data || {}).length == 0
                     ? {
                         flex: 1,
                         alignItems: 'center',
@@ -307,10 +328,18 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   (error ||
                     (Object.keys(data || {}).length > 0 &&
                       data[graphqlQueryResultKey])) &&
-                  networkStatus == 4
+                  (networkStatus == 4 ||
+                    (this.state.layoutHeight <= 0 && networkStatus == 2))
                 }
                 onEndReachedThreshold={0.99}
-                onScroll={() => {
+                onScroll={({
+                  nativeEvent: {
+                    contentOffset: { y },
+                    layoutMeasurement: { height }
+                  }
+                }) => {
+                  if (y <= 0 || (y >= height - 15 && y <= height))
+                    this.setState({ layoutHeight: height })
                   !this.state.hasUserScrolled &&
                     this.setState({ hasUserScrolled: true })
                 }}

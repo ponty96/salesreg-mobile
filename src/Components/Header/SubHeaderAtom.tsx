@@ -24,7 +24,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
   render() {
     return (
       <View style={styles.header}>
-        <View style={styles.row}>
+        <View style={[styles.row, { marginLeft: 6 }]}>
           <Icon
             name={this.props.iconName}
             type={this.props.iconType || 'Ionicons'}
@@ -34,7 +34,7 @@ class SubHeaderAtom extends React.Component<IProps, any> {
         </View>
         {this.props.rightLabel ? (
           <TouchableOpacity onPress={this.props.onPressArrow}>
-            <View style={styles.row}>
+            <View style={[styles.row, { marginRight: -7 }]}>
               <Text style={styles.rightLabel}>{this.props.rightLabel}</Text>
               <Icon
                 name="chevron-small-right"
@@ -57,7 +57,7 @@ export default SubHeaderAtom
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',
-    padding: 13,
+    padding: 16,
     justifyContent: 'space-between',
     alignItems: 'center',
     borderBottomWidth: 1,

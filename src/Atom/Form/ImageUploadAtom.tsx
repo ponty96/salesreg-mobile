@@ -213,7 +213,7 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
   render() {
     return (
       <React.Fragment>
-        <View>
+        <View style={{ alignItems: 'center' }}>
           {this.state.prevImageUploaded &&
           this.state.isInProcessing == undefined
             ? this.renderDefaultImage()

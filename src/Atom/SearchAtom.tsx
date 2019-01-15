@@ -1,4 +1,4 @@
-import { StyleSheet, Platform } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import React from 'react'
 import { Item, Input } from 'native-base'
 import Icon from './Icon'
@@ -33,29 +33,35 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
           this.state.isFocused ? { backgroundColor: color.searchBoxActive } : {}
         ]}
       >
-        <Icon
-          name="ios-search"
+        <View style={{ marginLeft: 12, marginTop: 2 }}>
+          <Icon
+            name="ios-search"
+            style={{
+              color: '#000',
+              fontSize: 24,
+              padding: 0
+            }}
+          />
+        </View>
+        <View
           style={{
-            color: '#000',
-            fontSize: 24,
-            padding: 0,
-            marginRight: 10,
-            marginTop: 5
+            width: '100%',
+            position: 'absolute',
+            marginTop: -10,
+            paddingHorizontal: 34
           }}
-        />
-        <Input
-          onFocus={() => this.setState({ isFocused: true })}
-          onBlur={() => this.setState({ isFocused: false })}
-          placeholder={this.props.placeholder || ''}
-          returnKeyType="search"
-          onChangeText={value => this.props.onSearch(value)}
-          onSubmitEditing={() => this.props.onSearch(this.props.queryText)}
-          value={this.props.queryText}
-          style={[
-            styles.inputText,
-            { marginTop: Platform.OS == 'android' ? 0 : -3 }
-          ]}
-        />
+        >
+          <Input
+            onFocus={() => this.setState({ isFocused: true })}
+            onBlur={() => this.setState({ isFocused: false })}
+            placeholder={this.props.placeholder || ''}
+            returnKeyType="search"
+            onChangeText={value => this.props.onSearch(value)}
+            onSubmitEditing={() => this.props.onSearch(this.props.queryText)}
+            value={this.props.queryText}
+            style={styles.inputText}
+          />
+        </View>
       </Item>
     )
   }
@@ -69,16 +75,17 @@ const styles = StyleSheet.create({
     borderRadius: 8,
     marginHorizontal: 12,
     marginRight: 0,
-    paddingLeft: 12,
     marginTop: 0,
     top: 0,
     height: 36,
-    justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 8
   },
   inputText: {
     fontFamily: 'AvenirNext-Regular',
-    textAlign: 'center'
+    textAlign: 'center',
+    width: '100%',
+    paddingLeft: 0,
+    paddingRight: 0
   }
 })
