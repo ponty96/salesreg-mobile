@@ -4,6 +4,7 @@ import { color } from '../Style/Color'
 import Header from '../Components/Header/BaseHeader'
 import Auth from '../services/auth'
 import { Content } from 'native-base'
+import setAppAnalytics from '../Functions/setAppAnalytics'
 
 interface IProps {
   navigation: any
@@ -14,8 +15,12 @@ interface IState {
 }
 
 export default class HomeScreen extends React.Component<IProps, IState> {
-  state = {
-    username: ''
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: ''
+    }
+    setAppAnalytics('OPEN_APP')
   }
 
   static navigationOptions = ({ navigation }: any) => {

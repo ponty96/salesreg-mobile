@@ -10,6 +10,7 @@ import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../../context/NotificationContext'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import setAppAnalytics from '../../Functions/setAppAnalytics'
 
 interface IProps {
   navigation: any
@@ -330,6 +331,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
       upsertContact: { success, fieldErrors, data }
     } = res
     if (success) {
+      setAppAnalytics('CREATE_CUSTOMER', this.state)
       const { contact } = this.props
       const resetAction = NavigationActions.reset({
         index: 1,

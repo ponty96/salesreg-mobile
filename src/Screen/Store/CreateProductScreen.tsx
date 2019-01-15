@@ -22,6 +22,7 @@ import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../../context/NotificationContext'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import setAppAnalytics from '../../Functions/setAppAnalytics'
 
 interface IProps {
   navigation: any
@@ -217,7 +218,8 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
             placeholder: '',
             validators: ['required'],
             name: 'isVariant',
-            underneathText: "If this item is another version of a product that already exists in your inventory, e.g if it is another color or size of a product you already have, then it is a variant of an existing product.",
+            underneathText:
+              'If this item is another version of a product that already exists in your inventory, e.g if it is another color or size of a product you already have, then it is a variant of an existing product.',
             type: {
               type: 'radio',
               options: ['New Product', 'Variant of Existing product']
@@ -523,6 +525,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
       createProduct: { success, fieldErrors, data }
     } = res
     if (success) {
+      setAppAnalytics('ADD_PRODUCT', this.state)
       const resetAction = NavigationActions.reset({
         index: 1,
         actions: [

@@ -14,6 +14,7 @@ import { parseFieldErrors } from '../../Functions'
 import AppSpinner from '../../Components/Spinner'
 import { AuthenticateClientGQL } from '../../graphql/client-mutations/authenticate'
 import { UserContext } from '../../context/UserContext'
+import setAppAnalytics from '../../Functions/setAppAnalytics'
 
 interface IProps {
   navigation: any
@@ -257,6 +258,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
+      setAppAnalytics('REGISTER_ACCOUNT', this.state)
       const { user } = this.props
       await Auth.setCurrentUser({ ...user, company: data })
       this.props.resetUserContext({ ...user, company: data })

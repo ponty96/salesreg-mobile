@@ -20,6 +20,7 @@ import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../../context/NotificationContext'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import setAppAnalytics from '../../Functions/setAppAnalytics'
 
 interface IProps {
   navigation: any
@@ -338,6 +339,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
       createProduct: { success, fieldErrors, data }
     } = res
     if (success) {
+      setAppAnalytics('ADD_PRODUCT', this.state)
       const resetAction = NavigationActions.reset({
         index: 1,
         actions: [
