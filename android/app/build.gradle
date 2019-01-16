@@ -146,6 +146,7 @@ android {
 
 dependencies {
     implementation project(':react-native-firebase')
+    implementation project(':react-native-webview-bridge')
     implementation project(':react-native-config')
     implementation project(':react-native-view-overflow')
     implementation project(':react-native-device-info')
@@ -172,3 +173,8 @@ task copyDownloadableDepsToLibs(type: Copy) {
     into 'libs'
 }
 apply plugin: 'com.google.gms.google-services'
+
+project.afterEvaluate {
+    apply from: '../../node_modules/react-native-zss-rich-text-editor/htmlCopy.gradle';
+    copyEditorHtmlToAppAssets(file('../../node_modules/react-native-zss-rich-text-editor'))
+}
