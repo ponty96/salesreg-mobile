@@ -70,3 +70,15 @@ export const DeleteBankGQL = gql`
     }
   }
 `
+
+export const UpdateCoverPhotoGQL = gql`
+  mutation updateCoverPhoto($companyId: Uuid!, $coverPhoto: String!) {
+    updateCoverPhoto(id: $companyId, coverPhoto: $coverPhoto) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
