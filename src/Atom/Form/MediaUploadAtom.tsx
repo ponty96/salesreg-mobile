@@ -12,6 +12,7 @@ import { Icon, ActionSheet } from 'native-base'
 import ImagePicker from 'react-native-image-crop-picker'
 import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
 import CachedImageAtom from '../CachedImageAtom'
+import Config from 'react-native-config'
 
 interface IProps {
   medias?: string[]
@@ -144,7 +145,7 @@ export default class MediaUploadAtom extends React.PureComponent<
     if (!url) {
       return mediaURL
     } else {
-      let baseURL = 'https://refineryaudio.s3.amazonaws.com/',
+      let baseURL = Config.S3_BASE_URL,
         fileName = mediaURL.substring(mediaURL.lastIndexOf('/') + 1)
       return `${baseURL}thumbnail%2F${fileName}`
     }

@@ -14,10 +14,11 @@ import { onError } from 'apollo-link-error'
 // import refreshOrLogout from '../services/refreshOrLogout';
 import { createUploadLink } from '@richeterre/apollo-upload-client'
 import { CachePersistor } from 'apollo-cache-persist'
+import Config from 'react-native-config'
 import ObservableStore from '../Functions/ObservableStore'
 
 // const GRAPHQL_API_ENDPOINT = 'http://16e11967.ngrok.iom /api'
-const GRAPHQL_API_ENDPOINT = 'http://localhost:5000/api'
+const GRAPHQL_API_ENDPOINT = Config.BASE_URL
 const cache = new InMemoryCache()
 
 const persistor = new CachePersistor({

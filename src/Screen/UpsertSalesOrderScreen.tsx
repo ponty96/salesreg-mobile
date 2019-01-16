@@ -15,6 +15,7 @@ import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../context/NotificationContext'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 import { Alert, Text } from 'react-native'
+import setAppAnalytics from '../Functions/setAppAnalytics'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -116,6 +117,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
   }
 
   navigateUser = () => {
+    setAppAnalytics('CREATE_SALES_ORDER', this.state)
     const resetAction = NavigationActions.reset({
       index: 1,
       actions: [

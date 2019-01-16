@@ -15,6 +15,7 @@ import { parseFieldErrors } from '../Functions'
 import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../context/NotificationContext'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import setAppAnalytics from '../Functions/setAppAnalytics'
 
 interface IProps {
   navigation: any
@@ -123,6 +124,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
       }
     } = this.props
 
+    setAppAnalytics('MAKE_INVOICE_PAYMENT', this.state)
     const resetAction = NavigationActions.reset({
       index: 1,
       actions: [

@@ -1,7 +1,8 @@
 import { Sentry } from 'react-native-sentry'
 import DeviceInfo from 'react-native-device-info'
+import Config from 'react-native-config'
 
-let dsn = 'https://3be412aa24be4c9f8b5fffcf9ef2cff2@sentry.io/1359820'
+let dsn = Config.SENTRY_DSN
 
 function setupSentry(user) {
   Sentry.config(dsn).install()
@@ -20,7 +21,7 @@ const addBuildContext = user => {
   })
 
   Sentry.setTagsContext({
-    environment: 'development'
+    environment: Config.SENTRY_ENVIRONMENT
   })
 
   Sentry.setUserContext({
