@@ -17,6 +17,7 @@ import setupSentry from './Functions/sentry'
 import NotificationAtom from './Atom/NotificationAtom'
 import { NotificationContext } from './context/NotificationContext'
 import ViewOverflow from 'react-native-view-overflow'
+import Config from 'react-native-config'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
 
@@ -55,7 +56,9 @@ export default class App extends React.Component {
     const refreshToken = await Auth.getRefreshToken()
     if (token && refreshToken) {
       const user = JSON.parse(await Auth.getCurrentUser())
-      setupSentry(user)
+      if (Config.NODE_ENVIRONMENT != 'development') {
+        setupSentry(user)
+      }
       client.mutate({
         mutation: AuthenticateClientGQL,
         variables: { user: user }
