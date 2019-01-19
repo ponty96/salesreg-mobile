@@ -27,6 +27,7 @@ type ITypes =
   | 'UpdateOption'
   | 'DeleteOption'
   | 'UpdateCoverPhoto'
+  | 'UpdateLegalDocument'
 
 const configureNotificationBanner = (type: ITypes, params?: any): object => {
   switch (type) {
@@ -178,7 +179,12 @@ const configureNotificationBanner = (type: ITypes, params?: any): object => {
     case 'UpdateCoverPhoto':
       return {
         title: 'Cover Photo Updated',
-        subtitle: 'A cover profile has been added to your webstore'
+        subtitle: 'Cover photo added to your webstore'
+      }
+    case 'UpdateLegalDocument':
+      return {
+        title: `${params.name.trim()} Updated`,
+        subtitle: `${params.name.trim()} has been added`
       }
   }
 }

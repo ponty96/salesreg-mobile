@@ -38,39 +38,11 @@ export default class WebstoreOptionsScreen extends React.PureComponent<IProps> {
             iconType: 'MaterialIcons'
           },
           {
-            section: 'Privacy Policy',
-            routeName: 'UpsertPolicy',
+            section: 'Manage Documents',
+            routeName: 'UpsertDocuments',
             showRightCaret: true,
-            description: 'Edit your business cover photo',
+            description: 'Edit your business documents',
             icon: 'file-document',
-            onPress: () => null,
-            iconType: 'MaterialCommunityIcons'
-          },
-          {
-            section: 'Refund Policy',
-            routeName: 'UpsertPolicy',
-            showRightCaret: true,
-            description: 'Edit your business refund policy',
-            icon: 'code-greater-than-or-equal',
-            onPress: () => null,
-            iconType: 'MaterialCommunityIcons'
-          },
-          {
-            section: 'Delivery Policy',
-            routeName: 'UpsertPolicy',
-            showRightCaret: true,
-            description: 'Edit your business delivery policy',
-            icon: 'truck-delivery',
-            onPress: () => null,
-            iconType: 'MaterialCommunityIcons'
-          },
-          {
-            section: 'Terms and Conditions',
-            routeName: 'UpsertPolicy',
-            showRightCaret: true,
-            description: 'Edit your terms and conditions',
-            icon: 'paperclip',
-            onPress: () => null,
             iconType: 'MaterialCommunityIcons'
           }
         ]}
