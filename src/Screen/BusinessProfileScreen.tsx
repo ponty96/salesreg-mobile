@@ -74,6 +74,22 @@ export default class BusinessProfileScreen extends Component<IProps, IState> {
             : null
         },
         {
+          section: 'Facebook',
+          value: user.company.facebook
+        },
+        {
+          section: 'Instagram',
+          value: user.company.instagram
+        },
+        {
+          section: 'Twitter',
+          value: user.company.twitter
+        },
+        {
+          section: 'linkedIn',
+          value: user.company.linkedin
+        },
+        {
           section: 'About',
           value: [user.company.about],
           hideBody: !user.company.about ? true : false
