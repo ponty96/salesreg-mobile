@@ -258,7 +258,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     if (!imageValidity) {
       Alert.alert(
         'Error',
-        'One or more images failed or are still loading, please cancel or wait to proceed with submission',
+        'One or more media failed or are still loading, please cancel or wait to proceed with submission',
         [{ text: 'Ok', onPress: () => null }],
         { cancelable: false }
       )
