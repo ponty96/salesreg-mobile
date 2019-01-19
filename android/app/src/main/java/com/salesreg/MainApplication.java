@@ -3,6 +3,7 @@ package com.salesreg;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import io.invertase.firebase.RNFirebasePackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.entria.views.RNViewOverflowPackage;
@@ -21,7 +22,6 @@ import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
 import com.facebook.soloader.SoLoader;
 import io.invertase.firebase.analytics.RNFirebaseAnalyticsPackage;
-import com.github.alinz.reactnativewebviewbridge.WebViewBridgePackage;
 
 import java.util.Arrays;
 import java.util.List;
@@ -38,6 +38,7 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new ReactNativeDocumentPicker(),
             new RNFirebasePackage(),
             new ReactNativeConfigPackage(),
             new RNViewOverflowPackage(),
@@ -47,7 +48,6 @@ public class MainApplication extends Application implements ReactApplication {
             new RNThumbnailPackage(),
             new RNFirebaseAnalyticsPackage(),
             new RNPaystackPackage(),
-            new WebViewBridgePackage(),
             new PickerPackage(),
             new RNFetchBlobPackage(),
             new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appCenterCrashes_whenToSendCrashes)),
