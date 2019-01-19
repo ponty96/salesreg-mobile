@@ -7,7 +7,7 @@ import { parseFieldErrors } from '../../../Functions'
 import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../../../context/NotificationContext'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
-import { UpdateCoverPhotoGQL } from '../../../graphql/mutations/business'
+import { UpdateCompanyCoverPhotoGQL } from '../../../graphql/mutations/business'
 
 interface IProps {
   navigation: any
@@ -42,10 +42,12 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
   }
 
   parseMutationVariables = () => {
-    let params = { ...this.state }
-    delete params.fieldErrors
-
-    return params
+    return {
+      coverPhoto: {
+        companyId: this.props.user.company.id,
+        coverPhoto: this.state.coverPhoto
+      }
+    }
   }
 
   navigateUser = () => {
@@ -53,7 +55,7 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
       index: 1,
       actions: [
         NavigationActions.navigate({
-          routeName: 'ProfileSettingsScreen'
+          routeName: 'ProfileSettings'
         }),
         NavigationActions.navigate({
           routeName: 'WebstoreOptions'
@@ -68,7 +70,7 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
 
   onCompleted = async res => {
     const {
-      updateCoverPhoto: { success, fieldErrors }
+      updateCompanyCoverPhoto: { success, fieldErrors }
     } = res
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -79,7 +81,10 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
 
   render() {
     return (
-      <Mutation mutation={UpdateCoverPhotoGQL} onCompleted={this.onCompleted}>
+      <Mutation
+        mutation={UpdateCompanyCoverPhotoGQL}
+        onCompleted={this.onCompleted}
+      >
         {(updateCoverPhoto, { loading }) => {
           return (
             <React.Fragment>
@@ -94,9 +99,7 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
                 }
                 steps={[
                   {
-                    stepTitle: "Let's add a cover photo to your webstore",
-                    stepHint:
-                      'The cover photo would be displayed on your webstore giving the effects of an imagery title.',
+                    stepTitle: 'You will need a cover image(2000*560)',
                     formFields: [
                       {
                         label: '',
@@ -104,7 +107,9 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
                         name: 'coverPhoto',
                         type: {
                           type: 'image-upload'
-                        }
+                        },
+                        underneathText:
+                          'This image will be used as the cover image for your webstore'
                       }
                     ],
                     buttonTitle: 'Done'
