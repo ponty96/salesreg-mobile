@@ -15,6 +15,7 @@ export const UpdateCompanyGQL = gql`
           slug
           contactEmail
           about
+          coverPhoto
           facebook
           twitter
           instagram
@@ -82,6 +83,11 @@ export const UpdateCompanyCoverPhotoGQL = gql`
       fieldErrors {
         key
         message
+      }
+      data {
+        ... on Company {
+          coverPhoto
+        }
       }
     }
   }

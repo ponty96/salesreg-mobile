@@ -21,6 +21,11 @@ export const UpdateUserGQL = gql`
             id
             title
             contactEmail
+            coverPhoto
+            facebook
+            twitter
+            instagram
+            linkedin
             about
             currency
             slug

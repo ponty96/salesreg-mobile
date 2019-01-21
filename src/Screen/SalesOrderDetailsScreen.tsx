@@ -73,6 +73,7 @@ class SalesOrderDetailsScreen extends Component<IProps> {
 
   render() {
     const sales = this.props.navigation.getParam('sales', {})
+    console.log('The sales is ', sales)
     return (
       <View style={styles.container}>
         <GenericDetailsComponent

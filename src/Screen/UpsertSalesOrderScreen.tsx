@@ -226,27 +226,27 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       return param
     })
 
-    const {
-        navigation: {
-          state: { params }
-        }
-      } = this.props,
-      _saleId = params && params.sales && params.sales.id,
-      saleId = _saleId || null,
-      _params = {
-        ...this.state,
-        contact,
-        items,
-        paymentMethod: this.state.paymentMethod.toUpperCase(),
-        ...this.state.user
-      }
+    // const {
+    //     navigation: {
+    //       state: { params }
+    //     }
+    //   } = this.props,
+    //   _saleId = params && params.sales && params.sales.id,
+    //   saleId = _saleId || null,
+    let _params = {
+      ...this.state,
+      contact,
+      items,
+      paymentMethod: this.state.paymentMethod.toUpperCase(),
+      ...this.state.user
+    }
 
     if (_params.isCustomerInContacts != 'No') {
       _params['contactId'] = _params.existingContact.id
       delete _params.contact
     }
 
-    _params['location'] = {
+    _params['locationId'] = {
       street1: this.state.street1,
       city: this.state.city,
       state: this.state.state,
@@ -269,12 +269,13 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     delete _params.state
     delete _params.country
 
-    return saleId
-      ? {
-          sale: _params,
-          saleId
-        }
-      : { sale: _params }
+    // return saleId
+    //   ? {
+    //       sale: _params,
+    //       saleId
+    //     }
+    //   : { sale: _params }
+    return { sale: _params }
   }
 
   checkSalesOrderValidity = upsertSales => {

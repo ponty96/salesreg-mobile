@@ -39,7 +39,6 @@ export default class BusinessProfileScreen extends Component<IProps, IState> {
 
   updateState = async () => {
     const user = JSON.parse(await Auth.getCurrentUser())
-    console.log('The user is ', user)
     const location = this.parseLocation(user.company)
     const country = Countries.find(country => country.value == location.country)
     this.setState({

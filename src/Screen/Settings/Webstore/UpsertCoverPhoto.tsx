@@ -8,10 +8,12 @@ import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../../../context/NotificationContext'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 import { UpdateCompanyCoverPhotoGQL } from '../../../graphql/mutations/business'
+import Auth from '../../../services/auth'
 
 interface IProps {
   navigation: any
   user?: any
+  resetUserContext?: (user?: any) => void
   setNotificationBanner?: (obj?: any) => void
 }
 
@@ -25,9 +27,13 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
     header: null
   }
 
-  state = {
-    fieldErrors: {},
-    coverPhoto: ''
+  constructor(props) {
+    super(props)
+    this.state = {
+      fieldErrors: {},
+      coverPhoto:
+        (this.props.user.company && this.props.user.company.coverPhoto) || ''
+    }
   }
 
   updateState = (key: string, val: string) => {
@@ -50,7 +56,16 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
     }
   }
 
-  navigateUser = () => {
+  navigateUser = async data => {
+    const user = JSON.parse(await Auth.getCurrentUser())
+    const updatedUser = {
+      ...user,
+      company: { ...user.company, coverPhoto: data.coverPhoto }
+    }
+
+    await Auth.setCurrentUser(updatedUser)
+    this.props.resetUserContext(updatedUser)
+
     const resetAction = NavigationActions.reset({
       index: 1,
       actions: [
@@ -70,12 +85,12 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
 
   onCompleted = async res => {
     const {
-      updateCompanyCoverPhoto: { success, fieldErrors }
+      updateCompanyCoverPhoto: { success, fieldErrors, data }
     } = res
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.navigateUser()
+      this.navigateUser(data)
     }
   }
 
@@ -126,12 +141,13 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
 
 const _UpsertCoverPhoto: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
+    {({ user, resetUserContext }) => (
       <NotificationContext.Consumer>
         {({ setNotificationBanner }) => (
           <UpsertCoverPhoto
             {...props}
             user={user}
+            resetUserContext={resetUserContext}
             setNotificationBanner={setNotificationBanner}
           />
         )}
