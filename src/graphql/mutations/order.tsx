@@ -19,6 +19,12 @@ export const UpdateSaleOrderStatusGQL = gql`
             gender
             email
           }
+          location {
+            street1
+            state
+            country
+            city
+          }
           paymentMethod
           status
           amount
@@ -101,6 +107,12 @@ export const UpsertSaleOrder = gql`
             gender
             email
           }
+          location {
+            street1
+            state
+            country
+            city
+          }
           paymentMethod
           status
           amount
@@ -165,6 +177,12 @@ export const UpdateInvoice = gql`
             discount
             amountPaid
             date
+            location {
+              street1
+              state
+              country
+              city
+            }
             items {
               id
               unitPrice

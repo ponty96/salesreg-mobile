@@ -60,6 +60,17 @@ class SalesOrderDetailsScreen extends Component<IProps> {
         }))
         .concat([
           {
+            section: 'Address',
+            value: sales.location
+              ? [
+                  sales.location.street1,
+                  sales.location.city,
+                  sales.location.state,
+                  sales.location.country
+                ]
+              : null
+          },
+          {
             itemTitle: 'Discount',
             itemValue: `\u20A6 ${sales.discount}`
           },

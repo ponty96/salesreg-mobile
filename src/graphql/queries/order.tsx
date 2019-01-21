@@ -59,6 +59,12 @@ export const ListCompanySalesGQL = gql`
           paymentMethod
           status
           amount
+          location {
+            street1
+            state
+            country
+            city
+          }
           amountPaid
           invoice {
             id
@@ -110,6 +116,12 @@ export const ListCompanyInvoicesGQL = gql`
               contactName
               id
               email
+            }
+            location {
+              street1
+              state
+              country
+              city
             }
             amountPaid
             date
