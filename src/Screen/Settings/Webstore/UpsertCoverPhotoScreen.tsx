@@ -22,7 +22,7 @@ interface IState {
   fieldErrors: any
 }
 
-class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
+class UpsertCoverPhotoScreen extends React.PureComponent<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -139,12 +139,12 @@ class UpsertCoverPhoto extends React.PureComponent<IProps, IState> {
   }
 }
 
-const _UpsertCoverPhoto: any = props => (
+const _UpsertCoverPhotoScreen: any = props => (
   <UserContext.Consumer>
     {({ user, resetUserContext }) => (
       <NotificationContext.Consumer>
         {({ setNotificationBanner }) => (
-          <UpsertCoverPhoto
+          <UpsertCoverPhotoScreen
             {...props}
             user={user}
             resetUserContext={resetUserContext}
@@ -156,6 +156,7 @@ const _UpsertCoverPhoto: any = props => (
   </UserContext.Consumer>
 )
 
-_UpsertCoverPhoto.navigationOptions = UpsertCoverPhoto.navigationOptions
+_UpsertCoverPhotoScreen.navigationOptions =
+  UpsertCoverPhotoScreen.navigationOptions
 
-export default _UpsertCoverPhoto
+export default _UpsertCoverPhotoScreen

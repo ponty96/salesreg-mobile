@@ -27,7 +27,7 @@ interface IState {
   fieldErrors: any
 }
 
-class UpsertDocuments extends React.PureComponent<IProps, IState> {
+class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -177,12 +177,12 @@ class UpsertDocuments extends React.PureComponent<IProps, IState> {
   }
 }
 
-const _UpsertDocuments: any = props => (
+const _UpsertDocumentsScreen: any = props => (
   <UserContext.Consumer>
     {({ user }) => (
       <NotificationContext.Consumer>
         {({ setNotificationBanner }) => (
-          <UpsertDocuments
+          <UpsertDocumentsScreen
             {...props}
             user={user}
             setNotificationBanner={setNotificationBanner}
@@ -193,6 +193,7 @@ const _UpsertDocuments: any = props => (
   </UserContext.Consumer>
 )
 
-_UpsertDocuments.navigationOptions = UpsertDocuments.navigationOptions
+_UpsertDocumentsScreen.navigationOptions =
+  UpsertDocumentsScreen.navigationOptions
 
-export default _UpsertDocuments
+export default _UpsertDocumentsScreen

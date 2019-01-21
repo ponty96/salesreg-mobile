@@ -38,8 +38,8 @@ import UpsertOptionScreen from '../Screen/Settings/Option/UpsertOptionScreen'
 
 //Webstore Setting Option
 import WebstoreOptionsScreen from '../Screen/Settings/Webstore/WebstoreOptionsScreen'
-import UpsertCoverPhoto from '../Screen/Settings/Webstore/UpsertCoverPhoto'
-import UpsertDocuments from '../Screen/Settings/Webstore/UpsertDocuments'
+import UpsertCoverPhotoScreen from '../Screen/Settings/Webstore/UpsertCoverPhotoScreen'
+import UpsertDocumentsScreen from '../Screen/Settings/Webstore/UpsertDocumentsScreen'
 
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
@@ -167,8 +167,8 @@ const businessStack = StackNavigator(
 
     // Webstore settings
     WebstoreOptions: WebstoreOptionsScreen,
-    UpsertCoverPhoto: UpsertCoverPhoto,
-    UpsertDocuments: UpsertDocuments,
+    UpsertCoverPhoto: UpsertCoverPhotoScreen,
+    UpsertDocuments: UpsertDocumentsScreen,
 
     // Expenses
     Expenses: ExpensesScreen,
