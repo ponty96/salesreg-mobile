@@ -56,12 +56,6 @@ export const ListCompanySalesGQL = gql`
             gender
             email
           }
-          location {
-            city
-            country
-            state
-            street1
-          }
           paymentMethod
           status
           amount
@@ -116,12 +110,6 @@ export const ListCompanyInvoicesGQL = gql`
               contactName
               id
               email
-            }
-            location {
-              city
-              country
-              state
-              street1
             }
             amountPaid
             date
