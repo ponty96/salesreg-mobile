@@ -13,10 +13,12 @@ import {
   PolicyDocuments,
   TermsDocuments
 } from '../../../utilities/data/picker-lists'
+import Auth from '../../../services/auth'
 
 interface IProps {
   navigation: any
   user?: any
+  resetUserContext?: (user?: any) => void
   setNotificationBanner?: (obj?: any) => void
 }
 
@@ -70,7 +72,16 @@ class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
     }
   }
 
-  navigateUser = () => {
+  navigateUser = async data => {
+    const user = JSON.parse(await Auth.getCurrentUser())
+    const updatedUser = {
+      ...user,
+      company: { ...user.company, legalDocuments: data.legalDocuments }
+    }
+
+    await Auth.setCurrentUser(updatedUser)
+    this.props.resetUserContext(updatedUser)
+
     const resetAction = NavigationActions.reset({
       index: 1,
       actions: [
@@ -94,13 +105,13 @@ class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
 
   onCompleted = async res => {
     const {
-      upsertLegalDocument: { success, fieldErrors }
+      upsertLegalDocument: { success, fieldErrors, data }
     } = res
 
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.navigateUser()
+      this.navigateUser(data)
     }
   }
 
@@ -179,12 +190,13 @@ class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
 
 const _UpsertDocumentsScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
+    {({ user, resetUserContext }) => (
       <NotificationContext.Consumer>
         {({ setNotificationBanner }) => (
           <UpsertDocumentsScreen
             {...props}
             user={user}
+            resetUserContext={resetUserContext}
             setNotificationBanner={setNotificationBanner}
           />
         )}

@@ -31,6 +31,12 @@ export const LoginUserMutationGQL = gql`
               logo
               facebook
               twitter
+              legalDocuments {
+                pdfUrl
+                name
+                type
+                id
+              }
               instagram
               linkedin
               coverPhoto
@@ -83,6 +89,12 @@ export const RegisterUserMutationGQL = gql`
               slug
               contactEmail
               about
+              legalDocuments {
+                pdfUrl
+                name
+                type
+                id
+              }
               currency
               coverPhoto
               facebook
@@ -129,6 +141,12 @@ export const AddUserCompanyMutationGQL = gql`
           about
           currency
           facebook
+          legalDocuments {
+            pdfUrl
+            name
+            type
+            id
+          }
           twitter
           instagram
           linkedin
