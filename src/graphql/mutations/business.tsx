@@ -126,3 +126,25 @@ export const UpsertLegalDocument = gql`
     }
   }
 `
+
+export const DeleteLegalDocument = gql`
+  mutation deleteLegalDocument($legalDocumentId: Uuid!) {
+    deleteLegalDocument(legalDocumentId: $legalDocumentId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          legalDocuments {
+            name
+            pdfUrl
+            type
+            id
+          }
+        }
+      }
+    }
+  }
+`

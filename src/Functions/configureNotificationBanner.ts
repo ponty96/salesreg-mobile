@@ -28,6 +28,7 @@ type ITypes =
   | 'DeleteOption'
   | 'UpdateCoverPhoto'
   | 'UpdateLegalDocument'
+  | 'DeleteLegalDocument'
 
 const configureNotificationBanner = (type: ITypes, params?: any): object => {
   switch (type) {
@@ -185,6 +186,13 @@ const configureNotificationBanner = (type: ITypes, params?: any): object => {
       return {
         title: `${params.name.trim()} Updated`,
         subtitle: `${params.name.trim()} has been added`
+      }
+    case 'DeleteLegalDocument':
+      return {
+        title: `Legal Document Deleted`,
+        subtitle: `Your ${params.name} ${
+          params.type == 'policy' ? 'policy' : ''
+        } has been removed`
       }
   }
 }
