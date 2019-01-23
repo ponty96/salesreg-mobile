@@ -33,7 +33,7 @@
   },
   "scripts": {
     "tsc": "tsc -p tsconfig.json",
-    "postinstall": "npm run build",
+    "postinstall": "npm run build && rm -rf ./node_modules/react-native-rave/node_modules",
     "clean": "rimraf build",
     "build": "npm run clean && npm run tsc --",
     "start": "node node_modules/react-native/local-cli/cli.js start",
@@ -102,6 +102,7 @@
     "react-native-loading-spinner-overlay": "^0.5.2",
     "react-native-paystack": "^3.3.0",
     "react-native-progress": "^3.5.0",
+    "react-native-rave": "^0.1.0",
     "react-native-sentry": "^0.40.2",
     "react-native-slider": "^0.11.0",
     "react-native-splash-screen": "^3.1.1",
