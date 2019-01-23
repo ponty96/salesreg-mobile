@@ -30,6 +30,19 @@ interface IState {
 }
 
 class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
+  private addedPolicyDocumenents: string[]
+
+  constructor(props) {
+    super(props)
+    let {
+      user: {
+        company: { legalDocuments }
+      }
+    } = this.props
+
+    this.addedPolicyDocumenents = legalDocuments.map(doc => doc.name)
+  }
+
   static navigationOptions = {
     header: null
   }
@@ -152,10 +165,25 @@ class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
                         name: 'name',
                         type: {
                           type: 'picker',
+                          emptySection: {
+                            emptyText: `All the documents for ${
+                              this.state.type
+                            } has been provided`
+                          },
                           options:
                             this.state.type == 'policy'
-                              ? PolicyDocuments
-                              : TermsDocuments
+                              ? PolicyDocuments.filter(
+                                  doc =>
+                                    this.addedPolicyDocumenents.indexOf(
+                                      doc.value
+                                    ) == -1
+                                )
+                              : TermsDocuments.filter(
+                                  doc =>
+                                    this.addedPolicyDocumenents.indexOf(
+                                      doc.value
+                                    ) == -1
+                                )
                         }
                       }
                     ]
