@@ -27,12 +27,14 @@ interface IProps {
 }
 
 interface IState {
-  deletedDocument: string
+  deletedDocumentName: string
+  deletedDocumentType: string
 }
 
 class DocumentsScreen extends React.PureComponent<IProps, IState> {
   state = {
-    deletedDocument: ''
+    deletedDocumentName: '',
+    deletedDocumentType: ''
   }
 
   static navigationOptions = ({ navigation }: any) => {
@@ -67,7 +69,8 @@ class DocumentsScreen extends React.PureComponent<IProps, IState> {
         if (buttonIndex == 0) {
           this.setState(
             {
-              deletedDocument: docs.title
+              deletedDocumentName: docs.name,
+              deletedDocumentType: docs.type
             },
             () =>
               deleteLegalDocument({ variables: { legalDocumentId: docs.id } })
@@ -98,16 +101,19 @@ class DocumentsScreen extends React.PureComponent<IProps, IState> {
           user: { company },
           user
         } = this.props,
-        updatedUser = { ...user, company: { ...company, legalDocuments: data } }
+        updatedUser = {
+          ...user,
+          company: { ...company, legalDocuments: data.legalDocuments }
+        }
 
       await Auth.setCurrentUser(updatedUser)
       this.props.resetUserContext(updatedUser)
 
       this.props.setNotificationBanner(
-        configureNotificationBanner(
-          'DeleteCategory',
-          this.state.deletedDocument
-        )
+        configureNotificationBanner('DeleteLegalDocument', {
+          name: this.state.deletedDocumentName,
+          type: this.state.deletedDocumentType
+        })
       )
     }
   }
