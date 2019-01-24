@@ -2,7 +2,6 @@ import React from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Components/Spinner'
-import RNPaystack from 'react-native-paystack'
 import Auth from '../services/auth'
 import { UpsertSaleOrder } from '../graphql/mutations/order'
 import {
@@ -14,9 +13,10 @@ import { parseFieldErrors } from '../Functions'
 import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../context/NotificationContext'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
-import { Alert, Text } from 'react-native'
+import { Alert, Text, Platform } from 'react-native'
 import setAppAnalytics from '../Functions/setAppAnalytics'
 import { color } from '../Style/Color'
+import CardPaymentAtom from '../Atom/CardPaymentAtom'
 
 interface IProps {
   navigation: any
@@ -35,7 +35,6 @@ interface IState {
   fieldErrors: any
   paymentMethod: string
   date: string
-  loading: boolean
   existingContact: { id?: string; contactName?: string; email?: string }
   contactName: string
   email: string
@@ -46,8 +45,8 @@ interface IState {
   salesOrderId: string
   hasSalesOrderBeenCreated: boolean
   tax: string
-  cardDetails: any
   user: { userId?: string; companyId?: string }
+  isCardPaymentVisible: boolean
 }
 
 class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
@@ -71,10 +70,9 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     contactName: '',
     email: '',
     data: {},
-    loading: false,
     salesOrderId: '',
     hasSalesOrderBeenCreated: false,
-    cardDetails: null,
+    isCardPaymentVisible: false,
     user: { companyId: '', userId: '' }
   }
 
@@ -162,39 +160,9 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
   }
 
   chargeCard = async () => {
-    const { cardDetails, amountPaid } = this.state,
-      _cardDetails = cardDetails || {},
-      { valid } = _cardDetails
-
-    if (valid) {
-      const {
-        values: { number, expiry, cvc }
-      } = _cardDetails
-
-      this.setState({ loading: true })
-      RNPaystack.chargeCard({
-        cardNumber: number.replace(/\s/gi, ''),
-        expiryMonth: expiry.split('/')[0],
-        expiryYear: expiry.split('/')[1],
-        cvc,
-        email:
-          this.state.isCustomerInContacts != 'No'
-            ? this.state.existingContact.email
-            : this.state.email,
-        amountInKobo: Number(amountPaid) * 100,
-        reference: `${this.state.salesOrderId}_${Date.now()}`
-      })
-        .then(() => {
-          this.setState({ loading: false })
-          this.navigateUser()
-        })
-        .catch(error => {
-          console.log(error.message)
-          this.setState({ loading: false })
-        })
-    } else {
-      console.log('Card details entered is invalid')
-    }
+    this.setState({
+      isCardPaymentVisible: true
+    })
   }
 
   parseMutationVariables = () => {
@@ -237,17 +205,16 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       delete _params.contact
     }
 
-    delete _params.cardDetails
     delete _params.fieldErrors
     delete _params.existingContact
     delete _params.isCustomerInContacts
     delete _params.user
     delete _params.salesOrderId
     delete _params.hasSalesOrderBeenCreated
-    delete _params.loading
     delete _params.email
     delete _params.data
     delete _params.contactName
+    delete _params.isCardPaymentVisible
 
     return saleId
       ? {
@@ -273,7 +240,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
         [{ text: 'Ok', onPress: () => null }],
         { cancelable: false }
       )
-    } else if (!Number(discount) || Number(discount) > amountPayable) {
+    } else if (Number(discount) > amountPayable) {
       Alert.alert(
         'Cannot make payment',
         `The discount cannot be more than the actual payable amount which is \u20A6${amountPayable}`,
@@ -289,11 +256,62 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     }
   }
 
+  handleCardSuccess = () => {
+    Platform.OS == 'android'
+      ? this.setState(
+          {
+            isCardPaymentVisible: false
+          },
+          this.navigateUser
+        )
+      : Alert.alert(
+          'Payment Successful',
+          `A sum of ${this.state.amountPaid} was made successfully`,
+          [
+            {
+              text: 'Ok',
+              onPress: () => {
+                this.setState(
+                  {
+                    isCardPaymentVisible: false
+                  },
+                  this.navigateUser
+                )
+              }
+            }
+          ],
+          { cancelable: false }
+        )
+  }
+
+  handleCardError = e => {
+    Alert.alert(
+      'Cannot make payment',
+      `${e}`,
+      [{ text: 'Ok', onPress: () => null }],
+      { cancelable: false }
+    )
+  }
+
   render() {
     const {
-      isCustomerInContacts,
-      user: { companyId }
-    } = this.state
+        isCustomerInContacts,
+        user: { companyId },
+        amountPaid,
+        existingContact,
+        email,
+        contactName,
+        salesOrderId
+      } = this.state,
+      _email = isCustomerInContacts != 'No' ? existingContact.email : email,
+      _firstname =
+        isCustomerInContacts != 'No'
+          ? existingContact.contactName.split(' ')[1]
+          : contactName.split(' ')[1],
+      _lastname =
+        isCustomerInContacts != 'No'
+          ? existingContact.contactName.split(' ')[0]
+          : contactName.split(' ')[0]
 
     return (
       <Mutation
@@ -321,7 +339,18 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       >
         {(upsertSales, { loading }) => (
           <React.Fragment>
-            <AppSpinner visible={loading || this.state.loading} />
+            <AppSpinner visible={loading} />
+            <CardPaymentAtom
+              visible={this.state.isCardPaymentVisible}
+              amount={amountPaid}
+              email={_email}
+              firstname={_firstname}
+              lastname={_lastname}
+              saleId={salesOrderId}
+              onSuccess={this.handleCardSuccess}
+              onError={this.handleCardError}
+              onClose={() => this.setState({ isCardPaymentVisible: false })}
+            />
             <FormStepperContainer
               formData={this.state}
               updateValueChange={this.updateState}
@@ -436,22 +465,6 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
                       name: 'discount',
                       underneathText:
                         'Discounts should be based on the amount given not the percentage. Ignore if there are no discounts.'
-                    }
-                  ],
-                  buttonTitle:
-                    this.state.paymentMethod.toLowerCase() != 'cash'
-                      ? 'Next'
-                      : 'Done'
-                },
-                this.state.paymentMethod.toLowerCase() == 'card' && {
-                  stepTitle: "Let's sort out the payment for this order",
-                  formFields: [
-                    {
-                      label: '',
-                      type: {
-                        type: 'card-payment'
-                      },
-                      name: 'cardDetails'
                     }
                   ],
                   buttonTitle: 'Done'

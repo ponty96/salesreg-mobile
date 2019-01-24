@@ -42,7 +42,6 @@ import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
 import MediaUploadAtom from '../../Atom/Form/MediaUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
-import CardPaymentAtom from '../../Atom/Form/CardPaymentAtom'
 import AddSalesOrderItemsList from '../../Atom/Form/AddSalesOrderItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
 import ProductListAtom from '../../Atom/Form/ProductListAtom'
@@ -70,7 +69,6 @@ interface FieldType {
     | 'tag-input'
     | 'search-picker'
     | 'search-multi-picker'
-    | 'card-payment'
     | 'restock-items'
     | 'product-list'
     | 'multi-media-upload'
@@ -652,17 +650,6 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
                 this.checkValidityOnValueChange(items, name, validators)
                 this.props.updateValueChange(name, items)
               }}
-            />
-          )
-        case 'card-payment':
-          return (
-            <CardPaymentAtom
-              handleCardSelection={(cardDetails: any) =>
-                this.props.updateValueChange(name, cardDetails)
-              }
-              error={fieldErrors && fieldErrors[name]}
-              key={`${type}-${index}`}
-              amount={formData[name]}
             />
           )
         case 'multi-picker':

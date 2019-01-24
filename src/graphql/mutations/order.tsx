@@ -83,8 +83,8 @@ export const UpdatePurchaseOrderStatusGQL = gql`
   }
 `
 export const UpsertSaleOrder = gql`
-  mutation upsertSaleOrder($sale: SaleInput!, $saleId: Uuid) {
-    upsertSaleOrder(sale: $sale, saleId: $saleId) {
+  mutation upsertSaleOrder($sale: SaleInput!) {
+    upsertSaleOrder(sale: $sale) {
       fieldErrors {
         key
         message
