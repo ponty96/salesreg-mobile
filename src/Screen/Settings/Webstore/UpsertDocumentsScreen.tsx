@@ -96,13 +96,16 @@ class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
     this.props.resetUserContext(updatedUser)
 
     const resetAction = NavigationActions.reset({
-      index: 1,
+      index: 2,
       actions: [
         NavigationActions.navigate({
           routeName: 'ProfileSettings'
         }),
         NavigationActions.navigate({
           routeName: 'WebstoreOptions'
+        }),
+        NavigationActions.navigate({
+          routeName: 'Documents'
         })
       ]
     })
