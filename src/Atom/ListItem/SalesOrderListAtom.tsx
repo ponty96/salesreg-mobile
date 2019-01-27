@@ -61,23 +61,25 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
           style={[
             styles.wrapper,
             this.props.style,
-            this.props.showTrash && { alignItems: 'center' },
+            this.props.showTrash && { alignItems: 'center', paddingRight: 0 },
             renderStatusIndicator(this.props.bottomRightText)
           ]}
           onPress={this.props.onPress}
         >
           {this.renderLeftComponent()}
           {this.props.showTrash ? (
-            <Icon
-              type="EvilIcons"
-              name="trash"
-              style={{
-                color: color.trashIcon,
-                fontSize: 40,
-                alignSelf: 'center'
-              }}
-              onPress={this.props.onPressTrash}
-            />
+            <View style={{ marginRight: -8 }}>
+              <Icon
+                type="EvilIcons"
+                name="trash"
+                style={{
+                  color: color.trashIcon,
+                  fontSize: 40,
+                  alignSelf: 'center'
+                }}
+                onPress={this.props.onPressTrash}
+              />
+            </View>
           ) : (
             this.renderRightComponent()
           )}

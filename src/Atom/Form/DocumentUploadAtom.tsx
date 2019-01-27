@@ -49,7 +49,7 @@ class DocumentUploadAtom extends React.PureComponent<IProps, IState> {
       },
       (error, res) => {
         if (!error) {
-          if (res.fileize / 1000000 > 8) {
+          if (res.fileSize / 1000000 > 8) {
             Alert.alert(
               'Pdf too large',
               'The pdf is too large, please select a pdf of size 8MB or less',
@@ -83,8 +83,8 @@ class DocumentUploadAtom extends React.PureComponent<IProps, IState> {
         <View>
           <View style={styles.placeholderWrapper}>
             <Icon
-              type="MaterialCommunityIcons"
-              name="file-plus"
+              type="MaterialIcons"
+              name="note-add"
               style={{ fontSize: 150, color: color.red }}
             />
           </View>

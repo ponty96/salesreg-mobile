@@ -22,6 +22,12 @@ export const UpdateUserGQL = gql`
             title
             contactEmail
             coverPhoto
+            legalDocuments {
+              pdfUrl
+              name
+              type
+              id
+            }
             facebook
             twitter
             instagram

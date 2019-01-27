@@ -16,6 +16,12 @@ export const UpdateCompanyGQL = gql`
           contactEmail
           about
           coverPhoto
+          legalDocuments {
+            pdfUrl
+            name
+            type
+            id
+          }
           facebook
           twitter
           instagram
@@ -106,6 +112,38 @@ export const UpsertLegalDocument = gql`
       fieldErrors {
         key
         message
+      }
+      data {
+        ... on Company {
+          legalDocuments {
+            name
+            pdfUrl
+            type
+            id
+          }
+        }
+      }
+    }
+  }
+`
+
+export const DeleteLegalDocument = gql`
+  mutation deleteLegalDocument($legalDocumentId: Uuid!) {
+    deleteLegalDocument(legalDocumentId: $legalDocumentId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          legalDocuments {
+            name
+            pdfUrl
+            type
+            id
+          }
+        }
       }
     }
   }

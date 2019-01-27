@@ -22,6 +22,7 @@
 		0A36BCAB21EC7D8F00F53D38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A36BCAA21EC7D8F00F53D38 /* GoogleService-Info.plist */; };
 		0A91936221EC91A000E19671 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A38C10721D4FC09008034B8 /* libRNDeviceInfo.a */; };
 		0A94F4C821F1FAFB00FB4C4C /* libRNDocumentPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A94F4C721F1FAF100FB4C4C /* libRNDocumentPicker.a */; };
+		0AE0920621F8183D0048874E /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AE091FA21F818310048874E /* libReactNativeConfig.a */; };
 		11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 5E9157331DD0AC6500FF2AA8 /* libRCTAnimation.a */; };
 		12368AC49533E0E52745AC74 /* libPods-salesreg.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 3546D28B578B70A968FF07FE /* libPods-salesreg.a */; };
 		133E29F31AD74F7200F7D852 /* libRCTLinking.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 78C398B91ACF4ADC00677621 /* libRCTLinking.a */; };
@@ -216,6 +217,20 @@
 			proxyType = 2;
 			remoteGlobalIDString = E01DD9DB1D2311A600C39062;
 			remoteInfo = RNDocumentPicker;
+		};
+		0AE091F921F818310048874E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0AE091CA21F818260048874E /* ReactNativeConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = EB2648DF1C7BE17A00B8F155;
+			remoteInfo = ReactNativeConfig;
+		};
+		0AE091FB21F818310048874E /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 0AE091CA21F818260048874E /* ReactNativeConfig.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = 3DF7F6AC203AA09B00D0EAB7;
+			remoteInfo = "ReactNativeConfig-tvOS";
 		};
 		139105C01AF99BAD00B5F7CC /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
@@ -467,6 +482,7 @@
 		0A36BCAA21EC7D8F00F53D38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A38C0D721D4FC08008034B8 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
 		0A94F4C221F1FAF100FB4C4C /* RNDocumentPicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDocumentPicker.xcodeproj; path = "../node_modules/react-native-document-picker/ios/RNDocumentPicker.xcodeproj"; sourceTree = "<group>"; };
+		0AE091CA21F818260048874E /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		0CB83E3C0D5C577A1B3E86C8 /* libPods-salesregTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-salesregTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		139105B61AF99BAD00B5F7CC /* RCTSettings.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTSettings.xcodeproj; path = "../node_modules/react-native/Libraries/Settings/RCTSettings.xcodeproj"; sourceTree = "<group>"; };
 		139FDEE61B06529A00C62182 /* RCTWebSocket.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTWebSocket.xcodeproj; path = "../node_modules/react-native/Libraries/WebSocket/RCTWebSocket.xcodeproj"; sourceTree = "<group>"; };
@@ -558,6 +574,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
+				0AE0920621F8183D0048874E /* libReactNativeConfig.a in Frameworks */,
 				0A2A336921CBD44800DA8688 /* libSplashScreen.a in Frameworks */,
 				11D1A2F320CAFA9E000508D9 /* libRCTAnimation.a in Frameworks */,
 				0A94F4C821F1FAFB00FB4C4C /* libRNDocumentPicker.a in Frameworks */,
@@ -773,6 +790,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		0AE091CB21F818260048874E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				0AE091FA21F818310048874E /* libReactNativeConfig.a */,
+				0AE091FC21F818310048874E /* libReactNativeConfig-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		139105B71AF99BAD00B5F7CC /* Products */ = {
 			isa = PBXGroup;
 			children = (
@@ -905,6 +931,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				0AE091CA21F818260048874E /* ReactNativeConfig.xcodeproj */,
 				0A94F4C221F1FAF100FB4C4C /* RNDocumentPicker.xcodeproj */,
 				0A38C0D721D4FC08008034B8 /* RNDeviceInfo.xcodeproj */,
 				0A178AAA21D351CE00B1BCCD /* RNSentry.xcodeproj */,
@@ -1179,6 +1206,10 @@
 					ProjectRef = 146833FF1AC3E56700842450 /* React.xcodeproj */;
 				},
 				{
+					ProductGroup = 0AE091CB21F818260048874E /* Products */;
+					ProjectRef = 0AE091CA21F818260048874E /* ReactNativeConfig.xcodeproj */;
+				},
+				{
 					ProductGroup = 0A38C0D821D4FC08008034B8 /* Products */;
 					ProjectRef = 0A38C0D721D4FC08008034B8 /* RNDeviceInfo.xcodeproj */;
 				},
@@ -1349,6 +1380,20 @@
 			fileType = archive.ar;
 			path = libRNDocumentPicker.a;
 			remoteRef = 0A94F4C621F1FAF100FB4C4C /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0AE091FA21F818310048874E /* libReactNativeConfig.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libReactNativeConfig.a;
+			remoteRef = 0AE091F921F818310048874E /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		0AE091FC21F818310048874E /* libReactNativeConfig-tvOS.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = "libReactNativeConfig-tvOS.a";
+			remoteRef = 0AE091FB21F818310048874E /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		139105C11AF99BAD00B5F7CC /* libRCTSettings.a */ = {

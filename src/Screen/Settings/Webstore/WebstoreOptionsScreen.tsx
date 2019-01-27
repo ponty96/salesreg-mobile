@@ -39,7 +39,7 @@ export default class WebstoreOptionsScreen extends React.PureComponent<IProps> {
           },
           {
             section: 'Manage Documents',
-            routeName: 'UpsertDocuments',
+            routeName: 'Documents',
             showRightCaret: true,
             description: 'Edit your business documents',
             icon: 'file-document',

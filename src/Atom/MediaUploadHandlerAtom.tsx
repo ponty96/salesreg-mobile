@@ -192,7 +192,8 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
     let { media } = this.props,
       path = !retry ? media && media.uri : optFile.uri,
       mime = !retry ? media && media.type : optFile.type,
-      filename = !retry ? media && media.fileName : optFile.filename
+      filename = !retry ? media && media.fileName : optFile.filename,
+      filesize = !retry ? media && media.fileSize : optFile.size
 
     const options = {
       keyPrefix: Config.S3_DOCUMENT_KEY_PREFIX,
@@ -205,9 +206,10 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
 
     const file = {
       uri: path,
-      name: `${filename}${Date.now()}|${filename.split('/')[0].toLowerCase()}`,
+      name: `${filename}|${filesize}`,
       type: mime,
       mime: mime,
+      size: filesize,
       filename
     }
 
@@ -376,7 +378,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
       <React.Fragment>
         {storeMedias.map(media => {
           let {
-            file: { mime },
+            file: { mime, filename },
             mediaId,
             progress,
             cancelFn,
@@ -393,47 +395,60 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
               ''
 
           return this.state.mediasToExclude.indexOf(location) == -1 ? (
-            <View key={mediaId} style={this.props.style}>
-              <Icon
-                type="MaterialCommunityIcons"
-                name="file-pdf"
-                style={{ fontSize: 150, color: color.red }}
-              />
-              <TouchableWithoutFeedback
-                onPress={() => (location ? Linking.openURL(location) : null)}
-              >
-                <View
-                  style={[
-                    styles.documentOverlay,
-                    {
-                      backgroundColor: location
-                        ? 'transparent'
-                        : 'rgba(0,0,0,.2)'
-                    }
-                  ]}
+            <React.Fragment>
+              <View key={mediaId} style={this.props.style}>
+                <Icon
+                  type="MaterialCommunityIcons"
+                  name="file-pdf"
+                  style={{ fontSize: 150, color: color.red }}
+                />
+                <TouchableWithoutFeedback
+                  onPress={() => (location ? Linking.openURL(location) : null)}
                 >
-                  {state != 'loading' && !this.props.hideRemoveButton && (
-                    <Icon
-                      name="x"
-                      type="Feather"
-                      onPress={() => {
-                        this.props.deleteMedia(mediaId, 'mediaId')
-                        this.props.removeUrlFromUploadedMedia(
-                          mediaId,
-                          'mediaId'
-                        )
-                      }}
-                      style={[styles.whiteIcon, styles.removeIcon]}
-                    />
-                  )}
-                  {state == 'loading'
-                    ? this.renderLoadingContainer(progress, cancelFn)
-                    : state == 'error'
-                    ? this.renderRetryContainer(type, mediaId, file)
-                    : this.renderUploadedContainer(type)}
-                </View>
-              </TouchableWithoutFeedback>
-            </View>
+                  <View
+                    style={[
+                      styles.documentOverlay,
+                      {
+                        backgroundColor: location
+                          ? 'transparent'
+                          : 'rgba(0,0,0,.2)'
+                      }
+                    ]}
+                  >
+                    {state != 'loading' && !this.props.hideRemoveButton && (
+                      <Icon
+                        name="x"
+                        type="Feather"
+                        onPress={() => {
+                          this.props.deleteMedia(mediaId, 'mediaId')
+                          this.props.removeUrlFromUploadedMedia(
+                            mediaId,
+                            'mediaId'
+                          )
+                        }}
+                        style={[styles.whiteIcon, styles.removeIcon]}
+                      />
+                    )}
+                    {state == 'loading'
+                      ? this.renderLoadingContainer(progress, cancelFn)
+                      : state == 'error'
+                      ? this.renderRetryContainer(type, mediaId, file)
+                      : this.renderUploadedContainer(type)}
+                  </View>
+                </TouchableWithoutFeedback>
+              </View>
+              <Text
+                style={{
+                  color: color.button,
+                  alignSelf: 'center',
+                  marginTop: 8,
+                  fontSize: 14,
+                  fontFamily: 'AvenirNext-Medium'
+                }}
+              >
+                {filename.replace(/.pdf/gi, '')}
+              </Text>
+            </React.Fragment>
           ) : null
         })}
       </React.Fragment>
