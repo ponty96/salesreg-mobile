@@ -15,6 +15,11 @@ export const UpdateCompanyGQL = gql`
           slug
           contactEmail
           about
+          coverPhoto
+          facebook
+          twitter
+          instagram
+          linkedin
           currency
           logo
           phone {
@@ -62,6 +67,41 @@ export const UpsertBankGQL = gql`
 export const DeleteBankGQL = gql`
   mutation deleteBank($bankId: Uuid!) {
     deleteBank(bankId: $bankId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
+export const UpdateCompanyCoverPhotoGQL = gql`
+  mutation updateCompanyCoverPhoto($coverPhoto: CoverPhotoInput!) {
+    updateCompanyCoverPhoto(coverPhoto: $coverPhoto) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          coverPhoto
+        }
+      }
+    }
+  }
+`
+
+export const UpsertLegalDocument = gql`
+  mutation upsertLegalDocument(
+    $legalDocument: LegalDocumentInput!
+    $legalDocumentId: Uuid
+  ) {
+    upsertLegalDocument(
+      legalDocument: $legalDocument
+      legalDocumentId: $legalDocumentId
+    ) {
       success
       fieldErrors {
         key

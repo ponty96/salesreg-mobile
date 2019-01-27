@@ -36,6 +36,11 @@ import UpsertCategoryScreen from '../Screen/Settings/Category/UpsertCategoryScre
 import OptionsScreen from '../Screen/Settings/Option/OptionsScreen'
 import UpsertOptionScreen from '../Screen/Settings/Option/UpsertOptionScreen'
 
+//Webstore Setting Option
+import WebstoreOptionsScreen from '../Screen/Settings/Webstore/WebstoreOptionsScreen'
+import UpsertCoverPhoto from '../Screen/Settings/Webstore/UpsertCoverPhoto'
+import UpsertDocuments from '../Screen/Settings/Webstore/UpsertDocuments'
+
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
@@ -159,6 +164,11 @@ const businessStack = StackNavigator(
     // Options
     Options: OptionsScreen,
     UpsertOption: UpsertOptionScreen,
+
+    // Webstore settings
+    WebstoreOptions: WebstoreOptionsScreen,
+    UpsertCoverPhoto: UpsertCoverPhoto,
+    UpsertDocuments: UpsertDocuments,
 
     // Expenses
     Expenses: ExpensesScreen,

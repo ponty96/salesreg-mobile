@@ -83,6 +83,14 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
                 iconType: 'MaterialCommunityIcons'
               },
               {
+                section: 'Manage Webstore',
+                routeName: 'WebstoreOptions',
+                showRightCaret: true,
+                description: 'Manage your webstore options',
+                icon: 'web',
+                iconType: 'MaterialCommunityIcons'
+              },
+              {
                 section: 'Log Out',
                 routeName: 'Login',
                 showRightCaret: false,

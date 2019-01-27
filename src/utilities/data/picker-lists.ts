@@ -39,6 +39,43 @@ export const PaymentMethod = [
   }
 ]
 
+export const LegalDocuments = [
+  {
+    mainLabel: 'Policy',
+    value: 'policy'
+  },
+  {
+    mainLabel: 'Terms',
+    value: 'terms'
+  }
+  // {
+  //   mainLabel: 'Information',
+  //   value: 'information'
+  // }
+]
+
+export const PolicyDocuments = [
+  {
+    mainLabel: 'Delivery Policy',
+    value: 'Delivery'
+  },
+  {
+    mainLabel: 'Refund Policy',
+    value: 'Refund'
+  },
+  {
+    mainLabel: 'Privacy Policy',
+    value: 'Privacy'
+  }
+]
+
+export const TermsDocuments = [
+  {
+    mainLabel: 'Terms and Condition',
+    value: 'Terms and Condition'
+  }
+]
+
 export const NG_Banks = [
   {
     value: '044',

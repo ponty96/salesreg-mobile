@@ -26,6 +26,8 @@ type ITypes =
   | 'CreateOption'
   | 'UpdateOption'
   | 'DeleteOption'
+  | 'UpdateCoverPhoto'
+  | 'UpdateLegalDocument'
 
 const configureNotificationBanner = (type: ITypes, params?: any): object => {
   switch (type) {
@@ -173,6 +175,16 @@ const configureNotificationBanner = (type: ITypes, params?: any): object => {
       return {
         title: 'Option Deleted',
         subtitle: `${params} was removed from options`
+      }
+    case 'UpdateCoverPhoto':
+      return {
+        title: 'Cover Photo Updated',
+        subtitle: 'Cover photo added to your webstore'
+      }
+    case 'UpdateLegalDocument':
+      return {
+        title: `${params.name.trim()} Updated`,
+        subtitle: `${params.name.trim()} has been added`
       }
   }
 }

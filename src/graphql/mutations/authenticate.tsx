@@ -29,6 +29,11 @@ export const LoginUserMutationGQL = gql`
               currency
               slug
               logo
+              facebook
+              twitter
+              instagram
+              linkedin
+              coverPhoto
               phone {
                 number
               }
@@ -79,6 +84,11 @@ export const RegisterUserMutationGQL = gql`
               contactEmail
               about
               currency
+              coverPhoto
+              facebook
+              twitter
+              instagram
+              linkedin
               logo
               phone {
                 number
@@ -118,6 +128,11 @@ export const AddUserCompanyMutationGQL = gql`
           contactEmail
           about
           currency
+          facebook
+          twitter
+          instagram
+          linkedin
+          coverPhoto
           logo
           phone {
             number

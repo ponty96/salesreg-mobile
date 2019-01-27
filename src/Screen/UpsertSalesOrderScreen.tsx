@@ -17,6 +17,7 @@ import configureNotificationBanner from '../Functions/configureNotificationBanne
 import { Alert, Text } from 'react-native'
 import setAppAnalytics from '../Functions/setAppAnalytics'
 import { color } from '../Style/Color'
+import { Countries } from '../utilities/data/picker-lists'
 
 interface IProps {
   navigation: any
@@ -46,6 +47,10 @@ interface IState {
   salesOrderId: string
   hasSalesOrderBeenCreated: boolean
   tax: string
+  street1: string
+  city: string
+  state: string
+  country: string
   cardDetails: any
   user: { userId?: string; companyId?: string }
 }
@@ -70,6 +75,10 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     tax: '',
     contactName: '',
     email: '',
+    street1: '',
+    city: '',
+    state: '',
+    country: 'NG',
     data: {},
     loading: false,
     salesOrderId: '',
@@ -248,6 +257,10 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     delete _params.email
     delete _params.data
     delete _params.contactName
+    delete _params.street1
+    delete _params.city
+    delete _params.state
+    delete _params.country
 
     return saleId
       ? {
@@ -273,7 +286,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
         [{ text: 'Ok', onPress: () => null }],
         { cancelable: false }
       )
-    } else if (!Number(discount) || Number(discount) > amountPayable) {
+    } else if (Number(discount) > amountPayable) {
       Alert.alert(
         'Cannot make payment',
         `The discount cannot be more than the actual payable amount which is \u20A6${amountPayable}`,
@@ -402,6 +415,48 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
                           placeholder: 'Touch to select customer'
                         }
                       : null
+                  ]
+                },
+                {
+                  stepTitle: 'Delivery Address',
+                  formFields: [
+                    {
+                      label: 'Street',
+                      placeholder: '123 Street',
+                      validators: ['required'],
+                      name: 'street1',
+                      type: {
+                        type: 'input'
+                      }
+                    },
+                    {
+                      label: 'City',
+                      validators: ['required'],
+                      placeholder: 'City name',
+                      name: 'city',
+                      type: {
+                        type: 'input'
+                      }
+                    },
+                    {
+                      label: 'State',
+                      placeholder: 'State name',
+                      validators: ['required'],
+                      name: 'state',
+                      type: {
+                        type: 'input'
+                      }
+                    },
+                    {
+                      label: 'Country',
+                      validators: ['required'],
+                      placeholder: 'Touch to choose',
+                      type: {
+                        type: 'picker',
+                        options: Countries
+                      },
+                      name: 'country'
+                    }
                   ]
                 },
                 {
