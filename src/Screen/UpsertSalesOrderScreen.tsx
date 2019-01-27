@@ -246,6 +246,13 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       delete _params.contact
     }
 
+    _params['location'] = {
+      state: this.state.state,
+      city: this.state.city,
+      street1: this.state.street1,
+      country: this.state.country
+    }
+
     delete _params.cardDetails
     delete _params.fieldErrors
     delete _params.existingContact
