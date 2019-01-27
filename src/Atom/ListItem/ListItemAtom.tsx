@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet, Text, TouchableWithoutFeedback } from 'react-native'
 import { color } from '../../Style/Color'
+import Icon from '../Icon'
 
-interface IProp {
+interface IProps {
   label: string
   value: string
   rightTextStyle?: object
@@ -14,35 +15,92 @@ interface IProp {
   icon?: JSX.Element
 }
 
-const ListItemAtom = (props: IProp): JSX.Element => {
-  return (
-    <View style={[styles.wrapper, props.listItemStyle]}>
-      <Text style={[styles.text, props.labelStyle]}>{props.label}</Text>
-      <View
-        style={{
-          justifyContent: 'flex-end',
-          alignItems: 'flex-end'
-        }}
+interface IState {
+  bodyViewState: boolean
+}
+
+class ListItemAtom extends React.PureComponent<IProps, IState> {
+  state = {
+    bodyViewState: false
+  }
+
+  renderBody = (value: any): JSX.Element => {
+    if (
+      typeof value == 'object' &&
+      value !== null &&
+      this.state.bodyViewState
+    ) {
+      return (
+        <View style={{ backgroundColor: '#fff', paddingHorizontal: 10 }}>
+          {value.map((val, index) => (
+            <View key={index} style={styles.row}>
+              <Text style={styles.normalText}>{val}</Text>
+            </View>
+          ))}
+        </View>
+      )
+    } else {
+      return <View />
+    }
+  }
+
+  render() {
+    return (
+      <TouchableWithoutFeedback
+        onPress={() =>
+          this.setState({ bodyViewState: !this.state.bodyViewState })
+        }
       >
-        {props.quantity ? (
-          <Text style={{ color: color.textColor }}>{props.quantity}</Text>
-        ) : (
-          <Text />
-        )}
-        <Text
-          style={[
-            styles.text,
-            props.rightTextStyle,
-            props.redText ? { color: color.red } : undefined,
-            props.greenText ? { color: color.selling } : undefined
-          ]}
-        >
-          {props.value}
-          {props.icon}
-        </Text>
-      </View>
-    </View>
-  )
+        <View>
+          <View style={[styles.wrapper, this.props.listItemStyle]}>
+            <Text style={[styles.text, this.props.labelStyle]}>
+              {this.props.label}
+            </Text>
+            {typeof this.props.value == 'object' &&
+            this.props.value !== null ? (
+              <Icon
+                name={
+                  this.state.bodyViewState ? 'ios-arrow-up' : 'ios-arrow-down'
+                }
+                type="Ionicons"
+                style={{
+                  fontSize: 28,
+                  color: color.textColor
+                }}
+              />
+            ) : (
+              <View
+                style={{
+                  justifyContent: 'flex-end',
+                  alignItems: 'flex-end'
+                }}
+              >
+                {this.props.quantity ? (
+                  <Text style={{ color: color.textColor }}>
+                    {this.props.quantity}
+                  </Text>
+                ) : (
+                  <Text />
+                )}
+                <Text
+                  style={[
+                    styles.text,
+                    this.props.rightTextStyle,
+                    this.props.redText ? { color: color.red } : undefined,
+                    this.props.greenText ? { color: color.selling } : undefined
+                  ]}
+                >
+                  {this.props.value}
+                  {this.props.icon}
+                </Text>
+              </View>
+            )}
+          </View>
+          {this.renderBody(this.props.value)}
+        </View>
+      </TouchableWithoutFeedback>
+    )
+  }
 }
 
 export default ListItemAtom
@@ -64,5 +122,15 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     textAlign: 'right',
     alignItems: 'center'
+  },
+  normalText: {
+    fontSize: 14,
+    fontFamily: 'SourceSansPro-Semibold',
+    color: color.textColor
+  },
+  row: {
+    flexDirection: 'row',
+    paddingLeft: 16,
+    marginBottom: 8
   }
 })
