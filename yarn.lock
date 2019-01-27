@@ -6887,10 +6887,6 @@ react-native-loading-spinner-overlay@^0.5.2:
   version "0.5.2"
   resolved "https://registry.yarnpkg.com/react-native-loading-spinner-overlay/-/react-native-loading-spinner-overlay-0.5.2.tgz#b7bcd277476d596615fd7feee601789f9bdc7acc"
 
-react-native-paystack@^3.3.0:
-  version "3.3.0"
-  resolved "https://registry.yarnpkg.com/react-native-paystack/-/react-native-paystack-3.3.0.tgz#0907f023f1b3befb65312d57a8cf44dc3041f12b"
-
 react-native-progress@^3.5.0:
   version "3.5.0"
   resolved "https://registry.yarnpkg.com/react-native-progress/-/react-native-progress-3.5.0.tgz#d1ccc7f96dc17c609aedb43b2e6695d67deae0ec"

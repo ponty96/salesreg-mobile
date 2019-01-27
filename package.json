@@ -100,7 +100,6 @@
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-lightbox": "^0.8.0",
     "react-native-loading-spinner-overlay": "^0.5.2",
-    "react-native-paystack": "^3.3.0",
     "react-native-progress": "^3.5.0",
     "react-native-rave": "^0.1.0",
     "react-native-sentry": "^0.40.2",

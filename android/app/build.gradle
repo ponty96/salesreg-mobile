@@ -152,7 +152,6 @@ dependencies {
     implementation project(':react-native-sentry')
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-thumbnail')
-    implementation project(':react-native-paystack')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-fetch-blob')
     implementation project(':appcenter-crashes')

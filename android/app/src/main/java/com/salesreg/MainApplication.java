@@ -10,7 +10,6 @@ import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import io.sentry.RNSentryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import me.hauvo.thumbnail.RNThumbnailPackage;
-import com.arttitude360.reactnative.rnpaystack.RNPaystackPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.microsoft.appcenter.reactnative.crashes.AppCenterReactNativeCrashesPackage;
@@ -45,7 +44,6 @@ public class MainApplication extends Application implements ReactApplication {
             new SplashScreenReactPackage(),
             new RNThumbnailPackage(),
             new RNFirebaseAnalyticsPackage(),
-            new RNPaystackPackage(),
             new PickerPackage(),
             new RNFetchBlobPackage(),
             new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appCenterCrashes_whenToSendCrashes)),
