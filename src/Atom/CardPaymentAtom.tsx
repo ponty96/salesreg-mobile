@@ -61,11 +61,11 @@ export default class CardPaymentAtom extends React.PureComponent<IProps> {
         animationType="slide"
         transparent={false}
         visible={this.props.visible}
-        onRequestClose={this.handleBackPress}
+        onRequestClose={this.handleTickPress}
       >
         <Container style={{ flex: 1 }}>
           <FormHeader
-            onPressBackIcon={this.handleBackPress}
+            onPressBackIcon={this.handleTickPress}
             currentStep={1}
             totalSteps={1}
             showTickIcon

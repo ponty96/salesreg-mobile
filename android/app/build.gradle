@@ -145,6 +145,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-document-picker')
     implementation project(':react-native-firebase')
     implementation project(':react-native-config')
     implementation project(':react-native-view-overflow')

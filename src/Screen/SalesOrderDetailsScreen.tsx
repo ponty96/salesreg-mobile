@@ -42,6 +42,7 @@ class SalesOrderDetailsScreen extends Component<IProps> {
     const sales = this.props.navigation.getParam('sales', {})
     const { items = [] } = sales
 
+    console.log('oya ', sales.location)
     return [
       {
         itemTitle: 'Date',
@@ -60,6 +61,17 @@ class SalesOrderDetailsScreen extends Component<IProps> {
         }))
         .concat([
           {
+            itemTitle: 'Delivery Address',
+            itemValue: sales.location
+              ? [
+                  sales.location.street1,
+                  sales.location.city,
+                  sales.location.state,
+                  sales.location.country
+                ]
+              : null
+          },
+          {
             itemTitle: 'Discount',
             itemValue: `\u20A6 ${sales.discount}`
           },
@@ -73,6 +85,7 @@ class SalesOrderDetailsScreen extends Component<IProps> {
 
   render() {
     const sales = this.props.navigation.getParam('sales', {})
+
     return (
       <View style={styles.container}>
         <GenericDetailsComponent

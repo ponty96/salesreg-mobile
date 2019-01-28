@@ -17,6 +17,7 @@ import { Alert, Text, Platform } from 'react-native'
 import setAppAnalytics from '../Functions/setAppAnalytics'
 import { color } from '../Style/Color'
 import CardPaymentAtom from '../Atom/CardPaymentAtom'
+import { Countries } from '../utilities/data/picker-lists'
 
 interface IProps {
   navigation: any
@@ -45,6 +46,10 @@ interface IState {
   salesOrderId: string
   hasSalesOrderBeenCreated: boolean
   tax: string
+  street1: string
+  city: string
+  state: string
+  country: string
   user: { userId?: string; companyId?: string }
   isCardPaymentVisible: boolean
 }
@@ -69,6 +74,10 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     tax: '',
     contactName: '',
     email: '',
+    street1: '',
+    city: '',
+    state: '',
+    country: 'NG',
     data: {},
     salesOrderId: '',
     hasSalesOrderBeenCreated: false,
@@ -205,6 +214,13 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       delete _params.contact
     }
 
+    _params['location'] = {
+      state: this.state.state,
+      city: this.state.city,
+      street1: this.state.street1,
+      country: this.state.country
+    }
+
     delete _params.fieldErrors
     delete _params.existingContact
     delete _params.isCustomerInContacts
@@ -215,6 +231,10 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     delete _params.data
     delete _params.contactName
     delete _params.isCardPaymentVisible
+    delete _params.street1
+    delete _params.city
+    delete _params.state
+    delete _params.country
 
     return saleId
       ? {
@@ -431,6 +451,48 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
                           placeholder: 'Touch to select customer'
                         }
                       : null
+                  ]
+                },
+                {
+                  stepTitle: 'Delivery Address',
+                  formFields: [
+                    {
+                      label: 'Street',
+                      placeholder: '123 Street',
+                      validators: ['required'],
+                      name: 'street1',
+                      type: {
+                        type: 'input'
+                      }
+                    },
+                    {
+                      label: 'City',
+                      validators: ['required'],
+                      placeholder: 'City name',
+                      name: 'city',
+                      type: {
+                        type: 'input'
+                      }
+                    },
+                    {
+                      label: 'State',
+                      placeholder: 'State name',
+                      validators: ['required'],
+                      name: 'state',
+                      type: {
+                        type: 'input'
+                      }
+                    },
+                    {
+                      label: 'Country',
+                      validators: ['required'],
+                      placeholder: 'Touch to choose',
+                      type: {
+                        type: 'picker',
+                        options: Countries
+                      },
+                      name: 'country'
+                    }
                   ]
                 },
                 {

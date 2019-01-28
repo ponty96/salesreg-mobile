@@ -3,10 +3,13 @@ import S3Upload from '../../Functions/S3Upload'
 
 const manageUpload = (payload, mediaId, dispatch) => {
   let s3Upload =
-      payload.mediaType == 'image'
+      payload.mediaType == 'image' || payload.mediaType == 'application'
         ? new S3Upload(payload.file, payload.options, mediaId)
         : new S3Upload(null, null, mediaId, payload.files),
-    uploadFn = payload.mediaType == 'image' ? 'singleUpload' : 'multipleUpload'
+    uploadFn =
+      payload.mediaType == 'image' || payload.mediaType == 'application'
+        ? 'singleUpload'
+        : 'multipleUpload'
   dispatch({
     type: Types.SET_MEDIA_CANCEL_INSTANCE,
     payload: {
@@ -81,9 +84,12 @@ export const uploadMedia = payload => dispatch => {
       uploadClass: payload.key,
       uploadType: payload.uploadType,
       retry: payload.retry,
-      file: payload.mediaType == 'image' ? payload.file : payload.files[0].file,
+      file:
+        payload.mediaType == 'image' || payload.mediaType == 'application'
+          ? payload.file
+          : payload.files[0].file,
       options:
-        payload.mediaType == 'image'
+        payload.mediaType == 'image' || payload.mediaType == 'application'
           ? payload.options
           : payload.files[0].options,
       mediaState: 'loading',
