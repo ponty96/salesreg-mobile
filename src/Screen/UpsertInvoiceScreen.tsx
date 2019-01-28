@@ -1,7 +1,6 @@
 import React from 'react'
-import { Alert } from 'react-native'
+import { Alert, Platform } from 'react-native'
 import FormStepperContainer from '../Container/Form/StepperContainer'
-import RNPaystack from 'react-native-paystack'
 import AppSpinner from '../Components/Spinner'
 import Auth from '../services/auth'
 import { CreateRecipt } from '../graphql/mutations/order'
@@ -16,6 +15,7 @@ import { NavigationActions } from 'react-navigation'
 import { NotificationContext } from '../context/NotificationContext'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 import setAppAnalytics from '../Functions/setAppAnalytics'
+import CardPaymentAtom from '../Atom/CardPaymentAtom'
 
 interface IProps {
   navigation: any
@@ -25,11 +25,11 @@ interface IProps {
 
 interface IState {
   user: { userId?: string; companyId?: string }
-  loading: boolean
   paymentMethod: string
   fieldErrors: any
   cardDetails: any
   amountPaid: string
+  isCardPaymentVisible: boolean
 }
 
 class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
@@ -39,11 +39,11 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
 
   state = {
     user: { companyId: '', userId: '' },
-    loading: false,
     paymentMethod: '',
     fieldErrors: {},
     cardDetails: null,
-    amountPaid: ''
+    amountPaid: '',
+    isCardPaymentVisible: false
   }
 
   async componentDidMount() {
@@ -71,48 +71,9 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
   }
 
   chargeCard = async () => {
-    const {
-        navigation: {
-          state: {
-            params: {
-              sales: {
-                id,
-                contact: { email }
-              }
-            }
-          }
-        }
-      } = this.props,
-      { cardDetails, amountPaid } = this.state,
-      _cardDetails = cardDetails || {},
-      { valid } = _cardDetails
-
-    if (valid) {
-      const {
-        values: { number, expiry, cvc }
-      } = _cardDetails
-
-      this.setState({ loading: true })
-      RNPaystack.chargeCard({
-        cardNumber: number.replace(/\s/gi, ''),
-        expiryMonth: expiry.split('/')[0],
-        expiryYear: expiry.split('/')[1],
-        cvc,
-        email,
-        amountInKobo: Number(amountPaid) * 100,
-        reference: `${id}_${Date.now()}`
-      })
-        .then(() => {
-          this.setState({ loading: false })
-          this.navigateUser()
-        })
-        .catch(error => {
-          console.log(error.message)
-          this.setState({ loading: false })
-        })
-    } else {
-      console.log('Card details entered is invalid')
-    }
+    this.setState({
+      isCardPaymentVisible: true
+    })
   }
 
   navigateUser = () => {
@@ -194,7 +155,60 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
     }
   }
 
+  handleCardSuccess = () => {
+    Platform.OS == 'android'
+      ? this.setState(
+          {
+            isCardPaymentVisible: false
+          },
+          this.navigateUser
+        )
+      : Alert.alert(
+          'Payment Successful',
+          `A sum of ${this.state.amountPaid} was made successfully`,
+          [
+            {
+              text: 'Ok',
+              onPress: () => {
+                this.setState(
+                  {
+                    isCardPaymentVisible: false
+                  },
+                  this.navigateUser
+                )
+              }
+            }
+          ],
+          { cancelable: false }
+        )
+  }
+
+  handleCardError = e => {
+    Alert.alert(
+      'Cannot make payment',
+      `${e}`,
+      [{ text: 'Ok', onPress: () => null }],
+      { cancelable: false }
+    )
+  }
+
   render() {
+    const {
+        navigation: {
+          state: {
+            params: {
+              sales: {
+                id,
+                contact: { email, contactName }
+              }
+            }
+          }
+        }
+      } = this.props,
+      { amountPaid } = this.state,
+      _firstname = contactName.split(' ')[1],
+      _lastname = contactName.split(' ')[0]
+
     return (
       <Mutation
         mutation={CreateRecipt}
@@ -222,7 +236,18 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
         {(makePayment, { loading }) => {
           return (
             <React.Fragment>
-              <AppSpinner visible={this.state.loading || loading} />
+              <AppSpinner visible={loading} />
+              <CardPaymentAtom
+                visible={this.state.isCardPaymentVisible}
+                amount={amountPaid}
+                email={email}
+                firstname={_firstname}
+                lastname={_lastname}
+                saleId={id}
+                onSuccess={this.handleCardSuccess}
+                onError={this.handleCardError}
+                onClose={() => this.setState({ isCardPaymentVisible: false })}
+              />
               <FormStepperContainer
                 fieldErrors={this.state.fieldErrors}
                 handleBackPress={() => this.props.navigation.goBack()}
@@ -251,22 +276,6 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
                         },
                         placeholder: '0.00',
                         name: 'amountPaid'
-                      }
-                    ],
-                    buttonTitle:
-                      this.state.paymentMethod.toLowerCase() != 'cash'
-                        ? 'Next'
-                        : 'Done'
-                  },
-                  this.state.paymentMethod.toLowerCase() == 'card' && {
-                    stepTitle: "Let's sort out the payment for this order",
-                    formFields: [
-                      {
-                        label: '',
-                        type: {
-                          type: 'card-payment'
-                        },
-                        name: 'cardDetails'
                       }
                     ],
                     buttonTitle: 'Done'
