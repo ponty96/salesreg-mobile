@@ -5,6 +5,7 @@ import Rave from 'react-native-rave'
 import { Container } from 'native-base'
 import FormHeader from '../Components/Header/FormHeader'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+import Config from 'react-native-config'
 
 interface IProps {
   amount: number | string
@@ -88,8 +89,8 @@ export default class CardPaymentAtom extends React.PureComponent<IProps> {
               txRef={`${this.props.saleId}_${Date.now()}`}
               firstname={this.props.firstname}
               lastname={this.props.lastname}
-              secretkey="FLWSECK-518c88a307e6521a624da625b79f6074-X"
-              publickey="FLWPUBK-9e0e028cab27f47dfb2bef02ee04fdd3-X"
+              secretkey={Config.FLUTTERWAVE_SECRET_KEY}
+              publickey={Config.FLUTTERWAVE_PUBLIC_KEY}
               primarycolor={color.button}
               paymenttype="both"
               page="card"
