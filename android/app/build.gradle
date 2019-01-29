@@ -145,6 +145,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-document-picker')
     implementation project(':react-native-firebase')
     implementation project(':react-native-config')
     implementation project(':react-native-view-overflow')
@@ -152,7 +153,6 @@ dependencies {
     implementation project(':react-native-sentry')
     implementation project(':react-native-splash-screen')
     implementation project(':react-native-thumbnail')
-    implementation project(':react-native-paystack')
     implementation project(':react-native-image-crop-picker')
     implementation project(':react-native-fetch-blob')
     implementation project(':appcenter-crashes')

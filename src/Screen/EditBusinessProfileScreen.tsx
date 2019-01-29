@@ -28,6 +28,10 @@ interface IState {
   fieldErrors: any
   companyId: string
   street1: string
+  facebook: string
+  instagram: string
+  linkedin: string
+  twitter: string
   city: string
   slug: string
   state: string
@@ -46,6 +50,10 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     city: '',
     state: '',
     slug: '',
+    facebook: '',
+    instagram: '',
+    linkedin: '',
+    twitter: '',
     country: 'NG',
     companyId: '',
     phoneNumber: '',
@@ -70,6 +78,10 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
       title: user.company.title,
       contactEmail: user.company.contactEmail,
       about: user.company.about,
+      facebook: user.company.facebook || '',
+      instagram: user.company.instagram || '',
+      linkedin: user.company.linkedIn || '',
+      twitter: user.company.twitter || '',
       slug: user.company.slug,
       currency: 'NGN',
       ...this.parseAddressForForm(user.company),
@@ -188,6 +200,38 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                     },
                     validators: ['required', 'email'],
                     name: 'contactEmail'
+                  },
+                  {
+                    label: 'Facebook',
+                    placeholder: 'e.g @username',
+                    type: {
+                      type: 'input'
+                    },
+                    name: 'facebook'
+                  },
+                  {
+                    label: 'Instagram',
+                    placeholder: 'e.g @username',
+                    type: {
+                      type: 'input'
+                    },
+                    name: 'instagram'
+                  },
+                  {
+                    label: 'Twitter',
+                    placeholder: 'e.g @username',
+                    type: {
+                      type: 'input'
+                    },
+                    name: 'twitter'
+                  },
+                  {
+                    label: 'LinkedIn',
+                    placeholder: 'e.g @username',
+                    type: {
+                      type: 'input'
+                    },
+                    name: 'linkedin'
                   }
                 ]
               },

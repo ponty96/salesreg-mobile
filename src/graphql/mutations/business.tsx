@@ -15,6 +15,17 @@ export const UpdateCompanyGQL = gql`
           slug
           contactEmail
           about
+          coverPhoto
+          legalDocuments {
+            pdfUrl
+            name
+            type
+            id
+          }
+          facebook
+          twitter
+          instagram
+          linkedin
           currency
           logo
           phone {
@@ -66,6 +77,73 @@ export const DeleteBankGQL = gql`
       fieldErrors {
         key
         message
+      }
+    }
+  }
+`
+
+export const UpdateCompanyCoverPhotoGQL = gql`
+  mutation updateCompanyCoverPhoto($coverPhoto: CoverPhotoInput!) {
+    updateCompanyCoverPhoto(coverPhoto: $coverPhoto) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          coverPhoto
+        }
+      }
+    }
+  }
+`
+
+export const UpsertLegalDocument = gql`
+  mutation upsertLegalDocument(
+    $legalDocument: LegalDocumentInput!
+    $legalDocumentId: Uuid
+  ) {
+    upsertLegalDocument(
+      legalDocument: $legalDocument
+      legalDocumentId: $legalDocumentId
+    ) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          legalDocuments {
+            name
+            pdfUrl
+            type
+            id
+          }
+        }
+      }
+    }
+  }
+`
+
+export const DeleteLegalDocument = gql`
+  mutation deleteLegalDocument($legalDocumentId: Uuid!) {
+    deleteLegalDocument(legalDocumentId: $legalDocumentId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          legalDocuments {
+            name
+            pdfUrl
+            type
+            id
+          }
+        }
       }
     }
   }

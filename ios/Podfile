@@ -29,7 +29,6 @@ target 'salesreg' do
   # use_frameworks!
 
   # Pods for salesreg
-  pod 'Paystack'
   pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
   pod 'RNImageCropPicker', :path => '../node_modules/react-native-image-crop-picker'
 

@@ -19,6 +19,12 @@ export const UpdateSaleOrderStatusGQL = gql`
             gender
             email
           }
+          location {
+            street1
+            state
+            country
+            city
+          }
           paymentMethod
           status
           amount
@@ -83,8 +89,8 @@ export const UpdatePurchaseOrderStatusGQL = gql`
   }
 `
 export const UpsertSaleOrder = gql`
-  mutation upsertSaleOrder($sale: SaleInput!, $saleId: Uuid) {
-    upsertSaleOrder(sale: $sale, saleId: $saleId) {
+  mutation upsertSaleOrder($sale: SaleInput!) {
+    upsertSaleOrder(sale: $sale) {
       fieldErrors {
         key
         message
@@ -100,6 +106,12 @@ export const UpsertSaleOrder = gql`
             id
             gender
             email
+          }
+          location {
+            street1
+            state
+            country
+            city
           }
           paymentMethod
           status
@@ -165,6 +177,12 @@ export const UpdateInvoice = gql`
             discount
             amountPaid
             date
+            location {
+              street1
+              state
+              country
+              city
+            }
             items {
               id
               unitPrice
