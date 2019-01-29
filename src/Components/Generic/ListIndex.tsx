@@ -73,6 +73,7 @@ const LoadMoreSpinner = () => (
 )
 
 class GenericListIndex extends React.Component<IProps, IState> {
+  private IS_FETCHING: boolean = false
   state = {
     business: null,
     queryText: this.props.queryText,
@@ -187,10 +188,12 @@ class GenericListIndex extends React.Component<IProps, IState> {
   }
 
   fetchMore = (fetchMore, after, hasNextPage): void => {
+    this.IS_FETCHING = true
     let { variables, graphqlQueryResultKey } = this.props,
       { business } = this.state
 
     if (!hasNextPage || !this.state.hasUserScrolled) {
+      this.IS_FETCHING = false
       return
     }
 
@@ -203,6 +206,8 @@ class GenericListIndex extends React.Component<IProps, IState> {
       },
       updateQuery: (prev, { fetchMoreResult }) => {
         if (!fetchMoreResult) return prev
+
+        this.IS_FETCHING = false
         return Object.assign({}, prev, {
           [graphqlQueryResultKey]: {
             ...fetchMoreResult[graphqlQueryResultKey],
@@ -302,6 +307,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
               )}
               <SectionList
                 renderItem={this.renderList}
+                stickySectionHeadersEnabled={true}
                 onRefresh={() =>
                   refetch({
                     variables: {
@@ -331,7 +337,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   (networkStatus == 4 ||
                     (this.state.layoutHeight <= 0 && networkStatus == 2))
                 }
-                onEndReachedThreshold={0.99}
+                onEndReachedThreshold={0.9}
                 onScroll={({
                   nativeEvent: {
                     contentOffset: { y },
@@ -343,17 +349,18 @@ class GenericListIndex extends React.Component<IProps, IState> {
                   !this.state.hasUserScrolled &&
                     this.setState({ hasUserScrolled: true })
                 }}
-                onEndReached={() =>
-                  this.fetchMore(
-                    fetchMore,
-                    data[graphqlQueryResultKey]
-                      ? data[graphqlQueryResultKey].pageInfo.endCursor
-                      : null,
-                    data[graphqlQueryResultKey]
-                      ? data[graphqlQueryResultKey].pageInfo.hasNextPage
-                      : false
-                  )
-                }
+                onEndReached={() => {
+                  !this.IS_FETCHING &&
+                    this.fetchMore(
+                      fetchMore,
+                      data[graphqlQueryResultKey]
+                        ? data[graphqlQueryResultKey].pageInfo.endCursor
+                        : null,
+                      data[graphqlQueryResultKey]
+                        ? data[graphqlQueryResultKey].pageInfo.hasNextPage
+                        : false
+                    )
+                }}
                 ListEmptyComponent={
                   error && Object.keys(data || {}).length == 0 ? (
                     <ErrorViewAtom onRefresh={refetch} />
@@ -417,7 +424,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
 
     const sectionList = Object.keys(grouped).map(key => ({
       date: key,
-      data: grouped[key]
+      data: grouped[key].reverse()
     }))
 
     const sortedSection = sectionList.sort((sectionA, sectionB) => {
