@@ -342,18 +342,20 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
               >
                 <View style={[styles.mediaOverlay]}>
                   {state != 'loading' && !this.props.hideRemoveButton && (
-                    <Icon
-                      name="x"
-                      type="Feather"
-                      onPress={() => {
-                        this.props.deleteMedia(mediaId, 'mediaId')
-                        this.props.removeUrlFromUploadedMedia(
-                          mediaId,
-                          'mediaId'
-                        )
-                      }}
-                      style={[styles.whiteIcon, styles.removeIcon]}
-                    />
+                    <View style={{ position: 'absolute', right: 5, top: 5 }}>
+                      <Icon
+                        name="close"
+                        type="MaterialIcons"
+                        onPress={() => {
+                          this.props.deleteMedia(mediaId, 'mediaId')
+                          this.props.removeUrlFromUploadedMedia(
+                            mediaId,
+                            'mediaId'
+                          )
+                        }}
+                        style={[styles.whiteIcon, styles.removeIcon]}
+                      />
+                    </View>
                   )}
                   {state == 'loading'
                     ? this.renderLoadingContainer(progress, cancelFn)
@@ -414,18 +416,20 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
                     ]}
                   >
                     {state != 'loading' && !this.props.hideRemoveButton && (
-                      <Icon
-                        name="x"
-                        type="Feather"
-                        onPress={() => {
-                          this.props.deleteMedia(mediaId, 'mediaId')
-                          this.props.removeUrlFromUploadedMedia(
-                            mediaId,
-                            'mediaId'
-                          )
-                        }}
-                        style={[styles.whiteIcon, styles.removeIcon]}
-                      />
+                      <View style={{ position: 'absolute', right: 5, top: 5 }}>
+                        <Icon
+                          name="close"
+                          type="MaterialIcons"
+                          onPress={() => {
+                            this.props.deleteMedia(mediaId, 'mediaId')
+                            this.props.removeUrlFromUploadedMedia(
+                              mediaId,
+                              'mediaId'
+                            )
+                          }}
+                          style={[styles.whiteIcon, styles.removeIcon]}
+                        />
+                      </View>
                     )}
                     {state == 'loading'
                       ? this.renderLoadingContainer(progress, cancelFn)
@@ -560,9 +564,6 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   removeIcon: {
-    position: 'absolute',
-    right: 5,
-    top: 5,
     fontWeight: 'bold'
   },
   stopDownloadIcon: {
