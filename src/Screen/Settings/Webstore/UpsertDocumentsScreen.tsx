@@ -119,7 +119,7 @@ class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
     this.props.navigation.dispatch(resetAction)
   }
 
-  onCompleted = async res => {
+  onCompleted = res => {
     const {
       upsertLegalDocument: { success, fieldErrors, data }
     } = res
