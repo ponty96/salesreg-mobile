@@ -1,5 +1,4 @@
 import React from 'react'
-import { Icon } from 'native-base'
 import {
   View,
   StyleSheet,
@@ -22,6 +21,7 @@ import {
 } from '../store/actions/cron'
 import { connect } from 'react-redux'
 import Config from 'react-native-config'
+import Icon from './Icon'
 
 interface IProps {
   onMediaSet?: (response) => void
@@ -298,11 +298,9 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
             borderWidth={5}
             progress={progress}
           />
-          <Icon
-            name="x"
-            type="Feather"
-            style={[styles.whiteIcon, styles.stopDownloadIcon]}
-          />
+          <View style={styles.stopDownloadIcon}>
+            <Icon name="close" type="MaterialIcons" style={styles.whiteIcon} />
+          </View>
         </View>
       </TouchableOpacity>
     )
