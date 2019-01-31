@@ -77,7 +77,7 @@ const DEFAULT_PRODUCT_PARAMS = {
   description: '',
   categories: [],
   isTopRatedByMerchant: null,
-  isFeatured: null,
+  isFeatured: 'Yes',
   tags: []
 }
 
