@@ -191,12 +191,15 @@ export default class MediaUploadAtom extends React.PureComponent<
             uri={this.transformPath(media)}
           >
             <View style={styles.mediaOverlay}>
-              <Icon
-                name="x"
-                type="Feather"
-                onPress={() => this.removeMedia(media)}
-                style={styles.removeIcon}
-              />
+              <View style={{ position: 'absolute', right: 0, top: 5 }}>
+                <Icon
+                  name="close"
+                  type="MaterialIcons"
+                  onPress={() => this.removeMedia(media)}
+                  style={styles.removeIcon}
+                />
+              </View>
+
               <Icon
                 type="FontAwesome"
                 name={!isVideo ? 'file-image-o' : 'video-camera'}
@@ -287,9 +290,6 @@ const styles = StyleSheet.create({
     color: '#BFBFBF'
   },
   removeIcon: {
-    position: 'absolute',
-    right: 0,
-    top: 5,
     fontWeight: 'bold',
     fontSize: 30,
     color: '#fff'

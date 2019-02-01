@@ -298,7 +298,7 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
           ]}
           {...this.panResponder.panHandlers}
         >
-          <View style={{ flexDirection: 'row', marginRight: 30 }}>
+          <View style={{ flexDirection: 'row', marginRight: 40 }}>
             {style == 'success' && (
               <Icon
                 style={[styles.successIcon, styles.icon]}

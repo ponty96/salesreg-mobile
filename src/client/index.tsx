@@ -68,7 +68,7 @@ const errorLink = onError(({ graphQLErrors, networkError }: any) => {
 })
 
 const observableStore = new ObservableStore()
-const timeoutLink = new ApolloLinkTimeout(30000, observableStore)
+const timeoutLink = new ApolloLinkTimeout(60000, observableStore)
 
 const client = new ApolloClient({
   link: timeoutLink.concat(

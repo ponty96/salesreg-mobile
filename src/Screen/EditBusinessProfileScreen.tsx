@@ -290,6 +290,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
 
     delete params.phoneNumber
     params['headOffice'] = this.parseAddress(params)
+    params.slug = this.state.slug.replace(/\s/g, '').toLowerCase()
     delete params.companyId
     delete params['company']
 

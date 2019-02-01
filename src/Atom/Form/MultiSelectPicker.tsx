@@ -13,6 +13,7 @@ import { color } from '../../Style/Color'
 import FormHeader from '../../Components/Header/FormHeader'
 import * as JsSearch from 'js-search'
 import { SearchAtom } from '../SearchAtom'
+import RefreshControlAtom from '../RefreshControlAtom'
 
 interface PickerData {
   icon?: any
@@ -39,6 +40,7 @@ interface IProps {
   emptySection?: {
     emptyText: string | any
   }
+  onRefresh?: () => void
 }
 
 interface IState {
@@ -241,7 +243,19 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
               />
             </View>
           ) : (
-            this.renderEmptyView()
+            <ScrollView
+              showsVerticalScrollIndicator={false}
+              contentContainerStyle={{
+                flex: 1,
+                justifyContent: 'center',
+                alignItems: 'center'
+              }}
+              refreshControl={
+                <RefreshControlAtom onRefresh={this.props.onRefresh} />
+              }
+            >
+              {this.renderEmptyView()}
+            </ScrollView>
           )}
         </React.Fragment>
       </Modal>

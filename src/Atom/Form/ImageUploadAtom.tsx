@@ -163,7 +163,7 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
       <View>
         <CachedImageAtom
           uri={this.props.image}
-          style={{ width: 300, height: 300, borderRadius: 0 }}
+          style={{ width: 300, height: 300, borderRadius: 0, marginTop: 24 }}
         />
         <TouchableOpacity onPress={this.handleImageUpload}>
           <Text
@@ -190,7 +190,7 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
           reduxMediaUploadClass={this.props.reduxMediaUploadClass}
           media={this.state.imageToUpload}
           hideRemoveButton
-          style={{ width: 300, height: 300 }}
+          style={{ width: 300, height: 300, marginTop: 24 }}
           uploadType="single"
         />
         <TouchableOpacity onPress={this.handleImageUpload}>
