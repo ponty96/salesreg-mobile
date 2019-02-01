@@ -167,6 +167,14 @@ export const renderCategoryStep = (type): FormStep => ({
       },
       name: 'isFeatured',
       underneathText: `Featured ${type}s are displayed on the homepage of your webstore.`
+    },
+    {
+      label: `Is this ${type} top rated?`,
+      type: {
+        type: 'radio',
+        options: ['Yes', 'No']
+      },
+      name: 'isTopRatedByMerchant'
     }
   ]
 })
