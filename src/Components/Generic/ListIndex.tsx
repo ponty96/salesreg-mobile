@@ -363,7 +363,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
                 }}
                 ListEmptyComponent={
                   error && Object.keys(data || {}).length == 0 ? (
-                    <ErrorViewAtom onRefresh={refetch} />
+                    <ErrorViewAtom />
                   ) : (
                     ((sections.length == 0 && !loading) ||
                       (data && data[graphqlQueryResultKey] && loading)) && (

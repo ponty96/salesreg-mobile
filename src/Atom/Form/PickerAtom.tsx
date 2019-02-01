@@ -7,6 +7,7 @@ import {
   View,
   ActivityIndicator,
   TouchableOpacity,
+  ScrollView,
   FlatList
 } from 'react-native'
 import { color } from '../../Style/Color'
@@ -14,6 +15,7 @@ import FormHeader from '../../Components/Header/FormHeader'
 import * as JsSearch from 'js-search'
 import { SearchAtom } from '../SearchAtom'
 import CachedImageAtom from '../CachedImageAtom'
+import RefreshControlAtom from '../RefreshControlAtom'
 
 export interface PickerData {
   icon?: any
@@ -40,6 +42,7 @@ interface IProps {
   onHandleOpen?: () => void
   underneathText?: string
   error?: any
+  onRefresh?: () => void
   loading?: boolean
   onSearch?: (queryText: string) => void
   emptySection?: IEmptySection
@@ -235,7 +238,19 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
                 />
               </View>
             ) : (
-              this.renderEmptyView()
+              <ScrollView
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={{
+                  flex: 1,
+                  justifyContent: 'center',
+                  alignItems: 'center'
+                }}
+                refreshControl={
+                  <RefreshControlAtom onRefresh={this.props.onRefresh} />
+                }
+              >
+                {this.renderEmptyView()}
+              </ScrollView>
             )}
           </React.Fragment>
         </Modal>
