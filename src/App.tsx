@@ -14,10 +14,12 @@ import { AuthenticateClientGQL } from './graphql/client-mutations/authenticate'
 import { UserContext } from './context/UserContext'
 import { appReducers } from './store/reducers'
 import setupSentry from './Functions/sentry'
-import NotificationAtom from './Atom/NotificationAtom'
-import { NotificationContext } from './context/NotificationContext'
 import ViewOverflow from 'react-native-view-overflow'
 import Config from 'react-native-config'
+import {
+  Root as NotificationRoot,
+  NotificationBanner
+} from './Components/NotificationBanner'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
 
@@ -25,30 +27,25 @@ export default class App extends React.Component {
   state = {
     loading: true,
     user: {},
-    resetUserContext: user => this.setState({ user: user || {} }),
-    notification: {
-      style: 'success',
-      title: '',
-      subtitle: '',
-      trigger: Date.now(),
-      timeout: 5000,
-      setNotificationBanner: ({ title, subtitle, style, timeout }) =>
-        this.setState({
-          notification: {
-            ...this.state.notification,
-            title,
-            subtitle,
-            trigger: Date.now(),
-            style,
-            timeout
-          }
-        })
-    }
+    resetUserContext: user => this.setState({ user: user || {} })
   }
 
   async componentDidMount() {
     this.authenticate()
     this.setState({ loading: true })
+
+    let banner = NotificationBanner({
+      title: 'Success created',
+      subtitle: 'Yaga ooo'
+    })
+
+    setTimeout(() => {
+      banner.show({ duration: 10000 })
+    }, 2000)
+
+    // setTimeout(() => {
+    //   banner.dismiss()
+    // }, 4000)
   }
 
   authenticate = async () => {
@@ -74,8 +71,7 @@ export default class App extends React.Component {
     return (
       // check if user is on IphoneX and use View
       <ViewOverflow style={{ flex: 1 }}>
-        <NotificationContext.Provider value={this.state.notification}>
-          <NotificationAtom />
+        <NotificationRoot>
           <View style={{ paddingTop: 0, flex: 1 }}>
             <Provider store={store}>
               <UserContext.Provider value={{ user, resetUserContext }}>
@@ -88,7 +84,7 @@ export default class App extends React.Component {
               </UserContext.Provider>
             </Provider>
           </View>
-        </NotificationContext.Provider>
+        </NotificationRoot>
       </ViewOverflow>
     )
   }
