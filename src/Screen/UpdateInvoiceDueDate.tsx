@@ -11,7 +11,7 @@ import {
   ListCompanyInvoicesGQL
 } from '../graphql/queries/order'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
@@ -69,9 +69,12 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
         })
       ]
     })
-    this.props.setNotificationBanner(
+
+    let banner = NotificationBanner(
       configureNotificationBanner('UpdateInvoiceDueDate')
     )
+    banner.show({ bannerPosition: 'bottom' })
+
     this.props.navigation.dispatch(resetAction)
   }
 
@@ -172,17 +175,7 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
 
 const _UpdateInvoiceDueDate: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <UpdateInvoiceDueDate
-            {...props}
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
-    )}
+    {({ user }) => <UpdateInvoiceDueDate {...props} user={user} />}
   </UserContext.Consumer>
 )
 

@@ -16,7 +16,7 @@ import {
 import { Mutation } from 'react-apollo'
 import AppSpinner from '../Components/Spinner'
 import { Content } from 'native-base'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 var BUTTONS = ['Yes, Change', 'Cancel']
@@ -303,28 +303,18 @@ class OrderStatusScreen extends Component<IProps, IState> {
           ]
         })
       }
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner('UpdateOrderStatus', contact)
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     }
   }
 }
 
-const _OrderStatusScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
-      <OrderStatusScreen
-        {...props}
-        setNotificationBanner={setNotificationBanner}
-      />
-    )}
-  </NotificationContext.Consumer>
-)
-
-_OrderStatusScreen.navigationOptions = OrderStatusScreen.navigationOptions
-
-export default _OrderStatusScreen
+export default OrderStatusScreen
 
 const styles = StyleSheet.create({
   container: {

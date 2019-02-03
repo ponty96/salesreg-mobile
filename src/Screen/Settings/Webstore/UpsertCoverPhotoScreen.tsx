@@ -5,7 +5,7 @@ import AppSpinner from '../../../Components/Spinner'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../../../context/NotificationContext'
+import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 import { UpdateCompanyCoverPhotoGQL } from '../../../graphql/mutations/business'
 import Auth from '../../../services/auth'
@@ -77,9 +77,12 @@ class UpsertCoverPhotoScreen extends React.PureComponent<IProps, IState> {
         })
       ]
     })
-    this.props.setNotificationBanner(
+
+    let banner = NotificationBanner(
       configureNotificationBanner('UpdateCoverPhoto')
     )
+    banner.show({ bannerPosition: 'bottom' })
+
     this.props.navigation.dispatch(resetAction)
   }
 
@@ -142,16 +145,11 @@ class UpsertCoverPhotoScreen extends React.PureComponent<IProps, IState> {
 const _UpsertCoverPhotoScreen: any = props => (
   <UserContext.Consumer>
     {({ user, resetUserContext }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <UpsertCoverPhotoScreen
-            {...props}
-            user={user}
-            resetUserContext={resetUserContext}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
+      <UpsertCoverPhotoScreen
+        {...props}
+        user={user}
+        resetUserContext={resetUserContext}
+      />
     )}
   </UserContext.Consumer>
 )

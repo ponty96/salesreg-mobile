@@ -7,7 +7,7 @@ import GenericListIndex from '../../../Components/Generic/ListIndex'
 import AppSpinner from '../../../Components/Spinner'
 import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
 import { DeleteCategoryGQL } from '../../../graphql/mutations/store'
-import { NotificationContext } from '../../../context/NotificationContext'
+import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 
 let BUTTONS = ['Yes, delete', 'Cancel']
@@ -26,6 +26,10 @@ interface IState {
 }
 
 class CategoriesScreen extends React.Component<IProps, IState> {
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     forceUpdateId: Date.now(),
     queryText: '',
@@ -85,12 +89,14 @@ class CategoriesScreen extends React.Component<IProps, IState> {
         100
       )
     } else {
-      this.props.setNotificationBanner(
+      let banner = NotificationBanner(
         configureNotificationBanner(
           'DeleteCategory',
           this.state.categoryNameToDelete
         )
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.setState({
         forceUpdateId: Date.now()
       })
@@ -150,19 +156,4 @@ class CategoriesScreen extends React.Component<IProps, IState> {
   }
 }
 
-const _CategoriesScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
-      <CategoriesScreen
-        {...props}
-        setNotificationBanner={setNotificationBanner}
-      />
-    )}
-  </NotificationContext.Consumer>
-)
-
-_CategoriesScreen.navigationOptions = {
-  header: null
-}
-
-export default _CategoriesScreen
+export default CategoriesScreen

@@ -16,10 +16,7 @@ import { appReducers } from './store/reducers'
 import setupSentry from './Functions/sentry'
 import ViewOverflow from 'react-native-view-overflow'
 import Config from 'react-native-config'
-import {
-  Root as NotificationRoot,
-  NotificationBanner
-} from './Components/NotificationBanner'
+import { Root as NotificationRoot } from './Components/NotificationBanner'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
 
@@ -33,19 +30,6 @@ export default class App extends React.Component {
   async componentDidMount() {
     this.authenticate()
     this.setState({ loading: true })
-
-    let banner = NotificationBanner({
-      title: 'Success created',
-      subtitle: 'Yaga ooo'
-    })
-
-    setTimeout(() => {
-      banner.show({ duration: 10000, bannerPosition: 'bottom' })
-    }, 2000)
-
-    setTimeout(() => {
-      banner.show({ duration: 10000, bannerPosition: 'top' })
-    }, 4000)
   }
 
   authenticate = async () => {

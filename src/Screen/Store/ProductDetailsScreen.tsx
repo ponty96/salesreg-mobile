@@ -16,7 +16,7 @@ import { DeleteProductGQL } from '../../graphql/mutations/store'
 import { ListCompanyProductsGQL } from '../../graphql/queries/store'
 import { UserContext } from '../../context/UserContext'
 import CachedImageAtom from '../../Atom/CachedImageAtom'
-import { NotificationContext } from '../../context/NotificationContext'
+import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 import Config from 'react-native-config'
 import { NavigationActions } from 'react-navigation'
@@ -229,9 +229,11 @@ class ProductDetailsScreen extends PureComponent<IProps> {
           }
         ]}
         onSuccessfulDeletion={() => {
-          this.props.setNotificationBanner(
+          let banner = NotificationBanner(
             configureNotificationBanner('DeleteProduct', product)
           )
+          banner.show({ bannerPosition: 'bottom' })
+
           this.resetNavigationStack()
         }}
         headerText={product.name}
@@ -245,17 +247,7 @@ class ProductDetailsScreen extends PureComponent<IProps> {
 
 const _ProductDetailsScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <ProductDetailsScreen
-            {...props}
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
-    )}
+    {({ user }) => <ProductDetailsScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
 

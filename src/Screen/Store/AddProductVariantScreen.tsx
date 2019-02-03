@@ -18,7 +18,7 @@ import {
 } from './utilities/productCreateSteps'
 import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../../context/NotificationContext'
+import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 import setAppAnalytics from '../../Functions/setAppAnalytics'
 
@@ -352,9 +352,12 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
           })
         ]
       })
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner('AddProductVariant', this.state)
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -364,17 +367,7 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
 
 const _AddProductVariantScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <AddProductVariantScreen
-            {...props}
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
-    )}
+    {({ user }) => <AddProductVariantScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
 
