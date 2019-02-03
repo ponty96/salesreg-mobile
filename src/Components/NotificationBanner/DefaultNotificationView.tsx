@@ -13,11 +13,15 @@ import { _Store } from './Root'
 import StatusBar from './StatusBar'
 import { INotificationBannerProps, IBannerPosition } from './typeDefinition'
 
+interface ICurrentVisibleProperties extends INotificationBannerProps {
+  bannerPosition?: IBannerPosition
+}
+
 interface IState {
   translateY: any
   translateX: any
   visible: boolean
-  currentVisibleProperties: INotificationBannerProps
+  currentVisibleProperties: ICurrentVisibleProperties
 }
 
 interface IProps extends INotificationBannerProps {
@@ -57,11 +61,10 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
       this.state.visible
         ? setTimeout(() => this.show(true), 500)
         : setTimeout(() => this.show(), 500)
-    }
-    else if (trigger && prevProps.trigger != trigger && shouldShow == false){
-      this.dismissTop();
+    } else if (trigger && prevProps.trigger != trigger && shouldShow == false) {
+      this.dismissTop()
       clearTimeout(this.timer)
-    } 
+    }
   }
 
   componentWillUnmount() {
@@ -69,9 +72,14 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
   }
 
   show = (hidingAnimation?: boolean) => {
+    let { bannerPosition } = this.props,
+      {
+        currentVisibleProperties: { bannerPosition: stateBannerPosition }
+      } = this.state
+
     if (hidingAnimation) {
       Animated.timing(this.state.translateY, {
-        toValue: -75,
+        toValue: stateBannerPosition == 'top' ? -75 : 75,
         duration: 200,
         useNativeDriver: true,
         easing: Easing.inOut(Easing.linear)
@@ -81,19 +89,63 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
         }
       })
     } else {
-      this.animateFromTop()
+      bannerPosition == 'top' ? this.animateFromTop() : this.animateFromBottom()
     }
   }
 
-  animateFromTop = () => {
-    let { duration, style, title, subtitle } = this.props
+  animateFromBottom = () => {
+    let { duration, style, title, subtitle, bannerPosition } = this.props
 
+    this.state.translateY.setValue(75)
     this.setState(
       {
         currentVisibleProperties: {
           style: style || 'success',
           title: title || '',
-          subtitle: subtitle || ''
+          subtitle: subtitle || '',
+          bannerPosition
+        }
+      },
+      () => {
+        Animated.sequence([
+          Animated.timing(this.state.translateY, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: true,
+            easing: Easing.inOut(Easing.linear)
+          }),
+          Animated.timing(this.state.translateY, {
+            toValue: 5,
+            duration: 250,
+            useNativeDriver: true,
+            easing: Easing.inOut(Easing.ease)
+          })
+        ]).start(animation => {
+          if (animation.finished) {
+            this.timer = setTimeout(
+              this.dismissBottom,
+              duration || this.timeout
+            )
+            this.setState({
+              visible: true
+            })
+          }
+        })
+      }
+    )
+  }
+
+  animateFromTop = () => {
+    let { duration, style, title, subtitle, bannerPosition } = this.props
+
+    this.state.translateY.setValue(-75)
+    this.setState(
+      {
+        currentVisibleProperties: {
+          style: style || 'success',
+          title: title || '',
+          subtitle: subtitle || '',
+          bannerPosition
         }
       },
       () => {
@@ -139,7 +191,28 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
     })
   }
 
+  dismissBottom = () => {
+    Animated.sequence([
+      Animated.timing(this.state.translateY, {
+        toValue: 75,
+        duration: 200,
+        useNativeDriver: true,
+        easing: Easing.inOut(Easing.linear)
+      })
+    ]).start(animation => {
+      if (animation.finished) {
+        this.setState({
+          visible: false
+        })
+      }
+    })
+  }
+
   dismissRight = () => {
+    let {
+      currentVisibleProperties: { bannerPosition }
+    } = this.state
+
     Animated.sequence([
       Animated.timing(this.state.translateX, {
         toValue: Dimensions.get('window').width,
@@ -148,7 +221,7 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
         easing: Easing.out(Easing.linear)
       }),
       Animated.timing(this.state.translateY, {
-        toValue: -75,
+        toValue: bannerPosition == 'top' ? -75 : 75,
         duration: 100,
         useNativeDriver: true,
         easing: Easing.inOut(Easing.ease)
@@ -170,6 +243,10 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
   }
 
   dismissLeft = () => {
+    let {
+      currentVisibleProperties: { bannerPosition }
+    } = this.state
+
     Animated.sequence([
       Animated.timing(this.state.translateX, {
         toValue: -Dimensions.get('window').width,
@@ -178,7 +255,7 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
         easing: Easing.out(Easing.linear)
       }),
       Animated.timing(this.state.translateY, {
-        toValue: -75,
+        toValue: bannerPosition == 'top' ? -75 : 75,
         duration: 100,
         useNativeDriver: true,
         easing: Easing.inOut(Easing.ease)
@@ -261,7 +338,7 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
 
   render() {
     let {
-      currentVisibleProperties: { title, subtitle, style }
+      currentVisibleProperties: { title, subtitle, style, bannerPosition }
     } = this.state
     return (
       <React.Fragment>
@@ -269,6 +346,9 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
         <Animated.View
           style={[
             styles.container,
+            bannerPosition == 'top' || !bannerPosition
+              ? { top: 0 }
+              : { bottom: 0 },
             {
               transform: [
                 { translateY: this.state.translateY },
@@ -351,7 +431,6 @@ const styles = StyleSheet.create({
   container: {
     backgroundColor: 'green',
     position: 'absolute',
-    top: 0,
     zIndex: 1900000,
     left: 0,
     paddingHorizontal: 10,

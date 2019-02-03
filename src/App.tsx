@@ -40,12 +40,12 @@ export default class App extends React.Component {
     })
 
     setTimeout(() => {
-      banner.show({ duration: 10000 })
+      banner.show({ duration: 10000, bannerPosition: 'bottom' })
     }, 2000)
 
-    // setTimeout(() => {
-    //   banner.dismiss()
-    // }, 4000)
+    setTimeout(() => {
+      banner.show({ duration: 10000, bannerPosition: 'top' })
+    }, 4000)
   }
 
   authenticate = async () => {
