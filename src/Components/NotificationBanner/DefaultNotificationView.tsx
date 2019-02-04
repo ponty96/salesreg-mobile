@@ -4,70 +4,49 @@ import {
   Easing,
   PanResponder,
   Dimensions,
-  StatusBar,
   StyleSheet,
   View,
-  Platform,
   Text
 } from 'react-native'
-import { NotificationContext } from '../context/NotificationContext'
-import Icon from './Icon'
-import { observableStore } from '../client'
+import Icon from 'react-native-vector-icons/Ionicons'
+import { _Store } from './Root'
+import StatusBar from './StatusBar'
+import { INotificationBannerProps, IBannerPosition } from './typeDefinition'
+
+interface ICurrentVisibleProperties extends INotificationBannerProps {
+  bannerPosition?: IBannerPosition
+}
 
 interface IState {
   translateY: any
   translateX: any
   visible: boolean
-  currentVisibleProperties: {
-    title?: string
-    subtitle?: string
-    style?: string
-  }
+  currentVisibleProperties: ICurrentVisibleProperties
 }
 
-interface IProperties {
-  style?: 'success' | 'warning' | 'error' | 'basic-info' | string
-  title?: string
-  trigger?: number
-  subtitle?: string
-  timeout?: number
+interface IProps extends INotificationBannerProps {
+  trigger: number
+  shouldShow: boolean
+  duration: number
+  autoDismiss: boolean
+  bannerPosition: IBannerPosition
 }
 
-interface IProps extends IProperties {
-  setNotificationBanner?: (IProperties) => void
-}
-
-const AppStatusBar = ({ backgroundColor, ...props }) =>
-  Platform.OS == 'ios' && (
-    <View
-      style={[
-        styles.statusBar,
-        { backgroundColor: backgroundColor || '#00b0cf' }
-      ]}
-    >
-      <StatusBar hidden barStyle={props.barStyle || 'light-content'} />
-    </View>
-  )
-
-class NotificationAtom extends React.PureComponent<IProps, IState> {
+class DefaultNotificationView extends React.PureComponent<IProps, IState> {
   constructor(props) {
     super(props)
     this.state = {
       translateY: new Animated.Value(-75),
       translateX: new Animated.Value(0),
       visible: false,
-      currentVisibleProperties: {
-        style: props.style,
-        title: props.title,
-        subtitle: props.subtitle
-      }
+      currentVisibleProperties: {}
     }
     this.handleSwipe()
   }
 
   private gestureDelay: number
   private panResponder: any
-  private errorColor: string = '#E25146'
+  private dangerColor: string = '#E25146'
   private successColor: string = '#41CC78'
   private warningColor: string = '#FCA83A'
   private basicInfoColor: string = '429AD8'
@@ -75,13 +54,17 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
   private timer: any
 
   componentDidUpdate(prevProps) {
-    let { trigger } = this.props
+    let { trigger, shouldShow } = this.props
 
-    if (trigger && prevProps.trigger != trigger) {
+    if (trigger && prevProps.trigger != trigger && shouldShow) {
       clearTimeout(this.timer)
+      console.log('I dey here nah')
       this.state.visible
         ? setTimeout(() => this.show(true), 500)
         : setTimeout(() => this.show(), 500)
+    } else if (trigger && prevProps.trigger != trigger && shouldShow == false) {
+      this.dismissTop()
+      clearTimeout(this.timer)
     }
   }
 
@@ -90,9 +73,14 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
   }
 
   show = (hidingAnimation?: boolean) => {
+    let { bannerPosition } = this.props,
+      {
+        currentVisibleProperties: { bannerPosition: stateBannerPosition }
+      } = this.state
+
     if (hidingAnimation) {
       Animated.timing(this.state.translateY, {
-        toValue: -75,
+        toValue: stateBannerPosition == 'top' ? -75 : 75,
         duration: 200,
         useNativeDriver: true,
         easing: Easing.inOut(Easing.linear)
@@ -102,19 +90,63 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
         }
       })
     } else {
-      this.animateFromTop()
+      bannerPosition == 'top' ? this.animateFromTop() : this.animateFromBottom()
     }
   }
 
-  animateFromTop = () => {
-    let { timeout, style, title, subtitle } = this.props
+  animateFromBottom = () => {
+    let { duration, style, title, subtitle, bannerPosition } = this.props
 
+    this.state.translateY.setValue(75)
     this.setState(
       {
         currentVisibleProperties: {
           style: style || 'success',
           title: title || '',
-          subtitle: subtitle || ''
+          subtitle: subtitle || '',
+          bannerPosition
+        }
+      },
+      () => {
+        Animated.sequence([
+          Animated.timing(this.state.translateY, {
+            toValue: 0,
+            duration: 200,
+            useNativeDriver: true,
+            easing: Easing.inOut(Easing.linear)
+          }),
+          Animated.timing(this.state.translateY, {
+            toValue: 5,
+            duration: 250,
+            useNativeDriver: true,
+            easing: Easing.inOut(Easing.ease)
+          })
+        ]).start(animation => {
+          if (animation.finished) {
+            this.timer = setTimeout(
+              this.dismissBottom,
+              duration || this.timeout
+            )
+            this.setState({
+              visible: true
+            })
+          }
+        })
+      }
+    )
+  }
+
+  animateFromTop = () => {
+    let { duration, style, title, subtitle, bannerPosition } = this.props
+
+    this.state.translateY.setValue(-75)
+    this.setState(
+      {
+        currentVisibleProperties: {
+          style: style || 'success',
+          title: title || '',
+          subtitle: subtitle || '',
+          bannerPosition
         }
       },
       () => {
@@ -133,7 +165,7 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
           })
         ]).start(animation => {
           if (animation.finished) {
-            this.timer = setTimeout(this.dismissTop, timeout || this.timeout)
+            this.timer = setTimeout(this.dismissTop, duration || this.timeout)
             this.setState({
               visible: true
             })
@@ -160,7 +192,28 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
     })
   }
 
+  dismissBottom = () => {
+    Animated.sequence([
+      Animated.timing(this.state.translateY, {
+        toValue: 75,
+        duration: 200,
+        useNativeDriver: true,
+        easing: Easing.inOut(Easing.linear)
+      })
+    ]).start(animation => {
+      if (animation.finished) {
+        this.setState({
+          visible: false
+        })
+      }
+    })
+  }
+
   dismissRight = () => {
+    let {
+      currentVisibleProperties: { bannerPosition }
+    } = this.state
+
     Animated.sequence([
       Animated.timing(this.state.translateX, {
         toValue: Dimensions.get('window').width,
@@ -169,7 +222,7 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
         easing: Easing.out(Easing.linear)
       }),
       Animated.timing(this.state.translateY, {
-        toValue: -75,
+        toValue: bannerPosition == 'top' ? -75 : 75,
         duration: 100,
         useNativeDriver: true,
         easing: Easing.inOut(Easing.ease)
@@ -191,6 +244,10 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
   }
 
   dismissLeft = () => {
+    let {
+      currentVisibleProperties: { bannerPosition }
+    } = this.state
+
     Animated.sequence([
       Animated.timing(this.state.translateX, {
         toValue: -Dimensions.get('window').width,
@@ -199,7 +256,7 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
         easing: Easing.out(Easing.linear)
       }),
       Animated.timing(this.state.translateY, {
-        toValue: -75,
+        toValue: bannerPosition == 'top' ? -75 : 75,
         duration: 100,
         useNativeDriver: true,
         easing: Easing.inOut(Easing.ease)
@@ -236,12 +293,14 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
     switch (style) {
       case 'success':
         return this.successColor
-      case 'error':
-        return this.errorColor
+      case 'danger':
+        return this.dangerColor
       case 'warning':
         return this.warningColor
-      default:
+      case 'info':
         return this.basicInfoColor
+      default:
+        return '#fff'
     }
   }
 
@@ -280,14 +339,17 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
 
   render() {
     let {
-      currentVisibleProperties: { title, subtitle, style }
+      currentVisibleProperties: { title, subtitle, style, bannerPosition }
     } = this.state
     return (
       <React.Fragment>
-        <AppStatusBar backgroundColor={this.getColor()} />
+        <StatusBar backgroundColor={this.getColor()} />
         <Animated.View
           style={[
             styles.container,
+            bannerPosition == 'top' || !bannerPosition
+              ? { top: 0 }
+              : { bottom: 0 },
             {
               transform: [
                 { translateY: this.state.translateY },
@@ -303,12 +365,11 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
               <Icon
                 style={[styles.successIcon, styles.icon]}
                 name="ios-checkmark-circle"
-                type="Ionicons"
               />
             )}
             <View
               style={{
-                marginLeft: style == 'error' ? 0 : 10,
+                marginLeft: style == 'danger' ? 0 : 10,
                 alignSelf: 'center'
               }}
             >
@@ -316,12 +377,8 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
               <Text style={styles.subtitle}>{subtitle}</Text>
             </View>
           </View>
-          {style == 'error' && (
-            <Icon
-              style={[styles.successIcon, styles.icon]}
-              name="ios-alert"
-              type="Ionicons"
-            />
+          {style == 'danger' && (
+            <Icon style={[styles.successIcon, styles.icon]} name="ios-alert" />
           )}
         </Animated.View>
       </React.Fragment>
@@ -329,35 +386,35 @@ class NotificationAtom extends React.PureComponent<IProps, IState> {
   }
 }
 
-class ClassObservableWrapper extends React.PureComponent<IProps> {
+class DefaultNotificationViewWrapper extends React.PureComponent<{}, IProps> {
   private unsubscribeStore: () => void
 
   constructor(props) {
     super(props)
     this.state = {
-      style: 'error',
-      subtitle: 'Please check your network connection',
-      title: 'Network Timed Out',
-      trigger: Date.now()
+      trigger: Date.now(),
+      shouldShow: false,
+      duration: 5000,
+      autoDismiss: true,
+      bannerPosition: 'top',
+      title: '',
+      subtitle: '',
+      style: 'success',
+      customView: null
     }
 
-    this.unsubscribeStore = observableStore.listen(() => {
-      let state = observableStore.getState()
-      if ('timeout' in state) {
+    this.listenToStore()
+  }
+
+  listenToStore = () => {
+    this.unsubscribeStore = _Store.listen(() => {
+      let state = _Store.getState()
+      if ('notificationBanner' in state) {
         this.setState({
-          ...this.state,
-          trigger: state.timeout.id
+          ...state['notificationBanner']
         })
       }
     })
-  }
-
-  componentDidUpdate(prevProps) {
-    if (prevProps != this.props) {
-      this.setState({
-        ...this.props
-      })
-    }
   }
 
   componentWillUnmount() {
@@ -365,23 +422,16 @@ class ClassObservableWrapper extends React.PureComponent<IProps> {
   }
 
   render() {
-    return <NotificationAtom {...this.state} />
+    return <DefaultNotificationView {...this.state} />
   }
 }
 
-const _NotificationAtom = props => (
-  <NotificationContext.Consumer>
-    {config => <ClassObservableWrapper {...props} {...config} />}
-  </NotificationContext.Consumer>
-)
-
-export default _NotificationAtom
+export default DefaultNotificationViewWrapper
 
 const styles = StyleSheet.create({
   container: {
     backgroundColor: 'green',
     position: 'absolute',
-    top: 0,
     zIndex: 1900000,
     left: 0,
     paddingHorizontal: 10,
@@ -406,10 +456,5 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontFamily: 'AvenirNext-DemiBold',
     fontSize: 14
-  },
-  statusBar: {
-    height: 20,
-    marginTop: -20,
-    zIndex: 2000
   }
 })

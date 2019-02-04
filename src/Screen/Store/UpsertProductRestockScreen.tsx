@@ -6,7 +6,7 @@ import { parseFieldErrors } from '../../Functions'
 import { UserContext } from '../../context/UserContext'
 import { RestockProducts } from '../../graphql/mutations/store'
 import { ListCompanyProductsGQL } from '../../graphql/queries/store'
-import { NotificationContext } from '../../context/NotificationContext'
+import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
@@ -57,9 +57,11 @@ class UpsertProductRestockScreen extends React.PureComponent<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
-      this.props.setNotificationBanner(
+      let banner = NotificationBanner(
         configureNotificationBanner('UpsertProductRestock')
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.navigate('Products')
     }
   }
@@ -152,17 +154,7 @@ class UpsertProductRestockScreen extends React.PureComponent<IProps, IState> {
 
 const _UpsertProductRestockScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <UpsertProductRestockScreen
-            {...props}
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
-    )}
+    {({ user }) => <UpsertProductRestockScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
 

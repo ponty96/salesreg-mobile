@@ -8,7 +8,7 @@ import AppSpinner from '../Components/Spinner'
 import { PaymentMethod } from '../utilities/data/picker-lists'
 import Auth from '../services/auth'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
@@ -31,6 +31,10 @@ interface IState {
 }
 
 class UpsertExpenseScreen extends Component<IProps, IState> {
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     title: '',
     date: '',
@@ -221,30 +225,17 @@ class UpsertExpenseScreen extends Component<IProps, IState> {
         ]
       })
 
-      this.props.setNotificationBanner(
+      let banner = NotificationBanner(
         configureNotificationBanner(
           expense ? 'UpdateExpense' : 'CreateExpense',
           this.state
         )
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     }
   }
 }
 
-const _UpsertExpenseScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
-      <UpsertExpenseScreen
-        {...props}
-        setNotificationBanner={setNotificationBanner}
-      />
-    )}
-  </NotificationContext.Consumer>
-)
-
-_UpsertExpenseScreen.navigationOptions = {
-  header: null
-}
-
-export default _UpsertExpenseScreen
+export default UpsertExpenseScreen

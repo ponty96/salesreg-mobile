@@ -7,7 +7,7 @@ import GenericListIndex from '../../../Components/Generic/ListIndex'
 import { ListCompanyOptionsGQL } from '../../../graphql/queries/store'
 import { DeleteOptionGQL } from '../../../graphql/mutations/store'
 import AppSpinner from '../../../Components/Spinner'
-import { NotificationContext } from '../../../context/NotificationContext'
+import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 
 let BUTTONS = ['Yes, delete', 'Cancel']
@@ -26,6 +26,10 @@ interface IState {
 }
 
 class OptionsScreen extends React.Component<IProps, IState> {
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     forceUpdateId: Date.now(),
     queryText: '',
@@ -82,12 +86,14 @@ class OptionsScreen extends React.Component<IProps, IState> {
         100
       )
     } else {
-      this.props.setNotificationBanner(
+      let banner = NotificationBanner(
         configureNotificationBanner(
           'DeleteOption',
           this.state.optionNameToDelete
         )
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.setState({
         forceUpdateId: Date.now()
       })
@@ -145,16 +151,4 @@ class OptionsScreen extends React.Component<IProps, IState> {
   }
 }
 
-const _OptionsScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
-      <OptionsScreen {...props} setNotificationBanner={setNotificationBanner} />
-    )}
-  </NotificationContext.Consumer>
-)
-
-_OptionsScreen.navigationOptions = {
-  header: null
-}
-
-export default _OptionsScreen
+export default OptionsScreen

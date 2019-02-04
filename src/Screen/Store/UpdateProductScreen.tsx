@@ -19,7 +19,7 @@ import {
 
 import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../../context/NotificationContext'
+import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
@@ -300,9 +300,12 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
           })
         ]
       })
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner('UpdateProduct', this.state)
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -312,17 +315,7 @@ class UpdateProductScreen extends PureComponent<IProps, IState> {
 
 const _UpdateProductScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <UpdateProductScreen
-            {...props}
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
-    )}
+    {({ user }) => <UpdateProductScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
 
