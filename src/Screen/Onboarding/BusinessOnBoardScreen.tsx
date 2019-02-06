@@ -122,7 +122,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                   {
                     label: 'How should customers call you?',
                     placeholder: 'E.g StacknBit',
-                    underneathText: `This is your business nick name`,
+                    underneathText: `This is your business nick name. Please make sure that its in lowercase and avoid adding spacing. Only Alphanumerics are allowed also`,
                     type: {
                       type: 'input',
                       keyboardType: 'default'
@@ -246,6 +246,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
       state: '**',
       country: params.businessCountry
     }
+    params.slug = this.state.slug.replace(/\s/g, '').toLowerCase()
     delete params.businessCountry
     delete params.user
     return { company: params, userId: this.state.user.id }

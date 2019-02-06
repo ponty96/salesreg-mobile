@@ -6,7 +6,7 @@ import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
@@ -24,6 +24,10 @@ interface IState {
 }
 
 class EditUserProfileScreen extends Component<IProps, IState> {
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     profilePicture: '',
     firstName: '',
@@ -161,9 +165,12 @@ class EditUserProfileScreen extends Component<IProps, IState> {
           })
         ]
       })
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner('UpdateProfile')
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -171,19 +178,4 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   }
 }
 
-const _EditUserProfileScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
-      <EditUserProfileScreen
-        {...props}
-        setNotificationBanner={setNotificationBanner}
-      />
-    )}
-  </NotificationContext.Consumer>
-)
-
-_EditUserProfileScreen.navigationOptions = {
-  header: null
-}
-
-export default _EditUserProfileScreen
+export default EditUserProfileScreen

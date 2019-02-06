@@ -63,7 +63,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
               <View style={styles.dot} />
               <Text style={[styles.text, { marginTop: -4 }]}>
                 Scroll down to find the settings menu where you can edit your
-                profile
+                profile and manage your webstore
               </Text>
             </View>
             <View style={styles.section}>

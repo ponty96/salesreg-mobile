@@ -12,7 +12,7 @@ import { Mutation } from 'react-apollo'
 import { DeleteLegalDocument } from '../../../graphql/mutations/business'
 import AppSpinner from '../../../Components/Spinner'
 import Auth from '../../../services/auth'
-import { NotificationContext } from '../../../context/NotificationContext'
+import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 
 let BUTTONS = ['Yes, delete', 'Cancel']
@@ -109,12 +109,13 @@ class DocumentsScreen extends React.PureComponent<IProps, IState> {
       await Auth.setCurrentUser(updatedUser)
       this.props.resetUserContext(updatedUser)
 
-      this.props.setNotificationBanner(
+      let banner = NotificationBanner(
         configureNotificationBanner('DeleteLegalDocument', {
           name: this.state.deletedDocumentName,
           type: this.state.deletedDocumentType
         })
       )
+      banner.show({ bannerPosition: 'bottom' })
     }
   }
 
@@ -188,20 +189,15 @@ class DocumentsScreen extends React.PureComponent<IProps, IState> {
 }
 
 const _DocumentsScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
-      <UserContext.Consumer>
-        {({ user, resetUserContext }) => (
-          <DocumentsScreen
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-            resetUserContext={resetUserContext}
-            {...props}
-          />
-        )}
-      </UserContext.Consumer>
+  <UserContext.Consumer>
+    {({ user, resetUserContext }) => (
+      <DocumentsScreen
+        user={user}
+        resetUserContext={resetUserContext}
+        {...props}
+      />
     )}
-  </NotificationContext.Consumer>
+  </UserContext.Consumer>
 )
 
 _DocumentsScreen.navigationOptions = DocumentsScreen.navigationOptions

@@ -30,7 +30,7 @@ type ITypes =
   | 'UpdateLegalDocument'
   | 'DeleteLegalDocument'
 
-const configureNotificationBanner = (type: ITypes, params?: any): object => {
+const configureNotificationBanner = (type: ITypes, params?: any): any => {
   switch (type) {
     case 'AddContact':
       return {

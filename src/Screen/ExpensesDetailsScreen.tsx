@@ -5,7 +5,7 @@ import moment from 'moment'
 import { DeleteExpenseGQL } from '../graphql/mutations/expense'
 import { ListCompanyExpensesGQL } from '../graphql/queries/expense'
 import { UserContext } from '../context/UserContext'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 import { NavigationActions } from 'react-navigation'
 
@@ -88,9 +88,11 @@ class ExpensesDetailsScreen extends Component<IProps> {
           }
         ]}
         onSuccessfulDeletion={() => {
-          this.props.setNotificationBanner(
+          let banner = NotificationBanner(
             configureNotificationBanner('DeleteExpense', expense)
           )
+          banner.show({ bannerPosition: 'bottom' })
+
           this.resetNavigationStack()
         }}
       />
@@ -100,17 +102,7 @@ class ExpensesDetailsScreen extends Component<IProps> {
 
 const _ExpensesDetailsScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <ExpensesDetailsScreen
-            {...props}
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
-    )}
+    {({ user }) => <ExpensesDetailsScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
 

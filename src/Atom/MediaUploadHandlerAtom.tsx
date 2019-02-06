@@ -1,5 +1,4 @@
 import React from 'react'
-import { Icon } from 'native-base'
 import {
   View,
   StyleSheet,
@@ -22,6 +21,7 @@ import {
 } from '../store/actions/cron'
 import { connect } from 'react-redux'
 import Config from 'react-native-config'
+import Icon from './Icon'
 
 interface IProps {
   onMediaSet?: (response) => void
@@ -298,11 +298,9 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
             borderWidth={5}
             progress={progress}
           />
-          <Icon
-            name="x"
-            type="Feather"
-            style={[styles.whiteIcon, styles.stopDownloadIcon]}
-          />
+          <View style={styles.stopDownloadIcon}>
+            <Icon name="close" type="MaterialIcons" style={styles.whiteIcon} />
+          </View>
         </View>
       </TouchableOpacity>
     )
@@ -344,18 +342,20 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
               >
                 <View style={[styles.mediaOverlay]}>
                   {state != 'loading' && !this.props.hideRemoveButton && (
-                    <Icon
-                      name="x"
-                      type="Feather"
-                      onPress={() => {
-                        this.props.deleteMedia(mediaId, 'mediaId')
-                        this.props.removeUrlFromUploadedMedia(
-                          mediaId,
-                          'mediaId'
-                        )
-                      }}
-                      style={[styles.whiteIcon, styles.removeIcon]}
-                    />
+                    <View style={{ position: 'absolute', right: 5, top: 5 }}>
+                      <Icon
+                        name="close"
+                        type="MaterialIcons"
+                        onPress={() => {
+                          this.props.deleteMedia(mediaId, 'mediaId')
+                          this.props.removeUrlFromUploadedMedia(
+                            mediaId,
+                            'mediaId'
+                          )
+                        }}
+                        style={[styles.whiteIcon, styles.removeIcon]}
+                      />
+                    </View>
                   )}
                   {state == 'loading'
                     ? this.renderLoadingContainer(progress, cancelFn)
@@ -416,18 +416,20 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
                     ]}
                   >
                     {state != 'loading' && !this.props.hideRemoveButton && (
-                      <Icon
-                        name="x"
-                        type="Feather"
-                        onPress={() => {
-                          this.props.deleteMedia(mediaId, 'mediaId')
-                          this.props.removeUrlFromUploadedMedia(
-                            mediaId,
-                            'mediaId'
-                          )
-                        }}
-                        style={[styles.whiteIcon, styles.removeIcon]}
-                      />
+                      <View style={{ position: 'absolute', right: 5, top: 5 }}>
+                        <Icon
+                          name="close"
+                          type="MaterialIcons"
+                          onPress={() => {
+                            this.props.deleteMedia(mediaId, 'mediaId')
+                            this.props.removeUrlFromUploadedMedia(
+                              mediaId,
+                              'mediaId'
+                            )
+                          }}
+                          style={[styles.whiteIcon, styles.removeIcon]}
+                        />
+                      </View>
                     )}
                     {state == 'loading'
                       ? this.renderLoadingContainer(progress, cancelFn)
@@ -562,9 +564,6 @@ const styles = StyleSheet.create({
     color: '#fff'
   },
   removeIcon: {
-    position: 'absolute',
-    right: 5,
-    top: 5,
     fontWeight: 'bold'
   },
   stopDownloadIcon: {

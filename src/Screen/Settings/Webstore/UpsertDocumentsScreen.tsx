@@ -5,7 +5,7 @@ import AppSpinner from '../../../Components/Spinner'
 import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../../../context/NotificationContext'
+import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 import { UpsertLegalDocument } from '../../../graphql/mutations/business'
 import {
@@ -109,17 +109,20 @@ class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
         })
       ]
     })
-    this.props.setNotificationBanner(
+
+    let banner = NotificationBanner(
       configureNotificationBanner('UpdateLegalDocument', {
         name: `${this.state.name} ${
           this.state.type == 'policy' ? 'Policy' : ''
         }`
       })
     )
+    banner.show({ bannerPosition: 'bottom' })
+
     this.props.navigation.dispatch(resetAction)
   }
 
-  onCompleted = async res => {
+  onCompleted = res => {
     const {
       upsertLegalDocument: { success, fieldErrors, data }
     } = res
@@ -222,16 +225,11 @@ class UpsertDocumentsScreen extends React.PureComponent<IProps, IState> {
 const _UpsertDocumentsScreen: any = props => (
   <UserContext.Consumer>
     {({ user, resetUserContext }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <UpsertDocumentsScreen
-            {...props}
-            user={user}
-            resetUserContext={resetUserContext}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
+      <UpsertDocumentsScreen
+        {...props}
+        user={user}
+        resetUserContext={resetUserContext}
+      />
     )}
   </UserContext.Consumer>
 )

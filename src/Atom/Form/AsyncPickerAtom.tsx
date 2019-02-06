@@ -46,7 +46,7 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
         fetchPolicy="cache-and-network"
         skip={this.state.skip}
       >
-        {({ loading, data }) => {
+        {({ loading, data, error, refetch, networkStatus }) => {
           const responseList = (data && data[graphqlQueryResultKey]) || []
 
           return (
@@ -54,7 +54,16 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
               {this.props.type == 'multi' ? (
                 <MultiSelectPickerAtom
                   {...this.props}
-                  loading={loading}
+                  loading={loading || networkStatus == 2 || networkStatus == 4}
+                  onRefresh={refetch}
+                  emptySection={
+                    error && responseList.length == 0
+                      ? {
+                          emptyText:
+                            'Oops!!! Error occurred while connecting, pull down to refresh'
+                        }
+                      : this.props.emptySection
+                  }
                   list={this.getList(responseList)}
                   onSearch={text => this.setState({ queryText: text })}
                   selectedItems={this.getSelected()}
@@ -66,10 +75,18 @@ class AsyncPickerAtom extends React.PureComponent<IProps, IState> {
               ) : (
                 <PickerAtom
                   {...this.props}
-                  loading={loading}
+                  loading={loading || networkStatus == 2 || networkStatus == 4}
+                  onRefresh={refetch}
                   list={this.getList(responseList)}
                   onSearch={text => this.setState({ queryText: text })}
-                  emptySection={this.props.emptySection}
+                  emptySection={
+                    error && responseList.length == 0
+                      ? {
+                          emptyText:
+                            'Error occurred while connecting, pull down to refresh'
+                        }
+                      : this.props.emptySection
+                  }
                   handleSelection={itemId =>
                     this.handleSelection(itemId, responseList)
                   }

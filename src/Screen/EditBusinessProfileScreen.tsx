@@ -11,7 +11,7 @@ import { UpdateCompanyGQL } from '../graphql/mutations/business'
 import Auth from '../services/auth'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 
 interface IProps {
@@ -40,6 +40,10 @@ interface IState {
 }
 
 class EditBusinessProfileScreen extends Component<IProps, IState> {
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     logo: '',
     about: '',
@@ -290,6 +294,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
 
     delete params.phoneNumber
     params['headOffice'] = this.parseAddress(params)
+    params.slug = this.state.slug.replace(/\s/g, '').toLowerCase()
     delete params.companyId
     delete params['company']
 
@@ -327,9 +332,12 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
           })
         ]
       })
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner('UpdateBusinessProfile')
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     } else {
       const parsedErrors = parseFieldErrors(fieldErrors)
@@ -343,19 +351,4 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
   }
 }
 
-const _EditBusinessProfileScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
-      <EditBusinessProfileScreen
-        {...props}
-        setNotificationBanner={setNotificationBanner}
-      />
-    )}
-  </NotificationContext.Consumer>
-)
-
-_EditBusinessProfileScreen.navigationOptions = {
-  header: null
-}
-
-export default _EditBusinessProfileScreen
+export default EditBusinessProfileScreen

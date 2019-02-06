@@ -5,7 +5,7 @@ import { getBankName } from '../utilities/data/picker-lists'
 import { DeleteBankGQL } from '../graphql/mutations/business'
 import { ListCompanyBanksGQL } from '../graphql/queries/business'
 import { UserContext } from '../context/UserContext'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 import { NavigationActions } from 'react-navigation'
 
@@ -91,9 +91,11 @@ class BankDetailsScreen extends Component<IProps> {
           }
         ]}
         onSuccessfulDeletion={() => {
-          this.props.setNotificationBanner(
+          let banner = NotificationBanner(
             configureNotificationBanner('DeleteAccount', bank)
           )
+          banner.show({ bannerPosition: 'bottom' })
+
           this.resetNavigationStack()
         }}
       />
@@ -103,17 +105,7 @@ class BankDetailsScreen extends Component<IProps> {
 
 const _BankDetailsScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <BankDetailsScreen
-            {...props}
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
-    )}
+    {({ user }) => <BankDetailsScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
 
