@@ -3,6 +3,7 @@ import {
   View,
   StyleSheet,
   Text,
+  Share,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Linking
@@ -183,20 +184,40 @@ class ProductDetailsScreen extends PureComponent<IProps> {
     this.props.navigation.dispatch(resetAction)
   }
 
+  onShare = async () => {
+    const product = this.props.navigation.getParam('product', {})
+    try {
+      const result: any = await Share.share(
+        {
+          title: `Check out ${product.name}`,
+          message: `Check out ${product.name} on https://www.yipcart.com`,
+          url: `https://www.yipcart.com`
+        },
+        { dialogTitle: `Check out ${product.name}` }
+      )
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+        } else {
+        }
+      } else if (result.action === Share.dismissedAction) {
+      }
+    } catch (error) {
+      //@An error occurred while sharing
+    }
+  }
+
   render() {
     const product = this.props.navigation.getParam('product', {})
     return [
       <View style={styles.topHeader} key="product-details-334">
-        {/* <TouchableOpacity
+        <TouchableOpacity
+          onPress={this.onShare}
           style={{ flexDirection: 'row', alignItems: 'center' }}
         >
-          <Icon
-            type="Ionicons"
-            name="md-share"
-            style={{ fontSize: 27, color: color.textColor, marginRight: 8 }}
-          />
+          <Icon type="Ionicons" name="md-share" style={styles.headerIcon} />
           <Text style={styles.rightNavText}>Share</Text>
-        </TouchableOpacity> */}
+        </TouchableOpacity>
         <TouchableOpacity
           style={{ flexDirection: 'row', alignItems: 'center' }}
           onPress={this.onPressAddProductVariant}
@@ -208,7 +229,6 @@ class ProductDetailsScreen extends PureComponent<IProps> {
             style={styles.headerIcon}
           />
         </TouchableOpacity>
-        <View />
       </View>,
       <GenericProfileDetails
         sections={this.sections()}
@@ -263,7 +283,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#ffffffc7',
     width: '100%',
     paddingVertical: 8,
-    justifyContent: 'flex-end',
+    justifyContent: 'space-between',
     paddingHorizontal: 16,
     borderBottomWidth: 1,
     borderBottomColor: color.list
