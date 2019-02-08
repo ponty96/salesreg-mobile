@@ -7,6 +7,7 @@ import com.reactnativedocumentpicker.ReactNativeDocumentPicker;
 import io.invertase.firebase.RNFirebasePackage;
 import com.lugg.ReactNativeConfig.ReactNativeConfigPackage;
 import com.entria.views.RNViewOverflowPackage;
+import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage; 
 import com.learnium.RNDeviceInfo.RNDeviceInfo;
 import io.sentry.RNSentryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
@@ -48,6 +49,7 @@ public class MainApplication extends Application implements ReactApplication {
             new RNThumbnailPackage(),
             new RNFirebaseAnalyticsPackage(),
             new RNFirebaseMessagingPackage(),
+            new RNFirebaseNotificationsPackage(),
             new PickerPackage(),
             new RNFetchBlobPackage(),
             new AppCenterReactNativeCrashesPackage(MainApplication.this, getResources().getString(R.string.appCenterCrashes_whenToSendCrashes)),
