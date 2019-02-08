@@ -89,6 +89,8 @@ async function setAppAnalytics(type: analyticsTypes, params?: any) {
       })
       Analytics.setCurrentScreen(currentScreen, currentScreenClassOverride)
       Analytics.logEvent(logEvent, logParams)
+    } else {
+      Analytics.setAnalyticsCollectionEnabled(false)
     }
   } catch (err) {
     console.log(err)
