@@ -228,14 +228,6 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                       type: 'input'
                     },
                     name: 'twitter'
-                  },
-                  {
-                    label: 'LinkedIn',
-                    placeholder: 'e.g @username',
-                    type: {
-                      type: 'input'
-                    },
-                    name: 'linkedin'
                   }
                 ]
               },
