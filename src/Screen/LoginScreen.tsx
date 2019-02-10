@@ -87,6 +87,8 @@ class LoginScreen extends React.Component<IProps, IState> {
               <AuthFormContainer
                 pageTitle="Login to your account"
                 actionButtonText="Login"
+                alternativeLinkText="Forgot Password" 
+                alternativeLinkRoute="ForgotPassword"
                 showActionButtonIcon={true}
                 onPressActionButton={() => this.validateLogin(loginUser)}
                 footerText="No account yet?"

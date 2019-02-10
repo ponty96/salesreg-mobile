@@ -67,6 +67,7 @@ import UpsertExpenseScreen from '../Screen/UpsertExpenseScreen'
 
 // Authentication Screens
 import LoginScreen from '../Screen/LoginScreen'
+import ForgotPasswordScreen from '../Screen/ForgotPasswordScreen'
 import LandingScreen from '../Screen/Onboarding/Landing'
 import UserOnboardScreen from '../Screen/Onboarding/UserOnboardScreen'
 import BusinessOnboardScreen from '../Screen/Onboarding/BusinessOnboardScreen'
@@ -235,6 +236,7 @@ const AuthStack = StackNavigator(
   {
     OnBoarding: LandingScreen,
     Login: LoginScreen,
+    ForgotPassword: ForgotPasswordScreen,
     Signup: UserOnboardScreen
   },
   {
