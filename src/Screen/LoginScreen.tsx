@@ -1,4 +1,5 @@
 import React from 'react'
+import { Linking, Alert } from 'react-native'
 import { Mutation } from 'react-apollo'
 import { LoginUserMutationGQL } from '../graphql/mutations/authenticate'
 import { AuthenticateClientGQL } from '../graphql/client-mutations/authenticate'
@@ -74,6 +75,23 @@ class LoginScreen extends React.Component<IProps, IState> {
     }
   }
 
+  handleForgotPassword = () => {
+    let url = 'https://www.facebook.com'
+    Linking.openURL(url).catch(() => {
+      Alert.alert(
+        '',
+        `An error occurred while opening url`,
+        [
+          {
+            text: 'Ok',
+            onPress: () => null
+          }
+        ],
+        { cancelable: false }
+      )
+    })
+  }
+
   render() {
     const { fieldErrors } = this.state
     return (
@@ -87,8 +105,8 @@ class LoginScreen extends React.Component<IProps, IState> {
               <AuthFormContainer
                 pageTitle="Login to your account"
                 actionButtonText="Login"
-                alternativeLinkText="Forgot Password" 
-                alternativeLinkRoute="ForgotPassword"
+                alternativeLinkText="Forgot Password"
+                alternativeLinkOnClick={this.handleForgotPassword}
                 showActionButtonIcon={true}
                 onPressActionButton={() => this.validateLogin(loginUser)}
                 footerText="No account yet?"
