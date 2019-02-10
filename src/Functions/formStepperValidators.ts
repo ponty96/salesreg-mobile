@@ -43,6 +43,12 @@ export const validateField = (
       error = required.errorMessage
     }
 
+    if (validator == 'social-media-username') {
+      let usernameValidation = validateSocialMediaUsername(_value || '')
+      isValid = usernameValidation.fieldValid
+      error = usernameValidation.errorMessage
+    }
+
     if (validator == 'email') {
       let emailValidation = validateEmail(_value)
       isValid = emailValidation.fieldValid
@@ -123,6 +129,27 @@ function isRequired(_value) {
   } else if (typeof _value == 'undefined') {
     fieldValid = false
     errorMessage = 'Field not set'
+  }
+
+  return { fieldValid, errorMessage }
+}
+
+function validateSocialMediaUsername(_value) {
+  let fieldValid = true,
+    errorMessage = '',
+    domainPattern = /^(?:https?:\/\/)?\w+(?:\.\w+)?(?:\.[A-Z]{2,3})+$/gi
+
+  if (_value[0] == '@' && _value.length > 0) {
+    fieldValid = false
+    errorMessage = 'Username should be entered without the @ symbol.'
+  } else if (domainPattern.test(_value.trim()) && _value.length > 0) {
+    fieldValid = false
+    errorMessage =
+      'Invalid username format. Enter username in the form e.g username'
+  } else if (/\./gi.test(_value) && _value.length > 0) {
+    fieldValid = false
+    errorMessage =
+      'Invalid username format. Username contains 1 or more invalid character. Enter username in the form e.g username'
   }
 
   return { fieldValid, errorMessage }

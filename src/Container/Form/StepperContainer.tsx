@@ -96,6 +96,7 @@ type validatorTypes =
   | 'sales-order'
   | 'confirm-password'
   | 'password'
+  | 'social-media-username'
   | 'expense-item'
 
 interface FormField {
