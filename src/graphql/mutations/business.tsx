@@ -62,8 +62,10 @@ export const UpsertBankGQL = gql`
           id
           date: updatedAt
           accountNumber
+          accountName
+          bankCode
+          subaccountId
           bankName
-          isPrimary
         }
       }
     }

@@ -13,8 +13,10 @@ export const ListCompanyBanksGQL = gql`
           id
           date: updatedAt
           accountNumber
+          accountName
+          bankCode
+          subaccountId
           bankName
-          isPrimary
         }
       }
     }
