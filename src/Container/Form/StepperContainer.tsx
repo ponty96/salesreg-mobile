@@ -87,6 +87,8 @@ interface FieldType {
   emptySection?: {
     emptyText: string | any
   }
+  loading ?: boolean
+  onRefresh ?: () => void
 }
 
 type validatorTypes =
