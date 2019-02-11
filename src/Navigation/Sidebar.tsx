@@ -123,10 +123,12 @@ const SidebarItem = (prop: {
 }
 
 export default class SideBar extends PureComponent<IProps, IState> {
-  handleNavigation = (location: string) => {
+  handleNavigation = async (location: string) => {
     this.setState({ activeRoute: location })
-    this.props.navigation.navigate(location)
+    let gettingStarted = await Auth.gettingStartedProgress()
+    gettingStarted == 'done' && this.props.navigation.navigate(location)
   }
+
   state = {
     businessName: '',
     activeRoute: ''
