@@ -138,7 +138,9 @@ class ProgressTracker extends React.PureComponent<IProps, IState> {
           multiline = false,
           searchQuery,
           searchQueryResponseKey,
-          emptySection
+          emptySection,
+          loading,
+          onRefresh
         },
         validators,
         label,
@@ -264,6 +266,9 @@ class ProgressTracker extends React.PureComponent<IProps, IState> {
               key={`${type}-${index}`}
               label={label}
               disabled={disabled}
+              loading={loading}
+              onRefresh={onRefresh}
+              emptySection={emptySection}
               list={options}
               selected={formData[name]}
               placeholder={placeholder}
@@ -571,7 +576,7 @@ const styles = StyleSheet.create({
   },
   stepHint: {
     fontSize: 13,
-    color: '#000',
+    color: '#999',
     fontFamily: 'AvenirNext-Medium'
   },
   stepBody: {
