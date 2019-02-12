@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+// import Config from 'react-native-config'
+
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { UpsertBankGQL } from '../graphql/mutations/business'
 import { ListCompanyBanksGQL } from '../graphql/queries/business'
@@ -22,6 +24,7 @@ interface IState {
   isPrimary: boolean | string
   companyId: string
   fieldErrors: any
+  bankCode: string
 }
 
 class UpsertBankScreen extends Component<IProps, IState> {
@@ -34,7 +37,8 @@ class UpsertBankScreen extends Component<IProps, IState> {
     bankName: '',
     isPrimary: null,
     companyId: '',
-    fieldErrors: null
+    fieldErrors: null,
+    bankCode: ''
   }
 
   updateState = (key: string, val: any) => {
@@ -51,6 +55,84 @@ class UpsertBankScreen extends Component<IProps, IState> {
       companyId: user.company.id
     })
   }
+
+  // verifyBankAccount = upsertBank => {
+  //   if (!this.state.hasBankAccountBeenVerified) {
+  //     let xhr = new XMLHttpRequest(),
+  //       data = {
+  //         recipientaccount: this.state.accountNumber,
+  //         destbankcode: this.state.bankName,
+  //         PBFPubKey: Config.FLUTTERWAVE_PUBLIC_KEY
+  //       }
+
+  //     xhr.withCredentials = true
+
+  //     this.setState({ isVerifyingBankAccount: true })
+
+  //     xhr.addEventListener('readystatechange', () => {
+  //       if (xhr.readyState === xhr.DONE) {
+  //         let response = JSON.parse(xhr.responseText)
+  //         if (response.data.data.accountname) {
+  //           this.setState({
+  //             isVerifyingBankAccount: false,
+  //             hasBankAccountBeenVerified: true
+  //           })
+  //           this.createBankAccount(upsertBank)
+  //         } else {
+  //           this.setState({
+  //             isVerifyingBankAccount: false,
+  //             hasBankAccountBeenVerified: false
+  //           })
+  //           let banner = NotificationBanner({
+  //             title: 'Invalid Account Details',
+  //             subtitle: 'Your account number is invalid',
+  //             style: 'danger'
+  //           })
+  //           banner.show({ bannerPosition: 'bottom' })
+  //         }
+  //       }
+  //     })
+
+  //     xhr.onerror = () => {
+  //       this.setState({
+  //         isVerifyingBankAccount: false,
+  //         hasBankAccountBeenVerified: false
+  //       })
+  //       let banner = NotificationBanner({
+  //         title: 'Error occurred',
+  //         subtitle: 'Unknown error occurred, try again!!',
+  //         style: 'danger'
+  //       })
+  //       banner.show({ bannerPosition: 'bottom' })
+  //     }
+
+  //     xhr.ontimeout = () => {
+  //       this.setState({
+  //         isVerifyingBankAccount: false,
+  //         hasBankAccountBeenVerified: false
+  //       })
+  //       let banner = NotificationBanner({
+  //         title: 'Error Timeout',
+  //         subtitle: 'Please check your network connection',
+  //         style: 'danger'
+  //       })
+  //       banner.show({ bannerPosition: 'bottom' })
+  //     }
+
+  //     xhr.timeout = 30000
+
+  //     xhr.open(
+  //       'POST',
+  //       `${
+  //         Config.FLUTTERWAVE_API_SERVICE
+  //       }/flwv3-pug/getpaidx/api/resolve_account`
+  //     )
+  //     xhr.setRequestHeader('content-type', 'application/json')
+  //     xhr.send(JSON.stringify(data))
+  //   } else {
+  //     this.createBankAccount(upsertBank)
+  //   }
+  // }
 
   render() {
     const bank = this.props.navigation.getParam('bank', {}),
@@ -135,7 +217,9 @@ class UpsertBankScreen extends Component<IProps, IState> {
     delete params['id']
     delete params['__typename']
     delete params['date']
+    delete params['subaccountId']
     params['isPrimary'] = this.state.isPrimary == 'yes' ? true : false
+    params.bankCode = params.bankName
 
     return { bank: params, bankId: bank ? bank.id : null }
   }

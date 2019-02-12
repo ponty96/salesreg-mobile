@@ -1,6 +1,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
-import Config from 'react-native-config'
+// import Config from 'react-native-config'
 
 import ProgressTracker from '../../Container/ProgressTracker'
 import { NG_Banks } from '../../utilities/data/picker-lists'
@@ -14,7 +14,7 @@ import {
 import { ListCompanyBanksGQL } from '../../graphql/queries/business'
 import Auth from '../../services/auth'
 import { UserContext } from '../../context/UserContext'
-import { NotificationBanner } from '../../Components/NotificationBanner'
+// import { NotificationBanner } from '../../Components/NotificationBanner'
 
 interface IState {
   fieldErrors: any
@@ -69,89 +69,83 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
     })
   }
 
-  verifyBankAccount = upsertBank => {
-    if (!this.state.hasBankAccountBeenVerified) {
-      let xhr = new XMLHttpRequest(),
-        data = {
-          recipientaccount: this.state.accountNumber,
-          destbankcode: this.state.bankName,
-          PBFPubKey: Config.FLUTTERWAVE_PUBLIC_KEY
-        }
+  // verifyBankAccount = upsertBank => {
+  //   if (!this.state.hasBankAccountBeenVerified) {
+  //     let xhr = new XMLHttpRequest(),
+  //       data = {
+  //         recipientaccount: this.state.accountNumber,
+  //         destbankcode: this.state.bankName,
+  //         PBFPubKey: Config.FLUTTERWAVE_PUBLIC_KEY
+  //       }
 
-      xhr.withCredentials = true
+  //     xhr.withCredentials = true
 
-      this.setState({ isVerifyingBankAccount: true })
+  //     this.setState({ isVerifyingBankAccount: true })
 
-      xhr.addEventListener('readystatechange', () => {
-        if (xhr.readyState === xhr.DONE) {
-          let response = JSON.parse(xhr.responseText)
-          if (response.data.data.accountname) {
-            this.setState({
-              isVerifyingBankAccount: false,
-              hasBankAccountBeenVerified: true
-            })
-            this.createBankAccount(upsertBank)
-          } else {
-            this.setState({
-              isVerifyingBankAccount: false,
-              hasBankAccountBeenVerified: false
-            })
-            let banner = NotificationBanner({
-              title: 'Invalid Account Details',
-              subtitle: 'Your account number is invalid',
-              style: 'danger'
-            })
-            banner.show({ bannerPosition: 'bottom' })
-          }
-        }
-      })
+  //     xhr.addEventListener('readystatechange', () => {
+  //       if (xhr.readyState === xhr.DONE) {
+  //         let response = JSON.parse(xhr.responseText)
+  //         if (response.data.data.accountname) {
+  //           this.setState({
+  //             isVerifyingBankAccount: false,
+  //             hasBankAccountBeenVerified: true
+  //           })
+  //           this.createBankAccount(upsertBank)
+  //         } else {
+  //           this.setState({
+  //             isVerifyingBankAccount: false,
+  //             hasBankAccountBeenVerified: false
+  //           })
+  //           let banner = NotificationBanner({
+  //             title: 'Invalid Account Details',
+  //             subtitle: 'Your account number is invalid',
+  //             style: 'danger'
+  //           })
+  //           banner.show({ bannerPosition: 'bottom' })
+  //         }
+  //       }
+  //     })
 
-      xhr.onerror = () => {
-        this.setState({
-          isVerifyingBankAccount: false,
-          hasBankAccountBeenVerified: false
-        })
-        let banner = NotificationBanner({
-          title: 'Error occurred',
-          subtitle: 'Unknown error occurred, try again!!',
-          style: 'danger'
-        })
-        banner.show({ bannerPosition: 'bottom' })
-      }
+  //     xhr.onerror = () => {
+  //       this.setState({
+  //         isVerifyingBankAccount: false,
+  //         hasBankAccountBeenVerified: false
+  //       })
+  //       let banner = NotificationBanner({
+  //         title: 'Error occurred',
+  //         subtitle: 'Unknown error occurred, try again!!',
+  //         style: 'danger'
+  //       })
+  //       banner.show({ bannerPosition: 'bottom' })
+  //     }
 
-      xhr.ontimeout = () => {
-        this.setState({
-          isVerifyingBankAccount: false,
-          hasBankAccountBeenVerified: false
-        })
-        let banner = NotificationBanner({
-          title: 'Error Timeout',
-          subtitle: 'Please check your network connection',
-          style: 'danger'
-        })
-        banner.show({ bannerPosition: 'bottom' })
-      }
+  //     xhr.ontimeout = () => {
+  //       this.setState({
+  //         isVerifyingBankAccount: false,
+  //         hasBankAccountBeenVerified: false
+  //       })
+  //       let banner = NotificationBanner({
+  //         title: 'Error Timeout',
+  //         subtitle: 'Please check your network connection',
+  //         style: 'danger'
+  //       })
+  //       banner.show({ bannerPosition: 'bottom' })
+  //     }
 
-      xhr.timeout = 30000
+  //     xhr.timeout = 30000
 
-      xhr.open(
-        'POST',
-        `${
-          Config.FLUTTERWAVE_API_SERVICE
-        }/flwv3-pug/getpaidx/api/resolve_account`
-      )
-      xhr.setRequestHeader('content-type', 'application/json')
-      xhr.send(JSON.stringify(data))
-    } else {
-      this.createBankAccount(upsertBank)
-    }
-  }
-
-  createBankAccount = upsertBank => {
-    upsertBank({
-      variables: this.parseBankMutationVariables()
-    })
-  }
+  //     xhr.open(
+  //       'POST',
+  //       `${
+  //         Config.FLUTTERWAVE_API_SERVICE
+  //       }/flwv3-pug/getpaidx/api/resolve_account`
+  //     )
+  //     xhr.setRequestHeader('content-type', 'application/json')
+  //     xhr.send(JSON.stringify(data))
+  //   } else {
+  //     this.createBankAccount(upsertBank)
+  //   }
+  // }
 
   onCompleteSocialPhase = async res => {
     const {
@@ -418,7 +412,10 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
                               name: 'isPrimary'
                             }
                           ],
-                          onSave: () => this.verifyBankAccount(upsertBank)
+                          onSave: () =>
+                            upsertBank({
+                              variables: this.parseBankMutationVariables()
+                            })
                         }
                       ]}
                       onCompleteSteps={() => null}
