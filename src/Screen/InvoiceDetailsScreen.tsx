@@ -74,8 +74,8 @@ export default class InvoicesScreen extends React.Component<IProps> {
       const result: any = await Share.share(
         {
           title: `Invoice Payment for ${sales.contact.contactName}`,
-          message: `Pay for your invoice using ${sales.shareLink}`,
-          url: `${sales.shareLink}`
+          message: `Pay for your invoice using ${sales.invoice.shareLink}`,
+          url: `${sales.invoice.shareLink}`
         },
         { dialogTitle: `Invoice Payment for ${sales.contact.contactName}` }
       )

@@ -69,6 +69,7 @@ export const ListCompanySalesGQL = gql`
           invoice {
             id
             refId
+            shareLink
             dueDate
           }
           items {
@@ -102,6 +103,7 @@ export const ListCompanyInvoicesGQL = gql`
           id
           amount
           refId
+          shareLink
           amountPaid
           user {
             lastName
