@@ -11,10 +11,13 @@ import Auth from '../services/auth'
 import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
   setNotificationBanner: (obj: any) => void
+  user: any
+  resetUserContext: (obj?: any) => void
 }
 
 interface IState {
@@ -46,7 +49,7 @@ class UpsertBankScreen extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = this.props.user
     const bank = this.props.navigation.getParam('bank', {})
     this.setState({
       ...bank,
@@ -139,11 +142,14 @@ class UpsertBankScreen extends Component<IProps, IState> {
     delete params['__typename']
     delete params['date']
     delete params['subaccountId']
+    delete params['subaccountTransacId']
+    delete params['company']
     params['isPrimary'] = this.state.isPrimary == 'yes' ? true : false
     params.bankCode = params.bankName
 
     return { bank: params, bankId: bank ? bank.id : null }
   }
+
   onCompleted = async res => {
     const {
       upsertBank: { success, fieldErrors, data }
@@ -153,6 +159,14 @@ class UpsertBankScreen extends Component<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
+      let updatedUser = {
+        ...this.props.user,
+        company: { ...this.props.user.company, bank: data }
+      }
+
+      this.props.resetUserContext(updatedUser)
+      await Auth.setCurrentUser(updatedUser)
+
       const resetAction = NavigationActions.reset({
         index: 1,
         actions: [
@@ -181,4 +195,18 @@ class UpsertBankScreen extends Component<IProps, IState> {
   }
 }
 
-export default UpsertBankScreen
+const _UpsertBankScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user, resetUserContext }) => (
+      <UpsertBankScreen
+        {...props}
+        user={user}
+        resetUserContext={resetUserContext}
+      />
+    )}
+  </UserContext.Consumer>
+)
+
+_UpsertBankScreen.navigationOptions = UpsertBankScreen.navigationOptions
+
+export default _UpsertBankScreen

@@ -23,6 +23,12 @@ export const UpdateCompanyGQL = gql`
             id
           }
           facebook
+          bank {
+            accountNumber
+            bankCode
+            subaccountId
+            subaccountTransacId
+          }
           twitter
           instagram
           linkedin
@@ -65,7 +71,16 @@ export const UpsertBankGQL = gql`
           accountName
           bankCode
           subaccountId
+          subaccountTransacId
           bankName
+          company {
+            bank {
+              accountNumber
+              bankCode
+              subaccountId
+              subaccountTransacId
+            }
+          }
         }
       }
     }

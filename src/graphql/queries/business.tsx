@@ -16,7 +16,16 @@ export const ListCompanyBanksGQL = gql`
           accountName
           bankCode
           subaccountId
+          subaccountTransacId
           bankName
+          company {
+            bank {
+              accountNumber
+              bankCode
+              subaccountId
+              subaccountTransacId
+            }
+          }
         }
       }
     }

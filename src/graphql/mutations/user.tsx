@@ -28,6 +28,12 @@ export const UpdateUserGQL = gql`
               type
               id
             }
+            bank {
+              accountNumber
+              bankCode
+              subaccountId
+              subaccountTransacId
+            }
             facebook
             twitter
             instagram

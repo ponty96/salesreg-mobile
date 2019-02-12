@@ -30,7 +30,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
     }
   }
 
-  async componentWillMount() {
+  async componentDidMount() {
     this.updateUserName()
     let gettingStartedProgress = await Auth.gettingStartedProgress()
     if (gettingStartedProgress == 'done') {

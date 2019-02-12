@@ -1,6 +1,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
-// import Config from 'react-native-config'
+import { Alert } from 'react-native'
 
 import ProgressTracker from '../../Container/ProgressTracker'
 import { NG_Banks } from '../../utilities/data/picker-lists'
@@ -14,7 +14,6 @@ import {
 import { ListCompanyBanksGQL } from '../../graphql/queries/business'
 import Auth from '../../services/auth'
 import { UserContext } from '../../context/UserContext'
-// import { NotificationBanner } from '../../Components/NotificationBanner'
 
 interface IState {
   fieldErrors: any
@@ -69,84 +68,6 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
     })
   }
 
-  // verifyBankAccount = upsertBank => {
-  //   if (!this.state.hasBankAccountBeenVerified) {
-  //     let xhr = new XMLHttpRequest(),
-  //       data = {
-  //         recipientaccount: this.state.accountNumber,
-  //         destbankcode: this.state.bankName,
-  //         PBFPubKey: Config.FLUTTERWAVE_PUBLIC_KEY
-  //       }
-
-  //     xhr.withCredentials = true
-
-  //     this.setState({ isVerifyingBankAccount: true })
-
-  //     xhr.addEventListener('readystatechange', () => {
-  //       if (xhr.readyState === xhr.DONE) {
-  //         let response = JSON.parse(xhr.responseText)
-  //         if (response.data.data.accountname) {
-  //           this.setState({
-  //             isVerifyingBankAccount: false,
-  //             hasBankAccountBeenVerified: true
-  //           })
-  //           this.createBankAccount(upsertBank)
-  //         } else {
-  //           this.setState({
-  //             isVerifyingBankAccount: false,
-  //             hasBankAccountBeenVerified: false
-  //           })
-  //           let banner = NotificationBanner({
-  //             title: 'Invalid Account Details',
-  //             subtitle: 'Your account number is invalid',
-  //             style: 'danger'
-  //           })
-  //           banner.show({ bannerPosition: 'bottom' })
-  //         }
-  //       }
-  //     })
-
-  //     xhr.onerror = () => {
-  //       this.setState({
-  //         isVerifyingBankAccount: false,
-  //         hasBankAccountBeenVerified: false
-  //       })
-  //       let banner = NotificationBanner({
-  //         title: 'Error occurred',
-  //         subtitle: 'Unknown error occurred, try again!!',
-  //         style: 'danger'
-  //       })
-  //       banner.show({ bannerPosition: 'bottom' })
-  //     }
-
-  //     xhr.ontimeout = () => {
-  //       this.setState({
-  //         isVerifyingBankAccount: false,
-  //         hasBankAccountBeenVerified: false
-  //       })
-  //       let banner = NotificationBanner({
-  //         title: 'Error Timeout',
-  //         subtitle: 'Please check your network connection',
-  //         style: 'danger'
-  //       })
-  //       banner.show({ bannerPosition: 'bottom' })
-  //     }
-
-  //     xhr.timeout = 30000
-
-  //     xhr.open(
-  //       'POST',
-  //       `${
-  //         Config.FLUTTERWAVE_API_SERVICE
-  //       }/flwv3-pug/getpaidx/api/resolve_account`
-  //     )
-  //     xhr.setRequestHeader('content-type', 'application/json')
-  //     xhr.send(JSON.stringify(data))
-  //   } else {
-  //     this.createBankAccount(upsertBank)
-  //   }
-  // }
-
   onCompleteSocialPhase = async res => {
     const {
       updateCompany: { success, fieldErrors, data }
@@ -188,12 +109,33 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
 
   onCompleteBankPhase = async res => {
     const {
-      upsertBank: { success, fieldErrors }
+      upsertBank: { success, fieldErrors, data }
     } = res
 
     if (!success) {
+      setTimeout(() => {
+        Alert.alert(
+          'Error Occurred!!!',
+          `${fieldErrors[0].message}`,
+          [
+            {
+              text: 'Okay',
+              onPress: () => null
+            }
+          ],
+          { cancelable: false }
+        )
+      }, 100)
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
+      let updatedUser = {
+        ...this.props.user,
+        company: { ...this.props.user.company, bank: data }
+      }
+
+      this.props.resetUserContext(updatedUser)
+      await Auth.setCurrentUser(updatedUser)
+
       await Auth.setGettingStartedProgress('done')
       this.props.onDone()
     }

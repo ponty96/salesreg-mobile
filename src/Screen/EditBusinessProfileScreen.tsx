@@ -13,10 +13,13 @@ import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
   setNotificationBanner: (obj: any) => void
+  user: any
+  resetUserContext: (obj?: any) => void
 }
 
 interface IState {
@@ -76,7 +79,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
   }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = this.props.user
     this.setState({
       companyId: user.company.id,
       title: user.company.title,
@@ -314,10 +317,11 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     const {
       updateCompany: { success, fieldErrors, data }
     } = res
+
     if (success) {
-      const user = JSON.parse(await Auth.getCurrentUser())
-      const updatedUser = { ...user, company: data }
+      const updatedUser = { ...this.props.user, company: data }
       await Auth.setCurrentUser(updatedUser)
+      this.props.resetUserContext(updatedUser)
       const resetAction = NavigationActions.reset({
         index: 1,
         actions: [
@@ -346,4 +350,19 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
   }
 }
 
-export default EditBusinessProfileScreen
+const _EditBusinessProfileScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user, resetUserContext }) => (
+      <EditBusinessProfileScreen
+        {...props}
+        user={user}
+        resetUserContext={resetUserContext}
+      />
+    )}
+  </UserContext.Consumer>
+)
+
+_EditBusinessProfileScreen.navigationOptions =
+  EditBusinessProfileScreen.navigationOptions
+
+export default _EditBusinessProfileScreen

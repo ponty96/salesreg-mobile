@@ -27,6 +27,12 @@ export const LoginUserMutationGQL = gql`
               contactEmail
               about
               currency
+              bank {
+                accountNumber
+                bankCode
+                subaccountId
+                subaccountTransacId
+              }
               slug
               logo
               facebook
@@ -94,6 +100,12 @@ export const RegisterUserMutationGQL = gql`
                 name
                 type
                 id
+              }
+              bank {
+                accountNumber
+                bankCode
+                subaccountId
+                subaccountTransacId
               }
               currency
               coverPhoto
