@@ -32,8 +32,8 @@ class SalesOrderDetailsScreen extends Component<IProps> {
       const result: any = await Share.share(
         {
           title: `Invoice Payment for ${sales.contact.contactName}`,
-          message: `Pay for your invoice using http://www.yipcart.com`,
-          url: `http://www.yipcart.com`
+          message: `Pay for your invoice using ${sales.shareLink}`,
+          url: `${sales.shareLink}`
         },
         { dialogTitle: `Invoice Payment for ${sales.contact.contactName}` }
       )
