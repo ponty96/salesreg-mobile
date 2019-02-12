@@ -3,6 +3,7 @@ import {
   ScrollView,
   View,
   Text,
+  Alert,
   TouchableOpacity,
   StyleSheet,
   Dimensions
@@ -11,11 +12,13 @@ import { SafeAreaView } from 'react-navigation'
 import Icon from '../Atom/Icon'
 import { color } from '../Style/Color'
 import Auth from '../services/auth'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
   onItemPress: any
   items: any
+  gettingStartedProgress: any
 }
 
 interface IState {
@@ -122,16 +125,31 @@ const SidebarItem = (prop: {
   )
 }
 
-export default class SideBar extends PureComponent<IProps, IState> {
+class SideBar extends PureComponent<IProps, IState> {
   handleNavigation = async (location: string) => {
     this.setState({ activeRoute: location })
-    let gettingStarted = await Auth.gettingStartedProgress()
-    gettingStarted == 'done' && this.props.navigation.navigate(location)
+    this.props.gettingStartedProgress == 'done'
+      ? this.props.navigation.navigate(location)
+      : this.showAlert()
   }
 
   state = {
     businessName: '',
     activeRoute: ''
+  }
+
+  showAlert = () => {
+    Alert.alert(
+      'Not Allowed!!!',
+      'Please complete the Getting Started section of the app',
+      [
+        {
+          text: 'Ok',
+          onPress: () => null
+        }
+      ],
+      { cancelable: false }
+    )
   }
 
   componentWillMount() {
@@ -273,6 +291,17 @@ export default class SideBar extends PureComponent<IProps, IState> {
     )
   }
 }
+
+const _SideBar = props => (
+  <UserContext.Consumer>
+    {({ gettingStartedProgress }) => (
+      <SideBar {...props} gettingStartedProgress={gettingStartedProgress} />
+    )}
+  </UserContext.Consumer>
+)
+
+export default _SideBar
+
 const styles = StyleSheet.create({
   header: {
     flexDirection: 'row',

@@ -2,5 +2,7 @@ import React from 'react'
 
 export const UserContext = React.createContext({
   user: {},
-  resetUserContext: user => null
+  gettingStartedProgress: null,
+  resetUserContext: user => null,
+  resetGettingStartedProgress: gettingStartedProgress => null
 })

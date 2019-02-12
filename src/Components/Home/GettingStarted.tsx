@@ -32,6 +32,8 @@ interface IState {
 interface IProps {
   user?: any
   resetUserContext?: (obj: any) => void
+  resetGettingStartedProgress?: (obj: any) => void
+  gettingStartedProgress?: any
   onDone: () => void
 }
 
@@ -76,6 +78,8 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
       const updatedUser = { ...this.props.user, company: data }
       await Auth.setCurrentUser(updatedUser)
       await Auth.setGettingStartedProgress('2')
+
+      this.props.resetGettingStartedProgress('2')
       this.props.resetUserContext(updatedUser)
       this.progressTracker.canGoForward() && this.progressTracker.gotoNext()
     } else {
@@ -102,6 +106,8 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
 
       await Auth.setCurrentUser(updatedUser)
       await Auth.setGettingStartedProgress('3')
+
+      this.props.resetGettingStartedProgress('3')
       this.props.resetUserContext(updatedUser)
       this.progressTracker.canGoForward() && this.progressTracker.gotoNext()
     }
@@ -134,6 +140,7 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
       }
 
       this.props.resetUserContext(updatedUser)
+      this.props.resetGettingStartedProgress('done')
       await Auth.setCurrentUser(updatedUser)
 
       await Auth.setGettingStartedProgress('done')
@@ -375,11 +382,18 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
 
 const _GettingStarted = props => (
   <UserContext.Consumer>
-    {({ user, resetUserContext }) => (
+    {({
+      user,
+      resetUserContext,
+      resetGettingStartedProgress,
+      gettingStartedProgress
+    }) => (
       <GettingStarted
         {...props}
         user={user}
         resetUserContext={resetUserContext}
+        gettingStartedProgress={gettingStartedProgress}
+        resetGettingStartedProgress={resetGettingStartedProgress}
       />
     )}
   </UserContext.Consumer>
