@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { View, StyleSheet } from 'react-native'
+import { View, StyleSheet, Share } from 'react-native'
 import { Content } from 'native-base'
 import Header from '../Components/Header/DetailsScreenHeader'
 import ListItemAtom from '../Atom/ListItem/ListItemAtom'
@@ -7,6 +7,7 @@ import { color } from '../Style/Color'
 import moment from 'moment'
 import { numberWithCommas } from '../Functions/numberWithCommas'
 import ProfileListAtom from '../Atom/ListItem/ExpandableListItemAtom'
+import FabAtom from '../Atom/FabAtom'
 
 interface IProps {
   navigation: any
@@ -65,6 +66,29 @@ export default class InvoicesScreen extends React.Component<IProps> {
         onPressLeftIcon={() => this.props.navigation.goBack()}
       />
     )
+  }
+
+  onShare = async () => {
+    const sales = this.props.navigation.getParam('sales', {})
+    try {
+      const result: any = await Share.share(
+        {
+          title: `Invoice Payment for ${sales.contact.contactName}`,
+          message: `Pay for your invoice using http://www.yipcart.com`,
+          url: `http://www.yipcart.com`
+        },
+        { dialogTitle: `Invoice Payment for ${sales.contact.contactName}` }
+      )
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+        } else {
+        }
+      } else if (result.action === Share.dismissedAction) {
+      }
+    } catch (error) {
+      //@An error occurred while sharing
+    }
   }
 
   render() {
@@ -150,6 +174,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
               listItemStyle={styles.listWrapper}
             />
           </Content>
+          <FabAtom onPress={this.onShare} name="share" type="MaterialIcons" />
         </View>
       </React.Fragment>
     )

@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, Share, Text, TouchableOpacity } from 'react-native'
 import { Icon } from 'native-base'
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../Components/Generic/Details'
@@ -26,6 +26,29 @@ class SalesOrderDetailsScreen extends Component<IProps> {
     }
   }
 
+  onShare = async () => {
+    const sales = this.props.navigation.getParam('sales', {})
+    try {
+      const result: any = await Share.share(
+        {
+          title: `Invoice Payment for ${sales.contact.contactName}`,
+          message: `Pay for your invoice using http://www.yipcart.com`,
+          url: `http://www.yipcart.com`
+        },
+        { dialogTitle: `Invoice Payment for ${sales.contact.contactName}` }
+      )
+
+      if (result.action === Share.sharedAction) {
+        if (result.activityType) {
+        } else {
+        }
+      } else if (result.action === Share.dismissedAction) {
+      }
+    } catch (error) {
+      //@An error occurred while sharing
+    }
+  }
+
   onStatusPress = async () => {
     const sales = this.props.navigation.getParam('sales', {})
     const hideHint = await Preferences.getOrderStatusHintPref()
@@ -42,7 +65,6 @@ class SalesOrderDetailsScreen extends Component<IProps> {
     const sales = this.props.navigation.getParam('sales', {})
     const { items = [] } = sales
 
-    console.log('oya ', sales.location)
     return [
       {
         itemTitle: 'Date',
@@ -97,6 +119,10 @@ class SalesOrderDetailsScreen extends Component<IProps> {
           shouldShowStatus={true}
           onPressStatus={this.onStatusPress}
           enableDelete={false}
+          showFab
+          fabIconName="share"
+          fabIconType="MaterialIcons"
+          fabOnPress={this.onShare}
         />
         <TouchableOpacity
           onPress={() =>
