@@ -36,15 +36,15 @@ export default class WebstoreOptionsScreen extends React.PureComponent<IProps> {
             description: 'Edit your business cover photo',
             icon: 'wallpaper',
             iconType: 'MaterialIcons'
-          },
-          {
-            section: 'Manage Documents',
-            routeName: 'Documents',
-            showRightCaret: true,
-            description: 'Edit your business documents',
-            icon: 'file-document',
-            iconType: 'MaterialCommunityIcons'
           }
+          // {
+          //   section: 'Manage Documents',
+          //   routeName: 'Documents',
+          //   showRightCaret: true,
+          //   description: 'Edit your business documents',
+          //   icon: 'file-document',
+          //   iconType: 'MaterialCommunityIcons'
+          // }
         ]}
       />
     )
