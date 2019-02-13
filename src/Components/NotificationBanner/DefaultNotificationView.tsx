@@ -85,7 +85,9 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
         easing: Easing.inOut(Easing.linear)
       }).start(animation => {
         if (animation.finished) {
-          this.animateFromTop()
+          bannerPosition == 'top'
+            ? this.animateFromTop()
+            : this.animateFromBottom()
         }
       })
     } else {
