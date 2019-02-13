@@ -5,12 +5,13 @@ import { color } from '../Style/Color'
 import Icon from './Icon'
 
 interface IProp {
-  routeName: string
+  routeName?: string
   name?: string
   type?: any
-  navigation: any
+  navigation?: any
   params?: any
   image?: any
+  onPress?: () => void
   goto?: { screen: string } | any
 }
 
@@ -19,7 +20,11 @@ const FabAtom = (props: IProp) => (
     position="bottomRight"
     style={styles.fab}
     active={true}
-    onPress={() => props.navigation.navigate(props.routeName, props.goto)}
+    onPress={() =>
+      props.onPress
+        ? props.onPress()
+        : props.navigation.navigate(props.routeName, props.goto)
+    }
   >
     <Icon
       name={props.name}
