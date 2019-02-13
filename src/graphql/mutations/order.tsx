@@ -13,6 +13,7 @@ export const UpdateSaleOrderStatusGQL = gql`
           id
           refId
           discount
+          charge
           contact {
             contactName
             id
@@ -31,6 +32,7 @@ export const UpdateSaleOrderStatusGQL = gql`
           amountPaid
           invoice {
             id
+            shareLink
             refId
             dueDate
           }
@@ -100,6 +102,7 @@ export const UpsertSaleOrder = gql`
         ... on Sale {
           id
           refId
+          charge
           discount
           contact {
             contactName
@@ -121,6 +124,7 @@ export const UpsertSaleOrder = gql`
             id
             refId
             dueDate
+            shareLink
           }
           items {
             id
@@ -165,6 +169,7 @@ export const UpdateInvoice = gql`
           id
           amount
           refId
+          shareLink
           amountPaid
           user {
             lastName
@@ -174,6 +179,7 @@ export const UpdateInvoice = gql`
           sale {
             amount
             id
+            charge
             discount
             amountPaid
             date

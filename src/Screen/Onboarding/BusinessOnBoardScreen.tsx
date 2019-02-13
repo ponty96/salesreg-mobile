@@ -21,6 +21,7 @@ interface IProps {
   screenProps: any
   resetUserContext: (user) => void
   user: any
+  resetGettingStartedProgress: (gettingStarted: any) => void
 }
 
 interface IState {
@@ -262,6 +263,9 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
       setAppAnalytics('REGISTER_ACCOUNT', this.state)
       const { user } = this.props
       await Auth.setCurrentUser({ ...user, company: data })
+      await Auth.setGettingStartedProgress('1')
+
+      this.props.resetGettingStartedProgress('1')
       this.props.resetUserContext({ ...user, company: data })
       this.navigateToStep(3)
     }
@@ -282,11 +286,12 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
 
 const _BusinessOnboardScreen = props => (
   <UserContext.Consumer>
-    {({ user, resetUserContext }) => (
+    {({ user, resetUserContext, resetGettingStartedProgress }) => (
       <BusinessOnboardScreen
         {...props}
         user={user}
         resetUserContext={resetUserContext}
+        resetGettingStartedProgress={resetGettingStartedProgress}
       />
     )}
   </UserContext.Consumer>

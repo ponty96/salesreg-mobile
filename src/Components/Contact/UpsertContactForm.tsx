@@ -232,27 +232,30 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     }
                   },
                   {
-                    label: 'Facebook',
-                    placeholder: 'e.g @username',
+                    label: 'Facebook username',
+                    placeholder: 'e.g username',
                     type: {
                       type: 'input'
                     },
+                    validators: ['social-media-username'],
                     name: 'facebook'
                   },
                   {
-                    label: 'Instagram',
-                    placeholder: 'e.g @username',
+                    label: 'Instagram username',
+                    placeholder: 'e.g username',
                     type: {
                       type: 'input'
                     },
+                    validators: ['social-media-username'],
                     name: 'instagram'
                   },
                   {
-                    label: 'Twitter',
-                    placeholder: 'e.g @username',
+                    label: 'Twitter username',
+                    placeholder: 'e.g username',
                     type: {
                       type: 'input'
                     },
+                    validators: ['social-media-username'],
                     name: 'twitter'
                   },
                   {

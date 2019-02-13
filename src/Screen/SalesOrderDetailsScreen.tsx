@@ -42,7 +42,6 @@ class SalesOrderDetailsScreen extends Component<IProps> {
     const sales = this.props.navigation.getParam('sales', {})
     const { items = [] } = sales
 
-    console.log('oya ', sales.location)
     return [
       {
         itemTitle: 'Date',
@@ -86,6 +85,7 @@ class SalesOrderDetailsScreen extends Component<IProps> {
   render() {
     const sales = this.props.navigation.getParam('sales', {})
 
+    console.log('The data is ', this.props.user.company)
     return (
       <View style={styles.container}>
         <GenericDetailsComponent

@@ -10,6 +10,7 @@ export const UpdateCompanyGQL = gql`
       }
       data {
         ... on Company {
+          saleCharge
           id
           title
           slug
@@ -23,6 +24,12 @@ export const UpdateCompanyGQL = gql`
             id
           }
           facebook
+          bank {
+            accountNumber
+            bankCode
+            subaccountId
+            subaccountTransacId
+          }
           twitter
           instagram
           linkedin
@@ -62,8 +69,19 @@ export const UpsertBankGQL = gql`
           id
           date: updatedAt
           accountNumber
+          accountName
+          bankCode
+          subaccountId
+          subaccountTransacId
           bankName
-          isPrimary
+          company {
+            bank {
+              accountNumber
+              bankCode
+              subaccountId
+              subaccountTransacId
+            }
+          }
         }
       }
     }

@@ -6,6 +6,7 @@ import { Container } from 'native-base'
 import FormHeader from '../Components/Header/FormHeader'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Config from 'react-native-config'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   amount: number | string
@@ -17,9 +18,11 @@ interface IProps {
   onError: (e) => void
   visible: boolean
   onClose: () => void
+  user: any
+  charge?: string
 }
 
-export default class CardPaymentAtom extends React.PureComponent<IProps> {
+class CardPaymentAtom extends React.PureComponent<IProps> {
   handleBackPress = () => {
     Alert.alert(
       '',
@@ -57,6 +60,10 @@ export default class CardPaymentAtom extends React.PureComponent<IProps> {
   }
 
   render() {
+    let _charge = this.props.charge || this.props.user.company.saleCharge,
+      _amount =
+        Number(this.props.amount) + Number(_charge) * Number(this.props.amount)
+
     return (
       <Modal
         animationType="slide"
@@ -81,17 +88,28 @@ export default class CardPaymentAtom extends React.PureComponent<IProps> {
             <Text style={styles.headerText}>
               Let's sort out the payment for this order
             </Text>
+            <Text style={styles.stepHint}>
+              Note: {this.props.firstname || 'You'} will be charged{' '}
+              {Number(_charge) * 100}
+              {'% '}
+              for this transaction
+            </Text>
             <Rave
-              amount={this.props.amount}
+              amount={`${_amount}`}
               country="NG"
               currency="NGN"
               email={this.props.email}
               txref={`${this.props.saleId}_${Date.now()}`}
-              firstname={this.props.firstname}
+              firstname={this.props.firstname || this.props.lastname}
               lastname={this.props.lastname}
               secretkey={Config.FLUTTERWAVE_SECRET_KEY}
               publickey={Config.FLUTTERWAVE_PUBLIC_KEY}
               primarycolor={color.button}
+              subaccounts={[
+                {
+                  id: this.props.user.company.bank.subaccountId
+                }
+              ]}
               paymenttype="both"
               page="card"
               meta={[{ metaname: 'saleId', metavalue: this.props.saleId }]}
@@ -106,6 +124,13 @@ export default class CardPaymentAtom extends React.PureComponent<IProps> {
   }
 }
 
+const _CardPaymentAtom = props => (
+  <UserContext.Consumer>
+    {({ user }) => <CardPaymentAtom {...props} user={user} />}
+  </UserContext.Consumer>
+)
+export default _CardPaymentAtom
+
 const styles = StyleSheet.create({
   container: {
     paddingHorizontal: 32,
@@ -118,5 +143,12 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-DemiBold',
     marginBottom: 0,
     marginTop: 16
+  },
+  stepHint: {
+    fontFamily: 'AvenirNext-Regular',
+    fontSize: 16,
+    color: color.textColor,
+    marginTop: 8,
+    marginBottom: 16
   }
 })

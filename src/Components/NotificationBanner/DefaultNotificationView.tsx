@@ -58,7 +58,6 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
 
     if (trigger && prevProps.trigger != trigger && shouldShow) {
       clearTimeout(this.timer)
-      console.log('I dey here nah')
       this.state.visible
         ? setTimeout(() => this.show(true), 500)
         : setTimeout(() => this.show(), 500)
@@ -86,7 +85,9 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
         easing: Easing.inOut(Easing.linear)
       }).start(animation => {
         if (animation.finished) {
-          this.animateFromTop()
+          bannerPosition == 'top'
+            ? this.animateFromTop()
+            : this.animateFromBottom()
         }
       })
     } else {

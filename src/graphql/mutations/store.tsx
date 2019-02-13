@@ -22,6 +22,7 @@ export const CreateProductGQL = gql`
           isFeatured
           isTopRatedByMerchant
           totalQuantitySold
+          shareLink
 
           user {
             id
@@ -85,6 +86,7 @@ export const UpdateProductGQL = gql`
           isFeatured
           isTopRatedByMerchant
           totalQuantitySold
+          shareLink
 
           user {
             id

@@ -1,6 +1,8 @@
 import React from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { Mutation } from 'react-apollo'
+import moment from 'moment'
+
 import AppSpinner from '../Components/Spinner'
 import Auth from '../services/auth'
 import { UpsertSaleOrder } from '../graphql/mutations/order'
@@ -72,7 +74,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     isCustomerInContacts: null,
     paymentMethod: '',
     amountPaid: '0.00',
-    date: new Date().toString(),
+    date: moment(new Date()).format('YYYY-MM-DD'),
     discount: '0',
     existingContact: { id: '', contactName: '', email: '' },
     tax: '',
@@ -252,7 +254,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
   }
 
   checkSalesOrderValidity = upsertSales => {
-    let { items, amountPaid, discount, hasSalesOrderBeenCreated } = this.state,
+    let { items, amountPaid, discount } = this.state,
       totalAmount = 0
     items.forEach(sales => {
       totalAmount += Number(sales.quantity) * Number(sales.unitPrice)
@@ -275,12 +277,53 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
         { cancelable: false }
       )
     } else {
-      !hasSalesOrderBeenCreated
-        ? upsertSales({
-            variables: this.parseMutationVariables()
-          })
-        : this.chargeCard()
+      this.notifyUserOfCharge(upsertSales)
     }
+  }
+
+  createSalesOrder = upsertSales => {
+    !this.state.hasSalesOrderBeenCreated
+      ? upsertSales({
+          variables: this.parseMutationVariables()
+        })
+      : this.chargeCard()
+  }
+
+  notifyUserOfCharge = upsertSales => {
+    let {
+        isCustomerInContacts,
+        existingContact,
+        contactName,
+        amountPaid,
+        paymentMethod
+      } = this.state,
+      _firstname =
+        isCustomerInContacts != 'No'
+          ? existingContact.contactName.split(' ')[0]
+          : contactName.split(' ')[0]
+
+    paymentMethod.toLowerCase() == 'cash'
+      ? Alert.alert(
+          'Proceed to make Payments?',
+          `Do you want to charge ${_firstname} \u20A6${amountPaid} for this transaction?`,
+          [
+            { text: 'Yes', onPress: () => this.createSalesOrder(upsertSales) },
+            { text: 'No', onPress: () => null }
+          ],
+          { cancelable: false }
+        )
+      : Alert.alert(
+          'Check Payments Details!',
+          `Amount to Pay: \u20A6${amountPaid} \nPercentage Charge: 5%`,
+          [
+            {
+              text: 'Proceed',
+              onPress: () => this.createSalesOrder(upsertSales)
+            },
+            { text: 'No', onPress: () => null }
+          ],
+          { cancelable: false }
+        )
   }
 
   handleCardSuccess = () => {

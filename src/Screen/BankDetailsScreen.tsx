@@ -77,6 +77,7 @@ class BankDetailsScreen extends Component<IProps> {
         hideNairaSymbolInGreenCanvas={true}
         items={this.parseItems()}
         hideTotal={true}
+        enableDelete={false}
         graphqlDeleteMutation={DeleteBankGQL}
         graphqlDeleteMutationResultKey="deleteBank"
         graphqlDeleteVariables={{ bankId: bank.id }}
