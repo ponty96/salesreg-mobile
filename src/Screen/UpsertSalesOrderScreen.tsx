@@ -1,10 +1,10 @@
 import React from 'react'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { Mutation } from 'react-apollo'
-import moment from "moment"
+import moment from 'moment'
 
 import AppSpinner from '../Components/Spinner'
-import Auth from '../services/auth'˝
+import Auth from '../services/auth'
 import { UpsertSaleOrder } from '../graphql/mutations/order'
 import {
   ListCompanySalesGQL,
@@ -74,7 +74,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     isCustomerInContacts: null,
     paymentMethod: '',
     amountPaid: '0.00',
-    date: moment(new Date()).format("YYYY-MM-DD"),
+    date: moment(new Date()).format('YYYY-MM-DD'),
     discount: '0',
     existingContact: { id: '', contactName: '', email: '' },
     tax: '',
