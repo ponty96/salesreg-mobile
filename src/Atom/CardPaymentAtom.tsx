@@ -59,7 +59,10 @@ class CardPaymentAtom extends React.PureComponent<IProps> {
   }
 
   render() {
-    let _amount = Number(this.props.amount) + 0.05 * Number(this.props.amount)
+    let _charge = this.props.user.company.saleCharge,
+      _amount =
+        Number(this.props.amount) + Number(_charge) * Number(this.props.amount)
+
     return (
       <Modal
         animationType="slide"
@@ -85,8 +88,10 @@ class CardPaymentAtom extends React.PureComponent<IProps> {
               Let's sort out the payment for this order
             </Text>
             <Text style={styles.stepHint}>
-              Note: {this.props.firstname || 'You'} will be charged 5% for this
-              transaction
+              Note: {this.props.firstname || 'You'} will be charged{' '}
+              {Number(_charge) * 100}
+              {'% '}
+              for this transaction
             </Text>
             <Rave
               amount={`${_amount}`}

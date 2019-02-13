@@ -18,6 +18,7 @@ export const UpdateUserGQL = gql`
           gender
           profilePicture
           company {
+            saleCharge
             id
             title
             contactEmail

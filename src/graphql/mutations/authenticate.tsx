@@ -24,6 +24,7 @@ export const LoginUserMutationGQL = gql`
             company {
               id
               title
+              saleCharge
               contactEmail
               about
               currency
@@ -91,6 +92,7 @@ export const RegisterUserMutationGQL = gql`
             profilePicture
             company {
               id
+              saleCharge
               title
               slug
               contactEmail
@@ -146,6 +148,7 @@ export const AddUserCompanyMutationGQL = gql`
       success
       data {
         ... on Company {
+          saleCharge
           id
           title
           slug

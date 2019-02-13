@@ -10,6 +10,7 @@ export const UpdateCompanyGQL = gql`
       }
       data {
         ... on Company {
+          saleCharge
           id
           title
           slug
