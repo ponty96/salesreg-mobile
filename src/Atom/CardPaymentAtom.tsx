@@ -100,7 +100,7 @@ class CardPaymentAtom extends React.PureComponent<IProps> {
               currency="NGN"
               email={this.props.email}
               txref={`${this.props.saleId}_${Date.now()}`}
-              firstname={this.props.firstname}
+              firstname={this.props.firstname || this.props.lastname}
               lastname={this.props.lastname}
               secretkey={Config.FLUTTERWAVE_SECRET_KEY}
               publickey={Config.FLUTTERWAVE_PUBLIC_KEY}

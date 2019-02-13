@@ -146,6 +146,8 @@ class UpsertBankScreen extends Component<IProps, IState> {
     delete params['company']
     params['isPrimary'] = this.state.isPrimary == 'yes' ? true : false
     params.bankCode = params.bankName
+    params['accountName'] =
+      this.state['accountName'] || this.props.user.company.title
 
     return { bank: params, bankId: bank ? bank.id : null }
   }
