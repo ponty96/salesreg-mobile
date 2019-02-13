@@ -42,7 +42,6 @@ class SalesOrderDetailsScreen extends Component<IProps> {
     const sales = this.props.navigation.getParam('sales', {})
     const { items = [] } = sales
 
-    console.log('oya ', sales.location)
     return [
       {
         itemTitle: 'Date',

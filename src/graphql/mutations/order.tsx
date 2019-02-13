@@ -31,6 +31,7 @@ export const UpdateSaleOrderStatusGQL = gql`
           amountPaid
           invoice {
             id
+            shareLink
             refId
             dueDate
           }
@@ -121,6 +122,7 @@ export const UpsertSaleOrder = gql`
             id
             refId
             dueDate
+            shareLink
           }
           items {
             id
@@ -165,6 +167,7 @@ export const UpdateInvoice = gql`
           id
           amount
           refId
+          shareLink
           amountPaid
           user {
             lastName
