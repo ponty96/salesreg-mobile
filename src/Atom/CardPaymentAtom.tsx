@@ -19,6 +19,7 @@ interface IProps {
   visible: boolean
   onClose: () => void
   user: any
+  charge?: string
 }
 
 class CardPaymentAtom extends React.PureComponent<IProps> {
@@ -59,7 +60,7 @@ class CardPaymentAtom extends React.PureComponent<IProps> {
   }
 
   render() {
-    let _charge = this.props.user.company.saleCharge,
+    let _charge = this.props.charge || this.props.user.company.saleCharge,
       _amount =
         Number(this.props.amount) + Number(_charge) * Number(this.props.amount)
 

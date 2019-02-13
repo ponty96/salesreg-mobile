@@ -234,6 +234,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
             params: {
               sales: {
                 id,
+                charge,
                 contact: { email, contactName }
               }
             }
@@ -277,6 +278,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
                 amount={amountPaid}
                 email={email}
                 firstname={_firstname}
+                charge={charge}
                 lastname={_lastname}
                 saleId={id}
                 onSuccess={this.handleCardSuccess}
