@@ -13,12 +13,20 @@ class Auth {
     return AsyncStorage.getItem('currentUser')
   }
 
+  static gettingStartedProgress() {
+    return AsyncStorage.getItem('gettingStartedProgress')
+  }
+
   static setToken(token: string) {
     AsyncStorage.setItem('token', token)
   }
 
   static setRefreshToken(token: string) {
     return AsyncStorage.setItem('refreshToken', token)
+  }
+
+  static setGettingStartedProgress(step: string) {
+    return AsyncStorage.setItem('gettingStartedProgress', step)
   }
 
   static setCurrentUser(user: any) {

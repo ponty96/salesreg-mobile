@@ -18,6 +18,7 @@ export const UpdateUserGQL = gql`
           gender
           profilePicture
           company {
+            saleCharge
             id
             title
             contactEmail
@@ -27,6 +28,12 @@ export const UpdateUserGQL = gql`
               name
               type
               id
+            }
+            bank {
+              accountNumber
+              bankCode
+              subaccountId
+              subaccountTransacId
             }
             facebook
             twitter

@@ -8,9 +8,12 @@ import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
+  resetUserContext: (obj?: any) => void
   setNotificationBanner: (obj: any) => void
 }
 
@@ -49,7 +52,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = this.props.user
 
     this.setState({
       firstName: user.firstName,
@@ -154,8 +157,10 @@ class EditUserProfileScreen extends Component<IProps, IState> {
     const {
       updateUser: { success, fieldErrors, data }
     } = res
+
     if (success) {
       await Auth.setCurrentUser(data)
+      this.props.resetUserContext(data)
       const resetAction = NavigationActions.reset({
         index: 1,
         actions: [
@@ -178,4 +183,19 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   }
 }
 
-export default EditUserProfileScreen
+const _EditUserProfileScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user, resetUserContext }) => (
+      <EditUserProfileScreen
+        {...props}
+        user={user}
+        resetUserContext={resetUserContext}
+      />
+    )}
+  </UserContext.Consumer>
+)
+
+_EditUserProfileScreen.navigationOptions =
+  EditUserProfileScreen.navigationOptions
+
+export default _EditUserProfileScreen

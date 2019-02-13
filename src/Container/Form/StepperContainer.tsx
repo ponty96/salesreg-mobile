@@ -74,7 +74,7 @@ interface FieldType {
     | 'restock-items'
     | 'product-list'
     | 'multi-media-upload'
-  keyboardType?: 'default' | 'numeric' | 'email-address'
+  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   secureTextEntry?: boolean
   options?: any[]
   disabled?: boolean
@@ -87,6 +87,8 @@ interface FieldType {
   emptySection?: {
     emptyText: string | any
   }
+  loading ?: boolean
+  onRefresh ?: () => void
 }
 
 type validatorTypes =
@@ -99,7 +101,7 @@ type validatorTypes =
   | 'social-media-username'
   | 'expense-item'
 
-interface FormField {
+export interface FormField {
   label: string
   placeholder?: string
   type: FieldType
