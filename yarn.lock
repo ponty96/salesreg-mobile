@@ -6777,9 +6777,9 @@ react-native-progress@^3.5.0:
   dependencies:
     prop-types "^15.5.8"
 
-react-native-rave@^0.1.0:
+"react-native-rave@https://github.com/gbenga504/rave-react-native.git":
   version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-rave/-/react-native-rave-0.1.0.tgz#9c4da787d5eccbdb165557d206cd1be1f238ab41"
+  resolved "https://github.com/gbenga504/rave-react-native.git#e967fb5c0d2f061ccb8f485952560bd352253c4f"
   dependencies:
     axios "^0.18.0"
     card-validator "^5.0.0"
