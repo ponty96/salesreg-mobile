@@ -87,8 +87,8 @@ interface FieldType {
   emptySection?: {
     emptyText: string | any
   }
-  loading ?: boolean
-  onRefresh ?: () => void
+  loading?: boolean
+  onRefresh?: () => void
 }
 
 type validatorTypes =
@@ -445,14 +445,14 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
 
       for (let len = 0; len < steps.length; len++) {
         steps[len].formFields.forEach(formField => {
-          if (fields.indexOf(formField.name) != -1) {
+          if (fields.indexOf(formField.name.toLowerCase()) != -1) {
             currentStep = len
           }
         })
         if (currentStep) break
       }
 
-      if (currentStep) {
+      if (typeof currentStep == 'number') {
         this.setState(
           {
             isReadyToSubmitForm: false
