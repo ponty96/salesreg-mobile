@@ -8,9 +8,9 @@
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:1060799093241:android:677a52b9798fedbb",
+        "mobilesdk_app_id": "1:1060799093241:android:994f1be824a4fa29",
         "android_client_info": {
-          "package_name": "com.salesreg"
+          "package_name": "com.yipcart.yipcart"
         }
       },
       "oauth_client": [

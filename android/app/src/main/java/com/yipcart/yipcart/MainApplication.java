@@ -1,4 +1,4 @@
-package com.salesreg;
+package com.yipcart.yipcart;
 
 import android.app.Application;
 
