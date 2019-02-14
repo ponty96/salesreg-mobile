@@ -100,6 +100,7 @@ type validatorTypes =
   | 'password'
   | 'social-media-username'
   | 'expense-item'
+  | 'alpha-numerics'
 
 export interface FormField {
   label: string
@@ -464,20 +465,19 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           isReadyToSubmitForm: false
         })
         setTimeout(() => {
-          Alert.alert(
-            'Error occurred',
-            fieldErrors[Object.keys(fieldErrors)[0]],
-            [
-              {
-                text: 'Ok',
-                onPress: () => {
-                  this.props.handleNonFormErrors &&
-                    this.props.handleNonFormErrors(fieldErrors)
-                }
-              }
-            ],
-            { cancelable: false }
-          )
+          this.props.handleNonFormErrors
+            ? this.props.handleNonFormErrors(fieldErrors)
+            : Alert.alert(
+                'Oops!!!',
+                fieldErrors[Object.keys(fieldErrors)[0]],
+                [
+                  {
+                    text: 'Ok',
+                    onPress: () => null
+                  }
+                ],
+                { cancelable: false }
+              )
         }, 500)
       }
     }
