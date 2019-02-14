@@ -65,8 +65,7 @@ class InputAtom extends React.Component<IProps, IState> {
             style={[
               {
                 borderBottomColor: color.textBorderBottom,
-                marginTop: 24,
-                height: 80
+                marginTop: 24
               },
               this.props.contStyle
             ]}
@@ -127,6 +126,7 @@ class InputAtom extends React.Component<IProps, IState> {
               <Text style={styles.labelText}>{this.props.label}</Text>
             </Label>
             <Textarea
+              bordered={false}
               rowSpan={5}
               style={[this.props.inputStyle, styles.multilineText]}
               ref={input => (this.inputRef = input)}
@@ -198,7 +198,7 @@ const styles = StyleSheet.create({
     color: color.principal,
     fontSize: 16,
     // marginTop: 6,
-    height: 55,
+    height: 45,
     top: Platform.OS == 'ios' ? 6 : 6
   },
   multilineText: {

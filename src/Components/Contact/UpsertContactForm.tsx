@@ -8,8 +8,8 @@ import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries } from '../../utilities/data/picker-lists'
 import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../../context/NotificationContext'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { NotificationBanner } from '../../Components/NotificationBanner'
 import setAppAnalytics from '../../Functions/setAppAnalytics'
 
 interface IProps {
@@ -18,7 +18,6 @@ interface IProps {
   user: any
   successRoute: string
   contactType: string
-  setNotificationBanner: (obj: any) => void
 }
 
 const genderToPossesivePronoun = gender => {
@@ -233,27 +232,30 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                     }
                   },
                   {
-                    label: 'Facebook',
-                    placeholder: 'e.g @username',
+                    label: 'Facebook username',
+                    placeholder: 'e.g username',
                     type: {
                       type: 'input'
                     },
+                    validators: ['social-media-username'],
                     name: 'facebook'
                   },
                   {
-                    label: 'Instagram',
-                    placeholder: 'e.g @username',
+                    label: 'Instagram username',
+                    placeholder: 'e.g username',
                     type: {
                       type: 'input'
                     },
+                    validators: ['social-media-username'],
                     name: 'instagram'
                   },
                   {
-                    label: 'Twitter',
-                    placeholder: 'e.g @username',
+                    label: 'Twitter username',
+                    placeholder: 'e.g username',
                     type: {
                       type: 'input'
                     },
+                    validators: ['social-media-username'],
                     name: 'twitter'
                   },
                   {
@@ -346,11 +348,13 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
         ]
       })
 
-      this.props.setNotificationBanner(
+      let banner = NotificationBanner(
         Object.keys(contact).length == 0
           ? configureNotificationBanner('AddContact', this.state)
           : configureNotificationBanner('UpdateContact', this.state)
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -360,17 +364,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
 
 const _UpsertContactForm = props => (
   <UserContext.Consumer>
-    {({ user }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <UpsertContactForm
-            {...props}
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
-    )}
+    {({ user }) => <UpsertContactForm {...props} user={user} />}
   </UserContext.Consumer>
 )
 

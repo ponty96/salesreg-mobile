@@ -14,9 +14,9 @@ import { AuthenticateClientGQL } from './graphql/client-mutations/authenticate'
 import { UserContext } from './context/UserContext'
 import { appReducers } from './store/reducers'
 import setupSentry from './Functions/sentry'
-import NotificationAtom from './Atom/NotificationAtom'
-import { NotificationContext } from './context/NotificationContext'
 import ViewOverflow from 'react-native-view-overflow'
+import Config from 'react-native-config'
+import { Root as NotificationRoot } from './Components/NotificationBanner'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
 
@@ -24,25 +24,10 @@ export default class App extends React.Component {
   state = {
     loading: true,
     user: {},
+    gettingStartedProgress: null,
     resetUserContext: user => this.setState({ user: user || {} }),
-    notification: {
-      style: 'success',
-      title: '',
-      subtitle: '',
-      trigger: Date.now(),
-      timeout: 5000,
-      setNotificationBanner: ({ title, subtitle, style, timeout }) =>
-        this.setState({
-          notification: {
-            ...this.state.notification,
-            title,
-            subtitle,
-            trigger: Date.now(),
-            style,
-            timeout
-          }
-        })
-    }
+    resetGettingStartedProgress: gettingStartedProgress =>
+      this.setState({ gettingStartedProgress: gettingStartedProgress || null })
   }
 
   async componentDidMount() {
@@ -53,29 +38,48 @@ export default class App extends React.Component {
   authenticate = async () => {
     const token = await Auth.getToken()
     const refreshToken = await Auth.getRefreshToken()
+
     if (token && refreshToken) {
       const user = JSON.parse(await Auth.getCurrentUser())
-      setupSentry(user)
+      const gettingStartedProgress = await Auth.gettingStartedProgress()
+      if (Config.NODE_ENVIRONMENT != 'development') {
+        setupSentry(user)
+      }
       client.mutate({
         mutation: AuthenticateClientGQL,
         variables: { user: user }
       })
-      this.setState({ loading: false, user })
+      this.setState({
+        loading: false,
+        user,
+        gettingStartedProgress: gettingStartedProgress || null
+      })
     } else {
       this.setState({ loading: false })
     }
   }
 
   render() {
-    let { user, resetUserContext } = this.state
+    let {
+      user,
+      resetUserContext,
+      gettingStartedProgress,
+      resetGettingStartedProgress
+    } = this.state
     return (
       // check if user is on IphoneX and use View
       <ViewOverflow style={{ flex: 1 }}>
-        <NotificationContext.Provider value={this.state.notification}>
-          <NotificationAtom />
+        <NotificationRoot>
           <View style={{ paddingTop: 0, flex: 1 }}>
             <Provider store={store}>
-              <UserContext.Provider value={{ user, resetUserContext }}>
+              <UserContext.Provider
+                value={{
+                  user,
+                  resetUserContext,
+                  gettingStartedProgress,
+                  resetGettingStartedProgress
+                }}
+              >
                 <ApolloProvider client={client}>
                   <Root>
                     <StatusBar barStyle="light-content" />
@@ -85,7 +89,7 @@ export default class App extends React.Component {
               </UserContext.Provider>
             </Provider>
           </View>
-        </NotificationContext.Provider>
+        </NotificationRoot>
       </ViewOverflow>
     )
   }

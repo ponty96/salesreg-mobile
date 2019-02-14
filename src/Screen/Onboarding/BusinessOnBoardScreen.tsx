@@ -1,4 +1,5 @@
 import React from 'react'
+import { Alert } from 'react-native'
 import ThirdStep from '../../Components/SignUp/ThirdStep'
 import LastStep from '../../Components/SignUp/LastStep'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
@@ -21,6 +22,7 @@ interface IProps {
   screenProps: any
   resetUserContext: (user) => void
   user: any
+  resetGettingStartedProgress: (gettingStarted: any) => void
 }
 
 interface IState {
@@ -84,6 +86,35 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
     this.setState({ currentStep: step })
   }
 
+  handleExistingUser = fieldErrors => {
+    if (Object.keys(fieldErrors).indexOf('ownerid') != -1) {
+      Alert.alert(
+        'Oops!!!',
+        `${
+          fieldErrors[Object.keys(fieldErrors)[0]]
+        }, please try signing in into your account. Thank you`,
+        [
+          {
+            text: 'Ok',
+            onPress: () => {
+              this.returnToLogin()
+            }
+          }
+        ],
+        { cancelable: false }
+      )
+    }
+  }
+
+  returnToLogin = async () => {
+    const {
+      screenProps: { client }
+    } = this.props
+    await client.resetStore()
+    await Auth.clearVault()
+    this.props.navigation.navigate('Login')
+  }
+
   renderComponentAtStep = (callbackFunc): JSX.Element => {
     const { user, slug } = this.state
     const { currentStep } = this.state
@@ -100,10 +131,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
         return (
           <FormStepperContainer
             formData={this.state}
-            handleNonFormErrors={() => {
-              Auth.clearVault()
-              this.props.navigation.navigate('OnBoarding')
-            }}
+            handleNonFormErrors={this.handleExistingUser}
             steps={[
               {
                 stepTitle: 'Tell us about your business',
@@ -122,12 +150,12 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                   {
                     label: 'How should customers call you?',
                     placeholder: 'E.g StacknBit',
-                    underneathText: `This is your business nick name`,
+                    underneathText: `This is your business nick name. Please make sure that its in lowercase and avoid adding spacing. Only Alphanumerics are allowed also`,
                     type: {
                       type: 'input',
                       keyboardType: 'default'
                     },
-                    validators: ['required'],
+                    validators: ['required', 'alpha-numerics'],
                     name: 'slug'
                   },
                   {
@@ -246,8 +274,10 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
       state: '**',
       country: params.businessCountry
     }
+    params.slug = this.state.slug.replace(/\s/g, '').toLowerCase()
     delete params.businessCountry
     delete params.user
+
     return { company: params, userId: this.state.user.id }
   }
 
@@ -256,11 +286,15 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
       addUserCompany: { success, fieldErrors, data }
     } = res
     if (!success) {
+      console.log('The error is ', fieldErrors)
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
       setAppAnalytics('REGISTER_ACCOUNT', this.state)
       const { user } = this.props
       await Auth.setCurrentUser({ ...user, company: data })
+      await Auth.setGettingStartedProgress('1')
+
+      this.props.resetGettingStartedProgress('1')
       this.props.resetUserContext({ ...user, company: data })
       this.navigateToStep(3)
     }
@@ -281,11 +315,12 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
 
 const _BusinessOnboardScreen = props => (
   <UserContext.Consumer>
-    {({ user, resetUserContext }) => (
+    {({ user, resetUserContext, resetGettingStartedProgress }) => (
       <BusinessOnboardScreen
         {...props}
         user={user}
         resetUserContext={resetUserContext}
+        resetGettingStartedProgress={resetGettingStartedProgress}
       />
     )}
   </UserContext.Consumer>

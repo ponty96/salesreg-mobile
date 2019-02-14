@@ -49,6 +49,7 @@ export const ListCompanySalesGQL = gql`
         node {
           id
           refId
+          charge
           discount
           contact {
             contactName
@@ -59,10 +60,17 @@ export const ListCompanySalesGQL = gql`
           paymentMethod
           status
           amount
+          location {
+            street1
+            state
+            country
+            city
+          }
           amountPaid
           invoice {
             id
             refId
+            shareLink
             dueDate
           }
           items {
@@ -96,6 +104,7 @@ export const ListCompanyInvoicesGQL = gql`
           id
           amount
           refId
+          shareLink
           amountPaid
           user {
             lastName
@@ -104,12 +113,19 @@ export const ListCompanyInvoicesGQL = gql`
           dueDate
           sale {
             amount
+            charge
             id
             discount
             contact {
               contactName
               id
               email
+            }
+            location {
+              street1
+              state
+              country
+              city
             }
             amountPaid
             date

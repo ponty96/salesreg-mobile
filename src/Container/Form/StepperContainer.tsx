@@ -41,8 +41,8 @@ import PhoneInputAtom from '../../Atom/Form/PhoneInputAtom'
 import ImageUploadAtom from '../../Atom/Form/ImageUploadAtom'
 import MediaUploadAtom from '../../Atom/Form/MediaUploadAtom'
 import DatePickerAtom from '../../Atom/Form/DatePickerAtom'
+import DocumentUploadAtom from '../../Atom/Form/DocumentUploadAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
-import CardPaymentAtom from '../../Atom/Form/CardPaymentAtom'
 import AddSalesOrderItemsList from '../../Atom/Form/AddSalesOrderItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
 import ProductListAtom from '../../Atom/Form/ProductListAtom'
@@ -66,15 +66,15 @@ interface FieldType {
     | 'date'
     | 'expense-items'
     | 'sales-order-items'
+    | 'document-upload'
     | 'multi-picker'
     | 'tag-input'
     | 'search-picker'
     | 'search-multi-picker'
-    | 'card-payment'
     | 'restock-items'
     | 'product-list'
     | 'multi-media-upload'
-  keyboardType?: 'default' | 'numeric' | 'email-address'
+  keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   secureTextEntry?: boolean
   options?: any[]
   disabled?: boolean
@@ -87,6 +87,8 @@ interface FieldType {
   emptySection?: {
     emptyText: string | any
   }
+  loading?: boolean
+  onRefresh?: () => void
 }
 
 type validatorTypes =
@@ -96,9 +98,11 @@ type validatorTypes =
   | 'sales-order'
   | 'confirm-password'
   | 'password'
+  | 'social-media-username'
   | 'expense-item'
+  | 'alpha-numerics'
 
-interface FormField {
+export interface FormField {
   label: string
   placeholder?: string
   type: FieldType
@@ -256,7 +260,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
     if (!imageValidity) {
       Alert.alert(
         'Error',
-        'One or more images failed or are still loading, please cancel or wait to proceed with submission',
+        'One or more media failed or are still loading, please cancel or wait to proceed with submission',
         [{ text: 'Ok', onPress: () => null }],
         { cancelable: false }
       )
@@ -442,14 +446,14 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
 
       for (let len = 0; len < steps.length; len++) {
         steps[len].formFields.forEach(formField => {
-          if (fields.indexOf(formField.name) != -1) {
+          if (fields.indexOf(formField.name.toLowerCase()) != -1) {
             currentStep = len
           }
         })
         if (currentStep) break
       }
 
-      if (currentStep) {
+      if (typeof currentStep == 'number') {
         this.setState(
           {
             isReadyToSubmitForm: false
@@ -461,20 +465,19 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           isReadyToSubmitForm: false
         })
         setTimeout(() => {
-          Alert.alert(
-            'Error occurred',
-            fieldErrors[Object.keys(fieldErrors)[0]],
-            [
-              {
-                text: 'Ok',
-                onPress: () => {
-                  this.props.handleNonFormErrors &&
-                    this.props.handleNonFormErrors(fieldErrors)
-                }
-              }
-            ],
-            { cancelable: false }
-          )
+          this.props.handleNonFormErrors
+            ? this.props.handleNonFormErrors(fieldErrors)
+            : Alert.alert(
+                'Oops!!!',
+                fieldErrors[Object.keys(fieldErrors)[0]],
+                [
+                  {
+                    text: 'Ok',
+                    onPress: () => null
+                  }
+                ],
+                { cancelable: false }
+              )
         }, 500)
       }
     }
@@ -598,6 +601,20 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
               error={fieldErrors && fieldErrors[name]}
             />
           )
+        case 'document-upload':
+          return (
+            <DocumentUploadAtom
+              reduxMediaUploadClass={this.state.singleMediaUploadInstanceKey}
+              key={`${type}-${index}`}
+              underneathText={underneathText}
+              document={formData[name]}
+              handleDocumentUpload={val => {
+                this.checkValidityOnValueChange(val, name, validators)
+                this.props.updateValueChange(name, val)
+              }}
+              error={fieldErrors && fieldErrors[name]}
+            />
+          )
         case 'multi-media-upload':
           return (
             <MediaUploadAtom
@@ -652,17 +669,6 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
                 this.checkValidityOnValueChange(items, name, validators)
                 this.props.updateValueChange(name, items)
               }}
-            />
-          )
-        case 'card-payment':
-          return (
-            <CardPaymentAtom
-              handleCardSelection={(cardDetails: any) =>
-                this.props.updateValueChange(name, cardDetails)
-              }
-              error={fieldErrors && fieldErrors[name]}
-              key={`${type}-${index}`}
-              amount={formData[name]}
             />
           )
         case 'multi-picker':

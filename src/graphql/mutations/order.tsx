@@ -13,11 +13,18 @@ export const UpdateSaleOrderStatusGQL = gql`
           id
           refId
           discount
+          charge
           contact {
             contactName
             id
             gender
             email
+          }
+          location {
+            street1
+            state
+            country
+            city
           }
           paymentMethod
           status
@@ -25,6 +32,7 @@ export const UpdateSaleOrderStatusGQL = gql`
           amountPaid
           invoice {
             id
+            shareLink
             refId
             dueDate
           }
@@ -83,8 +91,8 @@ export const UpdatePurchaseOrderStatusGQL = gql`
   }
 `
 export const UpsertSaleOrder = gql`
-  mutation upsertSaleOrder($sale: SaleInput!, $saleId: Uuid) {
-    upsertSaleOrder(sale: $sale, saleId: $saleId) {
+  mutation upsertSaleOrder($sale: SaleInput!) {
+    upsertSaleOrder(sale: $sale) {
       fieldErrors {
         key
         message
@@ -94,12 +102,19 @@ export const UpsertSaleOrder = gql`
         ... on Sale {
           id
           refId
+          charge
           discount
           contact {
             contactName
             id
             gender
             email
+          }
+          location {
+            street1
+            state
+            country
+            city
           }
           paymentMethod
           status
@@ -109,6 +124,7 @@ export const UpsertSaleOrder = gql`
             id
             refId
             dueDate
+            shareLink
           }
           items {
             id
@@ -153,6 +169,7 @@ export const UpdateInvoice = gql`
           id
           amount
           refId
+          shareLink
           amountPaid
           user {
             lastName
@@ -162,9 +179,16 @@ export const UpdateInvoice = gql`
           sale {
             amount
             id
+            charge
             discount
             amountPaid
             date
+            location {
+              street1
+              state
+              country
+              city
+            }
             items {
               id
               unitPrice

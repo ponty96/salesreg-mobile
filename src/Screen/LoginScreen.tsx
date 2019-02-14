@@ -78,10 +78,16 @@ class LoginScreen extends React.Component<IProps, IState> {
     const { fieldErrors } = this.state
     return (
       <UserContext.Consumer>
-        {({ resetUserContext }) => (
+        {({ resetUserContext, resetGettingStartedProgress }) => (
           <Mutation
             mutation={LoginUserMutationGQL}
-            onCompleted={res => this.onCompleted(res, resetUserContext)}
+            onCompleted={res =>
+              this.onCompleted(
+                res,
+                resetUserContext,
+                resetGettingStartedProgress
+              )
+            }
           >
             {(loginUser, { loading }) => (
               <AuthFormContainer
@@ -121,8 +127,7 @@ class LoginScreen extends React.Component<IProps, IState> {
       </UserContext.Consumer>
     )
   }
-  onCompleted = async (res, resetUserContext) => {
-    console.log('LOGINSCREEN', res)
+  onCompleted = async (res, resetUserContext, resetGettingStartedProgress) => {
     const {
       loginUser: { data, fieldErrors, success }
     } = res
@@ -137,7 +142,23 @@ class LoginScreen extends React.Component<IProps, IState> {
       await Auth.setToken(accessToken)
       await Auth.setRefreshToken(refreshToken)
       await Auth.setCurrentUser(user)
+
+      let _stage = 'done'
+      if (user.company && !user.company.facebook) {
+        _stage = '1'
+      } else if (user.company && !user.company.coverPhoto) {
+        _stage = '2'
+      } else if (
+        user.company &&
+        (!user.company.bank || !user.company.bank.subaccountId)
+      ) {
+        _stage = '3'
+      }
+
+      resetGettingStartedProgress(_stage)
       resetUserContext(user)
+
+      await Auth.setGettingStartedProgress(_stage)
       await client.resetStore()
       client.mutate({
         mutation: AuthenticateClientGQL,

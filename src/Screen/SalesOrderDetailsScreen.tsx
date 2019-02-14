@@ -27,6 +27,7 @@ class SalesOrderDetailsScreen extends Component<IProps> {
   }
 
   onStatusPress = async () => {
+    console.log('I am here oga')
     const sales = this.props.navigation.getParam('sales', {})
     const hideHint = await Preferences.getOrderStatusHintPref()
     this.props.navigation.navigate('OrderStatusChange', {
@@ -60,6 +61,17 @@ class SalesOrderDetailsScreen extends Component<IProps> {
         }))
         .concat([
           {
+            itemTitle: 'Delivery Address',
+            itemValue: sales.location
+              ? [
+                  sales.location.street1,
+                  sales.location.city,
+                  sales.location.state,
+                  sales.location.country
+                ]
+              : null
+          },
+          {
             itemTitle: 'Discount',
             itemValue: `\u20A6 ${sales.discount}`
           },
@@ -73,6 +85,8 @@ class SalesOrderDetailsScreen extends Component<IProps> {
 
   render() {
     const sales = this.props.navigation.getParam('sales', {})
+
+    console.log('The data is ', this.props.user.company)
     return (
       <View style={styles.container}>
         <GenericDetailsComponent

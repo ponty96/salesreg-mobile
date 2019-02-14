@@ -24,11 +24,29 @@ export const LoginUserMutationGQL = gql`
             company {
               id
               title
+              saleCharge
               contactEmail
               about
               currency
+              bank {
+                accountNumber
+                bankCode
+                subaccountId
+                subaccountTransacId
+              }
               slug
               logo
+              facebook
+              twitter
+              legalDocuments {
+                pdfUrl
+                name
+                type
+                id
+              }
+              instagram
+              linkedin
+              coverPhoto
               phone {
                 number
               }
@@ -74,11 +92,29 @@ export const RegisterUserMutationGQL = gql`
             profilePicture
             company {
               id
+              saleCharge
               title
               slug
               contactEmail
               about
+              legalDocuments {
+                pdfUrl
+                name
+                type
+                id
+              }
+              bank {
+                accountNumber
+                bankCode
+                subaccountId
+                subaccountTransacId
+              }
               currency
+              coverPhoto
+              facebook
+              twitter
+              instagram
+              linkedin
               logo
               phone {
                 number
@@ -112,12 +148,24 @@ export const AddUserCompanyMutationGQL = gql`
       success
       data {
         ... on Company {
+          saleCharge
           id
           title
           slug
           contactEmail
           about
           currency
+          facebook
+          legalDocuments {
+            pdfUrl
+            name
+            type
+            id
+          }
+          twitter
+          instagram
+          linkedin
+          coverPhoto
           logo
           phone {
             number

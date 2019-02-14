@@ -20,7 +20,7 @@ import {
 } from './utilities/productCreateSteps'
 import { UserContext } from '../../context/UserContext'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../../context/NotificationContext'
+import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 import setAppAnalytics from '../../Functions/setAppAnalytics'
 
@@ -81,7 +81,7 @@ const DEFAULT_PRODUCT_PARAMS = {
   description: '',
   categories: [],
   isTopRatedByMerchant: null,
-  isFeatured: null,
+  isFeatured: 'Yes',
   tags: []
 }
 
@@ -538,9 +538,12 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
           })
         ]
       })
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner('CreateProduct', this.state)
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -550,17 +553,7 @@ class CreateProductScreen extends PureComponent<IProps, IState> {
 
 const _CreateProductScreen: any = props => (
   <UserContext.Consumer>
-    {({ user }) => (
-      <NotificationContext.Consumer>
-        {({ setNotificationBanner }) => (
-          <CreateProductScreen
-            {...props}
-            user={user}
-            setNotificationBanner={setNotificationBanner}
-          />
-        )}
-      </NotificationContext.Consumer>
-    )}
+    {({ user }) => <CreateProductScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
 

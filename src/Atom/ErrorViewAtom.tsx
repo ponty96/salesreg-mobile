@@ -4,7 +4,6 @@ import Icon from './Icon'
 import { color } from '../Style/Color'
 
 interface IProps {
-  onRefresh: () => void
   preferredErrorMessage?: string
 }
 

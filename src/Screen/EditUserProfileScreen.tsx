@@ -6,11 +6,14 @@ import { parseFieldErrors } from '../Functions'
 import AppSpinner from '../Components/Spinner'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
+  user: any
+  resetUserContext: (obj?: any) => void
   setNotificationBanner: (obj: any) => void
 }
 
@@ -24,6 +27,10 @@ interface IState {
 }
 
 class EditUserProfileScreen extends Component<IProps, IState> {
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     profilePicture: '',
     firstName: '',
@@ -45,7 +52,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
   }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = this.props.user
 
     this.setState({
       firstName: user.firstName,
@@ -150,8 +157,10 @@ class EditUserProfileScreen extends Component<IProps, IState> {
     const {
       updateUser: { success, fieldErrors, data }
     } = res
+
     if (success) {
       await Auth.setCurrentUser(data)
+      this.props.resetUserContext(data)
       const resetAction = NavigationActions.reset({
         index: 1,
         actions: [
@@ -161,9 +170,12 @@ class EditUserProfileScreen extends Component<IProps, IState> {
           })
         ]
       })
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner('UpdateProfile')
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     } else {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
@@ -172,18 +184,18 @@ class EditUserProfileScreen extends Component<IProps, IState> {
 }
 
 const _EditUserProfileScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
+  <UserContext.Consumer>
+    {({ user, resetUserContext }) => (
       <EditUserProfileScreen
         {...props}
-        setNotificationBanner={setNotificationBanner}
+        user={user}
+        resetUserContext={resetUserContext}
       />
     )}
-  </NotificationContext.Consumer>
+  </UserContext.Consumer>
 )
 
-_EditUserProfileScreen.navigationOptions = {
-  header: null
-}
+_EditUserProfileScreen.navigationOptions =
+  EditUserProfileScreen.navigationOptions
 
 export default _EditUserProfileScreen

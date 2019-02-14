@@ -11,12 +11,15 @@ import { UpdateCompanyGQL } from '../graphql/mutations/business'
 import Auth from '../services/auth'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
   setNotificationBanner: (obj: any) => void
+  user: any
+  resetUserContext: (obj?: any) => void
 }
 
 interface IState {
@@ -28,6 +31,10 @@ interface IState {
   fieldErrors: any
   companyId: string
   street1: string
+  facebook: string
+  instagram: string
+  linkedin: string
+  twitter: string
   city: string
   slug: string
   state: string
@@ -36,6 +43,10 @@ interface IState {
 }
 
 class EditBusinessProfileScreen extends Component<IProps, IState> {
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     logo: '',
     about: '',
@@ -46,6 +57,10 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     city: '',
     state: '',
     slug: '',
+    facebook: '',
+    instagram: '',
+    linkedin: '',
+    twitter: '',
     country: 'NG',
     companyId: '',
     phoneNumber: '',
@@ -64,12 +79,16 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
   }
 
   updateDetails = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = this.props.user
     this.setState({
       companyId: user.company.id,
       title: user.company.title,
       contactEmail: user.company.contactEmail,
       about: user.company.about,
+      facebook: user.company.facebook || '',
+      instagram: user.company.instagram || '',
+      linkedin: user.company.linkedIn || '',
+      twitter: user.company.twitter || '',
       slug: user.company.slug,
       currency: 'NGN',
       ...this.parseAddressForForm(user.company),
@@ -188,6 +207,33 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
                     },
                     validators: ['required', 'email'],
                     name: 'contactEmail'
+                  },
+                  {
+                    label: 'Facebook username',
+                    placeholder: 'e.g username',
+                    type: {
+                      type: 'input'
+                    },
+                    validators: ['social-media-username'],
+                    name: 'facebook'
+                  },
+                  {
+                    label: 'Instagram username',
+                    placeholder: 'e.g username',
+                    type: {
+                      type: 'input'
+                    },
+                    validators: ['social-media-username'],
+                    name: 'instagram'
+                  },
+                  {
+                    label: 'Twitter username',
+                    placeholder: 'e.g username',
+                    type: {
+                      type: 'input'
+                    },
+                    validators: ['social-media-username'],
+                    name: 'twitter'
                   }
                 ]
               },
@@ -246,6 +292,7 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
 
     delete params.phoneNumber
     params['headOffice'] = this.parseAddress(params)
+    params.slug = this.state.slug.replace(/\s/g, '').toLowerCase()
     delete params.companyId
     delete params['company']
 
@@ -270,10 +317,11 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
     const {
       updateCompany: { success, fieldErrors, data }
     } = res
+
     if (success) {
-      const user = JSON.parse(await Auth.getCurrentUser())
-      const updatedUser = { ...user, company: data }
+      const updatedUser = { ...this.props.user, company: data }
       await Auth.setCurrentUser(updatedUser)
+      this.props.resetUserContext(updatedUser)
       const resetAction = NavigationActions.reset({
         index: 1,
         actions: [
@@ -283,9 +331,12 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
           })
         ]
       })
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner('UpdateBusinessProfile')
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     } else {
       const parsedErrors = parseFieldErrors(fieldErrors)
@@ -300,18 +351,18 @@ class EditBusinessProfileScreen extends Component<IProps, IState> {
 }
 
 const _EditBusinessProfileScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
+  <UserContext.Consumer>
+    {({ user, resetUserContext }) => (
       <EditBusinessProfileScreen
         {...props}
-        setNotificationBanner={setNotificationBanner}
+        user={user}
+        resetUserContext={resetUserContext}
       />
     )}
-  </NotificationContext.Consumer>
+  </UserContext.Consumer>
 )
 
-_EditBusinessProfileScreen.navigationOptions = {
-  header: null
-}
+_EditBusinessProfileScreen.navigationOptions =
+  EditBusinessProfileScreen.navigationOptions
 
 export default _EditBusinessProfileScreen

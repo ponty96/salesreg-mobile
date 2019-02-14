@@ -7,7 +7,7 @@ import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
 import Auth from '../../../services/auth'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../../../context/NotificationContext'
+import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 
 interface IProps {
@@ -26,6 +26,10 @@ interface IState {
 }
 
 class UpsertCategoryScreen extends Component<IProps, IState> {
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     title: '',
     description: '',
@@ -144,30 +148,18 @@ class UpsertCategoryScreen extends Component<IProps, IState> {
           })
         ]
       })
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner(
           category ? 'UpdateCategory' : 'CreateCategory',
           this.state
         )
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     }
   }
 }
 
-const _UpsertCategoryScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
-      <UpsertCategoryScreen
-        {...props}
-        setNotificationBanner={setNotificationBanner}
-      />
-    )}
-  </NotificationContext.Consumer>
-)
-
-_UpsertCategoryScreen.navigationOptions = {
-  header: null
-}
-
-export default _UpsertCategoryScreen
+export default UpsertCategoryScreen

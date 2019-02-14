@@ -39,44 +39,104 @@ export const validateField = (
 
     if (validator == 'required') {
       let required = isRequired(_value)
-      isValid = required.fieldValid
-      error = required.errorMessage
+      isValid = required.fieldValid == false ? required.fieldValid : isValid
+      error = required.fieldValid == false ? required.errorMessage : error
+    }
+
+    if (validator == 'social-media-username') {
+      let usernameValidation = validateSocialMediaUsername(_value || '')
+      isValid =
+        usernameValidation.fieldValid == false
+          ? usernameValidation.fieldValid
+          : isValid
+      error =
+        usernameValidation.fieldValid == false
+          ? usernameValidation.errorMessage
+          : error
     }
 
     if (validator == 'email') {
       let emailValidation = validateEmail(_value)
-      isValid = emailValidation.fieldValid
-      error = emailValidation.errorMessage
+      isValid =
+        emailValidation.fieldValid == false
+          ? emailValidation.fieldValid
+          : isValid
+      error =
+        emailValidation.fieldValid == false
+          ? emailValidation.errorMessage
+          : error
     }
 
     if (validator == 'phone') {
       let phoneValidation = validatePhone(_value)
-      isValid = phoneValidation.fieldValid
-      error = phoneValidation.errorMessage
+      isValid =
+        phoneValidation.fieldValid == false
+          ? phoneValidation.fieldValid
+          : isValid
+      error =
+        phoneValidation.fieldValid == false
+          ? phoneValidation.errorMessage
+          : error
     }
 
     if (validator == 'credit-card') {
       let creditCardValidation = validateCreditCard(_value)
-      isValid = creditCardValidation.fieldValid
-      error = creditCardValidation.errorMessage
+      isValid =
+        creditCardValidation.fieldValid == false
+          ? creditCardValidation.fieldValid
+          : isValid
+      error =
+        creditCardValidation.fieldValid == false
+          ? creditCardValidation.errorMessage
+          : error
     }
 
     if (validator == 'sales-order') {
       let salesOrderValiation = validateSalesOrder(_value)
-      isValid = salesOrderValiation.fieldValid
-      error = salesOrderValiation.errorMessage
+      isValid =
+        salesOrderValiation.fieldValid == false
+          ? salesOrderValiation.fieldValid
+          : isValid
+      error =
+        salesOrderValiation.fieldValid == false
+          ? salesOrderValiation.errorMessage
+          : error
     }
 
     if (validator == 'expense-item') {
       let expenseValiation = validateExpenseItem(_value)
-      isValid = expenseValiation.fieldValid
-      error = expenseValiation.errorMessage
+      isValid =
+        expenseValiation.fieldValid == false
+          ? expenseValiation.fieldValid
+          : isValid
+      error =
+        expenseValiation.fieldValid == false
+          ? expenseValiation.errorMessage
+          : error
     }
 
     if (validator == 'password') {
       let passwordValiation = validatePassword(_value)
-      isValid = passwordValiation.fieldValid
-      error = passwordValiation.errorMessage
+      isValid =
+        passwordValiation.fieldValid == false
+          ? passwordValiation.fieldValid
+          : isValid
+      error =
+        passwordValiation.fieldValid == false
+          ? passwordValiation.errorMessage
+          : error
+    }
+
+    if (validator == 'alpha-numerics') {
+      let alphaNumericsValiation = validateAlphaNumerics(_value)
+      isValid =
+        alphaNumericsValiation.fieldValid == false
+          ? alphaNumericsValiation.fieldValid
+          : isValid
+      error =
+        alphaNumericsValiation.fieldValid == false
+          ? alphaNumericsValiation.errorMessage
+          : error
     }
 
     if (validator == 'confirm-password') {
@@ -84,8 +144,14 @@ export const validateField = (
         _value,
         passwordFieldValue
       )
-      isValid = passwordConfirmValidation.fieldValid
-      error = passwordConfirmValidation.errorMessage
+      isValid =
+        passwordConfirmValidation.fieldValid == false
+          ? passwordConfirmValidation.fieldValid
+          : isValid
+      error =
+        passwordConfirmValidation.fieldValid == false
+          ? passwordConfirmValidation.errorMessage
+          : error
     }
   })
 
@@ -128,6 +194,27 @@ function isRequired(_value) {
   return { fieldValid, errorMessage }
 }
 
+function validateSocialMediaUsername(_value) {
+  let fieldValid = true,
+    errorMessage = '',
+    domainPattern = /^(?:https?:\/\/)?\w+(?:\.\w+)?(?:\.[A-Z]{2,3})+$/gi
+
+  if (_value[0] == '@' && _value.length > 0) {
+    fieldValid = false
+    errorMessage = 'Username should be entered without the @ symbol.'
+  } else if (domainPattern.test(_value.trim()) && _value.length > 0) {
+    fieldValid = false
+    errorMessage =
+      'Invalid username format. Enter username in the form e.g username'
+  } else if (/\./gi.test(_value) && _value.length > 0) {
+    fieldValid = false
+    errorMessage =
+      'Invalid username format. Username contains 1 or more invalid character. Enter username in the form e.g username'
+  }
+
+  return { fieldValid, errorMessage }
+}
+
 function validatePassword(_value) {
   let fieldValid = true,
     errorMessage = ''
@@ -137,6 +224,19 @@ function validatePassword(_value) {
   } else if (!_value) {
     fieldValid = false
     errorMessage = 'The password cannot be less than 8 characters'
+  }
+
+  return { fieldValid, errorMessage }
+}
+
+function validateAlphaNumerics(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+
+  if (!/^[a-zA-Z\d][a-zA-Z\d-_]+[a-zA-Z\d]$/gi.test(_value)) {
+    fieldValid = false
+    errorMessage =
+      'Slug can only start with alphabets and contain alphabets and/or numbers in between with a minimum of 3 characters'
   }
 
   return { fieldValid, errorMessage }

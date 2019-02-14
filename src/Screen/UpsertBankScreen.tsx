@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import { UpsertBankGQL } from '../graphql/mutations/business'
 import { ListCompanyBanksGQL } from '../graphql/queries/business'
@@ -8,12 +9,15 @@ import AppSpinner from '../Components/Spinner'
 import { NG_Banks } from '../utilities/data/picker-lists'
 import Auth from '../services/auth'
 import { NavigationActions } from 'react-navigation'
-import { NotificationContext } from '../context/NotificationContext'
+import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
   setNotificationBanner: (obj: any) => void
+  user: any
+  resetUserContext: (obj?: any) => void
 }
 
 interface IState {
@@ -22,15 +26,21 @@ interface IState {
   isPrimary: boolean | string
   companyId: string
   fieldErrors: any
+  bankCode: string
 }
 
 class UpsertBankScreen extends Component<IProps, IState> {
+  static navigationOptions = {
+    header: null
+  }
+
   state = {
     accountNumber: '',
     bankName: '',
     isPrimary: null,
     companyId: '',
-    fieldErrors: null
+    fieldErrors: null,
+    bankCode: ''
   }
 
   updateState = (key: string, val: any) => {
@@ -39,7 +49,7 @@ class UpsertBankScreen extends Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    const user = JSON.parse(await Auth.getCurrentUser())
+    const user = this.props.user
     const bank = this.props.navigation.getParam('bank', {})
     this.setState({
       ...bank,
@@ -131,10 +141,17 @@ class UpsertBankScreen extends Component<IProps, IState> {
     delete params['id']
     delete params['__typename']
     delete params['date']
+    delete params['subaccountId']
+    delete params['subaccountTransacId']
+    delete params['company']
     params['isPrimary'] = this.state.isPrimary == 'yes' ? true : false
+    params.bankCode = params.bankName
+    params['accountName'] =
+      this.state['accountName'] || this.props.user.company.title
 
     return { bank: params, bankId: bank ? bank.id : null }
   }
+
   onCompleted = async res => {
     const {
       upsertBank: { success, fieldErrors, data }
@@ -144,6 +161,14 @@ class UpsertBankScreen extends Component<IProps, IState> {
     if (!success) {
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
+      let updatedUser = {
+        ...this.props.user,
+        company: { ...this.props.user.company, bank: data }
+      }
+
+      this.props.resetUserContext(updatedUser)
+      await Auth.setCurrentUser(updatedUser)
+
       const resetAction = NavigationActions.reset({
         index: 1,
         actions: [
@@ -156,7 +181,8 @@ class UpsertBankScreen extends Component<IProps, IState> {
           })
         ]
       })
-      this.props.setNotificationBanner(
+
+      let banner = NotificationBanner(
         configureNotificationBanner(
           Object.keys(bank).length == 0
             ? 'CreateBankAccount'
@@ -164,24 +190,25 @@ class UpsertBankScreen extends Component<IProps, IState> {
           this.state
         )
       )
+      banner.show({ bannerPosition: 'bottom' })
+
       this.props.navigation.dispatch(resetAction)
     }
   }
 }
 
 const _UpsertBankScreen: any = props => (
-  <NotificationContext.Consumer>
-    {({ setNotificationBanner }) => (
+  <UserContext.Consumer>
+    {({ user, resetUserContext }) => (
       <UpsertBankScreen
         {...props}
-        setNotificationBanner={setNotificationBanner}
+        user={user}
+        resetUserContext={resetUserContext}
       />
     )}
-  </NotificationContext.Consumer>
+  </UserContext.Consumer>
 )
 
-_UpsertBankScreen.navigationOptions = {
-  header: null
-}
+_UpsertBankScreen.navigationOptions = UpsertBankScreen.navigationOptions
 
 export default _UpsertBankScreen

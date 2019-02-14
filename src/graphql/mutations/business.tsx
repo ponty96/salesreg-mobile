@@ -10,11 +10,29 @@ export const UpdateCompanyGQL = gql`
       }
       data {
         ... on Company {
+          saleCharge
           id
           title
           slug
           contactEmail
           about
+          coverPhoto
+          legalDocuments {
+            pdfUrl
+            name
+            type
+            id
+          }
+          facebook
+          bank {
+            accountNumber
+            bankCode
+            subaccountId
+            subaccountTransacId
+          }
+          twitter
+          instagram
+          linkedin
           currency
           logo
           phone {
@@ -51,8 +69,19 @@ export const UpsertBankGQL = gql`
           id
           date: updatedAt
           accountNumber
+          accountName
+          bankCode
+          subaccountId
+          subaccountTransacId
           bankName
-          isPrimary
+          company {
+            bank {
+              accountNumber
+              bankCode
+              subaccountId
+              subaccountTransacId
+            }
+          }
         }
       }
     }
@@ -66,6 +95,73 @@ export const DeleteBankGQL = gql`
       fieldErrors {
         key
         message
+      }
+    }
+  }
+`
+
+export const UpdateCompanyCoverPhotoGQL = gql`
+  mutation updateCompanyCoverPhoto($coverPhoto: CoverPhotoInput!) {
+    updateCompanyCoverPhoto(coverPhoto: $coverPhoto) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          coverPhoto
+        }
+      }
+    }
+  }
+`
+
+export const UpsertLegalDocument = gql`
+  mutation upsertLegalDocument(
+    $legalDocument: LegalDocumentInput!
+    $legalDocumentId: Uuid
+  ) {
+    upsertLegalDocument(
+      legalDocument: $legalDocument
+      legalDocumentId: $legalDocumentId
+    ) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          legalDocuments {
+            name
+            pdfUrl
+            type
+            id
+          }
+        }
+      }
+    }
+  }
+`
+
+export const DeleteLegalDocument = gql`
+  mutation deleteLegalDocument($legalDocumentId: Uuid!) {
+    deleteLegalDocument(legalDocumentId: $legalDocumentId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          legalDocuments {
+            name
+            pdfUrl
+            type
+            id
+          }
+        }
       }
     }
   }

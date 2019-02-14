@@ -18,9 +18,27 @@ export const UpdateUserGQL = gql`
           gender
           profilePicture
           company {
+            saleCharge
             id
             title
             contactEmail
+            coverPhoto
+            legalDocuments {
+              pdfUrl
+              name
+              type
+              id
+            }
+            bank {
+              accountNumber
+              bankCode
+              subaccountId
+              subaccountTransacId
+            }
+            facebook
+            twitter
+            instagram
+            linkedin
             about
             currency
             slug

@@ -57,18 +57,19 @@ const errorLink = onError(({ graphQLErrors, networkError }: any) => {
     if (graphQLErrors[0] && graphQLErrors[0].message === 'Not authenticated') {
       // refreshOrLogout();
     }
-    graphQLErrors.map(({ message, locations, path }: any) =>
-      console.log(
-        `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+    graphQLErrors.map &&
+      graphQLErrors.map(({ message, locations, path }: any) =>
+        console.log(
+          `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+        )
       )
-    )
   }
 
   if (networkError) console.log(`[Network error]: ${networkError}`)
 })
 
 const observableStore = new ObservableStore()
-const timeoutLink = new ApolloLinkTimeout(30000, observableStore)
+const timeoutLink = new ApolloLinkTimeout(60000, observableStore)
 
 const client = new ApolloClient({
   link: timeoutLink.concat(

@@ -55,9 +55,6 @@ PODS:
     - nanopb/encode (= 0.3.901)
   - nanopb/decode (0.3.901)
   - nanopb/encode (0.3.901)
-  - Paystack (3.0.5):
-    - Paystack/Core (= 3.0.5)
-  - Paystack/Core (3.0.5)
   - QBImagePickerController (3.4.0)
   - react-native-fetch-blob (0.10.6):
     - React/Core
@@ -101,7 +98,6 @@ DEPENDENCIES:
   - Firebase/Core
   - Folly (from `../node_modules/react-native/third-party-podspecs/Folly.podspec`)
   - glog (from `../node_modules/react-native/third-party-podspecs/GLog.podspec`)
-  - Paystack
   - react-native-fetch-blob (from `../node_modules/react-native-fetch-blob`)
   - React/Core (from `../node_modules/react-native`)
   - React/RCTActionSheet (from `../node_modules/react-native`)
@@ -127,7 +123,6 @@ SPEC REPOS:
     - GoogleAppMeasurement
     - GoogleUtilities
     - nanopb
-    - Paystack
     - QBImagePickerController
     - RSKImageCropper
 
@@ -159,7 +154,6 @@ SPEC CHECKSUMS:
   GoogleAppMeasurement: 5029d78f2b438bd30ffb44e6c558b57c21622727
   GoogleUtilities: 95996bea7c7d9b8fb811b7507669a4a8762f80c7
   nanopb: 2901f78ea1b7b4015c860c2fdd1ea2fee1a18d48
-  Paystack: 21a16fe02cca6cc94618a2b68b7402917179ca0b
   QBImagePickerController: d54cf93db6decf26baf6ed3472f336ef35cae022
   React: 1fe0eb13d90b625d94c3b117c274dcfd2e760e11
   react-native-fetch-blob: 63394b1d7b0781547b3e4463b3195790177b1222
@@ -167,6 +161,6 @@ SPEC CHECKSUMS:
   RSKImageCropper: 98296ad26b41753f796b6898d015509598f13d97
   yoga: b1ce48b6cf950b98deae82838f5173ea7cf89e85
 
-PODFILE CHECKSUM: 9a3914ba376787846e50b46719283189528b3d59
+PODFILE CHECKSUM: 9acf9174176962a463723e2a235ded42304623f8
 
 COCOAPODS: 1.5.3
