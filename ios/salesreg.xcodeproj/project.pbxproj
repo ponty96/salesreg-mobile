@@ -1096,7 +1096,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = S53WX8N36T;
+						DevelopmentTeam = 29P9NVZG7Q;
 						ProvisioningStyle = Manual;
 					};
 					2D02E47A1E0B4A5D006451C7 = {
@@ -1802,7 +1802,8 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\n";
+			shellScript = "
+";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -1951,12 +1952,12 @@
 			baseConfigurationReference = CB237FD72E564B4DC419BD45 /* Pods-salesreg.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Abraham Ameh (S53WX8N36T)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ayomide Aregbede (29P9NVZG7Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ayomide Aregbede (29P9NVZG7Q)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = S53WX8N36T;
+				DEVELOPMENT_TEAM = 29P9NVZG7Q;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
@@ -1977,9 +1978,9 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yipcart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yipcart.yipcart;
 				PRODUCT_NAME = salesreg;
-				PROVISIONING_PROFILE_SPECIFIER = com.adhoc.yipcart;
+				PROVISIONING_PROFILE_SPECIFIER = com.production.yipcart;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
 			name = Debug;
@@ -1989,11 +1990,11 @@
 			baseConfigurationReference = 2FA5B2BD06F95A037A1B14AF /* Pods-salesreg.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Abraham Ameh (S53WX8N36T)";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Ayomide Aregbede (29P9NVZG7Q)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Ayomide Aregbede (29P9NVZG7Q)";
 				CODE_SIGN_STYLE = Manual;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = S53WX8N36T;
+				DEVELOPMENT_TEAM = 29P9NVZG7Q;
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(SRCROOT)/../node_modules/appcenter/ios/AppCenterReactNative",
@@ -2014,7 +2015,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = com.yipcart;
+				PRODUCT_BUNDLE_IDENTIFIER = com.yipcart.yipcart;
 				PRODUCT_NAME = salesreg;
 				PROVISIONING_PROFILE_SPECIFIER = com.production.yipcart;
 				VERSIONING_SYSTEM = "apple-generic";
