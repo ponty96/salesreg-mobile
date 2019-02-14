@@ -44,62 +44,112 @@ class ListItemAtom extends React.PureComponent<IProps, IState> {
     }
   }
 
-  render() {
-    return (
-      <TouchableWithoutFeedback
-        onPress={() =>
-          this.setState({ bodyViewState: !this.state.bodyViewState })
-        }
-      >
-        <View>
-          <View style={[styles.wrapper, this.props.listItemStyle]}>
-            <Text style={[styles.text, this.props.labelStyle]}>
-              {this.props.label}
-            </Text>
-            {typeof this.props.value == 'object' &&
-            this.props.value !== null ? (
-              <Icon
-                name={
-                  this.state.bodyViewState ? 'ios-arrow-up' : 'ios-arrow-down'
-                }
-                type="Ionicons"
-                style={{
-                  fontSize: 28,
-                  color: color.textColor
-                }}
-              />
-            ) : (
-              <View
-                style={{
-                  justifyContent: 'flex-end',
-                  alignItems: 'flex-end'
-                }}
-              >
-                {this.props.quantity ? (
-                  <Text style={{ color: color.textColor }}>
-                    {this.props.quantity}
-                  </Text>
-                ) : (
-                  <Text />
-                )}
-                <Text
-                  style={[
-                    styles.text,
-                    this.props.rightTextStyle,
-                    this.props.redText ? { color: color.red } : undefined,
-                    this.props.greenText ? { color: color.selling } : undefined
-                  ]}
-                >
-                  {this.props.value}
-                  {this.props.icon}
+  renderWithToogle = () => (
+    <TouchableWithoutFeedback
+      onPress={() =>
+        this.setState({ bodyViewState: !this.state.bodyViewState })
+      }
+    >
+      <View>
+        <View style={[styles.wrapper, this.props.listItemStyle]}>
+          <Text style={[styles.text, this.props.labelStyle]}>
+            {this.props.label}
+          </Text>
+          {typeof this.props.value == 'object' && this.props.value !== null ? (
+            <Icon
+              name={
+                this.state.bodyViewState ? 'ios-arrow-up' : 'ios-arrow-down'
+              }
+              type="Ionicons"
+              style={{
+                fontSize: 28,
+                color: color.textColor
+              }}
+            />
+          ) : (
+            <View
+              style={{
+                justifyContent: 'flex-end',
+                alignItems: 'flex-end'
+              }}
+            >
+              {this.props.quantity ? (
+                <Text style={{ color: color.textColor }}>
+                  {this.props.quantity}
                 </Text>
-              </View>
-            )}
-          </View>
-          {this.renderBody(this.props.value)}
+              ) : (
+                <Text />
+              )}
+              <Text
+                style={[
+                  styles.text,
+                  this.props.rightTextStyle,
+                  this.props.redText ? { color: color.red } : undefined,
+                  this.props.greenText ? { color: color.selling } : undefined
+                ]}
+              >
+                {this.props.value}
+                {this.props.icon}
+              </Text>
+            </View>
+          )}
         </View>
-      </TouchableWithoutFeedback>
-    )
+        {this.renderBody(this.props.value)}
+      </View>
+    </TouchableWithoutFeedback>
+  )
+
+  renderWithoutToggle = () => (
+    <View>
+      <View style={[styles.wrapper, this.props.listItemStyle]}>
+        <Text style={[styles.text, this.props.labelStyle]}>
+          {this.props.label}
+        </Text>
+        {typeof this.props.value == 'object' && this.props.value !== null ? (
+          <Icon
+            name={this.state.bodyViewState ? 'ios-arrow-up' : 'ios-arrow-down'}
+            type="Ionicons"
+            style={{
+              fontSize: 28,
+              color: color.textColor
+            }}
+          />
+        ) : (
+          <View
+            style={{
+              justifyContent: 'flex-end',
+              alignItems: 'flex-end'
+            }}
+          >
+            {this.props.quantity ? (
+              <Text style={{ color: color.textColor }}>
+                {this.props.quantity}
+              </Text>
+            ) : (
+              <Text />
+            )}
+            <Text
+              style={[
+                styles.text,
+                this.props.rightTextStyle,
+                this.props.redText ? { color: color.red } : undefined,
+                this.props.greenText ? { color: color.selling } : undefined
+              ]}
+            >
+              {this.props.value}
+              {this.props.icon}
+            </Text>
+          </View>
+        )}
+      </View>
+      {this.renderBody(this.props.value)}
+    </View>
+  )
+
+  render() {
+    return typeof this.props.value == 'object' && this.props.value !== null
+      ? this.renderWithToogle()
+      : this.renderWithoutToggle()
   }
 }
 

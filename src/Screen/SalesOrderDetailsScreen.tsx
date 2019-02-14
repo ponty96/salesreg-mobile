@@ -27,6 +27,7 @@ class SalesOrderDetailsScreen extends Component<IProps> {
   }
 
   onStatusPress = async () => {
+    console.log('I am here oga')
     const sales = this.props.navigation.getParam('sales', {})
     const hideHint = await Preferences.getOrderStatusHintPref()
     this.props.navigation.navigate('OrderStatusChange', {
