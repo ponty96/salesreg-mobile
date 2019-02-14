@@ -140,8 +140,8 @@ class SideBar extends PureComponent<IProps, IState> {
 
   showAlert = () => {
     Alert.alert(
-      'Not Allowed!!!',
-      'Please complete the Getting Started section of the app',
+      'Sorry!!!',
+      `We know you can't wait to begin, but you have to complete the get started section to do so.`,
       [
         {
           text: 'Ok',
