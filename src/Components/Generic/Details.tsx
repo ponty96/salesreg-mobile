@@ -232,7 +232,6 @@ export default class GenericDetailsComponent extends Component<IProps> {
         100
       )
     } else {
-      console.log('This was successful ', success)
       this.props.onSuccessfulDeletion()
     }
   }
