@@ -1,4 +1,5 @@
 import React from 'react'
+import { Alert } from 'react-native'
 import ThirdStep from '../../Components/SignUp/ThirdStep'
 import LastStep from '../../Components/SignUp/LastStep'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
@@ -85,6 +86,35 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
     this.setState({ currentStep: step })
   }
 
+  handleExistingUser = fieldErrors => {
+    if (Object.keys(fieldErrors).indexOf('ownerid') != -1) {
+      Alert.alert(
+        'Oops!!!',
+        `${
+          fieldErrors[Object.keys(fieldErrors)[0]]
+        }, please try signing in into your account. Thank you`,
+        [
+          {
+            text: 'Ok',
+            onPress: () => {
+              this.returnToLogin()
+            }
+          }
+        ],
+        { cancelable: false }
+      )
+    }
+  }
+
+  returnToLogin = async () => {
+    const {
+      screenProps: { client }
+    } = this.props
+    await client.resetStore()
+    await Auth.clearVault()
+    this.props.navigation.navigate('Login')
+  }
+
   renderComponentAtStep = (callbackFunc): JSX.Element => {
     const { user, slug } = this.state
     const { currentStep } = this.state
@@ -101,6 +131,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
         return (
           <FormStepperContainer
             formData={this.state}
+            handleNonFormErrors={this.handleExistingUser}
             steps={[
               {
                 stepTitle: 'Tell us about your business',
@@ -124,7 +155,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                       type: 'input',
                       keyboardType: 'default'
                     },
-                    validators: ['required'],
+                    validators: ['required', 'alpha-numerics'],
                     name: 'slug'
                   },
                   {
@@ -255,6 +286,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
       addUserCompany: { success, fieldErrors, data }
     } = res
     if (!success) {
+      console.log('The error is ', fieldErrors)
       this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     } else {
       setAppAnalytics('REGISTER_ACCOUNT', this.state)

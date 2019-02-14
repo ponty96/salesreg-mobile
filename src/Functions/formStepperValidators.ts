@@ -127,6 +127,18 @@ export const validateField = (
           : error
     }
 
+    if (validator == 'alpha-numerics') {
+      let alphaNumericsValiation = validateAlphaNumerics(_value)
+      isValid =
+        alphaNumericsValiation.fieldValid == false
+          ? alphaNumericsValiation.fieldValid
+          : isValid
+      error =
+        alphaNumericsValiation.fieldValid == false
+          ? alphaNumericsValiation.errorMessage
+          : error
+    }
+
     if (validator == 'confirm-password') {
       let passwordConfirmValidation = validateConfirmPassword(
         _value,
@@ -212,6 +224,19 @@ function validatePassword(_value) {
   } else if (!_value) {
     fieldValid = false
     errorMessage = 'The password cannot be less than 8 characters'
+  }
+
+  return { fieldValid, errorMessage }
+}
+
+function validateAlphaNumerics(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+
+  if (!/^[a-zA-Z\d][a-zA-Z\d-_]+[a-zA-Z\d]$/gi.test(_value)) {
+    fieldValid = false
+    errorMessage =
+      'Slug can only start with alphabets and contain alphabets and/or numbers in between with a minimum of 3 characters'
   }
 
   return { fieldValid, errorMessage }
