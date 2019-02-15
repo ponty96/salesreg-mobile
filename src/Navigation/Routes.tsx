@@ -50,6 +50,7 @@ import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
 import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
 import UserProfileScreen from '../Screen/UserProfileScreen'
 import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
+import ChargeCalculatorScreen from '../Screen/Settings/ChargeCalculatorScreen'
 
 // Order
 import OrderStatusScreen from '../Screen/OrderStatusScreen'
@@ -130,6 +131,9 @@ const businessStack = StackNavigator(
     // Setting ROUTES
     ProfileSettings: {
       screen: ProfileSettingsScreen
+    },
+    ChargeCalculator: {
+      screen: ChargeCalculatorScreen
     },
     UserProfile: {
       screen: UserProfileScreen

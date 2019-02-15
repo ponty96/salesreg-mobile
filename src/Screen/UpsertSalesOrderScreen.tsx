@@ -20,10 +20,12 @@ import setAppAnalytics from '../Functions/setAppAnalytics'
 import { color } from '../Style/Color'
 import CardPaymentAtom from '../Atom/CardPaymentAtom'
 import { Countries } from '../utilities/data/picker-lists'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   navigation: any
   setNotificationBanner: (obj: any) => void
+  user?: any
 }
 
 interface ISalesInput {
@@ -277,7 +279,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
         { cancelable: false }
       )
     } else {
-      this.notifyUserOfCharge(upsertSales)
+      this.createSalesOrder(upsertSales)
     }
   }
 
@@ -287,43 +289,6 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
           variables: this.parseMutationVariables()
         })
       : this.chargeCard()
-  }
-
-  notifyUserOfCharge = upsertSales => {
-    let {
-        isCustomerInContacts,
-        existingContact,
-        contactName,
-        amountPaid,
-        paymentMethod
-      } = this.state,
-      _firstname =
-        isCustomerInContacts != 'No'
-          ? existingContact.contactName.split(' ')[0]
-          : contactName.split(' ')[0]
-
-    paymentMethod.toLowerCase() == 'cash'
-      ? Alert.alert(
-          'Proceed to make Payments?',
-          `Do you want to charge ${_firstname} \u20A6${amountPaid} for this transaction?`,
-          [
-            { text: 'Yes', onPress: () => this.createSalesOrder(upsertSales) },
-            { text: 'No', onPress: () => null }
-          ],
-          { cancelable: false }
-        )
-      : Alert.alert(
-          'Check Payments Details!',
-          `Amount to Pay: \u20A6${amountPaid} \nPercentage Charge: 5%`,
-          [
-            {
-              text: 'Proceed',
-              onPress: () => this.createSalesOrder(upsertSales)
-            },
-            { text: 'No', onPress: () => null }
-          ],
-          { cancelable: false }
-        )
   }
 
   handleCardSuccess = () => {
@@ -590,4 +555,13 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
   }
 }
 
-export default UpsertSalesOrderScreen
+const _UpsertSalesOrderScreen: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <UpsertSalesOrderScreen {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+_UpsertSalesOrderScreen.navigationOptions =
+  UpsertSalesOrderScreen.navigationOptions
+
+export default _UpsertSalesOrderScreen
