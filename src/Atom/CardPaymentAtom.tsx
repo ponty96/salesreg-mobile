@@ -60,10 +60,6 @@ class CardPaymentAtom extends React.PureComponent<IProps> {
   }
 
   render() {
-    let _charge = this.props.charge || this.props.user.company.saleCharge,
-      _amount =
-        Number(this.props.amount) + Number(_charge) * Number(this.props.amount)
-
     return (
       <Modal
         animationType="slide"
@@ -88,14 +84,8 @@ class CardPaymentAtom extends React.PureComponent<IProps> {
             <Text style={styles.headerText}>
               Let's sort out the payment for this order
             </Text>
-            <Text style={styles.stepHint}>
-              Note: {this.props.firstname || 'You'} will be charged{' '}
-              {Number(_charge) * 100}
-              {'% '}
-              for this transaction
-            </Text>
             <Rave
-              amount={`${_amount}`}
+              amount={this.props.amount}
               country="NG"
               currency="NGN"
               email={this.props.email}
@@ -143,12 +133,5 @@ const styles = StyleSheet.create({
     fontFamily: 'AvenirNext-DemiBold',
     marginBottom: 0,
     marginTop: 16
-  },
-  stepHint: {
-    fontFamily: 'AvenirNext-Regular',
-    fontSize: 16,
-    color: color.textColor,
-    marginTop: 8,
-    marginBottom: 16
   }
 })
