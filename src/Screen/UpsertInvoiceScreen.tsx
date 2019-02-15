@@ -126,7 +126,18 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
 
   checkInvoiceValidity = (makePayment: (obj: any) => void) => {
     let amountPayable = this.props.navigation.getParam('amountPayable', null),
-      { amountPaid } = this.state
+      { amountPaid, paymentMethod } = this.state,
+      {
+        navigation: {
+          state: {
+            params: {
+              sales: {
+                invoice: { id }
+              }
+            }
+          }
+        }
+      } = this.props
 
     if (Number(amountPaid) > amountPayable) {
       Alert.alert(
@@ -136,58 +147,15 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
         { cancelable: false }
       )
     } else {
-      this.notifyUserOfCharge(makePayment)
-    }
-  }
-
-  notifyUserOfCharge = makePayment => {
-    const {
-        navigation: {
-          state: {
-            params: {
-              sales: {
-                invoice: { id },
-                contact: { contactName }
-              }
+      paymentMethod.toLowerCase() == 'cash'
+        ? makePayment({
+            variables: {
+              invoiceId: id,
+              amountPaid: this.state.amountPaid
             }
-          }
-        }
-      } = this.props,
-      { amountPaid, paymentMethod } = this.state,
-      _firstname = contactName.split(' ')[0]
-
-    paymentMethod.toLowerCase() == 'cash'
-      ? Alert.alert(
-          'Proceed to make Payments?',
-          `Do you want to charge ${_firstname} \u20A6${amountPaid} for this transaction?`,
-          [
-            {
-              text: 'Yes',
-              onPress: () => {
-                makePayment({
-                  variables: {
-                    invoiceId: id,
-                    amountPaid: this.state.amountPaid
-                  }
-                })
-              }
-            },
-            { text: 'No', onPress: () => null }
-          ],
-          { cancelable: false }
-        )
-      : Alert.alert(
-          'Check Payments Details!',
-          `Amount to Pay: \u20A6${amountPaid} \nPercentage Charge: 5%`,
-          [
-            {
-              text: 'Proceed',
-              onPress: () => this.chargeCard()
-            },
-            { text: 'No', onPress: () => null }
-          ],
-          { cancelable: false }
-        )
+          })
+        : this.chargeCard()
+    }
   }
 
   handleCardSuccess = () => {
