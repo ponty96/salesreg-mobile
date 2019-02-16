@@ -278,7 +278,7 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
                               type: {
                                 type: 'input'
                               },
-                              validators: ['required', 'social-media-username'],
+                              validators: ['social-media-username'],
                               name: 'facebook'
                             },
                             {
@@ -296,7 +296,7 @@ class GettingStarted extends React.PureComponent<IProps, IState> {
                               type: {
                                 type: 'input'
                               },
-                              validators: ['required', 'social-media-username'],
+                              validators: ['social-media-username'],
                               name: 'twitter'
                             }
                           ],
