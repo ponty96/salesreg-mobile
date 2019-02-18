@@ -106,6 +106,7 @@ export const ListCompanyInvoicesGQL = gql`
           refId
           shareLink
           amountPaid
+          allowsSplitPayment
           user {
             lastName
             firstName

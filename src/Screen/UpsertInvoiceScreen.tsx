@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert, Platform } from 'react-native'
+import { Alert } from 'react-native'
 import FormStepperContainer from '../Container/Form/StepperContainer'
 import AppSpinner from '../Components/Spinner'
 import Auth from '../services/auth'
@@ -15,7 +15,6 @@ import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
 import setAppAnalytics from '../Functions/setAppAnalytics'
-import CardPaymentAtom from '../Atom/CardPaymentAtom'
 
 interface IProps {
   navigation: any
@@ -126,7 +125,7 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
 
   checkInvoiceValidity = (makePayment: (obj: any) => void) => {
     let amountPayable = this.props.navigation.getParam('amountPayable', null),
-      { amountPaid, paymentMethod } = this.state,
+      { amountPaid } = this.state,
       {
         navigation: {
           state: {
@@ -147,72 +146,16 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
         { cancelable: false }
       )
     } else {
-      paymentMethod.toLowerCase() == 'cash'
-        ? makePayment({
-            variables: {
-              invoiceId: id,
-              amountPaid: this.state.amountPaid
-            }
-          })
-        : this.chargeCard()
+      makePayment({
+        variables: {
+          invoiceId: id,
+          amountPaid: this.state.amountPaid
+        }
+      })
     }
   }
 
-  handleCardSuccess = () => {
-    Platform.OS == 'android'
-      ? this.setState(
-          {
-            isCardPaymentVisible: false
-          },
-          this.navigateUser
-        )
-      : Alert.alert(
-          'Payment Successful',
-          `A sum of ${this.state.amountPaid} was made successfully`,
-          [
-            {
-              text: 'Ok',
-              onPress: () => {
-                this.setState(
-                  {
-                    isCardPaymentVisible: false
-                  },
-                  this.navigateUser
-                )
-              }
-            }
-          ],
-          { cancelable: false }
-        )
-  }
-
-  handleCardError = e => {
-    Alert.alert(
-      'Cannot make payment',
-      `${e}`,
-      [{ text: 'Ok', onPress: () => null }],
-      { cancelable: false }
-    )
-  }
-
   render() {
-    const {
-        navigation: {
-          state: {
-            params: {
-              sales: {
-                id,
-                charge,
-                contact: { email, contactName }
-              }
-            }
-          }
-        }
-      } = this.props,
-      { amountPaid } = this.state,
-      _firstname = contactName.split(' ')[1],
-      _lastname = contactName.split(' ')[0]
-
     return (
       <Mutation
         mutation={CreateRecipt}
@@ -241,18 +184,6 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
           return (
             <React.Fragment>
               <AppSpinner visible={loading} />
-              <CardPaymentAtom
-                visible={this.state.isCardPaymentVisible}
-                amount={amountPaid}
-                email={email}
-                firstname={_firstname}
-                charge={charge}
-                lastname={_lastname}
-                saleId={id}
-                onSuccess={this.handleCardSuccess}
-                onError={this.handleCardError}
-                onClose={() => this.setState({ isCardPaymentVisible: false })}
-              />
               <FormStepperContainer
                 fieldErrors={this.state.fieldErrors}
                 handleBackPress={() => this.props.navigation.goBack()}
@@ -261,17 +192,8 @@ class UpsertInvoiceScreen extends React.PureComponent<IProps, IState> {
                 onCompleteSteps={() => this.checkInvoiceValidity(makePayment)}
                 steps={[
                   {
-                    stepTitle: 'Payment Method',
+                    stepTitle: 'Payment',
                     formFields: [
-                      {
-                        label: 'How is this customer paying?',
-                        validators: ['required'],
-                        type: {
-                          type: 'radio',
-                          options: ['Card', 'Cash']
-                        },
-                        name: 'paymentMethod'
-                      },
                       {
                         label: 'How much(N) was actually paid?',
                         validators: ['required'],

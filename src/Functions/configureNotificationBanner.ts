@@ -31,6 +31,7 @@ type ITypes =
   | 'DeleteLegalDocument'
   | 'CreateSpecialOffer'
   | 'UpdateSpecialOffer'
+  | 'UpdateInvoicesSplitPayment'
 
 const configureNotificationBanner = (type: ITypes, params?: any): any => {
   switch (type) {
@@ -84,6 +85,13 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
             ? 'A variant of '
             : ''
         }${params.name.trim()} was removed`
+      }
+    case 'UpdateInvoicesSplitPayment':
+      return {
+        title: 'Invoice Allow Split Payment Status Change',
+        subtitle: params.allowsSplitPayment
+          ? `You allowed split payment on this invoice`
+          : `You disallowed split payment on this invoice`
       }
     case 'UpsertSalesOrder':
       return {
