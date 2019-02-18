@@ -66,6 +66,11 @@ import ExpensesScreen from '../Screen/ExpensesScreen'
 import ExpensesDetailsScreen from '../Screen/ExpensesDetailsScreen'
 import UpsertExpenseScreen from '../Screen/UpsertExpenseScreen'
 
+// Special Offer Screens
+import SpecialOfferScreen from '../Screen/SpecialOffer/SpecialOfferScreen'
+import SpecialOfferDetailsScreen from '../Screen/SpecialOffer/SpecialOfferDetailsScreen'
+import UpsertSpecialOfferScreen from '../Screen/SpecialOffer/UpsertSpecialOfferScreen'
+
 // Authentication Screens
 import LoginScreen from '../Screen/LoginScreen'
 import LandingScreen from '../Screen/Onboarding/Landing'
@@ -87,7 +92,8 @@ import UpsertBankScreen from '../Screen/UpsertBankScreen'
 import InvoiceDetailsScreen from '../Screen/InvoiceDetailsScreen'
 import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
-import UpdateInvoiceDueDate from '../Screen/UpdateInvoiceDueDate'
+import UpdateInvoiceDueDate from '../Screen/Invoices/UpdateInvoiceDueDate'
+import UpdateInvoicesSplitPayment from '../Screen/Invoices/UpdateInvoicesSplitPayment'
 
 import IncomeScreen from '../Screen/IncomeScreen'
 
@@ -117,6 +123,9 @@ const businessStack = StackNavigator(
     },
     InvoiceDetails: {
       screen: InvoiceDetailsScreen
+    },
+    UpdateInvoicesSplitPayment: {
+      screen: UpdateInvoicesSplitPayment
     },
     UpdateInvoiceDueDate: {
       screen: UpdateInvoiceDueDate
@@ -169,6 +178,11 @@ const businessStack = StackNavigator(
     // Options
     Options: OptionsScreen,
     UpsertOption: UpsertOptionScreen,
+
+    // Special Offer
+    SpecialOffer: SpecialOfferScreen,
+    SpecialOfferDetails: SpecialOfferDetailsScreen,
+    UpsertSpecialOffer: UpsertSpecialOfferScreen,
 
     // Webstore settings
     WebstoreOptions: WebstoreOptionsScreen,

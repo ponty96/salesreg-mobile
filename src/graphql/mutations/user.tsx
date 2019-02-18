@@ -21,6 +21,7 @@ export const UpdateUserGQL = gql`
             saleCharge
             id
             title
+            shareLink
             contactEmail
             coverPhoto
             legalDocuments {

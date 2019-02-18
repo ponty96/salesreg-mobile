@@ -96,7 +96,7 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
                 showRightCaret: true,
                 description:
                   'Calculate the amount of profit you can make on a single sales',
-                icon: 'web',
+                icon: 'calculator',
                 iconType: 'MaterialCommunityIcons'
               },
               {

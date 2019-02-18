@@ -244,6 +244,19 @@ class SideBar extends PureComponent<IProps, IState> {
               ]}
             />
             <SidebarItem
+              title="OFFERS"
+              navigate={this.handleNavigation}
+              activeRoute={this.state.activeRoute}
+              categories={[
+                {
+                  title: 'Special Offers',
+                  routeName: 'SpecialOffer',
+                  iconName: 'local-offer',
+                  iconType: 'MaterialIcons'
+                }
+              ]}
+            />
+            <SidebarItem
               title="TRANSACTIONS"
               navigate={this.handleNavigation}
               activeRoute={this.state.activeRoute}

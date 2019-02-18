@@ -13,6 +13,7 @@ type analyticsTypes =
   | 'CREATE_SALES_ORDER'
   | 'MAKE_INVOICE_PAYMENT'
   | 'CREATE_CUSTOMER'
+  | 'CREATE_SPECIAL_OFFER'
 
 async function setAppAnalytics(type: analyticsTypes, params?: any) {
   try {
@@ -47,6 +48,17 @@ async function setAppAnalytics(type: analyticsTypes, params?: any) {
           }
           Analytics.setUserProperties({
             ['App Opened']: moment(new Date()).format('YYYY-MM-DD')
+          })
+          break
+        case 'CREATE_SPECIAL_OFFER':
+          currentScreen = 'special_offer_screen'
+          currentScreenClassOverride = 'UpsertSpecialOfferScreen'
+          logEvent = 'special_offer'
+          logParams = {
+            score: 5.0
+          }
+          Analytics.setUserProperties({
+            ['Create Special Offer']: moment(new Date()).format('YYYY-MM-DD')
           })
           break
         case 'ADD_PRODUCT':

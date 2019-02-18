@@ -27,7 +27,6 @@ class SalesOrderDetailsScreen extends Component<IProps> {
   }
 
   onStatusPress = async () => {
-    console.log('I am here oga')
     const sales = this.props.navigation.getParam('sales', {})
     const hideHint = await Preferences.getOrderStatusHintPref()
     this.props.navigation.navigate('OrderStatusChange', {
@@ -74,10 +73,6 @@ class SalesOrderDetailsScreen extends Component<IProps> {
           {
             itemTitle: 'Discount',
             itemValue: `\u20A6 ${sales.discount}`
-          },
-          {
-            itemTitle: 'Payment Method',
-            itemValue: sales.paymentMethod.toUpperCase()
           }
         ])
     )
@@ -86,7 +81,6 @@ class SalesOrderDetailsScreen extends Component<IProps> {
   render() {
     const sales = this.props.navigation.getParam('sales', {})
 
-    console.log('The data is ', this.props.user.company)
     return (
       <View style={styles.container}>
         <GenericDetailsComponent
