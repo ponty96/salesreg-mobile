@@ -92,8 +92,8 @@ class InputAtom extends React.Component<IProps, IState> {
                   this.props.getValue(
                     this.props.keyboardType == 'phone-pad' ||
                       this.props.keyboardType == 'numeric'
-                      ? text.replace(/,/gi, '')
-                      : text
+                      ? text.replace(/,"'/gi, '')
+                      : text.replace(/"'/gi, '')
                   )
                 }
                 value={
@@ -134,7 +134,9 @@ class InputAtom extends React.Component<IProps, IState> {
               editable={this.props.editable}
               placeholder={this.props.placeholder}
               placeholderTextColor={color.inactive}
-              onChangeText={text => this.props.getValue(text)}
+              onChangeText={text =>
+                this.props.getValue(text.replace(/"'/gi, ''))
+              }
               value={this.props.defaultValue}
             />
           </React.Fragment>

@@ -150,7 +150,7 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                   {
                     label: 'How should customers call you?',
                     placeholder: 'E.g StacknBit',
-                    underneathText: `This is your business nick name. Please make sure that its in lowercase and avoid adding spacing. Only Alphanumerics are allowed also`,
+                    underneathText: `${slug}.yipcart.com will be your website domain name. The slug forms your business domain name. Please make sure that its in lowercase and avoid adding spacing. Only Alphanumerics are allowed also`,
                     type: {
                       type: 'input',
                       keyboardType: 'default'

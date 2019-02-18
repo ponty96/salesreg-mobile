@@ -29,6 +29,8 @@ type ITypes =
   | 'UpdateCoverPhoto'
   | 'UpdateLegalDocument'
   | 'DeleteLegalDocument'
+  | 'CreateSpecialOffer'
+  | 'UpdateSpecialOffer'
 
 const configureNotificationBanner = (type: ITypes, params?: any): any => {
   switch (type) {
@@ -193,6 +195,16 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
         subtitle: `Your ${params.name} ${
           params.type == 'policy' ? 'policy' : ''
         } has been removed`
+      }
+    case 'CreateSpecialOffer':
+      return {
+        title: `Special Offer Created`,
+        subtitle: `${params.title} has been added from your offers`
+      }
+    case 'UpdateSpecialOffer':
+      return {
+        title: `Special Offer Updated`,
+        subtitle: `${params.title} has been updated`
       }
   }
 }

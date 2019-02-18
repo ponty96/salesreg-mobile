@@ -1,8 +1,8 @@
 import gql from 'graphql-tag'
 
-export const ListSpecialOffersGQL = gql`
-  query listSpecialOffers($companyId: Uuid!, $after: String, $first: Int) {
-    listSpecialOffers(companyId: $companyId, after: $after, first: $first) {
+export const ListCompanyBonanzasGQL = gql`
+  query listCompanyBonanzas($companyId: Uuid!, $after: String, $first: Int) {
+    listCompanyBonanzas(companyId: $companyId, after: $after, first: $first) {
       pageInfo {
         endCursor
         hasNextPage
@@ -12,13 +12,17 @@ export const ListSpecialOffersGQL = gql`
         node {
           id
           title
+          date: startDate
           startDate
           endDate
           coverPhoto
-          items {
+          bonanzaItems {
             id
-            name
-            maximumQuantity
+            product {
+              id
+              name
+            }
+            maxQuantity
             priceSlashTo
           }
         }

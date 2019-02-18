@@ -103,6 +103,18 @@ export const validateField = (
           : error
     }
 
+    if (validator == 'special-offer') {
+      let specialOfferValiation = validateSpecialOffer(_value)
+      isValid =
+        specialOfferValiation.fieldValid == false
+          ? specialOfferValiation.fieldValid
+          : isValid
+      error =
+        specialOfferValiation.fieldValid == false
+          ? specialOfferValiation.errorMessage
+          : error
+    }
+
     if (validator == 'expense-item') {
       let expenseValiation = validateExpenseItem(_value)
       isValid =
@@ -233,7 +245,7 @@ function validateAlphaNumerics(_value) {
   let fieldValid = true,
     errorMessage = ''
 
-  if (!/^[a-zA-Z\d][a-zA-Z\d-_]+[a-zA-Z\d]$/gi.test(_value)) {
+  if (!/^[a-zA-Z\d][a-zA-Z\d-]+[a-zA-Z\d]$/gi.test(_value)) {
     fieldValid = false
     errorMessage =
       'Slug can only start with alphabets and contain alphabets and/or numbers in between with a minimum of 3 characters'
@@ -326,6 +338,28 @@ function validateSalesOrder(_value) {
           'The name or quantity in one of the items cannot be empty'
       } else {
         fieldValid = true
+      }
+    })
+  } else {
+    fieldValid = false
+    errorMessage = 'The items list cannot be empty'
+  }
+
+  return { fieldValid, errorMessage }
+}
+
+function validateSpecialOffer(_value) {
+  let fieldValid = true,
+    errorMessage = ''
+
+  if (_value.length > 0) {
+    _value.forEach(val => {
+      if (val && val.name && val.name.trim().length == 0) {
+        fieldValid = false
+        errorMessage = 'The name in one of the items cannot be empty'
+      } else if (!val.name) {
+        fieldValid = false
+        errorMessage = 'The name in one of the items cannot be empty'
       }
     })
   } else {

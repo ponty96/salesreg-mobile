@@ -1,7 +1,11 @@
 import React from 'react'
+import moment from 'moment'
+import { StyleSheet, View } from 'react-native'
+
 import Header from '../../Components/Header/BaseHeader'
 import GenericListIndex from '../../Components/Generic/ListIndex'
-import { ListSpecialOffersGQL } from '../../graphql/queries/offer'
+import { ListCompanyBonanzasGQL } from '../../graphql/queries/offer'
+import Icon from '../../Atom/Icon'
 
 interface IProps {
   navigation: any
@@ -11,7 +15,10 @@ interface IState {
   queryText: string
 }
 
-export default class ProductScreen extends React.PureComponent<IProps, IState> {
+export default class SpecialOfferScreen extends React.PureComponent<
+  IProps,
+  IState
+> {
   state = {
     queryText: ''
   }
@@ -22,7 +29,32 @@ export default class ProductScreen extends React.PureComponent<IProps, IState> {
     }
   }
 
-  parseData = (item: any) => {}
+  parseData = (item: any) => {
+    const { title, endDate, coverPhoto, startDate } = item,
+      _photo = coverPhoto
+        ? { avatar: coverPhoto }
+        : {
+            icon: (
+              <View style={styles.iconContainer}>
+                <Icon
+                  type="Ionicons"
+                  name="md-calendar"
+                  style={{ fontSize: 16 }}
+                />
+              </View>
+            )
+          }
+    return [
+      {
+        firstTopText: title,
+        bottomLeftFirstText: '',
+        bottomLeftSecondText: '', //total amount in sales
+        topRightText: `${moment(startDate).format('YYYY-MM-DD')}`,
+        bottomRightText: `${moment(endDate).format('YYYY-MM-DD')}`,
+        ..._photo
+      }
+    ]
+  }
 
   render() {
     return (
@@ -43,29 +75,42 @@ export default class ProductScreen extends React.PureComponent<IProps, IState> {
         <GenericListIndex
           navigation={this.props.navigation}
           queryText={this.state.queryText}
-          graphqlQuery={ListSpecialOffersGQL}
-          graphqlQueryResultKey="listSpecialOffers"
+          graphqlQuery={ListCompanyBonanzasGQL}
+          graphqlQueryResultKey="listCompanyBonanzas"
           parseItemData={this.parseData}
           onItemPress={item =>
             this.props.navigation.navigate('SpecialOfferDetails', {
               specialOffer: item
             })
           }
-          emptyListText={`When you add products, they get listed here \nAdd products by tapping the`}
+          emptyListText={`When you add special offers, they get listed here \nAdd special offers by tapping the`}
           headerText="All your special offers will appear here"
-          fabRouteName="CreateProduct"
-          fabIconName="package-variant"
-          fabIconType="MaterialCommunityIcons"
+          fabRouteName="UpsertSpecialOffer"
+          fabIconName="local-offer"
+          fabIconType="MaterialIcons"
           hideSeparator={true}
-          subHeader={{
-            rightLabel: sections => (sections.length > 0 ? '+Re-stock' : ''),
-            onPress: sections =>
-              sections.length > 0
-                ? this.props.navigation.navigate('UpsertProductRestock')
-                : null
-          }}
         />
       </React.Fragment>
     )
   }
 }
+
+const styles = StyleSheet.create({
+  iconContainer: {
+    height: 50,
+    width: 50,
+    marginTop: 0,
+    paddingTop: 0,
+    borderRadius: 25,
+    margin: 0,
+    padding: 0,
+    marginRight: 8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#999'
+  },
+  icon: {
+    fontSize: 18,
+    color: '#fff'
+  }
+})

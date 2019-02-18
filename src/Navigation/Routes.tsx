@@ -66,6 +66,11 @@ import ExpensesScreen from '../Screen/ExpensesScreen'
 import ExpensesDetailsScreen from '../Screen/ExpensesDetailsScreen'
 import UpsertExpenseScreen from '../Screen/UpsertExpenseScreen'
 
+// Special Offer Screens
+import SpecialOfferScreen from '../Screen/SpecialOffer/SpecialOfferScreen'
+import SpecialOfferDetailsScreen from '../Screen/SpecialOffer/SpecialOfferDetailsScreen'
+import UpsertSpecialOfferScreen from '../Screen/SpecialOffer/UpsertSpecialOfferScreen'
+
 // Authentication Screens
 import LoginScreen from '../Screen/LoginScreen'
 import LandingScreen from '../Screen/Onboarding/Landing'
@@ -169,6 +174,11 @@ const businessStack = StackNavigator(
     // Options
     Options: OptionsScreen,
     UpsertOption: UpsertOptionScreen,
+
+    // Special Offer
+    SpecialOffer: SpecialOfferScreen,
+    SpecialOfferDetails: SpecialOfferDetailsScreen,
+    UpsertSpecialOffer: UpsertSpecialOfferScreen,
 
     // Webstore settings
     WebstoreOptions: WebstoreOptionsScreen,

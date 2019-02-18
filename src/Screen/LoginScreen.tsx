@@ -144,7 +144,7 @@ class LoginScreen extends React.Component<IProps, IState> {
       await Auth.setCurrentUser(user)
 
       let _stage = 'done'
-      if (user.company && !user.company.facebook) {
+      if (user.company && !user.company.instagram) {
         _stage = '1'
       } else if (user.company && !user.company.coverPhoto) {
         _stage = '2'
