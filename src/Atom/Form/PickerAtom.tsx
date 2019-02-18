@@ -143,7 +143,9 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
         return placeholder
       }
     } else {
-      return 'Touch to choose'
+      return placeholder && placeholder.length > 0
+        ? placeholder
+        : 'Touch to choose'
     }
   }
 

@@ -27,12 +27,13 @@ export const ListCompanyProductsGQL = gql`
           minimumSku
           number: sku
           name
+          date : updatedAt
           featuredImage
           images
           isFeatured
           isTopRatedByMerchant
           totalQuantitySold
-
+          shareLink
           user {
             id
             firstName
@@ -42,12 +43,10 @@ export const ListCompanyProductsGQL = gql`
             id
             title
           }
-
           tags {
             name
             id
           }
-
           optionValues {
             id
             name
@@ -56,7 +55,6 @@ export const ListCompanyProductsGQL = gql`
               id
             }
           }
-
           productGroup {
             id
             title
@@ -150,12 +148,10 @@ export const SearchProductGroupsByTitleGQL = gql`
     searchProductGroupsByTitle(companyId: $companyId, query: $queryText) {
       title
       id
-
       options {
         optionId: id
         optionName: name
       }
-
       products {
         id
         description
@@ -167,6 +163,7 @@ export const SearchProductGroupsByTitleGQL = gql`
         images
         isFeatured
         isTopRatedByMerchant
+        shareLink
         categories {
           id
           title

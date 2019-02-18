@@ -1,4 +1,4 @@
-package com.salesreg;
+package com.yipcart.yipcart;
 
 import com.facebook.react.ReactActivity;
 import org.devio.rn.splashscreen.SplashScreen;

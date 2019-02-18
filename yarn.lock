@@ -6777,9 +6777,9 @@ react-native-progress@^3.5.0:
   dependencies:
     prop-types "^15.5.8"
 
-react-native-rave@^0.1.0:
+"react-native-rave@https://github.com/gbenga504/rave-react-native.git":
   version "0.1.0"
-  resolved "https://registry.yarnpkg.com/react-native-rave/-/react-native-rave-0.1.0.tgz#9c4da787d5eccbdb165557d206cd1be1f238ab41"
+  resolved "https://github.com/gbenga504/rave-react-native.git#e967fb5c0d2f061ccb8f485952560bd352253c4f"
   dependencies:
     axios "^0.18.0"
     card-validator "^5.0.0"
@@ -8479,9 +8479,9 @@ xcode@^1.0.0:
     simple-plist "^0.2.1"
     uuid "^3.3.2"
 
-"xcode@git+https://github.com/apache/cordova-node-xcode.git#e7646f0680d509b590b839e567c217590451505b":
+"xcode@https://github.com/apache/cordova-node-xcode#e7646f0680d509b590b839e567c217590451505b":
   version "1.0.1-dev"
-  resolved "git+https://github.com/apache/cordova-node-xcode.git#e7646f0680d509b590b839e567c217590451505b"
+  resolved "https://github.com/apache/cordova-node-xcode#e7646f0680d509b590b839e567c217590451505b"
   dependencies:
     simple-plist "^0.2.1"
     uuid "3.0.1"

@@ -3,7 +3,7 @@ import * as humps from 'humps'
 export const parseFieldErrors = errors => {
   return errors.reduce((acc, error) => {
     const key = humps.camelize(error.key)
-    return { ...acc, [key]: error.message }
+    return { ...acc, [key.toLowerCase()]: error.message }
   }, {})
 }
 

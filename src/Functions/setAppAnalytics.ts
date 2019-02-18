@@ -2,6 +2,7 @@ import firebase from 'react-native-firebase'
 import Config from 'react-native-config'
 import Auth from '../services/auth'
 import { Platform } from 'react-native'
+import moment from 'moment'
 
 const Analytics = firebase.analytics()
 
@@ -12,6 +13,7 @@ type analyticsTypes =
   | 'CREATE_SALES_ORDER'
   | 'MAKE_INVOICE_PAYMENT'
   | 'CREATE_CUSTOMER'
+  | 'CREATE_SPECIAL_OFFER'
 
 async function setAppAnalytics(type: analyticsTypes, params?: any) {
   try {
@@ -33,6 +35,9 @@ async function setAppAnalytics(type: analyticsTypes, params?: any) {
             business_name: params.title,
             country: params.businessCountry
           }
+          Analytics.setUserProperties({
+            ['New Registered User']: moment(new Date()).format('YYYY-MM-DD')
+          })
           break
         case 'OPEN_APP':
           currentScreen = 'home_screen'
@@ -41,6 +46,20 @@ async function setAppAnalytics(type: analyticsTypes, params?: any) {
           logParams = {
             score: 5.0
           }
+          Analytics.setUserProperties({
+            ['App Opened']: moment(new Date()).format('YYYY-MM-DD')
+          })
+          break
+        case 'CREATE_SPECIAL_OFFER':
+          currentScreen = 'special_offer_screen'
+          currentScreenClassOverride = 'UpsertSpecialOfferScreen'
+          logEvent = 'special_offer'
+          logParams = {
+            score: 5.0
+          }
+          Analytics.setUserProperties({
+            ['Create Special Offer']: moment(new Date()).format('YYYY-MM-DD')
+          })
           break
         case 'ADD_PRODUCT':
           currentScreen = 'create_product|add_variant'
@@ -50,6 +69,9 @@ async function setAppAnalytics(type: analyticsTypes, params?: any) {
           logParams = {
             product_name: params.productGroupTitle
           }
+          Analytics.setUserProperties({
+            ['New Product']: moment(new Date()).format('YYYY-MM-DD')
+          })
           break
         case 'CREATE_SALES_ORDER':
           currentScreen = 'upsert_sales'
@@ -62,6 +84,9 @@ async function setAppAnalytics(type: analyticsTypes, params?: any) {
               '',
             amount_paid: params.amountPaid
           }
+          Analytics.setUserProperties({
+            ['New Sales Order']: moment(new Date()).format('YYYY-MM-DD')
+          })
           break
         case 'MAKE_INVOICE_PAYMENT':
           currentScreen = 'upsert_invoice'
@@ -70,6 +95,9 @@ async function setAppAnalytics(type: analyticsTypes, params?: any) {
           logParams = {
             amount_paid: params.amountPaid
           }
+          Analytics.setUserProperties({
+            ['Invoice Payment']: moment(new Date()).format('YYYY-MM-DD')
+          })
           break
         case 'CREATE_CUSTOMER':
           currentScreen = 'upsert_customer'
@@ -79,6 +107,9 @@ async function setAppAnalytics(type: analyticsTypes, params?: any) {
             customer_name: params.contactName,
             email: params.email
           }
+          Analytics.setUserProperties({
+            ['Create Customer']: moment(new Date()).format('YYYY-MM-DD')
+          })
           break
       }
 

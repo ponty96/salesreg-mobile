@@ -42,6 +42,7 @@ interface IProps {
   navigation?: any
   fabIconName?: string
   fabIconType?: string
+  fabOnPress?: () => void
   graphqlDeleteMutation?: DocumentNode
   graphqlRefetchQueries?: any[]
   graphqlDeleteVariables?: {}
@@ -148,7 +149,8 @@ export default class GenericDetailsComponent extends Component<IProps> {
       fabRouteName,
       navigation,
       fabIconName,
-      fabIconType
+      fabIconType,
+      fabOnPress
     } = this.props
 
     return (
@@ -188,6 +190,7 @@ export default class GenericDetailsComponent extends Component<IProps> {
           <FabAtom
             routeName={fabRouteName}
             navigation={navigation}
+            onPress={fabOnPress}
             goto={this.props.fabRouteParams || {}}
             name={fabIconName}
             type={fabIconType}
@@ -229,7 +232,6 @@ export default class GenericDetailsComponent extends Component<IProps> {
         100
       )
     } else {
-      console.log('This was successful ', success)
       this.props.onSuccessfulDeletion()
     }
   }

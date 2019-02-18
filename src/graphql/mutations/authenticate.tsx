@@ -24,9 +24,16 @@ export const LoginUserMutationGQL = gql`
             company {
               id
               title
+              saleCharge
               contactEmail
               about
               currency
+              bank {
+                accountNumber
+                bankCode
+                subaccountId
+                subaccountTransacId
+              }
               slug
               logo
               facebook
@@ -85,6 +92,7 @@ export const RegisterUserMutationGQL = gql`
             profilePicture
             company {
               id
+              saleCharge
               title
               slug
               contactEmail
@@ -94,6 +102,12 @@ export const RegisterUserMutationGQL = gql`
                 name
                 type
                 id
+              }
+              bank {
+                accountNumber
+                bankCode
+                subaccountId
+                subaccountTransacId
               }
               currency
               coverPhoto
@@ -134,6 +148,7 @@ export const AddUserCompanyMutationGQL = gql`
       success
       data {
         ... on Company {
+          saleCharge
           id
           title
           slug

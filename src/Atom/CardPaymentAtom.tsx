@@ -6,6 +6,7 @@ import { Container } from 'native-base'
 import FormHeader from '../Components/Header/FormHeader'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Config from 'react-native-config'
+import { UserContext } from '../context/UserContext'
 
 interface IProps {
   amount: number | string
@@ -17,9 +18,11 @@ interface IProps {
   onError: (e) => void
   visible: boolean
   onClose: () => void
+  user: any
+  charge?: string
 }
 
-export default class CardPaymentAtom extends React.PureComponent<IProps> {
+class CardPaymentAtom extends React.PureComponent<IProps> {
   handleBackPress = () => {
     Alert.alert(
       '',
@@ -87,11 +90,16 @@ export default class CardPaymentAtom extends React.PureComponent<IProps> {
               currency="NGN"
               email={this.props.email}
               txref={`${this.props.saleId}_${Date.now()}`}
-              firstname={this.props.firstname}
+              firstname={this.props.firstname || this.props.lastname}
               lastname={this.props.lastname}
               secretkey={Config.FLUTTERWAVE_SECRET_KEY}
               publickey={Config.FLUTTERWAVE_PUBLIC_KEY}
               primarycolor={color.button}
+              subaccounts={[
+                {
+                  id: this.props.user.company.bank.subaccountId
+                }
+              ]}
               paymenttype="both"
               page="card"
               meta={[{ metaname: 'saleId', metavalue: this.props.saleId }]}
@@ -105,6 +113,13 @@ export default class CardPaymentAtom extends React.PureComponent<IProps> {
     )
   }
 }
+
+const _CardPaymentAtom = props => (
+  <UserContext.Consumer>
+    {({ user }) => <CardPaymentAtom {...props} user={user} />}
+  </UserContext.Consumer>
+)
+export default _CardPaymentAtom
 
 const styles = StyleSheet.create({
   container: {

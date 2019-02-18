@@ -91,6 +91,15 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
                 iconType: 'MaterialCommunityIcons'
               },
               {
+                section: 'Charge Calculator',
+                routeName: 'ChargeCalculator',
+                showRightCaret: true,
+                description:
+                  'Calculate the amount of profit you can make on a single sales',
+                icon: 'calculator',
+                iconType: 'MaterialCommunityIcons'
+              },
+              {
                 section: 'Log Out',
                 routeName: 'Login',
                 showRightCaret: false,

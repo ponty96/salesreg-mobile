@@ -65,8 +65,7 @@ class InputAtom extends React.Component<IProps, IState> {
             style={[
               {
                 borderBottomColor: color.textBorderBottom,
-                marginTop: 24,
-                height: 80
+                marginTop: 24
               },
               this.props.contStyle
             ]}
@@ -93,8 +92,8 @@ class InputAtom extends React.Component<IProps, IState> {
                   this.props.getValue(
                     this.props.keyboardType == 'phone-pad' ||
                       this.props.keyboardType == 'numeric'
-                      ? text.replace(/,/gi, '')
-                      : text
+                      ? text.replace(/,"'/gi, '')
+                      : text.replace(/"'/gi, '')
                   )
                 }
                 value={
@@ -135,7 +134,9 @@ class InputAtom extends React.Component<IProps, IState> {
               editable={this.props.editable}
               placeholder={this.props.placeholder}
               placeholderTextColor={color.inactive}
-              onChangeText={text => this.props.getValue(text)}
+              onChangeText={text =>
+                this.props.getValue(text.replace(/"'/gi, ''))
+              }
               value={this.props.defaultValue}
             />
           </React.Fragment>
@@ -199,7 +200,7 @@ const styles = StyleSheet.create({
     color: color.principal,
     fontSize: 16,
     // marginTop: 6,
-    height: 55,
+    height: 45,
     top: Platform.OS == 'ios' ? 6 : 6
   },
   multilineText: {
