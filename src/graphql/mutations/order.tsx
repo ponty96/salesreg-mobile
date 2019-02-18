@@ -178,6 +178,7 @@ export const UpdateInvoice = gql`
           refId
           shareLink
           amountPaid
+          allowsSplitPayment
           user {
             lastName
             firstName
@@ -189,7 +190,6 @@ export const UpdateInvoice = gql`
             charge
             discount
             amountPaid
-            allowsSplitPayment
             date
             location {
               street1

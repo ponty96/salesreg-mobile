@@ -208,17 +208,12 @@ function isRequired(_value) {
 
 function validateSocialMediaUsername(_value) {
   let fieldValid = true,
-    errorMessage = '',
-    domainPattern = /^(?:https?:\/\/)?\w+(?:\.\w+)?(?:\.[A-Z]{2,3})+$/gi
+    errorMessage = ''
 
   if (_value[0] == '@' && _value.length > 0) {
     fieldValid = false
     errorMessage = 'Username should be entered without the @ symbol.'
-  } else if (domainPattern.test(_value.trim()) && _value.length > 0) {
-    fieldValid = false
-    errorMessage =
-      'Invalid username format. Enter username in the form e.g username'
-  } 
+  }
 
   return { fieldValid, errorMessage }
 }
