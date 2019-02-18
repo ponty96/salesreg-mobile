@@ -25,6 +25,7 @@ export const LoginUserMutationGQL = gql`
               id
               title
               saleCharge
+              shareLink
               contactEmail
               about
               currency
@@ -95,6 +96,7 @@ export const RegisterUserMutationGQL = gql`
               saleCharge
               title
               slug
+              shareLink
               contactEmail
               about
               legalDocuments {
@@ -153,6 +155,7 @@ export const AddUserCompanyMutationGQL = gql`
           title
           slug
           contactEmail
+          shareLink
           about
           currency
           facebook

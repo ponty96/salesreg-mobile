@@ -1,9 +1,18 @@
-import { StyleSheet, View, Text, TouchableWithoutFeedback } from 'react-native'
+import {
+  StyleSheet,
+  View,
+  Text,
+  TouchableWithoutFeedback,
+  Linking,
+  Easing,
+  Animated
+} from 'react-native'
 import React from 'react'
 import { Left, Right, Title } from 'native-base'
 import Icon from '../../Atom/Icon'
 import { color } from '../../Style/Color'
 import { SearchAtom } from '../../Atom/SearchAtom'
+import { UserContext } from '../../context/UserContext'
 
 export interface IProps {
   title: string
@@ -44,15 +53,51 @@ export interface IProps {
     placeholder: string
     onSearch: (text) => void
   }
+  user?: any
 }
 
-export default class BaseHeader extends React.PureComponent<IProps> {
+class BaseHeader extends React.PureComponent<IProps> {
+  isImagePoped: boolean = true
+
+  state = {
+    scale: new Animated.Value(1)
+  }
+
   static defaultProps = {
     leftIconTitle: 'md-menu',
     leftIconType: 'IonIcons',
-    rightIconTitle: 'dots-three-horizontal',
-    rightIconType: 'Entypo',
     hideRightMenu: false
+  }
+
+  componentDidMount() {
+    this.animateRocket()
+  }
+
+  animateRocket = () => {
+    Animated.timing(this.state.scale, {
+      toValue: this.isImagePoped ? 1 : 1.2,
+      duration: 1000,
+      useNativeDriver: true,
+      easing: Easing.inOut(Easing.linear)
+    }).start(animation => {
+      this.isImagePoped = !this.isImagePoped
+      if (animation.finished) {
+        this.animateRocket()
+      }
+    })
+  }
+
+  openSite = () => {
+    let {
+      user: {
+        company: { shareLink }
+      }
+    } = this.props
+    Linking.canOpenURL(shareLink).then(supported => {
+      if (supported) {
+        Linking.openURL(shareLink).catch(() => null)
+      }
+    })
   }
 
   render() {
@@ -78,13 +123,30 @@ export default class BaseHeader extends React.PureComponent<IProps> {
           <Title style={styles.title}>{props.title}</Title>
           {!this.props.hideRightMenu ? (
             <Right>
-              <TouchableWithoutFeedback onPress={this.props.onPressRightIcon}>
+              <TouchableWithoutFeedback
+                onPress={
+                  !this.props.rightIconTitle
+                    ? this.openSite
+                    : this.props.onPressRightIcon
+                }
+              >
                 <View style={[styles.rightWrapper, this.props.rightIconStyle]}>
-                  <Icon
-                    name={this.props.rightIconTitle}
-                    style={styles.searchIcon}
-                    type={this.props.rightIconType}
-                  />
+                  {!this.props.rightIconTitle ? (
+                    <Animated.Image
+                      source={require('../../../assets-v1/rocket.png')}
+                      style={{
+                        height: 25,
+                        width: 25,
+                        transform: [{ scale: this.state.scale }]
+                      }}
+                    />
+                  ) : (
+                    <Icon
+                      name={this.props.rightIconTitle}
+                      style={styles.searchIcon}
+                      type={this.props.rightIconType}
+                    />
+                  )}
                   {this.props.rightText && (
                     <Text style={styles.rightText}>{this.props.rightText}</Text>
                   )}
@@ -100,6 +162,16 @@ export default class BaseHeader extends React.PureComponent<IProps> {
     )
   }
 }
+
+const _BaseHeader: any = props => (
+  <UserContext.Consumer>
+    {({ user }) => <BaseHeader {...props} user={user} />}
+  </UserContext.Consumer>
+)
+
+_BaseHeader.defaultProps = BaseHeader.defaultProps
+
+export default _BaseHeader
 
 const styles = StyleSheet.create({
   header: {

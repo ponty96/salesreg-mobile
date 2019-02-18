@@ -13,6 +13,7 @@ export const UpdateCompanyGQL = gql`
           saleCharge
           id
           title
+          shareLink
           slug
           contactEmail
           about
