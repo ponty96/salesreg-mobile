@@ -92,8 +92,8 @@ class InputAtom extends React.Component<IProps, IState> {
                   this.props.getValue(
                     this.props.keyboardType == 'phone-pad' ||
                       this.props.keyboardType == 'numeric'
-                      ? text.replace(/,"'/gi, '')
-                      : text.replace(/"'/gi, '')
+                      ? text.replace(/,|"/gi, '')
+                      : text.replace(/"|'/gi, '')
                   )
                 }
                 value={

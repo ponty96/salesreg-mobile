@@ -1,18 +1,18 @@
 import React from 'react'
-import FormStepperContainer from '../Container/Form/StepperContainer'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Mutation } from 'react-apollo'
-import { parseFieldErrors } from '../Functions'
-import AppSpinner from '../Components/Spinner'
-import { UserContext } from '../context/UserContext'
-import { UpdateInvoice } from '../graphql/mutations/order'
+import { parseFieldErrors } from '../../Functions'
+import AppSpinner from '../../Components/Spinner'
+import { UserContext } from '../../context/UserContext'
+import { UpdateInvoice } from '../../graphql/mutations/order'
 import moment from 'moment'
 import {
   ListCompanySalesGQL,
   ListCompanyInvoicesGQL
-} from '../graphql/queries/order'
+} from '../../graphql/queries/order'
 import { NavigationActions } from 'react-navigation'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   user?: any
@@ -22,10 +22,11 @@ interface IProps {
 
 interface IState {
   dueDate?: string
+  allowsSplitPayment: string
   fieldErrors?: any
 }
 
-class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
+class UpdateInvoicesSplitPayment extends React.PureComponent<IProps, IState> {
   static navigationOptions = {
     header: null
   }
@@ -34,6 +35,10 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
     dueDate: moment(this.props.navigation.state.params.invoice.dueDate).format(
       'YYYY-MM-DD'
     ),
+    allowsSplitPayment: this.props.navigation.state.params.invoice
+      .allowsSplitPayment
+      ? 'Yes'
+      : 'No',
     fieldErrors: null
   }
 
@@ -71,7 +76,10 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
     })
 
     let banner = NotificationBanner(
-      configureNotificationBanner('UpdateInvoiceDueDate')
+      configureNotificationBanner('UpdateInvoicesSplitPayment', {
+        allowsSplitPayment:
+          this.state.allowsSplitPayment == 'Yes' ? true : false
+      })
     )
     banner.show({ bannerPosition: 'bottom' })
 
@@ -91,7 +99,11 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
 
     return {
       invoiceId: id,
-      invoice: { dueDate: this.state.dueDate }
+      invoice: {
+        dueDate: this.state.dueDate,
+        allowsSplitPayment:
+          this.state.allowsSplitPayment == 'Yes' ? true : false
+      }
     }
   }
 
@@ -147,17 +159,17 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
                 }
                 steps={[
                   {
-                    stepTitle: "Let's set a new invoice due date",
+                    stepTitle: "Let's allow part payment on this invoice?",
                     formFields: [
                       {
-                        label: 'When do you want to extend the invoice to?',
-                        name: 'dueDate',
-                        placeholder: 'e.g 06/23/2018',
+                        label:
+                          'Do you want to allow part payment on this invoice?',
+                        name: 'allowsSplitPayment',
+                        placeholder: 'e.g no',
                         validators: ['required'],
                         type: {
-                          type: 'date',
-                          minDate: new Date(),
-                          maxDate: new Date('1 January 2030')
+                          type: 'radio',
+                          options: ['Yes', 'No']
                         }
                       }
                     ],
@@ -175,10 +187,11 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
 
 const _UpdateInvoiceDueDate: any = props => (
   <UserContext.Consumer>
-    {({ user }) => <UpdateInvoiceDueDate {...props} user={user} />}
+    {({ user }) => <UpdateInvoicesSplitPayment {...props} user={user} />}
   </UserContext.Consumer>
 )
 
-_UpdateInvoiceDueDate.navigationOptions = UpdateInvoiceDueDate.navigationOptions
+_UpdateInvoiceDueDate.navigationOptions =
+  UpdateInvoicesSplitPayment.navigationOptions
 
 export default _UpdateInvoiceDueDate

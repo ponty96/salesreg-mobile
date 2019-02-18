@@ -92,7 +92,8 @@ import UpsertBankScreen from '../Screen/UpsertBankScreen'
 import InvoiceDetailsScreen from '../Screen/InvoiceDetailsScreen'
 import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
-import UpdateInvoiceDueDate from '../Screen/UpdateInvoiceDueDate'
+import UpdateInvoiceDueDate from '../Screen/Invoices/UpdateInvoiceDueDate'
+import UpdateInvoicesSplitPayment from '../Screen/Invoices/UpdateInvoicesSplitPayment'
 
 import IncomeScreen from '../Screen/IncomeScreen'
 
@@ -122,6 +123,9 @@ const businessStack = StackNavigator(
     },
     InvoiceDetails: {
       screen: InvoiceDetailsScreen
+    },
+    UpdateInvoicesSplitPayment: {
+      screen: UpdateInvoicesSplitPayment
     },
     UpdateInvoiceDueDate: {
       screen: UpdateInvoiceDueDate
