@@ -45,6 +45,7 @@ import DocumentUploadAtom from '../../Atom/Form/DocumentUploadAtom'
 import AddExpenseItemsList from '../../Atom/Form/AddExpenseItemsList'
 import AddSalesOrderItemsList from '../../Atom/Form/AddSalesOrderItemsList'
 import MultiSelectPickerAtom from '../../Atom/Form/MultiSelectPicker'
+import AddSpecialOfferItemsList from '../../Atom/Form/AddSpecialOfferItemsList'
 import ProductListAtom from '../../Atom/Form/ProductListAtom'
 import TagInput from '../../Atom/Form/TagInput'
 import AsyncPickerAtom from '../../Atom/Form/AsyncPickerAtom'
@@ -66,6 +67,7 @@ interface FieldType {
     | 'date'
     | 'expense-items'
     | 'sales-order-items'
+    | 'special-offer-items'
     | 'document-upload'
     | 'multi-picker'
     | 'tag-input'
@@ -101,6 +103,7 @@ type validatorTypes =
   | 'social-media-username'
   | 'expense-item'
   | 'alpha-numerics'
+  | 'special-offer'
 
 export interface FormField {
   label: string
@@ -565,6 +568,18 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
               error={fieldErrors && fieldErrors[name]}
               key={`${type}-${index}`}
               salesItems={formData[name]}
+              onUpdateItems={(items: any) => {
+                this.checkValidityOnValueChange(items, name, validators)
+                this.props.updateValueChange(name, items)
+              }}
+            />
+          )
+        case 'special-offer-items':
+          return (
+            <AddSpecialOfferItemsList
+              error={fieldErrors && fieldErrors[name]}
+              key={`${type}-${index}`}
+              offerItems={formData[name]}
               onUpdateItems={(items: any) => {
                 this.checkValidityOnValueChange(items, name, validators)
                 this.props.updateValueChange(name, items)

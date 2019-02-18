@@ -15,7 +15,7 @@ const NavigationalInformation = (props: IProps) => (
           <Text style={styles.homeText}>Welcome {props.username}!</Text>
         </View>
         <Text style={[styles.text, { marginVertical: 20 }]}>
-          Tap the menu icon on the top right hand corner of the screen to find
+          Tap the menu icon on the top left hand corner of the screen to find
           all the menu options you will be needing:
         </Text>
         <View style={styles.section}>

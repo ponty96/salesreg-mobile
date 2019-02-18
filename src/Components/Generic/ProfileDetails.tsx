@@ -158,11 +158,16 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
           style={{ width: '100%', height: 280, borderRadius: 0 }}
         />
       )
-    } else if (this.props.imageCategory == 'profile') {
+    } else if (
+      this.props.imageCategory == 'profile' ||
+      this.props.imageCategory == 'event'
+    ) {
       return (
         <Icon
           type="Ionicons"
-          name="ios-person"
+          name={
+            this.props.imageCategory == 'profile' ? 'ios-person' : 'md-calendar'
+          }
           style={{ fontSize: 250, color: '#616161' }}
         />
       )
