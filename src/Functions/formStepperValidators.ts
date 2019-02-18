@@ -218,11 +218,7 @@ function validateSocialMediaUsername(_value) {
     fieldValid = false
     errorMessage =
       'Invalid username format. Enter username in the form e.g username'
-  } else if (/\./gi.test(_value) && _value.length > 0) {
-    fieldValid = false
-    errorMessage =
-      'Invalid username format. Username contains 1 or more invalid character. Enter username in the form e.g username'
-  }
+  } 
 
   return { fieldValid, errorMessage }
 }
