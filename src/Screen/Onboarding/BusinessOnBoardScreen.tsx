@@ -1,5 +1,5 @@
 import React from 'react'
-import { Alert } from 'react-native'
+import { Alert, Text } from 'react-native'
 import ThirdStep from '../../Components/SignUp/ThirdStep'
 import LastStep from '../../Components/SignUp/LastStep'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
@@ -150,7 +150,17 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                   {
                     label: 'How should customers call you?',
                     placeholder: 'E.g StacknBit',
-                    underneathText: `${slug}.yipcart.com will be your website domain name. The slug forms your business domain name. Please make sure that its in lowercase and avoid adding spacing. Only Alphanumerics are allowed also`,
+                    underneathText: (
+                      <Text>
+                        <Text style={{ fontFamily: 'AvenirNext-Bold' }}>
+                          {slug}.yipcart.com
+                        </Text>{' '}
+                        will be your website domain name. The slug forms your
+                        business domain name. Please make sure that its in
+                        lowercase and avoid adding spacing. Only Alphanumerics
+                        are allowed also
+                      </Text>
+                    ),
                     type: {
                       type: 'input',
                       keyboardType: 'default'
