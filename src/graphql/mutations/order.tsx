@@ -122,7 +122,14 @@ export const UpsertSaleOrder = gql`
           amountPaid
           invoice {
             id
+            amount
             refId
+            amountPaid
+            allowsSplitPayment
+            user {
+              lastName
+              firstName
+            }
             dueDate
             shareLink
           }
