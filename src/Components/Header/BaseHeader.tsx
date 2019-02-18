@@ -3,8 +3,9 @@ import {
   View,
   Text,
   TouchableWithoutFeedback,
-  Image,
-  Linking
+  Linking,
+  Easing,
+  Animated
 } from 'react-native'
 import React from 'react'
 import { Left, Right, Title } from 'native-base'
@@ -56,10 +57,34 @@ export interface IProps {
 }
 
 class BaseHeader extends React.PureComponent<IProps> {
+  isImagePoped: boolean = true
+
+  state = {
+    scale: new Animated.Value(1)
+  }
+
   static defaultProps = {
     leftIconTitle: 'md-menu',
     leftIconType: 'IonIcons',
     hideRightMenu: false
+  }
+
+  componentDidMount() {
+    this.animateRocket()
+  }
+
+  animateRocket = () => {
+    Animated.timing(this.state.scale, {
+      toValue: this.isImagePoped ? 1 : 1.2,
+      duration: 1000,
+      useNativeDriver: true,
+      easing: Easing.inOut(Easing.linear)
+    }).start(animation => {
+      this.isImagePoped = !this.isImagePoped
+      if (animation.finished) {
+        this.animateRocket()
+      }
+    })
   }
 
   openSite = () => {
@@ -107,9 +132,13 @@ class BaseHeader extends React.PureComponent<IProps> {
               >
                 <View style={[styles.rightWrapper, this.props.rightIconStyle]}>
                   {!this.props.rightIconTitle ? (
-                    <Image
+                    <Animated.Image
                       source={require('../../../assets-v1/rocket.png')}
-                      style={{ height: 25, width: 25 }}
+                      style={{
+                        height: 25,
+                        width: 25,
+                        transform: [{ scale: this.state.scale }]
+                      }}
                     />
                   ) : (
                     <Icon
