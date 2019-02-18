@@ -1,18 +1,18 @@
 import React from 'react'
-import FormStepperContainer from '../Container/Form/StepperContainer'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Mutation } from 'react-apollo'
-import { parseFieldErrors } from '../Functions'
-import AppSpinner from '../Components/Spinner'
-import { UserContext } from '../context/UserContext'
-import { UpdateInvoice } from '../graphql/mutations/order'
+import { parseFieldErrors } from '../../Functions'
+import AppSpinner from '../../Components/Spinner'
+import { UserContext } from '../../context/UserContext'
+import { UpdateInvoice } from '../../graphql/mutations/order'
 import moment from 'moment'
 import {
   ListCompanySalesGQL,
   ListCompanyInvoicesGQL
-} from '../graphql/queries/order'
+} from '../../graphql/queries/order'
 import { NavigationActions } from 'react-navigation'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   user?: any

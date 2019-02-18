@@ -86,7 +86,8 @@ import UpsertBankScreen from '../Screen/UpsertBankScreen'
 import InvoiceDetailsScreen from '../Screen/InvoiceDetailsScreen'
 import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
-import UpdateInvoiceDueDate from '../Screen/UpdateInvoiceDueDate'
+import UpdateInvoiceDueDate from '../Screen/Invoices/UpdateInvoiceDueDate'
+import UpdateInvoicesSplitPayment from '../Screen/Invoices/UpdateInvoicesSplitPayment'
 
 import IncomeScreen from '../Screen/IncomeScreen'
 
@@ -94,218 +95,221 @@ import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
 
 const businessStack = StackNavigator(
-  {
-    Home: {
-      screen: HomeScreen
-    },
-    Employees: {
-      screen: EmployeesScreen
-    },
-    NewEmployee: {
-      screen: EmployeeForm
-    },
+	{
+		Home: {
+			screen: HomeScreen
+		},
+		Employees: {
+			screen: EmployeesScreen
+		},
+		NewEmployee: {
+			screen: EmployeeForm
+		},
 
-    // Transactions
-    Banks: {
-      screen: BankScreen
-    },
-    BankDetails: BankDetailsScreen,
-    UpsertBank: UpsertBankScreen,
-    Income: {
-      screen: IncomeScreen
-    },
-    InvoiceDetails: {
-      screen: InvoiceDetailsScreen
-    },
-    UpdateInvoiceDueDate: {
-      screen: UpdateInvoiceDueDate
-    },
-    Invoices: {
-      screen: InvoicesScreen
-    },
-    UpsertInvoice: {
-      screen: UpsertInvoiceScreen
-    },
+		// Transactions
+		Banks: {
+			screen: BankScreen
+		},
+		BankDetails: BankDetailsScreen,
+		UpsertBank: UpsertBankScreen,
+		Income: {
+			screen: IncomeScreen
+		},
+		InvoiceDetails: {
+			screen: InvoiceDetailsScreen
+		},
+		UpdateInvoiceDueDate: {
+			screen: UpdateInvoiceDueDate
+		},
+		UpdateInvoicesSplitPayment: {
+			screen: UpdateInvoicesSplitPayment
+		},
+		Invoices: {
+			screen: InvoicesScreen
+		},
+		UpsertInvoice: {
+			screen: UpsertInvoiceScreen
+		},
 
-    // Setting ROUTES
-    ProfileSettings: {
-      screen: ProfileSettingsScreen
-    },
-    UserProfile: {
-      screen: UserProfileScreen
-    },
-    BusinessProfile: {
-      screen: BusinessProfileScreen
-    },
-    EditUserProfile: {
-      screen: EditUserProfileScreen
-    },
-    EditBusinessProfile: {
-      screen: EditBusinessProfileScreen
-    },
+		// Setting ROUTES
+		ProfileSettings: {
+			screen: ProfileSettingsScreen
+		},
+		UserProfile: {
+			screen: UserProfileScreen
+		},
+		BusinessProfile: {
+			screen: BusinessProfileScreen
+		},
+		EditUserProfile: {
+			screen: EditUserProfileScreen
+		},
+		EditBusinessProfile: {
+			screen: EditBusinessProfileScreen
+		},
 
-    // STORE ROUTES
-    Products: {
-      screen: ProductScreen
-    },
-    CreateProduct: {
-      screen: CreateProductScreen
-    },
-    UpdateProduct: UpdateProductScreen,
-    UpsertProductRestock: UpsertProductRestockScreen,
-    UpdateProductGroupOptions: UpdateProductGroupOptionsScreen,
-    AddProductVariant: AddProductVariantScreen,
-    ProductDetails: {
-      screen: ProductDetailsScreen
-    },
+		// STORE ROUTES
+		Products: {
+			screen: ProductScreen
+		},
+		CreateProduct: {
+			screen: CreateProductScreen
+		},
+		UpdateProduct: UpdateProductScreen,
+		UpsertProductRestock: UpsertProductRestockScreen,
+		UpdateProductGroupOptions: UpdateProductGroupOptionsScreen,
+		AddProductVariant: AddProductVariantScreen,
+		ProductDetails: {
+			screen: ProductDetailsScreen
+		},
 
-    Categories: CategoriesScreen,
-    UpsertCategory: UpsertCategoryScreen,
+		Categories: CategoriesScreen,
+		UpsertCategory: UpsertCategoryScreen,
 
-    // Options
-    Options: OptionsScreen,
-    UpsertOption: UpsertOptionScreen,
+		// Options
+		Options: OptionsScreen,
+		UpsertOption: UpsertOptionScreen,
 
-    // Webstore settings
-    WebstoreOptions: WebstoreOptionsScreen,
-    UpsertCoverPhoto: UpsertCoverPhotoScreen,
-    UpsertDocuments: UpsertDocumentsScreen,
-    Documents: DocumentsScreen,
+		// Webstore settings
+		WebstoreOptions: WebstoreOptionsScreen,
+		UpsertCoverPhoto: UpsertCoverPhotoScreen,
+		UpsertDocuments: UpsertDocumentsScreen,
+		Documents: DocumentsScreen,
 
-    // Expenses
-    Expenses: ExpensesScreen,
-    UpsertExpense: UpsertExpenseScreen,
-    ExpensesDetails: ExpensesDetailsScreen,
+		// Expenses
+		Expenses: ExpensesScreen,
+		UpsertExpense: UpsertExpenseScreen,
+		ExpensesDetails: ExpensesDetailsScreen,
 
-    // Order
-    OrderStatusChange: OrderStatusScreen,
+		// Order
+		OrderStatusChange: OrderStatusScreen,
 
-    // Sales Order
-    SalesDetails: SalesOrderDetailsScreen,
-    Sales: SalesOrderScreen,
-    SalesOrderDailySales: SalesOrderDailySalesScreen,
-    UpsertSales: UpsertSalesOrderScreen,
+		// Sales Order
+		SalesDetails: SalesOrderDetailsScreen,
+		Sales: SalesOrderScreen,
+		SalesOrderDailySales: SalesOrderDailySalesScreen,
+		UpsertSales: UpsertSalesOrderScreen,
 
-    // Contact
-    Customers: {
-      screen: CustomerScreen
-    },
-    UpsertCustomer: {
-      screen: UpsertCustomerScreen
-    },
-    CustomerDetails: {
-      screen: CustomerDetailScreen
-    },
-    CustomerPaymentActivity
-  },
-  {
-    initialRouteName: 'Home',
-    navigationOptions: ({ navigation }: any) => ({
-      header: (
-        <Header
-          title="Products"
-          // tslint:disable-next-line:jsx-no-lambda
-          onPressLeftIcon={() => {
-            navigation.navigate('DrawerToggle')
-          }}
-          // tslint:disable-next-line:jsx-no-lambda
-          onPressRightIcon={() => console.log('Search icon pressed.')}
-        />
-      )
-    })
-  }
+		// Contact
+		Customers: {
+			screen: CustomerScreen
+		},
+		UpsertCustomer: {
+			screen: UpsertCustomerScreen
+		},
+		CustomerDetails: {
+			screen: CustomerDetailScreen
+		},
+		CustomerPaymentActivity
+	},
+	{
+		initialRouteName: 'Home',
+		navigationOptions: ({ navigation }: any) => ({
+			header: (
+				<Header
+					title="Products"
+					// tslint:disable-next-line:jsx-no-lambda
+					onPressLeftIcon={() => {
+						navigation.navigate('DrawerToggle')
+					}}
+					// tslint:disable-next-line:jsx-no-lambda
+					onPressRightIcon={() => console.log('Search icon pressed.')}
+				/>
+			)
+		})
+	}
 )
 
 const DrawerStack = DrawerNavigator(
-  {
-    ViewBusiness: businessStack
-  },
-  {
-    initialRouteName: 'ViewBusiness',
-    contentComponent: (props: any) => <Sidebar {...props} />,
-    contentOptions: {
-      activeTintColor: color.secondary,
-      activeBackgroundColor: color.primary,
-      inactiveTintColor: color.primary
-    }
-  }
+	{
+		ViewBusiness: businessStack
+	},
+	{
+		initialRouteName: 'ViewBusiness',
+		contentComponent: (props: any) => <Sidebar {...props} />,
+		contentOptions: {
+			activeTintColor: color.secondary,
+			activeBackgroundColor: color.primary,
+			inactiveTintColor: color.primary
+		}
+	}
 )
 
 const AuthStack = StackNavigator(
-  {
-    OnBoarding: LandingScreen,
-    Login: LoginScreen,
-    Signup: UserOnboardScreen
-  },
-  {
-    headerMode: 'none'
-  }
+	{
+		OnBoarding: LandingScreen,
+		Login: LoginScreen,
+		Signup: UserOnboardScreen
+	},
+	{
+		headerMode: 'none'
+	}
 )
 
 const BusinessOnBoardStack = StackNavigator(
-  {
-    BusinessOnboard: BusinessOnboardScreen
-  },
-  {
-    headerMode: 'none'
-  }
+	{
+		BusinessOnboard: BusinessOnboardScreen
+	},
+	{
+		headerMode: 'none'
+	}
 )
 
 interface IProps {
-  client: any
+	client: any
 }
 
 interface IState {
-  display: boolean
+	display: boolean
 }
 
 export default class Routes extends React.Component<IProps, IState> {
-  state = {
-    display: false
-  }
+	state = {
+		display: false
+	}
 
-  componentDidMount() {
-    /**
+	componentDidMount() {
+		/**
      * We would be simulating a very small timeout
      * This is needed to prevent glitches in the screen when the user opens the app at first
      */
-    setTimeout(
-      () =>
-        this.setState({ display: true }, () => {
-          SplashScreen.hide()
-        }),
-      500
-    )
-  }
+		setTimeout(
+			() =>
+				this.setState({ display: true }, () => {
+					SplashScreen.hide()
+				}),
+			500
+		)
+	}
 
-  render() {
-    const { client } = this.props,
-      { display } = this.state
+	render() {
+		const { client } = this.props,
+			{ display } = this.state
 
-    return (
-      <Query query={AuthenticateQueryGQL}>
-        {({ loading, error, data }) => {
-          console.log('data', data)
-          console.log('loading', loading)
-          if (loading) {
-            return <Text>{`Loading data here`}</Text>
-          }
-          if (error) {
-            return <Text>{`Error! ${error.message}`}</Text>
-          }
-          if (!data.authenticate && display) {
-            console.log('Oya ', loading)
-            return <AuthStack screenProps={{ client }} />
-          } else {
-            if (data.user && !data.user.company && display) {
-              return <BusinessOnBoardStack screenProps={{ client }} />
-            } else if (display) {
-              return <DrawerStack screenProps={{ client }} />
-            }
-            return null
-          }
-        }}
-      </Query>
-    )
-  }
+		return (
+			<Query query={AuthenticateQueryGQL}>
+				{({ loading, error, data }) => {
+					console.log('data', data)
+					console.log('loading', loading)
+					if (loading) {
+						return <Text>{`Loading data here`}</Text>
+					}
+					if (error) {
+						return <Text>{`Error! ${error.message}`}</Text>
+					}
+					if (!data.authenticate && display) {
+						console.log('Oya ', loading)
+						return <AuthStack screenProps={{ client }} />
+					} else {
+						if (data.user && !data.user.company && display) {
+							return <BusinessOnBoardStack screenProps={{ client }} />
+						} else if (display) {
+							return <DrawerStack screenProps={{ client }} />
+						}
+						return null
+					}
+				}}
+			</Query>
+		)
+	}
 }
