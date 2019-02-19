@@ -75,7 +75,7 @@ class BaseHeader extends React.PureComponent<IProps> {
 
   animateRocket = () => {
     Animated.timing(this.state.scale, {
-      toValue: this.isImagePoped ? 1 : 1.2,
+      toValue: this.isImagePoped ? 1 : 1.4,
       duration: 1000,
       useNativeDriver: true,
       easing: Easing.inOut(Easing.linear)
@@ -137,7 +137,11 @@ class BaseHeader extends React.PureComponent<IProps> {
                       style={{
                         height: 25,
                         width: 25,
-                        transform: [{ scale: this.state.scale }]
+                        transform: [
+                          {
+                            scale: this.state.scale
+                          }
+                        ]
                       }}
                     />
                   ) : (
