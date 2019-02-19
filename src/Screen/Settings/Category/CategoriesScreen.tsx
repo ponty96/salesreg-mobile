@@ -140,7 +140,7 @@ class CategoriesScreen extends React.Component<IProps, IState> {
                       category: item
                     })
                   }
-                  emptyListText={`Your business grows richer when your \nexpenses are under control. No better \nway to control your expenses than keeping a detailed record of your \nspendings \n\nLet's proceed by tapping the`}
+                  emptyListText={`Organizing your products into categories makes it cleaner, and a lot easier for your customers to both understand them, and to relate with them quickly. \n\nTo start creating categories, touch the`}
                   headerText="Great habit keeping records!"
                   fabRouteName="UpsertCategory"
                   fabIconName="apps"

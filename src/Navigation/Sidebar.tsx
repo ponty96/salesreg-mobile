@@ -243,7 +243,7 @@ class SideBar extends PureComponent<IProps, IState> {
                 }
               ]}
             />
-            <SidebarItem
+            {/* <SidebarItem
               title="OFFERS"
               navigate={this.handleNavigation}
               activeRoute={this.state.activeRoute}
@@ -255,7 +255,7 @@ class SideBar extends PureComponent<IProps, IState> {
                   iconType: 'MaterialIcons'
                 }
               ]}
-            />
+            /> */}
             <SidebarItem
               title="TRANSACTIONS"
               navigate={this.handleNavigation}
