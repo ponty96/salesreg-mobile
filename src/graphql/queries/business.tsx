@@ -31,3 +31,13 @@ export const ListCompanyBanksGQL = gql`
     }
   }
 `
+
+export const ListCompanyDeliveryFees = gql`
+  query listCompanyDeliveryFees($companyId: Uuid!) {
+    listCompanyDeliveryFees(companyId: $companyId) {
+      id
+      location
+      price
+    }
+  }
+`

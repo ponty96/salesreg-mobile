@@ -91,6 +91,14 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
                 iconType: 'MaterialCommunityIcons'
               },
               {
+                section: 'Manage Delivery Fees',
+                routeName: 'DeliveryFees',
+                showRightCaret: true,
+                description: 'Manage the delivery fees of your customers',
+                icon: 'truck-delivery',
+                iconType: 'MaterialCommunityIcons'
+              },
+              {
                 section: 'Charge Calculator',
                 routeName: 'ChargeCalculator',
                 showRightCaret: true,

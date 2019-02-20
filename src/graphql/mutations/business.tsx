@@ -167,3 +167,37 @@ export const DeleteLegalDocument = gql`
     }
   }
 `
+
+export const CreateDeliveryFee = gql`
+  mutation createDeliveryFee(
+    $companyId: Uuid!
+    $location: String!
+    $price: String!
+    $userId: Uuid!
+  ) {
+    createDeliveryFee(
+      companyId: $companyId
+      location: $location
+      price: $price
+      userId: $userId
+    ) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
+export const DeleteDeliveryFee = gql`
+  mutation deleteDeliveryFee($deliveryFeeId: Uuid!) {
+    deleteDeliveryFee(deliveryFeeId: $deliveryFeeId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
