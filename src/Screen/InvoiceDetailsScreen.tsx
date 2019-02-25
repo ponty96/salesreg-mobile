@@ -40,25 +40,6 @@ export default class InvoicesScreen extends React.Component<IProps> {
     })
   }
 
-  onPressEditInvoiceSplitPayment = () => {
-    let {
-      navigation: {
-        state: {
-          params: {
-            sales: {
-              invoice: { id, dueDate, allowsSplitPayment }
-            },
-            from
-          }
-        }
-      }
-    } = this.props
-    this.props.navigation.navigate('UpdateInvoicesSplitPayment', {
-      invoice: { id, dueDate, allowsSplitPayment },
-      from
-    })
-  }
-
   renderHeader = (amount, amountPaid, sales, from) => {
     return Number(amount) - amountPaid > 0 ? (
       <Header
@@ -120,7 +101,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
                 amountPaid,
                 items,
                 discount,
-                invoice: { dueDate, allowsSplitPayment },
+                invoice: { dueDate },
                 date
               },
               sales,
@@ -164,14 +145,6 @@ export default class InvoicesScreen extends React.Component<IProps> {
                 listItemStyle={styles.listWrapper}
               />
             ))}
-            <ProfileListAtom
-              section={`Allow split payment?: ${
-                allowsSplitPayment ? 'yes' : 'no'
-              }`}
-              value={'Edit'}
-              type={'button'}
-              onPress={this.onPressEditInvoiceSplitPayment}
-            />
             <ListItemAtom
               label="Discount"
               value={`\u20A6 ${discount}`}
