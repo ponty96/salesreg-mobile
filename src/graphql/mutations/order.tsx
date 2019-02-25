@@ -125,7 +125,6 @@ export const UpsertSaleOrder = gql`
             amount
             refId
             amountPaid
-            allowsSplitPayment
             user {
               lastName
               firstName
@@ -178,7 +177,6 @@ export const UpdateInvoice = gql`
           refId
           shareLink
           amountPaid
-          allowsSplitPayment
           user {
             lastName
             firstName
