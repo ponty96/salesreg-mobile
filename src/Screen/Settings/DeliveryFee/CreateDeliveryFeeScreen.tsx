@@ -9,6 +9,7 @@ import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 import { UserContext } from '../../../context/UserContext'
+import { States } from '../../../utilities/data/picker-lists'
 
 interface IProps {
   navigation: any
@@ -17,8 +18,9 @@ interface IProps {
 }
 
 interface IState {
-  location: String
-  price: String
+  state: String
+  region: String
+  fee: String
   fieldErrors: any
   isStandardFee: String
 }
@@ -29,8 +31,9 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
   }
 
   state = {
-    location: '',
-    price: '',
+    state: '',
+    region: '',
+    fee: '',
     fieldErrors: null,
     isStandardFee: 'No'
   }
@@ -38,9 +41,9 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
   updateState = (key: string, val: any) => {
     let formData = { ...this.state, [key]: val }
     if (key == 'isStandardFee' && val.toLowerCase() == 'yes')
-      formData = { ...formData, location: 'Others' }
+      formData = { ...formData, region: 'Others' }
     else if (key == 'isStandardFee' && val.toLowerCase() == 'no')
-      formData = { ...formData, location: '' }
+      formData = { ...formData, region: '' }
     this.setState({ ...formData })
   }
 
@@ -75,10 +78,22 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
                     },
                     name: 'isStandardFee'
                   },
+                  this.state.isStandardFee.toLowerCase() == 'no'
+                    ? {
+                        label: 'What state is this delivery based on?',
+                        placeholder: 'Touch to choose',
+                        type: {
+                          type: 'picker',
+                          disabled: true,
+                          options: States
+                        },
+                        name: 'state'
+                      }
+                    : null,
                   {
-                    label: 'What location is this delivery fee based on?',
-                    placeholder: 'e.g Lagos',
-                    name: 'location',
+                    label: 'What region is this delivery fee based on?',
+                    placeholder: 'e.g Ikeja',
+                    name: 'region',
                     type: {
                       type: 'input',
                       editable:
@@ -89,9 +104,9 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
                     }
                   },
                   {
-                    label: `How much is the delivery to ${this.state.location.trim()}`,
+                    label: `How much is the delivery to ${this.state.region.trim()} in ${this.state.state.trim()} state`,
                     placeholder: '3000',
-                    name: 'price',
+                    name: 'fee',
                     type: {
                       type: 'input',
                       keyboardType: 'numeric'

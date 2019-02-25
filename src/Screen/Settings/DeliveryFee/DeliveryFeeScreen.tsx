@@ -39,9 +39,9 @@ class DeliveryFeeScreen extends React.Component<IProps, IState> {
   parseData = (item: any, deleteDeliveryFee: (obj: any) => void) => {
     return [
       {
-        firstTopText: item.location,
-        bottomLeftFirstText: item.price,
-        bottomLeftSecondText: '', // item.date
+        firstTopText: item.state,
+        bottomLeftFirstText: item.region,
+        bottomLeftSecondText: item.fee,
         topRightText: ``, // this should be the number of products and services within this category
         showTrash: true,
         onPressTrash: () => {
@@ -56,7 +56,7 @@ class DeliveryFeeScreen extends React.Component<IProps, IState> {
               if (buttonIndex == 0) {
                 this.setState(
                   {
-                    deliveryAddressToDelete: item.location
+                    deliveryAddressToDelete: item.region
                   },
                   () => {
                     deleteDeliveryFee({ variables: { deliveryFeeId: item.id } })

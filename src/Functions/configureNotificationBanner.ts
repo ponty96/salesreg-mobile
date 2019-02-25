@@ -159,7 +159,9 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
     case 'CreateDeliveryFee':
       return {
         title: 'Delivery Fee Created',
-        subtitle: `${params.location} added to delivery fees`
+        subtitle: `A delivery fee was added for ${params.region} in ${
+          params.state
+        } state`
       }
     case 'UpdateCategory':
       return {

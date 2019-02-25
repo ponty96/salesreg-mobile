@@ -171,14 +171,16 @@ export const DeleteLegalDocument = gql`
 export const CreateDeliveryFee = gql`
   mutation createDeliveryFee(
     $companyId: Uuid!
-    $location: String!
-    $price: String!
+    $state: String!
+    $region: String!
+    $fee: String!
     $userId: Uuid!
   ) {
     createDeliveryFee(
       companyId: $companyId
-      location: $location
-      price: $price
+      state: $state
+      region: $region
+      fee: $fee
       userId: $userId
     ) {
       success
