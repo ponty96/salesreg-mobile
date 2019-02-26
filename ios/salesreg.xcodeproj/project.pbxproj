@@ -19,7 +19,7 @@
 		0A158BE121C700BB0090711D /* libART.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A158BDE21C700B00090711D /* libART.a */; };
 		0A178AB421D351EA00B1BCCD /* libRNSentry.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A178AB121D351CF00B1BCCD /* libRNSentry.a */; };
 		0A2A336921CBD44800DA8688 /* libSplashScreen.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A2A336821CBD3D000DA8688 /* libSplashScreen.a */; };
-		0A36BCAB21EC7D8F00F53D38 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A36BCAA21EC7D8F00F53D38 /* GoogleService-Info.plist */; };
+		0A76CEC02225484B0059E713 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 0A76CEBF2225484B0059E713 /* GoogleService-Info.plist */; };
 		0A91936221EC91A000E19671 /* libRNDeviceInfo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A38C10721D4FC09008034B8 /* libRNDeviceInfo.a */; };
 		0A94F4C821F1FAFB00FB4C4C /* libRNDocumentPicker.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0A94F4C721F1FAF100FB4C4C /* libRNDocumentPicker.a */; };
 		0AE0920621F8183D0048874E /* libReactNativeConfig.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0AE091FA21F818310048874E /* libReactNativeConfig.a */; };
@@ -471,8 +471,8 @@
 		0A158BD821C700B00090711D /* ART.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ART.xcodeproj; path = "../node_modules/react-native/Libraries/ART/ART.xcodeproj"; sourceTree = "<group>"; };
 		0A178AAA21D351CE00B1BCCD /* RNSentry.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNSentry.xcodeproj; path = "../node_modules/react-native-sentry/ios/RNSentry.xcodeproj"; sourceTree = "<group>"; };
 		0A2A336321CBD3D000DA8688 /* SplashScreen.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = SplashScreen.xcodeproj; path = "../node_modules/react-native-splash-screen/ios/SplashScreen.xcodeproj"; sourceTree = "<group>"; };
-		0A36BCAA21EC7D8F00F53D38 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A38C0D721D4FC08008034B8 /* RNDeviceInfo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDeviceInfo.xcodeproj; path = "../node_modules/react-native-device-info/ios/RNDeviceInfo.xcodeproj"; sourceTree = "<group>"; };
+		0A76CEBF2225484B0059E713 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		0A94F4C221F1FAF100FB4C4C /* RNDocumentPicker.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RNDocumentPicker.xcodeproj; path = "../node_modules/react-native-document-picker/ios/RNDocumentPicker.xcodeproj"; sourceTree = "<group>"; };
 		0AE091CA21F818260048874E /* ReactNativeConfig.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactNativeConfig.xcodeproj; path = "../node_modules/react-native-config/ios/ReactNativeConfig.xcodeproj"; sourceTree = "<group>"; };
 		0CB83E3C0D5C577A1B3E86C8 /* libPods-salesregTests.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-salesregTests.a"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -804,7 +804,7 @@
 		13B07FAE1A68108700A75B9A /* salesreg */ = {
 			isa = PBXGroup;
 			children = (
-				0A36BCAA21EC7D8F00F53D38 /* GoogleService-Info.plist */,
+				0A76CEBF2225484B0059E713 /* GoogleService-Info.plist */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -1606,7 +1606,7 @@
 			files = (
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
 				13B07FBD1A68108700A75B9A /* LaunchScreen.xib in Resources */,
-				0A36BCAB21EC7D8F00F53D38 /* GoogleService-Info.plist in Resources */,
+				0A76CEC02225484B0059E713 /* GoogleService-Info.plist in Resources */,
 				42E2E8790908492195CA5084 /* avenir-next-bold.ttf in Resources */,
 				73D3FED1A73848FEBF820EDF /* AvenirNext-Bold.ttf in Resources */,
 				F336C5013D3447D5B137A0AB /* AvenirNext-DemiBold.ttf in Resources */,
