@@ -35,7 +35,8 @@ const states = [
   'Sokoto',
   'Taraba',
   'Yobe',
-  'Zamfara'
+  'Zamfara',
+  'Others'
 ]
 
 export default states

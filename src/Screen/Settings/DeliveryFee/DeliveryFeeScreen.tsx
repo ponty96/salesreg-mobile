@@ -40,8 +40,8 @@ class DeliveryFeeScreen extends React.Component<IProps, IState> {
     return [
       {
         firstTopText: item.state,
-        bottomLeftFirstText: item.region,
-        bottomLeftSecondText: item.fee,
+        bottomLeftFirstText: `${item.region}:`,
+        bottomLeftSecondText: `\u20A6${item.fee}`,
         topRightText: ``, // this should be the number of products and services within this category
         showTrash: true,
         onPressTrash: () => {

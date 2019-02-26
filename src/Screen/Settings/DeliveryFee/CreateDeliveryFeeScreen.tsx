@@ -41,9 +41,9 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
   updateState = (key: string, val: any) => {
     let formData = { ...this.state, [key]: val }
     if (key == 'isStandardFee' && val.toLowerCase() == 'yes')
-      formData = { ...formData, region: 'Others' }
+      formData = { ...formData, region: 'Others', state: 'Others' }
     else if (key == 'isStandardFee' && val.toLowerCase() == 'no')
-      formData = { ...formData, region: '' }
+      formData = { ...formData, region: '', state: '' }
     this.setState({ ...formData })
   }
 
@@ -84,7 +84,6 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
                         placeholder: 'Touch to choose',
                         type: {
                           type: 'picker',
-                          disabled: true,
                           options: States
                         },
                         name: 'state'
@@ -140,7 +139,7 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
     delete params.isStandardFee
     delete params.fieldErrors
 
-    return { companyId, userId, ...params }
+    return { deliveryFee: { companyId, userId, ...params } }
   }
 
   onCompleted = async res => {
