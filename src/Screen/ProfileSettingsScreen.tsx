@@ -23,6 +23,7 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
       header: (
         <Header
           title="Settings"
+          onPressRightIcon={() => navigation.navigate('Notifications')}
           onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
         />
       )

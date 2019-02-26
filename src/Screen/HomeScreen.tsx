@@ -56,6 +56,9 @@ export default class HomeScreen extends React.Component<IProps, IState> {
       <React.Fragment>
         <Header
           title="Home"
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
         />
         {this.state.display == 'homescreen' ? (

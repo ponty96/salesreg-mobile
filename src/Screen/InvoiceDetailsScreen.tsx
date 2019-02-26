@@ -63,6 +63,7 @@ export default class InvoicesScreen extends React.Component<IProps> {
       <Header
         title="Invoice Details"
         hideRightMenu
+        onPressRightIcon={() => this.props.navigation.navigate('Notifications')}
         onPressLeftIcon={() => this.props.navigation.goBack()}
       />
     )

@@ -14,6 +14,8 @@ import { color } from '../../Style/Color'
 import { SearchAtom } from '../../Atom/SearchAtom'
 import { UserContext } from '../../context/UserContext'
 
+const NOTIFICATION_COUNT = 5
+
 export interface IProps {
   title: string
   leftIconTitle?: string
@@ -70,7 +72,7 @@ class BaseHeader extends React.PureComponent<IProps> {
   }
 
   componentDidMount() {
-    this.animateRocket()
+    // this.animateRocket()
   }
 
   animateRocket = () => {
@@ -100,6 +102,19 @@ class BaseHeader extends React.PureComponent<IProps> {
     })
   }
 
+  renderNotificationIcon = () => {
+    return (
+      <View>
+        <Icon name="bell-o" type="FontAwesome" style={styles.bell} />
+        {Number(NOTIFICATION_COUNT) > 0 && (
+          <View style={styles.notificationContainer}>
+            <Text style={styles.notificationText}>{NOTIFICATION_COUNT}</Text>
+          </View>
+        )}
+      </View>
+    )
+  }
+
   render() {
     const props = this.props
     return (
@@ -123,28 +138,23 @@ class BaseHeader extends React.PureComponent<IProps> {
           <Title style={styles.title}>{props.title}</Title>
           {!this.props.hideRightMenu ? (
             <Right>
-              <TouchableWithoutFeedback
-                onPress={
-                  !this.props.rightIconTitle
-                    ? this.openSite
-                    : this.props.onPressRightIcon
-                }
-              >
+              <TouchableWithoutFeedback onPress={this.props.onPressRightIcon}>
                 <View style={[styles.rightWrapper, this.props.rightIconStyle]}>
                   {!this.props.rightIconTitle ? (
-                    <Animated.Image
-                      source={require('../../../assets-v1/rocket.png')}
-                      style={{
-                        height: 25,
-                        width: 25,
-                        transform: [
-                          {
-                            scale: this.state.scale
-                          }
-                        ]
-                      }}
-                    />
+                    this.renderNotificationIcon()
                   ) : (
+                    //   <Animated.Image
+                    //   source={require('../../../assets-v1/rocket.png')}
+                    //   style={{
+                    //     height: 25,
+                    //     width: 25,
+                    //     transform: [
+                    //       {
+                    //         scale: this.state.scale
+                    //       }
+                    //     ]
+                    //   }}
+                    // />
                     <Icon
                       name={this.props.rightIconTitle}
                       style={styles.searchIcon}
@@ -216,5 +226,25 @@ const styles = StyleSheet.create({
     width: 25,
     // left: 20,
     fontSize: 26
+  },
+  bell: {
+    fontSize: 23,
+    color: color.black
+  },
+  notificationContainer: {
+    backgroundColor: color.blue,
+    borderRadius: 12.5,
+    width: 23,
+    height: 23,
+    position: 'absolute',
+    top: -7,
+    right: -10,
+    alignItems: 'center',
+    justifyContent: 'center'
+  },
+  notificationText: {
+    color: color.secondary,
+    fontFamily: 'AvenirNext-Bold',
+    fontSize: 12
   }
 })

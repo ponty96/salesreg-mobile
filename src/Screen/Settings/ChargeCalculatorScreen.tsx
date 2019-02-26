@@ -29,6 +29,7 @@ class ChargeCalculatorScreen extends React.PureComponent<IProps> {
           leftIconTitle="md-arrow-back"
           leftIconType="Ionicons"
           onPressLeftIcon={() => navigation.goBack()}
+          onPressRightIcon={() => navigation.navigate('Notifications')}
         />
       )
     }
