@@ -126,6 +126,12 @@ export const ChangeNotificationReadStatus = gql`
         key
         message
       }
+      data {
+        ... on Notification {
+          id
+          readStatus
+        }
+      }
     }
   }
 `

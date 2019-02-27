@@ -7,14 +7,14 @@ import {
   Easing,
   Animated
 } from 'react-native'
+// import { Query } from 'react-apollo'
 import React from 'react'
 import { Left, Right, Title } from 'native-base'
 import Icon from '../../Atom/Icon'
 import { color } from '../../Style/Color'
 import { SearchAtom } from '../../Atom/SearchAtom'
 import { UserContext } from '../../context/UserContext'
-
-const NOTIFICATION_COUNT = 5
+// import { GetUnreadCompanyNotificationsCount } from '../../graphql/queries/business'
 
 export interface IProps {
   title: string
@@ -106,13 +106,31 @@ class BaseHeader extends React.PureComponent<IProps> {
     return (
       <View>
         <Icon name="bell-o" type="FontAwesome" style={styles.bell} />
-        {Number(NOTIFICATION_COUNT) > 0 && (
-          <View style={styles.notificationContainer}>
-            <Text style={styles.notificationText}>{NOTIFICATION_COUNT}</Text>
-          </View>
-        )}
+
+        <View style={styles.notificationContainer}>
+          <Text style={styles.notificationText}>3</Text>
+        </View>
       </View>
     )
+    // <Query
+    //   query={GetUnreadCompanyNotificationsCount}
+    //   notifyOnNetworkStatusChange={true}
+    //   variables={{
+    //     companyId: this.props.user.id
+    //   }}
+    //   fetchPolicy="cache-first"
+    // >
+    //   {({ data }) => (
+    //     <View>
+    //       <Icon name="bell-o" type="FontAwesome" style={styles.bell} />
+    //       {data && Number(data) > 0 && (
+    //         <View style={styles.notificationContainer}>
+    //           <Text style={styles.notificationText}>{data}</Text>
+    //         </View>
+    //       )}
+    //     </View>
+    //   )}
+    // </Query>
   }
 
   render() {

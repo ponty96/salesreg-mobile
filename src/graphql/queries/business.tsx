@@ -53,6 +53,7 @@ export const ListCompanyNotificationsGQL = gql`
           id
           actionType
           element
+          readStatus
           elementData
           date: insertedAt
           notificationItems {
@@ -65,5 +66,11 @@ export const ListCompanyNotificationsGQL = gql`
         }
       }
     }
+  }
+`
+
+export const GetUnreadCompanyNotificationsCount = gql`
+  query getUnreadCompanyNotificationsCount($companyId: Uuid!) {
+    getUnreadCompanyNotificationsCount(companyId: $companyId)
   }
 `
