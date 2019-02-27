@@ -1,7 +1,10 @@
 import React from 'react'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
-import { ListCompanyNotificationsGQL } from '../graphql/queries/business'
+import {
+  ListCompanyNotificationsGQL,
+  GetUnreadCompanyNotificationsCount
+} from '../graphql/queries/business'
 import { ChangeNotificationReadStatus } from '../graphql/mutations/business'
 import moment from 'moment'
 import { color } from '../Style/Color'
@@ -110,11 +113,18 @@ class NotificationScreen extends React.PureComponent<IProps> {
     return (
       <Mutation
         mutation={ChangeNotificationReadStatus}
+        refetchQueries={[
+          {
+            query: GetUnreadCompanyNotificationsCount,
+            variables: { companyId: this.props.user.company.id }
+          }
+        ]}
         onCompleted={() => null}
       >
         {changeStatus => (
           <GenericListIndex
             navigation={this.props.navigation}
+            fetchPolicy="cache-and-network"
             graphqlQuery={ListCompanyNotificationsGQL}
             graphqlQueryResultKey="listCompanyNotifications"
             parseItemData={this.parseData}
