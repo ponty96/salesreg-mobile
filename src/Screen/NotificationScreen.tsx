@@ -1,26 +1,12 @@
 import React from 'react'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
-import { ListCompanySalesGQL } from '../graphql/queries/order'
+import { ListCompanyNotificationsGQL } from '../graphql/queries/business'
 import moment from 'moment'
 import { color } from '../Style/Color'
 
 interface IProps {
   navigation: any
-}
-
-const NOTIFICATIONS = {
-  element: 'Order',
-  actionType: 'Created',
-  date: 'Tue Feb 26 2019 15:24:33 GMT+0100 (West Africa Standard Time)',
-  notificationItems: [
-    {
-      changedTo: 'OR001',
-      itemId: 'OR001',
-      itemType: 'Order',
-      current: 'OR002'
-    }
-  ]
 }
 
 export default class NotificationScreen extends React.PureComponent<IProps> {
@@ -47,18 +33,18 @@ export default class NotificationScreen extends React.PureComponent<IProps> {
     return color[`${_element}${_actionType}`] || color.defaultNotificationColor
   }
 
-  parseData = () => {
+  parseData = (item: any) => {
     return [
       {
-        firstTopText: `${
-          NOTIFICATIONS.element
-        } ${NOTIFICATIONS.actionType.toLowerCase()}`,
-        bottomLeftFirstText: `OR001`,
-        bottomRightText: `${moment(NOTIFICATIONS.date).calendar()}`,
+        firstTopText: `${item.element[0].toUpperCase()}${item.element.substr(
+          1
+        )} ${item.actionType.toLowerCase()}`,
+        bottomLeftFirstText: item.elementData,
+        bottomRightText: `${moment(item.date).calendar()}`,
         coloredBorder: true,
         borderRightColor: this.determineListItemBorderRightColor(
-          NOTIFICATIONS.element,
-          NOTIFICATIONS.actionType
+          item.element,
+          item.actionType
         )
       }
     ]
@@ -72,8 +58,8 @@ export default class NotificationScreen extends React.PureComponent<IProps> {
     return (
       <GenericListIndex
         navigation={this.props.navigation}
-        graphqlQuery={ListCompanySalesGQL}
-        graphqlQueryResultKey="listCompanySales"
+        graphqlQuery={ListCompanyNotificationsGQL}
+        graphqlQueryResultKey="listCompanyNotifications"
         parseItemData={this.parseData}
         onItemPress={this.onClickNotification}
         emptyListText={`All notifications for an Order, Invoice, Special offer, Product or Billing will be shown here. \n\nYou should start seeing notifications once they are sent.`}

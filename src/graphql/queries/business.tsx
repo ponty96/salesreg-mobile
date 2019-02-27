@@ -31,3 +31,39 @@ export const ListCompanyBanksGQL = gql`
     }
   }
 `
+
+export const ListCompanyNotificationsGQL = gql`
+  query listCompanyNotifications(
+    $companyId: Uuid!
+    $after: String
+    $first: Int
+  ) {
+    listCompanyNotifications(
+      companyId: $companyId
+      after: $after
+      first: $first
+    ) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          id
+          actionType
+          element
+          elementData
+          date: insertedAt
+          notificationItems {
+            changedTo
+            current
+            itemType
+            id
+            itemId
+          }
+        }
+      }
+    }
+  }
+`

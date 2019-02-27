@@ -48,7 +48,7 @@ export const color = {
 
   /// notifications
   orderCreated: basicColors.yellow,
-  orderStatuschanged: basicColors.blue,
+  orderStatus_change: basicColors.blue,
   invoiceCreated: basicColors.cyan,
   paymentMade: basicColors.green,
   invoiceDue: basicColors.red,
