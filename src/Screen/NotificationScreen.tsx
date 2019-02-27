@@ -110,7 +110,7 @@ class NotificationScreen extends React.PureComponent<IProps> {
     return (
       <Mutation
         mutation={ChangeNotificationReadStatus}
-        onCompleted={res => console.log('This is ', res)}
+        onCompleted={() => null}
       >
         {changeStatus => (
           <GenericListIndex
@@ -134,5 +134,7 @@ const _NotificationScreen: any = props => (
     {({ user }) => <NotificationScreen {...props} user={user} />}
   </UserContext.Consumer>
 )
+
+_NotificationScreen.navigationOptions = NotificationScreen.navigationOptions
 
 export default _NotificationScreen

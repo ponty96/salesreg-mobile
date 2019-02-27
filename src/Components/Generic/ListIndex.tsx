@@ -212,8 +212,8 @@ class GenericListIndex extends React.Component<IProps, IState> {
           [graphqlQueryResultKey]: {
             ...fetchMoreResult[graphqlQueryResultKey],
             edges: [
-              ...prev[graphqlQueryResultKey].edges,
-              ...fetchMoreResult[graphqlQueryResultKey].edges
+              ...fetchMoreResult[graphqlQueryResultKey].edges,
+              ...prev[graphqlQueryResultKey].edges
             ]
           }
         })
@@ -269,6 +269,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
         fetchPolicy={fetchPolicy || 'cache-first'}
       >
         {({ loading, data, error, networkStatus, fetchMore, refetch }) => {
+          console.log('Mehn this data is ', data)
           this.refetchQuery = refetch
           this.networkStatus = networkStatus
           const sections =

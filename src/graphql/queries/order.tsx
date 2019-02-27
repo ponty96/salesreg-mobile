@@ -105,6 +105,7 @@ export const ListCompanyInvoicesGQL = gql`
           amount
           refId
           shareLink
+          date: updatedAt
           amountPaid
           user {
             lastName
