@@ -110,9 +110,10 @@ class BaseHeader extends React.PureComponent<IProps> {
         variables={{
           companyId: this.props.user.company.id
         }}
-        fetchPolicy="network-only"
+        fetchPolicy="cache-and-network"
       >
         {({ data }) => {
+          console.log('This is ', data)
           return (
             <View>
               <Icon name="bell-o" type="FontAwesome" style={styles.bell} />

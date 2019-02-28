@@ -35,7 +35,8 @@ class NotificationScreen extends React.PureComponent<IProps> {
     let _element = element.replace(/\s/, '').toLowerCase(),
       _actionType = `${actionType[0].toUpperCase()}${actionType
         .substr(1)
-        .toLowerCase()}`
+        .toLowerCase()
+        .replace(/\s/, '')}`
 
     return color[`${_element}${_actionType}`] || color.defaultNotificationColor
   }
@@ -83,6 +84,12 @@ class NotificationScreen extends React.PureComponent<IProps> {
             companyId: this.props.user.company.id
           }
         })
+        const _unreadNotificationData = proxy.readQuery({
+          query: GetUnreadCompanyNotificationsCount,
+          variables: {
+            companyId: this.props.user.company.id
+          }
+        })
         let _edges = data.listCompanyNotifications.edges.map(edge => {
           if (edge.node.id == item.id) {
             return {
@@ -96,6 +103,9 @@ class NotificationScreen extends React.PureComponent<IProps> {
           return edge
         })
         data.listCompanyNotifications.edges = _edges
+        _unreadNotificationData.getUnreadCompanyNotificationsCount.data.count =
+          _unreadNotificationData.getUnreadCompanyNotificationsCount.data
+            .count - 1
         proxy.writeQuery({
           query: ListCompanyNotificationsGQL,
           variables: {
@@ -104,6 +114,13 @@ class NotificationScreen extends React.PureComponent<IProps> {
             companyId: this.props.user.company.id
           },
           data
+        })
+        proxy.writeQuery({
+          query: GetUnreadCompanyNotificationsCount,
+          variables: {
+            companyId: this.props.user.company.id
+          },
+          data: _unreadNotificationData
         })
       }
     })

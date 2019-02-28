@@ -269,7 +269,6 @@ class GenericListIndex extends React.Component<IProps, IState> {
         fetchPolicy={fetchPolicy || 'cache-first'}
       >
         {({ loading, data, error, networkStatus, fetchMore, refetch }) => {
-          console.log('Mehn this data is ', data)
           this.refetchQuery = refetch
           this.networkStatus = networkStatus
           const sections =
@@ -425,7 +424,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
 
     const sectionList = Object.keys(grouped).map(key => ({
       date: key,
-      data: grouped[key].reverse()
+      data: grouped[key]
     }))
 
     const sortedSection = sectionList.sort((sectionA, sectionB) => {
