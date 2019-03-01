@@ -8,6 +8,7 @@ import AppSpinner from '../Components/Spinner'
 import AuthFormContainer from '../Container/AuthFormContainer'
 import InputAtom from '../Atom/Form/InputAtom'
 import { UserContext } from '../context/UserContext'
+import { upsertMobileDevice } from '../services/MobileDevice'
 
 interface IProps {
   navigation: any
@@ -127,6 +128,15 @@ class LoginScreen extends React.Component<IProps, IState> {
       </UserContext.Consumer>
     )
   }
+
+  updateMobileDeviceInfo = user => {
+    const {
+      screenProps: { client }
+    } = this.props
+
+    upsertMobileDevice(client, user)
+  }
+
   onCompleted = async (res, resetUserContext, resetGettingStartedProgress) => {
     const {
       loginUser: { data, fieldErrors, success }
@@ -160,6 +170,8 @@ class LoginScreen extends React.Component<IProps, IState> {
 
       await Auth.setGettingStartedProgress(_stage)
       await client.resetStore()
+
+      this.updateMobileDeviceInfo(user)
       client.mutate({
         mutation: AuthenticateClientGQL,
         variables: { user: user }

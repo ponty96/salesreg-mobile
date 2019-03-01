@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
+import firebase from 'react-native-firebase'
 
 import Routes from './Navigation/Routes'
 import Auth from './services/auth'
@@ -17,10 +18,16 @@ import setupSentry from './Functions/sentry'
 import ViewOverflow from 'react-native-view-overflow'
 import Config from 'react-native-config'
 import { Root as NotificationRoot } from './Components/NotificationBanner'
+import {
+  upsertMobileDevice,
+  upsertWhenTokenChanges
+} from './services/MobileDevice'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
 
 export default class App extends React.Component {
+  private onTokenRefreshListener: any
+
   state = {
     loading: true,
     user: {},
@@ -33,6 +40,18 @@ export default class App extends React.Component {
   async componentDidMount() {
     this.authenticate()
     this.setState({ loading: true })
+  }
+
+  componentWillUnmount() {
+    this.onTokenRefreshListener && this.onTokenRefreshListener()
+  }
+
+  handleTokenChanged = (client: any, user: any) => {
+    this.onTokenRefreshListener = firebase
+      .messaging()
+      .onTokenRefresh(fcmToken => {
+        upsertWhenTokenChanges(fcmToken, user, client)
+      })
   }
 
   authenticate = async () => {
@@ -54,6 +73,9 @@ export default class App extends React.Component {
         user,
         gettingStartedProgress: gettingStartedProgress || null
       })
+
+      upsertMobileDevice(client, user)
+      this.handleTokenChanged(client, user)
     } else {
       this.setState({ loading: false })
     }

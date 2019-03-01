@@ -108,12 +108,14 @@ class BaseHeader extends React.PureComponent<IProps> {
         query={GetUnreadCompanyNotificationsCount}
         notifyOnNetworkStatusChange={true}
         variables={{
-          companyId: this.props.user.company.id
+          companyId:
+            this.props.user &&
+            this.props.user.company &&
+            this.props.user.company.id
         }}
         fetchPolicy="cache-and-network"
       >
         {({ data }) => {
-          console.log('This is ', data)
           return (
             <View>
               <Icon name="bell-o" type="FontAwesome" style={styles.bell} />
