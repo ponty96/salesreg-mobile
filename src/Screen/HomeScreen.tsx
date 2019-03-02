@@ -4,6 +4,8 @@ import Auth from '../services/auth'
 import setAppAnalytics from '../Functions/setAppAnalytics'
 import NavigationalInformation from '../Components/Home/NavigationInformation'
 import GettingStarted from '../Components/Home/GettingStarted'
+import firebase from 'react-native-firebase'
+import notificationNavigationHandler from '../Functions/notificationNavigationHandler'
 
 interface IProps {
   navigation: any
@@ -24,6 +26,9 @@ export default class HomeScreen extends React.Component<IProps, IState> {
     setAppAnalytics('OPEN_APP')
   }
 
+  private foregroundMessageListener: any
+  private clickedNotificationHandler: any
+
   static navigationOptions = () => {
     return {
       header: null
@@ -31,6 +36,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
   }
 
   async componentDidMount() {
+    this.handleInitialNotifications()
     this.updateUserName()
     let gettingStartedProgress = await Auth.gettingStartedProgress()
     if (gettingStartedProgress == 'done') {
@@ -42,6 +48,70 @@ export default class HomeScreen extends React.Component<IProps, IState> {
         display: 'getting-started'
       })
     }
+    this.handleForegroundNotifications()
+    this.handleForegroundClickedNotifications()
+  }
+
+  componentWillUnmount() {
+    this.foregroundMessageListener()
+    this.clickedNotificationHandler()
+  }
+
+  handleForegroundClickedNotifications = () => {
+    this.clickedNotificationHandler = firebase
+      .notifications()
+      .onNotificationOpened(notificationOpened => {
+        let {
+          notification: { data }
+        } = notificationOpened
+
+        notificationNavigationHandler(
+          data,
+          this.props.navigation,
+          'app-notification'
+        )
+      })
+  }
+
+  handleInitialNotifications = () => {
+    firebase
+      .notifications()
+      .getInitialNotification()
+      .then(notificationOpened => {
+        let {
+          notification: { data }
+        } = notificationOpened
+
+        notificationNavigationHandler(
+          data,
+          this.props.navigation,
+          'app-notification'
+        )
+      })
+  }
+
+  handleForegroundNotifications = () => {
+    this.foregroundMessageListener = firebase.messaging().onMessage(message => {
+      let {
+        _data: { id, actionType, element, elementData }
+      } = message
+
+      const notification = new firebase.notifications.Notification()
+        .setNotificationId(id)
+        .setTitle(
+          `${element[0].toUpperCase()}${element.substr(
+            1
+          )} ${actionType.toLowerCase()}`
+        )
+        .setBody(elementData)
+        .setSound('default')
+        .setData(message._data)
+        .android.setAutoCancel(true)
+        .android.setSmallIcon('@drawable/ic_stat_yipcart_logo_icon_white')
+        .android.setChannelId('all-notifications')
+
+      firebase.notifications().displayNotification(notification)
+    })
   }
 
   updateUserName = async () => {

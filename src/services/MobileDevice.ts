@@ -23,12 +23,10 @@ export const upsertMobileDevice = (client: any, user: any) => {
           userId: user.id
         }
 
-        client
-          .mutate({
-            mutation: UpsertMobileDevice,
-            variables: { mobileDevice }
-          })
-          .then(data => console.log('mehn i enter this one ', data))
+        client.mutate({
+          mutation: UpsertMobileDevice,
+          variables: { mobileDevice }
+        })
       }
     }
   )
