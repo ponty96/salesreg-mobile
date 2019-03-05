@@ -55,6 +55,9 @@ import ChargeCalculatorScreen from '../Screen/Settings/ChargeCalculatorScreen'
 // Order
 import OrderStatusScreen from '../Screen/OrderStatusScreen'
 
+// Notification
+import NotificationScreen from '../Screen/NotificationScreen'
+
 // Sales Order screens
 import SalesOrderScreen from '../Screen/SalesOrderScreen'
 import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
@@ -93,7 +96,6 @@ import InvoiceDetailsScreen from '../Screen/InvoiceDetailsScreen'
 import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
 import UpdateInvoiceDueDate from '../Screen/Invoices/UpdateInvoiceDueDate'
-import UpdateInvoicesSplitPayment from '../Screen/Invoices/UpdateInvoicesSplitPayment'
 
 import IncomeScreen from '../Screen/IncomeScreen'
 
@@ -124,9 +126,6 @@ const businessStack = StackNavigator(
     InvoiceDetails: {
       screen: InvoiceDetailsScreen
     },
-    UpdateInvoicesSplitPayment: {
-      screen: UpdateInvoicesSplitPayment
-    },
     UpdateInvoiceDueDate: {
       screen: UpdateInvoiceDueDate
     },
@@ -135,6 +134,11 @@ const businessStack = StackNavigator(
     },
     UpsertInvoice: {
       screen: UpsertInvoiceScreen
+    },
+
+    // Notification ROUTES
+    Notifications: {
+      screen: NotificationScreen
     },
 
     // Setting ROUTES

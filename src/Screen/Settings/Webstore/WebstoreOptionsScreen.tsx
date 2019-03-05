@@ -15,6 +15,7 @@ export default class WebstoreOptionsScreen extends React.PureComponent<IProps> {
           title="Webstore Settings"
           leftIconTitle="md-arrow-back"
           leftIconType="Ionicons"
+          onPressRightIcon={() => navigation.navigate('Notifications')}
           onPressLeftIcon={() => navigation.goBack()}
         />
       )
