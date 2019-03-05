@@ -37,7 +37,6 @@ export const upsertWhenTokenChanges = async (token, user, client) => {
     brand: DeviceInfo.getBrand(),
     buildNumber: `${DeviceInfo.getBuildNumber()}`,
     deviceToken: token,
-    lastActive: `${DeviceInfo.getLastUpdateTime()}`,
     mobileOs: Platform.OS,
     notificationEnabled: true,
     userId: user.id
