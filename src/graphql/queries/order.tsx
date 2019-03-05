@@ -37,6 +37,51 @@ export const ListCompanyPurchasesGQL = gql`
   }
 `
 
+export const GetSaleByIdGQL = gql`
+  query getSaleById($saleId: Uuid) {
+    getSaleById(saleId: $saleId) {
+      id
+      refId
+      charge
+      discount
+      contact {
+        contactName
+        id
+        gender
+        email
+      }
+      paymentMethod
+      status
+      amount
+      location {
+        street1
+        state
+        country
+        city
+      }
+      amountPaid
+      invoice {
+        id
+        refId
+        shareLink
+        dueDate
+      }
+      items {
+        id
+        unitPrice
+        quantity
+        product {
+          name
+          id
+          costPrice
+          featuredImage
+        }
+      }
+      date
+    }
+  }
+`
+
 export const ListCompanySalesGQL = gql`
   query listCompanySales($companyId: Uuid!, $after: String, $first: Int) {
     listCompanySales(companyId: $companyId, after: $after, first: $first) {
@@ -91,6 +136,54 @@ export const ListCompanySalesGQL = gql`
   }
 `
 
+export const GetInvoiceByIdGQL = gql`
+  query getInvoiceById($invoiceId: Uuid!) {
+    getInvoiceById(invoiceId: $invoiceId) {
+      id
+      amount
+      refId
+      shareLink
+      date: updatedAt
+      amountPaid
+      user {
+        lastName
+        firstName
+      }
+      dueDate
+      sale {
+        amount
+        charge
+        id
+        discount
+        contact {
+          contactName
+          id
+          email
+        }
+        location {
+          street1
+          state
+          country
+          city
+        }
+        amountPaid
+        date
+        items {
+          id
+          unitPrice
+          quantity
+          product {
+            name
+            id
+            costPrice
+            featuredImage
+          }
+        }
+      }
+    }
+  }
+`
+
 export const ListCompanyInvoicesGQL = gql`
   query listCompanyInvoices($companyId: Uuid!, $after: String, $first: Int) {
     listCompanyInvoices(companyId: $companyId, after: $after, first: $first) {
@@ -105,6 +198,7 @@ export const ListCompanyInvoicesGQL = gql`
           amount
           refId
           shareLink
+          date: updatedAt
           amountPaid
           user {
             lastName

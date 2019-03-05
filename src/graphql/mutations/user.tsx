@@ -70,3 +70,33 @@ export const UpdateUserGQL = gql`
     }
   }
 `
+
+export const UpsertMobileDevice = gql`
+  mutation upsertMobileDevice($mobileDevice: MobileDeviceInput!) {
+    upsertMobileDevice(mobileDevice: $mobileDevice) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
+export const DisableMobileDeviceNotification = gql`
+  mutation disableMobileDeviceNotification(
+    $deviceToken: String!
+    $userId: Uuid!
+  ) {
+    disableMobileDeviceNotification(
+      deviceToken: $deviceToken
+      userId: $userId
+    ) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`

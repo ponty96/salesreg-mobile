@@ -55,6 +55,9 @@ import ChargeCalculatorScreen from '../Screen/Settings/ChargeCalculatorScreen'
 // Order
 import OrderStatusScreen from '../Screen/OrderStatusScreen'
 
+// Notification
+import NotificationScreen from '../Screen/NotificationScreen'
+
 // Sales Order screens
 import SalesOrderScreen from '../Screen/SalesOrderScreen'
 import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
@@ -131,6 +134,11 @@ const businessStack = StackNavigator(
     },
     UpsertInvoice: {
       screen: UpsertInvoiceScreen
+    },
+
+    // Notification ROUTES
+    Notifications: {
+      screen: NotificationScreen
     },
 
     // Setting ROUTES

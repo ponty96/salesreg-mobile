@@ -13,6 +13,8 @@ export interface DataProps {
   bottomRightText?: string
   avatar?: string
   icon?: JSX.Element
+  coloredBorder?: boolean
+  borderRightColor?: string
   topLeftTextStyle?: any
 }
 interface IProps extends DataProps {
@@ -24,6 +26,26 @@ interface IProps extends DataProps {
   bottomRightTextStyle?: object
   showTrash?: boolean
   onPressTrash?: () => void
+}
+
+const renderColoredRightBorder = (
+  borderRightColor: string,
+  coloredBorder: boolean
+): any => {
+  let borderStyle: any = {
+    borderRightWidth: 3
+  }
+
+  if (coloredBorder) {
+    borderStyle = {
+      ...borderStyle,
+      borderRightColor
+    }
+  } else {
+    borderStyle = {}
+  }
+
+  return borderStyle
 }
 
 const renderStatusIndicator = (bottomRightText: string): any => {
@@ -62,7 +84,11 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
             styles.wrapper,
             this.props.style,
             this.props.showTrash && { alignItems: 'center', paddingRight: 0 },
-            renderStatusIndicator(this.props.bottomRightText)
+            renderStatusIndicator(this.props.bottomRightText),
+            renderColoredRightBorder(
+              this.props.borderRightColor,
+              this.props.coloredBorder
+            )
           ]}
           onPress={this.props.onPress}
         >

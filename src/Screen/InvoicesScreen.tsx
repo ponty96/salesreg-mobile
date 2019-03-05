@@ -1,5 +1,4 @@
 import React from 'react'
-import { Alert } from 'react-native'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
 import { ListCompanyInvoicesGQL } from '../graphql/queries/order'
@@ -40,7 +39,9 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
       <React.Fragment>
         <Header
           title="Invoices"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
         />
         <GenericListIndex
