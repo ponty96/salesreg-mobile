@@ -67,7 +67,6 @@ export const disableMobileDeviceNotification = async (
       mutation: DisableMobileDeviceNotification,
       variables: { deviceToken: token, userId: user.id }
     })
-    .then(data => console.log(`Mehn i commot this thing `, data))
 
   setTimeout(() => Auth.clearVault(), 10)
 }
