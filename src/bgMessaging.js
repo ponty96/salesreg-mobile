@@ -2,18 +2,17 @@ import firebase from 'react-native-firebase'
 
 export default async message => {
   let {
-    data: { id, actionType, element, elementData }
+    data: { id, action_type, element, element_data }
   } = message
 
-  console.log('No think am oooo ', message)
   const notification = new firebase.notifications.Notification()
     .setNotificationId(id)
     .setTitle(
       `${element[0].toUpperCase()}${element.substr(
         1
-      )} ${actionType.toLowerCase()}`
+      )} ${action_type.toLowerCase()}`
     )
-    .setBody(elementData)
+    .setBody(element_data)
     .setSound('default')
     .setData(message.data)
     .android.setAutoCancel(true)

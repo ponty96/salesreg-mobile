@@ -1,5 +1,3 @@
-import { NavigationActions } from 'react-navigation'
-
 type INotificationType = 'fail-safe-notification' | 'app-notification'
 const notificationNavigationHandler = (
   params: any,
@@ -20,30 +18,37 @@ const handleFailSafeNotifications = (params: any, navigation: any) => {
 
 const handleAppNotifications = (params: any, navigation: any) => {
   let { screen, routeParams } = routeTo(params)
-  const resetAction = NavigationActions.reset({
-    index: 1,
-    actions: [
-      NavigationActions.navigate({
-        routeName: 'Home'
-      }),
-      NavigationActions.navigate({
-        routeName: screen,
-        params: routeParams
-      })
-    ]
-  })
-
-  navigation.dispatch(resetAction)
+  navigation.navigate(screen, routeParams)
 }
 
 const routeTo = (params: any): { screen: string; routeParams: any } => {
   let screen = '',
-    routeParams = {}
+    routeParams = {},
+    _elementId = 0
 
   switch (params.element.toLowerCase()) {
     case 'invoice':
-      screen = 'invoice'
-      routeParams = { invoice: params.notificationItems[0] }
+      screen = 'InvoiceDetails'
+      _elementId = params.elementId || params.element_id
+      routeParams = {
+        ownedBy: 'notifications',
+        from: 'Invoices',
+        invoiceId: _elementId
+      }
+      break
+    case 'product':
+      let _actionType = params.actionType || params.action_type
+      _elementId = params.elementId || params.element_id
+      screen = _actionType == 'restocked' ? '' : 'ProductDetails'
+      routeParams =
+        _actionType == 'restocked'
+          ? {}
+          : { ownedBy: 'notifications', productId: _elementId }
+      break
+    case 'order':
+      screen = 'SalesDetails'
+      _elementId = params.elementId || params.element_id
+      routeParams = { ownedBy: 'notifications', orderId: _elementId }
       break
     default:
       screen = ''

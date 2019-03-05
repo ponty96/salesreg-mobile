@@ -24,6 +24,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
       display: null
     }
     setAppAnalytics('OPEN_APP')
+    this.handleInitialNotifications()
   }
 
   private foregroundMessageListener: any
@@ -36,7 +37,6 @@ export default class HomeScreen extends React.Component<IProps, IState> {
   }
 
   async componentDidMount() {
-    this.handleInitialNotifications()
     this.updateUserName()
     let gettingStartedProgress = await Auth.gettingStartedProgress()
     if (gettingStartedProgress == 'done') {
@@ -53,8 +53,8 @@ export default class HomeScreen extends React.Component<IProps, IState> {
   }
 
   componentWillUnmount() {
-    this.foregroundMessageListener()
-    this.clickedNotificationHandler()
+    this.foregroundMessageListener && this.foregroundMessageListener()
+    this.clickedNotificationHandler && this.clickedNotificationHandler()
   }
 
   handleForegroundClickedNotifications = () => {
@@ -93,7 +93,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
   handleForegroundNotifications = () => {
     this.foregroundMessageListener = firebase.messaging().onMessage(message => {
       let {
-        _data: { id, actionType, element, elementData }
+        _data: { id, action_type, element, element_data }
       } = message
 
       const notification = new firebase.notifications.Notification()
@@ -101,9 +101,9 @@ export default class HomeScreen extends React.Component<IProps, IState> {
         .setTitle(
           `${element[0].toUpperCase()}${element.substr(
             1
-          )} ${actionType.toLowerCase()}`
+          )} ${action_type.toLowerCase()}`
         )
-        .setBody(elementData)
+        .setBody(element_data)
         .setSound('default')
         .setData(message._data)
         .android.setAutoCancel(true)

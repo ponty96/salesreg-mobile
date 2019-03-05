@@ -10,6 +10,7 @@ import moment from 'moment'
 import { color } from '../Style/Color'
 import { Mutation } from 'react-apollo'
 import { UserContext } from '../context/UserContext'
+import notificationNavigationHandler from '../Functions/notificationNavigationHandler'
 
 interface IProps {
   navigation: any
@@ -124,6 +125,11 @@ class NotificationScreen extends React.PureComponent<IProps> {
         })
       }
     })
+    notificationNavigationHandler(
+      item,
+      this.props.navigation,
+      'fail-safe-notification'
+    )
   }
 
   render() {

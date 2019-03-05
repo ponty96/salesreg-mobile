@@ -53,6 +53,7 @@ export const ListCompanyNotificationsGQL = gql`
           id
           actionType
           element
+          elementId
           readStatus
           elementData
           date: insertedAt

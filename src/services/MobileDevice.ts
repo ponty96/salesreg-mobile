@@ -17,7 +17,6 @@ export const upsertMobileDevice = (client: any, user: any) => {
           brand: DeviceInfo.getBrand(),
           buildNumber: `${DeviceInfo.getBuildNumber()}`,
           deviceToken: fcmToken,
-          lastActive: `${DeviceInfo.getLastUpdateTime()}`,
           mobileOs: Platform.OS,
           notificationEnabled: currentEnabilityState,
           userId: user.id
