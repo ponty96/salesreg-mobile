@@ -12,8 +12,6 @@ import io.sentry.RNSentryPackage;
 import org.devio.rn.splashscreen.SplashScreenReactPackage;
 import me.hauvo.thumbnail.RNThumbnailPackage;
 import com.reactnative.ivpusic.imagepicker.PickerPackage;
-import io.invertase.firebase.messaging.RNFirebaseMessagingPackage;
-import io.invertase.firebase.notifications.RNFirebaseNotificationsPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.microsoft.appcenter.reactnative.crashes.AppCenterReactNativeCrashesPackage;
 import com.microsoft.appcenter.reactnative.analytics.AppCenterReactNativeAnalyticsPackage;
@@ -41,13 +39,11 @@ public class MainApplication extends Application implements ReactApplication {
           new MainReactPackage(),
             new ReactNativeDocumentPicker(),
             new RNFirebasePackage(),
-            new RNFirebaseMessagingPackage(),
             new ReactNativeConfigPackage(),
             new RNViewOverflowPackage(),
             new RNDeviceInfo(),
             new RNSentryPackage(),
             new SplashScreenReactPackage(),
-            new RNFirebaseNotificationsPackage(),
             new RNThumbnailPackage(),
             new RNFirebaseAnalyticsPackage(),
             new PickerPackage(),
