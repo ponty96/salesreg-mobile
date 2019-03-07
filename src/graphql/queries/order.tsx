@@ -67,6 +67,7 @@ export const ListCompanySalesGQL = gql`
 						city
 					}
 					amountPaid
+					deliveryFee
 					invoice {
 						id
 						refId
@@ -128,6 +129,7 @@ export const ListCompanyInvoicesGQL = gql`
 							city
 						}
 						amountPaid
+						deliveryFee
 						date
 						items {
 							id
