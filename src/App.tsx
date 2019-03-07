@@ -7,9 +7,9 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
-import firebase from 'react-native-firebase'
 
 import Routes from './Navigation/Routes'
+import OneSignal from 'react-native-onesignal'
 import Auth from './services/auth'
 import { AuthenticateClientGQL } from './graphql/client-mutations/authenticate'
 import { UserContext } from './context/UserContext'
@@ -18,15 +18,28 @@ import setupSentry from './Functions/sentry'
 import ViewOverflow from 'react-native-view-overflow'
 import Config from 'react-native-config'
 import { Root as NotificationRoot } from './Components/NotificationBanner'
-import {
-  upsertMobileDevice,
-  upsertWhenTokenChanges
-} from './services/MobileDevice'
+import { upsertMobileDevice } from './services/MobileDevice'
+import pushNotificationWrapper from './Functions/PushNotificationWrapper'
+import { PushNotificationContext } from './context/PushNotificationContext'
+import PushNotificationContainer from './Container/PushNotificationContainer'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
 
-export default class App extends React.Component {
-  private onTokenRefreshListener: any
+interface IProps {
+  onSetPushNotificationData: (data) => void
+}
+
+class App extends React.Component<IProps> {
+  constructor(props) {
+    super(props)
+    OneSignal.init('ec30c28b-6108-4f40-8ad1-019144f28afe', {
+      kOSSettingsKeyAutoPrompt: true
+    })
+
+    OneSignal.addEventListener('opened', this.onOpened)
+    OneSignal.addEventListener('ids', this.onIds)
+    OneSignal.configure()
+  }
 
   state = {
     loading: true,
@@ -40,18 +53,22 @@ export default class App extends React.Component {
   async componentDidMount() {
     this.authenticate()
     this.setState({ loading: true })
+    OneSignal.inFocusDisplaying(2)
   }
 
   componentWillUnmount() {
-    this.onTokenRefreshListener && this.onTokenRefreshListener()
+    OneSignal.removeEventListener('opened', this.onOpened)
+    OneSignal.removeEventListener('ids', this.onIds)
   }
 
-  handleTokenChanged = (client: any, user: any) => {
-    this.onTokenRefreshListener = firebase
-      .messaging()
-      .onTokenRefresh(fcmToken => {
-        upsertWhenTokenChanges(fcmToken, user, client)
-      })
+  onOpened = openResult => {
+    this.props.onSetPushNotificationData(
+      openResult.notification.payload.additionalData
+    )
+  }
+
+  onIds = device => {
+    pushNotificationWrapper.setFCMToken(device.pushToken)
   }
 
   authenticate = async () => {
@@ -75,7 +92,6 @@ export default class App extends React.Component {
       })
 
       upsertMobileDevice(client, user)
-      this.handleTokenChanged(client, user)
     } else {
       this.setState({ loading: false })
     }
@@ -92,27 +108,39 @@ export default class App extends React.Component {
       // check if user is on IphoneX and use View
       <ViewOverflow style={{ flex: 1 }}>
         <NotificationRoot>
-          <View style={{ paddingTop: 0, flex: 1 }}>
-            <Provider store={store}>
-              <UserContext.Provider
-                value={{
-                  user,
-                  resetUserContext,
-                  gettingStartedProgress,
-                  resetGettingStartedProgress
-                }}
-              >
-                <ApolloProvider client={client}>
-                  <Root>
-                    <StatusBar barStyle="light-content" />
-                    <Routes client={client} />
-                  </Root>
-                </ApolloProvider>
-              </UserContext.Provider>
-            </Provider>
-          </View>
+          <PushNotificationContainer>
+            <View style={{ paddingTop: 0, flex: 1 }}>
+              <Provider store={store}>
+                <UserContext.Provider
+                  value={{
+                    user,
+                    resetUserContext,
+                    gettingStartedProgress,
+                    resetGettingStartedProgress
+                  }}
+                >
+                  <ApolloProvider client={client}>
+                    <Root>
+                      <StatusBar barStyle="light-content" />
+                      <Routes client={client} />
+                    </Root>
+                  </ApolloProvider>
+                </UserContext.Provider>
+              </Provider>
+            </View>
+          </PushNotificationContainer>
         </NotificationRoot>
       </ViewOverflow>
     )
   }
 }
+
+const _App = props => (
+  <PushNotificationContext.Consumer>
+    {({ onSetPushNotificationData }) => (
+      <App {...props} onSetPushNotificationData={onSetPushNotificationData} />
+    )}
+  </PushNotificationContext.Consumer>
+)
+
+export default _App
