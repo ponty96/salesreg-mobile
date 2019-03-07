@@ -4,11 +4,11 @@ import Auth from '../services/auth'
 import setAppAnalytics from '../Functions/setAppAnalytics'
 import NavigationalInformation from '../Components/Home/NavigationInformation'
 import GettingStarted from '../Components/Home/GettingStarted'
-import firebase from 'react-native-firebase'
-import notificationNavigationHandler from '../Functions/notificationNavigationHandler'
+import { PushNotificationContext } from '../context/PushNotificationContext'
 
 interface IProps {
   navigation: any
+  onSetNavigation: (navigation) => void
 }
 
 interface IState {
@@ -16,7 +16,7 @@ interface IState {
   display: any
 }
 
-export default class HomeScreen extends React.Component<IProps, IState> {
+class HomeScreen extends React.Component<IProps, IState> {
   constructor(props) {
     super(props)
     this.state = {
@@ -24,11 +24,8 @@ export default class HomeScreen extends React.Component<IProps, IState> {
       display: null
     }
     setAppAnalytics('OPEN_APP')
-    this.handleInitialNotifications()
+    this.props.onSetNavigation(this.props.navigation)
   }
-
-  private foregroundMessageListener: any
-  private clickedNotificationHandler: any
 
   static navigationOptions = () => {
     return {
@@ -48,70 +45,6 @@ export default class HomeScreen extends React.Component<IProps, IState> {
         display: 'getting-started'
       })
     }
-    this.handleForegroundNotifications()
-    this.handleForegroundClickedNotifications()
-  }
-
-  componentWillUnmount() {
-    this.foregroundMessageListener && this.foregroundMessageListener()
-    this.clickedNotificationHandler && this.clickedNotificationHandler()
-  }
-
-  handleForegroundClickedNotifications = () => {
-    this.clickedNotificationHandler = firebase
-      .notifications()
-      .onNotificationOpened(notificationOpened => {
-        let {
-          notification: { data }
-        } = notificationOpened
-
-        notificationNavigationHandler(
-          data,
-          this.props.navigation,
-          'app-notification'
-        )
-      })
-  }
-
-  handleInitialNotifications = () => {
-    firebase
-      .notifications()
-      .getInitialNotification()
-      .then(notificationOpened => {
-        let {
-          notification: { data }
-        } = notificationOpened
-
-        notificationNavigationHandler(
-          data,
-          this.props.navigation,
-          'app-notification'
-        )
-      })
-  }
-
-  handleForegroundNotifications = () => {
-    this.foregroundMessageListener = firebase.messaging().onMessage(message => {
-      let {
-        _data: { id, action_type, element, element_data }
-      } = message
-
-      const notification = new firebase.notifications.Notification()
-        .setNotificationId(id)
-        .setTitle(
-          `${element[0].toUpperCase()}${element.substr(
-            1
-          )} ${action_type.toLowerCase()}`
-        )
-        .setBody(element_data)
-        .setSound('default')
-        .setData(message._data)
-        .android.setAutoCancel(true)
-        .android.setSmallIcon('@drawable/ic_stat_yipcart_logo_icon_white')
-        .android.setChannelId('all-notifications')
-
-      firebase.notifications().displayNotification(notification)
-    })
   }
 
   updateUserName = async () => {
@@ -142,3 +75,15 @@ export default class HomeScreen extends React.Component<IProps, IState> {
     )
   }
 }
+
+const _HomeScreen: any = props => (
+  <PushNotificationContext.Consumer>
+    {({ onSetNavigation }) => (
+      <HomeScreen onSetNavigation={onSetNavigation} {...props} />
+    )}
+  </PushNotificationContext.Consumer>
+)
+
+_HomeScreen.navigationOptions = HomeScreen.navigationOptions
+
+export default _HomeScreen

@@ -1,4 +1,5 @@
 import React from 'react'
+import { View, StyleSheet } from 'react-native'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
 import {
@@ -11,6 +12,7 @@ import { color } from '../Style/Color'
 import { Mutation } from 'react-apollo'
 import { UserContext } from '../context/UserContext'
 import notificationNavigationHandler from '../Functions/notificationNavigationHandler'
+import Icon from '../Atom/Icon'
 
 interface IProps {
   navigation: any
@@ -42,20 +44,129 @@ class NotificationScreen extends React.PureComponent<IProps> {
     return color[`${_element}${_actionType}`] || color.defaultNotificationColor
   }
 
+  getImageRenderingData = (
+    element,
+    actionType
+  ): {
+    tagIconName: string
+    tagIconType: any
+    tagBackgroundColor: string
+    display: string
+  } => {
+    let data = {
+      tagIconName: 'tag',
+      tagIconType: 'MaterialCommunityIcons',
+      tagBackgroundColor: '#3669d4',
+      display: 'block'
+    }
+    switch (element.toLowerCase()) {
+      case 'order':
+        if (actionType.toLowerCase() == 'created') {
+          data.tagBackgroundColor = '#3669d4'
+        } else if (actionType.toLowerCase() == 'refund') {
+          data.display = 'none'
+        } else {
+          data.tagBackgroundColor = '#0f912d'
+        }
+        break
+      case 'invoice':
+        data.tagIconName = 'receipt'
+        data.tagIconType = 'MaterialIcons'
+        if (actionType.toLowerCase() == 'created') {
+          data.tagBackgroundColor = '#3669d4'
+        } else if (actionType.toLowerCase() == 'payment') {
+          data.tagBackgroundColor = '#0f922c'
+        } else if (actionType.toLowerCase() == 'due') {
+          data.tagBackgroundColor = '#d00202'
+        }
+        break
+      case 'product':
+        data.tagIconName = 'content-copy'
+        data.tagIconType = 'MaterialCommunityIcons'
+        if (actionType.toLowerCase() == 'updated') {
+          data.tagBackgroundColor = '#3669d4'
+        } else if (actionType.toLowerCase() == 'restocked') {
+          data.tagBackgroundColor = '#fba618'
+        } else if (
+          actionType.toLowerCase().indexOf('needs') != -1 &&
+          actionType.toLowerCase().indexOf('restock') != -1
+        ) {
+          data.tagBackgroundColor = '#d00300'
+        }
+        break
+      case 'billing':
+        data.tagIconName = 'cash'
+        data.tagIconType = 'MaterialCommunityIcons'
+        if (actionType.toLowerCase().indexOf('due') != -1) {
+          data.tagBackgroundColor = '#d00202'
+        } else if (
+          actionType.toLowerCase().indexOf('paid') != -1 &&
+          actionType.toLowerCase().indexOf('settlement') != -1
+        ) {
+          data.tagBackgroundColor = '#0f922c'
+        }
+        break
+    }
+    return data
+  }
+
+  renderImage = (element, actionType) => {
+    let {
+      tagIconName,
+      tagIconType,
+      tagBackgroundColor,
+      display
+    } = this.getImageRenderingData(element, actionType)
+    return (
+      <View>
+        <View style={styles.imageContainer}>
+          <Icon
+            name="ios-notifications"
+            type="Ionicons"
+            style={styles.bellIcon}
+          />
+        </View>
+        {display == 'block' && (
+          <View
+            style={[
+              styles.tagContainer,
+              { backgroundColor: tagBackgroundColor }
+            ]}
+          >
+            <Icon
+              name={tagIconName}
+              type={tagIconType}
+              style={styles.tagIcon}
+            />
+          </View>
+        )}
+      </View>
+    )
+  }
+
   parseData = (item: any) => {
     return [
       {
         firstTopText: `${item.element[0].toUpperCase()}${item.element.substr(
           1
         )} ${item.actionType.toLowerCase()}`,
-        bottomLeftFirstText: item.elementData,
+        bottomLeftFirstText: item.message,
+        topLeftTextStyle: { fontFamily: 'AvenirNext-DemiBold' },
         bottomRightText: `${moment(item.date).calendar()}`,
-        coloredBorder: true,
-        borderRightColor: this.determineListItemBorderRightColor(
-          item.element,
-          item.actionType
-        ),
-        style: item.readStatus == 'unread' ? { backgroundColor: '#e1f5fe' } : {}
+        style: {
+          marginLeft: 20,
+          backgroundColor: 'transparent',
+          borderBottomColor: 'transparent'
+        },
+        containerStyle:
+          item.readStatus == 'unread'
+            ? {
+                backgroundColor: '#f0f4fd',
+                paddingHorizontal: 16,
+                marginHorizontal: 0
+              }
+            : { paddingHorizontal: 16, marginHorizontal: 0 },
+        icon: this.renderImage(item.element, item.actionType)
       }
     ]
   }
@@ -171,3 +282,32 @@ const _NotificationScreen: any = props => (
 _NotificationScreen.navigationOptions = NotificationScreen.navigationOptions
 
 export default _NotificationScreen
+
+const styles = StyleSheet.create({
+  imageContainer: {
+    width: 50,
+    height: 50,
+    borderRadius: 25,
+    backgroundColor: '#d9dde6',
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  bellIcon: {
+    fontSize: 30,
+    color: '#afb3bc'
+  },
+  tagContainer: {
+    width: 15,
+    height: 15,
+    borderRadius: 10,
+    position: 'absolute',
+    bottom: 0,
+    right: 0,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  tagIcon: {
+    fontSize: 10,
+    color: '#fff'
+  }
+})

@@ -20,6 +20,7 @@ export interface DataProps {
 interface IProps extends DataProps {
   onPress?: () => void
   style?: object
+  containerStyle?: object
   rightTopTextStyle?: object
   leftStyle?: object
   rightTextStyle?: object
@@ -73,7 +74,7 @@ const renderStatusIndicator = (bottomRightText: string): any => {
 export default class SalesOrderListAtom extends React.PureComponent<IProps> {
   render() {
     return (
-      <View style={styles.listItem}>
+      <View style={[styles.listItem, this.props.containerStyle]}>
         {this.props.avatar && (
           <CachedImageAtom uri={this.props.avatar} style={styles.avatar} />
         )}
