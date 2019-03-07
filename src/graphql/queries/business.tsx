@@ -55,7 +55,7 @@ export const ListCompanyNotificationsGQL = gql`
           element
           elementId
           readStatus
-          elementData
+          message
           date: insertedAt
           notificationItems {
             changedTo
