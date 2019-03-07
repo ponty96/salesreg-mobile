@@ -101,6 +101,7 @@
     "react-native-keyboard-aware-scroll-view": "^0.8.0",
     "react-native-lightbox": "^0.8.0",
     "react-native-loading-spinner-overlay": "^0.5.2",
+    "react-native-onesignal": "^3.2.12",
     "react-native-progress": "^3.5.0",
     "react-native-rave": "https://github.com/gbenga504/rave-react-native.git",
     "react-native-sentry": "^0.40.2",

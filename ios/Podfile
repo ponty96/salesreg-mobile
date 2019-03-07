@@ -37,6 +37,8 @@ target 'salesreg' do
 
   pod 'Firebase/Core'
 
+  pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
+
   target 'salesregTests' do
     inherit! :search_paths
     # Pods for testing
