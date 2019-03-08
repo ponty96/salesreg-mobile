@@ -9,6 +9,7 @@ import { UserContext } from '../context/UserContext'
 import { color } from '../Style/Color'
 import QueryLoader from '../Components/QueryLoader'
 import { GetSaleByIdGQL } from '../graphql/queries/order'
+import { convertToLocalTime } from '../Functions'
 
 interface IProps {
   navigation: any
@@ -50,7 +51,9 @@ class SalesOrderDetailsScreen extends Component<IProps> {
     return [
       {
         itemTitle: 'Date',
-        itemValue: moment(sales.date).calendar()
+        itemValue: moment(
+          convertToLocalTime(sales.date, 'YYYY-MM-DD HH:mm:ss')
+        ).calendar()
       },
       {
         itemTitle: 'Status',

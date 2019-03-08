@@ -4,6 +4,7 @@ import GenericListIndex from '../Components/Generic/ListIndex'
 import { ListCompanyInvoicesGQL } from '../graphql/queries/order'
 import { color } from '../Style/Color'
 import moment from 'moment'
+import { convertToLocalTime } from '../Functions'
 
 interface IProps {
   navigation: any
@@ -29,7 +30,9 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
         bottomLeftSecondText: '',
         rightTextStyle: { color: amountOwed > 0 ? color.red : color.green },
         topRightText: `\u20A6 ${amountOwed}`,
-        bottomRightText: moment(item.dueDate).calendar()
+        bottomRightText: moment(
+          convertToLocalTime(item.dueDate, 'YYYY-MM-DD HH:mm:ss')
+        ).calendar()
       }
     ]
   }

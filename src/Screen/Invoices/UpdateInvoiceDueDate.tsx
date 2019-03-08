@@ -5,7 +5,6 @@ import { parseFieldErrors } from '../../Functions'
 import AppSpinner from '../../Components/Spinner'
 import { UserContext } from '../../context/UserContext'
 import { UpdateInvoice } from '../../graphql/mutations/order'
-import moment from 'moment'
 import {
   ListCompanySalesGQL,
   ListCompanyInvoicesGQL
@@ -13,6 +12,7 @@ import {
 import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { convertToLocalTime } from '../../Functions'
 
 interface IProps {
   user?: any
@@ -31,7 +31,8 @@ class UpdateInvoiceDueDate extends React.PureComponent<IProps, IState> {
   }
 
   state = {
-    dueDate: moment(this.props.navigation.state.params.invoice.dueDate).format(
+    dueDate: convertToLocalTime(
+      this.props.navigation.state.params.invoice.dueDate,
       'YYYY-MM-DD'
     ),
     fieldErrors: null
