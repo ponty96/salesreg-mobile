@@ -6,7 +6,7 @@ import SalesOrderListAtom from '../Atom/ListItem/SalesOrderListAtom'
 
 interface Category {
   section: string
-  routeName: string
+  routeName?: string
   showRightCaret?: boolean | true
   onPress?: any | null
   description?: string
