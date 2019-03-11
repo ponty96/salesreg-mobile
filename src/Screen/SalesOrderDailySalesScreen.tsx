@@ -15,6 +15,7 @@ export default class SalesOrderDailySalesScreen extends React.Component<
       header: (
         <Header
           title="Daily Sales Record"
+          onPressRightIcon={() => navigation.navigate("Notifications")}
           onPressLeftIcon={() => navigation.goBack()}
           hideRightMenu={true}
         />

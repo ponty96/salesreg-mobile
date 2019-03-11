@@ -118,6 +118,24 @@ export const UpdateCompanyCoverPhotoGQL = gql`
   }
 `
 
+export const ChangeNotificationReadStatus = gql`
+  mutation changeNotificationReadStatus($notificationId: Uuid) {
+    changeNotificationReadStatus(notificationId: $notificationId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Notification {
+          id
+          readStatus
+        }
+      }
+    }
+  }
+`
+
 export const UpsertLegalDocument = gql`
   mutation upsertLegalDocument(
     $legalDocument: LegalDocumentInput!

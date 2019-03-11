@@ -215,8 +215,8 @@ class GenericListIndex extends React.Component<IProps, IState> {
           [graphqlQueryResultKey]: {
             ...fetchMoreResult[graphqlQueryResultKey],
             edges: [
-              ...prev[graphqlQueryResultKey].edges,
-              ...fetchMoreResult[graphqlQueryResultKey].edges
+              ...fetchMoreResult[graphqlQueryResultKey].edges,
+              ...prev[graphqlQueryResultKey].edges
             ]
           }
         })
@@ -431,7 +431,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
 
       const sectionList = Object.keys(grouped).map(key => ({
         date: key,
-        data: grouped[key].reverse()
+        data: grouped[key]
       }))
 
       const sortedSection = sectionList.sort((sectionA, sectionB) => {

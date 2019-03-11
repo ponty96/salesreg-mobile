@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Alert } from 'react-native'
 import Header from '../../Components/Header/BaseHeader'
 import GenericListIndex from '../../Components/Generic/ListIndex'
 import { ListCompanyProductsGQL } from '../../graphql/queries/store'
@@ -45,7 +44,9 @@ export default class ProductScreen extends React.Component<IProps, IState> {
       <React.Fragment>
         <Header
           title="Products"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
           showSearchBar
           searchBar={{

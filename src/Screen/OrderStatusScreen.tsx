@@ -122,6 +122,7 @@ class OrderStatusScreen extends Component<IProps, IState> {
       header: (
         <Header
           title="Order status"
+          onPressRightIcon={() => navigation.navigate('Notifications')}
           onPressLeftIcon={() => navigation.goBack()}
           hideRightMenu={true}
         />

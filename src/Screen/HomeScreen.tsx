@@ -4,9 +4,11 @@ import Auth from '../services/auth'
 import setAppAnalytics from '../Functions/setAppAnalytics'
 import NavigationalInformation from '../Components/Home/NavigationInformation'
 import GettingStarted from '../Components/Home/GettingStarted'
+import { PushNotificationContext } from '../context/PushNotificationContext'
 
 interface IProps {
   navigation: any
+  onSetNavigation: (navigation) => void
 }
 
 interface IState {
@@ -14,7 +16,7 @@ interface IState {
   display: any
 }
 
-export default class HomeScreen extends React.Component<IProps, IState> {
+class HomeScreen extends React.Component<IProps, IState> {
   constructor(props) {
     super(props)
     this.state = {
@@ -22,6 +24,7 @@ export default class HomeScreen extends React.Component<IProps, IState> {
       display: null
     }
     setAppAnalytics('OPEN_APP')
+    this.props.onSetNavigation(this.props.navigation)
   }
 
   static navigationOptions = () => {
@@ -56,6 +59,9 @@ export default class HomeScreen extends React.Component<IProps, IState> {
       <React.Fragment>
         <Header
           title="Home"
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
         />
         {this.state.display == 'homescreen' ? (
@@ -69,3 +75,15 @@ export default class HomeScreen extends React.Component<IProps, IState> {
     )
   }
 }
+
+const _HomeScreen: any = props => (
+  <PushNotificationContext.Consumer>
+    {({ onSetNavigation }) => (
+      <HomeScreen onSetNavigation={onSetNavigation} {...props} />
+    )}
+  </PushNotificationContext.Consumer>
+)
+
+_HomeScreen.navigationOptions = HomeScreen.navigationOptions
+
+export default _HomeScreen

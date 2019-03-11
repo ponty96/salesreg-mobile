@@ -16,6 +16,7 @@ import AppSpinner from '../../Components/Spinner'
 import { AuthenticateClientGQL } from '../../graphql/client-mutations/authenticate'
 import { UserContext } from '../../context/UserContext'
 import setAppAnalytics from '../../Functions/setAppAnalytics'
+import { upsertMobileDevice } from '../../services/MobileDevice'
 
 interface IProps {
   navigation: any
@@ -316,6 +317,8 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
     } = this.props
     const { user } = this.props
     await client.resetStore()
+
+    upsertMobileDevice(client, user)
     client.mutate({
       mutation: AuthenticateClientGQL,
       variables: { user: user }
