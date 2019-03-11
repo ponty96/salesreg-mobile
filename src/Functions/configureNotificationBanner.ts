@@ -31,6 +31,8 @@ type ITypes =
   | 'DeleteLegalDocument'
   | 'CreateSpecialOffer'
   | 'UpdateSpecialOffer'
+  | 'DeleteDeliveryFee'
+  | 'CreateDeliveryFee'
 
 const configureNotificationBanner = (type: ITypes, params?: any): any => {
   switch (type) {
@@ -154,6 +156,13 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
         title: 'Category Created',
         subtitle: `${params.title} added to categories`
       }
+    case 'CreateDeliveryFee':
+      return {
+        title: 'Delivery Fee Created',
+        subtitle: `A delivery fee was added for ${params.region} in ${
+          params.state
+        } state`
+      }
     case 'UpdateCategory':
       return {
         title: 'Category Updated',
@@ -163,6 +172,11 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
       return {
         title: 'Category Removed',
         subtitle: `${params} was removed from categories`
+      }
+    case 'DeleteDeliveryFee':
+      return {
+        title: 'Delivery Fee Deleted',
+        subtitle: `${params} was removed from delivery fees`
       }
     case 'CreateOption':
       return {

@@ -32,6 +32,17 @@ export const ListCompanyBanksGQL = gql`
   }
 `
 
+export const ListCompanyDeliveryFees = gql`
+  query listCompanyDeliveryFees($companyId: Uuid!) {
+    listCompanyDeliveryFees(companyId: $companyId) {
+      id
+      state
+      region
+      fee
+    }
+  }
+`
+
 export const ListCompanyNotificationsGQL = gql`
   query listCompanyNotifications(
     $companyId: Uuid!

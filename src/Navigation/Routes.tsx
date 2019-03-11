@@ -42,6 +42,10 @@ import UpsertCoverPhotoScreen from '../Screen/Settings/Webstore/UpsertCoverPhoto
 import UpsertDocumentsScreen from '../Screen/Settings/Webstore/UpsertDocumentsScreen'
 import DocumentsScreen from '../Screen/Settings/Webstore/DocumentsScreen'
 
+//Delivery Fee Screens
+import CreateDeliveryFeeScreen from '../Screen/Settings/DeliveryFee/CreateDeliveryFeeScreen'
+import DeliveryFeeScreen from '../Screen/Settings/DeliveryFee/DeliveryFeeScreen'
+
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
@@ -193,6 +197,10 @@ const businessStack = StackNavigator(
     UpsertCoverPhoto: UpsertCoverPhotoScreen,
     UpsertDocuments: UpsertDocumentsScreen,
     Documents: DocumentsScreen,
+
+    // Delivery Fee
+    CreateDeliveryFee: CreateDeliveryFeeScreen,
+    DeliveryFees: DeliveryFeeScreen,
 
     // Expenses
     Expenses: ExpensesScreen,

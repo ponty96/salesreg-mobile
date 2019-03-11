@@ -4,12 +4,12 @@ import { Content } from 'native-base'
 import Header from '../Components/Header/DetailsScreenHeader'
 import ListItemAtom from '../Atom/ListItem/ListItemAtom'
 import { color } from '../Style/Color'
-import moment from 'moment'
 import { numberWithCommas } from '../Functions/numberWithCommas'
 import ProfileListAtom from '../Atom/ListItem/ExpandableListItemAtom'
 import FabAtom from '../Atom/FabAtom'
 import QueryLoader from '../Components/QueryLoader'
 import { GetInvoiceByIdGQL } from '../graphql/queries/order'
+import { convertToLocalTime } from '../Functions'
 
 interface IProps {
   navigation: any
@@ -100,7 +100,8 @@ class InvoicesScreen extends React.Component<IProps> {
         items,
         discount,
         invoice: { dueDate },
-        date
+        date,
+        deliveryFee
       } = sales,
       from = this.props.navigation.getParam('from', null),
       total = parseFloat(
@@ -114,13 +115,13 @@ class InvoicesScreen extends React.Component<IProps> {
           <Content>
             <ListItemAtom
               label="Issued date"
-              value={moment(date).format('DD/MM/YYYY')}
+              value={convertToLocalTime(date, 'DD/MM/YYYY')}
               labelStyle={styles.listLabel}
               rightTextStyle={[styles.greenText, { color: color.black }]}
               listItemStyle={styles.listWrapper}
             />
             <ProfileListAtom
-              section={`Date due: ${moment(dueDate).format('DD/MM/YYYY')}`}
+              section={`Date due: ${convertToLocalTime(dueDate, 'DD/MM/YYYY')}`}
               value={
                 Number(total) - amountPaid > 0 ? 'Edit' : 'Payment Completed'
               }
@@ -141,6 +142,13 @@ class InvoicesScreen extends React.Component<IProps> {
             <ListItemAtom
               label="Discount"
               value={`\u20A6 ${discount}`}
+              labelStyle={styles.listLabel}
+              rightTextStyle={[styles.greenText, { color: color.black }]}
+              listItemStyle={styles.listWrapper}
+            />
+            <ListItemAtom
+              label="Delivery Fee"
+              value={`\u20A6 ${deliveryFee || 0}`}
               labelStyle={styles.listLabel}
               rightTextStyle={[styles.greenText, { color: color.black }]}
               listItemStyle={styles.listWrapper}

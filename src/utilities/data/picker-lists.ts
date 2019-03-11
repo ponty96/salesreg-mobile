@@ -1,4 +1,5 @@
 import countries from './countries'
+import states from './states'
 
 export const Countries = Object.keys(countries).map(key => {
   const country = countries[key]
@@ -9,6 +10,11 @@ export const Countries = Object.keys(countries).map(key => {
     subLabel: `+ ${country.callingCode || ''}`
   }
 })
+
+export const States = states.map(state => ({
+  mainLabel: state,
+  value: state.toLowerCase()
+}))
 
 export const Currencies = Object.keys(countries).map(key => {
   const country = countries[key]

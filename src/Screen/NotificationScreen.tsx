@@ -13,6 +13,7 @@ import { Mutation } from 'react-apollo'
 import { UserContext } from '../context/UserContext'
 import notificationNavigationHandler from '../Functions/notificationNavigationHandler'
 import Icon from '../Atom/Icon'
+import { convertToLocalTime } from '../Functions'
 
 interface IProps {
   navigation: any
@@ -149,10 +150,12 @@ class NotificationScreen extends React.PureComponent<IProps> {
       {
         firstTopText: `${item.element[0].toUpperCase()}${item.element.substr(
           1
-        )} ${item.actionType.toLowerCase()}`,
+        )} ${item.actionType && item.actionType.toLowerCase()}`,
         bottomLeftFirstText: item.message,
         topLeftTextStyle: { fontFamily: 'AvenirNext-DemiBold' },
-        bottomRightText: `${moment(item.date).calendar()}`,
+        bottomRightText: `${moment(
+          convertToLocalTime(item.date, 'YYYY-MM-DD HH:mm:ss')
+        ).calendar()}`,
         style: {
           marginLeft: 20,
           backgroundColor: 'transparent',
