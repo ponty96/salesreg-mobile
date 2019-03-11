@@ -81,6 +81,10 @@ class SalesOrderDetailsScreen extends Component<IProps> {
           {
             itemTitle: 'Discount',
             itemValue: `\u20A6 ${sales.discount}`
+          },
+          {
+            itemTitle: 'Delivery Fee',
+            itemValue: `\u20A6 ${sales.deliveryFee || 0}`
           }
         ])
     )

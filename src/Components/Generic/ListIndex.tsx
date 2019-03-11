@@ -42,6 +42,7 @@ interface IProps {
   variables?: any
   headerText: string
   forceUpdateID?: number
+  fabRouteParams?: any
   emptyListText: string
   fabRouteName?: string
   fabIconName?: string
@@ -53,6 +54,7 @@ interface IProps {
   showFabFn?: (val?: any) => any
   hideSeparator?: boolean
   user: any
+  isPaginatedList: boolean
   queryText?: string
 }
 
@@ -88,6 +90,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
     showFabFn: function() {
       return true
     },
+    isPaginatedList: true,
     hideSeparator: false
   }
 
@@ -230,6 +233,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
       headerText,
       emptyListText,
       fetchPolicy,
+      fabRouteParams,
       fabRouteName,
       fabIconName,
       fabIconType,
@@ -351,6 +355,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
                 }}
                 onEndReached={() => {
                   !this.IS_FETCHING &&
+                    this.props.isPaginatedList &&
                     this.fetchMore(
                       fetchMore,
                       data[graphqlQueryResultKey]
@@ -403,6 +408,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
                 <FabAtom
                   routeName={fabRouteName}
                   navigation={navigation}
+                  goto={fabRouteParams}
                   name={fabIconName}
                   type={fabIconType}
                 />
@@ -417,22 +423,34 @@ class GenericListIndex extends React.Component<IProps, IState> {
   }
 
   parseSections = sections => {
-    const grouped =
-      _.groupBy(sections.edges, section =>
-        moment(section.node.date).format('L')
-      ) || {}
+    if (sections.edges) {
+      const grouped =
+        _.groupBy(sections.edges, section =>
+          moment(section.node.date).format('L')
+        ) || {}
 
-    const sectionList = Object.keys(grouped).map(key => ({
-      date: key,
-      data: grouped[key]
-    }))
+      const sectionList = Object.keys(grouped).map(key => ({
+        date: key,
+        data: grouped[key]
+      }))
 
-    const sortedSection = sectionList.sort((sectionA, sectionB) => {
-      const a = new Date(sectionA.date)
-      const b = new Date(sectionB.date)
-      return a > b ? -1 : a < b ? 1 : 0
-    })
-    return sortedSection
+      const sortedSection = sectionList.sort((sectionA, sectionB) => {
+        const a = new Date(sectionA.date)
+        const b = new Date(sectionB.date)
+        return a > b ? -1 : a < b ? 1 : 0
+      })
+      return sortedSection
+    } else {
+      return sections.length > 0
+        ? [
+            {
+              data: sections.map(section => ({
+                node: section
+              }))
+            }
+          ]
+        : sections
+    }
   }
 }
 

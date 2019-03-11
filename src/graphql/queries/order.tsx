@@ -112,6 +112,7 @@ export const ListCompanySalesGQL = gql`
             city
           }
           amountPaid
+          deliveryFee
           invoice {
             id
             refId
@@ -222,6 +223,7 @@ export const ListCompanyInvoicesGQL = gql`
               city
             }
             amountPaid
+            deliveryFee
             date
             items {
               id
@@ -237,6 +239,14 @@ export const ListCompanyInvoicesGQL = gql`
           }
         }
       }
+    }
+  }
+`
+
+export const CompanyAllowsNationwideDeliveryGQL = gql`
+  query companyAllowsNationwideDelivery($companyId: Uuid!) {
+    companyAllowsNationwideDelivery(companyId: $companyId) {
+      exist
     }
   }
 `

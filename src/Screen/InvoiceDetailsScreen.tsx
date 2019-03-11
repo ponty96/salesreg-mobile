@@ -100,7 +100,8 @@ class InvoicesScreen extends React.Component<IProps> {
         items,
         discount,
         invoice: { dueDate },
-        date
+        date,
+        deliveryFee
       } = sales,
       from = this.props.navigation.getParam('from', null),
       total = parseFloat(
@@ -141,6 +142,13 @@ class InvoicesScreen extends React.Component<IProps> {
             <ListItemAtom
               label="Discount"
               value={`\u20A6 ${discount}`}
+              labelStyle={styles.listLabel}
+              rightTextStyle={[styles.greenText, { color: color.black }]}
+              listItemStyle={styles.listWrapper}
+            />
+            <ListItemAtom
+              label="Delivery Fee"
+              value={`\u20A6 ${deliveryFee || 0}`}
               labelStyle={styles.listLabel}
               rightTextStyle={[styles.greenText, { color: color.black }]}
               listItemStyle={styles.listWrapper}
