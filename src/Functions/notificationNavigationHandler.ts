@@ -50,6 +50,11 @@ const routeTo = (params: any): { screen: string; routeParams: any } => {
       _elementId = params.elementId || params.element_id
       routeParams = { ownedBy: 'notifications', orderId: _elementId }
       break
+    case 'delivery':
+      screen = 'DeliveryFees'
+      _elementId = null
+      routeParams = { ownedBy: 'notifications', orderId: _elementId }
+      break
     default:
       screen = ''
   }

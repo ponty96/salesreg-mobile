@@ -150,7 +150,7 @@ class NotificationScreen extends React.PureComponent<IProps> {
       {
         firstTopText: `${item.element[0].toUpperCase()}${item.element.substr(
           1
-        )} ${item.actionType.toLowerCase()}`,
+        )} ${item.actionType && item.actionType.toLowerCase()}`,
         bottomLeftFirstText: item.message,
         topLeftTextStyle: { fontFamily: 'AvenirNext-DemiBold' },
         bottomRightText: `${moment(
