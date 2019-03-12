@@ -12,6 +12,10 @@ export const LoginUserMutationGQL = gql`
         ... on Authorization {
           message
           accessToken
+          s3Bucket
+          s3Region
+          s3AccessKey
+          s3SecretKey
           refreshToken
           user {
             id
@@ -82,6 +86,10 @@ export const RegisterUserMutationGQL = gql`
         ... on Authorization {
           message
           accessToken
+          s3Bucket
+          s3Region
+          s3AccessKey
+          s3SecretKey
           refreshToken
           user {
             id

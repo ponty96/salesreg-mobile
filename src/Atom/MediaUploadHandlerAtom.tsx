@@ -22,6 +22,7 @@ import {
 import { connect } from 'react-redux'
 import Config from 'react-native-config'
 import Icon from './Icon'
+import Auth from '../services/auth'
 
 interface IProps {
   onMediaSet?: (response) => void
@@ -60,6 +61,11 @@ interface IState {
 }
 
 class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
+  private s3Bucket: string
+  private s3Region: string
+  private s3AccessKey: string
+  private s3SecretKey: string
+
   constructor(props) {
     super(props)
     this.state = {
@@ -74,8 +80,19 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
     }
   }
 
-  componentDidMount() {
-    this.props.removeUrlFromUploadedMedia(
+  async componentDidMount() {
+    let { s3Bucket, s3Region, s3AccessKey, s3SecretKey } = JSON.parse(
+      await Auth.getS3Keys()
+    )
+
+    this.s3Bucket = s3Bucket
+    this.s3Region = s3Region
+    this.s3AccessKey = s3AccessKey
+    this.s3SecretKey = s3SecretKey
+
+    console.log('This is ', this.s3Bucket)
+
+    await this.props.removeUrlFromUploadedMedia(
       this.state.mediasToExclude,
       'upload_url'
     )
@@ -143,19 +160,19 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
 
     const optionsThumbnail = {
       keyPrefix: Config.S3_THUMBNAIL_KEY_PREFIX,
-      bucket: Config.S3_BUCKET,
-      region: Config.S3_REGION,
-      accessKey: Config.S3_ACCESS_KEY,
-      secretKey: Config.S3_SECRET_KEY,
+      bucket: this.s3Bucket,
+      region: this.s3Region,
+      accessKey: this.s3AccessKey,
+      secretKey: this.s3SecretKey,
       successActionStatus: Config.S3_SUCCESS_ACTION_STATUS
     }
 
     const optionsVideo = {
       keyPrefix: Config.S3_VIDEO_KEY_PREFIX,
-      bucket: Config.S3_BUCKET,
-      region: Config.S3_REGION,
-      accessKey: Config.S3_ACCESS_KEY,
-      secretKey: Config.S3_SECRET_KEY,
+      bucket: this.s3Bucket,
+      region: this.s3Region,
+      accessKey: this.s3AccessKey,
+      secretKey: this.s3SecretKey,
       successActionStatus: Config.S3_SUCCESS_ACTION_STATUS
     }
 
@@ -197,10 +214,10 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
 
     const options = {
       keyPrefix: Config.S3_DOCUMENT_KEY_PREFIX,
-      bucket: Config.S3_BUCKET,
-      region: Config.S3_REGION,
-      accessKey: Config.S3_ACCESS_KEY,
-      secretKey: Config.S3_SECRET_KEY,
+      bucket: this.s3Bucket,
+      region: this.s3Region,
+      accessKey: this.s3AccessKey,
+      secretKey: this.s3SecretKey,
       successActionStatus: Config.S3_SUCCESS_ACTION_STATUS
     }
 
@@ -229,10 +246,10 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
 
     const options = {
       keyPrefix: Config.S3_IMAGE_KEY_PREFIX,
-      bucket: Config.S3_BUCKET,
-      region: Config.S3_REGION,
-      accessKey: Config.S3_ACCESS_KEY,
-      secretKey: Config.S3_SECRET_KEY,
+      bucket: this.s3Bucket,
+      region: this.s3Region,
+      accessKey: this.s3AccessKey,
+      secretKey: this.s3SecretKey,
       successActionStatus: Config.S3_SUCCESS_ACTION_STATUS
     }
 
