@@ -126,7 +126,6 @@ class InputAtom extends React.Component<IProps, IState> {
               <Text style={styles.labelText}>{this.props.label}</Text>
             </Label>
             <Textarea
-              bordered={false}
               rowSpan={5}
               style={[this.props.inputStyle, styles.multilineText]}
               ref={input => (this.inputRef = input)}
