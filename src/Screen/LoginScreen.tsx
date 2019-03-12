@@ -146,11 +146,20 @@ class LoginScreen extends React.Component<IProps, IState> {
         screenProps: { client }
       } = this.props
 
-      const { accessToken, refreshToken, user } = data
+      const {
+        accessToken,
+        refreshToken,
+        s3Bucket,
+        s3Region,
+        s3AccessKey,
+        s3SecretKey,
+        user
+      } = data
 
       await Auth.clearVault()
       await Auth.setToken(accessToken)
       await Auth.setRefreshToken(refreshToken)
+      await Auth.setS3Keys({ s3Bucket, s3Region, s3AccessKey, s3SecretKey })
       await Auth.setCurrentUser(user)
 
       let _stage = 'done'
