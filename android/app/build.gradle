@@ -87,8 +87,8 @@ project.ext.react = [
 ]
 
 project.ext.envConfigFiles = [
-    debug: ".env.development",
-    release: ".env.development"
+    debug: ".env.staging",
+    release: ".env.staging"
 ]
 
 apply from: "../../node_modules/react-native/react.gradle"
@@ -119,8 +119,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         vectorDrawables.useSupportLibrary = true
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
-        versionName "0.9"
+        versionCode 17
+        versionName "0.17"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
