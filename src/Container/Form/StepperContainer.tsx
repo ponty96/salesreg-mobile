@@ -449,11 +449,16 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         currentStep = undefined
 
       for (let len = 0; len < steps.length; len++) {
-        steps[len].formFields.forEach(formField => {
-          if (fields.indexOf(formField.name.toLowerCase()) != -1) {
-            currentStep = len
-          }
-        })
+        steps[len] &&
+          steps[len].formFields &&
+          steps[len].formFields.forEach(formField => {
+            if (
+              formField &&
+              fields.indexOf(formField.name.toLowerCase()) != -1
+            ) {
+              currentStep = len
+            }
+          })
         if (currentStep) break
       }
 
