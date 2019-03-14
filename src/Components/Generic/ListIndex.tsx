@@ -56,6 +56,7 @@ interface IProps {
   user: any
   isPaginatedList: boolean
   queryText?: string
+  formatData?: (sections) => void
 }
 
 interface IState {
@@ -423,33 +424,37 @@ class GenericListIndex extends React.Component<IProps, IState> {
   }
 
   parseSections = sections => {
-    if (sections.edges) {
-      const grouped =
-        _.groupBy(sections.edges, section =>
-          moment(section.node.date).format('L')
-        ) || {}
-
-      const sectionList = Object.keys(grouped).map(key => ({
-        date: key,
-        data: grouped[key]
-      }))
-
-      const sortedSection = sectionList.sort((sectionA, sectionB) => {
-        const a = new Date(sectionA.date)
-        const b = new Date(sectionB.date)
-        return a > b ? -1 : a < b ? 1 : 0
-      })
-      return sortedSection
+    if (this.props.formatData) {
+      return this.props.formatData(sections)
     } else {
-      return sections.length > 0
-        ? [
-            {
-              data: sections.map(section => ({
-                node: section
-              }))
-            }
-          ]
-        : sections
+      if (sections.edges) {
+        const grouped =
+          _.groupBy(sections.edges, section =>
+            moment(section.node.date).format('L')
+          ) || {}
+
+        const sectionList = Object.keys(grouped).map(key => ({
+          date: key,
+          data: grouped[key]
+        }))
+
+        const sortedSection = sectionList.sort((sectionA, sectionB) => {
+          const a = new Date(sectionA.date)
+          const b = new Date(sectionB.date)
+          return a > b ? -1 : a < b ? 1 : 0
+        })
+        return sortedSection
+      } else {
+        return sections.length > 0
+          ? [
+              {
+                data: sections.map(section => ({
+                  node: section
+                }))
+              }
+            ]
+          : sections
+      }
     }
   }
 }

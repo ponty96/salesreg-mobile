@@ -184,7 +184,6 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
 const styles = StyleSheet.create({
   listItem: {
     flexDirection: 'row',
-    flex: 1,
     marginHorizontal: 16,
     alignItems: 'center'
   },

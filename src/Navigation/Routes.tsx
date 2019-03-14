@@ -45,6 +45,7 @@ import DocumentsScreen from '../Screen/Settings/Webstore/DocumentsScreen'
 //Delivery Fee Screens
 import CreateDeliveryFeeScreen from '../Screen/Settings/DeliveryFee/CreateDeliveryFeeScreen'
 import DeliveryFeeScreen from '../Screen/Settings/DeliveryFee/DeliveryFeeScreen'
+import DeliveryDetailsScreen from '../Screen/Settings/DeliveryFee/DeliveryDetailsScreen'
 
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
@@ -201,6 +202,7 @@ const businessStack = StackNavigator(
     // Delivery Fee
     CreateDeliveryFee: CreateDeliveryFeeScreen,
     DeliveryFees: DeliveryFeeScreen,
+    DeliveryDetails: DeliveryDetailsScreen,
 
     // Expenses
     Expenses: ExpensesScreen,
