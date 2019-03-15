@@ -1,15 +1,15 @@
 import * as React from 'react'
 import { Alert } from 'react-native'
-import { Mutation } from 'react-apollo'
 import { ActionSheet } from 'native-base'
+import { Mutation } from 'react-apollo'
+import AppSpinner from '../../../Components/Spinner'
 import Header from '../../../Components/Header/DetailsScreenHeader'
 import GenericListIndex from '../../../Components/Generic/ListIndex'
-import AppSpinner from '../../../Components/Spinner'
 import { ListCompanyDeliveryFees } from '../../../graphql/queries/business'
+import { UserContext } from '../../../context/UserContext'
 import { DeleteDeliveryFee } from '../../../graphql/mutations/business'
 import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
-import { UserContext } from '../../../context/UserContext'
 
 let BUTTONS = ['Yes, delete', 'Cancel']
 let DESTRUCTIVE_INDEX = 0
@@ -18,7 +18,6 @@ let CANCEL_INDEX = 1
 interface IProps {
   navigation: any
   user?: any
-  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -32,42 +31,55 @@ class DeliveryFeeScreen extends React.Component<IProps, IState> {
   }
 
   state = {
-    forceUpdateId: Date.now(),
-    deliveryAddressToDelete: ''
+    deliveryAddressToDelete: '',
+    forceUpdateId: Date.now()
   }
 
-  parseData = (item: any, deleteDeliveryFee: (obj: any) => void) => {
+  parseData = (item: any): any => {
     return [
       {
         firstTopText: item.state.toUpperCase(),
-        bottomLeftFirstText: `${item.region}:`,
-        bottomLeftSecondText: `\u20A6${item.fee}`,
+        bottomLeftFirstText:
+          item.state.toLowerCase() == 'nation wide'
+            ? `Price: \u20A6${item.locations[0].fee}`
+            : `${item.locations.length} region${
+                item.locations.length > 1 ? 's' : ''
+              }`,
+        bottomLeftSecondText: ``,
         topRightText: ``, // this should be the number of products and services within this category
-        showTrash: true,
-        onPressTrash: () => {
-          ActionSheet.show(
-            {
-              options: BUTTONS,
-              cancelButtonIndex: CANCEL_INDEX,
-              destructiveButtonIndex: DESTRUCTIVE_INDEX,
-              title: 'Delete?'
-            },
-            buttonIndex => {
-              if (buttonIndex == 0) {
-                this.setState(
-                  {
-                    deliveryAddressToDelete: item.region
-                  },
-                  () => {
-                    deleteDeliveryFee({ variables: { deliveryFeeId: item.id } })
-                  }
-                )
-              }
-            }
-          )
-        }
+        showTrash: false
       }
     ]
+  }
+
+  groupDeliveryFees = sections => {
+    if (sections.length == 0) {
+      return sections
+    } else {
+      let _sections = [],
+        seenStates = []
+
+      sections.forEach(section => {
+        let index = seenStates.indexOf(section.state)
+        if (index != -1) {
+          _sections[index].node.locations.push(section)
+        } else {
+          seenStates.push(section.state)
+          _sections.push({
+            node: {
+              state: section.state,
+              locations: [section]
+            }
+          })
+        }
+      })
+
+      return [
+        {
+          data: _sections
+        }
+      ]
+    }
   }
 
   onCompleted = async res => {
@@ -96,53 +108,86 @@ class DeliveryFeeScreen extends React.Component<IProps, IState> {
         )
       )
       banner.show({ bannerPosition: 'bottom' })
-
       this.setState({
         forceUpdateId: Date.now()
       })
     }
   }
 
+  deleteDeliveryFee = (address, deleteDeliveryFee) => {
+    ActionSheet.show(
+      {
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        destructiveButtonIndex: DESTRUCTIVE_INDEX,
+        title: 'Delete?'
+      },
+      buttonIndex => {
+        if (buttonIndex == 0) {
+          this.setState(
+            {
+              deliveryAddressToDelete: address.state
+            },
+            () => {
+              deleteDeliveryFee({
+                variables: { deliveryFeeId: address.locations[0].id }
+              })
+            }
+          )
+        }
+      }
+    )
+  }
+
   render() {
     return (
-      <React.Fragment>
-        <Header
-          title="Delivery Fees"
-          onPressLeftIcon={() => this.props.navigation.goBack()}
-          hideRightMenu={true}
-        />
-        <Mutation
-          mutation={DeleteDeliveryFee}
-          refetchQueries={ListCompanyDeliveryFees}
-          awaitRefetchQueries={true}
-          onCompleted={this.onCompleted}
-        >
-          {(deleteDeliveryFee, { loading }) => {
-            return (
-              <React.Fragment>
-                <AppSpinner visible={loading} />
-                <GenericListIndex
-                  forceUpdateID={this.state.forceUpdateId}
-                  isPaginatedList={false}
-                  navigation={this.props.navigation}
-                  graphqlQuery={ListCompanyDeliveryFees}
-                  graphqlQueryResultKey="listCompanyDeliveryFees"
-                  parseItemData={item =>
-                    this.parseData(item, deleteDeliveryFee)
-                  }
-                  onItemPress={() => null}
-                  emptyListText={`Adding delivery locations allow you manage the delivery fee for various customers based on their locations. \n\n To start creating delivery fees, touch the`}
-                  headerText="Manage Delivery Charges!"
-                  fabRouteName="CreateDeliveryFee"
-                  fabIconName="truck-delivery"
-                  fabIconType="MaterialCommunityIcons"
-                  hideSeparator={true}
-                />
-              </React.Fragment>
-            )
-          }}
-        </Mutation>
-      </React.Fragment>
+      <Mutation
+        mutation={DeleteDeliveryFee}
+        refetchQueries={[
+          {
+            query: ListCompanyDeliveryFees,
+            variables: {
+              companyId: this.props.user.company.id
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+        onCompleted={this.onCompleted}
+      >
+        {(deleteDeliveryFee, { loading }) => (
+          <React.Fragment>
+            <AppSpinner visible={loading} />
+            <Header
+              title="Shipping Zones"
+              onPressLeftIcon={() => this.props.navigation.goBack()}
+              hideRightMenu={true}
+            />
+            <GenericListIndex
+              isPaginatedList={false}
+              navigation={this.props.navigation}
+              graphqlQuery={ListCompanyDeliveryFees}
+              graphqlQueryResultKey="listCompanyDeliveryFees"
+              fetchPolicy="network-only"
+              parseItemData={item => this.parseData(item)}
+              onItemPress={node => {
+                node.state.toLowerCase() == 'nation wide'
+                  ? this.deleteDeliveryFee(node, deleteDeliveryFee)
+                  : this.props.navigation.navigate('DeliveryDetails', {
+                      locations: node.locations,
+                      state: node.state
+                    })
+              }}
+              formatData={this.groupDeliveryFees}
+              emptyListText={`Adding shipping zones allow you manage the shipping fee for your customers based on their regions. \n\n To start creating shipping zones, touch the`}
+              headerText="Manage Delivery Charges!"
+              fabRouteName="CreateDeliveryFee"
+              fabIconName="truck-delivery"
+              fabIconType="MaterialCommunityIcons"
+              hideSeparator={true}
+            />
+          </React.Fragment>
+        )}
+      </Mutation>
     )
   }
 }

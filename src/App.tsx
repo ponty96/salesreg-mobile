@@ -7,6 +7,7 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
+import codePush from 'react-native-code-push'
 
 import Routes from './Navigation/Routes'
 import OneSignal from 'react-native-onesignal'
@@ -24,6 +25,13 @@ import { PushNotificationContext } from './context/PushNotificationContext'
 import PushNotificationContainer from './Container/PushNotificationContainer'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
+const pushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+  updateDialog: {
+    appendReleaseDescription: true
+  },
+  installMode: codePush.InstallMode.IMMEDIATE
+}
 
 interface IProps {
   onSetPushNotificationData: (data) => void
@@ -143,4 +151,6 @@ const _App = props => (
   </PushNotificationContext.Consumer>
 )
 
-export default _App
+const YipCartApp = codePush(pushOptions)(_App)
+
+export default YipCartApp
