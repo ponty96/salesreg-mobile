@@ -20,7 +20,6 @@ let CANCEL_INDEX = 1
 interface IProps {
   navigation: any
   user?: any
-  setNotificationBanner: (obj: any) => void
 }
 
 interface IState {
@@ -108,7 +107,7 @@ class DeliveryDetailsScreen extends React.Component<IProps, IState> {
     return (
       <React.Fragment>
         <Header
-          title={`${state[0].toUpperCase()}${state.substr(1)} Delivery Fees`}
+          title={`${state[0].toUpperCase()}${state.substr(1)} State Regions`}
           onPressLeftIcon={() => this.props.navigation.goBack()}
           hideRightMenu={true}
         />
@@ -147,10 +146,10 @@ class DeliveryDetailsScreen extends React.Component<IProps, IState> {
                   ) : (
                     <EmptyList
                       type={{
-                        Text: `No Address found for ${state[0].toUpperCase()}${state.substr(
+                        Text: `No regions found for ${state[0].toUpperCase()}${state.substr(
                           1
-                        )}, please add one or more addresses to this location`,
-                        headerText: 'Addresses Not Found'
+                        )}, please add one or more regions to this location`,
+                        headerText: 'Regions Not Found'
                       }}
                     />
                   )}
