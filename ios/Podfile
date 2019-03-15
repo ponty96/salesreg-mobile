@@ -37,6 +37,8 @@ target 'salesreg' do
 
   pod 'Firebase/Core'
 
+  pod 'CodePush', :path => '../node_modules/react-native-code-push'
+
   target 'salesregTests' do
     inherit! :search_paths
     # Pods for testing
