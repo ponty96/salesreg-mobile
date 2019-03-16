@@ -30,7 +30,7 @@ const pushOptions = {
   updateDialog: {
     appendReleaseDescription: true
   },
-  installMode: codePush.InstallMode.IMMEDIATE
+  installMode: codePush.InstallMode.ON_NEXT_RESTART
 }
 
 interface IProps {
