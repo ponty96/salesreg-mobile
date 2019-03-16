@@ -31,3 +31,58 @@ export const ListCompanyBanksGQL = gql`
     }
   }
 `
+
+export const ListCompanyDeliveryFees = gql`
+  query listCompanyDeliveryFees($companyId: Uuid!) {
+    listCompanyDeliveryFees(companyId: $companyId) {
+      id
+      state
+      region
+      fee
+    }
+  }
+`
+
+export const ListCompanyNotificationsGQL = gql`
+  query listCompanyNotifications(
+    $companyId: Uuid!
+    $after: String
+    $first: Int
+  ) {
+    listCompanyNotifications(
+      companyId: $companyId
+      after: $after
+      first: $first
+    ) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
+      }
+      edges {
+        node {
+          id
+          actionType
+          element
+          elementId
+          readStatus
+          message
+          date: insertedAt
+          notificationItems {
+            changedTo
+            current
+            itemType
+            id
+            itemId
+          }
+        }
+      }
+    }
+  }
+`
+
+export const GetUnreadCompanyNotificationsCount = gql`
+  query getUnreadCompanyNotificationsCount($companyId: Uuid!) {
+    getUnreadCompanyNotificationsCount(companyId: $companyId)
+  }
+`

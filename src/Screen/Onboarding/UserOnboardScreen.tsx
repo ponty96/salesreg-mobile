@@ -180,6 +180,7 @@ export default class UserOnboardScreen extends React.PureComponent<
         )
     }
   }
+
   onCompleted = async (res, resetUserContext) => {
     const {
       registerUser: { success, fieldErrors, data }
@@ -191,11 +192,20 @@ export default class UserOnboardScreen extends React.PureComponent<
       const {
         screenProps: { client }
       } = this.props
-      const { accessToken, refreshToken, user } = data
+      const {
+        accessToken,
+        refreshToken,
+        user,
+        s3Bucket,
+        s3Region,
+        s3AccessKey,
+        s3SecretKey
+      } = data
       await Auth.clearVault()
       await Auth.setToken(accessToken)
       await Auth.setRefreshToken(refreshToken)
       await Auth.setCurrentUser(user)
+      await Auth.setS3Keys({ s3Bucket, s3Region, s3AccessKey, s3SecretKey })
       resetUserContext(user)
       await client.resetStore()
 

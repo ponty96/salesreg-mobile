@@ -7,10 +7,14 @@ import moment from 'moment'
 import Preferences from '../services/preferences'
 import { UserContext } from '../context/UserContext'
 import { color } from '../Style/Color'
+import QueryLoader from '../Components/QueryLoader'
+import { GetSaleByIdGQL } from '../graphql/queries/order'
+import { convertToLocalTime } from '../Functions'
 
 interface IProps {
   navigation: any
   user?: any
+  sales?: any
 }
 
 class SalesOrderDetailsScreen extends Component<IProps> {
@@ -27,7 +31,8 @@ class SalesOrderDetailsScreen extends Component<IProps> {
   }
 
   onStatusPress = async () => {
-    const sales = this.props.navigation.getParam('sales', {})
+    const sales =
+      this.props.navigation.getParam('sales', null) || this.props.sales
     const hideHint = await Preferences.getOrderStatusHintPref()
     this.props.navigation.navigate('OrderStatusChange', {
       showHint: hideHint ? false : true,
@@ -39,13 +44,16 @@ class SalesOrderDetailsScreen extends Component<IProps> {
   }
 
   parseItems = () => {
-    const sales = this.props.navigation.getParam('sales', {})
+    const sales =
+      this.props.navigation.getParam('sales', null) || this.props.sales
     const { items = [] } = sales
 
     return [
       {
         itemTitle: 'Date',
-        itemValue: moment(sales.date).calendar()
+        itemValue: moment(
+          convertToLocalTime(sales.date, 'YYYY-MM-DD HH:mm:ss')
+        ).calendar()
       },
       {
         itemTitle: 'Status',
@@ -73,13 +81,18 @@ class SalesOrderDetailsScreen extends Component<IProps> {
           {
             itemTitle: 'Discount',
             itemValue: `\u20A6 ${sales.discount}`
+          },
+          {
+            itemTitle: 'Delivery Fee',
+            itemValue: `\u20A6 ${sales.deliveryFee || 0}`
           }
         ])
     )
   }
 
   render() {
-    const sales = this.props.navigation.getParam('sales', {})
+    const sales =
+      this.props.navigation.getParam('sales', null) || this.props.sales
 
     return (
       <View style={styles.container}>
@@ -141,11 +154,32 @@ const styles = StyleSheet.create({
   }
 })
 
-const _SalesOrderDetailsScreen: any = props => (
-  <UserContext.Consumer>
-    {({ user }) => <SalesOrderDetailsScreen {...props} user={user} />}
-  </UserContext.Consumer>
-)
+const _SalesOrderDetailsScreen: any = props => {
+  let {
+    navigation: {
+      state: {
+        params: { ownedBy, orderId }
+      }
+    }
+  } = props
+
+  return (
+    <QueryLoader
+      from={ownedBy}
+      graphqlQuery={GetSaleByIdGQL}
+      graphqlQueryResultKey="getSaleById"
+      variables={{ saleId: orderId }}
+    >
+      {data => (
+        <UserContext.Consumer>
+          {({ user }) => (
+            <SalesOrderDetailsScreen {...props} sales={data} user={user} />
+          )}
+        </UserContext.Consumer>
+      )}
+    </QueryLoader>
+  )
+}
 
 _SalesOrderDetailsScreen.navigationOptions =
   SalesOrderDetailsScreen.navigationOptions

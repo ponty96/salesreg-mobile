@@ -42,6 +42,11 @@ import UpsertCoverPhotoScreen from '../Screen/Settings/Webstore/UpsertCoverPhoto
 import UpsertDocumentsScreen from '../Screen/Settings/Webstore/UpsertDocumentsScreen'
 import DocumentsScreen from '../Screen/Settings/Webstore/DocumentsScreen'
 
+//Delivery Fee Screens
+import CreateDeliveryFeeScreen from '../Screen/Settings/DeliveryFee/CreateDeliveryFeeScreen'
+import DeliveryFeeScreen from '../Screen/Settings/DeliveryFee/DeliveryFeeScreen'
+import DeliveryDetailsScreen from '../Screen/Settings/DeliveryFee/DeliveryDetailsScreen'
+
 // Business Screens
 import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
 import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
@@ -54,6 +59,9 @@ import ChargeCalculatorScreen from '../Screen/Settings/ChargeCalculatorScreen'
 
 // Order
 import OrderStatusScreen from '../Screen/OrderStatusScreen'
+
+// Notification
+import NotificationScreen from '../Screen/NotificationScreen'
 
 // Sales Order screens
 import SalesOrderScreen from '../Screen/SalesOrderScreen'
@@ -93,7 +101,6 @@ import InvoiceDetailsScreen from '../Screen/InvoiceDetailsScreen'
 import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
 import InvoicesScreen from '../Screen/InvoicesScreen'
 import UpdateInvoiceDueDate from '../Screen/Invoices/UpdateInvoiceDueDate'
-import UpdateInvoicesSplitPayment from '../Screen/Invoices/UpdateInvoicesSplitPayment'
 
 import IncomeScreen from '../Screen/IncomeScreen'
 
@@ -124,9 +131,6 @@ const businessStack = StackNavigator(
     InvoiceDetails: {
       screen: InvoiceDetailsScreen
     },
-    UpdateInvoicesSplitPayment: {
-      screen: UpdateInvoicesSplitPayment
-    },
     UpdateInvoiceDueDate: {
       screen: UpdateInvoiceDueDate
     },
@@ -135,6 +139,11 @@ const businessStack = StackNavigator(
     },
     UpsertInvoice: {
       screen: UpsertInvoiceScreen
+    },
+
+    // Notification ROUTES
+    Notifications: {
+      screen: NotificationScreen
     },
 
     // Setting ROUTES
@@ -189,6 +198,11 @@ const businessStack = StackNavigator(
     UpsertCoverPhoto: UpsertCoverPhotoScreen,
     UpsertDocuments: UpsertDocumentsScreen,
     Documents: DocumentsScreen,
+
+    // Delivery Fee
+    CreateDeliveryFee: CreateDeliveryFeeScreen,
+    DeliveryFees: DeliveryFeeScreen,
+    DeliveryDetails: DeliveryDetailsScreen,
 
     // Expenses
     Expenses: ExpensesScreen,

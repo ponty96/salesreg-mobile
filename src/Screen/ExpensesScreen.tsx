@@ -1,5 +1,4 @@
 import * as React from 'react'
-import { Alert } from 'react-native'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
 import { ListCompanyExpensesGQL } from '../graphql/queries/expense'
@@ -39,7 +38,7 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
       <React.Fragment>
         <Header
           title="Expenses"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressRightIcon={() => this.props.navigation.navigate("Notifications")}
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
           showSearchBar
           searchBar={{

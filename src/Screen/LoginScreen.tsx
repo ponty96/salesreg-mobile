@@ -8,6 +8,7 @@ import AppSpinner from '../Components/Spinner'
 import AuthFormContainer from '../Container/AuthFormContainer'
 import InputAtom from '../Atom/Form/InputAtom'
 import { UserContext } from '../context/UserContext'
+import { upsertMobileDevice } from '../services/MobileDevice'
 
 interface IProps {
   navigation: any
@@ -127,6 +128,15 @@ class LoginScreen extends React.Component<IProps, IState> {
       </UserContext.Consumer>
     )
   }
+
+  updateMobileDeviceInfo = user => {
+    const {
+      screenProps: { client }
+    } = this.props
+
+    upsertMobileDevice(client, user)
+  }
+
   onCompleted = async (res, resetUserContext, resetGettingStartedProgress) => {
     const {
       loginUser: { data, fieldErrors, success }
@@ -136,11 +146,20 @@ class LoginScreen extends React.Component<IProps, IState> {
         screenProps: { client }
       } = this.props
 
-      const { accessToken, refreshToken, user } = data
+      const {
+        accessToken,
+        refreshToken,
+        s3Bucket,
+        s3Region,
+        s3AccessKey,
+        s3SecretKey,
+        user
+      } = data
 
       await Auth.clearVault()
       await Auth.setToken(accessToken)
       await Auth.setRefreshToken(refreshToken)
+      await Auth.setS3Keys({ s3Bucket, s3Region, s3AccessKey, s3SecretKey })
       await Auth.setCurrentUser(user)
 
       let _stage = 'done'
@@ -160,6 +179,8 @@ class LoginScreen extends React.Component<IProps, IState> {
 
       await Auth.setGettingStartedProgress(_stage)
       await client.resetStore()
+
+      this.updateMobileDeviceInfo(user)
       client.mutate({
         mutation: AuthenticateClientGQL,
         variables: { user: user }

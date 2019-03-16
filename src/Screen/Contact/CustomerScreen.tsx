@@ -50,6 +50,9 @@ export default class CustomerScreen extends React.PureComponent<
         <Header
           title="Customer"
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           showSearchBar
           searchBar={{
             placeholder: 'Search for a customer',

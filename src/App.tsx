@@ -7,8 +7,10 @@ import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
+import codePush from 'react-native-code-push'
 
 import Routes from './Navigation/Routes'
+import OneSignal from 'react-native-onesignal'
 import Auth from './services/auth'
 import { AuthenticateClientGQL } from './graphql/client-mutations/authenticate'
 import { UserContext } from './context/UserContext'
@@ -17,10 +19,36 @@ import setupSentry from './Functions/sentry'
 import ViewOverflow from 'react-native-view-overflow'
 import Config from 'react-native-config'
 import { Root as NotificationRoot } from './Components/NotificationBanner'
+import { upsertMobileDevice } from './services/MobileDevice'
+import pushNotificationWrapper from './Functions/PushNotificationWrapper'
+import { PushNotificationContext } from './context/PushNotificationContext'
+import PushNotificationContainer from './Container/PushNotificationContainer'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
+const pushOptions = {
+  checkFrequency: codePush.CheckFrequency.ON_APP_START,
+  updateDialog: {
+    appendReleaseDescription: true
+  },
+  installMode: codePush.InstallMode.ON_NEXT_RESTART
+}
 
-export default class App extends React.Component {
+interface IProps {
+  onSetPushNotificationData: (data) => void
+}
+
+class App extends React.Component<IProps> {
+  constructor(props) {
+    super(props)
+    OneSignal.init('ec30c28b-6108-4f40-8ad1-019144f28afe', {
+      kOSSettingsKeyAutoPrompt: true
+    })
+
+    OneSignal.addEventListener('opened', this.onOpened)
+    OneSignal.addEventListener('ids', this.onIds)
+    OneSignal.configure()
+  }
+
   state = {
     loading: true,
     user: {},
@@ -33,6 +61,22 @@ export default class App extends React.Component {
   async componentDidMount() {
     this.authenticate()
     this.setState({ loading: true })
+    OneSignal.inFocusDisplaying(2)
+  }
+
+  componentWillUnmount() {
+    OneSignal.removeEventListener('opened', this.onOpened)
+    OneSignal.removeEventListener('ids', this.onIds)
+  }
+
+  onOpened = openResult => {
+    this.props.onSetPushNotificationData(
+      openResult.notification.payload.additionalData
+    )
+  }
+
+  onIds = device => {
+    pushNotificationWrapper.setFCMToken(device.pushToken)
   }
 
   authenticate = async () => {
@@ -54,6 +98,8 @@ export default class App extends React.Component {
         user,
         gettingStartedProgress: gettingStartedProgress || null
       })
+
+      upsertMobileDevice(client, user)
     } else {
       this.setState({ loading: false })
     }
@@ -70,27 +116,41 @@ export default class App extends React.Component {
       // check if user is on IphoneX and use View
       <ViewOverflow style={{ flex: 1 }}>
         <NotificationRoot>
-          <View style={{ paddingTop: 0, flex: 1 }}>
-            <Provider store={store}>
-              <UserContext.Provider
-                value={{
-                  user,
-                  resetUserContext,
-                  gettingStartedProgress,
-                  resetGettingStartedProgress
-                }}
-              >
-                <ApolloProvider client={client}>
-                  <Root>
-                    <StatusBar barStyle="light-content" />
-                    <Routes client={client} />
-                  </Root>
-                </ApolloProvider>
-              </UserContext.Provider>
-            </Provider>
-          </View>
+          <PushNotificationContainer>
+            <View style={{ paddingTop: 0, flex: 1 }}>
+              <Provider store={store}>
+                <UserContext.Provider
+                  value={{
+                    user,
+                    resetUserContext,
+                    gettingStartedProgress,
+                    resetGettingStartedProgress
+                  }}
+                >
+                  <ApolloProvider client={client}>
+                    <Root>
+                      <StatusBar barStyle="light-content" />
+                      <Routes client={client} />
+                    </Root>
+                  </ApolloProvider>
+                </UserContext.Provider>
+              </Provider>
+            </View>
+          </PushNotificationContainer>
         </NotificationRoot>
       </ViewOverflow>
     )
   }
 }
+
+const _App = props => (
+  <PushNotificationContext.Consumer>
+    {({ onSetPushNotificationData }) => (
+      <App {...props} onSetPushNotificationData={onSetPushNotificationData} />
+    )}
+  </PushNotificationContext.Consumer>
+)
+
+const YipCartApp = codePush(pushOptions)(_App)
+
+export default YipCartApp

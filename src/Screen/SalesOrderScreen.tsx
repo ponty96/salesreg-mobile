@@ -1,9 +1,9 @@
 import * as React from 'react'
-import { Alert } from 'react-native'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
 import { ListCompanySalesGQL } from '../graphql/queries/order'
 import moment from 'moment'
+import { convertToLocalTime } from '../Functions'
 
 interface IProps {
   navigation: any
@@ -25,7 +25,9 @@ export default class SalesScreen extends React.Component<IProps> {
       {
         firstTopText: item.contact.contactName,
         bottomLeftFirstText: `S ${item.refId}`, //item.paidTo
-        bottomLeftSecondText: moment(item.date).calendar(), //item.date
+        bottomLeftSecondText: moment(
+          convertToLocalTime(item.date, 'YYYY-MM-DD HH:mm:ss')
+        ).calendar(), //item.date
         topRightText: `\u20A6 ${total}`,
         bottomRightText: item.status
       }
@@ -37,7 +39,9 @@ export default class SalesScreen extends React.Component<IProps> {
       <React.Fragment>
         <Header
           title="Sales Order"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
         />
         <GenericListIndex

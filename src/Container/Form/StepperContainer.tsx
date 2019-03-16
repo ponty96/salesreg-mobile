@@ -78,6 +78,7 @@ interface FieldType {
     | 'multi-media-upload'
   keyboardType?: 'default' | 'numeric' | 'email-address' | 'phone-pad'
   secureTextEntry?: boolean
+  editable?: boolean
   options?: any[]
   disabled?: boolean
   maxDate?: Date | string
@@ -448,11 +449,16 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
         currentStep = undefined
 
       for (let len = 0; len < steps.length; len++) {
-        steps[len].formFields.forEach(formField => {
-          if (fields.indexOf(formField.name.toLowerCase()) != -1) {
-            currentStep = len
-          }
-        })
+        steps[len] &&
+          steps[len].formFields &&
+          steps[len].formFields.forEach(formField => {
+            if (
+              formField &&
+              fields.indexOf(formField.name.toLowerCase()) != -1
+            ) {
+              currentStep = len
+            }
+          })
         if (currentStep) break
       }
 
@@ -507,6 +513,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           minDate,
           secureTextEntry = false,
           options = [],
+          editable,
           multiline = false,
           searchQuery,
           searchQueryResponseKey,
@@ -530,6 +537,7 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
               key={`${type}-${index}`}
               label={label}
               placeholder={placeholder}
+              editable={editable}
               defaultValue={formData[name] || value}
               keyboardType={keyboardType || 'default'}
               secureTextEntry={secureTextEntry}

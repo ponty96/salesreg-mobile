@@ -1,10 +1,10 @@
 import React from 'react'
-import { Alert } from 'react-native'
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
 import { ListCompanyInvoicesGQL } from '../graphql/queries/order'
 import { color } from '../Style/Color'
 import moment from 'moment'
+import { convertToLocalTime } from '../Functions'
 
 interface IProps {
   navigation: any
@@ -30,7 +30,9 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
         bottomLeftSecondText: '',
         rightTextStyle: { color: amountOwed > 0 ? color.red : color.green },
         topRightText: `\u20A6 ${amountOwed}`,
-        bottomRightText: moment(item.dueDate).calendar()
+        bottomRightText: moment(
+          convertToLocalTime(item.dueDate, 'YYYY-MM-DD HH:mm:ss')
+        ).calendar()
       }
     ]
   }
@@ -40,7 +42,9 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
       <React.Fragment>
         <Header
           title="Invoices"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
         />
         <GenericListIndex

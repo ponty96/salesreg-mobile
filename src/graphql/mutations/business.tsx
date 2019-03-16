@@ -118,6 +118,24 @@ export const UpdateCompanyCoverPhotoGQL = gql`
   }
 `
 
+export const ChangeNotificationReadStatus = gql`
+  mutation changeNotificationReadStatus($notificationId: Uuid) {
+    changeNotificationReadStatus(notificationId: $notificationId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Notification {
+          id
+          readStatus
+        }
+      }
+    }
+  }
+`
+
 export const UpsertLegalDocument = gql`
   mutation upsertLegalDocument(
     $legalDocument: LegalDocumentInput!
@@ -163,6 +181,30 @@ export const DeleteLegalDocument = gql`
             id
           }
         }
+      }
+    }
+  }
+`
+
+export const CreateDeliveryFee = gql`
+  mutation createDeliveryFee($deliveryFee: DeliveryFeeInput!) {
+    createDeliveryFee(deliveryFee: $deliveryFee) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
+export const DeleteDeliveryFee = gql`
+  mutation deleteDeliveryFee($deliveryFeeId: Uuid!) {
+    deleteDeliveryFee(deliveryFeeId: $deliveryFeeId) {
+      success
+      fieldErrors {
+        key
+        message
       }
     }
   }

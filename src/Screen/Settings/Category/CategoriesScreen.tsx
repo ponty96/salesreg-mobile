@@ -108,7 +108,9 @@ class CategoriesScreen extends React.Component<IProps, IState> {
       <React.Fragment>
         <Header
           title="Categories"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           onPressLeftIcon={() => this.props.navigation.goBack()}
           hideRightMenu={true}
           showSearchBar

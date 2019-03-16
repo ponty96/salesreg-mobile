@@ -21,26 +21,20 @@ import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 import Config from 'react-native-config'
 import { NavigationActions } from 'react-navigation'
+import QueryLoader from '../../Components/QueryLoader'
+import { GetProductById } from '../../graphql/queries/store'
 
 interface IProps {
   navigation?: any
   user?: any
+  product?: any
   setNotificationBanner: (obj: any) => void
 }
 
 class ProductDetailsScreen extends PureComponent<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
-    const product = navigation.getParam('product', {})
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Product Details"
-          onPressLeftIcon={() => navigation.goBack()}
-          onPressRightIcon={() =>
-            navigation.navigate('UpdateProduct', { product })
-          }
-        />
-      )
+      header: null
     }
   }
 
@@ -62,7 +56,8 @@ class ProductDetailsScreen extends PureComponent<IProps> {
   }
 
   sections = (): any => {
-    const product = this.props.navigation.getParam('product', {})
+    const product =
+      this.props.navigation.getParam('product', null) || this.props.product
     return [
       ...this.parseOptionValues(product),
       ...this.showVariantOptionStep(product),
@@ -161,11 +156,14 @@ class ProductDetailsScreen extends PureComponent<IProps> {
   }
 
   onPressEditVariantOptions = () => {
-    const product = this.props.navigation.getParam('product', {})
+    const product =
+      this.props.navigation.getParam('product', null) || this.props.product
     this.props.navigation.navigate('UpdateProductGroupOptions', { product })
   }
+
   onPressAddProductVariant = () => {
-    const product = this.props.navigation.getParam('product', {})
+    const product =
+      this.props.navigation.getParam('product', null) || this.props.product
     this.props.navigation.navigate('AddProductVariant', { product })
   }
 
@@ -185,7 +183,8 @@ class ProductDetailsScreen extends PureComponent<IProps> {
   }
 
   onShare = async () => {
-    const product = this.props.navigation.getParam('product', {})
+    const product =
+      this.props.navigation.getParam('product', null) || this.props.product
     try {
       const result: any = await Share.share(
         {
@@ -208,68 +207,98 @@ class ProductDetailsScreen extends PureComponent<IProps> {
   }
 
   render() {
-    const product = this.props.navigation.getParam('product', {})
-    return [
-      <View style={styles.topHeader} key="product-details-334">
-        <TouchableOpacity
-          onPress={this.onShare}
-          style={{ flexDirection: 'row', alignItems: 'center' }}
-        >
-          <Icon type="Ionicons" name="md-share" style={styles.headerIcon} />
-          <Text style={styles.rightNavText}>Share</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={{ flexDirection: 'row', alignItems: 'center' }}
-          onPress={this.onPressAddProductVariant}
-        >
-          <Text style={styles.rightNavText}>Add variants</Text>
-          <Icon
-            name="chevron-small-right"
-            type="Entypo"
-            style={styles.headerIcon}
-          />
-        </TouchableOpacity>
-      </View>,
-      <GenericProfileDetails
-        sections={this.sections()}
-        image={product.featuredImage} // change logic based on product having multiple images
-        enableDelete={true}
-        graphqlDeleteMutation={DeleteProductGQL}
-        graphqlDeleteMutationResultKey="deleteProduct"
-        graphqlDeleteVariables={{ productId: product.id }}
-        graphqlRefetchQueries={[
-          {
-            query: ListCompanyProductsGQL,
-            variables: {
-              queryText: '',
-              companyId: this.props.user.company.id,
-              first: 10,
-              after: null
-            }
+    const product =
+      this.props.navigation.getParam('product', null) || this.props.product
+    return (
+      <React.Fragment>
+        <Header
+          title="Product Details"
+          onPressLeftIcon={() => this.props.navigation.goBack()}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('UpdateProduct', { product })
           }
-        ]}
-        onSuccessfulDeletion={() => {
-          let banner = NotificationBanner(
-            configureNotificationBanner('DeleteProduct', product)
-          )
-          banner.show({ bannerPosition: 'bottom' })
+        />
+        <View style={styles.topHeader}>
+          <TouchableOpacity
+            onPress={this.onShare}
+            style={{ flexDirection: 'row', alignItems: 'center' }}
+          >
+            <Icon type="Ionicons" name="md-share" style={styles.headerIcon} />
+            <Text style={styles.rightNavText}>Share</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={{ flexDirection: 'row', alignItems: 'center' }}
+            onPress={this.onPressAddProductVariant}
+          >
+            <Text style={styles.rightNavText}>Add variants</Text>
+            <Icon
+              name="chevron-small-right"
+              type="Entypo"
+              style={styles.headerIcon}
+            />
+          </TouchableOpacity>
+        </View>
+        <GenericProfileDetails
+          sections={this.sections()}
+          image={product.featuredImage} // change logic based on product having multiple images
+          enableDelete={true}
+          graphqlDeleteMutation={DeleteProductGQL}
+          graphqlDeleteMutationResultKey="deleteProduct"
+          graphqlDeleteVariables={{ productId: product.id }}
+          graphqlRefetchQueries={[
+            {
+              query: ListCompanyProductsGQL,
+              variables: {
+                queryText: '',
+                companyId: this.props.user.company.id,
+                first: 10,
+                after: null
+              }
+            }
+          ]}
+          onSuccessfulDeletion={() => {
+            let banner = NotificationBanner(
+              configureNotificationBanner('DeleteProduct', product)
+            )
+            banner.show({ bannerPosition: 'bottom' })
 
-          this.resetNavigationStack()
-        }}
-        headerText={product.name}
-        headerSubText={product.number}
-        key="product-details-335"
-        imageCategory="item"
-      />
-    ]
+            this.resetNavigationStack()
+          }}
+          headerText={product.name}
+          headerSubText={product.number}
+          imageCategory="item"
+        />
+      </React.Fragment>
+    )
   }
 }
 
-const _ProductDetailsScreen: any = props => (
-  <UserContext.Consumer>
-    {({ user }) => <ProductDetailsScreen {...props} user={user} />}
-  </UserContext.Consumer>
-)
+const _ProductDetailsScreen: any = props => {
+  let {
+    navigation: {
+      state: {
+        params: { ownedBy, productId }
+      }
+    }
+  } = props
+
+  return (
+    <QueryLoader
+      from={ownedBy}
+      graphqlQuery={GetProductById}
+      graphqlQueryResultKey="getProductById"
+      variables={{ productId }}
+    >
+      {data => (
+        <UserContext.Consumer>
+          {({ user }) => (
+            <ProductDetailsScreen product={data} {...props} user={user} />
+          )}
+        </UserContext.Consumer>
+      )}
+    </QueryLoader>
+  )
+}
 
 _ProductDetailsScreen.navigationOptions = ProductDetailsScreen.navigationOptions
 
@@ -278,7 +307,6 @@ export default _ProductDetailsScreen
 const styles = StyleSheet.create({
   topHeader: {
     flexDirection: 'row',
-    position: 'absolute',
     zIndex: 999,
     backgroundColor: '#ffffffc7',
     width: '100%',

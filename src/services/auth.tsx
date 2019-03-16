@@ -17,6 +17,14 @@ class Auth {
     return AsyncStorage.getItem('gettingStartedProgress')
   }
 
+  static getMobileDeviceInfo() {
+    return AsyncStorage.getItem('mobileDeviceInfo')
+  }
+
+  static getS3Keys() {
+    return AsyncStorage.getItem('S3_KEYS')
+  }
+
   static setToken(token: string) {
     AsyncStorage.setItem('token', token)
   }
@@ -34,12 +42,28 @@ class Auth {
     return AsyncStorage.setItem('currentUser', JSON.stringify(user))
   }
 
+  static setS3Keys(keys) {
+    return AsyncStorage.setItem('S3_KEYS', JSON.stringify(keys))
+  }
+
+  static setMobileDeviceInfo(mobileDeviceInfo: any) {
+    return AsyncStorage.setItem(
+      'mobileDeviceInfo',
+      JSON.stringify(mobileDeviceInfo)
+    )
+  }
+
   static clearToken() {
     return AsyncStorage.removeItem('token')
   }
 
   static clearVault() {
-    return AsyncStorage.multiRemove(['token', 'refreshToken', 'currentUser'])
+    return AsyncStorage.multiRemove([
+      'token',
+      'refreshToken',
+      'currentUser',
+      'mobileDeviceInfo'
+    ])
   }
 }
 

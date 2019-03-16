@@ -4,16 +4,19 @@ import { Content } from 'native-base'
 import Header from '../Components/Header/DetailsScreenHeader'
 import ListItemAtom from '../Atom/ListItem/ListItemAtom'
 import { color } from '../Style/Color'
-import moment from 'moment'
 import { numberWithCommas } from '../Functions/numberWithCommas'
 import ProfileListAtom from '../Atom/ListItem/ExpandableListItemAtom'
 import FabAtom from '../Atom/FabAtom'
+import QueryLoader from '../Components/QueryLoader'
+import { GetInvoiceByIdGQL } from '../graphql/queries/order'
+import { convertToLocalTime } from '../Functions'
 
 interface IProps {
   navigation: any
+  sales: any
 }
 
-export default class InvoicesScreen extends React.Component<IProps> {
+class InvoicesScreen extends React.Component<IProps> {
   static navigationOptions = () => {
     return {
       header: null
@@ -21,40 +24,15 @@ export default class InvoicesScreen extends React.Component<IProps> {
   }
 
   onPressEditInvoice = () => {
-    let {
-      navigation: {
-        state: {
-          params: {
-            sales: {
-              invoice: { id, dueDate }
-            },
-            from
-          }
-        }
-      }
-    } = this.props
+    let sales =
+        this.props.navigation.getParam('sales', null) || this.props.sales,
+      {
+        invoice: { id, dueDate }
+      } = sales,
+      from = this.props.navigation.getParam('from', null)
 
     this.props.navigation.navigate('UpdateInvoiceDueDate', {
       invoice: { id, dueDate },
-      from
-    })
-  }
-
-  onPressEditInvoiceSplitPayment = () => {
-    let {
-      navigation: {
-        state: {
-          params: {
-            sales: {
-              invoice: { id, dueDate, allowsSplitPayment }
-            },
-            from
-          }
-        }
-      }
-    } = this.props
-    this.props.navigation.navigate('UpdateInvoicesSplitPayment', {
-      invoice: { id, dueDate, allowsSplitPayment },
       from
     })
   }
@@ -82,13 +60,15 @@ export default class InvoicesScreen extends React.Component<IProps> {
       <Header
         title="Invoice Details"
         hideRightMenu
+        onPressRightIcon={() => this.props.navigation.navigate('Notifications')}
         onPressLeftIcon={() => this.props.navigation.goBack()}
       />
     )
   }
 
   onShare = async () => {
-    const sales = this.props.navigation.getParam('sales', {})
+    const sales =
+      this.props.navigation.getParam('sales', null) || this.props.sales
     try {
       const result: any = await Share.share(
         {
@@ -111,24 +91,19 @@ export default class InvoicesScreen extends React.Component<IProps> {
   }
 
   render() {
+    let sales =
+      this.props.navigation.getParam('sales', null) || this.props.sales
+
     let {
-        navigation: {
-          state: {
-            params: {
-              sales: {
-                amount,
-                amountPaid,
-                items,
-                discount,
-                invoice: { dueDate, allowsSplitPayment },
-                date
-              },
-              sales,
-              from
-            }
-          }
-        }
-      } = this.props,
+        amount,
+        amountPaid,
+        items,
+        discount,
+        invoice: { dueDate },
+        date,
+        deliveryFee
+      } = sales,
+      from = this.props.navigation.getParam('from', null),
       total = parseFloat(
         (Number(amount) - Number(discount)).toString()
       ).toFixed(2)
@@ -140,13 +115,13 @@ export default class InvoicesScreen extends React.Component<IProps> {
           <Content>
             <ListItemAtom
               label="Issued date"
-              value={moment(date).format('DD/MM/YYYY')}
+              value={convertToLocalTime(date, 'DD/MM/YYYY')}
               labelStyle={styles.listLabel}
               rightTextStyle={[styles.greenText, { color: color.black }]}
               listItemStyle={styles.listWrapper}
             />
             <ProfileListAtom
-              section={`Date due: ${moment(dueDate).format('DD/MM/YYYY')}`}
+              section={`Date due: ${convertToLocalTime(dueDate, 'DD/MM/YYYY')}`}
               value={
                 Number(total) - amountPaid > 0 ? 'Edit' : 'Payment Completed'
               }
@@ -164,17 +139,16 @@ export default class InvoicesScreen extends React.Component<IProps> {
                 listItemStyle={styles.listWrapper}
               />
             ))}
-            <ProfileListAtom
-              section={`Allow split payment?: ${
-                allowsSplitPayment ? 'yes' : 'no'
-              }`}
-              value={'Edit'}
-              type={'button'}
-              onPress={this.onPressEditInvoiceSplitPayment}
-            />
             <ListItemAtom
               label="Discount"
               value={`\u20A6 ${discount}`}
+              labelStyle={styles.listLabel}
+              rightTextStyle={[styles.greenText, { color: color.black }]}
+              listItemStyle={styles.listWrapper}
+            />
+            <ListItemAtom
+              label="Delivery Fee"
+              value={`\u20A6 ${deliveryFee || 0}`}
               labelStyle={styles.listLabel}
               rightTextStyle={[styles.greenText, { color: color.black }]}
               listItemStyle={styles.listWrapper}
@@ -207,6 +181,33 @@ export default class InvoicesScreen extends React.Component<IProps> {
     )
   }
 }
+
+const _InvoicesScreen: any = props => {
+  let {
+    navigation: {
+      state: {
+        params: { ownedBy, invoiceId }
+      }
+    }
+  } = props
+
+  return (
+    <QueryLoader
+      from={ownedBy}
+      graphqlQuery={GetInvoiceByIdGQL}
+      graphqlQueryResultKey="getInvoiceById"
+      variables={{ invoiceId }}
+    >
+      {data => (
+        <InvoicesScreen {...props} sales={{ ...data.sale, invoice: data }} />
+      )}
+    </QueryLoader>
+  )
+}
+
+_InvoicesScreen.navigationOptions = InvoicesScreen.navigationOptions
+
+export default _InvoicesScreen
 
 const styles = StyleSheet.create({
   container: {

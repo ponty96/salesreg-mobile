@@ -7,9 +7,9 @@
 	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
 	<string>ca-app-pub-3940256099942544/4411468910</string>
 	<key>CLIENT_ID</key>
-	<string>1060799093241-cs782rr1n8rc3sdo333q40s93dtfmj8p.apps.googleusercontent.com</string>
+	<string>1060799093241-rg6moa6is1fb53nrmjte1sjc68e40efj.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.1060799093241-cs782rr1n8rc3sdo333q40s93dtfmj8p</string>
+	<string>com.googleusercontent.apps.1060799093241-rg6moa6is1fb53nrmjte1sjc68e40efj</string>
 	<key>API_KEY</key>
 	<string>AIzaSyDPmQdhADgr4hUBBKFYSbF0jTgoRiWpge8</string>
 	<key>GCM_SENDER_ID</key>
@@ -17,7 +17,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.yipcart</string>
+	<string>com.yipcart.yipcart</string>
 	<key>PROJECT_ID</key>
 	<string>yipcart-b825a</string>
 	<key>STORAGE_BUCKET</key>
@@ -33,7 +33,7 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:1060799093241:ios:29b31ab170de25a5</string>
+	<string>1:1060799093241:ios:994f1be824a4fa29</string>
 	<key>DATABASE_URL</key>
 	<string>https://yipcart-b825a.firebaseio.com</string>
 </dict>

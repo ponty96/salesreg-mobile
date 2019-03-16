@@ -1,5 +1,57 @@
 import gql from 'graphql-tag'
 
+export const GetProductById = gql`
+  query getProductById($productId: Uuid!) {
+    getProductById(productId: $productId) {
+      id
+      description
+      costPrice
+      price
+      minimumSku
+      number: sku
+      name
+      date: updatedAt
+      featuredImage
+      images
+      isFeatured
+      isTopRatedByMerchant
+      totalQuantitySold
+      shareLink
+      user {
+        id
+        firstName
+        lastName
+      }
+      categories {
+        id
+        title
+      }
+      tags {
+        name
+        id
+      }
+      optionValues {
+        id
+        name
+        option {
+          name
+          id
+        }
+      }
+      productGroup {
+        id
+        title
+        options {
+          optionId: id
+          optionName: name
+          title: name
+          id
+        }
+      }
+    }
+  }
+`
+
 export const ListCompanyProductsGQL = gql`
   query listCompanyProducts(
     $companyId: Uuid!
@@ -27,7 +79,7 @@ export const ListCompanyProductsGQL = gql`
           minimumSku
           number: sku
           name
-          date : updatedAt
+          date: updatedAt
           featuredImage
           images
           isFeatured

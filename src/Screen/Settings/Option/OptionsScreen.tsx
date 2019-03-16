@@ -105,7 +105,9 @@ class OptionsScreen extends React.Component<IProps, IState> {
       <React.Fragment>
         <Header
           title="Product Variant Options"
-          onPressRightIcon={() => Alert.alert('Search button pressed.')}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           onPressLeftIcon={() => this.props.navigation.goBack()}
           hideRightMenu={true}
           showSearchBar
