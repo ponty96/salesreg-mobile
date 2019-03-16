@@ -120,8 +120,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         vectorDrawables.useSupportLibrary = true
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 21
-        versionName "0.21"
+        versionCode 22
+        versionName "0.22"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
