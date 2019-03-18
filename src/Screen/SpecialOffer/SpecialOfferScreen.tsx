@@ -1,11 +1,11 @@
 import React from 'react'
 import moment from 'moment'
 import { StyleSheet, View } from 'react-native'
+import { Icon } from 'native-base'
 
 import Header from '../../Components/Header/BaseHeader'
 import GenericListIndex from '../../Components/Generic/ListIndex'
 import { ListCompanyBonanzasGQL } from '../../graphql/queries/offer'
-import Icon from '../../Atom/Icon'
 
 interface IProps {
   navigation: any

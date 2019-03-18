@@ -2,7 +2,8 @@ import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
 import InputAtom from './InputAtom'
 import ButtonAtom from './ButtonAtom'
-import Icon from '../Icon'
+import { Icon } from 'native-base'
+
 import { color } from '../../Style/Color'
 
 interface ExpenseItem {

@@ -1,6 +1,7 @@
 import React from 'react'
 import { View, Text, StyleSheet } from 'react-native'
-import Icon from './Icon'
+import { Icon } from 'native-base'
+
 import { color } from '../Style/Color'
 
 interface IProps {

@@ -1,9 +1,10 @@
 import React from 'react'
 import { View, StyleSheet, Text } from 'react-native'
+import { Icon } from 'native-base'
+
 import InputAtom from './InputAtom'
 import AsyncPickerAtom from './AsyncPickerAtom'
 import ButtonAtom from './ButtonAtom'
-import Icon from '../Icon'
 import { SearchProductsByName } from '../../graphql/queries/store'
 import { color } from '../../Style/Color'
 

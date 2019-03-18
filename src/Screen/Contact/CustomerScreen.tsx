@@ -72,13 +72,13 @@ export default class CustomerScreen extends React.PureComponent<
           headerText="Get closer than ever to your customers"
           fabRouteName="UpsertCustomer"
           fabIconName="user-plus"
-          fabIconType="FontAwesome5"
+          fabIconType="FontAwesome"
           subHeader={{
             screen: 'order',
             rightLabel: '',
             onPress: this.subHeaderPress,
             iconName: 'user',
-            iconType: 'FontAwesome5'
+            iconType: 'FontAwesome'
           }}
           hideSeparator={true}
         />

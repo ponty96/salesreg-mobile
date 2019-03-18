@@ -8,10 +8,11 @@ import {
   TouchableWithoutFeedback,
   Linking
 } from 'react-native'
+import { Icon } from 'native-base'
+
 import { color } from '../../Style/Color'
 import Header from '../../Components/Header/DetailsScreenHeader'
 import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
-import Icon from '../../Atom/Icon'
 import { Chip } from '../../Atom/Chip'
 import { DeleteProductGQL } from '../../graphql/mutations/store'
 import { ListCompanyProductsGQL } from '../../graphql/queries/store'
