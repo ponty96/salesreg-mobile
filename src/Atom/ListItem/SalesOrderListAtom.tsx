@@ -1,9 +1,8 @@
 import React from 'react'
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import { color } from '../../Style/Color'
-import { Left, Right } from 'native-base'
+import { Left, Right, Icon } from 'native-base'
 import CachedImageAtom from '../CachedImageAtom'
-import Icon from '../Icon'
 
 export interface DataProps {
   firstTopText: string

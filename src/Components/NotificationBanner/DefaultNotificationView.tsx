@@ -8,7 +8,8 @@ import {
   View,
   Text
 } from 'react-native'
-import Icon from 'react-native-vector-icons/Ionicons'
+import { Icon } from 'native-base'
+
 import { _Store } from './Root'
 import StatusBar from './StatusBar'
 import { INotificationBannerProps, IBannerPosition } from './typeDefinition'
@@ -365,6 +366,7 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
             {style == 'success' && (
               <Icon
                 style={[styles.successIcon, styles.icon]}
+                type="Ionicons"
                 name="ios-checkmark-circle"
               />
             )}
@@ -379,7 +381,11 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
             </View>
           </View>
           {style == 'danger' && (
-            <Icon style={[styles.successIcon, styles.icon]} name="ios-alert" />
+            <Icon
+              style={[styles.successIcon, styles.icon]}
+              type="Ionicons"
+              name="ios-alert"
+            />
           )}
         </Animated.View>
       </React.Fragment>

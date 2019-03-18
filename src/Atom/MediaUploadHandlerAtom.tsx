@@ -21,7 +21,8 @@ import {
 } from '../store/actions/cron'
 import { connect } from 'react-redux'
 import Config from 'react-native-config'
-import Icon from './Icon'
+import { Icon } from 'native-base'
+
 import Auth from '../services/auth'
 
 interface IProps {

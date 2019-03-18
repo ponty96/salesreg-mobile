@@ -6,8 +6,9 @@ import {
   TouchableWithoutFeedback,
   TouchableOpacity
 } from 'react-native'
+import { Icon } from 'native-base'
+
 import { color } from '../../Style/Color'
-import Icon from '../Icon'
 
 interface IProps {
   section: string

@@ -1,8 +1,9 @@
 import React from 'react'
 import { StyleSheet, View, Text, Image } from 'react-native'
+import { Icon } from 'native-base'
+
 import OnboardingContainer from '../../Container/OnboardingContainer'
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
-import Icon from '../../Atom/Icon'
 import { color } from '../../Style/Color'
 import ViewOverflow from 'react-native-view-overflow'
 

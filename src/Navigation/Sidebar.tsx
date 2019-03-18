@@ -9,7 +9,8 @@ import {
   Dimensions
 } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
-import Icon from '../Atom/Icon'
+import { Icon } from 'native-base'
+
 import { color } from '../Style/Color'
 import Auth from '../services/auth'
 import { UserContext } from '../context/UserContext'
@@ -219,7 +220,7 @@ class SideBar extends PureComponent<IProps, IState> {
                   title: 'Customers',
                   routeName: 'Customers',
                   iconName: 'user',
-                  iconType: 'FontAwesome5'
+                  iconType: 'FontAwesome'
                 }
               ]}
             />

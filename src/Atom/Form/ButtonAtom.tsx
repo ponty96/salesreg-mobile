@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Button } from 'native-base'
+import { Button, Icon } from 'native-base'
+
 import { Text, StyleSheet } from 'react-native'
 import { color } from '../../Style/Color'
-import Icon from '../../Atom/Icon'
 
 interface IProps {
   btnText?: string

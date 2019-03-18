@@ -7,7 +7,7 @@ import {
   Dimensions,
   KeyboardAvoidingView
 } from 'react-native'
-import Icon from '../Atom/Icon'
+import { Icon } from 'native-base'
 import InputAtom from '../Atom/Form/InputAtom'
 import { color } from '../Style/Color'
 import SaveCancelButton from '../Container/SaveCancelButton'
@@ -63,7 +63,11 @@ class EmployeeForm extends Component<IProps, IState> {
               />
             </View>
             <View>
-              <Icon name="md-close" onPress={() => this.removeInput(key)} />
+              <Icon
+                name="md-close"
+                type="Ionicons"
+                onPress={() => this.removeInput(key)}
+              />
             </View>
           </View>
         </FormInputViewAtom>
@@ -102,7 +106,7 @@ class EmployeeForm extends Component<IProps, IState> {
                 />
               </View>
               <View>
-                <Icon name="md-close" />
+                <Icon name="md-close" type="Ionicons" />
               </View>
             </View>
           </FormInputViewAtom>

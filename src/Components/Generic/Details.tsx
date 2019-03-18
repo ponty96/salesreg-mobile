@@ -6,10 +6,10 @@ import {
   Alert,
   TouchableOpacity
 } from 'react-native'
-import { ActionSheet } from 'native-base'
+import { ActionSheet, Icon } from 'native-base'
 import ListItemAtom from '../../Atom/ListItem/ListItemAtom'
 import { color } from '../../Style/Color'
-import Icon from '../../Atom/Icon'
+
 import { GreenCanvas } from '../../Atom/GreenCanvas'
 import FabAtom from '../../Atom/FabAtom'
 import { DocumentNode } from 'graphql'

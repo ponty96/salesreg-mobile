@@ -1,7 +1,7 @@
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import React from 'react'
-import { Left, Right, Title } from 'native-base'
-import Icon from '../../Atom/Icon'
+import { Left, Right, Title, Icon } from 'native-base'
+
 import { color } from '../../Style/Color'
 
 export interface IProps {

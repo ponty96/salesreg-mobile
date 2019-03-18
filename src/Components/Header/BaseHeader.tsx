@@ -9,8 +9,8 @@ import {
 } from 'react-native'
 import { Query } from 'react-apollo'
 import React from 'react'
-import { Left, Right, Title } from 'native-base'
-import Icon from '../../Atom/Icon'
+import { Left, Right, Title, Icon } from 'native-base'
+
 import { color } from '../../Style/Color'
 import { SearchAtom } from '../../Atom/SearchAtom'
 import { UserContext } from '../../context/UserContext'
@@ -67,7 +67,7 @@ class BaseHeader extends React.PureComponent<IProps> {
 
   static defaultProps = {
     leftIconTitle: 'md-menu',
-    leftIconType: 'IonIcons',
+    leftIconType: 'Ionicons',
     hideRightMenu: false
   }
 

@@ -1,7 +1,8 @@
 import React from 'react'
 import { Text, StyleSheet, View, TouchableOpacity } from 'react-native'
+import { Icon } from 'native-base'
+
 import { color } from '../Style/Color'
-import Icon from '../Atom/Icon'
 
 interface ChipProps {
   text: string
@@ -21,6 +22,7 @@ export const Chip = (props: ChipProps) => (
       {props.showCloseIcon && (
         <Icon
           name="md-close-circle"
+          type="Ionicons"
           style={styles.icon}
           onPress={props.onPressCloseIcon}
         />
