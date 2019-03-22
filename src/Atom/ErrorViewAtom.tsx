@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
+import { MediumText } from '../Atom/TextAtom'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -11,10 +12,10 @@ interface IProps {
 const ErrorViewAtom = (props: IProps) => (
   <View style={styles.container}>
     <Icon name="alert-circle" type="Feather" style={styles.icon} />
-    <Text style={styles.text}>
+    <MediumText style={styles.text}>
       {props.preferredErrorMessage ||
         `Error occurred while connecting, pull down to refresh`}
-    </Text>
+    </MediumText>
   </View>
 )
 
@@ -31,8 +32,7 @@ const styles = StyleSheet.create({
   text: {
     color: color.textColor,
     textAlign: 'center',
-    marginTop: 20,
-    fontFamily: 'AvenirNext-Medium'
+    marginTop: 20
   },
   icon: {
     fontSize: 90,

@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { ListItem, Text, View, Left, Body, Right } from 'native-base'
+import { ListItem, View, Left, Body, Right } from 'native-base'
 import { StyleSheet } from 'react-native'
+
+import { DemiBoldText, RegularText, BoldText } from '../Atom/TextAtom'
 import { color } from '../Style/Color'
 import { capitalizeFirstLetter } from '../Functions/capitalizeFirstLetter'
 import GoldRatings from './GoldRatingsAtom'
@@ -25,9 +27,9 @@ class EmployeeListAtom extends React.Component<IProps, any> {
     if (this.props.items.image === '') {
       return (
         <View style={styles.textIconCont}>
-          <Text style={{ fontFamily: 'AvenirNext-Bold', fontSize: 25 }}>
+          <BoldText style={{ fontSize: 25 }}>
             {capitalizeFirstLetter(this.props.items.customerName)}
-          </Text>
+          </BoldText>
         </View>
       )
     } else {
@@ -39,11 +41,17 @@ class EmployeeListAtom extends React.Component<IProps, any> {
       <ListItem style={styles.row} onPress={this.props.onPress}>
         <Left style={styles.view1}>{this.renderAvatar()}</Left>
         <Body style={styles.view2}>
-          <Text style={styles.textCus}>{this.props.items.customerName}</Text>
-          <Text style={styles.textLoc}>{this.props.items.location}</Text>
+          <DemiBoldText style={styles.textCus}>
+            {this.props.items.customerName}
+          </DemiBoldText>
+          <RegularText style={styles.textLoc}>
+            {this.props.items.location}
+          </RegularText>
         </Body>
         <Right style={styles.view3}>
-          <Text style={styles.textPos}>{this.props.items.position}</Text>
+          <DemiBoldText style={styles.textPos}>
+            {this.props.items.position}
+          </DemiBoldText>
           <GoldRatings showText={false} />
         </Right>
       </ListItem>
@@ -87,8 +95,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 13,
     color: color.principal,
-    textAlign: 'left',
-    fontFamily: 'Source Sans Pro'
+    textAlign: 'left'
   },
   dp: {
     height: 55,
@@ -113,15 +120,12 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   textCus: {
-    fontSize: 14,
-    fontFamily: 'SourceSansPro-Semibold'
+    fontSize: 14
   },
   textLoc: {
-    fontSize: 14,
-    fontFamily: 'Source Sans Pro'
+    fontSize: 14
   },
   textPos: {
-    fontSize: 16,
-    fontFamily: 'SourceSansPro-Semibold'
+    fontSize: 16
   }
 })

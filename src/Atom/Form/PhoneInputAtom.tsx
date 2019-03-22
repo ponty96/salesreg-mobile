@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+
+import { RegularText } from '../TextAtom'
 import countries from '../../utilities/data/countries'
 import InputAtom from './InputAtom'
 import { color } from '../../Style/Color'
@@ -25,9 +27,7 @@ export default class PhoneInputAtom extends React.PureComponent<IProps> {
           keyboardType="phone-pad"
           inlineElement={
             <View style={styles.callingCodeBox}>
-              <Text style={styles.callingCodeText}>
-                {this.getCallingCode()}
-              </Text>
+              <RegularText>{this.getCallingCode()}</RegularText>
             </View>
           }
           error={this.props.error}
@@ -54,7 +54,6 @@ const styles = StyleSheet.create({
   },
   callingCodeText: {
     fontSize: 16,
-    textAlign: 'center',
-    fontFamily: 'AvenirNext-Regular'
+    textAlign: 'center'
   }
 })

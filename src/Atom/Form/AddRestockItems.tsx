@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
+import { RegularText } from '../TextAtom'
 import InputAtom from './InputAtom'
 import ButtonAtom from './ButtonAtom'
 import { color } from '../../Style/Color'
@@ -105,7 +106,7 @@ export default class AddRestockItemsList extends React.PureComponent<IProps> {
 
   renderErrorText = () => {
     return this.props.error ? (
-      <Text style={styles.errorText}>{this.props.error}</Text>
+      <RegularText style={styles.errorText}>{this.props.error}</RegularText>
     ) : null
   }
 
@@ -163,7 +164,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 2,
     marginTop: 0,
-    fontFamily: 'AvenirNext-Regular',
     color: 'red',
     paddingVertical: 12
   }

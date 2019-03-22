@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
 import InputAtom from './InputAtom'
+import { DemiBoldText, RegularText } from '../TextAtom'
 import AsyncPickerAtom from './AsyncPickerAtom'
 import ButtonAtom from './ButtonAtom'
 import { SearchProductsByName } from '../../graphql/queries/store'
@@ -79,15 +80,15 @@ const AddSalesOrderItem = (props: SalesItem) => (
       />
     </View>
     <View style={styles.salesInputRow}>
-      <Text style={styles.text}>{`Amt(\u20A6)`}</Text>
+      <DemiBoldText style={styles.text}>{`Amt(\u20A6)`}</DemiBoldText>
       <View style={styles.totalAmtContainer}>
-        <Text style={[styles.text, { fontSize: 18 }]}>
+        <DemiBoldText style={[styles.text, { fontSize: 18 }]}>
           {numberWithCommas(
             (
               Number(props.item.unitPrice) * Number(props.item.quantity)
             ).toFixed(2)
           ) || 0.0}
-        </Text>
+        </DemiBoldText>
       </View>
     </View>
   </View>
@@ -141,7 +142,7 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
 
   renderErrorText = () => {
     return this.props.error ? (
-      <Text style={styles.errorText}>{this.props.error}</Text>
+      <RegularText style={styles.errorText}>{this.props.error}</RegularText>
     ) : null
   }
 
@@ -190,7 +191,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 2,
     marginTop: 0,
-    fontFamily: 'AvenirNext-Regular',
     color: 'red',
     paddingVertical: 12
   },
@@ -219,8 +219,7 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    color: color.textColor,
-    fontFamily: 'AvenirNext-DemiBold'
+    color: color.textColor
   },
   totalAmtContainer: {
     borderRadius: 5,

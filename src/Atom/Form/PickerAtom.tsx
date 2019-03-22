@@ -1,5 +1,5 @@
 import * as React from 'react'
-import { Label, Text, Icon } from 'native-base'
+import { Label, Icon } from 'native-base'
 import {
   Modal,
   StyleSheet,
@@ -10,9 +10,11 @@ import {
   ScrollView,
   FlatList
 } from 'react-native'
+import * as JsSearch from 'js-search'
+
+import { DemiBoldText, MediumText, RegularText } from '../TextAtom'
 import { color } from '../../Style/Color'
 import FormHeader from '../../Components/Header/FormHeader'
-import * as JsSearch from 'js-search'
 import { SearchAtom } from '../SearchAtom'
 import CachedImageAtom from '../CachedImageAtom'
 import RefreshControlAtom from '../RefreshControlAtom'
@@ -71,9 +73,9 @@ const PickerItem = (props: PickerItem) => (
           uri={props.icon}
           style={{ width: 30, height: 25, marginRight: 24 }}
         />
-        <Text style={styles.pickerItemLabel}>{props.label}</Text>
+        <RegularText>{props.label}</RegularText>
       </View>
-      <Text style={styles.pickerItemLabel}>{props.subLabel}</Text>
+      <RegularText>{props.subLabel}</RegularText>
     </View>
   </TouchableOpacity>
 )
@@ -152,9 +154,9 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   renderEmptyView = () => {
     return this.props.emptySection ? (
       <View style={styles.emptyView}>
-        <Text style={styles.emptyText}>
+        <MediumText style={styles.emptyText}>
           {this.props.emptySection.emptyText}
-        </Text>
+        </MediumText>
       </View>
     ) : null
   }
@@ -173,13 +175,17 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
               padding: 0
             }}
           >
-            <Text style={styles.labelText}>
-              {this.props.required && <Text style={styles.required}>*</Text>}
+            <DemiBoldText style={styles.labelText}>
+              {this.props.required && (
+                <RegularText style={styles.required}>*</RegularText>
+              )}
               {this.props.label}
-            </Text>
+            </DemiBoldText>
           </Label>
           <View style={styles.caretContainer}>
-            <Text style={styles.placeholderStyle}>{this.getPlaceholder()}</Text>
+            <RegularText style={styles.placeholderStyle}>
+              {this.getPlaceholder()}
+            </RegularText>
             <Icon
               name="arrow-down"
               type="SimpleLineIcons"
@@ -262,17 +268,16 @@ class PickerAtom extends React.PureComponent<IProps, IState> {
   renderUnderNeathText = () => {
     if (this.props.error || this.props.underneathText) {
       return (
-        <Text
+        <RegularText
           style={[
             styles.underneathText,
             {
-              fontFamily: 'AvenirNext-Regular',
               color: this.props.error ? 'red' : color.principal
             }
           ]}
         >
           {this.props.error || this.props.underneathText}
-        </Text>
+        </RegularText>
       )
     } else {
       return null
@@ -303,7 +308,6 @@ const styles = StyleSheet.create({
     fontSize: 13
   },
   labelText: {
-    fontFamily: 'AvenirNext-DemiBold',
     padding: 0,
     fontSize: 16,
     color: color.textColor
@@ -313,7 +317,6 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   placeholderStyle: {
-    fontFamily: 'AvenirNext-Regular',
     color: color.principal,
     fontSize: 16,
     padding: 0,
@@ -324,9 +327,6 @@ const styles = StyleSheet.create({
     padding: 32,
     flexDirection: 'row',
     justifyContent: 'space-between'
-  },
-  pickerItemLabel: {
-    fontFamily: 'AvenirNext-Regular'
   },
   underneathText: {
     marginLeft: 0,

@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+
+import { RegularText } from '../TextAtom'
 import InputAtom from './InputAtom'
 import { Chip } from '../Chip'
 import { color } from '../../Style/Color'
@@ -36,18 +38,17 @@ export default class TagInput extends React.PureComponent<IProps, IState> {
   renderUnderNeathText = () => {
     if (this.props.error || this.props.underneathText) {
       return (
-        <Text
+        <RegularText
           style={[
             styles.underneathText,
             this.props.underneathStyle,
             {
-              fontFamily: 'AvenirNext-Regular',
               color: this.props.error ? 'red' : color.principal
             }
           ]}
         >
           {this.props.error || this.props.underneathText}
-        </Text>
+        </RegularText>
       )
     } else {
       return null
@@ -105,7 +106,8 @@ const styles = StyleSheet.create({
     flex: 1
   },
   textInputContStyle: {
-    marginTop: 0
+    marginTop: 0,
+    fontFamily: 'AvenirNext-Regular'
   },
   underneathText: {
     marginLeft: 3,
@@ -113,7 +115,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 0,
     marginTop: 2,
-    fontFamily: 'AvenirNext-Regular',
     paddingVertical: 12
   }
 })
