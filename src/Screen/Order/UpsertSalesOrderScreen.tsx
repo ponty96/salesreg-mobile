@@ -21,9 +21,13 @@ import { color } from '../../Style/Color'
 import { Countries } from '../../utilities/data/picker-lists'
 import { UserContext } from '../../context/UserContext'
 import { RegularText } from '../../Atom/TextAtom'
+import { States } from '../../utilities/data/picker-lists'
+import { SingleUserGQL } from '../../graphql/queries/Authenticate'
 
 interface IProps {
   navigation: any
+  screenProps: any
+  user: any
   setNotificationBanner: (obj: any) => void
 }
 
@@ -48,10 +52,12 @@ interface IState {
   salesOrderId: string
   hasSalesOrderBeenCreated: boolean
   tax: string
-  street1: string
-  city: string
+  region: string
+  address: string
   state: string
   country: string
+  deliveryFee: string
+  companyRegions: any[]
   user: { userId?: string; companyId?: string }
   isCardPaymentVisible: boolean
 }
@@ -79,15 +85,17 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     tax: '',
     contactName: '',
     email: '',
-    street1: '',
-    city: '',
+    region: '',
+    address: '',
     state: '',
     country: 'NG',
     data: {},
     salesOrderId: '',
     hasSalesOrderBeenCreated: false,
     isCardPaymentVisible: false,
-    user: { companyId: '', userId: '' }
+    user: { companyId: '', userId: '' },
+    companyRegions: [],
+    deliveryFee: '0.00'
   }
 
   async componentDidMount() {
@@ -103,7 +111,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     })
   }
 
-  updateState = (key: string, val: any) => {
+  updateState = async (key: string, val: any) => {
     const formData = {
       ...this.state,
       [key]: val
@@ -117,7 +125,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       })
     }
 
-    this.setState({
+    await this.setState({
       ...formData,
       amountPaid:
         key == 'items'
@@ -125,6 +133,75 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
           : key == 'amountPaid'
           ? val
           : this.state.amountPaid
+    })
+
+    if (key === 'state') {
+      this.getRegions()
+    }
+
+    if (key === 'region') {
+      this.handleRegionSelection()
+    }
+  }
+
+  getRegions = () => {
+    const {
+      screenProps: { client },
+      user: { id }
+    } = this.props
+
+    client
+      .query({
+        query: SingleUserGQL,
+        variables: { id },
+        fetchPolicy: 'cache-only'
+      })
+      .then(result => {
+        let {
+            data: {
+              singleUser: {
+                company: { deliveryFees }
+              }
+            }
+          } = result,
+          { state } = this.state,
+          nationwideFee = ''
+
+        let companyRegions = deliveryFees.reduce((acc, value) => {
+          value.state.toLowerCase() == 'nation wide' &&
+            (nationwideFee = value.fee)
+
+          if (value.state.toLowerCase() == state.toLowerCase()) {
+            acc.push({
+              ...value,
+              mainLabel:
+                value.region.toLowerCase() == 'all' ? 'Others' : value.region,
+              value: value.region
+            })
+          }
+          return acc
+        }, [])
+
+        companyRegions.length == 0 &&
+          this.setState({
+            deliveryFee: nationwideFee
+          })
+
+        this.setState({
+          companyRegions
+        })
+      })
+  }
+
+  handleRegionSelection = () => {
+    let deliveryFee = ''
+    this.state.companyRegions.forEach(locations => {
+      if (locations.region == this.state.region) {
+        deliveryFee = locations.fee
+      }
+    })
+    this.setState({
+      deliveryFee
     })
   }
 
@@ -214,9 +291,10 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     }
 
     _params['location'] = {
-      state: this.state.state,
-      city: this.state.city,
-      street1: this.state.street1,
+      state: this.state.state.trim().length > 0 ? this.state.state : 'Others',
+      street1:
+        this.state.address.trim().length > 0 ? this.state.address : 'Others',
+      city: this.state.region.trim().length > 0 ? this.state.region : 'Others',
       country: this.state.country
     }
 
@@ -230,10 +308,11 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     delete _params.data
     delete _params.contactName
     delete _params.isCardPaymentVisible
-    delete _params.street1
-    delete _params.city
+    delete _params.region
     delete _params.state
+    delete _params.address
     delete _params.country
+    delete _params.companyRegions
 
     return saleId
       ? {
@@ -393,41 +472,43 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
                   stepTitle: 'Delivery Address',
                   formFields: [
                     {
-                      label: 'Street',
-                      placeholder: '123 Street',
-                      validators: [],
-                      name: 'street1',
-                      type: {
-                        type: 'input'
-                      }
-                    },
-                    {
-                      label: 'City',
-                      validators: [],
-                      placeholder: 'City name',
-                      name: 'city',
-                      type: {
-                        type: 'input'
-                      }
-                    },
-                    {
-                      label: 'State',
-                      placeholder: 'State name',
-                      validators: [],
-                      name: 'state',
-                      type: {
-                        type: 'input'
-                      }
-                    },
-                    {
                       label: 'Country',
                       validators: [],
                       placeholder: 'Touch to choose',
                       type: {
                         type: 'picker',
+                        disabled: true,
                         options: Countries
                       },
                       name: 'country'
+                    },
+                    {
+                      label: 'State',
+                      placeholder: 'Touch to choose',
+                      validators: [],
+                      name: 'state',
+                      type: {
+                        type: 'picker',
+                        options: States
+                      }
+                    },
+                    this.state.companyRegions.length > 0 && {
+                      label: 'Region',
+                      placeholder: 'Touch to choose',
+                      validators: [],
+                      name: 'region',
+                      type: {
+                        type: 'picker',
+                        options: this.state.companyRegions
+                      }
+                    },
+                    {
+                      label: 'Address',
+                      placeholder: 'Address',
+                      name: 'address',
+                      type: {
+                        type: 'input'
+                      }
                     }
                   ]
                 },
@@ -435,25 +516,14 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
                   stepTitle: 'Payment',
                   formFields: [
                     {
-                      label: 'How much(N) was actually paid?',
+                      label: 'How much(N) is the delivery fee?',
                       validators: ['required'],
                       type: {
                         type: 'input',
                         keyboardType: 'numeric'
                       },
                       placeholder: '0.00',
-                      name: 'amountPaid'
-                    },
-                    {
-                      label: 'Are you giving discounts?',
-                      type: {
-                        type: 'input',
-                        keyboardType: 'numeric'
-                      },
-                      placeholder: '0',
-                      name: 'discount',
-                      underneathText:
-                        'Discounts should be based on the amount given not the percentage. Ignore if there are no discounts.'
+                      name: 'deliveryFee'
                     }
                   ],
                   buttonTitle: 'Done'

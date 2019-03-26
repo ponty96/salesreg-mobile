@@ -8,16 +8,17 @@ import { Provider } from 'react-redux'
 import thunk from 'redux-thunk'
 import logger from 'redux-logger'
 import codePush from 'react-native-code-push'
+import ViewOverflow from 'react-native-view-overflow'
+import Config from 'react-native-config'
+import OneSignal from 'react-native-onesignal'
 
 import Routes from './Navigation/Routes'
-import OneSignal from 'react-native-onesignal'
 import Auth from './services/auth'
 import { AuthenticateClientGQL } from './graphql/client-mutations/authenticate'
+import { SingleUserGQL } from './graphql/queries/Authenticate'
 import { UserContext } from './context/UserContext'
 import { appReducers } from './store/reducers'
 import setupSentry from './Functions/sentry'
-import ViewOverflow from 'react-native-view-overflow'
-import Config from 'react-native-config'
 import { Root as NotificationRoot } from './Components/NotificationBanner'
 import { upsertMobileDevice } from './services/MobileDevice'
 import pushNotificationWrapper from './Functions/PushNotificationWrapper'
@@ -93,6 +94,11 @@ class App extends React.Component<IProps> {
         mutation: AuthenticateClientGQL,
         variables: { user: user }
       })
+      client.query({
+        query: SingleUserGQL,
+        variables: { id: user.id }
+      })
+
       this.setState({
         loading: false,
         user,

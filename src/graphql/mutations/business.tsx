@@ -15,6 +15,12 @@ export const UpdateCompanyGQL = gql`
           title
           shareLink
           slug
+          deliveryFees {
+            id
+            state
+            region
+            fee
+          }
           contactEmail
           about
           coverPhoto
