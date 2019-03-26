@@ -1,13 +1,15 @@
 import React from 'react'
-import { View, StyleSheet, Text, TouchableOpacity, Alert } from 'react-native'
-import { color } from '../../Style/Color'
+import { View, StyleSheet, TouchableOpacity, Alert } from 'react-native'
 import { Icon } from 'native-base'
-import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
 import { connect } from 'react-redux'
 import {
   DocumentPicker,
   DocumentPickerUtil
 } from 'react-native-document-picker'
+
+import { MediumText, RegularText } from '../TextAtom'
+import { color } from '../../Style/Color'
+import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
 
 interface IProps {
   document: string
@@ -88,17 +90,16 @@ class DocumentUploadAtom extends React.PureComponent<IProps, IState> {
               style={{ fontSize: 150, color: color.red }}
             />
           </View>
-          <Text
+          <MediumText
             style={{
               color: color.button,
               alignSelf: 'center',
               marginVertical: 20,
-              fontSize: 18,
-              fontFamily: 'AvenirNext-Medium'
+              fontSize: 18
             }}
           >
             Upload Pdf
-          </Text>
+          </MediumText>
         </View>
       </TouchableOpacity>
     )
@@ -115,17 +116,16 @@ class DocumentUploadAtom extends React.PureComponent<IProps, IState> {
               style={{ fontSize: 150, color: color.red }}
             />
           </View>
-          <Text
+          <MediumText
             style={{
               color: color.button,
               alignSelf: 'center',
               marginVertical: 20,
-              fontSize: 18,
-              fontFamily: 'AvenirNext-Medium'
+              fontSize: 18
             }}
           >
             Change Pdf
-          </Text>
+          </MediumText>
         </View>
       </TouchableOpacity>
     )
@@ -144,17 +144,16 @@ class DocumentUploadAtom extends React.PureComponent<IProps, IState> {
             style={styles.placeholderWrapper}
             uploadType="single"
           />
-          <Text
+          <MediumText
             style={{
               color: color.button,
               alignSelf: 'center',
               marginVertical: 20,
-              fontSize: 18,
-              fontFamily: 'AvenirNext-Medium'
+              fontSize: 18
             }}
           >
             Change Document
-          </Text>
+          </MediumText>
         </View>
       </TouchableOpacity>
     )
@@ -179,17 +178,16 @@ class DocumentUploadAtom extends React.PureComponent<IProps, IState> {
   renderUnderNeathText = () => {
     if (this.props.error || this.props.underneathText) {
       return (
-        <Text
+        <RegularText
           style={[
             styles.underneathText,
             {
-              fontFamily: 'AvenirNext-Regular',
               color: this.props.error ? 'red' : color.principal
             }
           ]}
         >
           {this.props.error || this.props.underneathText}
-        </Text>
+        </RegularText>
       )
     } else {
       return null

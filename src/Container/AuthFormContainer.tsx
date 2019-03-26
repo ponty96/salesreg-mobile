@@ -1,8 +1,10 @@
 import React from 'react'
-import { StyleSheet, Text, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 import { Container, Content, Form } from 'native-base'
+
 import { color } from '../Style/Color'
 import ButtonAtom from '../Atom/Form/ButtonAtom'
+import { MediumText, DemiBoldText } from '../Atom/TextAtom'
 
 interface IProps {
   navigate: any
@@ -34,7 +36,7 @@ export default class AuthFormContainer extends React.PureComponent<IProps> {
               justifyContent: 'space-between'
             }}
           >
-            <Text style={styles.pageTitle}>{pageTitle}</Text>
+            <DemiBoldText style={styles.pageTitle}>{pageTitle}</DemiBoldText>
             <View
               style={{
                 // flex: 1,
@@ -71,7 +73,9 @@ export default class AuthFormContainer extends React.PureComponent<IProps> {
               )}
             </View>
             <View style={styles.footer}>
-              <Text style={styles.footerText}>{this.props.footerText}</Text>
+              <MediumText style={styles.footerText}>
+                {this.props.footerText}
+              </MediumText>
               <ButtonAtom
                 btnText={this.props.footerButtonText}
                 onPress={() =>
@@ -95,7 +99,6 @@ const styles = StyleSheet.create({
   },
   pageTitle: {
     color: '#000',
-    fontFamily: 'AvenirNext-DemiBold',
     fontSize: 22,
     paddingTop: 45,
     marginLeft: 30
@@ -113,7 +116,6 @@ const styles = StyleSheet.create({
   footerText: {
     color: '#fff',
     paddingVertical: 8,
-    fontFamily: 'AvenirNext-Medium',
     fontSize: 16,
     marginBottom: 8
   }

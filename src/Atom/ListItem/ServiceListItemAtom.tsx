@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { View, Text, TouchableOpacity, StyleSheet } from 'react-native'
+import { View, TouchableOpacity, StyleSheet } from 'react-native'
+
 import { color } from '../../Style/Color'
+import { RegularText } from '../TextAtom'
 
 interface IProps {
   name: string
@@ -25,10 +27,12 @@ class ServicesListItemAtom extends React.Component<IProps, {}> {
         style={[styles.listContainer, this.props.contStyle]}
       >
         <View style={styles.listTextCont}>
-          <Text style={[styles.nameText, { fontFamily: 'Source Sans Pro' }]}>
+          <RegularText
+            style={[styles.nameText, { fontFamily: 'Source Sans Pro' }]}
+          >
             {this.props.name}
-          </Text>
-          <Text
+          </RegularText>
+          <RegularText
             style={[
               { fontFamily: 'Source Sans Pro' },
               styles.amountText,
@@ -36,7 +40,7 @@ class ServicesListItemAtom extends React.Component<IProps, {}> {
             ]}
           >
             {'\u20A6 '} {this.props.amount}
-          </Text>
+          </RegularText>
         </View>
       </TouchableOpacity>
     )

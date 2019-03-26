@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
+import { NavigationActions } from 'react-navigation'
+import { Mutation, Query } from 'react-apollo'
+
 import FormStepperContainer, {
   FormStep
 } from '../../../Container/Form/StepperContainer'
 import { CreateDeliveryFee } from '../../../graphql/mutations/business'
 import { ListCompanyDeliveryFees } from '../../../graphql/queries/business'
-import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
-import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 import { UserContext } from '../../../context/UserContext'
 import { States } from '../../../utilities/data/picker-lists'
-import { Query } from 'react-apollo'
 import { CompanyAllowsNationwideDeliveryGQL } from '../../../graphql/queries/order'
+import { SingleUserGQL } from '../../../graphql/queries/Authenticate'
 
 interface IProps {
   navigation: any
@@ -161,6 +162,12 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
             query: ListCompanyDeliveryFees,
             variables: {
               companyId: this.props.user.company.id
+            }
+          },
+          {
+            query: SingleUserGQL,
+            variables: {
+              id: this.props.user.id
             }
           }
         ]}

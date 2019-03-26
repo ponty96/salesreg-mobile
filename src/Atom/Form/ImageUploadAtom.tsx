@@ -1,18 +1,13 @@
 import React from 'react'
-import {
-  View,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  Image,
-  Alert
-} from 'react-native'
-import { color } from '../../Style/Color'
-import ImagePicker from 'react-native-image-crop-picker'
+import { View, StyleSheet, TouchableOpacity, Image, Alert } from 'react-native'
+import { connect } from 'react-redux'
 import { ActionSheet, Icon } from 'native-base'
+import ImagePicker from 'react-native-image-crop-picker'
+
+import { color } from '../../Style/Color'
+import { MediumText, RegularText } from '../TextAtom'
 import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
 import CachedImageAtom from '../CachedImageAtom'
-import { connect } from 'react-redux'
 
 interface IProps {
   image: string
@@ -142,17 +137,16 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
               />
             )}
           </View>
-          <Text
+          <MediumText
             style={{
               color: color.button,
               alignSelf: 'center',
               marginVertical: 20,
-              fontSize: 18,
-              fontFamily: 'AvenirNext-Medium'
+              fontSize: 18
             }}
           >
             Upload Photo
-          </Text>
+          </MediumText>
         </View>
       </TouchableOpacity>
     )
@@ -166,17 +160,16 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
           style={{ width: 300, height: 300, borderRadius: 0, marginTop: 24 }}
         />
         <TouchableOpacity onPress={this.handleImageUpload}>
-          <Text
+          <MediumText
             style={{
               color: color.button,
               alignSelf: 'center',
               marginVertical: 20,
-              fontSize: 18,
-              fontFamily: 'AvenirNext-Medium'
+              fontSize: 18
             }}
           >
             Change Photo
-          </Text>
+          </MediumText>
         </TouchableOpacity>
       </View>
     )
@@ -194,17 +187,16 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
           uploadType="single"
         />
         <TouchableOpacity onPress={this.handleImageUpload}>
-          <Text
+          <MediumText
             style={{
               color: color.button,
               alignSelf: 'center',
               marginVertical: 20,
-              fontSize: 18,
-              fontFamily: 'AvenirNext-Medium'
+              fontSize: 18
             }}
           >
             Change Photo
-          </Text>
+          </MediumText>
         </TouchableOpacity>
       </View>
     )
@@ -229,17 +221,16 @@ class ImageUploadAtom extends React.PureComponent<IProps, IState> {
   renderUnderNeathText = () => {
     if (this.props.error || this.props.underneathText) {
       return (
-        <Text
+        <RegularText
           style={[
             styles.underneathText,
             {
-              fontFamily: 'AvenirNext-Regular',
               color: this.props.error ? 'red' : color.principal
             }
           ]}
         >
           {this.props.error || this.props.underneathText}
-        </Text>
+        </RegularText>
       )
     } else {
       return null
@@ -275,7 +266,6 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginTop: 0,
     paddingLeft: 8,
-    fontFamily: 'AvenirNext-Regular',
     paddingVertical: 0
   }
 })

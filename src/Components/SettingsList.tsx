@@ -1,7 +1,8 @@
 import * as React from 'react'
 import { StyleSheet, View, Dimensions, FlatList } from 'react-native'
+import { Icon } from 'native-base'
+
 import { color } from '../Style/Color'
-import Icon from '../Atom/Icon'
 import SalesOrderListAtom from '../Atom/ListItem/SalesOrderListAtom'
 
 interface Category {

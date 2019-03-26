@@ -33,6 +33,12 @@ export const LoginUserMutationGQL = gql`
               contactEmail
               about
               currency
+              deliveryFees {
+                id
+                state
+                region
+                fee
+              }
               bank {
                 accountNumber
                 bankCode
@@ -107,6 +113,12 @@ export const RegisterUserMutationGQL = gql`
               shareLink
               contactEmail
               about
+              deliveryFees {
+                id
+                state
+                region
+                fee
+              }
               legalDocuments {
                 pdfUrl
                 name
@@ -166,6 +178,12 @@ export const AddUserCompanyMutationGQL = gql`
           shareLink
           about
           currency
+          deliveryFees {
+            id
+            state
+            region
+            fee
+          }
           facebook
           legalDocuments {
             pdfUrl

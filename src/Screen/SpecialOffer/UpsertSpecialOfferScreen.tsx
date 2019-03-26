@@ -1,5 +1,4 @@
 import React from 'react'
-import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Mutation } from 'react-apollo'
 import { NavigationActions } from 'react-navigation'
 
@@ -11,6 +10,7 @@ import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 import { UserContext } from '../../context/UserContext'
 import setAppAnalytics from '../../Functions/setAppAnalytics'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
 
 interface IProps {
   navigation: any

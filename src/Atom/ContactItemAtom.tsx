@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { ListItem, Text, Left, Body, Right } from 'native-base'
+import { ListItem, Left, Body, Right } from 'native-base'
 import { StyleSheet } from 'react-native'
+
+import { RegularText } from '../Atom/TextAtom'
 import { color } from '../Style/Color'
 import CachedImageAtom from './CachedImageAtom'
 
@@ -21,15 +23,17 @@ class ContactItemAtom extends React.Component<IProps, any> {
           <CachedImageAtom uri={this.props.image} style={styles.dp} />
         </Left>
         <Body style={styles.view2}>
-          <Text style={styles.rowText1}>{this.props.contactName}</Text>
+          <RegularText style={styles.rowText1}>
+            {this.props.contactName}
+          </RegularText>
         </Body>
         <Right style={styles.view3}>
-          <Text style={styles.text1}>
+          <RegularText style={styles.text1}>
             {'\u20A6'} {this.props.amount}
-          </Text>
-          <Text style={[styles.lilFont, styles[this.props.realStyle]]}>
+          </RegularText>
+          <RegularText style={[styles.lilFont, styles[this.props.realStyle]]}>
             {this.props.latestAmount}
-          </Text>
+          </RegularText>
         </Right>
       </ListItem>
     )
@@ -72,8 +76,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 13,
     color: color.principal,
-    textAlign: 'left',
-    fontFamily: 'Source Sans Pro'
+    textAlign: 'left'
   },
   dp: {
     height: 55,
@@ -91,8 +94,7 @@ const styles = StyleSheet.create({
   text1: {
     fontSize: 13,
     fontWeight: '200',
-    color: color.principal,
-    fontFamily: 'Source Sans Pro'
+    color: color.principal
   },
   lilFont: {
     fontSize: 12

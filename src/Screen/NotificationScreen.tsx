@@ -1,5 +1,8 @@
 import React from 'react'
 import { View, StyleSheet } from 'react-native'
+import { Icon } from 'native-base'
+import moment from 'moment'
+
 import Header from '../Components/Header/BaseHeader'
 import GenericListIndex from '../Components/Generic/ListIndex'
 import {
@@ -7,12 +10,10 @@ import {
   GetUnreadCompanyNotificationsCount
 } from '../graphql/queries/business'
 import { ChangeNotificationReadStatus } from '../graphql/mutations/business'
-import moment from 'moment'
 import { color } from '../Style/Color'
 import { Mutation } from 'react-apollo'
 import { UserContext } from '../context/UserContext'
 import notificationNavigationHandler from '../Functions/notificationNavigationHandler'
-import Icon from '../Atom/Icon'
 import { convertToLocalTime } from '../Functions'
 
 interface IProps {

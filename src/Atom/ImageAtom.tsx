@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { View, Text, TouchableOpacity } from 'react-native'
+import { View, TouchableOpacity } from 'react-native'
 import { StyleSheet } from 'react-native'
+
+import { RegularText, BoldText } from './TextAtom'
 import { color } from '../Style/Color'
 import CachedImageAtom from './CachedImageAtom'
 
@@ -34,9 +36,7 @@ class ImageAtom extends React.Component<IProps, any> {
               style={styles.image}
             />
           </View>
-          <Text style={[styles.imageText, { fontFamily: 'Source Sans Pro' }]}>
-            Upload logo
-          </Text>
+          <RegularText style={[styles.imageText]}>Upload logo</RegularText>
         </TouchableOpacity>
       )
     } else {
@@ -46,12 +46,14 @@ class ImageAtom extends React.Component<IProps, any> {
           style={styles.selfAlign}
         >
           <View style={styles.imgContainer}>
-            <Text style={styles.imgPlaceholderText}>
+            <BoldText style={styles.imgPlaceholderText}>
               {this.props.placeholder &&
                 this.props.placeholder.substr(0, 1).toUpperCase()}
-            </Text>
+            </BoldText>
           </View>
-          <Text style={[styles.selfAlign, styles.menuColor]}>Upload logo</Text>
+          <RegularText style={[styles.selfAlign, styles.menuColor]}>
+            Upload logo
+          </RegularText>
         </TouchableOpacity>
       )
     }
@@ -83,7 +85,6 @@ const styles = StyleSheet.create({
     fontSize: 14
   },
   imgPlaceholderText: {
-    fontWeight: 'bold',
     fontSize: 20
   },
   menuColor: {

@@ -1,8 +1,9 @@
 import React from 'react'
+import { Mutation } from 'react-apollo'
+
 import FormStepperContainer from '../../../Container/Form/StepperContainer'
 import { UserContext } from '../../../context/UserContext'
 import AppSpinner from '../../../Components/Spinner'
-import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../../../Components/NotificationBanner'

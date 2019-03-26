@@ -47,7 +47,7 @@ export const UpdateSaleOrderStatusGQL = gql`
               featuredImage
             }
           }
-          date
+          date: insertedAt
         }
       }
     }
@@ -64,7 +64,7 @@ export const UpdatePurchaseOrderStatusGQL = gql`
       success
       data {
         ... on Purchase {
-          date
+          date: insertedAt
           id
           contact {
             contactName
@@ -143,7 +143,7 @@ export const UpsertSaleOrder = gql`
               featuredImage
             }
           }
-          date
+          date: insertedAt
         }
       }
     }
@@ -188,7 +188,7 @@ export const UpdateInvoice = gql`
             charge
             discount
             amountPaid
-            date
+            date: insertedAt
             location {
               street1
               state

@@ -1,6 +1,7 @@
 import React from 'react'
-import { RegisterUserMutationGQL } from '../../graphql/mutations/authenticate'
 import { Mutation } from 'react-apollo'
+
+import { RegisterUserMutationGQL } from '../../graphql/mutations/authenticate'
 import { parseFieldErrors } from '../../Functions'
 import AppSpinner from '../../Components/Spinner'
 import FirstStep from '../../Components/SignUp/FirstStep'

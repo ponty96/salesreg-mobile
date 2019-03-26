@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
+import { Mutation } from 'react-apollo'
+import { NavigationActions } from 'react-navigation'
+
 import FormStepperContainer from '../../../Container/Form/StepperContainer'
 import { UpsertOptionGQL } from '../../../graphql/mutations/store'
 import { ListCompanyOptionsGQL } from '../../../graphql/queries/store'
-import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
 import Auth from '../../../services/auth'
-import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 

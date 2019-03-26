@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
+
+import { RegularText } from '../Atom/TextAtom'
 import Header from '../Components/Header/BaseHeader'
 // import AppSpinner from '../Components/Spinner'
 
@@ -48,31 +49,29 @@ import DeliveryFeeScreen from '../Screen/Settings/DeliveryFee/DeliveryFeeScreen'
 import DeliveryDetailsScreen from '../Screen/Settings/DeliveryFee/DeliveryDetailsScreen'
 
 // Business Screens
-import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
-import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
+import BusinessProfileScreen from '../Screen/BusinessProfile/BusinessProfileScreen'
+import EditBusinessProfileScreen from '../Screen/BusinessProfile/EditBusinessProfileScreen'
 
 // User Profile Screens
-import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
-import UserProfileScreen from '../Screen/UserProfileScreen'
-import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
+import EditUserProfileScreen from '../Screen/User/EditUserProfileScreen'
+import UserProfileScreen from '../Screen/User/UserProfileScreen'
+import ProfileSettingsScreen from '../Screen/User/ProfileSettingsScreen'
 import ChargeCalculatorScreen from '../Screen/Settings/ChargeCalculatorScreen'
 
 // Order
-import OrderStatusScreen from '../Screen/OrderStatusScreen'
+import OrderStatusScreen from '../Screen/Order/OrderStatusScreen'
+import SalesOrderScreen from '../Screen/Order/SalesOrderScreen'
+import SalesOrderDetailsScreen from '../Screen/Order/SalesOrderDetailsScreen'
+import SalesOrderDailySalesScreen from '../Screen/Order/SalesOrderDailySalesScreen'
+import UpsertSalesOrderScreen from '../Screen/Order/UpsertSalesOrderScreen'
 
 // Notification
 import NotificationScreen from '../Screen/NotificationScreen'
 
-// Sales Order screens
-import SalesOrderScreen from '../Screen/SalesOrderScreen'
-import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
-import SalesOrderDailySalesScreen from '../Screen/SalesOrderDailySalesScreen'
-import UpsertSalesOrderScreen from '../Screen/UpsertSalesOrderScreen'
-
 // Expenses Screens
-import ExpensesScreen from '../Screen/ExpensesScreen'
-import ExpensesDetailsScreen from '../Screen/ExpensesDetailsScreen'
-import UpsertExpenseScreen from '../Screen/UpsertExpenseScreen'
+import ExpensesScreen from '../Screen/Expenses/ExpensesScreen'
+import ExpensesDetailsScreen from '../Screen/Expenses/ExpensesDetailsScreen'
+import UpsertExpenseScreen from '../Screen/Expenses/UpsertExpenseScreen'
 
 // Special Offer Screens
 import SpecialOfferScreen from '../Screen/SpecialOffer/SpecialOfferScreen'
@@ -93,13 +92,13 @@ import EmployeeForm from '../Components/EmployeeForm'
 import HomeScreen from '../Screen/HomeScreen'
 
 // Other Component Screens
-import BankScreen from '../Screen/BankScreen'
-import BankDetailsScreen from '../Screen/BankDetailsScreen'
-import UpsertBankScreen from '../Screen/UpsertBankScreen'
+import BankScreen from '../Screen/Bank/BankScreen'
+import BankDetailsScreen from '../Screen/Bank/BankDetailsScreen'
+import UpsertBankScreen from '../Screen/Bank/UpsertBankScreen'
 
-import InvoiceDetailsScreen from '../Screen/InvoiceDetailsScreen'
-import UpsertInvoiceScreen from '../Screen/UpsertInvoiceScreen'
-import InvoicesScreen from '../Screen/InvoicesScreen'
+import InvoiceDetailsScreen from '../Screen/Invoices/InvoiceDetailsScreen'
+import UpsertInvoiceScreen from '../Screen/Invoices/UpsertInvoiceScreen'
+import InvoicesScreen from '../Screen/Invoices/InvoicesScreen'
 import UpdateInvoiceDueDate from '../Screen/Invoices/UpdateInvoiceDueDate'
 
 import IncomeScreen from '../Screen/IncomeScreen'
@@ -320,10 +319,10 @@ export default class Routes extends React.Component<IProps, IState> {
           console.log('data', data)
           console.log('loading', loading)
           if (loading) {
-            return <Text>{`Loading data here`}</Text>
+            return <RegularText>{`Loading data here`}</RegularText>
           }
           if (error) {
-            return <Text>{`Error! ${error.message}`}</Text>
+            return <RegularText>{`Error! ${error.message}`}</RegularText>
           }
           if (!data.authenticate && display) {
             console.log('Oya ', loading)

@@ -1,5 +1,7 @@
 import React from 'react'
-import { Alert, Text } from 'react-native'
+import { Alert } from 'react-native'
+import { Mutation } from 'react-apollo'
+
 import ThirdStep from '../../Components/SignUp/ThirdStep'
 import LastStep from '../../Components/SignUp/LastStep'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
@@ -10,13 +12,13 @@ import {
 } from '../../utilities/data/picker-lists'
 import Auth from '../../services/auth'
 import { AddUserCompanyMutationGQL } from '../../graphql/mutations/authenticate'
-import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../Functions'
 import AppSpinner from '../../Components/Spinner'
 import { AuthenticateClientGQL } from '../../graphql/client-mutations/authenticate'
 import { UserContext } from '../../context/UserContext'
 import setAppAnalytics from '../../Functions/setAppAnalytics'
 import { upsertMobileDevice } from '../../services/MobileDevice'
+import { RegularText, BoldText } from '../../Atom/TextAtom'
 
 interface IProps {
   navigation: any
@@ -152,15 +154,12 @@ class BusinessOnboardScreen extends React.PureComponent<IProps, IState> {
                     label: 'How should customers call you?',
                     placeholder: 'E.g StacknBit',
                     underneathText: (
-                      <Text>
-                        <Text style={{ fontFamily: 'AvenirNext-Bold' }}>
-                          {slug}.yipcart.com
-                        </Text>{' '}
-                        will be your website domain name. The slug forms your
-                        business domain name. Please make sure that its in
-                        lowercase and avoid adding spacing. Only Alphanumerics
-                        are allowed also
-                      </Text>
+                      <RegularText>
+                        <BoldText>{slug}.yipcart.com</BoldText> will be your
+                        website domain name. The slug forms your business domain
+                        name. Please make sure that its in lowercase and avoid
+                        adding spacing. Only Alphanumerics are allowed also
+                      </RegularText>
                     ),
                     type: {
                       type: 'input',

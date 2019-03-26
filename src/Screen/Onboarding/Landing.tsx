@@ -1,17 +1,17 @@
 import React, { PureComponent } from 'react'
 import {
   View,
-  Text,
   StyleSheet,
   FlatList,
   Image,
   ImageSourcePropType,
   Dimensions
 } from 'react-native'
+import ViewOverflow from 'react-native-view-overflow'
 
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import { color } from '../../Style/Color'
-import ViewOverflow from 'react-native-view-overflow'
+import { DemiBoldText } from '../../Atom/TextAtom'
 
 interface IProps {
   navigation: any
@@ -194,12 +194,12 @@ class LandingScreen extends PureComponent<IProps, IState> {
           }
           renderItem={({ item }) => (
             <View style={{ width: Dimensions.get('window').width }}>
-              <Text style={[styles.haveAccount, styles.messageTitle]}>
+              <DemiBoldText style={[styles.haveAccount, styles.messageTitle]}>
                 {item.title}
-              </Text>
-              <Text style={[styles.haveAccount, styles.messageBody]}>
+              </DemiBoldText>
+              <DemiBoldText style={[styles.haveAccount, styles.messageBody]}>
                 {item.body}
-              </Text>
+              </DemiBoldText>
             </View>
           )}
           keyExtractor={(item, index) => {
@@ -214,7 +214,9 @@ class LandingScreen extends PureComponent<IProps, IState> {
           onPress={() => navigate('Signup')}
           type="primary"
         />
-        <Text style={styles.haveAccount}>Already have an account?</Text>
+        <DemiBoldText style={styles.haveAccount}>
+          Already have an account?
+        </DemiBoldText>
         <ButtonAtom
           btnText="LOGIN"
           transparent={true}

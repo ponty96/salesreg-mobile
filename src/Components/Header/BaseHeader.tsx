@@ -1,7 +1,6 @@
 import {
   StyleSheet,
   View,
-  Text,
   TouchableWithoutFeedback,
   Linking,
   Easing,
@@ -9,12 +8,13 @@ import {
 } from 'react-native'
 import { Query } from 'react-apollo'
 import React from 'react'
-import { Left, Right, Title } from 'native-base'
-import Icon from '../../Atom/Icon'
+import { Left, Right, Title, Icon } from 'native-base'
+
 import { color } from '../../Style/Color'
 import { SearchAtom } from '../../Atom/SearchAtom'
 import { UserContext } from '../../context/UserContext'
 import { GetUnreadCompanyNotificationsCount } from '../../graphql/queries/business'
+import { DemiBoldText, BoldText } from '../../Atom/TextAtom'
 
 export interface IProps {
   title: string
@@ -67,7 +67,7 @@ class BaseHeader extends React.PureComponent<IProps> {
 
   static defaultProps = {
     leftIconTitle: 'md-menu',
-    leftIconType: 'IonIcons',
+    leftIconType: 'Ionicons',
     hideRightMenu: false
   }
 
@@ -124,9 +124,9 @@ class BaseHeader extends React.PureComponent<IProps> {
               data.getUnreadCompanyNotificationsCount.data.count &&
               data.getUnreadCompanyNotificationsCount.data.count > 0 ? (
                 <View style={styles.notificationContainer}>
-                  <Text style={styles.notificationText}>
+                  <BoldText style={styles.notificationText}>
                     {data.getUnreadCompanyNotificationsCount.data.count}
-                  </Text>
+                  </BoldText>
                 </View>
               ) : null}
             </View>
@@ -183,7 +183,9 @@ class BaseHeader extends React.PureComponent<IProps> {
                     />
                   )}
                   {this.props.rightText && (
-                    <Text style={styles.rightText}>{this.props.rightText}</Text>
+                    <DemiBoldText style={styles.rightText}>
+                      {this.props.rightText}
+                    </DemiBoldText>
                   )}
                 </View>
               </TouchableWithoutFeedback>

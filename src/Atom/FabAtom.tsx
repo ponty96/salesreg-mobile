@@ -1,8 +1,8 @@
 import * as React from 'react'
-import { Fab } from 'native-base'
+import { Fab, Icon } from 'native-base'
 import { StyleSheet } from 'react-native'
+
 import { color } from '../Style/Color'
-import Icon from './Icon'
 
 interface IProp {
   routeName?: string

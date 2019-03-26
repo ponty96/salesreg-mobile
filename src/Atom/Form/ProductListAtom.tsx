@@ -1,5 +1,7 @@
 import React from 'react'
-import { Text, StyleSheet } from 'react-native'
+import { StyleSheet } from 'react-native'
+
+import { RegularText } from '../TextAtom'
 import SalesOrderListAtom from '../ListItem/SalesOrderListAtom'
 import { color } from '../../Style/Color'
 
@@ -17,9 +19,9 @@ export default class ProductListAtom extends React.PureComponent<IProps> {
   render() {
     return (
       <React.Fragment>
-        <Text style={styles.titleText}>
+        <RegularText style={styles.titleText}>
           Click back arrow to edit, or just click done to finish.
-        </Text>
+        </RegularText>
         {this.props.list.map((listItem, i) => {
           return (
             <SalesOrderListAtom
@@ -39,7 +41,6 @@ const styles = StyleSheet.create({
   titleText: {
     marginVertical: 15,
     fontSize: 16,
-    color: color.black,
-    fontFamily: 'AvenirNext-Regular'
+    color: color.black
   }
 })

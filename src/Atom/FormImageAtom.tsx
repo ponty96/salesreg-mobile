@@ -1,11 +1,7 @@
 import * as React from 'react'
-import {
-  View,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-  StyleSheet
-} from 'react-native'
+import { View, TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
+import { DemiBoldText } from './TextAtom'
+
 import { color } from '../Style/Color'
 import CachedImageAtom from './CachedImageAtom'
 
@@ -57,17 +53,16 @@ class FormImageAtom extends React.Component<IProps, any> {
     const { title } = this.determineDataBasedOnProps(this.props.form)
     return (
       <View style={styles.mainView}>
-        <Text
+        <DemiBoldText
           style={[
             styles.headerText,
             {
-              fontFamily: 'SourceSansPro-Semibold',
               color: color.label
             }
           ]}
         >
           {title}
-        </Text>
+        </DemiBoldText>
         <View style={styles.uploadView}>
           <TouchableOpacity
             onPress={this.handleSelection}
@@ -79,17 +74,16 @@ class FormImageAtom extends React.Component<IProps, any> {
                 style={styles.image}
               />
             </View>
-            <Text
+            <DemiBoldText
               style={[
                 styles.imageText,
                 {
-                  fontFamily: 'SourceSansPro-Semibold',
                   color: color.label
                 }
               ]}
             >
               Upload Image
-            </Text>
+            </DemiBoldText>
           </TouchableOpacity>
         </View>
       </View>

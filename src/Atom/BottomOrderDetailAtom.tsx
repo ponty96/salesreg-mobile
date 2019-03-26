@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { ListItem, Left, Right } from 'native-base'
+
+import { RegularText } from '../Atom/TextAtom'
 
 interface IProps {
   total?: string
@@ -21,40 +23,44 @@ export default class BottomOrderDetailAtom extends React.Component<
       <View>
         <ListItem style={styles.redList}>
           <Left>
-            <Text style={styles.whiteTextL}>TOTAL</Text>
+            <RegularText style={styles.whiteTextL}>TOTAL</RegularText>
           </Left>
           <Right>
-            <Text style={styles.whiteTextR}>
+            <RegularText style={styles.whiteTextR}>
               {'\u20A6'} {this.props.total}.00
-            </Text>
+            </RegularText>
           </Right>
         </ListItem>
         <ListItem style={styles.whiteList}>
           <Left>
-            <Text style={styles.blackTextL}>Amount Pending</Text>
+            <RegularText style={styles.blackTextL}>Amount Pending</RegularText>
           </Left>
           <Right>
-            <Text style={styles.blackTextR}>
+            <RegularText style={styles.blackTextR}>
               {'\u20A6'} {this.props.amount}.00
-            </Text>
+            </RegularText>
           </Right>
         </ListItem>
         <ListItem style={styles.whiteList}>
           <Left>
-            <Text style={styles.blackTextL}>Balance</Text>
+            <RegularText style={styles.blackTextL}>Balance</RegularText>
           </Left>
           <Right>
-            <Text style={styles.redTextR}>
+            <RegularText style={styles.redTextR}>
               {'\u20A6'} {this.props.balance}.00
-            </Text>
+            </RegularText>
           </Right>
         </ListItem>
         <ListItem style={styles.whiteList}>
           <Left>
-            <Text style={styles.blackTextL}>Balance due date</Text>
+            <RegularText style={styles.blackTextL}>
+              Balance due date
+            </RegularText>
           </Left>
           <Right>
-            <Text style={styles.blackTextR}>{this.props.dueDate}.</Text>
+            <RegularText style={styles.blackTextR}>
+              {this.props.dueDate}.
+            </RegularText>
           </Right>
         </ListItem>
       </View>

@@ -1,8 +1,10 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+import { Icon } from 'native-base'
+
 import InputAtom from './InputAtom'
 import ButtonAtom from './ButtonAtom'
-import Icon from '../Icon'
+import { RegularText } from '../../Atom/TextAtom'
 import { color } from '../../Style/Color'
 
 interface ExpenseItem {
@@ -81,7 +83,7 @@ export default class AddExpenseItemsList extends React.Component<IProps> {
 
   renderErrorText = () => {
     return this.props.error ? (
-      <Text style={styles.errorText}>{this.props.error}</Text>
+      <RegularText style={styles.errorText}>{this.props.error}</RegularText>
     ) : null
   }
 
@@ -133,7 +135,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 2,
     marginTop: 0,
-    fontFamily: 'AvenirNext-Regular',
     color: 'red',
     paddingVertical: 12
   },

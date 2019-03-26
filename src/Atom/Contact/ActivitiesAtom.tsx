@@ -1,7 +1,9 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Left, Right } from 'native-base'
+
 import { color } from '../../Style/Color'
+import { MediumText } from '../../Atom/TextAtom'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 
 interface IProps {
@@ -28,8 +30,8 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
                 val === 'paid'
                   ? color.selling
                   : val === 'debt'
-                    ? 'red'
-                    : 'black'
+                  ? 'red'
+                  : 'black'
             }
           ]}
         />
@@ -50,8 +52,8 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
             margin: 0
           }}
         >
-          <Text style={styles.normalFont}>{this.props.title}</Text>
-          <Text
+          <MediumText style={styles.normalFont}>{this.props.title}</MediumText>
+          <MediumText
             style={[
               styles.status,
               {
@@ -61,7 +63,7 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
             ]}
           >
             {this.props.details}
-          </Text>
+          </MediumText>
         </Left>
         <Right
           style={{
@@ -70,7 +72,7 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
             paddingVertical: 16
           }}
         >
-          <Text
+          <MediumText
             style={[
               styles.cash,
               {
@@ -78,14 +80,14 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
                   this.props.status === 'paid'
                     ? color.selling
                     : this.props.status === 'debt'
-                      ? 'red'
-                      : 'black'
+                    ? 'red'
+                    : 'black'
               }
             ]}
           >
             {'\u20A6'} {numberWithCommas(this.props.amount)}
-          </Text>
-          <Text style={styles.smallFont}>{this.props.dueDate}</Text>
+          </MediumText>
+          <MediumText style={styles.smallFont}>{this.props.dueDate}</MediumText>
         </Right>
       </View>
     )
