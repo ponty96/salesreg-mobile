@@ -14,3 +14,22 @@ export const AuthenticateQueryGQL = gql`
     }
   }
 `
+
+export const SingleUserGQL = gql`
+  query singleUser($id: Uuid!) {
+    singleUser(id: $id) {
+      ... on User {
+        id
+        company {
+          id
+          deliveryFees {
+            id
+            state
+            region
+            fee
+          }
+        }
+      }
+    }
+  }
+`

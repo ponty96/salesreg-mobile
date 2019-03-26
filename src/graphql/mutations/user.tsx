@@ -24,6 +24,12 @@ export const UpdateUserGQL = gql`
             shareLink
             contactEmail
             coverPhoto
+            deliveryFees {
+              id
+              state
+              region
+              fee
+            }
             legalDocuments {
               pdfUrl
               name

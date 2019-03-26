@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { NavigationActions } from 'react-navigation'
-import { Mutation, Query  } from 'react-apollo'
-
+import { Mutation, Query } from 'react-apollo'
 
 import FormStepperContainer, {
   FormStep
@@ -15,6 +14,7 @@ import configureNotificationBanner from '../../../Functions/configureNotificatio
 import { UserContext } from '../../../context/UserContext'
 import { States } from '../../../utilities/data/picker-lists'
 import { CompanyAllowsNationwideDeliveryGQL } from '../../../graphql/queries/order'
+import { SingleUserGQL } from '../../../graphql/queries/Authenticate'
 
 interface IProps {
   navigation: any
@@ -162,6 +162,12 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
             query: ListCompanyDeliveryFees,
             variables: {
               companyId: this.props.user.company.id
+            }
+          },
+          {
+            query: SingleUserGQL,
+            variables: {
+              id: this.props.user.id
             }
           }
         ]}

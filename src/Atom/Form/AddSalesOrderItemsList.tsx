@@ -125,7 +125,7 @@ export default class AddSalesOrderItemsList extends React.PureComponent<
         productId: null,
         name: '',
         unitPrice: '0.00',
-        quantity: ''
+        quantity: '1'
       }
     ])
     this.props.onUpdateItems(expenseItems)
