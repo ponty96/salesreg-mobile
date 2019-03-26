@@ -10,7 +10,7 @@ export const UpsertExpenseGQL = gql`
       }
       data {
         ... on Expense {
-          date
+          date: updatedAt
           id
           company {
             id

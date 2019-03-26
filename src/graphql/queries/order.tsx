@@ -11,13 +11,12 @@ export const ListCompanyPurchasesGQL = gql`
       edges {
         node {
           id
-          date
+          date: insertedAt
           contact {
             contactName
             id
             gender
           }
-          date
           paymentMethod
           status
           amount
@@ -77,7 +76,7 @@ export const GetSaleByIdGQL = gql`
           featuredImage
         }
       }
-      date
+      date: insertedAt
     }
   }
 `
@@ -130,7 +129,7 @@ export const ListCompanySalesGQL = gql`
               featuredImage
             }
           }
-          date
+          date: insertedAt
         }
       }
     }
@@ -168,7 +167,7 @@ export const GetInvoiceByIdGQL = gql`
           city
         }
         amountPaid
-        date
+        date: insertedAt
         items {
           id
           unitPrice
@@ -224,7 +223,7 @@ export const ListCompanyInvoicesGQL = gql`
             }
             amountPaid
             deliveryFee
-            date
+            date: insertedAt
             items {
               id
               unitPrice

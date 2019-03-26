@@ -20,7 +20,7 @@ export const ListCompanyExpensesGQL = gql`
       }
       edges {
         node {
-          date
+          date: updatedAt
           id
           company {
             id
