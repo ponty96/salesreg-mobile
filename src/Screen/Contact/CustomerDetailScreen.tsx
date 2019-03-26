@@ -1,6 +1,8 @@
 import React, { PureComponent } from 'react'
+
 import ContactDetails from '../../Components/Contact/ContactDetails'
 import Header from '../../Components/Header/DetailsScreenHeader'
+
 interface IProps {
   navigation: any
 }

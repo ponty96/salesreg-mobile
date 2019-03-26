@@ -1,7 +1,8 @@
 import * as React from 'react'
-import Header from '../Components/Header/DetailsScreenHeader'
-import GenericListIndex from '../Components/Generic/ListIndex'
-import { ListCompanySalesGQL } from '../graphql/queries/order'
+
+import Header from '../../Components/Header/DetailsScreenHeader'
+import GenericListIndex from '../../Components/Generic/ListIndex'
+import { ListCompanySalesGQL } from '../../graphql/queries/order'
 
 interface IProps {
   navigation: any

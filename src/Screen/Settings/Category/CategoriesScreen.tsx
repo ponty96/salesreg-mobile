@@ -2,6 +2,7 @@ import * as React from 'react'
 import { Alert } from 'react-native'
 import { Mutation } from 'react-apollo'
 import { ActionSheet } from 'native-base'
+
 import Header from '../../../Components/Header/DetailsScreenHeader'
 import GenericListIndex from '../../../Components/Generic/ListIndex'
 import AppSpinner from '../../../Components/Spinner'

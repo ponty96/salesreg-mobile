@@ -1,10 +1,11 @@
 import React from 'react'
-import Header from '../Components/Header/BaseHeader'
-import GenericListIndex from '../Components/Generic/ListIndex'
-import { ListCompanyInvoicesGQL } from '../graphql/queries/order'
-import { color } from '../Style/Color'
 import moment from 'moment'
-import { convertToLocalTime } from '../Functions'
+
+import Header from '../../Components/Header/BaseHeader'
+import GenericListIndex from '../../Components/Generic/ListIndex'
+import { ListCompanyInvoicesGQL } from '../../graphql/queries/order'
+import { color } from '../../Style/Color'
+import { convertToLocalTime } from '../../Functions'
 
 interface IProps {
   navigation: any

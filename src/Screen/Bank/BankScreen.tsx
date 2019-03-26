@@ -1,8 +1,9 @@
 import * as React from 'react'
-import Header from '../Components/Header/BaseHeader'
-import GenericListIndex from '../Components/Generic/ListIndex'
-import { ListCompanyBanksGQL } from '../graphql/queries/business'
-import { getBankName } from '../utilities/data/picker-lists'
+
+import Header from '../../Components/Header/BaseHeader'
+import GenericListIndex from '../../Components/Generic/ListIndex'
+import { ListCompanyBanksGQL } from '../../graphql/queries/business'
+import { getBankName } from '../../utilities/data/picker-lists'
 
 interface IProps {
   navigation: any

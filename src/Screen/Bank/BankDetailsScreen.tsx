@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import Header from '../Components/Header/DetailsScreenHeader'
-import GenericDetailsComponent from '../Components/Generic/Details'
-import { getBankName } from '../utilities/data/picker-lists'
-import { DeleteBankGQL } from '../graphql/mutations/business'
-import { ListCompanyBanksGQL } from '../graphql/queries/business'
-import { UserContext } from '../context/UserContext'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
 import { NavigationActions } from 'react-navigation'
+
+import Header from '../../Components/Header/DetailsScreenHeader'
+import GenericDetailsComponent from '../../Components/Generic/Details'
+import { getBankName } from '../../utilities/data/picker-lists'
+import { DeleteBankGQL } from '../../graphql/mutations/business'
+import { ListCompanyBanksGQL } from '../../graphql/queries/business'
+import { UserContext } from '../../context/UserContext'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface IProps {
   navigation: any

@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
-import Header from '../Components/Header/DetailsScreenHeader'
-import GenericDetailsComponent from '../Components/Generic/Details'
-// import moment from 'moment'
-import { DeleteExpenseGQL } from '../graphql/mutations/expense'
-import { ListCompanyExpensesGQL } from '../graphql/queries/expense'
-import { UserContext } from '../context/UserContext'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
 import { NavigationActions } from 'react-navigation'
-import { convertToLocalTime } from '../Functions'
+
+import Header from '../../Components/Header/DetailsScreenHeader'
+import GenericDetailsComponent from '../../Components/Generic/Details'
+import { DeleteExpenseGQL } from '../../graphql/mutations/expense'
+import { ListCompanyExpensesGQL } from '../../graphql/queries/expense'
+import { UserContext } from '../../context/UserContext'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { convertToLocalTime } from '../../Functions'
 
 interface IProps {
   navigation: any

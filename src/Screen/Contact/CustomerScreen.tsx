@@ -1,4 +1,5 @@
 import * as React from 'react'
+
 import { CompanyContactGQL } from '../../graphql/queries/contact'
 import Header from '../../Components/Header/BaseHeader'
 import GenericListIndex from '../../Components/Generic/ListIndex'

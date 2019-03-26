@@ -1,20 +1,21 @@
 import React from 'react'
 import { Alert } from 'react-native'
-import FormStepperContainer from '../Container/Form/StepperContainer'
-import AppSpinner from '../Components/Spinner'
-import Auth from '../services/auth'
-import { CreateRecipt } from '../graphql/mutations/order'
 import { Mutation } from 'react-apollo'
+import { NavigationActions } from 'react-navigation'
+
+import FormStepperContainer from '../../Container/Form/StepperContainer'
+import AppSpinner from '../../Components/Spinner'
+import Auth from '../../services/auth'
+import { CreateRecipt } from '../../graphql/mutations/order'
 import {
   ListCompanySalesGQL,
   ListCompanyInvoicesGQL
-} from '../graphql/queries/order'
-import { UserContext } from '../context/UserContext'
-import { parseFieldErrors } from '../Functions'
-import { NavigationActions } from 'react-navigation'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
-import setAppAnalytics from '../Functions/setAppAnalytics'
+} from '../../graphql/queries/order'
+import { UserContext } from '../../context/UserContext'
+import { parseFieldErrors } from '../../Functions'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import setAppAnalytics from '../../Functions/setAppAnalytics'
 
 interface IProps {
   navigation: any

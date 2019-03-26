@@ -1,17 +1,17 @@
 import React, { Component } from 'react'
-
-import FormStepperContainer from '../Container/Form/StepperContainer'
-import { UpsertBankGQL } from '../graphql/mutations/business'
-import { ListCompanyBanksGQL } from '../graphql/queries/business'
 import { Mutation } from 'react-apollo'
-import { parseFieldErrors } from '../Functions'
-import AppSpinner from '../Components/Spinner'
-import { NG_Banks } from '../utilities/data/picker-lists'
-import Auth from '../services/auth'
 import { NavigationActions } from 'react-navigation'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
-import { UserContext } from '../context/UserContext'
+
+import FormStepperContainer from '../../Container/Form/StepperContainer'
+import { UpsertBankGQL } from '../../graphql/mutations/business'
+import { ListCompanyBanksGQL } from '../../graphql/queries/business'
+import { parseFieldErrors } from '../../Functions'
+import AppSpinner from '../../Components/Spinner'
+import { NG_Banks } from '../../utilities/data/picker-lists'
+import Auth from '../../services/auth'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any

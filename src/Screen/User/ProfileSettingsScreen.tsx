@@ -1,11 +1,11 @@
 import React, { PureComponent } from 'react'
-import SettingsList from '../Components/SettingsList'
-import Header from '../Components/Header/BaseHeader'
 import gql from 'graphql-tag'
-// import Auth from '../services/auth'
-import { UserContext } from '../context/UserContext'
-import { persistor } from '../client'
-import { disableMobileDeviceNotification } from '../services/MobileDevice'
+
+import SettingsList from '../../Components/SettingsList'
+import Header from '../../Components/Header/BaseHeader'
+import { UserContext } from '../../context/UserContext'
+import { persistor } from '../../client'
+import { disableMobileDeviceNotification } from '../../services/MobileDevice'
 
 interface IProps {
   navigation: any

@@ -2,23 +2,26 @@ import React, { Component } from 'react'
 import { StyleSheet, View, Alert, TouchableOpacity } from 'react-native'
 import { CheckBox, ActionSheet, Content } from 'native-base'
 import { Mutation } from 'react-apollo'
-
-import SelectStatusAtom from '../Atom/SelectStatusAtom'
-import { color } from '../Style/Color'
-import Header from '../Components/Header/DetailsScreenHeader'
-import ButtonAtom from '../Atom/Form/ButtonAtom'
-import Preferences from '../services/preferences'
 import { NavigationActions } from 'react-navigation'
-import { ORDER_STATUSES, orderStateMachine } from '../utilities/data/statuses'
-import { capitalize } from '../Functions'
+
+import SelectStatusAtom from '../../Atom/SelectStatusAtom'
+import { color } from '../../Style/Color'
+import Header from '../../Components/Header/DetailsScreenHeader'
+import ButtonAtom from '../../Atom/Form/ButtonAtom'
+import Preferences from '../../services/preferences'
+import {
+  ORDER_STATUSES,
+  orderStateMachine
+} from '../../utilities/data/statuses'
+import { capitalize } from '../../Functions'
 import {
   UpdateSaleOrderStatusGQL,
   UpdatePurchaseOrderStatusGQL
-} from '../graphql/mutations/order'
-import AppSpinner from '../Components/Spinner'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
-import { MediumText, RegularText, DemiBoldText } from '../Atom/TextAtom'
+} from '../../graphql/mutations/order'
+import AppSpinner from '../../Components/Spinner'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { MediumText, RegularText, DemiBoldText } from '../../Atom/TextAtom'
 
 var BUTTONS = ['Yes, Change', 'Cancel']
 var DESTRUCTIVE_INDEX = 0

@@ -1,9 +1,10 @@
 import * as React from 'react'
-import Header from '../Components/Header/BaseHeader'
-import GenericListIndex from '../Components/Generic/ListIndex'
-import { ListCompanySalesGQL } from '../graphql/queries/order'
 import moment from 'moment'
-import { convertToLocalTime } from '../Functions'
+
+import Header from '../../Components/Header/BaseHeader'
+import GenericListIndex from '../../Components/Generic/ListIndex'
+import { ListCompanySalesGQL } from '../../graphql/queries/order'
+import { convertToLocalTime } from '../../Functions'
 
 interface IProps {
   navigation: any

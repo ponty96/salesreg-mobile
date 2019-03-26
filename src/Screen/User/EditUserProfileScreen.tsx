@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
-import { UpdateUserGQL } from '../graphql/mutations/user'
-import Auth from '../services/auth'
 import { Mutation } from 'react-apollo'
-import { parseFieldErrors } from '../Functions'
-import AppSpinner from '../Components/Spinner'
-import FormStepperContainer from '../Container/Form/StepperContainer'
 import { NavigationActions } from 'react-navigation'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
-import { UserContext } from '../context/UserContext'
+
+import { UpdateUserGQL } from '../../graphql/mutations/user'
+import Auth from '../../services/auth'
+import { parseFieldErrors } from '../../Functions'
+import AppSpinner from '../../Components/Spinner'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any

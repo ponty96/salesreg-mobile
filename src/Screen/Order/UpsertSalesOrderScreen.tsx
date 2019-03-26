@@ -4,23 +4,23 @@ import moment from 'moment'
 import { Alert } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
-import FormStepperContainer from '../Container/Form/StepperContainer'
-import AppSpinner from '../Components/Spinner'
-import Auth from '../services/auth'
-import { UpsertSaleOrder } from '../graphql/mutations/order'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
+import AppSpinner from '../../Components/Spinner'
+import Auth from '../../services/auth'
+import { UpsertSaleOrder } from '../../graphql/mutations/order'
 import {
   ListCompanySalesGQL,
   ListCompanyInvoicesGQL
-} from '../graphql/queries/order'
-import { CompanyCustomersGQL } from '../graphql/queries/contact'
-import { parseFieldErrors } from '../Functions'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
-import setAppAnalytics from '../Functions/setAppAnalytics'
-import { color } from '../Style/Color'
-import { Countries } from '../utilities/data/picker-lists'
-import { UserContext } from '../context/UserContext'
-import { RegularText } from '../Atom/TextAtom'
+} from '../../graphql/queries/order'
+import { CompanyCustomersGQL } from '../../graphql/queries/contact'
+import { parseFieldErrors } from '../../Functions'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import setAppAnalytics from '../../Functions/setAppAnalytics'
+import { color } from '../../Style/Color'
+import { Countries } from '../../utilities/data/picker-lists'
+import { UserContext } from '../../context/UserContext'
+import { RegularText } from '../../Atom/TextAtom'
 
 interface IProps {
   navigation: any

@@ -1,19 +1,20 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
-import { parseFieldErrors } from '../Functions'
+import { NavigationActions } from 'react-navigation'
+
+import { parseFieldErrors } from '../../Functions'
 import {
   Countries,
   Currencies,
   geCurrencyFromCountry
-} from '../utilities/data/picker-lists'
-import AppSpinner from '../Components/Spinner'
-import { UpdateCompanyGQL } from '../graphql/mutations/business'
-import Auth from '../services/auth'
-import FormStepperContainer from '../Container/Form/StepperContainer'
-import { NavigationActions } from 'react-navigation'
-import { NotificationBanner } from '../Components/NotificationBanner'
-import configureNotificationBanner from '../Functions/configureNotificationBanner'
-import { UserContext } from '../context/UserContext'
+} from '../../utilities/data/picker-lists'
+import AppSpinner from '../../Components/Spinner'
+import { UpdateCompanyGQL } from '../../graphql/mutations/business'
+import Auth from '../../services/auth'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { UserContext } from '../../context/UserContext'
 
 interface IProps {
   navigation: any

@@ -1,7 +1,8 @@
 import * as React from 'react'
-import Header from '../Components/Header/BaseHeader'
-import GenericListIndex from '../Components/Generic/ListIndex'
-import { ListCompanyExpensesGQL } from '../graphql/queries/expense'
+
+import Header from '../../Components/Header/BaseHeader'
+import GenericListIndex from '../../Components/Generic/ListIndex'
+import { ListCompanyExpensesGQL } from '../../graphql/queries/expense'
 
 interface IProps {
   navigation: any
@@ -38,7 +39,9 @@ export default class ExpensesScreen extends React.Component<IProps, IState> {
       <React.Fragment>
         <Header
           title="Expenses"
-          onPressRightIcon={() => this.props.navigation.navigate("Notifications")}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
           showSearchBar
           searchBar={{

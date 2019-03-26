@@ -1,8 +1,9 @@
 import React, { Component } from 'react'
-import Header from '../Components/Header/DetailsScreenHeader'
-import GenericProfileDetails from '../Components/Generic/ProfileDetails'
-import { Countries } from '../utilities/data/picker-lists'
-import Auth from '../services/auth'
+
+import Header from '../../Components/Header/DetailsScreenHeader'
+import GenericProfileDetails from '../../Components/Generic/ProfileDetails'
+import { Countries } from '../../utilities/data/picker-lists'
+import Auth from '../../services/auth'
 
 interface IProps {
   navigation: any

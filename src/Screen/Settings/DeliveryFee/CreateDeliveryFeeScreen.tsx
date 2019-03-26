@@ -1,18 +1,19 @@
 import React, { Component } from 'react'
+import { NavigationActions } from 'react-navigation'
+import { Mutation, Query  } from 'react-apollo'
+
+
 import FormStepperContainer, {
   FormStep
 } from '../../../Container/Form/StepperContainer'
 import { CreateDeliveryFee } from '../../../graphql/mutations/business'
 import { ListCompanyDeliveryFees } from '../../../graphql/queries/business'
-import { Mutation } from 'react-apollo'
 import { parseFieldErrors } from '../../../Functions'
 import AppSpinner from '../../../Components/Spinner'
-import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../../../Components/NotificationBanner'
 import configureNotificationBanner from '../../../Functions/configureNotificationBanner'
 import { UserContext } from '../../../context/UserContext'
 import { States } from '../../../utilities/data/picker-lists'
-import { Query } from 'react-apollo'
 import { CompanyAllowsNationwideDeliveryGQL } from '../../../graphql/queries/order'
 
 interface IProps {

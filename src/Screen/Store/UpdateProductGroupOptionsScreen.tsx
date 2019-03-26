@@ -1,6 +1,7 @@
 import React, { PureComponent } from 'react'
-
 import { Mutation } from 'react-apollo'
+import { NavigationActions } from 'react-navigation'
+
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
@@ -8,7 +9,6 @@ import { ListCompanyProductsGQL } from '../../graphql/queries/store'
 import { UpdateProductGroupOptionsGQL } from '../../graphql/mutations/store'
 import { UserContext } from '../../context/UserContext'
 import { SearchOptionsByNameGQL } from '../../graphql/queries/store'
-import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 

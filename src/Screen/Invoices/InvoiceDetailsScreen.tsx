@@ -1,15 +1,16 @@
 import * as React from 'react'
 import { View, StyleSheet, Share } from 'react-native'
 import { Content } from 'native-base'
-import Header from '../Components/Header/DetailsScreenHeader'
-import ListItemAtom from '../Atom/ListItem/ListItemAtom'
-import { color } from '../Style/Color'
-import { numberWithCommas } from '../Functions/numberWithCommas'
-import ProfileListAtom from '../Atom/ListItem/ExpandableListItemAtom'
-import FabAtom from '../Atom/FabAtom'
-import QueryLoader from '../Components/QueryLoader'
-import { GetInvoiceByIdGQL } from '../graphql/queries/order'
-import { convertToLocalTime } from '../Functions'
+
+import Header from '../../Components/Header/DetailsScreenHeader'
+import ListItemAtom from '../../Atom/ListItem/ListItemAtom'
+import { color } from '../../Style/Color'
+import { numberWithCommas } from '../../Functions/numberWithCommas'
+import ProfileListAtom from '../../Atom/ListItem/ExpandableListItemAtom'
+import FabAtom from '../../Atom/FabAtom'
+import QueryLoader from '../../Components/QueryLoader'
+import { GetInvoiceByIdGQL } from '../../graphql/queries/order'
+import { convertToLocalTime } from '../../Functions'
 
 interface IProps {
   navigation: any
