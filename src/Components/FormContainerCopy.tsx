@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Dimensions } from 'react-native'
+import { StyleSheet, View, Dimensions } from 'react-native'
+
+import { RegularText } from '../Atom/TextAtom'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -15,7 +17,9 @@ class FormContainerAtom extends React.Component<IProps, any> {
   render() {
     return (
       <View style={[styles.mainView, this.props.containerStyle]}>
-        <Text style={styles.headerText}>{this.props.headerText}</Text>
+        <RegularText style={styles.headerText}>
+          {this.props.headerText}
+        </RegularText>
         <View
           style={[
             this.props.inputForTwo ? styles.inputViewForTwo : styles.inputView,

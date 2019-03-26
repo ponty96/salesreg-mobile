@@ -1,19 +1,21 @@
 import React, { PureComponent } from 'react'
-import { color } from '../../Style/Color'
-import ProfileListAtom from '../../Atom/ListItem/ExpandableListItemAtom'
 import {
   StyleSheet,
   View,
   FlatList,
   Alert,
-  Text,
   TouchableOpacity
 } from 'react-native'
 import { Icon, ActionSheet } from 'native-base'
 import { Mutation } from 'react-apollo'
 import { DocumentNode } from 'graphql'
+
+import { color } from '../../Style/Color'
+import ProfileListAtom from '../../Atom/ListItem/ExpandableListItemAtom'
 import AppSpinner from '../../Components/Spinner'
 import CachedImageAtom from '../../Atom/CachedImageAtom'
+import { BoldText, RegularText } from '../../Atom/TextAtom'
+
 var BUTTONS = ['Yes, delete', 'Cancel']
 var DESTRUCTIVE_INDEX = 0
 var CANCEL_INDEX = 1
@@ -181,8 +183,12 @@ export default class GenericProfileDetails extends PureComponent<IProps> {
     } else if (index == 1) {
       return (
         <View style={styles.textView}>
-          <Text style={styles.headerText}>{this.props.headerText}</Text>
-          <Text style={styles.headerSubText}>{this.props.headerSubText}</Text>
+          <RegularText style={styles.headerText}>
+            {this.props.headerText}
+          </RegularText>
+          <BoldText style={styles.headerSubText}>
+            {this.props.headerSubText}
+          </BoldText>
         </View>
       )
     } else {
@@ -217,13 +223,11 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 16,
-    fontFamily: 'AvenirNext-Regular',
     color: '#fff',
     padding: 0
   },
   headerSubText: {
     fontSize: 24,
-    fontFamily: 'AvenirNext-Bold',
     color: '#fff',
     marginTop: 6,
     padding: 0

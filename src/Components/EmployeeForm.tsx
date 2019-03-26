@@ -3,15 +3,16 @@ import {
   View,
   ScrollView,
   StyleSheet,
-  Text,
   Dimensions,
   KeyboardAvoidingView
 } from 'react-native'
 import { Icon } from 'native-base'
+
 import InputAtom from '../Atom/Form/InputAtom'
 import { color } from '../Style/Color'
 import SaveCancelButton from '../Container/SaveCancelButton'
 import FormInputViewAtom from '../Atom/FormInputViewAtom'
+import { RegularText } from '../Atom/TextAtom'
 
 interface IProps {
   navigation: any
@@ -111,9 +112,9 @@ class EmployeeForm extends Component<IProps, IState> {
             </View>
           </FormInputViewAtom>
           {this.displayState()}
-          <Text style={styles.blueT} onPress={this.onPress}>
+          <RegularText style={styles.blueT} onPress={this.onPress}>
             +Add Email or Phone
-          </Text>
+          </RegularText>
         </ScrollView>
         <SaveCancelButton
           navigation={this.props.navigation}

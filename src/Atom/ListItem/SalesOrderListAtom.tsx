@@ -1,8 +1,10 @@
 import React from 'react'
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
+
 import { color } from '../../Style/Color'
 import { Left, Right, Icon } from 'native-base'
 import CachedImageAtom from '../CachedImageAtom'
+import { RegularText, DemiBoldText } from '../TextAtom'
 
 export interface DataProps {
   firstTopText: string
@@ -123,7 +125,7 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
     if (firstTopText || bottomLeftFirstText || bottomLeftSecondText) {
       return (
         <Left style={[styles.leftWrapper, this.props.leftStyle]}>
-          <Text
+          <DemiBoldText
             numberOfLines={1}
             ellipsizeMode="tail"
             style={[
@@ -133,7 +135,7 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
             ]}
           >
             {firstTopText}
-          </Text>
+          </DemiBoldText>
           {this.renderBottomTexts(bottomLeftFirstText, bottomLeftSecondText)}
         </Left>
       )
@@ -143,12 +145,12 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
     if (bottomLeftFirstText || bottomLeftSecondText) {
       return (
         <View style={styles.wrapperForTopLeft}>
-          <Text style={[styles.text, styles.bottom]}>
+          <RegularText style={[styles.text, styles.bottom]}>
             {bottomLeftFirstText}
-          </Text>
-          <Text style={[styles.time, styles.bottom]}>
+          </RegularText>
+          <RegularText style={[styles.time, styles.bottom]}>
             {bottomLeftSecondText}
-          </Text>
+          </RegularText>
         </View>
       )
     }
@@ -175,7 +177,7 @@ export default class SalesOrderListAtom extends React.PureComponent<IProps> {
   }
   renderRightAlignedText = (text, styles): any => {
     if (text) {
-      return <Text style={styles}>{text}</Text>
+      return <RegularText style={styles}>{text}</RegularText>
     }
   }
 }

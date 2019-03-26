@@ -7,23 +7,23 @@ import {
   ImageBackground,
   Dimensions,
   Linking,
-  Text,
   TouchableWithoutFeedback
 } from 'react-native'
 import Circle from 'react-native-progress/Circle'
-import { color } from '../Style/Color'
 import RNThumbnail from 'react-native-thumbnail'
+import { connect } from 'react-redux'
+import Config from 'react-native-config'
+import { Icon } from 'native-base'
+
+import { color } from '../Style/Color'
+import Auth from '../services/auth'
 import {
   uploadMedia,
   deleteMedia,
   resetMediaStore,
   removeUrlFromUploadedMedia
 } from '../store/actions/cron'
-import { connect } from 'react-redux'
-import Config from 'react-native-config'
-import { Icon } from 'native-base'
-
-import Auth from '../services/auth'
+import { MediumText, BoldText } from './TextAtom'
 
 interface IProps {
   onMediaSet?: (response) => void
@@ -287,7 +287,7 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
             type="MaterialIcons"
             style={styles.whiteIcon}
           />
-          <Text style={styles.retryText}>Retry</Text>
+          <BoldText style={styles.retryText}>Retry</BoldText>
         </View>
       </TouchableOpacity>
     )
@@ -457,17 +457,16 @@ class MediaUploadHandlerAtom extends React.PureComponent<IProps, IState> {
                   </View>
                 </TouchableWithoutFeedback>
               </View>
-              <Text
+              <MediumText
                 style={{
                   color: color.button,
                   alignSelf: 'center',
                   marginTop: 8,
-                  fontSize: 14,
-                  fontFamily: 'AvenirNext-Medium'
+                  fontSize: 14
                 }}
               >
                 {filename.replace(/.pdf/gi, '')}
-              </Text>
+              </MediumText>
             </React.Fragment>
           ) : null
         })}

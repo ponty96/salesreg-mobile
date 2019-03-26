@@ -3,26 +3,27 @@ import {
   View,
   StyleSheet,
   SectionList,
-  Text,
   ActivityIndicator,
   Platform
 } from 'react-native'
+import { Query } from 'react-apollo'
+import * as _ from 'lodash'
+import moment from 'moment'
+import { DocumentNode } from 'graphql'
+
 import FabAtom from '../../Atom/FabAtom'
 import EmptyList from '../../Components/EmptyList'
 import SalesOrderListAtom, {
   DataProps
 } from '../../Atom/ListItem/SalesOrderListAtom'
 import { color } from '../../Style/Color'
-import { Query } from 'react-apollo'
 import AppSpinner from '../../Components/Spinner'
-import * as _ from 'lodash'
-import moment from 'moment'
 import { FetchPolicy } from 'apollo-client'
-import { DocumentNode } from 'graphql'
 import SubHeaderAtom from '../Header/SubHeaderAtom'
 import { UserContext } from '../../context/UserContext'
 import ErrorViewAtom from '../../Atom/ErrorViewAtom'
 import { observableStore } from '../../client'
+import { DemiBoldText, RegularText } from '../../Atom/TextAtom'
 
 interface SubHeaderProps {
   screen: string
@@ -156,7 +157,9 @@ class GenericListIndex extends React.Component<IProps, IState> {
           this.props.sectionHeaderContainerStyle
         ])}
       >
-        <Text style={styles.footerText}>{moment(section.date).calendar()}</Text>
+        <RegularText style={styles.footerText}>
+          {moment(section.date).calendar()}
+        </RegularText>
       </View>
     )
   }
@@ -172,10 +175,12 @@ class GenericListIndex extends React.Component<IProps, IState> {
       return (
         <View>
           <View style={styles.footerPallete}>
-            <Text style={styles.footerPalleteText}>TOTAL SALES</Text>
-            <Text style={styles.footerPalleteText}>
+            <DemiBoldText style={styles.footerPalleteText}>
+              TOTAL SALES
+            </DemiBoldText>
+            <DemiBoldText style={styles.footerPalleteText}>
               {`\u20A6 ${totalSales}`}
-            </Text>
+            </DemiBoldText>
           </View>
           {/* TODO Calculate profit, considering service */}
         </View>
@@ -473,7 +478,6 @@ const styles = StyleSheet.create({
     backgroundColor: color.secondary
   },
   footerText: {
-    fontFamily: 'AvenirNext-Regular',
     fontSize: 12,
     textAlign: 'center',
     borderRadius: 5
@@ -501,7 +505,6 @@ const styles = StyleSheet.create({
   },
   footerPalleteText: {
     color: '#fff',
-    fontFamily: 'AvenirNext-DemiBold',
     fontSize: 16
   },
   loadMore: {

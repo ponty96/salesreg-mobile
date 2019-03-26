@@ -1,10 +1,12 @@
 import React, { Component } from 'react'
-import { StyleSheet, View, Text, Alert, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, Alert, TouchableOpacity } from 'react-native'
+import { CheckBox, ActionSheet, Content } from 'native-base'
+import { Mutation } from 'react-apollo'
+
 import SelectStatusAtom from '../Atom/SelectStatusAtom'
 import { color } from '../Style/Color'
 import Header from '../Components/Header/DetailsScreenHeader'
 import ButtonAtom from '../Atom/Form/ButtonAtom'
-import { CheckBox, ActionSheet } from 'native-base'
 import Preferences from '../services/preferences'
 import { NavigationActions } from 'react-navigation'
 import { ORDER_STATUSES, orderStateMachine } from '../utilities/data/statuses'
@@ -13,11 +15,10 @@ import {
   UpdateSaleOrderStatusGQL,
   UpdatePurchaseOrderStatusGQL
 } from '../graphql/mutations/order'
-import { Mutation } from 'react-apollo'
 import AppSpinner from '../Components/Spinner'
-import { Content } from 'native-base'
 import { NotificationBanner } from '../Components/NotificationBanner'
 import configureNotificationBanner from '../Functions/configureNotificationBanner'
+import { MediumText, RegularText, DemiBoldText } from '../Atom/TextAtom'
 
 var BUTTONS = ['Yes, Change', 'Cancel']
 var DESTRUCTIVE_INDEX = 0
@@ -65,35 +66,35 @@ const OrderStatusHint = (props: IOrderStatusProps) => {
       }}
     >
       <Content>
-        <Text style={[styles.boldText, { marginVertical: 20 }]}>
+        <DemiBoldText style={[styles.boldText, { marginVertical: 20 }]}>
           {`Keep ${firstName}'s mind at rest concerning ${parseGender(
             props.gender
           )} order.`.trim()}
-        </Text>
+        </DemiBoldText>
         <View style={styles.section}>
           <View style={styles.dot} />
-          <Text style={[styles.text, { marginTop: -4 }]}>
+          <RegularText style={[styles.text, { marginTop: -4 }]}>
             Indicate the status of this order by touching the circles on each
             status
-          </Text>
+          </RegularText>
         </View>
         <View style={styles.section}>
           <View style={styles.dot} />
-          <Text style={[styles.text, { marginTop: -4 }]}>
+          <RegularText style={[styles.text, { marginTop: -4 }]}>
             Press the blue Done button when you are finished
-          </Text>
+          </RegularText>
         </View>
         <View style={styles.section}>
           <View style={styles.dot} />
-          <Text style={[styles.text, { marginTop: -4 }]}>
+          <RegularText style={[styles.text, { marginTop: -4 }]}>
             {`${firstName} order will be sent to her`}
-          </Text>
+          </RegularText>
         </View>
         <View style={styles.section}>
           <View style={styles.dot} />
-          <Text style={[styles.text, { marginTop: -4 }]}>
+          <RegularText style={[styles.text, { marginTop: -4 }]}>
             You can always update the status in the order details page
-          </Text>
+          </RegularText>
         </View>
 
         <TouchableOpacity style={[styles.row]} onPress={props.hideHintCheck}>
@@ -102,7 +103,9 @@ const OrderStatusHint = (props: IOrderStatusProps) => {
             style={styles.checkBox}
             onPress={props.hideHintCheck}
           />
-          <Text style={styles.dismissText}>Don't show this message again</Text>
+          <MediumText style={styles.dismissText}>
+            Don't show this message again
+          </MediumText>
         </TouchableOpacity>
       </Content>
       <View style={styles.footer}>
@@ -191,9 +194,9 @@ class OrderStatusScreen extends Component<IProps, IState> {
               }
             ]}
           >
-            <Text style={styles.headerText}>
+            <DemiBoldText style={styles.headerText}>
               {this.state.orderStatus.label}
-            </Text>
+            </DemiBoldText>
             {ORDER_STATUSES.map(orderStatus => (
               <SelectStatusAtom
                 key={orderStatus.value}
@@ -337,8 +340,7 @@ const styles = StyleSheet.create({
   hintText: {
     fontSize: 18,
     color: color.textColor,
-    paddingVertical: 16,
-    fontFamily: 'AvenirNext-Medium'
+    paddingVertical: 16
   },
   dotIcon: {
     fontSize: 25,
@@ -358,7 +360,6 @@ const styles = StyleSheet.create({
     height: 22
   },
   dismissText: {
-    fontFamily: 'AvenirNext-Medium',
     fontSize: 16,
     color: color.textColor,
     marginLeft: 16
@@ -378,7 +379,6 @@ const styles = StyleSheet.create({
   /** Borrowed style */
   boldText: {
     fontSize: 22,
-    fontFamily: 'AvenirNext-DemiBold',
     marginBottom: 16,
     // textAlign: 'justify',
     marginRight: 30,
@@ -386,7 +386,6 @@ const styles = StyleSheet.create({
     padding: 16
   },
   text: {
-    fontFamily: 'AvenirNext-Regular',
     fontSize: 17,
     textAlign: 'justify',
     marginRight: 30,

@@ -6,13 +6,13 @@ import {
   Dimensions,
   StyleSheet,
   View,
-  Text
 } from 'react-native'
 import { Icon } from 'native-base'
 
 import { _Store } from './Root'
 import StatusBar from './StatusBar'
 import { INotificationBannerProps, IBannerPosition } from './typeDefinition'
+import { DemiBoldText, BoldText } from '../../Atom/TextAtom'
 
 interface ICurrentVisibleProperties extends INotificationBannerProps {
   bannerPosition?: IBannerPosition
@@ -376,8 +376,8 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
                 alignSelf: 'center'
               }}
             >
-              <Text style={styles.title}>{title}</Text>
-              <Text style={styles.subtitle}>{subtitle}</Text>
+              <BoldText style={styles.title}>{title}</BoldText>
+              <DemiBoldText style={styles.subtitle}>{subtitle}</DemiBoldText>
             </View>
           </View>
           {style == 'danger' && (
@@ -457,12 +457,10 @@ const styles = StyleSheet.create({
   },
   title: {
     color: '#fff',
-    fontFamily: 'AvenirNext-Bold',
     fontSize: 16
   },
   subtitle: {
     color: '#fff',
-    fontFamily: 'AvenirNext-DemiBold',
     fontSize: 14
   }
 })

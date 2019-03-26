@@ -1,7 +1,8 @@
 import React from 'react'
-import { Text } from 'react-native'
 import SplashScreen from 'react-native-splash-screen'
 import { DrawerNavigator, StackNavigator } from 'react-navigation'
+
+import { RegularText } from '../Atom/TextAtom'
 import Header from '../Components/Header/BaseHeader'
 // import AppSpinner from '../Components/Spinner'
 
@@ -320,10 +321,10 @@ export default class Routes extends React.Component<IProps, IState> {
           console.log('data', data)
           console.log('loading', loading)
           if (loading) {
-            return <Text>{`Loading data here`}</Text>
+            return <RegularText>{`Loading data here`}</RegularText>
           }
           if (error) {
-            return <Text>{`Error! ${error.message}`}</Text>
+            return <RegularText>{`Error! ${error.message}`}</RegularText>
           }
           if (!data.authenticate && display) {
             console.log('Oya ', loading)

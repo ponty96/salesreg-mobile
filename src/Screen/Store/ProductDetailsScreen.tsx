@@ -2,13 +2,14 @@ import React, { PureComponent } from 'react'
 import {
   View,
   StyleSheet,
-  Text,
   Share,
   TouchableOpacity,
   TouchableWithoutFeedback,
   Linking
 } from 'react-native'
 import { Icon } from 'native-base'
+import Config from 'react-native-config'
+import { NavigationActions } from 'react-navigation'
 
 import { color } from '../../Style/Color'
 import Header from '../../Components/Header/DetailsScreenHeader'
@@ -20,10 +21,9 @@ import { UserContext } from '../../context/UserContext'
 import CachedImageAtom from '../../Atom/CachedImageAtom'
 import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
-import Config from 'react-native-config'
-import { NavigationActions } from 'react-navigation'
 import QueryLoader from '../../Components/QueryLoader'
 import { GetProductById } from '../../graphql/queries/store'
+import { RegularText, MediumText } from '../../Atom/TextAtom'
 
 interface IProps {
   navigation?: any
@@ -129,7 +129,11 @@ class ProductDetailsScreen extends PureComponent<IProps> {
       },
       {
         section: 'Description',
-        body: <Text style={styles.descriptionText}>{product.description}</Text>,
+        body: (
+          <RegularText style={styles.descriptionText}>
+            {product.description}
+          </RegularText>
+        ),
         hideBody:
           product.description && product.description.length > 0 ? false : true
       }
@@ -225,13 +229,13 @@ class ProductDetailsScreen extends PureComponent<IProps> {
             style={{ flexDirection: 'row', alignItems: 'center' }}
           >
             <Icon type="Ionicons" name="md-share" style={styles.headerIcon} />
-            <Text style={styles.rightNavText}>Share</Text>
+            <MediumText style={styles.rightNavText}>Share</MediumText>
           </TouchableOpacity>
           <TouchableOpacity
             style={{ flexDirection: 'row', alignItems: 'center' }}
             onPress={this.onPressAddProductVariant}
           >
-            <Text style={styles.rightNavText}>Add variants</Text>
+            <MediumText style={styles.rightNavText}>Add variants</MediumText>
             <Icon
               name="chevron-small-right"
               type="Entypo"
@@ -349,7 +353,6 @@ const styles = StyleSheet.create({
   rightNavText: {
     color: color.button,
     fontSize: 16,
-    fontFamily: 'AvenirNext-Medium',
     marginLeft: 8
   },
   headerIcon: {
@@ -373,7 +376,6 @@ const styles = StyleSheet.create({
     textAlign: 'justify',
     marginHorizontal: 14,
     paddingBottom: 10,
-    fontFamily: 'AvenirNext-Regular',
     color: color.textColor
   }
 })

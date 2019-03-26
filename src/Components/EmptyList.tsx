@@ -1,5 +1,7 @@
 import * as React from 'react'
-import { StyleSheet, View, Text } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+
+import { DemiBoldText, MediumText, RegularText } from '../Atom/TextAtom'
 import { color } from '../Style/Color'
 
 interface Empty {
@@ -14,27 +16,32 @@ const emptyList = (prop: { type: Empty }) => {
   if (prop.type.verifyMainList === 'main') {
     return (
       <View style={styles.view}>
-        <Text style={styles.headerText}>{prop.type.headerText}</Text>
-        <Text style={styles.normalText}>
+        <DemiBoldText style={styles.headerText}>
+          {prop.type.headerText}
+        </DemiBoldText>
+        <MediumText style={styles.normalText}>
           {prop.type.Text}{' '}
-          <Text style={styles.blueText}>blue round button</Text>
-        </Text>
+          <MediumText style={styles.blueText}>blue round button</MediumText>
+        </MediumText>
       </View>
     )
   } else if (prop.type.verifyMainList === 'employee') {
     return (
       <View>
-        <Text>
-          No employees. Press the <Text>blue</Text> button to {prop.type.Text}
-        </Text>
+        <RegularText>
+          No employees. Press the <RegularText>blue</RegularText> button to{' '}
+          {prop.type.Text}
+        </RegularText>
       </View>
     )
   } else {
     return (
       <View style={styles.view}>
-        <Text style={[styles.headerText]}>{prop.type.headerText}</Text>
+        <DemiBoldText style={styles.headerText}>
+          {prop.type.headerText}
+        </DemiBoldText>
         {prop.type.Text && (
-          <Text style={[styles.normalText]}>{prop.type.Text}</Text>
+          <MediumText style={styles.normalText}>{prop.type.Text}</MediumText>
         )}
         {prop.type.body}
       </View>

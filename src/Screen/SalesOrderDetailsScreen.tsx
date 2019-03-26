@@ -1,15 +1,17 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, Text, TouchableOpacity } from 'react-native'
+import { View, StyleSheet, TouchableOpacity } from 'react-native'
 import { Icon } from 'native-base'
+import moment from 'moment'
+
 import Header from '../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../Components/Generic/Details'
-import moment from 'moment'
 import Preferences from '../services/preferences'
 import { UserContext } from '../context/UserContext'
 import { color } from '../Style/Color'
 import QueryLoader from '../Components/QueryLoader'
 import { GetSaleByIdGQL } from '../graphql/queries/order'
 import { convertToLocalTime } from '../Functions'
+import { RegularText } from '../Atom/TextAtom'
 
 interface IProps {
   navigation: any
@@ -115,7 +117,7 @@ class SalesOrderDetailsScreen extends Component<IProps> {
           }
         >
           <View style={styles.invoicebuttomContainer}>
-            <Text style={styles.invoiceText}>Invoice</Text>
+            <RegularText style={styles.invoiceText}>Invoice</RegularText>
             <Icon
               name="chevron-small-right"
               type="Entypo"
@@ -145,8 +147,7 @@ const styles = StyleSheet.create({
   },
   invoiceText: {
     fontSize: 16,
-    color: color.button,
-    fontFamily: 'AvenirNext-Regular'
+    color: color.button
   },
   invoiceIcon: {
     fontSize: 35,
