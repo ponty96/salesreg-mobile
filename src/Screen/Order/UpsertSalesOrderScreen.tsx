@@ -65,7 +65,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     items: [
       {
         productId: null,
-        quantity: '',
+        quantity: '1',
         name: '',
         unitPrice: '0.00'
       }
