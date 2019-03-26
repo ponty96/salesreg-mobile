@@ -7,7 +7,7 @@ import Header from '../../Components/Header/DetailsScreenHeader'
 import { UserContext } from '../../context/UserContext'
 import { color } from '../../Style/Color'
 import FabAtom from '../../Atom/FabAtom'
-import { numberWithCommas } from '../../Functions'
+import { numberWithCommas } from '../../Functions/numberWithCommas';
 
 interface IProps {
   navigation: any
@@ -49,7 +49,7 @@ class SpecialOfferDetailsScreen extends Component<IProps> {
         section: item.product.name,
         value: `\u20A6 ${numberWithCommas(item.priceSlashTo)}(${
           item.maxQuantity
-        })`
+          })`
       }))
     )
   }
@@ -62,7 +62,7 @@ class SpecialOfferDetailsScreen extends Component<IProps> {
           title: specialOffer.title,
           message: `Save BIG on ${specialOffer.shareLink} with ${
             this.props.user.company.title
-          }`,
+            }`,
           url: `${specialOffer.shareLink}`
         },
         { dialogTitle: specialOffer.title }

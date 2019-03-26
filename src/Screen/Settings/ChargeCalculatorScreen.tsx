@@ -6,8 +6,8 @@ import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import Header from '../../Components/Header/BaseHeader'
 import { UserContext } from '../../context/UserContext'
 import { color } from '../../Style/Color'
-import { numberWithCommas } from '../../Functions'
 import { MediumText, BoldText } from '../../Atom/TextAtom'
+import { numberWithCommas } from '../../Functions/numberWithCommas';
 
 interface IProps {
   navigation: any
