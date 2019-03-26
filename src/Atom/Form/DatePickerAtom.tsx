@@ -1,8 +1,10 @@
 import * as React from 'react'
 import DatePicker from 'react-native-datepicker'
 import { StyleSheet, View } from 'react-native'
+import { Item, Label, Icon } from 'native-base'
+
+import { RegularText, DemiBoldText } from '../TextAtom'
 import { color } from '../../Style/Color'
-import { Item, Label, Text, Icon } from 'native-base'
 
 interface IProps {
   error: string
@@ -24,7 +26,11 @@ export default class DatePickerAtom extends React.Component<IProps> {
 
   renderError = () => {
     if (this.props.error) {
-      return <Text style={styles.underneathText}>{this.props.error}</Text>
+      return (
+        <RegularText style={styles.underneathText}>
+          {this.props.error}
+        </RegularText>
+      )
     }
     return null
   }
@@ -50,8 +56,12 @@ export default class DatePickerAtom extends React.Component<IProps> {
               paddingBottom: 0
             }}
           >
-            {this.props.required && <Text style={styles.required}>*</Text>}
-            <Text style={styles.labelText}>{this.props.label}</Text>
+            {this.props.required && (
+              <RegularText style={styles.required}>*</RegularText>
+            )}
+            <DemiBoldText style={styles.labelText}>
+              {this.props.label}
+            </DemiBoldText>
           </Label>
           <DatePicker
             style={styles.datepickerCont}

@@ -1,8 +1,9 @@
 import React from 'react'
-import { View, StyleSheet, Text, TouchableWithoutFeedback } from 'react-native'
+import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
 import { Icon } from 'native-base'
 
 import { color } from '../../Style/Color'
+import { RegularText } from '../../Atom/TextAtom'
 
 interface IProps {
   label: string
@@ -35,7 +36,7 @@ class ListItemAtom extends React.PureComponent<IProps, IState> {
         <View style={{ backgroundColor: '#fff', paddingHorizontal: 10 }}>
           {value.map((val, index) => (
             <View key={index} style={styles.row}>
-              <Text style={styles.normalText}>{val}</Text>
+              <RegularText style={styles.normalText}>{val}</RegularText>
             </View>
           ))}
         </View>
@@ -53,9 +54,9 @@ class ListItemAtom extends React.PureComponent<IProps, IState> {
     >
       <View>
         <View style={[styles.wrapper, this.props.listItemStyle]}>
-          <Text style={[styles.text, this.props.labelStyle]}>
+          <RegularText style={[styles.text, this.props.labelStyle]}>
             {this.props.label}
-          </Text>
+          </RegularText>
           {typeof this.props.value == 'object' && this.props.value !== null ? (
             <Icon
               name={
@@ -75,13 +76,13 @@ class ListItemAtom extends React.PureComponent<IProps, IState> {
               }}
             >
               {this.props.quantity ? (
-                <Text style={{ color: color.textColor }}>
+                <RegularText style={{ color: color.textColor }}>
                   {this.props.quantity}
-                </Text>
+                </RegularText>
               ) : (
-                <Text />
+                <RegularText />
               )}
-              <Text
+              <RegularText
                 style={[
                   styles.text,
                   this.props.rightTextStyle,
@@ -91,7 +92,7 @@ class ListItemAtom extends React.PureComponent<IProps, IState> {
               >
                 {this.props.value}
                 {this.props.icon}
-              </Text>
+              </RegularText>
             </View>
           )}
         </View>
@@ -103,9 +104,9 @@ class ListItemAtom extends React.PureComponent<IProps, IState> {
   renderWithoutToggle = () => (
     <View>
       <View style={[styles.wrapper, this.props.listItemStyle]}>
-        <Text style={[styles.text, this.props.labelStyle]}>
+        <RegularText style={[styles.text, this.props.labelStyle]}>
           {this.props.label}
-        </Text>
+        </RegularText>
         {typeof this.props.value == 'object' && this.props.value !== null ? (
           <Icon
             name={this.state.bodyViewState ? 'ios-arrow-up' : 'ios-arrow-down'}
@@ -123,13 +124,13 @@ class ListItemAtom extends React.PureComponent<IProps, IState> {
             }}
           >
             {this.props.quantity ? (
-              <Text style={{ color: color.textColor }}>
+              <RegularText style={{ color: color.textColor }}>
                 {this.props.quantity}
-              </Text>
+              </RegularText>
             ) : (
-              <Text />
+              <RegularText />
             )}
-            <Text
+            <RegularText
               style={[
                 styles.text,
                 this.props.rightTextStyle,
@@ -139,7 +140,7 @@ class ListItemAtom extends React.PureComponent<IProps, IState> {
             >
               {this.props.value}
               {this.props.icon}
-            </Text>
+            </RegularText>
           </View>
         )}
       </View>

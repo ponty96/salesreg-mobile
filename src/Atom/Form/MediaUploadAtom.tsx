@@ -3,16 +3,17 @@ import {
   StyleSheet,
   View,
   Linking,
-  Text,
   Alert,
   TouchableWithoutFeedback,
   TouchableOpacity
 } from 'react-native'
 import { Icon, ActionSheet } from 'native-base'
 import ImagePicker from 'react-native-image-crop-picker'
+import Config from 'react-native-config'
+
+import { RegularText } from '../TextAtom'
 import MediaUploadHandlerAtom from './../MediaUploadHandlerAtom'
 import CachedImageAtom from '../CachedImageAtom'
-import Config from 'react-native-config'
 
 interface IProps {
   medias?: string[]
@@ -221,7 +222,7 @@ export default class MediaUploadAtom extends React.PureComponent<
 
   renderErrorText = () => {
     return this.props.error ? (
-      <Text style={styles.errorText}>{this.props.error}</Text>
+      <RegularText style={styles.errorText}>{this.props.error}</RegularText>
     ) : null
   }
 
@@ -263,7 +264,6 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginTop: 0,
     paddingLeft: 3,
-    fontFamily: 'AvenirNext-Regular',
     paddingVertical: 0
   },
   mediaOverlay: {

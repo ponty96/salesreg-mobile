@@ -1,11 +1,12 @@
 import React from 'react'
-import { StyleSheet, View, Text, Image } from 'react-native'
+import { StyleSheet, View, Image } from 'react-native'
 import { Icon } from 'native-base'
+import ViewOverflow from 'react-native-view-overflow'
 
 import OnboardingContainer from '../../Container/OnboardingContainer'
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import { color } from '../../Style/Color'
-import ViewOverflow from 'react-native-view-overflow'
+import { BoldText, DemiBoldText, MediumText } from '../../Atom/TextAtom'
 
 interface CheckedItemProps {
   isChecked?: boolean | false
@@ -38,7 +39,7 @@ const CheckBox = (props: { isChecked: boolean }): JSX.Element =>
 const CheckedItem = (props: CheckedItemProps): JSX.Element => (
   <View style={styles.checkBoxWrapper}>
     {props.isVisible && <CheckBox isChecked={props.isChecked} />}
-    <Text style={styles.checkItemText}>{props.text}</Text>
+    <BoldText style={styles.checkItemText}>{props.text}</BoldText>
   </View>
 )
 
@@ -60,8 +61,10 @@ export default class SignUpProcess extends React.PureComponent<IProps> {
               resizeMode="stretch"
             />
           </ViewOverflow>
-          <Text style={styles.header}>{this.props.header}</Text>
-          <Text style={styles.description}>{this.props.description}</Text>
+          <BoldText style={styles.header}>{this.props.header}</BoldText>
+          <MediumText style={styles.description}>
+            {this.props.description}
+          </MediumText>
           {this.props.checkedItems.map((checkItem: CheckedItemProps, index) => (
             <CheckedItem
               key={index}
@@ -79,7 +82,9 @@ export default class SignUpProcess extends React.PureComponent<IProps> {
           </View>
           {this.props.showLogin && (
             <React.Fragment>
-              <Text style={styles.haveAccount}>Already have an account?</Text>
+              <DemiBoldText style={styles.haveAccount}>
+                Already have an account?
+              </DemiBoldText>
               <ButtonAtom
                 btnText="LOGIN"
                 transparent={true}
@@ -112,12 +117,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     fontSize: 26,
     color: '#fff',
-    fontFamily: 'AvenirNext-Bold',
     paddingVertical: 28
   },
   description: {
     alignSelf: 'flex-start',
-    fontFamily: 'AvenirNext-Medium',
     fontSize: 18,
     color: '#fff',
     marginBottom: 15
@@ -147,7 +150,6 @@ const styles = StyleSheet.create({
     color: '#fff',
     fontSize: 24,
     marginTop: -3,
-    fontFamily: 'AvenirNext-Bold',
     flexWrap: 'wrap',
     textAlign: 'left',
     alignSelf: 'flex-start',
@@ -161,7 +163,6 @@ const styles = StyleSheet.create({
     marginTop: 32,
     textAlign: 'center',
     color: '#fff',
-    fontSize: 14,
-    fontFamily: 'AvenirNext-DemiBold'
+    fontSize: 14
   }
 })

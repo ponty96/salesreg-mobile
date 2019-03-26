@@ -1,5 +1,7 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+
+import { MediumText, BoldText } from './TextAtom'
 import { color } from '../Style/Color'
 
 interface CanvasProps {
@@ -10,13 +12,13 @@ interface CanvasProps {
 
 export const GreenCanvas = (props: CanvasProps) => (
   <View style={styles.detailsHeader}>
-    <Text style={styles.title}>{props.title}</Text>
+    <MediumText style={styles.title}>{props.title}</MediumText>
     {props.subText && (
-      <Text style={styles.amount}>
+      <BoldText style={styles.amount}>
         {props.hideNairaSymbolInGreenCanvas
           ? props.subText
           : `\u20A6 ${props.subText}`}
-      </Text>
+      </BoldText>
     )}
   </View>
 )
@@ -30,14 +32,12 @@ const styles = StyleSheet.create({
   },
   title: {
     fontSize: 18,
-    fontFamily: 'AvenirNext-Medium',
     paddingBottom: 8,
     color: '#fff',
     textAlign: 'center'
   },
   amount: {
     fontSize: 22,
-    fontFamily: 'AvenirNext-Bold',
     color: '#fff',
     textAlign: 'center'
   }

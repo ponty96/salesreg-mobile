@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, StyleSheet, View } from 'react-native'
+import { StyleSheet, View } from 'react-native'
 
 import InputAtom from '../../Atom/Form/InputAtom'
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
@@ -7,6 +7,7 @@ import Header from '../../Components/Header/BaseHeader'
 import { UserContext } from '../../context/UserContext'
 import { color } from '../../Style/Color'
 import { numberWithCommas } from '../../Functions'
+import { MediumText, BoldText } from '../../Atom/TextAtom'
 
 interface IProps {
   navigation: any
@@ -65,21 +66,21 @@ class ChargeCalculatorScreen extends React.PureComponent<IProps> {
           keyboardType="numeric"
           getValue={profit => this.setState({ profit })}
         />
-        <Text style={styles.text}>
+        <MediumText style={styles.text}>
           Payment Charge: {this.state.paymentCharge}
-        </Text>
-        <Text style={styles.text}>
+        </MediumText>
+        <MediumText style={styles.text}>
           Service Charge: {Number(this.props.user.company.saleCharge) * 100}%
-        </Text>
-        <Text style={styles.text}>
+        </MediumText>
+        <MediumText style={styles.text}>
           You need to charge{' '}
-          <Text style={styles.boldened}>
+          <BoldText>
             {'\u20A6'}
             {numberWithCommas(
               Number(this.state.amountNeededToCharge.toFixed(2))
             )}
-          </Text>
-        </Text>
+          </BoldText>
+        </MediumText>
         <View style={styles.buttonContainer}>
           <ButtonAtom
             textStyle={{ color: '#fff' }}
@@ -111,13 +112,9 @@ const styles = StyleSheet.create({
     paddingHorizontal: 16
   },
   text: {
-    fontFamily: 'AvenirNext-Medium',
     color: color.textColor,
     fontSize: 15,
     marginTop: 20
-  },
-  boldened: {
-    fontFamily: 'AvenirNext-Bold'
   },
   buttonContainer: {
     flexDirection: 'row',

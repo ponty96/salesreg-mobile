@@ -28,10 +28,12 @@
  */
 
 import React from 'react'
-import { Text, StyleSheet, View, BackHandler, Alert } from 'react-native'
+import {  StyleSheet, View, BackHandler, Alert } from 'react-native'
 import { Container, Form } from 'native-base'
-import { color } from '../../Style/Color'
 import { connect } from 'react-redux'
+
+import { RegularText, DemiBoldText } from '../../Atom/TextAtom'
+import { color } from '../../Style/Color'
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import FormHeader from '../../Components/Header/FormHeader'
 import InputAtom from '../../Atom/Form/InputAtom'
@@ -197,24 +199,24 @@ class FormStepperContainer extends React.PureComponent<IProps, IState> {
           scrollEventThrottle={400}
           contentContainerStyle={styles.container}
         >
-          <Text style={styles.headerText}>
+          <DemiBoldText style={styles.headerText}>
             {steps[this.state.currentStep - 1]['stepTitle']}
-          </Text>
+          </DemiBoldText>
           {steps[this.state.currentStep - 1]['stepHint'] && (
-            <Text style={styles.stepHint}>
+            <RegularText style={styles.stepHint}>
               {steps[this.state.currentStep - 1]['stepHint']}
-            </Text>
+            </RegularText>
           )}
           <Form>{this.renderCurrentStepFormFields()}</Form>
         </KeyboardAwareScrollView>
 
         <View style={[styles.footer, btnViewStyle]}>
-          <Text
+          <DemiBoldText
             onPress={() => this.props.handleBackPress()}
             style={styles.cancelText}
           >
             Cancel
-          </Text>
+          </DemiBoldText>
           <ButtonAtom
             btnText={`${steps[this.state.currentStep - 1]['buttonTitle'] ||
               'Next'}`}
@@ -774,12 +776,10 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     fontSize: 22,
     color: '#000',
-    fontFamily: 'AvenirNext-DemiBold',
     marginBottom: 0,
     marginTop: 16
   },
   stepHint: {
-    fontFamily: 'AvenirNext-Regular',
     fontSize: 16,
     color: color.textColor,
     marginTop: 8,
@@ -803,7 +803,6 @@ const styles = StyleSheet.create({
     backgroundColor: '#fff'
   },
   cancelText: {
-    fontFamily: 'AvenirNext-DemiBold',
     fontSize: 16,
     color: color.button
   }

@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { Item, Input, Label, Text, Textarea } from 'native-base'
+import { Item, Input, Label, Textarea } from 'native-base'
 import { View, StyleSheet, Platform, Keyboard } from 'react-native'
+
+import { RegularText, DemiBoldText } from '../TextAtom'
 import { color } from '../../Style/Color'
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 
@@ -77,8 +79,12 @@ class InputAtom extends React.Component<IProps, IState> {
                 fontSize: 14
               }}
             >
-              {this.props.required && <Text style={styles.required}>*</Text>}
-              <Text style={styles.labelText}>{this.props.label}</Text>
+              {this.props.required && (
+                <RegularText style={styles.required}>*</RegularText>
+              )}
+              <DemiBoldText style={styles.labelText}>
+                {this.props.label}
+              </DemiBoldText>
             </Label>
             <View
               style={{ flexDirection: 'row', width: '100%', marginBottom: 4 }}
@@ -122,8 +128,12 @@ class InputAtom extends React.Component<IProps, IState> {
                 fontSize: 14
               }}
             >
-              {this.props.required && <Text style={styles.required}>*</Text>}
-              <Text style={styles.labelText}>{this.props.label}</Text>
+              {this.props.required && (
+                <RegularText style={styles.required}>*</RegularText>
+              )}
+              <DemiBoldText style={styles.labelText}>
+                {this.props.label}
+              </DemiBoldText>
             </Label>
             <Textarea
               rowSpan={5}
@@ -148,18 +158,17 @@ class InputAtom extends React.Component<IProps, IState> {
   renderUnderNeathText = () => {
     if (this.props.error || this.props.underneathText) {
       return (
-        <Text
+        <RegularText
           style={[
             styles.underneathText,
             this.props.underneathStyle,
             {
-              fontFamily: 'AvenirNext-Regular',
               color: this.props.error ? 'red' : color.principal
             }
           ]}
         >
           {this.props.error || this.props.underneathText}
-        </Text>
+        </RegularText>
       )
     } else {
       return null
@@ -176,7 +185,6 @@ const styles = StyleSheet.create({
     top: 0
   },
   labelText: {
-    fontFamily: 'AvenirNext-DemiBold',
     padding: 0,
     fontSize: 16,
     color: color.textColor
@@ -191,7 +199,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 0,
     marginTop: 2,
-    fontFamily: 'AvenirNext-Regular',
     paddingVertical: 12
   },
   inputText: {

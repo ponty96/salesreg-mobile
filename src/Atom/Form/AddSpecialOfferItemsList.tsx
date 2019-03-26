@@ -1,7 +1,8 @@
 import React from 'react'
-import { View, StyleSheet, Text } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
+import { RegularText } from '../TextAtom'
 import InputAtom from './InputAtom'
 import AsyncPickerAtom from './AsyncPickerAtom'
 import ButtonAtom from './ButtonAtom'
@@ -134,7 +135,7 @@ export default class AddSpecialOfferItemsList extends React.PureComponent<
 
   renderErrorText = () => {
     return this.props.error ? (
-      <Text style={styles.errorText}>{this.props.error}</Text>
+      <RegularText style={styles.errorText}>{this.props.error}</RegularText>
     ) : null
   }
 
@@ -211,7 +212,6 @@ const styles = StyleSheet.create({
   },
   text: {
     fontSize: 15,
-    color: color.textColor,
-    fontFamily: 'AvenirNext-DemiBold'
+    color: color.textColor
   }
 })

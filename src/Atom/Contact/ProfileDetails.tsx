@@ -1,8 +1,10 @@
 import React, { PureComponent } from 'react'
+import { StyleSheet, View, FlatList } from 'react-native'
+
 import { color } from '../../Style/Color'
 import ProfileListAtom from '../../Atom/ListItem/ExpandableListItemAtom'
-import { StyleSheet, View, FlatList, Text } from 'react-native'
 import CachedImageAtom from '../CachedImageAtom'
+import { RegularText, BoldText } from '../TextAtom'
 
 interface Section {
   section: string
@@ -48,8 +50,12 @@ export default class ProfileDetails extends PureComponent<IProps> {
     } else if (index == 1) {
       return (
         <View style={styles.textView}>
-          <Text style={styles.headerText}>{this.props.headerText}</Text>
-          <Text style={styles.headerSubText}>{this.props.headerSubText}</Text>
+          <RegularText style={styles.headerText}>
+            {this.props.headerText}
+          </RegularText>
+          <BoldText style={styles.headerSubText}>
+            {this.props.headerSubText}
+          </BoldText>
         </View>
       )
     } else {
@@ -77,13 +83,11 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 16,
-    fontFamily: 'AvenirNext-Regular',
     color: '#fff',
     padding: 0
   },
   headerSubText: {
     fontSize: 24,
-    fontFamily: 'AvenirNext-Bold',
     color: '#fff',
     marginTop: 6,
     padding: 0

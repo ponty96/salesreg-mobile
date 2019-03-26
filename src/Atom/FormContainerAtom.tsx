@@ -1,20 +1,24 @@
-import * as React from 'react';
-import { StyleSheet, View, Text, Dimensions } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { StyleSheet, View, Dimensions } from 'react-native'
+
+import { DemiBoldText } from '../Atom/TextAtom'
+import { color } from '../Style/Color'
 
 interface IProps {
   style?: object
   containerStyle?: object
-  headerText?: string;
-  change?: boolean;
-  inputForTwo?: boolean;
+  headerText?: string
+  change?: boolean
+  inputForTwo?: boolean
 }
 
 class FormContainerAtom extends React.Component<IProps, any> {
   render() {
     return (
       <View style={[styles.mainView, this.props.containerStyle]}>
-        <Text style={styles.headerText}>{this.props.headerText}</Text>
+        <DemiBoldText style={styles.headerText}>
+          {this.props.headerText}
+        </DemiBoldText>
         <View
           style={
             this.props.inputForTwo ? styles.inputViewForTwo : styles.inputView
@@ -23,11 +27,11 @@ class FormContainerAtom extends React.Component<IProps, any> {
           {this.props.children}
         </View>
       </View>
-    );
+    )
   }
 }
 
-export default FormContainerAtom;
+export default FormContainerAtom
 
 const styles = StyleSheet.create({
   mainView: {
@@ -65,4 +69,4 @@ const styles = StyleSheet.create({
     color: color.label,
     fontFamily: 'SourceSansPro-Semibold'
   }
-});
+})

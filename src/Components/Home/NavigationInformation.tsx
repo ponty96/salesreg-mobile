@@ -1,7 +1,9 @@
 import React from 'react'
-import { View, Text, StyleSheet, Dimensions } from 'react-native'
-import { color } from '../../Style/Color'
+import { View, StyleSheet, Dimensions } from 'react-native'
 import { Content } from 'native-base'
+
+import { RegularText } from '../../Atom/TextAtom'
+import { color } from '../../Style/Color'
 
 interface IProps {
   username: String
@@ -12,42 +14,44 @@ const NavigationalInformation = (props: IProps) => (
     <Content>
       <View style={styles.container}>
         <View style={styles.homeBackground}>
-          <Text style={styles.homeText}>Welcome {props.username}!</Text>
+          <RegularText style={styles.homeText}>
+            Welcome {props.username}!
+          </RegularText>
         </View>
-        <Text style={[styles.text, { marginVertical: 20 }]}>
+        <RegularText style={[styles.text, { marginVertical: 20 }]}>
           Tap the menu icon on the top left hand corner of the screen to find
           all the menu options you will be needing:
-        </Text>
+        </RegularText>
         <View style={styles.section}>
           <View style={styles.dot} />
-          <Text style={[styles.text, { marginTop: -4 }]}>
+          <RegularText style={[styles.text, { marginTop: -4 }]}>
             Scroll down to find the settings menu where you can edit your
             profile and manage your webstore
-          </Text>
+          </RegularText>
         </View>
         <View style={styles.section}>
           <View style={styles.dot} />
-          <Text style={[styles.text, { marginTop: -4 }]}>
+          <RegularText style={[styles.text, { marginTop: -4 }]}>
             Use the products menu to manage your inventory
-          </Text>
+          </RegularText>
         </View>
         <View style={styles.section}>
           <View style={styles.dot} />
-          <Text style={[styles.text, { marginTop: -4 }]}>
+          <RegularText style={[styles.text, { marginTop: -4 }]}>
             Manage your customers' activities in the customer menu.
-          </Text>
+          </RegularText>
         </View>
         <View style={styles.section}>
           <View style={styles.dot} />
-          <Text style={[styles.text, { marginTop: -4 }]}>
+          <RegularText style={[styles.text, { marginTop: -4 }]}>
             Process your sales using the sales and the invoice menu
-          </Text>
+          </RegularText>
         </View>
         <View style={styles.section}>
           <View style={styles.dot} />
-          <Text style={[styles.text, { marginTop: -4 }]}>
+          <RegularText style={[styles.text, { marginTop: -4 }]}>
             Expense and banking menus help with your finance
-          </Text>
+          </RegularText>
         </View>
       </View>
     </Content>
@@ -77,7 +81,6 @@ const styles = StyleSheet.create({
     fontFamily: 'SourceSansPro-Bold'
   },
   text: {
-    fontFamily: 'AvenirNext-Regular',
     fontSize: 17,
     textAlign: 'justify',
     marginRight: 30,

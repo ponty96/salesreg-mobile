@@ -1,17 +1,17 @@
 import React, { PureComponent } from 'react'
-import { color } from '../../Style/Color'
-import GenericProfileDetails from '../Generic/ProfileDetails'
 import moment from 'moment'
 import { Icon } from 'native-base'
-
 import { StyleSheet, TouchableOpacity, View, Linking } from 'react-native'
+import { NavigationActions } from 'react-navigation'
+
 import { numberWithCommas } from '../../Functions/numberWithCommas'
 import { DeleteContact } from '../../graphql/mutations/contact'
 import { CompanyContactGQL } from '../../graphql/queries/contact'
 import { UserContext } from '../../context/UserContext'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 import { NotificationBanner } from '../../Components/NotificationBanner'
-import { NavigationActions } from 'react-navigation'
+import { color } from '../../Style/Color'
+import GenericProfileDetails from '../Generic/ProfileDetails'
 
 interface IProps {
   contact: any
