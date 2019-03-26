@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
 import {
-  Text,
   StyleSheet,
   View,
   TouchableWithoutFeedback,
   TouchableOpacity
 } from 'react-native'
+import { Icon } from 'native-base'
+
 import { color } from '../../Style/Color'
-import Icon from '../Icon'
+import { RegularText, DemiBoldText } from '../../Atom/TextAtom'
 
 interface IProps {
   section: string
@@ -29,12 +30,16 @@ class ProfileListAtom extends Component<IProps, IState> {
   }
   rightRightComponent = (value: any) => {
     if (this.props.type == 'currency') {
-      return <Text style={styles.priceText}>{this.props.value}</Text>
+      return (
+        <RegularText style={styles.priceText}>{this.props.value}</RegularText>
+      )
     } else if (this.props.type == 'button') {
       return (
         <TouchableOpacity onPress={this.props.onPress}>
           <View style={styles.buttonRow}>
-            <Text style={styles.rightLabel}>{this.props.value}</Text>
+            <RegularText style={styles.rightLabel}>
+              {this.props.value}
+            </RegularText>
             <Icon
               name="chevron-small-right"
               type="Entypo"
@@ -45,7 +50,9 @@ class ProfileListAtom extends Component<IProps, IState> {
         </TouchableOpacity>
       )
     } else if (typeof value == 'string') {
-      return <Text style={styles.normalText}>{this.props.value}</Text>
+      return (
+        <RegularText style={styles.normalText}>{this.props.value}</RegularText>
+      )
     } else if (
       this.props.body ||
       (typeof value == 'object' && value !== null)
@@ -60,7 +67,7 @@ class ProfileListAtom extends Component<IProps, IState> {
           }}
         />
       ) : (
-        <Text style={styles.notProvidedText}>None Provided</Text>
+        <RegularText style={styles.notProvidedText}>None Provided</RegularText>
       )
     } else return <View />
   }
@@ -74,8 +81,7 @@ class ProfileListAtom extends Component<IProps, IState> {
         <View style={{ backgroundColor: '#fff', paddingHorizontal: 10 }}>
           {value.map((val, index) => (
             <View key={index} style={styles.row}>
-              {/* <Text style={styles.normalText}>{key}</Text> */}
-              <Text style={styles.normalText}>{val}</Text>
+              <RegularText style={styles.normalText}>{val}</RegularText>
             </View>
           ))}
         </View>
@@ -116,7 +122,9 @@ class ProfileListAtom extends Component<IProps, IState> {
                   />
                 </View>
               )}
-              <Text style={styles.label}>{this.props.section}</Text>
+              <DemiBoldText style={styles.label}>
+                {this.props.section}
+              </DemiBoldText>
             </View>
             {this.rightRightComponent(this.props.value)}
           </View>
@@ -161,12 +169,10 @@ const styles = StyleSheet.create({
   },
   label: {
     fontSize: 14,
-    fontFamily: 'AvenirNext-DemiBold',
     color: color.textColor
   },
   normalText: {
     fontSize: 14,
-    fontFamily: 'AvenirNext-Regular',
     color: color.textColor
   },
   row: {
@@ -179,13 +185,11 @@ const styles = StyleSheet.create({
   },
   priceText: {
     fontSize: 14,
-    fontFamily: 'AvenirNext-Regular',
     color: color.selling
   },
   notProvidedText: {
     fontSize: 14,
-    color: color.textColor,
-    fontFamily: 'AvenirNext-Regular'
+    color: color.textColor
   },
   buttonRow: {
     flexDirection: 'row',
@@ -193,8 +197,7 @@ const styles = StyleSheet.create({
   },
   rightLabel: {
     color: color.button,
-    fontSize: 14,
-    fontFamily: 'AvenirNext-Regular'
+    fontSize: 14
   },
   arrowIcon: {
     fontSize: 28,

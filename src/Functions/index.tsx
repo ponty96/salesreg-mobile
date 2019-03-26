@@ -17,12 +17,6 @@ export const capitalize = (word: string): string => {
   return word.charAt(0).toUpperCase() + word.substr(1)
 }
 
-export const numberWithCommas = (num: number) => {
-  const parts = num.toString().split('.')
-  parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ',')
-  return parts.join('.')
-}
-
 export const convertToLocalTime = (date: string, format: string) => {
   var ts = moment.utc(date)
   return ts.local().format(format)

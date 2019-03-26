@@ -1,8 +1,9 @@
 import * as React from 'react'
-import { Button } from 'native-base'
-import { Text, StyleSheet } from 'react-native'
+import { Button, Icon } from 'native-base'
+import { StyleSheet } from 'react-native'
+
+import { DemiBoldText } from '../TextAtom'
 import { color } from '../../Style/Color'
-import Icon from '../../Atom/Icon'
 
 interface IProps {
   btnText?: string
@@ -40,7 +41,7 @@ class ButtonAtom extends React.Component<IProps, any> {
         ]}
         onPress={this.props.onPress}
       >
-        <Text
+        <DemiBoldText
           style={[
             styles.text,
             styles[`${this.props.type}Text`],
@@ -48,7 +49,7 @@ class ButtonAtom extends React.Component<IProps, any> {
           ]}
         >
           {this.props.btnText}
-        </Text>
+        </DemiBoldText>
         {!this.props.hideIcon && (
           <Icon
             name={this.props.icon || 'ios-arrow-forward'}
@@ -86,7 +87,6 @@ const styles = StyleSheet.create({
     backgroundColor: color.button
   },
   text: {
-    fontFamily: 'AvenirNext-DemiBold',
     fontSize: 16,
     marginRight: 10
   },

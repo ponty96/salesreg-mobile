@@ -1,7 +1,9 @@
 import React from 'react'
-import { Text, StyleSheet, TouchableOpacity, View } from 'react-native'
+import { StyleSheet, TouchableOpacity, View } from 'react-native'
+
 import { color } from '../Style/Color'
 import RadioButton from './Form/SingeRadioButton'
+import { MediumText } from './TextAtom'
 
 const renderStatusIndicator = (bottomRightText: string): any => {
   let borderStyle: any = {
@@ -46,7 +48,7 @@ const SelectStatusAtom = (props: IProps): JSX.Element => {
           size={13}
           onPress={props.onPress}
         />
-        <Text style={styles.text}>{props.title}</Text>
+        <MediumText style={styles.text}>{props.title}</MediumText>
       </View>
     </TouchableOpacity>
   )

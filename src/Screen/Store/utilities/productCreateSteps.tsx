@@ -1,11 +1,12 @@
 import React from 'react'
+
+import { RegularText } from '../../../Atom/TextAtom'
 import {
   SearchOptionsByNameGQL,
   SearchProductGroupsByTitleGQL,
   SearchCategoriesByTitleGQL
 } from '../../../graphql/queries/store'
 import { FormStep } from '../../../Container/Form/StepperContainer'
-import { Text } from 'react-native'
 import { color } from '../../../Style/Color'
 
 interface OptionValue {
@@ -45,15 +46,15 @@ export const renderSelectOptionsFormStep = (name): FormStep => ({
         type: 'search-multi-picker',
         emptySection: {
           emptyText: (
-            <Text>
+            <RegularText>
               If you do not find the options you want, you may skip this field
               for now, and complete this form, then go to menu, and select{' '}
-              <Text style={{ color: color.button }}>
+              <RegularText style={{ color: color.button }}>
                 "settings > variant options"
-              </Text>{' '}
+              </RegularText>{' '}
               to create new options, then complete this field by editing this
               product's details.
-            </Text>
+            </RegularText>
           )
         },
         searchQuery: SearchOptionsByNameGQL,
@@ -142,15 +143,15 @@ export const renderCategoryStep = (type): FormStep => ({
         type: 'search-multi-picker',
         emptySection: {
           emptyText: (
-            <Text>
+            <RegularText>
               If you do not find the categories you want, you may skip this
               field for now, and complete this form, then go to menu, and select{' '}
-              <Text style={{ color: color.button }}>
+              <RegularText style={{ color: color.button }}>
                 "settings > categories"
-              </Text>{' '}
+              </RegularText>{' '}
               to create new categories, then complete this field by editing this
               product's details.
-            </Text>
+            </RegularText>
           )
         },
         searchQuery: SearchCategoriesByTitleGQL,

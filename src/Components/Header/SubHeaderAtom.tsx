@@ -1,7 +1,9 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, TouchableOpacity } from 'react-native'
+import { StyleSheet, View, TouchableOpacity } from 'react-native'
+import { Icon } from 'native-base'
+
 import { color } from '../../Style/Color'
-import Icon from '../../Atom/Icon'
+import { RegularText, MediumText } from '../../Atom/TextAtom'
 
 interface IProps {
   total?: any
@@ -30,12 +32,14 @@ class SubHeaderAtom extends React.Component<IProps, any> {
             type={this.props.iconType || 'Ionicons'}
             style={styles.cart}
           />
-          <Text style={styles.text}>{this.props.total}</Text>
+          <RegularText style={styles.text}>{this.props.total}</RegularText>
         </View>
         {this.props.rightLabel ? (
           <TouchableOpacity onPress={this.props.onPressArrow}>
             <View style={[styles.row, { marginRight: -7 }]}>
-              <Text style={styles.rightLabel}>{this.props.rightLabel}</Text>
+              <MediumText style={styles.rightLabel}>
+                {this.props.rightLabel}
+              </MediumText>
               <Icon
                 name="chevron-small-right"
                 type="Entypo"

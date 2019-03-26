@@ -1,12 +1,14 @@
 import React from 'react'
-import { Text, Modal, StyleSheet, Alert } from 'react-native'
-import { color } from '../Style/Color'
+import { Modal, StyleSheet, Alert } from 'react-native'
 import Rave from 'react-native-rave'
 import { Container } from 'native-base'
-import FormHeader from '../Components/Header/FormHeader'
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import Config from 'react-native-config'
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
+
+import { color } from '../Style/Color'
+import FormHeader from '../Components/Header/FormHeader'
 import { UserContext } from '../context/UserContext'
+import { DemiBoldText } from '../Atom/TextAtom'
 
 interface IProps {
   amount: number | string
@@ -81,9 +83,9 @@ class CardPaymentAtom extends React.PureComponent<IProps> {
             scrollEventThrottle={400}
             contentContainerStyle={styles.container}
           >
-            <Text style={styles.headerText}>
+            <DemiBoldText style={styles.headerText}>
               Let's sort out the payment for this order
-            </Text>
+            </DemiBoldText>
             <Rave
               amount={this.props.amount}
               country="NG"
@@ -130,7 +132,6 @@ const styles = StyleSheet.create({
     alignSelf: 'flex-start',
     fontSize: 22,
     color: '#000',
-    fontFamily: 'AvenirNext-DemiBold',
     marginBottom: 0,
     marginTop: 16
   }

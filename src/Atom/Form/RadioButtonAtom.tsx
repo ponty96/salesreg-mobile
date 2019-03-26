@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { Item, Label, Text } from 'native-base'
+import { Item, Label } from 'native-base'
 import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+
+import { RegularText, DemiBoldText } from '../TextAtom'
 import { color } from '../../Style/Color'
 
 interface IProps {
@@ -17,7 +19,7 @@ interface IProps {
 const Radio = (props: any) => (
   <TouchableWithoutFeedback onPress={props.onPress}>
     <View style={styles.radio}>
-      <Text style={[styles.radioText]}>{props.option}</Text>
+      <RegularText style={[styles.radioText]}>{props.option}</RegularText>
       <View style={[styles.circle, props.isSelected && styles.selected]} />
     </View>
   </TouchableWithoutFeedback>
@@ -43,8 +45,12 @@ export default class RadioButtonAtom extends React.PureComponent<IProps> {
               padding: 0
             }}
           >
-            {this.props.required && <Text style={styles.required}>*</Text>}
-            <Text style={styles.labelText}>{this.props.label}</Text>
+            {this.props.required && (
+              <RegularText style={styles.required}>*</RegularText>
+            )}
+            <DemiBoldText style={styles.labelText}>
+              {this.props.label}
+            </DemiBoldText>
           </Label>
           <View style={{ width: '100%' }}>
             {this.props.options.map((option, index: number) => [
@@ -74,18 +80,17 @@ export default class RadioButtonAtom extends React.PureComponent<IProps> {
   renderUnderNeathText = () => {
     if (this.props.error || this.props.underneathText) {
       return (
-        <Text
+        <RegularText
           style={[
             styles.underneathText,
             this.props.underneathStyle,
             {
-              fontFamily: 'AvenirNext-Regular',
               color: this.props.error ? 'red' : color.principal
             }
           ]}
         >
           {this.props.error || this.props.underneathText}
-        </Text>
+        </RegularText>
       )
     } else {
       return null
@@ -100,7 +105,6 @@ const styles = StyleSheet.create({
     top: 0
   },
   labelText: {
-    fontFamily: 'AvenirNext-DemiBold',
     padding: 0,
     fontSize: 16,
     color: color.textColor
@@ -115,7 +119,6 @@ const styles = StyleSheet.create({
     fontSize: 14,
     marginBottom: 0,
     marginTop: 2,
-    fontFamily: 'AvenirNext-Regular',
     paddingVertical: 12
   },
   radio: {
@@ -125,7 +128,6 @@ const styles = StyleSheet.create({
     paddingVertical: 18
   },
   radioText: {
-    fontFamily: 'AvenirNext-Regular',
     color: color.principal,
     fontSize: 16
   },

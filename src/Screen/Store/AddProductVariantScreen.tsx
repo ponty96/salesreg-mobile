@@ -1,5 +1,7 @@
 import React, { PureComponent } from 'react'
 import { Mutation } from 'react-apollo'
+import { NavigationActions } from 'react-navigation'
+
 import AppSpinner from '../../Components/Spinner'
 import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer, {
@@ -17,7 +19,6 @@ import {
   renderTagStep
 } from './utilities/productCreateSteps'
 import { UserContext } from '../../context/UserContext'
-import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 import setAppAnalytics from '../../Functions/setAppAnalytics'

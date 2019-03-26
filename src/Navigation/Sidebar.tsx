@@ -2,17 +2,18 @@ import React, { PureComponent } from 'react'
 import {
   ScrollView,
   View,
-  Text,
   Alert,
   TouchableOpacity,
   StyleSheet,
   Dimensions
 } from 'react-native'
 import { SafeAreaView } from 'react-navigation'
-import Icon from '../Atom/Icon'
+import { Icon } from 'native-base'
+
 import { color } from '../Style/Color'
 import Auth from '../services/auth'
 import { UserContext } from '../context/UserContext'
+import { RegularText, MediumText } from '../Atom/TextAtom'
 
 interface IProps {
   navigation: any
@@ -76,14 +77,9 @@ const SidebarItem = (prop: {
   return (
     <View>
       <View style={sideBarItemStyles.listHeader}>
-        <Text
-          style={[
-            sideBarItemStyles.title,
-            { fontFamily: 'AvenirNext-Regular' }
-          ]}
-        >
+        <RegularText style={[sideBarItemStyles.title]}>
           {prop.title}
-        </Text>
+        </RegularText>
       </View>
       {prop.categories.map((category: Category, key: number) => {
         return (
@@ -108,7 +104,7 @@ const SidebarItem = (prop: {
                   ]}
                 />
               </View>
-              <Text
+              <MediumText
                 style={[
                   sideBarItemStyles.category,
                   prop.activeRoute == category.routeName &&
@@ -116,7 +112,7 @@ const SidebarItem = (prop: {
                 ]}
               >
                 {category.title}
-              </Text>
+              </MediumText>
             </View>
           </TouchableOpacity>
         )
@@ -219,7 +215,7 @@ class SideBar extends PureComponent<IProps, IState> {
                   title: 'Customers',
                   routeName: 'Customers',
                   iconName: 'user',
-                  iconType: 'FontAwesome5'
+                  iconType: 'FontAwesome'
                 }
               ]}
             />

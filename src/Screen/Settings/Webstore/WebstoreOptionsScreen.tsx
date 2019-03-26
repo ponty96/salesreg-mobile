@@ -1,5 +1,6 @@
 import React from 'react'
 import { Linking } from 'react-native'
+
 import SettingsList from '../../../Components/SettingsList'
 import Header from '../../../Components/Header/BaseHeader'
 import { UserContext } from '../../../context/UserContext'

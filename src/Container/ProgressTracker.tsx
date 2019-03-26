@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StyleSheet, Text, Alert } from 'react-native'
+import { View, StyleSheet, Alert } from 'react-native'
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view'
 import { Form, Icon } from 'native-base'
 import { connect } from 'react-redux'
@@ -23,6 +23,7 @@ import AsyncPickerAtom from '../Atom/Form/AsyncPickerAtom'
 import AddRestockItemsList from '../Atom/Form/AddRestockItems'
 import { validateField, validateStep } from '../Functions/formStepperValidators'
 import { color } from '../Style/Color'
+import { DemiBoldText, MediumText } from '../Atom/TextAtom'
 
 interface FormStep extends IFormStep {
   onSave: () => void
@@ -475,15 +476,17 @@ class ProgressTracker extends React.PureComponent<IProps, IState> {
                   style={styles.iconStepText}
                 />
               ) : (
-                <Text style={styles.numberedStepText}>{i + 1}</Text>
+                <MediumText style={styles.numberedStepText}>{i + 1}</MediumText>
               )}
             </View>
-            <Text style={styles.stepTitle}>{step.stepTitle}</Text>
+            <DemiBoldText style={styles.stepTitle}>
+              {step.stepTitle}
+            </DemiBoldText>
           </View>
           <View style={styles.stepBody}>
             <View style={{ marginHorizontal: 25 }}>
               {step.stepHint && (
-                <Text style={styles.stepHint}>{step.stepHint}</Text>
+                <MediumText style={styles.stepHint}>{step.stepHint}</MediumText>
               )}
               {currentStep == i + 1 &&
                 step.formFields.map(this.parseFormFields)}
@@ -512,7 +515,9 @@ class ProgressTracker extends React.PureComponent<IProps, IState> {
           scrollEventThrottle={400}
           contentContainerStyle={styles.scrollContainer}
         >
-          <Text style={styles.headerText}>{this.props.title}</Text>
+          <DemiBoldText style={styles.headerText}>
+            {this.props.title}
+          </DemiBoldText>
           <Form>{this.renderCurrentStepFormFields()}</Form>
         </KeyboardAwareScrollView>
       </View>

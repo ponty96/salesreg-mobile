@@ -1,14 +1,16 @@
-import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import React from 'react'
+import { StyleSheet } from 'react-native'
+
+import { RegularText } from '../TextAtom'
 
 interface IProps {
-  errorText: any;
+  errorText: any
 }
 const FormErrorTextAtom = (props: IProps) => (
-  <Text style={styles.errorText}>{props.errorText}</Text>
-);
+  <RegularText style={styles.errorText}>{props.errorText}</RegularText>
+)
 
-export default FormErrorTextAtom;
+export default FormErrorTextAtom
 
 const styles = StyleSheet.create({
   errorText: {
@@ -18,4 +20,4 @@ const styles = StyleSheet.create({
     marginBottom: 25,
     marginTop: 2
   }
-});
+})

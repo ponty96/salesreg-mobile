@@ -1,4 +1,5 @@
 import React from 'react'
+
 import ActivitiesList from '../../Components/Contact/ActivitiesList'
 import Header from '../../Components/Header/DetailsScreenHeader'
 

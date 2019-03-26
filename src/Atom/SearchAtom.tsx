@@ -1,7 +1,7 @@
 import { StyleSheet, View } from 'react-native'
 import React from 'react'
-import { Item, Input } from 'native-base'
-import Icon from './Icon'
+import { Item, Input, Icon } from 'native-base'
+
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -36,6 +36,7 @@ export class SearchAtom extends React.PureComponent<IProps, IState> {
         <View style={{ marginLeft: 12, marginTop: 2 }}>
           <Icon
             name="ios-search"
+            type="Ionicons"
             style={{
               color: '#000',
               fontSize: 24,

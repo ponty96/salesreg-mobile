@@ -1,6 +1,8 @@
 import React from 'react'
-import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Mutation } from 'react-apollo'
+import { NavigationActions } from 'react-navigation'
+
+import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { parseFieldErrors } from '../../Functions'
 import AppSpinner from '../../Components/Spinner'
 import { UserContext } from '../../context/UserContext'
@@ -9,7 +11,6 @@ import {
   ListCompanySalesGQL,
   ListCompanyInvoicesGQL
 } from '../../graphql/queries/order'
-import { NavigationActions } from 'react-navigation'
 import { NotificationBanner } from '../../Components/NotificationBanner'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 import { convertToLocalTime } from '../../Functions'
