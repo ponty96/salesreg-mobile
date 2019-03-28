@@ -79,7 +79,7 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
 
   step1 = (): FormStep => {
     return {
-      stepTitle: `Let's now create a delivery fee`,
+      stepTitle: `Let's create a shipping zone`,
       formFields: [
         {
           label: 'Do you deliver nation wide?',
@@ -91,7 +91,7 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
         },
         this.state.deliversNationWide.toLowerCase() == 'yes'
           ? {
-              label: 'Whats your delivery charge?',
+              label: 'How much do you charge?',
               placeholder: '3000',
               name: 'fee',
               type: {
@@ -108,7 +108,7 @@ class CreateDeliveryFeeScreen extends Component<IProps, IState> {
 
   step2 = (): FormStep => {
     return {
-      stepTitle: "Let's now create a delivery fee",
+      stepTitle: "Let's create a shipping zone",
       formFields: [
         {
           label: 'What state is this delivery based on?',
