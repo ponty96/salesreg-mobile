@@ -1,18 +1,15 @@
 import React from 'react'
-import { View, StyleSheet, Dimensions } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import { Content } from 'native-base'
-
-import { RegularText } from '../../Atom/TextAtom'
-import { color } from '../../Style/Color'
 
 interface IProps {
   username: String
 }
 
 const NavigationalInformation = (props: IProps) => (
-  <View style={{ backgroundColor: '#fff', flex: 1 }}>
+  <View style={styles.container}>
     <Content>
-      <View style={styles.container}>
+      {/* <View style={styles.container}>
         <View style={styles.homeBackground}>
           <RegularText style={styles.homeText}>
             Welcome {props.username}!
@@ -53,7 +50,7 @@ const NavigationalInformation = (props: IProps) => (
             Expense and banking menus help with your finance
           </RegularText>
         </View>
-      </View>
+      </View> */}
     </Content>
   </View>
 )
@@ -61,42 +58,5 @@ const NavigationalInformation = (props: IProps) => (
 export default NavigationalInformation
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    paddingHorizontal: 16
-  },
-  homeBackground: {
-    backgroundColor: 'rgba(152,251,152, 0.2)', // #98FB98
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    marginTop: 16,
-    borderRadius: 3
-  },
-  homeText: {
-    color: color.selling,
-    fontSize: 30,
-    padding: 20,
-    textAlign: 'center',
-    fontFamily: 'SourceSansPro-Bold'
-  },
-  text: {
-    fontSize: 17,
-    textAlign: 'justify',
-    marginRight: 30,
-    color: color.textColor
-  },
-  dot: {
-    width: 8,
-    height: 8,
-    borderRadius: 4,
-    marginRight: 15,
-    backgroundColor: color.textColor
-  },
-  section: {
-    flexDirection: 'row',
-    marginBottom: 30,
-    marginRight: 30,
-    alignItems: 'flex-start'
-  }
+  container: { backgroundColor: '#eee', flex: 1 }
 })
