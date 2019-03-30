@@ -39,6 +39,8 @@ target 'salesreg' do
 
   pod 'CodePush', :path => '../node_modules/react-native-code-push'
 
+  pod 'RNSVG', :path => '../node_modules/react-native-svg'
+
   target 'salesregTests' do
     inherit! :search_paths
     # Pods for testing

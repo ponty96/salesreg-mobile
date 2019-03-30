@@ -65,7 +65,7 @@ class HomeScreen extends React.Component<IProps, IState> {
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
         />
         {this.state.display == 'homescreen' ? (
-          <NavigationalInformation username={this.state.username} />
+          <NavigationalInformation />
         ) : this.state.display == 'getting-started' ? (
           <GettingStarted
             onDone={() => this.setState({ display: 'homescreen' })}

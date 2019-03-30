@@ -58,6 +58,11 @@ export const color = {
   expiredoffer: basicColors.black,
   defaultNotificationColor: basicColors.orange,
 
+  ///graph color
+  backgroundGradientFrom: '#fff',
+  backgroundGradientTo: '#fff',
+  graphColor: '#999',
+
   pendingBgColor: '#F3F6D2',
   processedBgColor: '#FFEFD6',
   deliveringBgColor: '#D8F4FC',
