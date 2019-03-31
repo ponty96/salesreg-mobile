@@ -4,12 +4,14 @@ import { Content } from 'native-base'
 
 import OrderAnalytics from './Dashboard/OrderAnalytics'
 import SalesAnalytics from './Dashboard/SalesAnalytics'
+import VisitorsAnalytics from './Dashboard/VisitorsAnalytics'
 
 const NavigationalInformation = () => (
   <View style={styles.container}>
     <Content>
       <SalesAnalytics />
       <OrderAnalytics />
+      <VisitorsAnalytics />
     </Content>
   </View>
 )

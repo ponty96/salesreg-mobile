@@ -102,11 +102,6 @@ export default class SalesAnalytics extends React.PureComponent {
 
 const styles = StyleSheet.create({
   ...DashboardStyles,
-  productsText: {
-    marginTop: 2,
-    fontSize: 13,
-    color: '#bdbdbd'
-  },
   dueInvoiceContainer: {
     marginVertical: 15,
     paddingVertical: 15,

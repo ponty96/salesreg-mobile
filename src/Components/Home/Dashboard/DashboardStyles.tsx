@@ -6,6 +6,9 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     alignItems: 'center'
   },
+  redText: {
+    color: 'red'
+  },
   container: {
     marginVertical: 4,
     padding: 16,
@@ -26,6 +29,11 @@ const styles = StyleSheet.create({
   largeText: {
     marginTop: 2,
     fontSize: 20
+  },
+  productsText: {
+    marginTop: 2,
+    fontSize: 13,
+    color: '#bdbdbd'
   },
   chartStyle: { marginLeft: -16, marginTop: 10 }
 })

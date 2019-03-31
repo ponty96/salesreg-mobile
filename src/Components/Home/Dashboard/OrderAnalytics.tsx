@@ -43,11 +43,11 @@ export default class OrderAnalytics extends React.PureComponent {
         <DemiBoldText style={styles.largeText}>56</DemiBoldText>
         <View style={styles.row}>
           <Icon
-            style={styles.decreaseText}
+            style={styles.redText}
             name="ios-arrow-round-down"
             type="Ionicons"
           />
-          <MediumText style={[styles.decreaseText, { marginLeft: 5 }]}>
+          <MediumText style={[styles.redText, { marginLeft: 5 }]}>
             2.45%
           </MediumText>
         </View>
@@ -80,8 +80,5 @@ export default class OrderAnalytics extends React.PureComponent {
 }
 
 const styles = StyleSheet.create({
-  ...DashboardStyles,
-  decreaseText: {
-    color: 'red'
-  }
+  ...DashboardStyles
 })
