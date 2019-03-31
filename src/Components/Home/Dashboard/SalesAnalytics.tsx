@@ -6,6 +6,7 @@ import { LineChart } from 'react-native-chart-kit'
 import { MediumText, DemiBoldText } from '../../../Atom/TextAtom'
 import { color } from '../../../Style/Color'
 import DashboardStyles from './DashboardStyles'
+import { numberWithCommas } from '../../../Functions/numberWithCommas'
 
 const data = {
   labels: ['Mar 25', '26', '27', '28', '29'],
@@ -34,7 +35,9 @@ export default class SalesAnalytics extends React.PureComponent {
   renderDueInvoice = () => (
     <View style={styles.dueInvoiceContainer}>
       <MediumText style={styles.smallText}>DUE INVOICE</MediumText>
-      <DemiBoldText style={styles.largeText}>N12,930.89</DemiBoldText>
+      <DemiBoldText style={styles.largeText}>
+        {`\u20A6${numberWithCommas(12930.89)}`}{' '}
+      </DemiBoldText>
     </View>
   )
 
