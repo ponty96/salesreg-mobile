@@ -28,6 +28,15 @@ const styles = StyleSheet.create({
     shadowRadius: 3,
     shadowOpacity: 1.0
   },
+  loadingContainer: {
+    height: 300
+  },
+  emptyContainer: {
+    alignItems: 'center'
+  },
+  noDataText: {
+    fontSize: 14
+  },
   smallText: {
     fontSize: 12,
     color: color.textColor

@@ -2,27 +2,26 @@ import React from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
 import { Icon } from 'native-base'
 import { LineChart } from 'react-native-chart-kit'
+import { Query } from 'react-apollo'
+import moment from 'moment'
 
 import { MediumText, DemiBoldText, RegularText } from '../../../Atom/TextAtom'
 import { color } from '../../../Style/Color'
 import DashboardStyles from './DashboardStyles'
 import { numberWithCommas } from '../../../Functions/numberWithCommas'
 import RangePickerAtom from '../../../Atom/RangePickerAtom'
+import { IncomeDashboardInfoGQL } from '../../../graphql/queries/order'
+import RequestActivityIndicator from './RequestActivityIndicator'
 
-const data = {
-  labels: ['Mar 25', '26', '27', '28', '29'],
-  datasets: [
-    {
-      data: [20, 45, 28, 80, 99, 43],
-      color: () => color.blue,
-      strokeWidth: 2
-    },
-    {
-      data: [20, 30, 45, 80, 50, 35],
-      color: () => color.green,
-      strokeWidth: 2
-    }
-  ]
+interface IProps {
+  shouldLoad: boolean
+}
+
+interface IState {
+  isRangePickerVisible: boolean
+  startDate: string
+  endDate: string
+  groupBy: 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY'
 }
 
 const chartConfig = {
@@ -32,91 +31,176 @@ const chartConfig = {
   strokeWidth: 0.5
 }
 
-export default class SalesAnalytics extends React.PureComponent {
-  state = {
-    isRangePickerVisible: false
+export default class SalesAnalytics extends React.PureComponent<
+  IProps,
+  IState
+> {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isRangePickerVisible: false,
+      startDate: moment()
+        .subtract(5, 'd')
+        .format('YYYY-MM-DD'),
+      endDate: moment().format('YYYY-MM-DD'),
+      groupBy: 'DAILY'
+    }
   }
 
-  renderDueInvoice = () => (
-    <View style={styles.dueInvoiceContainer}>
-      <MediumText style={styles.smallText}>DUE INVOICE</MediumText>
-      <DemiBoldText style={styles.largeText}>
-        {`\u20A6${numberWithCommas(12930.89)}`}{' '}
-      </DemiBoldText>
-    </View>
-  )
+  evaluateDataPoints = dataPoints => {
+    let labels = [],
+      datasets = [{ data: [], color: () => color.blue, strokeWidth: 2 }]
 
-  renderSales = () => (
-    <React.Fragment>
-      <View style={styles.row}>
-        <MediumText style={styles.smallText}>TOTAL SALES</MediumText>
-        <Icon
-          name="today"
-          type="MaterialIcons"
-          style={styles.icon}
-          onPress={() => this.setState({ isRangePickerVisible: true })}
-        />
-      </View>
-      <DemiBoldText style={styles.largeText}>N67,988.90</DemiBoldText>
-      <View style={{ marginTop: 20 }}>
-        <MediumText style={styles.smallText}>TOTAL PRODUCT</MediumText>
-        <DemiBoldText style={styles.largeText}>32</DemiBoldText>
-      </View>
-    </React.Fragment>
-  )
+    dataPoints.forEach((point, i) => {
+      labels.push(moment(point.date).format(i == 0 ? 'MMM DD' : 'DD '))
+      datasets[0].data.push(point.total)
+    })
+    return { labels, datasets }
+  }
 
-  renderProducts = () => (
-    <View style={styles.productContainer}>
-      <MediumText style={styles.smallText}>TOP PRODUCT</MediumText>
-      <View style={styles.row}>
-        <RegularText style={[styles.smallText, styles.productsText]}>
-          Hublot wrist watch
-        </RegularText>
-        <RegularText style={[styles.smallText, styles.productsText]}>
-          N23,500.00
-        </RegularText>
-      </View>
-      <View style={styles.row}>
-        <RegularText style={[styles.smallText, styles.productsText]}>
-          Simulation Dildo
-        </RegularText>
-        <RegularText style={[styles.smallText, styles.productsText]}>
-          N15,200.00
-        </RegularText>
-      </View>
-    </View>
-  )
+  setFilter = (startDate, endDate, groupBy) => {
+    this.setState({
+      startDate,
+      endDate,
+      groupBy
+    })
+  }
 
-  renderSalesOverTime = () => (
-    <View style={{ marginTop: 15 }}>
-      <MediumText style={[styles.smallText]}>SALES OVER TIME</MediumText>
-      <LineChart
-        data={data}
-        width={Dimensions.get('window').width - 26}
-        height={220}
-        withDots={false}
-        withShadow={false}
-        style={styles.chartStyle}
-        chartConfig={chartConfig}
-      />
-    </View>
-  )
+  renderDueInvoice = data => {
+    let { amountDue } = data
+    return (
+      <View style={styles.dueInvoiceContainer}>
+        <MediumText style={styles.smallText}>DUE INVOICE</MediumText>
+        <DemiBoldText style={styles.largeText}>
+          {`\u20A6${numberWithCommas(amountDue || 0)}`}{' '}
+        </DemiBoldText>
+      </View>
+    )
+  }
 
-  render() {
+  renderSales = data => {
+    let { totalIncome, totalProducts } = data
     return (
       <React.Fragment>
-        <View style={styles.container}>
-          {this.renderSales()}
-          {this.renderDueInvoice()}
-          {this.renderProducts()}
-          {this.renderSalesOverTime()}
+        <DemiBoldText style={styles.largeText}>
+          {`\u20A6${numberWithCommas(totalIncome)}`}
+        </DemiBoldText>
+        <View style={{ marginTop: 20 }}>
+          <MediumText style={styles.smallText}>TOTAL PRODUCT</MediumText>
+          <DemiBoldText style={styles.largeText}>
+            {totalProducts || 0}
+          </DemiBoldText>
         </View>
-        <RangePickerAtom
-          visible={this.state.isRangePickerVisible}
-          onSave={() => null}
-          onRequestClose={() => this.setState({ isRangePickerVisible: false })}
-        />
       </React.Fragment>
+    )
+  }
+
+  renderProducts = data => {
+    let { topProducts } = data
+
+    return (
+      <View style={styles.productContainer}>
+        <MediumText style={styles.smallText}>TOP PRODUCT</MediumText>
+        {topProducts.length > 0 ? (
+          topProducts.map((product, i) => (
+            <View style={styles.row} key={i}>
+              <RegularText style={[styles.smallText, styles.productsText]}>
+                {product.title}
+              </RegularText>
+              <RegularText style={[styles.smallText, styles.productsText]}>
+                {`\u20A6${numberWithCommas(product.amount)}`}
+              </RegularText>
+            </View>
+          ))
+        ) : (
+          <View style={styles.emptyContainer}>
+            <RegularText style={[styles.smallText, styles.noDataText]}>
+              No sales yet
+            </RegularText>
+          </View>
+        )}
+      </View>
+    )
+  }
+
+  renderGraph = data => {
+    let { dataPoints } = data,
+      chartPoints = this.evaluateDataPoints(dataPoints)
+
+    return (
+      <View style={{ marginTop: 15 }}>
+        <MediumText style={[styles.smallText]}>SALES OVER TIME</MediumText>
+        {dataPoints.length > 0 ? (
+          <LineChart
+            data={chartPoints}
+            width={Dimensions.get('window').width - 26}
+            height={220}
+            withDots={false}
+            withShadow={false}
+            style={styles.chartStyle}
+            chartConfig={chartConfig}
+          />
+        ) : (
+          <View style={styles.emptyContainer}>
+            <RegularText style={[styles.smallText, styles.noDataText]}>
+              No sales yet
+            </RegularText>
+          </View>
+        )}
+      </View>
+    )
+  }
+
+  render() {
+    let { shouldLoad } = this.props,
+      { startDate, endDate, groupBy } = this.state
+
+    return (
+      <Query
+        query={IncomeDashboardInfoGQL}
+        fetchPolicy="cache-and-network"
+        skip={!shouldLoad}
+        variables={{ query: { startDate, endDate, groupBy } }}
+      >
+        {({ loading, data }) => {
+          let _data = data && data.incomeDashboardInfo
+
+          return (
+            <View style={styles.container}>
+              <View style={styles.row}>
+                <MediumText style={styles.smallText}>TOTAL SALES</MediumText>
+                <Icon
+                  name="today"
+                  type="MaterialIcons"
+                  style={styles.icon}
+                  onPress={() => this.setState({ isRangePickerVisible: true })}
+                />
+              </View>
+              {loading && (
+                <RequestActivityIndicator
+                  delay={500}
+                  containerStyle={styles.loadingContainer}
+                />
+              )}
+              {!loading && _data && (
+                <React.Fragment>
+                  {this.renderSales(_data)}
+                  {this.renderDueInvoice(_data)}
+                  {this.renderProducts(_data)}
+                  {this.renderGraph(_data)}
+                </React.Fragment>
+              )}
+              <RangePickerAtom
+                visible={this.state.isRangePickerVisible}
+                onSave={this.setFilter}
+                onRequestClose={() =>
+                  this.setState({ isRangePickerVisible: false })
+                }
+              />
+            </View>
+          )
+        }}
+      </Query>
     )
   }
 }

@@ -10,18 +10,35 @@ import RadioAtom from '../RadioAtom'
 interface IProps {
   onRequestClose: () => void
   visible: boolean
-  onSave: (boolean) => void
+  onSave: (start: string, end: string, groupBy: any) => void
 }
 
-export default class RangePickerAtom extends React.PureComponent<IProps> {
+interface IState {
+  groupBy: any
+  startDate: string | undefined
+  endDate: string | undefined
+}
+
+export default class RangePickerAtom extends React.PureComponent<
+  IProps,
+  IState
+> {
   state = {
-    groupBy: 'Daily'
+    groupBy: 'DAILY',
+    startDate: undefined,
+    endDate: undefined
   }
 
-  setValue = (groupBy: string) => {
+  setGroupBy = (groupBy: string) => {
     this.setState({
       groupBy
     })
+  }
+
+  saveFilter = () => {
+    let { startDate, endDate, groupBy } = this.state
+    this.props.onRequestClose()
+    this.props.onSave(startDate, endDate, groupBy)
   }
 
   renderHeader = () => (
@@ -33,7 +50,7 @@ export default class RangePickerAtom extends React.PureComponent<IProps> {
         onPress={this.props.onRequestClose}
       />
       <DemiBoldText>Data Settings</DemiBoldText>
-      <DemiBoldText>SAVE</DemiBoldText>
+      <DemiBoldText onPress={this.saveFilter}>SAVE</DemiBoldText>
     </View>
   )
 
@@ -61,7 +78,12 @@ export default class RangePickerAtom extends React.PureComponent<IProps> {
       }}
       monthFormat="MMMM yyyy"
       theme={{ markColor: color.green, markTextColor: 'white' }}
-      onSuccess={(s, e) => console.log(s, e)}
+      onSuccess={(startDate, endDate) =>
+        this.setState({
+          startDate,
+          endDate
+        })
+      }
     />
   )
 
@@ -70,19 +92,25 @@ export default class RangePickerAtom extends React.PureComponent<IProps> {
       <DemiBoldText style={styles.groupbyTitle}>GROUP BY</DemiBoldText>
       <RadioAtom
         option="Daily"
-        onPress={() => this.setValue('Daily')}
+        onPress={() => this.setGroupBy('Daily')}
         isSelected={this.state.groupBy == 'Daily'}
         containerStyle={{ paddingVertical: 10 }}
       />
       <RadioAtom
         option="Weekly"
-        onPress={() => this.setValue('Weekly')}
+        onPress={() => this.setGroupBy('Weekly')}
         isSelected={this.state.groupBy == 'Weekly'}
         containerStyle={{ paddingVertical: 10 }}
       />
       <RadioAtom
+        option="Monthly"
+        onPress={() => this.setGroupBy('Monthly')}
+        isSelected={this.state.groupBy == 'Monthly'}
+        containerStyle={{ paddingVertical: 10 }}
+      />
+      <RadioAtom
         option="Yearly"
-        onPress={() => this.setValue('Yearly')}
+        onPress={() => this.setGroupBy('Yearly')}
         isSelected={this.state.groupBy == 'Yearly'}
         containerStyle={{ paddingVertical: 10 }}
       />
