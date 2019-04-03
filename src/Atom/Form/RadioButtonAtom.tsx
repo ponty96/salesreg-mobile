@@ -1,9 +1,10 @@
 import * as React from 'react'
 import { Item, Label } from 'native-base'
-import { View, StyleSheet, TouchableWithoutFeedback } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 
 import { RegularText, DemiBoldText } from '../TextAtom'
 import { color } from '../../Style/Color'
+import RadioAtom from '../RadioAtom'
 
 interface IProps {
   required?: boolean | false
@@ -16,14 +17,6 @@ interface IProps {
   error?: any
 }
 
-const Radio = (props: any) => (
-  <TouchableWithoutFeedback onPress={props.onPress}>
-    <View style={styles.radio}>
-      <RegularText style={[styles.radioText]}>{props.option}</RegularText>
-      <View style={[styles.circle, props.isSelected && styles.selected]} />
-    </View>
-  </TouchableWithoutFeedback>
-)
 export default class RadioButtonAtom extends React.PureComponent<IProps> {
   render() {
     return (
@@ -54,7 +47,7 @@ export default class RadioButtonAtom extends React.PureComponent<IProps> {
           </Label>
           <View style={{ width: '100%' }}>
             {this.props.options.map((option, index: number) => [
-              <Radio
+              <RadioAtom
                 key={`radio-${index}`}
                 option={option}
                 onPress={() => this.props.getValue(option)}
@@ -120,27 +113,5 @@ const styles = StyleSheet.create({
     marginBottom: 0,
     marginTop: 2,
     paddingVertical: 12
-  },
-  radio: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    width: '100%',
-    paddingVertical: 18
-  },
-  radioText: {
-    color: color.principal,
-    fontSize: 16
-  },
-  circle: {
-    height: 24,
-    width: 24,
-    borderRadius: 14,
-    backgroundColor: color.textBorderBottom,
-    borderWidth: 2,
-    borderColor: color.textBorderBottom
-  },
-  selected: {
-    backgroundColor: color.green,
-    borderColor: color.green
   }
 })

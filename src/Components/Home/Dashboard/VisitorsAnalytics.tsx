@@ -3,7 +3,7 @@ import { View, StyleSheet, Dimensions } from 'react-native'
 import { Icon } from 'native-base'
 import { PieChart } from 'react-native-chart-kit'
 
-import { MediumText, DemiBoldText } from '../../../Atom/TextAtom'
+import { MediumText, DemiBoldText, RegularText } from '../../../Atom/TextAtom'
 import DashboardStyles from './DashboardStyles'
 import { color } from '../../../Style/Color'
 
@@ -49,8 +49,8 @@ export default class VisitorsAnalytics extends React.PureComponent {
   renderTitle = () => (
     <React.Fragment>
       <View style={styles.row}>
-        <MediumText style={styles.smallText}>Total Visitors</MediumText>
-        <Icon name="today" type="MaterialIcons" />
+        <MediumText style={styles.smallText}>TOTAL VISITORS</MediumText>
+        <Icon name="today" type="MaterialIcons" style={styles.icon} />
       </View>
       <View style={styles.row}>
         <DemiBoldText style={styles.largeText}>56</DemiBoldText>
@@ -72,8 +72,8 @@ export default class VisitorsAnalytics extends React.PureComponent {
     <View style={styles.graph}>
       <PieChart
         data={data}
-        width={Dimensions.get('window').width - 26}
-        height={220}
+        width={Dimensions.get('window').width - 16}
+        height={180}
         accessor="count"
         backgroundColor="transparent"
         chartConfig={chartConfig}
@@ -85,20 +85,20 @@ export default class VisitorsAnalytics extends React.PureComponent {
     <View style={styles.productContainer}>
       <MediumText style={styles.smallText}>TRENDING PRODUCT</MediumText>
       <View style={styles.row}>
-        <MediumText style={[styles.smallText, styles.productsText]}>
+        <RegularText style={[styles.smallText, styles.productsText]}>
           Hublot wrist watch
-        </MediumText>
-        <MediumText style={[styles.smallText, styles.productsText]}>
+        </RegularText>
+        <RegularText style={[styles.smallText, styles.productsText]}>
           N23,500.00
-        </MediumText>
+        </RegularText>
       </View>
       <View style={styles.row}>
-        <MediumText style={[styles.smallText, styles.productsText]}>
+        <RegularText style={[styles.smallText, styles.productsText]}>
           Simulation Dildo
-        </MediumText>
-        <MediumText style={[styles.smallText, styles.productsText]}>
+        </RegularText>
+        <RegularText style={[styles.smallText, styles.productsText]}>
           N15,200.00
-        </MediumText>
+        </RegularText>
       </View>
     </View>
   )

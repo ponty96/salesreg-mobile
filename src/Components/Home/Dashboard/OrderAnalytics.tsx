@@ -13,12 +13,12 @@ const data = {
     {
       data: [20, 45, 28, 80, 99, 43],
       color: () => color.blue,
-      strokeWidth: 3
+      strokeWidth: 2
     },
     {
       data: [20, 30, 45, 80, 50, 35],
       color: () => color.green,
-      strokeWidth: 3
+      strokeWidth: 2
     }
   ]
 }
@@ -35,9 +35,9 @@ export default class OrderAnalytics extends React.PureComponent {
     <React.Fragment>
       <View style={styles.row}>
         <MediumText style={styles.smallText}>
-          Order awaiting fulfillment
+          ORDER AWAITING FULFILLMENT
         </MediumText>
-        <Icon name="today" type="MaterialIcons" />
+        <Icon name="today" type="MaterialIcons" style={styles.icon} />
       </View>
       <View style={styles.row}>
         <DemiBoldText style={styles.largeText}>56</DemiBoldText>
@@ -63,6 +63,7 @@ export default class OrderAnalytics extends React.PureComponent {
         width={Dimensions.get('window').width - 26}
         height={220}
         withShadow={false}
+        withDots={false}
         style={styles.chartStyle}
         chartConfig={chartConfig}
       />

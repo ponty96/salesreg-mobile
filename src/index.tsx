@@ -4,6 +4,7 @@ import App from './App'
 import { YellowBox } from 'react-native'
 import { persistor } from './client'
 import { PushNotificationContext } from './context/PushNotificationContext'
+import '@babel/polyfill'
 
 YellowBox.ignoreWarnings([
   'Warning: isMounted(...) is deprecated',

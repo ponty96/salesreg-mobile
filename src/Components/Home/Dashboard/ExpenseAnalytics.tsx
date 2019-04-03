@@ -2,16 +2,21 @@ import React from 'react'
 import { View, StyleSheet } from 'react-native'
 import { Icon } from 'native-base'
 
-import { MediumText, DemiBoldText } from '../../../Atom/TextAtom'
+import { MediumText, DemiBoldText, RegularText } from '../../../Atom/TextAtom'
 import DashboardStyles from './DashboardStyles'
 import { numberWithCommas } from '../../../Functions/numberWithCommas'
+import RangePickerAtom from '../../../Atom/RangePickerAtom'
 
 export default class ExpenseAnalytics extends React.PureComponent {
+  state = {
+    isRangePickerVisible: false
+  }
+
   renderTitle = () => (
     <React.Fragment>
       <View style={styles.row}>
-        <MediumText style={styles.smallText}>Total Expense</MediumText>
-        <Icon name="today" type="MaterialIcons" />
+        <MediumText style={styles.smallText}>TOTAL EXPENSE</MediumText>
+        <Icon name="today" type="MaterialIcons" style={styles.icon} />
       </View>
       <View style={styles.row}>
         <DemiBoldText style={styles.largeText}>{`\u20A6${numberWithCommas(
@@ -35,38 +40,37 @@ export default class ExpenseAnalytics extends React.PureComponent {
     <View style={styles.expenseContainer}>
       <MediumText style={styles.smallText}>EXPENSE BREAKDOWN</MediumText>
       <View style={[styles.row, styles.borderedExpense]}>
-        <MediumText style={[styles.smallText, styles.productsText]}>
+        <RegularText style={[styles.smallText, styles.productsText]}>
           Bought Bag Packs
-        </MediumText>
-        <MediumText style={[styles.smallText, styles.productsText]}>
+        </RegularText>
+        <RegularText style={[styles.smallText, styles.productsText]}>
           {`\u20A6${numberWithCommas(23500.0)}`}{' '}
-        </MediumText>
+        </RegularText>
       </View>
       <View style={[styles.row, styles.borderedExpense]}>
-        <MediumText style={[styles.smallText, styles.productsText]}>
+        <RegularText style={[styles.smallText, styles.productsText]}>
           Bought Bag Packs
-        </MediumText>
-        <MediumText style={[styles.smallText, styles.productsText]}>
+        </RegularText>
+        <RegularText style={[styles.smallText, styles.productsText]}>
           {`\u20A6${numberWithCommas(23500.0)}`}{' '}
-        </MediumText>
-      </View>
-      <View style={[styles.row, { paddingTop: 15 }]}>
-        <MediumText style={[styles.smallText, styles.productsText]}>
-          Bought Bag Packs
-        </MediumText>
-        <MediumText style={[styles.smallText, styles.productsText]}>
-          {`\u20A6${numberWithCommas(23500.0)}`}{' '}
-        </MediumText>
+        </RegularText>
       </View>
     </View>
   )
 
   render() {
     return (
-      <View style={styles.container}>
-        {this.renderTitle()}
-        {this.renderExpenses()}
-      </View>
+      <React.Fragment>
+        <RangePickerAtom
+          visible={this.state.isRangePickerVisible}
+          onSave={() => null}
+          onRequestClose={() => this.setState({ isRangePickerVisible: false })}
+        />
+        <View style={styles.container}>
+          {this.renderTitle()}
+          {this.renderExpenses()}
+        </View>
+      </React.Fragment>
     )
   }
 }

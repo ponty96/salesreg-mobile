@@ -1,4 +1,5 @@
 import { StyleSheet } from 'react-native'
+import { color } from '../../../Style/Color'
 
 const styles = StyleSheet.create({
   row: {
@@ -9,11 +10,15 @@ const styles = StyleSheet.create({
   redText: {
     color: 'red'
   },
+  icon: {
+    color: color.textColor,
+    fontSize: 25
+  },
   container: {
     marginVertical: 4,
     padding: 16,
     borderRadius: 4,
-    marginHorizontal: 10,
+    marginHorizontal: 0,
     backgroundColor: '#fff',
     shadowColor: '#e0e0e0',
     shadowOffset: {
@@ -24,16 +29,18 @@ const styles = StyleSheet.create({
     shadowOpacity: 1.0
   },
   smallText: {
-    fontSize: 12
+    fontSize: 12,
+    color: color.textColor
   },
   largeText: {
     marginTop: 2,
-    fontSize: 20
+    fontSize: 20,
+    color: color.textColor
   },
   productsText: {
     marginTop: 2,
     fontSize: 13,
-    color: '#bdbdbd'
+    color: '#616161'
   },
   chartStyle: { marginLeft: -16, marginTop: 10 }
 })
