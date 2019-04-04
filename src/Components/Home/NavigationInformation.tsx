@@ -6,12 +6,7 @@ import SalesAnalytics from './Dashboard/SalesAnalytics'
 // import VisitorsAnalytics from './Dashboard/VisitorsAnalytics'
 import ExpenseAnalytics from './Dashboard/ExpenseAnalytics'
 
-const data = [
-  { key: 'sales' },
-  { key: 'order' },
-  { key: 'visitors' },
-  { key: 'expense' }
-]
+const data = [{ key: 'sales' }, { key: 'order' }, { key: 'expense' }]
 
 interface IState {
   viewableIndexes: number[]
@@ -53,10 +48,12 @@ class NavigationalInformation extends React.PureComponent<any, IState> {
       return (
         <OrderAnalytics shouldLoad={viewableIndexes.indexOf(1) != -1 && true} />
       )
-    } else if (item.key == 'visitors') {
-      // return <VisitorsAnalytics />
     } else if (item.key == 'expense') {
-      return <ExpenseAnalytics />
+      return (
+        <ExpenseAnalytics
+          shouldLoad={viewableIndexes.indexOf(2) != -1 && true}
+        />
+      )
     }
     return null
   }

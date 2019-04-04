@@ -51,7 +51,7 @@ export const ExpenseDashboardInfoGQL = gql`
     expenseDashboardInfo(query: $query) {
       dataPoints {
         date
-        float
+        total
       }
       topExpenses {
         title

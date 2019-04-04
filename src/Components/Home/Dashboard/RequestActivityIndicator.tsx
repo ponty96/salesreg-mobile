@@ -56,7 +56,7 @@ export default class RequestActivityIndicator extends React.PureComponent<
       <View style={[styles.container, _style]}>
         <ActivityIndicator
           animating={true}
-          size={Platform.OS == 'android' ? 20 : 0}
+          size={Platform.OS == 'android' ? 20 : 'small'}
           color={this.props.color || color.button}
         />
       </View>
