@@ -24,7 +24,7 @@ export default class RangePickerAtom extends React.PureComponent<
   IState
 > {
   state = {
-    groupBy: 'DAILY',
+    groupBy: 'WEEKLY',
     startDate: undefined,
     endDate: undefined
   }
@@ -92,26 +92,26 @@ export default class RangePickerAtom extends React.PureComponent<
       <DemiBoldText style={styles.groupbyTitle}>GROUP BY</DemiBoldText>
       <RadioAtom
         option="Daily"
-        onPress={() => this.setGroupBy('Daily')}
-        isSelected={this.state.groupBy == 'Daily'}
+        onPress={() => this.setGroupBy('DAILY')}
+        isSelected={this.state.groupBy == 'DAILY'}
         containerStyle={{ paddingVertical: 10 }}
       />
       <RadioAtom
         option="Weekly"
-        onPress={() => this.setGroupBy('Weekly')}
-        isSelected={this.state.groupBy == 'Weekly'}
+        onPress={() => this.setGroupBy('WEEKLY')}
+        isSelected={this.state.groupBy == 'WEEKLY'}
         containerStyle={{ paddingVertical: 10 }}
       />
       <RadioAtom
         option="Monthly"
-        onPress={() => this.setGroupBy('Monthly')}
-        isSelected={this.state.groupBy == 'Monthly'}
+        onPress={() => this.setGroupBy('MONTHLY')}
+        isSelected={this.state.groupBy == 'MONTHLY'}
         containerStyle={{ paddingVertical: 10 }}
       />
       <RadioAtom
         option="Yearly"
-        onPress={() => this.setGroupBy('Yearly')}
-        isSelected={this.state.groupBy == 'Yearly'}
+        onPress={() => this.setGroupBy('YEARLY')}
+        isSelected={this.state.groupBy == 'YEARLY'}
         containerStyle={{ paddingVertical: 10 }}
       />
     </View>

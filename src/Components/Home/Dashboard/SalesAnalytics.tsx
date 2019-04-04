@@ -41,10 +41,10 @@ export default class SalesAnalytics extends React.PureComponent<
     this.state = {
       isRangePickerVisible: false,
       startDate: moment()
-        .subtract(5, 'd')
+        .subtract(30, 'd')
         .format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
-      groupBy: 'DAILY',
+      groupBy: 'WEEKLY',
       shouldLoad: true
     }
   }

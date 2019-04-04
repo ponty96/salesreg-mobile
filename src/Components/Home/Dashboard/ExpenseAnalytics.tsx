@@ -32,10 +32,10 @@ export default class ExpenseAnalytics extends React.PureComponent<
     this.state = {
       isRangePickerVisible: false,
       startDate: moment()
-        .subtract(5, 'd')
+        .subtract(30, 'd')
         .format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
-      groupBy: 'DAILY',
+      groupBy: 'WEEKLY',
       shouldLoad: false
     }
   }
@@ -61,14 +61,14 @@ export default class ExpenseAnalytics extends React.PureComponent<
       <DemiBoldText style={styles.largeText}>{`\u20A6${numberWithCommas(
         data.totalExpense || 0
       )}`}</DemiBoldText>
-      <View style={styles.row}>
+      {/* <View style={styles.row}>
         <Icon
           style={styles.redText}
           name="ios-arrow-round-down"
           type="Ionicons"
         />
         <MediumText style={[styles.redText, { marginLeft: 5 }]}>0%</MediumText>
-      </View>
+      </View> */}
     </View>
   )
 
