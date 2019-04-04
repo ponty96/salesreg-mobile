@@ -2,25 +2,26 @@ import React from 'react'
 import { View, StyleSheet, Dimensions } from 'react-native'
 import { Icon } from 'native-base'
 import { LineChart } from 'react-native-chart-kit'
+import { Query } from 'react-apollo'
+import moment from 'moment'
 
-import { MediumText, DemiBoldText } from '../../../Atom/TextAtom'
+import { MediumText, DemiBoldText, RegularText } from '../../../Atom/TextAtom'
 import DashboardStyles from './DashboardStyles'
 import { color } from '../../../Style/Color'
+import RangePickerAtom from '../../../Atom/RangePickerAtom'
+import { OrderDashboardInfoGQL } from '../../../graphql/queries/order'
+import RequestActivityIndicator from './RequestActivityIndicator'
 
-const data = {
-  labels: ['Mar 25', '26', '27', '28', '29'],
-  datasets: [
-    {
-      data: [20, 45, 28, 80, 99, 43],
-      color: () => color.blue,
-      strokeWidth: 2
-    },
-    {
-      data: [20, 30, 45, 80, 50, 35],
-      color: () => color.green,
-      strokeWidth: 2
-    }
-  ]
+interface IState {
+  isRangePickerVisible: boolean
+  startDate: string
+  endDate: string
+  shouldLoad: boolean
+  groupBy: 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY'
+}
+
+interface IProps {
+  shouldLoad: boolean
 }
 
 const chartConfig = {
@@ -30,52 +31,141 @@ const chartConfig = {
   strokeWidth: 0.5
 }
 
-export default class OrderAnalytics extends React.PureComponent {
-  renderTitle = () => (
-    <React.Fragment>
-      <View style={styles.row}>
-        <MediumText style={styles.smallText}>
-          ORDER AWAITING FULFILLMENT
-        </MediumText>
-        <Icon name="today" type="MaterialIcons" style={styles.icon} />
-      </View>
-      <View style={styles.row}>
-        <DemiBoldText style={styles.largeText}>56</DemiBoldText>
-        <View style={styles.row}>
-          <Icon
-            style={styles.redText}
-            name="ios-arrow-round-down"
-            type="Ionicons"
-          />
-          <MediumText style={[styles.redText, { marginLeft: 5 }]}>
-            2.45%
-          </MediumText>
-        </View>
-      </View>
-    </React.Fragment>
-  )
+export default class OrderAnalytics extends React.PureComponent<
+  IProps,
+  IState
+> {
+  constructor(props) {
+    super(props)
+    this.state = {
+      isRangePickerVisible: false,
+      startDate: moment()
+        .subtract(5, 'd')
+        .format('YYYY-MM-DD'),
+      endDate: moment().format('YYYY-MM-DD'),
+      groupBy: 'DAILY',
+      shouldLoad: false
+    }
+  }
 
-  renderOrderOverTime = () => (
-    <View style={{ marginTop: 15 }}>
-      <MediumText style={[styles.smallText]}>ORDER OVER TIME</MediumText>
-      <LineChart
-        data={data}
-        width={Dimensions.get('window').width - 26}
-        height={220}
-        withShadow={false}
-        withDots={false}
-        style={styles.chartStyle}
-        chartConfig={chartConfig}
-      />
+  componentDidUpdate() {
+    if (this.props.shouldLoad && !this.state.shouldLoad) {
+      this.setState({
+        shouldLoad: true
+      })
+    }
+  }
+
+  evaluateDataPoints = dataPoints => {
+    let labels = [],
+      datasets = [{ data: [], color: () => color.blue, strokeWidth: 2 }]
+
+    dataPoints.forEach((point, i) => {
+      labels.push(moment(point.date).format(i == 0 ? 'MMM DD' : 'DD '))
+      datasets[0].data.push(point.total)
+    })
+    return { labels, datasets }
+  }
+
+  setFilter = (startDate, endDate, groupBy) => {
+    this.setState({
+      startDate,
+      endDate,
+      groupBy
+    })
+  }
+
+  renderTitle = () => (
+    <View style={styles.row}>
+      <DemiBoldText style={styles.largeText}>0</DemiBoldText>
+      <View style={styles.row}>
+        <Icon
+          style={styles.redText}
+          name="ios-arrow-round-down"
+          type="Ionicons"
+        />
+        <MediumText style={[styles.redText, { marginLeft: 5 }]}>0%</MediumText>
+      </View>
     </View>
   )
 
-  render() {
+  renderGraph = data => {
+    let { dataPoints } = data,
+      chartPoints = this.evaluateDataPoints(dataPoints)
+
     return (
-      <View style={styles.container}>
-        {this.renderTitle()}
-        {this.renderOrderOverTime()}
+      <View style={{ marginTop: 15 }}>
+        <MediumText style={[styles.smallText]}>ORDER OVER TIME</MediumText>
+        {dataPoints.length > 0 ? (
+          <LineChart
+            data={chartPoints}
+            width={Dimensions.get('window').width - 26}
+            height={220}
+            withShadow={false}
+            withDots={false}
+            style={styles.chartStyle}
+            chartConfig={chartConfig}
+          />
+        ) : (
+          <View style={styles.emptyContainer}>
+            <RegularText style={[styles.smallText, styles.noDataText]}>
+              No orders yet
+            </RegularText>
+          </View>
+        )}
       </View>
+    )
+  }
+
+  render() {
+    let { startDate, endDate, groupBy, shouldLoad } = this.state
+
+    return (
+      <Query
+        query={OrderDashboardInfoGQL}
+        fetchPolicy="cache-and-network"
+        skip={!shouldLoad}
+        variables={{ query: { startDate, endDate, groupBy } }}
+      >
+        {({ loading, data }) => {
+          let _data = data && data.orderDashboardInfo
+
+          return (
+            <View style={styles.container}>
+              <View style={styles.row}>
+                <MediumText style={styles.smallText}>
+                  ORDER AWAITING FULFILLMENT
+                </MediumText>
+                <Icon
+                  name="today"
+                  type="MaterialIcons"
+                  style={styles.icon}
+                  onPress={() => this.setState({ isRangePickerVisible: true })}
+                />
+              </View>
+              {loading && (
+                <RequestActivityIndicator
+                  delay={500}
+                  containerStyle={styles.loadingContainer}
+                />
+              )}
+              {!loading && _data && (
+                <React.Fragment>
+                  {this.renderTitle()}
+                  {this.renderGraph(_data)}
+                </React.Fragment>
+              )}
+              <RangePickerAtom
+                visible={this.state.isRangePickerVisible}
+                onSave={this.setFilter}
+                onRequestClose={() =>
+                  this.setState({ isRangePickerVisible: false })
+                }
+              />
+            </View>
+          )
+        }}
+      </Query>
     )
   }
 }

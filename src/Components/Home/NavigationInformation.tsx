@@ -3,7 +3,7 @@ import { View, StyleSheet, FlatList } from 'react-native'
 
 import OrderAnalytics from './Dashboard/OrderAnalytics'
 import SalesAnalytics from './Dashboard/SalesAnalytics'
-import VisitorsAnalytics from './Dashboard/VisitorsAnalytics'
+// import VisitorsAnalytics from './Dashboard/VisitorsAnalytics'
 import ExpenseAnalytics from './Dashboard/ExpenseAnalytics'
 
 const data = [
@@ -14,7 +14,7 @@ const data = [
 ]
 
 interface IState {
-  currentViewableIndex: number
+  viewableIndexes: number[]
 }
 
 class NavigationalInformation extends React.PureComponent<any, IState> {
@@ -30,29 +30,31 @@ class NavigationalInformation extends React.PureComponent<any, IState> {
     }
 
     this.state = {
-      currentViewableIndex: 0
+      viewableIndexes: []
     }
   }
 
   viewableChanged = ({ viewableItems }) => {
     if (viewableItems.length > 0) {
       this.setState({
-        currentViewableIndex: viewableItems[0].index
+        viewableIndexes: viewableItems.map(item => item.index)
       })
     }
   }
 
   renderItems = ({ item }) => {
-    let { currentViewableIndex } = this.state
+    let { viewableIndexes } = this.state
 
     if (item.key == 'sales') {
-      return <SalesAnalytics shouldLoad={currentViewableIndex == 0 && true} />
-    } else if (item.key == 'order') {
-      return <OrderAnalytics />
-    } else if (item.key == 'visitors') {
       return (
-        <VisitorsAnalytics />
+        <SalesAnalytics shouldLoad={viewableIndexes.indexOf(0) != -1 && true} />
       )
+    } else if (item.key == 'order') {
+      return (
+        <OrderAnalytics shouldLoad={viewableIndexes.indexOf(1) != -1 && true} />
+      )
+    } else if (item.key == 'visitors') {
+      // return <VisitorsAnalytics />
     } else if (item.key == 'expense') {
       return <ExpenseAnalytics />
     }
@@ -64,6 +66,7 @@ class NavigationalInformation extends React.PureComponent<any, IState> {
       <View style={styles.container}>
         <FlatList
           data={data}
+          extraData={this.state.viewableIndexes}
           renderItem={this.renderItems}
           onViewableItemsChanged={this.viewableChanged}
           viewabilityConfig={this.viewabilityConfig}

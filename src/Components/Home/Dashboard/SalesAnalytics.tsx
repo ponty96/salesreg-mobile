@@ -21,6 +21,7 @@ interface IState {
   isRangePickerVisible: boolean
   startDate: string
   endDate: string
+  shouldLoad: boolean
   groupBy: 'DAILY' | 'WEEKLY' | 'MONTHLY' | 'YEARLY'
 }
 
@@ -43,7 +44,16 @@ export default class SalesAnalytics extends React.PureComponent<
         .subtract(5, 'd')
         .format('YYYY-MM-DD'),
       endDate: moment().format('YYYY-MM-DD'),
-      groupBy: 'DAILY'
+      groupBy: 'DAILY',
+      shouldLoad: true
+    }
+  }
+
+  componentDidUpdate() {
+    if (this.props.shouldLoad && !this.state.shouldLoad) {
+      this.setState({
+        shouldLoad: true
+      })
     }
   }
 
@@ -152,8 +162,7 @@ export default class SalesAnalytics extends React.PureComponent<
   }
 
   render() {
-    let { shouldLoad } = this.props,
-      { startDate, endDate, groupBy } = this.state
+    let { startDate, endDate, groupBy, shouldLoad } = this.state
 
     return (
       <Query

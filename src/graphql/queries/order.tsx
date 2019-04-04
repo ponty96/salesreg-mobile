@@ -268,3 +268,18 @@ export const IncomeDashboardInfoGQL = gql`
     }
   }
 `
+
+export const OrderDashboardInfoGQL = gql`
+  query orderDashboardInfo($query: GraphQueryInput) {
+    orderDashboardInfo(query: $query) {
+      dataPoints {
+        date
+        total
+      }
+      orderStatuses {
+        count
+        status
+      }
+    }
+  }
+`

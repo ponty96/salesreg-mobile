@@ -26,7 +26,8 @@ const styles = StyleSheet.create({
       height: 3
     },
     shadowRadius: 3,
-    shadowOpacity: 1.0
+    shadowOpacity: 1.0,
+    minHeight: 150
   },
   loadingContainer: {
     height: 300
