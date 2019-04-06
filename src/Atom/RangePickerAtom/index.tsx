@@ -1,11 +1,11 @@
 import React from 'react'
 import { StyleSheet, View, Modal } from 'react-native'
 import { Icon, Content } from 'native-base'
+import moment from 'moment'
 
 import { DemiBoldText } from '../TextAtom'
 import DateRangePicker from './DateRangePicker'
 import { color } from '../../Style/Color'
-import RadioAtom from '../RadioAtom'
 
 interface IProps {
   onRequestClose: () => void
@@ -14,7 +14,6 @@ interface IProps {
 }
 
 interface IState {
-  groupBy: any
   startDate: string | undefined
   endDate: string | undefined
 }
@@ -24,19 +23,26 @@ export default class RangePickerAtom extends React.PureComponent<
   IState
 > {
   state = {
-    groupBy: 'WEEKLY',
     startDate: undefined,
     endDate: undefined
   }
 
-  setGroupBy = (groupBy: string) => {
-    this.setState({
-      groupBy
-    })
+  getGroupedby = duration => {
+    if (duration <= 7) {
+      return 'DAILY'
+    } else if (duration > 7 && duration <= 30) {
+      return 'WEEKLY'
+    } else if (duration > 30 && duration <= 365) {
+      return 'MONTHLY'
+    }
+    return 'YEARLY'
   }
 
   saveFilter = () => {
-    let { startDate, endDate, groupBy } = this.state
+    let { startDate, endDate } = this.state,
+      duration = moment(endDate).diff(moment(startDate), 'days'),
+      groupBy = this.getGroupedby(duration)
+
     this.props.onRequestClose()
     this.props.onSave(startDate, endDate, groupBy)
   }
@@ -87,36 +93,6 @@ export default class RangePickerAtom extends React.PureComponent<
     />
   )
 
-  renderGroupBys = () => (
-    <View style={styles.groupByContainer}>
-      <DemiBoldText style={styles.groupbyTitle}>GROUP BY</DemiBoldText>
-      <RadioAtom
-        option="Daily"
-        onPress={() => this.setGroupBy('DAILY')}
-        isSelected={this.state.groupBy == 'DAILY'}
-        containerStyle={{ paddingVertical: 10 }}
-      />
-      <RadioAtom
-        option="Weekly"
-        onPress={() => this.setGroupBy('WEEKLY')}
-        isSelected={this.state.groupBy == 'WEEKLY'}
-        containerStyle={{ paddingVertical: 10 }}
-      />
-      <RadioAtom
-        option="Monthly"
-        onPress={() => this.setGroupBy('MONTHLY')}
-        isSelected={this.state.groupBy == 'MONTHLY'}
-        containerStyle={{ paddingVertical: 10 }}
-      />
-      <RadioAtom
-        option="Yearly"
-        onPress={() => this.setGroupBy('YEARLY')}
-        isSelected={this.state.groupBy == 'YEARLY'}
-        containerStyle={{ paddingVertical: 10 }}
-      />
-    </View>
-  )
-
   render() {
     return (
       <Modal
@@ -127,10 +103,7 @@ export default class RangePickerAtom extends React.PureComponent<
       >
         <View style={styles.container}>
           {this.renderHeader()}
-          <Content>
-            {this.renderCalendar()}
-            {this.renderGroupBys()}
-          </Content>
+          <Content>{this.renderCalendar()}</Content>
         </View>
       </Modal>
     )
@@ -156,15 +129,5 @@ const styles = StyleSheet.create({
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#e0e0e0',
     paddingHorizontal: 16
-  },
-  groupByContainer: {
-    borderTopWidth: StyleSheet.hairlineWidth,
-    borderTopColor: '#e0e0e0',
-    paddingHorizontal: 16
-  },
-  groupbyTitle: {
-    marginVertical: 15,
-    color: color.principal,
-    fontSize: 16
   }
 })

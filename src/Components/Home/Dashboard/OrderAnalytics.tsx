@@ -11,6 +11,7 @@ import { color } from '../../../Style/Color'
 import RangePickerAtom from '../../../Atom/RangePickerAtom'
 import { OrderDashboardInfoGQL } from '../../../graphql/queries/order'
 import RequestActivityIndicator from './RequestActivityIndicator'
+import { evaluateDataPoints } from '../../../Functions/graphHelpers'
 
 interface IState {
   isRangePickerVisible: boolean
@@ -56,17 +57,6 @@ export default class OrderAnalytics extends React.PureComponent<
     }
   }
 
-  evaluateDataPoints = dataPoints => {
-    let labels = [],
-      datasets = [{ data: [], color: () => color.blue, strokeWidth: 2 }]
-
-    dataPoints.forEach((point, i) => {
-      labels.push(moment(point.date).format(i == 0 ? 'MMM DD' : 'DD '))
-      datasets[0].data.push(point.total)
-    })
-    return { labels, datasets }
-  }
-
   setFilter = (startDate, endDate, groupBy) => {
     this.setState({
       startDate,
@@ -91,7 +81,7 @@ export default class OrderAnalytics extends React.PureComponent<
 
   renderGraph = data => {
     let { dataPoints } = data,
-      chartPoints = this.evaluateDataPoints(dataPoints)
+      chartPoints = evaluateDataPoints(dataPoints)
 
     return (
       <View style={{ marginTop: 15 }}>

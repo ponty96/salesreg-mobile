@@ -12,6 +12,7 @@ import { numberWithCommas } from '../../../Functions/numberWithCommas'
 import RangePickerAtom from '../../../Atom/RangePickerAtom'
 import { IncomeDashboardInfoGQL } from '../../../graphql/queries/order'
 import RequestActivityIndicator from './RequestActivityIndicator'
+import { evaluateDataPoints } from '../../../Functions/graphHelpers'
 
 interface IProps {
   shouldLoad: boolean
@@ -55,17 +56,6 @@ export default class SalesAnalytics extends React.PureComponent<
         shouldLoad: true
       })
     }
-  }
-
-  evaluateDataPoints = dataPoints => {
-    let labels = [],
-      datasets = [{ data: [], color: () => color.blue, strokeWidth: 2 }]
-
-    dataPoints.forEach((point, i) => {
-      labels.push(moment(point.date).format(i == 0 ? 'MMM DD' : 'DD '))
-      datasets[0].data.push(point.total)
-    })
-    return { labels, datasets }
   }
 
   setFilter = (startDate, endDate, groupBy) => {
@@ -135,7 +125,7 @@ export default class SalesAnalytics extends React.PureComponent<
 
   renderGraph = data => {
     let { dataPoints } = data,
-      chartPoints = this.evaluateDataPoints(dataPoints)
+      chartPoints = evaluateDataPoints(dataPoints)
 
     return (
       <View style={{ marginTop: 15 }}>
