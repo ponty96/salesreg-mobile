@@ -12,6 +12,7 @@ import ViewOverflow from 'react-native-view-overflow'
 import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import { color } from '../../Style/Color'
 import { DemiBoldText } from '../../Atom/TextAtom'
+import StatusBarAtom from '../../Atom/StatusBarAtom'
 
 interface IProps {
   navigation: any
@@ -128,6 +129,7 @@ class LandingScreen extends PureComponent<IProps, IState> {
 
     return (
       <View style={styles.container}>
+        <StatusBarAtom backgroundColor={color.button} />
         <FlatList
           horizontal
           showsHorizontalScrollIndicator={false}

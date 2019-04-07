@@ -1,7 +1,7 @@
 import React from 'react'
-import { AppRegistry } from 'react-native'
+import { AppRegistry, YellowBox } from 'react-native'
+
 import App from './App'
-import { YellowBox } from 'react-native'
 import { persistor } from './client'
 import { PushNotificationContext } from './context/PushNotificationContext'
 import '@babel/polyfill'

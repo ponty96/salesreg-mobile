@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { Query } from 'react-apollo'
 import React from 'react'
-import { Left, Right, Title, Icon } from 'native-base'
+import { Left, Right, Icon } from 'native-base'
 
 import { color } from '../../Style/Color'
 import { SearchAtom } from '../../Atom/SearchAtom'
@@ -154,9 +154,10 @@ class BaseHeader extends React.PureComponent<IProps> {
                 style={styles.headerIcon}
                 type={this.props.leftIconType}
               />
+
+              <DemiBoldText style={styles.title}>{props.title}</DemiBoldText>
             </Left>
           </TouchableWithoutFeedback>
-          <Title style={styles.title}>{props.title}</Title>
           {!this.props.hideRightMenu ? (
             <Right>
               <TouchableWithoutFeedback onPress={this.props.onPressRightIcon}>
@@ -219,7 +220,7 @@ const styles = StyleSheet.create({
     borderBottomColor: color.textBorderBottom
   },
   wrapper: {
-    height: 70,
+    height: 56,
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
@@ -230,9 +231,9 @@ const styles = StyleSheet.create({
     color: '#000'
   },
   title: {
-    fontFamily: 'AvenirNext-DemiBold',
     fontSize: 18,
-    color: '#000'
+    color: '#000',
+    marginLeft: 20
   },
   rightText: {
     fontFamily: 'AvenirNext-DemiBold',
