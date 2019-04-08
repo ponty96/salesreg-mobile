@@ -1,4 +1,5 @@
 import { ApolloClient } from 'apollo-client'
+import { Alert, Linking } from 'react-native'
 import { InMemoryCache } from 'apollo-cache-inmemory'
 import { AsyncStorage } from 'react-native'
 import { ApolloLink, split } from 'apollo-link'
@@ -57,6 +58,34 @@ const errorLink = onError(({ graphQLErrors, networkError }: any) => {
     if (graphQLErrors[0] && graphQLErrors[0].message === 'Not authenticated') {
       // refreshOrLogout();
     }
+
+    if (
+      graphQLErrors[0] &&
+      graphQLErrors[0].message.split(';').length >= 2 &&
+      graphQLErrors[0].message.split(';').length <= 3
+    ) {
+      let messageContent = graphQLErrors[0].message.split(';')
+
+      Alert.alert(
+        messageContent[0],
+        messageContent[1],
+        [
+          {
+            text: messageContent[2] ? 'Open in browser' : 'Ok',
+            onPress: () =>
+              messageContent[2]
+                ? Linking.canOpenURL(messageContent[2]).then(supported => {
+                    if (supported) {
+                      Linking.openURL(messageContent[2]).catch(() => null)
+                    }
+                  })
+                : null
+          }
+        ],
+        { cancelable: false }
+      )
+    }
+
     graphQLErrors.map &&
       graphQLErrors.map(({ message, locations, path }: any) =>
         console.log(
