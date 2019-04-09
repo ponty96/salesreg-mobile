@@ -1,7 +1,6 @@
 import React from 'react'
 import { Mutation } from 'react-apollo'
 import moment from 'moment'
-import { Alert } from 'react-native'
 import { NavigationActions } from 'react-navigation'
 
 import FormStepperContainer from '../../Container/Form/StepperContainer'
@@ -50,7 +49,6 @@ interface IState {
   discount: string
   amountPaid: string
   salesOrderId: string
-  hasSalesOrderBeenCreated: boolean
   tax: string
   region: string
   address: string
@@ -91,7 +89,6 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     country: 'NG',
     data: {},
     salesOrderId: '',
-    hasSalesOrderBeenCreated: false,
     isCardPaymentVisible: false,
     user: { companyId: '', userId: '' },
     companyRegions: [],
@@ -239,8 +236,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       this.setState(
         {
           salesOrderId: id,
-          data,
-          hasSalesOrderBeenCreated: true
+          data
         },
         () => {
           this.navigateUser()
@@ -303,7 +299,6 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     delete _params.isCustomerInContacts
     delete _params.user
     delete _params.salesOrderId
-    delete _params.hasSalesOrderBeenCreated
     delete _params.email
     delete _params.data
     delete _params.contactName
@@ -320,37 +315,6 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
           saleId
         }
       : { sale: _params }
-  }
-
-  checkSalesOrderValidity = upsertSales => {
-    let { items, amountPaid, discount, hasSalesOrderBeenCreated } = this.state,
-      totalAmount = 0
-    items.forEach(sales => {
-      totalAmount += Number(sales.quantity) * Number(sales.unitPrice)
-    })
-    let _amountPayable = totalAmount - Number(discount),
-      amountPayable = _amountPayable || totalAmount
-
-    if (Number(amountPaid) > amountPayable) {
-      Alert.alert(
-        'Cannot make payment',
-        `You are paying too much than the actual amount payable for the sales order. Maximum amount payable is \u20A6${amountPayable}. Please review your order`,
-        [{ text: 'Ok', onPress: () => null }],
-        { cancelable: false }
-      )
-    } else if (Number(discount) > amountPayable) {
-      Alert.alert(
-        'Cannot make payment',
-        `The discount cannot be more than the actual payable amount which is \u20A6${amountPayable}`,
-        [{ text: 'Ok', onPress: () => null }],
-        { cancelable: false }
-      )
-    } else {
-      !hasSalesOrderBeenCreated &&
-        upsertSales({
-          variables: this.parseMutationVariables()
-        })
-    }
   }
 
   render() {
@@ -391,7 +355,11 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
               updateValueChange={this.updateState}
               handleBackPress={() => this.props.navigation.goBack()}
               fieldErrors={this.state.fieldErrors}
-              onCompleteSteps={() => this.checkSalesOrderValidity(upsertSales)}
+              onCompleteSteps={() =>
+                upsertSales({
+                  variables: this.parseMutationVariables()
+                })
+              }
               steps={[
                 {
                   stepTitle: "Let's have the items that are being ordered",
@@ -524,6 +492,17 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
                       },
                       placeholder: '0.00',
                       name: 'deliveryFee'
+                    },
+                    {
+                      label: 'Are you giving discounts?',
+                      type: {
+                        type: 'input',
+                        keyboardType: 'numeric'
+                      },
+                      placeholder: '0',
+                      name: 'discount',
+                      underneathText:
+                        'Discounts should be based on the amount given not the percentage. Ignore if there are no discounts.'
                     }
                   ],
                   buttonTitle: 'Done'
