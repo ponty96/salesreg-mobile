@@ -2,8 +2,12 @@ import moment from 'moment'
 
 import { color } from '../Style/Color'
 
-const getXAxisDataPoint = (date: string, index: number): string => {
-  switch (this.state.groupBy) {
+const getXAxisDataPoint = (
+  groupBy: string,
+  date: string,
+  index: number
+): string => {
+  switch (groupBy) {
     case 'DAILY':
       return moment(date).format('ddd')
     case 'MONTHLY':
@@ -17,13 +21,14 @@ const getXAxisDataPoint = (date: string, index: number): string => {
 }
 
 export const evaluateDataPoints = (
+  groupBy: string,
   dataPoints: [{ date: string; total: number }]
 ): { labels: any[]; datasets: any[] } => {
   let labels = [],
     datasets = [{ data: [], color: () => color.blue, strokeWidth: 2 }]
 
   dataPoints.forEach((point, i) => {
-    labels.push(getXAxisDataPoint(point.date, i))
+    labels.push(getXAxisDataPoint(groupBy, point.date, i))
     datasets[0].data.push(point.total)
   })
   return { labels, datasets }

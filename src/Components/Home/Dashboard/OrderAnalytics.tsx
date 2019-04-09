@@ -81,7 +81,7 @@ export default class OrderAnalytics extends React.PureComponent<
 
   renderGraph = data => {
     let { dataPoints } = data,
-      chartPoints = evaluateDataPoints(dataPoints)
+      chartPoints = evaluateDataPoints(this.state.groupBy, dataPoints)
 
     return (
       <View style={{ marginTop: 15 }}>

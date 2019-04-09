@@ -8,7 +8,7 @@ import {
 } from 'react-native'
 import { Query } from 'react-apollo'
 import React from 'react'
-import { Left, Right, Icon } from 'native-base'
+import { Icon } from 'native-base'
 
 import { color } from '../../Style/Color'
 import { SearchAtom } from '../../Atom/SearchAtom'
@@ -142,10 +142,9 @@ class BaseHeader extends React.PureComponent<IProps> {
       <View style={styles.header}>
         <View style={styles.wrapper}>
           <TouchableWithoutFeedback onPress={this.props.onPressLeftIcon}>
-            <Left
+            <View
               style={{
                 flexDirection: 'row',
-                width: 20,
                 alignItems: 'center'
               }}
             >
@@ -156,10 +155,10 @@ class BaseHeader extends React.PureComponent<IProps> {
               />
 
               <DemiBoldText style={styles.title}>{props.title}</DemiBoldText>
-            </Left>
+            </View>
           </TouchableWithoutFeedback>
           {!this.props.hideRightMenu ? (
-            <Right>
+            <View>
               <TouchableWithoutFeedback onPress={this.props.onPressRightIcon}>
                 <View style={[styles.rightWrapper, this.props.rightIconStyle]}>
                   {!this.props.rightIconTitle ? (
@@ -190,9 +189,9 @@ class BaseHeader extends React.PureComponent<IProps> {
                   )}
                 </View>
               </TouchableWithoutFeedback>
-            </Right>
+            </View>
           ) : (
-            <Right />
+            <View />
           )}
         </View>
         {this.props.showSearchBar && <SearchAtom {...this.props.searchBar} />}
