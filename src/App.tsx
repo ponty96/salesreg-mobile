@@ -1,5 +1,5 @@
 import React from 'react'
-import { View, StatusBar } from 'react-native'
+import { View } from 'react-native'
 import { Root } from 'native-base'
 import { ApolloProvider } from 'react-apollo'
 import client from './client'
@@ -24,6 +24,7 @@ import { upsertMobileDevice } from './services/MobileDevice'
 import pushNotificationWrapper from './Functions/PushNotificationWrapper'
 import { PushNotificationContext } from './context/PushNotificationContext'
 import PushNotificationContainer from './Container/PushNotificationContainer'
+import StatusBarAtom from './Atom/StatusBarAtom'
 
 const store = createStore(appReducers, applyMiddleware(thunk, logger))
 const pushOptions = {
@@ -77,6 +78,7 @@ class App extends React.Component<IProps> {
   }
 
   onIds = device => {
+    console.log('The device ', device)
     pushNotificationWrapper.setFCMToken(device.pushToken)
   }
 
@@ -135,7 +137,7 @@ class App extends React.Component<IProps> {
                 >
                   <ApolloProvider client={client}>
                     <Root>
-                      <StatusBar barStyle="light-content" />
+                      <StatusBarAtom />
                       <Routes client={client} />
                     </Root>
                   </ApolloProvider>

@@ -21,12 +21,20 @@ class Auth {
     return AsyncStorage.getItem('mobileDeviceInfo')
   }
 
+  static getCurrentSchemaVersion() {
+    return AsyncStorage.getItem('schema_version')
+  }
+
   static getS3Keys() {
     return AsyncStorage.getItem('S3_KEYS')
   }
 
   static setToken(token: string) {
     AsyncStorage.setItem('token', token)
+  }
+
+  static setCurrentSchemaVersion(version: string) {
+    return AsyncStorage.setItem('schema_version', version)
   }
 
   static setRefreshToken(token: string) {
