@@ -78,6 +78,7 @@ class App extends React.Component<IProps> {
   }
 
   onIds = device => {
+    console.log('The device ', device)
     pushNotificationWrapper.setFCMToken(device.pushToken)
   }
 

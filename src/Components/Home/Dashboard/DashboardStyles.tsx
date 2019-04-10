@@ -33,10 +33,12 @@ const styles = StyleSheet.create({
     height: 300
   },
   emptyContainer: {
-    alignItems: 'center'
+    alignItems: 'flex-start',
+    marginTop: 10
   },
   noDataText: {
-    fontSize: 14
+    fontSize: 14,
+    color: '#979ca9'
   },
   smallText: {
     fontSize: 12,
