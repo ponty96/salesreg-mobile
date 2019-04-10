@@ -249,3 +249,37 @@ export const CompanyAllowsNationwideDeliveryGQL = gql`
     }
   }
 `
+
+export const IncomeDashboardInfoGQL = gql`
+  query incomeDashboardInfo($query: GraphQueryInput) {
+    incomeDashboardInfo(query: $query) {
+      amountDue
+      totalIncome
+      totalProducts
+      dataPoints {
+        date
+        total
+      }
+      topProducts {
+        amount
+        productId
+        title
+      }
+    }
+  }
+`
+
+export const OrderDashboardInfoGQL = gql`
+  query orderDashboardInfo($query: GraphQueryInput) {
+    orderDashboardInfo(query: $query) {
+      dataPoints {
+        date
+        total
+      }
+      orderStatuses {
+        count
+        status
+      }
+    }
+  }
+`

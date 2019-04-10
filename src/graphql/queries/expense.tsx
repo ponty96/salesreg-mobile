@@ -45,3 +45,19 @@ export const ListCompanyExpensesGQL = gql`
     }
   }
 `
+
+export const ExpenseDashboardInfoGQL = gql`
+  query expenseDashboardInfo($query: GraphQueryInput) {
+    expenseDashboardInfo(query: $query) {
+      dataPoints {
+        date
+        total
+      }
+      topExpenses {
+        title
+        totalInGroup
+      }
+      totalExpense
+    }
+  }
+`
