@@ -10,6 +10,7 @@ import { numberWithCommas } from '../../../Functions/numberWithCommas'
 import RangePickerAtom from '../../../Atom/RangePickerAtom'
 import { ExpenseDashboardInfoGQL } from '../../../graphql/queries/expense'
 import RequestActivityIndicator from './RequestActivityIndicator'
+import { getName } from '../../../Functions/graphHelpers'
 
 interface IState {
   isRangePickerVisible: boolean
@@ -80,9 +81,12 @@ export default class ExpenseAnalytics extends React.PureComponent<
         <MediumText style={styles.smallText}>EXPENSE BREAKDOWN</MediumText>
         {topExpenses.length > 0 ? (
           topExpenses.map((expense, i) => (
-            <View style={[styles.row, styles.borderedExpense]} key={i}>
+            <View
+              style={[styles.row, styles.borderedExpense, styles.addTopMargin]}
+              key={i}
+            >
               <RegularText style={[styles.smallText, styles.productsText]}>
-                {expense.title}
+                {getName(expense.title)}
               </RegularText>
               <RegularText style={[styles.smallText, styles.productsText]}>
                 {`\u20A6${numberWithCommas(expense.totalInGroup || 0)}`}{' '}
