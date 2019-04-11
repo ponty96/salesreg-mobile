@@ -1,8 +1,11 @@
+// import '@babel/polyfill'
 import React from 'react'
-import { AppRegistry } from 'react-native'
+import { AppRegistry, YellowBox } from 'react-native'
+import Config from 'react-native-config'
+
 import App from './App'
-import { YellowBox } from 'react-native'
 import { persistor } from './client'
+import Auth from './services/auth'
 import { PushNotificationContext } from './context/PushNotificationContext'
 
 YellowBox.ignoreWarnings([
@@ -12,7 +15,18 @@ YellowBox.ignoreWarnings([
   'Class RCTCxxModule'
 ])
 
-persistor.restore()
+async function setupApollo() {
+  const currentVersion = await Auth.getCurrentSchemaVersion()
+
+  if (currentVersion === Config.SCHEMA_VERSION) {
+    await persistor.restore()
+  } else {
+    await persistor.purge()
+    await Auth.setCurrentSchemaVersion(Config.SCHEMA_VERSION)
+  }
+}
+
+setupApollo()
 
 export default class Index extends React.PureComponent {
   constructor(props) {

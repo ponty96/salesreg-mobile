@@ -120,8 +120,8 @@ android {
         minSdkVersion rootProject.ext.minSdkVersion
         vectorDrawables.useSupportLibrary = true
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 9
-        versionName "0.2.2"
+        versionCode 12
+        versionName "0.2.5"
         ndk {
             abiFilters "armeabi-v7a", "x86"
         }
@@ -157,6 +157,7 @@ android {
 }
 
 dependencies {
+    compile project(':react-native-svg')
     compile project(':react-native-code-push')
     compile project(':react-native-onesignal')
     compile project(':react-native-document-picker')

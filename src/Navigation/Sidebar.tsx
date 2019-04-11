@@ -13,7 +13,7 @@ import { Icon } from 'native-base'
 import { color } from '../Style/Color'
 import Auth from '../services/auth'
 import { UserContext } from '../context/UserContext'
-import { RegularText, MediumText } from '../Atom/TextAtom'
+import { MediumText } from '../Atom/TextAtom'
 
 interface IProps {
   navigation: any
@@ -35,6 +35,15 @@ interface Category {
 }
 
 const sideBarItemStyles = StyleSheet.create({
+  categoryContainer: {
+    borderBottomWidth: StyleSheet.hairlineWidth,
+    borderBottomColor: '#d8d8d8',
+    paddingVertical: 6
+  },
+  hideBorder: {
+    borderBottomWidth: 0,
+    paddingVertical: 6
+  },
   listHeader: {
     backgroundColor: 'transparent',
     marginTop: 16,
@@ -53,11 +62,11 @@ const sideBarItemStyles = StyleSheet.create({
     paddingVertical: 6
   },
   category: {
-    marginLeft: 30,
+    marginLeft: 20,
     backgroundColor: 'transparent',
     color: color.textColor,
-    marginVertical: 6,
-    fontSize: 16,
+    marginTop: 6,
+    fontSize: 14,
     fontFamily: 'AvenirNext-Medium'
   },
   activeCategoryWrapper: {
@@ -72,15 +81,17 @@ const SidebarItem = (prop: {
   title: string
   categories: Category[]
   navigate: any
+  hideBottomBorder?: boolean
   activeRoute?: string | null
 }) => {
   return (
-    <View>
-      <View style={sideBarItemStyles.listHeader}>
-        <RegularText style={[sideBarItemStyles.title]}>
-          {prop.title}
-        </RegularText>
-      </View>
+    <View
+      style={
+        prop.hideBottomBorder
+          ? sideBarItemStyles.hideBorder
+          : sideBarItemStyles.categoryContainer
+      }
+    >
       {prop.categories.map((category: Category, key: number) => {
         return (
           <TouchableOpacity
@@ -93,12 +104,16 @@ const SidebarItem = (prop: {
             onPress={() => prop.navigate(category.routeName)}
           >
             <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-              <View style={{ width: 35 }}>
+              <View style={{ width: 20 }}>
                 <Icon
                   name={category.iconName}
                   type={category.iconType}
                   style={[
-                    { fontSize: 20, color: color.textColor },
+                    {
+                      fontSize: category.iconType == 'EvilIcons' ? 27 : 20,
+                      marginLeft: category.iconType == 'EvilIcons' ? -5 : 0,
+                      color: color.textColor
+                    },
                     prop.activeRoute == category.routeName &&
                       sideBarItemStyles.activeCategory
                   ]}
@@ -186,7 +201,7 @@ class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Home',
                   iconName: 'home',
-                  iconType: 'MaterialIcons',
+                  iconType: 'SimpleLineIcons',
                   routeName: 'Home'
                 }
               ]}
@@ -200,8 +215,20 @@ class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Products',
                   routeName: 'Products',
-                  iconName: 'md-cart',
-                  iconType: 'Ionicons'
+                  iconName: 'archive',
+                  iconType: 'EvilIcons'
+                },
+                {
+                  title: 'Categories',
+                  routeName: 'Categories',
+                  iconName: 'folder-alt',
+                  iconType: 'SimpleLineIcons'
+                },
+                {
+                  title: 'Price Calculator',
+                  routeName: 'ChargeCalculator',
+                  iconName: 'calculator',
+                  iconType: 'SimpleLineIcons'
                 }
               ]}
             />
@@ -214,8 +241,20 @@ class SideBar extends PureComponent<IProps, IState> {
                 {
                   title: 'Customers',
                   routeName: 'Customers',
-                  iconName: 'user',
+                  iconName: 'user-o',
                   iconType: 'FontAwesome'
+                },
+                {
+                  title: 'Sales',
+                  routeName: 'Sales',
+                  iconName: 'cart-outline',
+                  iconType: 'MaterialCommunityIcons'
+                },
+                {
+                  title: 'Shipping Zones',
+                  routeName: 'DeliveryFees',
+                  iconName: 'location-pin',
+                  iconType: 'SimpleLineIcons'
                 }
               ]}
             />
@@ -226,15 +265,21 @@ class SideBar extends PureComponent<IProps, IState> {
               activeRoute={this.state.activeRoute}
               categories={[
                 {
-                  title: 'Sales',
-                  routeName: 'Sales',
-                  iconName: 'shopping-cart',
-                  iconType: 'FontAwesome'
-                },
-                {
                   title: 'Invoices',
                   routeName: 'Invoices',
                   iconName: 'receipt',
+                  iconType: 'MaterialCommunityIcons'
+                },
+                {
+                  title: 'Expenses',
+                  routeName: 'Expenses',
+                  iconName: 'credit-card',
+                  iconType: 'SimpleLineIcons'
+                },
+                {
+                  title: 'Banks',
+                  routeName: 'Banks',
+                  iconName: 'bank',
                   iconType: 'MaterialCommunityIcons'
                 }
               ]}
@@ -253,44 +298,22 @@ class SideBar extends PureComponent<IProps, IState> {
               ]}
             /> */}
             <SidebarItem
-              title="TRANSACTIONS"
-              navigate={this.handleNavigation}
-              activeRoute={this.state.activeRoute}
-              categories={[
-                {
-                  title: 'Banks',
-                  routeName: 'Banks',
-                  iconName: 'bank',
-                  iconType: 'MaterialCommunityIcons'
-                },
-                // {
-                //   title: 'Income',
-                //   routeName: 'Income'
-                // },
-                {
-                  title: 'Expenses',
-                  routeName: 'Expenses',
-                  iconName: 'database-minus',
-                  iconType: 'MaterialCommunityIcons'
-                }
-              ]}
-            />
-            <SidebarItem
               title="HELP & SETTINGS"
+              hideBottomBorder
               navigate={this.handleNavigation}
               activeRoute={this.state.activeRoute}
               categories={[
                 {
                   title: 'Settings',
                   routeName: 'ProfileSettings',
-                  iconType: 'MaterialIcons',
+                  iconType: 'SimpleLineIcons',
                   iconName: 'settings'
                 },
                 {
                   title: 'Help & Feedback',
                   routeName: 'Help',
-                  iconType: 'MaterialIcons',
-                  iconName: 'help'
+                  iconType: 'Ionicons',
+                  iconName: 'ios-help-circle-outline'
                 }
               ]}
             />

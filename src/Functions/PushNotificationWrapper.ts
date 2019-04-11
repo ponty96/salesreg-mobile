@@ -21,12 +21,12 @@ class PushNotificationWrapper {
 
     await Auth.setMobileDeviceInfo({
       ..._mobileDeviceInfo,
-      token: this.fcmToken,
+      token: this.fcmToken || '',
       notificationEnabled: true
     })
 
     return Promise.resolve({
-      fcmToken: this.fcmToken,
+      fcmToken: this.fcmToken || '',
       previousEnabilityState:
         this.fcmToken == _mobileDeviceInfo.token
           ? _mobileDeviceInfo.notificationEnabled || false
