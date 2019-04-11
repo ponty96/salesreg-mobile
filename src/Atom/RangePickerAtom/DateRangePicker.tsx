@@ -35,6 +35,15 @@ export default class DateRangePicker extends Component<IProps, IState> {
     this.setupInitialRange()
   }
 
+  componentDidUpdate(prevProps) {
+    if (
+      this.props.initialRange[0] != prevProps.initialRange[0] ||
+      this.props.initialRange[1] != prevProps.initialRange[1]
+    ) {
+      this.setupInitialRange()
+    }
+  }
+
   onDayPress = day => {
     if (
       !this.state.isFromDatePicked ||
