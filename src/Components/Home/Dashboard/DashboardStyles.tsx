@@ -49,6 +49,9 @@ const styles = StyleSheet.create({
     fontSize: 20,
     color: color.textColor
   },
+  addTopMargin: {
+    marginTop: 7
+  },
   productsText: {
     marginTop: 2,
     fontSize: 13,

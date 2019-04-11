@@ -29,7 +29,12 @@ export const evaluateDataPoints = (
 
   dataPoints.forEach((point, i) => {
     labels.push(getXAxisDataPoint(groupBy, point.date, i))
-    datasets[0].data.push(point.total)
+    datasets[0].data.push(Number(point.total))
   })
   return { labels, datasets }
+}
+
+export const getName = title => {
+  let productName = title.length < 35 ? title : `${title.substring(0, 20)}...`
+  return productName
 }

@@ -12,7 +12,7 @@ import { numberWithCommas } from '../../../Functions/numberWithCommas'
 import RangePickerAtom from '../../../Atom/RangePickerAtom'
 import { IncomeDashboardInfoGQL } from '../../../graphql/queries/order'
 import RequestActivityIndicator from './RequestActivityIndicator'
-import { evaluateDataPoints } from '../../../Functions/graphHelpers'
+import { evaluateDataPoints, getName } from '../../../Functions/graphHelpers'
 
 interface IProps {
   shouldLoad: boolean
@@ -103,9 +103,9 @@ export default class SalesAnalytics extends React.PureComponent<
         <MediumText style={styles.smallText}>TOP PRODUCT</MediumText>
         {topProducts.length > 0 ? (
           topProducts.map((product, i) => (
-            <View style={styles.row} key={i}>
+            <View style={[styles.row, styles.addTopMargin]} key={i}>
               <RegularText style={[styles.smallText, styles.productsText]}>
-                {product.title}
+                {getName(product.title)}
               </RegularText>
               <RegularText style={[styles.smallText, styles.productsText]}>
                 {`\u20A6${numberWithCommas(product.amount)}`}
