@@ -191,6 +191,8 @@ export default class SalesAnalytics extends React.PureComponent<
               )}
               <RangePickerAtom
                 visible={this.state.isRangePickerVisible}
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
                 onSave={this.setFilter}
                 onRequestClose={() =>
                   this.setState({ isRangePickerVisible: false })

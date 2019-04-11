@@ -10,12 +10,16 @@ import { color } from '../../Style/Color'
 interface IProps {
   onRequestClose: () => void
   visible: boolean
+  startDate: string
+  endDate: string
   onSave: (start: string, end: string, groupBy: any) => void
 }
 
 interface IState {
   startDate: string | undefined
   endDate: string | undefined
+  initialStartDateOnRender: string | undefined
+  initialEndDateOnRender: string | undefined
 }
 
 export default class RangePickerAtom extends React.PureComponent<
@@ -24,7 +28,19 @@ export default class RangePickerAtom extends React.PureComponent<
 > {
   state = {
     startDate: undefined,
-    endDate: undefined
+    endDate: undefined,
+    initialStartDateOnRender: undefined,
+    initialEndDateOnRender: undefined
+  }
+
+  componentDidUpdate(prevProps) {
+    let { startDate, endDate } = this.props
+    if (prevProps.visible == false && this.props.visible == true) {
+      this.setState({
+        initialStartDateOnRender: startDate,
+        initialEndDateOnRender: endDate
+      })
+    }
   }
 
   getGroupedby = duration => {
@@ -48,16 +64,32 @@ export default class RangePickerAtom extends React.PureComponent<
   }
 
   renderHeader = () => (
-    <View style={styles.header}>
-      <Icon
-        name="arrow-back"
-        type="MaterialIcons"
-        style={styles.icon}
-        onPress={this.props.onRequestClose}
-      />
-      <DemiBoldText>Data Settings</DemiBoldText>
-      <DemiBoldText onPress={this.saveFilter}>SAVE</DemiBoldText>
-    </View>
+    <React.Fragment>
+      <View style={styles.header}>
+        <Icon
+          name="arrow-back"
+          type="MaterialIcons"
+          style={styles.icon}
+          onPress={this.props.onRequestClose}
+        />
+        <DemiBoldText>Data Settings</DemiBoldText>
+        <DemiBoldText onPress={this.saveFilter}>SAVE</DemiBoldText>
+      </View>
+      <View style={styles.header}>
+        <DemiBoldText>
+          From:{' '}
+          {moment(this.state.startDate || this.props.startDate).format(
+            'Do MMM, YYYY'
+          )}
+        </DemiBoldText>
+        <DemiBoldText>
+          To:{' '}
+          {moment(this.state.endDate || this.props.endDate).format(
+            'Do MMM, YYYY'
+          )}
+        </DemiBoldText>
+      </View>
+    </React.Fragment>
   )
 
   renderArrows = direction => {
@@ -82,6 +114,10 @@ export default class RangePickerAtom extends React.PureComponent<
       style={{
         marginHorizontal: -4
       }}
+      initialRange={[
+        this.state.initialStartDateOnRender || moment().format('YYYY-MM-DD'),
+        this.state.initialEndDateOnRender || moment().format('YYYY-MM-DD')
+      ]}
       monthFormat="MMMM yyyy"
       theme={{ markColor: color.green, markTextColor: 'white' }}
       onSuccess={(startDate, endDate) =>

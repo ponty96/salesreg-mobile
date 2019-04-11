@@ -143,6 +143,8 @@ export default class ExpenseAnalytics extends React.PureComponent<
               <RangePickerAtom
                 visible={this.state.isRangePickerVisible}
                 onSave={this.setFilter}
+                startDate={this.state.startDate}
+                endDate={this.state.endDate}
                 onRequestClose={() =>
                   this.setState({ isRangePickerVisible: false })
                 }
