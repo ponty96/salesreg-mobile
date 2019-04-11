@@ -28,8 +28,6 @@ async function setupApollo() {
 
 setupApollo()
 
-persistor.restore()
-
 export default class Index extends React.PureComponent {
   constructor(props) {
     super(props)
