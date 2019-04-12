@@ -95,6 +95,7 @@ export default class OrderAnalytics extends React.PureComponent<
             withDots={false}
             style={styles.chartStyle}
             chartConfig={chartConfig}
+            bezier
           />
         ) : (
           <View style={styles.emptyContainer}>
