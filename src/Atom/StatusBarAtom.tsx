@@ -10,7 +10,7 @@ const StatusBarAtom = ({ backgroundColor, ...props }: IProps) =>
     <View
       style={[styles.statusBar, { backgroundColor: backgroundColor || '#fff' }]}
     >
-      <StatusBar hidden barStyle={props.barStyle || 'dark-content'} />
+      <StatusBar barStyle={props.barStyle || 'dark-content'} />
     </View>
   ) : (
     <StatusBar
@@ -22,10 +22,11 @@ const StatusBarAtom = ({ backgroundColor, ...props }: IProps) =>
 
 export default StatusBarAtom
 
+const STATUSBAR_HEIGHT = Platform.OS === 'ios' ? 20 : StatusBar.currentHeight
 const styles = StyleSheet.create({
   statusBar: {
-    height: 20,
-    marginTop: -20,
+    height: STATUSBAR_HEIGHT,
+    marginTop: 0,
     zIndex: 2000
   }
 })
