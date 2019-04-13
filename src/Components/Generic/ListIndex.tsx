@@ -276,7 +276,7 @@ class GenericListIndex extends React.Component<IProps, IState> {
             }
           }
         }}
-        fetchPolicy={fetchPolicy || 'cache-first'}
+        fetchPolicy={fetchPolicy || 'cache-and-network'}
       >
         {({ loading, data, error, networkStatus, fetchMore, refetch }) => {
           this.refetchQuery = refetch
