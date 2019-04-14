@@ -2,7 +2,7 @@ import React from 'react'
 import { StyleSheet, View } from 'react-native'
 
 import InputAtom from '../../Atom/Form/InputAtom'
-import ButtonAtom from '../../Atom/Form/ButtonAtom'
+// import ButtonAtom from '../../Atom/Form/ButtonAtom'
 import Header from '../../Components/Header/BaseHeader'
 import { UserContext } from '../../context/UserContext'
 import { color } from '../../Style/Color'
@@ -62,7 +62,9 @@ class ChargeCalculatorScreen extends React.PureComponent<IProps> {
           label="How much do you want to sell this product?"
           defaultValue={this.state.profit}
           keyboardType="numeric"
-          getValue={profit => this.setState({ profit })}
+          getValue={profit =>
+            this.setState({ profit }, () => this.calculateCharge())
+          }
         />
         <MediumText style={styles.text}>
           Payment Charge: {this.state.paymentCharge}
@@ -79,14 +81,14 @@ class ChargeCalculatorScreen extends React.PureComponent<IProps> {
             )}
           </BoldText>
         </MediumText>
-        <View style={styles.buttonContainer}>
+        {/* <View style={styles.buttonContainer}>
           <ButtonAtom
             textStyle={{ color: '#fff' }}
             hideIcon
             btnText="Calculate"
             onPress={this.calculateCharge}
           />
-        </View>
+        </View> */}
       </View>
     )
   }
