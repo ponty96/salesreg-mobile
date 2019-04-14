@@ -7,7 +7,7 @@ import Header from '../../Components/Header/BaseHeader'
 import { UserContext } from '../../context/UserContext'
 import { color } from '../../Style/Color'
 import { MediumText, BoldText } from '../../Atom/TextAtom'
-import { numberWithCommas } from '../../Functions/numberWithCommas';
+import { numberWithCommas } from '../../Functions/numberWithCommas'
 
 interface IProps {
   navigation: any
@@ -27,9 +27,7 @@ class ChargeCalculatorScreen extends React.PureComponent<IProps> {
       header: (
         <Header
           title="Charge Calculator"
-          leftIconTitle="md-arrow-back"
-          leftIconType="Ionicons"
-          onPressLeftIcon={() => navigation.goBack()}
+          onPressLeftIcon={() => navigation.navigate('DrawerToggle')}
           onPressRightIcon={() => navigation.navigate('Notifications')}
         />
       )
