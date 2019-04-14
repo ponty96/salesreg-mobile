@@ -22,8 +22,9 @@ import { FetchPolicy } from 'apollo-client'
 import SubHeaderAtom from '../Header/SubHeaderAtom'
 import { UserContext } from '../../context/UserContext'
 import ErrorViewAtom from '../../Atom/ErrorViewAtom'
-import { observableStore } from '../../client'
 import { DemiBoldText, RegularText } from '../../Atom/TextAtom'
+import { NotificationBanner } from '../NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 
 interface SubHeaderProps {
   screen: string
@@ -269,10 +270,11 @@ class GenericListIndex extends React.Component<IProps, IState> {
               this.networkStatus == 8 ||
               this.networkStatus == 2
             ) {
-              observableStore.dispatch('timeout', {
-                id: Date.now(),
-                messgae: 'A timeout error occurred'
+              let banner = NotificationBanner({
+                ...configureNotificationBanner('TimeoutError')
               })
+
+              banner.show({ bannerPosition: 'bottom' })
             }
           }
         }}

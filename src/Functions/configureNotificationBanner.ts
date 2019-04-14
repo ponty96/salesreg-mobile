@@ -33,9 +33,16 @@ type ITypes =
   | 'UpdateSpecialOffer'
   | 'DeleteDeliveryFee'
   | 'CreateDeliveryFee'
+  | 'TimeoutError'
 
 const configureNotificationBanner = (type: ITypes, params?: any): any => {
   switch (type) {
+    case 'TimeoutError':
+      return {
+        title: 'Network Error',
+        subtitle: 'A timeout error occurred',
+        style: 'danger'
+      }
     case 'AddContact':
       return {
         title: 'Created Customer',

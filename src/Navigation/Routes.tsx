@@ -316,8 +316,6 @@ export default class Routes extends React.Component<IProps, IState> {
     return (
       <Query query={AuthenticateQueryGQL}>
         {({ loading, error, data }) => {
-          console.log('data', data)
-          console.log('loading', loading)
           if (loading) {
             return <RegularText>{`Loading data here`}</RegularText>
           }
