@@ -102,6 +102,7 @@ import InvoicesScreen from '../Screen/Invoices/InvoicesScreen'
 import UpdateInvoiceDueDate from '../Screen/Invoices/UpdateInvoiceDueDate'
 
 import IncomeScreen from '../Screen/IncomeScreen'
+import SubscriptionDetailsScreen from '../Screen/Settings/Subscription/SubscriptionDetailsScreen'
 
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
@@ -163,6 +164,9 @@ const businessStack = StackNavigator(
     },
     EditBusinessProfile: {
       screen: EditBusinessProfileScreen
+    },
+    SubscriptionDetails: {
+      screen: SubscriptionDetailsScreen
     },
 
     // STORE ROUTES
