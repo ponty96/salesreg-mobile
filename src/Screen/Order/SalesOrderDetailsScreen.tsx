@@ -38,7 +38,7 @@ class SalesOrderDetailsScreen extends Component<IProps> {
         <Header
           title="Sales Order Details"
           onPressLeftIcon={() => navigation.goBack()}
-          hideRightMenu={true}
+          onPressRightIcon={() => null}
         />
       )
     }
