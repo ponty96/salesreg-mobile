@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { Mutation } from 'react-apollo'
+import { NavigationActions } from 'react-navigation'
+
 import AppSpinner from '../Spinner'
 import { UpsertContactGQL } from '../../graphql/mutations/contact'
 import { CompanyContactGQL } from '../../graphql/queries/contact'
@@ -7,7 +9,6 @@ import { parseFieldErrors, capitalize } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries } from '../../utilities/data/picker-lists'
 import { UserContext } from '../../context/UserContext'
-import { NavigationActions } from 'react-navigation'
 import configureNotificationBanner from '../../Functions/configureNotificationBanner'
 import { NotificationBanner } from '../../Components/NotificationBanner'
 import setAppAnalytics from '../../Functions/setAppAnalytics'
@@ -47,6 +48,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     instagram: '',
     twitter: '',
     facebook: '',
+    contactType: '',
     allowsMarketing: 'No',
     // snapchat: '',
     // last step
@@ -157,6 +159,17 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                       options: ['Male', 'Female']
                     },
                     name: 'gender'
+                  },
+                  {
+                    label: `What type of contact is ${
+                      this.state.gender == 'Male' ? 'he' : 'she'
+                    }?`,
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'radio',
+                      options: ['Customer', 'Prospect']
+                    },
+                    name: 'contactType'
                   }
                 ]
               },

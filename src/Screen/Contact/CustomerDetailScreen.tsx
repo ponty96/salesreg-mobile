@@ -26,7 +26,7 @@ export default class UpsertCustomerScreen extends PureComponent<IProps> {
     return (
       <ContactDetails
         contact={this.props.navigation.getParam('customer', {})}
-        contactType="customer"
+        contactType="contact"
         navigation={this.props.navigation}
       />
     )

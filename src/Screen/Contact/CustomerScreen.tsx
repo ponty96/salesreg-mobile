@@ -49,7 +49,7 @@ export default class CustomerScreen extends React.PureComponent<
     return (
       <React.Fragment>
         <Header
-          title="Customer"
+          title="Contact"
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
           onPressRightIcon={() =>
             this.props.navigation.navigate('Notifications')
