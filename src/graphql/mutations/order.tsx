@@ -212,3 +212,15 @@ export const UpdateInvoice = gql`
     }
   }
 `
+
+export const DeleteSaleOrderGQL = gql`
+  mutation deleteSaleOrder($saleId: Uuid!) {
+    deleteSaleOrder(saleId: $saleId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`

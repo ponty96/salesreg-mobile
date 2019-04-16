@@ -34,6 +34,7 @@ type ITypes =
   | 'DeleteDeliveryFee'
   | 'CreateDeliveryFee'
   | 'TimeoutError'
+  | 'DeleteSaleOrder'
 
 const configureNotificationBanner = (type: ITypes, params?: any): any => {
   switch (type) {
@@ -226,6 +227,11 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
       return {
         title: `Special Offer Updated`,
         subtitle: `${params.title} has been updated`
+      }
+    case 'DeleteSaleOrder':
+      return {
+        title: `Sale Order Deleted`,
+        subtitle: `Your sale order has been removed`
       }
   }
 }
