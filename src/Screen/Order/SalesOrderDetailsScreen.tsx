@@ -32,15 +32,9 @@ interface IProps {
 }
 
 class SalesOrderDetailsScreen extends Component<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Sales Order Details"
-          onPressLeftIcon={() => navigation.goBack()}
-          onPressRightIcon={() => null}
-        />
-      )
+      header: null
     }
   }
 
@@ -209,40 +203,49 @@ class SalesOrderDetailsScreen extends Component<IProps> {
       this.props.navigation.getParam('sales', null) || this.props.sales
 
     return (
-      <Mutation
-        mutation={DeleteSaleOrderGQL}
-        onCompleted={this.onDeleteCompleted}
-        refetchQueries={[
-          {
-            query: ListCompanySalesGQL,
-            variables: {
-              companyId: this.props.user.company.id,
-              first: 10,
-              after: null
-            }
+      <React.Fragment>
+        <Header
+          title="Sales Order Details"
+          onPressLeftIcon={() => this.props.navigation.goBack()}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('UpsertSales', { sales })
           }
-        ]}
-        awaitRefetchQueries={true}
-      >
-        {(deleteSaleOrder, { loading }) => (
-          <React.Fragment>
-            <AppSpinner visible={loading} />
-            <View style={styles.container}>
-              <GenericDetailsComponent
-                title={sales.contact.contactName}
-                totalAmount={parseFloat(
-                  (Number(sales.amount) - Number(sales.discount)).toString()
-                ).toFixed(2)}
-                items={this.parseItems()}
-                shouldShowStatus={true}
-                onPressStatus={this.onStatusPress}
-                enableDelete={false}
-              />
-              {this.renderBottom(deleteSaleOrder)}
-            </View>
-          </React.Fragment>
-        )}
-      </Mutation>
+        />
+        <Mutation
+          mutation={DeleteSaleOrderGQL}
+          onCompleted={this.onDeleteCompleted}
+          refetchQueries={[
+            {
+              query: ListCompanySalesGQL,
+              variables: {
+                companyId: this.props.user.company.id,
+                first: 10,
+                after: null
+              }
+            }
+          ]}
+          awaitRefetchQueries={true}
+        >
+          {(deleteSaleOrder, { loading }) => (
+            <React.Fragment>
+              <AppSpinner visible={loading} />
+              <View style={styles.container}>
+                <GenericDetailsComponent
+                  title={sales.contact.contactName}
+                  totalAmount={parseFloat(
+                    (Number(sales.amount) - Number(sales.discount)).toString()
+                  ).toFixed(2)}
+                  items={this.parseItems()}
+                  shouldShowStatus={true}
+                  onPressStatus={this.onStatusPress}
+                  enableDelete={false}
+                />
+                {this.renderBottom(deleteSaleOrder)}
+              </View>
+            </React.Fragment>
+          )}
+        </Mutation>
+      </React.Fragment>
     )
   }
 }

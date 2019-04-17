@@ -65,34 +65,67 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
     header: null
   }
 
-  state = {
-    items: [
-      {
-        productId: null,
-        quantity: '1',
-        name: '',
-        unitPrice: '0.00'
+  constructor(props) {
+    super(props)
+
+    let sale = this.props.navigation.getParam('sales', null),
+      newState = {}
+
+    if (sale) {
+      newState = {
+        items: sale.items.map(item => ({
+          productId: item.product.id,
+          quantity: item.quantity,
+          unitPrice: item.unitPrice,
+          name: item.product.name
+        })),
+        isCustomerInContacts: sale.contact ? 'Yes' : 'No',
+        amountPaid: sale.amountPaid,
+        date: moment(sale.date).format('YYYY-MM-DD'),
+        discount: sale.discount,
+        existingContact: {
+          id: sale.contact.id,
+          contactName: sale.contact.contactName,
+          email: sale.contact.email
+        },
+        region: sale.location.city,
+        address: sale.location.street1,
+        state: sale.location.state,
+        country: sale.location.country,
+        deliveryFee: sale.deliveryFee
       }
-    ],
-    fieldErrors: null,
-    isCustomerInContacts: null,
-    amountPaid: '0.00',
-    date: moment(new Date()).format('YYYY-MM-DD'),
-    discount: '0',
-    existingContact: { id: '', contactName: '', email: '' },
-    tax: '',
-    contactName: '',
-    email: '',
-    region: '',
-    address: '',
-    state: '',
-    country: 'NG',
-    data: {},
-    salesOrderId: '',
-    isCardPaymentVisible: false,
-    user: { companyId: '', userId: '' },
-    companyRegions: [],
-    deliveryFee: '0.00'
+    }
+
+    this.state = {
+      items: [
+        {
+          productId: null,
+          quantity: '1',
+          name: '',
+          unitPrice: '0.00'
+        }
+      ],
+      fieldErrors: null,
+      isCustomerInContacts: null,
+      amountPaid: '0.00',
+      date: moment(new Date()).format('YYYY-MM-DD'),
+      discount: '0',
+      existingContact: { id: '', contactName: '', email: '' },
+      tax: '',
+      contactName: '',
+      email: '',
+      region: '',
+      address: '',
+      state: '',
+      country: 'NG',
+      data: {},
+      salesOrderId: '',
+      isCardPaymentVisible: false,
+      user: { companyId: '', userId: '' },
+      companyRegions: [],
+      deliveryFee: '0.00',
+      ...newState
+    }
   }
 
   async componentDidMount() {
@@ -100,6 +133,7 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       company: { id: companyId },
       id: userId
     } = JSON.parse(await Auth.getCurrentUser())
+
     this.setState({
       user: {
         companyId,
