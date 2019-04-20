@@ -8,7 +8,8 @@ type ITypes =
   | 'UpdateProduct'
   | 'UpsertProductRestock'
   | 'DeleteProduct'
-  | 'UpsertSalesOrder'
+  | 'CreateSaleOrder'
+  | 'UpdateSaleOrder'
   | 'UpdateOrderStatus'
   | 'UpdateInvoiceDueDate'
   | 'MakeInvoicePayment'
@@ -34,6 +35,7 @@ type ITypes =
   | 'DeleteDeliveryFee'
   | 'CreateDeliveryFee'
   | 'TimeoutError'
+  | 'DeleteSaleOrder'
 
 const configureNotificationBanner = (type: ITypes, params?: any): any => {
   switch (type) {
@@ -94,10 +96,15 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
             : ''
         }${params.name.trim()} was removed`
       }
-    case 'UpsertSalesOrder':
+    case 'CreateSaleOrder':
       return {
         title: 'Sales Order Created',
         subtitle: `A new sales order was created successfully`
+      }
+    case 'UpdateSaleOrder':
+      return {
+        title: 'Sales Order Updated',
+        subtitle: `Your sale order was just updated successfully`
       }
     case 'UpdateOrderStatus':
       return {
@@ -226,6 +233,11 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
       return {
         title: `Special Offer Updated`,
         subtitle: `${params.title} has been updated`
+      }
+    case 'DeleteSaleOrder':
+      return {
+        title: `Sale Order Deleted`,
+        subtitle: `Your sale order has been removed`
       }
   }
 }
