@@ -80,6 +80,19 @@ export const LoginUserMutationGQL = gql`
     }
   }
 `
+
+export const ForgotPasswordMutationGQL = gql`
+  mutation forgotPassword($email: String!){
+    forgotPassword(email: $email){
+      success 
+      fieldErrors {
+        key 
+        message 
+      }
+    }
+  }
+`
+
 export const RegisterUserMutationGQL = gql`
   mutation registerUser($user: UserInput!) {
     registerUser(user: $user) {

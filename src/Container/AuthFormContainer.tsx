@@ -17,6 +17,7 @@ interface IProps {
 
   alternativeLinkText?: string
   alternativeLinkRoute?: string
+  alternativeLinkOnClick?: () => void
 
   footerText: string
   footerButtonText: string
@@ -63,7 +64,9 @@ export default class AuthFormContainer extends React.PureComponent<IProps> {
                 <ButtonAtom
                   btnText={this.props.alternativeLinkText.toUpperCase()}
                   onPress={() =>
-                    this.props.navigate(this.props.alternativeLinkRoute)
+                    this.props.alternativeLinkOnClick
+                      ? this.props.alternativeLinkOnClick()
+                      : this.props.navigate(this.props.alternativeLinkRoute)
                   }
                   type="primary"
                   transparent={true}
