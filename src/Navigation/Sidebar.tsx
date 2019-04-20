@@ -239,8 +239,8 @@ class SideBar extends PureComponent<IProps, IState> {
               activeRoute={this.state.activeRoute}
               categories={[
                 {
-                  title: 'Customers',
-                  routeName: 'Customers',
+                  title: 'Contacts',
+                  routeName: 'Contacts',
                   iconName: 'user-o',
                   iconType: 'FontAwesome'
                 },

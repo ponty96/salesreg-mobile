@@ -94,7 +94,7 @@ class ContactDetails extends PureComponent<IProps> {
         }),
         NavigationActions.navigate({
           routeName:
-            this.props.contactType == 'customer' ? 'Customers' : 'Vendors'
+            this.props.contactType == 'customer' ? 'Customers' : 'Prospects'
         })
       ]
     })

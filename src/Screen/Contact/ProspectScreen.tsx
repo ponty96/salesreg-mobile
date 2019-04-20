@@ -12,7 +12,7 @@ interface IState {
   queryText: string
 }
 
-export default class CustomerScreen extends React.PureComponent<
+export default class ProspectScreen extends React.PureComponent<
   IProps,
   IState
 > {
@@ -26,10 +26,10 @@ export default class CustomerScreen extends React.PureComponent<
     }
   }
 
-  onPress = customer => {
+  onPress = prospect => {
     this.props.navigation.navigate('ContactDetails', {
-      contact: customer,
-      type: 'customer'
+      contact: prospect,
+      type: 'prospect'
     })
   }
 
@@ -52,14 +52,14 @@ export default class CustomerScreen extends React.PureComponent<
     return (
       <React.Fragment>
         <Header
-          title="Customer"
+          title="Prospect"
           onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
           onPressRightIcon={() =>
             this.props.navigation.navigate('Notifications')
           }
           showSearchBar
           searchBar={{
-            placeholder: 'Search for a customer',
+            placeholder: 'Search for a prospect',
             queryText: this.state.queryText,
             onSearch: queryText => this.setState({ queryText })
           }}
@@ -67,14 +67,14 @@ export default class CustomerScreen extends React.PureComponent<
         <GenericListIndex
           navigation={this.props.navigation}
           queryText={this.state.queryText}
-          variables={{ type: 'customer' }}
+          variables={{ type: 'prospect' }}
           graphqlQuery={CompanyContactGQL}
-          fabRouteParams={{ contactType: 'customer' }}
           graphqlQueryResultKey="companyContacts"
+          fabRouteParams={{ contactType: 'prospect' }}
           parseItemData={this.parseData}
           onItemPress={this.onPress}
           emptyListText={`So close that you tell them what they need well before they realize it themselves. \n\nStart doing so by tapping`}
-          headerText="Get closer than ever to your customers"
+          headerText="Get closer than ever to your prospect"
           fabRouteName="UpsertContact"
           fabIconName="user-plus"
           fabIconType="FontAwesome"

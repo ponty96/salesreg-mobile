@@ -7,16 +7,19 @@ interface IProps {
   navigation: any
 }
 
-export default class UpsertCustomerScreen extends PureComponent<IProps> {
+export default class ContactDetailsScreen extends PureComponent<IProps> {
   static navigationOptions = ({ navigation }: any) => {
-    const customer = navigation.getParam('customer', {})
+    const contact = navigation.getParam('contact', {}),
+      contactType = navigation.getParam('type', null)
     return {
       header: (
         <Header
-          title="Customer details"
+          title={`${
+            contactType == 'customer' ? 'Customer' : 'Prospect'
+          } details`}
           onPressLeftIcon={() => navigation.goBack()}
           onPressRightIcon={() =>
-            navigation.navigate('UpsertCustomer', { customer })
+            navigation.navigate('UpsertContact', { contact, contactType })
           }
         />
       )
@@ -25,8 +28,8 @@ export default class UpsertCustomerScreen extends PureComponent<IProps> {
   render() {
     return (
       <ContactDetails
-        contact={this.props.navigation.getParam('customer', {})}
-        contactType="contact"
+        contact={this.props.navigation.getParam('contact', {})}
+        contactType={this.props.navigation.getParam('type', null)}
         navigation={this.props.navigation}
       />
     )

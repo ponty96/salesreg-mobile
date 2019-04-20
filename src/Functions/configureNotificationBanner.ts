@@ -45,13 +45,15 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
       }
     case 'AddContact':
       return {
-        title: 'Created Customer',
-        subtitle: `Created ${params.contactName.trim()}'s information`
+        title:
+          params.type == 'customer' ? 'Created Customer' : 'Created Prospect',
+        subtitle: `Created ${params.contact.contactName.trim()}'s information`
       }
     case 'UpdateContact':
       return {
-        title: 'Updated Customer',
-        subtitle: `Updated ${params.contactName.trim()}'s information`
+        title:
+          params.type == 'customer' ? 'Updated Customer' : 'Updated Prospect',
+        subtitle: `Updated ${params.contact.contactName.trim()}'s information`
       }
     case 'DeleteContact':
       return {

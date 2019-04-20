@@ -5,7 +5,7 @@ import { NavigationActions } from 'react-navigation'
 import AppSpinner from '../Spinner'
 import { UpsertContactGQL } from '../../graphql/mutations/contact'
 import { CompanyContactGQL } from '../../graphql/queries/contact'
-import { parseFieldErrors, capitalize } from '../../Functions'
+import { parseFieldErrors } from '../../Functions'
 import FormStepperContainer from '../../Container/Form/StepperContainer'
 import { Countries } from '../../utilities/data/picker-lists'
 import { UserContext } from '../../context/UserContext'
@@ -48,7 +48,6 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     instagram: '',
     twitter: '',
     facebook: '',
-    contactType: '',
     allowsMarketing: 'No',
     // snapchat: '',
     // last step
@@ -159,17 +158,6 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
                       options: ['Male', 'Female']
                     },
                     name: 'gender'
-                  },
-                  {
-                    label: `What type of contact is ${
-                      this.state.gender == 'Male' ? 'he' : 'she'
-                    }?`,
-                    placeholder: 'E.g Doe',
-                    type: {
-                      type: 'radio',
-                      options: ['Customer', 'Prospect']
-                    },
-                    name: 'contactType'
                   }
                 ]
               },
@@ -322,6 +310,7 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
     delete params['totalAmountPaid']
     delete params['totalDebt']
     delete params['data']
+    delete params['contactType']
 
     return {
       contact: {
@@ -346,7 +335,10 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
       upsertContact: { success, fieldErrors, data }
     } = res
     if (success) {
-      setAppAnalytics('CREATE_CUSTOMER', this.state)
+      setAppAnalytics('CREATE_CONTACT', {
+        contact: this.state,
+        type: this.props.contactType
+      })
       const { contact } = this.props
       const resetAction = NavigationActions.reset({
         index: 1,
@@ -355,16 +347,22 @@ class UpsertContactForm extends Component<IProps> /*, IState*/ {
             routeName: this.props.successRoute
           }),
           NavigationActions.navigate({
-            routeName: `${capitalize(this.props.contactType)}Details`,
-            params: { [`${this.props.contactType}`]: data }
+            routeName: `ContactDetails`,
+            params: { contact: data, type: this.props.contactType }
           })
         ]
       })
 
       let banner = NotificationBanner(
         Object.keys(contact).length == 0
-          ? configureNotificationBanner('AddContact', this.state)
-          : configureNotificationBanner('UpdateContact', this.state)
+          ? configureNotificationBanner('AddContact', {
+              contact: this.state,
+              type: this.props.contactType
+            })
+          : configureNotificationBanner('UpdateContact', {
+              contact: this.state,
+              type: this.props.contactType
+            })
       )
       banner.show({ bannerPosition: 'bottom' })
 

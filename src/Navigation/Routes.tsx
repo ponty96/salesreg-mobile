@@ -14,10 +14,11 @@ import { RegularText } from '../Atom/TextAtom'
 import { Query } from 'react-apollo'
 import { AuthenticateQueryGQL } from '../graphql/queries/Authenticate'
 
-// Customer Screens
-import UpsertCustomerScreen from '../Screen/Contact/UpsertCustomerScreen'
-import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
+// Contact Screens
+import UpsertContactScreen from '../Screen/Contact/UpsertContactScreen'
+import ContactDetailScreen from '../Screen/Contact/ContactDetailScreen'
 import CustomerScreen from '../Screen/Contact/CustomerScreen'
+import ProspectScreen from '../Screen/Contact/ProspectScreen'
 import CustomerPaymentActivity from '../Screen/Contact/CustomerPaymentActivity'
 
 /***
@@ -116,7 +117,7 @@ const contactTab = TabNavigator(
       screen: CustomerScreen
     },
     Prospects: {
-      screen: () => null
+      screen: ProspectScreen
     }
   },
   {
@@ -254,14 +255,14 @@ const businessStack = StackNavigator(
     UpsertSales: UpsertSalesOrderScreen,
 
     // Contact
-    Customers: {
+    Contacts: {
       screen: contactTab
     },
-    UpsertCustomer: {
-      screen: UpsertCustomerScreen
+    UpsertContact: {
+      screen: UpsertContactScreen
     },
-    CustomerDetails: {
-      screen: CustomerDetailScreen
+    ContactDetails: {
+      screen: ContactDetailScreen
     },
     CustomerPaymentActivity
   },
