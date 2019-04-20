@@ -68,7 +68,7 @@ export default class OrderAnalytics extends React.PureComponent<
   renderStatuses = data => {
     let { orderStatuses } = data
     return (
-      <View style={styles.row}>
+      <View style={[styles.row, { flexWrap: 'wrap' }]}>
         {orderStatuses.map((orderStatus: any) => (
           <View style={[styles.row, { marginBottom: 3 }]}>
             <Icon
