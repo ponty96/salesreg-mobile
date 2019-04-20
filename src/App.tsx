@@ -124,27 +124,27 @@ class App extends React.Component<IProps> {
       // check if user is on IphoneX and use View
       <ViewOverflow style={{ flex: 1 }}>
         <NotificationRoot>
-          <PushNotificationContainer>
-            <View style={{ paddingTop: 0, flex: 1 }}>
-              <Provider store={store}>
-                <UserContext.Provider
-                  value={{
-                    user,
-                    resetUserContext,
-                    gettingStartedProgress,
-                    resetGettingStartedProgress
-                  }}
-                >
-                  <ApolloProvider client={client}>
+          <View style={{ paddingTop: 0, flex: 1 }}>
+            <Provider store={store}>
+              <UserContext.Provider
+                value={{
+                  user,
+                  resetUserContext,
+                  gettingStartedProgress,
+                  resetGettingStartedProgress
+                }}
+              >
+                <ApolloProvider client={client}>
+                  <PushNotificationContainer user={user}>
                     <Root>
                       <StatusBarAtom />
                       <Routes client={client} />
                     </Root>
-                  </ApolloProvider>
-                </UserContext.Provider>
-              </Provider>
-            </View>
-          </PushNotificationContainer>
+                  </PushNotificationContainer>
+                </ApolloProvider>
+              </UserContext.Provider>
+            </Provider>
+          </View>
         </NotificationRoot>
       </ViewOverflow>
     )
