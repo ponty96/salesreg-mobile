@@ -8,7 +8,8 @@ type ITypes =
   | 'UpdateProduct'
   | 'UpsertProductRestock'
   | 'DeleteProduct'
-  | 'UpsertSalesOrder'
+  | 'CreateSaleOrder'
+  | 'UpdateSaleOrder'
   | 'UpdateOrderStatus'
   | 'UpdateInvoiceDueDate'
   | 'MakeInvoicePayment'
@@ -95,10 +96,15 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
             : ''
         }${params.name.trim()} was removed`
       }
-    case 'UpsertSalesOrder':
+    case 'CreateSaleOrder':
       return {
         title: 'Sales Order Created',
         subtitle: `A new sales order was created successfully`
+      }
+    case 'UpdateSaleOrder':
+      return {
+        title: 'Sales Order Updated',
+        subtitle: `Your sale order was just updated successfully`
       }
     case 'UpdateOrderStatus':
       return {

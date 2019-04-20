@@ -251,8 +251,17 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
       ]
     })
 
+    const {
+        navigation: {
+          state: { params }
+        }
+      } = this.props,
+      saleId = params && params.sales && params.sales.id
+
     let banner = NotificationBanner(
-      configureNotificationBanner('UpsertSalesOrder')
+      configureNotificationBanner(
+        saleId ? 'UpdateSaleOrder' : 'CreateSaleOrder'
+      )
     )
     banner.show({ bannerPosition: 'bottom' })
 
