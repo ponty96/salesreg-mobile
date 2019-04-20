@@ -19,7 +19,6 @@ interface IState {
   email: string
   firstName: string
   lastName: string
-  gender: string
   password: string
   passwordConfirmation: string
   currentStep: number
@@ -36,7 +35,6 @@ export default class UserOnboardScreen extends React.PureComponent<
     lastName: '',
     password: '',
     passwordConfirmation: '',
-    gender: '',
     currentStep: 0,
     fieldErrors: null
   }
@@ -76,7 +74,6 @@ export default class UserOnboardScreen extends React.PureComponent<
     const params = { ...this.state }
     delete params.currentStep
     delete params.fieldErrors
-    params.gender = params.gender.toUpperCase()
     return { user: params }
   }
 
@@ -118,16 +115,6 @@ export default class UserOnboardScreen extends React.PureComponent<
                     },
                     validators: ['required'],
                     name: 'lastName'
-                  },
-                  {
-                    label: 'Are you male or female?',
-                    placeholder: 'E.g Doe',
-                    type: {
-                      type: 'radio',
-                      options: ['male', 'female']
-                    },
-                    validators: ['required'],
-                    name: 'gender'
                   }
                 ]
               },
