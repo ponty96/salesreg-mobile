@@ -80,9 +80,9 @@ class UpsertSalesOrderScreen extends React.PureComponent<IProps, IState> {
           name: item.product.name
         })),
         isCustomerInContacts: sale.contact ? 'Yes' : 'No',
-        amountPaid: sale.amountPaid,
+        amountPaid: `${sale.amountPaid}`,
         date: moment(sale.date).format('YYYY-MM-DD'),
-        discount: sale.discount,
+        discount: `${sale.discount}`,
         existingContact: {
           id: sale.contact.id,
           contactName: sale.contact.contactName,
