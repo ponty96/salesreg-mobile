@@ -6,16 +6,19 @@ interface IProps {
   navigation: any
 }
 
-export default class UpsertCustomerScreen extends PureComponent<IProps> {
+export default class UpsertContactScreen extends PureComponent<IProps> {
   static navigationOptions = {
     header: null
   }
   render() {
+    let contactType = this.props.navigation.getParam('contactType', null),
+      contact = this.props.navigation.getParam('contact', {})
+
     return (
       <UpsertContactForm
-        successRoute="Customers"
-        contact={this.props.navigation.getParam('customer', {})}
-        contactType="customer"
+        successRoute="Contacts"
+        contact={contact}
+        contactType={contactType}
         navigation={this.props.navigation}
       />
     )

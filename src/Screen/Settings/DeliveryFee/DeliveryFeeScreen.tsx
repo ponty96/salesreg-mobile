@@ -4,7 +4,7 @@ import { ActionSheet } from 'native-base'
 import { Mutation } from 'react-apollo'
 
 import AppSpinner from '../../../Components/Spinner'
-import Header from '../../../Components/Header/DetailsScreenHeader'
+import Header from '../../../Components/Header/BaseHeader'
 import GenericListIndex from '../../../Components/Generic/ListIndex'
 import { ListCompanyDeliveryFees } from '../../../graphql/queries/business'
 import { UserContext } from '../../../context/UserContext'
@@ -160,8 +160,9 @@ class DeliveryFeeScreen extends React.Component<IProps, IState> {
             <AppSpinner visible={loading} />
             <Header
               title="Shipping Zones"
-              onPressLeftIcon={() => this.props.navigation.goBack()}
-              hideRightMenu={true}
+              onPressLeftIcon={() =>
+                this.props.navigation.navigate('DrawerToggle')
+              }
             />
             <GenericListIndex
               isPaginatedList={false}

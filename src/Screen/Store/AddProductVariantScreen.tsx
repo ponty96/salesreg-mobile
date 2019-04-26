@@ -121,6 +121,38 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
     })
   }
 
+  componentDidMount() {
+    this.updateDetails()
+  }
+
+  parseOptionValuesForForm = ({ optionValues = [] }) => {
+    return optionValues.map(optionValue => ({
+      name: optionValue.name,
+      optionId: optionValue.option.id,
+      optionName: optionValue.option.name
+    }))
+  }
+
+  updateDetails = async () => {
+    const { user } = this.props
+    const product = this.props.navigation.getParam('product', null)
+    const optionValues = this.parseOptionValuesForForm(product)
+
+    this.setState({
+      userId: user.id,
+      companyId: user.company.id,
+      ...product,
+      tags: product.tags.map(tag => tag.name),
+      isTopRatedByMerchant:
+        product.isTopRatedByMerchant == false ? 'No' : 'Yes',
+      isFeatured: product.isFeatured == false ? 'No' : 'Yes',
+      sku: product.number,
+      optionValues: optionValues,
+      price: '',
+      name: this.getProductName(product, optionValues)
+    })
+  }
+
   updateState = (key: string, value: any) => {
     if (key.indexOf('option-') == 0) {
       this.updateOptionValues(key, value)
@@ -317,12 +349,16 @@ class AddProductVariantScreen extends PureComponent<IProps, IState> {
     }
   }
 
-  getProductName = () => {
+  getProductName = (product?: any, optionValues?: any) => {
+    let productGroupTitle =
+        (product && product.productGroup.title) || this.state.productGroupTitle,
+      _optionValues = optionValues || this.state.optionValues
+
     if (this.state.optionValues.length > 0) {
-      return `${this.state.productGroupTitle} (${this.state.optionValues.map(
+      return `${productGroupTitle} (${_optionValues.map(
         optionValue => optionValue.name || '?'
       )})`
-    } else return this.state.productGroupTitle
+    } else return productGroupTitle
   }
 
   parseOptionValuesForMutation = () => {

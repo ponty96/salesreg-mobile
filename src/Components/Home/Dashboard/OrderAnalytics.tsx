@@ -5,7 +5,7 @@ import { LineChart } from 'react-native-chart-kit'
 import { Query } from 'react-apollo'
 import moment from 'moment'
 
-import { MediumText, DemiBoldText, RegularText } from '../../../Atom/TextAtom'
+import { MediumText, RegularText } from '../../../Atom/TextAtom'
 import DashboardStyles from './DashboardStyles'
 import { color } from '../../../Style/Color'
 import RangePickerAtom from '../../../Atom/RangePickerAtom'
@@ -65,19 +65,29 @@ export default class OrderAnalytics extends React.PureComponent<
     })
   }
 
-  renderTitle = () => (
-    <View style={styles.row}>
-      <DemiBoldText style={styles.largeText}>0</DemiBoldText>
-      {/* <View style={styles.row}>
-        <Icon
-          style={styles.redText}
-          name="ios-arrow-round-down"
-          type="Ionicons"
-        />
-        <MediumText style={[styles.redText, { marginLeft: 5 }]}>0%</MediumText>
-      </View> */}
-    </View>
-  )
+  renderStatuses = data => {
+    let { orderStatuses } = data
+    return (
+      <View style={[styles.row, { flexWrap: 'wrap' }]}>
+        {orderStatuses.map((orderStatus: any) => (
+          <View style={[styles.row, { marginBottom: 3 }]}>
+            <Icon
+              type="MaterialCommunityIcons"
+              name="checkbox-blank-circle"
+              style={{
+                fontSize: 13,
+                marginRight: 7,
+                color: color[`${orderStatus.status.trim()}BorderIndicator`]
+              }}
+            />
+            <MediumText>
+              {orderStatus.count} {orderStatus.status} orders
+            </MediumText>
+          </View>
+        ))}
+      </View>
+    )
+  }
 
   renderGraph = data => {
     let { dataPoints } = data,
@@ -95,6 +105,7 @@ export default class OrderAnalytics extends React.PureComponent<
             withDots={false}
             style={styles.chartStyle}
             chartConfig={chartConfig}
+            bezier
           />
         ) : (
           <View style={styles.emptyContainer}>
@@ -141,7 +152,7 @@ export default class OrderAnalytics extends React.PureComponent<
               )}
               {!loading && _data && (
                 <React.Fragment>
-                  {this.renderTitle()}
+                  {this.renderStatuses(_data)}
                   {this.renderGraph(_data)}
                 </React.Fragment>
               )}

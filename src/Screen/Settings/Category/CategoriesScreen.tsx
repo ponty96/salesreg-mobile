@@ -3,7 +3,7 @@ import { Alert } from 'react-native'
 import { Mutation } from 'react-apollo'
 import { ActionSheet } from 'native-base'
 
-import Header from '../../../Components/Header/DetailsScreenHeader'
+import Header from '../../../Components/Header/BaseHeader'
 import GenericListIndex from '../../../Components/Generic/ListIndex'
 import AppSpinner from '../../../Components/Spinner'
 import { ListCompanyCategoriesGQL } from '../../../graphql/queries/store'
@@ -112,8 +112,7 @@ class CategoriesScreen extends React.Component<IProps, IState> {
           onPressRightIcon={() =>
             this.props.navigation.navigate('Notifications')
           }
-          onPressLeftIcon={() => this.props.navigation.goBack()}
-          hideRightMenu={true}
+          onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
           showSearchBar
           searchBar={{
             placeholder: 'Search for a category',

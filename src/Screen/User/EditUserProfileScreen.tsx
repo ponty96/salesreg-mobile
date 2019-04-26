@@ -23,7 +23,6 @@ interface IState {
   firstName: string
   lastName: string
   dateOfBirth: string | Date
-  gender: string
   fieldErrors: any
 }
 
@@ -37,7 +36,6 @@ class EditUserProfileScreen extends Component<IProps, IState> {
     firstName: '',
     lastName: '',
     dateOfBirth: new Date('1 January 1990'),
-    gender: '',
     fieldErrors: null
   }
 
@@ -59,8 +57,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
       firstName: user.firstName,
       lastName: user.lastName,
       dateOfBirth: user.dateOfBirth || new Date('1 January 1990'),
-      profilePicture: user.profilePicture || '',
-      gender: user.gender.toLowerCase()
+      profilePicture: user.profilePicture || ''
     })
   }
 
@@ -95,16 +92,6 @@ class EditUserProfileScreen extends Component<IProps, IState> {
                     },
                     validators: ['required'],
                     name: 'lastName'
-                  },
-                  {
-                    label: 'Are you male or female?',
-                    placeholder: 'E.g Doe',
-                    type: {
-                      type: 'radio',
-                      options: ['male', 'female']
-                    },
-                    validators: ['required'],
-                    name: 'gender'
                   },
                   {
                     label: `Date of Birth?`,
@@ -147,8 +134,7 @@ class EditUserProfileScreen extends Component<IProps, IState> {
 
   parseMutationVariables = () => {
     const params = {
-      ...this.state,
-      gender: this.state.gender ? this.state.gender.toUpperCase() : ''
+      ...this.state
     }
     delete params.fieldErrors
     return { user: params }

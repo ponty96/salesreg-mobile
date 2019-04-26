@@ -1,19 +1,24 @@
 import React from 'react'
 import SplashScreen from 'react-native-splash-screen'
-import { DrawerNavigator, StackNavigator } from 'react-navigation'
+import {
+  DrawerNavigator,
+  TabBarBottom,
+  StackNavigator,
+  TabNavigator
+} from 'react-navigation'
 
 import { RegularText } from '../Atom/TextAtom'
-import Header from '../Components/Header/BaseHeader'
 // import AppSpinner from '../Components/Spinner'
 
 // graphql
 import { Query } from 'react-apollo'
 import { AuthenticateQueryGQL } from '../graphql/queries/Authenticate'
 
-// Customer Screens
-import UpsertCustomerScreen from '../Screen/Contact/UpsertCustomerScreen'
-import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
+// Contact Screens
+import UpsertContactScreen from '../Screen/Contact/UpsertContactScreen'
+import ContactDetailScreen from '../Screen/Contact/ContactDetailScreen'
 import CustomerScreen from '../Screen/Contact/CustomerScreen'
+import ProspectScreen from '../Screen/Contact/ProspectScreen'
 import CustomerPaymentActivity from '../Screen/Contact/CustomerPaymentActivity'
 
 /***
@@ -105,6 +110,38 @@ import IncomeScreen from '../Screen/IncomeScreen'
 
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
+
+const contactTab = TabNavigator(
+  {
+    Customers: {
+      screen: CustomerScreen
+    },
+    Prospects: {
+      screen: ProspectScreen
+    }
+  },
+  {
+    tabBarPosition: 'bottom',
+    swipeEnabled: true,
+    tabBarOptions: {
+      showLabel: true,
+      style: {
+        height: 60,
+        borderTopWidth: 1,
+        borderTopColor: '#eee',
+        paddingBottom: 20,
+        backgroundColor: '#fff'
+      },
+      activeTintColor: color.button,
+      inactiveTintColor: color.textColor,
+      labelStyle: {
+        fontSize: 15,
+        fontFamily: 'AvenirNext-DemiBold'
+      }
+    },
+    tabBarComponent: TabBarBottom
+  }
+)
 
 const businessStack = StackNavigator(
   {
@@ -218,31 +255,21 @@ const businessStack = StackNavigator(
     UpsertSales: UpsertSalesOrderScreen,
 
     // Contact
-    Customers: {
-      screen: CustomerScreen
+    Contacts: {
+      screen: contactTab
     },
-    UpsertCustomer: {
-      screen: UpsertCustomerScreen
+    UpsertContact: {
+      screen: UpsertContactScreen
     },
-    CustomerDetails: {
-      screen: CustomerDetailScreen
+    ContactDetails: {
+      screen: ContactDetailScreen
     },
     CustomerPaymentActivity
   },
   {
     initialRouteName: 'Home',
-    navigationOptions: ({ navigation }: any) => ({
-      header: (
-        <Header
-          title="Products"
-          // tslint:disable-next-line:jsx-no-lambda
-          onPressLeftIcon={() => {
-            navigation.navigate('DrawerToggle')
-          }}
-          // tslint:disable-next-line:jsx-no-lambda
-          onPressRightIcon={() => console.log('Search icon pressed.')}
-        />
-      )
+    navigationOptions: () => ({
+      header: null
     })
   }
 )
@@ -316,8 +343,6 @@ export default class Routes extends React.Component<IProps, IState> {
     return (
       <Query query={AuthenticateQueryGQL}>
         {({ loading, error, data }) => {
-          console.log('data', data)
-          console.log('loading', loading)
           if (loading) {
             return <RegularText>{`Loading data here`}</RegularText>
           }

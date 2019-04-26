@@ -1,7 +1,9 @@
 import React, { Component } from 'react'
-import { View, StyleSheet, TouchableOpacity } from 'react-native'
-import { Icon } from 'native-base'
+import { View, StyleSheet, Alert, TouchableOpacity } from 'react-native'
+import { Icon, ActionSheet } from 'native-base'
 import moment from 'moment'
+import { Mutation } from 'react-apollo'
+import { NavigationActions } from 'react-navigation'
 
 import Header from '../../Components/Header/DetailsScreenHeader'
 import GenericDetailsComponent from '../../Components/Generic/Details'
@@ -9,9 +11,19 @@ import Preferences from '../../services/preferences'
 import { UserContext } from '../../context/UserContext'
 import { color } from '../../Style/Color'
 import QueryLoader from '../../Components/QueryLoader'
-import { GetSaleByIdGQL } from '../../graphql/queries/order'
+import {
+  GetSaleByIdGQL,
+  ListCompanySalesGQL
+} from '../../graphql/queries/order'
 import { convertToLocalTime } from '../../Functions'
 import { RegularText } from '../../Atom/TextAtom'
+import { DeleteSaleOrderGQL } from '../../graphql/mutations/order'
+import AppSpinner from '../../Components/Spinner'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+var BUTTONS = ['Yes, delete', 'Cancel']
+var DESTRUCTIVE_INDEX = 0
+var CANCEL_INDEX = 1
 
 interface IProps {
   navigation: any
@@ -20,16 +32,66 @@ interface IProps {
 }
 
 class SalesOrderDetailsScreen extends Component<IProps> {
-  static navigationOptions = ({ navigation }: any) => {
+  static navigationOptions = () => {
     return {
-      header: (
-        <Header
-          title="Sales Order Details"
-          onPressLeftIcon={() => navigation.goBack()}
-          hideRightMenu={true}
-        />
-      )
+      header: null
     }
+  }
+
+  resetNavigationStack = () => {
+    const resetAction = NavigationActions.reset({
+      index: 1,
+      actions: [
+        NavigationActions.navigate({
+          routeName: 'Home'
+        }),
+        NavigationActions.navigate({
+          routeName: 'Sales'
+        })
+      ]
+    })
+    this.props.navigation.dispatch(resetAction)
+  }
+
+  onDeleteCompleted = async res => {
+    const {
+      deleteSaleOrder: { success, fieldErrors }
+    } = res
+
+    if (!success) {
+      setTimeout(
+        () =>
+          Alert.alert(
+            'Error',
+            fieldErrors[0].message,
+            [{ text: 'Ok', onPress: () => null }],
+            { cancelable: false }
+          ),
+        100
+      )
+    } else {
+      let banner = NotificationBanner(
+        configureNotificationBanner('DeleteSaleOrder')
+      )
+      banner.show({ bannerPosition: 'bottom' })
+      this.resetNavigationStack()
+    }
+  }
+
+  handleDelete = cb => {
+    ActionSheet.show(
+      {
+        options: BUTTONS,
+        cancelButtonIndex: CANCEL_INDEX,
+        destructiveButtonIndex: DESTRUCTIVE_INDEX,
+        title: 'Delete?'
+      },
+      buttonIndex => {
+        if (buttonIndex == 0) {
+          cb()
+        }
+      }
+    )
   }
 
   onStatusPress = async () => {
@@ -92,22 +154,12 @@ class SalesOrderDetailsScreen extends Component<IProps> {
     )
   }
 
-  render() {
+  renderBottom = (deleteFn?: (variables: any) => void) => {
     const sales =
       this.props.navigation.getParam('sales', null) || this.props.sales
 
     return (
-      <View style={styles.container}>
-        <GenericDetailsComponent
-          title={sales.contact.contactName}
-          totalAmount={parseFloat(
-            (Number(sales.amount) - Number(sales.discount)).toString()
-          ).toFixed(2)}
-          items={this.parseItems()}
-          shouldShowStatus={true}
-          onPressStatus={this.onStatusPress}
-          enableDelete={false}
-        />
+      <View style={styles.bottomContainer}>
         <TouchableOpacity
           onPress={() =>
             this.props.navigation.navigate('InvoiceDetails', {
@@ -125,7 +177,75 @@ class SalesOrderDetailsScreen extends Component<IProps> {
             />
           </View>
         </TouchableOpacity>
+        <TouchableOpacity
+          style={{
+            justifyContent: 'center',
+            alignItems: 'flex-end'
+          }}
+          onPress={() =>
+            this.handleDelete(() =>
+              deleteFn({ variables: { saleId: sales.id } })
+            )
+          }
+        >
+          <Icon
+            type="EvilIcons"
+            name="trash"
+            style={{ color: color.trashIcon, fontSize: 60 }}
+          />
+        </TouchableOpacity>
       </View>
+    )
+  }
+
+  render() {
+    const sales =
+      this.props.navigation.getParam('sales', null) || this.props.sales
+
+    return (
+      <React.Fragment>
+        <Header
+          title="Sales Order Details"
+          onPressLeftIcon={() => this.props.navigation.goBack()}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('UpsertSales', { sales })
+          }
+        />
+        <Mutation
+          mutation={DeleteSaleOrderGQL}
+          onCompleted={this.onDeleteCompleted}
+          refetchQueries={[
+            {
+              query: ListCompanySalesGQL,
+              variables: {
+                companyId: this.props.user.company.id,
+                first: 10,
+                after: null
+              }
+            }
+          ]}
+          awaitRefetchQueries={true}
+        >
+          {(deleteSaleOrder, { loading }) => (
+            <React.Fragment>
+              <AppSpinner visible={loading} />
+              <View style={styles.container}>
+                <GenericDetailsComponent
+                  title={sales.contact.contactName}
+                  totalAmount={parseFloat(
+                    (Number(sales.amount) - Number(sales.discount)).toString()
+                  ).toFixed(2)}
+                  items={this.parseItems()}
+                  shouldShowStatus={true}
+                  onPressStatus={this.onStatusPress}
+                  enableDelete={false}
+                />
+                {this.renderBottom(deleteSaleOrder)}
+              </View>
+            </React.Fragment>
+          )}
+        </Mutation>
+      </React.Fragment>
     )
   }
 }
@@ -140,7 +260,6 @@ const styles = StyleSheet.create({
     justifyContent: 'flex-end',
     alignItems: 'center',
     height: 70,
-    paddingRight: 24,
     borderTopWidth: StyleSheet.hairlineWidth,
     borderTopColor: '#bdbdbd',
     backgroundColor: '#fff'
@@ -152,6 +271,13 @@ const styles = StyleSheet.create({
   invoiceIcon: {
     fontSize: 35,
     color: color.button
+  },
+  bottomContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+    paddingHorizontal: 16
   }
 })
 

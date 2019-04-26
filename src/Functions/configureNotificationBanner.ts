@@ -8,7 +8,8 @@ type ITypes =
   | 'UpdateProduct'
   | 'UpsertProductRestock'
   | 'DeleteProduct'
-  | 'UpsertSalesOrder'
+  | 'CreateSaleOrder'
+  | 'UpdateSaleOrder'
   | 'UpdateOrderStatus'
   | 'UpdateInvoiceDueDate'
   | 'MakeInvoicePayment'
@@ -33,18 +34,28 @@ type ITypes =
   | 'UpdateSpecialOffer'
   | 'DeleteDeliveryFee'
   | 'CreateDeliveryFee'
+  | 'TimeoutError'
+  | 'DeleteSaleOrder'
 
 const configureNotificationBanner = (type: ITypes, params?: any): any => {
   switch (type) {
+    case 'TimeoutError':
+      return {
+        title: 'Network Error',
+        subtitle: 'A timeout error occurred',
+        style: 'danger'
+      }
     case 'AddContact':
       return {
-        title: 'Created Customer',
-        subtitle: `Created ${params.contactName.trim()}'s information`
+        title:
+          params.type == 'customer' ? 'Created Customer' : 'Created Prospect',
+        subtitle: `Created ${params.contact.contactName.trim()}'s information`
       }
     case 'UpdateContact':
       return {
-        title: 'Updated Customer',
-        subtitle: `Updated ${params.contactName.trim()}'s information`
+        title:
+          params.type == 'customer' ? 'Updated Customer' : 'Updated Prospect',
+        subtitle: `Updated ${params.contact.contactName.trim()}'s information`
       }
     case 'DeleteContact':
       return {
@@ -87,10 +98,15 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
             : ''
         }${params.name.trim()} was removed`
       }
-    case 'UpsertSalesOrder':
+    case 'CreateSaleOrder':
       return {
         title: 'Sales Order Created',
         subtitle: `A new sales order was created successfully`
+      }
+    case 'UpdateSaleOrder':
+      return {
+        title: 'Sales Order Updated',
+        subtitle: `Your sale order was just updated successfully`
       }
     case 'UpdateOrderStatus':
       return {
@@ -219,6 +235,11 @@ const configureNotificationBanner = (type: ITypes, params?: any): any => {
       return {
         title: `Special Offer Updated`,
         subtitle: `${params.title} has been updated`
+      }
+    case 'DeleteSaleOrder':
+      return {
+        title: `Sale Order Deleted`,
+        subtitle: `Your sale order has been removed`
       }
   }
 }

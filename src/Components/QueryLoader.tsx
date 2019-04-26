@@ -56,7 +56,6 @@ const QueryLoader = (props: IProps) => {
             component = props.children(data[props.graphqlQueryResultKey])
           }
 
-          console.log('The data is ', data)
           return (
             <React.Fragment>
               <AppSpinner

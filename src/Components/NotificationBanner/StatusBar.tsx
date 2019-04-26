@@ -9,7 +9,7 @@ const AppStatusBar = ({ backgroundColor, ...props }) =>
         { backgroundColor: backgroundColor || '#00b0cf' }
       ]}
     >
-      <StatusBar hidden barStyle={props.barStyle || 'light-content'} />
+      <StatusBar barStyle={props.barStyle || 'light-content'} />
     </View>
   )
 

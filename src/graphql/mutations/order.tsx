@@ -91,8 +91,8 @@ export const UpdatePurchaseOrderStatusGQL = gql`
   }
 `
 export const UpsertSaleOrder = gql`
-  mutation upsertSaleOrder($sale: SaleInput!) {
-    upsertSaleOrder(sale: $sale) {
+  mutation upsertSaleOrder($saleId: Uuid, $sale: SaleInput!) {
+    upsertSaleOrder(saleId: $saleId, sale: $sale) {
       fieldErrors {
         key
         message
@@ -208,6 +208,18 @@ export const UpdateInvoice = gql`
             }
           }
         }
+      }
+    }
+  }
+`
+
+export const DeleteSaleOrderGQL = gql`
+  mutation deleteSaleOrder($saleId: Uuid!) {
+    deleteSaleOrder(saleId: $saleId) {
+      success
+      fieldErrors {
+        key
+        message
       }
     }
   }
