@@ -45,10 +45,6 @@ export default class UserProfileScreen extends Component<IProps, IState> {
           section: 'Email',
           value: user.email
         },
-        {
-          section: 'Gender',
-          value: user.gender
-        },
         // {
         //   section: 'Phone',
         //   value: user.phone ? user.phone.number : ''
