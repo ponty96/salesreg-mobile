@@ -1937,8 +1937,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "
-";
+			shellScript = "\n";
 		};
 /* End PBXShellScriptBuildPhase section */
 

@@ -38,7 +38,7 @@ const sideBarItemStyles = StyleSheet.create({
   categoryContainer: {
     borderBottomWidth: StyleSheet.hairlineWidth,
     borderBottomColor: '#d8d8d8',
-    paddingVertical: 6
+    paddingVertical: 8
   },
   hideBorder: {
     borderBottomWidth: 0,
@@ -57,23 +57,23 @@ const sideBarItemStyles = StyleSheet.create({
   },
   categoryWrapper: {
     borderRadius: 5,
+    flexDirection: 'row',
+    alignItems: 'center',
     marginHorizontal: 5,
     paddingLeft: 22,
-    paddingVertical: 6
+    height: 48
   },
   category: {
     marginLeft: 20,
     backgroundColor: 'transparent',
     color: color.textColor,
-    marginTop: 6,
-    fontSize: 14,
-    fontFamily: 'AvenirNext-Medium'
+    fontSize: 14
   },
   activeCategoryWrapper: {
-    backgroundColor: color.button
+    backgroundColor: '#e1f5fe'
   },
   activeCategory: {
-    color: '#fff'
+    color: color.button
   }
 })
 
@@ -239,8 +239,8 @@ class SideBar extends PureComponent<IProps, IState> {
               activeRoute={this.state.activeRoute}
               categories={[
                 {
-                  title: 'Customers',
-                  routeName: 'Customers',
+                  title: 'Contacts',
+                  routeName: 'Contacts',
                   iconName: 'user-o',
                   iconType: 'FontAwesome'
                 },

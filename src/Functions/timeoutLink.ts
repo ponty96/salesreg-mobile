@@ -1,5 +1,7 @@
 import { ApolloLink, Observable, Operation, NextLink } from 'apollo-link'
 import { DefinitionNode } from 'graphql'
+import { NotificationBanner } from '../Components/NotificationBanner'
+import configureNotificationBanner from './configureNotificationBanner'
 
 const DEFAULT_TIMEOUT: number = 15000
 
@@ -8,11 +10,9 @@ const DEFAULT_TIMEOUT: number = 15000
  */
 export default class TimeoutLink extends ApolloLink {
   private timeout: number
-  private observableStore: any
 
-  constructor(timeout: number, observableStore) {
+  constructor(timeout: number) {
     super()
-    this.observableStore = observableStore
     this.timeout = timeout || DEFAULT_TIMEOUT
   }
 
@@ -76,11 +76,12 @@ export default class TimeoutLink extends ApolloLink {
         }
 
         observer.error(new Error('Timeout exceeded'))
-        operationType == 'mutation' &&
-          this.observableStore.dispatch('timeout', {
-            id: Date.now(),
-            messgae: 'A timeout error occurred'
+        if (operationType == 'mutation') {
+          let banner = NotificationBanner({
+            ...configureNotificationBanner('TimeoutError')
           })
+          banner.show({ bannerPosition: 'bottom' })
+        }
 
         onTimeOutCallback && onTimeOutCallback()
         subscription.unsubscribe()

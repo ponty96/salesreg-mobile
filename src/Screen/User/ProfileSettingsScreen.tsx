@@ -74,14 +74,6 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
             iconType: 'MaterialIcons'
           },
           {
-            section: 'Manage Categories',
-            routeName: 'Categories',
-            showRightCaret: true,
-            description: 'Manage your store categories',
-            icon: 'apps',
-            iconType: 'MaterialCommunityIcons'
-          },
-          {
             section: 'Manage Variant Options',
             routeName: 'Options',
             showRightCaret: true,
@@ -95,23 +87,6 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
             showRightCaret: true,
             description: 'Manage your webstore options',
             icon: 'web',
-            iconType: 'MaterialCommunityIcons'
-          },
-          {
-            section: 'Manage Delivery Fees',
-            routeName: 'DeliveryFees',
-            showRightCaret: true,
-            description: 'Manage the delivery fees of your customers',
-            icon: 'truck-delivery',
-            iconType: 'MaterialCommunityIcons'
-          },
-          {
-            section: 'Charge Calculator',
-            routeName: 'ChargeCalculator',
-            showRightCaret: true,
-            description:
-              'Calculate the amount of profit you can make on a single sales',
-            icon: 'calculator',
             iconType: 'MaterialCommunityIcons'
           },
           {

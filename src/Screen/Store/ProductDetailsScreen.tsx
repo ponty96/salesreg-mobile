@@ -357,7 +357,6 @@ const styles = StyleSheet.create({
   },
   headerIcon: {
     color: color.button,
-    padding: 16,
     fontSize: 28
   },
   clickableDisplayOverlay: {

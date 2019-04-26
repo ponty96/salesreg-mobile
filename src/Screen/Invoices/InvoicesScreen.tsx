@@ -32,7 +32,7 @@ export default class InvoiceScreen extends React.PureComponent<IProps> {
         rightTextStyle: { color: amountOwed > 0 ? color.red : color.green },
         topRightText: `\u20A6 ${amountOwed}`,
         bottomRightText: moment(
-          convertToLocalTime(item.dueDate, 'YYYY-MM-DD HH:mm:ss')
+          convertToLocalTime(item.date, 'YYYY-MM-DD HH:mm:ss')
         ).calendar()
       }
     ]

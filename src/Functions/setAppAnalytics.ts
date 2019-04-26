@@ -12,7 +12,8 @@ type analyticsTypes =
   | 'ADD_PRODUCT'
   | 'CREATE_SALES_ORDER'
   | 'MAKE_INVOICE_PAYMENT'
-  | 'CREATE_CUSTOMER'
+  | 'CREATE_CONTACT'
+  | 'UPDATE_CONTACT'
   | 'CREATE_SPECIAL_OFFER'
 
 async function setAppAnalytics(type: analyticsTypes, params?: any) {
@@ -99,16 +100,18 @@ async function setAppAnalytics(type: analyticsTypes, params?: any) {
             ['Invoice Payment']: moment(new Date()).format('YYYY-MM-DD')
           })
           break
-        case 'CREATE_CUSTOMER':
-          currentScreen = 'upsert_customer'
+        case 'CREATE_CONTACT':
+          currentScreen = 'upsert_contact'
           currentScreenClassOverride = 'UpsertContactForm'
-          logEvent = 'upsert_customer'
+          logEvent = 'upsert_contact'
           logParams = {
-            customer_name: params.contactName,
-            email: params.email
+            customer_name: params.contact.contactName,
+            email: params.contact.email
           }
           Analytics.setUserProperties({
-            ['Create Customer']: moment(new Date()).format('YYYY-MM-DD')
+            [params.type == 'customer'
+              ? 'Create Customer'
+              : 'Create Prospect']: moment(new Date()).format('YYYY-MM-DD')
           })
           break
       }

@@ -5,7 +5,7 @@ import {
   PanResponder,
   Dimensions,
   StyleSheet,
-  View,
+  View
 } from 'react-native'
 import { Icon } from 'native-base'
 
@@ -349,6 +349,7 @@ class DefaultNotificationView extends React.PureComponent<IProps, IState> {
         <Animated.View
           style={[
             styles.container,
+            { paddingRight: style == 'danger' ? 10 : 60 },
             bannerPosition == 'top' || !bannerPosition
               ? { top: 0 }
               : { bottom: 0 },
