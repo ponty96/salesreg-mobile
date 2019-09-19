@@ -74,6 +74,14 @@ class ProfileSettingsScreen extends PureComponent<IProps> {
             iconType: 'MaterialIcons'
           },
           {
+            section: 'Manage Subscription',
+            routeName: 'SubscriptionDetails',
+            showRightCaret: true,
+            description: 'Manage your subscription',
+            icon: 'payment',
+            iconType: 'MaterialIcons'
+          },
+          {
             section: 'Manage Variant Options',
             routeName: 'Options',
             showRightCaret: true,
