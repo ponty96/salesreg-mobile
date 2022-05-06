@@ -1,52 +1,58 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Dimensions } from 'react-native'
+import { StyleSheet, View, Dimensions, FlatList } from 'react-native'
+import { Icon } from 'native-base'
+
 import { color } from '../Style/Color'
-import { ListItem, Left, Right, Icon } from 'native-base'
+import SalesOrderListAtom from '../Atom/ListItem/SalesOrderListAtom'
 
 interface Category {
   section: string
-  routeName: string
+  routeName?: string
   showRightCaret?: boolean | true
   onPress?: any | null
+  description?: string
+  icon?: string
+  iconType?: any
 }
-const settingsList = (prop: { categories: Category[]; navigate: any }) => {
+const SettingsList = (props: { categories: Category[]; navigate: any }) => {
   return (
     <View style={styles.container}>
-      {prop.categories.map((category: Category, key: number) => {
-        return (
-          <ListItem
-            style={styles.section}
-            key={key}
+      <FlatList
+        data={props.categories}
+        keyExtractor={item => item.section}
+        renderItem={({ item: category }: any) => (
+          <SalesOrderListAtom
             onPress={() =>
               category.onPress
                 ? category.onPress()
-                : prop.navigate(category.routeName)
+                : props.navigate(category.routeName)
             }
-          >
-            <Left>
-              <Text
-                style={[styles.sectionText, { fontFamily: 'SourceSansPro' }]}
+            firstTopText={category.section}
+            bottomLeftFirstText={category.description}
+            icon={
+              <View
+                style={{
+                  marginRight: 10
+                }}
               >
-                {category.section}
-              </Text>
-            </Left>
-            {category.showRightCaret && (
-              <Right>
                 <Icon
-                  name="keyboard-arrow-right"
-                  type="MaterialIcons"
-                  style={styles.icon}
+                  type={category.iconType || 'Ionicons'}
+                  name={category.icon}
+                  style={{
+                    fontSize: 28,
+                    color: color.textColor
+                  }}
                 />
-              </Right>
-            )}
-          </ListItem>
-        )
-      })}
+              </View>
+            }
+          />
+        )}
+      />
     </View>
   )
 }
 
-export default settingsList
+export default SettingsList
 
 const styles = StyleSheet.create({
   container: {

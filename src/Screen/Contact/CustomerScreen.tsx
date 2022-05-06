@@ -1,97 +1,95 @@
-import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
+import * as React from 'react'
 
-import FabAtom from '../../Atom/FabAtom';
-import ContactList from '../../Components/Contact/ContactList';
-import { color } from '../../Style/Color';
-import CustomHeader from '../../Components/CustomHeader';
-
-import { CompanyContactGQL } from '../../graphql/queries/contact';
-import { Query } from 'react-apollo';
-import AppSpinner from '../../Components/Spinner';
-import Auth from '../../services/auth';
+import { CompanyContactGQL } from '../../graphql/queries/contact'
+import Header from '../../Components/Header/BaseHeader'
+import GenericListIndex from '../../Components/Generic/ListIndex'
 
 interface IProps {
-  navigation: any;
+  navigation: any
 }
 
 interface IState {
-  companyId: string;
+  queryText: string
 }
 
-class CustomerScreen extends Component<IProps, IState> {
-  static navigationOptions = ({ navigation }: any) => {
-    return {
-      header: (
-        <CustomHeader
-          title="Customer"
-          showMenu
-          showRight
-          firstRightIcon="ios-search"
-          rightText=" "
-          onMenuPress={() => navigation.navigate('DrawerToggle')}
-        />
-      )
-    };
-  };
-
+export default class CustomerScreen extends React.PureComponent<
+  IProps,
+  IState
+> {
   state = {
-    companyId: ''
-  };
+    queryText: ''
+  }
+
+  static navigationOptions = () => {
+    return {
+      header: null
+    }
+  }
 
   onPress = customer => {
-    this.props.navigation.navigate('CustomerDetails', { customer });
-  };
-
-  componentDidMount() {
-    this.updateState();
+    this.props.navigation.navigate('ContactDetails', {
+      contact: customer,
+      type: 'customer'
+    })
   }
-  updateState = async () => {
-    const user = JSON.parse(await Auth.getCurrentUser());
-    this.setState({
-      companyId: user.company.id
-    });
-  };
+
+  parseData = (item: any) => {
+    return [
+      {
+        firstTopText: item.contactName,
+        bottomLeftFirstText: '', //item.paidTo
+        bottomLeftSecondText: '', //item.date
+        topRightText: `\u20A6 ${item.totalAmountPaid}`,
+        bottomRightText: item.totalDebt ? `-${item.totalDebt}` : '',
+        avatar:
+          item.image ||
+          'https://snack-code-uploads.s3.us-west-1.amazonaws.com/~asset/9d799c33cbf767ffc1a72e53997218f7'
+      }
+    ]
+  }
 
   render() {
     return (
-      <Query
-        query={CompanyContactGQL}
-        variables={{ companyId: this.state.companyId, type: 'customer' }}
-        fetchPolicy="cache-and-network"
-      >
-        {({ loading, data }) => (
-          <View style={styles.centerContainer}>
-            <AppSpinner visible={loading} />
-            <ContactList
-              items={data.companyContacts || []}
-              onPress={this.onPress}
-              screenType="customer"
-            />
-            <FabAtom
-              routeName={'UpsertCustomer'}
-              name={'md-person-add'}
-              navigation={this.props.navigation}
-            />
-          </View>
-        )}
-      </Query>
-    );
+      <React.Fragment>
+        <Header
+          title="Customer"
+          onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
+          showSearchBar
+          searchBar={{
+            placeholder: 'Search for a customer',
+            queryText: this.state.queryText,
+            onSearch: queryText => this.setState({ queryText })
+          }}
+        />
+        <GenericListIndex
+          navigation={this.props.navigation}
+          queryText={this.state.queryText}
+          variables={{ type: 'customer' }}
+          graphqlQuery={CompanyContactGQL}
+          fabRouteParams={{ contactType: 'customer' }}
+          graphqlQueryResultKey="companyContacts"
+          parseItemData={this.parseData}
+          onItemPress={this.onPress}
+          emptyListText={`So close that you tell them what they need well before they realize it themselves. \n\nStart doing so by tapping`}
+          headerText="Get closer than ever to your customers"
+          fabRouteName="UpsertContact"
+          fabIconName="user-plus"
+          fabIconType="FontAwesome"
+          subHeader={{
+            screen: 'order',
+            rightLabel: '',
+            onPress: this.subHeaderPress,
+            iconName: 'user',
+            iconType: 'FontAwesome'
+          }}
+          hideSeparator={true}
+        />
+      </React.Fragment>
+    )
   }
+
+  subHeaderPress = () => {}
 }
-
-export default CustomerScreen;
-
-const styles = StyleSheet.create({
-  centerContainer: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: color.secondary
-  },
-  headerIcon: {
-    color: color.secondary,
-    padding: 16,
-    fontSize: 28
-  }
-});

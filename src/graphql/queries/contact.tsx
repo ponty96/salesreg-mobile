@@ -1,36 +1,72 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const CompanyContactGQL = gql`
-  query companyContacts($companyId: Uuid!, $type: String!) {
-    companyContacts(companyId: $companyId, type: $type) {
-      id
-      contactName
-      email
-      image
-      type
-      address {
-        state
-        street1
-        city
-        id
-        country
+  query companyContacts(
+    $companyId: Uuid!
+    $type: String!
+    $after: String
+    $first: Int
+    $queryText: String!
+  ) {
+    companyContacts(
+      companyId: $companyId
+      type: $type
+      after: $after
+      first: $first
+      query: $queryText
+    ) {
+      pageInfo {
+        endCursor
+        hasNextPage
+        hasPreviousPage
       }
-      phone {
-        id
-        type
-        number
-      }
-      dislikes
-      likes
-      maritalStatus
-      currency
-      birthday
-      bank {
-        bankName
-        accountName
-        accountNumber
-        id
+      edges {
+        node {
+          id
+          contactName
+          allowsMarketing
+          email
+          image
+          type
+          gender
+          address {
+            state
+            street1
+            city
+            id
+            country
+          }
+          phone {
+            id
+            type
+            number
+          }
+          dislikes
+          likes
+          maritalStatus
+          currency
+          birthday
+
+          instagram
+          facebook
+          twitter
+          snapchat
+          totalDebt
+          totalAmountPaid
+
+          data: updatedAt
+        }
       }
     }
   }
-`;
+`
+
+export const CompanyCustomersGQL = gql`
+  query companyCustomers($queryText: String!, $companyId: Uuid!) {
+    companyCustomers(name: $queryText, companyId: $companyId) {
+      id
+      contactName
+      email
+    }
+  }
+`

@@ -1,14 +1,9 @@
 import * as React from 'react'
-import {
-  Image,
-  View,
-  Text,
-  TouchableOpacity,
-  Dimensions,
-  StyleSheet
-} from 'react-native'
-import { ImagePicker } from 'expo'
+import { View, TouchableOpacity, Dimensions, StyleSheet } from 'react-native'
+import { DemiBoldText } from './TextAtom'
+
 import { color } from '../Style/Color'
+import CachedImageAtom from './CachedImageAtom'
 
 interface IProps {
   source: string
@@ -23,16 +18,7 @@ class FormImageAtom extends React.Component<IProps, any> {
   }
 
   handleSelection = async () => {
-    if (this.props.getValue) {
-      let result = await ImagePicker.launchImageLibraryAsync({
-        allowsEditing: false
-      })
-
-      if (result && !result.cancelled) {
-        this.setState({ image: result })
-        this.props.getValue(this.state.image.uri)
-      }
-    }
+    // image picker functionality here
   }
 
   determineDataBasedOnProps = (form: string) => {
@@ -67,39 +53,37 @@ class FormImageAtom extends React.Component<IProps, any> {
     const { title } = this.determineDataBasedOnProps(this.props.form)
     return (
       <View style={styles.mainView}>
-        <Text
+        <DemiBoldText
           style={[
             styles.headerText,
             {
-              fontFamily: 'SourceSansPro_Semibold',
               color: color.label
             }
           ]}
         >
           {title}
-        </Text>
+        </DemiBoldText>
         <View style={styles.uploadView}>
           <TouchableOpacity
             onPress={this.handleSelection}
             style={styles.selfAlign}
           >
             <View style={styles.imgContainer}>
-              <Image
-                source={{ uri: this.state.image.uri || this.props.source }}
+              <CachedImageAtom
+                uri={this.state.image.uri || this.props.source}
                 style={styles.image}
               />
             </View>
-            <Text
+            <DemiBoldText
               style={[
                 styles.imageText,
                 {
-                  fontFamily: 'SourceSansPro_Semibold',
                   color: color.label
                 }
               ]}
             >
               Upload Image
-            </Text>
+            </DemiBoldText>
           </TouchableOpacity>
         </View>
       </View>

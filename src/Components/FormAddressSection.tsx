@@ -1,23 +1,23 @@
-import React, { PureComponent } from 'react';
-import { View } from 'react-native';
-import FormContainerAtom from '../Atom/FormContainerAtom';
-import InputAtom from '../Atom/InputAtom';
-import FormContainerWrappedAtom from '../Atom/FormContainerWrappedAtom';
-import PickerAtom from '../Atom/PickerAtom';
-import FormErrorTextAtom from '../Atom/FormErrorTextAtom';
+import React, { PureComponent } from 'react'
+import { View } from 'react-native'
+import FormContainerAtom from '../Atom/FormContainerAtom'
+import InputAtom from '../Atom/Form/InputAtom'
+import FormContainerWrappedAtom from '../Atom/FormContainerWrappedAtom'
+import PickerAtom from '../Atom/Form/PickerAtom'
+import FormErrorTextAtom from '../Atom/Form/FormErrorTextAtom'
 
 interface IProps {
-  street1: string;
-  city: string;
-  state: string;
-  country: string;
-  getValue: (key: string, value: any) => void;
-  fieldErrors: any;
+  street1: string
+  city: string
+  state: string
+  country: string
+  getValue: (key: string, value: any) => void
+  fieldErrors: any
 }
 
 export default class FormAddressSection extends PureComponent<IProps> {
   render() {
-    const { fieldErrors } = this.props;
+    const { fieldErrors } = this.props
     return (
       <FormContainerAtom headerText="Address">
         <InputAtom
@@ -39,7 +39,7 @@ export default class FormAddressSection extends PureComponent<IProps> {
         <FormContainerWrappedAtom wrapperStyles={{ paddingVertical: 0 }}>
           <View>
             <PickerAtom
-              list={['Lagos']}
+              list={['Lagos', 'Ondo']}
               placeholder="e.g Lagos"
               selected={this.props.state}
               handleSelection={state => this.props.getValue('state', state)}
@@ -52,7 +52,7 @@ export default class FormAddressSection extends PureComponent<IProps> {
           </View>
           <View>
             <PickerAtom
-              list={['Nigeria']}
+              list={['Nigeria', 'United States']}
               placeholder="e.g Nigeria"
               selected={this.props.country}
               required={true}
@@ -68,6 +68,6 @@ export default class FormAddressSection extends PureComponent<IProps> {
           </View>
         </FormContainerWrappedAtom>
       </FormContainerAtom>
-    );
+    )
   }
 }

@@ -1,16 +1,18 @@
 import * as React from 'react'
-import { Icon, Fab } from 'native-base'
+import { Fab, Icon } from 'native-base'
 import { StyleSheet } from 'react-native'
+
 import { color } from '../Style/Color'
 
 interface IProp {
-  routeName: string
+  routeName?: string
   name?: string
   type?: any
-  navigation: any
+  navigation?: any
   params?: any
   image?: any
-  goto?: { screen: string }
+  onPress?: () => void
+  goto?: { screen: string } | any
 }
 
 const FabAtom = (props: IProp) => (
@@ -18,7 +20,11 @@ const FabAtom = (props: IProp) => (
     position="bottomRight"
     style={styles.fab}
     active={true}
-    onPress={() => props.navigation.navigate(props.routeName, props.goto)}
+    onPress={() =>
+      props.onPress
+        ? props.onPress()
+        : props.navigation.navigate(props.routeName, props.goto)
+    }
   >
     <Icon
       name={props.name}

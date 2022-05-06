@@ -1,15 +1,18 @@
-import * as React from 'react';
-import { ListItem, Text, Thumbnail, Left, Body, Right } from 'native-base';
-import { StyleSheet } from 'react-native';
-import { color } from '../Style/Color';
+import * as React from 'react'
+import { ListItem, Left, Body, Right } from 'native-base'
+import { StyleSheet } from 'react-native'
+
+import { RegularText } from '../Atom/TextAtom'
+import { color } from '../Style/Color'
+import CachedImageAtom from './CachedImageAtom'
 
 interface IProps {
-  latestAmount: string;
-  realStyle: string;
-  onPress: () => void;
-  image: string;
-  contactName: string;
-  amount: any;
+  latestAmount: string
+  realStyle: string
+  onPress: () => void
+  image: string
+  contactName: string
+  amount: any
 }
 
 class ContactItemAtom extends React.Component<IProps, any> {
@@ -17,25 +20,27 @@ class ContactItemAtom extends React.Component<IProps, any> {
     return (
       <ListItem style={styles.row} onPress={this.props.onPress}>
         <Left style={styles.view1}>
-          <Thumbnail source={{ uri: this.props.image }} style={styles.dp} />
+          <CachedImageAtom uri={this.props.image} style={styles.dp} />
         </Left>
         <Body style={styles.view2}>
-          <Text style={styles.rowText1}>{this.props.contactName}</Text>
+          <RegularText style={styles.rowText1}>
+            {this.props.contactName}
+          </RegularText>
         </Body>
         <Right style={styles.view3}>
-          <Text style={styles.text1}>
+          <RegularText style={styles.text1}>
             {'\u20A6'} {this.props.amount}
-          </Text>
-          <Text style={[styles.lilFont, styles[this.props.realStyle]]}>
+          </RegularText>
+          <RegularText style={[styles.lilFont, styles[this.props.realStyle]]}>
             {this.props.latestAmount}
-          </Text>
+          </RegularText>
         </Right>
       </ListItem>
-    );
+    )
   }
 }
 
-export default ContactItemAtom;
+export default ContactItemAtom
 
 const styles = StyleSheet.create({
   row: {
@@ -71,8 +76,7 @@ const styles = StyleSheet.create({
     fontWeight: '400',
     fontSize: 13,
     color: color.principal,
-    textAlign: 'left',
-    fontFamily: 'SourceSansPro'
+    textAlign: 'left'
   },
   dp: {
     height: 55,
@@ -90,8 +94,7 @@ const styles = StyleSheet.create({
   text1: {
     fontSize: 13,
     fontWeight: '200',
-    color: color.principal,
-    fontFamily: 'SourceSansPro'
+    color: color.principal
   },
   lilFont: {
     fontSize: 12
@@ -108,4 +111,4 @@ const styles = StyleSheet.create({
     fontSize: 12,
     color: 'rgba(218,11,11,59)'
   }
-});
+})

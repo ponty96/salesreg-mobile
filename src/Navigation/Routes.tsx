@@ -1,59 +1,93 @@
 import React from 'react'
-import { Text, View } from 'react-native'
-import { DrawerNavigator, StackNavigator, TabNavigator } from 'react-navigation'
-import CustomHeader from '../Components/CustomHeader'
+import SplashScreen from 'react-native-splash-screen'
+import {
+  DrawerNavigator,
+  TabBarBottom,
+  StackNavigator,
+  TabNavigator
+} from 'react-navigation'
+
+import { RegularText } from '../Atom/TextAtom'
+// import AppSpinner from '../Components/Spinner'
 
 // graphql
 import { Query } from 'react-apollo'
 import { AuthenticateQueryGQL } from '../graphql/queries/Authenticate'
 
-// Customer Screens
-import UpsertCustomerScreen from '../Screen/Contact/UpsertCustomerScreen'
-import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
+// Contact Screens
+import UpsertContactScreen from '../Screen/Contact/UpsertContactScreen'
+import ContactDetailScreen from '../Screen/Contact/ContactDetailScreen'
 import CustomerScreen from '../Screen/Contact/CustomerScreen'
+import ProspectScreen from '../Screen/Contact/ProspectScreen'
+import CustomerPaymentActivity from '../Screen/Contact/CustomerPaymentActivity'
 
-// Vendor Screens
-import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen'
-import VendorDetailScreen from '../Screen/Contact/VendorDetailScreen'
-import VendorScreen from '../Screen/Contact/VendorScreen'
-
+/***
+ *
+ * STORE SCREENS
+ */
 // Product Screens
-import UpsertProductScreen from '../Screen/UpsertProductScreen'
-import ProductDetailsScreen from '../Screen/ProductDetailsScreen'
-import ProductScreen from '../Screen/ProductScreen'
+import CreateProductScreen from '../Screen/Store/CreateProductScreen'
+import ProductDetailsScreen from '../Screen/Store/ProductDetailsScreen'
+import ProductScreen from '../Screen/Store/ProductScreen'
+import UpdateProductScreen from '../Screen/Store/UpdateProductScreen'
+import UpdateProductGroupOptionsScreen from '../Screen/Store/UpdateProductGroupOptionsScreen'
+import AddProductVariantScreen from '../Screen/Store/AddProductVariantScreen'
+import UpsertProductRestockScreen from '../Screen/Store/UpsertProductRestockScreen'
 
-// Service Screens
-import UpsertServiceScreen from '../Screen/UpsertServiceScreen'
-import ServiceDetailsScreen from '../Screen/ServiceDetailsScreen'
-import ServicesScreen from '../Screen/ServicesScreen'
+// Category Screens
+import CategoriesScreen from '../Screen/Settings/Category/CategoriesScreen'
+import UpsertCategoryScreen from '../Screen/Settings/Category/UpsertCategoryScreen'
+
+// Options Screens
+import OptionsScreen from '../Screen/Settings/Option/OptionsScreen'
+import UpsertOptionScreen from '../Screen/Settings/Option/UpsertOptionScreen'
+
+//Webstore Setting Option
+import WebstoreOptionsScreen from '../Screen/Settings/Webstore/WebstoreOptionsScreen'
+import UpsertCoverPhotoScreen from '../Screen/Settings/Webstore/UpsertCoverPhotoScreen'
+import UpsertDocumentsScreen from '../Screen/Settings/Webstore/UpsertDocumentsScreen'
+import DocumentsScreen from '../Screen/Settings/Webstore/DocumentsScreen'
+
+//Delivery Fee Screens
+import CreateDeliveryFeeScreen from '../Screen/Settings/DeliveryFee/CreateDeliveryFeeScreen'
+import DeliveryFeeScreen from '../Screen/Settings/DeliveryFee/DeliveryFeeScreen'
+import DeliveryDetailsScreen from '../Screen/Settings/DeliveryFee/DeliveryDetailsScreen'
 
 // Business Screens
-import BusinessProfileScreen from '../Screen/BusinessProfileScreen'
-import EditBusinessProfileScreen from '../Screen/EditBusinessProfileScreen'
+import BusinessProfileScreen from '../Screen/BusinessProfile/BusinessProfileScreen'
+import EditBusinessProfileScreen from '../Screen/BusinessProfile/EditBusinessProfileScreen'
 
 // User Profile Screens
-import EditUserProfileScreen from '../Screen/EditUserProfileScreen'
-import UserProfileScreen from '../Screen/UserProfileScreen'
-import ProfileSettingsScreen from '../Screen/ProfileSettingsScreen'
+import EditUserProfileScreen from '../Screen/User/EditUserProfileScreen'
+import UserProfileScreen from '../Screen/User/UserProfileScreen'
+import ProfileSettingsScreen from '../Screen/User/ProfileSettingsScreen'
+import ChargeCalculatorScreen from '../Screen/Settings/ChargeCalculatorScreen'
 
-// SalesOrder Screens
-import ServicesSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
-import ProductSalesOrderScreen from '../Screen/ServicesSalesOrderScreen'
-import ProductSalesRecordScreen from '../Screen/ProductSalesRecordScreen'
-import SalesOrderStatusScreen from '../Screen/SalesOrderStatusScreen'
-import SalesOrderDetailsScreen from '../Screen/SalesOrderDetailsScreen'
-import NewSalesOrderScreen from '../Screen/NewSalesOrderScreen'
-import ServiceSalesRecordScreen from '../Screen/ServiceSalesRecordScreen'
+// Order
+import OrderStatusScreen from '../Screen/Order/OrderStatusScreen'
+import SalesOrderScreen from '../Screen/Order/SalesOrderScreen'
+import SalesOrderDetailsScreen from '../Screen/Order/SalesOrderDetailsScreen'
+import SalesOrderDailySalesScreen from '../Screen/Order/SalesOrderDailySalesScreen'
+import UpsertSalesOrderScreen from '../Screen/Order/UpsertSalesOrderScreen'
+
+// Notification
+import NotificationScreen from '../Screen/NotificationScreen'
 
 // Expenses Screens
-import ExpensesScreen from '../Screen/ExpensesScreen'
-import ExpensesDetailsScreen from '../Screen/ExpensesDetailsScreen'
-import NewExpensesScreen from '../Screen/NewExpensesSceen'
+import ExpensesScreen from '../Screen/Expenses/ExpensesScreen'
+import ExpensesDetailsScreen from '../Screen/Expenses/ExpensesDetailsScreen'
+import UpsertExpenseScreen from '../Screen/Expenses/UpsertExpenseScreen'
+
+// Special Offer Screens
+import SpecialOfferScreen from '../Screen/SpecialOffer/SpecialOfferScreen'
+import SpecialOfferDetailsScreen from '../Screen/SpecialOffer/SpecialOfferDetailsScreen'
+import UpsertSpecialOfferScreen from '../Screen/SpecialOffer/UpsertSpecialOfferScreen'
 
 // Authentication Screens
 import LoginScreen from '../Screen/LoginScreen'
-import SignupScreen from '../Screen/SignupScreen'
-import OnBoardingScreen from '../Screen/OnBoardingScreen'
+import LandingScreen from '../Screen/Onboarding/Landing'
+import UserOnboardScreen from '../Screen/Onboarding/UserOnboardScreen'
+import BusinessOnboardScreen from '../Screen/Onboarding/BusinessOnboardScreen'
 
 // Employee Screens
 import EmployeesScreen from '../Screen/EmployeesScreen'
@@ -63,133 +97,49 @@ import EmployeeForm from '../Components/EmployeeForm'
 import HomeScreen from '../Screen/HomeScreen'
 
 // Other Component Screens
-import BankScreen from '../Screen/BankScreen'
-import InventoryScreen from '../Screen/InventoryScreen'
-import InvoicesScreen from '../Screen/InvoicesScreen'
-import PurchaseScreen from '../Screen/PurchaseScreen'
-import ResetScreen from '../Screen/ResetScreen'
-import ReceiptsScreen from '../Screen/ReceiptsScreen'
-import IncomeScreen from '../Screen/IncomeScreen'
+import BankScreen from '../Screen/Bank/BankScreen'
+import BankDetailsScreen from '../Screen/Bank/BankDetailsScreen'
+import UpsertBankScreen from '../Screen/Bank/UpsertBankScreen'
 
-import MainOrderList from '../Components/MainOrderList'
-import OrderListScreen from '../Screen/OrderListScreen'
-import NewOrderScreen from '../Screen/NewOrderScreen'
-import OrderDetailsScreen from '../Screen/OrderDetailsScreen'
+import InvoiceDetailsScreen from '../Screen/Invoices/InvoiceDetailsScreen'
+import UpsertInvoiceScreen from '../Screen/Invoices/UpsertInvoiceScreen'
+import InvoicesScreen from '../Screen/Invoices/InvoicesScreen'
+import UpdateInvoiceDueDate from '../Screen/Invoices/UpdateInvoiceDueDate'
+
+import IncomeScreen from '../Screen/IncomeScreen'
 
 import { color } from '../Style/Color'
 import Sidebar from './Sidebar'
 
-/**
- * Contacts
- */
-
-import UpsertCustomerScreen from '../Screen/Contact/UpsertCustomerScreen'
-import CustomerDetailScreen from '../Screen/Contact/CustomerDetailScreen'
-import CustomerScreen from '../Screen/Contact/CustomerScreen'
-
-import UpsertVendorScreen from '../Screen/Contact/UpsertVendorScreen'
-import VendorDetailScreen from '../Screen/Contact/VendorDetailScreen'
-import VendorScreen from '../Screen/Contact/VendorScreen'
-
-const viewBothStack = TabNavigator(
+const contactTab = TabNavigator(
   {
-    Products: {
-      screen: ProductScreen
+    Customers: {
+      screen: CustomerScreen
     },
-    Services: {
-      screen: ServicesScreen
+    Prospects: {
+      screen: ProspectScreen
     }
   },
   {
-    navigationOptions: ({ navigation }: any) => ({
-      tabBarIcon: ({ focused }: any) => {
-        const { routeName } = navigation.state
-        let tabColor
-        if (routeName === 'Products') {
-          tabColor = focused ? color.secondary : color.secondary
-        } else if (routeName === 'Services') {
-          tabColor = focused ? color.secondary : color.secondary
-        }
-        return (
-          <View style={{ alignItems: 'center' }}>
-            <Text style={{ color: tabColor, fontWeight: 'bold', fontSize: 20 }}>
-              {routeName}
-            </Text>
-          </View>
-        )
-      }
-    }),
+    tabBarPosition: 'bottom',
+    swipeEnabled: true,
     tabBarOptions: {
-      activeTintColor: color.secondary,
-      inactiveTintColor: color.secondary,
       showLabel: true,
       style: {
-        backgroundColor: color.primary,
         height: 60,
-        paddingVertical: 8
+        borderTopWidth: 1,
+        borderTopColor: '#eee',
+        paddingBottom: 20,
+        backgroundColor: '#fff'
       },
-      indicatorStyle: {
-        backgroundColor: color.check
-      },
-      upperCaseLabel: false,
+      activeTintColor: color.button,
+      inactiveTintColor: color.textColor,
       labelStyle: {
-        fontSize: 14,
-        fontFamily: 'SourceSansPro'
+        fontSize: 15,
+        fontFamily: 'AvenirNext-DemiBold'
       }
     },
-    animationEnabled: false,
-    swipeEnabled: true
-  }
-)
-
-const salesOrderTab = TabNavigator(
-  {
-    Products: {
-      screen: ProductSalesOrderScreen
-    },
-    Services: {
-      screen: ServicesSalesOrderScreen
-    }
-  },
-  {
-    navigationOptions: ({ navigation }: any) => ({
-      tabBarIcon: ({ focused }: any) => {
-        const { routeName } = navigation.state
-        let tabColor
-        if (routeName === 'Products') {
-          tabColor = focused ? color.secondary : color.secondary
-        } else if (routeName === 'Services') {
-          tabColor = focused ? color.secondary : color.secondary
-        }
-        return (
-          <View style={{ alignItems: 'center' }}>
-            <Text style={{ color: tabColor, fontWeight: 'bold', fontSize: 20 }}>
-              {routeName}
-            </Text>
-          </View>
-        )
-      }
-    }),
-    tabBarOptions: {
-      activeTintColor: color.check,
-      inactiveTintColor: color.secondary,
-      showLabel: true,
-      style: {
-        backgroundColor: color.primary,
-        height: 60,
-        paddingVertical: 8
-      },
-      indicatorStyle: {
-        backgroundColor: color.check
-      },
-      upperCaseLabel: false,
-      labelStyle: {
-        fontSize: 14,
-        fontFamily: 'SourceSansPro'
-      }
-    },
-    animationEnabled: false,
-    swipeEnabled: true
+    tabBarComponent: TabBarBottom
   }
 )
 
@@ -204,47 +154,40 @@ const businessStack = StackNavigator(
     NewEmployee: {
       screen: EmployeeForm
     },
-    Purchase: {
-      screen: PurchaseScreen
-    },
-    ProductSalesRecord: {
-      screen: ProductSalesRecordScreen
-    },
-    Bank: {
+
+    // Transactions
+    Banks: {
       screen: BankScreen
     },
+    BankDetails: BankDetailsScreen,
+    UpsertBank: UpsertBankScreen,
     Income: {
       screen: IncomeScreen
     },
-    Receipts: {
-      screen: ReceiptsScreen
+    InvoiceDetails: {
+      screen: InvoiceDetailsScreen
     },
-    Expenses: {
-      screen: ExpensesScreen
+    UpdateInvoiceDueDate: {
+      screen: UpdateInvoiceDueDate
     },
-    Inventory: {
-      screen: InventoryScreen
-    },
-    Invoice: {
+    Invoices: {
       screen: InvoicesScreen
     },
+    UpsertInvoice: {
+      screen: UpsertInvoiceScreen
+    },
+
+    // Notification ROUTES
+    Notifications: {
+      screen: NotificationScreen
+    },
+
+    // Setting ROUTES
     ProfileSettings: {
       screen: ProfileSettingsScreen
     },
-    NewOrder: {
-      screen: NewOrderScreen
-    },
-    ViewBusiness: {
-      screen: viewBothStack
-    },
-    OrderDetails: {
-      screen: OrderDetailsScreen
-    },
-    NewProduct: {
-      screen: UpsertProductScreen
-    },
-    ProductDetails: {
-      screen: ProductDetailsScreen
+    ChargeCalculator: {
+      screen: ChargeCalculatorScreen
     },
     UserProfile: {
       screen: UserProfileScreen
@@ -252,78 +195,81 @@ const businessStack = StackNavigator(
     BusinessProfile: {
       screen: BusinessProfileScreen
     },
-    OrderList: {
-      screen: OrderListScreen
-    },
-    MainOrder: {
-      screen: MainOrderList
-    },
     EditUserProfile: {
       screen: EditUserProfileScreen
     },
     EditBusinessProfile: {
       screen: EditBusinessProfileScreen
     },
-    EditServices: UpsertServiceScreen,
-    ShowService: ServiceDetailsScreen,
-    SalesOrderStatus: SalesOrderStatusScreen,
-    SalesOrderDetails: SalesOrderDetailsScreen,
-    NewSalesOrder: NewSalesOrderScreen,
-    ServiceSalesRecord: ServiceSalesRecordScreen,
+
+    // STORE ROUTES
+    Products: {
+      screen: ProductScreen
+    },
+    CreateProduct: {
+      screen: CreateProductScreen
+    },
+    UpdateProduct: UpdateProductScreen,
+    UpsertProductRestock: UpsertProductRestockScreen,
+    UpdateProductGroupOptions: UpdateProductGroupOptionsScreen,
+    AddProductVariant: AddProductVariantScreen,
+    ProductDetails: {
+      screen: ProductDetailsScreen
+    },
+
+    Categories: CategoriesScreen,
+    UpsertCategory: UpsertCategoryScreen,
+
+    // Options
+    Options: OptionsScreen,
+    UpsertOption: UpsertOptionScreen,
+
+    // Special Offer
+    SpecialOffer: SpecialOfferScreen,
+    SpecialOfferDetails: SpecialOfferDetailsScreen,
+    UpsertSpecialOffer: UpsertSpecialOfferScreen,
+
+    // Webstore settings
+    WebstoreOptions: WebstoreOptionsScreen,
+    UpsertCoverPhoto: UpsertCoverPhotoScreen,
+    UpsertDocuments: UpsertDocumentsScreen,
+    Documents: DocumentsScreen,
+
+    // Delivery Fee
+    CreateDeliveryFee: CreateDeliveryFeeScreen,
+    DeliveryFees: DeliveryFeeScreen,
+    DeliveryDetails: DeliveryDetailsScreen,
+
+    // Expenses
+    Expenses: ExpensesScreen,
+    UpsertExpense: UpsertExpenseScreen,
     ExpensesDetails: ExpensesDetailsScreen,
-    NewExpenses: NewExpensesScreen,
-    Customers: {
-      screen: CustomerScreen
+
+    // Order
+    OrderStatusChange: OrderStatusScreen,
+
+    // Sales Order
+    SalesDetails: SalesOrderDetailsScreen,
+    Sales: SalesOrderScreen,
+    SalesOrderDailySales: SalesOrderDailySalesScreen,
+    UpsertSales: UpsertSalesOrderScreen,
+
+    // Contact
+    Contacts: {
+      screen: contactTab
     },
-    UpsertCustomer: {
-      screen: UpsertCustomerScreen
+    UpsertContact: {
+      screen: UpsertContactScreen
     },
-    CustomerDetails: {
-      screen: CustomerDetailScreen
+    ContactDetails: {
+      screen: ContactDetailScreen
     },
-    Vendors: {
-      screen: VendorScreen
-    },
-    UpsertVendor: {
-      screen: UpsertVendorScreen
-    },
-    VendorDetails: {
-      screen: VendorDetailScreen
-    },
-    salesOrderTab: {
-      screen: salesOrderTab,
-      navigationOptions: ({ navigation }: any) => ({
-        header: (
-          <CustomHeader
-            title="Sales order"
-            showMenu
-            showRight
-            rightText=" "
-            firstRightIcon="ios-search"
-            onMenuPress={() => navigation.navigate('DrawerToggle')}
-          />
-        )
-      })
-    }
+    CustomerPaymentActivity
   },
   {
     initialRouteName: 'Home',
-    navigationOptions: ({ navigation }: any) => ({
-      header: (
-        <CustomHeader
-          title="Products & Services"
-          showMenu={true}
-          // tslint:disable-next-line:jsx-no-lambda
-          onMenuPress={() => {
-            navigation.navigate('DrawerToggle')
-          }}
-          firstRightIcon={'ios-search'}
-          navigation={navigation}
-          showRight={true}
-          // tslint:disable-next-line:jsx-no-lambda
-          onPressFirstRightIcon={() => console.log('Search icon pressed.')}
-        />
-      )
+    navigationOptions: () => ({
+      header: null
     })
   }
 )
@@ -345,10 +291,18 @@ const DrawerStack = DrawerNavigator(
 
 const AuthStack = StackNavigator(
   {
-    OnBoarding: OnBoardingScreen,
+    OnBoarding: LandingScreen,
     Login: LoginScreen,
-    Reset: ResetScreen,
-    Signup: SignupScreen
+    Signup: UserOnboardScreen
+  },
+  {
+    headerMode: 'none'
+  }
+)
+
+const BusinessOnBoardStack = StackNavigator(
+  {
+    BusinessOnboard: BusinessOnboardScreen
   },
   {
     headerMode: 'none'
@@ -358,26 +312,54 @@ const AuthStack = StackNavigator(
 interface IProps {
   client: any
 }
-export default class Routes extends React.Component<IProps> {
-  public render() {
-    const { client } = this.props
+
+interface IState {
+  display: boolean
+}
+
+export default class Routes extends React.Component<IProps, IState> {
+  state = {
+    display: false
+  }
+
+  componentDidMount() {
+    /**
+     * We would be simulating a very small timeout
+     * This is needed to prevent glitches in the screen when the user opens the app at first
+     */
+    setTimeout(
+      () =>
+        this.setState({ display: true }, () => {
+          SplashScreen.hide()
+        }),
+      500
+    )
+  }
+
+  render() {
+    const { client } = this.props,
+      { display } = this.state
+
     return (
       <Query query={AuthenticateQueryGQL}>
         {({ loading, error, data }) => {
-          console.log('loading', loading)
-          console.log('error', error)
-          console.log('data', data)
           if (loading) {
-            return <Text>'Loading...'</Text>
+            return <RegularText>{`Loading data here`}</RegularText>
           }
           if (error) {
-            return <Text>{`Error! ${error.message}`}</Text>
+            return <RegularText>{`Error! ${error.message}`}</RegularText>
           }
-
-          if (!data.authenticate) {
+          if (!data.authenticate && display) {
+            console.log('Oya ', loading)
             return <AuthStack screenProps={{ client }} />
+          } else {
+            if (data.user && !data.user.company && display) {
+              return <BusinessOnBoardStack screenProps={{ client }} />
+            } else if (display) {
+              return <DrawerStack screenProps={{ client }} />
+            }
+            return null
           }
-          return <DrawerStack screenProps={{ client }} />
         }}
       </Query>
     )

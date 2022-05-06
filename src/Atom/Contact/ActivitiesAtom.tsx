@@ -1,16 +1,18 @@
-import React from 'react';
-import { View, StyleSheet, Text } from 'react-native';
-import { Left, Right } from 'native-base';
-import { color } from '../../Style/Color';
-import { numberWithCommas } from '../../Functions/numberWithCommas';
+import React from 'react'
+import { View, StyleSheet } from 'react-native'
+import { Left, Right } from 'native-base'
+
+import { color } from '../../Style/Color'
+import { MediumText } from '../../Atom/TextAtom'
+import { numberWithCommas } from '../../Functions/numberWithCommas'
 
 interface IProps {
-  amount: number;
-  dueDate: string;
-  status: string;
-  bar: number;
-  details: string;
-  title: string;
+  amount: number
+  dueDate: string
+  status: string
+  bar: number
+  details: string
+  title: string
 }
 
 export default class ActivitiesAtom extends React.Component<IProps, any> {
@@ -28,92 +30,84 @@ export default class ActivitiesAtom extends React.Component<IProps, any> {
                 val === 'paid'
                   ? color.selling
                   : val === 'debt'
-                    ? 'red'
-                    : 'black'
+                  ? 'red'
+                  : 'black'
             }
           ]}
         />
       </View>
-    );
-  };
+    )
+  }
   render() {
     return (
       <View style={styles.container}>
         <View style={styles.sideList}>
           {this.sideTriangle(this.props.status, this.props.bar)}
         </View>
-        <View style={styles.mainList}>
-          <Left
-            style={{
-              flexDirection: 'column',
-              paddingLeft: 12,
-              paddingVertical: 16,
-              margin: 0
-            }}
+        <Left
+          style={{
+            flexDirection: 'column',
+            paddingLeft: 12,
+            paddingVertical: 16,
+            margin: 0
+          }}
+        >
+          <MediumText style={styles.normalFont}>{this.props.title}</MediumText>
+          <MediumText
+            style={[
+              styles.status,
+              {
+                color:
+                  this.props.status === 'paid' ? color.selling : color.textColor
+              }
+            ]}
           >
-            <Text style={styles.normalFont}>{this.props.title}</Text>
-            <Text
-              style={[
-                styles.status,
-                {
-                  color: this.props.status === 'paid' ? color.selling : 'black'
-                }
-              ]}
-            >
-              {this.props.details}
-            </Text>
-          </Left>
-          <Right
-            style={{
-              flexDirection: 'column',
-              paddingRight: 16,
-              paddingVertical: 16
-            }}
+            {this.props.details}
+          </MediumText>
+        </Left>
+        <Right
+          style={{
+            flexDirection: 'column',
+            paddingRight: 16,
+            paddingVertical: 16
+          }}
+        >
+          <MediumText
+            style={[
+              styles.cash,
+              {
+                color:
+                  this.props.status === 'paid'
+                    ? color.selling
+                    : this.props.status === 'debt'
+                    ? 'red'
+                    : 'black'
+              }
+            ]}
           >
-            <Text
-              style={[
-                styles.cash,
-                {
-                  color:
-                    this.props.status === 'paid'
-                      ? color.selling
-                      : this.props.status === 'debt'
-                        ? 'red'
-                        : 'black'
-                }
-              ]}
-            >
-              {'\u20A6'} {numberWithCommas(this.props.amount)}
-            </Text>
-            <Text style={styles.smallFont}>{this.props.dueDate}</Text>
-          </Right>
-        </View>
+            {'\u20A6'} {numberWithCommas(this.props.amount)}
+          </MediumText>
+          <MediumText style={styles.smallFont}>{this.props.dueDate}</MediumText>
+        </Right>
       </View>
-    );
+    )
   }
 }
 
 const styles = StyleSheet.create({
   container: {
     flexDirection: 'row',
-    width: '100%',
     backgroundColor: color.secondary,
-    margin: 0
+    margin: 0,
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    borderBottomWidth: 1,
+    borderBottomColor: color.listBorderColor
   },
   sideList: {
-    width: '11%',
     paddingLeft: 16,
     // paddingRight: 16,
     alignSelf: 'flex-end',
-    margin: 0
-  },
-  mainList: {
-    width: '89%',
-    backgroundColor: color.secondary,
-    height: 75,
-    flexDirection: 'row',
-    borderBottomWidth: 1,
-    borderBottomColor: color.listBorderColor,
     margin: 0
   },
   line: {
@@ -146,24 +140,20 @@ const styles = StyleSheet.create({
   },
   cash: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
-    // paddingTop: 3,
-    // paddingBottom: 6
+    fontFamily: 'AvenirNext-Medium',
+    marginBottom: 10
   },
   status: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro'
-    // paddingTop: 3,
-    // paddingBottom: 6
+    fontFamily: 'AvenirNext-Medium'
   },
   normalFont: {
     fontSize: 14,
-    fontFamily: 'SourceSansPro',
-    // paddingTop: 8,
-    color: color.button
+    fontFamily: 'AvenirNext-Medium',
+    marginBottom: 10
   },
   smallFont: {
     fontSize: 12,
-    fontFamily: 'SourceSansPro'
+    fontFamily: 'AvenirNext-Medium'
   }
-});
+})

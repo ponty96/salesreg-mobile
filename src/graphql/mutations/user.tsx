@@ -1,35 +1,8 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const UpdateUserGQL = gql`
-  mutation updateUser(
-    $dateOfBirth: String!
-    $firstName: String!
-    $gender: Gender!
-    $lastName: String!
-    $phoneType: String
-    $phoneNumber: String!
-    $profilePicture: String
-    $street1: String!
-    $city: String!
-    $state: String!
-    $country: String!
-  ) {
-    updateUser(
-      user: {
-        dateOfBirth: $dateOfBirth
-        firstName: $firstName
-        gender: $gender
-        lastName: $lastName
-        phone: { type: $phoneType, number: $phoneNumber }
-        profilePicture: $profilePicture
-        location: {
-          street1: $street1
-          city: $city
-          state: $state
-          country: $country
-        }
-      }
-    ) {
+  mutation updateUser($user: UpdateUserInput!) {
+    updateUser(user: $user) {
       success
       fieldErrors {
         key
@@ -44,25 +17,47 @@ export const UpdateUserGQL = gql`
           dateOfBirth
           gender
           profilePicture
-          phone {
-            type
-            number
-          }
-          location {
-            id
-            city
-            country
-            state
-            street1
-            type
-          }
           company {
+            saleCharge
             id
             title
+            shareLink
             contactEmail
+            coverPhoto
+            deliveryFees {
+              id
+              state
+              region
+              fee
+            }
+            legalDocuments {
+              pdfUrl
+              name
+              type
+              id
+            }
+            bank {
+              accountNumber
+              bankCode
+              subaccountId
+              subaccountTransacId
+            }
+            facebook
+            twitter
+            instagram
+            linkedin
             about
-            category
             currency
+            slug
+            logo
+            phone {
+              number
+            }
+            bank {
+              accountName
+              accountNumber
+              bankName
+            }
             branches {
               id
               type
@@ -80,4 +75,34 @@ export const UpdateUserGQL = gql`
       }
     }
   }
-`;
+`
+
+export const UpsertMobileDevice = gql`
+  mutation upsertMobileDevice($mobileDevice: MobileDeviceInput!) {
+    upsertMobileDevice(mobileDevice: $mobileDevice) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
+export const DisableMobileDeviceNotification = gql`
+  mutation disableMobileDeviceNotification(
+    $deviceToken: String!
+    $userId: Uuid!
+  ) {
+    disableMobileDeviceNotification(
+      deviceToken: $deviceToken
+      userId: $userId
+    ) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`

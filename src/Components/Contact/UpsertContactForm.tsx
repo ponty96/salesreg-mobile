@@ -1,342 +1,382 @@
-import React, { PureComponent } from 'react';
-import { View, StyleSheet, KeyboardAvoidingView } from 'react-native';
-import InputAtom from '../../Atom/InputAtom';
-import PickerAtom from '../../Atom/PickerAtom';
-// import ButtonAtom from '../../Atom/ButtonAtom';
-import FormImageAtom from '../../Atom/FormImageAtom';
-import { Form } from 'native-base';
-import { color } from '../../Style/Color';
-import FormContainerAtom from '../../Atom/FormContainerAtom';
-import SaveCancelButton from '../../Container/SaveCancelButton';
-import { ScrollView } from 'react-native-gesture-handler';
-import FormAddressSection from '../FormAddressSection';
-import { Textarea } from 'native-base';
-import FormErrorTextAtom from '../../Atom/FormErrorTextAtom';
-import DatePickerAtom from '../../Atom/DatePickerAtom';
-import { Mutation } from 'react-apollo';
-import AppSpinner from '../Spinner';
-import { UpsertContactGQL } from '../../graphql/mutations/contact';
-import Auth from '../../services/auth';
-import { parseFieldErrors, capitalize } from '../../Functions';
+import React, { Component } from 'react'
+import { Mutation } from 'react-apollo'
+import { NavigationActions } from 'react-navigation'
+
+import AppSpinner from '../Spinner'
+import { UpsertContactGQL } from '../../graphql/mutations/contact'
+import { CompanyContactGQL } from '../../graphql/queries/contact'
+import { parseFieldErrors } from '../../Functions'
+import FormStepperContainer from '../../Container/Form/StepperContainer'
+import { Countries } from '../../utilities/data/picker-lists'
+import { UserContext } from '../../context/UserContext'
+import configureNotificationBanner from '../../Functions/configureNotificationBanner'
+import { NotificationBanner } from '../../Components/NotificationBanner'
+import setAppAnalytics from '../../Functions/setAppAnalytics'
 
 interface IProps {
-  navigation: any;
-  contact: any;
-  successRoute: string;
-  contactType: string;
+  navigation: any
+  contact: any
+  user: any
+  successRoute: string
+  contactType: string
 }
 
-interface IState {}
+const genderToPossesivePronoun = gender => {
+  if (gender == 'Male') return 'His'
+  return 'Her'
+}
 
-class UpsertContactForm extends PureComponent<IProps, IState> {
+const genderToPronoun = gender => {
+  if (gender == 'Female') return 'she'
+  return 'he'
+}
+
+class UpsertContactForm extends Component<IProps> /*, IState*/ {
   state = {
-    image: 'http://downloadicons.net/sites/default/files/user-icon-2197.png',
     contactName: '',
-    companyName: '',
-    number: '',
-    name: '',
     email: '',
-    fax: '',
-    bankName: '',
-    accountName: '',
-    accountNumber: '',
-    currency: '',
-    birthday: '',
-    maritalStatus: '',
-    marriageAnniversary: '',
-    likes: '',
-    dislikes: '',
+    gender: '',
+    // step 1
+    image: '',
+    // step 3
     street1: '',
     city: '',
     state: '',
-    country: '',
-    fieldErrors: null,
+    country: 'NG',
+    // step 4
+    number: '',
+    instagram: '',
+    twitter: '',
+    facebook: '',
+    allowsMarketing: 'No',
+    // snapchat: '',
+    // last step
+    birthday: new Date('1 January 1990'),
+    // other required fields
     userId: '',
-    companyId: ''
-  };
+    companyId: '',
+    fieldErrors: null
+  }
 
   componentDidMount() {
-    const { contact } = this.props;
-    let details = {};
+    const { contact } = this.props
+    let details = {}
     if (contact) {
-      const {
-        address = {},
-        bank = {},
-        likes = [],
-        dislikes = [],
-        phone
-      } = contact;
+      const { address = {}, phone, birthday } = contact
       details = {
         ...contact,
         ...address,
-        ...bank,
         ...phone,
-        likes: likes.join(', '),
-        dislikes: dislikes.join(', ')
-      };
+        birthday: birthday || new Date('1 January 1990'),
+        gender: contact.gender
+          ? `${contact.gender[0].toUpperCase()}${contact.gender
+              .toLowerCase()
+              .substring(1)}`
+          : '',
+        image: contact.image ? contact.image : ''
+      }
     }
-    this.updateDetails(details);
+    this.updateDetails(details)
   }
 
   updateDetails = async (details: any) => {
-    const user = JSON.parse(await Auth.getCurrentUser());
+    let { user } = this.props
+
     this.setState({
       userId: user.id,
       companyId: user.company.id,
       ...details
-    });
-  };
+    })
+  }
 
   updateState = (key: string, value: any) => {
-    this.setState({ [key]: value });
-  };
-
-  getImage = (_pic: any) => {};
-
-  // addFromContacts = () => {
-  //   console.log('Added From Contacts');
-  // };
+    this.setState({ [key]: value })
+  }
 
   render() {
-    const { fieldErrors } = this.state;
-    const labelSuffix = capitalize(this.props.contactType);
-    return (
-      <Mutation mutation={UpsertContactGQL} onCompleted={this.onCompleted}>
-        {(upsertContact, { loading }) => (
-          <View style={styles.ababa}>
-            <ScrollView>
-              <KeyboardAvoidingView
-                behavior="padding"
-                keyboardVerticalOffset={60}
-                style={styles.itemsContainer}
-              >
-                <AppSpinner visible={loading} />
-                <ScrollView>
-                  <Form>
-                    <FormImageAtom
-                      form={'contact'}
-                      getValue={this.getImage}
-                      source={this.state.image}
-                    />
-                    <FormContainerAtom headerText={`${labelSuffix} ID`}>
-                      <InputAtom
-                        label={`${labelSuffix} Name`}
-                        getValue={val => this.updateState('contactName', val)}
-                        required
-                        placeholder="e.g Ayomide Aregbede"
-                        defaultValue={this.state.contactName}
-                        error={fieldErrors && fieldErrors['contactName']}
-                      />
-                      <InputAtom
-                        label={'Company Name'}
-                        placeholder="e.g Miji Jones"
-                        defaultValue={this.state.companyName}
-                        getValue={val => this.updateState('companyName', val)}
-                        error={fieldErrors && fieldErrors['companyName']}
-                      />
-                    </FormContainerAtom>
-                    <FormContainerAtom headerText={`${labelSuffix} contact`}>
-                      <InputAtom
-                        getValue={val => this.updateState('number', val)}
-                        keyboardType="numeric"
-                        key="number"
-                        label="Phone"
-                        required
-                        placeholder="e.g 0813443412"
-                        defaultValue={this.state.number}
-                        error={fieldErrors && fieldErrors['number']}
-                      />
-                      <InputAtom
-                        getValue={val => this.updateState('email', val)}
-                        keyboardType="email-address"
-                        key="email"
-                        label="Email Address"
-                        placeholder="e.g somebody@example.com"
-                        defaultValue={this.state.email}
-                        error={fieldErrors && fieldErrors['email']}
-                      />
-                    </FormContainerAtom>
-                    <FormContainerAtom headerText="Banking detail">
-                      <InputAtom
-                        label="Bank name"
-                        getValue={val => this.updateState('bankName', val)}
-                        placeholder="e.g Guarranty Trust Bank"
-                        defaultValue={this.state.bankName}
-                        error={fieldErrors && fieldErrors['bankName']}
-                      />
-                      <InputAtom
-                        label="Account name"
-                        getValue={val => this.updateState('accountName', val)}
-                        placeholder="e.g Ayomide Aregbede"
-                        defaultValue={this.state.accountName}
-                        error={fieldErrors && fieldErrors['accountName']}
-                      />
-                      <InputAtom
-                        label="Account number"
-                        getValue={val => this.updateState('accountNumber', val)}
-                        keyboardType="numeric"
-                        placeholder="03457806203"
-                        defaultValue={this.state.accountNumber}
-                        error={fieldErrors && fieldErrors['accountNumber']}
-                      />
+    const firstName = this.state.contactName
+      ? this.state.contactName.split(' ')[0]
+      : ''
+    const parsedGender = genderToPossesivePronoun(this.state.gender)
+    const contact = this.props.contact || {}
 
-                      <PickerAtom
-                        list={['Naira (\u20A6)']}
-                        placeholder={`e.g Naira (\u20A6)`}
-                        selected={this.state.currency}
-                        handleSelection={val =>
-                          this.updateState('currency', val)
-                        }
-                        label="Currency"
-                      />
-                      {fieldErrors &&
-                        fieldErrors['currency'] && (
-                          <FormErrorTextAtom
-                            errorText={fieldErrors['currency']}
-                          />
-                        )}
-                    </FormContainerAtom>
-                    <FormAddressSection
-                      street1={this.state.street1}
-                      city={this.state.city}
-                      state={this.state.state}
-                      country={this.state.country}
-                      fieldErrors={fieldErrors}
-                      getValue={this.updateState}
-                    />
-                    <FormContainerAtom headerText="Other information">
-                      <DatePickerAtom
-                        placeholder=""
-                        date={this.state.birthday}
-                        handleDateSelection={val =>
-                          this.updateState('birthday', val)
-                        }
-                        label="Birthday"
-                        required={true}
-                        error={fieldErrors && fieldErrors['birthday']}
-                      />
-                      <PickerAtom
-                        list={['Single', 'Married']}
-                        placeholder="e.g Single"
-                        selected={this.state.maritalStatus.toUpperCase()}
-                        handleSelection={val =>
-                          this.updateState('maritalStatus', val)
-                        }
-                        label="Marital Status"
-                      />
-                      {fieldErrors &&
-                        fieldErrors['maritalStatus'] && (
-                          <FormErrorTextAtom
-                            errorText={fieldErrors['maritalStatus']}
-                          />
-                        )}
-                    </FormContainerAtom>
-                    <FormContainerAtom headerText="Likes">
-                      <Textarea
-                        rowSpan={5}
-                        placeholder="e.g hublot, movado, red, orange"
-                        placeholderTextColor={color.inactive}
-                        defaultValue={this.state.likes}
-                        onChangeText={val => this.updateState('likes', val)}
-                      />
-                      {fieldErrors &&
-                        fieldErrors['likes'] && (
-                          <FormErrorTextAtom errorText={fieldErrors['likes']} />
-                        )}
-                    </FormContainerAtom>
-                    <FormContainerAtom headerText="Dislikes">
-                      <Textarea
-                        rowSpan={5}
-                        placeholder="e.g hublot, movado, red, orange"
-                        placeholderTextColor={color.inactive}
-                        defaultValue={this.state.likes}
-                        onChangeText={val => this.updateState('dislikes', val)}
-                      />
-                      {fieldErrors &&
-                        fieldErrors['dislikes'] && (
-                          <FormErrorTextAtom
-                            errorText={fieldErrors['dislikes']}
-                          />
-                        )}
-                    </FormContainerAtom>
-                  </Form>
-                </ScrollView>
-              </KeyboardAvoidingView>
-            </ScrollView>
-            <SaveCancelButton
-              navigation={this.props.navigation}
-              createfunc={() =>
-                upsertContact({ variables: this.parseMutationVariables() })
+    return (
+      <Mutation
+        mutation={UpsertContactGQL}
+        refetchQueries={[
+          {
+            query: CompanyContactGQL,
+            variables: {
+              queryText: '',
+              companyId: this.state.companyId,
+              type: this.props.contactType,
+              first: 10,
+              after: null
+            }
+          }
+        ]}
+        awaitRefetchQueries={true}
+        onCompleted={this.onCompleted}
+      >
+        {(upsertContact, { loading }) => [
+          <AppSpinner visible={loading} />,
+          <FormStepperContainer
+            formAction={Object.keys(contact).length > 0 && 'update'}
+            formData={this.state}
+            updateValueChange={this.updateState}
+            handleBackPress={() => this.props.navigation.goBack()}
+            fieldErrors={this.state.fieldErrors}
+            steps={[
+              {
+                stepTitle: `Let's know this ${this.props.contactType}`,
+                formFields: [
+                  {
+                    label: 'Name?',
+                    placeholder: 'John Doe',
+                    validators: ['required'],
+                    name: 'contactName',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'Email?',
+                    placeholder: 'someone@address.com',
+                    name: 'email',
+                    validators: ['required', 'email'],
+                    type: {
+                      type: 'input',
+                      keyboardType: 'email-address'
+                    }
+                  },
+                  {
+                    label: 'Gender?',
+                    placeholder: 'E.g Doe',
+                    validators: ['required'],
+                    type: {
+                      type: 'radio',
+                      options: ['Male', 'Female']
+                    },
+                    name: 'gender'
+                  }
+                ]
+              },
+              {
+                stepTitle: `Add ${firstName}'s photo(3MB \nor less)`,
+                formFields: [
+                  {
+                    label: '',
+                    name: 'image',
+                    type: {
+                      type: 'image-upload',
+                      uploadCategory: 'profile-photo'
+                    },
+                    underneathText: ''
+                  }
+                ]
+              },
+              {
+                stepTitle: `${parsedGender} address?`,
+                formFields: [
+                  {
+                    label: 'Street',
+                    placeholder: '123 Street',
+                    validators: ['required'],
+                    name: 'street1',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'City',
+                    validators: ['required'],
+                    placeholder: 'City name',
+                    name: 'city',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'State',
+                    placeholder: 'State name',
+                    validators: ['required'],
+                    name: 'state',
+                    type: {
+                      type: 'input'
+                    }
+                  },
+                  {
+                    label: 'Country',
+                    validators: ['required'],
+                    placeholder: 'Touch to choose',
+                    type: {
+                      type: 'picker',
+                      options: Countries
+                    },
+                    name: 'country'
+                  }
+                ]
+              },
+              {
+                stepTitle: `How can you contact ${firstName}\n`,
+                stepHint: '(please scroll down)',
+                formFields: [
+                  {
+                    label: `${parsedGender} phone number?`,
+                    type: {
+                      type: 'phone-input'
+                    },
+                    validators: ['required', 'phone'],
+                    name: 'number',
+                    extraData: {
+                      countryCode: this.state.country
+                    }
+                  },
+                  {
+                    label: 'Facebook username',
+                    placeholder: 'e.g username',
+                    type: {
+                      type: 'input'
+                    },
+                    validators: ['social-media-username'],
+                    name: 'facebook'
+                  },
+                  {
+                    label: 'Instagram username',
+                    placeholder: 'e.g username',
+                    type: {
+                      type: 'input'
+                    },
+                    validators: ['social-media-username'],
+                    name: 'instagram'
+                  },
+                  {
+                    label: 'Twitter username',
+                    placeholder: 'e.g username',
+                    type: {
+                      type: 'input'
+                    },
+                    validators: ['social-media-username'],
+                    name: 'twitter'
+                  },
+                  {
+                    label: `Does ${genderToPronoun(
+                      this.state.gender
+                    )} allow marketing?`,
+                    placeholder: 'E.g Doe',
+                    type: {
+                      type: 'radio',
+                      options: ['Yes', 'No']
+                    },
+                    name: 'allowsMarketing'
+                  }
+                ]
+              },
+              {
+                stepTitle: 'Other personal details',
+                formFields: [
+                  {
+                    label: `What's ${firstName}'s birthday?`,
+                    placeholder: 'e.g 06/23/2018',
+                    name: 'birthday',
+                    type: {
+                      type: 'date'
+                    }
+                  }
+                ],
+                buttonTitle: 'Done'
               }
-              positiveButtonName="SAVE"
-            />
-          </View>
-        )}
+            ]}
+            onCompleteSteps={() =>
+              upsertContact({ variables: this.parseMutationVariables() })
+            }
+          />
+        ]}
       </Mutation>
-    );
+    )
   }
   parseMutationVariables = () => {
-    const { contact = {} } = this.props;
-    return {
-      ...this.state,
-      contactId: contact ? contact.id : null,
-      bank: this.parseBankDetails(),
-      type: this.props.contactType
-    };
-  };
+    const { street1, state, city, country, number } = this.state
+    const { contact = {} } = this.props
+    let params = { ...this.state }
+    delete params.street1
+    delete params.city
+    delete params.state
+    delete params.country
+    delete params.number
+    delete params.fieldErrors
+    delete params['__typename']
+    delete params['id']
+    delete params['totalAmountPaid']
+    delete params['totalDebt']
+    delete params['data']
+    delete params['contactType']
 
-  parseBankDetails = (): any => {
-    const { accountName, accountNumber, bankName } = this.state;
-    if (accountName || accountNumber || bankName) {
-      return {
-        accountName,
-        accountNumber,
-        bankName
-      };
+    return {
+      contact: {
+        ...params,
+        type: this.props.contactType,
+        gender: this.state.gender.toUpperCase(),
+        address: {
+          street1,
+          state,
+          city,
+          country
+        },
+        phone: {
+          number
+        }
+      },
+      contactId: contact ? contact.id : null
     }
-    return null;
-  };
+  }
   onCompleted = async res => {
     const {
-      upsertContact: { success, fieldErrors }
-    } = res;
+      upsertContact: { success, fieldErrors, data }
+    } = res
     if (success) {
-      this.props.navigation.navigate(this.props.successRoute);
+      setAppAnalytics('CREATE_CONTACT', {
+        contact: this.state,
+        type: this.props.contactType
+      })
+      const { contact } = this.props
+      const resetAction = NavigationActions.reset({
+        index: 1,
+        actions: [
+          NavigationActions.navigate({
+            routeName: this.props.successRoute
+          }),
+          NavigationActions.navigate({
+            routeName: `ContactDetails`,
+            params: { contact: data, type: this.props.contactType }
+          })
+        ]
+      })
+
+      let banner = NotificationBanner(
+        Object.keys(contact).length == 0
+          ? configureNotificationBanner('AddContact', {
+              contact: this.state,
+              type: this.props.contactType
+            })
+          : configureNotificationBanner('UpdateContact', {
+              contact: this.state,
+              type: this.props.contactType
+            })
+      )
+      banner.show({ bannerPosition: 'bottom' })
+
+      this.props.navigation.dispatch(resetAction)
     } else {
-      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) });
+      this.setState({ fieldErrors: parseFieldErrors(fieldErrors) })
     }
-  };
+  }
 }
 
-export default UpsertContactForm;
+const _UpsertContactForm = props => (
+  <UserContext.Consumer>
+    {({ user }) => <UpsertContactForm {...props} user={user} />}
+  </UserContext.Consumer>
+)
 
-const styles = StyleSheet.create({
-  ababa: {
-    flex: 1,
-    backgroundColor: '#fff'
-  },
-  itemsContainer: {
-    flex: 4,
-    backgroundColor: '#F6F6F6'
-  },
-  sendAnother: {
-    color: color.button,
-    fontSize: 16,
-    fontFamily: 'SourceSansPro_Semibold'
-  },
-  btnStyle: {
-    paddingHorizontal: 5,
-    alignSelf: 'flex-start',
-    marginVertical: 3
-  },
-  wrappedInputLeft: {
-    width: '50%',
-    paddingLeft: 12
-  },
-  bottomBorder: {
-    borderBottomColor: color.list,
-    borderBottomWidth: 1,
-    marginLeft: 3,
-    marginRight: 3
-  }
-});
+export default _UpsertContactForm

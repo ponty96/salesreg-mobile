@@ -1,6 +1,8 @@
 import * as React from 'react'
-import { View, Text, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
 import StarRating from 'react-native-star-rating'
+
+import { RegularText } from './TextAtom'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -64,7 +66,7 @@ class GoldRatings extends React.Component<IProps, any> {
     return (
       <View style={styles.goldRatingsContainer}>
         {this.props.showText && (
-          <Text style={styles.addText}> {this.state.value} </Text>
+          <RegularText style={styles.addText}> {this.state.value} </RegularText>
         )}
         <StarRating
           disabled={false}

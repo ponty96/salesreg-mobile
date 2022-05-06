@@ -1,7 +1,10 @@
 import * as React from 'react'
-import { View, Text, Image, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+
 import { color } from '../Style/Color'
 import { capitalizeFirstLetter } from '../Functions/capitalizeFirstLetter'
+import CachedImageAtom from './CachedImageAtom'
+import { BoldText } from './TextAtom'
 
 interface IProps {
   businessName: string
@@ -15,18 +18,20 @@ export default class NameDisplayAtom extends React.Component<IProps, any> {
       <View style={[styles.nameDisplayWrapper, this.props.style]}>
         <View style={styles.nameDisplayLetterDisplay}>
           {this.props.image ? (
-            <Image
-              source={{ uri: this.props.image }}
+            <CachedImageAtom
+              uri={this.props.image}
               style={styles.nameDisplayImage}
             />
           ) : (
-            <Text style={styles.innerText}>
+            <BoldText style={styles.innerText}>
               {this.props.businessName &&
                 capitalizeFirstLetter(this.props.businessName)}
-            </Text>
+            </BoldText>
           )}
         </View>
-        <Text style={styles.nameDisplayName}>{this.props.businessName}</Text>
+        <BoldText style={styles.nameDisplayName}>
+          {this.props.businessName}
+        </BoldText>
       </View>
     )
   }
@@ -43,8 +48,7 @@ const styles = StyleSheet.create({
   nameDisplayName: {
     fontSize: 14,
     fontWeight: '400',
-    marginLeft: 20,
-    fontFamily: 'SourceSansPro_Bold'
+    marginLeft: 20
   },
   nameDisplayImage: {
     height: 70,
@@ -61,7 +65,6 @@ const styles = StyleSheet.create({
     alignItems: 'center'
   },
   innerText: {
-    fontFamily: 'SourceSansPro_Bold',
     fontSize: 16
   }
 })

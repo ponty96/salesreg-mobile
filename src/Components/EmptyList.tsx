@@ -1,35 +1,49 @@
 import * as React from 'react'
-import { StyleSheet, View, Text, Dimensions } from 'react-native'
+import { StyleSheet, View } from 'react-native'
+
+import { DemiBoldText, MediumText, RegularText } from '../Atom/TextAtom'
 import { color } from '../Style/Color'
 
 interface Empty {
-  Text: string
+  Text?: string
   verifyMainList?: string
   style?: any
+  headerText?: string
+  body?: any
 }
 
 const emptyList = (prop: { type: Empty }) => {
   if (prop.type.verifyMainList === 'main') {
     return (
       <View style={styles.view}>
-        <Text style={styles.normalText}>
-          Press the <Text style={styles.blueText}>blue</Text> round button to
-          add {prop.type.Text}
-        </Text>
+        <DemiBoldText style={styles.headerText}>
+          {prop.type.headerText}
+        </DemiBoldText>
+        <MediumText style={styles.normalText}>
+          {prop.type.Text}{' '}
+          <MediumText style={styles.blueText}>blue round button</MediumText>
+        </MediumText>
       </View>
     )
   } else if (prop.type.verifyMainList === 'employee') {
     return (
       <View>
-        <Text>
-          No employees. Press the <Text>blue</Text> button to {prop.type.Text}
-        </Text>
+        <RegularText>
+          No employees. Press the <RegularText>blue</RegularText> button to{' '}
+          {prop.type.Text}
+        </RegularText>
       </View>
     )
   } else {
     return (
-      <View style={[styles.view, prop.type.style]}>
-        <Text style={styles.normalText}>{prop.type.Text}</Text>
+      <View style={styles.view}>
+        <DemiBoldText style={styles.headerText}>
+          {prop.type.headerText}
+        </DemiBoldText>
+        {prop.type.Text && (
+          <MediumText style={styles.normalText}>{prop.type.Text}</MediumText>
+        )}
+        {prop.type.body}
       </View>
     )
   }
@@ -39,21 +53,23 @@ export default emptyList
 
 const styles = StyleSheet.create({
   view: {
-    width: Dimensions.get('screen').width - 32,
-    backgroundColor: color.grey,
     padding: 16,
-    alignSelf: 'center',
     marginVertical: 16,
     borderRadius: 2
   },
+  headerText: {
+    fontSize: 22,
+    fontFamily: 'AvenirNext-DemiBold',
+    marginBottom: 16
+  },
   normalText: {
-    fontSize: 14,
-    fontFamily: 'SourceSansPro',
+    fontSize: 18,
+    fontFamily: 'AvenirNext-Medium',
     color: color.principal
   },
   blueText: {
     color: color.button,
-    fontSize: 14,
-    fontFamily: 'SourceSansPro'
+    fontSize: 18,
+    fontFamily: 'AvenirNext-Medium'
   }
 })

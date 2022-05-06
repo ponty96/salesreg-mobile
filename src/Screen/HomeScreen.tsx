@@ -1,35 +1,50 @@
 import * as React from 'react'
-import { View, StyleSheet, Text, Dimensions } from 'react-native'
-import { color } from '../Style/Color'
-import CustomHeader from '../Components/CustomHeader'
+import Header from '../Components/Header/BaseHeader'
 import Auth from '../services/auth'
+import setAppAnalytics from '../Functions/setAppAnalytics'
+import NavigationalInformation from '../Components/Home/NavigationInformation'
+import GettingStarted from '../Components/Home/GettingStarted'
+import { PushNotificationContext } from '../context/PushNotificationContext'
 
 interface IProps {
   navigation: any
+  onSetNavigation: (navigation) => void
 }
 
 interface IState {
   username: string
+  display: any
 }
 
-export default class HomeScreen extends React.Component<IProps, IState> {
-  state = {
-    username: ''
+class HomeScreen extends React.Component<IProps, IState> {
+  constructor(props) {
+    super(props)
+    this.state = {
+      username: '',
+      display: null
+    }
+    setAppAnalytics('OPEN_APP')
+    this.props.onSetNavigation(this.props.navigation)
   }
-  static navigationOptions = ({ navigation }: any) => {
+
+  static navigationOptions = () => {
     return {
-      header: (
-        <CustomHeader
-          title="Home"
-          showMenu
-          onMenuPress={() => navigation.navigate('DrawerToggle')}
-        />
-      )
+      header: null
     }
   }
 
-  componentWillMount() {
+  async componentDidMount() {
     this.updateUserName()
+    let gettingStartedProgress = await Auth.gettingStartedProgress()
+    if (gettingStartedProgress == 'done') {
+      this.setState({
+        display: 'homescreen'
+      })
+    } else {
+      this.setState({
+        display: 'getting-started'
+      })
+    }
   }
 
   updateUserName = async () => {
@@ -41,31 +56,34 @@ export default class HomeScreen extends React.Component<IProps, IState> {
 
   render() {
     return (
-      <View style={styles.container}>
-        <View style={styles.homeBackground}>
-          <Text style={styles.homeText}>Welcome {this.state.username}!</Text>
-        </View>
-      </View>
+      <React.Fragment>
+        <Header
+          title="Home"
+          onPressRightIcon={() =>
+            this.props.navigation.navigate('Notifications')
+          }
+          onPressLeftIcon={() => this.props.navigation.navigate('DrawerToggle')}
+        />
+        {this.state.display == 'homescreen' ? (
+          <NavigationalInformation />
+        ) : this.state.display == 'getting-started' ? (
+          <GettingStarted
+            onDone={() => this.setState({ display: 'homescreen' })}
+          />
+        ) : null}
+      </React.Fragment>
     )
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1
-  },
-  homeBackground: {
-    backgroundColor: 'rgba(152,251,152, 0.2)', // #98FB98
-    width: Dimensions.get('screen').width - 32,
-    alignSelf: 'center',
-    marginTop: 16,
-    borderRadius: 3
-  },
-  homeText: {
-    color: color.selling,
-    fontSize: 30,
-    padding: 20,
-    textAlign: 'center',
-    fontFamily: 'SourceSansPro_Semibold'
-  }
-})
+const _HomeScreen: any = props => (
+  <PushNotificationContext.Consumer>
+    {({ onSetNavigation }) => (
+      <HomeScreen onSetNavigation={onSetNavigation} {...props} />
+    )}
+  </PushNotificationContext.Consumer>
+)
+
+_HomeScreen.navigationOptions = HomeScreen.navigationOptions
+
+export default _HomeScreen

@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { View, StyleSheet } from 'react-native'
-import ButtonAtom from '../Atom/ButtonAtom'
+import ButtonAtom from '../Atom/Form/ButtonAtom'
 import { color } from '../Style/Color'
 
 interface IProps {
@@ -57,6 +57,6 @@ const styles = StyleSheet.create({
   },
   buttonText: {
     color: color.principal,
-    fontFamily: 'SourceSansPro_Semibold'
+    fontFamily: 'SourceSansPro-Semibold'
   }
 })

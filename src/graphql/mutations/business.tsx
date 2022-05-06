@@ -1,34 +1,8 @@
-import gql from 'graphql-tag';
+import gql from 'graphql-tag'
 
 export const UpdateCompanyGQL = gql`
-  mutation updateCompany(
-    $companyId: Uuid!
-    $about: String
-    $category: Category!
-    $contactEmail: String!
-    $currency: String!
-    $title: String!
-    $street1: String!
-    $city: String!
-    $state: String!
-    $country: String!
-  ) {
-    updateCompany(
-      id: $companyId
-      company: {
-        about: $about
-        title: $title
-        category: $category
-        contactEmail: $contactEmail
-        currency: $currency
-        headOffice: {
-          street1: $street1
-          city: $city
-          state: $state
-          country: $country
-        }
-      }
-    ) {
+  mutation updateCompany($companyId: Uuid!, $company: CompanyInput!) {
+    updateCompany(id: $companyId, company: $company) {
       success
       fieldErrors {
         key
@@ -36,12 +10,41 @@ export const UpdateCompanyGQL = gql`
       }
       data {
         ... on Company {
+          saleCharge
           id
           title
+          shareLink
+          slug
+          deliveryFees {
+            id
+            state
+            region
+            fee
+          }
           contactEmail
           about
-          category
+          coverPhoto
+          legalDocuments {
+            pdfUrl
+            name
+            type
+            id
+          }
+          facebook
+          bank {
+            accountNumber
+            bankCode
+            subaccountId
+            subaccountTransacId
+          }
+          twitter
+          instagram
+          linkedin
           currency
+          logo
+          phone {
+            number
+          }
           branches {
             id
             type
@@ -58,4 +61,157 @@ export const UpdateCompanyGQL = gql`
       }
     }
   }
-`;
+`
+
+export const UpsertBankGQL = gql`
+  mutation upsertBank($bankId: Uuid, $bank: BankInput!) {
+    upsertBank(bankId: $bankId, bank: $bank) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Bank {
+          id
+          date: updatedAt
+          accountNumber
+          accountName
+          bankCode
+          subaccountId
+          subaccountTransacId
+          bankName
+          company {
+            bank {
+              accountNumber
+              bankCode
+              subaccountId
+              subaccountTransacId
+            }
+          }
+        }
+      }
+    }
+  }
+`
+
+export const DeleteBankGQL = gql`
+  mutation deleteBank($bankId: Uuid!) {
+    deleteBank(bankId: $bankId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
+export const UpdateCompanyCoverPhotoGQL = gql`
+  mutation updateCompanyCoverPhoto($coverPhoto: CoverPhotoInput!) {
+    updateCompanyCoverPhoto(coverPhoto: $coverPhoto) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          coverPhoto
+        }
+      }
+    }
+  }
+`
+
+export const ChangeNotificationReadStatus = gql`
+  mutation changeNotificationReadStatus($notificationId: Uuid) {
+    changeNotificationReadStatus(notificationId: $notificationId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Notification {
+          id
+          readStatus
+        }
+      }
+    }
+  }
+`
+
+export const UpsertLegalDocument = gql`
+  mutation upsertLegalDocument(
+    $legalDocument: LegalDocumentInput!
+    $legalDocumentId: Uuid
+  ) {
+    upsertLegalDocument(
+      legalDocument: $legalDocument
+      legalDocumentId: $legalDocumentId
+    ) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          legalDocuments {
+            name
+            pdfUrl
+            type
+            id
+          }
+        }
+      }
+    }
+  }
+`
+
+export const DeleteLegalDocument = gql`
+  mutation deleteLegalDocument($legalDocumentId: Uuid!) {
+    deleteLegalDocument(legalDocumentId: $legalDocumentId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+      data {
+        ... on Company {
+          legalDocuments {
+            name
+            pdfUrl
+            type
+            id
+          }
+        }
+      }
+    }
+  }
+`
+
+export const CreateDeliveryFee = gql`
+  mutation createDeliveryFee($deliveryFee: DeliveryFeeInput!) {
+    createDeliveryFee(deliveryFee: $deliveryFee) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`
+
+export const DeleteDeliveryFee = gql`
+  mutation deleteDeliveryFee($deliveryFeeId: Uuid!) {
+    deleteDeliveryFee(deliveryFeeId: $deliveryFeeId) {
+      success
+      fieldErrors {
+        key
+        message
+      }
+    }
+  }
+`

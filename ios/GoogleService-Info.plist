@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>1060799093241-rg6moa6is1fb53nrmjte1sjc68e40efj.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1060799093241-rg6moa6is1fb53nrmjte1sjc68e40efj</string>
+	<key>API_KEY</key>
+	<string>AIzaSyDPmQdhADgr4hUBBKFYSbF0jTgoRiWpge8</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1060799093241</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.yipcart.yipcart</string>
+	<key>PROJECT_ID</key>
+	<string>yipcart-b825a</string>
+	<key>STORAGE_BUCKET</key>
+	<string>yipcart-b825a.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true></true>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false></false>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1060799093241:ios:994f1be824a4fa29</string>
+	<key>DATABASE_URL</key>
+	<string>https://yipcart-b825a.firebaseio.com</string>
+</dict>
+</plist>

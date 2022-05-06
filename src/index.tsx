@@ -1,0 +1,53 @@
+// import '@babel/polyfill'
+import React from 'react'
+import { AppRegistry, YellowBox } from 'react-native'
+import Config from 'react-native-config'
+
+import App from './App'
+import { persistor } from './client'
+import Auth from './services/auth'
+import { PushNotificationContext } from './context/PushNotificationContext'
+
+YellowBox.ignoreWarnings([
+  'Warning: isMounted(...) is deprecated',
+  'Module RCTImageLoader',
+  'Module RNDocumentPicker',
+  'Class RCTCxxModule'
+])
+
+async function setupApollo() {
+  const currentVersion = await Auth.getCurrentSchemaVersion()
+
+  if (currentVersion === Config.SCHEMA_VERSION) {
+    await persistor.restore()
+  } else {
+    await persistor.purge()
+    await Auth.setCurrentSchemaVersion(Config.SCHEMA_VERSION)
+  }
+}
+
+setupApollo()
+
+export default class Index extends React.PureComponent {
+  constructor(props) {
+    super(props)
+  }
+
+  state = {
+    data: null,
+    onSetPushNotificationData: data => this.setState({ data, id: Date.now() }),
+    id: Date.now(),
+    navigation: null,
+    onSetNavigation: navigation => this.setState({ navigation })
+  }
+
+  render() {
+    return (
+      <PushNotificationContext.Provider value={this.state}>
+        <App {...this.props} />
+      </PushNotificationContext.Provider>
+    )
+  }
+}
+
+AppRegistry.registerComponent('salesreg', () => Index)

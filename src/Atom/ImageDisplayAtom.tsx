@@ -1,6 +1,9 @@
 import * as React from 'react'
-import { Image, Text, View, StyleSheet } from 'react-native'
+import { View, StyleSheet } from 'react-native'
+
+import { RegularText } from './TextAtom'
 import { color } from '../Style/Color'
+import CachedImageAtom from './CachedImageAtom'
 
 interface IProps {
   image: string
@@ -12,12 +15,14 @@ export default class ImageDisplayAtom extends React.Component<IProps, any> {
     return (
       <View style={styles.smallImageDisplayContainer}>
         <View style={styles.smallImageDisplayImageWrapper}>
-          <Image
-            source={{ uri: this.props.image }}
+          <CachedImageAtom
+            uri={this.props.image}
             style={styles.smallImageDisplayImage}
           />
         </View>
-        <Text style={styles.smallImageDisplayName}>{this.props.name}</Text>
+        <RegularText style={styles.smallImageDisplayName}>
+          {this.props.name}
+        </RegularText>
       </View>
     )
   }
@@ -44,7 +49,6 @@ const styles = StyleSheet.create({
   smallImageDisplayName: {
     marginTop: 20,
     marginLeft: 20,
-    fontSize: 14,
-    fontWeight: '400'
+    fontSize: 14
   }
 })

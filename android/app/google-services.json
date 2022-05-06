@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "1060799093241",
+    "firebase_url": "https://yipcart-b825a.firebaseio.com",
+    "project_id": "yipcart-b825a",
+    "storage_bucket": "yipcart-b825a.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1060799093241:android:994f1be824a4fa29",
+        "android_client_info": {
+          "package_name": "com.yipcart.yipcart"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1060799093241-72ikbbek8g6r6enfbqg6k9v70h42p0a5.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBTzS4xpDnEAuTuyfkpKHvPqW4uPmUkyDQ"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
